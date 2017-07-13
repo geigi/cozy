@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/de/geigi/audiobooks">
+    <file preprocess="xml-stripblanks">main_window.ui</file>
+  </gresource>
+</gresources>
