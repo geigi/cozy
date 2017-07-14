@@ -1,2 +1,8 @@
+app/
+bin/
+
 # Ignore glade tmp files
 *~
+
+# Ignore sublime files
+*.sublime-workspace
