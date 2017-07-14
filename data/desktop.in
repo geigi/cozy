@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=AudioBooks
+Name=Cozy
 GenericName=Audio Book Player
 Comment=Play and organize your audio book collection
 # Icon=org.gnome.Lollypop
-Exec=audiobooks %U
+Exec=cozy %U
 Terminal=false
 Type=Application
 Categories=GNOME;GTK;AudioVideo;Player;Audio;
@@ -14,12 +14,12 @@ Actions=Toggle;Next;Prev;
 
 [Desktop Action Toggle]
 Name=Play/Pause
-Exec=audiobooks -t
+Exec=cozy -t
 
 [Desktop Action Next]
 Name=Next
-Exec=audiobooks -n
+Exec=cozy -n
 
 [Desktop Action Prev]
 Name=Previous
-Exec=audiobooks -p
+Exec=cozy -p

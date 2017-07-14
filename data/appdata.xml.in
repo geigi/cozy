@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>de.geigi.audiobooks.desktop</id>
+  <id>de.geigi.cozy.desktop</id>
   <licence>LGPL</licence>
-  <name>Audio Books</name>
+  <name>Cozy</name>
   <summary>Play and organize your audio book collection</summary>
   <description>
     <p>
-      Audio Books is a new GNOME audio book playing application.
+      Cozy is a new GNOME audio book playing application.
     </p>
     <p>
       It provides:

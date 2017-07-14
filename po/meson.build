@@ -5,7 +5,7 @@ langs = [
 ]
 
 if langs.length() > 0
-  i18n.gettext('audiobooks',
+  i18n.gettext('cozy',
     languages: langs,
     args: [
       '--from-code=UTF-8',

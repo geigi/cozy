@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/de/geigi/audiobooks">
+  <gresource prefix="/de/geigi/cozy">
     <file>blank_album.png</file>
   </gresource>
 </gresources>

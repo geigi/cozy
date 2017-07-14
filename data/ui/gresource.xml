@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/de/geigi/audiobooks">
+  <gresource prefix="/de/geigi/cozy">
 	  <file>application.css</file>
     <file preprocess="xml-stripblanks">main_window.ui</file>
     <file preprocess="xml-stripblanks">app_menu.ui</file>

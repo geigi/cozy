@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<interface domain="audiobooks">
+<interface domain="cozy">
 	<menu id="app_menu">
     <section>
       <item>

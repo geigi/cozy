@@ -9,7 +9,7 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# This program  /home/ju/GitHub/AudioBooksis distributed in the hope that it will be useful,
+# This program  /home/ju/GitHub/Cozyis distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Lesser General Public License for more details.
@@ -36,14 +36,14 @@ class Application(Gtk.Application):
     self.init_actions()
 
   def init_resources(self):
-    resource = Gio.resource_load(os.path.join(pkgdatadir, 'audiobooks.ui.gresource'))
+    resource = Gio.resource_load(os.path.join(pkgdatadir, 'cozy.ui.gresource'))
     Gio.Resource._register(resource)
 
-    resource = Gio.resource_load(os.path.join(pkgdatadir, 'audiobooks.img.gresource'))
+    resource = Gio.resource_load(os.path.join(pkgdatadir, 'cozy.img.gresource'))
     Gio.Resource._register(resource)
 
   def init_css(self):
-    cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/audiobooks/application.css")
+    cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application.css")
     cssProvider = Gtk.CssProvider()
     cssProvider.load_from_file(cssProviderFile)
 
@@ -52,7 +52,7 @@ class Application(Gtk.Application):
     styleContext.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
 
   def init_window(self):
-    builder = Gtk.Builder.new_from_resource("/de/geigi/audiobooks/main_window.ui")
+    builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/main_window.ui")
 
     window = builder.get_object("app_window")
     window.set_application(self)

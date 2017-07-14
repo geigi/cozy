@@ -1,11 +1,11 @@
-project('audiobooks',
+project('cozy',
   version: '0.0.1',
   meson_version: '>= 0.40.0')
 
-project_name = 'audiobooks'
+project_name = 'cozy'
 
 python = import('python3')
-project_id = 'org.gnome.audiobooks'
+project_id = 'org.gnome.cozy'
 i18n = import('i18n')
 gnome = import('gnome')
 
@@ -38,6 +38,6 @@ subdir('po')
 subdir('src')
 
 install_subdir(
-  'audiobooks',
+  'cozy',
   install_dir: python_dir
 )
