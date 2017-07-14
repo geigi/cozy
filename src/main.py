@@ -43,7 +43,10 @@ class Application(Gtk.Application):
     Gio.Resource._register(resource)
 
   def init_css(self):
-    cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application.css")
+    if Gtk.get_minor_version() > 18:
+      cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application.css")
+    else :
+      cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application_legacy.css")
     cssProvider = Gtk.CssProvider()
     cssProvider.load_from_file(cssProviderFile)
 
