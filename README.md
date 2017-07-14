@@ -23,5 +23,5 @@ Cozy is a new GTK3 audio book manager and player. Here are some of the upcoming 
 $ git clone https://github.com/geigi/cozy.git
 $ cd cozy
 $ meson desired_build_directory --prefix=desired_installation_directory
-# sudo ninja -C desired_build_directory install
+# ninja -C desired_build_directory install
 ```
