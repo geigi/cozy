@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# __main__.py
+# main.py
 #
 # Copyright (C) 2017 geigi
 #
@@ -30,12 +30,19 @@ class Application(Gtk.Application):
     super().__init__(application_id='org.gnome.Audiobooks', **kwargs)
 
   def do_activate(self):
+    self.init_resources()
+    self.init_css()
+    self.init_window()
+    self.init_actions()
+
+  def init_resources(self):
     resource = Gio.resource_load(os.path.join(pkgdatadir, 'audiobooks.ui.gresource'))
     Gio.Resource._register(resource)
 
     resource = Gio.resource_load(os.path.join(pkgdatadir, 'audiobooks.img.gresource'))
     Gio.Resource._register(resource)
 
+  def init_css(self):
     cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/audiobooks/application.css")
     cssProvider = Gtk.CssProvider()
     cssProvider.load_from_file(cssProviderFile)
@@ -44,6 +51,7 @@ class Application(Gtk.Application):
     styleContext = Gtk.StyleContext()
     styleContext.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
 
+  def init_window(self):
     builder = Gtk.Builder.new_from_resource("/de/geigi/audiobooks/main_window.ui")
 
     window = builder.get_object("app_window")
@@ -57,6 +65,7 @@ class Application(Gtk.Application):
 
     self.set_app_menu(builder.get_object("app_menu"))
 
+  def init_actions(self):
     help_action = Gio.SimpleAction.new("help", None)
     help_action.connect("activate", self.help)
     self.add_action(help_action)
