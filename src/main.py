@@ -25,6 +25,12 @@ from gi.repository import Gtk, Gio, Gdk
 
 pkgdatadir = '@DATA_DIR@'
 
+class ListBoxRowWithData(Gtk.ListBoxRow):
+  def __init__(self, data):
+    super(Gtk.ListBoxRow, self).__init__()
+    self.data = data
+    self.add(Gtk.Label(data))
+
 class Application(Gtk.Application):
   def __init__(self, **kwargs):
     super().__init__(application_id='org.gnome.Audiobooks', **kwargs)
@@ -65,6 +71,19 @@ class Application(Gtk.Application):
     # just for demo
     scale = builder.get_object("progress_scale")
     scale.set_range(0, 4)
+    author_box = builder.get_object("author_box")
+    reader_box = builder.get_object("reader_box")
+
+    for i in range(1,100):
+      row_a = ListBoxRowWithData(i)
+      row_b = ListBoxRowWithData(i)
+
+      author_box.add(row_a)
+      reader_box.add(row_b)
+      pass
+
+    author_box.show_all()
+    reader_box.show_all()
 
     self.set_app_menu(builder.get_object("app_menu"))
 
