@@ -29,7 +29,9 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
   def __init__(self, data):
     super(Gtk.ListBoxRow, self).__init__()
     self.data = data
-    self.add(Gtk.Label(data))
+    label = Gtk.Label(data)
+    label.set_xalign(0.0)
+    self.add(label)
 
 class Application(Gtk.Application):
   def __init__(self, **kwargs):
@@ -63,18 +65,19 @@ class Application(Gtk.Application):
     styleContext.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
 
   def init_window(self):
-    builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/main_window.ui")
+    window_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/main_window.ui")
+    search_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/search_popover.ui")
 
-    window = builder.get_object("app_window")
+    window = window_builder.get_object("app_window")
     window.set_application(self)
     window.show_all()
     window.present()
 
     # just for demo
-    scale = builder.get_object("progress_scale")
+    scale = window_builder.get_object("progress_scale")
     scale.set_range(0, 4)
-    author_box = builder.get_object("author_box")
-    reader_box = builder.get_object("reader_box")
+    author_box = window_builder.get_object("author_box")
+    reader_box = window_builder.get_object("reader_box")
 
     for i in range(1,100):
       row_a = ListBoxRowWithData(i)
@@ -87,7 +90,12 @@ class Application(Gtk.Application):
     author_box.show_all()
     reader_box.show_all()
 
-    self.set_app_menu(builder.get_object("app_menu"))
+    search_button = window_builder.get_object("search_button")
+    popover = search_builder.get_object("search_popover")
+
+    search_button.set_popover(popover)
+
+    self.set_app_menu(window_builder.get_object("app_menu"))
 
   def init_actions(self):
     help_action = Gio.SimpleAction.new("help", None)
@@ -103,13 +111,13 @@ class Application(Gtk.Application):
     self.add_action(quit_action)
 
   def help(self, action, parameter):
-    end
+    pass
 
   def quit(self, action, parameter):
       self.quit()
 
   def about(self, action, parameter):
-    end
+    pass
 
 def main():
   application = Application()

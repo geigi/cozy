@@ -9,16 +9,16 @@
       Cozy is a new GNOME audio book playing application.
     </p>
     <p>
-      It provides:
+      It provides:F
     </p>
     <ul>
       <li>MP3, Ogg and FLAC playback</li>
     </ul>
   </description>
   <!--screenshots>
-    <screenshot type="default" width="800" height="439">http://gnumdk.github.io/lollypop-web/images/screenshot.jpg</screenshot>
+    <screenshot type="default" width="" height="">http://</screenshot>
   </screenshots>
-  <url type="homepage">https://gnumdk.github.io/lollypop-web/</url>
-  <url type="bugtracker">https://github.com/gnumdk/lollypop/issues</url>
-  <updatecontact>cedric.bellegarde@adishatz.org</updatecontact-->
+  <url type="homepage">https://</url>
+  <url type="bugtracker">https://github.com/geigi/cozy/issues</url>
+  <updatecontact>github@geigi.de</updatecontact-->
 </component>

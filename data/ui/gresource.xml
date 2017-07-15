@@ -5,5 +5,6 @@
     <file>application_legacy.css</file>
     <file preprocess="xml-stripblanks">main_window.ui</file>
     <file preprocess="xml-stripblanks">app_menu.ui</file>
+    <file preprocess="xml-stripblanks">search_popover.ui</file>
   </gresource>
 </gresources>

@@ -2,7 +2,7 @@
 Name=Cozy
 GenericName=Audio Book Player
 Comment=Play and organize your audio book collection
-# Icon=org.gnome.Lollypop
+# Icon=de.geigi.cozy
 Exec=cozy %U
 Terminal=false
 Type=Application
