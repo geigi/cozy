@@ -50,8 +50,10 @@ class Application(Gtk.Application):
 
   def init_css(self):
     if Gtk.get_minor_version() > 18:
+      print("Fanciest design possible")
       cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application.css")
     else :
+      print("Using legacy css file")
       cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application_legacy.css")
     cssProvider = Gtk.CssProvider()
     cssProvider.load_from_file(cssProviderFile)

@@ -235,6 +235,7 @@
                 <property name="hexpand">True</property>
                 <property name="round_digits">1</property>
                 <property name="draw_value">False</property>
+                <property name="width_request">100</property>
                 <style>
                   <class name="min_width"/>
                 </style>
