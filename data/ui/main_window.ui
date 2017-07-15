@@ -143,7 +143,7 @@
           <object class="GtkBox" id="mini_player">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="halign">center</property>
+            <property name="halign">start</property>
             <property name="margin_left">5</property>
             <property name="margin_right">10</property>
             <property name="hexpand">True</property>
