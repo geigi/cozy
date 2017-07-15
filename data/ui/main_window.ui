@@ -230,15 +230,12 @@
             <property name="hexpand">True</property>
             <child>
               <object class="GtkScale" id="progress_scale">
+                <property name="width_request">150</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
                 <property name="round_digits">1</property>
                 <property name="draw_value">False</property>
-                <property name="width_request">100</property>
-                <style>
-                  <class name="min_width"/>
-                </style>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -340,6 +337,9 @@
               </packing>
             </child>
           </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
         </child>
       </object>
     </child>
