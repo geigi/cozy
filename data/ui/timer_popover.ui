@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.20.0 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
+  <requires lib="gtk+" version="3.16"/>
   <object class="GtkEntryBuffer" id="timer_buffer">
     <property name="text" translatable="yes">3</property>
     <property name="max_length">10</property>
