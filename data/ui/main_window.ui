@@ -16,13 +16,6 @@
     <property name="margin_right">4</property>
     <property name="icon_name">object-rotate-left-symbolic</property>
   </object>
-  <object class="GtkImage" id="sleep_img">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="valign">center</property>
-    <property name="vexpand">True</property>
-    <property name="icon_name">time</property>
-  </object>
   <object class="GtkApplicationWindow" id="app_window">
     <property name="name">main_window</property>
     <property name="can_focus">False</property>
@@ -354,11 +347,17 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="timer_button">
+              <object class="GtkMenuButton" id="timer_button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="image">sleep_img</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">time</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>

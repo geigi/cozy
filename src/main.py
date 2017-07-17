@@ -50,6 +50,10 @@ class Application(Gtk.Application):
     resource = Gio.resource_load(os.path.join(pkgdatadir, 'cozy.img.gresource'))
     Gio.Resource._register(resource)
 
+    self.window_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/main_window.ui")
+    self.search_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/search_popover.ui")
+    self.timer_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/timer_popover.ui")
+
   def init_css(self):
     if Gtk.get_minor_version() > 18:
       print("Fanciest design possible")
@@ -65,19 +69,16 @@ class Application(Gtk.Application):
     styleContext.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
 
   def init_window(self):
-    window_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/main_window.ui")
-    search_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/search_popover.ui")
-
-    window = window_builder.get_object("app_window")
+    window = self.window_builder.get_object("app_window")
     window.set_application(self)
     window.show_all()
     window.present()
 
     # just for demo
-    scale = window_builder.get_object("progress_scale")
+    scale = self.window_builder.get_object("progress_scale")
     scale.set_range(0, 4)
-    author_box = window_builder.get_object("author_box")
-    reader_box = window_builder.get_object("reader_box")
+    author_box = self.window_builder.get_object("author_box")
+    reader_box = self.window_builder.get_object("reader_box")
 
     for i in range(1,100):
       row_a = ListBoxRowWithData(i)
@@ -90,12 +91,29 @@ class Application(Gtk.Application):
     author_box.show_all()
     reader_box.show_all()
 
-    search_button = window_builder.get_object("search_button")
-    popover = search_builder.get_object("search_popover")
+    search_button = self.window_builder.get_object("search_button")
+    popover = self.search_builder.get_object("search_popover")
 
     search_button.set_popover(popover)
 
-    self.set_app_menu(window_builder.get_object("app_menu"))
+    timer_button = self.window_builder.get_object("timer_button")
+    timer_popover = self.timer_builder.get_object("timer_popover")
+    timer_button.set_popover(timer_popover)
+
+    self.timer_switch = self.timer_builder.get_object("timer_switch")
+
+    self.timer_scale = self.timer_builder.get_object("timer_scale")
+
+    for i in range(0, 181, 15):
+      self.timer_scale.add_mark(i, Gtk.PositionType.RIGHT, None)
+
+    self.timer_spinner = self.timer_builder.get_object("timer_spinner")
+    self.timer_buffer = self.timer_builder.get_object("timer_buffer")
+
+    self.timer_spinner.connect("value-changed", self.on_timer_changed)
+    self.init_timer_buffer()
+
+    self.set_app_menu(self.window_builder.get_object("app_menu"))
 
   def init_actions(self):
     help_action = Gio.SimpleAction.new("help", None)
@@ -118,6 +136,26 @@ class Application(Gtk.Application):
 
   def about(self, action, parameter):
     pass
+
+  def init_timer_buffer(self):
+    adjustment = self.timer_spinner.get_adjustment()
+    value = adjustment.get_value()
+
+    text = str(int(value)) + " min"
+    self.timer_buffer.set_text(text, len(text))
+
+    return True
+
+  def on_timer_changed(self, spinner):
+    print("called")
+    if not self.timer_switch.get_active():
+      self.timer_switch.set_active(True)
+
+    adjustment = self.timer_spinner.get_adjustment()
+    value = adjustment.get_value()
+
+    text = str(int(value)) + " min"
+    self.timer_buffer.set_text(text, len(text))
 
 def main():
   application = Application()
