@@ -35,7 +35,14 @@ conf.set('VERSION', meson.project_version())
 
 subdir('data')
 subdir('po')
-subdir('src')
+
+message('Preparing init file')
+configure_file(
+  input: 'main.py',
+  output: 'cozy',
+  configuration: conf,
+  install_dir: 'bin'
+)
 
 install_subdir(
   'cozy',

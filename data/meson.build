@@ -11,8 +11,6 @@ i18n.merge_file(
   install_dir: join_paths(get_option('datadir'), 'applications')
 )
 
-install_subdir('img', install_dir: 'share/' + project_name)
-
 #message('Preparing appdata')
 #i18n.merge_file(
 #  output: project_id + '.appdata.xml',
