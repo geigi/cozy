@@ -29,9 +29,15 @@ pkgdatadir = '@DATA_DIR@'
 class Application(Gtk.Application):
   def __init__(self, **kwargs):
     super().__init__(application_id='org.gnome.Audiobooks', **kwargs)
+    self.ui = CozyUI(pkgdatadir, self)
+
+  def do_startup(self):
+    Gtk.Application.do_startup(self)
+    self.ui.startup()
 
   def do_activate(self):
-    self.ui = CozyUI(pkgdatadir, self)
+    self.ui.activate()
+    self.add_window(self.ui.window)
 
 def main():
   application = Application()

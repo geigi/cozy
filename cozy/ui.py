@@ -8,9 +8,12 @@ class CozyUI:
     self.pkgdir = pkgdatadir
     self.app = app
 
+  def activate(self):
+    self.init_window()
+
+  def startup(self):
     self.init_resources()
     self.init_css()
-    self.init_window()
     self.init_actions()
 
   def init_resources(self):
@@ -40,10 +43,10 @@ class CozyUI:
     styleContext.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
 
   def init_window(self):
-    window = self.window_builder.get_object("app_window")
-    window.set_application(self.app)
-    window.show_all()
-    window.present()
+    self.window = self.window_builder.get_object("app_window")
+    self.window.set_application(self.app)
+    self.window.show_all()
+    self.window.present()
 
     author_box = self.window_builder.get_object("author_box")
     reader_box = self.window_builder.get_object("reader_box")
@@ -69,8 +72,6 @@ class CozyUI:
     self.timer_spinner.connect("value-changed", self.on_timer_changed)
     self.init_timer_buffer()
 
-    self.app.set_app_menu(self.window_builder.get_object("app_menu"))
-
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
     scale.set_range(0, 4)
@@ -87,6 +88,8 @@ class CozyUI:
     reader_box.show_all()
 
   def init_actions(self):
+    self.app.set_app_menu(self.window_builder.get_object("app_menu"))
+
     help_action = Gio.SimpleAction.new("help", None)
     help_action.connect("activate", self.help)
     self.app.add_action(help_action)
@@ -118,7 +121,6 @@ class CozyUI:
     return True
 
   def on_timer_changed(self, spinner):
-    print("called")
     if not self.timer_switch.get_active():
       self.timer_switch.set_active(True)
 
