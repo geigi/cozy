@@ -27,6 +27,8 @@ class CozyUI:
     self.search_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/search_popover.ui")
     self.timer_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/timer_popover.ui")
     self.settings_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/settings.ui")
+    self.menu_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")
+    self.about_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/about.ui")
 
   def init_css(self):
     if Gtk.get_minor_version() > 18:
@@ -60,6 +62,15 @@ class CozyUI:
     self.timer_spinner = self.timer_builder.get_object("timer_spinner")
     self.timer_buffer = self.timer_builder.get_object("timer_buffer")
 
+    # get settings window
+    self.settings_window = self.settings_builder.get_object("settings_window")
+    self.settings_window.set_transient_for(self.window)
+    self.settings_window.connect("destroy", self.hide_window)
+
+    # get about dialog
+    self.about_dialog = self.about_builder.get_object("about_dialog")
+    self.about_dialog.set_transient_for(self.window)
+
     # init popovers
     search_button.set_popover(search_popover)
     timer_button.set_popover(timer_popover)
@@ -71,6 +82,9 @@ class CozyUI:
     # timer SpinButton text format
     self.timer_spinner.connect("value-changed", self.on_timer_changed)
     self.init_timer_buffer()
+
+    # shortcuts
+    self.accel = Gtk.AccelGroup()
 
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
@@ -88,7 +102,10 @@ class CozyUI:
     reader_box.show_all()
 
   def init_actions(self):
-    self.app.set_app_menu(self.window_builder.get_object("app_menu"))
+    self.accel = Gtk.AccelGroup()
+
+    menu = self.menu_builder.get_object("app_menu")
+    self.app.set_app_menu(menu)
 
     help_action = Gio.SimpleAction.new("help", None)
     help_action.connect("activate", self.help)
@@ -101,15 +118,30 @@ class CozyUI:
     quit_action = Gio.SimpleAction.new("quit", None)
     quit_action.connect("activate", self.quit)
     self.app.add_action(quit_action)
+    self.app.set_accels_for_action("app.quit", ["<Control>q", "<Control>w"])
+
+
+    pref_action = Gio.SimpleAction.new("prefs", None)
+    pref_action.connect("activate", self.show_prefs)
+    self.app.add_action(pref_action)
+    self.app.set_accels_for_action("app.prefs", ["<Control>comma"])
 
   def help(self, action, parameter):
     pass
 
   def quit(self, action, parameter):
-      self.quit()
+      self.app.quit()
 
   def about(self, action, parameter):
+    self.about_dialog.show()
     pass
+
+  def show_prefs(self, action, parameter):
+    self.settings_window.show()
+    pass
+
+  def hide_window(self, widget, data=None):
+    widget.hide()
 
   def init_timer_buffer(self):
     adjustment = self.timer_spinner.get_adjustment()
