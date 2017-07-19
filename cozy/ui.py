@@ -122,11 +122,14 @@ class CozyUI:
     self.app.add_action(quit_action)
     self.app.set_accels_for_action("app.quit", ["<Control>q", "<Control>w"])
 
-
     pref_action = Gio.SimpleAction.new("prefs", None)
     pref_action.connect("activate", self.show_prefs)
     self.app.add_action(pref_action)
     self.app.set_accels_for_action("app.prefs", ["<Control>comma"])
+
+    sync_action = Gio.SimpleAction.new("sync", None)
+    sync_action.connect("activate", self.sync)
+    self.app.add_action(sync_action)
 
   def help(self, action, parameter):
     pass
@@ -146,6 +149,9 @@ class CozyUI:
     widget.hide()
 
     return True
+
+  def sync(self, action, parameter):
+    pass
 
   def init_timer_buffer(self):
     adjustment = self.timer_spinner.get_adjustment()

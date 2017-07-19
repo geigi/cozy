@@ -3,6 +3,12 @@
 	<menu id="app_menu">
     <section>
       <item>
+        <attribute name="action">app.scan</attribute>
+        <attribute name="label" translatable="yes">_Scan Directory</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name="action">app.prefs</attribute>
         <attribute name="label" translatable="yes">_Preferences</attribute>
       </item>
