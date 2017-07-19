@@ -65,11 +65,13 @@ class CozyUI:
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
     self.settings_window.set_transient_for(self.window)
-    self.settings_window.connect("destroy", self.hide_window)
+    self.settings_window.connect("delete-event", self.hide_window)
 
     # get about dialog
     self.about_dialog = self.about_builder.get_object("about_dialog")
     self.about_dialog.set_transient_for(self.window)
+    self.about_dialog.connect("delete-event", self.hide_window)
+    
 
     # init popovers
     search_button.set_popover(search_popover)
@@ -142,6 +144,8 @@ class CozyUI:
 
   def hide_window(self, widget, data=None):
     widget.hide()
+
+    return True
 
   def init_timer_buffer(self):
     adjustment = self.timer_spinner.get_adjustment()
