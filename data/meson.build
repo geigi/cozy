@@ -1,6 +1,15 @@
 subdir('img')
 subdir('ui')
 
+message('Compiling schemas')
+
+gnome.compile_schemas()
+install_data(
+  project_id + '.gschema.xml',
+  install_dir: 'share/glib-2.0/schemas'
+)
+meson.add_install_script('meson_post_install.py')
+
 message('Making a .desktop file')
 i18n.merge_file(
   output: project_id + '.desktop',

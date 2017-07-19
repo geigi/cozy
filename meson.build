@@ -5,7 +5,7 @@ project('cozy',
 project_name = 'cozy'
 
 python = import('python3')
-project_id = 'org.gnome.cozy'
+project_id = 'de.geigi.Cozy'
 i18n = import('i18n')
 gnome = import('gnome')
 

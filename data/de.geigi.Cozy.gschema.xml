@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/de/geigi/Cozy/" id="de.geigi.Cozy" gettext-domain="cozy">
+    <key type="b" name="symlinks">
+      <default>false</default>
+      <summary>Follow symlincs</summary>
+      <description></description>
+    </key>
+  </schema>
+</schemalist>

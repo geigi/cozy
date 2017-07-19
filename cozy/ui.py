@@ -10,6 +10,7 @@ class CozyUI:
 
   def activate(self):
     self.init_window()
+    self.init_bindings()
 
   def startup(self):
     self.init_resources()
@@ -152,6 +153,12 @@ class CozyUI:
 
   def sync(self, action, parameter):
     pass
+
+  def init_bindings(self):
+    settings = Gio.Settings.new("de.geigi.Cozy")
+
+    sl_switch = self.settings_builder.get_object("symlinks_switch")
+    settings.bind("symlinks", sl_switch, "active", Gio.SettingsBindFlags.DEFAULT)
 
   def init_timer_buffer(self):
     adjustment = self.timer_spinner.get_adjustment()
