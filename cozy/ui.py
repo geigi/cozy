@@ -1,7 +1,7 @@
 import os
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio, Gdk
+from gi.repository import Gtk, Gio, Gdk, GdkPixbuf
 
 class CozyUI:
   def __init__(self, pkgdatadir, app):
@@ -62,6 +62,7 @@ class CozyUI:
     self.timer_scale = self.timer_builder.get_object("timer_scale")
     self.timer_spinner = self.timer_builder.get_object("timer_spinner")
     self.timer_buffer = self.timer_builder.get_object("timer_buffer")
+    self.cover_img = self.window_builder.get_object("cover_img")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -100,6 +101,9 @@ class CozyUI:
       author_box.add(row_a)
       reader_box.add(row_b)
       pass
+
+    pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
+    self.set_title_cover(pixbuf)
 
     author_box.show_all()
     reader_box.show_all()
@@ -150,6 +154,10 @@ class CozyUI:
     widget.hide()
 
     return True
+
+  def set_title_cover(self, pixbuf):
+    pixbuf = pixbuf.scale_simple(40, 40, GdkPixbuf.InterpType.BILINEAR)
+    self.cover_img.set_from_pixbuf(pixbuf)
 
   def sync(self, action, parameter):
     pass

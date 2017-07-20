@@ -146,7 +146,6 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">2</property>
                 <property name="margin_bottom">2</property>
-                <property name="pixbuf">blank_album.png</property>
               </object>
               <packing>
                 <property name="expand">False</property>
