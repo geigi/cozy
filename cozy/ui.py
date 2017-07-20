@@ -9,15 +9,15 @@ class CozyUI:
     self.app = app
 
   def activate(self):
-    self.init_window()
-    self.init_bindings()
+    self.__init_window()
+    self.__init_bindings()
 
   def startup(self):
-    self.init_resources()
-    self.init_css()
-    self.init_actions()
+    self.__init_resources()
+    self.__init_css()
+    self.__init_actions()
 
-  def init_resources(self):
+  def __init_resources(self):
     resource = Gio.resource_load(os.path.join(self.pkgdir, 'cozy.ui.gresource'))
     Gio.Resource._register(resource)
 
@@ -31,7 +31,7 @@ class CozyUI:
     self.menu_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")
     self.about_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/about.ui")
 
-  def init_css(self):
+  def __init_css(self):
     if Gtk.get_minor_version() > 18:
       print("Fanciest design possible")
       cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application.css")
@@ -45,7 +45,7 @@ class CozyUI:
     styleContext = Gtk.StyleContext()
     styleContext.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
 
-  def init_window(self):
+  def __init_window(self):
     self.window = self.window_builder.get_object("app_window")
     self.window.set_application(self.app)
     self.window.show_all()
@@ -84,8 +84,8 @@ class CozyUI:
       self.timer_scale.add_mark(i, Gtk.PositionType.RIGHT, None)
 
     # timer SpinButton text format
-    self.timer_spinner.connect("value-changed", self.on_timer_changed)
-    self.init_timer_buffer()
+    self.timer_spinner.connect("value-changed", self.__on_timer_changed)
+    self.__init_timer_buffer()
 
     # shortcuts
     self.accel = Gtk.AccelGroup()
@@ -108,7 +108,7 @@ class CozyUI:
     author_box.show_all()
     reader_box.show_all()
 
-  def init_actions(self):
+  def __init_actions(self):
     self.accel = Gtk.AccelGroup()
 
     menu = self.menu_builder.get_object("app_menu")
@@ -162,7 +162,7 @@ class CozyUI:
   def sync(self, action, parameter):
     pass
 
-  def init_bindings(self):
+  def __init_bindings(self):
     settings = Gio.Settings.new("de.geigi.Cozy")
 
     sl_switch = self.settings_builder.get_object("symlinks_switch")
@@ -177,7 +177,7 @@ class CozyUI:
     replay_switch = self.settings_builder.get_object("replay_switch")
     settings.bind("replay", replay_switch, "active", Gio.SettingsBindFlags.DEFAULT)
 
-  def init_timer_buffer(self):
+  def __init_timer_buffer(self):
     adjustment = self.timer_spinner.get_adjustment()
     value = adjustment.get_value()
 
@@ -186,7 +186,7 @@ class CozyUI:
 
     return True
 
-  def on_timer_changed(self, spinner):
+  def __on_timer_changed(self, spinner):
     if not self.timer_switch.get_active():
       self.timer_switch.set_active(True)
 
