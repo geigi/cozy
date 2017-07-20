@@ -160,6 +160,15 @@ class CozyUI:
     sl_switch = self.settings_builder.get_object("symlinks_switch")
     settings.bind("symlinks", sl_switch, "active", Gio.SettingsBindFlags.DEFAULT)
 
+    auto_scan_switch = self.settings_builder.get_object("auto_scan_switch")
+    settings.bind("autoscan", auto_scan_switch, "active", Gio.SettingsBindFlags.DEFAULT)
+
+    timer_suspend_switch = self.settings_builder.get_object("timer_suspend_switch")
+    settings.bind("suspend", timer_suspend_switch, "active", Gio.SettingsBindFlags.DEFAULT)
+
+    replay_switch = self.settings_builder.get_object("replay_switch")
+    settings.bind("replay", replay_switch, "active", Gio.SettingsBindFlags.DEFAULT)
+
   def init_timer_buffer(self):
     adjustment = self.timer_spinner.get_adjustment()
     value = adjustment.get_value()

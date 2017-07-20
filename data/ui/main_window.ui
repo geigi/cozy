@@ -386,7 +386,7 @@ audio-volume-medium-symbolic</property>
                   <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">search-symbolic</property>
+                    <property name="icon_name">edit-find-symbolic</property>
                   </object>
                 </child>
               </object>
@@ -405,7 +405,7 @@ audio-volume-medium-symbolic</property>
                   <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">time</property>
+                    <property name="icon_name">weather-clear-night-symbolic</property>
                   </object>
                 </child>
               </object>

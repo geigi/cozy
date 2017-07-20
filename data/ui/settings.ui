@@ -351,6 +351,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_right">5</property>
                     <property name="label" translatable="yes">Audio Books location</property>
                   </object>
                   <packing>
@@ -363,6 +364,7 @@
                   <object class="GtkFileChooserButton" id="location_chooser">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_left">5</property>
                     <property name="dialog">location_chooser_dialog</property>
                     <property name="title" translatable="yes"/>
                   </object>

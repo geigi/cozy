@@ -3,7 +3,22 @@
   <schema path="/de/geigi/Cozy/" id="de.geigi.Cozy" gettext-domain="cozy">
     <key type="b" name="symlinks">
       <default>false</default>
-      <summary>Follow symlincs</summary>
+      <summary>Follow symlinks</summary>
+      <description></description>
+    </key>
+    <key type="b" name="suspend">
+      <default>false</default>
+      <summary>Suspend system on timer</summary>
+      <description></description>
+    </key>
+    <key type="b" name="replay">
+      <default>false</default>
+      <summary>Replay 30 seconds on playback start</summary>
+      <description></description>
+    </key>
+    <key type="b" name="autoscan">
+      <default>false</default>
+      <summary>Auto scan the audio book directory</summary>
       <description></description>
     </key>
   </schema>
