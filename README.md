@@ -1,11 +1,10 @@
 # It's getting Cozy
 
 Cozy is a new GTK3 audio book manager and player. Here are some of the upcoming features:
-- [x] mp3 support
+- mp3, flac, ogg support
+- developed on Arch Linux and tested under elementaryOS
 - [ ] m4v support
-- [x] flac support
 - [ ] wav support
-- [x] ogg support
 - [ ] remember playback position of audio books
 - [ ] drag & drop support
 - [ ] display tags & cover
@@ -18,12 +17,12 @@ Cozy is a new GTK3 audio book manager and player. Here are some of the upcoming 
 
 ## Requirements
 - `python3`
-- `pip`
-- `meson >= 0.40.0`
+- `pip` for `peewee`
+- `meson >= 0.40.0` as build system
 - `ninja`
-- `gtk3 >= 3.16`
-- `peewee >= 2.10.1`
-- `mutagen`
+- `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
+- `peewee >= 2.10.1` as object relation mapper
+- `python3-mutagen` for meta tag management
 
 ## Build
 ```bash
