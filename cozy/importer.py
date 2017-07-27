@@ -1,13 +1,15 @@
 import os
 import mutagen
 
-from mutagen.easyid3 import *
-from mutagen.id3 import *
+from mutagen.easyid3 import EasyID3
+from mutagen.id3 import ID3
+from mutagen.flac import FLAC
 
 from cozy.db import *
 from cozy.ui import *
 
-def Import():
+def Import(ui):
+  ui.throbber.start()
   for directory, subdirectories, files in os.walk(Settings.get().path):
     for file in files:
       if file.lower().endswith(('.mp3', '.wav', '.flac', '.mp4', '.m4v')):
@@ -20,6 +22,7 @@ def Import():
           cover = ""
 
           # getting the cover data is file specific
+          ### MP3 ###
           if file.lower().endswith('.mp3'):
             track = ID3(path)
             try:
@@ -31,6 +34,24 @@ def Import():
             # for mp3 we are using the easyid3 functionality
             # because its syntax compatible to the rest
             track = EasyID3(path)
+          ### FLAC ###
+          elif file.lower().endswith('.flac'):
+            track = FLAC(path)
+            try:
+              cover = track.pictures[0].data
+            except Exception as e:
+              print("Could not load cover for file " + path)
+              print(e)
+              pass
+          ### OGG ###
+          elif file.lower().endswith('.ogg'):
+            track = OggVorbis(path)
+            try:
+              cover = track.get("metadata_block_picture", [])[0]
+            except Exception as e:
+              print("Could not load cover for file " + path)
+              print(e)
+              pass
 
           book_name = "Nameless Book"
           author = "No Name"
@@ -84,5 +105,5 @@ def Import():
                        position=0, 
                        book=book, 
                        file=path)
-
-Import()
+  ui.refresh_content()
+  ui.throbber.stop()

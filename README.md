@@ -1,7 +1,11 @@
 # It's getting Cozy
 
 Cozy is a new GTK3 audio book manager and player. Here are some of the upcoming features:
-- [ ] mp3, m4v, flac, wav support
+- [x] mp3 support
+- [ ] m4v support
+- [x] flac support
+- [ ] wav support
+- [x] ogg support
 - [ ] remember playback position of audio books
 - [ ] drag & drop support
 - [ ] display tags & cover

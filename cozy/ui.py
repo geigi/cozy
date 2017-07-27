@@ -2,6 +2,7 @@ import os
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio, Gdk, GdkPixbuf
+from threading import Thread
 
 from cozy.importer import *
 from cozy.db import *
@@ -14,6 +15,8 @@ class CozyUI:
   def activate(self):
     self.__init_window()
     self.__init_bindings()
+
+    self.scan(None, None)
 
   def startup(self):
     self.__init_resources()
@@ -54,18 +57,20 @@ class CozyUI:
     self.window.show_all()
     self.window.present()
 
-    author_box = self.window_builder.get_object("author_box")
-    reader_box = self.window_builder.get_object("reader_box")
     search_button = self.window_builder.get_object("search_button")
     search_popover = self.search_builder.get_object("search_popover")
     timer_button = self.window_builder.get_object("timer_button")
     timer_popover = self.timer_builder.get_object("timer_popover")
+    
 
     self.timer_switch = self.timer_builder.get_object("timer_switch")
     self.timer_scale = self.timer_builder.get_object("timer_scale")
     self.timer_spinner = self.timer_builder.get_object("timer_spinner")
     self.timer_buffer = self.timer_builder.get_object("timer_buffer")
     self.cover_img = self.window_builder.get_object("cover_img")
+    self.throbber = self.window_builder.get_object("spinner")
+    self.author_box = self.window_builder.get_object("author_box")
+    self.reader_box = self.window_builder.get_object("reader_box")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -98,19 +103,8 @@ class CozyUI:
     scale = self.window_builder.get_object("progress_scale")
     scale.set_range(0, 4)
 
-    for i in range(1,100):
-      row_a = ListBoxRowWithData(i)
-      row_b = ListBoxRowWithData(i)
-
-      author_box.add(row_a)
-      reader_box.add(row_b)
-      pass
-
     pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
     self.set_title_cover(pixbuf)
-
-    author_box.show_all()
-    reader_box.show_all()
 
   def __init_actions(self):
     self.accel = Gtk.AccelGroup()
@@ -164,12 +158,25 @@ class CozyUI:
     self.cover_img.set_from_pixbuf(pixbuf)
 
   def scan(self, action, parameter):
-    print(Books().select().where(Book.name == "test").count())
+    thread = Thread(target = Import, args=(self, ))
+    thread.start()
     pass
 
   def initDbSettings(self):
     chooser = self.settings_builder.get_object("location_chooser")
     chooser.set_current_folder(Settings.get().path)
+
+  def refresh_content(self):
+    for i in range(1,100):
+      row_a = ListBoxRowWithData(i)
+      row_b = ListBoxRowWithData(i)
+
+      self.author_box.add(row_a)
+      self.reader_box.add(row_b)
+
+      self.author_box.show_all()
+      self.reader_box.show_all()
+      pass
 
   def __init_bindings(self):
     settings = Gio.Settings.new("de.geigi.Cozy")
