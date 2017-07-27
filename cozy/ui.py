@@ -3,6 +3,9 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio, Gdk, GdkPixbuf
 
+from cozy.importer import *
+from cozy.db import *
+
 class CozyUI:
   def __init__(self, pkgdatadir, app):
     self.pkgdir = pkgdatadir
@@ -132,9 +135,9 @@ class CozyUI:
     self.app.add_action(pref_action)
     self.app.set_accels_for_action("app.prefs", ["<Control>comma"])
 
-    sync_action = Gio.SimpleAction.new("sync", None)
-    sync_action.connect("activate", self.sync)
-    self.app.add_action(sync_action)
+    scan_action = Gio.SimpleAction.new("scan", None)
+    scan_action.connect("activate", self.scan)
+    self.app.add_action(scan_action)
 
   def help(self, action, parameter):
     pass
@@ -159,7 +162,8 @@ class CozyUI:
     pixbuf = pixbuf.scale_simple(40, 40, GdkPixbuf.InterpType.BILINEAR)
     self.cover_img.set_from_pixbuf(pixbuf)
 
-  def sync(self, action, parameter):
+  def scan(self, action, parameter):
+    print(Books().select().where(Book.name == "test").count())
     pass
 
   def __init_bindings(self):

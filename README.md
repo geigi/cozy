@@ -14,9 +14,11 @@ Cozy is a new GTK3 audio book manager and player. Here are some of the upcoming 
 
 ## Requirements
 - `python3`
+- `pip`
 - `meson >= 0.40.0`
 - `ninja`
 - `gtk3 >= 3.16`
+- `peewee >= 2.10.1`
 
 ## Build
 ```bash
