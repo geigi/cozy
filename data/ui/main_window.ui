@@ -36,6 +36,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="stack">sort_stack</property>
+                <style>
+                  <class name="bold"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>

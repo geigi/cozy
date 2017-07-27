@@ -61,25 +61,25 @@ def Import(ui):
 
           # try to get all the tags
           try:
-            book_name = track["album"]
+            book_name = track["album"][0]
             pass
           except Exception:
             pass
 
           try:
-            author = track["composer"]
+            author = track["composer"][0]
             pass
           except Exception:
             pass
 
           try:
-            reader = track["author"]
+            reader = track["author"][0]
             pass
           except Exception:
             pass
 
           try:
-            track_name = track["title"]
+            track_name = track["title"][0]
             pass
           except Exception:
             pass

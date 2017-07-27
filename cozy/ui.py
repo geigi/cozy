@@ -167,16 +167,44 @@ class CozyUI:
     chooser.set_current_folder(Settings.get().path)
 
   def refresh_content(self):
-    for i in range(1,100):
-      row_a = ListBoxRowWithData(i)
-      row_b = ListBoxRowWithData(i)
+    # First clear the ListBoxes
+    childs = self.author_box.get_children()
+    for element in childs:
+      self.author_box.remove(element)
 
-      self.author_box.add(row_a)
-      self.reader_box.add(row_b)
+    childs = self.reader_box.get_children()
+    for element in childs:
+      self.reader_box.remove(element)
 
-      self.author_box.show_all()
-      self.reader_box.show_all()
+    seen_authors = []
+    seen_readers = []
+    for book in Books():
+      if book.author not in seen_authors:
+        seen_authors.append(book.author)
+
+      if book.reader not in seen_readers:
+        seen_readers.append(book.reader)
       pass
+
+    seen_authors.sort()
+    seen_readers.sort()
+
+    # TODO translate
+    all_row = ListBoxRowWithData("All")
+    self.author_box.add(all_row)
+    all_row = ListBoxRowWithData("All")
+    self.reader_box.add(all_row)
+
+    for author in seen_authors:
+      row = ListBoxRowWithData(author)
+      self.author_box.add(row)
+
+    for reader in seen_readers:
+      row = ListBoxRowWithData(reader)
+      self.reader_box.add(row)
+
+    self.author_box.show_all()
+    self.reader_box.show_all()
 
   def __init_bindings(self):
     settings = Gio.Settings.new("de.geigi.Cozy")
@@ -224,9 +252,12 @@ class CozyUI:
 
 
 class ListBoxRowWithData(Gtk.ListBoxRow):
+  MARGIN = 5
   def __init__(self, data):
     super(Gtk.ListBoxRow, self).__init__()
     self.data = data
     label = Gtk.Label(data)
     label.set_xalign(0.0)
+    label.set_margin_top(self.MARGIN)
+    label.set_margin_bottom(self.MARGIN)
     self.add(label)
