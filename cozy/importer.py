@@ -1,3 +1,88 @@
-from cozy.db import *
+import os
+import mutagen
 
-#Book.create(name="test", author="test", reader="test", position=1, rating=5)
+from mutagen.easyid3 import *
+from mutagen.id3 import *
+
+from cozy.db import *
+from cozy.ui import *
+
+def Import():
+  for directory, subdirectories, files in os.walk(Settings.get().path):
+    for file in files:
+      if file.lower().endswith(('.mp3', '.wav', '.flac', '.mp4', '.m4v')):
+        path = os.path.join(directory, file)
+
+        # Is the track already in the database?
+        if (Track.select().where(Track.file == path).count() < 1):
+          track = mutagen.File(path)
+
+          cover = ""
+
+          # getting the cover data is file specific
+          if file.lower().endswith('.mp3'):
+            track = ID3(path)
+            try:
+              cover = track.getall("APIC")[0].data
+              pass
+            except Exception as e:
+              pass
+
+            # for mp3 we are using the easyid3 functionality
+            # because its syntax compatible to the rest
+            track = EasyID3(path)
+
+          book_name = "Nameless Book"
+          author = "No Name"
+          reader = "No Name"
+          track_name = "Nameless Track"
+          track_number = 0
+
+          # try to get all the tags
+          try:
+            book_name = track["album"]
+            pass
+          except Exception:
+            pass
+
+          try:
+            author = track["composer"]
+            pass
+          except Exception:
+            pass
+
+          try:
+            reader = track["author"]
+            pass
+          except Exception:
+            pass
+
+          try:
+            track_name = track["title"]
+            pass
+          except Exception:
+            pass
+
+          try:
+            track_number = int(track["tracknumber"][0])
+            pass
+          except Exception as e:
+            print(e)
+            pass
+
+          # create database entries
+          if (Book.select().where(Book.name == book_name).count() < 1):
+            book = Book.create(name=book_name, 
+                        author=author, 
+                        reader=reader, 
+                        position=0, 
+                        rating=-1,
+                        cover=cover)
+
+          Track.create(name=track_name, 
+                       number=track_number, 
+                       position=0, 
+                       book=book, 
+                       file=path)
+
+Import()

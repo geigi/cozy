@@ -71,6 +71,7 @@ class CozyUI:
     self.settings_window = self.settings_builder.get_object("settings_window")
     self.settings_window.set_transient_for(self.window)
     self.settings_window.connect("delete-event", self.hide_window)
+    self.initDbSettings()
 
     # get about dialog
     self.about_dialog = self.about_builder.get_object("about_dialog")
@@ -166,6 +167,10 @@ class CozyUI:
     print(Books().select().where(Book.name == "test").count())
     pass
 
+  def initDbSettings(self):
+    chooser = self.settings_builder.get_object("location_chooser")
+    chooser.set_current_folder(Settings.get().path)
+
   def __init_bindings(self):
     settings = Gio.Settings.new("de.geigi.Cozy")
 
@@ -180,6 +185,9 @@ class CozyUI:
 
     replay_switch = self.settings_builder.get_object("replay_switch")
     settings.bind("replay", replay_switch, "active", Gio.SettingsBindFlags.DEFAULT)
+
+    folder_chooser = self.settings_builder.get_object("location_chooser")
+    folder_chooser.connect("file-set", self.__on_folder_changed)
 
   def __init_timer_buffer(self):
     adjustment = self.timer_spinner.get_adjustment()
@@ -199,6 +207,14 @@ class CozyUI:
 
     text = str(int(value)) + " min"
     self.timer_buffer.set_text(text, len(text))
+
+  def __on_folder_changed(self, sender):
+    folder_chooser = self.settings_builder.get_object("location_chooser")
+    settings = Settings.get()
+    settings.path = folder_chooser.get_file().get_path()
+    settings.save()
+    CleanDB()
+
 
 class ListBoxRowWithData(Gtk.ListBoxRow):
   def __init__(self, data):

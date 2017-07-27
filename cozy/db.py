@@ -18,19 +18,30 @@ class Book(BaseModel):
   reader = CharField()
   position = IntegerField()
   rating = IntegerField()
+  cover = CharField(null=True)
 
 class Track(BaseModel):
   name = CharField()
-  length = IntegerField()
   number = IntegerField()
   position = IntegerField()
   book = ForeignKeyField(Book)
   file = CharField()
 
+class Settings(BaseModel):
+  path = CharField()
+
 db.connect()
 # Create tables only when not already present
 #                               |
-db.create_tables([Track, Book], True)
+db.create_tables([Track, Book, Settings], True)
+
+if (Settings.select().count() < 1):
+  print("Init default audio book location path")
+  home_dir = path = os.path.expanduser('~') + "/AudioBooks"
+  if not os.path.exists(home_dir):
+    os.makedirs(home_dir)
+
+  Settings.create(path = home_dir)
 
 def Books():
   return Book.select()
@@ -40,3 +51,6 @@ def Search(search):
 
 def Tracks(book):
   return Track.select().where(book == Track.book)
+
+def CleanDB():
+  pass
