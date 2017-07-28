@@ -324,7 +324,7 @@ class BookElement(Gtk.Box):
     self.set_orientation(Gtk.Orientation.VERTICAL)
     self.set_spacing(10)
     self.set_halign(Gtk.Align.CENTER)
-    self.set_valign(Gtk.Align.CENTER)
+    self.set_valign(Gtk.Align.START)
     self.set_margin_top(10)
 
     label = Gtk.Label((self.book.name[:60] + '...') if len(self.book.name) > 60 else self.book.name)
