@@ -119,7 +119,26 @@
             <property name="hscrollbar_policy">never</property>
             <property name="shadow_type">in</property>
             <child>
-              <placeholder/>
+              <object class="GtkViewport" id="books_viewport">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkFlowBox" id="book_box">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">baseline</property>
+                    <property name="valign">start</property>
+                    <property name="margin_left">10</property>
+                    <property name="margin_right">10</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="homogeneous">True</property>
+                    <property name="column_spacing">30</property>
+                    <property name="row_spacing">30</property>
+                    <property name="activate_on_single_click">False</property>
+                  </object>
+                </child>
+              </object>
             </child>
           </object>
           <packing>

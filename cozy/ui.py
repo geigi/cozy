@@ -1,7 +1,7 @@
 import os
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio, Gdk, GdkPixbuf
+from gi.repository import Gtk, Gio, Gdk, GdkPixbuf, Pango
 from threading import Thread
 
 from cozy.importer import *
@@ -50,6 +50,7 @@ class CozyUI:
     screen = Gdk.Screen.get_default()
     styleContext = Gtk.StyleContext()
     styleContext.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
+    styleContext.add_class("bordered")
 
   def __init_window(self):
     self.window = self.window_builder.get_object("app_window")
@@ -71,6 +72,7 @@ class CozyUI:
     self.throbber = self.window_builder.get_object("spinner")
     self.author_box = self.window_builder.get_object("author_box")
     self.reader_box = self.window_builder.get_object("reader_box")
+    self.book_box = self.window_builder.get_object("book_box")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -167,7 +169,7 @@ class CozyUI:
     chooser.set_current_folder(Settings.get().path)
 
   def refresh_content(self):
-    # First clear the ListBoxes
+    # First clear the boxes
     childs = self.author_box.get_children()
     for element in childs:
       self.author_box.remove(element)
@@ -175,6 +177,10 @@ class CozyUI:
     childs = self.reader_box.get_children()
     for element in childs:
       self.reader_box.remove(element)
+
+    childs = self.book_box.get_children()
+    for element in childs:
+      self.book_box.remove(element)
 
     seen_authors = []
     seen_readers = []
@@ -205,6 +211,14 @@ class CozyUI:
 
     self.author_box.show_all()
     self.reader_box.show_all()
+
+
+
+    for b in Books():
+        self.book_box.add(BookElement(b))
+        pass
+
+    self.book_box.show_all()
 
   def __init_bindings(self):
     settings = Gio.Settings.new("de.geigi.Cozy")
@@ -260,4 +274,37 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
     label.set_xalign(0.0)
     label.set_margin_top(self.MARGIN)
     label.set_margin_bottom(self.MARGIN)
+    self.add(label)
+
+class BookElement(Gtk.Box):
+  book = None
+  def __init__(self, b):
+    self.book = b
+
+    super(Gtk.Box, self).__init__()
+    self.set_orientation(Gtk.Orientation.VERTICAL)
+    self.set_spacing(10)
+
+    label = Gtk.Label((self.book.name[:60] + '...') if len(self.book.name) > 60 else self.book.name)
+    label.set_xalign(0.5)
+    label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
+    label.props.max_width_chars = 30
+    label.props.justify = Gtk.Justification.CENTER
+
+    if self.book.cover is not None:
+        loader = GdkPixbuf.PixbufLoader.new_with_type("jpeg")
+        loader.write(b.cover)
+        loader.close()
+        pixbuf = loader.get_pixbuf()
+    else:
+        pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
+
+    pixbuf = pixbuf.scale_simple(180, 180, GdkPixbuf.InterpType.BILINEAR)
+    
+    img = Gtk.Image()
+    img.set_halign(Gtk.Align.CENTER)
+    img.get_style_context().add_class("bordered")
+    img.set_from_pixbuf(pixbuf)
+
+    self.add(img)
     self.add(label)

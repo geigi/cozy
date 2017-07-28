@@ -18,7 +18,7 @@ class Book(BaseModel):
   reader = CharField()
   position = IntegerField()
   rating = IntegerField()
-  cover = CharField(null=True)
+  cover = BlobField(null=True)
 
 class Track(BaseModel):
   name = CharField()

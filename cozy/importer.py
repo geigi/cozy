@@ -1,5 +1,6 @@
 import os
 import mutagen
+import base64
 
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
@@ -7,6 +8,16 @@ from mutagen.flac import FLAC
 
 from cozy.db import *
 from cozy.ui import *
+
+def b64tobinary(b64):
+  data = None
+  try:
+    data = base64.b64decode(b64)
+  except (TypeError, ValueError) as e:
+    print(e)
+    pass
+
+  return data
 
 def Import(ui):
   ui.throbber.start()
@@ -19,7 +30,7 @@ def Import(ui):
         if (Track.select().where(Track.file == path).count() < 1):
           track = mutagen.File(path)
 
-          cover = ""
+          cover = None
 
           # getting the cover data is file specific
           ### MP3 ###
