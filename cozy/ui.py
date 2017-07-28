@@ -284,6 +284,9 @@ class BookElement(Gtk.Box):
     super(Gtk.Box, self).__init__()
     self.set_orientation(Gtk.Orientation.VERTICAL)
     self.set_spacing(10)
+    self.set_halign(Gtk.Align.CENTER)
+    self.set_valign(Gtk.Align.CENTER)
+    self.set_margin_top(10)
 
     label = Gtk.Label((self.book.name[:60] + '...') if len(self.book.name) > 60 else self.book.name)
     label.set_xalign(0.5)
@@ -303,6 +306,7 @@ class BookElement(Gtk.Box):
     
     img = Gtk.Image()
     img.set_halign(Gtk.Align.CENTER)
+    img.set_valign(Gtk.Align.CENTER)
     img.get_style_context().add_class("bordered")
     img.set_from_pixbuf(pixbuf)
 
