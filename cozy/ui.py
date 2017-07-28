@@ -73,6 +73,7 @@ class CozyUI:
     self.author_box = self.window_builder.get_object("author_box")
     self.reader_box = self.window_builder.get_object("reader_box")
     self.book_box = self.window_builder.get_object("book_box")
+    self.sort_stack = self.window_builder.get_object("sort_stack")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -100,6 +101,12 @@ class CozyUI:
 
     # shortcuts
     self.accel = Gtk.AccelGroup()
+
+    # sorting and filtering
+    self.author_box.connect("row-activated", self.__on_listbox_changed)
+    self.reader_box.connect("row-activated", self.__on_listbox_changed)
+    self.book_box.set_sort_func(self.__sort_books, None, False)
+    self.book_box.set_filter_func(self.__filter_books, None, False)
 
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
@@ -198,8 +205,10 @@ class CozyUI:
     # TODO translate
     all_row = ListBoxRowWithData("All")
     self.author_box.add(all_row)
+    self.author_box.select_row(all_row)
     all_row = ListBoxRowWithData("All")
     self.reader_box.add(all_row)
+    self.reader_box.select_row(all_row)
 
     for author in seen_authors:
       row = ListBoxRowWithData(author)
@@ -209,10 +218,10 @@ class CozyUI:
       row = ListBoxRowWithData(reader)
       self.reader_box.add(row)
 
+
+
     self.author_box.show_all()
     self.reader_box.show_all()
-
-
 
     for b in Books():
         self.book_box.add(BookElement(b))
@@ -263,6 +272,36 @@ class CozyUI:
     settings.path = folder_chooser.get_file().get_path()
     settings.save()
     CleanDB()
+
+  ####################
+  # CONTENT HANDLING #
+  ####################
+
+  def __on_listbox_changed(self, sender, row):
+    self.book_box.invalidate_filter();
+
+  def __sort_books(self, book_1, book_2, data, notify_destroy):
+    return book_1.get_children()[0].book.name.lower() > book_2.get_children()[0].book.name.lower()
+
+  def __filter_books(self, book, data, notify_destroy):
+    if self.sort_stack.get_visible_child().get_name() == "sort_author_scroller":
+      author = self.author_box.get_selected_row().data
+      if author is None:
+        return True
+
+      if author == "All":
+        return True
+      else:
+        return True if book.get_children()[0].book.author == author else False
+    else:
+      reader = self.reader_box.get_selected_row().data
+      if reader is None:
+        return True
+        
+      if reader == "All":
+        return True
+      else:
+        return True if book.get_children()[0].book.reader == reader else False
 
 
 class ListBoxRowWithData(Gtk.ListBoxRow):
