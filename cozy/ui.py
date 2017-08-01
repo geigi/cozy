@@ -85,7 +85,7 @@ class CozyUI:
     self.about_dialog = self.about_builder.get_object("about_dialog")
     self.about_dialog.set_transient_for(self.window)
     self.about_dialog.connect("delete-event", self.hide_window)
-    
+
 
     # init popovers
     search_button.set_popover(search_popover)
@@ -107,6 +107,7 @@ class CozyUI:
     self.reader_box.connect("row-activated", self.__on_listbox_changed)
     self.book_box.set_sort_func(self.__sort_books, None, False)
     self.book_box.set_filter_func(self.__filter_books, None, False)
+    self.book_box.connect("selected-children-changed", self.__on_book_selec_changed)
 
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
@@ -273,6 +274,15 @@ class CozyUI:
     settings.save()
     CleanDB()
 
+  def __on_book_selec_changed(self, flowbox):
+    selected = flowbox.get_selected_children()[0]
+    for child in flowbox.get_children():
+      if child == selected:
+        child.get_children()[0].selected = True
+      else:
+        child.get_children()[0].selected = False
+        child.get_children()[0]._on_leave_notify(None, None)
+
   ####################
   # CONTENT HANDLING #
   ####################
@@ -317,6 +327,7 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
 
 class BookElement(Gtk.Box):
   book = None
+  selected = False
   def __init__(self, b):
     self.book = b
 
@@ -343,11 +354,63 @@ class BookElement(Gtk.Box):
 
     pixbuf = pixbuf.scale_simple(180, 180, GdkPixbuf.InterpType.BILINEAR)
     
+    box = Gtk.EventBox()
+    box.set_halign(Gtk.Align.CENTER)
+    box.set_valign(Gtk.Align.CENTER)
+
     img = Gtk.Image()
     img.set_halign(Gtk.Align.CENTER)
     img.set_valign(Gtk.Align.CENTER)
     img.get_style_context().add_class("bordered")
     img.set_from_pixbuf(pixbuf)
 
-    self.add(img)
+    play_img = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.DIALOG)
+
+    play_color = Gtk.Grid()
+    play_color.get_style_context().add_class("black_opacity")
+    play_color.set_property("halign", Gtk.Align.CENTER)
+    play_color.set_property("valign", Gtk.Align.CENTER)
+    play_color.add(play_img)
+
+    self.overlay = Gtk.Overlay.new()
+    self.overlay.add(img)
+    self.play_overlay = Gtk.Overlay.new()
+    self.play_overlay.add(play_color)
+    self.play_overlay.set_opacity(0.0)
+    self.overlay.add_overlay(self.play_overlay)
+    
+    color = Gtk.Grid()
+    color.get_style_context().add_class("mouse_hover")
+    color.set_property("halign", Gtk.Align.CENTER)
+    color.set_property("valign", Gtk.Align.CENTER)
+    color.add(self.overlay)
+
+    box.add(color)
+    self.add(box)
+    box.connect("enter-notify-event", self._on_enter_notify)
+    box.connect("leave-notify-event", self._on_leave_notify)
+    box.connect("button-press-event", self.__on_button_press)
+
     self.add(label)
+
+  def __on_button_press(self, eventbox, event):
+    pass
+
+  def _on_enter_notify(self, widget, event):
+    """
+      On enter notify, change overlay opacity
+      @param widget as Gtk.EventBox
+      @param event as Gdk.Event
+    """
+    self.overlay.set_opacity(0.85)
+    self.play_overlay.set_opacity(1.0)
+
+  def _on_leave_notify(self, widget, event):
+    """
+      On leave notify, change overlay opacity
+      @param widget as Gtk.EventBox (can be None)
+      @param event as Gdk.Event (can be None)
+    """
+    if not self.selected:
+      self.overlay.set_opacity(1.0)
+      self.play_overlay.set_opacity(0.0)
