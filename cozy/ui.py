@@ -275,13 +275,14 @@ class CozyUI:
     CleanDB()
 
   def __on_book_selec_changed(self, flowbox):
-    selected = flowbox.get_selected_children()[0]
-    for child in flowbox.get_children():
-      if child == selected:
-        child.get_children()[0].selected = True
-      else:
-        child.get_children()[0].selected = False
-        child.get_children()[0]._on_leave_notify(None, None)
+    if len(flowbox.get_selected_children()) > 0:
+      selected = flowbox.get_selected_children()[0]
+      for child in flowbox.get_children():
+        if child == selected:
+          child.get_children()[0].selected = True
+        else:
+          child.get_children()[0].selected = False
+          child.get_children()[0]._on_leave_notify(None, None)
 
   ####################
   # CONTENT HANDLING #
