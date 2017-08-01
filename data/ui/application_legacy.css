@@ -5,3 +5,12 @@
 .bordered {
   border: 2px solid shade(@theme_bg_color, 0.85);
 }
+
+.mouse_hover {
+  background-color: @theme_selected_fg_color;
+  border-radius: 4px;
+}
+
+.black_opacity {
+  background-color: rgba(255, 255, 255, 0.3);
+}
