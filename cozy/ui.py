@@ -365,6 +365,7 @@ class BookElement(Gtk.Box):
     img.set_from_pixbuf(pixbuf)
 
     play_img = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.DIALOG)
+    play_img.get_style_context().add_class("white")
 
     play_color = Gtk.Grid()
     play_color.get_style_context().add_class("black_opacity")
