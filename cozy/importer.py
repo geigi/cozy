@@ -10,6 +10,12 @@ from cozy.db import *
 from cozy.ui import *
 
 def b64tobinary(b64):
+  """
+  Decode base64 to binary data
+
+  :param b64: base64 data
+  :return: decoded data
+  """
   data = None
   try:
     data = base64.b64decode(b64)
@@ -20,6 +26,11 @@ def b64tobinary(b64):
   return data
 
 def Import(ui):
+  """
+  Import all supported audio files from the location set by the user in settings
+
+  :param ui: main ui to update the throbber status
+  """
   ui.throbber.start()
   for directory, subdirectories, files in os.walk(Settings.get().path):
     for file in files:
@@ -69,6 +80,7 @@ def Import(ui):
           reader = "No Name"
           track_name = "Nameless Track"
           track_number = 0
+          disk = 0
 
           # try to get all the tags
           try:
@@ -102,6 +114,14 @@ def Import(ui):
             print(e)
             pass
 
+          # TODO: disk number
+          try:
+            disk = int(track["disk"][0])
+            pass
+          except Exception as e:
+            print(e)
+            pass
+
           # create database entries
           if (Book.select().where(Book.name == book_name).count() < 1):
             book = Book.create(name=book_name, 
@@ -115,6 +135,8 @@ def Import(ui):
                        number=track_number, 
                        position=0, 
                        book=book, 
-                       file=path)
+                       file=path,
+                       disk=disk)
+  
   ui.refresh_content()
   ui.throbber.stop()

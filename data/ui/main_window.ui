@@ -19,15 +19,16 @@
   <object class="GtkApplicationWindow" id="app_window">
     <property name="name">main_window</property>
     <property name="can_focus">False</property>
-    <property name="default_width">1000</property>
-    <property name="default_height">500</property>
+    <property name="default_width">1100</property>
+    <property name="default_height">700</property>
     <property name="icon_name">multimedia</property>
     <child>
-      <object class="GtkBox" id="main_content">
+      <object class="GtkPaned" id="main_content">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
           <object class="GtkBox" id="sort_box">
+            <property name="width_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
@@ -35,6 +36,8 @@
               <object class="GtkStackSwitcher" id="sort_stack_switcher">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="hexpand">True</property>
                 <property name="stack">sort_stack</property>
                 <style>
                   <class name="bold"/>
@@ -42,7 +45,7 @@
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">True</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -50,6 +53,7 @@
               <object class="GtkStack" id="sort_stack">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <property name="transition_type">slide-left-right</property>
                 <child>
                   <object class="GtkScrolledWindow" id="sort_author_scroller">
@@ -101,20 +105,20 @@
                 </child>
               </object>
               <packing>
-                <property name="expand">True</property>
+                <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="resize">True</property>
+            <property name="shrink">False</property>
           </packing>
         </child>
         <child>
           <object class="GtkScrolledWindow" id="book_scroller">
+            <property name="width_request">600</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="hscrollbar_policy">never</property>
@@ -145,9 +149,8 @@
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="resize">True</property>
+            <property name="shrink">False</property>
           </packing>
         </child>
       </object>
