@@ -1,5 +1,7 @@
 from gi.repository import Gtk, GdkPixbuf, Pango
 
+from cozy.db import *
+
 class BookElement(Gtk.Box):
   """
   This class represents a book with big artwork in the book viewer.
@@ -93,7 +95,26 @@ class BookElement(Gtk.Box):
     self.add(box)
     self.add(label)
 
+    # create track list popover
+    self.__create_popover()
+
+  def __create_popover(self):
+    self.popover = Gtk.Popover.new(self)
+    self.popover.set_position(Gtk.PositionType.BOTTOM)
+
+    box = Gtk.Box()
+    box.set_orientation(Gtk.Orientation.VERTICAL)
+    box.set_halign(Gtk.Align.CENTER)
+    box.set_valign(Gtk.Align.START)
+    box.props.margin = 8
+
+    for track in Tracks(self.book):
+      box.add(TrackElement(track))
+
+    self.popover.add(box)
+
   def __on_button_press(self, eventbox, event):
+    self.popover.show_all()
     pass
 
   def _on_enter_notify(self, widget, event):
@@ -115,4 +136,64 @@ class BookElement(Gtk.Box):
       self.overlay.set_opacity(1.0)
       self.play_overlay.set_opacity(0.0)
 
-class BookPopup(Gtk.Pop)
+class TrackElement(Gtk.EventBox):
+  """
+  An element to display a track in a book popover.
+  """
+  track = None
+  selected = False
+  def __init__(self, t):
+    self.track = t
+
+    super(Gtk.EventBox, self).__init__()
+    self.connect("enter-notify-event", self._on_enter_notify)
+    self.connect("leave-notify-event", self._on_leave_notify)
+    self.connect("button-press-event", self.__on_button_press)
+
+    self.box = Gtk.Box()
+    self.box.set_orientation(Gtk.Orientation.HORIZONTAL)
+    self.box.set_spacing(3)
+    self.box.set_halign(Gtk.Align.FILL)
+    self.box.set_valign(Gtk.Align.CENTER)
+
+    no_label = Gtk.Label()
+    title_label = Gtk.Label()
+    dur_label = Gtk.Label()
+
+    no_label.set_text(str(self.track.number))
+    no_label.props.margin = 4
+    no_label.set_margin_right(7)
+
+    title_label.set_text(self.track.name)
+    title_label.set_halign(Gtk.Align.START)
+    title_label.props.margin = 4
+    title_label.set_margin_right(7)
+
+    dur_label.set_text("1:00")
+    dur_label.set_halign(Gtk.Align.END)
+    dur_label.props.margin = 4
+
+    self.box.add(no_label)
+    self.box.pack_start(title_label, True, True, 0)
+    self.box.pack_end(dur_label, False, False, 0)
+
+    self.add(self.box)
+
+  def __on_button_press(self, eventbox, event):
+    pass
+
+  def _on_enter_notify(self, widget, event):
+    """
+    On enter notify add css hover class
+    :param widget: as Gtk.EventBox
+    :param event: as Gdk.Event
+    """
+    self.box.get_style_context().add_class("box_hover")
+
+  def _on_leave_notify(self, widget, event):
+    """
+    On leave notify remove css hover class
+    :param widget: as Gtk.EventBox (can be None)
+    :param event: as Gdk.Event (can be None)
+    """
+    self.box.get_style_context().remove_class("box_hover")

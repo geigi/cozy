@@ -81,6 +81,8 @@ def Import(ui):
           track_name = "Nameless Track"
           track_number = 0
           disk = 0
+          length = 0
+          modified = 0
 
           # try to get all the tags
           try:
@@ -122,6 +124,14 @@ def Import(ui):
             print(e)
             pass
 
+          # TODO: track lenght
+          try:
+            length = int(track["length"][0])
+            pass
+          except Exception as e:
+            print(e)
+            pass
+
           # create database entries
           if (Book.select().where(Book.name == book_name).count() < 1):
             book = Book.create(name=book_name, 
@@ -136,7 +146,9 @@ def Import(ui):
                        position=0, 
                        book=book, 
                        file=path,
-                       disk=disk)
+                       disk=disk,
+                       length=length,
+                       modified=modified)
   
   ui.refresh_content()
   ui.throbber.stop()

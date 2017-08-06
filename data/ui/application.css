@@ -18,3 +18,7 @@
 .white {
   color: white;
 }
+
+.box_hover {
+  background: shade(@theme_bg_color, 1.1)
+}

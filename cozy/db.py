@@ -40,6 +40,8 @@ class Track(BaseModel):
   position = IntegerField()
   book = ForeignKeyField(Book)
   file = CharField()
+  length = IntegerField()
+  modified = IntegerField()
 
 class Settings(BaseModel):
   """
@@ -80,7 +82,7 @@ def Tracks(book):
   :param book: the book object
   :return: all tracks belonging to the book object
   """
-  return Track.select().where(book == Track.book)
+  return Track.select().join(Book).where(Book.name == book.name)
 
 def CleanDB():
   """
