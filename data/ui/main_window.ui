@@ -142,6 +142,7 @@
                     <property name="homogeneous">True</property>
                     <property name="column_spacing">30</property>
                     <property name="row_spacing">30</property>
+                    <property name="selection_mode">none</property>
                     <property name="activate_on_single_click">False</property>
                   </object>
                 </child>

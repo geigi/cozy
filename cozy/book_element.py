@@ -1,4 +1,4 @@
-from gi.repository import Gtk, GdkPixbuf, Pango
+from gi.repository import Gtk, Gdk, GdkPixbuf, Pango
 
 from cozy.db import *
 
@@ -53,6 +53,14 @@ class BookElement(Gtk.Box):
     img.get_style_context().add_class("bordered")
     img.set_from_pixbuf(pixbuf)
 
+    play_box = Gtk.EventBox()
+
+    # we want to change the mouse cursor if the user is hovering over the play button
+    play_box.connect("enter-notify-event", self._on_play_enter_notify)
+    play_box.connect("leave-notify-event", self._on_play_leave_notify)
+    # on click we want to play the audio book
+    play_box.connect("button-press-event", self.__on_play_button_press)
+
     # play_img is the themed play button for the overlay
     play_img = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.DIALOG)
     play_img.get_style_context().add_class("white")
@@ -80,7 +88,8 @@ class BookElement(Gtk.Box):
     color.set_property("valign", Gtk.Align.CENTER)
 
     # assemble play overlay
-    play_color.add(play_img)
+    play_box.add(play_img)
+    play_color.add(play_box)
     self.play_overlay.add(play_color)
 
     # assemble overlay with album art
@@ -102,6 +111,7 @@ class BookElement(Gtk.Box):
     self.popover = Gtk.Popover.new(self)
     self.popover.set_position(Gtk.PositionType.BOTTOM)
 
+    # TODO: Scroll if there are many tracks
     box = Gtk.Box()
     box.set_orientation(Gtk.Orientation.VERTICAL)
     box.set_halign(Gtk.Align.CENTER)
@@ -111,15 +121,19 @@ class BookElement(Gtk.Box):
     for track in Tracks(self.book):
       box.add(TrackElement(track))
 
+    self.popover.connect("closed", self.__on_popover_close)
+
     self.popover.add(box)
 
   def __on_button_press(self, eventbox, event):
+    # TODO: Handle deselect
+    self.selected = True
     self.popover.show_all()
     pass
 
   def _on_enter_notify(self, widget, event):
     """
-    On enter notify, change overlay opacity
+    On enter notify change overlay opacity
     :param widget: as Gtk.EventBox
     :param event: as Gdk.Event
     """
@@ -128,13 +142,38 @@ class BookElement(Gtk.Box):
 
   def _on_leave_notify(self, widget, event):
     """
-    On leave notify, change overlay opacity
+    On leave notify change overlay opacity
     :param widget: as Gtk.EventBox (can be None)
     :param event: as Gdk.Event (can be None)
     """
     if not self.selected:
       self.overlay.set_opacity(1.0)
       self.play_overlay.set_opacity(0.0)
+
+  def __on_popover_close(self, popover):
+    """
+    On popover close deselect this element and hide the overlay.
+    """
+    self.selected = False
+    self._on_leave_notify(None, None)
+
+  def _on_play_enter_notify(self, widget, event):
+    """
+    Change the cursor to pointing hand
+    """
+    self.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND2))
+
+  def _on_play_leave_notify(self, widget, event):
+    """
+    Reset the cursor.
+    """
+    self.props.window.set_cursor(None)
+
+  def __on_play_button_press(self, widget, event):
+    """
+    Play this book.
+    """
+    return True
 
 class TrackElement(Gtk.EventBox):
   """
@@ -156,14 +195,19 @@ class TrackElement(Gtk.EventBox):
     self.box.set_halign(Gtk.Align.FILL)
     self.box.set_valign(Gtk.Align.CENTER)
 
+    self.play_img = Gtk.Image()
     no_label = Gtk.Label()
     title_label = Gtk.Label()
     dur_label = Gtk.Label()
+
+    self.play_img.set_margin_right(5)
+    self.play_img.props.width_request = 16
 
     no_label.set_text(str(self.track.number))
     no_label.props.margin = 4
     no_label.set_margin_right(7)
 
+    # TODO: title max length
     title_label.set_text(self.track.name)
     title_label.set_halign(Gtk.Align.START)
     title_label.props.margin = 4
@@ -173,6 +217,7 @@ class TrackElement(Gtk.EventBox):
     dur_label.set_halign(Gtk.Align.END)
     dur_label.props.margin = 4
 
+    self.box.add(self.play_img)
     self.box.add(no_label)
     self.box.pack_start(title_label, True, True, 0)
     self.box.pack_end(dur_label, False, False, 0)
@@ -188,6 +233,7 @@ class TrackElement(Gtk.EventBox):
     :param widget: as Gtk.EventBox
     :param event: as Gdk.Event
     """
+    self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
     self.box.get_style_context().add_class("box_hover")
 
   def _on_leave_notify(self, widget, event):
@@ -197,3 +243,4 @@ class TrackElement(Gtk.EventBox):
     :param event: as Gdk.Event (can be None)
     """
     self.box.get_style_context().remove_class("box_hover")
+    self.play_img.clear()
