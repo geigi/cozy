@@ -25,6 +25,14 @@ def b64tobinary(b64):
 
   return data
 
+# TODO: First start. Ask for location of Audio books, then do first scan.
+# TODO: Explain to the user that files can be added using drag & drop or through rescan menu option.
+# TODO: Update Scan. Don't do this automatically for now. Go through all files and add new ones. Rescan files that have been changed from database. Remove entries from db that are not longer there. Important: don't forget playback position
+# TODO: If file can not be found on playback ask for location of file. If provided, update location in db.
+# TODO: App startup only with db
+# TODO: Change folder: Media was moved. Here we need an update scan. Update the file locations of each file. Then do update scan.
+# TODO: Drag & Drop files: Create folders and copy to correct location. Then import to db.
+# TODO: Default values that make sense. File name for track number, Folder Name for Album, ...
 def Import(ui):
   """
   Import all supported audio files from the location set by the user in settings
@@ -46,7 +54,13 @@ def Import(ui):
           # getting the cover data is file specific
           ### MP3 ###
           if file.lower().endswith('.mp3'):
-            track = ID3(path)
+            # TODO: Proper file handling: Check whether file has id3 tags, set usable default values, then go on
+            try:
+              track = ID3(path)
+            except Exception as e:
+              print("Track " + str(track) + " has no ID3 Tag")
+              continue
+
             try:
               cover = track.getall("APIC")[0].data
               pass
@@ -140,6 +154,9 @@ def Import(ui):
                         position=0, 
                         rating=-1,
                         cover=cover)
+          else:
+            book = Book.select().where(Book.name == book_name).get()
+
 
           Track.create(name=track_name, 
                        number=track_number, 

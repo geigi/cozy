@@ -331,11 +331,13 @@ class CozyUI:
     """
     Clean the database when the audio book location is changed.
     """
+    print("Change folder")
     folder_chooser = self.settings_builder.get_object("location_chooser")
     settings = Settings.get()
     settings.path = folder_chooser.get_file().get_path()
     settings.save()
     CleanDB()
+    self.scan(None, None)
 
   def __on_book_selec_changed(self, flowbox):
     """

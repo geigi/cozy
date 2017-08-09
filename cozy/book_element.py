@@ -111,23 +111,37 @@ class BookElement(Gtk.Box):
     self.popover = Gtk.Popover.new(self)
     self.popover.set_position(Gtk.PositionType.BOTTOM)
 
-    # TODO: Scroll if there are many tracks
+    # We need to scroll when there are many tracks in a Book
+    scroller = Gtk.ScrolledWindow()
+    scroller.set_propagate_natural_width(True)
+    scroller.set_propagate_natural_height(True)
+    scroller.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+    # TODO: This only works in GTK >= 3.22
+    scroller.set_max_content_height(600)
+
+    # This box contains all content
     box = Gtk.Box()
     box.set_orientation(Gtk.Orientation.VERTICAL)
     box.set_halign(Gtk.Align.CENTER)
     box.set_valign(Gtk.Align.START)
     box.props.margin = 8
 
+
+
     for track in Tracks(self.book):
       box.add(TrackElement(track))
 
+
     self.popover.connect("closed", self.__on_popover_close)
 
-    self.popover.add(box)
+    self.popover.add(scroller)
+    scroller.add_with_viewport(box)
+    scroller.show()
 
   def __on_button_press(self, eventbox, event):
     # TODO: Handle deselect
     self.selected = True
+    # TODO: self.popover.popup() when using gtk >= 3.22
     self.popover.show_all()
     pass
 
@@ -189,12 +203,14 @@ class TrackElement(Gtk.EventBox):
     self.connect("leave-notify-event", self._on_leave_notify)
     self.connect("button-press-event", self.__on_button_press)
 
+    # This box contains all content
     self.box = Gtk.Box()
     self.box.set_orientation(Gtk.Orientation.HORIZONTAL)
     self.box.set_spacing(3)
     self.box.set_halign(Gtk.Align.FILL)
     self.box.set_valign(Gtk.Align.CENTER)
 
+    # These are the widgets that contain data
     self.play_img = Gtk.Image()
     no_label = Gtk.Label()
     title_label = Gtk.Label()
@@ -206,6 +222,9 @@ class TrackElement(Gtk.EventBox):
     no_label.set_text(str(self.track.number))
     no_label.props.margin = 4
     no_label.set_margin_right(7)
+    no_label.set_margin_left(0)
+    no_label.set_size_request(30, -1)
+    no_label.set_xalign(1)
 
     # TODO: title max length
     title_label.set_text(self.track.name)
@@ -213,6 +232,7 @@ class TrackElement(Gtk.EventBox):
     title_label.props.margin = 4
     title_label.set_margin_right(7)
 
+    # TODO: set actual length
     dur_label.set_text("1:00")
     dur_label.set_halign(Gtk.Align.END)
     dur_label.props.margin = 4

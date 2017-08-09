@@ -43,6 +43,7 @@ class Track(BaseModel):
   length = IntegerField()
   modified = IntegerField()
 
+# TODO: First opened
 class Settings(BaseModel):
   """
   Settings contains all settings that are not saved in the gschema.
@@ -75,6 +76,7 @@ def Books():
 def Search(search):
   return Track.select().where(search in Track.name)
 
+# Return ordered after Track ID / name when not available
 def Tracks(book):
   """
   Find all tracks that belong to a given book
@@ -82,10 +84,13 @@ def Tracks(book):
   :param book: the book object
   :return: all tracks belonging to the book object
   """
-  return Track.select().join(Book).where(Book.name == book.name)
+  return Track.select().join(Book).where(Book.id == book.id).order_by(Track.disk, Track.number, Track.name)
 
 def CleanDB():
   """
   Delete everything from the database except settings.
   """
-  pass
+  q = Track.delete()
+  q.execute()
+  q = Book.delete()
+  q.execute()
