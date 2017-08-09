@@ -114,12 +114,7 @@ class BookElement(Gtk.Box):
     # We need to scroll when there are many tracks in a Book
     scroller = Gtk.ScrolledWindow()
     scroller.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-    if Gtk.get_minor_version() > 20:
-        scroller.set_propagate_natural_height(True)
-        scroller.set_max_content_height(600)
-    else:
-        pass
-
+    
     # This box contains all content
     box = Gtk.Box()
     box.set_orientation(Gtk.Orientation.VERTICAL)
@@ -127,9 +122,19 @@ class BookElement(Gtk.Box):
     box.set_valign(Gtk.Align.START)
     box.props.margin = 8
 
+    count = 0
     for track in Tracks(self.book):
       box.add(TrackElement(track))
+      count += 1
 
+    if Gtk.get_minor_version() > 20:
+      scroller.set_propagate_natural_height(True)
+      scroller.set_max_content_height(600)
+    else:
+      padding = 12
+      height = 30
+      scroller.set_size_request(-1, count * height + padding)
+      pass
 
     self.popover.connect("closed", self.__on_popover_close)
 
