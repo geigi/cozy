@@ -113,11 +113,12 @@ class BookElement(Gtk.Box):
 
     # We need to scroll when there are many tracks in a Book
     scroller = Gtk.ScrolledWindow()
-    scroller.set_propagate_natural_width(True)
-    scroller.set_propagate_natural_height(True)
     scroller.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-    # TODO: This only works in GTK >= 3.22
-    scroller.set_max_content_height(600)
+    if Gtk.get_minor_version() > 20:
+        scroller.set_propagate_natural_height(True)
+        scroller.set_max_content_height(600)
+    else:
+        pass
 
     # This box contains all content
     box = Gtk.Box()
@@ -125,8 +126,6 @@ class BookElement(Gtk.Box):
     box.set_halign(Gtk.Align.CENTER)
     box.set_valign(Gtk.Align.START)
     box.props.margin = 8
-
-
 
     for track in Tracks(self.book):
       box.add(TrackElement(track))
@@ -136,13 +135,14 @@ class BookElement(Gtk.Box):
 
     self.popover.add(scroller)
     scroller.add_with_viewport(box)
-    scroller.show()
+    scroller.show_all()
 
   def __on_button_press(self, eventbox, event):
-    # TODO: Handle deselect
     self.selected = True
-    # TODO: self.popover.popup() when using gtk >= 3.22
-    self.popover.show_all()
+    if Gtk.get_minor_version() > 20:
+        self.popover.popup()
+    else:
+        self.popover.show_all()
     pass
 
   def _on_enter_notify(self, widget, event):
