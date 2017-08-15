@@ -89,10 +89,10 @@ def Import(ui):
               print(e)
               pass
 
-          book_name = "Nameless Book"
-          author = "No Name"
-          reader = "No Name"
-          track_name = "Nameless Track"
+          book_name = os.path.basename(os.path.normpath(directory))
+          author = "Unknown Author"
+          reader = "Unknown Reader"
+          track_name = os.path.splittext(file)[0]
           track_number = 0
           disk = 0
           length = 0

@@ -49,12 +49,17 @@ class Settings(BaseModel):
   Settings contains all settings that are not saved in the gschema.
   """
   path = CharField()
+  first = BooleanField(default=True)
 
 
 db.connect()
 # Create tables only when not already present
 #                                           |
 db.create_tables([Track, Book, Settings], True)
+
+if (Settings.get().first == True):
+  # TODO: Open hello screen as dialog
+  print("first run")
 
 # If there is no user set AudioBooks location, create the default one
 if (Settings.select().count() < 1):
