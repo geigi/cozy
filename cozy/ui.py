@@ -246,8 +246,13 @@ class CozyUI:
     """
     Start the db import in a seperate thread
     """
+    self.throbber.start()
+
     thread = Thread(target = Import, args=(self, ))
     thread.start()
+
+    self.refresh_content()
+    self.throbber.stop()
     pass
 
   def initDbSettings(self):

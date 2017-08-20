@@ -40,7 +40,6 @@ def Import(ui):
   :param ui: main ui to update the throbber status
   """
   print("Starting import...")
-  ui.throbber.start()
   for directory, subdirectories, files in os.walk(Settings.get().path):
     for file in files:
       if file.lower().endswith(('.mp3', '.wav', '.flac', '.mp4', '.m4v')):
@@ -167,6 +166,3 @@ def Import(ui):
                        disk=disk,
                        length=length,
                        modified=modified)
-  
-  ui.refresh_content()
-  ui.throbber.stop()
