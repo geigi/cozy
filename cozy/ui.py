@@ -43,6 +43,7 @@ class CozyUI:
     self.settings_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/settings.ui")
     self.menu_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")
     self.about_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/about.ui")
+    self.hello_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/hello.ui")
 
   def __init_css(self):
     """

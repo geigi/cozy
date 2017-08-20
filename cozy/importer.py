@@ -39,6 +39,7 @@ def Import(ui):
 
   :param ui: main ui to update the throbber status
   """
+  print("Starting import...")
   ui.throbber.start()
   for directory, subdirectories, files in os.walk(Settings.get().path):
     for file in files:
