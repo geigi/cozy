@@ -89,7 +89,7 @@ def Import(ui):
           book_name = os.path.basename(os.path.normpath(directory))
           author = _("Unknown Author")
           reader = _("Unknown Reader")
-          track_name = os.path.splittext(file)[0]
+          track_name = os.path.splitext(file)[0]
           track_number = 0
           disk = 0
           length = 0

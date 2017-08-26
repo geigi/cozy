@@ -20,5 +20,5 @@
 }
 
 .box_hover {
-  background: shade(@theme_tooltip_bg_color, 1.1)
+  background: shade(@theme_bg_color, 0.9)
 }
