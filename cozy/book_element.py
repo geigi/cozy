@@ -2,6 +2,9 @@ from gi.repository import Gtk, Gdk, GdkPixbuf, Pango
 
 from cozy.db import *
 
+MAX_BOOK_LENGTH = 60
+MAX_TRACK_LENGTH = 40
+
 class BookElement(Gtk.Box):
   """
   This class represents a book with big artwork in the book viewer.
@@ -19,7 +22,7 @@ class BookElement(Gtk.Box):
     self.set_margin_top(10)
 
     # label contains the book name and is limited to x chars
-    label = Gtk.Label((self.book.name[:60] + '...') if len(self.book.name) > 60 else self.book.name)
+    label = Gtk.Label((self.book.name[:MAX_BOOK_LENGTH] + '...') if len(self.book.name) > MAX_BOOK_LENGTH else self.book.name)
     label.set_xalign(0.5)
     label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
     label.props.max_width_chars = 30
@@ -231,8 +234,7 @@ class TrackElement(Gtk.EventBox):
     no_label.set_size_request(30, -1)
     no_label.set_xalign(1)
 
-    # TODO: title max length
-    title_label.set_text(self.track.name)
+    title_label.set_text((self.track.name[:MAX_TRACK_LENGTH] + '...') if len(self.track.name) > MAX_TRACK_LENGTH else self.track.name)
     title_label.set_halign(Gtk.Align.START)
     title_label.props.margin = 4
     title_label.set_margin_right(7)

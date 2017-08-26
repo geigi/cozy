@@ -25,11 +25,8 @@ def b64tobinary(b64):
 
   return data
 
-# TODO: First start. Ask for location of Audio books, then do first scan.
-# TODO: Explain to the user that files can be added using drag & drop or through rescan menu option.
 # TODO: Update Scan. Don't do this automatically for now. Go through all files and add new ones. Rescan files that have been changed from database. Remove entries from db that are not longer there. Important: don't forget playback position
 # TODO: If file can not be found on playback ask for location of file. If provided, update location in db.
-# TODO: App startup only with db
 # TODO: Change folder: Media was moved. Here we need an update scan. Update the file locations of each file. Then do update scan.
 # TODO: Drag & Drop files: Create folders and copy to correct location. Then import to db.
 # TODO: Default values that make sense. File name for track number, Folder Name for Album, ...
@@ -90,8 +87,8 @@ def Import(ui):
               pass
 
           book_name = os.path.basename(os.path.normpath(directory))
-          author = "Unknown Author"
-          reader = "Unknown Reader"
+          author = _("Unknown Author")
+          reader = _("Unknown Reader")
           track_name = os.path.splittext(file)[0]
           track_number = 0
           disk = 0

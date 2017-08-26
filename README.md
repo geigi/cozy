@@ -36,3 +36,7 @@ $ meson desired_build_directory --prefix=desired_installation_directory
 ```
 XDG_DATA_DIRS=desired_installation_directory/share:/usr/share PYTHONPATH=desired_installation_directory/lib/python3.[your_python3_version]/site-packages app/bin/cozy
 ```
+
+## Help me translate cozy!
+Cozy is on Transifex, where anyone can help translate:
+https://www.transifex.com/geigi/cozy/

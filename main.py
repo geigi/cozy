@@ -19,6 +19,7 @@
 
 import sys
 import gi
+import locale
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
@@ -26,10 +27,20 @@ from cozy.ui import CozyUI
 from cozy.db import *
 
 pkgdatadir = '@DATA_DIR@'
+localedir = '@LOCALE_DIR@'
+
+
 
 class Application(Gtk.Application):
   def __init__(self, **kwargs):
     super().__init__(application_id='org.gnome.Audiobooks', **kwargs)
+
+    import gettext
+
+    locale.bindtextdomain('cozy', localedir)
+    locale.textdomain('cozy')
+    gettext.install('cozy', localedir)
+
     self.ui = CozyUI(pkgdatadir, self)
     InitDB()
 

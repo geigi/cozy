@@ -1,0 +1,144 @@
+# Copyright (C) 2017
+# This file is distributed under the same license as the cozy package.
+# geigi <transifex@geigi.de>, 2017.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: cozy 0.1\n"
+"POT-Creation-Date: 2017-08-26 09:43+0200\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2017\n"
+"Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cozy/importer.py:90
+msgid "Unknown Author"
+msgstr "Unbekannter Autor"
+
+#: cozy/importer.py:91
+msgid "Unknown Reader"
+msgstr "Unbekannter Leser"
+
+#: cozy/ui.py:197 cozy/ui.py:335 data/ui/timer_popover.ui:71
+msgid "min"
+msgstr "min"
+
+#: cozy/ui.py:300 cozy/ui.py:303 cozy/ui.py:388 cozy/ui.py:397
+msgid "All"
+msgstr "Alle"
+
+#: data/ui/main_window.ui:79
+msgid "Author"
+msgstr "Autor"
+
+#: data/ui/main_window.ui:102
+msgid "Reader"
+msgstr "Leser"
+
+#: data/ui/about.ui:12
+msgid "GitHub"
+msgstr "GitHub"
+
+#: data/ui/app_menu.ui:7
+msgid "_Scan Directory"
+msgstr "_Suche nach neuen Medien"
+
+#: data/ui/app_menu.ui:13
+msgid "_Preferences"
+msgstr "_Einstellungen"
+
+#: data/ui/app_menu.ui:19
+msgid "_Help"
+msgstr "_Hilfe"
+
+#: data/ui/app_menu.ui:23
+msgid "_About"
+msgstr "_Über"
+
+#: data/ui/app_menu.ui:27
+msgid "_Quit"
+msgstr "_Beenden"
+
+#: data/ui/hello.ui:44
+msgid ""
+"Cozy is an application to browse and playback your DRM free audio book "
+"collection. "
+msgstr ""
+"Cozy ist ein Programm zum verwalten und abspielen Deiner DRM-freien "
+"Hörbuchbibliothek."
+
+#: data/ui/hello.ui:91
+msgid ""
+"To get started, select where you store your audio books. Files in this "
+"folder will be imported to your library:"
+msgstr ""
+"Zu Beginn wähle einen Ordner, in dem du deine Hörbücher speichern möchtest. "
+"Hast du bereits einen Ordner mit Hörbüchern, kannst du ihn hier auswählen:"
+
+#: data/ui/hello.ui:139
+msgid "How to add new audio books:"
+msgstr "So fügst du neue Bücher hinzu:"
+
+#: data/ui/hello.ui:200
+msgid "Drag & Drop"
+msgstr "Drag & Drop"
+
+#: data/ui/hello.ui:212
+msgid "Rescan from menu"
+msgstr "Medienordner scannen im Menü anzeigen"
+
+#: data/ui/hello.ui:229
+msgid "Let's get cozy"
+msgstr "Let's get cozy"
+
+#: data/ui/settings.ui:29 data/ui/settings.ui:105
+msgid "Order by"
+msgstr "Sortieren nach:"
+
+#: data/ui/settings.ui:39
+msgid "Newest"
+msgstr "Neuestes"
+
+#: data/ui/settings.ui:56
+msgid "Year"
+msgstr "Jahr"
+
+#: data/ui/settings.ui:74
+msgid "Name"
+msgstr "Name"
+
+#: data/ui/settings.ui:146
+msgid "Appearance"
+msgstr "Erscheinung"
+
+#: data/ui/settings.ui:162
+msgid "Suspend system on timer"
+msgstr "Schicke System schlafen nach Timer"
+
+#: data/ui/settings.ui:198
+msgid "Replay 30 seconds"
+msgstr "30 Sekunden Replay"
+
+#: data/ui/settings.ui:233
+msgid "Automatic media scan"
+msgstr "Automatischer Medienordner Scan"
+
+#: data/ui/settings.ui:264
+msgid "Behaviour"
+msgstr "Verhalten"
+
+#: data/ui/settings.ui:281
+msgid "Follow symlinks"
+msgstr "Folge Symlinks"
+
+#: data/ui/settings.ui:319 data/ui/settings.ui:334
+msgid "Audio Books location"
+msgstr "Hörbücher Ordner"
+
+#: data/ui/settings.ui:356
+msgid "Files"
+msgstr "Dateien"

@@ -1,12 +1,14 @@
-import os
-import gi
-gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio, Gdk, GdkPixbuf
 from threading import Thread
 
 from cozy.importer import *
 from cozy.db import *
 from cozy.book_element import *
+
+import os
+import gi
+gi.require_version('Gtk', '3.0')
+
 
 class CozyUI:
   """
@@ -20,7 +22,7 @@ class CozyUI:
     self.__init_window()
     self.__init_bindings()
 
-    self.scan(None, None)
+    self.refresh_content()
 
   def startup(self):
     self.__init_resources()
@@ -192,7 +194,7 @@ class CozyUI:
     adjustment = self.timer_spinner.get_adjustment()
     value = adjustment.get_value()
 
-    text = str(int(value)) + " min"
+    text = str(int(value)) + " " + _("min")
     self.timer_buffer.set_text(text, len(text))
 
     return True
@@ -295,10 +297,10 @@ class CozyUI:
 
     # TODO translate
     # Add the special All element
-    all_row = ListBoxRowWithData("All")
+    all_row = ListBoxRowWithData(_("All"))
     self.author_box.add(all_row)
     self.author_box.select_row(all_row)
-    all_row = ListBoxRowWithData("All")
+    all_row = ListBoxRowWithData(_("All"))
     self.reader_box.add(all_row)
     self.reader_box.select_row(all_row)
 
@@ -330,7 +332,7 @@ class CozyUI:
     adjustment = self.timer_spinner.get_adjustment()
     value = adjustment.get_value()
 
-    text = str(int(value)) + " min"
+    text = str(int(value)) + " " + _("min")
     self.timer_buffer.set_text(text, len(text))
 
   def __on_folder_changed(self, sender):
@@ -383,7 +385,7 @@ class CozyUI:
       if author is None:
         return True
 
-      if author == "All":
+      if author == _("All"):
         return True
       else:
         return True if book.get_children()[0].book.author == author else False
@@ -392,7 +394,7 @@ class CozyUI:
       if reader is None:
         return True
         
-      if reader == "All":
+      if reader == _("All"):
         return True
       else:
         return True if book.get_children()[0].book.reader == reader else False

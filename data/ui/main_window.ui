@@ -198,7 +198,7 @@
                     <property name="can_focus">False</property>
                     <property name="valign">end</property>
                     <property name="vexpand">True</property>
-                    <property name="label" translatable="yes">Harry Potter und der Halbblutprinz</property>
+                    <property name="label" translatable="no">Harry Potter und der Halbblutprinz</property>
                     <property name="justify">right</property>
                     <property name="ellipsize">end</property>
                     <property name="width_chars">10</property>
@@ -220,7 +220,7 @@
                     <property name="can_focus">False</property>
                     <property name="valign">start</property>
                     <property name="vexpand">True</property>
-                    <property name="label" translatable="yes">Epilog</property>
+                    <property name="label" translatable="no">Epilog</property>
                     <property name="ellipsize">end</property>
                     <property name="width_chars">10</property>
                     <property name="single_line_mode">True</property>
@@ -357,7 +357,7 @@ audio-volume-medium-symbolic</property>
                 <property name="can_focus">False</property>
                 <property name="halign">end</property>
                 <property name="margin_right">3</property>
-                <property name="label" translatable="yes">0:00</property>
+                <property name="label" translatable="no">0:00</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -386,7 +386,7 @@ audio-volume-medium-symbolic</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="margin_left">3</property>
-                <property name="label" translatable="yes">4:00</property>
+                <property name="label" translatable="no">4:00</property>
               </object>
               <packing>
                 <property name="expand">False</property>
