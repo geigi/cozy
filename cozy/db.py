@@ -43,27 +43,21 @@ class Track(BaseModel):
   length = IntegerField()
   modified = IntegerField()
 
-# TODO: First opened
 class Settings(BaseModel):
   """
   Settings contains all settings that are not saved in the gschema.
   """
   path = CharField()
+  first = BooleanField(default=True)
 
+def InitDB():
+  db.connect()
+  # Create tables only when not already present
+  #                                           |
+  db.create_tables([Track, Book, Settings], True)
 
-db.connect()
-# Create tables only when not already present
-#                                           |
-db.create_tables([Track, Book, Settings], True)
-
-# If there is no user set AudioBooks location, create the default one
-if (Settings.select().count() < 1):
-  print("Init default audio book location path")
-  home_dir = path = os.path.expanduser('~') + "/AudioBooks"
-  if not os.path.exists(home_dir):
-    os.makedirs(home_dir)
-
-  Settings.create(path = home_dir)
+  if (Settings.select().count() == 0):
+    Settings.create(path = "")
 
 def Books():
   """

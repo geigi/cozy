@@ -25,11 +25,8 @@ def b64tobinary(b64):
 
   return data
 
-# TODO: First start. Ask for location of Audio books, then do first scan.
-# TODO: Explain to the user that files can be added using drag & drop or through rescan menu option.
 # TODO: Update Scan. Don't do this automatically for now. Go through all files and add new ones. Rescan files that have been changed from database. Remove entries from db that are not longer there. Important: don't forget playback position
 # TODO: If file can not be found on playback ask for location of file. If provided, update location in db.
-# TODO: App startup only with db
 # TODO: Change folder: Media was moved. Here we need an update scan. Update the file locations of each file. Then do update scan.
 # TODO: Drag & Drop files: Create folders and copy to correct location. Then import to db.
 # TODO: Default values that make sense. File name for track number, Folder Name for Album, ...
@@ -39,7 +36,7 @@ def Import(ui):
 
   :param ui: main ui to update the throbber status
   """
-  ui.throbber.start()
+  print("Starting import...")
   for directory, subdirectories, files in os.walk(Settings.get().path):
     for file in files:
       if file.lower().endswith(('.mp3', '.wav', '.flac', '.mp4', '.m4v')):
@@ -89,10 +86,10 @@ def Import(ui):
               print(e)
               pass
 
-          book_name = "Nameless Book"
-          author = "No Name"
-          reader = "No Name"
-          track_name = "Nameless Track"
+          book_name = os.path.basename(os.path.normpath(directory))
+          author = _("Unknown Author")
+          reader = _("Unknown Reader")
+          track_name = os.path.splittext(file)[0]
           track_number = 0
           disk = 0
           length = 0
@@ -166,6 +163,3 @@ def Import(ui):
                        disk=disk,
                        length=length,
                        modified=modified)
-  
-  ui.refresh_content()
-  ui.throbber.stop()

@@ -13,5 +13,12 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+        "extra_paths":
+        [
+            "~/.cache/fakegir",
+        ]
+    }
 }
+
