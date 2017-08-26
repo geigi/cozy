@@ -131,8 +131,8 @@ class BookElement(Gtk.Box):
       scroller.set_propagate_natural_height(True)
       scroller.set_max_content_height(600)
     else:
-      padding = 12
-      height = 30
+      padding = 17
+      height = 24
       scroller.set_size_request(-1, count * height + padding)
       pass
 
