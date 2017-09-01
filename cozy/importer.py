@@ -129,6 +129,41 @@ def FirstImport(ui):
                        length=length,
                        modified=modified)
 
+def UpdateDatabase():
+  """
+  Scans the audio book directory for changes and new files.
+  """
+  pass
+
+def RebaseLocation():
+  """
+  This gets called when a user changes the location of the audio book folder.
+  Every file in the database will be searched in the new location
+  and the path will be updated in the database.
+  """
+  pass
+
+def __importFile(path):
+  """
+  Imports all information about a track into the database.
+  Note: This creates also a new album object when it doesnt exist yet. 
+  Note: This does not check whether the file is already imported.
+  """
+  pass
+
+def __updateFile(path):
+  """
+  Updates the information about this file in the database.
+  """
+  pass
+
+def __removeFile(path):
+  """
+  Removes a file from the database. This also removes the 
+  book entry when there are no tracks in the database anymore.
+  """
+  pass
+
 def __getCommonDiskNumber(track):
   """
   Get the disk number for most files.
