@@ -38,5 +38,5 @@ XDG_DATA_DIRS=desired_installation_directory/share:/usr/share PYTHONPATH=desired
 ```
 
 ## Help me translate cozy!
-Cozy is on Transifex, where anyone can help translate:
+Cozy is on Transifex, where anyone can contribute and translate. Can't find your language in the list? Let me know!
 https://www.transifex.com/geigi/cozy/
