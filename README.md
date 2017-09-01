@@ -2,7 +2,7 @@
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
 
-Cozy is a new GTK3 audio book manager and player. Here are some of the upcoming features:
+Cozy is a modern audio book manager and player for Linux. Here are some of the implemented & upcoming features:
 - mp3, flac, ogg support
 - display tags & cover
 - category sort by author, reader & name
