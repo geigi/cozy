@@ -40,7 +40,7 @@ class Track(BaseModel):
   position = IntegerField()
   book = ForeignKeyField(Book)
   file = CharField()
-  length = IntegerField()
+  length = FloatField()
   modified = IntegerField()
 
 class Settings(BaseModel):
@@ -88,3 +88,22 @@ def CleanDB():
   q.execute()
   q = Book.delete()
   q.execute()
+
+def SecondsToStr(seconds):
+  """
+  Converts seconds to a string with the following apperance:
+  hh:mm:ss
+
+  :param seconds: The seconds as float
+  """
+  m, s = divmod(seconds, 60)
+  h, m = divmod(m, 60)
+
+  if (h > 0):
+    result = "%d:%02d:%02d" % (h, m, s)
+  elif (m > 0):
+    result = "%02d:%02d" % (m, s)
+  else:
+    result = "00:%02d" % (s)
+
+  return result

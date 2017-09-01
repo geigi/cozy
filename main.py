@@ -29,8 +29,6 @@ from cozy.db import *
 pkgdatadir = '@DATA_DIR@'
 localedir = '@LOCALE_DIR@'
 
-
-
 class Application(Gtk.Application):
   def __init__(self, **kwargs):
     super().__init__(application_id='org.gnome.Audiobooks', **kwargs)
@@ -76,6 +74,7 @@ class Application(Gtk.Application):
     self.ui.activate()
     self.add_window(self.ui.window)
     self.ui.scan(None, None)
+    self.ui.refresh_content()
 
   def __on_folder_changed(self, sender):
     """

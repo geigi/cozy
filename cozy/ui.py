@@ -250,7 +250,7 @@ class CozyUI:
     """
     self.throbber.start()
 
-    thread = Thread(target = Import, args=(self, ))
+    thread = Thread(target = FirstImport, args=(self, ))
     thread.start()
 
     self.refresh_content()
