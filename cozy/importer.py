@@ -42,6 +42,8 @@ def UpdateDatabase(ui):
   Scans the audio book directory for changes and new files. 
   Also removes entries from the db that are no longer existent.
   """
+  i = 0
+  file_count = sum([len(files) for r, d, files in os.walk(Settings.get().path)])
   for directory, subdirectories, files in os.walk(Settings.get().path):
     for file in files:
       if file.lower().endswith(('.mp3', '.ogg', '.flac')):
@@ -53,6 +55,10 @@ def UpdateDatabase(ui):
         # Has the track changed on disk?
         elif Track.select().where(Track.file == path).first().modified < os.path.getmtime(path):
           __importFile(file, path, update=True)
+
+        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.progress_bar.set_fraction, i / file_count)
+        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_fraction, i / file_count)
+        i = i + 1
 
   # remove entries from the db that are no longer existent
   for track in Track.select():
@@ -66,6 +72,11 @@ def UpdateDatabase(ui):
 
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.throbber.stop)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.import_box.set_visible, False)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_visible, False)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.sort_box.set_visible, True)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.book_scroller.set_visible, True)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.position_box.set_visible, True)
 
 def RebaseLocation(oldPath, newPath):
   """
@@ -76,7 +87,9 @@ def RebaseLocation(oldPath, newPath):
   for track in Track.select():
     newPath = track.path.replace(oldPath, newPath)
     Track.update(path=newPath).where(Track.id == track.id).execute()
-  pass
+  
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.throbber.stop)
 
 def __importFile(file, path, update=False):
   """

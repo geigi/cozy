@@ -91,7 +91,13 @@ class CozyUI:
     self.author_box = self.window_builder.get_object("author_box")
     self.reader_box = self.window_builder.get_object("reader_box")
     self.book_box = self.window_builder.get_object("book_box")
+    self.book_scroller = self.window_builder.get_object("book_scroller")
     self.sort_stack = self.window_builder.get_object("sort_stack")
+    self.sort_box = self.window_builder.get_object("sort_box")
+    self.progress_bar = self.window_builder.get_object("progress_bar")
+    self.update_progress_bar = self.window_builder.get_object("update_progress_bar")
+    self.import_box = self.window_builder.get_object("import_box")
+    self.position_box = self.window_builder.get_object("position_box")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -130,6 +136,10 @@ class CozyUI:
     self.book_box.set_sort_func(self.__sort_books, None, False)
     self.book_box.set_filter_func(self.__filter_books, None, False)
     self.book_box.connect("selected-children-changed", self.__on_book_selec_changed)
+
+    # hide import screen
+    self.import_box.set_visible(False)
+    self.update_progress_bar.set_visible(False)
 
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
@@ -244,11 +254,15 @@ class CozyUI:
     pixbuf = pixbuf.scale_simple(40, 40, GdkPixbuf.InterpType.BILINEAR)
     self.cover_img.set_from_pixbuf(pixbuf)
 
-  def scan(self, action, parameter):
+  def scan(self, action, first_scan):
     """
     Start the db import in a seperate thread
     """
     self.throbber.start()
+    self.position_box.set_visible(False)
+    if not first_scan:
+      self.update_progress_bar.set_fraction(0)
+      self.update_progress_bar.set_visible(True)
 
     thread = Thread(target = UpdateDatabase, args = (self, ))
     thread.start()

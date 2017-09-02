@@ -117,36 +117,93 @@
           </packing>
         </child>
         <child>
-          <object class="GtkScrolledWindow" id="book_scroller">
-            <property name="width_request">600</property>
+          <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hscrollbar_policy">never</property>
-            <property name="shadow_type">in</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkViewport" id="books_viewport">
-                <property name="visible">True</property>
+              <object class="GtkBox" id="import_box">
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkFlowBox" id="book_box">
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="halign">baseline</property>
-                    <property name="valign">start</property>
-                    <property name="margin_left">10</property>
-                    <property name="margin_right">10</property>
-                    <property name="margin_top">10</property>
-                    <property name="margin_bottom">10</property>
+                    <property name="margin_top">70</property>
+                    <property name="label" translatable="yes">Importing your audio books...</property>
+                    <attributes>
+                      <attribute name="weight" value="heavy"/>
+                      <attribute name="scale" value="1"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkProgressBar" id="progress_bar">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">100</property>
+                    <property name="margin_right">100</property>
+                    <property name="margin_bottom">70</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="homogeneous">True</property>
-                    <property name="column_spacing">30</property>
-                    <property name="row_spacing">30</property>
-                    <property name="selection_mode">none</property>
-                    <property name="activate_on_single_click">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="book_scroller">
+                <property name="width_request">600</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hscrollbar_policy">never</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkViewport" id="books_viewport">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkFlowBox" id="book_box">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">baseline</property>
+                        <property name="valign">start</property>
+                        <property name="margin_left">10</property>
+                        <property name="margin_right">10</property>
+                        <property name="margin_top">10</property>
+                        <property name="margin_bottom">10</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="homogeneous">True</property>
+                        <property name="column_spacing">30</property>
+                        <property name="row_spacing">30</property>
+                        <property name="selection_mode">none</property>
+                        <property name="activate_on_single_click">False</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -198,7 +255,7 @@
                     <property name="can_focus">False</property>
                     <property name="valign">end</property>
                     <property name="vexpand">True</property>
-                    <property name="label" translatable="no">Harry Potter und der Halbblutprinz</property>
+                    <property name="label">Harry Potter und der Halbblutprinz</property>
                     <property name="justify">right</property>
                     <property name="ellipsize">end</property>
                     <property name="width_chars">10</property>
@@ -220,7 +277,7 @@
                     <property name="can_focus">False</property>
                     <property name="valign">start</property>
                     <property name="vexpand">True</property>
-                    <property name="label" translatable="no">Epilog</property>
+                    <property name="label">Epilog</property>
                     <property name="ellipsize">end</property>
                     <property name="width_chars">10</property>
                     <property name="single_line_mode">True</property>
@@ -346,52 +403,77 @@ audio-volume-medium-symbolic</property>
           </object>
         </child>
         <child type="title">
-          <object class="GtkBox" id="position_box">
+          <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_right">20</property>
-            <property name="hexpand">True</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkLabel" id="current_label">
+              <object class="GtkBox" id="position_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">end</property>
-                <property name="margin_right">3</property>
-                <property name="label" translatable="no">0:00</property>
+                <property name="margin_right">20</property>
+                <property name="hexpand">True</property>
+                <child>
+                  <object class="GtkLabel" id="current_label">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">end</property>
+                    <property name="margin_right">3</property>
+                    <property name="label">0:00</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScale" id="progress_scale">
+                    <property name="width_request">150</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="round_digits">1</property>
+                    <property name="draw_value">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="remaining_label">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="margin_left">3</property>
+                    <property name="label">4:00</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkProgressBar" id="update_progress_bar">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_right">20</property>
+                <property name="hexpand">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkScale" id="progress_scale">
-                <property name="width_request">150</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hexpand">True</property>
-                <property name="round_digits">1</property>
-                <property name="draw_value">False</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="remaining_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="margin_left">3</property>
-                <property name="label" translatable="no">4:00</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">3</property>
               </packing>
             </child>
           </object>

@@ -75,7 +75,10 @@ class Application(Gtk.Application):
 
     self.ui.activate()
     self.add_window(self.ui.window)
-    self.ui.scan(None, None)
+    self.ui.import_box.set_visible(True)
+    self.ui.sort_box.set_visible(False)
+    self.ui.book_scroller.set_visible(False)
+    self.ui.scan(None, True)
     self.ui.refresh_content()
 
   def __on_folder_changed(self, sender):

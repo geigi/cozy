@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-26 09:43+0200\n"
+"POT-Creation-Date: 2017-09-02 18:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cozy/importer.py:90
+#: cozy/importer.py:152
 msgid "Unknown Author"
 msgstr ""
 
-#: cozy/importer.py:91
+#: cozy/importer.py:153
 msgid "Unknown Reader"
 msgstr ""
 
-#: cozy/ui.py:197 cozy/ui.py:335 data/ui/timer_popover.ui:71
+#: cozy/ui.py:207 cozy/ui.py:348 data/ui/timer_popover.ui:71
 msgid "min"
 msgstr ""
 
-#: cozy/ui.py:300 cozy/ui.py:303 cozy/ui.py:388 cozy/ui.py:397
+#: cozy/ui.py:311 cozy/ui.py:314 cozy/ui.py:401 cozy/ui.py:410
 msgid "All"
 msgstr ""
 
@@ -39,6 +39,10 @@ msgstr ""
 
 #: data/ui/main_window.ui:102
 msgid "Reader"
+msgstr ""
+
+#: data/ui/main_window.ui:133
+msgid "Importing your audio books..."
 msgstr ""
 
 #: data/ui/about.ui:12
