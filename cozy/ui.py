@@ -250,7 +250,7 @@ class CozyUI:
     """
     self.throbber.start()
 
-    thread = Thread(target = FirstImport, args=(self, ))
+    thread = Thread(target = UpdateDatabase)
     thread.start()
 
     self.refresh_content()

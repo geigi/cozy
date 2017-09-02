@@ -31,9 +31,7 @@ def b64tobinary(b64):
 
   return data
 
-# TODO: Update Scan. Don't do this automatically for now. Go through all files and add new ones. Rescan files that have been changed from database. Remove entries from db that are not longer there. Important: don't forget playback position
 # TODO: If file can not be found on playback ask for location of file. If provided, update location in db.
-# TODO: Change folder: Media was moved. Here we need an update scan. Update the file locations of each file. Then do update scan.
 # TODO: Drag & Drop files: Create folders and copy to correct location. Then import to db.
 # TODO: Some sort of first import loading screen
 # TODO: Refresh ui after every album?
@@ -51,111 +49,151 @@ def FirstImport(ui):
 
         # Is the track already in the database?
         if (Track.select().where(Track.file == path).count() < 1):
-          track = TrackContainer(mutagen.File(path), path)
-
-          cover = None
-
-          # getting the some data is file specific
-
-          ### MP3 ###
-          if file.lower().endswith('.mp3'):
-            print("mp3")
-            try:
-              track.mutagen = ID3(path)
-            except Exception as e:
-              print("Track " + track.path + " has no ID3 Tag")
-              continue
-
-            cover = __getMP3Tag(track, "APIC")
-            length = __getCommonTrackLength(TrackContainer(MP3(track.path), path))
-            disk = __getMP3Tag(track, "TPOS")
-
-            # for mp3 we are using the easyid3 functionality
-            # because its syntax compatible to the rest
-            track.mutagen = EasyID3(path)
-
-          ### FLAC ###
-          elif file.lower().endswith('.flac'):
-            print("flac")
-            track.mutagen = FLAC(path)
-            disk = int(__getCommonDiskNumber(track))
-            length = float(__getCommonTrackLength(track))
-            cover = __getFLACCover(track)
-
-          ### OGG ###
-          elif file.lower().endswith('.ogg'):
-            print("ogg")
-            track.mutagen = OggVorbis(path)
-            disk = int(__getCommonDiskNumber(track))
-            length = float(__getCommonTrackLength(track))
-            cover = __getOGGCover(track)
-
-          modified = 0
-
-          # try to get all the tags
-          book_name = __getCommonTag(track, "album")
-          author = __getCommonTag(track, "composer")
-          reader = __getCommonTag(track, "author")
-          track_name = __getCommonTag(track, "title")
-          try:
-            track_number = int(__getCommonTag(track, "tracknumber"))
-          except ValueError:
-            track_number = 0
-            pass
-
-          if book_name == None: book_name = os.path.basename(os.path.normpath(directory))
-          if author == None: author = _("Unknown Author")
-          if reader == None: reader = _("Unknown Reader")
-          if track_name == None: track_name = os.path.splitext(file)[0]
-
-          # create database entries
-          if (Book.select().where(Book.name == book_name).count() < 1):
-            book = Book.create(name=book_name, 
-                        author=author, 
-                        reader=reader, 
-                        position=0, 
-                        rating=-1,
-                        cover=cover)
-          else:
-            book = Book.select().where(Book.name == book_name).get()
-
-
-          Track.create(name=track_name, 
-                       number=track_number, 
-                       position=0, 
-                       book=book, 
-                       file=path,
-                       disk=disk,
-                       length=length,
-                       modified=modified)
+          __importFile(file, path)
 
 def UpdateDatabase():
   """
-  Scans the audio book directory for changes and new files.
+  Scans the audio book directory for changes and new files. 
+  Also removes entries from the db that are no longer existent.
   """
+  for directory, subdirectories, files in os.walk(Settings.get().path):
+    for file in files:
+      if file.lower().endswith(('.mp3', '.ogg', '.flac')):
+        path = os.path.join(directory, file)
+
+        # Is the track already in the database?
+        if (Track.select().where(Track.file == path).count() < 1):
+          __importFile(file, path)
+        # Has the track changed on disk?
+        elif Track.select().where(Track.file == path).first().modified < os.path.getmtime(path):
+          __importFile(file, path, update=True)
+
+  # remove entries from the db that are no longer existent
+  for track in Track.select():
+    if not os.path.exists(track.file):
+      track.delete_instance()
+
+  # remove all books that have no tracks
+  for book in Book.select():
+    if Track.select().where(Track.book == book).count() < 1:
+      book.delete_instance()
+
   pass
 
-def RebaseLocation():
+def RebaseLocation(oldPath, newPath):
   """
   This gets called when a user changes the location of the audio book folder.
-  Every file in the database will be searched in the new location
-  and the path will be updated in the database.
+  Every file in the database updated with the new path.
+  Note: This does not check for the existence of those files.
   """
+  for track in Track.select():
+    newPath = track.path.replace(oldPath, newPath)
+    Track.update(path=newPath).where(Track.id == track.id).execute()
   pass
 
-def __importFile(path):
+def __importFile(file, path, update=False):
   """
   Imports all information about a track into the database.
   Note: This creates also a new album object when it doesnt exist yet. 
   Note: This does not check whether the file is already imported.
   """
-  pass
 
-def __updateFile(path):
-  """
-  Updates the information about this file in the database.
-  """
-  pass
+  track = TrackContainer(mutagen.File(path), path)
+  cover = None
+
+  # getting the some data is file specific
+  ### MP3 ###
+  if file.lower().endswith('.mp3'):
+    print("mp3")
+    try:
+      track.mutagen = ID3(path)
+    except Exception as e:
+      print("Track " + track.path + " has no ID3 Tag")
+      return
+
+    cover = __getMP3Tag(track, "APIC")
+    length = __getCommonTrackLength(TrackContainer(MP3(track.path), path))
+    disk = __getMP3Tag(track, "TPOS")
+
+    # for mp3 we are using the easyid3 functionality
+    # because its syntax compatible to the rest
+    track.mutagen = EasyID3(path)
+
+  ### FLAC ###
+  elif file.lower().endswith('.flac'):
+    print("flac")
+    track.mutagen = FLAC(path)
+    disk = int(__getCommonDiskNumber(track))
+    length = float(__getCommonTrackLength(track))
+    cover = __getFLACCover(track)
+
+  ### OGG ###
+  elif file.lower().endswith('.ogg'):
+    print("ogg")
+    track.mutagen = OggVorbis(path)
+    disk = int(__getCommonDiskNumber(track))
+    length = float(__getCommonTrackLength(track))
+    cover = __getOGGCover(track)
+
+  modified = os.path.getmtime(path)
+
+  # try to get all the tags
+  book_name = __getCommonTag(track, "album")
+  author = __getCommonTag(track, "composer")
+  reader = __getCommonTag(track, "author")
+  track_name = __getCommonTag(track, "title")
+  try:
+    track_number = int(__getCommonTag(track, "tracknumber"))
+  except ValueError:
+    track_number = 0
+    pass
+
+  if book_name == None: book_name = os.path.basename(os.path.normpath(directory))
+  if author == None: author = _("Unknown Author")
+  if reader == None: reader = _("Unknown Reader")
+  if track_name == None: track_name = os.path.splitext(file)[0]
+
+  if update:
+    if (Book.select().where(Book.name == book_name).count() < 1):
+      book = Book.create(name=book_name, 
+                  author=author, 
+                  reader=reader, 
+                  position=0, 
+                  rating=-1,
+                  cover=cover)
+    else:
+      book = Book.select().where(Book.name == book_name).get()
+      Book.update(name=book_name,
+                  reader=reader,
+                  cover=cover).where(Book.id == book.id).execute()
+
+    Track.update(name=track_name, 
+                 number=track_number,
+                 book=book,
+                 disk=disk,
+                 length=length,
+                 modified=modified).where(Track.path == path).execute()
+  else:
+    # create database entries
+    if (Book.select().where(Book.name == book_name).count() < 1):
+      book = Book.create(name=book_name, 
+                  author=author, 
+                  reader=reader, 
+                  position=0, 
+                  rating=-1,
+                  cover=cover)
+    else:
+      book = Book.select().where(Book.name == book_name).get()
+
+
+    Track.create(name=track_name, 
+                 number=track_number,
+                 position=0, 
+                 book=book, 
+                 file=path,
+                 disk=disk,
+                 length=length,
+                 modified=modified)
 
 def __removeFile(path):
   """
