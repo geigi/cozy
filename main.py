@@ -21,7 +21,7 @@ import sys
 import gi
 import locale
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, GObject
 
 from cozy.ui import CozyUI
 from cozy.db import *
@@ -31,6 +31,8 @@ localedir = '@LOCALE_DIR@'
 
 class Application(Gtk.Application):
   def __init__(self, **kwargs):
+    GObject.threads_init()
+
     super().__init__(application_id='org.gnome.Audiobooks', **kwargs)
 
     import gettext

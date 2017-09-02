@@ -7,6 +7,8 @@ from mutagen.id3 import ID3
 from mutagen.flac import FLAC
 from mutagen.mp3 import MP3
 
+from gi.repository import Gdk, GLib
+
 from cozy.db import *
 from cozy.ui import *
 
@@ -34,24 +36,8 @@ def b64tobinary(b64):
 # TODO: If file can not be found on playback ask for location of file. If provided, update location in db.
 # TODO: Drag & Drop files: Create folders and copy to correct location. Then import to db.
 # TODO: Some sort of first import loading screen
-# TODO: Refresh ui after every album?
-def FirstImport(ui):
-  """
-  Import all supported audio files from the location set by the user in settings
 
-  :param ui: main ui to update the throbber status
-  """
-  print("Starting first import...")
-  for directory, subdirectories, files in os.walk(Settings.get().path):
-    for file in files:
-      if file.lower().endswith(('.mp3', '.ogg', '.flac')):
-        path = os.path.join(directory, file)
-
-        # Is the track already in the database?
-        if (Track.select().where(Track.file == path).count() < 1):
-          __importFile(file, path)
-
-def UpdateDatabase():
+def UpdateDatabase(ui):
   """
   Scans the audio book directory for changes and new files. 
   Also removes entries from the db that are no longer existent.
@@ -78,7 +64,8 @@ def UpdateDatabase():
     if Track.select().where(Track.book == book).count() < 1:
       book.delete_instance()
 
-  pass
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.throbber.stop)
 
 def RebaseLocation(oldPath, newPath):
   """
@@ -184,7 +171,6 @@ def __importFile(file, path, update=False):
                   cover=cover)
     else:
       book = Book.select().where(Book.name == book_name).get()
-
 
     Track.create(name=track_name, 
                  number=track_number,

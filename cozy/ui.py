@@ -250,11 +250,8 @@ class CozyUI:
     """
     self.throbber.start()
 
-    thread = Thread(target = UpdateDatabase)
+    thread = Thread(target = UpdateDatabase, args = (self, ))
     thread.start()
-
-    self.refresh_content()
-    self.throbber.stop()
     pass
 
   def initDbSettings(self):
@@ -321,6 +318,8 @@ class CozyUI:
       pass
 
     self.book_box.show_all()
+
+    return False
 
   def __on_timer_changed(self, spinner):
     """
