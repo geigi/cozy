@@ -98,6 +98,7 @@ class CozyUI:
     self.update_progress_bar = self.window_builder.get_object("update_progress_bar")
     self.import_box = self.window_builder.get_object("import_box")
     self.position_box = self.window_builder.get_object("position_box")
+    self.location_chooser = self.settings_builder.get_object("location_chooser")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -353,12 +354,20 @@ class CozyUI:
     Clean the database when the audio book location is changed.
     """
     print("Change folder")
-    folder_chooser = self.settings_builder.get_object("location_chooser")
+    self.throbber.start()
+    self.location_chooser.set_sensitive(False)
+
     settings = Settings.get()
-    settings.path = folder_chooser.get_file().get_path()
+    oldPath = settings.path
+    settings.path = self.location_chooser.get_file().get_path()
     settings.save()
-    CleanDB()
-    self.scan(None, None)
+
+    self.update_progress_bar.set_fraction(0)
+    self.update_progress_bar.set_visible(True)
+    self.position_box.set_visible(False)
+
+    thread = Thread(target = RebaseLocation, args = (self, oldPath, settings.path))
+    thread.start()
 
   def __on_book_selec_changed(self, flowbox):
     """

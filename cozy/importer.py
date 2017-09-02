@@ -78,18 +78,24 @@ def UpdateDatabase(ui):
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.book_scroller.set_visible, True)
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.position_box.set_visible, True)
 
-def RebaseLocation(oldPath, newPath):
+def RebaseLocation(ui, oldPath, newPath):
   """
   This gets called when a user changes the location of the audio book folder.
   Every file in the database updated with the new path.
   Note: This does not check for the existence of those files.
   """
+  trackCount = Track.select().count()
+  currentTrackCount = 0
   for track in Track.select():
-    newPath = track.path.replace(oldPath, newPath)
-    Track.update(path=newPath).where(Track.id == track.id).execute()
+    newFilePath = track.file.replace(oldPath, newPath)
+    Track.update(file=newFilePath).where(Track.id == track.id).execute()
+    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_fraction, currentTrackCount / trackCount)
+    currentTrackCount = currentTrackCount + 1;
   
-  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.throbber.stop)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_visible, False)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.position_box.set_visible, True)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.location_chooser.set_sensitive, True)
 
 def __importFile(file, path, update=False):
   """
