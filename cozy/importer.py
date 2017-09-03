@@ -71,12 +71,10 @@ def UpdateDatabase(ui):
       book.delete_instance()
 
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
-  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.throbber.stop)
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.import_box.set_visible, False)
-  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_visible, False)
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.sort_box.set_visible, True)
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.book_scroller.set_visible, True)
-  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.position_box.set_visible, True)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
 
 def RebaseLocation(ui, oldPath, newPath):
   """
@@ -92,10 +90,7 @@ def RebaseLocation(ui, oldPath, newPath):
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_fraction, currentTrackCount / trackCount)
     currentTrackCount = currentTrackCount + 1;
   
-  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.throbber.stop)
-  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_visible, False)
-  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.position_box.set_visible, True)
-  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.location_chooser.set_sensitive, True)
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
 
 def __importFile(file, path, update=False):
   """
@@ -178,7 +173,7 @@ def __importFile(file, path, update=False):
                  book=book,
                  disk=disk,
                  length=length,
-                 modified=modified).where(Track.path == path).execute()
+                 modified=modified).where(Track.file == path).execute()
   else:
     # create database entries
     if (Book.select().where(Book.name == book_name).count() < 1):

@@ -72,6 +72,7 @@ class CozyUI:
     Add fields for all ui objects we need to access from code.
     Initialize everything we can't do from glade like events and other stuff.
     """
+    print("Initialize window")
     self.window = self.window_builder.get_object("app_window")
     self.window.set_application(self.app)
     self.window.show_all()
@@ -99,6 +100,10 @@ class CozyUI:
     self.import_box = self.window_builder.get_object("import_box")
     self.position_box = self.window_builder.get_object("position_box")
     self.location_chooser = self.settings_builder.get_object("location_chooser")
+    self.status_stack = self.window_builder.get_object("status_stack")
+    self.status_label = self.window_builder.get_object("status_label")
+    self.play_button = self.window_builder.get_object("play_button")
+    self.prev_button = self.window_builder.get_object("prev_button")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -140,7 +145,6 @@ class CozyUI:
 
     # hide import screen
     self.import_box.set_visible(False)
-    self.update_progress_bar.set_visible(False)
 
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
@@ -176,9 +180,9 @@ class CozyUI:
     self.app.add_action(pref_action)
     self.app.set_accels_for_action("app.prefs", ["<Control>comma"])
 
-    scan_action = Gio.SimpleAction.new("scan", None)
-    scan_action.connect("activate", self.scan)
-    self.app.add_action(scan_action)
+    self.scan_action = Gio.SimpleAction.new("scan", None)
+    self.scan_action.connect("activate", self.scan)
+    self.app.add_action(self.scan_action)
 
   def __init_bindings(self):
     """
@@ -248,6 +252,27 @@ class CozyUI:
     # we handeled the close event so the window must not get destroyed.
     return True
 
+  def switch_to_working(self, message, first):
+    self.throbber.start()
+    self.status_label.set_text(message)
+    self.location_chooser.set_sensitive(False)
+    self.play_button.set_sensitive(False)
+    self.prev_button.set_sensitive(False)
+    self.scan_action.set_enabled(False)
+    if not first:
+        self.update_progress_bar.set_fraction(0)
+        self.status_stack.props.visible_child_name = "working"
+    pass
+
+  def switch_to_playing(self):
+    self.status_stack.props.visible_child_name = "playback"
+    self.scan_action.set_enabled(True)
+    self.location_chooser.set_sensitive(True)
+    self.play_button.set_sensitive(True)
+    self.prev_button.set_sensitive(True)
+    self.throbber.stop()
+    pass
+
   def set_title_cover(self, pixbuf):
     """
     Sets the cover in the title bar.
@@ -259,12 +284,7 @@ class CozyUI:
     """
     Start the db import in a seperate thread
     """
-    self.throbber.start()
-    self.position_box.set_visible(False)
-    if not first_scan:
-      self.update_progress_bar.set_fraction(0)
-      self.update_progress_bar.set_visible(True)
-
+    self.switch_to_working(_("Importing Audiobooks"), first_scan)
     thread = Thread(target = UpdateDatabase, args = (self, ))
     thread.start()
     pass
@@ -362,9 +382,7 @@ class CozyUI:
     settings.path = self.location_chooser.get_file().get_path()
     settings.save()
 
-    self.update_progress_bar.set_fraction(0)
-    self.update_progress_bar.set_visible(True)
-    self.position_box.set_visible(False)
+    self.switch_to_working(_("Changing audio book location..."), False)
 
     thread = Thread(target = RebaseLocation, args = (self, oldPath, settings.path))
     thread.start()
