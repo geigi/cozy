@@ -61,6 +61,8 @@ class Application(Gtk.Application):
 
       self.hello.show()
       self.add_window(self.hello)
+
+
     else:
       self.ui.activate()
       self.add_window(self.ui.window)
@@ -77,10 +79,8 @@ class Application(Gtk.Application):
     self.hello.close()
 
     self.ui.activate()
+    self.ui.main_stack.props.visible_child_name = "import"
     self.add_window(self.ui.window)
-    self.ui.import_box.set_visible(True)
-    self.ui.sort_box.set_visible(False)
-    self.ui.book_scroller.set_visible(False)
     self.ui.scan(None, True)
     self.ui.refresh_content()
 
@@ -105,6 +105,7 @@ def __on_command_line():
 
 def main():
   __on_command_line()
+  print(sys.argv)
   application = Application()
 
   try:

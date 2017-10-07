@@ -80,9 +80,6 @@ def UpdateDatabase(ui):
       book.delete_instance()
 
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
-  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.import_box.set_visible, False)
-  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.sort_box.set_visible, True)
-  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.book_scroller.set_visible, True)
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
 
 def RebaseLocation(ui, oldPath, newPath):

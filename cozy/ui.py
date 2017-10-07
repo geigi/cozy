@@ -105,6 +105,7 @@ class CozyUI:
     self.status_label = self.window_builder.get_object("status_label")
     self.play_button = self.window_builder.get_object("play_button")
     self.prev_button = self.window_builder.get_object("prev_button")
+    self.main_stack = self.window_builder.get_object("main_stack")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -143,9 +144,6 @@ class CozyUI:
     self.book_box.set_sort_func(self.__sort_books, None, False)
     self.book_box.set_filter_func(self.__filter_books, None, False)
     self.book_box.connect("selected-children-changed", self.__on_book_selec_changed)
-
-    # hide import screen
-    self.import_box.set_visible(False)
 
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
@@ -266,6 +264,7 @@ class CozyUI:
     pass
 
   def switch_to_playing(self):
+    self.main_stack.props.visible_child_name = "main"
     self.status_stack.props.visible_child_name = "playback"
     self.scan_action.set_enabled(True)
     self.location_chooser.set_sensitive(True)
