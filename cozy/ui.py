@@ -7,8 +7,9 @@ from cozy.book_element import *
 
 import os
 import gi
-gi.require_version('Gtk', '3.0')
+import logging
 
+gi.require_version('Gtk', '3.0')
 
 class CozyUI:
   """
@@ -53,10 +54,10 @@ class CozyUI:
     Add css classes to the default screen style context.
     """
     if Gtk.get_minor_version() > 18:
-      print("Fanciest design possible")
+      logging.debug("Fanciest design possible")
       cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application.css")
     else :
-      print("Using legacy css file")
+      logging.debug("Using legacy css file")
       cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application_legacy.css")
     cssProvider = Gtk.CssProvider()
     cssProvider.load_from_file(cssProviderFile)
@@ -72,7 +73,7 @@ class CozyUI:
     Add fields for all ui objects we need to access from code.
     Initialize everything we can't do from glade like events and other stuff.
     """
-    print("Initialize window")
+    logging.debug("Initialize window")
     self.window = self.window_builder.get_object("app_window")
     self.window.set_application(self.app)
     self.window.show_all()
@@ -373,7 +374,7 @@ class CozyUI:
     """
     Clean the database when the audio book location is changed.
     """
-    print("Change folder")
+    logging.debug("Audio book location changed, rebasing the location in db.")
     self.throbber.start()
     self.location_chooser.set_sensitive(False)
 

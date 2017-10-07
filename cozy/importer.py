@@ -1,6 +1,7 @@
 import os
 import mutagen
 import base64
+import logging
 
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
@@ -28,7 +29,7 @@ def b64tobinary(b64):
   try:
     data = base64.b64decode(b64)
   except (TypeError, ValueError) as e:
-    print(e)
+    logging.error(e)
     pass
 
   return data
@@ -43,7 +44,9 @@ def UpdateDatabase(ui):
   Also removes entries from the db that are no longer existent.
   """
   i = 0
+  percent_counter = 0
   file_count = sum([len(files) for r, d, files in os.walk(Settings.get().path)])
+  percent_threshold = file_count / 1000
   for directory, subdirectories, files in os.walk(Settings.get().path):
     for file in files:
       if file.lower().endswith(('.mp3', '.ogg', '.flac')):
@@ -55,10 +58,16 @@ def UpdateDatabase(ui):
         # Has the track changed on disk?
         elif Track.select().where(Track.file == path).first().modified < os.path.getmtime(path):
           __importFile(file, path, update=True)
-
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.progress_bar.set_fraction, i / file_count)
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_fraction, i / file_count)
+        
         i = i + 1
+
+        # don't flood gui updates
+        if percent_counter < percent_threshold:
+          percent_counter = percent_counter + 1
+        else:
+          percent_counter = 1
+          Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.progress_bar.set_fraction, i / file_count)
+          Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_fraction, i / file_count)
 
   # remove entries from the db that are no longer existent
   for track in Track.select():
@@ -105,11 +114,11 @@ def __importFile(file, path, update=False):
   # getting the some data is file specific
   ### MP3 ###
   if file.lower().endswith('.mp3'):
-    print("mp3")
+    logging.debug("Importing mp3 " + track.path)
     try:
       track.mutagen = ID3(path)
     except Exception as e:
-      print("Track " + track.path + " has no ID3 Tag")
+      logging.warning("Track " + track.path + " has no ID3 Tags")
       return
 
     cover = __getMP3Tag(track, "APIC")
@@ -122,7 +131,7 @@ def __importFile(file, path, update=False):
 
   ### FLAC ###
   elif file.lower().endswith('.flac'):
-    print("flac")
+    logging.debug("Importing flac " + track.path)
     track.mutagen = FLAC(path)
     disk = int(__getCommonDiskNumber(track))
     length = float(__getCommonTrackLength(track))
@@ -130,7 +139,7 @@ def __importFile(file, path, update=False):
 
   ### OGG ###
   elif file.lower().endswith('.ogg'):
-    print("ogg")
+    logging.debug("Importing ogg " + track.path)
     track.mutagen = OggVorbis(path)
     disk = int(__getCommonDiskNumber(track))
     length = float(__getCommonTrackLength(track))
@@ -212,8 +221,8 @@ def __getCommonDiskNumber(track):
   try:
     disk = int(track.mutagen["disk"][0])
   except Exception as e:
-    print("Could not find disk number for file " + track.path)
-    print(e)
+    logging.debug("Could not find disk number for file " + track.path)
+    logging.debug(e)
     pass
 
   return disk
@@ -228,8 +237,8 @@ def __getCommonTrackLength(track):
   try:
     length = float(track.mutagen.info.length)
   except Exception as e:
-    print("Could not get length for file " + track.path)
-    print(e)
+    logging.debug("Could not get length for file " + track.path)
+    logging.debug(e)
     pass
 
   return length
@@ -242,10 +251,9 @@ def __getOGGCover(track):
   """
   try:
     cover = track.mutagen.get("metadata_block_picture", [])[0]
-    print(length)
   except Exception as e:
-    print("Could not load cover for file " + track.path)
-    print(e)
+    logging.debug("Could not load cover for file " + track.path)
+    logging.debug(e)
     pass
 
   return cover
@@ -258,10 +266,9 @@ def __getFLACCover(track):
   """
   try:
     cover = track.mutagen.pictures[0].data
-    print(length)
   except Exception as e:
-    print("Could not load cover for file " + track.path)
-    print(e)
+    logging.debug("Could not load cover for file " + track.path)
+    logging.debug(e)
     pass
 
   return cover
@@ -284,8 +291,8 @@ def __getMP3Tag(track, tag):
     value = track.mutagen.getall(tag)[0].data
     pass
   except Exception as e:
-    print("Could not get mp3 tag " + tag + " for file " + track.path)
-    print(e)
+    logging.debug("Could not get mp3 tag " + tag + " for file " + track.path)
+    logging.debug(e)
     pass
 
   return value
@@ -303,7 +310,8 @@ def __getCommonTag(track, tag):
     value = track.mutagen[tag][0]
     pass
   except Exception as e:
-    print("Could not get tag " + tag + " for file " + track.path)
+    logging.debug("Could not get tag " + tag + " for file " + track.path)
+    logging.debug(e)
     pass
 
   return value

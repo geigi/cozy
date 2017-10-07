@@ -20,8 +20,10 @@
 import sys
 import gi
 import locale
+import logging
+import argparse
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GObject
+from gi.repository import Gtk, GObject, GLib
 
 from cozy.ui import CozyUI
 from cozy.db import *
@@ -33,7 +35,9 @@ class Application(Gtk.Application):
   def __init__(self, **kwargs):
     GObject.threads_init()
 
-    super().__init__(application_id='org.gnome.Audiobooks', **kwargs)
+    Gtk.Application.__init__(self, application_id='de.geigi.cozy')
+
+    GLib.setenv("PULSE_PROP_media.role", "music", True)
 
     import gettext
 
@@ -41,10 +45,9 @@ class Application(Gtk.Application):
     locale.textdomain('cozy')
     gettext.install('cozy', localedir)
 
+  def do_startup(self):
     self.ui = CozyUI(pkgdatadir, self)
     InitDB()
-
-  def do_startup(self):
     Gtk.Application.do_startup(self)
     self.ui.startup()
 
@@ -66,7 +69,7 @@ class Application(Gtk.Application):
     """
     Store the user selected path and start the first import.
     """
-    print("Cozy will now import all audio files from your selected location.")
+    logging.info("Cozy will now import all audio files from your selected location.")
 
     location = self.folder_chooser.get_file().get_path()
     Settings.update(first = False).execute()
@@ -87,10 +90,26 @@ class Application(Gtk.Application):
     """
     self.start_button.set_sensitive(True)
 
+def __on_command_line():
+    """
+      Handle command line
+    """
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-d", "--debug", action="store_true", dest="debug")
+    args = parser.parse_args(sys.argv[1:])
+
+    if args.debug == True:
+      logging.basicConfig(level=logging.DEBUG)
+    else:
+      logging.basicConfig(level=logging.INFO)
+
 def main():
+  __on_command_line()
   application = Application()
 
   try:
+    # Handle the debug option seperatly without the Glib stuff
+    if "-d" in sys.argv: sys.argv.remove("-d")
     ret = application.run(sys.argv)
   except SystemExit as e:
     ret = e.code
