@@ -46,6 +46,25 @@ def GetGstPlayerState():
   success, state, pending = __player.get_state(10)
   return state
 
+def GetCurrentDuration():
+  """
+  Current duration of track
+  :returns: duration in ns
+  """
+  global __player
+  duration = __player.query_position(Gst.Format.TIME)[1]
+  return duration
+
+def GetCurrentDurationUi():
+  """
+  current duration to display in ui
+  :return m: minutes
+  :return s: seconds
+  """
+  s,ns = divmod(GetCurrentDuration(), 1000000000)
+  m,s = divmod(s, 60)
+  return m,s
+
 def PlayPause(track):
   """
   Play a new file or pause/play if the file is already loaded.
@@ -65,3 +84,16 @@ def PlayPause(track):
     __player.set_state(Gst.State.NULL)
     __player.set_property("uri", "file://" + track.file)
     __player.set_state(Gst.State.PLAYING)
+
+def Rewind(seconds):
+  """
+  Seek seconds back in time. Caps at 0 seconds.
+  :param seconds: time in seconds
+  """
+  global __player
+  duration = GetCurrentDuration()
+  seek = duration - (seconds * 1000000000)
+  if seek < 0:
+    # TODO: Go back to previous track
+    seek = 0
+  __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, seek)

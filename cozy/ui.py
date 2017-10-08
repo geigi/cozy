@@ -151,6 +151,7 @@ class CozyUI:
 
     # button actions
     self.play_button.connect("clicked", self.__on_play_pause_clicked)
+    self.prev_button.connect("clicked", self.__on_rewind_clicked)
 
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
@@ -416,6 +417,12 @@ class CozyUI:
     Play/Pause the player.
     """
     PlayPause(None)
+
+  def __on_rewind_clicked(self, button):
+    """
+    Jump back 30 seconds.
+    """
+    Rewind(30)
 
   def __on_gst_message(self, bus, message):
     """
