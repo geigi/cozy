@@ -4,6 +4,7 @@ from threading import Thread
 from cozy.importer import *
 from cozy.db import *
 from cozy.book_element import *
+from cozy.player import *
 
 import os
 import gi
@@ -22,6 +23,7 @@ class CozyUI:
   def activate(self):
     self.__init_window()
     self.__init_bindings()
+    self.__init_gst_messaging()
 
     self.refresh_content()
 
@@ -106,6 +108,8 @@ class CozyUI:
     self.play_button = self.window_builder.get_object("play_button")
     self.prev_button = self.window_builder.get_object("prev_button")
     self.main_stack = self.window_builder.get_object("main_stack")
+    self.play_img = self.window_builder.get_object("play_img")
+    self.pause_img = self.window_builder.get_object("pause_img")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -144,6 +148,9 @@ class CozyUI:
     self.book_box.set_sort_func(self.__sort_books, None, False)
     self.book_box.set_filter_func(self.__filter_books, None, False)
     self.book_box.connect("selected-children-changed", self.__on_book_selec_changed)
+
+    # button actions
+    self.play_button.connect("clicked", self.__on_play_pause_clicked)
 
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
@@ -212,6 +219,10 @@ class CozyUI:
     self.timer_buffer.set_text(text, len(text))
 
     return True
+
+  def __init_gst_messaging(self):
+    self.__gst_state = None
+    GetGstBus().connect("message", self.__on_gst_message)
 
   def help(self, action, parameter):
     """
@@ -399,6 +410,35 @@ class CozyUI:
         else:
           child.get_children()[0].selected = False
           child.get_children()[0]._on_leave_notify(None, None)
+
+  def __on_play_pause_clicked(self, button):
+    """
+    Play/Pause the player.
+    """
+    PlayPause(None)
+
+  def __on_gst_message(self, bus, message):
+    """
+    Listen to and handle all gst player messages that are important for the ui.
+    """
+    t = message.type
+    if t == Gst.MessageType.STATE_CHANGED:
+      state = GetGstPlayerState()
+
+      # return if state is not changed
+      if state == self.__gst_state:
+        return
+      
+      # save the state only for states that are important to us. 
+      # Saves CPU time and unneccesarry gui updates.
+      if  state == Gst.State.PLAYING:
+        self.__gst_state = state
+        self.play_button.set_image(self.pause_img)
+        pass
+      elif state == Gst.State.PAUSED:
+        self.__gst_state = state
+        self.play_button.set_image(self.play_img)
+        pass
 
   ####################
   # CONTENT HANDLING #

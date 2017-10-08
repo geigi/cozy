@@ -1,6 +1,7 @@
 from gi.repository import Gtk, Gdk, GdkPixbuf, Pango
 
 from cozy.db import *
+from cozy.player import *
 
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
@@ -255,6 +256,7 @@ class TrackElement(Gtk.EventBox):
     self.add(self.box)
 
   def __on_button_press(self, eventbox, event):
+    PlayPause(self.track)
     pass
 
   def _on_enter_notify(self, widget, event):

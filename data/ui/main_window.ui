@@ -2,6 +2,13 @@
 <!-- Generated with glade 3.20.0 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
+  <object class="GtkImage" id="pause_img">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin_left">10</property>
+    <property name="margin_right">10</property>
+    <property name="icon_name">media-playback-pause-symbolic</property>
+  </object>
   <object class="GtkImage" id="play_img">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
