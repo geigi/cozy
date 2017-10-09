@@ -1,8 +1,12 @@
 # It's getting Cozy
 
-![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
+Cozy is a modern audio book player for Linux. 
 
-Cozy is a modern audio book player for Linux. Here are some of the implemented & upcoming features:
+<p align="center">
+  <img src="https://raw.githubusercontent.com/geigi/cozy/master/data/icons/hicolor/scalable/apps/de.geigi.cozy.svg?sanitize=true" alt="Icon">
+</p>
+
+Here are some of the implemented & upcoming features:
 - mp3, flac, ogg support
 - display tags & cover
 - category sort by author, reader & name
@@ -16,6 +20,8 @@ Cozy is a modern audio book player for Linux. Here are some of the implemented &
 - [ ] media keys & notification integration
 - [ ] playback speed
 - [ ] sleep timer
+
+![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
 
 ## Requirements
 - `python3`
