@@ -1,5 +1,6 @@
 subdir('img')
 subdir('ui')
+subdir('icons')
 
 message('Compiling schemas')
 
