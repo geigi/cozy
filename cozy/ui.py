@@ -9,6 +9,7 @@ from cozy.player import *
 import os
 import gi
 import logging
+log = logging.getLogger("ui")
 
 gi.require_version('Gtk', '3.0')
 
@@ -16,9 +17,10 @@ class CozyUI:
   """
   CozyUI is the main ui class.
   """
-  def __init__(self, pkgdatadir, app):
+  def __init__(self, pkgdatadir, app, version):
     self.pkgdir = pkgdatadir
     self.app = app
+    self.version = version
 
   def activate(self):
     self.__init_window()
@@ -56,10 +58,10 @@ class CozyUI:
     Add css classes to the default screen style context.
     """
     if Gtk.get_minor_version() > 18:
-      logging.debug("Fanciest design possible")
+      log.debug("Fanciest design possible")
       cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application.css")
     else :
-      logging.debug("Using legacy css file")
+      log.debug("Using legacy css file")
       cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application_legacy.css")
     cssProvider = Gtk.CssProvider()
     cssProvider.load_from_file(cssProviderFile)
@@ -75,9 +77,10 @@ class CozyUI:
     Add fields for all ui objects we need to access from code.
     Initialize everything we can't do from glade like events and other stuff.
     """
-    logging.debug("Initialize window")
+    log.info("Initialize main window")
     self.window = self.window_builder.get_object("app_window")
     self.window.set_application(self.app)
+    self.window.set_icon_name("de.geigi.cozy")
     self.window.show_all()
     self.window.present()
 
@@ -121,6 +124,7 @@ class CozyUI:
     self.about_dialog = self.about_builder.get_object("about_dialog")
     self.about_dialog.set_transient_for(self.window)
     self.about_dialog.connect("delete-event", self.hide_window)
+    self.about_dialog.set_version(self.version)
 
     # we need to update the database when the audio book location was changed
     folder_chooser = self.settings_builder.get_object("location_chooser")
@@ -385,7 +389,7 @@ class CozyUI:
     """
     Clean the database when the audio book location is changed.
     """
-    logging.debug("Audio book location changed, rebasing the location in db.")
+    log.debug("Audio book location changed, rebasing the location in db.")
     self.throbber.start()
     self.location_chooser.set_sensitive(False)
 

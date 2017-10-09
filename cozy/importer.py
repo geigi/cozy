@@ -2,6 +2,7 @@ import os
 import mutagen
 import base64
 import logging
+log = logging.getLogger("importer")
 
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
@@ -29,7 +30,7 @@ def b64tobinary(b64):
   try:
     data = base64.b64decode(b64)
   except (TypeError, ValueError) as e:
-    logging.error(e)
+    log.error(e)
     pass
 
   return data
@@ -111,11 +112,11 @@ def __importFile(file, path, update=False):
   # getting the some data is file specific
   ### MP3 ###
   if file.lower().endswith('.mp3'):
-    logging.debug("Importing mp3 " + track.path)
+    log.debug("Importing mp3 " + track.path)
     try:
       track.mutagen = ID3(path)
     except Exception as e:
-      logging.warning("Track " + track.path + " has no ID3 Tags")
+      log.warning("Track " + track.path + " has no ID3 Tags")
       return
 
     cover = __getMP3Tag(track, "APIC")
@@ -128,7 +129,7 @@ def __importFile(file, path, update=False):
 
   ### FLAC ###
   elif file.lower().endswith('.flac'):
-    logging.debug("Importing flac " + track.path)
+    log.debug("Importing flac " + track.path)
     track.mutagen = FLAC(path)
     disk = int(__getCommonDiskNumber(track))
     length = float(__getCommonTrackLength(track))
@@ -136,7 +137,7 @@ def __importFile(file, path, update=False):
 
   ### OGG ###
   elif file.lower().endswith('.ogg'):
-    logging.debug("Importing ogg " + track.path)
+    log.debug("Importing ogg " + track.path)
     track.mutagen = OggVorbis(path)
     disk = int(__getCommonDiskNumber(track))
     length = float(__getCommonTrackLength(track))
@@ -218,8 +219,8 @@ def __getCommonDiskNumber(track):
   try:
     disk = int(track.mutagen["disk"][0])
   except Exception as e:
-    logging.debug("Could not find disk number for file " + track.path)
-    logging.debug(e)
+    log.debug("Could not find disk number for file " + track.path)
+    log.debug(e)
     pass
 
   return disk
@@ -234,8 +235,8 @@ def __getCommonTrackLength(track):
   try:
     length = float(track.mutagen.info.length)
   except Exception as e:
-    logging.debug("Could not get length for file " + track.path)
-    logging.debug(e)
+    log.debug("Could not get length for file " + track.path)
+    log.debug(e)
     pass
 
   return length
@@ -249,8 +250,8 @@ def __getOGGCover(track):
   try:
     cover = track.mutagen.get("metadata_block_picture", [])[0]
   except Exception as e:
-    logging.debug("Could not load cover for file " + track.path)
-    logging.debug(e)
+    log.debug("Could not load cover for file " + track.path)
+    log.debug(e)
     pass
 
   return cover
@@ -264,8 +265,8 @@ def __getFLACCover(track):
   try:
     cover = track.mutagen.pictures[0].data
   except Exception as e:
-    logging.debug("Could not load cover for file " + track.path)
-    logging.debug(e)
+    log.debug("Could not load cover for file " + track.path)
+    log.debug(e)
     pass
 
   return cover
@@ -288,8 +289,8 @@ def __getMP3Tag(track, tag):
     value = track.mutagen.getall(tag)[0].data
     pass
   except Exception as e:
-    logging.debug("Could not get mp3 tag " + tag + " for file " + track.path)
-    logging.debug(e)
+    log.debug("Could not get mp3 tag " + tag + " for file " + track.path)
+    log.debug(e)
     pass
 
   return value
@@ -307,8 +308,8 @@ def __getCommonTag(track, tag):
     value = track.mutagen[tag][0]
     pass
   except Exception as e:
-    logging.debug("Could not get tag " + tag + " for file " + track.path)
-    logging.debug(e)
+    log.debug("Could not get tag " + tag + " for file " + track.path)
+    log.debug(e)
     pass
 
   return value

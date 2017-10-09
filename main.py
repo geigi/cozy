@@ -28,8 +28,11 @@ from gi.repository import Gtk, GObject, GLib
 from cozy.ui import CozyUI
 from cozy.db import *
 
+log = logging.getLogger("main")
+
 pkgdatadir = '@DATA_DIR@'
 localedir = '@LOCALE_DIR@'
+version = '@VERSION@'
 
 class Application(Gtk.Application):
   def __init__(self, **kwargs):
@@ -46,7 +49,8 @@ class Application(Gtk.Application):
     gettext.install('cozy', localedir)
 
   def do_startup(self):
-    self.ui = CozyUI(pkgdatadir, self)
+    log.info("Starting up cozy " + version)
+    self.ui = CozyUI(pkgdatadir, self, version)
     InitDB()
     Gtk.Application.do_startup(self)
     self.ui.startup()
@@ -62,7 +66,6 @@ class Application(Gtk.Application):
       self.hello.show()
       self.add_window(self.hello)
 
-
     else:
       self.ui.activate()
       self.add_window(self.ui.window)
@@ -71,7 +74,7 @@ class Application(Gtk.Application):
     """
     Store the user selected path and start the first import.
     """
-    logging.info("Cozy will now import all audio files from your selected location.")
+    log.info("Cozy will now import all audio files from your selected location.")
 
     location = self.folder_chooser.get_file().get_path()
     Settings.update(first = False).execute()

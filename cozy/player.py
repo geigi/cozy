@@ -1,5 +1,6 @@
 import gi
 import logging
+log = logging.getLogger("player")
 gi.require_version('Gst', '1.0')
 from gi.repository import Gst
 
@@ -18,8 +19,8 @@ def __on_gst_message(bus, message):
     pass
   elif t == Gst.MessageType.ERROR:
     err, debug = message.parse_error()
-    logging.error(err)
-    logging.debug(debug)
+    log.error(err)
+    log.debug(debug)
     pass
   pass
 
