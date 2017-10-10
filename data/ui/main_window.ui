@@ -28,7 +28,7 @@
     <property name="can_focus">False</property>
     <property name="default_width">1100</property>
     <property name="default_height">700</property>
-    <property name="icon_name">multimedia</property>
+    <property name="icon_name">de.geigi.cozy</property>
     <child>
       <object class="GtkStack" id="main_stack">
         <property name="visible">True</property>
@@ -264,7 +264,6 @@
                     <property name="can_focus">False</property>
                     <property name="valign">end</property>
                     <property name="vexpand">True</property>
-                    <property name="label">Harry Potter und der Halbblutprinz</property>
                     <property name="justify">right</property>
                     <property name="ellipsize">end</property>
                     <property name="width_chars">10</property>
@@ -286,7 +285,6 @@
                     <property name="can_focus">False</property>
                     <property name="valign">start</property>
                     <property name="vexpand">True</property>
-                    <property name="label">Epilog</property>
                     <property name="ellipsize">end</property>
                     <property name="width_chars">10</property>
                     <property name="single_line_mode">True</property>

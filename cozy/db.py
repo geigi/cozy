@@ -1,6 +1,7 @@
 import os
 from peewee import *
 from xdg import *
+from gi.repository import GdkPixbuf
 
 # first we get the data home and find the database if it exists
 data_dir = BaseDirectory.xdg_data_home + "/cozy/"
@@ -107,3 +108,21 @@ def SecondsToStr(seconds):
     result = "00:%02d" % (s)
 
   return result
+
+def GetCoverPixbuf(book):
+  """
+  Get the cover from a given book and create a pixbuf object from it.
+  :param book: The book object
+  :return: pixbuf object containing the cover
+  """
+  pixbuf = None
+
+  if book.cover is not None:
+    loader = GdkPixbuf.PixbufLoader.new_with_type("jpeg")
+    loader.write(book.cover)
+    loader.close()
+    pixbuf = loader.get_pixbuf()
+  else:
+    pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
+
+  return pixbuf

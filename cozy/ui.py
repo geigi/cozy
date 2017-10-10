@@ -17,6 +17,8 @@ class CozyUI:
   """
   CozyUI is the main ui class.
   """
+  current_book = None
+
   def __init__(self, pkgdatadir, app, version):
     self.pkgdir = pkgdatadir
     self.app = app
@@ -80,7 +82,6 @@ class CozyUI:
     log.info("Initialize main window")
     self.window = self.window_builder.get_object("app_window")
     self.window.set_application(self.app)
-    self.window.set_icon_name("de.geigi.cozy")
     self.window.show_all()
     self.window.present()
 
@@ -113,6 +114,8 @@ class CozyUI:
     self.main_stack = self.window_builder.get_object("main_stack")
     self.play_img = self.window_builder.get_object("play_img")
     self.pause_img = self.window_builder.get_object("pause_img")
+    self.title_label = self.window_builder.get_object("title_label")
+    self.subtitle_label = self.window_builder.get_object("subtitle_label")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -450,6 +453,16 @@ class CozyUI:
         self.__gst_state = state
         self.play_button.set_image(self.play_img)
         pass
+    elif t == Gst.MessageType.STREAM_START:
+      # set data of new stream in ui
+      track = GetCurrentTrack()
+      self.title_label.set_text(track.book.name)
+      self.subtitle_label.set_text(track.name)
+
+      # only change cover when book has changed
+      if self.current_book is not track.book:
+        self.current_book = track.book
+        self.set_title_cover(GetCoverPixbuf(track.book))
 
   ####################
   # CONTENT HANDLING #

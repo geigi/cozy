@@ -66,6 +66,10 @@ def GetCurrentDurationUi():
   m,s = divmod(s, 60)
   return m,s
 
+def GetCurrentTrack():
+  global __current_track
+  return __current_track
+
 def PlayPause(track):
   """
   Play a new file or pause/play if the file is already loaded.

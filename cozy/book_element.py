@@ -29,16 +29,8 @@ class BookElement(Gtk.Box):
     label.props.max_width_chars = 30
     label.props.justify = Gtk.Justification.CENTER
 
-    # load the book cover, otherwise the placeholder
-    if self.book.cover is not None:
-        loader = GdkPixbuf.PixbufLoader.new_with_type("jpeg")
-        loader.write(b.cover)
-        loader.close()
-        pixbuf = loader.get_pixbuf()
-    else:
-        pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
-
     # scale the book cover to a fix size.
+    pixbuf = GetCoverPixbuf(self.book)
     pixbuf = pixbuf.scale_simple(180, 180, GdkPixbuf.InterpType.BILINEAR)
     
     # box is the main container for the album art
