@@ -6,20 +6,23 @@ Cozy is a modern audio book player for Linux.
   <img src="https://raw.githubusercontent.com/geigi/cozy/master/data/icons/hicolor/scalable/apps/de.geigi.cozy.svg?sanitize=true" alt="Icon">
 </p>
 
-Here are some of the implemented & upcoming features:
-- mp3, flac, ogg support
-- display tags & cover
-- category sort by author, reader & name
+Here are some of the current features:
+- Import all your audiobooks into cozy to browse them comfortably
+- Listen to your DRM free mp3, flac, ogg audio books
+- Sort your audio books by author, reader & name
 - developed on Arch Linux and tested under elementaryOS
-- [ ] m4v support
-- [ ] wav support
-- [ ] remember playback position of audio books
-- [ ] drag & drop support
-- [ ] sort by name, added date, last played
-- [ ] ratings
-- [ ] media keys & notification integration
-- [ ] playback speed
-- [ ] sleep timer
+
+Upcoming:
+- m4v support
+- wav support
+- Search
+- Remember playback position of audio books
+- drag & drop import and copy support
+- Sort by name, added date, last played
+- Ratings
+- Media keys & notification integration
+- Playback speed control
+- Sleep timer
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
 
@@ -37,7 +40,7 @@ Here are some of the implemented & upcoming features:
 $ git clone https://github.com/geigi/cozy.git
 $ cd cozy
 $ meson desired_build_directory --prefix=desired_installation_directory
-# ninja -C desired_build_directory install
+$ ninja -C desired_build_directory install
 ```
 
 ## Running a local build
