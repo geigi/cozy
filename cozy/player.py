@@ -102,3 +102,17 @@ def Rewind(seconds):
     # TODO: Go back to previous track
     seek = 0
   __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, seek)
+
+def JumpTo(seconds):
+  """
+  Jumps to the given second. Caps at 0 and the file length
+  :param seconds: time in seconds
+  """
+  global __player
+  if seconds < 0:
+    __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, 0)
+  elif seconds > GetCurrentTrack().length:
+    __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, int(GetCurrentTrack().length) * 1000000000)
+  else:
+    __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, int(seconds) * 1000000000)
+

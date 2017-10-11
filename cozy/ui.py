@@ -20,6 +20,7 @@ class CozyUI:
   """
   current_book = None
   play_status_updater = None
+  progress_scale_clicked = False
 
   def __init__(self, pkgdatadir, app, version):
     self.pkgdir = pkgdatadir
@@ -153,6 +154,11 @@ class CozyUI:
     # this is required otherwise the timer will not show "min" on start
     self.__init_timer_buffer()
 
+    # init progress scale
+    self.progress_scale.connect("button-release-event", self.__on_progress_clicked)
+    self.progress_scale.connect("button-press-event", self.__on_progress_press)
+    self.progress_scale.connect("value-changed", self.__update_ui_time)
+
     # shortcuts
     self.accel = Gtk.AccelGroup()
 
@@ -282,6 +288,7 @@ class CozyUI:
     self.play_status_updater = RepeatedTimer(1, self.__update_time)
     self.play_status_updater.start()
     self.__update_time()
+    self.__update_ui_time(self.progress_scale)
 
   def pause(self):
     self.play_button.set_image(self.play_img)
@@ -405,6 +412,19 @@ class CozyUI:
 
     text = str(int(value)) + " " + _("min")
     self.timer_buffer.set_text(text, len(text))
+ 
+  def __on_progress_press(self, widget, sender):
+    """
+    Remember that progress scale is clicked so it won't get updates from the player.
+    """
+    self.progress_scale_clicked = True
+
+  def __on_progress_clicked(self, widget, sender):
+    """
+    Jump to the slided time and release the progress scale update lock.
+    """
+    JumpTo(self.progress_scale.get_value())
+    self.progress_scale_clicked = False
 
   def __on_folder_changed(self, sender):
     """
@@ -489,13 +509,21 @@ class CozyUI:
     """
     Update the current and remaining time.
     """
-    cur_m, cur_s = GetCurrentDurationUi()
-    self.progress_scale.set_value(cur_m * 60 + cur_s)
-    self.current_label.set_markup("<tt><b>" + str(cur_m).zfill(2) + ":" + str(cur_s).zfill(2) + "</b></tt>")
+    if not self.progress_scale_clicked:
+      cur_m, cur_s = GetCurrentDurationUi()
+      self.progress_scale.set_value(cur_m * 60 + cur_s)
+    
+
+  def __update_ui_time(self, widget):
+    """
+    Displays the value of the progress slider in the text boxes as time.
+    """
+    val = int(self.progress_scale.get_value())
+    m, s = divmod(val, 60)
+    self.current_label.set_markup("<tt><b>" + str(m).zfill(2) + ":" + str(s).zfill(2) + "</b></tt>")
     track = GetCurrentTrack()
 
-    cur_secs, ns = divmod(int(GetCurrentDuration()), 1000000000)
-    remaining_secs = int(track.length - cur_secs)
+    remaining_secs = int(track.length - val)
     remaining_mins, remaining_secs = divmod(remaining_secs, 60)
 
     self.remaining_label.set_markup("<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
@@ -560,4 +588,5 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
     label.set_xalign(0.0)
     label.set_margin_top(self.MARGIN)
     label.set_margin_bottom(self.MARGIN)
+    label.set_margin_start(7)
     self.add(label)
