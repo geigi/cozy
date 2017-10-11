@@ -5,6 +5,7 @@ from cozy.importer import *
 from cozy.db import *
 from cozy.book_element import *
 from cozy.player import *
+from cozy.tools import *
 
 import os
 import gi
@@ -18,6 +19,7 @@ class CozyUI:
   CozyUI is the main ui class.
   """
   current_book = None
+  play_status_updater = None
 
   def __init__(self, pkgdatadir, app, version):
     self.pkgdir = pkgdatadir
@@ -84,6 +86,8 @@ class CozyUI:
     self.window.set_application(self.app)
     self.window.show_all()
     self.window.present()
+    self.window.connect("delete-event", self.on_close)
+
 
     search_button = self.window_builder.get_object("search_button")
     search_popover = self.search_builder.get_object("search_popover")
@@ -116,6 +120,9 @@ class CozyUI:
     self.pause_img = self.window_builder.get_object("pause_img")
     self.title_label = self.window_builder.get_object("title_label")
     self.subtitle_label = self.window_builder.get_object("subtitle_label")
+    self.progress_scale = self.window_builder.get_object("progress_scale")
+    self.current_label = self.window_builder.get_object("current_label")
+    self.remaining_label = self.window_builder.get_object("remaining_label")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -269,6 +276,17 @@ class CozyUI:
 
     # we handeled the close event so the window must not get destroyed.
     return True
+
+  def play(self):
+    self.play_button.set_image(self.pause_img)
+    self.play_status_updater = RepeatedTimer(1, self.__update_time)
+    self.play_status_updater.start()
+    self.__update_time()
+
+  def pause(self):
+    self.play_button.set_image(self.play_img)
+    if self.play_status_updater is not None:
+      self.play_status_updater.stop()
 
   def switch_to_working(self, message, first):
     self.throbber.start()
@@ -447,11 +465,11 @@ class CozyUI:
       # Saves CPU time and unneccesarry gui updates.
       if  state == Gst.State.PLAYING:
         self.__gst_state = state
-        self.play_button.set_image(self.pause_img)
+        self.play()
         pass
       elif state == Gst.State.PAUSED:
         self.__gst_state = state
-        self.play_button.set_image(self.play_img)
+        self.pause()
         pass
     elif t == Gst.MessageType.STREAM_START:
       # set data of new stream in ui
@@ -463,6 +481,32 @@ class CozyUI:
       if self.current_book is not track.book:
         self.current_book = track.book
         self.set_title_cover(GetCoverPixbuf(track.book))
+
+      total = GetCurrentTrack().length
+      self.progress_scale.set_range(0, total)
+
+  def __update_time(self):
+    """
+    Update the current and remaining time.
+    """
+    cur_m, cur_s = GetCurrentDurationUi()
+    self.progress_scale.set_value(cur_m * 60 + cur_s)
+    self.current_label.set_markup("<tt><b>" + str(cur_m).zfill(2) + ":" + str(cur_s).zfill(2) + "</b></tt>")
+    track = GetCurrentTrack()
+
+    cur_secs, ns = divmod(int(GetCurrentDuration()), 1000000000)
+    remaining_secs = int(track.length - cur_secs)
+    remaining_mins, remaining_secs = divmod(remaining_secs, 60)
+
+    self.remaining_label.set_markup("<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+
+  def on_close(self, widget, data=None):
+    """
+    Close and dispose everything that needs to be when window is closed.
+    """
+    # Stop timers
+    if self.play_status_updater is not None:
+      self.play_status_updater.stop()
 
   ####################
   # CONTENT HANDLING #

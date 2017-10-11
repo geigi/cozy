@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.0 -->
+<!-- Generated with glade 3.20.1 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
   <object class="GtkImage" id="pause_img">
@@ -427,11 +427,13 @@ audio-volume-medium-symbolic</property>
                     <property name="hexpand">True</property>
                     <child>
                       <object class="GtkLabel" id="current_label">
+                        <property name="width_request">35</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">end</property>
                         <property name="margin_right">3</property>
-                        <property name="label">0:00</property>
+                        <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
+                        <property name="use_markup">True</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -456,11 +458,13 @@ audio-volume-medium-symbolic</property>
                     </child>
                     <child>
                       <object class="GtkLabel" id="remaining_label">
+                        <property name="width_request">35</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
                         <property name="margin_left">3</property>
-                        <property name="label">4:00</property>
+                        <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
+                        <property name="use_markup">True</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
