@@ -295,6 +295,28 @@ class CozyUI:
     if self.play_status_updater is not None:
       self.play_status_updater.stop()
 
+  def stop(self):
+    """
+    Remove all information about a playing book from the ui.
+    """
+    self.play_button.set_image(self.play_img)
+    if self.play_status_updater is not None:
+      self.play_status_updater.stop()
+
+    self.title_label.set_text("")
+    self.subtitle_label.set_text("")
+
+    self.set_title_cover(GetCoverPixbuf(None))
+
+    self.progress_scale.set_range(0, 1)
+    self.progress_scale.set_value(0)
+
+    self.remaining_label.set_markup("<tt><b>" + "--:--" + "</b></tt>")
+    self.current_label.set_markup("<tt><b>" + "--:--" + "</b></tt>")
+
+    self.play_button.set_sensitive(False)
+    self.prev_button.set_sensitive(False)
+
   def switch_to_working(self, message, first):
     self.throbber.start()
     self.status_label.set_text(message)
@@ -491,11 +513,17 @@ class CozyUI:
         self.__gst_state = state
         self.pause()
         pass
+      elif state == Gst.State.READY:
+        # Playback stopped. Remove displayed track.
+        self.stop()
+        self.__gst_state = state
     elif t == Gst.MessageType.STREAM_START:
       # set data of new stream in ui
       track = GetCurrentTrack()
       self.title_label.set_text(track.book.name)
       self.subtitle_label.set_text(track.name)
+      self.play_button.set_sensitive(True)
+      self.prev_button.set_sensitive(True)
 
       # only change cover when book has changed
       if self.current_book is not track.book:

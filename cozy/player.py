@@ -4,6 +4,8 @@ log = logging.getLogger("player")
 gi.require_version('Gst', '1.0')
 from gi.repository import Gst
 
+from cozy.db import *
+
 Gst.init(None)
 
 def __on_gst_message(bus, message):
@@ -13,6 +15,29 @@ def __on_gst_message(bus, message):
 
   t = message.type
   if t == Gst.MessageType.EOS:
+    # try to load the next track of the book. 
+    # Stop playback if there isn't any
+    tracks = Tracks(GetCurrentTrack().book)
+    current = GetCurrentTrack()
+    save_next = False
+    next_track = None
+    try:
+      for track in tracks:
+        if save_next:
+          next_track = track
+          raise StopIteration
+
+        if current == track:
+          save_next = True
+
+    except StopIteration:
+      pass
+
+    if next_track is not None:
+      PlayPause(next_track)
+    else:
+      Stop()
+
     # Play next file
     # Set play position to 0
     # Check if audiobook is finished
@@ -89,6 +114,10 @@ def PlayPause(track):
     __player.set_state(Gst.State.NULL)
     __player.set_property("uri", "file://" + track.file)
     __player.set_state(Gst.State.PLAYING)
+
+def Stop():
+  global __player
+  __player.set_state(Gst.State.READY)
 
 def Rewind(seconds):
   """

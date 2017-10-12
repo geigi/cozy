@@ -315,6 +315,7 @@
                 <child>
                   <object class="GtkButton" id="prev_button">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="halign">center</property>
@@ -333,6 +334,7 @@
                   <object class="GtkButton" id="play_button">
                     <property name="width_request">42</property>
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="halign">center</property>
