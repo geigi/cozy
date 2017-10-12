@@ -49,7 +49,8 @@ class Settings(BaseModel):
   Settings contains all settings that are not saved in the gschema.
   """
   path = CharField()
-  first = BooleanField(default=True)
+  first_start = BooleanField(default=True)
+  last_played_book = ForeignKeyField(Book, null=True)
 
 def InitDB():
   db.connect()
@@ -58,7 +59,7 @@ def InitDB():
   db.create_tables([Track, Book, Settings], True)
 
   if (Settings.select().count() == 0):
-    Settings.create(path = "")
+    Settings.create(path = "", last_played_book=None)
 
 def Books():
   """

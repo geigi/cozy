@@ -56,7 +56,7 @@ class Application(Gtk.Application):
     self.ui.startup()
 
   def do_activate(self):
-    if Settings.get().first:
+    if Settings.get().first_start:
       self.hello = self.ui.hello_builder.get_object("hello_window")
       self.folder_chooser = self.ui.hello_builder.get_object("book_location")
       self.start_button = self.ui.hello_builder.get_object("start_button")
@@ -77,7 +77,7 @@ class Application(Gtk.Application):
     log.info("Cozy will now import all audio files from your selected location.")
 
     location = self.folder_chooser.get_file().get_path()
-    Settings.update(first = False).execute()
+    Settings.update(first_start = False).execute()
     Settings.update(path = location).execute()
     self.hello.close()
 

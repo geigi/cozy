@@ -21,6 +21,7 @@ class CozyUI:
   current_book = None
   play_status_updater = None
   progress_scale_clicked = False
+  __gst_state = None
 
   def __init__(self, pkgdatadir, app, version):
     self.pkgdir = pkgdatadir
@@ -31,6 +32,7 @@ class CozyUI:
     self.__init_window()
     self.__init_bindings()
     self.__init_gst_messaging()
+    self.__load_last_book()
 
     self.refresh_content()
 
@@ -252,6 +254,17 @@ class CozyUI:
     self.__gst_state = None
     GetGstBus().connect("message", self.__on_gst_message)
 
+  def __load_last_book(self):
+    """
+    Loads the last book into the player
+    """
+    LoadLastBook()
+    if Settings.get().last_played_book is not None:
+      self.__update_track_ui()
+      self.__update_ui_time(self.progress_scale)
+      self.__update_time()
+      self.progress_scale.set_value(int(GetCurrentTrack().position / 1000000000))
+
   def help(self, action, parameter):
     """
     Show app help.
@@ -307,6 +320,7 @@ class CozyUI:
     Remove all information about a playing book from the ui.
     """
     self.play_button.set_image(self.play_img)
+    self.play_button.set_sensitive(False)
     if self.play_status_updater is not None:
       self.play_status_updater.stop()
 
@@ -493,19 +507,28 @@ class CozyUI:
     Play/Pause the player.
     """
     PlayPause(None)
+    JumpToNs(GetCurrentTrack().position)
 
   def __on_rewind_clicked(self, button):
     """
     Jump back 30 seconds.
     """
     Rewind(30)
+    if self.progress_scale.get_value() > 30:
+      self.progress_scale.set_value(self.progress_scale.get_value() - 30)
+    else:
+      self.progress_scale.set_value(0)
 
   def __on_gst_message(self, bus, message):
     """
     Listen to and handle all gst player messages that are important for the ui.
     """
     t = message.type
-    if t == Gst.MessageType.STATE_CHANGED:
+    if t == Gst.MessageType.BUFFERING:
+      if (message.percentage > 99):
+        self.__update_time()
+        self.__update_ui_time(self.progress_scale)
+    elif t == Gst.MessageType.STATE_CHANGED:
       state = GetGstPlayerState()
 
       # return if state is not changed
@@ -522,26 +545,30 @@ class CozyUI:
         self.__gst_state = state
         self.pause()
         pass
-      elif state == Gst.State.READY:
+      elif state == Gst.State.NULL:
         # Playback stopped. Remove displayed track.
         self.stop()
         self.__gst_state = state
     elif t == Gst.MessageType.STREAM_START:
-      # set data of new stream in ui
-      track = GetCurrentTrack()
-      self.title_label.set_text(track.book.name)
-      self.subtitle_label.set_text(track.name)
-      self.play_button.set_sensitive(True)
-      self.prev_button.set_sensitive(True)
-      self.progress_scale.set_sensitive(True)
+      self.__update_track_ui()
 
-      # only change cover when book has changed
-      if self.current_book is not track.book:
-        self.current_book = track.book
-        self.set_title_cover(GetCoverPixbuf(track.book))
+  def __update_track_ui(self):
+    # set data of new stream in ui
+    track = GetCurrentTrack()
+    self.title_label.set_text(track.book.name)
+    self.subtitle_label.set_text(track.name)
+    self.play_button.set_sensitive(True)
+    self.prev_button.set_sensitive(True)
+    self.progress_scale.set_sensitive(True)
 
-      total = GetCurrentTrack().length
-      self.progress_scale.set_range(0, total)
+    # only change cover when book has changed
+    if self.current_book is not track.book:
+      self.current_book = track.book
+      self.set_title_cover(GetCoverPixbuf(track.book))
+
+    total = GetCurrentTrack().length
+    self.progress_scale.set_sensitive(True)
+    self.progress_scale.set_range(0, total)
 
   def __update_time(self):
     """
@@ -573,6 +600,10 @@ class CozyUI:
     # Stop timers
     if self.play_status_updater is not None:
       self.play_status_updater.stop()
+
+    # save current position when still playing
+    if GetGstPlayerState() == Gst.State.PLAYING:
+      Track.update(position = GetCurrentDuration()).where(Track.id == GetCurrentTrack().id).execute()
 
   ####################
   # CONTENT HANDLING #
