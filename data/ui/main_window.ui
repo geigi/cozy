@@ -351,7 +351,6 @@
                 </child>
                 <child>
                   <object class="GtkVolumeButton" id="volume_button">
-                    <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="focus_on_click">False</property>
                     <property name="receives_default">True</property>
@@ -447,6 +446,7 @@ audio-volume-medium-symbolic</property>
                       <object class="GtkScale" id="progress_scale">
                         <property name="width_request">150</property>
                         <property name="visible">True</property>
+                        <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="round_digits">1</property>
@@ -537,7 +537,6 @@ audio-volume-medium-symbolic</property>
             <property name="vexpand">True</property>
             <child>
               <object class="GtkMenuButton" id="search_button">
-                <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <child>
@@ -556,7 +555,6 @@ audio-volume-medium-symbolic</property>
             </child>
             <child>
               <object class="GtkMenuButton" id="timer_button">
-                <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <child>

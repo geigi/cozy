@@ -89,6 +89,13 @@ class CozyUI:
     self.window.present()
     self.window.connect("delete-event", self.on_close)
 
+    # hide wip stuff
+    self.volume_button = self.window_builder.get_object("volume_button")
+    self.volume_button.set_visible(False)
+    self.search_button = self.window_builder.get_object("search_button")
+    self.search_button.set_visible(False)
+    self.timer_button = self.window_builder.get_object("timer_button")
+    self.timer_button.set_visible(False)
 
     search_button = self.window_builder.get_object("search_button")
     search_popover = self.search_builder.get_object("search_popover")
@@ -317,6 +324,8 @@ class CozyUI:
     self.play_button.set_sensitive(False)
     self.prev_button.set_sensitive(False)
 
+    self.progress_scale.set_sensitive(False)
+
   def switch_to_working(self, message, first):
     self.throbber.start()
     self.status_label.set_text(message)
@@ -524,6 +533,7 @@ class CozyUI:
       self.subtitle_label.set_text(track.name)
       self.play_button.set_sensitive(True)
       self.prev_button.set_sensitive(True)
+      self.progress_scale.set_sensitive(True)
 
       # only change cover when book has changed
       if self.current_book is not track.book:
