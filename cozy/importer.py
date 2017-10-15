@@ -108,6 +108,7 @@ def __importFile(file, path, update=False):
 
   track = TrackContainer(mutagen.File(path), path)
   cover = None
+  reader = None
 
   # getting the some data is file specific
   ### MP3 ###
@@ -119,13 +120,16 @@ def __importFile(file, path, update=False):
       log.warning("Track " + track.path + " has no ID3 Tags")
       return
 
+    mp3 = TrackContainer(MP3(track.path), path)
     cover = __getMP3Tag(track, "APIC")
-    length = __getCommonTrackLength(TrackContainer(MP3(track.path), path))
+    length = __getCommonTrackLength(mp3)
     disk = __getMP3Tag(track, "TPOS")
 
     # for mp3 we are using the easyid3 functionality
     # because its syntax compatible to the rest
     track.mutagen = EasyID3(path)
+    author = __getMP3Tag(mp3, "TCOM")
+    reader = __getMP3Tag(mp3, "TPE1")
 
   ### FLAC ###
   elif file.lower().endswith('.flac'):
@@ -134,6 +138,9 @@ def __importFile(file, path, update=False):
     disk = int(__getCommonDiskNumber(track))
     length = float(__getCommonTrackLength(track))
     cover = __getFLACCover(track)
+    author = __getCommonTag(track, "composer")
+    flac = FLAC(path)
+    reader = flac["artist"][0]
 
   ### OGG ###
   elif file.lower().endswith('.ogg'):
@@ -142,13 +149,13 @@ def __importFile(file, path, update=False):
     disk = int(__getCommonDiskNumber(track))
     length = float(__getCommonTrackLength(track))
     cover = __getOGGCover(track)
+    author = __getCommonTag(track, "composer")
+    reader = __getCommonTag(track, "author")
 
   modified = os.path.getmtime(path)
 
   # try to get all the tags
   book_name = __getCommonTag(track, "album")
-  author = __getCommonTag(track, "composer")
-  reader = __getCommonTag(track, "author")
   track_name = __getCommonTag(track, "title")
   try:
     track_number = int(__getCommonTag(track, "tracknumber"))
@@ -172,6 +179,7 @@ def __importFile(file, path, update=False):
     else:
       book = Book.select().where(Book.name == book_name).get()
       Book.update(name=book_name,
+                  author=author,
                   reader=reader,
                   cover=cover).where(Book.id == book.id).execute()
 
@@ -284,9 +292,16 @@ def __getMP3Tag(track, tag):
     value = 0.0
   elif tag == "TPOS":
     value = 0
+  elif tag == "TPE1":
+    value = ""
+  elif tag == "TCOM":
+    value = ""
 
   try:
-    value = track.mutagen.getall(tag)[0].data
+    if tag == "TPE1" or tag == "TCOM":
+      value = track.mutagen[tag]
+    else:
+      value = track.mutagen.getall(tag)[0].data
     pass
   except Exception as e:
     log.debug("Could not get mp3 tag " + tag + " for file " + track.path)
