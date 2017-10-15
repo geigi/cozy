@@ -98,6 +98,10 @@ def GetCurrentDurationUi():
   return m,s
 
 def GetCurrentTrack():
+  """
+  Get the currently loaded track object.
+  :return: currently loaded track object
+  """
   global __current_track
   return Track.select().where(Track.id == __current_track.id).get()
 
@@ -125,6 +129,9 @@ def PlayPause(track):
     Settings.update(last_played_book = __current_track.book).execute()
 
 def Stop():
+  """
+  Stop playback.
+  """
   global __player
   __player.set_state(Gst.State.PAUSED)
 
@@ -175,6 +182,9 @@ def JumpToNs(ns):
   Track.update(position=new_position).where(Track.id == __current_track.id).execute()
 
 def LoadLastBook():
+  """
+  Load the last played book into the player.
+  """
   global __current_track
   global __player
 

@@ -1,6 +1,7 @@
 import os
 import mutagen
 import base64
+import urllib, shutil, errno
 import logging
 log = logging.getLogger("importer")
 
@@ -209,6 +210,45 @@ def __importFile(file, path, update=False):
                  disk=disk,
                  length=length,
                  modified=modified)
+
+def Copy(ui, selection):
+  selection = selection.get_uris()
+
+  # count the work
+  count = len(selection)
+  cur = 0
+
+  for uri in selection:
+    parsed_path = urllib.parse.urlparse(uri)
+    path = urllib.parse.unquote(parsed_path.path)
+    if os.path.isfile(path) or os.path.isdir(path):
+      CopyToAudiobookFolder(path)
+      cur = cur + 1
+      Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_fraction, cur / count)
+
+  Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.scan, None, False)
+
+def CopyToAudiobookFolder(path):
+  """
+  Copies the given path (folder or file) to the audio book folder.
+  """
+  try:
+    name = os.path.basename(os.path.normpath(path))
+    shutil.copytree(path, Settings.get().path + "/" + name)
+  except OSError as exc:
+    if exc.errno == errno.ENOTDIR:
+      try:
+        shutil.copy(path, Settings.get().path)
+      except OSError as e:
+        if e.errno == 95:
+          pass
+        else:
+          log.error(e)
+    elif exc.errno == errno.ENOTSUP:
+      pass
+    else: 
+      log.error("Could not import file " + path)
+      log.error(exc)
 
 def __removeFile(path):
   """

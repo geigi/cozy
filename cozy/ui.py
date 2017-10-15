@@ -93,6 +93,9 @@ class CozyUI:
     self.window.show_all()
     self.window.present()
     self.window.connect("delete-event", self.on_close)
+    self.window.connect("drag_data_received", self.__on_drag_data_received)
+    self.window.drag_dest_set(Gtk.DestDefaults.MOTION | Gtk.DestDefaults.HIGHLIGHT | Gtk.DestDefaults.DROP,
+                  [Gtk.TargetEntry.new("text/uri-list", 0, 80)], Gdk.DragAction.COPY)
 
     # hide wip stuff
     self.volume_button = self.window_builder.get_object("volume_button")
@@ -359,8 +362,8 @@ class CozyUI:
     self.prev_button.set_sensitive(False)
     self.scan_action.set_enabled(False)
     if not first:
-        self.update_progress_bar.set_fraction(0)
-        self.status_stack.props.visible_child_name = "working"
+      self.update_progress_bar.set_fraction(0)
+      self.status_stack.props.visible_child_name = "working"
     pass
 
   def switch_to_playing(self):
@@ -491,6 +494,17 @@ class CozyUI:
     """
     JumpTo(self.progress_scale.get_value())
     self.progress_scale_clicked = False
+
+  def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
+    """
+    We want to import the files that are dragged onto the window.
+    inspired by https://stackoverflow.com/questions/24094186/drag-and-drop-file-example-in-pygobject
+    """
+    if target_type == 80:
+      self.throbber.start()
+      self.switch_to_working("Copying new files...", False)
+      thread = Thread(target = Copy, args = (self, selection, ))
+      thread.start()
 
   def __on_folder_changed(self, sender):
     """
