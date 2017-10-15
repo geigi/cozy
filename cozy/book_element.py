@@ -193,6 +193,8 @@ class BookElement(Gtk.Box):
     """
     Play this book.
     """
+    track = GetTrackForPlayback(self.book)
+    PlayPause(track)
     return True
 
 class TrackElement(Gtk.EventBox):

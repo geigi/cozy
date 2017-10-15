@@ -129,3 +129,21 @@ def GetCoverPixbuf(book):
     pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
 
   return pixbuf
+
+def GetTrackForPlayback(book):
+  """
+  Finds the current track to playback for a given book.
+  :param book: book which the next track is required from
+  :return: current track position from book db
+  """
+  tracks = Tracks(book)
+  i = 1
+  track_no = 1
+  try:
+    for track in tracks:
+      if i == book.position:
+        track_no = i
+  except StopIteration:
+    pass
+
+  return tracks[track_no]
