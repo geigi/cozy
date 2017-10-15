@@ -29,6 +29,9 @@ class CozyUI:
     self.version = version
 
   def activate(self):
+    self.__first_play = True
+    self.settings = Gio.Settings.new("de.geigi.Cozy")
+      
     self.__init_window()
     self.__init_bindings()
     self.__init_gst_messaging()
@@ -224,19 +227,18 @@ class CozyUI:
     """
     Bind Gio.Settings to widgets in settings dialog.
     """
-    settings = Gio.Settings.new("de.geigi.Cozy")
 
     sl_switch = self.settings_builder.get_object("symlinks_switch")
-    settings.bind("symlinks", sl_switch, "active", Gio.SettingsBindFlags.DEFAULT)
+    self.settings.bind("symlinks", sl_switch, "active", Gio.SettingsBindFlags.DEFAULT)
 
     auto_scan_switch = self.settings_builder.get_object("auto_scan_switch")
-    settings.bind("autoscan", auto_scan_switch, "active", Gio.SettingsBindFlags.DEFAULT)
+    self.settings.bind("autoscan", auto_scan_switch, "active", Gio.SettingsBindFlags.DEFAULT)
 
     timer_suspend_switch = self.settings_builder.get_object("timer_suspend_switch")
-    settings.bind("suspend", timer_suspend_switch, "active", Gio.SettingsBindFlags.DEFAULT)
+    self.settings.bind("suspend", timer_suspend_switch, "active", Gio.SettingsBindFlags.DEFAULT)
 
     replay_switch = self.settings_builder.get_object("replay_switch")
-    settings.bind("replay", replay_switch, "active", Gio.SettingsBindFlags.DEFAULT)
+    self.settings.bind("replay", replay_switch, "active", Gio.SettingsBindFlags.DEFAULT)
 
   def __init_timer_buffer(self):
     """
@@ -263,7 +265,16 @@ class CozyUI:
       self.__update_track_ui()
       self.__update_ui_time(self.progress_scale)
       self.__update_time()
-      self.progress_scale.set_value(int(GetCurrentTrack().position / 1000000000))
+
+      pos = int(GetCurrentTrack().position)
+      if self.settings.get_boolean("replay") == True:
+        log.info("Replaying the previous 30 seconds.")
+        amount = 30 * 1000000000
+        if (pos < amount):
+          pos = 0
+        else:
+          pos = pos - amount
+      self.progress_scale.set_value(int(pos / 1000000000))
 
   def help(self, action, parameter):
     """
@@ -469,6 +480,11 @@ class CozyUI:
     """
     self.progress_scale_clicked = True
 
+    # If the user drags the slider we don't want to jump back
+    # another 30 seconds on first play
+    if self.__first_play == True:
+      self.__first_play == False
+
   def __on_progress_clicked(self, widget, sender):
     """
     Jump to the slided time and release the progress scale update lock.
@@ -512,8 +528,18 @@ class CozyUI:
     Play/Pause the player.
     """
     PlayPause(None)
-    JumpToNs(GetCurrentTrack().position)
+    pos = GetCurrentTrack().position
+    if self.__first_play:
+      self.__first_play = False
 
+      if self.settings.get_boolean("replay") == True:
+        amount = 30 * 1000000000
+        if pos < amount:
+          pos = 0
+        else:
+          pos = pos - amount
+    JumpToNs(pos)
+      
   def __on_rewind_clicked(self, button):
     """
     Jump back 30 seconds.
