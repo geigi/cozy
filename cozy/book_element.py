@@ -31,7 +31,12 @@ class BookElement(Gtk.Box):
 
     # scale the book cover to a fix size.
     pixbuf = GetCoverPixbuf(self.book)
-    pixbuf = pixbuf.scale_simple(180, 180, GdkPixbuf.InterpType.BILINEAR)
+    if pixbuf.get_height() > pixbuf.get_width():
+      width = int(pixbuf.get_width() / (pixbuf.get_height() / 180))
+      pixbuf = pixbuf.scale_simple(width, 180, GdkPixbuf.InterpType.BILINEAR)
+    else:
+      height = int(pixbuf.get_height() / (pixbuf.get_width() / 180))
+      pixbuf = pixbuf.scale_simple(180, height, GdkPixbuf.InterpType.BILINEAR)
     
     # box is the main container for the album art
     box = Gtk.EventBox()

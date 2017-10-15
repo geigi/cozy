@@ -366,7 +366,12 @@ class CozyUI:
     """
     Sets the cover in the title bar.
     """
-    pixbuf = pixbuf.scale_simple(40, 40, GdkPixbuf.InterpType.BILINEAR)
+    if pixbuf.get_height() > pixbuf.get_width():
+      width = int(pixbuf.get_width() / (pixbuf.get_height() / 40))
+      pixbuf = pixbuf.scale_simple(width, 40, GdkPixbuf.InterpType.BILINEAR)
+    else:
+      height = int(pixbuf.get_height() / (pixbuf.get_width() / 40))
+      pixbuf = pixbuf.scale_simple(40, height, GdkPixbuf.InterpType.BILINEAR)
     self.cover_img.set_from_pixbuf(pixbuf)
 
   def scan(self, action, first_scan):
