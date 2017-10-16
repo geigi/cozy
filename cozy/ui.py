@@ -267,7 +267,8 @@ class CozyUI:
     if Settings.get().last_played_book is not None:
       self.__update_track_ui()
       self.__update_ui_time(self.progress_scale)
-      self.__update_time()
+      cur_m, cur_s = GetCurrentDurationUi()
+      self.progress_scale.set_value(cur_m * 60 + cur_s)
 
       pos = int(GetCurrentTrack().position)
       if self.settings.get_boolean("replay") == True:
@@ -621,7 +622,8 @@ class CozyUI:
     """
     if not self.progress_scale_clicked:
       cur_m, cur_s = GetCurrentDurationUi()
-      self.progress_scale.set_value(cur_m * 60 + cur_s)
+      Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.progress_scale.set_value, cur_m * 60 + cur_s)
+      #()
     
 
   def __update_ui_time(self, widget):
