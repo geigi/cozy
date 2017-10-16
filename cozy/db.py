@@ -146,4 +146,4 @@ def GetTrackForPlayback(book):
   except StopIteration:
     pass
 
-  return tracks[track_no]
+  return tracks[track_no - 1]

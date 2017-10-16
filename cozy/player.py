@@ -45,7 +45,7 @@ def __on_gst_message(bus, message):
       PlayPause(next_track)
     else:
       Stop()
-      Book.update(position=None).where(Book.id == current.id).execute()
+      Book.update(position=0).where(Book.id == current.id).execute()
       Settings.update(last_played_book=None).execute()
 
   elif t == Gst.MessageType.ERROR:
