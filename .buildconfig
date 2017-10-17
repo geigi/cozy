@@ -1,0 +1,13 @@
+[default]
+name=Default
+device=local
+runtime=host
+config-opts=
+run-opts=
+prefix=/home/ju/.cache/gnome-builder/install/Cozy/host
+app-id=
+default=true
+
+[default.environment]
+XDG_DATA_DIRS=/home/ju/.cache/gnome-builder/install/Cozy/host/share:/usr/share
+PYTHONPATH=/home/ju/.cache/gnome-builder/install/Cozy/host/lib/python3.6/site-package

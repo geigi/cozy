@@ -20,33 +20,7 @@ def __on_gst_message(bus, message):
     else:
       __player.set_state(Gst.State.PLAYING)
   if t == Gst.MessageType.EOS:
-    # try to load the next track of the book. 
-    # Stop playback if there isn't any
-    tracks = Tracks(GetCurrentTrack().book)
-    current = GetCurrentTrack()
-    save_next = False
-    next_track = None
-    try:
-      for track in tracks:
-        if save_next:
-          next_track = track
-          raise StopIteration
-
-        if current == track:
-          save_next = True
-
-    except StopIteration:
-      pass
-
-    Track.update(position=0).where(Track.id == current.id).execute()
-
-    if next_track is not None:
-      Book.update(position=next_track.id).where(Book.id == next_track.book.id).execute()
-      PlayPause(next_track)
-    else:
-      Stop()
-      Book.update(position=0).where(Book.id == current.id).execute()
-      Settings.update(last_played_book=None).execute()
+    NextTrack()
 
   elif t == Gst.MessageType.ERROR:
     err, debug = message.parse_error()
@@ -127,6 +101,63 @@ def PlayPause(track):
     __player.set_state(Gst.State.PLAYING)
     Book.update(position = __current_track.id).where(Book.id == __current_track.book.id).execute()
     Settings.update(last_played_book = __current_track.book).execute()
+
+def NextTrack():
+  # try to load the next track of the book. 
+  # Stop playback if there isn't any
+  tracks = Tracks(GetCurrentTrack().book)
+  current = GetCurrentTrack()
+  save_next = False
+  next_track = None
+  try:
+    for track in tracks:
+      if save_next:
+        next_track = track
+        raise StopIteration
+
+      if current == track:
+        save_next = True
+
+  except StopIteration:
+    pass
+
+  Track.update(position=0).where(Track.id == current.id).execute()
+
+  if next_track is not None:
+    Book.update(position=next_track.id).where(Book.id == next_track.book.id).execute()
+    PlayPause(next_track)
+  else:
+    __player.set
+    Book.update(position=0).where(Book.id == current.id).execute()
+    Settings.update(last_played_book=None).execute()
+
+def PrevTrack():
+  # try to load the next track of the book. 
+  # Stop playback if there isn't any
+  global __player
+  global __current_track
+  tracks = Tracks(GetCurrentTrack().book)
+  current = GetCurrentTrack()
+  previous = None
+  try:
+    for track in tracks:
+      if current == track:
+        raise StopIteration
+      previous = track
+  except StopIteration:
+    pass
+
+  Track.update(position=0).where(Track.id == current.id).execute()
+
+  if previous is not None:
+    Book.update(position=previous.id).where(Book.id == previous.book.id).execute()
+    PlayPause(previous)
+  else:
+    first_track = __current_track
+    __player.set_state(Gst.State.NULL)
+    __current_track = None
+    PlayPause(first_track)
+    Book.update(position=0).where(Book.id == current.id).execute()
 
 def Stop():
   """

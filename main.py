@@ -27,6 +27,7 @@ from gi.repository import Gtk, GObject, GLib
 
 from cozy.ui import CozyUI
 from cozy.db import *
+from cozy.mpris import MPRIS
 
 log = logging.getLogger("main")
 
@@ -69,6 +70,7 @@ class Application(Gtk.Application):
     else:
       self.ui.activate()
       self.add_window(self.ui.window)
+      MPRIS(self, self.ui)
 
   def first_start(self, button):
     """
