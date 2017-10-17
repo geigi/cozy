@@ -96,6 +96,8 @@ class CozyUI:
     self.window.connect("drag_data_received", self.__on_drag_data_received)
     self.window.drag_dest_set(Gtk.DestDefaults.MOTION | Gtk.DestDefaults.HIGHLIGHT | Gtk.DestDefaults.DROP,
                   [Gtk.TargetEntry.new("text/uri-list", 0, 80)], Gdk.DragAction.COPY)
+    if not Gtk.get_minor_version() > 18:
+      self.window.connect("check-resize", self.__window_resized)
 
     # hide wip stuff
     self.volume_button = self.window_builder.get_object("volume_button")
@@ -639,6 +641,17 @@ class CozyUI:
     remaining_mins, remaining_secs = divmod(remaining_secs, 60)
 
     self.remaining_label.set_markup("<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+
+  def __window_resized(self, window):
+    """
+    Resize the progress scale to expand to the window size
+    for older gtk versions.
+    """
+    width, height = self.window.get_size()
+    value = width - 800
+    if value < 80:
+      value = 80
+    self.progress_scale.props.width_request = value
 
   def on_close(self, widget, data=None):
     """
