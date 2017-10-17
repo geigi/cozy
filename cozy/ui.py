@@ -73,6 +73,7 @@ class CozyUI:
     else :
       log.debug("Using legacy css file")
       cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application_legacy.css")
+      self.connect("check-resize", self.__window_resized)
     cssProvider = Gtk.CssProvider()
     cssProvider.load_from_file(cssProviderFile)
 
