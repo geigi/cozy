@@ -440,19 +440,19 @@ class CozyUI:
 
     # TODO translate
     # Add the special All element
-    all_row = ListBoxRowWithData(_("All"))
+    all_row = ListBoxRowWithData(_("All"), True)
     self.author_box.add(all_row)
     self.author_box.select_row(all_row)
-    all_row = ListBoxRowWithData(_("All"))
+    all_row = ListBoxRowWithData(_("All"), True)
     self.reader_box.add(all_row)
     self.reader_box.select_row(all_row)
 
     for author in seen_authors:
-      row = ListBoxRowWithData(author)
+      row = ListBoxRowWithData(author, False)
       self.author_box.add(row)
 
     for reader in seen_readers:
-      row = ListBoxRowWithData(reader)
+      row = ListBoxRowWithData(reader, False)
       self.reader_box.add(row)
 
     # this is required to see the new items
@@ -710,10 +710,12 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
   This class represents a listboxitem for an author/reader.
   """
   MARGIN = 5
-  def __init__(self, data):
+  def __init__(self, data, bold=False):
     super(Gtk.ListBoxRow, self).__init__()
     self.data = data
     label = Gtk.Label(data)
+    if bold:
+      label.set_markup("<b>" + data + "</b>")
     label.set_xalign(0.0)
     label.set_margin_top(self.MARGIN)
     label.set_margin_bottom(self.MARGIN)
