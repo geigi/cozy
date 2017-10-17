@@ -73,6 +73,7 @@ class CozyUI:
     else :
       log.debug("Using legacy css file")
       cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application_legacy.css")
+      self.connect("check-resize", self.__window_resized)
     cssProvider = Gtk.CssProvider()
     cssProvider.load_from_file(cssProviderFile)
 
@@ -639,6 +640,10 @@ class CozyUI:
     remaining_mins, remaining_secs = divmod(remaining_secs, 60)
 
     self.remaining_label.set_markup("<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+
+  def __window_resized(self, window):
+    width, height = self.get_size()
+    self.progress_scale.props.width_request = int(width / 3)
 
   def on_close(self, widget, data=None):
     """
