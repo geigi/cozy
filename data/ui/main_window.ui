@@ -433,6 +433,7 @@ audio-volume-medium-symbolic</property>
                         <property name="can_focus">False</property>
                         <property name="halign">end</property>
                         <property name="margin_right">3</property>
+                        <property name="margin_top">2</property>
                         <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
                         <property name="use_markup">True</property>
                       </object>
@@ -453,7 +454,7 @@ audio-volume-medium-symbolic</property>
                         <property name="draw_value">False</property>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
+                        <property name="expand">True</property>
                         <property name="fill">True</property>
                         <property name="position">2</property>
                       </packing>
@@ -465,6 +466,7 @@ audio-volume-medium-symbolic</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
                         <property name="margin_left">3</property>
+                        <property name="margin_top">2</property>
                         <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
                         <property name="use_markup">True</property>
                       </object>
