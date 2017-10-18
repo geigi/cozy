@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="48px" height="48px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve">
+<g id="Drop_Shadow_2_" transform="matrix(1.052632,0,0,1.285713,-1.263158,-13.42854)" opacity="0.4">
+	
+		<radialGradient id="rect2801_5_" cx="-290.8033" cy="399.3565" r="0.8832" gradientTransform="matrix(5.9947 0 0 1.0551 1780.6377 -376.8474)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#181818"/>
+		<stop  offset="1" style="stop-color:#181818;stop-opacity:0"/>
+	</radialGradient>
+	<rect id="rect2801_2_" x="37.4" y="43.8" fill="url(#rect2801_5_)" width="4.8" height="1.4"/>
+	
+		<radialGradient id="rect2_5_" cx="-584.2985" cy="-359.5868" r="0.8836" gradientTransform="matrix(-5.9947 0 0 -1.0551 -3492.0408 -334.8889)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#181818"/>
+		<stop  offset="1" style="stop-color:#181818;stop-opacity:0"/>
+	</radialGradient>
+	<rect id="rect2_2_" x="5.9" y="43.8" fill="url(#rect2_5_)" width="4.8" height="1.4"/>
+	
+		<linearGradient id="rect1_5_" gradientUnits="userSpaceOnUse" x1="-122.3607" y1="551.707" x2="-122.3607" y2="549.2213" gradientTransform="matrix(2.9917 0 0 0.9184 390.0733 -461.4956)">
+		<stop  offset="0" style="stop-color:#181818;stop-opacity:0"/>
+		<stop  offset="0.5" style="stop-color:#181818"/>
+		<stop  offset="1" style="stop-color:#181818;stop-opacity:0"/>
+	</linearGradient>
+	<rect id="rect1_2_" x="10.6" y="43.8" fill="url(#rect1_5_)" width="26.7" height="1.4"/>
+</g>
+<path id="Icon_Border_2_" opacity="0.6" fill="#381F18" stroke="#3F3022" stroke-miterlimit="10" enable-background="new    " d="
+	M44,39.7c0,2.4-1.9,4.3-4.3,4.3H8.3C5.9,44,4,42.1,4,39.7V8.3C4,5.9,5.9,4,8.3,4h31.4C42.1,4,44,5.9,44,8.3V39.7z"/>
+<linearGradient id="Background_5_" gradientUnits="userSpaceOnUse" x1="266.0068" y1="-286.5" x2="266.0068" y2="-325.5005" gradientTransform="matrix(1 0 0 -1 -242 -282)">
+	<stop  offset="0" style="stop-color:#F39200"/>
+	<stop  offset="0.1354" style="stop-color:#F18905"/>
+	<stop  offset="0.3558" style="stop-color:#EC7114"/>
+	<stop  offset="0.6339" style="stop-color:#E3492C"/>
+	<stop  offset="0.9557" style="stop-color:#D8134D"/>
+	<stop  offset="1" style="stop-color:#D60B52"/>
+</linearGradient>
+<linearGradient id="Background_6_" gradientUnits="userSpaceOnUse" x1="266.0068" y1="-286" x2="266.0068" y2="-326.0005" gradientTransform="matrix(1 0 0 -1 -242 -282)">
+	<stop  offset="0" style="stop-color:#E94E1B"/>
+	<stop  offset="7.124600e-003" style="stop-color:#EA531C"/>
+	<stop  offset="5.917540e-002" style="stop-color:#EF7524"/>
+	<stop  offset="0.1123" style="stop-color:#F4902B"/>
+	<stop  offset="0.1663" style="stop-color:#F7A32F"/>
+	<stop  offset="0.2218" style="stop-color:#F8AE32"/>
+	<stop  offset="0.2809" style="stop-color:#F9B233"/>
+	<stop  offset="0.5897" style="stop-color:#E94E1B"/>
+	<stop  offset="0.8088" style="stop-color:#E94E1B"/>
+	<stop  offset="0.8493" style="stop-color:#E24822"/>
+	<stop  offset="0.9094" style="stop-color:#CE3934"/>
+	<stop  offset="0.9814" style="stop-color:#AD2052"/>
+	<stop  offset="1" style="stop-color:#A3195B"/>
+</linearGradient>
+<path id="Background_2_" fill="url(#Background_5_)" stroke="url(#Background_6_)" stroke-miterlimit="10" d="M43.5,39.3
+	c0,2.3-1.9,4.2-4.2,4.2H8.7c-2.3,0-4.2-1.9-4.2-4.2V8.7c0-2.3,1.9-4.2,4.2-4.2h30.6c2.3,0,4.2,1.9,4.2,4.2V39.3z"/>
+<path id="Shadow_Book_2_" opacity="0.2" enable-background="new    " d="M30.4,38.4c0,2.4-0.9,2.1-2.1,2.1H19
+	c-1.2,0-2.1,0.4-2.1-2.1V20.2c0-2.4,0.9-1.7,2.1-1.7h9.3c1.2,0,2.1-0.7,2.1,1.7V38.4z"/>
+<g id="Shadow_Headphones_2_" opacity="0.2">
+	<path id="rect5540_6_" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="
+		M12.5,25.5v-2.1c0-7.1,5.2-12.8,11.6-12.8H24c6.4,0,11.5,5.7,11.5,12.8v2.1"/>
+	<path id="rect5413-5_6_" d="M11.8,24.7h1.9v9.5h-2c-0.7,0-1.2-1.5-1.2-2.4l0-4.5C10.6,26.1,11.1,24.7,11.8,24.7z"/>
+	<path id="rect5413_6_" d="M14.5,23.1h1v12.7h-1c-0.6,0-1.1-0.6-1.1-0.9V24C13.4,23.6,13.9,23.1,14.5,23.1z"/>
+	<path id="rect5413-5-2_6_" d="M36.9,24.7H35v9.5h2c0.7,0,1.2-1.5,1.2-2.4l0-4.5C38.1,26.1,37.6,24.7,36.9,24.7z"/>
+	<path id="rect5413-3_6_" d="M34.2,23.1h-1v12.7h1c0.6,0,1.1-0.6,1.1-0.9V24C35.3,23.6,34.8,23.1,34.2,23.1z"/>
+</g>
+<g id="Headphones_2_">
+	<path id="rect5540_5_" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12,24.4
+		v-2.1c0-7,5.2-12.6,11.5-12.6h-0.1c6.3,0,11.5,5.6,11.5,12.6v2.1"/>
+	<path id="rect5413-5_5_" fill="#FFFFFF" d="M11.2,23.7h1.9v9.4h-1.9c-0.7,0-1.1-1.4-1.1-2.4l0-4.4C10,25.1,10.5,23.7,11.2,23.7z"/>
+	<path id="rect5413_5_" fill="#FFFFFF" d="M13.8,22.1h1v12.5h-1c-0.6,0-1.1-0.6-1.1-0.9V23C12.8,22.7,13.3,22.1,13.8,22.1z"/>
+	<path id="rect5413-5-2_5_" fill="#FFFFFF" d="M35.8,23.7h-1.9v9.4h1.9c0.7,0,1.1-1.4,1.1-2.4l0-4.4C37,25.1,36.5,23.7,35.8,23.7z"
+		/>
+	<path id="rect5413-3_5_" fill="#FFFFFF" d="M33.2,22.1h-1v12.5h1c0.6,0,1.1-0.6,1.1-0.9V23C34.2,22.7,33.7,22.1,33.2,22.1z"/>
+	<path id="path5647_4_" display="none" fill-opacity="0.388" d="M10.9,29.7l0.6,1.1l0.5,0.8c0.6,0.5,0.7,0.4,1,0.5v0.6v0.1h-1.4
+		h-0.1C10.8,32,10.9,30.2,10.9,29.7z"/>
+	<path id="path5647-9_4_" display="none" fill-opacity="0.39" d="M36.8,30.1l-0.6,1l-0.5,0.8c-0.6,0.4-0.6,0.3-1,0.5v0.5v0.1H36h0.1
+		C36.9,32.2,36.8,30.5,36.8,30.1L36.8,30.1z"/>
+	<path id="path5647-1_4_" display="none" fill-opacity="0.3" d="M13.6,31.2l0.3,1.2l0.3,0.9c0.3,0.5,0.4,0.4,0.6,0.6v0.6v0.1l-0.7,0
+		l-0.2-0.2l-0.1-0.2c0-0.1-0.1-0.2-0.1-0.4C13.6,32.9,13.6,31.5,13.6,31.2z"/>
+	<path id="path5647-1-2_4_" display="none" fill="#1D1D1B" fill-opacity="0.3" d="M34,30.4l-0.4,1.4l-0.3,1.1
+		c-0.4,0.6-0.4,0.5-0.6,0.7v0.7v0.2l0.9,0l0.2-0.2l0.1-0.2c0-0.1,0.1-0.3,0.1-0.5C34,32.6,34,30.9,34,30.4L34,30.4z"/>
+</g>
+<g id="Layer_3">
+	<path fill="#FFFFFF" d="M17,18v1v2v18h2h9h2V21v-2v-1H17z M19,29v-2h9v2H19z M20,33h8v2h-9v-2H20z M28,23h-7h-1h-1v-2h9V23z"/>
+</g>
+</svg>

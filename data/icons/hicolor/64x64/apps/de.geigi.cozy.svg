@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="64px" height="64px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+<g id="Drop_Shadow_1_" transform="matrix(1.052632,0,0,1.285713,-1.263158,-13.42854)" opacity="0.4">
+	
+		<radialGradient id="rect2801_5_" cx="-399.4544" cy="410.4026" r="1.2372" gradientTransform="matrix(5.9947 0 0 1.0551 2444.9326 -376.0775)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#181818"/>
+		<stop  offset="1" style="stop-color:#181818;stop-opacity:0"/>
+	</radialGradient>
+	<rect id="rect2801_1_" x="50.3" y="56" fill="url(#rect2801_5_)" width="6.7" height="1.9"/>
+	
+		<radialGradient id="rect2_5_" cx="-739.86" cy="-358.1869" r="1.2383" gradientTransform="matrix(-5.9947 0 0 -1.0551 -4422.3354 -320.9897)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#181818"/>
+		<stop  offset="1" style="stop-color:#181818;stop-opacity:0"/>
+	</radialGradient>
+	<rect id="rect2_1_" x="6.2" y="56" fill="url(#rect2_5_)" width="6.7" height="1.9"/>
+	
+		<linearGradient id="rect1_5_" gradientUnits="userSpaceOnUse" x1="-208.3625" y1="564.9839" x2="-208.3625" y2="561.5024" gradientTransform="matrix(2.9917 0 0 0.9184 654.9694 -460.9879)">
+		<stop  offset="0" style="stop-color:#181818;stop-opacity:0"/>
+		<stop  offset="0.5" style="stop-color:#181818"/>
+		<stop  offset="1" style="stop-color:#181818;stop-opacity:0"/>
+	</linearGradient>
+	<rect id="rect1_1_" x="12.9" y="56" fill="url(#rect1_5_)" width="37.5" height="1.9"/>
+</g>
+<path id="Icon_Border_1_" opacity="0.6" fill="#381F18" stroke="#3F3022" stroke-miterlimit="10" enable-background="new    " d="
+	M60,53.9c0,3.3-2.7,6-6,6H10c-3.3,0-6-2.7-6-6V10.1c0-3.3,2.7-6,6-6H54c3.3,0,6,2.7,6,6V53.9z"/>
+<linearGradient id="Background_5_" gradientUnits="userSpaceOnUse" x1="274.0098" y1="-270.272" x2="274.0098" y2="-325.2593" gradientTransform="matrix(1 0 0 -1 -242 -266)">
+	<stop  offset="0" style="stop-color:#F39200"/>
+	<stop  offset="0.1354" style="stop-color:#F18905"/>
+	<stop  offset="0.3558" style="stop-color:#EC7114"/>
+	<stop  offset="0.6339" style="stop-color:#E3492C"/>
+	<stop  offset="0.9557" style="stop-color:#D8134D"/>
+	<stop  offset="1" style="stop-color:#D60B52"/>
+</linearGradient>
+<linearGradient id="Background_6_" gradientUnits="userSpaceOnUse" x1="274.0098" y1="-269.772" x2="274.0098" y2="-325.7593" gradientTransform="matrix(1 0 0 -1 -242 -266)">
+	<stop  offset="0" style="stop-color:#E94E1B"/>
+	<stop  offset="7.124600e-003" style="stop-color:#EA531C"/>
+	<stop  offset="5.917540e-002" style="stop-color:#EF7524"/>
+	<stop  offset="0.1123" style="stop-color:#F4902B"/>
+	<stop  offset="0.1663" style="stop-color:#F7A32F"/>
+	<stop  offset="0.2218" style="stop-color:#F8AE32"/>
+	<stop  offset="0.2809" style="stop-color:#F9B233"/>
+	<stop  offset="0.5897" style="stop-color:#E94E1B"/>
+	<stop  offset="0.8088" style="stop-color:#E94E1B"/>
+	<stop  offset="0.8493" style="stop-color:#E24822"/>
+	<stop  offset="0.9094" style="stop-color:#CE3934"/>
+	<stop  offset="0.9814" style="stop-color:#AD2052"/>
+	<stop  offset="1" style="stop-color:#A3195B"/>
+</linearGradient>
+<path id="Background_1_" fill="url(#Background_5_)" stroke="url(#Background_6_)" stroke-miterlimit="10" d="M59.5,53.3
+	c0,3.3-2.7,5.9-5.9,5.9H10.5c-3.3,0-5.9-2.7-5.9-5.9V10.2c0-3.3,2.7-5.9,5.9-5.9h43.1c3.3,0,5.9,2.7,5.9,5.9V53.3z"/>
+<path id="Shadow_Book_1_" opacity="0.2" enable-background="new    " d="M41,52.2c0,3.4-1.3,2.9-3,2.9H25c-1.7,0-3,0.5-3-2.9V26.7
+	c0-3.4,1.3-2.3,3-2.3h13c1.7,0,3-1,3,2.3V52.2z"/>
+<g id="Shadow_Headphones_1_" opacity="0.2">
+	<path id="rect5540_2_" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M15.1,34
+		v-3c0-10,7.4-18,16.5-18h-0.2c9.1,0,16.4,8,16.4,18v3"/>
+	<path id="rect5413-5_2_" d="M13.9,33h2.7v13.4h-2.8c-0.9,0-1.6-2-1.6-3.4l-0.1-6.3C12.2,35,12.9,33,13.9,33z"/>
+	<path id="rect5413_2_" d="M17.7,30.8h1.4v17.8h-1.4c-0.8,0-1.5-0.8-1.5-1.3V32C16.1,31.5,16.8,30.8,17.7,30.8z"/>
+	<path id="rect5413-5-2_2_" d="M49.1,33h-2.7v13.4h2.8c0.9,0,1.6-2,1.6-3.4l0-6.3C50.8,35,50.1,33,49.1,33z"/>
+	<path id="rect5413-3_2_" d="M45.3,30.8h-1.4v17.8h1.4c0.8,0,1.5-0.8,1.5-1.3V32C46.9,31.5,46.2,30.8,45.3,30.8z"/>
+</g>
+<g id="Headphones_1_">
+	<path id="rect5540_1_" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M15,32.8
+		v-2.9c0-9.8,7.5-17.7,16.7-17.7h-0.2c9.1,0,16.5,7.9,16.5,17.7v2.9"/>
+	<path id="rect5413-5_1_" fill="#FFFFFF" d="M13.8,31.6h2.7v13.2h-2.8c-0.9,0-1.6-2-1.6-3.4L12,35.2C12,33.6,12.8,31.6,13.8,31.6z"
+		/>
+	<path id="rect5413_1_" fill="#FFFFFF" d="M17.6,29.4H19V47h-1.4c-0.8,0-1.6-0.8-1.6-1.3V30.6C16,30.2,16.7,29.4,17.6,29.4z"/>
+	<path id="rect5413-5-2_1_" fill="#FFFFFF" d="M49.2,31.6h-2.7v13.2h2.8c1,0,1.7-2,1.7-3.4l0-6.2C51,33.6,50.3,31.6,49.2,31.6z"/>
+	<path id="rect5413-3_1_" fill="#FFFFFF" d="M45.5,29.4H44V47h1.4c0.8,0,1.5-0.8,1.5-1.3V30.6C47,30.2,46.3,29.4,45.5,29.4z"/>
+	<path id="path5647_2_" display="none" fill-opacity="0.388" d="M13.3,40.1l0.9,1.6l0.8,1.2c0.9,0.7,1,0.5,1.4,0.8v0.8v0.2h-2h-0.1
+		C13.2,43.3,13.3,40.7,13.3,40.1z"/>
+	<path id="path5647-9_2_" display="none" fill-opacity="0.39" d="M50.7,40.5l-0.8,1.4L49.1,43c-0.8,0.6-0.9,0.5-1.4,0.7v0.7v0.1h1.9
+		h0.1C50.8,43.5,50.7,41.2,50.7,40.5L50.7,40.5z"/>
+	<path id="path5647-1_2_" display="none" fill-opacity="0.3" d="M17.2,42.1l0.5,1.7l0.4,1.2c0.5,0.7,0.5,0.6,0.8,0.8v0.8v0.2l-1.1,0
+		l-0.3-0.2l-0.2-0.2c0-0.1-0.2-0.3-0.2-0.6C17.2,44.5,17.2,42.6,17.2,42.1z"/>
+	<path id="path5647-1-2_2_" display="none" fill="#1D1D1B" fill-opacity="0.3" d="M46.7,41l-0.5,2l-0.5,1.5c-0.5,0.9-0.6,0.7-0.9,1
+		v1v0.2l1.2,0l0.3-0.3l0.2-0.3c0-0.2,0.2-0.4,0.2-0.8C46.7,44,46.7,41.7,46.7,41L46.7,41z"/>
+</g>
+<path fill="#FFFFFF" d="M38,22.4H25c-1.7,0-3-1.1-3,2.3v25.2c0,3.4,1.3,2.8,3,2.8h13c1.7,0,3,0.6,3-2.8V24.7
+	C41,21.3,39.7,22.4,38,22.4z M24.3,28h7.4v2h-7.4V28z M24.3,34.5h5.6v2h-5.6V34.5z M24.3,41.1h7.4v2h-7.4V41.1z M29.9,49.2h-5.6v-2
+	h5.6V49.2z M39.1,49.2h-7.4v-2h7.4V49.2z M39.1,43.1h-5.6v-2h5.6V43.1z M39.1,36.5h-7.4v-2h7.4V36.5z M39.1,30h-5.6v-2h5.6V30z"/>
+<g id="Layer_3">
+</g>
+</svg>
