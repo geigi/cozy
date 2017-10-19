@@ -30,7 +30,7 @@ class CozyUI:
 
   def activate(self):
     self.__first_play = True
-    self.settings = Gio.Settings.new("de.geigi.Cozy")
+    self.settings = Gio.Settings.new("com.github.geigi.cozy")
       
     self.__init_window()
     self.__init_bindings()

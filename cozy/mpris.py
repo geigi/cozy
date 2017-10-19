@@ -230,7 +230,7 @@ class MPRIS(Server):
         elif property_name == "Identity":
             return GLib.Variant("s", "Cozy")
         elif property_name == "DesktopEntry":
-            return GLib.Variant("s", "de.geigi.cozy")
+            return GLib.Variant("s", "com.github.geigi.cozy")
         elif property_name == "SupportedUriSchemes":
             return GLib.Variant("as", ["file"])
         elif property_name == "SupportedMimeTypes":

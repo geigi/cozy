@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>de.geigi.cozy.desktop</id>
+  <id>com.github.geigi.cozy.desktop</id>
   <licence>LGPL</licence>
   <name>Cozy</name>
   <summary>Play and organize your audio book collection</summary>

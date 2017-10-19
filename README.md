@@ -3,7 +3,7 @@
 Cozy is a modern audio book player for Linux. 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/geigi/cozy/master/data/icons/hicolor/scalable/apps/de.geigi.cozy.svg?sanitize=true" alt="Icon">
+  <img src="https://raw.githubusercontent.com/geigi/cozy/master/data/icons/hicolor/scalable/apps/com.github.geigi.cozy.svg?sanitize=true" alt="Icon">
 </p>
 
 Here are some of the current features:

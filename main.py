@@ -39,7 +39,7 @@ class Application(Gtk.Application):
   def __init__(self, **kwargs):
     GObject.threads_init()
 
-    Gtk.Application.__init__(self, application_id='de.geigi.cozy')
+    Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
 
     GLib.setenv("PULSE_PROP_media.role", "music", True)
 
