@@ -3,7 +3,6 @@ Section: multimedia
 Priority: optional
 Maintainer: Julian Geywitz <github@geigi.de>
 Build-Depends: debhelper (>= 9),
-               dh,
                meson,
                ninja-build, 
                libgtk-3-dev,
