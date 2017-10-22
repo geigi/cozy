@@ -32,7 +32,7 @@
       </ul>
   </description>
   <provides>
-    <binary>com.github.geigi.cozy</binary>
+    <binary>cozy</binary>
   </provides>
   <screenshots>
     <screenshot type="default">
