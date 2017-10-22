@@ -16,9 +16,16 @@
 %:
 	dh $@ 
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz
 
+override_dh_auto_clean:
+	rm -rf debian/build
 
-override_dh_install:
-	dh_install --fail-missing
+override_dh_auto_configure:
+	mkdir -p debian/build
+	cd debian/build && meson --prefix=/usr ../..
+
+override_dh_auto_build:
+	cd debian/build && ninja -v
+
+override_dh_auto_install:
+  cd debian/build && DESTDIR=${CURDIR}/debian/com.github.geigi.cozy ninja install
