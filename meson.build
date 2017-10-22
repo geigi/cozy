@@ -20,7 +20,22 @@ endif
 dependency('gtk+-3.0', version :'>=3.14')
 dependency('glib-2.0')
 
-python_dir = join_paths(get_option('prefix'), python.sysconfig_path('purelib'))
+# from https://github.com/AsavarTzeth/pulseeffects/blob/master/meson.build
+# Support Debian non-standard python paths
+# Fallback to Meson python3 module if command fails
+message('Getting python install path')
+py3_purelib = ''
+r = run_command(python_bin.path(), '-c', 'from distutils.sysconfig import get_python_lib; print(get_python_lib(prefix=""))')
+if r.returncode() != 0
+  py3_purelib = python.sysconfig_path('purelib')
+  if not py3_purelib.endswith('site-packages')
+    error('Cannot find python install path')
+  endif
+  python_dir = py3_purelib
+else
+  python_dir = r.stdout().strip()
+endif
+
 LIBEXEC_DIR = join_paths(get_option('prefix'), 'libexec')
 DATA_DIR = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
 
