@@ -1,5 +1,5 @@
-com.github.geigi.cozy (0.1.0) UNSTABLE; urgency=low
+com.github.geigi.cozy (0.2.0) UNSTABLE; urgency=low
 
-  * Initial release
+  * Getting the App Center integration running
 
-Julian Geywitz <github@geigi.de>  Thu, 19 Oct 2016 12:40:14 +0200
+-- Julian Geywitz <github@geigi.de>  Thu, 22 Oct 2016 13:45:14 +0200
