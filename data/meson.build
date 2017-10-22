@@ -21,11 +21,8 @@ i18n.merge_file(
   install_dir: join_paths(get_option('datadir'), 'applications')
 )
 
-#message('Preparing appdata')
-#i18n.merge_file(
-#  output: project_id + '.appdata.xml',
-#  input: 'appdata.xml.in',
-#  po_dir: '../po',
-#  install: true,
-#  install_dir: join_paths(get_option('datadir'), 'appdata')
-#)
+message('Preparing appdata')
+install_data(
+  project_id + '.appdata.xml',
+  install_dir: join_paths(get_option('datadir'), 'metainfo')
+)
