@@ -2,9 +2,7 @@
 
 Cozy is a modern audio book player for Linux. 
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/geigi/cozy/master/data/icons/hicolor/scalable/apps/com.github.geigi.cozy.svg?sanitize=true" alt="Icon">
-</p>
+![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
 
 Here are some of the current features:
 - Import all your audiobooks into cozy to browse them comfortably
@@ -12,6 +10,12 @@ Here are some of the current features:
 - Remembers your playback position
 - Sort your audio books by author, reader & name
 - developed on Arch Linux and tested under elementaryOS
+
+<p align="center">
+  <a href="https://appcenter.elementary.io/com.github.philip-scott.wallpaperize">
+  <img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter">
+  </a>
+</p>
 
 Upcoming:
 - m4v support
@@ -23,8 +27,6 @@ Upcoming:
 - Media keys & notification integration
 - Playback speed control
 - Sleep timer
-
-![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
 
 ## Requirements
 - `python3`
