@@ -32,7 +32,7 @@
       </ul>
   </description>
   <provides>
-    <binary>cozy</binary>
+    <binary>com.github.geigi.cozy</binary>
   </provides>
   <screenshots>
     <screenshot type="default">
@@ -45,6 +45,12 @@
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.2.2" timestamp="1508681985">
+      <description>
+        <p>Fixed missing track list
+        </p>
+      </description>
+    </release>
     <release version="0.2.0" timestamp="1508666338">
       <description>
         <p>Cozy's first release! This release includes everything to start listening to your audiobooks. More features are coming soon!

@@ -1,3 +1,9 @@
+com.github.geigi.cozy (0.2.2) UNSTABLE; urgency=low
+
+  * Fixed missing tracklist in ui
+
+-- Julian Geywitz <github@geigi.de>  Thu, 22 Oct 2016 16:19:14 +0200
+
 com.github.geigi.cozy (0.2.0) UNSTABLE; urgency=low
 
   * Getting the App Center integration running

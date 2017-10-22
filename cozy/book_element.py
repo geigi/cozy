@@ -123,6 +123,11 @@ class BookElement(Gtk.Box):
     box.set_valign(Gtk.Align.START)
     box.props.margin = 8
 
+    count = 0
+    for track in Tracks(self.book):
+      box.add(TrackElement(track))
+      count += 1
+
     if Gtk.get_minor_version() > 20:
       scroller.set_propagate_natural_height(True)
       scroller.set_max_content_height(500)

@@ -1,5 +1,5 @@
 project('cozy',
-  version: '0.2.0',
+  version: '0.2.2',
   meson_version: '>= 0.40.0')
 
 project_name = 'cozy'
@@ -54,7 +54,7 @@ subdir('po')
 message('Preparing init file')
 configure_file(
   input: 'main.py',
-  output: 'cozy',
+  output: 'com.github.geigi.cozy',
   configuration: conf,
   install_dir: 'bin'
 )
