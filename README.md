@@ -12,7 +12,7 @@ Cozy is a modern audio book player for Linux.
 - developed on Arch Linux and tested under elementaryOS
 
 <p align="center">
-  <a href="https://appcenter.elementary.io/com.github.philip-scott.wallpaperize">
+  <a href="https://appcenter.elementary.io/com.github.geigi.cozy">
   <img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter">
   </a>
 </p>
