@@ -89,6 +89,7 @@ class CozyUI:
     """
     log.info("Initialize main window")
     self.window = self.window_builder.get_object("app_window")
+    self.window.set_default_size(1100, 700)
     self.window.set_application(self.app)
     self.window.show_all()
     self.window.present()

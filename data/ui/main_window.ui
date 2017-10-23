@@ -26,8 +26,6 @@
   <object class="GtkApplicationWindow" id="app_window">
     <property name="name">main_window</property>
     <property name="can_focus">False</property>
-    <property name="default_width">1100</property>
-    <property name="default_height">700</property>
     <property name="icon_name">com.github.geigi.cozy</property>
     <child>
       <object class="GtkStack" id="main_stack">
