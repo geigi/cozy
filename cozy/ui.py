@@ -141,6 +141,8 @@ class CozyUI:
     self.progress_scale = self.window_builder.get_object("progress_scale")
     self.current_label = self.window_builder.get_object("current_label")
     self.remaining_label = self.window_builder.get_object("remaining_label")
+    self.author_toggle_button = self.window_builder.get_object("author_toggle_button")
+    self.reader_toggle_button = self.window_builder.get_object("reader_toggle_button")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -189,6 +191,8 @@ class CozyUI:
     # button actions
     self.play_button.connect("clicked", self.__on_play_pause_clicked)
     self.prev_button.connect("clicked", self.__on_rewind_clicked)
+    self.author_toggle_button.connect("toggled", self.__toggle_author)
+    self.reader_toggle_button.connect("toggled", self.__toggle_reader)
 
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
@@ -566,6 +570,27 @@ class CozyUI:
       self.progress_scale.set_value(self.progress_scale.get_value() - 30)
     else:
       self.progress_scale.set_value(0)
+
+  def __toggle_reader(self, button):
+    """
+    Switch to reader selection
+    """
+    if self.reader_toggle_button.get_active():
+      self.author_toggle_button.set_active(False)
+      self.sort_stack.props.visible_child_name = "reader"
+    elif self.author_toggle_button.get_active() is False:
+      self.reader_toggle_button.set_active(True)
+
+  def __toggle_author(self, button):
+    """
+    Switch to author selection
+    """
+    if self.author_toggle_button.get_active():
+      self.reader_toggle_button.set_active(False)
+      self.sort_stack.props.visible_child_name = "author"
+    elif self.reader_toggle_button.get_active() is False:
+      self.author_toggle_button.set_active(True)
+
 
   def __on_gst_message(self, bus, message):
     """

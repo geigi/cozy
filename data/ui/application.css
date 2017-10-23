@@ -22,3 +22,7 @@
 .box_hover {
   background: shade(@theme_tooltip_bg_color, 1.1)
 }
+
+.no_frame {
+  border-style: none;
+}

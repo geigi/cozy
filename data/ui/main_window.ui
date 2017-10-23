@@ -45,15 +45,66 @@
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkStackSwitcher" id="sort_stack_switcher">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="halign">center</property>
+                    <property name="margin_bottom">2</property>
                     <property name="hexpand">True</property>
-                    <property name="stack">sort_stack</property>
-                    <style>
-                      <class name="bold"/>
-                    </style>
+                    <child>
+                      <object class="GtkToggleButton" id="author_toggle_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="focus_on_click">False</property>
+                        <property name="receives_default">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="relief">none</property>
+                        <property name="active">True</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="width_request">90</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">&lt;big&gt;Author&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
+                            <style>
+                              <class name="no_frame"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToggleButton" id="reader_toggle_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="focus_on_click">False</property>
+                        <property name="receives_default">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="relief">none</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="width_request">90</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">&lt;big&gt;Reader&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
+                            <style>
+                              <class name="no_frame"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -85,6 +136,9 @@
                             </child>
                           </object>
                         </child>
+                        <style>
+                          <class name="no_frame"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="name">author</property>
@@ -108,6 +162,9 @@
                             </child>
                           </object>
                         </child>
+                        <style>
+                          <class name="no_frame"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="name">reader</property>
@@ -160,6 +217,9 @@
                     </child>
                   </object>
                 </child>
+                <style>
+                  <class name="no_frame"/>
+                </style>
               </object>
               <packing>
                 <property name="resize">True</property>
