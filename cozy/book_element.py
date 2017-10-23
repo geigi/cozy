@@ -17,17 +17,25 @@ class BookElement(Gtk.Box):
 
     super(Gtk.Box, self).__init__()
     self.set_orientation(Gtk.Orientation.VERTICAL)
-    self.set_spacing(10)
+    self.set_spacing(7)
     self.set_halign(Gtk.Align.CENTER)
     self.set_valign(Gtk.Align.START)
     self.set_margin_top(10)
 
     # label contains the book name and is limited to x chars
-    label = Gtk.Label((self.book.name[:MAX_BOOK_LENGTH] + '...') if len(self.book.name) > MAX_BOOK_LENGTH else self.book.name)
-    label.set_xalign(0.5)
-    label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
-    label.props.max_width_chars = 30
-    label.props.justify = Gtk.Justification.CENTER
+    title_label = Gtk.Label("")
+    title = (self.book.name[:MAX_BOOK_LENGTH] + '...') if len(self.book.name) > MAX_BOOK_LENGTH else self.book.name
+    title_label.set_markup("<b>" + title + "</b>")
+    title_label.set_xalign(0.5)
+    title_label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
+    title_label.props.max_width_chars = 30
+    title_label.props.justify = Gtk.Justification.CENTER
+
+    author_label = Gtk.Label((self.book.author[:MAX_BOOK_LENGTH] + '...') if len(self.book.author) > MAX_BOOK_LENGTH else self.book.author)
+    author_label.set_xalign(0.5)
+    author_label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
+    author_label.props.max_width_chars = 30
+    author_label.props.justify = Gtk.Justification.CENTER
 
     # scale the book cover to a fix size.
     pixbuf = GetCoverPixbuf(self.book)
@@ -61,17 +69,15 @@ class BookElement(Gtk.Box):
     play_box.connect("leave-notify-event", self._on_play_leave_notify)
     # on click we want to play the audio book
     play_box.connect("button-press-event", self.__on_play_button_press)
-
-    # play_img is the themed play button for the overlay
-    play_img = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.DIALOG)
-    play_img.get_style_context().add_class("white")
+    play_box.set_property("halign", Gtk.Align.CENTER)
+    play_box.set_property("valign", Gtk.Align.CENTER)
 
     # play_color is an overlay for the play button 
     # with this it should be visible on any album art color
-    play_color = Gtk.Grid()
-    play_color.get_style_context().add_class("black_opacity")
-    play_color.set_property("halign", Gtk.Align.CENTER)
-    play_color.set_property("valign", Gtk.Align.CENTER)
+    play_image = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/play_background.svg")
+    play_button = Gtk.Image.new_from_pixbuf(play_image)
+    play_button.set_property("halign", Gtk.Align.CENTER)
+    play_button.set_property("valign", Gtk.Align.CENTER)
 
     # this is the main overlay for the album art
     # we need to create field for the overlays 
@@ -80,7 +86,12 @@ class BookElement(Gtk.Box):
 
     # this is the play symbol overlay
     self.play_overlay = Gtk.Overlay.new()
-    self.play_overlay.set_opacity(0.0)
+
+    # this is for the play button animation
+    self.play_revealer = Gtk.Revealer()
+    self.play_revealer.set_transition_type(Gtk.RevealerTransitionType.CROSSFADE)
+    self.play_revealer.set_transition_duration(300)
+    self.play_revealer.add(self.play_overlay)
     
     # this grid has a background color to act as a visible overlay
     color = Gtk.Grid()
@@ -89,13 +100,12 @@ class BookElement(Gtk.Box):
     color.set_property("valign", Gtk.Align.CENTER)
 
     # assemble play overlay
-    play_box.add(play_img)
-    play_color.add(play_box)
-    self.play_overlay.add(play_color)
+    play_box.add(play_button)
+    self.play_overlay.add(play_box)
 
     # assemble overlay with album art
     self.overlay.add(img)
-    self.overlay.add_overlay(self.play_overlay)
+    self.overlay.add_overlay(self.play_revealer)
 
     # assemble overlay color
     color.add(self.overlay)
@@ -103,7 +113,8 @@ class BookElement(Gtk.Box):
 
     # assemble finished element
     self.add(box)
-    self.add(label)
+    self.add(title_label)
+    self.add(author_label)
 
     # create track list popover
     self.__create_popover()
@@ -164,7 +175,7 @@ class BookElement(Gtk.Box):
     :param event: as Gdk.Event
     """
     self.overlay.set_opacity(0.9)
-    self.play_overlay.set_opacity(1.0)
+    self.play_revealer.set_reveal_child(True)
 
   def _on_leave_notify(self, widget, event):
     """
@@ -174,7 +185,7 @@ class BookElement(Gtk.Box):
     """
     if not self.selected:
       self.overlay.set_opacity(1.0)
-      self.play_overlay.set_opacity(0.0)
+      self.play_revealer.set_reveal_child(False)
 
   def __on_popover_close(self, popover):
     """
