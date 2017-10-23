@@ -45,6 +45,14 @@
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.2.3" timestamp="1508767505">
+      <description>
+        <p>Some UI changes
+        </p>
+        <p>New playback hover icon
+        </p>
+      </description>
+    </release>
     <release version="0.2.2" timestamp="1508681985">
       <description>
         <p>Fixed missing track list

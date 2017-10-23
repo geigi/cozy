@@ -1,3 +1,10 @@
+com.github.geigi.cozy (0.2.3) UNSTABLE; urgency=low
+
+  * Some UI changes
+  * New playback hover icon
+
+-- Julian Geywitz <github@geigi.de>  Thu, 23 Oct 2016 16:03:14 +0200
+
 com.github.geigi.cozy (0.2.2) UNSTABLE; urgency=low
 
   * Fixed missing tracklist in ui
