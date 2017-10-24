@@ -208,6 +208,16 @@ class CozyUI:
     self.author_toggle_button.connect("toggled", self.__toggle_author)
     self.reader_toggle_button.connect("toggled", self.__toggle_reader)
 
+    # menu
+    menu = self.menu_builder.get_object("app_menu")
+    self.menu_button = self.window_builder.get_object("menu_button")
+    # for elementary we add a menu button, else we just set the app menu
+    if self.is_elementary:
+      self.menu_button.set_visible(True)
+      self.menu_button.set_menu_model(menu)
+    else:
+      self.menu_button.set_visible(False)
+
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
     scale.set_range(0, 4)
@@ -221,13 +231,8 @@ class CozyUI:
     """
     self.accel = Gtk.AccelGroup()
 
-    menu = self.menu_builder.get_object("app_menu")
-    # for elementary we add a menu button, else we just set the app menu
-    if self.is_elementary:
-      self.menu_button = self.window_builder.get_object("menu_button")
-      self.menu_button.set_visible(True)
-      self.menu_button.set_menu_model(menu)
-    else:
+    if not self.is_elementary:
+      menu = self.menu_builder.get_object("app_menu")
       self.app.set_app_menu(menu)
 
     help_action = Gio.SimpleAction.new("help", None)
