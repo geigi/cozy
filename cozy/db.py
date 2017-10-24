@@ -52,7 +52,7 @@ class Settings(BaseModel):
   first_start = BooleanField(default=True)
   last_played_book = ForeignKeyField(Book, null=True)
 
-def InitDB():
+def init_db():
   db.connect()
   # Create tables only when not already present
   #                                           |
@@ -61,7 +61,7 @@ def InitDB():
   if (Settings.select().count() == 0):
     Settings.create(path = "", last_played_book=None)
 
-def Books():
+def books():
   """
   Find all books in the database
 
@@ -73,7 +73,7 @@ def Search(search):
   return Track.select().where(search in Track.name)
 
 # Return ordered after Track ID / name when not available
-def Tracks(book):
+def tracks(book):
   """
   Find all tracks that belong to a given book
 
@@ -82,7 +82,7 @@ def Tracks(book):
   """
   return Track.select().join(Book).where(Book.id == book.id).order_by(Track.disk, Track.number, Track.name)
 
-def CleanDB():
+def clean_db():
   """
   Delete everything from the database except settings.
   """
@@ -91,7 +91,7 @@ def CleanDB():
   q = Book.delete()
   q.execute()
 
-def SecondsToStr(seconds):
+def seconds_to_str(seconds):
   """
   Converts seconds to a string with the following apperance:
   hh:mm:ss
@@ -110,7 +110,7 @@ def SecondsToStr(seconds):
 
   return result
 
-def GetCoverPixbuf(book):
+def get_cover_pixbuf(book):
   """
   Get the cover from a given book and create a pixbuf object from it.
   :param book: The book object
@@ -130,13 +130,13 @@ def GetCoverPixbuf(book):
 
   return pixbuf
 
-def GetTrackForPlayback(book):
+def get_track_for_playback(book):
   """
   Finds the current track to playback for a given book.
   :param book: book which the next track is required from
   :return: current track position from book db
   """
-  tracks = Tracks(book)
+  tracks = tracks(book)
   i = 1
   track_no = 1
   try:

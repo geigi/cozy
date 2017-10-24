@@ -20,7 +20,7 @@ def __on_gst_message(bus, message):
     else:
       __player.set_state(Gst.State.PLAYING)
   if t == Gst.MessageType.EOS:
-    NextTrack()
+    next_track()
 
   elif t == Gst.MessageType.ERROR:
     err, debug = message.parse_error()
@@ -35,7 +35,7 @@ __bus.add_signal_watch()
 __bus.connect("message", __on_gst_message)
 __current_track = None
 
-def GetGstBus():
+def get_gst_bus():
   """
   Get the global gst bus.
   :return: gst bus
@@ -43,7 +43,7 @@ def GetGstBus():
   global __bus
   return __bus
 
-def GetGstPlayerState():
+def get_gst_player_state():
   """
   Get the current state of the gst player.
   :return: gst player state
@@ -52,7 +52,7 @@ def GetGstPlayerState():
   success, state, pending = __player.get_state(10)
   return state
 
-def GetCurrentDuration():
+def get_current_duration():
   """
   Current duration of track
   :returns: duration in ns
@@ -61,17 +61,17 @@ def GetCurrentDuration():
   duration = __player.query_position(Gst.Format.TIME)[1]
   return duration
 
-def GetCurrentDurationUi():
+def get_current_duration_ui():
   """
   current duration to display in ui
   :return m: minutes
   :return s: seconds
   """
-  s,ns = divmod(GetCurrentDuration(), 1000000000)
+  s,ns = divmod(get_current_duration(), 1000000000)
   m,s = divmod(s, 60)
   return m,s
 
-def GetCurrentTrack():
+def get_current_track():
   """
   Get the currently loaded track object.
   :return: currently loaded track object
@@ -79,7 +79,7 @@ def GetCurrentTrack():
   global __current_track
   return Track.select().where(Track.id == __current_track.id).get()
 
-def PlayPause(track):
+def play_pause(track):
   """
   Play a new file or pause/play if the file is already loaded.
   :param track: Track object that will be played/paused.
@@ -89,9 +89,9 @@ def PlayPause(track):
 
   if __current_track == track or track is None:
     # Track is already selected, only play/pause
-    if GetGstPlayerState() == Gst.State.PLAYING:
+    if get_gst_player_state() == Gst.State.PLAYING:
       __player.set_state(Gst.State.PAUSED)
-      Track.update(position=GetCurrentDuration()).where(Track.id == GetCurrentTrack().id).execute()
+      Track.update(position=get_current_duration()).where(Track.id == get_current_track().id).execute()
     else: 
       __player.set_state(Gst.State.PLAYING)
   else:
@@ -102,11 +102,11 @@ def PlayPause(track):
     Book.update(position = __current_track.id).where(Book.id == __current_track.book.id).execute()
     Settings.update(last_played_book = __current_track.book).execute()
 
-def NextTrack():
+def next_track():
   # try to load the next track of the book. 
   # Stop playback if there isn't any
-  tracks = Tracks(GetCurrentTrack().book)
-  current = GetCurrentTrack()
+  tracks = tracks(get_current_track().book)
+  current = get_current_track()
   save_next = False
   next_track = None
   try:
@@ -125,19 +125,19 @@ def NextTrack():
 
   if next_track is not None:
     Book.update(position=next_track.id).where(Book.id == next_track.book.id).execute()
-    PlayPause(next_track)
+    play_pause(next_track)
   else:
     __player.set
     Book.update(position=0).where(Book.id == current.id).execute()
     Settings.update(last_played_book=None).execute()
 
-def PrevTrack():
+def prev_track():
   # try to load the next track of the book. 
   # Stop playback if there isn't any
   global __player
   global __current_track
-  tracks = Tracks(GetCurrentTrack().book)
-  current = GetCurrentTrack()
+  tracks = tracks(get_current_track().book)
+  current = get_current_track()
   previous = None
   try:
     for track in tracks:
@@ -151,28 +151,28 @@ def PrevTrack():
 
   if previous is not None:
     Book.update(position=previous.id).where(Book.id == previous.book.id).execute()
-    PlayPause(previous)
+    play_pause(previous)
   else:
     first_track = __current_track
     __player.set_state(Gst.State.NULL)
     __current_track = None
-    PlayPause(first_track)
+    play_pause(first_track)
     Book.update(position=0).where(Book.id == current.id).execute()
 
-def Stop():
+def stop():
   """
   Stop playback.
   """
   global __player
   __player.set_state(Gst.State.PAUSED)
 
-def Rewind(seconds):
+def rewind(seconds):
   """
   Seek seconds back in time. Caps at 0 seconds.
   :param seconds: time in seconds
   """
   global __player
-  duration = GetCurrentDuration()
+  duration = get_current_duration()
   seek = duration - (seconds * 1000000000)
   if seek < 0:
     # TODO: Go back to previous track
@@ -180,7 +180,7 @@ def Rewind(seconds):
   __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, seek)
   Track.update(position=seek).where(Track.id == __current_track.id).execute()
 
-def JumpTo(seconds):
+def jump_to(seconds):
   """
   Jumps to the given second. Caps at 0 and the file length
   :param seconds: time in seconds
@@ -190,13 +190,13 @@ def JumpTo(seconds):
   new_position = int(seconds) * 1000000000
   if seconds < 0:
     new_position = 0
-  elif int(seconds) > GetCurrentTrack().length:
-    new_position =  int(GetCurrentTrack().length) * 1000000000
+  elif int(seconds) > get_current_track().length:
+    new_position =  int(get_current_track().length) * 1000000000
   
   __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, new_position)
   Track.update(position=new_position).where(Track.id == __current_track.id).execute()
 
-def JumpToNs(ns):
+def jump_to_ns(ns):
   """
   Jumps to the given ns. Caps at 0 and the file length
   :param ns: time in ns
@@ -206,13 +206,13 @@ def JumpToNs(ns):
   new_position = ns
   if ns < 0:
     new_position = 0
-  elif int(ns / 1000000000) > GetCurrentTrack().length:
-    new_position =  int(GetCurrentTrack().length) * 1000000000
+  elif int(ns / 1000000000) > get_current_track().length:
+    new_position =  int(get_current_track().length) * 1000000000
   
   __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, new_position)
   Track.update(position=new_position).where(Track.id == __current_track.id).execute()
 
-def LoadLastBook():
+def load_last_book():
   """
   Load the last played book into the player.
   """

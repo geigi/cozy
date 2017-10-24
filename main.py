@@ -52,7 +52,7 @@ class Application(Gtk.Application):
   def do_startup(self):
     log.info("Starting up cozy " + version)
     self.ui = CozyUI(pkgdatadir, self, version)
-    InitDB()
+    init_db()
     Gtk.Application.do_startup(self)
     self.ui.startup()
 

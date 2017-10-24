@@ -40,7 +40,7 @@ def b64tobinary(b64):
 # TODO: Drag & Drop files: Create folders and copy to correct location. Then import to db.
 # TODO: Some sort of first import loading screen
 
-def UpdateDatabase(ui):
+def update_database(ui):
   """
   Scans the audio book directory for changes and new files. 
   Also removes entries from the db that are no longer existent.
@@ -84,7 +84,7 @@ def UpdateDatabase(ui):
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
 
-def RebaseLocation(ui, oldPath, newPath):
+def rebase_location(ui, oldPath, newPath):
   """
   This gets called when a user changes the location of the audio book folder.
   Every file in the database updated with the new path.
@@ -122,24 +122,24 @@ def __importFile(file, path, update=False):
       return
 
     mp3 = TrackContainer(MP3(track.path), path)
-    cover = __getMP3Tag(track, "APIC")
-    length = __getCommonTrackLength(mp3)
-    disk = __getMP3Tag(track, "TPOS")
+    cover = __get_mp3_tag(track, "APIC")
+    length = __get_common_track_length(mp3)
+    disk = __get_mp3_tag(track, "TPOS")
 
     # for mp3 we are using the easyid3 functionality
     # because its syntax compatible to the rest
     track.mutagen = EasyID3(path)
-    author = __getMP3Tag(mp3, "TCOM")
-    reader = __getMP3Tag(mp3, "TPE1")
+    author = __get_mp3_tag(mp3, "TCOM")
+    reader = __get_mp3_tag(mp3, "TPE1")
 
   ### FLAC ###
   elif file.lower().endswith('.flac'):
     log.debug("Importing flac " + track.path)
     track.mutagen = FLAC(path)
-    disk = int(__getCommonDiskNumber(track))
-    length = float(__getCommonTrackLength(track))
-    cover = __getFLACCover(track)
-    author = __getCommonTag(track, "composer")
+    disk = int(__get_common_disk_number(track))
+    length = float(__get_common_track_length(track))
+    cover = __get_flac_cover(track)
+    author = __get_common_tag(track, "composer")
     flac = FLAC(path)
     reader = flac["artist"][0]
 
@@ -147,19 +147,19 @@ def __importFile(file, path, update=False):
   elif file.lower().endswith('.ogg'):
     log.debug("Importing ogg " + track.path)
     track.mutagen = OggVorbis(path)
-    disk = int(__getCommonDiskNumber(track))
-    length = float(__getCommonTrackLength(track))
-    cover = __getOGGCover(track)
-    author = __getCommonTag(track, "composer")
-    reader = __getCommonTag(track, "author")
+    disk = int(__get_common_disk_number(track))
+    length = float(__get_common_track_length(track))
+    cover = __get_ogg_cover(track)
+    author = __get_common_tag(track, "composer")
+    reader = __get_common_tag(track, "author")
 
   modified = os.path.getmtime(path)
 
   # try to get all the tags
-  book_name = __getCommonTag(track, "album")
-  track_name = __getCommonTag(track, "title")
+  book_name = __get_common_tag(track, "album")
+  track_name = __get_common_tag(track, "title")
   try:
-    track_number = int(__getCommonTag(track, "tracknumber"))
+    track_number = int(__get_common_tag(track, "tracknumber"))
   except ValueError:
     track_number = 0
     pass
@@ -211,7 +211,7 @@ def __importFile(file, path, update=False):
                  length=length,
                  modified=modified)
 
-def Copy(ui, selection):
+def copy(ui, selection):
   selection = selection.get_uris()
 
   # count the work
@@ -222,13 +222,13 @@ def Copy(ui, selection):
     parsed_path = urllib.parse.urlparse(uri)
     path = urllib.parse.unquote(parsed_path.path)
     if os.path.isfile(path) or os.path.isdir(path):
-      CopyToAudiobookFolder(path)
+      copy_to_audiobook_folder(path)
       cur = cur + 1
       Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_fraction, cur / count)
 
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.scan, None, False)
 
-def CopyToAudiobookFolder(path):
+def copy_to_audiobook_folder(path):
   """
   Copies the given path (folder or file) to the audio book folder.
   """
@@ -250,14 +250,14 @@ def CopyToAudiobookFolder(path):
       log.error("Could not import file " + path)
       log.error(exc)
 
-def __removeFile(path):
+def __remove_file(path):
   """
   Removes a file from the database. This also removes the 
   book entry when there are no tracks in the database anymore.
   """
   pass
 
-def __getCommonDiskNumber(track):
+def __get_common_disk_number(track):
   """
   Get the disk number for most files.
   
@@ -273,7 +273,7 @@ def __getCommonDiskNumber(track):
 
   return disk
 
-def __getCommonTrackLength(track):
+def __get_common_track_length(track):
   """
   Get the track length for most files.
   
@@ -289,7 +289,7 @@ def __getCommonTrackLength(track):
 
   return length
 
-def __getOGGCover(track):
+def __get_ogg_cover(track):
   """
   Get the cover of an OGG file.
   
@@ -304,7 +304,7 @@ def __getOGGCover(track):
 
   return cover
 
-def __getFLACCover(track):
+def __get_flac_cover(track):
   """
   Get the cover of a FLAC file.
   
@@ -319,7 +319,7 @@ def __getFLACCover(track):
 
   return cover
 
-def __getMP3Tag(track, tag):
+def __get_mp3_tag(track, tag):
   """
   Get the first value of a id3 tag.
   
@@ -350,7 +350,7 @@ def __getMP3Tag(track, tag):
 
   return value
 
-def __getCommonTag(track, tag):
+def __get_common_tag(track, tag):
   """
   Get the first value of a tag for most of the file types.
 

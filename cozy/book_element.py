@@ -38,7 +38,7 @@ class BookElement(Gtk.Box):
     author_label.props.justify = Gtk.Justification.CENTER
 
     # scale the book cover to a fix size.
-    pixbuf = GetCoverPixbuf(self.book)
+    pixbuf = get_cover_pixbuf(self.book)
     if pixbuf.get_height() > pixbuf.get_width():
       width = int(pixbuf.get_width() / (pixbuf.get_height() / 180))
       pixbuf = pixbuf.scale_simple(width, 180, GdkPixbuf.InterpType.BILINEAR)
@@ -135,7 +135,7 @@ class BookElement(Gtk.Box):
     box.props.margin = 8
 
     count = 0
-    for track in Tracks(self.book):
+    for track in tracks(self.book):
       box.add(TrackElement(track))
       count += 1
 
@@ -144,7 +144,7 @@ class BookElement(Gtk.Box):
       scroller.set_max_content_height(500)
     else:
       count = 0
-      for track in Tracks(self.book):
+      for track in tracks(self.book):
         box.add(TrackElement(track))
         count += 1
       padding = 17
@@ -210,8 +210,8 @@ class BookElement(Gtk.Box):
     """
     Play this book.
     """
-    track = GetTrackForPlayback(self.book)
-    PlayPause(track)
+    track = get_track_for_playback(self.book)
+    play_pause(track)
     return True
 
 class TrackElement(Gtk.EventBox):
@@ -260,7 +260,7 @@ class TrackElement(Gtk.EventBox):
     title_label.props.width_request = 100
     title_label.props.xalign = 0.0
 
-    dur_label.set_text(SecondsToStr(self.track.length))
+    dur_label.set_text(seconds_to_str(self.track.length))
     dur_label.set_halign(Gtk.Align.END)
     dur_label.props.margin = 4
 
@@ -272,7 +272,7 @@ class TrackElement(Gtk.EventBox):
     self.add(self.box)
 
   def __on_button_press(self, eventbox, event):
-    PlayPause(self.track)
+    play_pause(self.track)
     pass
 
   def _on_enter_notify(self, widget, event):

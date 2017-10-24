@@ -1,10 +1,10 @@
 # Forked from https://github.com/gnumdk/lollypop/blob/master/lollypop/mpris.py
-# Copyright (c) 2014-2017 Cedric Bellegarde <cedric.bellegarde@adishatz.org>
-# Copyright (c) 2016 Gaurav Narula
-# Copyright (c) 2016 Felipe Borges <felipeborges@gnome.org>
-# Copyright (c) 2013 Arnel A. Borja <kyoushuu@yahoo.com>
-# Copyright (c) 2013 Vadim Rutkovsky <vrutkovs@redhat.com>
-# Copyright (c) 2017 Julian Geywitz <cozy@geigi.de>
+# copyright (c) 2014-2017 Cedric Bellegarde <cedric.bellegarde@adishatz.org>
+# copyright (c) 2016 Gaurav Narula
+# copyright (c) 2016 Felipe Borges <felipeborges@gnome.org>
+# copyright (c) 2013 Arnel A. Borja <kyoushuu@yahoo.com>
+# copyright (c) 2013 Vadim Rutkovsky <vrutkovs@redhat.com>
+# copyright (c) 2017 Julian Geywitz <cozy@geigi.de>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -122,7 +122,7 @@ class MPRIS(Server):
             <method name="Next"/>
             <method name="Previous"/>
             <method name="Pause"/>
-            <method name="PlayPause"/>
+            <method name="play_pause"/>
             <method name="Stop"/>
             <method name="Play"/>
             <method name="Seek">
@@ -174,7 +174,7 @@ class MPRIS(Server):
                                        None)
         Server.__init__(self, self.__bus, self.__MPRIS_PATH)
 
-        bus = GetGstBus()
+        bus = get_gst_bus()
         bus.connect("message", self.__on_gst_message)
 
         #Lp().player.connect("current-changed", self.__on_current_changed)
@@ -190,25 +190,25 @@ class MPRIS(Server):
         self.__app.quit()
 
     def Next(self):
-        NextTrack()
+        next_track()
 
     def Previous(self):
-        PrevTrack()
+        prev_track()
 
     def Pause(self):
-        PlayPause(None)
+        play_pause(None)
 
-    def PlayPause(self):
-        PlayPause(None)
+    def play_pause(self):
+        play_pause(None)
 
     def Stop(self):
-        Stop(None)
+        stop(None)
 
     def Play(self):
-        PlayPause(None)
+        play_pause(None)
 
     def SetPosition(self, track_id, position):
-        JumpToNs(position)
+        jump_to_ns(position)
         4
     def Seek(self, offset):
         pass
@@ -245,10 +245,10 @@ class MPRIS(Server):
         elif property_name == "Position":
             return GLib.Variant(
                                "x",
-                               GetCurrentDuration())
+                               get_current_duration())
         elif property_name in ["CanGoNext", "CanGoPrevious",
                                "CanPlay", "CanPause"]:
-            return GLib.Variant("b", GetCurrentTrack() is not None)
+            return GLib.Variant("b", get_current_track() is not None)
 
     def GetAll(self, interface):
         ret = {}
@@ -309,7 +309,7 @@ class MPRIS(Server):
         return GLib.Variant("o", "/de/geigi/Cozy/TrackId/%s" % track_id)
 
     def __get_status(self):
-        state = GetGstPlayerState()
+        state = get_gst_player_state()
         if state == Gst.State.PLAYING:
             return "Playing"
         elif state == Gst.State.PAUSED:
@@ -329,7 +329,7 @@ class MPRIS(Server):
             pass
 
     def __update_metadata(self):
-        track = GetCurrentTrack()
+        track = get_current_track()
         if self.__get_status() == "Stopped":
             self.__metadata = {"mpris:trackid": GLib.Variant(
                                   "o",
@@ -358,7 +358,7 @@ class MPRIS(Server):
                                                  "file:///" + track.file)
             
             cover_path = "/tmp/cozy_mpris.jpg"
-            pixbuf = GetCoverPixbuf(track.book)
+            pixbuf = get_cover_pixbuf(track.book)
             if pixbuf is not None:
                 pixbuf.savev(cover_path, "jpeg",
                              ["quality"], ["90"])
@@ -371,7 +371,7 @@ class MPRIS(Server):
         self.Seeked(position * (1000 * 1000))
 
     def __on_current_changed(self):
-        current_track_id = GetCurrentTrack().id
+        current_track_id = get_current_track().id
         if current_track_id and current_track_id >= 0:
             self.__cozy_id = current_track_id
         else:

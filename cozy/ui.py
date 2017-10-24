@@ -288,20 +288,20 @@ class CozyUI:
 
   def __init_gst_messaging(self):
     self.__gst_state = None
-    GetGstBus().connect("message", self.__on_gst_message)
+    get_gst_bus().connect("message", self.__on_gst_message)
 
   def __load_last_book(self):
     """
     Loads the last book into the player
     """
-    LoadLastBook()
+    load_last_book()
     if Settings.get().last_played_book is not None:
       self.__update_track_ui()
       self.__update_ui_time(self.progress_scale)
-      cur_m, cur_s = GetCurrentDurationUi()
+      cur_m, cur_s = get_current_duration_ui()
       self.progress_scale.set_value(cur_m * 60 + cur_s)
 
-      pos = int(GetCurrentTrack().position)
+      pos = int(get_current_track().position)
       if self.settings.get_boolean("replay") == True:
         log.info("Replaying the previous 30 seconds.")
         amount = 30 * 1000000000
@@ -373,7 +373,7 @@ class CozyUI:
     self.title_label.set_text("")
     self.subtitle_label.set_text("")
 
-    self.set_title_cover(GetCoverPixbuf(None))
+    self.set_title_cover(get_cover_pixbuf(None))
 
     self.progress_scale.set_range(0, 1)
     self.progress_scale.set_value(0)
@@ -412,7 +412,7 @@ class CozyUI:
     """
     Sets the cover in the title bar.
     """
-    if Gtk.get_minor_version() < 24:
+    if self.is_elementary:
       size = 28
     else:
       size = 40
@@ -429,7 +429,7 @@ class CozyUI:
     Start the db import in a seperate thread
     """
     self.switch_to_working(_("Importing Audiobooks"), first_scan)
-    thread = Thread(target = UpdateDatabase, args = (self, ))
+    thread = Thread(target = update_database, args = (self, ))
     thread.start()
     pass
 
@@ -460,7 +460,7 @@ class CozyUI:
     # we want every item only once, so wh use a list to add only the new ones
     seen_authors = []
     seen_readers = []
-    for book in Books():
+    for book in books():
       if book.author not in seen_authors:
         seen_authors.append(book.author)
 
@@ -492,7 +492,7 @@ class CozyUI:
     self.author_box.show_all()
     self.reader_box.show_all()
 
-    for b in Books():
+    for b in books():
       self.book_box.add(BookElement(b))
       pass
 
@@ -528,7 +528,7 @@ class CozyUI:
     """
     Jump to the slided time and release the progress scale update lock.
     """
-    JumpTo(self.progress_scale.get_value())
+    jump_to(self.progress_scale.get_value())
     self.progress_scale_clicked = False
 
   def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
@@ -538,8 +538,8 @@ class CozyUI:
     """
     if target_type == 80:
       self.throbber.start()
-      self.switch_to_working("Copying new files...", False)
-      thread = Thread(target = Copy, args = (self, selection, ))
+      self.switch_to_working("copying new files...", False)
+      thread = Thread(target = copy, args = (self, selection, ))
       thread.start()
 
   def __on_folder_changed(self, sender):
@@ -557,7 +557,7 @@ class CozyUI:
 
     self.switch_to_working(_("Changing audio book location..."), False)
 
-    thread = Thread(target = RebaseLocation, args = (self, oldPath, settings.path))
+    thread = Thread(target = rebase_location, args = (self, oldPath, settings.path))
     thread.start()
 
   def __on_book_selec_changed(self, flowbox):
@@ -577,8 +577,8 @@ class CozyUI:
     """
     Play/Pause the player.
     """
-    PlayPause(None)
-    pos = GetCurrentTrack().position
+    play_pause(None)
+    pos = get_current_track().position
     if self.__first_play:
       self.__first_play = False
 
@@ -588,13 +588,13 @@ class CozyUI:
           pos = 0
         else:
           pos = pos - amount
-    JumpToNs(pos)
+    jump_to_ns(pos)
       
   def __on_rewind_clicked(self, button):
     """
     Jump back 30 seconds.
     """
-    Rewind(30)
+    rewind(30)
     if self.progress_scale.get_value() > 30:
       self.progress_scale.set_value(self.progress_scale.get_value() - 30)
     else:
@@ -631,7 +631,7 @@ class CozyUI:
         self.__update_time()
         self.__update_ui_time(self.progress_scale)
     elif t == Gst.MessageType.STATE_CHANGED:
-      state = GetGstPlayerState()
+      state = get_gst_player_state()
 
       # return if state is not changed
       if state == self.__gst_state:
@@ -656,7 +656,7 @@ class CozyUI:
 
   def __update_track_ui(self):
     # set data of new stream in ui
-    track = GetCurrentTrack()
+    track = get_current_track()
     self.title_label.set_text(track.book.name)
     self.subtitle_label.set_text(track.name)
     self.play_button.set_sensitive(True)
@@ -666,9 +666,9 @@ class CozyUI:
     # only change cover when book has changed
     if self.current_book is not track.book:
       self.current_book = track.book
-      self.set_title_cover(GetCoverPixbuf(track.book))
+      self.set_title_cover(get_cover_pixbuf(track.book))
 
-    total = GetCurrentTrack().length
+    total = get_current_track().length
     self.progress_scale.set_sensitive(True)
     self.progress_scale.set_range(0, total)
 
@@ -677,7 +677,7 @@ class CozyUI:
     Update the current and remaining time.
     """
     if not self.progress_scale_clicked:
-      cur_m, cur_s = GetCurrentDurationUi()
+      cur_m, cur_s = get_current_duration_ui()
       Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.progress_scale.set_value, cur_m * 60 + cur_s)
       #()
     
@@ -689,7 +689,7 @@ class CozyUI:
     val = int(self.progress_scale.get_value())
     m, s = divmod(val, 60)
     self.current_label.set_markup("<tt><b>" + str(m).zfill(2) + ":" + str(s).zfill(2) + "</b></tt>")
-    track = GetCurrentTrack()
+    track = get_current_track()
 
     remaining_secs = int(track.length - val)
     remaining_mins, remaining_secs = divmod(remaining_secs, 60)
@@ -716,8 +716,8 @@ class CozyUI:
       self.play_status_updater.stop()
 
     # save current position when still playing
-    if GetGstPlayerState() == Gst.State.PLAYING:
-      Track.update(position = GetCurrentDuration()).where(Track.id == GetCurrentTrack().id).execute()
+    if get_gst_player_state() == Gst.State.PLAYING:
+      Track.update(position = get_current_duration()).where(Track.id == get_current_track().id).execute()
 
   ####################
   # CONTENT HANDLING #
