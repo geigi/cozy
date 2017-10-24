@@ -14,130 +14,176 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cozy/importer.py:152
+#: cozy/importer.py:169
 msgid "Unknown Author"
-msgstr ""
+msgstr "Unknown Author"
 
-#: cozy/importer.py:153
+#: cozy/importer.py:170
 msgid "Unknown Reader"
-msgstr ""
+msgstr "Unknown Reader"
 
-#: cozy/ui.py:207 cozy/ui.py:348 data/ui/timer_popover.ui:71
+#: cozy/ui.py:287 cozy/ui.py:522 data/ui/timer_popover.ui:71
 msgid "min"
-msgstr ""
+msgstr "min"
 
-#: cozy/ui.py:311 cozy/ui.py:314 cozy/ui.py:401 cozy/ui.py:410
+#: cozy/ui.py:441
+msgid "Importing Audiobooks"
+msgstr "Importing Audiobooks"
+
+#: cozy/ui.py:485 cozy/ui.py:488 cozy/ui.py:766 cozy/ui.py:775
 msgid "All"
-msgstr ""
+msgstr "All"
 
-#: data/ui/main_window.ui:79
+#: cozy/ui.py:577
+msgid "Changing audio book location..."
+msgstr "Changing audio book location..."
+
+#: data/ui/main_window.ui:65
+msgid "<big>Author</big>"
+msgstr "<big>Author</big>"
+
+#: data/ui/main_window.ui:92
+msgid "<big>Reader</big>"
+msgstr "<big>Reader</big>"
+
+#: data/ui/main_window.ui:143
 msgid "Author"
-msgstr ""
+msgstr "Author"
 
-#: data/ui/main_window.ui:102
+#: data/ui/main_window.ui:169
 msgid "Reader"
-msgstr ""
+msgstr "Reader"
 
-#: data/ui/main_window.ui:133
-msgid "Importing your audio books..."
+#: data/ui/main_window.ui:245
+msgid "Importing your audiobooks..."
+msgstr "Importing your audiobooks..."
+
+#: data/ui/main_window.ui:300
+msgid "Import your Audiobooks"
+msgstr "Import your Audiobooks"
+
+#: data/ui/main_window.ui:316
+msgid ""
+"Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
+"Cozy automatically imports your audiobooks in one directory - your library"
+
+#: data/ui/main_window.ui:356 data/ui/hello.ui:200
+msgid "Drag & Drop"
+msgstr "Drag & Drop"
+
+#: data/ui/main_window.ui:372
+msgid ""
+"Drag your audiobooks into cozy and the will be automatically imported to "
+"your library"
+msgstr ""
+"Drag your audiobooks into cozy and the will be automatically imported to "
+"your library"
+
+#: data/ui/main_window.ui:432
+msgid "Change Audiobooks Folder"
+msgstr "Change Audiobooks Folder"
+
+#: data/ui/main_window.ui:448
+msgid "Load audiobooks from a folder, network drive or an external disk"
+msgstr "Load audiobooks from a folder, network drive or an external disk"
 
 #: data/ui/about.ui:12
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: data/ui/app_menu.ui:7
 msgid "_Scan Directory"
-msgstr ""
+msgstr "_Scan Directory"
 
 #: data/ui/app_menu.ui:13
 msgid "_Preferences"
-msgstr ""
+msgstr "_Preferences"
 
 #: data/ui/app_menu.ui:19
 msgid "_Help"
-msgstr ""
+msgstr "_Help"
 
 #: data/ui/app_menu.ui:23
 msgid "_About"
-msgstr ""
+msgstr "_About"
 
 #: data/ui/app_menu.ui:27
 msgid "_Quit"
-msgstr ""
+msgstr "_Quit"
 
 #: data/ui/hello.ui:44
 msgid ""
 "Cozy is an application to browse and playback your DRM free audio book "
 "collection. "
 msgstr ""
+"Cozy is an application to browse and playback your DRM free audio book "
+"collection. "
 
 #: data/ui/hello.ui:91
 msgid ""
 "To get started, select where you store your audio books. Files in this "
 "folder will be imported to your library:"
 msgstr ""
+"To get started, select where you store your audio books. Files in this "
+"folder will be imported to your library:"
 
 #: data/ui/hello.ui:139
 msgid "How to add new audio books:"
-msgstr ""
-
-#: data/ui/hello.ui:200
-msgid "Drag & Drop"
-msgstr ""
+msgstr "How to add new audio books:"
 
 #: data/ui/hello.ui:212
 msgid "Rescan from menu"
-msgstr ""
+msgstr "Rescan from menu"
 
 #: data/ui/hello.ui:229
 msgid "Let's get cozy"
-msgstr ""
+msgstr "Let's get cozy"
 
-#: data/ui/settings.ui:29 data/ui/settings.ui:105
+#: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
-msgstr ""
+msgstr "Order by"
 
-#: data/ui/settings.ui:39
+#: data/ui/settings.ui:37
 msgid "Newest"
-msgstr ""
+msgstr "Newest"
 
-#: data/ui/settings.ui:56
+#: data/ui/settings.ui:54
 msgid "Year"
-msgstr ""
+msgstr "Year"
 
-#: data/ui/settings.ui:74
+#: data/ui/settings.ui:72
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
-#: data/ui/settings.ui:146
+#: data/ui/settings.ui:143
 msgid "Appearance"
-msgstr ""
+msgstr "Appearance"
 
-#: data/ui/settings.ui:162
+#: data/ui/settings.ui:158
 msgid "Suspend system on timer"
-msgstr ""
+msgstr "Suspend system on timer"
 
-#: data/ui/settings.ui:198
+#: data/ui/settings.ui:194
 msgid "Replay 30 seconds"
-msgstr ""
+msgstr "Replay 30 seconds"
 
-#: data/ui/settings.ui:233
+#: data/ui/settings.ui:228
 msgid "Automatic media scan"
-msgstr ""
+msgstr "Automatic media scan"
 
-#: data/ui/settings.ui:264
+#: data/ui/settings.ui:259
 msgid "Behaviour"
-msgstr ""
+msgstr "Behaviour"
 
-#: data/ui/settings.ui:281
+#: data/ui/settings.ui:275
 msgid "Follow symlinks"
-msgstr ""
+msgstr "Follow symlinks"
 
-#: data/ui/settings.ui:319 data/ui/settings.ui:334
-msgid "Audio Books location"
-msgstr ""
+#: data/ui/settings.ui:313 data/ui/settings.ui:328
+msgid "Audio books location"
+msgstr "Audio books location"
 
-#: data/ui/settings.ui:356
+#: data/ui/settings.ui:350
 msgid "Files"
-msgstr ""
+msgstr "Files"

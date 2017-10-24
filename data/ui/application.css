@@ -26,3 +26,21 @@
 .no_frame {
   border-style: none;
 }
+
+.h1 {
+  font-size: 230%;
+}
+
+.h2 {
+  font-size: 200%;
+  font-weight: lighter;
+}
+
+.h3 {
+  font-size: 160%;
+}
+
+.h4 {
+  font-size: 130%;
+  font-weight: lighter;
+}

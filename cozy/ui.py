@@ -40,6 +40,7 @@ class CozyUI:
     self.__load_last_book()
 
     self.refresh_content()
+    self.check_for_tracks()
 
   def startup(self):
     self.__check_current_distro()
@@ -157,12 +158,13 @@ class CozyUI:
     self.remaining_label = self.window_builder.get_object("remaining_label")
     self.author_toggle_button = self.window_builder.get_object("author_toggle_button")
     self.reader_toggle_button = self.window_builder.get_object("reader_toggle_button")
+    self.no_media_file_chooser = self.window_builder.get_object("no_media_file_chooser")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
     self.settings_window.set_transient_for(self.window)
     self.settings_window.connect("delete-event", self.hide_window)
-    self.initDbSettings()
+    self.init_db_settings()
 
     # get about dialog
     self.about_dialog = self.about_builder.get_object("about_dialog")
@@ -173,6 +175,7 @@ class CozyUI:
     # we need to update the database when the audio book location was changed
     folder_chooser = self.settings_builder.get_object("location_chooser")
     folder_chooser.connect("file-set", self.__on_folder_changed)
+    self.no_media_file_chooser.connect("file-set", self.__on_no_media_folder_changed)
 
     # init popovers
     search_button.set_popover(search_popover)
@@ -408,6 +411,13 @@ class CozyUI:
     self.throbber.stop()
     pass
 
+  def check_for_tracks(self):
+    if books().count() < 1:
+      self.no_media_file_chooser.set_current_folder(Settings.get().path)
+      self.main_stack.props.visible_child_name = "no_media"
+    else:
+      self.main_stack.props.visible_child_name = "main"
+
   def set_title_cover(self, pixbuf):
     """
     Sets the cover in the title bar.
@@ -433,7 +443,7 @@ class CozyUI:
     thread.start()
     pass
 
-  def initDbSettings(self):
+  def init_db_settings(self):
     """
     Display settings from the database in the ui.
     """
@@ -471,7 +481,6 @@ class CozyUI:
     seen_authors.sort()
     seen_readers.sort()
 
-    # TODO translate
     # Add the special All element
     all_row = ListBoxRowWithData(_("All"), True)
     self.author_box.add(all_row)
@@ -541,6 +550,16 @@ class CozyUI:
       self.switch_to_working("copying new files...", False)
       thread = Thread(target = copy, args = (self, selection, ))
       thread.start()
+
+  def __on_no_media_folder_changed(self, sender):
+    """
+    Get's called when the user changes the audiobook location from
+    the no media screen. Now we want to do a first scan instead of a rebase.
+    """
+    location = self.no_media_file_chooser.get_file().get_path()
+    Settings.update(path = location).execute()
+    self.main_stack.props.visible_child_name = "import"
+    self.scan(None, True)
 
   def __on_folder_changed(self, sender):
     """

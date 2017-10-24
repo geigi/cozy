@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-02 18:42+0200\n"
+"POT-Creation-Date: 2017-10-24 19:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,32 +17,75 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cozy/importer.py:152
+#: cozy/importer.py:169
 msgid "Unknown Author"
 msgstr ""
 
-#: cozy/importer.py:153
+#: cozy/importer.py:170
 msgid "Unknown Reader"
 msgstr ""
 
-#: cozy/ui.py:207 cozy/ui.py:348 data/ui/timer_popover.ui:71
+#: cozy/ui.py:287 cozy/ui.py:522 data/ui/timer_popover.ui:71
 msgid "min"
 msgstr ""
 
-#: cozy/ui.py:311 cozy/ui.py:314 cozy/ui.py:401 cozy/ui.py:410
+#: cozy/ui.py:441
+msgid "Importing Audiobooks"
+msgstr ""
+
+#: cozy/ui.py:485 cozy/ui.py:488 cozy/ui.py:766 cozy/ui.py:775
 msgid "All"
 msgstr ""
 
-#: data/ui/main_window.ui:79
+#: cozy/ui.py:577
+msgid "Changing audio book location..."
+msgstr ""
+
+#: data/ui/main_window.ui:65
+msgid "<big>Author</big>"
+msgstr ""
+
+#: data/ui/main_window.ui:92
+msgid "<big>Reader</big>"
+msgstr ""
+
+#: data/ui/main_window.ui:143
 msgid "Author"
 msgstr ""
 
-#: data/ui/main_window.ui:102
+#: data/ui/main_window.ui:169
 msgid "Reader"
 msgstr ""
 
-#: data/ui/main_window.ui:133
-msgid "Importing your audio books..."
+#: data/ui/main_window.ui:245
+msgid "Importing your audiobooks..."
+msgstr ""
+
+#: data/ui/main_window.ui:300
+msgid "Import your Audiobooks"
+msgstr ""
+
+#: data/ui/main_window.ui:316
+msgid ""
+"Cozy automatically imports your audiobooks in one directory - your library"
+msgstr ""
+
+#: data/ui/main_window.ui:356 data/ui/hello.ui:200
+msgid "Drag & Drop"
+msgstr ""
+
+#: data/ui/main_window.ui:372
+msgid ""
+"Drag your audiobooks into cozy and the will be automatically imported to "
+"your library"
+msgstr ""
+
+#: data/ui/main_window.ui:432
+msgid "Change Audiobooks Folder"
+msgstr ""
+
+#: data/ui/main_window.ui:448
+msgid "Load audiobooks from a folder, network drive or an external disk"
 msgstr ""
 
 #: data/ui/about.ui:12
@@ -85,10 +128,6 @@ msgstr ""
 msgid "How to add new audio books:"
 msgstr ""
 
-#: data/ui/hello.ui:200
-msgid "Drag & Drop"
-msgstr ""
-
 #: data/ui/hello.ui:212
 msgid "Rescan from menu"
 msgstr ""
@@ -97,50 +136,50 @@ msgstr ""
 msgid "Let's get cozy"
 msgstr ""
 
-#: data/ui/settings.ui:29 data/ui/settings.ui:105
+#: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
 msgstr ""
 
-#: data/ui/settings.ui:39
+#: data/ui/settings.ui:37
 msgid "Newest"
 msgstr ""
 
-#: data/ui/settings.ui:56
+#: data/ui/settings.ui:54
 msgid "Year"
 msgstr ""
 
-#: data/ui/settings.ui:74
+#: data/ui/settings.ui:72
 msgid "Name"
 msgstr ""
 
-#: data/ui/settings.ui:146
+#: data/ui/settings.ui:143
 msgid "Appearance"
 msgstr ""
 
-#: data/ui/settings.ui:162
+#: data/ui/settings.ui:158
 msgid "Suspend system on timer"
 msgstr ""
 
-#: data/ui/settings.ui:198
+#: data/ui/settings.ui:194
 msgid "Replay 30 seconds"
 msgstr ""
 
-#: data/ui/settings.ui:233
+#: data/ui/settings.ui:228
 msgid "Automatic media scan"
 msgstr ""
 
-#: data/ui/settings.ui:264
+#: data/ui/settings.ui:259
 msgid "Behaviour"
 msgstr ""
 
-#: data/ui/settings.ui:281
+#: data/ui/settings.ui:275
 msgid "Follow symlinks"
 msgstr ""
 
-#: data/ui/settings.ui:319 data/ui/settings.ui:334
-msgid "Audio Books location"
+#: data/ui/settings.ui:313 data/ui/settings.ui:328
+msgid "Audio books location"
 msgstr ""
 
-#: data/ui/settings.ui:356
+#: data/ui/settings.ui:350
 msgid "Files"
 msgstr ""

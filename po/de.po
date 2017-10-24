@@ -16,33 +16,80 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/importer.py:152
+#: cozy/importer.py:169
 msgid "Unknown Author"
 msgstr "Unbekannter Autor"
 
-#: cozy/importer.py:153
+#: cozy/importer.py:170
 msgid "Unknown Reader"
 msgstr "Unbekannter Leser"
 
-#: cozy/ui.py:207 cozy/ui.py:348 data/ui/timer_popover.ui:71
+#: cozy/ui.py:287 cozy/ui.py:522 data/ui/timer_popover.ui:71
 msgid "min"
 msgstr "min"
 
-#: cozy/ui.py:311 cozy/ui.py:314 cozy/ui.py:401 cozy/ui.py:410
+#: cozy/ui.py:441
+msgid "Importing Audiobooks"
+msgstr "Importiere Hörbücher"
+
+#: cozy/ui.py:485 cozy/ui.py:488 cozy/ui.py:766 cozy/ui.py:775
 msgid "All"
 msgstr "Alle"
 
-#: data/ui/main_window.ui:79
+#: cozy/ui.py:577
+msgid "Changing audio book location..."
+msgstr "Wechsle zu neuem Hörbuch-Ordner..."
+
+#: data/ui/main_window.ui:65
+msgid "<big>Author</big>"
+msgstr "<big>Autor</big>"
+
+#: data/ui/main_window.ui:92
+msgid "<big>Reader</big>"
+msgstr "<big>Leser</big>"
+
+#: data/ui/main_window.ui:143
 msgid "Author"
 msgstr "Autor"
 
-#: data/ui/main_window.ui:102
+#: data/ui/main_window.ui:169
 msgid "Reader"
 msgstr "Leser"
 
-#: data/ui/main_window.ui:133
-msgid "Importing your audio books..."
+#: data/ui/main_window.ui:245
+msgid "Importing your audiobooks..."
 msgstr "Importiere deine Hörbücher..."
+
+#: data/ui/main_window.ui:300
+msgid "Import your Audiobooks"
+msgstr "Importiere deine Hörbücher"
+
+#: data/ui/main_window.ui:316
+msgid ""
+"Cozy automatically imports your audiobooks in one directory - your library"
+msgstr ""
+"Cozy verwaltet automatisch alle Hörbücher in einem Ordner - deiner "
+"Bibliothek"
+
+#: data/ui/main_window.ui:356 data/ui/hello.ui:200
+msgid "Drag & Drop"
+msgstr "Drag & Drop"
+
+#: data/ui/main_window.ui:372
+msgid ""
+"Drag your audiobooks into cozy and the will be automatically imported to "
+"your library"
+msgstr "Ziehe deine Hörbücher mit der Maus nach Cozy um sie zu importieren"
+
+#: data/ui/main_window.ui:432
+msgid "Change Audiobooks Folder"
+msgstr "Wechsle Hörbuch-Ordner"
+
+#: data/ui/main_window.ui:448
+msgid "Load audiobooks from a folder, network drive or an external disk"
+msgstr ""
+"Lade Hörbücher von einem Ordner, einer Netzwerkfestplatte oder einer "
+"externen Festplatte"
 
 #: data/ui/about.ui:12
 msgid "GitHub"
@@ -88,10 +135,6 @@ msgstr ""
 msgid "How to add new audio books:"
 msgstr "So fügst du neue Bücher hinzu:"
 
-#: data/ui/hello.ui:200
-msgid "Drag & Drop"
-msgstr "Drag & Drop"
-
 #: data/ui/hello.ui:212
 msgid "Rescan from menu"
 msgstr "Medienordner scannen im Menü anzeigen"
@@ -100,50 +143,50 @@ msgstr "Medienordner scannen im Menü anzeigen"
 msgid "Let's get cozy"
 msgstr "Let's get cozy"
 
-#: data/ui/settings.ui:29 data/ui/settings.ui:105
+#: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
 msgstr "Sortieren nach:"
 
-#: data/ui/settings.ui:39
+#: data/ui/settings.ui:37
 msgid "Newest"
 msgstr "Neuestes"
 
-#: data/ui/settings.ui:56
+#: data/ui/settings.ui:54
 msgid "Year"
 msgstr "Jahr"
 
-#: data/ui/settings.ui:74
+#: data/ui/settings.ui:72
 msgid "Name"
 msgstr "Name"
 
-#: data/ui/settings.ui:146
+#: data/ui/settings.ui:143
 msgid "Appearance"
 msgstr "Erscheinung"
 
-#: data/ui/settings.ui:162
+#: data/ui/settings.ui:158
 msgid "Suspend system on timer"
 msgstr "Schicke System schlafen nach Timer"
 
-#: data/ui/settings.ui:198
+#: data/ui/settings.ui:194
 msgid "Replay 30 seconds"
 msgstr "30 Sekunden Replay"
 
-#: data/ui/settings.ui:233
+#: data/ui/settings.ui:228
 msgid "Automatic media scan"
 msgstr "Automatischer Medienordner Scan"
 
-#: data/ui/settings.ui:264
+#: data/ui/settings.ui:259
 msgid "Behaviour"
 msgstr "Verhalten"
 
-#: data/ui/settings.ui:281
+#: data/ui/settings.ui:275
 msgid "Follow symlinks"
 msgstr "Folge Symlinks"
 
-#: data/ui/settings.ui:319 data/ui/settings.ui:334
-msgid "Audio Books location"
-msgstr "Hörbücher Ordner"
+#: data/ui/settings.ui:313 data/ui/settings.ui:328
+msgid "Audio books location"
+msgstr "Hörbücher Pfad"
 
-#: data/ui/settings.ui:356
+#: data/ui/settings.ui:350
 msgid "Files"
 msgstr "Dateien"
