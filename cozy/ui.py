@@ -11,6 +11,7 @@ import os
 import gi
 import logging
 log = logging.getLogger("ui")
+import platform
 
 gi.require_version('Gtk', '3.0')
 
@@ -22,6 +23,7 @@ class CozyUI:
   play_status_updater = None
   progress_scale_clicked = False
   __gst_state = None
+  is_elementary = False
 
   def __init__(self, pkgdatadir, app, version):
     self.pkgdir = pkgdatadir
@@ -32,6 +34,7 @@ class CozyUI:
     self.__first_play = True
     self.settings = Gio.Settings.new("com.github.geigi.cozy")
       
+    self.__check_current_distro()
     self.__init_window()
     self.__init_bindings()
     self.__init_gst_messaging()
@@ -81,6 +84,15 @@ class CozyUI:
     styleContext = Gtk.StyleContext()
     styleContext.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
     styleContext.add_class("bordered")
+
+  def __check_current_distro(self):
+    """
+    Currently we are only checking for elementaryOS
+    """
+    if "elementary" in platform.dist():
+      self.is_elementary = True
+    else:
+      self.is_elementary = False
 
   def __init_window(self):
     """
@@ -209,7 +221,13 @@ class CozyUI:
     self.accel = Gtk.AccelGroup()
 
     menu = self.menu_builder.get_object("app_menu")
-    self.app.set_app_menu(menu)
+    # for elementary we add a menu button, else we just set the app menu
+    if self.is_elementary:
+      self.menu_button = self.window_builder.get_object("menu_button")
+      self.menu_button.set_visible(True)
+      self.menu_button.set_menu_model(menu)
+    else:
+      self.app.set_app_menu(menu)
 
     help_action = Gio.SimpleAction.new("help", None)
     help_action.connect("activate", self.help)
