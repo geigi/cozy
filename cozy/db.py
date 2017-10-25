@@ -1,10 +1,9 @@
 import os
 from peewee import *
-from xdg import *
-from gi.repository import GdkPixbuf
+from gi.repository import GLib, GdkPixbuf
 
 # first we get the data home and find the database if it exists
-data_dir = BaseDirectory.xdg_data_home + "/cozy/"
+data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)
 
