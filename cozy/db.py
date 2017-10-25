@@ -136,14 +136,7 @@ def get_track_for_playback(book):
   :param book: book which the next track is required from
   :return: current track position from book db
   """
-  tracks = tracks(book)
-  i = 1
-  track_no = 1
-  try:
-    for track in tracks:
-      if i == book.position:
-        track_no = i
-  except StopIteration:
-    pass
 
-  return tracks[track_no - 1]
+  book = Book.select().where(Book.id == book.id).get()
+  track = Track.select().where(Track.id == book.position).get()
+  return track

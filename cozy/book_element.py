@@ -11,9 +11,13 @@ class BookElement(Gtk.Box):
   This class represents a book with big artwork in the book viewer.
   """
   book = None
+  ui = None
   selected = False
-  def __init__(self, b):
+  wait_to_seek = False
+
+  def __init__(self, b, ui):
     self.book = b
+    self.ui = ui
 
     super(Gtk.Box, self).__init__()
     self.set_orientation(Gtk.Orientation.VERTICAL)
@@ -119,6 +123,9 @@ class BookElement(Gtk.Box):
     # create track list popover
     self.__create_popover()
 
+    # listen to gst messages
+    get_gst_bus().connect("message", self.__on_gst_message)
+
   def __create_popover(self):
     self.popover = Gtk.Popover.new(self)
     self.popover.set_position(Gtk.PositionType.BOTTOM)
@@ -211,8 +218,35 @@ class BookElement(Gtk.Box):
     Play this book.
     """
     track = get_track_for_playback(self.book)
-    play_pause(track)
+
+    if get_current_track().book.id == self.book.id:
+      play_pause(None)
+      if get_gst_player_state() == Gst.State.PLAYING:
+        jump_to_ns(track.position)
+
+    else:
+      load_file(track)
+      play_pause(None)
+      self.wait_to_seek = True
+      pos = int(track.position)
+      self.ui.progress_scale.set_value(int(pos / 1000000000))
+
     return True
+  
+  def __on_gst_message(self, bus, message):
+    if not self.wait_to_seek:
+      return
+
+    t = message.type
+    if t == Gst.MessageType.STATE_CHANGED:
+      state = get_gst_player_state()
+      if state == Gst.State.PLAYING or state == Gst.State.PAUSED:
+        query = Gst.Query.new_seeking(Gst.Format.TIME)
+        if get_playbin().query(query):
+          fmt, seek_enabled, start, end = query.parse_seeking()
+          if seek_enabled:
+            jump_to_ns(get_current_track().position)
+            self.wait_to_seek = False
 
 class TrackElement(Gtk.EventBox):
   """
@@ -273,6 +307,7 @@ class TrackElement(Gtk.EventBox):
 
   def __on_button_press(self, eventbox, event):
     play_pause(self.track)
+    Book.update(position=self.track).where(Book.id == self.track.book.id).execute()
     pass
 
   def _on_enter_notify(self, widget, event):

@@ -43,13 +43,21 @@ def get_gst_bus():
   global __bus
   return __bus
 
+def get_playbin():
+  """
+  Get the global gst playbin.
+  :return: playbin
+  """
+  global __player
+  return __player
+
 def get_gst_player_state():
   """
   Get the current state of the gst player.
   :return: gst player state
   """
   global __player
-  success, state, pending = __player.get_state(10)
+  success, state, pending = __player.get_state(50)
   return state
 
 def get_current_duration():
@@ -95,22 +103,18 @@ def play_pause(track):
     else: 
       __player.set_state(Gst.State.PLAYING)
   else:
-    __current_track = track
-    __player.set_state(Gst.State.NULL)
-    __player.set_property("uri", "file://" + track.file)
+    load_file(track)
     __player.set_state(Gst.State.PLAYING)
-    Book.update(position = __current_track.id).where(Book.id == __current_track.book.id).execute()
-    Settings.update(last_played_book = __current_track.book).execute()
 
 def next_track():
   # try to load the next track of the book. 
   # Stop playback if there isn't any
-  tracks = tracks(get_current_track().book)
+  trax = tracks(get_current_track().book)
   current = get_current_track()
   save_next = False
   next_track = None
   try:
-    for track in tracks:
+    for track in trax:
       if save_next:
         next_track = track
         raise StopIteration
@@ -127,7 +131,7 @@ def next_track():
     Book.update(position=next_track.id).where(Book.id == next_track.book.id).execute()
     play_pause(next_track)
   else:
-    __player.set
+    __player.set_state(Gst.State.NULL)
     Book.update(position=0).where(Book.id == current.id).execute()
     Settings.update(last_played_book=None).execute()
 
@@ -136,11 +140,11 @@ def prev_track():
   # Stop playback if there isn't any
   global __player
   global __current_track
-  tracks = tracks(get_current_track().book)
+  trax = tracks(get_current_track().book)
   current = get_current_track()
   previous = None
   try:
-    for track in tracks:
+    for track in trax:
       if current == track:
         raise StopIteration
       previous = track
@@ -211,6 +215,21 @@ def jump_to_ns(ns):
   
   __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, new_position)
   Track.update(position=new_position).where(Track.id == __current_track.id).execute()
+
+def load_file(track):
+  global __current_track
+  global __player
+
+  if get_gst_player_state() == Gst.State.PLAYING:
+    Track.update(position=get_current_duration()).where(Track.id == get_current_track().id).execute()
+    Book.update(position=__current_track.id).where(Book.id == __current_track.book.id).execute()
+
+  __current_track = track
+  __player.set_state(Gst.State.NULL)
+  __player.set_property("uri", "file://" + track.file)
+  __player.set_state(Gst.State.PAUSED)
+  Book.update(position = __current_track.id).where(Book.id == __current_track.book.id).execute()
+  Settings.update(last_played_book = __current_track.book).execute()
 
 def load_last_book():
   """
