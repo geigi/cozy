@@ -122,7 +122,7 @@ class MPRIS(Server):
             <method name="Next"/>
             <method name="Previous"/>
             <method name="Pause"/>
-            <method name="play_pause"/>
+            <method name="PlayPause"/>
             <method name="Stop"/>
             <method name="Play"/>
             <method name="Seek">
@@ -198,7 +198,7 @@ class MPRIS(Server):
     def Pause(self):
         play_pause(None)
 
-    def play_pause(self):
+    def PlayPause(self):
         play_pause(None)
 
     def Stop(self):

@@ -506,7 +506,7 @@ class CozyUI:
     self.reader_box.show_all()
 
     for b in books():
-      self.book_box.add(BookElement(b))
+      self.book_box.add(BookElement(b, self))
       pass
 
     self.book_box.show_all()
@@ -662,7 +662,7 @@ class CozyUI:
       
       # save the state only for states that are important to us. 
       # Saves CPU time and unneccesarry gui updates.
-      if  state == Gst.State.PLAYING:
+      if state == Gst.State.PLAYING:
         self.__gst_state = state
         self.play()
         pass

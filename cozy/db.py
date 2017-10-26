@@ -1,14 +1,14 @@
 import os
 from peewee import *
-from xdg import *
-from gi.repository import GdkPixbuf
+from gi.repository import GLib, GdkPixbuf
 
 # first we get the data home and find the database if it exists
-data_dir = BaseDirectory.xdg_data_home + "/cozy/"
+data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
+print(data_dir)
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)
 
-db = SqliteDatabase(data_dir + "cozy.db")
+db = SqliteDatabase(os.path.join(data_dir, "cozy.db"))
 
 class BaseModel(Model):
   """
@@ -136,14 +136,10 @@ def get_track_for_playback(book):
   :param book: book which the next track is required from
   :return: current track position from book db
   """
-  tracks = tracks(book)
-  i = 1
-  track_no = 1
-  try:
-    for track in tracks:
-      if i == book.position:
-        track_no = i
-  except StopIteration:
-    pass
 
-  return tracks[track_no - 1]
+  book = Book.select().where(Book.id == book.id).get()
+  if book.position < 1:
+    track = tracks(book)[0]
+  else:
+    track = Track.select().where(Track.id == book.position).get()
+  return track
