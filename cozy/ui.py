@@ -220,6 +220,10 @@ class CozyUI:
       self.menu_button.set_menu_model(menu)
     else:
       self.menu_button.set_visible(False)
+      
+    if self.is_elementary:
+      about_close_button = self.about_builder.get_object("button_box").get_children()[2]
+      about_close_button.connect("clicked", self.__about_close_clicked)
 
     # DEMO #
     scale = self.window_builder.get_object("progress_scale")
@@ -725,6 +729,9 @@ class CozyUI:
     if value < 80:
       value = 80
     self.progress_scale.props.width_request = value
+
+  def __about_close_clicked(self, widget):
+    self.about_dialog.hide()
 
   def on_close(self, widget, data=None):
     """
