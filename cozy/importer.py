@@ -2,6 +2,7 @@ import os
 import mutagen
 import base64
 import urllib, shutil, errno
+import urllib.parse
 import logging
 log = logging.getLogger("importer")
 
@@ -35,10 +36,6 @@ def b64tobinary(b64):
     pass
 
   return data
-
-# TODO: If file can not be found on playback ask for location of file. If provided, update location in db.
-# TODO: Drag & Drop files: Create folders and copy to correct location. Then import to db.
-# TODO: Some sort of first import loading screen
 
 def update_database(ui):
   """

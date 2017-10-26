@@ -85,7 +85,10 @@ def get_current_track():
   :return: currently loaded track object
   """
   global __current_track
-  return Track.select().where(Track.id == __current_track.id).get()
+  if __current_track is not None:
+    return Track.select().where(Track.id == __current_track.id).get()
+  else:
+    return None
 
 def play_pause(track):
   """
@@ -216,7 +219,12 @@ def jump_to_ns(ns):
   __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, new_position)
   Track.update(position=new_position).where(Track.id == __current_track.id).execute()
 
+# TODO: If file can not be found on playback ask for location of file. If provided, update location in db.
 def load_file(track):
+  """
+  Loads a given track into the player.
+  :param track: track to be loaded
+  """
   global __current_track
   global __player
 

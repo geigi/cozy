@@ -218,12 +218,12 @@ class BookElement(Gtk.Box):
     Play this book.
     """
     track = get_track_for_playback(self.book)
+    current_track = get_current_track()
 
-    if get_current_track().book.id == self.book.id:
+    if current_track is not None and current_track.book.id == self.book.id:
       play_pause(None)
       if get_gst_player_state() == Gst.State.PLAYING:
         jump_to_ns(track.position)
-
     else:
       load_file(track)
       play_pause(None)
@@ -234,6 +234,10 @@ class BookElement(Gtk.Box):
     return True
   
   def __on_gst_message(self, bus, message):
+    """
+    Handle gst messages from the player.
+    Here we seek to the last position after a new track was loaded into the player.
+    """
     if not self.wait_to_seek:
       return
 
@@ -306,6 +310,10 @@ class TrackElement(Gtk.EventBox):
     self.add(self.box)
 
   def __on_button_press(self, eventbox, event):
+    """
+    Play the selected track.
+    TODO Jump to last position
+    """
     play_pause(self.track)
     Book.update(position=self.track).where(Book.id == self.track.book.id).execute()
     pass
