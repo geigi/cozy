@@ -56,7 +56,7 @@
         <p>Instructions if there are no files in library</p>
         <p>About dialog now quitable</p>
         <p>Optional auto-rescan the directory on startup</p>
-        <p>Bugfixes & ui tweaks</p>
+        <p>Bugfixes and ui tweaks</p>
       </description>
     </release>
     <release version="0.2.3" timestamp="1508767505">
