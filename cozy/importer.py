@@ -163,8 +163,8 @@ def __importFile(file, path, update=False):
     pass
 
   if book_name == None: book_name = os.path.basename(os.path.normpath(directory))
-  if author == None: author = _("Unknown Author")
-  if reader == None: reader = _("Unknown Reader")
+  if author == None or author == "": author = _("Unknown Author")
+  if reader == None or reader == "": reader = _("Unknown Reader")
   if track_name == None: track_name = os.path.splitext(file)[0]
 
   if update:
