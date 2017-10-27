@@ -32,13 +32,13 @@ class CozyUI:
 
   def activate(self):
     self.__first_play = True
-    self.settings = Gio.Settings.new("com.github.geigi.cozy")
     
     self.__init_window()
     self.__init_bindings()
     self.__init_gst_messaging()
     self.__load_last_book()
 
+    self.auto_import()
     self.refresh_content()
     self.check_for_tracks()
 
@@ -57,6 +57,8 @@ class CozyUI:
 
     resource = Gio.resource_load(os.path.join(self.pkgdir, 'cozy.img.gresource'))
     Gio.Resource._register(resource)
+
+    self.settings = Gio.Settings.new("com.github.geigi.cozy")
 
     self.window_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/main_window.ui")
     self.search_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/search_popover.ui")
@@ -445,7 +447,6 @@ class CozyUI:
     self.switch_to_working(_("Importing Audiobooks"), first_scan)
     thread = Thread(target = update_database, args = (self, ))
     thread.start()
-    pass
 
   def init_db_settings(self):
     """
@@ -453,6 +454,10 @@ class CozyUI:
     """
     chooser = self.settings_builder.get_object("location_chooser")
     chooser.set_current_folder(Settings.get().path)
+
+  def auto_import(self):
+    if self.settings.get_boolean("autoscan") == True:
+      self.scan(None, False)
 
   def refresh_content(self):
     """

@@ -220,6 +220,7 @@
             </child>
             <child>
               <object class="GtkBox">
+                <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
                   <object class="GtkLabel">

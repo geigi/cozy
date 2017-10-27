@@ -23,7 +23,7 @@ import locale
 import logging
 import argparse
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GObject, GLib
+from gi.repository import Gtk, GObject, GLib, Gio
 
 from cozy.ui import CozyUI
 from cozy.db import *
@@ -63,6 +63,8 @@ class Application(Gtk.Application):
       self.start_button = self.ui.hello_builder.get_object("start_button")
       self.start_button.connect("clicked", self.first_start)
       self.folder_chooser.connect("file-set", self.__on_folder_changed)
+      auto_scan_switch = self.ui.hello_builder.get_object("auto_scan_switch")
+      self.ui.settings.bind("autoscan", auto_scan_switch, "active", Gio.SettingsBindFlags.DEFAULT)
 
       self.hello.show()
       self.add_window(self.hello)
