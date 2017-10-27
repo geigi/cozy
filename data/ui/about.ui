@@ -8,11 +8,12 @@
     <property name="type_hint">dialog</property>
     <property name="program_name">Cozy</property>
     <property name="version">0.0.1</property>
+    <property name="comments" translatable="yes">Support me on Patreon: https://www.patreon.com/geigi</property>
     <property name="website">https://github.com/geigi/cozy</property>
     <property name="website_label" translatable="yes">GitHub</property>
     <property name="authors">geigi</property>
     <property name="logo_icon_name">com.github.geigi.cozy</property>
-    <property name="license_type">lgpl-3-0</property>
+    <property name="license_type">gpl-3-0</property>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>

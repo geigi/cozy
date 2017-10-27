@@ -1,3 +1,15 @@
+com.github.geigi.cozy (0.2.4) UNSTABLE; urgency=low
+
+  * Do not use default_width and default_height properties
+  * Smaller HeaderBar height
+  * Use open-menu-symbolic for preferences button
+  * Instructions if there are no files in library
+  * About dialog now quitable
+  * Optional auto-rescan the directory on startup
+  * Bugfixes & ui tweaks
+
+-- Julian Geywitz <github@geigi.de>  Sat, 28 Oct 2016 00:04:14 +0200
+
 com.github.geigi.cozy (0.2.3) UNSTABLE; urgency=low
 
   * Some UI changes

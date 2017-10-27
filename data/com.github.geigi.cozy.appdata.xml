@@ -30,6 +30,9 @@
       <li>Sleep timer</li>
       <li>... you tell me!</li>
       </ul>
+      <p>
+      Note: If you're from the EU and want to support this project, head over to my <a href="https://www.patreon.com/geigi">patreon page</a>. Because of tax reasons I cannot accept payments from the EU except Germany.
+      </p>
   </description>
   <provides>
     <binary>com.github.geigi.cozy</binary>
@@ -45,6 +48,17 @@
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.2.4" timestamp="1509142062">
+      <description>
+        <p>Do not use default_width and default_height properties</p>
+        <p>Smaller HeaderBar height</p>
+        <p>Use open-menu-symbolic for preferences button</p>
+        <p>Instructions if there are no files in library</p>
+        <p>About dialog now quitable</p>
+        <p>Optional auto-rescan the directory on startup</p>
+        <p>Bugfixes & ui tweaks</p>
+      </description>
+    </release>
     <release version="0.2.3" timestamp="1508767505">
       <description>
         <p>Some UI changes
