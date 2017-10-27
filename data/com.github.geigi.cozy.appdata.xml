@@ -48,7 +48,7 @@
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
-    <release version="0.2.4" timestamp="1509142062">
+    <release version="0.2.5" timestamp="1509142062">
       <description>
         <p>Do not use default_width and default_height properties</p>
         <p>Smaller HeaderBar height</p>

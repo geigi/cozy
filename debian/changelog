@@ -1,4 +1,4 @@
-com.github.geigi.cozy (0.2.4) UNSTABLE; urgency=low
+com.github.geigi.cozy (0.2.5) UNSTABLE; urgency=low
 
   * Do not use default_width and default_height properties
   * Smaller HeaderBar height
