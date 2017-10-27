@@ -42,6 +42,12 @@ def update_database(ui):
   Scans the audio book directory for changes and new files. 
   Also removes entries from the db that are no longer existent.
   """
+  if not os.path.exists(Settings.get().path):
+    # TODO: Notify the user about this
+    return
+
+  
+
   i = 0
   percent_counter = 0
   file_count = sum([len(files) for r, d, files in os.walk(Settings.get().path)])
