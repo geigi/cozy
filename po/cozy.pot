@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-24 19:20+0200\n"
+"POT-Creation-Date: 2017-10-27 23:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cozy/importer.py:169
+#: cozy/importer.py:172
 msgid "Unknown Author"
 msgstr ""
 
-#: cozy/importer.py:170
+#: cozy/importer.py:173
 msgid "Unknown Reader"
 msgstr ""
 
-#: cozy/ui.py:287 cozy/ui.py:522 data/ui/timer_popover.ui:71
+#: cozy/ui.py:293 cozy/ui.py:531 data/ui/timer_popover.ui:71
 msgid "min"
 msgstr ""
 
-#: cozy/ui.py:441
+#: cozy/ui.py:447
 msgid "Importing Audiobooks"
 msgstr ""
 
-#: cozy/ui.py:485 cozy/ui.py:488 cozy/ui.py:766 cozy/ui.py:775
+#: cozy/ui.py:494 cozy/ui.py:497 cozy/ui.py:778 cozy/ui.py:787
 msgid "All"
 msgstr ""
 
-#: cozy/ui.py:577
+#: cozy/ui.py:586
 msgid "Changing audio book location..."
 msgstr ""
 
@@ -136,6 +136,10 @@ msgstr ""
 msgid "Let's get cozy"
 msgstr ""
 
+#: data/ui/hello.ui:269
+msgid "Automatically import new audiobooks on startup"
+msgstr ""
+
 #: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
 msgstr ""
@@ -164,22 +168,22 @@ msgstr ""
 msgid "Replay 30 seconds"
 msgstr ""
 
-#: data/ui/settings.ui:228
+#: data/ui/settings.ui:229
 msgid "Automatic media scan"
 msgstr ""
 
-#: data/ui/settings.ui:259
+#: data/ui/settings.ui:260
 msgid "Behaviour"
 msgstr ""
 
-#: data/ui/settings.ui:275
+#: data/ui/settings.ui:276
 msgid "Follow symlinks"
 msgstr ""
 
-#: data/ui/settings.ui:313 data/ui/settings.ui:328
+#: data/ui/settings.ui:314 data/ui/settings.ui:329
 msgid "Audio books location"
 msgstr ""
 
-#: data/ui/settings.ui:350
+#: data/ui/settings.ui:351
 msgid "Files"
 msgstr ""

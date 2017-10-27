@@ -16,27 +16,27 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/importer.py:169
+#: cozy/importer.py:172
 msgid "Unknown Author"
 msgstr "Unbekannter Autor"
 
-#: cozy/importer.py:170
+#: cozy/importer.py:173
 msgid "Unknown Reader"
 msgstr "Unbekannter Leser"
 
-#: cozy/ui.py:287 cozy/ui.py:522 data/ui/timer_popover.ui:71
+#: cozy/ui.py:293 cozy/ui.py:531 data/ui/timer_popover.ui:71
 msgid "min"
 msgstr "min"
 
-#: cozy/ui.py:441
+#: cozy/ui.py:447
 msgid "Importing Audiobooks"
 msgstr "Importiere Hörbücher"
 
-#: cozy/ui.py:485 cozy/ui.py:488 cozy/ui.py:766 cozy/ui.py:775
+#: cozy/ui.py:494 cozy/ui.py:497 cozy/ui.py:778 cozy/ui.py:787
 msgid "All"
 msgstr "Alle"
 
-#: cozy/ui.py:577
+#: cozy/ui.py:586
 msgid "Changing audio book location..."
 msgstr "Wechsle zu neuem Hörbuch-Ordner..."
 
@@ -143,6 +143,10 @@ msgstr "Medienordner scannen im Menü anzeigen"
 msgid "Let's get cozy"
 msgstr "Let's get cozy"
 
+#: data/ui/hello.ui:269
+msgid "Automatically import new audiobooks on startup"
+msgstr "Importiere neue Hörbücher automatisch beim Start"
+
 #: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
 msgstr "Sortieren nach:"
@@ -171,22 +175,22 @@ msgstr "Schicke System schlafen nach Timer"
 msgid "Replay 30 seconds"
 msgstr "30 Sekunden Replay"
 
-#: data/ui/settings.ui:228
+#: data/ui/settings.ui:229
 msgid "Automatic media scan"
 msgstr "Automatischer Medienordner Scan"
 
-#: data/ui/settings.ui:259
+#: data/ui/settings.ui:260
 msgid "Behaviour"
 msgstr "Verhalten"
 
-#: data/ui/settings.ui:275
+#: data/ui/settings.ui:276
 msgid "Follow symlinks"
 msgstr "Folge Symlinks"
 
-#: data/ui/settings.ui:313 data/ui/settings.ui:328
+#: data/ui/settings.ui:314 data/ui/settings.ui:329
 msgid "Audio books location"
 msgstr "Hörbücher Pfad"
 
-#: data/ui/settings.ui:350
+#: data/ui/settings.ui:351
 msgid "Files"
 msgstr "Dateien"
