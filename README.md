@@ -9,18 +9,18 @@ Cozy is a modern audio book player for Linux.
 - Listen to your DRM free mp3, flac, ogg audio books
 - Remembers your playback position
 - Sort your audio books by author, reader & name
+- drag & drop to import new audiobooks
+- Mpris integration (Media keys & playback info for desktop environment)
 - developed on Arch Linux and tested under elementaryOS
 
 ## How can I get it?
 If you're running elementaryOS, you can get cozy here: COMING SOON
-
 
 <!--p align="center">
   <a href="https://appcenter.elementary.io/com.github.geigi.cozy">
   <img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter">
   </a>
 </p-->
-
 
 Arch Linux users can find cozy under the name `cozy-audiobooks` in the AUR:
 https://aur.archlinux.org/packages/cozy-audiobooks/
@@ -32,12 +32,12 @@ $ pacaur -S cozy-audiobooks
 - m4v support
 - wav support
 - Search
-- drag & drop import and copy support
 - Sort by name, added date, last played
 - Ratings
-- Media keys & notification integration
 - Playback speed control
 - Sleep timer
+
+If you like this project, consider supporting me on <a href="https://www.patreon.com/bePatron?u=8147127"> Patreon</a> :)
 
 ## Requirements
 - `python3`
