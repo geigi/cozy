@@ -57,6 +57,14 @@
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.2.6" timestamp="1509365426">
+      <description>
+        <p>UI fixes in hello screen</p>
+        <p>Small bug fixes</p>
+        <p>New screenshots for app center</p>
+        <p>Contributors and patrons will now be added to the about window</p>
+      </description>
+    </release>
     <release version="0.2.5" timestamp="1509142062">
       <description>
         <p>Do not use default_width and default_height properties</p>
