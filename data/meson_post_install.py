@@ -12,5 +12,3 @@ if not environ.get('DESTDIR'):
   subprocess.call(['glib-compile-schemas', schemadir])
   print('Updating icon cache...')
   subprocess.call(['gtk-update-icon-cache', '-qtf', path.join(datadir, 'icons', 'hicolor')])
-  print('Installing peewee')
-  subprocess.call(['pip3', 'install', 'peewee'])

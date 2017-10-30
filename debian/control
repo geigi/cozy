@@ -14,7 +14,13 @@ Build-Depends: debhelper (>= 9),
 Standards-Version: 3.9.6
 Package: com.github.geigi.cozy
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, 
+         ${shlibs:Depends},
+         ${python3:Depends},
+         python3-pip,
+         python3-mutagen,
+         libgstreamer1.0-dev,
+         libgstreamer-plugins-base1.0-dev
 Pre-Depends: dpkg (>= 1.15.6)
 Description: Cozy
  A modern audiobook player

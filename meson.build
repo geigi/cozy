@@ -63,3 +63,15 @@ install_subdir(
   'cozy',
   install_dir: python_dir
 )
+
+peewee_dir = join_paths(meson.source_root(), 'peewee')
+
+if run_command('[', '-d', peewee_dir, ']').returncode() == 0
+    message('Installing peewee dependency')
+    install_subdir(
+      'peewee',
+      install_dir: python_dir
+)
+endif
+
+
