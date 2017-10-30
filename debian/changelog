@@ -1,8 +1,13 @@
+com.github.geigi.cozy (0.2.8) UNSTABLE; urgency=low
+
+  * Fixed debian build
+
+-- Julian Geywitz <github@geigi.de>  Mon, 30 Oct 2017 20:28:14 +0200
 com.github.geigi.cozy (0.2.7) UNSTABLE; urgency=low
 
   * Fixed debian runtime dependencies
 
--- Julian Geywitz <github@geigi.de>  Mon, 30 Oct 2017 13:08:14 +0200
+-- Julian Geywitz <github@geigi.de>  Mon, 30 Oct 2017 17:08:14 +0200
 com.github.geigi.cozy (0.2.6) UNSTABLE; urgency=low
 
   * UI fixes in hello screen
