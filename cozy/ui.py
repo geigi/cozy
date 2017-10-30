@@ -421,8 +421,12 @@ class CozyUI:
     if books().count() < 1:
       self.no_media_file_chooser.set_current_folder(Settings.get().path)
       self.main_stack.props.visible_child_name = "no_media"
+      self.play_button.set_sensitive(False)
+      self.prev_button.set_sensitive(False)
     else:
       self.main_stack.props.visible_child_name = "main"
+      self.play_button.set_sensitive(True)
+      self.prev_button.set_sensitive(True)
 
   def set_title_cover(self, pixbuf):
     """
