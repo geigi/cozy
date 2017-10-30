@@ -57,6 +57,11 @@
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.2.7" timestamp="1509390271">
+      <description>
+        <p>Fixed debian runtime dependencies</p>
+      </description>
+    </release>
     <release version="0.2.6" timestamp="1509365426">
       <description>
         <p>UI fixes in hello screen</p>

@@ -1,3 +1,8 @@
+com.github.geigi.cozy (0.2.7) UNSTABLE; urgency=low
+
+  * Fixed debian runtime dependencies
+
+-- Julian Geywitz <github@geigi.de>  Mon, 30 Oct 2017 13:08:14 +0200
 com.github.geigi.cozy (0.2.6) UNSTABLE; urgency=low
 
   * UI fixes in hello screen
@@ -6,7 +11,6 @@ com.github.geigi.cozy (0.2.6) UNSTABLE; urgency=low
   * Contributors and patrons will now be added to the about window
 
 -- Julian Geywitz <github@geigi.de>  Mon, 30 Oct 2017 13:08:14 +0200
-
 com.github.geigi.cozy (0.2.5) UNSTABLE; urgency=low
 
   * Do not use default_width and default_height properties
@@ -18,20 +22,17 @@ com.github.geigi.cozy (0.2.5) UNSTABLE; urgency=low
   * Bugfixes & ui tweaks
 
 -- Julian Geywitz <github@geigi.de>  Sat, 28 Oct 2017 00:04:14 +0200
-
 com.github.geigi.cozy (0.2.3) UNSTABLE; urgency=low
 
   * Some UI changes
   * New playback hover icon
 
 -- Julian Geywitz <github@geigi.de>  Thu, 23 Oct 2017 16:03:14 +0200
-
 com.github.geigi.cozy (0.2.2) UNSTABLE; urgency=low
 
   * Fixed missing tracklist in ui
 
 -- Julian Geywitz <github@geigi.de>  Thu, 22 Oct 2017 16:19:14 +0200
-
 com.github.geigi.cozy (0.2.0) UNSTABLE; urgency=low
 
   * Getting the App Center integration running
