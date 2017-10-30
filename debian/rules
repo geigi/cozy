@@ -25,6 +25,8 @@ override_dh_auto_configure:
 	cd debian/build && meson --prefix=/usr ../..
 
 override_dh_auto_build:
+  mkdir ${CURDIR}/peewee
+  pip4 install --upgrade pip
 	pip3 install --target="${CURDIR}/peewee" peewee
 	cd debian/build && ninja -v
 
