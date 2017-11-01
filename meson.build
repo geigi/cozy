@@ -1,5 +1,5 @@
 project('cozy',
-  version: '0.3.4',
+  version: '0.3.5',
   meson_version: '>= 0.40.0')
 
 project_name = 'cozy'
@@ -65,15 +65,15 @@ install_subdir(
 )
 
 peewee_dir = join_paths(meson.source_root(), 'peewee/lib/python3.5/site-packages')
-new_peewee_dir = join_paths(meson.source_root(), 'peewee/lib/python3.5/peewee')
+new_peewee_dir = join_paths(meson.source_root(), 'peewee/lib/python3.5/dist-packages')
 
 if run_command('[', '-d', peewee_dir, ']').returncode() == 0
     message('Installing peewee dependency')
     run_command('mv', peewee_dir, new_peewee_dir)
     if r.returncode() == 0
       install_subdir(
-        'peewee/lib/python3.5/peewee',
-        install_dir: python_dir)
+        'peewee/lib/python3.5/dist-packages',
+        install_dir: '/usr/local/lib/python3.5')
     endif
 endif
 
