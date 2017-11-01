@@ -57,6 +57,11 @@
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.3.0" timestamp="1509547123">
+      <description>
+        <p>App Center build fix</p>
+      </description>
+    </release>
     <release version="0.2.9" timestamp="1509546498">
       <description>
         <p>Fixed debian build?</p>

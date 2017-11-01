@@ -26,7 +26,7 @@ override_dh_auto_configure:
 
 override_dh_auto_build:
 	mkdir ${CURDIR}/peewee
-	pip3 install --upgrade pip
+	pip3 install --user --upgrade pip
 	pip3 install --target="${CURDIR}/peewee" peewee
 	cd debian/build && ninja -v
 
