@@ -22,12 +22,10 @@ override_dh_auto_clean:
 
 override_dh_auto_configure:
 	mkdir -p debian/build
+	pip3 install --install-option="--install-purelib=${CURDIR}/peewee" peewee
 	cd debian/build && meson --prefix=/usr ../..
 
 override_dh_auto_build:
-	mkdir ${CURDIR}/peewee
-	pip3 install --user --upgrade pip
-	pip3 install --target="${CURDIR}/peewee" peewee
 	cd debian/build && ninja -v
 
 override_dh_auto_install:
