@@ -1,3 +1,8 @@
+com.github.geigi.cozy (0.2.9) UNSTABLE; urgency=low
+
+  * Fixed debian build?
+
+-- Julian Geywitz <github@geigi.de>  Wed, 01 Nov 2017 15:26:14 +0200
 com.github.geigi.cozy (0.2.8) UNSTABLE; urgency=low
 
   * Fixed debian build
