@@ -23,11 +23,6 @@
     <property name="margin_right">4</property>
     <property name="icon_name">object-rotate-left-symbolic</property>
   </object>
-  <object class="GtkImage" id="timer_on_image">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">weather-clear-night-symbolic</property>
-  </object>
   <object class="GtkApplicationWindow" id="app_window">
     <property name="name">main_window</property>
     <property name="can_focus">False</property>
@@ -849,7 +844,7 @@ audio-volume-medium-symbolic</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <child>
-                  <object class="GtkImage" id="timer_off_image">
+                  <object class="GtkImage" id="timer_image">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="icon_name">weather-clear-symbolic</property>

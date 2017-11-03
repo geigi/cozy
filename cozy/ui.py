@@ -162,8 +162,7 @@ class CozyUI:
     self.author_toggle_button = self.window_builder.get_object("author_toggle_button")
     self.reader_toggle_button = self.window_builder.get_object("reader_toggle_button")
     self.no_media_file_chooser = self.window_builder.get_object("no_media_file_chooser")
-    self.timer_off_image = self.window_builder.get_object("timer_off_image")
-    self.timer_on_image = self.window_builder.get_object("timer_on_image")
+    self.timer_image = self.window_builder.get_object("timer_image")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -550,11 +549,11 @@ class CozyUI:
     Start/Stop the sleep timer object.
     """
     if self.timer_switch.get_active() == True:
-      self.timer_button.set_image(self.timer_on_image)
+      self.timer_image.set_from_icon_name("weather-clear-night-symbolic", Gtk.IconSize.BUTTON)
       if get_gst_player_state() == Gst.State.PLAYING:
         self.__start_sleep_timer()
     else:
-      self.timer_button.set_image(self.timer_off_image)
+      self.timer_image.set_from_icon_name("weather-clear-symbolic", Gtk.IconSize.BUTTON)
       if self.sleep_timer is not None:
         self.sleep_timer.stop()
   

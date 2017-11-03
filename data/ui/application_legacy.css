@@ -27,3 +27,8 @@
 .no_frame {
   border-style: none;
 }
+
+.h4 {
+  font-weight: lighter;
+  font-size: 110%;
+}
