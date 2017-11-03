@@ -194,6 +194,7 @@ class CozyUI:
     self.__init_timer_buffer()
     # timer SpinButton text format
     self.timer_spinner.connect("value-changed", self.__on_timer_changed)
+    self.timer_spinner.connect("focus-out-event", self.__on_timer_focus_out)
 
     # init progress scale
     self.progress_scale.connect("button-release-event", self.__on_progress_clicked)
@@ -536,7 +537,7 @@ class CozyUI:
     adjustment = self.timer_spinner.get_adjustment()
     value = adjustment.get_value()
 
-    if not self.sleep_timer.is_running:
+    if self.sleep_timer is not None and not self.sleep_timer.is_running:
       self.settings.set_int("timer", int(value))
 
     self.current_timer_time = value * 60
@@ -556,6 +557,13 @@ class CozyUI:
       self.timer_image.set_from_icon_name("weather-clear-symbolic", Gtk.IconSize.BUTTON)
       if self.sleep_timer is not None:
         self.sleep_timer.stop()
+
+  def __on_timer_focus_out(self, event, widget):
+    """
+    Do not propagate event further.
+    This fixes the disappearing ' min' after the spin button looses focus.
+    """
+    return True
   
   def __start_sleep_timer(self):
     """
