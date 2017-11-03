@@ -20,7 +20,8 @@
 }
 
 .box_hover {
-  background: shade(@theme_bg_color, 0.9)
+  color: @theme_selected_fg_color;
+  background: @theme_selected_bg_color
 }
 
 .no_frame {

@@ -12,6 +12,7 @@ import gi
 import logging
 log = logging.getLogger("ui")
 import platform
+import time
 
 gi.require_version('Gtk', '3.0')
 
@@ -21,9 +22,11 @@ class CozyUI:
   """
   current_book = None
   play_status_updater = None
+  sleep_timer = None
   progress_scale_clicked = False
   __gst_state = None
   is_elementary = False
+  current_timer_time = 0
 
   def __init__(self, pkgdatadir, app, version):
     self.pkgdir = pkgdatadir
@@ -122,11 +125,9 @@ class CozyUI:
     self.search_button = self.window_builder.get_object("search_button")
     self.search_button.set_visible(False)
     self.timer_button = self.window_builder.get_object("timer_button")
-    self.timer_button.set_visible(False)
 
     search_button = self.window_builder.get_object("search_button")
     search_popover = self.search_builder.get_object("search_popover")
-    timer_button = self.window_builder.get_object("timer_button")
     timer_popover = self.timer_builder.get_object("timer_popover")
 
     self.timer_switch = self.timer_builder.get_object("timer_switch")
@@ -161,6 +162,8 @@ class CozyUI:
     self.author_toggle_button = self.window_builder.get_object("author_toggle_button")
     self.reader_toggle_button = self.window_builder.get_object("reader_toggle_button")
     self.no_media_file_chooser = self.window_builder.get_object("no_media_file_chooser")
+    self.timer_off_image = self.window_builder.get_object("timer_off_image")
+    self.timer_on_image = self.window_builder.get_object("timer_on_image")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -181,16 +184,17 @@ class CozyUI:
 
     # init popovers
     search_button.set_popover(search_popover)
-    timer_button.set_popover(timer_popover)
+    self.timer_button.set_popover(timer_popover)
+    self.timer_switch.connect("notify::active", self.__timer_switch_changed)
 
     # add marks to timer scale
     for i in range(0, 181, 15):
       self.timer_scale.add_mark(i, Gtk.PositionType.RIGHT, None)
 
-    # timer SpinButton text format
-    self.timer_spinner.connect("value-changed", self.__on_timer_changed)
     # this is required otherwise the timer will not show "min" on start
     self.__init_timer_buffer()
+    # timer SpinButton text format
+    self.timer_spinner.connect("value-changed", self.__on_timer_changed)
 
     # init progress scale
     self.progress_scale.connect("button-release-event", self.__on_progress_clicked)
@@ -287,8 +291,9 @@ class CozyUI:
     """
     Add "min" to the timer text field on startup.
     """
+    value = self.settings.get_int("timer")
     adjustment = self.timer_spinner.get_adjustment()
-    value = adjustment.get_value()
+    adjustment.set_value(value)
 
     text = str(int(value)) + " " + _("min")
     self.timer_buffer.set_text(text, len(text))
@@ -532,13 +537,68 @@ class CozyUI:
     adjustment = self.timer_spinner.get_adjustment()
     value = adjustment.get_value()
 
+    if not self.sleep_timer.is_running:
+      self.settings.set_int("timer", int(value))
+
+    self.current_timer_time = value * 60
+
     text = str(int(value)) + " " + _("min")
     self.timer_buffer.set_text(text, len(text))
- 
+
+  def __timer_switch_changed(self, sender, widget):
+    """
+    Start/Stop the sleep timer object.
+    """
+    if self.timer_switch.get_active() == True:
+      self.timer_button.set_image(self.timer_on_image)
+      if get_gst_player_state() == Gst.State.PLAYING:
+        self.__start_sleep_timer()
+    else:
+      self.timer_button.set_image(self.timer_off_image)
+      if self.sleep_timer is not None:
+        self.sleep_timer.stop()
+  
+  def __start_sleep_timer(self):
+    """
+    Start the sleep timer but only when it is enabled by the user.
+    """
+    if self.timer_switch.get_active() == True:
+      # Enable Timer
+      adjustment = self.timer_spinner.get_adjustment()
+      countdown = int(adjustment.get_value())
+      self.sleep_timer = RepeatedTimer(1, self.__sleep_timer_fired)
+      self.sleep_timer.start()
+      self.current_timer_time = countdown * 60
+
+  def __pause_sleep_timer(self):
+    """
+    Stop the sleep timer.
+    """
+    if self.sleep_timer is not None:
+      self.sleep_timer.stop()
+
+  def __sleep_timer_fired(self):
+    """
+    The sleep timer gets called every second. Here we do the countdown stuff
+    aswell as stop the playback / suspend the machine.
+    """
+    self.current_timer_time = self.current_timer_time - 1
+    adjustment = self.timer_spinner.get_adjustment()
+    adjustment.set_value(int(self.current_timer_time / 60) + 1)
+    if self.current_timer_time < 1:
+      self.timer_switch.set_active(False)
+      if get_gst_player_state() == Gst.State.PLAYING:
+        play_pause(None)
+
+      self.sleep_timer.stop()
+
   def __on_progress_press(self, widget, sender):
     """
     Remember that progress scale is clicked so it won't get updates from the player.
     """
+    if sender.button != 1:
+      return True
+
     self.progress_scale_clicked = True
 
     # If the user drags the slider we don't want to jump back
@@ -546,12 +606,19 @@ class CozyUI:
     if self.__first_play == True:
       self.__first_play == False
 
+    return False
+
   def __on_progress_clicked(self, widget, sender):
     """
     Jump to the slided time and release the progress scale update lock.
     """
+    if sender.button != 1:
+      return True
+
     jump_to(self.progress_scale.get_value())
     self.progress_scale_clicked = False
+
+    return False
 
   def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
     """
@@ -674,10 +741,12 @@ class CozyUI:
       if state == Gst.State.PLAYING:
         self.__gst_state = state
         self.play()
+        self.__start_sleep_timer()
         pass
       elif state == Gst.State.PAUSED:
         self.__gst_state = state
         self.pause()
+        self.__pause_sleep_timer()
         pass
       elif state == Gst.State.NULL:
         # Playback stopped. Remove displayed track.

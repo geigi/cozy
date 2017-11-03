@@ -99,7 +99,6 @@ class BookElement(Gtk.Box):
     
     # this grid has a background color to act as a visible overlay
     color = Gtk.Grid()
-    color.get_style_context().add_class("mouse_hover")
     color.set_property("halign", Gtk.Align.CENTER)
     color.set_property("valign", Gtk.Align.CENTER)
 
@@ -181,7 +180,7 @@ class BookElement(Gtk.Box):
     :param widget: as Gtk.EventBox
     :param event: as Gdk.Event
     """
-    self.overlay.set_opacity(0.9)
+    self.overlay.set_opacity(0.8)
     self.play_revealer.set_reveal_child(True)
 
   def _on_leave_notify(self, widget, event):

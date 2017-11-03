@@ -21,5 +21,10 @@
       <summary>Auto scan the audio book directory</summary>
       <description></description>
     </key>
+    <key type="i" name="timer">
+      <default>30</default>
+      <summary>Last used timer duration</summary>
+      <description></description>
+    </key>
   </schema>
 </schemalist>

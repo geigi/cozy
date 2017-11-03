@@ -23,6 +23,11 @@
     <property name="margin_right">4</property>
     <property name="icon_name">object-rotate-left-symbolic</property>
   </object>
+  <object class="GtkImage" id="timer_on_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">weather-clear-night-symbolic</property>
+  </object>
   <object class="GtkApplicationWindow" id="app_window">
     <property name="name">main_window</property>
     <property name="can_focus">False</property>
@@ -227,7 +232,7 @@
           </object>
           <packing>
             <property name="name">main</property>
-            <property name="title" translatable="no">page0</property>
+            <property name="title">page0</property>
           </packing>
         </child>
         <child>
@@ -243,13 +248,13 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">70</property>
                 <property name="label" translatable="yes">Importing your audiobooks...</property>
-                <style>
-                  <class name="h1"/>
-                </style>
                 <attributes>
                   <attribute name="weight" value="heavy"/>
                   <attribute name="scale" value="1"/>
                 </attributes>
+                <style>
+                  <class name="h1"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -277,7 +282,7 @@
           </object>
           <packing>
             <property name="name">import</property>
-            <property name="title" translatable="no">page1</property>
+            <property name="title">page1</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -499,7 +504,7 @@
           </object>
           <packing>
             <property name="name">no_media</property>
-            <property name="title" translatable="no">page0</property>
+            <property name="title">page0</property>
             <property name="position">2</property>
           </packing>
         </child>
@@ -762,7 +767,7 @@ audio-volume-medium-symbolic</property>
                   </object>
                   <packing>
                     <property name="name">playback</property>
-                    <property name="title" translatable="no">page0</property>
+                    <property name="title">page0</property>
                   </packing>
                 </child>
                 <child>
@@ -798,7 +803,7 @@ audio-volume-medium-symbolic</property>
                   </object>
                   <packing>
                     <property name="name">working</property>
-                    <property name="title" translatable="no">page1</property>
+                    <property name="title">page1</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -840,13 +845,14 @@ audio-volume-medium-symbolic</property>
             </child>
             <child>
               <object class="GtkMenuButton" id="timer_button">
+                <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <child>
-                  <object class="GtkImage">
+                  <object class="GtkImage" id="timer_off_image">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">weather-clear-night-symbolic</property>
+                    <property name="icon_name">weather-clear-symbolic</property>
                   </object>
                 </child>
               </object>

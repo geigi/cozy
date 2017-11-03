@@ -209,7 +209,7 @@ class MPRIS(Server):
 
     def SetPosition(self, track_id, position):
         jump_to_ns(position)
-        4
+        
     def Seek(self, offset):
         pass
 
