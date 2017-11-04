@@ -293,6 +293,7 @@ def load_last_book():
         __player.set_property("uri", "file://" + last_track.file)
         __player.set_state(Gst.State.PAUSED)
         __current_track = last_track
+        __emit_event("track-changed")
 
 def __emit_event(event):
   """

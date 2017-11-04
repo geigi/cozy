@@ -131,15 +131,15 @@ class BookElement(Gtk.Box):
     scroller.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
     
     # This box contains all content
-    box = Gtk.Box()
-    box.set_orientation(Gtk.Orientation.VERTICAL)
-    box.set_halign(Gtk.Align.CENTER)
-    box.set_valign(Gtk.Align.START)
-    box.props.margin = 8
+    self.track_box = Gtk.Box()
+    self.track_box.set_orientation(Gtk.Orientation.VERTICAL)
+    self.track_box.set_halign(Gtk.Align.CENTER)
+    self.track_box.set_valign(Gtk.Align.START)
+    self.track_box.props.margin = 8
 
     count = 0
     for track in tracks(self.book):
-      box.add(TrackElement(track))
+      self.track_box.add(TrackElement(track, self.ui))
       count += 1
 
     if Gtk.get_minor_version() > 20:
@@ -148,7 +148,7 @@ class BookElement(Gtk.Box):
     else:
       count = 0
       for track in tracks(self.book):
-        box.add(TrackElement(track))
+        self.track_box.add(TrackElement(track, self.ui))
         count += 1
       padding = 17
       height = 24
@@ -160,8 +160,10 @@ class BookElement(Gtk.Box):
     self.popover.connect("closed", self.__on_popover_close)
 
     self.popover.add(scroller)
-    scroller.add_with_viewport(box)
+    scroller.add_with_viewport(self.track_box)
     scroller.show_all()
+
+    self._mark_current_track()
 
   def __on_button_press(self, eventbox, event):
     self.selected = True
@@ -226,14 +228,32 @@ class BookElement(Gtk.Box):
 
     return True
 
+  def _mark_current_track(self):
+    """
+    Mark the current track position in the popover.
+    """
+    book = Book.select().where(Book.id == self.book.id).get()
+
+    if book.position < 1:
+      return
+
+    for track_element in self.track_box.get_children():
+      if track_element.track.id == book.position:
+        track_element.select()
+      else:
+        track_element.deselect()
+
 class TrackElement(Gtk.EventBox):
   """
   An element to display a track in a book popover.
   """
   track = None
   selected = False
-  def __init__(self, t):
+  ui = None
+  
+  def __init__(self, t, ui):
     self.track = t
+    self.ui = ui
 
     super(Gtk.EventBox, self).__init__()
     self.connect("enter-notify-event", self._on_enter_notify)
@@ -305,7 +325,8 @@ class TrackElement(Gtk.EventBox):
     :param widget: as Gtk.EventBox
     :param event: as Gdk.Event
     """
-    self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+    if self.ui.current_track_element is not self and not self.selected:
+      self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
     self.box.get_style_context().add_class("box_hover")
 
   def _on_leave_notify(self, widget, event):
@@ -315,4 +336,20 @@ class TrackElement(Gtk.EventBox):
     :param event: as Gdk.Event (can be None)
     """
     self.box.get_style_context().remove_class("box_hover")
+    if self.ui.current_track_element is not self and not self.selected:
+      self.play_img.clear()
+
+  def select(self):
+    """
+    Select this track as the current position of the audio book. 
+    Permanently displays the play icon.
+    """
+    self.selected = True
+    self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+
+  def deselect(self):
+    """
+    Deselect this track.
+    """
+    self.selected = False
     self.play_img.clear()

@@ -25,6 +25,8 @@ class CozyUI:
   progress_scale_clicked = False
   is_elementary = False
   current_timer_time = 0
+  current_book_element = None
+  current_track_element = None
 
   def __init__(self, pkgdatadir, app, version):
     self.pkgdir = pkgdatadir
@@ -36,11 +38,11 @@ class CozyUI:
     
     self.__init_window()
     self.__init_bindings()
-    self.__load_last_book()
 
     self.auto_import()
     self.refresh_content()
     self.check_for_tracks()
+    self.__load_last_book()
 
   def startup(self):
     self.__check_current_distro()
@@ -743,8 +745,6 @@ class CozyUI:
     if not self.progress_scale_clicked:
       cur_m, cur_s = get_current_duration_ui()
       Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.progress_scale.set_value, cur_m * 60 + cur_s)
-      #()
-    
 
   def __update_ui_time(self, widget):
     """
@@ -760,6 +760,34 @@ class CozyUI:
 
     self.remaining_label.set_markup("<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
 
+  def __track_changed(self):
+    """
+    The track loaded in the player has changed.
+    Refresh the currently playing track and mark it in the track overview popover.
+    """
+    if self.current_track_element is not None:
+      self.current_track_element.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+
+    curr_track = get_current_track()
+    try:
+      for book_element in self.book_box.get_children():
+        if book_element.get_children()[0].book.id == curr_track.book.id:
+          self.current_book_element = book_element.get_children()[0]
+          raise StopIteration
+    except StopIteration:
+      pass
+    
+    try:
+      for track_element in self.current_book_element.track_box.get_children():
+        if track_element.track.id == curr_track.id:
+          self.current_track_element = track_element
+          raise StopIteration
+    except StopIteration:
+      pass
+
+    self.current_track_element.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+    self.current_book_element._mark_current_track()
+
   def __player_changed(self, event):
     """
     Listen to and handle all gst player messages that are important for the ui.
@@ -770,11 +798,14 @@ class CozyUI:
     elif event == "play":
       self.play()
       self.__start_sleep_timer()
+      self.current_track_element.play_img.set_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
     elif event == "pause":
       self.pause()
       self.__pause_sleep_timer()
+      self.current_track_element.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
     elif event == "track-changed":
       self.__update_track_ui()
+      self.__track_changed()
     elif event == "file-not-found":
       pass
 
