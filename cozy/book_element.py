@@ -122,9 +122,6 @@ class BookElement(Gtk.Box):
     # create track list popover
     self.__create_popover()
 
-    # listen to gst messages
-    get_gst_bus().connect("message", self.__on_gst_message)
-
   def __create_popover(self):
     self.popover = Gtk.Popover.new(self)
     self.popover.set_position(Gtk.PositionType.BOTTOM)
@@ -225,31 +222,9 @@ class BookElement(Gtk.Box):
         jump_to_ns(track.position)
     else:
       load_file(track)
-      play_pause(None)
-      self.wait_to_seek = True
-      pos = int(track.position)
-      self.ui.progress_scale.set_value(int(pos / 1000000000))
+      play_pause(None, True)
 
     return True
-  
-  def __on_gst_message(self, bus, message):
-    """
-    Handle gst messages from the player.
-    Here we seek to the last position after a new track was loaded into the player.
-    """
-    if not self.wait_to_seek:
-      return
-
-    t = message.type
-    if t == Gst.MessageType.STATE_CHANGED:
-      state = get_gst_player_state()
-      if state == Gst.State.PLAYING or state == Gst.State.PAUSED:
-        query = Gst.Query.new_seeking(Gst.Format.TIME)
-        if get_playbin().query(query):
-          fmt, seek_enabled, start, end = query.parse_seeking()
-          if seek_enabled:
-            jump_to_ns(get_current_track().position)
-            self.wait_to_seek = False
 
 class TrackElement(Gtk.EventBox):
   """
@@ -313,9 +288,16 @@ class TrackElement(Gtk.EventBox):
     Play the selected track.
     TODO Jump to last position
     """
-    play_pause(self.track)
-    Book.update(position=self.track).where(Book.id == self.track.book.id).execute()
-    pass
+    current_track = get_current_track()
+
+    if current_track is not None and current_track.id == self.track.id:
+      play_pause(None)
+      if get_gst_player_state() == Gst.State.PLAYING:
+        jump_to_ns(Track.select().where(Track.id == self.track.id).get().position)
+    else:
+      load_file(self.track)
+      play_pause(None, True)
+      Book.update(position=self.track).where(Book.id == self.track.book.id).execute()
 
   def _on_enter_notify(self, widget, event):
     """

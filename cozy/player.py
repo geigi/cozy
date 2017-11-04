@@ -19,21 +19,25 @@ def __on_gst_message(bus, message):
       __player.set_state(Gst.State.PAUSED)
     else:
       __player.set_state(Gst.State.PLAYING)
-  if t == Gst.MessageType.EOS:
+  elif t == Gst.MessageType.EOS:
     next_track()
-
   elif t == Gst.MessageType.ERROR:
     err, debug = message.parse_error()
     log.error(err)
     log.debug(debug)
     pass
-  pass
+  elif t == Gst.MessageType.STATE_CHANGED:
+    state = get_gst_player_state()
+    if state == Gst.State.PLAYING or state == Gst.State.PAUSED:
+      auto_jump()
 
 __player = Gst.ElementFactory.make("playbin", "player")
 __bus = __player.get_bus()
 __bus.add_signal_watch()
 __bus.connect("message", __on_gst_message)
 __current_track = None
+__listeners = []
+__wait_to_seek = False
 
 def get_gst_bus():
   """
@@ -90,24 +94,37 @@ def get_current_track():
   else:
     return None
 
-def play_pause(track):
+def add_player_listener(function):
+  """
+  Add a listener to listen to changes from the player.
+  """
+  global __listeners
+  __listeners.append(function)
+
+def play_pause(track, jump=False):
   """
   Play a new file or pause/play if the file is already loaded.
   :param track: Track object that will be played/paused.
   """
   global __current_track
   global __player
+  global __wait_to_seek
+
+  __wait_to_seek = jump
 
   if __current_track == track or track is None:
     # Track is already selected, only play/pause
     if get_gst_player_state() == Gst.State.PLAYING:
       __player.set_state(Gst.State.PAUSED)
+      __emit_event("pause")
       Track.update(position=get_current_duration()).where(Track.id == get_current_track().id).execute()
     else: 
       __player.set_state(Gst.State.PLAYING)
+      __emit_event("play")
   else:
     load_file(track)
     __player.set_state(Gst.State.PLAYING)
+    __emit_event("play")
 
 def next_track():
   # try to load the next track of the book. 
@@ -138,6 +155,7 @@ def next_track():
     __player.set_state(Gst.State.NULL)
     Book.update(position=0).where(Book.id == current.id).execute()
     Settings.update(last_played_book=None).execute()
+    __emit_event("stop")
 
 def prev_track():
   # try to load the next track of the book. 
@@ -220,6 +238,19 @@ def jump_to_ns(ns):
   __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, new_position)
   Track.update(position=new_position).where(Track.id == __current_track.id).execute()
 
+def auto_jump():
+  """
+  Automatically jump to the last playback position if posible
+  """
+  global __wait_to_seek
+  if __wait_to_seek:
+    query = Gst.Query.new_seeking(Gst.Format.TIME)
+    if get_playbin().query(query):
+      fmt, seek_enabled, start, end = query.parse_seeking()
+      if seek_enabled:
+        jump_to_ns(get_current_track().position)
+        __wait_to_seek = False
+
 # TODO: If file can not be found on playback ask for location of file. If provided, update location in db.
 def load_file(track):
   """
@@ -234,11 +265,13 @@ def load_file(track):
     Book.update(position=__current_track.id).where(Book.id == __current_track.book.id).execute()
 
   __current_track = track
+  __emit_event("stop")
   __player.set_state(Gst.State.NULL)
   __player.set_property("uri", "file://" + track.file)
   __player.set_state(Gst.State.PAUSED)
   Book.update(position = __current_track.id).where(Book.id == __current_track.book.id).execute()
   Settings.update(last_played_book = __current_track.book).execute()
+  __emit_event("track-changed")
 
 def load_last_book():
   """
@@ -260,3 +293,10 @@ def load_last_book():
         __player.set_property("uri", "file://" + last_track.file)
         __player.set_state(Gst.State.PAUSED)
         __current_track = last_track
+
+def __emit_event(event):
+  """
+  This function is used to notify listeners of player state changes.
+  """
+  for function in __listeners:
+    function(event)

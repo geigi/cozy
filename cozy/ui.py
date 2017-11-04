@@ -23,7 +23,6 @@ class CozyUI:
   play_status_updater = None
   sleep_timer = None
   progress_scale_clicked = False
-  __gst_state = None
   is_elementary = False
   current_timer_time = 0
 
@@ -37,7 +36,6 @@ class CozyUI:
     
     self.__init_window()
     self.__init_bindings()
-    self.__init_gst_messaging()
     self.__load_last_book()
 
     self.auto_import()
@@ -230,12 +228,7 @@ class CozyUI:
       about_close_button = self.about_builder.get_object("button_box").get_children()[2]
       about_close_button.connect("clicked", self.__about_close_clicked)
 
-    # DEMO #
-    scale = self.window_builder.get_object("progress_scale")
-    scale.set_range(0, 4)
-
-    #pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
-    #self.set_title_cover(pixbuf)
+    add_player_listener(self.__player_changed)
 
   def __init_actions(self):
     """
@@ -298,10 +291,6 @@ class CozyUI:
     self.timer_buffer.set_text(text, len(text))
 
     return True
-
-  def __init_gst_messaging(self):
-    self.__gst_state = None
-    get_gst_bus().connect("message", self.__on_gst_message)
 
   def __load_last_book(self):
     """
@@ -366,8 +355,8 @@ class CozyUI:
     self.play_button.set_image(self.pause_img)
     self.play_status_updater = RepeatedTimer(1, self.__update_time)
     self.play_status_updater.start()
-    self.__update_time()
-    self.__update_ui_time(self.progress_scale)
+    #self.__update_time()
+    #self.__update_ui_time(self.progress_scale)
 
   def pause(self):
     self.play_button.set_image(self.play_img)
@@ -386,7 +375,7 @@ class CozyUI:
     self.title_label.set_text("")
     self.subtitle_label.set_text("")
 
-    self.set_title_cover(get_cover_pixbuf(None))
+    self.cover_img.set_from_pixbuf(None)
 
     self.progress_scale.set_range(0, 1)
     self.progress_scale.set_value(0)
@@ -406,6 +395,7 @@ class CozyUI:
     self.play_button.set_sensitive(False)
     self.prev_button.set_sensitive(False)
     self.scan_action.set_enabled(False)
+    self.timer_button.set_sensitive(False)
     if not first:
       self.update_progress_bar.set_fraction(0)
       self.status_stack.props.visible_child_name = "working"
@@ -418,6 +408,7 @@ class CozyUI:
     self.location_chooser.set_sensitive(True)
     self.play_button.set_sensitive(True)
     self.prev_button.set_sensitive(True)
+    self.timer_button.set_sensitive(True)
     self.throbber.stop()
     pass
 
@@ -724,43 +715,7 @@ class CozyUI:
       self.sort_stack.props.visible_child_name = "author"
     elif self.reader_toggle_button.get_active() is False:
       self.author_toggle_button.set_active(True)
-
-
-  def __on_gst_message(self, bus, message):
-    """
-    Listen to and handle all gst player messages that are important for the ui.
-    """
-    t = message.type
-    if t == Gst.MessageType.BUFFERING:
-      if (message.percentage > 99):
-        self.__update_time()
-        self.__update_ui_time(self.progress_scale)
-    elif t == Gst.MessageType.STATE_CHANGED:
-      state = get_gst_player_state()
-
-      # return if state is not changed
-      if state == self.__gst_state:
-        return
-      
-      # save the state only for states that are important to us. 
-      # Saves CPU time and unneccesarry gui updates.
-      if state == Gst.State.PLAYING:
-        self.__gst_state = state
-        self.play()
-        self.__start_sleep_timer()
-        pass
-      elif state == Gst.State.PAUSED:
-        self.__gst_state = state
-        self.pause()
-        self.__pause_sleep_timer()
-        pass
-      elif state == Gst.State.NULL:
-        # Playback stopped. Remove displayed track.
-        print("STOP")
-        self.stop()
-        self.__gst_state = state
-    elif t == Gst.MessageType.STREAM_START:
-      self.__update_track_ui()
+    
 
   def __update_track_ui(self):
     # set data of new stream in ui
@@ -777,8 +732,9 @@ class CozyUI:
       self.set_title_cover(get_cover_pixbuf(track.book))
 
     total = get_current_track().length
-    self.progress_scale.set_sensitive(True)
     self.progress_scale.set_range(0, total)
+    self.progress_scale.set_value(int(track.position / 1000000000))
+    self.__update_ui_time(None)
 
   def __update_time(self):
     """
@@ -804,6 +760,24 @@ class CozyUI:
 
     self.remaining_label.set_markup("<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
 
+  def __player_changed(self, event):
+    """
+    Listen to and handle all gst player messages that are important for the ui.
+    """
+    if event == "stop":
+      self.stop()
+      self.__pause_sleep_timer()
+    elif event == "play":
+      self.play()
+      self.__start_sleep_timer()
+    elif event == "pause":
+      self.pause()
+      self.__pause_sleep_timer()
+    elif event == "track-changed":
+      self.__update_track_ui()
+    elif event == "file-not-found":
+      pass
+
   def __window_resized(self, window):
     """
     Resize the progress scale to expand to the window size
@@ -825,10 +799,13 @@ class CozyUI:
     # Stop timers
     if self.play_status_updater is not None:
       self.play_status_updater.stop()
+    if self.sleep_timer is not None:
+      self.sleep_timer.stop()
 
     # save current position when still playing
     if get_gst_player_state() == Gst.State.PLAYING:
       Track.update(position = get_current_duration()).where(Track.id == get_current_track().id).execute()
+      stop()
 
   ####################
   # CONTENT HANDLING #
@@ -868,7 +845,6 @@ class CozyUI:
         return True
       else:
         return True if book.get_children()[0].book.reader == reader else False
-
 
 class ListBoxRowWithData(Gtk.ListBoxRow):
   """

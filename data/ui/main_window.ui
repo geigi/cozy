@@ -248,7 +248,7 @@
                   <attribute name="scale" value="1"/>
                 </attributes>
                 <style>
-                  <class name="h1"/>
+                  <class name="h2"/>
                 </style>
               </object>
               <packing>
