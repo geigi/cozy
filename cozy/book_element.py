@@ -146,10 +146,6 @@ class BookElement(Gtk.Box):
       scroller.set_propagate_natural_height(True)
       scroller.set_max_content_height(500)
     else:
-      count = 0
-      for track in tracks(self.book):
-        self.track_box.add(TrackElement(track, self.ui))
-        count += 1
       padding = 17
       height = 24
       scroller_height = count * height + padding
