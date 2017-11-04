@@ -35,6 +35,7 @@ $ pacaur -S cozy-audiobooks
 - Sort by name, added date, last played
 - Ratings
 - Playback speed control
+- Flatpak or AppImage support
 
 If you like this project, consider supporting me on <a href="https://www.patreon.com/bePatron?u=8147127"> Patreon</a> :)
 
