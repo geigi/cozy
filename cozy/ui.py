@@ -756,6 +756,7 @@ class CozyUI:
         pass
       elif state == Gst.State.NULL:
         # Playback stopped. Remove displayed track.
+        print("STOP")
         self.stop()
         self.__gst_state = state
     elif t == Gst.MessageType.STREAM_START:

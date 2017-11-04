@@ -134,6 +134,7 @@ def next_track():
     Book.update(position=next_track.id).where(Book.id == next_track.book.id).execute()
     play_pause(next_track)
   else:
+    stop()
     __player.set_state(Gst.State.NULL)
     Book.update(position=0).where(Book.id == current.id).execute()
     Settings.update(last_played_book=None).execute()
