@@ -12,7 +12,6 @@ import gi
 import logging
 log = logging.getLogger("ui")
 import platform
-import time
 
 gi.require_version('Gtk', '3.0')
 
@@ -235,8 +234,8 @@ class CozyUI:
     scale = self.window_builder.get_object("progress_scale")
     scale.set_range(0, 4)
 
-    pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
-    self.set_title_cover(pixbuf)
+    #pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
+    #self.set_title_cover(pixbuf)
 
   def __init_actions(self):
     """

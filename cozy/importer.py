@@ -10,6 +10,7 @@ from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
 from mutagen.flac import FLAC
 from mutagen.mp3 import MP3
+from mutagen.mp4 import MP4
 
 from gi.repository import Gdk, GLib
 
@@ -52,15 +53,15 @@ def update_database(ui):
   percent_threshold = file_count / 1000
   for directory, subdirectories, files in os.walk(Settings.get().path):
     for file in files:
-      if file.lower().endswith(('.mp3', '.ogg', '.flac')):
+      if file.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a')):
         path = os.path.join(directory, file)
 
         # Is the track already in the database?
         if (Track.select().where(Track.file == path).count() < 1):
-          __importFile(file, path)
+          __importFile(file, directory, path)
         # Has the track changed on disk?
         elif Track.select().where(Track.file == path).first().modified < os.path.getmtime(path):
-          __importFile(file, path, update=True)
+          __importFile(file, directory, path, update=True)
         
         i = i + 1
 
@@ -102,7 +103,7 @@ def rebase_location(ui, oldPath, newPath):
   
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
 
-def __importFile(file, path, update=False):
+def __importFile(file, directory, path, update=False):
   """
   Imports all information about a track into the database.
   Note: This creates also a new album object when it doesnt exist yet. 
@@ -112,6 +113,7 @@ def __importFile(file, path, update=False):
   track = TrackContainer(mutagen.File(path), path)
   cover = None
   reader = None
+  track_number = None
 
   # getting the some data is file specific
   ### MP3 ###
@@ -133,6 +135,8 @@ def __importFile(file, path, update=False):
     track.mutagen = EasyID3(path)
     author = __get_mp3_tag(mp3, "TCOM")
     reader = __get_mp3_tag(mp3, "TPE1")
+    book_name = __get_common_tag(track, "album")
+    track_name = __get_common_tag(track, "title")
 
   ### FLAC ###
   elif file.lower().endswith('.flac'):
@@ -144,6 +148,8 @@ def __importFile(file, path, update=False):
     author = __get_common_tag(track, "composer")
     flac = FLAC(path)
     reader = flac["artist"][0]
+    book_name = __get_common_tag(track, "album")
+    track_name = __get_common_tag(track, "title")
 
   ### OGG ###
   elif file.lower().endswith('.ogg'):
@@ -154,15 +160,41 @@ def __importFile(file, path, update=False):
     cover = __get_ogg_cover(track)
     author = __get_common_tag(track, "composer")
     reader = __get_common_tag(track, "author")
+    book_name = __get_common_tag(track, "album")
+    track_name = __get_common_tag(track, "title")
 
+  ### MP4 ###
+  elif file.lower().endswith('.m4a'):
+    log.debug("Importing mp4 " + track.path)
+    try:
+      track.mutagen = MP4(path)
+    except:
+      return
+
+    try:
+      disk = int(track.mutagen["disk"][0][0])
+    except Exception as e:
+      log.debug(e)
+      disk = 0
+    length = float(track.mutagen.info.length)
+    cover = __get_mp4_cover(track)
+    author = __get_common_tag(track, "\xa9wrt")
+    reader = __get_common_tag(track, "\xa9ART")
+    try:
+      track_number = int(track.mutagen["trkn"][0][0])
+    except Exception as e:
+      log.debug(e)
+      track_number = 0
+    book_name = __get_common_tag(track, "\xa9alb")
+    track_name = __get_common_tag(track, "\xa9nam")
+    
   modified = os.path.getmtime(path)
 
   # try to get all the tags
-  book_name = __get_common_tag(track, "album")
-  track_name = __get_common_tag(track, "title")
   try:
-    track_number = int(__get_common_tag(track, "tracknumber"))
-  except ValueError:
+    if track_number is None:
+      track_number = int(__get_common_tag(track, "tracknumber"))
+  except:
     track_number = 0
     pass
 
@@ -306,6 +338,23 @@ def __get_ogg_cover(track):
 
   return cover
 
+def __get_mp4_cover(track):
+  """
+  Get the cover of an MP4 file.
+  
+  :param track: Track object
+  """
+  cover = None
+
+  try:
+    cover = track.mutagen.tags["covr"][0]
+  except Exception as e:
+    log.debug("Could not load cover for file " + track.path)
+    log.debug(e)
+    pass
+
+  return cover
+
 def __get_flac_cover(track):
   """
   Get the cover of a FLAC file.
@@ -365,8 +414,8 @@ def __get_common_tag(track, tag):
     value = track.mutagen[tag][0]
     pass
   except Exception as e:
-    log.debug("Could not get tag " + tag + " for file " + track.path)
-    log.debug(e)
+    log.info("Could not get tag " + tag + " for file " + track.path)
+    log.info(e)
     pass
 
   return value

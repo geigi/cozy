@@ -121,7 +121,7 @@ def get_cover_pixbuf(book):
   if book is None:
     pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
   elif book.cover is not None:
-    loader = GdkPixbuf.PixbufLoader.new_with_type("jpeg")
+    loader = GdkPixbuf.PixbufLoader.new()
     loader.write(book.cover)
     loader.close()
     pixbuf = loader.get_pixbuf()
