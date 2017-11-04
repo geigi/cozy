@@ -46,8 +46,6 @@ def update_database(ui):
     # TODO: Notify the user about this
     return
 
-  
-
   i = 0
   percent_counter = 0
   file_count = sum([len(files) for r, d, files in os.walk(Settings.get().path)])
