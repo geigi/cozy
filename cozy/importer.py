@@ -122,7 +122,7 @@ def __importFile(file, directory, path, update=False):
     try:
       track.mutagen = ID3(path)
     except Exception as e:
-      log.warning("Track " + track.path + " has no ID3 Tags")
+      log.warning("Track " + track.path + " is no valid MP3 file. Skipping...")
       return
 
     mp3 = TrackContainer(MP3(track.path), path)
@@ -141,20 +141,29 @@ def __importFile(file, directory, path, update=False):
   ### FLAC ###
   elif file.lower().endswith('.flac'):
     log.debug("Importing flac " + track.path)
-    track.mutagen = FLAC(path)
+    try:
+      track.mutagen = FLAC(path)
+    except Exception as e:
+      log.warning("Track " + track.path + "is not a valid FLAC file. Skipping...")
+      return
+
     disk = int(__get_common_disk_number(track))
     length = float(__get_common_track_length(track))
     cover = __get_flac_cover(track)
     author = __get_common_tag(track, "composer")
-    flac = FLAC(path)
-    reader = flac["artist"][0]
+    reader = track.mutagen["artist"][0]
     book_name = __get_common_tag(track, "album")
     track_name = __get_common_tag(track, "title")
 
   ### OGG ###
   elif file.lower().endswith('.ogg'):
     log.debug("Importing ogg " + track.path)
-    track.mutagen = OggVorbis(path)
+    try:
+      track.mutagen = OggVorbis(path)
+    except Exception as e:
+      log.warning("Track " + track.path + "is not a valid OGG file. Skipping...")
+      return
+
     disk = int(__get_common_disk_number(track))
     length = float(__get_common_track_length(track))
     cover = __get_ogg_cover(track)
@@ -169,6 +178,7 @@ def __importFile(file, directory, path, update=False):
     try:
       track.mutagen = MP4(path)
     except:
+      log.warning("Track " + track.path + "is not a valid MP4 file. Skipping...")
       return
 
     try:

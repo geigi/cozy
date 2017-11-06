@@ -14,6 +14,7 @@ class BookElement(Gtk.Box):
   ui = None
   selected = False
   wait_to_seek = False
+  playing = False
 
   def __init__(self, b, ui):
     self.book = b
@@ -79,9 +80,9 @@ class BookElement(Gtk.Box):
     # play_color is an overlay for the play button 
     # with this it should be visible on any album art color
     play_image = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/play_background.svg")
-    play_button = Gtk.Image.new_from_pixbuf(play_image)
-    play_button.set_property("halign", Gtk.Align.CENTER)
-    play_button.set_property("valign", Gtk.Align.CENTER)
+    self.play_button = Gtk.Image.new_from_pixbuf(play_image)
+    self.play_button.set_property("halign", Gtk.Align.CENTER)
+    self.play_button.set_property("valign", Gtk.Align.CENTER)
 
     # this is the main overlay for the album art
     # we need to create field for the overlays 
@@ -103,7 +104,7 @@ class BookElement(Gtk.Box):
     color.set_property("valign", Gtk.Align.CENTER)
 
     # assemble play overlay
-    play_box.add(play_button)
+    play_box.add(self.play_button)
     self.play_overlay.add(play_box)
 
     # assemble overlay with album art
@@ -238,6 +239,12 @@ class BookElement(Gtk.Box):
         track_element.select()
       else:
         track_element.deselect()
+
+  def set_playing(self, is_playing):
+    if is_playing:
+      self.play_button.set_from_resource("/de/geigi/cozy/pause_background.svg")
+    else:
+      self.play_button.set_from_resource("/de/geigi/cozy/play_background.svg")
 
 class TrackElement(Gtk.EventBox):
   """

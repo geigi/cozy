@@ -12,6 +12,7 @@ import gi
 import logging
 log = logging.getLogger("ui")
 import platform
+import webbrowser
 
 gi.require_version('Gtk', '3.0')
 
@@ -319,7 +320,7 @@ class CozyUI:
     """
     Show app help.
     """
-    pass
+    webbrowser.open("https://github.com/geigi/cozy/issues",new=2)
 
   def quit(self, action, parameter):
     """
@@ -354,16 +355,18 @@ class CozyUI:
     return True
 
   def play(self):
+    if self.current_book_element is None:
+      self.__track_changed()
     self.play_button.set_image(self.pause_img)
     self.play_status_updater = RepeatedTimer(1, self.__update_time)
     self.play_status_updater.start()
-    #self.__update_time()
-    #self.__update_ui_time(self.progress_scale)
+    self.current_book_element.set_playing(True)
 
   def pause(self):
     self.play_button.set_image(self.play_img)
     if self.play_status_updater is not None:
       self.play_status_updater.stop()
+    self.current_book_element.set_playing(False)
 
   def stop(self):
     """
@@ -389,6 +392,8 @@ class CozyUI:
     self.prev_button.set_sensitive(False)
 
     self.progress_scale.set_sensitive(False)
+    if self.current_book_element is not None:
+      self.current_book_element.set_playing(False)
 
   def switch_to_working(self, message, first):
     self.throbber.start()
@@ -768,6 +773,9 @@ class CozyUI:
     if self.current_track_element is not None:
       self.current_track_element.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
 
+    if self.current_book_element is not None:
+      self.current_book_element.set_playing(False)
+
     curr_track = get_current_track()
     try:
       for book_element in self.book_box.get_children():
@@ -788,7 +796,7 @@ class CozyUI:
     self.current_track_element.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
     self.current_book_element._mark_current_track()
 
-  def __player_changed(self, event):
+  def __player_changed(self, event, message):
     """
     Listen to and handle all gst player messages that are important for the ui.
     """
@@ -806,7 +814,7 @@ class CozyUI:
     elif event == "track-changed":
       self.__update_track_ui()
       self.__track_changed()
-    elif event == "file-not-found":
+    elif event == "error":
       pass
 
   def __window_resized(self, window):
