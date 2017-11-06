@@ -318,7 +318,7 @@ class TrackElement(Gtk.EventBox):
       if get_gst_player_state() == Gst.State.PLAYING:
         jump_to_ns(Track.select().where(Track.id == self.track.id).get().position)
     else:
-      load_file(self.track)
+      load_file(Track.select().where(Track.id == self.track.id).get())
       play_pause(None, True)
       Book.update(position=self.track).where(Book.id == self.track.book.id).execute()
 

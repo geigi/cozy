@@ -25,7 +25,7 @@ def __on_gst_message(bus, message):
     err, debug = message.parse_error()
     log.error(err)
     log.debug(debug)
-    pass
+    __emit_event("error", err)
   elif t == Gst.MessageType.STATE_CHANGED:
     state = get_gst_player_state()
     if state == Gst.State.PLAYING or state == Gst.State.PAUSED:
@@ -295,9 +295,9 @@ def load_last_book():
         __current_track = last_track
         __emit_event("track-changed")
 
-def __emit_event(event):
+def __emit_event(event, message=None):
   """
   This function is used to notify listeners of player state changes.
   """
   for function in __listeners:
-    function(event)
+    function(event, message)

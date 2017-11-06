@@ -6,6 +6,7 @@ from cozy.db import *
 from cozy.book_element import *
 from cozy.player import *
 from cozy.tools import *
+from cozy.file_not_found_dialog import *
 
 import os
 import gi
@@ -28,6 +29,7 @@ class CozyUI:
   current_timer_time = 0
   current_book_element = None
   current_track_element = None
+  dialog_open = False
 
   def __init__(self, pkgdatadir, app, version):
     self.pkgdir = pkgdatadir
@@ -815,7 +817,12 @@ class CozyUI:
       self.__update_track_ui()
       self.__track_changed()
     elif event == "error":
-      pass
+      if self.dialog_open:
+        return
+      if "Resource not found" in str(message):
+        self.dialog_open = True
+        dialog = FileNotFoundDialog(get_current_track().file, self)
+        dialog.show()
 
   def __window_resized(self, window):
     """
