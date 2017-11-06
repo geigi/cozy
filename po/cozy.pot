@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-27 23:34+0200\n"
+"POT-Creation-Date: 2017-11-06 18:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cozy/importer.py:172
+#: cozy/importer.py:212
 msgid "Unknown Author"
 msgstr ""
 
-#: cozy/importer.py:173
+#: cozy/importer.py:213
 msgid "Unknown Reader"
 msgstr ""
 
-#: cozy/ui.py:293 cozy/ui.py:531 data/ui/timer_popover.ui:71
+#: cozy/ui.py:295 cozy/ui.py:544 data/ui/timer_popover.ui:71
 msgid "min"
 msgstr ""
 
-#: cozy/ui.py:447
+#: cozy/ui.py:455
 msgid "Importing Audiobooks"
 msgstr ""
 
-#: cozy/ui.py:494 cozy/ui.py:497 cozy/ui.py:778 cozy/ui.py:787
+#: cozy/ui.py:502 cozy/ui.py:505 cozy/ui.py:881 cozy/ui.py:890
 msgid "All"
 msgstr ""
 
-#: cozy/ui.py:586
+#: cozy/ui.py:663
 msgid "Changing audio book location..."
 msgstr ""
 
@@ -70,7 +70,7 @@ msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 
-#: data/ui/main_window.ui:356 data/ui/hello.ui:200
+#: data/ui/main_window.ui:356 data/ui/hello.ui:240
 msgid "Drag & Drop"
 msgstr ""
 
@@ -88,7 +88,11 @@ msgstr ""
 msgid "Load audiobooks from a folder, network drive or an external disk"
 msgstr ""
 
-#: data/ui/about.ui:12
+#: data/ui/about.ui:11
+msgid "Support me on Patreon: https://www.patreon.com/geigi"
+msgstr ""
+
+#: data/ui/about.ui:13
 msgid "GitHub"
 msgstr ""
 
@@ -112,6 +116,27 @@ msgstr ""
 msgid "_Quit"
 msgstr ""
 
+#: data/ui/file_not_found.ui:19
+msgid "Cancel"
+msgstr ""
+
+#: data/ui/file_not_found.ui:32
+msgid "Locate"
+msgstr ""
+
+#: data/ui/file_not_found.ui:84
+msgid "File not found"
+msgstr ""
+
+#: data/ui/file_not_found.ui:100
+msgid ""
+"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
+msgstr ""
+
+#: data/ui/file_not_found.ui:117
+msgid "This file could not be found. Do you want to locate it manually?"
+msgstr ""
+
 #: data/ui/hello.ui:44
 msgid ""
 "Cozy is an application to browse and playback your DRM free audio book "
@@ -124,20 +149,20 @@ msgid ""
 "folder will be imported to your library:"
 msgstr ""
 
-#: data/ui/hello.ui:139
+#: data/ui/hello.ui:154
+msgid "Automatically import new audiobooks on startup"
+msgstr ""
+
+#: data/ui/hello.ui:179
 msgid "How to add new audio books:"
 msgstr ""
 
-#: data/ui/hello.ui:212
+#: data/ui/hello.ui:252
 msgid "Rescan from menu"
 msgstr ""
 
-#: data/ui/hello.ui:229
-msgid "Let's get cozy"
-msgstr ""
-
 #: data/ui/hello.ui:269
-msgid "Automatically import new audiobooks on startup"
+msgid "Let's get cozy"
 msgstr ""
 
 #: data/ui/settings.ui:27 data/ui/settings.ui:102
