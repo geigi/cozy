@@ -17,8 +17,8 @@ else
     message('Found python3 binary')
 endif
 
-dependency('gtk+-3.0', version :'>=3.14')
-dependency('glib-2.0')
+# dependency('gtk+-3.0', version :'>=3.14')
+# dependency('glib-2.0')
 
 # from https://github.com/AsavarTzeth/pulseeffects/blob/master/meson.build
 # Support Debian non-standard python paths
