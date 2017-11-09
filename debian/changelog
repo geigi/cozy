@@ -1,3 +1,15 @@
+com.github.geigi.cozy (0.3.6) UNSTABLE; urgency=low
+
+  * The sleep timer has landed!
+  * m4a/mp4 support!
+  * Lots of UI improvements
+  * More reliable playback
+  * Fixed bug where tracks would appear twice in older GTK versions
+  * More robust importing
+  * New dialog when a file could not be found
+  * Homepage URL is now corrected
+
+-- Julian Geywitz <github@geigi.de>  Wed, 09 Nov 2017 12:46:14 +0200
 com.github.geigi.cozy (0.3.5) UNSTABLE; urgency=low
 
   * Fixed peewee dependency install location

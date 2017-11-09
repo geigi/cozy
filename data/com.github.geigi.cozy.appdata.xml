@@ -45,6 +45,9 @@
       <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot2.png</image>
     </screenshot>
     <screenshot type="default">
+      <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot5.png</image>
+    </screenshot>
+    <screenshot type="default">
       <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot3.png</image>
     </screenshot>
     <screenshot type="default">
@@ -57,6 +60,18 @@
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.3.6" timestamp="1510228225">
+      <description>
+        <p>The sleep timer has landed!</p>
+        <p>m4a/mp4 support!</p>
+        <p>Lots of UI improvements</p>
+        <p>More reliable playback</p>
+        <p>Fixed bug where tracks would appear twice in older GTK versions</p>
+        <p>More robust importing</p>
+        <p>New dialog when a file could not be found</p>
+        <p>Homepage URL is now corrected</p>
+      </description>
+    </release>
     <release version="0.3.5" timestamp="1509552782">
       <description>
         <p>Fixed peewee dependency install location</p>
