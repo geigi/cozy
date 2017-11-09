@@ -1,21 +1,43 @@
 # It's getting Cozy
 
+Cozy is a modern audio book player for Linux. 
+
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
 
-Cozy is a modern audio book player for Linux. Here are some of the implemented & upcoming features:
-- mp3, flac, ogg support
-- display tags & cover
-- category sort by author, reader & name
+### Here are some of the current features:
+- Import all your audiobooks into cozy to browse them comfortably
+- Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg audio books
+- Remembers your playback position
+- Sleep timer!
+- Sort your audio books by author, reader & name
+- drag & drop to import new audiobooks
+- Mpris integration (Media keys & playback info for desktop environment)
 - developed on Arch Linux and tested under elementaryOS
-- [ ] m4v support
-- [ ] wav support
-- [ ] remember playback position of audio books
-- [ ] drag & drop support
-- [ ] sort by name, added date, last played
-- [ ] ratings
-- [ ] media keys & notification integration
-- [ ] playback speed
-- [ ] sleep timer
+
+## How can I get it?
+If you're running elementaryOS, you can get cozy here:
+
+<p align="center">
+  <a href="https://appcenter.elementary.io/com.github.geigi.cozy">
+  <img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter">
+  </a>
+</p>
+
+Arch Linux users can find cozy under the name `cozy-audiobooks` in the AUR:
+https://aur.archlinux.org/packages/cozy-audiobooks/
+```
+$ pacaur -S cozy-audiobooks
+```
+
+### Upcoming:
+- wav support
+- Search
+- Sort by name, added date, last played
+- Ratings
+- Playback speed control
+- Flatpak or AppImage support
+
+If you like this project, consider supporting me on <a href="https://www.patreon.com/bePatron?u=8147127"> Patreon</a> :)
 
 ## Requirements
 - `python3`
@@ -31,7 +53,7 @@ Cozy is a modern audio book player for Linux. Here are some of the implemented &
 $ git clone https://github.com/geigi/cozy.git
 $ cd cozy
 $ meson desired_build_directory --prefix=desired_installation_directory
-# ninja -C desired_build_directory install
+$ ninja -C desired_build_directory install
 ```
 
 ## Running a local build

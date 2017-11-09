@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <schema path="/de/geigi/Cozy/" id="de.geigi.Cozy" gettext-domain="cozy">
+  <schema path="/com/github/geigi/cozy/" id="com.github.geigi.cozy" gettext-domain="cozy">
     <key type="b" name="symlinks">
       <default>false</default>
       <summary>Follow symlinks</summary>
@@ -19,6 +19,11 @@
     <key type="b" name="autoscan">
       <default>false</default>
       <summary>Auto scan the audio book directory</summary>
+      <description></description>
+    </key>
+    <key type="i" name="timer">
+      <default>30</default>
+      <summary>Last used timer duration</summary>
       <description></description>
     </key>
   </schema>

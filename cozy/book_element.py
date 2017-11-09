@@ -1,6 +1,7 @@
 from gi.repository import Gtk, Gdk, GdkPixbuf, Pango
 
 from cozy.db import *
+from cozy.player import *
 
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
@@ -10,35 +11,45 @@ class BookElement(Gtk.Box):
   This class represents a book with big artwork in the book viewer.
   """
   book = None
+  ui = None
   selected = False
-  def __init__(self, b):
+  wait_to_seek = False
+  playing = False
+
+  def __init__(self, b, ui):
     self.book = b
+    self.ui = ui
 
     super(Gtk.Box, self).__init__()
     self.set_orientation(Gtk.Orientation.VERTICAL)
-    self.set_spacing(10)
+    self.set_spacing(7)
     self.set_halign(Gtk.Align.CENTER)
     self.set_valign(Gtk.Align.START)
     self.set_margin_top(10)
 
     # label contains the book name and is limited to x chars
-    label = Gtk.Label((self.book.name[:MAX_BOOK_LENGTH] + '...') if len(self.book.name) > MAX_BOOK_LENGTH else self.book.name)
-    label.set_xalign(0.5)
-    label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
-    label.props.max_width_chars = 30
-    label.props.justify = Gtk.Justification.CENTER
+    title_label = Gtk.Label("")
+    title = (self.book.name[:MAX_BOOK_LENGTH] + '...') if len(self.book.name) > MAX_BOOK_LENGTH else self.book.name
+    title_label.set_markup("<b>" + title + "</b>")
+    title_label.set_xalign(0.5)
+    title_label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
+    title_label.props.max_width_chars = 30
+    title_label.props.justify = Gtk.Justification.CENTER
 
-    # load the book cover, otherwise the placeholder
-    if self.book.cover is not None:
-        loader = GdkPixbuf.PixbufLoader.new_with_type("jpeg")
-        loader.write(b.cover)
-        loader.close()
-        pixbuf = loader.get_pixbuf()
-    else:
-        pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
+    author_label = Gtk.Label((self.book.author[:MAX_BOOK_LENGTH] + '...') if len(self.book.author) > MAX_BOOK_LENGTH else self.book.author)
+    author_label.set_xalign(0.5)
+    author_label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
+    author_label.props.max_width_chars = 30
+    author_label.props.justify = Gtk.Justification.CENTER
 
     # scale the book cover to a fix size.
-    pixbuf = pixbuf.scale_simple(180, 180, GdkPixbuf.InterpType.BILINEAR)
+    pixbuf = get_cover_pixbuf(self.book)
+    if pixbuf.get_height() > pixbuf.get_width():
+      width = int(pixbuf.get_width() / (pixbuf.get_height() / 180))
+      pixbuf = pixbuf.scale_simple(width, 180, GdkPixbuf.InterpType.BILINEAR)
+    else:
+      height = int(pixbuf.get_height() / (pixbuf.get_width() / 180))
+      pixbuf = pixbuf.scale_simple(180, height, GdkPixbuf.InterpType.BILINEAR)
     
     # box is the main container for the album art
     box = Gtk.EventBox()
@@ -63,17 +74,15 @@ class BookElement(Gtk.Box):
     play_box.connect("leave-notify-event", self._on_play_leave_notify)
     # on click we want to play the audio book
     play_box.connect("button-press-event", self.__on_play_button_press)
-
-    # play_img is the themed play button for the overlay
-    play_img = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.DIALOG)
-    play_img.get_style_context().add_class("white")
+    play_box.set_property("halign", Gtk.Align.CENTER)
+    play_box.set_property("valign", Gtk.Align.CENTER)
 
     # play_color is an overlay for the play button 
     # with this it should be visible on any album art color
-    play_color = Gtk.Grid()
-    play_color.get_style_context().add_class("black_opacity")
-    play_color.set_property("halign", Gtk.Align.CENTER)
-    play_color.set_property("valign", Gtk.Align.CENTER)
+    play_image = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/play_background.svg")
+    self.play_button = Gtk.Image.new_from_pixbuf(play_image)
+    self.play_button.set_property("halign", Gtk.Align.CENTER)
+    self.play_button.set_property("valign", Gtk.Align.CENTER)
 
     # this is the main overlay for the album art
     # we need to create field for the overlays 
@@ -82,22 +91,25 @@ class BookElement(Gtk.Box):
 
     # this is the play symbol overlay
     self.play_overlay = Gtk.Overlay.new()
-    self.play_overlay.set_opacity(0.0)
+
+    # this is for the play button animation
+    self.play_revealer = Gtk.Revealer()
+    self.play_revealer.set_transition_type(Gtk.RevealerTransitionType.CROSSFADE)
+    self.play_revealer.set_transition_duration(300)
+    self.play_revealer.add(self.play_overlay)
     
     # this grid has a background color to act as a visible overlay
     color = Gtk.Grid()
-    color.get_style_context().add_class("mouse_hover")
     color.set_property("halign", Gtk.Align.CENTER)
     color.set_property("valign", Gtk.Align.CENTER)
 
     # assemble play overlay
-    play_box.add(play_img)
-    play_color.add(play_box)
-    self.play_overlay.add(play_color)
+    play_box.add(self.play_button)
+    self.play_overlay.add(play_box)
 
     # assemble overlay with album art
     self.overlay.add(img)
-    self.overlay.add_overlay(self.play_overlay)
+    self.overlay.add_overlay(self.play_revealer)
 
     # assemble overlay color
     color.add(self.overlay)
@@ -105,7 +117,8 @@ class BookElement(Gtk.Box):
 
     # assemble finished element
     self.add(box)
-    self.add(label)
+    self.add(title_label)
+    self.add(author_label)
 
     # create track list popover
     self.__create_popover()
@@ -119,31 +132,35 @@ class BookElement(Gtk.Box):
     scroller.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
     
     # This box contains all content
-    box = Gtk.Box()
-    box.set_orientation(Gtk.Orientation.VERTICAL)
-    box.set_halign(Gtk.Align.CENTER)
-    box.set_valign(Gtk.Align.START)
-    box.props.margin = 8
+    self.track_box = Gtk.Box()
+    self.track_box.set_orientation(Gtk.Orientation.VERTICAL)
+    self.track_box.set_halign(Gtk.Align.CENTER)
+    self.track_box.set_valign(Gtk.Align.START)
+    self.track_box.props.margin = 8
 
     count = 0
-    for track in Tracks(self.book):
-      box.add(TrackElement(track))
+    for track in tracks(self.book):
+      self.track_box.add(TrackElement(track, self.ui))
       count += 1
 
     if Gtk.get_minor_version() > 20:
       scroller.set_propagate_natural_height(True)
-      scroller.set_max_content_height(600)
+      scroller.set_max_content_height(500)
     else:
       padding = 17
       height = 24
-      scroller.set_size_request(-1, count * height + padding)
-      pass
+      scroller_height = count * height + padding
+      if scroller_height > 500:
+        scroller_height = 500
+      scroller.set_size_request(-1, scroller_height)
 
     self.popover.connect("closed", self.__on_popover_close)
 
     self.popover.add(scroller)
-    scroller.add_with_viewport(box)
+    scroller.add_with_viewport(self.track_box)
     scroller.show_all()
+
+    self._mark_current_track()
 
   def __on_button_press(self, eventbox, event):
     self.selected = True
@@ -159,8 +176,8 @@ class BookElement(Gtk.Box):
     :param widget: as Gtk.EventBox
     :param event: as Gdk.Event
     """
-    self.overlay.set_opacity(0.9)
-    self.play_overlay.set_opacity(1.0)
+    self.overlay.set_opacity(0.8)
+    self.play_revealer.set_reveal_child(True)
 
   def _on_leave_notify(self, widget, event):
     """
@@ -170,7 +187,7 @@ class BookElement(Gtk.Box):
     """
     if not self.selected:
       self.overlay.set_opacity(1.0)
-      self.play_overlay.set_opacity(0.0)
+      self.play_revealer.set_reveal_child(False)
 
   def __on_popover_close(self, popover):
     """
@@ -195,7 +212,39 @@ class BookElement(Gtk.Box):
     """
     Play this book.
     """
+    track = get_track_for_playback(self.book)
+    current_track = get_current_track()
+
+    if current_track is not None and current_track.book.id == self.book.id:
+      play_pause(None)
+      if get_gst_player_state() == Gst.State.PLAYING:
+        jump_to_ns(track.position)
+    else:
+      load_file(track)
+      play_pause(None, True)
+
     return True
+
+  def _mark_current_track(self):
+    """
+    Mark the current track position in the popover.
+    """
+    book = Book.select().where(Book.id == self.book.id).get()
+
+    if book.position < 1:
+      return
+
+    for track_element in self.track_box.get_children():
+      if track_element.track.id == book.position:
+        track_element.select()
+      else:
+        track_element.deselect()
+
+  def set_playing(self, is_playing):
+    if is_playing:
+      self.play_button.set_from_resource("/de/geigi/cozy/pause_background.svg")
+    else:
+      self.play_button.set_from_resource("/de/geigi/cozy/play_background.svg")
 
 class TrackElement(Gtk.EventBox):
   """
@@ -203,8 +252,11 @@ class TrackElement(Gtk.EventBox):
   """
   track = None
   selected = False
-  def __init__(self, t):
+  ui = None
+  
+  def __init__(self, t, ui):
     self.track = t
+    self.ui = ui
 
     super(Gtk.EventBox, self).__init__()
     self.connect("enter-notify-event", self._on_enter_notify)
@@ -243,7 +295,7 @@ class TrackElement(Gtk.EventBox):
     title_label.props.width_request = 100
     title_label.props.xalign = 0.0
 
-    dur_label.set_text(SecondsToStr(self.track.length))
+    dur_label.set_text(seconds_to_str(self.track.length))
     dur_label.set_halign(Gtk.Align.END)
     dur_label.props.margin = 4
 
@@ -255,7 +307,20 @@ class TrackElement(Gtk.EventBox):
     self.add(self.box)
 
   def __on_button_press(self, eventbox, event):
-    pass
+    """
+    Play the selected track.
+    TODO Jump to last position
+    """
+    current_track = get_current_track()
+
+    if current_track is not None and current_track.id == self.track.id:
+      play_pause(None)
+      if get_gst_player_state() == Gst.State.PLAYING:
+        jump_to_ns(Track.select().where(Track.id == self.track.id).get().position)
+    else:
+      load_file(Track.select().where(Track.id == self.track.id).get())
+      play_pause(None, True)
+      Book.update(position=self.track).where(Book.id == self.track.book.id).execute()
 
   def _on_enter_notify(self, widget, event):
     """
@@ -263,7 +328,8 @@ class TrackElement(Gtk.EventBox):
     :param widget: as Gtk.EventBox
     :param event: as Gdk.Event
     """
-    self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+    if self.ui.current_track_element is not self and not self.selected:
+      self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
     self.box.get_style_context().add_class("box_hover")
 
   def _on_leave_notify(self, widget, event):
@@ -273,4 +339,20 @@ class TrackElement(Gtk.EventBox):
     :param event: as Gdk.Event (can be None)
     """
     self.box.get_style_context().remove_class("box_hover")
+    if self.ui.current_track_element is not self and not self.selected:
+      self.play_img.clear()
+
+  def select(self):
+    """
+    Select this track as the current position of the audio book. 
+    Permanently displays the play icon.
+    """
+    self.selected = True
+    self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+
+  def deselect(self):
+    """
+    Deselect this track.
+    """
+    self.selected = False
     self.play_img.clear()

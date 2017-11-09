@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.0 -->
+<!-- Generated with glade 3.20.1 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
+  <object class="GtkImage" id="pause_img">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin_left">10</property>
+    <property name="margin_right">10</property>
+    <property name="icon_name">media-playback-pause-symbolic</property>
+  </object>
   <object class="GtkImage" id="play_img">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -19,90 +26,297 @@
   <object class="GtkApplicationWindow" id="app_window">
     <property name="name">main_window</property>
     <property name="can_focus">False</property>
-    <property name="default_width">1100</property>
-    <property name="default_height">700</property>
-    <property name="icon_name">multimedia</property>
+    <property name="icon_name">com.github.geigi.cozy</property>
     <child>
-      <object class="GtkPaned" id="main_content">
+      <object class="GtkStack" id="main_stack">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="transition_type">crossfade</property>
         <child>
-          <object class="GtkBox" id="sort_box">
-            <property name="width_request">80</property>
+          <object class="GtkPaned" id="main_content">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkStackSwitcher" id="sort_stack_switcher">
+              <object class="GtkBox" id="sort_box">
+                <property name="width_request">80</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="hexpand">True</property>
-                <property name="stack">sort_stack</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="hexpand">True</property>
+                    <child>
+                      <object class="GtkToggleButton" id="author_toggle_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="focus_on_click">False</property>
+                        <property name="receives_default">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="relief">none</property>
+                        <property name="active">True</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="width_request">90</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">&lt;big&gt;Author&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
+                            <style>
+                              <class name="no_frame"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToggleButton" id="reader_toggle_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="focus_on_click">False</property>
+                        <property name="receives_default">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="relief">none</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="width_request">90</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">&lt;big&gt;Reader&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
+                            <style>
+                              <class name="no_frame"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkStack" id="sort_stack">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="vexpand">True</property>
+                    <property name="transition_type">slide-left-right</property>
+                    <child>
+                      <object class="GtkScrolledWindow" id="sort_author_scroller">
+                        <property name="name">sort_author_scroller</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="shadow_type">in</property>
+                        <child>
+                          <object class="GtkViewport" id="sort_author_viewport">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkListBox" id="author_box">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="no_frame"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="name">author</property>
+                        <property name="title" translatable="yes">Author</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkScrolledWindow" id="sort_reader_scroller">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="shadow_type">in</property>
+                        <child>
+                          <object class="GtkViewport" id="sort_reader_viewport">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkListBox" id="reader_box">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="no_frame"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="name">reader</property>
+                        <property name="title" translatable="yes">Reader</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="resize">True</property>
+                <property name="shrink">False</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="book_scroller">
+                <property name="width_request">600</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hscrollbar_policy">never</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkViewport" id="books_viewport">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkFlowBox" id="book_box">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">baseline</property>
+                        <property name="valign">start</property>
+                        <property name="margin_left">10</property>
+                        <property name="margin_right">10</property>
+                        <property name="margin_top">10</property>
+                        <property name="margin_bottom">10</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="homogeneous">True</property>
+                        <property name="column_spacing">30</property>
+                        <property name="row_spacing">30</property>
+                        <property name="selection_mode">none</property>
+                        <property name="activate_on_single_click">False</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
                 <style>
-                  <class name="bold"/>
+                  <class name="no_frame"/>
                 </style>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
+                <property name="resize">True</property>
+                <property name="shrink">True</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="name">main</property>
+            <property name="title">page0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="import_box">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">40</property>
+            <property name="margin_right">40</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">70</property>
+                <property name="label" translatable="yes">Importing your audiobooks...</property>
+                <attributes>
+                  <attribute name="weight" value="heavy"/>
+                  <attribute name="scale" value="1"/>
+                </attributes>
+                <style>
+                  <class name="h2"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkStack" id="sort_stack">
+              <object class="GtkProgressBar" id="progress_bar">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="valign">center</property>
+                <property name="margin_left">10</property>
+                <property name="margin_right">10</property>
+                <property name="margin_top">50</property>
+                <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
-                <property name="transition_type">slide-left-right</property>
-                <child>
-                  <object class="GtkScrolledWindow" id="sort_author_scroller">
-                    <property name="name">sort_author_scroller</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="shadow_type">in</property>
-                    <child>
-                      <object class="GtkViewport" id="sort_author_viewport">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkListBox" id="author_box">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="name">author</property>
-                    <property name="title" translatable="yes">Author</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkScrolledWindow" id="sort_reader_scroller">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="shadow_type">in</property>
-                    <child>
-                      <object class="GtkViewport" id="sort_reader_viewport">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkListBox" id="reader_box">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="name">reader</property>
-                    <property name="title" translatable="yes">Reader</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="name">import</property>
+            <property name="title">page1</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="margin_left">30</property>
+            <property name="margin_right">30</property>
+            <property name="margin_top">40</property>
+            <property name="margin_bottom">40</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_bottom">10</property>
+                <property name="label" translatable="yes">Import your Audiobooks</property>
+                <style>
+                  <class name="h1"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_bottom">85</property>
+                <property name="label" translatable="yes">Cozy automatically imports your audiobooks in one directory - your library</property>
+                <style>
+                  <class name="h2"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -110,48 +324,183 @@
                 <property name="position">1</property>
               </packing>
             </child>
-          </object>
-          <packing>
-            <property name="resize">True</property>
-            <property name="shrink">False</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkScrolledWindow" id="book_scroller">
-            <property name="width_request">600</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hscrollbar_policy">never</property>
-            <property name="shadow_type">in</property>
             <child>
-              <object class="GtkViewport" id="books_viewport">
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_bottom">35</property>
                 <child>
-                  <object class="GtkFlowBox" id="book_box">
+                  <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="halign">baseline</property>
-                    <property name="valign">start</property>
-                    <property name="margin_left">10</property>
-                    <property name="margin_right">10</property>
-                    <property name="margin_top">10</property>
-                    <property name="margin_bottom">10</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <property name="homogeneous">True</property>
-                    <property name="column_spacing">30</property>
-                    <property name="row_spacing">30</property>
-                    <property name="selection_mode">none</property>
-                    <property name="activate_on_single_click">False</property>
+                    <property name="margin_right">8</property>
+                    <property name="icon_name">preferences-desktop-peripherals</property>
+                    <property name="icon_size">6</property>
                   </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Drag &amp; Drop</property>
+                        <property name="single_line_mode">True</property>
+                        <style>
+                          <class name="h3"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Drag your audiobooks into cozy and the will be automatically imported to your library</property>
+                        <style>
+                          <class name="h4"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
               </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin_bottom">10</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_right">7</property>
+                        <property name="icon_name">folder-open</property>
+                        <property name="icon_size">6</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">Change Audiobooks Folder</property>
+                            <property name="single_line_mode">True</property>
+                            <style>
+                              <class name="h3"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Load audiobooks from a folder, network drive or an external disk</property>
+                            <style>
+                              <class name="h4"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkFileChooserButton" id="no_media_file_chooser">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">54</property>
+                    <property name="margin_top">2</property>
+                    <property name="action">select-folder</property>
+                    <property name="local_only">False</property>
+                    <property name="title" translatable="yes"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
             </child>
           </object>
           <packing>
-            <property name="resize">True</property>
-            <property name="shrink">False</property>
+            <property name="name">no_media</property>
+            <property name="title">page0</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>
@@ -170,87 +519,16 @@
             <property name="margin_right">10</property>
             <property name="hexpand">True</property>
             <child>
-              <object class="GtkImage" id="cover_img">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_top">2</property>
-                <property name="margin_bottom">2</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkBox" id="title_box">
-                <property name="name">s</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="vexpand">True</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel" id="title_label">
-                    <property name="name">title_book</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="valign">end</property>
-                    <property name="vexpand">True</property>
-                    <property name="label" translatable="no">Harry Potter und der Halbblutprinz</property>
-                    <property name="justify">right</property>
-                    <property name="ellipsize">end</property>
-                    <property name="width_chars">10</property>
-                    <property name="single_line_mode">True</property>
-                    <style>
-                      <class name="title"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="subtitle_label">
-                    <property name="name">title_track</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="valign">start</property>
-                    <property name="vexpand">True</property>
-                    <property name="label" translatable="no">Epilog</property>
-                    <property name="ellipsize">end</property>
-                    <property name="width_chars">10</property>
-                    <property name="single_line_mode">True</property>
-                    <style>
-                      <class name="subtitle"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkBox" id="control_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
-                <property name="margin_right">20</property>
+                <property name="margin_right">2</property>
                 <child>
                   <object class="GtkButton" id="prev_button">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="halign">center</property>
@@ -269,6 +547,7 @@
                   <object class="GtkButton" id="play_button">
                     <property name="width_request">42</property>
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="halign">center</property>
@@ -285,7 +564,6 @@
                 </child>
                 <child>
                   <object class="GtkVolumeButton" id="volume_button">
-                    <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="focus_on_click">False</property>
                     <property name="receives_default">True</property>
@@ -321,18 +599,6 @@ audio-volume-medium-symbolic</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
-                <child>
-                  <object class="GtkSpinner" id="spinner">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_left">10</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">3</property>
-                  </packing>
-                </child>
                 <style>
                   <class name="linked"/>
                 </style>
@@ -340,24 +606,16 @@ audio-volume-medium-symbolic</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="position">0</property>
               </packing>
             </child>
-          </object>
-        </child>
-        <child type="title">
-          <object class="GtkBox" id="position_box">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_right">20</property>
-            <property name="hexpand">True</property>
             <child>
-              <object class="GtkLabel" id="current_label">
+              <object class="GtkImage" id="cover_img">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">end</property>
-                <property name="margin_right">3</property>
-                <property name="label" translatable="no">0:00</property>
+                <property name="margin_left">5</property>
+                <property name="margin_top">2</property>
+                <property name="margin_bottom">2</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -366,13 +624,55 @@ audio-volume-medium-symbolic</property>
               </packing>
             </child>
             <child>
-              <object class="GtkScale" id="progress_scale">
-                <property name="width_request">150</property>
+              <object class="GtkBox" id="title_box">
+                <property name="name">s</property>
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hexpand">True</property>
-                <property name="round_digits">1</property>
-                <property name="draw_value">False</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">5</property>
+                <property name="margin_right">5</property>
+                <property name="vexpand">True</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel" id="title_label">
+                    <property name="name">title_book</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="valign">end</property>
+                    <property name="vexpand">True</property>
+                    <property name="justify">right</property>
+                    <property name="ellipsize">end</property>
+                    <property name="width_chars">10</property>
+                    <property name="single_line_mode">True</property>
+                    <style>
+                      <class name="title"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="subtitle_label">
+                    <property name="name">title_track</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="valign">start</property>
+                    <property name="vexpand">True</property>
+                    <property name="ellipsize">end</property>
+                    <property name="width_chars">10</property>
+                    <property name="single_line_mode">True</property>
+                    <style>
+                      <class name="subtitle"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -381,17 +681,134 @@ audio-volume-medium-symbolic</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="remaining_label">
+              <object class="GtkSpinner" id="spinner">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="margin_left">3</property>
-                <property name="label" translatable="no">4:00</property>
+                <property name="margin_left">5</property>
+                <property name="margin_right">5</property>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">3</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child type="title">
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkStack" id="status_stack">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="transition_type">slide-up-down</property>
+                <child>
+                  <object class="GtkBox" id="position_box">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_right">20</property>
+                    <property name="hexpand">True</property>
+                    <child>
+                      <object class="GtkLabel" id="current_label">
+                        <property name="width_request">35</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">end</property>
+                        <property name="margin_right">3</property>
+                        <property name="margin_top">2</property>
+                        <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkScale" id="progress_scale">
+                        <property name="width_request">150</property>
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="round_digits">1</property>
+                        <property name="draw_value">False</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="remaining_label">
+                        <property name="width_request">35</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="margin_left">3</property>
+                        <property name="margin_top">2</property>
+                        <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">playback</property>
+                    <property name="title">page0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="status_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_bottom">5</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkProgressBar" id="update_progress_bar">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_right">20</property>
+                        <property name="hexpand">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">working</property>
+                    <property name="title">page1</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
               </packing>
             </child>
           </object>
@@ -407,7 +824,6 @@ audio-volume-medium-symbolic</property>
             <property name="vexpand">True</property>
             <child>
               <object class="GtkMenuButton" id="search_button">
-                <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <child>
@@ -430,10 +846,10 @@ audio-volume-medium-symbolic</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <child>
-                  <object class="GtkImage">
+                  <object class="GtkImage" id="timer_image">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">weather-clear-night-symbolic</property>
+                    <property name="icon_name">weather-clear-symbolic</property>
                   </object>
                 </child>
               </object>
@@ -441,6 +857,25 @@ audio-volume-medium-symbolic</property>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkMenuButton" id="menu_button">
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">open-menu-symbolic</property>
+                    <property name="icon_size">2</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>

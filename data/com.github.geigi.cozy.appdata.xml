@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.github.geigi.cozy.desktop</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <name>Cozy</name>
+  <summary>A modern audio book player for Linux.</summary>
+  <description>
+      <p>
+      You like audio books? Then lets get cozy!
+      </p>
+      <p>
+      Cozy is a modern audio book player for Linux. Here are some of the current features:
+      </p>
+      <ul>
+      <li>Import all your audiobooks into cozy to browse them comfortably</li>
+      <li>Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg audio books</li>
+      <li>Remembers your playback position</li>
+      <li>Sleep timer!</li>
+      <li>drag and drop import and copy support</li>
+      <li>Sort your audio books by author, reader and name</li>
+      </ul>
+      <p>What's next?</p>
+      <ul>
+      <li>wav support</li>
+      <li>Search</li>
+      <li>Sort by name, added date, last played</li>
+      <li>Ratings</li>
+      <li>Playback speed control</li>
+      <li>... you tell me!</li>
+      </ul>
+      <p>
+      Note: If you're from the EU and want to support this project, head over to my patreon page: https://www.patreon.com/geigi 
+      Because of tax reasons I cannot accept payments from the EU except from Germany.
+      </p>
+  </description>
+  <provides>
+    <binary>com.github.geigi.cozy</binary>
+  </provides>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot1.png</image>
+    </screenshot>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot2.png</image>
+    </screenshot>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot3.png</image>
+    </screenshot>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot4.png</image>
+    </screenshot>
+  </screenshots>
+  <developer_name>Julian Geywitz</developer_name>
+  <url type="homepage">https://github.com/geigi/cozy</url>
+  <url type="bugtracker">https://github.com/geigi/cozy/issues</url>
+  <url type="help">https://github.com/geigi/cozy/issues</url>
+  <update_contact>cozy@geigi.de</update_contact>
+  <releases>
+    <release version="0.3.5" timestamp="1509552782">
+      <description>
+        <p>Fixed peewee dependency install location</p>
+      </description>
+    </release>
+    <release version="0.3.4" timestamp="1509552782">
+      <description>
+        <p>Dependency fixes</p>
+      </description>
+    </release>
+    <release version="0.3.3" timestamp="1509550360">
+      <description>
+        <p>App Center build fix</p>
+      </description>
+    </release>
+    <release version="0.3.2" timestamp="1509548540">
+      <description>
+        <p>App Center build fix</p>
+      </description>
+    </release>
+    <release version="0.3.1" timestamp="1509547979">
+      <description>
+        <p>App Center build fix</p>
+      </description>
+    </release>
+    <release version="0.3.0" timestamp="1509547123">
+      <description>
+        <p>App Center build fix</p>
+      </description>
+    </release>
+    <release version="0.2.9" timestamp="1509546498">
+      <description>
+        <p>Fixed debian build?</p>
+      </description>
+    </release>
+    <release version="0.2.8" timestamp="1509391672">
+      <description>
+        <p>Fixed debian build</p>
+      </description>
+    </release>
+    <release version="0.2.7" timestamp="1509390271">
+      <description>
+        <p>Fixed debian runtime dependencies</p>
+      </description>
+    </release>
+    <release version="0.2.6" timestamp="1509365426">
+      <description>
+        <p>UI fixes in hello screen</p>
+        <p>Small bug fixes</p>
+        <p>New screenshots for app center</p>
+        <p>Contributors and patrons will now be added to the about window</p>
+      </description>
+    </release>
+    <release version="0.2.5" timestamp="1509142062">
+      <description>
+        <p>Do not use default_width and default_height properties</p>
+        <p>Smaller HeaderBar height</p>
+        <p>Use open-menu-symbolic for preferences button</p>
+        <p>Instructions if there are no files in library</p>
+        <p>About dialog now quitable</p>
+        <p>Optional auto-rescan the directory on startup</p>
+        <p>Bugfixes and ui tweaks</p>
+      </description>
+    </release>
+    <release version="0.2.3" timestamp="1508767505">
+      <description>
+        <p>Some UI changes
+        </p>
+        <p>New playback hover icon
+        </p>
+      </description>
+    </release>
+    <release version="0.2.2" timestamp="1508681985">
+      <description>
+        <p>Fixed missing track list
+        </p>
+      </description>
+    </release>
+    <release version="0.2.0" timestamp="1508666338">
+      <description>
+        <p>Cozy's first release! This release includes everything to start listening to your audiobooks. More features are coming soon!
+      </p>
+      </description>
+    </release>
+  </releases>
+  <custom>
+    <value key="x-appcenter-color-primary">#FB6542</value>
+    <value key="x-appcenter-color-primary-text">#FFFFFF</value>
+    <value key="x-appcenter-suggested-price">4</value>
+  </custom>
+</component>

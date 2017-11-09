@@ -183,7 +183,7 @@ Missing character: There is no t in font nullfont!
 <inserted text> 
                 $
 l.8 project_
-            id = 'de.geigi.Cozy'
+            id = 'com.github.geigi.cozy'
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 

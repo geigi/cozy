@@ -2,13 +2,13 @@
 Name=Cozy
 GenericName=Audio Book Player
 Comment=Play and organize your audio book collection
-# Icon=de.geigi.cozy
-Exec=cozy %U
+Icon=com.github.geigi.cozy
+Exec=com.github.geigi.cozy %U
 Terminal=false
 Type=Application
 Categories=GNOME;GTK;AudioVideo;Player;Audio;
 StartupNotify=true
-MimeType=application/ogg;application/x-ogg;application/x-ogm-audio;audio/aac;audio/mp4;audio/mpeg;audio/mpegurl;audio/ogg;audio/vnd.rn-realaudio;audio/vorbis;audio/x-flac;audio/x-mp3;audio/x-mpeg;audio/x-mpegurl;audio/x-ms-wma;audio/x-musepack;audio/x-oggflac;audio/x-pn-realaudio;audio/x-scpls;audio/x-speex;audio/x-vorbis;audio/x-vorbis+ogg;audio/x-wav;x-content/audio-player;audio/x-aac;audio/m4a;audio/x-m4a;audio/mp3;audio/ac3;audio/flac;application/xspf+xml;audio/x-opus+ogg;
+MimeType=application-x;
 
 Actions=Toggle;Next;Prev;
 

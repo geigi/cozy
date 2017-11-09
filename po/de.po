@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cozy 0.1\n"
-"POT-Creation-Date: 2017-08-26 09:43+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-02 18:42+0200\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
 "MIME-Version: 1.0\n"
@@ -15,31 +16,86 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/importer.py:90
+#: cozy/importer.py:212
 msgid "Unknown Author"
 msgstr "Unbekannter Autor"
 
-#: cozy/importer.py:91
+#: cozy/importer.py:213
 msgid "Unknown Reader"
 msgstr "Unbekannter Leser"
 
-#: cozy/ui.py:197 cozy/ui.py:335 data/ui/timer_popover.ui:71
+#: cozy/ui.py:295 cozy/ui.py:544 data/ui/timer_popover.ui:71
 msgid "min"
 msgstr "min"
 
-#: cozy/ui.py:300 cozy/ui.py:303 cozy/ui.py:388 cozy/ui.py:397
+#: cozy/ui.py:455
+msgid "Importing Audiobooks"
+msgstr "Importiere Hörbücher"
+
+#: cozy/ui.py:502 cozy/ui.py:505 cozy/ui.py:881 cozy/ui.py:890
 msgid "All"
 msgstr "Alle"
 
-#: data/ui/main_window.ui:79
+#: cozy/ui.py:663
+msgid "Changing audio book location..."
+msgstr "Wechsle zu neuem Hörbuch-Ordner..."
+
+#: data/ui/main_window.ui:65
+msgid "<big>Author</big>"
+msgstr "<big>Autor</big>"
+
+#: data/ui/main_window.ui:92
+msgid "<big>Reader</big>"
+msgstr "<big>Leser</big>"
+
+#: data/ui/main_window.ui:143
 msgid "Author"
 msgstr "Autor"
 
-#: data/ui/main_window.ui:102
+#: data/ui/main_window.ui:169
 msgid "Reader"
 msgstr "Leser"
 
-#: data/ui/about.ui:12
+#: data/ui/main_window.ui:245
+msgid "Importing your audiobooks..."
+msgstr "Importiere deine Hörbücher..."
+
+#: data/ui/main_window.ui:300
+msgid "Import your Audiobooks"
+msgstr "Importiere deine Hörbücher"
+
+#: data/ui/main_window.ui:316
+msgid ""
+"Cozy automatically imports your audiobooks in one directory - your library"
+msgstr ""
+"Cozy verwaltet automatisch alle Hörbücher in einem Ordner - deiner "
+"Bibliothek"
+
+#: data/ui/main_window.ui:356 data/ui/hello.ui:240
+msgid "Drag & Drop"
+msgstr "Drag & Drop"
+
+#: data/ui/main_window.ui:372
+msgid ""
+"Drag your audiobooks into cozy and the will be automatically imported to "
+"your library"
+msgstr "Ziehe deine Hörbücher mit der Maus nach Cozy um sie zu importieren"
+
+#: data/ui/main_window.ui:432
+msgid "Change Audiobooks Folder"
+msgstr "Wechsle Hörbuch-Ordner"
+
+#: data/ui/main_window.ui:448
+msgid "Load audiobooks from a folder, network drive or an external disk"
+msgstr ""
+"Lade Hörbücher von einem Ordner, einer Netzwerkfestplatte oder einer "
+"externen Festplatte"
+
+#: data/ui/about.ui:11
+msgid "Support me on Patreon: https://www.patreon.com/geigi"
+msgstr "Unterstütze mich auf Patreon: https://www.patreon.com/geigi"
+
+#: data/ui/about.ui:13
 msgid "GitHub"
 msgstr "GitHub"
 
@@ -63,6 +119,27 @@ msgstr "_Über"
 msgid "_Quit"
 msgstr "_Beenden"
 
+#: data/ui/file_not_found.ui:19
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: data/ui/file_not_found.ui:32
+msgid "Locate"
+msgstr "Auswählen"
+
+#: data/ui/file_not_found.ui:84
+msgid "File not found"
+msgstr "Datei nicht gefunden"
+
+#: data/ui/file_not_found.ui:100
+msgid ""
+"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
+msgstr ""
+
+#: data/ui/file_not_found.ui:117
+msgid "This file could not be found. Do you want to locate it manually?"
+msgstr "Diese Datei wurde nicht gefunden. Möchtest Du sie selbst auswählen?"
+
 #: data/ui/hello.ui:44
 msgid ""
 "Cozy is an application to browse and playback your DRM free audio book "
@@ -79,66 +156,66 @@ msgstr ""
 "Zu Beginn wähle einen Ordner, in dem du deine Hörbücher speichern möchtest. "
 "Hast du bereits einen Ordner mit Hörbüchern, kannst du ihn hier auswählen:"
 
-#: data/ui/hello.ui:139
+#: data/ui/hello.ui:154
+msgid "Automatically import new audiobooks on startup"
+msgstr "Importiere neue Hörbücher automatisch beim Start"
+
+#: data/ui/hello.ui:179
 msgid "How to add new audio books:"
 msgstr "So fügst du neue Bücher hinzu:"
 
-#: data/ui/hello.ui:200
-msgid "Drag & Drop"
-msgstr "Drag & Drop"
-
-#: data/ui/hello.ui:212
+#: data/ui/hello.ui:252
 msgid "Rescan from menu"
 msgstr "Medienordner scannen im Menü anzeigen"
 
-#: data/ui/hello.ui:229
+#: data/ui/hello.ui:269
 msgid "Let's get cozy"
 msgstr "Let's get cozy"
 
-#: data/ui/settings.ui:29 data/ui/settings.ui:105
+#: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
 msgstr "Sortieren nach:"
 
-#: data/ui/settings.ui:39
+#: data/ui/settings.ui:37
 msgid "Newest"
 msgstr "Neuestes"
 
-#: data/ui/settings.ui:56
+#: data/ui/settings.ui:54
 msgid "Year"
 msgstr "Jahr"
 
-#: data/ui/settings.ui:74
+#: data/ui/settings.ui:72
 msgid "Name"
 msgstr "Name"
 
-#: data/ui/settings.ui:146
+#: data/ui/settings.ui:143
 msgid "Appearance"
 msgstr "Erscheinung"
 
-#: data/ui/settings.ui:162
+#: data/ui/settings.ui:158
 msgid "Suspend system on timer"
 msgstr "Schicke System schlafen nach Timer"
 
-#: data/ui/settings.ui:198
+#: data/ui/settings.ui:194
 msgid "Replay 30 seconds"
 msgstr "30 Sekunden Replay"
 
-#: data/ui/settings.ui:233
+#: data/ui/settings.ui:229
 msgid "Automatic media scan"
 msgstr "Automatischer Medienordner Scan"
 
-#: data/ui/settings.ui:264
+#: data/ui/settings.ui:260
 msgid "Behaviour"
 msgstr "Verhalten"
 
-#: data/ui/settings.ui:281
+#: data/ui/settings.ui:276
 msgid "Follow symlinks"
 msgstr "Folge Symlinks"
 
-#: data/ui/settings.ui:319 data/ui/settings.ui:334
-msgid "Audio Books location"
-msgstr "Hörbücher Ordner"
+#: data/ui/settings.ui:314 data/ui/settings.ui:329
+msgid "Audio books location"
+msgstr "Hörbücher Pfad"
 
-#: data/ui/settings.ui:356
+#: data/ui/settings.ui:351
 msgid "Files"
 msgstr "Dateien"

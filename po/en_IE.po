@@ -6,133 +6,214 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cozy 0.1\n"
-"POT-Creation-Date: 2017-08-26 09:43+0200\n"
-"Last-Translator: Julian Geywotz <transifex@geigi.de>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-02 18:42+0200\n"
+"Last-Translator: Julian Geywitz <transifex@geigi.de>\n"
 "Language: en_IE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cozy/importer.py:90
+#: cozy/importer.py:212
 msgid "Unknown Author"
-msgstr ""
+msgstr "Unknown Author"
 
-#: cozy/importer.py:91
+#: cozy/importer.py:213
 msgid "Unknown Reader"
-msgstr ""
+msgstr "Unknown Reader"
 
-#: cozy/ui.py:197 cozy/ui.py:335 data/ui/timer_popover.ui:71
+#: cozy/ui.py:295 cozy/ui.py:544 data/ui/timer_popover.ui:71
 msgid "min"
-msgstr ""
+msgstr "min"
 
-#: cozy/ui.py:300 cozy/ui.py:303 cozy/ui.py:388 cozy/ui.py:397
+#: cozy/ui.py:455
+msgid "Importing Audiobooks"
+msgstr "Importing Audiobooks"
+
+#: cozy/ui.py:502 cozy/ui.py:505 cozy/ui.py:881 cozy/ui.py:890
 msgid "All"
-msgstr ""
+msgstr "All"
 
-#: data/ui/main_window.ui:79
+#: cozy/ui.py:663
+msgid "Changing audio book location..."
+msgstr "Changing audio book location..."
+
+#: data/ui/main_window.ui:65
+msgid "<big>Author</big>"
+msgstr "<big>Author</big>"
+
+#: data/ui/main_window.ui:92
+msgid "<big>Reader</big>"
+msgstr "<big>Reader</big>"
+
+#: data/ui/main_window.ui:143
 msgid "Author"
-msgstr ""
+msgstr "Author"
 
-#: data/ui/main_window.ui:102
+#: data/ui/main_window.ui:169
 msgid "Reader"
-msgstr ""
+msgstr "Reader"
 
-#: data/ui/about.ui:12
-msgid "GitHub"
+#: data/ui/main_window.ui:245
+msgid "Importing your audiobooks..."
+msgstr "Importing your audiobooks..."
+
+#: data/ui/main_window.ui:300
+msgid "Import your Audiobooks"
+msgstr "Import your Audiobooks"
+
+#: data/ui/main_window.ui:316
+msgid ""
+"Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
+"Cozy automatically imports your audiobooks in one directory - your library"
+
+#: data/ui/main_window.ui:356 data/ui/hello.ui:240
+msgid "Drag & Drop"
+msgstr "Drag & Drop"
+
+#: data/ui/main_window.ui:372
+msgid ""
+"Drag your audiobooks into cozy and the will be automatically imported to "
+"your library"
+msgstr ""
+"Drag your audiobooks into cozy and the will be automatically imported to "
+"your library"
+
+#: data/ui/main_window.ui:432
+msgid "Change Audiobooks Folder"
+msgstr "Change Audiobooks Folder"
+
+#: data/ui/main_window.ui:448
+msgid "Load audiobooks from a folder, network drive or an external disk"
+msgstr "Load audiobooks from a folder, network drive or an external disk"
+
+#: data/ui/about.ui:11
+msgid "Support me on Patreon: https://www.patreon.com/geigi"
+msgstr "Support me on Patreon: https://www.patreon.com/geigi"
+
+#: data/ui/about.ui:13
+msgid "GitHub"
+msgstr "GitHub"
 
 #: data/ui/app_menu.ui:7
 msgid "_Scan Directory"
-msgstr ""
+msgstr "_Scan Directory"
 
 #: data/ui/app_menu.ui:13
 msgid "_Preferences"
-msgstr ""
+msgstr "_Preferences"
 
 #: data/ui/app_menu.ui:19
 msgid "_Help"
-msgstr ""
+msgstr "_Help"
 
 #: data/ui/app_menu.ui:23
 msgid "_About"
-msgstr ""
+msgstr "_About"
 
 #: data/ui/app_menu.ui:27
 msgid "_Quit"
+msgstr "_Quit"
+
+#: data/ui/file_not_found.ui:19
+msgid "Cancel"
+msgstr "Cancel"
+
+#: data/ui/file_not_found.ui:32
+msgid "Locate"
+msgstr "Locate"
+
+#: data/ui/file_not_found.ui:84
+msgid "File not found"
+msgstr "File not found"
+
+#: data/ui/file_not_found.ui:100
+msgid ""
+"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
 msgstr ""
+"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
+
+#: data/ui/file_not_found.ui:117
+msgid "This file could not be found. Do you want to locate it manually?"
+msgstr "This file could not be found. Do you want to locate it manually?"
 
 #: data/ui/hello.ui:44
 msgid ""
 "Cozy is an application to browse and playback your DRM free audio book "
 "collection. "
 msgstr ""
+"Cozy is an application to browse and playback your DRM free audio book "
+"collection. "
 
 #: data/ui/hello.ui:91
 msgid ""
 "To get started, select where you store your audio books. Files in this "
 "folder will be imported to your library:"
 msgstr ""
+"To get started, select where you store your audio books. Files in this "
+"folder will be imported to your library:"
 
-#: data/ui/hello.ui:139
+#: data/ui/hello.ui:154
+msgid "Automatically import new audiobooks on startup"
+msgstr "Automatically import new audiobooks on startup"
+
+#: data/ui/hello.ui:179
 msgid "How to add new audio books:"
-msgstr ""
+msgstr "How to add new audio books:"
 
-#: data/ui/hello.ui:200
-msgid "Drag & Drop"
-msgstr ""
-
-#: data/ui/hello.ui:212
+#: data/ui/hello.ui:252
 msgid "Rescan from menu"
-msgstr ""
+msgstr "Rescan from menu"
 
-#: data/ui/hello.ui:229
+#: data/ui/hello.ui:269
 msgid "Let's get cozy"
-msgstr ""
+msgstr "Let's get cozy"
 
-#: data/ui/settings.ui:29 data/ui/settings.ui:105
+#: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
-msgstr ""
+msgstr "Order by"
 
-#: data/ui/settings.ui:39
+#: data/ui/settings.ui:37
 msgid "Newest"
-msgstr ""
+msgstr "Newest"
 
-#: data/ui/settings.ui:56
+#: data/ui/settings.ui:54
 msgid "Year"
-msgstr ""
+msgstr "Year"
 
-#: data/ui/settings.ui:74
+#: data/ui/settings.ui:72
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
-#: data/ui/settings.ui:146
+#: data/ui/settings.ui:143
 msgid "Appearance"
-msgstr ""
+msgstr "Appearance"
 
-#: data/ui/settings.ui:162
+#: data/ui/settings.ui:158
 msgid "Suspend system on timer"
-msgstr ""
+msgstr "Suspend system on timer"
 
-#: data/ui/settings.ui:198
+#: data/ui/settings.ui:194
 msgid "Replay 30 seconds"
-msgstr ""
+msgstr "Replay 30 seconds"
 
-#: data/ui/settings.ui:233
+#: data/ui/settings.ui:229
 msgid "Automatic media scan"
-msgstr ""
+msgstr "Automatic media scan"
 
-#: data/ui/settings.ui:264
+#: data/ui/settings.ui:260
 msgid "Behaviour"
-msgstr ""
+msgstr "Behaviour"
 
-#: data/ui/settings.ui:281
+#: data/ui/settings.ui:276
 msgid "Follow symlinks"
-msgstr ""
+msgstr "Follow symlinks"
 
-#: data/ui/settings.ui:319 data/ui/settings.ui:334
-msgid "Audio Books location"
-msgstr ""
+#: data/ui/settings.ui:314 data/ui/settings.ui:329
+msgid "Audio books location"
+msgstr "Audio books location"
 
-#: data/ui/settings.ui:356
+#: data/ui/settings.ui:351
 msgid "Files"
-msgstr ""
+msgstr "Files"

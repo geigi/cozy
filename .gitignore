@@ -1,5 +1,12 @@
 app/
 bin/
+debian/build/
+debian/com.github.geigi.cozy.debhelper.log
+debian/com.github.geigi.cozy.substvars
+debian/com.github.geigi.cozy/
+debian/debhelper-build-stamp
+debian/files
+peewee/
 
 # Ignore glade tmp files
 *~

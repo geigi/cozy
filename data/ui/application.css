@@ -20,5 +20,28 @@
 }
 
 .box_hover {
-  background: shade(@theme_tooltip_bg_color, 1.1)
+  color: @theme_selected_fg_color;
+  background: @theme_selected_bg_color
+}
+
+.no_frame {
+  border-style: none;
+}
+
+.h1 {
+  font-size: 230%;
+}
+
+.h2 {
+  font-size: 200%;
+  font-weight: lighter;
+}
+
+.h3 {
+  font-size: 160%;
+}
+
+.h4 {
+  font-size: 130%;
+  font-weight: lighter;
 }
