@@ -200,13 +200,13 @@ def __importFile(file, directory, path, update=False):
     
   modified = os.path.getmtime(path)
 
-  # try to get all the tags
+  # try to get all the remaining tags
   try:
     if track_number is None:
       track_number = int(__get_common_tag(track, "tracknumber"))
-  except:
+  except Exception as e:
+    log.debug(e)
     track_number = 0
-    pass
 
   if book_name == None: book_name = os.path.basename(os.path.normpath(directory))
   if author == None or author == "": author = _("Unknown Author")
