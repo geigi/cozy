@@ -4,7 +4,7 @@
   <metadata_license>CC0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <name>Cozy</name>
-  <summary>A modern audio book player for Linux.</summary>
+  <summary>A modern audio book player for Linux</summary>
   <description>
       <p>
       You like audio books? Then lets get cozy!
@@ -30,7 +30,7 @@
       <li>... you tell me!</li>
       </ul>
       <p>
-      Note: If you're from the EU and want to support this project, head over to my patreon page: https://www.patreon.com/geigi 
+      Note: If you're from the EU and want to support this project, head over to my patreon page: <url>https://www.patreon.com/geigi</url>
       Because of tax reasons I cannot accept payments from the EU except from Germany.
       </p>
   </description>
@@ -60,6 +60,18 @@
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.3.7" timestamp="1510229179">
+      <description>
+        <p>The sleep timer has landed!</p>
+        <p>m4a/mp4 support!</p>
+        <p>Lots of UI improvements</p>
+        <p>More reliable playback</p>
+        <p>Fixed bug where tracks would appear twice in older GTK versions</p>
+        <p>More robust importing</p>
+        <p>New dialog when a file could not be found</p>
+        <p>Homepage URL is now corrected</p>
+      </description>
+    </release>
     <release version="0.3.6" timestamp="1510228225">
       <description>
         <p>The sleep timer has landed!</p>
