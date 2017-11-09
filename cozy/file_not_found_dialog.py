@@ -32,6 +32,9 @@ class FileNotFoundDialog():
     """
     self.parent.dialog_open = False
     self.dialog.destroy()
+    stop()
+    get_playbin().set_state(Gst.State.NULL)
+    emit_event("stop")
 
   def locate(self, button):
     """

@@ -25,7 +25,7 @@ def __on_gst_message(bus, message):
     err, debug = message.parse_error()
     log.error(err)
     log.debug(debug)
-    __emit_event("error", err)
+    emit_event("error", err)
   elif t == Gst.MessageType.STATE_CHANGED:
     state = get_gst_player_state()
     if state == Gst.State.PLAYING or state == Gst.State.PAUSED:
@@ -116,15 +116,15 @@ def play_pause(track, jump=False):
     # Track is already selected, only play/pause
     if get_gst_player_state() == Gst.State.PLAYING:
       __player.set_state(Gst.State.PAUSED)
-      __emit_event("pause")
+      emit_event("pause")
       Track.update(position=get_current_duration()).where(Track.id == get_current_track().id).execute()
     else: 
       __player.set_state(Gst.State.PLAYING)
-      __emit_event("play")
+      emit_event("play")
   else:
     load_file(track)
     __player.set_state(Gst.State.PLAYING)
-    __emit_event("play")
+    emit_event("play")
 
 def next_track():
   # try to load the next track of the book. 
@@ -155,7 +155,7 @@ def next_track():
     __player.set_state(Gst.State.NULL)
     Book.update(position=0).where(Book.id == current.id).execute()
     Settings.update(last_played_book=None).execute()
-    __emit_event("stop")
+    emit_event("stop")
 
 def prev_track():
   # try to load the next track of the book. 
@@ -265,13 +265,13 @@ def load_file(track):
     Book.update(position=__current_track.id).where(Book.id == __current_track.book.id).execute()
 
   __current_track = track
-  __emit_event("stop")
+  emit_event("stop")
   __player.set_state(Gst.State.NULL)
   __player.set_property("uri", "file://" + track.file)
   __player.set_state(Gst.State.PAUSED)
   Book.update(position = __current_track.id).where(Book.id == __current_track.book.id).execute()
   Settings.update(last_played_book = __current_track.book).execute()
-  __emit_event("track-changed")
+  emit_event("track-changed")
 
 def load_last_book():
   """
@@ -293,9 +293,9 @@ def load_last_book():
         __player.set_property("uri", "file://" + last_track.file)
         __player.set_state(Gst.State.PAUSED)
         __current_track = last_track
-        __emit_event("track-changed")
+        emit_event("track-changed")
 
-def __emit_event(event, message=None):
+def emit_event(event, message=None):
   """
   This function is used to notify listeners of player state changes.
   """
