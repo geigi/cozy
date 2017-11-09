@@ -1,4 +1,6 @@
 # It's getting Cozy
+<span class="badge-patreon"><a href="https://patreon.com/geigi" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
+[![AUR](https://img.shields.io/aur/version/yaourt.svg)](https://aur.archlinux.org/packages/cozy-audiobooks/)
 
 Cozy is a modern audio book player for Linux. 
 
@@ -26,7 +28,6 @@ If you're running elementaryOS, you can get cozy here:
 </p>
 
 Arch Linux users can find cozy under the name `cozy-audiobooks` in the AUR:
-https://aur.archlinux.org/packages/cozy-audiobooks/
 ```
 $ pacaur -S cozy-audiobooks
 ```
