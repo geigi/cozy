@@ -779,21 +779,14 @@ class CozyUI:
       self.current_book_element.set_playing(False)
 
     curr_track = get_current_track()
-    try:
-      for book_element in self.book_box.get_children():
-        if book_element.get_children()[0].book.id == curr_track.book.id:
-          self.current_book_element = book_element.get_children()[0]
-          raise StopIteration
-    except StopIteration:
-      pass
-    
-    try:
-      for track_element in self.current_book_element.track_box.get_children():
-        if track_element.track.id == curr_track.id:
-          self.current_track_element = track_element
-          raise StopIteration
-    except StopIteration:
-      pass
+    self.current_book_element = next(
+                                    filter(
+                                          lambda x: x.get_children()[0].book.id == curr_track.book.id,
+                                          self.book_box.get_children()), None).get_children()[0]
+    self.current_track_element = next(
+                                    filter(
+                                          lambda x: x.track.id == curr_track.id, 
+                                          self.current_book_element.track_box.get_children()), None)
 
     self.current_track_element.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
     self.current_book_element._mark_current_track()

@@ -129,21 +129,12 @@ def play_pause(track, jump=False):
 def next_track():
   # try to load the next track of the book. 
   # Stop playback if there isn't any
-  trax = tracks(get_current_track().book)
+  album_tracks = tracks(get_current_track().book)
   current = get_current_track()
-  save_next = False
+  index = list(album_tracks).index(current)
   next_track = None
-  try:
-    for track in trax:
-      if save_next:
-        next_track = track
-        raise StopIteration
-
-      if current == track:
-        save_next = True
-
-  except StopIteration:
-    pass
+  if index + 1 < len(album_tracks):
+    next_track = album_tracks[index + 1]
 
   Track.update(position=0).where(Track.id == current.id).execute()
 
@@ -162,16 +153,12 @@ def prev_track():
   # Stop playback if there isn't any
   global __player
   global __current_track
-  trax = tracks(get_current_track().book)
+  album_tracks = tracks(get_current_track().book)
   current = get_current_track()
+  index = list(album_tracks).index(current)
   previous = None
-  try:
-    for track in trax:
-      if current == track:
-        raise StopIteration
-      previous = track
-  except StopIteration:
-    pass
+  if index > -1:
+    previous = album_tracks[index - 1]
 
   Track.update(position=0).where(Track.id == current.id).execute()
 
