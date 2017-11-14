@@ -1,0 +1,250 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-11 22:54+0400\n"
+"PO-Revision-Date: 2017-11-11 22:56+0400\n"
+"Last-Translator: Андрей Культяпов <camellan@yandex.ru>\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: cozy/importer.py:212
+msgid "Unknown Author"
+msgstr "Неизвестный автор"
+
+#: cozy/importer.py:213
+msgid "Unknown Reader"
+msgstr "Неизвестный диктор"
+
+#: cozy/ui.py:295 cozy/ui.py:544 data/ui/timer_popover.ui:71
+msgid "min"
+msgstr "мин"
+
+#: cozy/ui.py:455
+msgid "Importing Audiobooks"
+msgstr "Импорт аудиокниг"
+
+#: cozy/ui.py:502 cozy/ui.py:505 cozy/ui.py:881 cozy/ui.py:890
+msgid "All"
+msgstr "Все"
+
+#: cozy/ui.py:663
+msgid "Changing audio book location..."
+msgstr "Выберите каталог аудиокниг..."
+
+#: data/ui/main_window.ui:65
+msgid "<big>Author</big>"
+msgstr "<big>Автор</big>"
+
+#: data/ui/main_window.ui:92
+msgid "<big>Reader</big>"
+msgstr "<big>Диктор</big>"
+
+#: data/ui/main_window.ui:143
+msgid "Author"
+msgstr "Автор"
+
+#: data/ui/main_window.ui:169
+msgid "Reader"
+msgstr "Диктор"
+
+#: data/ui/main_window.ui:245
+msgid "Importing your audiobooks..."
+msgstr "Импортирование аудиокниг..."
+
+#: data/ui/main_window.ui:300
+msgid "Import your Audiobooks"
+msgstr "Импорт аудиокниг"
+
+#: data/ui/main_window.ui:316
+msgid ""
+"Cozy automatically imports your audiobooks in one directory - your library"
+msgstr ""
+"Cozy автоматически импортирует аудиокниги из указанного каталога в библиотеку"
+
+#: data/ui/main_window.ui:356 data/ui/hello.ui:240
+msgid "Drag & Drop"
+msgstr "Drag & Drop"
+
+#: data/ui/main_window.ui:372
+msgid ""
+"Drag your audiobooks into cozy and the will be automatically imported to "
+"your library"
+msgstr ""
+"Перетащите ваши аудиокниги в Cozy и они будут автоматически импортированы в "
+"библиотеку"
+
+#: data/ui/main_window.ui:432
+msgid "Change Audiobooks Folder"
+msgstr "Изменить каталог аудиокниг"
+
+#: data/ui/main_window.ui:448
+msgid "Load audiobooks from a folder, network drive or an external disk"
+msgstr "Загрузить аудиокниги из папки, сетевого или внешний диска"
+
+#: data/ui/about.ui:11
+msgid "Support me on Patreon: https://www.patreon.com/geigi"
+msgstr "Поддержите меня в Patreon: https://www.patreon.com/geigi"
+
+#: data/ui/about.ui:13
+msgid "GitHub"
+msgstr "GitHub"
+
+#: data/ui/app_menu.ui:7
+msgid "_Scan Directory"
+msgstr "_Найти книги"
+
+#: data/ui/app_menu.ui:13
+msgid "_Preferences"
+msgstr "_Параметры"
+
+#: data/ui/app_menu.ui:19
+msgid "_Help"
+msgstr "_Справка"
+
+#: data/ui/app_menu.ui:23
+msgid "_About"
+msgstr "_О программе"
+
+#: data/ui/app_menu.ui:27
+msgid "_Quit"
+msgstr "_Выход"
+
+#: data/ui/file_not_found.ui:19
+msgid "Cancel"
+msgstr "Отмена"
+
+#: data/ui/file_not_found.ui:32
+msgid "Locate"
+msgstr "Найти"
+
+#: data/ui/file_not_found.ui:84
+msgid "File not found"
+msgstr "Файл не найден"
+
+#: data/ui/file_not_found.ui:100
+msgid ""
+"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
+msgstr ""
+"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
+
+#: data/ui/file_not_found.ui:117
+msgid "This file could not be found. Do you want to locate it manually?"
+msgstr "Файл не найден. Вы хотите найти его самостоятельно?"
+
+#: data/ui/hello.ui:44
+msgid ""
+"Cozy is an application to browse and playback your DRM free audio book "
+"collection. "
+msgstr ""
+"Cozy - это приложение для обзора и прослушивания вашей коллекции аудиокниг. "
+
+#: data/ui/hello.ui:91
+msgid ""
+"To get started, select where you store your audio books. Files in this "
+"folder will be imported to your library:"
+msgstr ""
+"Для начала укажите место, где хранятся ваши аудио книги. Файлы из этой папки "
+"будут импортированы в библиотеку:"
+
+#: data/ui/hello.ui:154
+msgid "Automatically import new audiobooks on startup"
+msgstr "Автоматически импортировать новые аудиокниги при запуске программы"
+
+#: data/ui/hello.ui:179
+msgid "How to add new audio books:"
+msgstr "Как добавлять новые аудиокниги:"
+
+#: data/ui/hello.ui:252
+msgid "Rescan from menu"
+msgstr "Сканирование из меню"
+
+#: data/ui/hello.ui:269
+msgid "Let's get cozy"
+msgstr "Запустить Cozy"
+
+#: data/ui/hello.ui:292
+msgid "Welcome to Cozy!"
+msgstr "Добро пожаловать в Cozy!"
+
+#: data/ui/settings.ui:27 data/ui/settings.ui:102
+msgid "Order by"
+msgstr "Заказ"
+
+#: data/ui/settings.ui:37
+msgid "Newest"
+msgstr "Новые"
+
+#: data/ui/settings.ui:54
+msgid "Year"
+msgstr "Год"
+
+#: data/ui/settings.ui:72
+msgid "Name"
+msgstr "Имя"
+
+#: data/ui/settings.ui:143
+msgid "Appearance"
+msgstr "Внешний вид"
+
+#: data/ui/settings.ui:158
+msgid "Suspend system on timer"
+msgstr "Выключение системы по таймеру"
+
+#: data/ui/settings.ui:194
+msgid "Replay 30 seconds"
+msgstr "Повтор 30 секунд"
+
+#: data/ui/settings.ui:229
+msgid "Automatic media scan"
+msgstr "Автоматическое сканирование медиа"
+
+#: data/ui/settings.ui:260
+msgid "Behaviour"
+msgstr "Поведение"
+
+#: data/ui/settings.ui:276
+msgid "Follow symlinks"
+msgstr "Следовать по символическим ссылкам"
+
+#: data/ui/settings.ui:314 data/ui/settings.ui:329
+msgid "Audio books location"
+msgstr "Расположение аудиокниг"
+
+#: data/ui/settings.ui:351
+msgid "Files"
+msgstr "Файлы"
+
+#~ msgid "Cozy"
+#~ msgstr "Cozy"
+
+#~ msgid "Audio Book Player"
+#~ msgstr "Проигрыватель аудиокниг"
+
+#~ msgid "Play and organize your audio book collection"
+#~ msgstr "Воспроизводит и упорядочивает вашу коллекцию аудиокниг"
+
+#~ msgid "com.github.geigi.cozy"
+#~ msgstr "com.github.geigi.cozy"
+
+#~ msgid "Play/Pause"
+#~ msgstr "Играть/Пауза"
+
+#~ msgid "Next"
+#~ msgstr "Следующая"
+
+#~ msgid "Previous"
+#~ msgstr "Предыдущая"

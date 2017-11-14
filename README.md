@@ -6,6 +6,12 @@ Cozy is a modern audio book player for Linux.
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
 
+<p align="center">
+  <a href="https://appcenter.elementary.io/com.github.geigi.cozy">
+  <img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter">
+  </a>
+</p>
+
 ### Here are some of the current features:
 - Import all your audiobooks into cozy to browse them comfortably
 - Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg audio books
@@ -19,20 +25,14 @@ Cozy is a modern audio book player for Linux.
 ## How can I get it?
 An AppImage is in the works. In the meantime:
 
-If you're running elementaryOS, you can get cozy here:
-
-<p align="center">
-  <a href="https://appcenter.elementary.io/com.github.geigi.cozy">
-  <img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter">
-  </a>
-</p>
+If you're running elementaryOS, you can get cozy from the App Center!
 
 Arch Linux users can find cozy under the name `cozy-audiobooks` in the AUR:
 ```
 $ pacaur -S cozy-audiobooks
 ```
 
-You're using a debian based system (Ubuntu, ...)? I've included a <a href="https://github.com/geigi/cozy/releases/download/0.3.9/com.github.geigi.cozy_0.3.9_amd64.deb">.deb</a> file in the release section!
+You're using a debian based system (Ubuntu, ...)? I've included a <a href="https://github.com/geigi/cozy/releases/download/0.4.0/com.github.geigi.cozy_0.4.0_amd64.deb">.deb</a> file in the release section!
 
 ### Upcoming:
 - wav support
@@ -67,5 +67,4 @@ XDG_DATA_DIRS=desired_installation_directory/share:/usr/share PYTHONPATH=desired
 ```
 
 ## Help me translate cozy!
-Cozy is on Transifex, where anyone can contribute and translate. Can't find your language in the list? Let me know!
-https://www.transifex.com/geigi/cozy/
+Cozy is on <a href="https://www.transifex.com/geigi/cozy/"> Transifex</a>, where anyone can contribute and translate. Can't find your language in the list? Let me know!
