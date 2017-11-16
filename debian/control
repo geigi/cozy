@@ -11,7 +11,7 @@ Build-Depends: debhelper (>= 9),
 
 Standards-Version: 3.9.6
 Package: com.github.geigi.cozy
-Architecture: any
+Architecture: all
 Depends: ${misc:Depends},${shlibs:Depends},python3,python3-mutagen,python3-gst-1.0,libgstreamer1.0-0,libgstreamer-plugins-base1.0-0
 Pre-Depends: dpkg (>= 1.15.6)
 Description: Cozy
