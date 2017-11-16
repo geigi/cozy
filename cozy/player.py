@@ -129,6 +129,8 @@ def play_pause(track, jump=False):
 def next_track():
   # try to load the next track of the book. 
   # Stop playback if there isn't any
+  global __current_track
+
   album_tracks = tracks(get_current_track().book)
   current = get_current_track()
   index = list(album_tracks).index(current)
@@ -143,8 +145,9 @@ def next_track():
     play_pause(next_track)
   else:
     stop()
+    Book.update(position=0).where(Book.id == current.book.id).execute()
     __player.set_state(Gst.State.NULL)
-    Book.update(position=0).where(Book.id == current.id).execute()
+    __current_track = None
     Settings.update(last_played_book=None).execute()
     emit_event("stop")
 
@@ -170,7 +173,7 @@ def prev_track():
     __player.set_state(Gst.State.NULL)
     __current_track = None
     play_pause(first_track)
-    Book.update(position=0).where(Book.id == current.id).execute()
+    Book.update(position=0).where(Book.id == current.book.id).execute()
 
 def stop():
   """

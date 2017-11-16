@@ -714,7 +714,6 @@ audio-volume-medium-symbolic</property>
                     <child>
                       <object class="GtkLabel" id="current_label">
                         <property name="width_request">35</property>
-                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">end</property>
                         <property name="margin_right">3</property>
@@ -747,7 +746,6 @@ audio-volume-medium-symbolic</property>
                     <child>
                       <object class="GtkLabel" id="remaining_label">
                         <property name="width_request">35</property>
-                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
                         <property name="margin_left">3</property>
@@ -824,6 +822,7 @@ audio-volume-medium-symbolic</property>
             <property name="vexpand">True</property>
             <child>
               <object class="GtkMenuButton" id="search_button">
+                <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <child>

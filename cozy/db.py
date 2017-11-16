@@ -69,6 +69,22 @@ def books():
   """
   return Book.select()
 
+def authors():
+  """
+  Find all authors in the database
+
+  :return: all authors
+  """
+  return Book.select(Book.author).distinct().order_by(Book.author)
+
+def readers():
+  """
+  Find all readers in the database
+
+  :return: all readers
+  """
+  return Book.select(Book.reader).distinct().order_by(Book.reader)
+
 def Search(search):
   return Track.select().where(search in Track.name)
 
@@ -110,10 +126,11 @@ def seconds_to_str(seconds):
 
   return result
 
-def get_cover_pixbuf(book):
+def get_cover_pixbuf(book, size=0):
   """
   Get the cover from a given book and create a pixbuf object from it.
   :param book: The book object
+  :param size: The size of the bigger side in pixels
   :return: pixbuf object containing the cover
   """
   pixbuf = None
@@ -127,6 +144,14 @@ def get_cover_pixbuf(book):
     pixbuf = loader.get_pixbuf()
   else:
     pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
+
+  if size > 0:
+    if pixbuf.get_height() > pixbuf.get_width():
+      width = int(pixbuf.get_width() / (pixbuf.get_height() / size))
+      pixbuf = pixbuf.scale_simple(width, size, GdkPixbuf.InterpType.BILINEAR)
+    else:
+      height = int(pixbuf.get_height() / (pixbuf.get_width() / size))
+      pixbuf = pixbuf.scale_simple(size, height, GdkPixbuf.InterpType.BILINEAR)
 
   return pixbuf
 
@@ -143,3 +168,41 @@ def get_track_for_playback(book):
   else:
     track = Track.select().where(Track.id == book.position).get()
   return track
+
+def search_authors(search_string):
+  """
+  Search all authors in the db with the given substring.
+  This ignores upper/lowercase and returns each author only once.
+  :param search_string: substring to search for
+  :return: authors matching the substring
+  """
+  return Book.select(Book.author).where(Book.author.contains(search_string)).distinct().order_by(Book.author)
+
+def search_readers(search_string):
+  """
+  Search all readers in the db with the given substring.
+  This ignores upper/lowercase and returns each reader only once.
+  :param search_string: substring to search for
+  :return: readers matching the substring
+  """
+  return Book.select(Book.reader).where(Book.reader.contains(search_string)).distinct().order_by(Book.reader)
+
+def search_books(search_string):
+  """
+  Search all book names in the db with the given substring.
+  This ignores upper/lowercase and returns each book name only once.
+  :param search_string: substring to search for
+  :return: book names matching the substring
+  """
+  return Book.select(Book.name, Book.cover).where(Book.name.contains(search_string) 
+                                                  | Book.author.contains(search_string)
+                                                  | Book.reader.contains(search_string)).distinct().order_by(Book.name)
+
+def search_tracks(search_string):
+  """
+  Search all tracks in the db with the given substring.
+  This ignores upper/lowercase.
+  :param search_string: substring to search for
+  :return: tracks matching the substring
+  """
+  return Track.select(Track.name).where(Track.name.contains(search_string)).order_by(Track.name)

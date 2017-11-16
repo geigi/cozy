@@ -1,4 +1,4 @@
-from gi.repository import Gtk, Gio, Gdk, GdkPixbuf
+from gi.repository import Gtk, Gio, Gdk
 from threading import Thread
 
 from cozy.importer import *
@@ -7,6 +7,7 @@ from cozy.book_element import *
 from cozy.player import *
 from cozy.tools import *
 from cozy.file_not_found_dialog import *
+from cozy.search_results import *
 
 import os
 import gi
@@ -52,6 +53,7 @@ class CozyUI:
     self.__init_resources()
     self.__init_css()
     self.__init_actions()
+    self.__init_search()
 
   def __init_resources(self):
     """
@@ -124,12 +126,16 @@ class CozyUI:
     # hide wip stuff
     self.volume_button = self.window_builder.get_object("volume_button")
     self.volume_button.set_visible(False)
-    self.search_button = self.window_builder.get_object("search_button")
-    self.search_button.set_visible(False)
-    self.timer_button = self.window_builder.get_object("timer_button")
 
-    search_button = self.window_builder.get_object("search_button")
-    search_popover = self.search_builder.get_object("search_popover")
+    # TODO: search
+    # Search author, reader, title, track
+    # spinning wheel while searching
+    # Click on author/reader jumps to page
+    # click on track starts playback
+    # Click on album as in normal player. Hover over cover to play,
+    #  click on Text jumps to album and opens popup
+    # Remeber last search till exit
+    self.search_popover = self.search_builder.get_object("search_popover")
     timer_popover = self.timer_builder.get_object("timer_popover")
 
     self.timer_switch = self.timer_builder.get_object("timer_switch")
@@ -165,6 +171,8 @@ class CozyUI:
     self.reader_toggle_button = self.window_builder.get_object("reader_toggle_button")
     self.no_media_file_chooser = self.window_builder.get_object("no_media_file_chooser")
     self.timer_image = self.window_builder.get_object("timer_image")
+    self.search_button = self.window_builder.get_object("search_button")
+    self.timer_button = self.window_builder.get_object("timer_button")
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -184,9 +192,24 @@ class CozyUI:
     self.no_media_file_chooser.connect("file-set", self.__on_no_media_folder_changed)
 
     # init popovers
-    search_button.set_popover(search_popover)
+    self.search_button.set_popover(self.search_popover)
     self.timer_button.set_popover(timer_popover)
     self.timer_switch.connect("notify::active", self.__timer_switch_changed)
+
+    # init search
+    self.search_book_label = self.search_builder.get_object("book_label")
+    self.search_track_label = self.search_builder.get_object("track_label")
+    self.search_author_label = self.search_builder.get_object("author_label")
+    self.search_reader_label = self.search_builder.get_object("reader_label")
+    self.search_reader_box = self.search_builder.get_object("reader_result_box")
+    self.search_author_box = self.search_builder.get_object("author_result_box")
+    self.search_book_box = self.search_builder.get_object("book_result_box")
+    self.search_track_box = self.search_builder.get_object("track_result_box")
+    self.search_entry = self.search_builder.get_object("search_entry")
+    self.search_scroller = self.search_builder.get_object("search_scroller")
+    self.nothing_found_label = self.search_builder.get_object("nothing_found_label")
+
+    self.search_entry.connect("search-changed", self.__on_search_changed)
 
     # add marks to timer scale
     for i in range(0, 181, 15):
@@ -219,15 +242,14 @@ class CozyUI:
     self.author_toggle_button.connect("toggled", self.__toggle_author)
     self.reader_toggle_button.connect("toggled", self.__toggle_reader)
 
+    # hide remaining and current labels
+    self.current_label.set_visible(False)
+    self.remaining_label.set_visible(False)
+
     # menu
     menu = self.menu_builder.get_object("app_menu")
     self.menu_button = self.window_builder.get_object("menu_button")
-    # for elementary we add a menu button, else we just set the app menu
-    if self.is_elementary:
-      self.menu_button.set_visible(True)
-      self.menu_button.set_menu_model(menu)
-    else:
-      self.menu_button.set_visible(False)
+    self.menu_button.set_menu_model(menu)
       
     if self.is_elementary:
       about_close_button = self.about_builder.get_object("button_box").get_children()[2]
@@ -241,9 +263,8 @@ class CozyUI:
     """
     self.accel = Gtk.AccelGroup()
 
-    if not self.is_elementary:
-      menu = self.menu_builder.get_object("app_menu")
-      self.app.set_app_menu(menu)
+    menu = self.menu_builder.get_object("app_menu")
+    self.app.set_app_menu(menu)
 
     help_action = Gio.SimpleAction.new("help", None)
     help_action.connect("activate", self.help)
@@ -296,6 +317,10 @@ class CozyUI:
     self.timer_buffer.set_text(text, len(text))
 
     return True
+
+  def __init_search(self):
+    self.search_thread = Thread(target=self.search)
+    self.search_thread_stop = threading.Event()
 
   def __load_last_book(self):
     """
@@ -384,11 +409,11 @@ class CozyUI:
 
     self.cover_img.set_from_pixbuf(None)
 
-    self.progress_scale.set_range(0, 1)
+    self.progress_scale.set_range(0, 0)
     self.progress_scale.set_value(0)
 
-    self.remaining_label.set_markup("<tt><b>" + "--:--" + "</b></tt>")
-    self.current_label.set_markup("<tt><b>" + "--:--" + "</b></tt>")
+    self.remaining_label.set_visible(False)
+    self.current_label.set_visible(False)
 
     self.play_button.set_sensitive(False)
     self.prev_button.set_sensitive(False)
@@ -405,6 +430,7 @@ class CozyUI:
     self.prev_button.set_sensitive(False)
     self.scan_action.set_enabled(False)
     self.timer_button.set_sensitive(False)
+    self.search_button.set_sensitive(False)
     if not first:
       self.update_progress_bar.set_fraction(0)
       self.status_stack.props.visible_child_name = "working"
@@ -418,6 +444,7 @@ class CozyUI:
     self.play_button.set_sensitive(True)
     self.prev_button.set_sensitive(True)
     self.timer_button.set_sensitive(True)
+    self.search_button.set_sensitive(True)
     self.throbber.stop()
     pass
 
@@ -427,25 +454,19 @@ class CozyUI:
       self.main_stack.props.visible_child_name = "no_media"
       self.play_button.set_sensitive(False)
       self.prev_button.set_sensitive(False)
+      self.search_button.set_sensitive(False)
+      self.timer_button.set_sensitive(False)
     else:
       self.main_stack.props.visible_child_name = "main"
       self.play_button.set_sensitive(True)
       self.prev_button.set_sensitive(True)
+      self.search_button.set_sensitive(True)
+      self.timer_button.set_sensitive(True)
 
   def set_title_cover(self, pixbuf):
     """
     Sets the cover in the title bar.
     """
-    if self.is_elementary:
-      size = 28
-    else:
-      size = 40
-    if pixbuf.get_height() > pixbuf.get_width():
-      width = int(pixbuf.get_width() / (pixbuf.get_height() / size))
-      pixbuf = pixbuf.scale_simple(width, size, GdkPixbuf.InterpType.BILINEAR)
-    else:
-      height = int(pixbuf.get_height() / (pixbuf.get_width() / size))
-      pixbuf = pixbuf.scale_simple(size, height, GdkPixbuf.InterpType.BILINEAR)
     self.cover_img.set_from_pixbuf(pixbuf)
 
   def scan(self, action, first_scan):
@@ -467,6 +488,32 @@ class CozyUI:
     if self.settings.get_boolean("autoscan") == True:
       self.scan(None, False)
 
+  def search(self, user_search):
+    """
+    Perform a search with the current search entry
+    """
+    # we need the main context to call methods in the main thread after the search is finished
+    main_context = GLib.MainContext.default()
+
+    books = search_books(user_search)
+    if self.search_thread_stop.is_set():
+      return
+    main_context.invoke_full(GLib.PRIORITY_DEFAULT, self.__on_book_search_finished, books)
+
+    authors = search_authors(user_search)
+    if self.search_thread_stop.is_set():
+      return
+    main_context.invoke_full(GLib.PRIORITY_DEFAULT, self.__on_author_search_finished, authors)
+    
+    readers = search_readers(user_search)
+    if self.search_thread_stop.is_set():
+      return
+    main_context.invoke_full(GLib.PRIORITY_DEFAULT, self.__on_reader_search_finished, readers)
+
+    if readers.count() < 1 and authors.count() < 1 and books.count() < 1:
+      main_context.invoke_full(GLib.PRIORITY_DEFAULT, self.nothing_found_label.set_visible, True)
+      main_context.invoke_full(GLib.PRIORITY_DEFAULT, self.search_scroller.set_visible, False)
+
   def refresh_content(self):
     """
     Refresh all content.
@@ -484,20 +531,6 @@ class CozyUI:
     for element in childs:
       self.book_box.remove(element)
 
-    # we want every item only once, so wh use a list to add only the new ones
-    seen_authors = []
-    seen_readers = []
-    for book in books():
-      if book.author not in seen_authors:
-        seen_authors.append(book.author)
-
-      if book.reader not in seen_readers:
-        seen_readers.append(book.reader)
-      pass
-
-    seen_authors.sort()
-    seen_readers.sort()
-
     # Add the special All element
     all_row = ListBoxRowWithData(_("All"), True)
     self.author_box.add(all_row)
@@ -506,12 +539,12 @@ class CozyUI:
     self.reader_box.add(all_row)
     self.reader_box.select_row(all_row)
 
-    for author in seen_authors:
-      row = ListBoxRowWithData(author, False)
+    for book in authors():
+      row = ListBoxRowWithData(book.author, False)
       self.author_box.add(row)
 
-    for reader in seen_readers:
-      row = ListBoxRowWithData(reader, False)
+    for book in readers():
+      row = ListBoxRowWithData(book.reader, False)
       self.reader_box.add(row)
 
     # this is required to see the new items
@@ -705,6 +738,98 @@ class CozyUI:
     else:
       self.progress_scale.set_value(0)
 
+  def __on_search_changed(self, sender):
+    """
+    Reset the search if running and start a new async search.
+    """
+    self.search_thread_stop.set()
+    self.throbber.start()
+
+    # hide nothing found
+    self.nothing_found_label.set_visible(False)
+
+    # we want to avoid flickering of the search box size
+    # as we remove widgets and add them again
+    # so we get the current search popup size and set it as
+    # the preferred size until the search is finished
+    # this helps only a bit, the widgets are still flickering
+    self.search_popover.set_size_request(self.search_popover.get_allocated_width(), 
+                                         self.search_popover.get_allocated_height())
+
+    # First clear the boxes
+    self.__remove_all_children(self.search_book_box)
+    self.__remove_all_children(self.search_author_box)
+    self.__remove_all_children(self.search_reader_box)
+
+    # Hide all the labels
+    self.search_book_label.set_visible(False)
+    self.search_author_label.set_visible(False)
+    self.search_reader_label.set_visible(False)
+    self.search_track_label.set_visible(False)
+
+    user_search = self.search_entry.get_text()
+    if user_search:
+      if self.search_thread.is_alive():
+        self.search_thread.join()
+      self.search_thread_stop.clear()
+      self.search_thread = Thread(target=self.search, args=(user_search, ))
+      self.search_thread.start()
+    else:
+      self.throbber.stop()
+      self.search_scroller.set_visible(False)
+      self.search_popover.set_size_request(-1, -1)
+
+  def __on_book_search_finished(self, books):
+    """
+    This gets called after the book search is finished.
+    It adds all the results to the gui.
+    :param books: Result peewee query containing the books
+    """
+    if len(books) > 0:
+      self.search_scroller.set_visible(True)
+      self.search_book_label.set_visible(True)
+
+      for book in books:
+        if self.search_thread_stop.is_set():
+          return
+        self.search_book_box.add(BookSearchResult(None, book))
+
+  def __on_author_search_finished(self, authors):
+    """
+    This gets called after the author search is finished.
+    It adds all the results to the gui.
+    :param authors: Result peewee query containing the authors
+    """
+    if len(authors) > 0:
+      self.search_scroller.set_visible(True)
+      self.search_author_label.set_visible(True)
+
+      for author in authors:
+        if self.search_thread_stop.is_set():
+          return
+        self.search_author_box.add(ArtistSearchResult(None, author, True))
+
+  def __on_reader_search_finished(self, readers):
+    """
+    This gets called after the reader search is finished.
+    It adds all the results to the gui.
+    It also resets the gui to a state before the search.
+    :param readers: Result peewee query containing the readers
+    """
+    if len(readers) > 0:
+      self.search_scroller.set_visible(True)
+      self.search_reader_label.set_visible(True)
+
+      for reader in readers:
+        if self.search_thread_stop.is_set():
+          return
+        self.search_reader_box.add(ArtistSearchResult(None, reader, False))
+
+    # the reader search is the last that finishes
+    # so we stop the throbber and reset the prefered height & width
+    self.throbber.stop()
+    self.search_popover.set_size_request(-1, -1)
+
   def __toggle_reader(self, button):
     """
     Switch to reader selection
@@ -738,7 +863,11 @@ class CozyUI:
     # only change cover when book has changed
     if self.current_book is not track.book:
       self.current_book = track.book
-      self.set_title_cover(get_cover_pixbuf(track.book))
+      if self.is_elementary:
+        size = 28
+      else:
+        size = 40
+      self.set_title_cover(get_cover_pixbuf(track.book, size))
 
     total = get_current_track().length
     self.progress_scale.set_range(0, total)
@@ -762,10 +891,11 @@ class CozyUI:
     self.current_label.set_markup("<tt><b>" + str(m).zfill(2) + ":" + str(s).zfill(2) + "</b></tt>")
     track = get_current_track()
 
-    remaining_secs = int(track.length - val)
-    remaining_mins, remaining_secs = divmod(remaining_secs, 60)
+    if track is not None:
+      remaining_secs = int(track.length - val)
+      remaining_mins, remaining_secs = divmod(remaining_secs, 60)
 
-    self.remaining_label.set_markup("<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+      self.remaining_label.set_markup("<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
 
   def __track_changed(self):
     """
@@ -790,6 +920,8 @@ class CozyUI:
 
     self.current_track_element.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
     self.current_book_element._mark_current_track()
+    self.remaining_label.set_visible(True)
+    self.current_label.set_visible(True)
 
   def __player_changed(self, event, message):
     """
@@ -830,6 +962,14 @@ class CozyUI:
 
   def __about_close_clicked(self, widget):
     self.about_dialog.hide()
+
+  def __remove_all_children(self, container):
+    """
+    Removes all widgets from a gtk container.
+    """
+    childs = container.get_children()
+    for element in childs:
+      container.remove(element)
 
   def on_close(self, widget, data=None):
     """

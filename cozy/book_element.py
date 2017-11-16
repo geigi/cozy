@@ -43,13 +43,7 @@ class BookElement(Gtk.Box):
     author_label.props.justify = Gtk.Justification.CENTER
 
     # scale the book cover to a fix size.
-    pixbuf = get_cover_pixbuf(self.book)
-    if pixbuf.get_height() > pixbuf.get_width():
-      width = int(pixbuf.get_width() / (pixbuf.get_height() / 180))
-      pixbuf = pixbuf.scale_simple(width, 180, GdkPixbuf.InterpType.BILINEAR)
-    else:
-      height = int(pixbuf.get_height() / (pixbuf.get_width() / 180))
-      pixbuf = pixbuf.scale_simple(180, height, GdkPixbuf.InterpType.BILINEAR)
+    pixbuf = get_cover_pixbuf(self.book, 180)
     
     # box is the main container for the album art
     box = Gtk.EventBox()
@@ -165,9 +159,9 @@ class BookElement(Gtk.Box):
   def __on_button_press(self, eventbox, event):
     self.selected = True
     if Gtk.get_minor_version() > 20:
-        self.popover.popup()
+      self.popover.popup()
     else:
-        self.popover.show_all()
+      self.popover.show_all()
     pass
 
   def _on_enter_notify(self, widget, event):
