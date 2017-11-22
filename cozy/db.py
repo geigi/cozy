@@ -161,7 +161,6 @@ def get_track_for_playback(book):
   :param book: book which the next track is required from
   :return: current track position from book db
   """
-
   book = Book.select().where(Book.id == book.id).get()
   if book.position < 1:
     track = tracks(book)[0]
@@ -194,7 +193,7 @@ def search_books(search_string):
   :param search_string: substring to search for
   :return: book names matching the substring
   """
-  return Book.select(Book.name, Book.cover).where(Book.name.contains(search_string) 
+  return Book.select(Book.name, Book.cover, Book.id).where(Book.name.contains(search_string) 
                                                   | Book.author.contains(search_string)
                                                   | Book.reader.contains(search_string)).distinct().order_by(Book.name)
 

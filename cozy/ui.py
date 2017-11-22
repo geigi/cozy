@@ -563,6 +563,45 @@ class CozyUI:
 
     return False
 
+  def __jump_to_author(self, book):
+    """
+    Jump to the given book author.
+    This is used from the search popover.
+    """
+    row = next(filter(
+                lambda x: x.get_children()[0].get_text() == book.author,
+                self.author_box.get_children()), None)
+
+    self.author_toggle_button.set_active(True)
+    self.__toggle_author(None)
+    self.author_box.select_row(row)
+    self.book_box.invalidate_filter();
+    self.__close_search_popover()
+
+  def __jump_to_reader(self, book):
+    """
+    Jump to the given book reader.
+    This is used from the search popover.
+    """
+    row = next(filter(
+                lambda x: x.get_children()[0].get_text() == book.reader,
+                self.reader_box.get_children()), None)
+
+    self.reader_toggle_button.set_active(True)
+    self.__toggle_reader(None)
+    self.reader_box.select_row(row)
+    self.book_box.invalidate_filter();
+    self.__close_search_popover()
+
+  def __close_search_popover(self, object=None):
+    """
+    Close the search popover specific to the used gtk version.
+    """
+    if Gtk.get_minor_version() < 22:
+      self.search_popover.hide()
+    else:
+      self.search_popover.popdown()
+
   def __on_timer_changed(self, spinner):
     """
     Add "min" to the timer text box on change.
@@ -796,7 +835,7 @@ class CozyUI:
       for book in books:
         if self.search_thread_stop.is_set():
           return
-        self.search_book_box.add(BookSearchResult(None, book))
+        self.search_book_box.add(BookSearchResult(book, self.__close_search_popover))
 
   def __on_author_search_finished(self, authors):
     """
@@ -811,7 +850,7 @@ class CozyUI:
       for author in authors:
         if self.search_thread_stop.is_set():
           return
-        self.search_author_box.add(ArtistSearchResult(None, author, True))
+        self.search_author_box.add(ArtistSearchResult(self.__jump_to_author, author, True))
 
   def __on_reader_search_finished(self, readers):
     """
@@ -827,7 +866,7 @@ class CozyUI:
       for reader in readers:
         if self.search_thread_stop.is_set():
           return
-        self.search_reader_box.add(ArtistSearchResult(None, reader, False))
+        self.search_reader_box.add(ArtistSearchResult(self.__jump_to_reader, reader, False))
 
     # the reader search is the last that finishes
     # so we stop the throbber and reset the prefered height & width
@@ -854,7 +893,6 @@ class CozyUI:
     elif self.reader_toggle_button.get_active() is False:
       self.author_toggle_button.set_active(True)
     
-
   def __update_track_ui(self):
     # set data of new stream in ui
     track = get_current_track()

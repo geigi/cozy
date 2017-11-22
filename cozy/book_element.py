@@ -6,6 +6,148 @@ from cozy.player import *
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
 
+class AlbumElement(Gtk.EventBox):
+  """
+  This class represents a clickable album art widget for a book.
+  """
+  def __init__(self, book, size, bordered=False, square=False):
+    """
+    :param size: the size for the longer side of the image
+    :param bordered: should there be a border around the album art?
+    :param square: should the widget be always a square?
+    """
+    super().__init__()
+
+    self.book = book
+    self.selected = False
+    self.signal_ids = []
+    self.play_signal_ids = []
+
+    # scale the book cover to a fix size.
+    pixbuf = get_cover_pixbuf(book, size)
+    
+    # box is the main container for the album art
+    self.set_halign(Gtk.Align.CENTER)
+    self.set_valign(Gtk.Align.CENTER)
+    # connect mouse events to the event box
+    self.signal_ids.append(self.connect("enter-notify-event", self._on_enter_notify))
+    self.signal_ids.append(self.connect("leave-notify-event", self._on_leave_notify))
+
+    # img contains the album art
+    img = Gtk.Image()
+    img.set_halign(Gtk.Align.CENTER)
+    img.set_valign(Gtk.Align.CENTER)
+    if bordered:
+      img.get_style_context().add_class("bordered")
+    if square:
+      img.set_size_request(size, size)
+    img.set_from_pixbuf(pixbuf)
+
+    self.play_box = Gtk.EventBox()
+
+    # we want to change the mouse cursor if the user is hovering over the play button
+    self.play_signal_ids.append(self.play_box.connect("enter-notify-event", self._on_play_enter_notify))
+    self.play_signal_ids.append(self.play_box.connect("leave-notify-event", self._on_play_leave_notify))
+    # on click we want to play the audio book
+    self.play_signal_ids.append(self.play_box.connect("button-press-event", self._on_play_button_press))
+    self.play_box.set_property("halign", Gtk.Align.CENTER)
+    self.play_box.set_property("valign", Gtk.Align.CENTER)
+
+    # play_color is an overlay for the play button 
+    # with this it should be visible on any album art color
+    play_image = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/play_background.svg")
+    if square:
+      play_image = play_image.scale_simple(size - 10, size - 10, GdkPixbuf.InterpType.BILINEAR)
+    self.play_button = Gtk.Image.new_from_pixbuf(play_image)
+    self.play_button.set_property("halign", Gtk.Align.CENTER)
+    self.play_button.set_property("valign", Gtk.Align.CENTER)
+
+    # this is the main overlay for the album art
+    # we need to create field for the overlays 
+    # to change the opacity of them on mouse over/leave events
+    self.overlay = Gtk.Overlay.new()
+
+    # this is the play symbol overlay
+    self.play_overlay = Gtk.Overlay.new()
+
+    # this is for the play button animation
+    self.play_revealer = Gtk.Revealer()
+    self.play_revealer.set_transition_type(Gtk.RevealerTransitionType.CROSSFADE)
+    self.play_revealer.set_transition_duration(300)
+    self.play_revealer.add(self.play_overlay)
+    
+    # this grid has a background color to act as a visible overlay
+    color = Gtk.Grid()
+    color.set_property("halign", Gtk.Align.CENTER)
+    color.set_property("valign", Gtk.Align.CENTER)
+
+    # assemble play overlay
+    self.play_box.add(self.play_button)
+    self.play_overlay.add(self.play_box)
+
+    # assemble overlay with album art
+    self.overlay.add(img)
+    self.overlay.add_overlay(self.play_revealer)
+
+    # assemble overlay color
+    color.add(self.overlay)
+    self.add(color)
+
+  def disconnect_signals(self):
+    """
+    Disconnect all signals from this element.
+    """
+    [self.disconnect(sig) for sig in self.signal_ids]
+    [self.play_box.disconnect(sig) for sig in self.play_signal_ids]
+
+  def _on_enter_notify(self, widget, event):
+    """
+    On enter notify change overlay opacity
+    :param widget: as Gtk.EventBox
+    :param event: as Gdk.Event
+    """
+    self.overlay.set_opacity(0.8)
+    self.play_revealer.set_reveal_child(True)
+
+  def _on_leave_notify(self, widget, event):
+    """
+    On leave notify change overlay opacity
+    :param widget: as Gtk.EventBox (can be None)
+    :param event: as Gdk.Event (can be None)
+    """
+    if not self.selected:
+      self.overlay.set_opacity(1.0)
+      self.play_revealer.set_reveal_child(False)
+
+  def _on_play_enter_notify(self, widget, event):
+    """
+    Change the cursor to pointing hand
+    """
+    self.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND2))
+
+  def _on_play_leave_notify(self, widget, event):
+    """
+    Reset the cursor.
+    """
+    self.props.window.set_cursor(None)
+
+  def _on_play_button_press(self, widget, event):
+    """
+    Play this book.
+    """
+    track = get_track_for_playback(self.book)
+    current_track = get_current_track()
+
+    if current_track is not None and current_track.book.id == self.book.id:
+      play_pause(None)
+      if get_gst_player_state() == Gst.State.PLAYING:
+        jump_to_ns(track.position)
+    else:
+      load_file(track)
+      play_pause(None, True)
+
+    return True
+
 class BookElement(Gtk.Box):
   """
   This class represents a book with big artwork in the book viewer.
@@ -42,75 +184,12 @@ class BookElement(Gtk.Box):
     author_label.props.max_width_chars = 30
     author_label.props.justify = Gtk.Justification.CENTER
 
-    # scale the book cover to a fix size.
-    pixbuf = get_cover_pixbuf(self.book, 180)
-    
-    # box is the main container for the album art
-    box = Gtk.EventBox()
-    box.set_halign(Gtk.Align.CENTER)
-    box.set_valign(Gtk.Align.CENTER)
-    # connect mouse events to the event box
-    box.connect("enter-notify-event", self._on_enter_notify)
-    box.connect("leave-notify-event", self._on_leave_notify)
-    box.connect("button-press-event", self.__on_button_press)
+    self.connect("button-press-event", self.__on_button_press)
 
-    # img contains the album art
-    img = Gtk.Image()
-    img.set_halign(Gtk.Align.CENTER)
-    img.set_valign(Gtk.Align.CENTER)
-    img.get_style_context().add_class("bordered")
-    img.set_from_pixbuf(pixbuf)
-
-    play_box = Gtk.EventBox()
-
-    # we want to change the mouse cursor if the user is hovering over the play button
-    play_box.connect("enter-notify-event", self._on_play_enter_notify)
-    play_box.connect("leave-notify-event", self._on_play_leave_notify)
-    # on click we want to play the audio book
-    play_box.connect("button-press-event", self.__on_play_button_press)
-    play_box.set_property("halign", Gtk.Align.CENTER)
-    play_box.set_property("valign", Gtk.Align.CENTER)
-
-    # play_color is an overlay for the play button 
-    # with this it should be visible on any album art color
-    play_image = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/play_background.svg")
-    self.play_button = Gtk.Image.new_from_pixbuf(play_image)
-    self.play_button.set_property("halign", Gtk.Align.CENTER)
-    self.play_button.set_property("valign", Gtk.Align.CENTER)
-
-    # this is the main overlay for the album art
-    # we need to create field for the overlays 
-    # to change the opacity of them on mouse over/leave events
-    self.overlay = Gtk.Overlay.new()
-
-    # this is the play symbol overlay
-    self.play_overlay = Gtk.Overlay.new()
-
-    # this is for the play button animation
-    self.play_revealer = Gtk.Revealer()
-    self.play_revealer.set_transition_type(Gtk.RevealerTransitionType.CROSSFADE)
-    self.play_revealer.set_transition_duration(300)
-    self.play_revealer.add(self.play_overlay)
-    
-    # this grid has a background color to act as a visible overlay
-    color = Gtk.Grid()
-    color.set_property("halign", Gtk.Align.CENTER)
-    color.set_property("valign", Gtk.Align.CENTER)
-
-    # assemble play overlay
-    play_box.add(self.play_button)
-    self.play_overlay.add(play_box)
-
-    # assemble overlay with album art
-    self.overlay.add(img)
-    self.overlay.add_overlay(self.play_revealer)
-
-    # assemble overlay color
-    color.add(self.overlay)
-    box.add(color)
+    self.art = AlbumElement(self.book, 180, True)
 
     # assemble finished element
-    self.add(box)
+    self.add(self.art)
     self.add(title_label)
     self.add(author_label)
 
@@ -157,67 +236,19 @@ class BookElement(Gtk.Box):
     self._mark_current_track()
 
   def __on_button_press(self, eventbox, event):
-    self.selected = True
+    self.art.selected = True
     if Gtk.get_minor_version() > 20:
       self.popover.popup()
     else:
       self.popover.show_all()
     pass
 
-  def _on_enter_notify(self, widget, event):
-    """
-    On enter notify change overlay opacity
-    :param widget: as Gtk.EventBox
-    :param event: as Gdk.Event
-    """
-    self.overlay.set_opacity(0.8)
-    self.play_revealer.set_reveal_child(True)
-
-  def _on_leave_notify(self, widget, event):
-    """
-    On leave notify change overlay opacity
-    :param widget: as Gtk.EventBox (can be None)
-    :param event: as Gdk.Event (can be None)
-    """
-    if not self.selected:
-      self.overlay.set_opacity(1.0)
-      self.play_revealer.set_reveal_child(False)
-
   def __on_popover_close(self, popover):
     """
     On popover close deselect this element and hide the overlay.
     """
-    self.selected = False
-    self._on_leave_notify(None, None)
-
-  def _on_play_enter_notify(self, widget, event):
-    """
-    Change the cursor to pointing hand
-    """
-    self.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND2))
-
-  def _on_play_leave_notify(self, widget, event):
-    """
-    Reset the cursor.
-    """
-    self.props.window.set_cursor(None)
-
-  def __on_play_button_press(self, widget, event):
-    """
-    Play this book.
-    """
-    track = get_track_for_playback(self.book)
-    current_track = get_current_track()
-
-    if current_track is not None and current_track.book.id == self.book.id:
-      play_pause(None)
-      if get_gst_player_state() == Gst.State.PLAYING:
-        jump_to_ns(track.position)
-    else:
-      load_file(track)
-      play_pause(None, True)
-
-    return True
+    self.art.selected = False
+    self.art._on_leave_notify(None, None)
 
   def _mark_current_track(self):
     """
@@ -236,9 +267,9 @@ class BookElement(Gtk.Box):
 
   def set_playing(self, is_playing):
     if is_playing:
-      self.play_button.set_from_resource("/de/geigi/cozy/pause_background.svg")
+      self.art.play_button.set_from_resource("/de/geigi/cozy/pause_background.svg")
     else:
-      self.play_button.set_from_resource("/de/geigi/cozy/play_background.svg")
+      self.art.play_button.set_from_resource("/de/geigi/cozy/play_background.svg")
 
 class TrackElement(Gtk.EventBox):
   """

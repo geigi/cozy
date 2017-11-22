@@ -1,5 +1,6 @@
 from gi.repository import Gtk
 from cozy.db import *
+from cozy.book_element import *
 
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
@@ -10,11 +11,15 @@ class SearchResult(Gtk.EventBox):
   This class is the base class for all search result GUI object.
   It features a GTK box that is highlighted when hovered.
   """
-  def __init__(self):
+  def __init__(self, on_click):
     super().__init__()
+
+    self.on_click = on_click
 
     self.connect("enter-notify-event", self._on_enter_notify)
     self.connect("leave-notify-event", self._on_leave_notify)
+    if on_click is not None:
+      self.connect("button-press-event", self.__on_clicked)
 
     self.props.margin_top = 2
     self.props.margin_bottom = 2
@@ -35,16 +40,20 @@ class SearchResult(Gtk.EventBox):
     """
     self.box.get_style_context().remove_class("box_hover")
 
+  def __on_clicked(self, widget, event):
+    self.on_click(self.book)
+
 class ArtistSearchResult(SearchResult):
   """
   This class represents an author or reader search result.
   """
   def __init__(self, on_click, book, is_author):
 
-    super().__init__()
+    super().__init__(on_click)
 
     self.book = book
     self.is_author = is_author
+    self.on_click = on_click
 
     # This box contains all content
     self.box = Gtk.Box()
@@ -75,7 +84,7 @@ class TrackSearchResult(SearchResult):
   This class represents a track search result (currently not used).
   """
   def __init__(self, on_click, track):
-    super().__init__()
+    super().__init__(on_click)
 
     self.track = track
 
@@ -104,8 +113,8 @@ class BookSearchResult(SearchResult):
   """
   This class represents a book search result.
   """
-  def __init__(self, on_click, book):
-    super().__init__()
+  def __init__(self, book, on_click):
+    super().__init__(on_click)
 
     self.book = book
 
@@ -116,12 +125,13 @@ class BookSearchResult(SearchResult):
     self.box.set_halign(Gtk.Align.FILL)
     self.box.set_valign(Gtk.Align.CENTER)
 
-    pixbuf = get_cover_pixbuf(book, BOOK_ICON_SIZE)
-    img = Gtk.Image()
-    img.set_halign(Gtk.Align.CENTER)
-    img.set_valign(Gtk.Align.CENTER)
-    img.set_from_pixbuf(pixbuf)
-    img.set_size_request(BOOK_ICON_SIZE, BOOK_ICON_SIZE)
+    img = AlbumElement(self.book, BOOK_ICON_SIZE, False, True)
+    img.disconnect_signals()
+    self.connect("enter-notify-event", img._on_enter_notify)
+    self.connect("enter-notify-event", img._on_play_enter_notify)
+    self.connect("leave-notify-event", img._on_leave_notify)
+    self.connect("leave-notify-event", img._on_play_leave_notify)
+    self.connect("button-press-event", img._on_play_button_press)
 
     title_label = Gtk.Label()
     title_label.set_text((self.book.name[:MAX_BOOK_LENGTH] + '...') if len(self.book.name) > MAX_BOOK_LENGTH else self.book.name)
