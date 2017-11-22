@@ -214,6 +214,8 @@ class CozyUI:
     if Gtk.get_minor_version() > 18:
       self.search_scroller.set_max_content_width(400)
       self.search_scroller.set_max_content_height(600)
+      self.search_scroller.set_propagate_natural_height(True)
+      self.search_scroller.set_propagate_natural_width(True)
 
     # add marks to timer scale
     for i in range(0, 181, 15):

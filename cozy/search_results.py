@@ -2,7 +2,7 @@ from gi.repository import Gtk
 from cozy.db import *
 from cozy.book_element import *
 
-MAX_BOOK_LENGTH = 60
+MAX_BOOK_LENGTH = 80
 MAX_TRACK_LENGTH = 40
 BOOK_ICON_SIZE = 40
 
@@ -74,6 +74,7 @@ class ArtistSearchResult(SearchResult):
     title_label.set_margin_right(5)
     title_label.props.width_request = 100
     title_label.props.xalign = 0.0
+    title_label.set_line_wrap(True)
 
     self.box.add(title_label)
     self.add(self.box)
@@ -104,6 +105,7 @@ class TrackSearchResult(SearchResult):
     title_label.set_margin_right(5)
     title_label.props.width_request = 100
     title_label.props.xalign = 0.0
+    title_label.set_line_wrap(True)
 
     self.box.add(title_label)
     self.add(self.box)
@@ -142,6 +144,7 @@ class BookSearchResult(SearchResult):
     title_label.set_margin_right(5)
     title_label.props.width_request = 100
     title_label.props.xalign = 0.0
+    title_label.set_line_wrap(True)
 
     self.box.add(img)
     self.box.add(title_label)
