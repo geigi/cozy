@@ -22,6 +22,7 @@ import gi
 import locale
 import logging
 import argparse
+import code, traceback, signal
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GObject, GLib, Gio
 
@@ -38,6 +39,7 @@ version = '@VERSION@'
 class Application(Gtk.Application):
   def __init__(self, **kwargs):
     GObject.threads_init()
+    listen()
 
     Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
 
@@ -123,6 +125,21 @@ def main():
     ret = e.code
 
   sys.exit(ret)
+
+def debug(sig, frame):
+    """Interrupt running process, and provide a python prompt for
+    interactive debugging."""
+    d={'_frame':frame}         # Allow access to frame object.
+    d.update(frame.f_globals)  # Unless shadowed by global
+    d.update(frame.f_locals)
+
+    i = code.InteractiveConsole(d)
+    message  = "Signal received : entering python shell.\nTraceback:\n"
+    message += ''.join(traceback.format_stack(frame))
+    i.interact(message)
+
+def listen():
+    signal.signal(signal.SIGUSR1, debug)  # Register handler
 
 if __name__ == '__main__':
   main()

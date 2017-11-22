@@ -211,6 +211,10 @@ class CozyUI:
 
     self.search_entry.connect("search-changed", self.__on_search_changed)
 
+    if Gtk.get_minor_version() > 18:
+      self.search_scroller.set_max_content_width(400)
+      self.search_scroller.set_max_content_height(600)
+
     # add marks to timer scale
     for i in range(0, 181, 15):
       self.timer_scale.add_mark(i, Gtk.PositionType.RIGHT, None)
@@ -745,9 +749,6 @@ class CozyUI:
     self.search_thread_stop.set()
     self.throbber.start()
 
-    # hide nothing found
-    self.nothing_found_label.set_visible(False)
-
     # we want to avoid flickering of the search box size
     # as we remove widgets and add them again
     # so we get the current search popup size and set it as
@@ -755,6 +756,9 @@ class CozyUI:
     # this helps only a bit, the widgets are still flickering
     self.search_popover.set_size_request(self.search_popover.get_allocated_width(), 
                                          self.search_popover.get_allocated_height())
+
+    # hide nothing found
+    self.nothing_found_label.set_visible(False)
 
     # First clear the boxes
     self.__remove_all_children(self.search_book_box)
@@ -770,7 +774,7 @@ class CozyUI:
     user_search = self.search_entry.get_text()
     if user_search:
       if self.search_thread.is_alive():
-        self.search_thread.join()
+        self.search_thread.join(timeout=0.2)
       self.search_thread_stop.clear()
       self.search_thread = Thread(target=self.search, args=(user_search, ))
       self.search_thread.start()
@@ -970,6 +974,7 @@ class CozyUI:
     childs = container.get_children()
     for element in childs:
       container.remove(element)
+      element.destroy()
 
   def on_close(self, widget, data=None):
     """
