@@ -269,8 +269,8 @@ class CozyUI:
     """
     self.accel = Gtk.AccelGroup()
 
-    menu = self.menu_builder.get_object("app_menu")
-    self.app.set_app_menu(menu)
+    #menu = self.menu_builder.get_object("app_menu")
+    #self.app.set_app_menu(menu)
 
     help_action = Gio.SimpleAction.new("help", None)
     help_action.connect("activate", self.help)
@@ -416,7 +416,8 @@ class CozyUI:
     self.cover_img.set_from_pixbuf(None)
 
     self.progress_scale.set_range(0, 0)
-    self.progress_scale.set_value(0)
+    self.progress_scale.set_range(0, 0)
+    self.progress_scale.set_visible(False)
 
     self.remaining_label.set_visible(False)
     self.current_label.set_visible(False)
@@ -903,6 +904,7 @@ class CozyUI:
     self.play_button.set_sensitive(True)
     self.prev_button.set_sensitive(True)
     self.progress_scale.set_sensitive(True)
+    self.progress_scale.set_visible(True)
 
     # only change cover when book has changed
     if self.current_book is not track.book:
