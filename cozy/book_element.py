@@ -356,6 +356,7 @@ class TrackElement(Gtk.EventBox):
     if self.ui.current_track_element is not self and not self.selected:
       self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
     self.box.get_style_context().add_class("box_hover")
+    self.play_img.get_style_context().add_class("box_hover")
 
   def _on_leave_notify(self, widget, event):
     """
@@ -364,6 +365,7 @@ class TrackElement(Gtk.EventBox):
     :param event: as Gdk.Event (can be None)
     """
     self.box.get_style_context().remove_class("box_hover")
+    self.play_img.get_style_context().remove_class("box_hover")
     if self.ui.current_track_element is not self and not self.selected:
       self.play_img.clear()
 

@@ -54,7 +54,7 @@
                 <property name="vexpand">True</property>
                 <property name="label" translatable="yes">Which book are you looking for?</property>
                 <attributes>
-                  <attribute name="weight" value="normal"/>
+                  <attribute name="weight" value="bold"/>
                 </attributes>
                 <style>
                   <class name="h4"/>
@@ -88,7 +88,7 @@
                           <object class="GtkLabel" id="author_label">
                             <property name="can_focus">False</property>
                             <property name="halign">center</property>
-                            <property name="margin_top">7</property>
+                            <property name="margin_top">2</property>
                             <property name="margin_bottom">3</property>
                             <property name="label" translatable="yes">Author</property>
                             <attributes>
@@ -123,6 +123,7 @@
                           <object class="GtkSeparator" id="author_separator">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -134,7 +135,7 @@
                           <object class="GtkLabel" id="book_label">
                             <property name="can_focus">False</property>
                             <property name="halign">center</property>
-                            <property name="margin_top">7</property>
+                            <property name="margin_top">2</property>
                             <property name="margin_bottom">3</property>
                             <property name="label" translatable="yes">Book</property>
                             <attributes>
@@ -169,6 +170,7 @@
                           <object class="GtkSeparator" id="book_separator">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -180,7 +182,7 @@
                           <object class="GtkLabel" id="reader_label">
                             <property name="can_focus">False</property>
                             <property name="halign">center</property>
-                            <property name="margin_top">7</property>
+                            <property name="margin_top">2</property>
                             <property name="margin_bottom">3</property>
                             <property name="label" translatable="yes">Reader</property>
                             <attributes>
@@ -215,6 +217,7 @@
                           <object class="GtkSeparator" id="reader_separator">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -226,7 +229,7 @@
                           <object class="GtkLabel" id="track_label">
                             <property name="can_focus">False</property>
                             <property name="halign">center</property>
-                            <property name="margin_top">7</property>
+                            <property name="margin_top">2</property>
                             <property name="margin_bottom">3</property>
                             <property name="label" translatable="yes">Track</property>
                             <attributes>
@@ -277,7 +280,7 @@
                 <property name="vexpand">True</property>
                 <property name="label" translatable="yes">Nothing found :(</property>
                 <attributes>
-                  <attribute name="weight" value="normal"/>
+                  <attribute name="weight" value="bold"/>
                 </attributes>
                 <style>
                   <class name="h4"/>
