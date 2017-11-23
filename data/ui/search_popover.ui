@@ -18,9 +18,11 @@
             <property name="hexpand">True</property>
             <child>
               <object class="GtkSearchEntry" id="search_entry">
-                <property name="width_request">400</property>
+                <property name="width_request">380</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="halign">center</property>
+                <property name="margin_top">8</property>
                 <property name="hexpand">True</property>
                 <property name="primary_icon_name">edit-find-symbolic</property>
                 <property name="primary_icon_activatable">False</property>
@@ -69,6 +71,8 @@
               <object class="GtkScrolledWindow" id="search_scroller">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="margin_left">5</property>
+                <property name="margin_right">5</property>
                 <property name="margin_top">5</property>
                 <property name="vexpand">True</property>
                 <property name="window_placement">bottom-left</property>
