@@ -207,7 +207,10 @@ class CozyUI:
     self.search_track_box = self.search_builder.get_object("track_result_box")
     self.search_entry = self.search_builder.get_object("search_entry")
     self.search_scroller = self.search_builder.get_object("search_scroller")
-    self.nothing_found_label = self.search_builder.get_object("nothing_found_label")
+    self.search_book_separator = self.search_builder.get_object("book_separator")
+    self.search_author_separator = self.search_builder.get_object("author_separator")
+    self.search_reader_separator = self.search_builder.get_object("reader_separator")
+    self.search_stack = self.search_builder.get_object("search_stack")
 
     self.search_entry.connect("search-changed", self.__on_search_changed)
 
@@ -518,8 +521,8 @@ class CozyUI:
     main_context.invoke_full(GLib.PRIORITY_DEFAULT, self.__on_reader_search_finished, readers)
 
     if readers.count() < 1 and authors.count() < 1 and books.count() < 1:
-      main_context.invoke_full(GLib.PRIORITY_DEFAULT, self.nothing_found_label.set_visible, True)
-      main_context.invoke_full(GLib.PRIORITY_DEFAULT, self.search_scroller.set_visible, False)
+      main_context.invoke_full(GLib.PRIORITY_DEFAULT, self.search_stack.set_visible_child_name, "nothing")
+      
 
   def refresh_content(self):
     """
@@ -800,17 +803,20 @@ class CozyUI:
                                          self.search_popover.get_allocated_height())
 
     # hide nothing found
-    self.nothing_found_label.set_visible(False)
+    self.search_stack.set_visible_child_name("main")
 
     # First clear the boxes
     self.__remove_all_children(self.search_book_box)
     self.__remove_all_children(self.search_author_box)
     self.__remove_all_children(self.search_reader_box)
 
-    # Hide all the labels
+    # Hide all the labels & separators
     self.search_book_label.set_visible(False)
     self.search_author_label.set_visible(False)
     self.search_reader_label.set_visible(False)
+    self.search_book_separator.set_visible(False)
+    self.search_author_separator.set_visible(False)
+    self.search_reader_separator.set_visible(False)
     self.search_track_label.set_visible(False)
 
     user_search = self.search_entry.get_text()
@@ -822,7 +828,7 @@ class CozyUI:
       self.search_thread.start()
     else:
       self.throbber.stop()
-      self.search_scroller.set_visible(False)
+      self.search_stack.set_visible_child_name("start")
       self.search_popover.set_size_request(-1, -1)
 
   def __on_book_search_finished(self, books):
@@ -832,8 +838,9 @@ class CozyUI:
     :param books: Result peewee query containing the books
     """
     if len(books) > 0:
-      self.search_scroller.set_visible(True)
+      self.search_stack.set_visible_child_name("main")
       self.search_book_label.set_visible(True)
+      self.search_book_separator.set_visible(True)
 
       for book in books:
         if self.search_thread_stop.is_set():
@@ -847,8 +854,9 @@ class CozyUI:
     :param authors: Result peewee query containing the authors
     """
     if len(authors) > 0:
-      self.search_scroller.set_visible(True)
+      self.search_stack.set_visible_child_name("main")
       self.search_author_label.set_visible(True)
+      self.search_author_separator.set_visible(True)
 
       for author in authors:
         if self.search_thread_stop.is_set():
@@ -863,8 +871,9 @@ class CozyUI:
     :param readers: Result peewee query containing the readers
     """
     if len(readers) > 0:
-      self.search_scroller.set_visible(True)
+      self.search_stack.set_visible_child_name("main")
       self.search_reader_label.set_visible(True)
+      self.search_reader_separator.set_visible(True)
 
       for reader in readers:
         if self.search_thread_stop.is_set():
