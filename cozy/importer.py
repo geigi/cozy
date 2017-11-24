@@ -51,18 +51,23 @@ def update_database(ui):
   percent_counter = 0
   file_count = sum([len(files) for r, d, files in os.walk(Settings.get().path)])
   percent_threshold = file_count / 1000
+  failed = ""
   for directory, subdirectories, files in os.walk(Settings.get().path):
     for file in files:
       if file.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a')):
         path = os.path.join(directory, file)
 
+        imported = True
         # Is the track already in the database?
         if (Track.select().where(Track.file == path).count() < 1):
-          __importFile(file, directory, path)
+          imported = __importFile(file, directory, path)
         # Has the track changed on disk?
         elif Track.select().where(Track.file == path).first().modified < os.path.getmtime(path):
-          __importFile(file, directory, path, update=True)
-        
+          imported = __importFile(file, directory, path, update=True)
+
+        if not imported:
+          failed += path + "\n"
+
         i = i + 1
 
         # don't flood gui updates
@@ -87,6 +92,9 @@ def update_database(ui):
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
   Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.check_for_tracks)
 
+  if len(failed) > 0:
+    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.display_failed_imports, failed)
+
 def rebase_location(ui, oldPath, newPath):
   """
   This gets called when a user changes the location of the audio book folder.
@@ -108,22 +116,33 @@ def __importFile(file, directory, path, update=False):
   Imports all information about a track into the database.
   Note: This creates also a new album object when it doesnt exist yet. 
   Note: This does not check whether the file is already imported.
+  :return: True if file was imported, otherwise False
   """
 
-  track = TrackContainer(mutagen.File(path), path)
+  try:
+    mutagen_file = mutagen.File(path)
+  except Exception as e:
+    log.warning("File could not be recognized by mutagen: " + path)
+    return False
+
+  if mutagen_file is None:
+    log.warning("File could not be recognized by mutagen: " + path)
+    return False
+
+  track = TrackContainer(mutagen_file, path)
   cover = None
   reader = None
   track_number = None
 
   # getting the some data is file specific
   ### MP3 ###
-  if file.lower().endswith('.mp3'):
+  if isinstance(mutagen_file.info, mutagen.mp3.MPEGInfo):
     log.debug("Importing mp3 " + track.path)
     try:
       track.mutagen = ID3(path)
     except Exception as e:
       log.warning("Track " + track.path + " is no valid MP3 file. Skipping...")
-      return
+      return False
 
     mp3 = TrackContainer(MP3(track.path), path)
     cover = __get_mp3_tag(track, "APIC")
@@ -139,13 +158,13 @@ def __importFile(file, directory, path, update=False):
     track_name = __get_common_tag(track, "title")
 
   ### FLAC ###
-  elif file.lower().endswith('.flac'):
+  elif isinstance(mutagen_file.info, mutagen.flac.StreamInfo):
     log.debug("Importing flac " + track.path)
     try:
       track.mutagen = FLAC(path)
     except Exception as e:
-      log.warning("Track " + track.path + "is not a valid FLAC file. Skipping...")
-      return
+      log.warning("Track " + track.path + " is not a valid FLAC file. Skipping...")
+      return False
 
     disk = int(__get_common_disk_number(track))
     length = float(__get_common_track_length(track))
@@ -156,13 +175,13 @@ def __importFile(file, directory, path, update=False):
     track_name = __get_common_tag(track, "title")
 
   ### OGG ###
-  elif file.lower().endswith('.ogg'):
+  elif isinstance(mutagen_file.info, mutagen.oggvorbis.OggVorbisInfo):
     log.debug("Importing ogg " + track.path)
     try:
       track.mutagen = OggVorbis(path)
     except Exception as e:
-      log.warning("Track " + track.path + "is not a valid OGG file. Skipping...")
-      return
+      log.warning("Track " + track.path + " is not a valid OGG file. Skipping...")
+      return False
 
     disk = int(__get_common_disk_number(track))
     length = float(__get_common_track_length(track))
@@ -173,13 +192,13 @@ def __importFile(file, directory, path, update=False):
     track_name = __get_common_tag(track, "title")
 
   ### MP4 ###
-  elif file.lower().endswith('.m4a'):
+  elif isinstance(mutagen_file.info, mutagen.mp4.MP4Info):
     log.debug("Importing mp4 " + track.path)
     try:
       track.mutagen = MP4(path)
     except:
-      log.warning("Track " + track.path + "is not a valid MP4 file. Skipping...")
-      return
+      log.warning("Track " + track.path + " is not a valid MP4 file. Skipping...")
+      return False
 
     try:
       disk = int(track.mutagen["disk"][0][0])
@@ -197,6 +216,11 @@ def __importFile(file, directory, path, update=False):
       track_number = 0
     book_name = __get_common_tag(track, "\xa9alb")
     track_name = __get_common_tag(track, "\xa9nam")
+
+  ### File will not be imported ###
+  else:
+    print(mutagen_file.info)
+    return False
     
   modified = os.path.getmtime(path)
 
@@ -254,6 +278,8 @@ def __importFile(file, directory, path, update=False):
                  disk=disk,
                  length=length,
                  modified=modified)
+
+  return True
 
 def copy(ui, selection):
   selection = selection.get_uris()

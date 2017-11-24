@@ -7,6 +7,7 @@ from cozy.book_element import *
 from cozy.player import *
 from cozy.tools import *
 from cozy.file_not_found_dialog import *
+from cozy.import_failed_dialog import *
 from cozy.search_results import *
 
 import os
@@ -568,6 +569,13 @@ class CozyUI:
     self.book_box.show_all()
 
     return False
+
+  def display_failed_imports(self, files):
+    """
+    Displays a dialog with a list of files that could not be imported.
+    """
+    dialog = ImportFailedDialog(files, self)
+    dialog.show()
 
   def __jump_to_author(self, book):
     """
