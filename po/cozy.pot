@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-24 19:21+0100\n"
+"POT-Creation-Date: 2017-11-24 19:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -164,26 +164,15 @@ msgstr ""
 msgid "Welcome to Cozy!"
 msgstr ""
 
-#: data/ui/import_failed.ui:6
-msgid ""
-"jkhjkj\n"
-"kjhkjh\n"
-"kjhkjhkj\n"
-"lklkjl\n"
-"ljklkjlk\n"
-"lkjlkjlk\n"
-"lkjlkjl\n"
-msgstr ""
-
-#: data/ui/import_failed.ui:29
+#: data/ui/import_failed.ui:23
 msgid "Ok"
 msgstr ""
 
-#: data/ui/import_failed.ui:83
+#: data/ui/import_failed.ui:77
 msgid "Some files could not be imported"
 msgstr ""
 
-#: data/ui/import_failed.ui:136
+#: data/ui/import_failed.ui:130
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
