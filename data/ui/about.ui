@@ -21,7 +21,7 @@ Fred Warren
 
 And to other open source projects:
 https://github.com/gnumdk/lollypop</property>
-    <property name="translator_credits" translatable="yes">camellan</property>
+    <property name="translator_credits" translatable="no">camellan</property>
     <property name="logo_icon_name">com.github.geigi.cozy</property>
     <property name="license_type">gpl-3-0</property>
     <child internal-child="vbox">

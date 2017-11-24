@@ -21,27 +21,27 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: cozy/importer.py:212
+#: cozy/importer.py:236
 msgid "Unknown Author"
 msgstr "Неизвестный автор"
 
-#: cozy/importer.py:213
+#: cozy/importer.py:237
 msgid "Unknown Reader"
 msgstr "Неизвестный диктор"
 
-#: cozy/ui.py:295 cozy/ui.py:544 data/ui/timer_popover.ui:71
+#: cozy/ui.py:326 cozy/ui.py:634 data/ui/timer_popover.ui:71
 msgid "min"
 msgstr "мин"
 
-#: cozy/ui.py:455
+#: cozy/ui.py:487
 msgid "Importing Audiobooks"
 msgstr "Импорт аудиокниг"
 
-#: cozy/ui.py:502 cozy/ui.py:505 cozy/ui.py:881 cozy/ui.py:890
+#: cozy/ui.py:546 cozy/ui.py:549 cozy/ui.py:1078 cozy/ui.py:1087
 msgid "All"
 msgstr "Все"
 
-#: cozy/ui.py:663
+#: cozy/ui.py:753
 msgid "Changing audio book location..."
 msgstr "Выберите каталог аудиокниг..."
 
@@ -53,11 +53,11 @@ msgstr "<big>Автор</big>"
 msgid "<big>Reader</big>"
 msgstr "<big>Диктор</big>"
 
-#: data/ui/main_window.ui:143
+#: data/ui/main_window.ui:143 data/ui/search_popover.ui:97
 msgid "Author"
 msgstr "Автор"
 
-#: data/ui/main_window.ui:169
+#: data/ui/main_window.ui:169 data/ui/search_popover.ui:191
 msgid "Reader"
 msgstr "Диктор"
 
@@ -73,7 +73,8 @@ msgstr "Импорт аудиокниг"
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy автоматически импортирует аудиокниги из указанного каталога в библиотеку"
+"Cozy автоматически импортирует аудиокниги из указанного каталога в "
+"библиотеку"
 
 #: data/ui/main_window.ui:356 data/ui/hello.ui:240
 msgid "Drag & Drop"
@@ -131,17 +132,11 @@ msgstr "Отмена"
 msgid "Locate"
 msgstr "Найти"
 
-#: data/ui/file_not_found.ui:84
+#: data/ui/file_not_found.ui:86
 msgid "File not found"
 msgstr "Файл не найден"
 
-#: data/ui/file_not_found.ui:100
-msgid ""
-"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
-msgstr ""
-"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
-
-#: data/ui/file_not_found.ui:117
+#: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
 msgstr "Файл не найден. Вы хотите найти его самостоятельно?"
 
@@ -157,8 +152,8 @@ msgid ""
 "To get started, select where you store your audio books. Files in this "
 "folder will be imported to your library:"
 msgstr ""
-"Для начала укажите место, где хранятся ваши аудиокниги. Файлы из этой папки "
-"будут импортированы в библиотеку:"
+"Для начала укажите место, где хранятся ваши аудио книги. Файлы из этой папки"
+" будут импортированы в библиотеку:"
 
 #: data/ui/hello.ui:154
 msgid "Automatically import new audiobooks on startup"
@@ -178,7 +173,23 @@ msgstr "Запустить Cozy"
 
 #: data/ui/hello.ui:292
 msgid "Welcome to Cozy!"
-msgstr "Добро пожаловать в Cozy!"
+msgstr ""
+
+#: data/ui/import_failed.ui:23
+msgid "Ok"
+msgstr ""
+
+#: data/ui/import_failed.ui:77
+msgid "Some files could not be imported"
+msgstr ""
+
+#: data/ui/import_failed.ui:130
+msgid ""
+"This can have multiple reasons:\n"
+"- The audio format is not supported\n"
+"- The file(s) are no valid audio files\n"
+"- The file(s) are corrupt"
+msgstr ""
 
 #: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
@@ -228,23 +239,18 @@ msgstr "Расположение аудиокниг"
 msgid "Files"
 msgstr "Файлы"
 
-#~ msgid "Cozy"
-#~ msgstr "Cozy"
+#: data/ui/search_popover.ui:57
+msgid "Which book are you looking for?"
+msgstr ""
 
-#~ msgid "Audio Book Player"
-#~ msgstr "Проигрыватель аудиокниг"
+#: data/ui/search_popover.ui:144
+msgid "Book"
+msgstr ""
 
-#~ msgid "Play and organize your audio book collection"
-#~ msgstr "Воспроизводит и упорядочивает вашу коллекцию аудиокниг"
+#: data/ui/search_popover.ui:238
+msgid "Track"
+msgstr ""
 
-#~ msgid "com.github.geigi.cozy"
-#~ msgstr "com.github.geigi.cozy"
-
-#~ msgid "Play/Pause"
-#~ msgstr "Играть/Пауза"
-
-#~ msgid "Next"
-#~ msgstr "Следующая"
-
-#~ msgid "Previous"
-#~ msgstr "Предыдущая"
+#: data/ui/search_popover.ui:285
+msgid "Nothing found :("
+msgstr ""

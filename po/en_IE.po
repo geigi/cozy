@@ -14,27 +14,27 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cozy/importer.py:212
+#: cozy/importer.py:236
 msgid "Unknown Author"
 msgstr "Unknown Author"
 
-#: cozy/importer.py:213
+#: cozy/importer.py:237
 msgid "Unknown Reader"
 msgstr "Unknown Reader"
 
-#: cozy/ui.py:295 cozy/ui.py:544 data/ui/timer_popover.ui:71
+#: cozy/ui.py:326 cozy/ui.py:634 data/ui/timer_popover.ui:71
 msgid "min"
 msgstr "min"
 
-#: cozy/ui.py:455
+#: cozy/ui.py:487
 msgid "Importing Audiobooks"
 msgstr "Importing Audiobooks"
 
-#: cozy/ui.py:502 cozy/ui.py:505 cozy/ui.py:881 cozy/ui.py:890
+#: cozy/ui.py:546 cozy/ui.py:549 cozy/ui.py:1078 cozy/ui.py:1087
 msgid "All"
 msgstr "All"
 
-#: cozy/ui.py:663
+#: cozy/ui.py:753
 msgid "Changing audio book location..."
 msgstr "Changing audio book location..."
 
@@ -46,11 +46,11 @@ msgstr "<big>Author</big>"
 msgid "<big>Reader</big>"
 msgstr "<big>Reader</big>"
 
-#: data/ui/main_window.ui:143
+#: data/ui/main_window.ui:143 data/ui/search_popover.ui:97
 msgid "Author"
 msgstr "Author"
 
-#: data/ui/main_window.ui:169
+#: data/ui/main_window.ui:169 data/ui/search_popover.ui:191
 msgid "Reader"
 msgstr "Reader"
 
@@ -124,17 +124,11 @@ msgstr "Cancel"
 msgid "Locate"
 msgstr "Locate"
 
-#: data/ui/file_not_found.ui:84
+#: data/ui/file_not_found.ui:86
 msgid "File not found"
 msgstr "File not found"
 
-#: data/ui/file_not_found.ui:100
-msgid ""
-"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
-msgstr ""
-"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
-
-#: data/ui/file_not_found.ui:117
+#: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
 msgstr "This file could not be found. Do you want to locate it manually?"
 
@@ -169,6 +163,30 @@ msgstr "Rescan from menu"
 #: data/ui/hello.ui:269
 msgid "Let's get cozy"
 msgstr "Let's get cozy"
+
+#: data/ui/hello.ui:292
+msgid "Welcome to Cozy!"
+msgstr "Welcome to Cozy!"
+
+#: data/ui/import_failed.ui:23
+msgid "Ok"
+msgstr "Ok"
+
+#: data/ui/import_failed.ui:77
+msgid "Some files could not be imported"
+msgstr "Some files could not be imported"
+
+#: data/ui/import_failed.ui:130
+msgid ""
+"This can have multiple reasons:\n"
+"- The audio format is not supported\n"
+"- The file(s) are no valid audio files\n"
+"- The file(s) are corrupt"
+msgstr ""
+"This can have multiple reasons:\n"
+"- The audio format is not supported\n"
+"- The file(s) are no valid audio files\n"
+"- The file(s) are corrupt"
 
 #: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
@@ -217,3 +235,19 @@ msgstr "Audio books location"
 #: data/ui/settings.ui:351
 msgid "Files"
 msgstr "Files"
+
+#: data/ui/search_popover.ui:57
+msgid "Which book are you looking for?"
+msgstr "Which book are you looking for?"
+
+#: data/ui/search_popover.ui:144
+msgid "Book"
+msgstr "Book"
+
+#: data/ui/search_popover.ui:238
+msgid "Track"
+msgstr "Track"
+
+#: data/ui/search_popover.ui:285
+msgid "Nothing found :("
+msgstr "Nothing found :("

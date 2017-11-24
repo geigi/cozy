@@ -1,3 +1,13 @@
+com.github.geigi.cozy (0.4.1) UNSTABLE; urgency=low
+
+  * Russian translation
+  * Search your library!
+  * More robust importer - notifies you about files that could not be imported
+  * UI tweaks
+  * Fixed a bug where the importer could crash
+  * Lots of behind the scenes changes
+
+-- Julian Geywitz <github@geigi.de>  Wed, 24 Nov 2017 19:14:14 +0200
 com.github.geigi.cozy (0.4.0) UNSTABLE; urgency=low
 
   * The sleep timer has landed!

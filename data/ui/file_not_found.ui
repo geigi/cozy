@@ -99,7 +99,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">center</property>
-                    <property name="label" translatable="yes">&lt;tt&gt;/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3&lt;/tt&gt;</property>
+                    <property name="label" translatable="no">&lt;tt&gt;/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3&lt;/tt&gt;</property>
                     <property name="use_markup">True</property>
                     <property name="wrap">True</property>
                     <property name="wrap_mode">char</property>
