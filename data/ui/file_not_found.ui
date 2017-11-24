@@ -56,6 +56,7 @@
               <object class="GtkImage" id="message_image">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_left">5</property>
                 <property name="margin_right">10</property>
                 <property name="icon_name">dialog-warning</property>
                 <property name="icon_size">6</property>

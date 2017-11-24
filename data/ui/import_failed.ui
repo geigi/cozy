@@ -53,6 +53,7 @@ lkjlkjl
               <object class="GtkImage" id="message_image">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_left">5</property>
                 <property name="margin_right">10</property>
                 <property name="icon_name">dialog-warning</property>
                 <property name="icon_size">6</property>
@@ -105,6 +106,8 @@ lkjlkjl
                         <child>
                           <object class="GtkTextView">
                             <property name="name">text-view</property>
+                            <property name="width_request">400</property>
+                            <property name="height_request">100</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="editable">False</property>
