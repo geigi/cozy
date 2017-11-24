@@ -680,19 +680,6 @@ audio-volume-medium-symbolic</property>
                 <property name="position">2</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkSpinner" id="spinner">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">3</property>
-              </packing>
-            </child>
           </object>
         </child>
         <child type="title">
@@ -821,6 +808,19 @@ audio-volume-medium-symbolic</property>
             <property name="valign">center</property>
             <property name="vexpand">True</property>
             <child>
+              <object class="GtkSpinner" id="spinner">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">5</property>
+                <property name="margin_right">7</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkMenuButton" id="search_button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -836,7 +836,7 @@ audio-volume-medium-symbolic</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -855,7 +855,7 @@ audio-volume-medium-symbolic</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <child>
@@ -874,7 +874,7 @@ audio-volume-medium-symbolic</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>

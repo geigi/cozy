@@ -9,17 +9,3 @@ Type=Application
 Categories=GNOME;GTK;AudioVideo;Player;Audio;
 StartupNotify=true
 MimeType=application-x;
-
-Actions=Toggle;Next;Prev;
-
-[Desktop Action Toggle]
-Name=Play/Pause
-Exec=cozy -t
-
-[Desktop Action Next]
-Name=Next
-Exec=cozy -n
-
-[Desktop Action Prev]
-Name=Previous
-Exec=cozy -p
