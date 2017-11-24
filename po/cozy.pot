@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-06 18:38+0100\n"
+"POT-Creation-Date: 2017-11-24 19:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cozy/importer.py:212
+#: cozy/importer.py:236
 msgid "Unknown Author"
 msgstr ""
 
-#: cozy/importer.py:213
+#: cozy/importer.py:237
 msgid "Unknown Reader"
 msgstr ""
 
-#: cozy/ui.py:295 cozy/ui.py:544 data/ui/timer_popover.ui:71
+#: cozy/ui.py:326 cozy/ui.py:634 data/ui/timer_popover.ui:71
 msgid "min"
 msgstr ""
 
-#: cozy/ui.py:455
+#: cozy/ui.py:487
 msgid "Importing Audiobooks"
 msgstr ""
 
-#: cozy/ui.py:502 cozy/ui.py:505 cozy/ui.py:881 cozy/ui.py:890
+#: cozy/ui.py:546 cozy/ui.py:549 cozy/ui.py:1078 cozy/ui.py:1087
 msgid "All"
 msgstr ""
 
-#: cozy/ui.py:663
+#: cozy/ui.py:753
 msgid "Changing audio book location..."
 msgstr ""
 
@@ -49,11 +49,11 @@ msgstr ""
 msgid "<big>Reader</big>"
 msgstr ""
 
-#: data/ui/main_window.ui:143
+#: data/ui/main_window.ui:143 data/ui/search_popover.ui:97
 msgid "Author"
 msgstr ""
 
-#: data/ui/main_window.ui:169
+#: data/ui/main_window.ui:169 data/ui/search_popover.ui:191
 msgid "Reader"
 msgstr ""
 
@@ -124,16 +124,11 @@ msgstr ""
 msgid "Locate"
 msgstr ""
 
-#: data/ui/file_not_found.ui:84
+#: data/ui/file_not_found.ui:86
 msgid "File not found"
 msgstr ""
 
-#: data/ui/file_not_found.ui:100
-msgid ""
-"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
-msgstr ""
-
-#: data/ui/file_not_found.ui:117
+#: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
 msgstr ""
 
@@ -167,6 +162,33 @@ msgstr ""
 
 #: data/ui/hello.ui:292
 msgid "Welcome to Cozy!"
+msgstr ""
+
+#: data/ui/import_failed.ui:6
+msgid ""
+"jkhjkj\n"
+"kjhkjh\n"
+"kjhkjhkj\n"
+"lklkjl\n"
+"ljklkjlk\n"
+"lkjlkjlk\n"
+"lkjlkjl\n"
+msgstr ""
+
+#: data/ui/import_failed.ui:29
+msgid "Ok"
+msgstr ""
+
+#: data/ui/import_failed.ui:83
+msgid "Some files could not be imported"
+msgstr ""
+
+#: data/ui/import_failed.ui:136
+msgid ""
+"This can have multiple reasons:\n"
+"- The audio format is not supported\n"
+"- The file(s) are no valid audio files\n"
+"- The file(s) are corrupt"
 msgstr ""
 
 #: data/ui/settings.ui:27 data/ui/settings.ui:102
@@ -215,4 +237,20 @@ msgstr ""
 
 #: data/ui/settings.ui:351
 msgid "Files"
+msgstr ""
+
+#: data/ui/search_popover.ui:57
+msgid "Which book are you looking for?"
+msgstr ""
+
+#: data/ui/search_popover.ui:144
+msgid "Book"
+msgstr ""
+
+#: data/ui/search_popover.ui:238
+msgid "Track"
+msgstr ""
+
+#: data/ui/search_popover.ui:285
+msgid "Nothing found :("
 msgstr ""
