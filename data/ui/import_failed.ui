@@ -77,6 +77,7 @@ lkjlkjl
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="label" translatable="yes">Some files could not be imported</property>
@@ -92,10 +93,13 @@ lkjlkjl
                 </child>
                 <child>
                   <object class="GtkScrolledWindow">
+                    <property name="width_request">400</property>
+                    <property name="height_request">100</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="margin_top">10</property>
                     <property name="margin_bottom">10</property>
+                    <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="shadow_type">in</property>
                     <child>
@@ -106,8 +110,6 @@ lkjlkjl
                         <child>
                           <object class="GtkTextView">
                             <property name="name">text-view</property>
-                            <property name="width_request">400</property>
-                            <property name="height_request">100</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="editable">False</property>
