@@ -32,7 +32,7 @@ Arch Linux users can find cozy under the name `cozy-audiobooks` in the AUR:
 $ pacaur -S cozy-audiobooks
 ```
 
-You're using a debian based system (Ubuntu, ...)? I've included a <a href="https://github.com/geigi/cozy/releases/download/0.4.0/com.github.geigi.cozy_0.4.0_amd64.deb">.deb</a> file in the release section!
+You're using a debian based system (Ubuntu, ...)? I've included a <a href="https://github.com/geigi/cozy/releases/download/0.4.1/com.github.geigi.cozy_0.4.1_all.deb">.deb</a> file in the release section!
 
 ### Upcoming:
 - wav support
