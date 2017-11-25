@@ -17,6 +17,7 @@ Cozy is a modern audio book player for Linux.
 - Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg audio books
 - Remembers your playback position
 - Sleep timer!
+- Search your library
 - Sort your audio books by author, reader & name
 - drag & drop to import new audiobooks
 - Mpris integration (Media keys & playback info for desktop environment)
@@ -36,7 +37,6 @@ You're using a debian based system (Ubuntu, ...)? I've included a <a href="https
 
 ### Upcoming:
 - wav support
-- Search
 - Sort by name, added date, last played
 - Ratings
 - Playback speed control
