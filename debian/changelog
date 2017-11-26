@@ -1,3 +1,16 @@
+com.github.geigi.cozy (0.4.2) UNSTABLE; urgency=low
+
+  * Russian translation
+  * Search your library!
+  * More robust importer - notifies you about files that could not be imported
+  * UI tweaks
+  * Fixed a bug where the importer could crash
+  * Added lots of tooltips
+  * Started implementing orca screen reader support
+  * Removed hello window
+  * Lots of behind the scenes changes
+
+-- Julian Geywitz <github@geigi.de>  Wed, 26 Nov 2017 19:59:14 +0200
 com.github.geigi.cozy (0.4.1) UNSTABLE; urgency=low
 
   * Russian translation
