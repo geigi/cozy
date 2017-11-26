@@ -23,8 +23,9 @@ import locale
 import logging
 import argparse
 import code, traceback, signal
+from pathlib import Path
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GObject, GLib, Gio
+from gi.repository import Gtk, GObject, GLib
 
 from cozy.ui import CozyUI
 from cozy.db import *
@@ -59,39 +60,21 @@ class Application(Gtk.Application):
     self.ui.startup()
 
   def do_activate(self):
-    if Settings.get().first_start:
-      self.hello = self.ui.hello_builder.get_object("hello_window")
-      self.folder_chooser = self.ui.hello_builder.get_object("book_location")
-      self.start_button = self.ui.hello_builder.get_object("start_button")
-      self.start_button.connect("clicked", self.first_start)
-      self.folder_chooser.connect("file-set", self.__on_folder_changed)
-      auto_scan_switch = self.ui.hello_builder.get_object("auto_scan_switch")
-      self.ui.settings.bind("autoscan", auto_scan_switch, "active", Gio.SettingsBindFlags.DEFAULT)
-
-      self.hello.show()
-      self.add_window(self.hello)
-
-    else:
-      self.ui.activate()
-      self.add_window(self.ui.window)
-      MPRIS(self, self.ui)
-
-  def first_start(self, button):
-    """
-    Store the user selected path and start the first import.
-    """
-    log.info("Cozy will now import all audio files from your selected location.")
-
-    location = self.folder_chooser.get_file().get_path()
-    Settings.update(first_start = False).execute()
-    Settings.update(path = location).execute()
-    self.hello.close()
-
     self.ui.activate()
-    self.ui.main_stack.props.visible_child_name = "import"
+
+    if Settings.get().first_start:
+      Settings.update(first_start = False).execute()
+      path = str(Path.home()) + "/Audiobooks"
+      Settings.update(path = str(Path.home()) + "/Audiobooks").execute()
+
+      if not os.path.exists(path):
+        os.makedirs(path)
+      else:
+        self.ui.scan(None, True)
+        self.ui.refresh_content()
+    
     self.add_window(self.ui.window)
-    self.ui.scan(None, True)
-    self.ui.refresh_content()
+    MPRIS(self, self.ui)
 
   def __on_folder_changed(self, sender):
     """

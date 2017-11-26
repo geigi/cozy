@@ -54,6 +54,7 @@
                         <property name="can_focus">False</property>
                         <property name="focus_on_click">False</property>
                         <property name="receives_default">True</property>
+                        <property name="tooltip_text" translatable="yes">Select by author</property>
                         <property name="hexpand">True</property>
                         <property name="relief">none</property>
                         <property name="active">True</property>
@@ -69,6 +70,12 @@
                             </style>
                           </object>
                         </child>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="author_toggle_button-atkobject">
+                            <property name="AtkObject::accessible-name" translatable="yes">Author filter button</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Filter books by author</property>
+                          </object>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -82,6 +89,7 @@
                         <property name="can_focus">False</property>
                         <property name="focus_on_click">False</property>
                         <property name="receives_default">True</property>
+                        <property name="tooltip_text" translatable="yes">Select by reader</property>
                         <property name="hexpand">True</property>
                         <property name="relief">none</property>
                         <child>
@@ -94,6 +102,12 @@
                             <style>
                               <class name="no_frame"/>
                             </style>
+                          </object>
+                        </child>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="reader_toggle_button-atkobject">
+                            <property name="AtkObject::accessible-name" translatable="yes">Reader filter button</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Filter books by reader</property>
                           </object>
                         </child>
                       </object>
@@ -130,6 +144,11 @@
                               <object class="GtkListBox" id="author_box">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="author_box-atkobject">
+                                    <property name="AtkObject::accessible-name" translatable="yes">List of authors</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
@@ -156,6 +175,11 @@
                               <object class="GtkListBox" id="reader_box">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="reader_box-atkobject">
+                                    <property name="AtkObject::accessible-name" translatable="yes">List of readers</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
@@ -211,6 +235,11 @@
                         <property name="row_spacing">30</property>
                         <property name="selection_mode">none</property>
                         <property name="activate_on_single_click">False</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="book_box-atkobject">
+                            <property name="AtkObject::accessible-name" translatable="yes">List of books</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
@@ -474,6 +503,7 @@
                   <object class="GtkFileChooserButton" id="no_media_file_chooser">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="tooltip_text" translatable="yes">Location of your audiobooks</property>
                     <property name="margin_left">54</property>
                     <property name="margin_top">2</property>
                     <property name="action">select-folder</property>
@@ -494,7 +524,51 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin_top">10</property>
+                <property name="margin_bottom">10</property>
+                <child>
+                  <object class="GtkSwitch" id="auto_scan_switch">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="auto_scan_switch-atkobject">
+                        <property name="AtkObject::accessible-name" translatable="yes">Auto scan switch</property>
+                        <property name="AtkObject::accessible-description" translatable="yes">Automatically import new audiobooks on startup</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">5</property>
+                    <property name="label" translatable="yes">Automatically import new audiobooks on startup</property>
+                    <style>
+                      <class name="h4"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">4</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -531,11 +605,18 @@
                     <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Rewind 30 seconds</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="image">prev_img</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="prev_button-atkobject">
+                        <property name="AtkObject::accessible-name" translatable="yes">Rewind button</property>
+                        <property name="AtkObject::accessible-description" translatable="yes">Jump back 30 seconds</property>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -550,11 +631,18 @@
                     <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Start playback</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="image">play_img</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="play_button-atkobject">
+                        <property name="AtkObject::accessible-name" translatable="yes">Play/Pause Button</property>
+                        <property name="AtkObject::accessible-description" translatable="yes">Start or pause the playback</property>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -628,6 +716,7 @@ audio-volume-medium-symbolic</property>
                 <property name="name">s</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">Currently playing</property>
                 <property name="margin_left">5</property>
                 <property name="margin_right">5</property>
                 <property name="vexpand">True</property>
@@ -643,6 +732,12 @@ audio-volume-medium-symbolic</property>
                     <property name="ellipsize">end</property>
                     <property name="width_chars">10</property>
                     <property name="single_line_mode">True</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="title_label-atkobject">
+                        <property name="AtkObject::accessible-name" translatable="yes">Booktitle</property>
+                        <property name="AtkObject::accessible-description" translatable="yes">Title of currently playing book</property>
+                      </object>
+                    </child>
                     <style>
                       <class name="title"/>
                     </style>
@@ -663,6 +758,12 @@ audio-volume-medium-symbolic</property>
                     <property name="ellipsize">end</property>
                     <property name="width_chars">10</property>
                     <property name="single_line_mode">True</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="subtitle_label-atkobject">
+                        <property name="AtkObject::accessible-name" translatable="yes">Track title</property>
+                        <property name="AtkObject::accessible-description" translatable="yes">Title of the currently playing track</property>
+                      </object>
+                    </child>
                     <style>
                       <class name="subtitle"/>
                     </style>
@@ -702,11 +803,18 @@ audio-volume-medium-symbolic</property>
                       <object class="GtkLabel" id="current_label">
                         <property name="width_request">35</property>
                         <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Elapsed time</property>
                         <property name="halign">end</property>
                         <property name="margin_right">3</property>
                         <property name="margin_top">2</property>
                         <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
                         <property name="use_markup">True</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="current_label-atkobject">
+                            <property name="AtkObject::accessible-name" translatable="yes">Time elapsed</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Elapsed time of current track</property>
+                          </object>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -717,12 +825,18 @@ audio-volume-medium-symbolic</property>
                     <child>
                       <object class="GtkScale" id="progress_scale">
                         <property name="width_request">150</property>
-                        <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Scrubb through current track</property>
                         <property name="hexpand">True</property>
                         <property name="round_digits">1</property>
                         <property name="draw_value">False</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="progress_scale-atkobject">
+                            <property name="AtkObject::accessible-name" translatable="yes">Position slider</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Position of the current track in seconds</property>
+                          </object>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -734,11 +848,18 @@ audio-volume-medium-symbolic</property>
                       <object class="GtkLabel" id="remaining_label">
                         <property name="width_request">35</property>
                         <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Remaining time</property>
                         <property name="halign">start</property>
                         <property name="margin_left">3</property>
                         <property name="margin_top">2</property>
                         <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
                         <property name="use_markup">True</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="remaining_label-atkobject">
+                            <property name="AtkObject::accessible-name" translatable="yes">Time remaining</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Remaining time of current track</property>
+                          </object>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -811,8 +932,14 @@ audio-volume-medium-symbolic</property>
               <object class="GtkSpinner" id="spinner">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">Working...</property>
                 <property name="margin_left">5</property>
                 <property name="margin_right">8</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="spinner-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Currently working</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -822,14 +949,22 @@ audio-volume-medium-symbolic</property>
             </child>
             <child>
               <object class="GtkMenuButton" id="search_button">
+                <property name="name">Search toggle button</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Search your library</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="icon_name">edit-find-symbolic</property>
+                  </object>
+                </child>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="search_button-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Search menu button</property>
+                    <property name="AtkObject::accessible-description" translatable="yes">Open the search popover</property>
                   </object>
                 </child>
               </object>
@@ -844,11 +979,18 @@ audio-volume-medium-symbolic</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Sleep timer</property>
                 <child>
                   <object class="GtkImage" id="timer_image">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="icon_name">weather-clear-symbolic</property>
+                  </object>
+                </child>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="timer_button-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Timer menu button</property>
+                    <property name="AtkObject::accessible-description" translatable="yes">Open the sleep timer popover</property>
                   </object>
                 </child>
               </object>
@@ -862,12 +1004,19 @@ audio-volume-medium-symbolic</property>
               <object class="GtkMenuButton" id="menu_button">
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Options</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="icon_name">open-menu-symbolic</property>
                     <property name="icon_size">2</property>
+                  </object>
+                </child>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="menu_button-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Options menu button</property>
+                    <property name="AtkObject::accessible-description" translatable="yes">Open the options popover</property>
                   </object>
                 </child>
               </object>

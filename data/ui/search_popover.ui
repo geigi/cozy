@@ -21,12 +21,22 @@
                 <property name="width_request">380</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="tooltip_text" translatable="yes">Search</property>
                 <property name="halign">center</property>
                 <property name="margin_top">8</property>
                 <property name="hexpand">True</property>
                 <property name="primary_icon_name">edit-find-symbolic</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">False</property>
+                <accessibility>
+                  <action action_name="activate" description="Search for books"/>
+                </accessibility>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="search_entry-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Search box</property>
+                    <property name="AtkObject::accessible-description" translatable="yes">Search your audiobook library</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -64,7 +74,7 @@
               </object>
               <packing>
                 <property name="name">start</property>
-                <property name="title" translatable="no">page2</property>
+                <property name="title">page2</property>
               </packing>
             </child>
             <child>
@@ -271,7 +281,7 @@
               </object>
               <packing>
                 <property name="name">main</property>
-                <property name="title" translatable="no">page0</property>
+                <property name="title">page0</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -292,7 +302,7 @@
               </object>
               <packing>
                 <property name="name">nothing</property>
-                <property name="title" translatable="no">page1</property>
+                <property name="title">page1</property>
                 <property name="position">2</property>
               </packing>
             </child>

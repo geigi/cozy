@@ -29,7 +29,14 @@
           <object class="GtkSwitch" id="timer_switch">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="tooltip_text" translatable="yes">Toggle the timer on/off</property>
             <property name="halign">center</property>
+            <child internal-child="accessible">
+              <object class="AtkObject" id="timer_switch-atkobject">
+                <property name="AtkObject::accessible-name" translatable="yes">Timer toggle button</property>
+                <property name="AtkObject::accessible-description" translatable="yes">Switch the sleep timer on or off</property>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -42,6 +49,7 @@
             <property name="height_request">150</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="tooltip_text" translatable="yes">Timer duration</property>
             <property name="orientation">vertical</property>
             <property name="adjustment">timer_value</property>
             <property name="inverted">True</property>
@@ -52,6 +60,12 @@
             <property name="digits">0</property>
             <property name="draw_value">False</property>
             <property name="value_pos">right</property>
+            <child internal-child="accessible">
+              <object class="AtkObject" id="timer_scale-atkobject">
+                <property name="AtkObject::accessible-name" translatable="yes">Timer duration slider</property>
+                <property name="AtkObject::accessible-description" translatable="yes">Set the sleep timer duration in minutes</property>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -63,6 +77,7 @@
           <object class="GtkSpinButton" id="timer_spinner">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="tooltip_text" translatable="yes">Timer duration</property>
             <property name="margin_top">6</property>
             <property name="buffer">timer_buffer</property>
             <property name="shadow_type">etched-in</property>
@@ -72,6 +87,12 @@
             <property name="input_purpose">number</property>
             <property name="adjustment">timer_value</property>
             <property name="snap_to_ticks">True</property>
+            <child internal-child="accessible">
+              <object class="AtkObject" id="timer_spinner-atkobject">
+                <property name="AtkObject::accessible-name" translatable="yes">Timer duration spin button</property>
+                <property name="AtkObject::accessible-description" translatable="yes">Set the sleep timer duration in minutes</property>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>

@@ -2,6 +2,7 @@ main.py
 cozy/book_element.py
 cozy/db.py
 cozy/file_not_found_dialog.py
+cozy/search_results.py
 cozy/importer.py
 cozy/mpris.py
 cozy/player.py
@@ -11,7 +12,6 @@ data/ui/main_window.ui
 data/ui/about.ui
 data/ui/app_menu.ui
 data/ui/file_not_found.ui
-data/ui/hello.ui
 data/ui/import_failed.ui
 data/ui/settings.ui
 data/ui/search_popover.ui

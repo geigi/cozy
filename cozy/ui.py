@@ -74,7 +74,6 @@ class CozyUI:
     self.settings_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/settings.ui")
     self.menu_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")
     self.about_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/about.ui")
-    self.hello_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/hello.ui")
 
   def __init_css(self):
     """
@@ -174,6 +173,8 @@ class CozyUI:
     self.timer_image = self.window_builder.get_object("timer_image")
     self.search_button = self.window_builder.get_object("search_button")
     self.timer_button = self.window_builder.get_object("timer_button")
+    self.auto_scan_switch = self.window_builder.get_object("auto_scan_switch")
+    self.settings.bind("autoscan", self.auto_scan_switch, "active", Gio.SettingsBindFlags.DEFAULT)
 
     # get settings window
     self.settings_window = self.settings_builder.get_object("settings_window")
@@ -479,6 +480,7 @@ class CozyUI:
     Sets the cover in the title bar.
     """
     self.cover_img.set_from_pixbuf(pixbuf)
+    self.cover_img.set_tooltip_text(get_current_track().book.name)
 
   def scan(self, action, first_scan):
     """
@@ -544,9 +546,11 @@ class CozyUI:
 
     # Add the special All element
     all_row = ListBoxRowWithData(_("All"), True)
+    all_row.set_tooltip_text(_("Display all books"))
     self.author_box.add(all_row)
     self.author_box.select_row(all_row)
     all_row = ListBoxRowWithData(_("All"), True)
+    all_row.set_tooltip_text(_("Display all books"))
     self.reader_box.add(all_row)
     self.reader_box.select_row(all_row)
 

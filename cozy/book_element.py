@@ -52,6 +52,7 @@ class AlbumElement(Gtk.EventBox):
     self.play_signal_ids.append(self.play_box.connect("button-press-event", self._on_play_button_press))
     self.play_box.set_property("halign", Gtk.Align.CENTER)
     self.play_box.set_property("valign", Gtk.Align.CENTER)
+    self.play_box.set_tooltip_text(_("Play this book"))
 
     # play_color is an overlay for the play button 
     # with this it should be visible on any album art color
@@ -168,6 +169,7 @@ class BookElement(Gtk.Box):
     self.set_halign(Gtk.Align.CENTER)
     self.set_valign(Gtk.Align.START)
     self.set_margin_top(10)
+    self.set_tooltip_text(_("Open book overview"))
 
     # label contains the book name and is limited to x chars
     title_label = Gtk.Label("")
@@ -287,6 +289,7 @@ class TrackElement(Gtk.EventBox):
     self.connect("enter-notify-event", self._on_enter_notify)
     self.connect("leave-notify-event", self._on_leave_notify)
     self.connect("button-press-event", self.__on_button_press)
+    self.set_tooltip_text(_("Play this track"))
 
     # This box contains all content
     self.box = Gtk.Box()

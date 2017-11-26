@@ -311,11 +311,13 @@ def copy_to_audiobook_folder(path):
         shutil.copy(path, Settings.get().path)
       except OSError as e:
         if e.errno == 95:
-          pass
+          log.error("Could not import file " + path)
+          log.error(exc)
         else:
           log.error(e)
     elif exc.errno == errno.ENOTSUP:
-      pass
+      log.error("Could not import file " + path)
+      log.error(exc)
     else: 
       log.error("Could not import file " + path)
       log.error(exc)

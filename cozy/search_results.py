@@ -65,8 +65,10 @@ class ArtistSearchResult(SearchResult):
     title_label = Gtk.Label()
     if is_author:
       title_label.set_text((self.book.author[:MAX_BOOK_LENGTH] + '...') if len(self.book.author) > MAX_BOOK_LENGTH else self.book.author)
+      self.set_tooltip_text(_("Jump to author ") + book.author)
     else:
       title_label.set_text((self.book.reader[:MAX_BOOK_LENGTH] + '...') if len(self.book.reader) > MAX_BOOK_LENGTH else self.book.reader)
+      self.set_tooltip_text(_("Jump to reader ") + book.reader)
     title_label.set_halign(Gtk.Align.START)
     title_label.props.margin = 4
     title_label.props.hexpand = True
@@ -126,6 +128,7 @@ class BookSearchResult(SearchResult):
     self.box.set_spacing(3)
     self.box.set_halign(Gtk.Align.FILL)
     self.box.set_valign(Gtk.Align.CENTER)
+    self.set_tooltip_text(_("Play this book"))
 
     img = AlbumElement(self.book, BOOK_ICON_SIZE, False, True)
     img.disconnect_signals()
