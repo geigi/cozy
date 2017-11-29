@@ -1101,7 +1101,7 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
   def __init__(self, data, bold=False):
     super(Gtk.ListBoxRow, self).__init__()
     self.data = data
-    label = Gtk.Label(data)
+    label = Gtk.Label.new(data)
     if bold:
       label.set_markup("<b>" + data + "</b>")
     label.set_xalign(0.0)
