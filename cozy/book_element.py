@@ -172,7 +172,7 @@ class BookElement(Gtk.Box):
     self.set_tooltip_text(_("Open book overview"))
 
     # label contains the book name and is limited to x chars
-    title_label = Gtk.Label("")
+    title_label = Gtk.Label.new("")
     title = (self.book.name[:MAX_BOOK_LENGTH] + '...') if len(self.book.name) > MAX_BOOK_LENGTH else self.book.name
     title_label.set_markup("<b>" + title + "</b>")
     title_label.set_xalign(0.5)
