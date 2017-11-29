@@ -216,7 +216,7 @@ class CozyUI:
 
     self.search_entry.connect("search-changed", self.__on_search_changed)
 
-    if Gtk.get_minor_version() > 18:
+    if Gtk.get_minor_version() > 20:
       self.search_scroller.set_max_content_width(400)
       self.search_scroller.set_max_content_height(600)
       self.search_scroller.set_propagate_natural_height(True)
