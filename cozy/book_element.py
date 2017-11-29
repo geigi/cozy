@@ -180,7 +180,7 @@ class BookElement(Gtk.Box):
     title_label.props.max_width_chars = 30
     title_label.props.justify = Gtk.Justification.CENTER
 
-    author_label = Gtk.Label((self.book.author[:MAX_BOOK_LENGTH] + '...') if len(self.book.author) > MAX_BOOK_LENGTH else self.book.author)
+    author_label = Gtk.Label.new((self.book.author[:MAX_BOOK_LENGTH] + '...') if len(self.book.author) > MAX_BOOK_LENGTH else self.book.author)
     author_label.set_xalign(0.5)
     author_label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
     author_label.props.max_width_chars = 30
