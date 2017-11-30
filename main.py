@@ -17,18 +17,22 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
-import gi
+import argparse
+import code
 import locale
 import logging
-import argparse
-import code, traceback, signal
-from pathlib import Path
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GObject, GLib
+import os
+import signal
+import sys
+import traceback
 
+import gi
+gi.require_version('Gtk', '3.0')
+
+from pathlib import Path
+from gi.repository import Gtk, GObject, GLib
 from cozy.ui import CozyUI
-from cozy.db import *
+from cozy.db import init_db, Settings
 from cozy.mpris import MPRIS
 
 log = logging.getLogger("main")
@@ -37,50 +41,48 @@ pkgdatadir = '@DATA_DIR@'
 localedir = '@LOCALE_DIR@'
 version = '@VERSION@'
 
+
 class Application(Gtk.Application):
-  def __init__(self, **kwargs):
-    GObject.threads_init()
-    listen()
+    def __init__(self, **kwargs):
+        self.ui = None
 
-    Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
+        GObject.threads_init()
+        listen()
 
-    GLib.setenv("PULSE_PROP_media.role", "music", True)
+        Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
 
-    import gettext
+        GLib.setenv("PULSE_PROP_media.role", "music", True)
 
-    locale.bindtextdomain('cozy', localedir)
-    locale.textdomain('cozy')
-    gettext.install('cozy', localedir)
+        import gettext
 
-  def do_startup(self):
-    log.info("Starting up cozy " + version)
-    self.ui = CozyUI(pkgdatadir, self, version)
-    init_db()
-    Gtk.Application.do_startup(self)
-    self.ui.startup()
+        locale.bindtextdomain('cozy', localedir)
+        locale.textdomain('cozy')
+        gettext.install('cozy', localedir)
 
-  def do_activate(self):
-    self.ui.activate()
+    def do_startup(self):
+        log.info("Starting up cozy " + version)
+        self.ui = CozyUI(pkgdatadir, self, version)
+        init_db()
+        Gtk.Application.do_startup(self)
+        self.ui.startup()
 
-    if Settings.get().first_start:
-      Settings.update(first_start = False).execute()
-      path = str(Path.home()) + "/Audiobooks"
-      Settings.update(path = str(Path.home()) + "/Audiobooks").execute()
+    def do_activate(self):
+        self.ui.activate()
 
-      if not os.path.exists(path):
-        os.makedirs(path)
-      else:
-        self.ui.scan(None, True)
-        self.ui.refresh_content()
-    
-    self.add_window(self.ui.window)
-    MPRIS(self, self.ui)
+        if Settings.get().first_start:
+            Settings.update(first_start=False).execute()
+            path = str(Path.home()) + "/Audiobooks"
+            Settings.update(path=str(Path.home()) + "/Audiobooks").execute()
 
-  def __on_folder_changed(self, sender):
-    """
-    Enable the start button when the user selected a location.
-    """
-    self.start_button.set_sensitive(True)
+            if not os.path.exists(path):
+                os.makedirs(path)
+            else:
+                self.ui.scan(None, True)
+                self.ui.refresh_content()
+
+        self.add_window(self.ui.window)
+        MPRIS(self, self.ui)
+
 
 def __on_command_line():
     """
@@ -90,39 +92,44 @@ def __on_command_line():
     parser.add_argument("-d", "--debug", action="store_true", dest="debug")
     args = parser.parse_args(sys.argv[1:])
 
-    if args.debug == True:
-      logging.basicConfig(level=logging.DEBUG)
+    if args.debug:
+        logging.basicConfig(level=logging.DEBUG)
     else:
-      logging.basicConfig(level=logging.INFO)
+        logging.basicConfig(level=logging.INFO)
+
 
 def main():
-  __on_command_line()
-  print(sys.argv)
-  application = Application()
+    __on_command_line()
+    print(sys.argv)
+    application = Application()
 
-  try:
-    # Handle the debug option seperatly without the Glib stuff
-    if "-d" in sys.argv: sys.argv.remove("-d")
-    ret = application.run(sys.argv)
-  except SystemExit as e:
-    ret = e.code
+    try:
+        # Handle the debug option seperatly without the Glib stuff
+        if "-d" in sys.argv:
+            sys.argv.remove("-d")
+        ret = application.run(sys.argv)
+    except SystemExit as e:
+        ret = e.code
 
-  sys.exit(ret)
+    sys.exit(ret)
+
 
 def debug(sig, frame):
     """Interrupt running process, and provide a python prompt for
     interactive debugging."""
-    d={'_frame':frame}         # Allow access to frame object.
+    d = {'_frame': frame}         # Allow access to frame object.
     d.update(frame.f_globals)  # Unless shadowed by global
     d.update(frame.f_locals)
 
     i = code.InteractiveConsole(d)
-    message  = "Signal received : entering python shell.\nTraceback:\n"
+    message = "Signal received : entering python shell.\nTraceback:\n"
     message += ''.join(traceback.format_stack(frame))
     i.interact(message)
+
 
 def listen():
     signal.signal(signal.SIGUSR1, debug)  # Register handler
 
+
 if __name__ == '__main__':
-  main()
+    main()
