@@ -14,3 +14,5 @@ peewee/
 
 # Ignore sublime files
 *.sublime-workspace
+
+.vscode

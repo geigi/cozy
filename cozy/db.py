@@ -151,15 +151,17 @@ def get_cover_pixbuf(book, size=0):
     """
     pixbuf = None
 
-    if book is None:
-        pixbuf = GdkPixbuf.Pixbuf.new_from_resource(
-            "/de/geigi/cozy/blank_album.png")
-    elif book.cover is not None:
-        loader = GdkPixbuf.PixbufLoader.new()
-        loader.write(book.cover)
-        loader.close()
-        pixbuf = loader.get_pixbuf()
-    else:
+    if book is not None and book.cover is not None:
+        try:
+            loader = GdkPixbuf.PixbufLoader.new()
+            loader.write(book.cover)
+            loader.close()
+            pixbuf = loader.get_pixbuf()
+        except Exception as e:
+            log.warning("Could not get cover for book " + book.name)
+            log.debug(e)
+        
+    if pixbuf is None:
         pixbuf = GdkPixbuf.Pixbuf.new_from_resource(
             "/de/geigi/cozy/blank_album.png")
 
