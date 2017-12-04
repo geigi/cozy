@@ -58,6 +58,17 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.4.3" timestamp="1512409564">
+      <description>
+        <ul>
+          <li>Updated russian translation</li>
+          <li>Fixed bug where cozy could crash on startup when a album cover is not supported</li>
+          <li>Track progressbar can now be controlled by the keyboard and supports incremental changes</li>
+          <li>Fixed a bug where the position of the track was not resetted after the playback finished</li>
+          <li>Probably faster import</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.2" timestamp="1511722853">
       <description>
         <ul>

@@ -1,3 +1,13 @@
+com.github.geigi.cozy (0.4.3) UNSTABLE; urgency=low
+
+  * Updated russian translation
+  * Fixed bug where cozy could crash on startup when a album cover is not supported
+  * Track progressbar can now be controlled by the keyboard and supports incremental changes
+  * Fixed a bug where the position of the track was not resetted after the playback finished
+  * Probably faster import
+  * Refactoring
+
+-- Julian Geywitz <github@geigi.de>  Wed, 04 Dec 2017 18:45:14 +0200
 com.github.geigi.cozy (0.4.2) UNSTABLE; urgency=low
 
   * Russian translation
