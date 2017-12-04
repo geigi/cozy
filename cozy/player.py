@@ -151,6 +151,7 @@ def next_track():
     if index + 1 < len(album_tracks):
         next_track = album_tracks[index + 1]
 
+    play_pause(None)
     db.Track.update(position=0).where(db.Track.id == current.id).execute()
 
     if next_track is not None:
