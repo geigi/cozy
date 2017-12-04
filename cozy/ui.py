@@ -261,10 +261,12 @@ class CozyUI:
             "focus-out-event", self.__on_timer_focus_out)
 
         # init progress scale
+        self.progress_scale.set_increments(30.0, 60.0)
         self.progress_scale.connect(
             "button-release-event", self.__on_progress_clicked)
         self.progress_scale.connect(
             "button-press-event", self.__on_progress_press)
+        self.progress_scale.connect("key-press-event", self.__on_progress_key_pressed)
         self.progress_scale.connect("value-changed", self.__update_ui_time)
 
         # shortcuts
@@ -747,9 +749,6 @@ class CozyUI:
         """
         Remember that progress scale is clicked so it won't get updates from the player.
         """
-        if sender.button != 1:
-            return True
-
         self.progress_scale_clicked = True
 
         # If the user drags the slider we don't want to jump back
@@ -763,9 +762,6 @@ class CozyUI:
         """
         Jump to the slided time and release the progress scale update lock.
         """
-        if sender.button != 1:
-            return True
-
         player.jump_to(self.progress_scale.get_value())
         self.progress_scale_clicked = False
 
@@ -781,6 +777,25 @@ class CozyUI:
             self.switch_to_working("copying new files...", False)
             thread = Thread(target=importer.copy, args=(self, selection, ))
             thread.start()
+
+    def __on_progress_key_pressed(self, widget, event):
+        """
+        Jump to the modified time.
+        """
+        old_val = self.progress_scale.get_value()
+        if event.keyval == Gdk.KEY_Up or event.keyval == Gdk.KEY_Left:
+            if old_val > 30.0:
+                player.jump_to(old_val - 30)
+            else:
+                player.jump_to(0)
+        elif event.keyval == Gdk.KEY_Down or event.keyval == Gdk.KEY_Right:
+            upper = self.progress_scale.get_adjustment().get_upper()
+            if old_val + 30.0 < upper:
+                player.jump_to(old_val + 30)
+            else:
+                player.jump_to(upper)
+
+        return False
 
     def __on_no_media_folder_changed(self, sender):
         """
