@@ -1,10 +1,10 @@
 import os
-import mutagen
 import base64
 import urllib, urllib.parse
 import shutil
 import errno
 import logging
+import mutagen
 
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
@@ -129,24 +129,16 @@ def __importFile(file, directory, path, update=False):
     :return: True if file was imported, otherwise False
     """
 
-    try:
-        mutagen_file = mutagen.File(path)
-    except Exception as e:
-        log.warning("File could not be recognized by mutagen: " + path)
-        return False
-
-    if mutagen_file is None:
-        log.warning("File could not be recognized by mutagen: " + path)
-        return False
-
-    track = TrackContainer(mutagen_file, path)
+    media_type = __get_media_type(path)
+    mutagen.File
+    track = TrackContainer(None, path)
     cover = None
     reader = None
     track_number = None
 
     # getting the some data is file specific
     ### MP3 ###
-    if isinstance(mutagen_file.info, mutagen.mp3.MPEGInfo):
+    if media_type is "mp3":
         log.debug("Importing mp3 " + track.path)
         try:
             track.mutagen = ID3(path)
@@ -169,7 +161,7 @@ def __importFile(file, directory, path, update=False):
         track_name = __get_common_tag(track, "title")
 
     ### FLAC ###
-    elif isinstance(mutagen_file.info, mutagen.flac.StreamInfo):
+    elif media_type is "flac":
         log.debug("Importing flac " + track.path)
         try:
             track.mutagen = FLAC(path)
@@ -187,7 +179,7 @@ def __importFile(file, directory, path, update=False):
         track_name = __get_common_tag(track, "title")
 
     ### OGG ###
-    elif isinstance(mutagen_file.info, mutagen.oggvorbis.OggVorbisInfo):
+    elif media_type is "ogg":
         log.debug("Importing ogg " + track.path)
         try:
             track.mutagen = OggVorbis(path)
@@ -205,7 +197,7 @@ def __importFile(file, directory, path, update=False):
         track_name = __get_common_tag(track, "title")
 
     ### MP4 ###
-    elif isinstance(mutagen_file.info, mutagen.mp4.MP4Info):
+    elif media_type is "mp4":
         log.debug("Importing mp4 " + track.path)
         try:
             track.mutagen = MP4(path)
@@ -234,7 +226,7 @@ def __importFile(file, directory, path, update=False):
 
     ### File will not be imported ###
     else:
-        print(mutagen_file.info)
+        log.warning("Skipping file: " + path)
         return False
 
     modified = os.path.getmtime(path)
@@ -300,6 +292,35 @@ def __importFile(file, directory, path, update=False):
 
     return True
 
+def __get_media_type(path):
+    """
+    Tests a given file for the media type.
+    :param path: Path to the file
+    :return: Media type as string
+    """
+    try:
+        fileobj = open(path, "rb")
+        header = fileobj.read(128)
+    except IOError as e:
+        log.warning(e)
+        return ""
+
+    path = path.lower()
+    
+    # MP4
+    if b"ftyp" in header or b"mp4" in header:
+        return "mp4"
+    # OGG
+    elif header.startswith(b"OggS") or b"\x01vorbis" in header:
+        return "ogg"
+    # FLAC
+    elif header.startswith(b"fLaC") or path.endswith(".flac"):
+        return "flac"
+    # MP3
+    elif header.startswith(b"ID3") or path.endswith(".mp3") or path.endswith(".mp2") or path.endswith(".mpg") or path.endswith(".mpeg"):
+        return "mp3"
+    else:
+        return ""
 
 def copy(ui, selection):
     """
