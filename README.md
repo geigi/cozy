@@ -24,16 +24,16 @@ Cozy is a modern audio book player for Linux.
 - developed on Arch Linux and tested under elementaryOS
 
 ## How can I get it?
-Get Cozy from <a href="https://github.com/flathub/com.github.geigi.cozy">Flathub</a>!
+Do you like Flatpak? Get Cozy from <a href="https://flathub.org/repo/appstream/com.github.geigi.cozy.flatpakref">Flathub</a>!
 
-If you're running elementaryOS, you can get cozy from the App Center!
+If you're running elementaryOS, you can get cozy from the App Center.
 
 Arch Linux users can find cozy under the name `cozy-audiobooks` in the AUR:
 ```
 $ pacaur -S cozy-audiobooks
 ```
 
-You're using a debian based system (Ubuntu, ...)? I've included a <a href="https://github.com/geigi/cozy/releases/download/0.4.2/com.github.geigi.cozy_0.4.2_all.deb">.deb</a> file in the release section!
+You're using a debian based system (Ubuntu, ...) or openSUSE? You can get the latest packages here (there is also a respository provided which you can use): https://software.opensuse.org//download.html?project=home%3Ageigi&package=com.github.geigi.cozy
 
 ### Upcoming:
 - wav support
