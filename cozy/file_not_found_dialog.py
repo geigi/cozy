@@ -1,8 +1,8 @@
 import os
 
-from cozy.db import *
-from cozy.player import *
-from gi.repository import Gtk
+from cozy.db import Track, Book
+from cozy.player import stop, get_playbin, emit_event, load_file, play_pause
+from gi.repository import Gtk, Gst
 
 
 class FileNotFoundDialog():
@@ -63,6 +63,7 @@ class FileNotFoundDialog():
             Track.update(file=new_location).where(
                 Track.file == self.missing_file).execute()
             self.dialog.destroy()
+            self.parent.dialog_open = False
             load_file(Track.select().where(Track.file == new_location).get())
             play_pause(None, True)
 

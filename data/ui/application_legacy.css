@@ -36,3 +36,11 @@
 .h5 {
   font-size: 115%;
 }
+
+.bg_default {
+	background-color: shade(@theme_bg_color, 0.95);
+}
+
+.roundless_button {
+  border-radius: 0;
+}
