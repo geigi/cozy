@@ -284,8 +284,8 @@ class CozyUI:
         self.reader_toggle_button.connect("toggled", self.__toggle_reader)
 
         # volume button
-        volume_button = self.window_builder.get_object("volume_button")
-        volume_button.connect("value-changed", self.__on_volume_changed)
+        self.volume_button = self.window_builder.get_object("volume_button")
+        self.volume_button.connect("value-changed", self.__on_volume_changed)
 
         # hide remaining and current labels
         self.current_label.set_visible(False)
@@ -445,12 +445,27 @@ class CozyUI:
             self.play_status_updater.stop()
         self.current_book_element.set_playing(False)
 
+    def block_ui_buttons(self, block, scan=False):
+        """
+        Makes the buttons to interact with the player insensetive.
+        :param block: Boolean
+        """
+        sensitive = not block
+        self.play_button.set_sensitive(sensitive)
+        self.volume_button.set_sensitive(sensitive)
+        self.prev_button.set_sensitive(sensitive)
+        self.timer_button.set_sensitive(sensitive)
+
+        if scan:
+            self.scan_action.set_enabled(sensitive)
+            self.location_chooser.set_sensitive(sensitive)
+            self.search_button.set_sensitive(sensitive)
+
     def stop(self):
         """
         Remove all information about a playing book from the ui.
         """
         self.play_button.set_image(self.play_img)
-        self.play_button.set_sensitive(False)
         if self.play_status_updater is not None:
             self.play_status_updater.stop()
 
@@ -466,8 +481,7 @@ class CozyUI:
         self.remaining_label.set_visible(False)
         self.current_label.set_visible(False)
 
-        self.play_button.set_sensitive(False)
-        self.prev_button.set_sensitive(False)
+        self.block_ui_buttons(True)
 
         self.progress_scale.set_sensitive(False)
         if self.current_book_element is not None:
@@ -481,12 +495,7 @@ class CozyUI:
         """
         self.throbber.start()
         self.status_label.set_text(message)
-        self.location_chooser.set_sensitive(False)
-        self.play_button.set_sensitive(False)
-        self.prev_button.set_sensitive(False)
-        self.scan_action.set_enabled(False)
-        self.timer_button.set_sensitive(False)
-        self.search_button.set_sensitive(False)
+        self.block_ui_buttons(True, True)
         if not first:
             self.update_progress_bar.set_fraction(0)
             self.status_stack.props.visible_child_name = "working"
@@ -498,12 +507,7 @@ class CozyUI:
         """
         self.main_stack.props.visible_child_name = "main"
         self.status_stack.props.visible_child_name = "playback"
-        self.scan_action.set_enabled(True)
-        self.location_chooser.set_sensitive(True)
-        self.play_button.set_sensitive(True)
-        self.prev_button.set_sensitive(True)
-        self.timer_button.set_sensitive(True)
-        self.search_button.set_sensitive(True)
+        self.block_ui_buttons(True, False)
         self.throbber.stop()
 
     def check_for_tracks(self):
@@ -514,16 +518,10 @@ class CozyUI:
         if db.books().count() < 1:
             self.no_media_file_chooser.set_current_folder(db.Settings.get().path)
             self.main_stack.props.visible_child_name = "no_media"
-            self.play_button.set_sensitive(False)
-            self.prev_button.set_sensitive(False)
-            self.search_button.set_sensitive(False)
-            self.timer_button.set_sensitive(False)
+            self.block_ui_buttons(True)
         else:
             self.main_stack.props.visible_child_name = "main"
-            self.play_button.set_sensitive(True)
-            self.prev_button.set_sensitive(True)
-            self.search_button.set_sensitive(True)
-            self.timer_button.set_sensitive(True)
+            self.block_ui_buttons(False)
 
     def set_title_cover(self, pixbuf):
         """
@@ -996,8 +994,7 @@ class CozyUI:
         track = player.get_current_track()
         self.title_label.set_text(track.book.name)
         self.subtitle_label.set_text(track.name)
-        self.play_button.set_sensitive(True)
-        self.prev_button.set_sensitive(True)
+        self.block_ui_buttons(False, True)
         self.progress_scale.set_sensitive(True)
         self.progress_scale.set_visible(True)
 
