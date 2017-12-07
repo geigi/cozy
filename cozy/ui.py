@@ -298,6 +298,8 @@ class CozyUI:
         self.menu_button.set_menu_model(menu)
 
         if self.is_elementary:
+            self.cover_img_box.props.width_request = 28
+            self.cover_img_box.props.height_request = 28
             about_close_button = self.about_builder.get_object(
                 "button_box").get_children()[2]
             about_close_button.connect("clicked", self.__about_close_clicked)
@@ -1004,8 +1006,6 @@ class CozyUI:
             self.current_book = track.book
             if self.is_elementary:
                 size = 28
-                self.cover_img_box.width_request = size
-                self.cover_img_box.height_request = size
             else:
                 size = 40
             self.set_title_cover(db.get_cover_pixbuf(track.book, size))
