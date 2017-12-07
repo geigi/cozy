@@ -684,6 +684,7 @@
                     <property name="can_focus">True</property>
                     <property name="focus_on_click">False</property>
                     <property name="receives_default">True</property>
+                    <property name="margin_right">5</property>
                     <property name="relief">none</property>
                     <property name="value">1</property>
                     <property name="size">button</property>
