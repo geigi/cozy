@@ -727,7 +727,7 @@ audio-volume-medium-symbolic</property>
               </packing>
             </child>
             <child>
-              <object class="GtkBox">
+              <object class="GtkBox" id="cover_img_box">
                 <property name="width_request">40</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
