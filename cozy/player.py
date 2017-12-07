@@ -112,6 +112,24 @@ def add_player_listener(function):
     __listeners.append(function)
 
 
+def set_volume(volume):
+    """
+    Set the player volume. 
+    :param volume: 0.0 is 0%, 1.0 is 100%
+    """
+    global __player
+    __player.set_property("volume", volume)
+
+
+def set_mute(mute):
+    """
+    Mute the player.
+    :param mute: Boolean
+    """
+    global __player
+    __player.set_property("mute", mute)
+
+
 def play_pause(track, jump=False):
     """
     Play a new file or pause/play if the file is already loaded.

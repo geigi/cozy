@@ -138,9 +138,6 @@ class CozyUI:
             self.window.connect("check-resize", self.__window_resized)
 
         # hide wip stuff
-        self.volume_button = self.window_builder.get_object("volume_button")
-        self.volume_button.set_visible(False)
-
         self.search_popover = self.search_builder.get_object("search_popover")
         timer_popover = self.timer_builder.get_object("timer_popover")
 
@@ -285,6 +282,10 @@ class CozyUI:
         self.prev_button.connect("clicked", self.__on_rewind_clicked)
         self.author_toggle_button.connect("toggled", self.__toggle_author)
         self.reader_toggle_button.connect("toggled", self.__toggle_reader)
+
+        # volume button
+        volume_button = self.window_builder.get_object("volume_button")
+        volume_button.connect("value-changed", self.__on_volume_changed)
 
         # hide remaining and current labels
         self.current_label.set_visible(False)
@@ -1118,6 +1119,12 @@ class CozyUI:
         for element in childs:
             container.remove(element)
             element.destroy()
+
+    def __on_volume_changed(self, widget, value):
+        """
+        Sets the ui value in the player.
+        """
+        player.set_volume(value)
 
     def on_close(self, widget, data=None):
         """
