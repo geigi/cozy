@@ -449,6 +449,8 @@ def __get_flac_cover(track):
 
     :param track: Track object
     """
+    cover = None
+    
     try:
         cover = track.mutagen.pictures[0].data
     except Exception as e:

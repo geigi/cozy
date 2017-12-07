@@ -522,9 +522,10 @@ class CozyUI:
             self.no_media_file_chooser.set_current_folder(db.Settings.get().path)
             self.main_stack.props.visible_child_name = "no_media"
             self.block_ui_buttons(True)
+            self.progress_scale.set_visible(False)
         else:
             self.main_stack.props.visible_child_name = "main"
-            self.block_ui_buttons(False)
+            self.search_button.set_sensitive(True)
 
     def set_title_cover(self, pixbuf):
         """
