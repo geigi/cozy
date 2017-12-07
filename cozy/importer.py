@@ -63,10 +63,10 @@ def update_database(ui):
                 imported = True
                 # Is the track already in the database?
                 if db.Track.select().where(db.Track.file == path).count() < 1:
-                    imported = __importFile(file, directory, path)
+                    imported = import_file(file, directory, path)
                 # Has the track changed on disk?
                 elif db.Track.select().where(db.Track.file == path).first().modified < os.path.getmtime(path):
-                    imported = __importFile(file, directory, path, update=True)
+                    imported = import_file(file, directory, path, update=True)
 
                 if not imported:
                     failed += path + "\n"
@@ -121,7 +121,7 @@ def rebase_location(ui, oldPath, newPath):
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
 
 
-def __importFile(file, directory, path, update=False):
+def import_file(file, directory, path, update=False):
     """
     Imports all information about a track into the database.
     Note: This creates also a new album object when it doesnt exist yet.

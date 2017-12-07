@@ -3,7 +3,7 @@ import os
 from cozy.db import Track, Book
 from cozy.player import stop, get_playbin, emit_event, load_file, play_pause
 from gi.repository import Gtk, Gst
-
+import cozy.importer as importer
 
 class FileNotFoundDialog():
     """
@@ -44,16 +44,24 @@ class FileNotFoundDialog():
         """
         Locate the file and update the database if the user selected one.
         """
-        filename = os.path.basename(self.missing_file)
+        directory, filename = os.path.split(self.missing_file)
         dialog = Gtk.FileChooserDialog("Please locate the file " + filename, self.parent.window,
                                        Gtk.FileChooserAction.OPEN,
                                        (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
                                         Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
 
+        filter = Gtk.FileFilter()
+        filter.add_pattern(filename)
+        filter.set_name(filename)
+        dialog.add_filter(filter)
         path, file_extension = os.path.splitext(self.missing_file)
         filter = Gtk.FileFilter()
         filter.add_pattern("*" + file_extension)
         filter.set_name(file_extension + " files")
+        dialog.add_filter(filter)
+        filter = Gtk.FileFilter()
+        filter.add_pattern("*")
+        filter.set_name(_("All files"))
         dialog.add_filter(filter)
         dialog.set_local_only(False)
 
@@ -62,6 +70,10 @@ class FileNotFoundDialog():
             new_location = dialog.get_filename()
             Track.update(file=new_location).where(
                 Track.file == self.missing_file).execute()
+
+            directory, filename = os.path.split(new_location)
+            importer.import_file(filename, directory, new_location, update=True)
+            self.parent.refresh_content()
             self.dialog.destroy()
             self.parent.dialog_open = False
             load_file(Track.select().where(Track.file == new_location).get())
