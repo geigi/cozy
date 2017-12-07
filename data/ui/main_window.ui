@@ -982,6 +982,7 @@ audio-volume-medium-symbolic</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Search your library</property>
+                <property name="margin_right">7</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -1008,6 +1009,7 @@ audio-volume-medium-symbolic</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Sleep timer</property>
+                <property name="margin_right">7</property>
                 <child>
                   <object class="GtkImage" id="timer_image">
                     <property name="visible">True</property>
