@@ -975,8 +975,11 @@ class CozyUI:
         if self.reader_toggle_button.get_active():
             self.author_toggle_button.set_active(False)
             self.sort_stack.props.visible_child_name = "reader"
+            self.book_box.invalidate_filter()
         elif self.author_toggle_button.get_active() is False:
             self.reader_toggle_button.set_active(True)
+
+        
 
     def __toggle_author(self, button):
         """
@@ -985,6 +988,7 @@ class CozyUI:
         if self.author_toggle_button.get_active():
             self.reader_toggle_button.set_active(False)
             self.sort_stack.props.visible_child_name = "author"
+            self.book_box.invalidate_filter()
         elif self.reader_toggle_button.get_active() is False:
             self.author_toggle_button.set_active(True)
 
@@ -1153,7 +1157,7 @@ class CozyUI:
         """
         Filter the books in the book view according to the selected author/reader or "All".
         """
-        if self.sort_stack.get_visible_child().get_name() == "sort_author_scroller":
+        if self.author_toggle_button.get_active():
             author = self.author_box.get_selected_row().data
             if author is None:
                 return True
