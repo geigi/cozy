@@ -81,6 +81,7 @@
                         </child>
                         <style>
                           <class name="roundless_button"/>
+                          <class name="toggle_button_left"/>
                         </style>
                       </object>
                       <packing>
@@ -118,6 +119,7 @@
                         </child>
                         <style>
                           <class name="roundless_button"/>
+                          <class name="toggle_button_right"/>
                         </style>
                       </object>
                       <packing>
