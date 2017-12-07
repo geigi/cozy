@@ -179,6 +179,7 @@ class CozyUI:
             "reader_toggle_button")
         self.no_media_file_chooser = self.window_builder.get_object(
             "no_media_file_chooser")
+        self.cover_img_box = self.window_builder.get_object("cover_img_box")
         self.timer_image = self.window_builder.get_object("timer_image")
         self.search_button = self.window_builder.get_object("search_button")
         self.timer_button = self.window_builder.get_object("timer_button")
@@ -1003,6 +1004,8 @@ class CozyUI:
             self.current_book = track.book
             if self.is_elementary:
                 size = 28
+                self.cover_img_box.width_request = size
+                self.cover_img_box.height_request = size
             else:
                 size = 40
             self.set_title_cover(db.get_cover_pixbuf(track.book, size))
