@@ -979,8 +979,6 @@ class CozyUI:
         elif self.author_toggle_button.get_active() is False:
             self.reader_toggle_button.set_active(True)
 
-        
-
     def __toggle_author(self, button):
         """
         Switch to author selection
