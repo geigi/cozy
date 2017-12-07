@@ -43,4 +43,13 @@
 
 .roundless_button {
   border-radius: 0;
+  border-color: shade(@theme_bg_color, 0.8);
+}
+
+.toggle_button_left {
+  border-width: 1px 1px 1px 1px;
+}
+
+.toggle_button_right {
+  border-width: 1px 1px 1px 0px;
 }
