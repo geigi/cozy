@@ -48,7 +48,7 @@
       <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot3.png</image>
     </screenshot>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot5.png</image>
+      <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot4.png</image>
     </screenshot>
   </screenshots>
   <developer_name>Julian Geywitz</developer_name>
@@ -58,6 +58,14 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.4.4" timestamp="1512691505">
+      <description>
+        <ul>
+          <li>Cozy now looks a lot nicer!</li>
+          <li>Lots of bug fixes</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.3" timestamp="1512409564">
       <description>
         <ul>

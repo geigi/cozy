@@ -1,3 +1,10 @@
+com.github.geigi.cozy (0.4.4) UNSTABLE; urgency=low
+
+  * Cozy now looks a lot nicer!
+  * Lots of bug fixes
+
+ -- Julian Geywitz <github@geigi.de>  Wed, 08 Dec 2017 01:05:14 +0200
+
 com.github.geigi.cozy (0.4.3) UNSTABLE; urgency=low
 
   * Updated russian translation
