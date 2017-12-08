@@ -11,5 +11,6 @@
     <file preprocess="xml-stripblanks">about.ui</file>
     <file preprocess="xml-stripblanks">file_not_found.ui</file>
     <file preprocess="xml-stripblanks">import_failed.ui</file>
+    <file preprocess="xml-stripblanks">playback_speed_popover.ui</file>
   </gresource>
 </gresources>

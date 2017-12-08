@@ -77,6 +77,8 @@ class CozyUI:
             "/de/geigi/cozy/main_window.ui")
         self.search_builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/search_popover.ui")
+        self.speed_builder = Gtk.Builder.new_from_resource(
+            "/de/geigi/cozy/playback_speed_popover.ui")
         self.timer_builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/timer_popover.ui")
         self.settings_builder = Gtk.Builder.new_from_resource(
@@ -212,6 +214,17 @@ class CozyUI:
         self.timer_button.set_popover(timer_popover)
         self.timer_switch.connect(
             "notify::active", self.__timer_switch_changed)
+
+        # init playback speed
+        self.playback_speed_scale = self.speed_builder.get_object("playback_speed_scale")
+        self.playback_speed_scale.add_mark(1.0, Gtk.PositionType.RIGHT, None)
+        self.playback_speed_scale.set_increments(0.02, 0.05)
+        self.playback_speed_scale.connect("value-changed", self.__set_playback_speed)
+        self.playback_speed_label = self.speed_builder.get_object("playback_speed_label")
+
+        self.playback_speed_button = self.window_builder.get_object("playback_speed_button")
+        playback_speed_popover = self.speed_builder.get_object("speed_popover")
+        self.playback_speed_button.set_popover(playback_speed_popover)
 
         # init search
         self.search_book_label = self.search_builder.get_object("book_label")
@@ -1041,6 +1054,15 @@ class CozyUI:
 
             self.remaining_label.set_markup(
                 "<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+
+    def __set_playback_speed(self, widget):
+        """
+        Set the playback speed.
+        Update playback speed label.
+        """
+        speed = round(self.playback_speed_scale.get_value(), 2)
+        self.playback_speed_label.set_text(str(round(speed, 1)) + " x")
+        player.set_playback_speed(speed)
 
     def __track_changed(self):
         """

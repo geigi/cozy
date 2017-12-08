@@ -158,8 +158,10 @@ def play_pause(track, jump=False):
 
 
 def next_track():
-    # try to load the next track of the book.
-    # Stop playback if there isn't any
+    """
+    Play the next track of the current book.
+    Stops playback if there isn't any.
+    """
     global __current_track
 
     album_tracks = db.tracks(get_current_track().book)
@@ -186,8 +188,10 @@ def next_track():
 
 
 def prev_track():
-    # try to load the next track of the book.
-    # Stop playback if there isn't any
+    """
+    Play the previous track of the current book.
+    Plays the same track again when it is the first of the book.
+    """
     global __player
     global __current_track
     album_tracks = db.tracks(get_current_track().book)
@@ -282,6 +286,17 @@ def auto_jump():
             if seek_enabled:
                 jump_to_ns(get_current_track().position)
                 __wait_to_seek = False
+
+
+def set_playback_speed(speed):
+    """
+    Sets the playback speed in the gst player.
+    """
+    global __player
+
+    position = get_current_duration()
+    __player.seek(speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.ACCURATE, Gst.SeekType.SET, position, Gst.SeekType.NONE, 0)
+
 
 def load_file(track):
     """

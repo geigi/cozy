@@ -2,6 +2,13 @@
 <!-- Generated with glade 3.20.2 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
+  <object class="GtkAdjustment" id="adjustment1">
+    <property name="lower">0.25</property>
+    <property name="upper">2</property>
+    <property name="value">1</property>
+    <property name="step_increment">0.050000000000000003</property>
+    <property name="page_increment">0.10000000000000001</property>
+  </object>
   <object class="GtkImage" id="pause_img">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -625,7 +632,7 @@
                 <property name="can_focus">False</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
-                <property name="margin_right">2</property>
+                <property name="margin_right">7</property>
                 <child>
                   <object class="GtkButton" id="prev_button">
                     <property name="visible">True</property>
@@ -678,12 +685,32 @@
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkMenuButton" id="playback_speed_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Playback speed</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="icon_name">media-seek-forward-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkVolumeButton" id="volume_button">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="focus_on_click">False</property>
                     <property name="receives_default">True</property>
-                    <property name="margin_right">5</property>
+                    <property name="tooltip_text" translatable="yes">Volume control</property>
                     <property name="relief">none</property>
                     <property name="value">1</property>
                     <property name="size">button</property>
@@ -713,7 +740,7 @@ audio-volume-medium-symbolic</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                   </packing>
                 </child>
                 <style>
