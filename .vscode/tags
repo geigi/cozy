@@ -1,0 +1,402 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AlbumElement	../cozy/book_element.py	/^class AlbumElement(Gtk.EventBox):$/;"	kind:class	line:10
+AlbumElement	../cozy/search_results.py	/^from cozy.book_element import AlbumElement$/;"	kind:namespace	line:2
+Application	../main.py	/^class Application(Gtk.Application):$/;"	kind:class	line:45
+ArtistSearchResult	../cozy/search_results.py	/^class ArtistSearchResult(SearchResult):$/;"	kind:class	line:56
+ArtistSearchResult	../cozy/ui.py	/^from cozy.search_results import BookSearchResult, ArtistSearchResult$/;"	kind:namespace	line:13
+BOOK_ICON_SIZE	../cozy/search_results.py	/^BOOK_ICON_SIZE = 40$/;"	kind:variable	line:6
+BaseModel	../cozy/db.py	/^class BaseModel(Model):$/;"	kind:class	line:16
+BaseModel	../cozy/db.py	/^from peewee import BaseModel, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase$/;"	kind:namespace	line:3
+BlobField	../cozy/db.py	/^from peewee import BaseModel, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase$/;"	kind:namespace	line:3
+Book	../cozy/db.py	/^class Book(BaseModel):$/;"	kind:class	line:27
+Book	../cozy/file_not_found_dialog.py	/^from cozy.db import Track, Book$/;"	kind:namespace	line:3
+BookElement	../cozy/book_element.py	/^class BookElement(Gtk.Box):$/;"	kind:class	line:163
+BookElement	../cozy/ui.py	/^from cozy.book_element import BookElement$/;"	kind:namespace	line:10
+BookSearchResult	../cozy/search_results.py	/^class BookSearchResult(SearchResult):$/;"	kind:class	line:118
+BookSearchResult	../cozy/ui.py	/^from cozy.search_results import BookSearchResult, ArtistSearchResult$/;"	kind:namespace	line:13
+BooleanField	../cozy/db.py	/^from peewee import BaseModel, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase$/;"	kind:namespace	line:3
+CharField	../cozy/db.py	/^from peewee import BaseModel, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase$/;"	kind:namespace	line:3
+CozyUI	../cozy/ui.py	/^class CozyUI:$/;"	kind:class	line:25
+CozyUI	../main.py	/^from cozy.ui import CozyUI$/;"	kind:namespace	line:34
+EasyID3	../cozy/importer.py	/^from mutagen.easyid3 import EasyID3$/;"	kind:namespace	line:9
+FLAC	../cozy/importer.py	/^from mutagen.flac import FLAC$/;"	kind:namespace	line:11
+FileNotFoundDialog	../cozy/file_not_found_dialog.py	/^class FileNotFoundDialog():$/;"	kind:class	line:8
+FileNotFoundDialog	../cozy/ui.py	/^from cozy.file_not_found_dialog import FileNotFoundDialog$/;"	kind:namespace	line:14
+FloatField	../cozy/db.py	/^from peewee import BaseModel, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase$/;"	kind:namespace	line:3
+ForeignKeyField	../cozy/db.py	/^from peewee import BaseModel, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase$/;"	kind:namespace	line:3
+GLib	../cozy/db.py	/^from gi.repository import GLib, GdkPixbuf$/;"	kind:namespace	line:4
+GLib	../cozy/importer.py	/^from gi.repository import Gdk, GLib$/;"	kind:namespace	line:15
+GLib	../cozy/mpris.py	/^from gi.repository import Gio, Gst, GLib, Gtk$/;"	kind:namespace	line:19
+GLib	../cozy/ui.py	/^from gi.repository import Gtk, Gio, Gdk, GLib, Gst$/;"	kind:namespace	line:8
+GLib	../main.py	/^from gi.repository import Gtk, GObject, GLib$/;"	kind:namespace	line:33
+GObject	../main.py	/^from gi.repository import Gtk, GObject, GLib$/;"	kind:namespace	line:33
+Gdk	../cozy/book_element.py	/^from gi.repository import Gtk, Gdk, GdkPixbuf, Pango$/;"	kind:namespace	line:1
+Gdk	../cozy/importer.py	/^from gi.repository import Gdk, GLib$/;"	kind:namespace	line:15
+Gdk	../cozy/ui.py	/^from gi.repository import Gtk, Gio, Gdk, GLib, Gst$/;"	kind:namespace	line:8
+GdkPixbuf	../cozy/book_element.py	/^from gi.repository import Gtk, Gdk, GdkPixbuf, Pango$/;"	kind:namespace	line:1
+GdkPixbuf	../cozy/db.py	/^from gi.repository import GLib, GdkPixbuf$/;"	kind:namespace	line:4
+Get	../cozy/mpris.py	/^    def Get(self, interface, property_name):$/;"	kind:member	line:224
+GetAll	../cozy/mpris.py	/^    def GetAll(self, interface):$/;"	kind:member	line:253
+Gio	../cozy/mpris.py	/^from gi.repository import Gio, Gst, GLib, Gtk$/;"	kind:namespace	line:19
+Gio	../cozy/ui.py	/^from gi.repository import Gtk, Gio, Gdk, GLib, Gst$/;"	kind:namespace	line:8
+Gst	../cozy/file_not_found_dialog.py	/^from gi.repository import Gtk, Gst$/;"	kind:namespace	line:5
+Gst	../cozy/mpris.py	/^from gi.repository import Gio, Gst, GLib, Gtk$/;"	kind:namespace	line:19
+Gst	../cozy/player.py	/^from gi.repository import Gst$/;"	kind:namespace	line:1
+Gst	../cozy/ui.py	/^from gi.repository import Gtk, Gio, Gdk, GLib, Gst$/;"	kind:namespace	line:8
+Gtk	../cozy/book_element.py	/^from gi.repository import Gtk, Gdk, GdkPixbuf, Pango$/;"	kind:namespace	line:1
+Gtk	../cozy/file_not_found_dialog.py	/^from gi.repository import Gtk, Gst$/;"	kind:namespace	line:5
+Gtk	../cozy/import_failed_dialog.py	/^from gi.repository import Gtk$/;"	kind:namespace	line:1
+Gtk	../cozy/mpris.py	/^from gi.repository import Gio, Gst, GLib, Gtk$/;"	kind:namespace	line:19
+Gtk	../cozy/search_results.py	/^from gi.repository import Gtk$/;"	kind:namespace	line:1
+Gtk	../cozy/ui.py	/^from gi.repository import Gtk, Gio, Gdk, GLib, Gst$/;"	kind:namespace	line:8
+Gtk	../main.py	/^from gi.repository import Gtk, GObject, GLib$/;"	kind:namespace	line:33
+ID3	../cozy/importer.py	/^from mutagen.id3 import ID3$/;"	kind:namespace	line:10
+ImportFailedDialog	../cozy/import_failed_dialog.py	/^class ImportFailedDialog():$/;"	kind:class	line:4
+IntegerField	../cozy/db.py	/^from peewee import BaseModel, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase$/;"	kind:namespace	line:3
+Introspect	../cozy/mpris.py	/^    def Introspect(self):$/;"	kind:member	line:295
+ListBoxRowWithData	../cozy/ui.py	/^class ListBoxRowWithData(Gtk.ListBoxRow):$/;"	kind:class	line:1185
+MARGIN	../cozy/ui.py	/^    MARGIN = 5$/;"	kind:variable	line:1189
+MAX_BOOK_LENGTH	../cozy/book_element.py	/^MAX_BOOK_LENGTH = 60$/;"	kind:variable	line:6
+MAX_BOOK_LENGTH	../cozy/search_results.py	/^MAX_BOOK_LENGTH = 80$/;"	kind:variable	line:4
+MAX_TRACK_LENGTH	../cozy/book_element.py	/^MAX_TRACK_LENGTH = 40$/;"	kind:variable	line:7
+MAX_TRACK_LENGTH	../cozy/search_results.py	/^MAX_TRACK_LENGTH = 40$/;"	kind:variable	line:5
+MP3	../cozy/importer.py	/^from mutagen.mp3 import MP3$/;"	kind:namespace	line:12
+MP4	../cozy/importer.py	/^from mutagen.mp4 import MP4$/;"	kind:namespace	line:13
+MPRIS	../cozy/mpris.py	/^class MPRIS(Server):$/;"	kind:class	line:80
+MPRIS	../main.py	/^from cozy.mpris import MPRIS$/;"	kind:namespace	line:36
+Meta	../cozy/db.py	/^    class Meta:$/;"	kind:class	line:20
+Model	../cozy/db.py	/^from peewee import BaseModel, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase$/;"	kind:namespace	line:3
+Next	../cozy/mpris.py	/^    def Next(self):$/;"	kind:member	line:192
+OggVorbis	../cozy/importer.py	/^from mutagen.oggvorbis import OggVorbis$/;"	kind:namespace	line:14
+Pango	../cozy/book_element.py	/^from gi.repository import Gtk, Gdk, GdkPixbuf, Pango$/;"	kind:namespace	line:1
+Path	../main.py	/^from pathlib import Path$/;"	kind:namespace	line:32
+Pause	../cozy/mpris.py	/^    def Pause(self):$/;"	kind:member	line:198
+Play	../cozy/mpris.py	/^    def Play(self):$/;"	kind:member	line:207
+PlayPause	../cozy/mpris.py	/^    def PlayPause(self):$/;"	kind:member	line:201
+Previous	../cozy/mpris.py	/^    def Previous(self):$/;"	kind:member	line:195
+PropertiesChanged	../cozy/mpris.py	/^    def PropertiesChanged(self, interface_name, changed_properties,$/;"	kind:member	line:284
+Quit	../cozy/mpris.py	/^    def Quit(self):$/;"	kind:member	line:189
+Raise	../cozy/mpris.py	/^    def Raise(self):$/;"	kind:member	line:185
+RepeatedTimer	../cozy/tools.py	/^class RepeatedTimer(object):$/;"	kind:class	line:6
+RepeatedTimer	../cozy/ui.py	/^from cozy.tools import RepeatedTimer$/;"	kind:namespace	line:11
+Search	../cozy/db.py	/^def Search(search):$/;"	kind:function	line:99
+SearchResult	../cozy/search_results.py	/^class SearchResult(Gtk.EventBox):$/;"	kind:class	line:9
+Seek	../cozy/mpris.py	/^    def Seek(self, offset):$/;"	kind:member	line:213
+Seeked	../cozy/mpris.py	/^    def Seeked(self, position):$/;"	kind:member	line:216
+Server	../cozy/mpris.py	/^class Server:$/;"	kind:class	line:27
+Set	../cozy/mpris.py	/^    def Set(self, interface, property_name, new_value):$/;"	kind:member	line:279
+SetPosition	../cozy/mpris.py	/^    def SetPosition(self, track_id, position):$/;"	kind:member	line:210
+Settings	../cozy/db.py	/^class Settings(BaseModel):$/;"	kind:class	line:53
+Settings	../main.py	/^from cozy.db import init_db, Settings$/;"	kind:namespace	line:35
+SqliteDatabase	../cozy/db.py	/^from peewee import BaseModel, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase$/;"	kind:namespace	line:3
+Stop	../cozy/mpris.py	/^    def Stop(self):$/;"	kind:member	line:204
+Thread	../cozy/ui.py	/^from threading import Thread$/;"	kind:namespace	line:9
+Track	../cozy/db.py	/^class Track(BaseModel):$/;"	kind:class	line:39
+Track	../cozy/file_not_found_dialog.py	/^from cozy.db import Track, Book$/;"	kind:namespace	line:3
+TrackContainer	../cozy/importer.py	/^class TrackContainer:$/;"	kind:class	line:21
+TrackElement	../cozy/book_element.py	/^class TrackElement(Gtk.EventBox):$/;"	kind:class	line:292
+TrackSearchResult	../cozy/search_results.py	/^class TrackSearchResult(SearchResult):$/;"	kind:class	line:91
+__MPRIS_COZY	../cozy/mpris.py	/^    __MPRIS_COZY = "org.mpris.MediaPlayer2.Cozy"$/;"	kind:variable	line:157
+__MPRIS_IFACE	../cozy/mpris.py	/^    __MPRIS_IFACE = "org.mpris.MediaPlayer2"$/;"	kind:variable	line:154
+__MPRIS_PATH	../cozy/mpris.py	/^    __MPRIS_PATH = "\/org\/mpris\/MediaPlayer2"$/;"	kind:variable	line:158
+__MPRIS_PLAYER_IFACE	../cozy/mpris.py	/^    __MPRIS_PLAYER_IFACE = "org.mpris.MediaPlayer2.Player"$/;"	kind:variable	line:155
+__MPRIS_RATINGS_IFACE	../cozy/mpris.py	/^    __MPRIS_RATINGS_IFACE = "org.mpris.MediaPlayer2.ExtensionSetRatings"$/;"	kind:variable	line:156
+__about_close_clicked	../cozy/ui.py	/^    def __about_close_clicked(self, widget):$/;"	kind:member	line:1111
+__bus	../cozy/player.py	/^__bus = __player.get_bus()$/;"	kind:variable	line:38
+__check_current_distro	../cozy/ui.py	/^    def __check_current_distro(self):$/;"	kind:member	line:112
+__close_search_popover	../cozy/ui.py	/^    def __close_search_popover(self, object=None):$/;"	kind:member	line:667
+__create_popover	../cozy/book_element.py	/^    def __create_popover(self):$/;"	kind:member	line:214
+__current_track	../cozy/player.py	/^__current_track = None$/;"	kind:variable	line:41
+__filter_books	../cozy/ui.py	/^    def __filter_books(self, book, data, notify_destroy):$/;"	kind:member	line:1161
+__get_common_disk_number	../cozy/importer.py	/^def __get_common_disk_number(track):$/;"	kind:function	line:380
+__get_common_tag	../cozy/importer.py	/^def __get_common_tag(track, tag):$/;"	kind:function	line:491
+__get_common_track_length	../cozy/importer.py	/^def __get_common_track_length(track):$/;"	kind:function	line:396
+__get_flac_cover	../cozy/importer.py	/^def __get_flac_cover(track):$/;"	kind:function	line:446
+__get_media_id	../cozy/mpris.py	/^    def __get_media_id(self, track_id):$/;"	kind:member	line:302
+__get_media_type	../cozy/importer.py	/^def __get_media_type(path):$/;"	kind:function	line:295
+__get_mp3_tag	../cozy/importer.py	/^def __get_mp3_tag(track, tag):$/;"	kind:function	line:461
+__get_mp4_cover	../cozy/importer.py	/^def __get_mp4_cover(track):$/;"	kind:function	line:429
+__get_ogg_cover	../cozy/importer.py	/^def __get_ogg_cover(track):$/;"	kind:function	line:412
+__get_status	../cozy/mpris.py	/^    def __get_status(self):$/;"	kind:member	line:311
+__init__	../cozy/book_element.py	/^    def __init__(self, b, ui):$/;"	kind:member	line:173
+__init__	../cozy/book_element.py	/^    def __init__(self, book, size, bordered=False, square=False):$/;"	kind:member	line:15
+__init__	../cozy/book_element.py	/^    def __init__(self, t, ui):$/;"	kind:member	line:300
+__init__	../cozy/file_not_found_dialog.py	/^    def __init__(self, file, parent):$/;"	kind:member	line:13
+__init__	../cozy/import_failed_dialog.py	/^    def __init__(self, files, parent):$/;"	kind:member	line:9
+__init__	../cozy/importer.py	/^    def __init__(self, track, path):$/;"	kind:member	line:22
+__init__	../cozy/mpris.py	/^    def __init__(self, app, ui):$/;"	kind:member	line:160
+__init__	../cozy/mpris.py	/^    def __init__(self, con, path):$/;"	kind:member	line:28
+__init__	../cozy/search_results.py	/^    def __init__(self, book, on_click):$/;"	kind:member	line:123
+__init__	../cozy/search_results.py	/^    def __init__(self, on_click, book):$/;"	kind:member	line:15
+__init__	../cozy/search_results.py	/^    def __init__(self, on_click, book, is_author):$/;"	kind:member	line:61
+__init__	../cozy/search_results.py	/^    def __init__(self, on_click, track):$/;"	kind:member	line:96
+__init__	../cozy/tools.py	/^    def __init__(self, interval, function, *args, **kwargs):$/;"	kind:member	line:10
+__init__	../cozy/ui.py	/^    def __init__(self, data, bold=False):$/;"	kind:member	line:1191
+__init__	../cozy/ui.py	/^    def __init__(self, pkgdatadir, app, version):$/;"	kind:member	line:39
+__init__	../main.py	/^    def __init__(self, **kwargs):$/;"	kind:member	line:46
+__init_actions	../cozy/ui.py	/^    def __init_actions(self):$/;"	kind:member	line:309
+__init_bindings	../cozy/ui.py	/^    def __init_bindings(self):$/;"	kind:member	line:341
+__init_css	../cozy/ui.py	/^    def __init_css(self):$/;"	kind:member	line:89
+__init_resources	../cozy/ui.py	/^    def __init_resources(self):$/;"	kind:member	line:62
+__init_search	../cozy/ui.py	/^    def __init_search(self):$/;"	kind:member	line:376
+__init_timer_buffer	../cozy/ui.py	/^    def __init_timer_buffer(self):$/;"	kind:member	line:363
+__init_window	../cozy/ui.py	/^    def __init_window(self):$/;"	kind:member	line:122
+__jump_to_author	../cozy/ui.py	/^    def __jump_to_author(self, book):$/;"	kind:member	line:637
+__jump_to_reader	../cozy/ui.py	/^    def __jump_to_reader(self, book):$/;"	kind:member	line:652
+__listeners	../cozy/player.py	/^__listeners = []$/;"	kind:variable	line:42
+__load_last_book	../cozy/ui.py	/^    def __load_last_book(self):$/;"	kind:member	line:380
+__on_author_search_finished	../cozy/ui.py	/^    def __on_author_search_finished(self, authors):$/;"	kind:member	line:933
+__on_book_search_finished	../cozy/ui.py	/^    def __on_book_search_finished(self, books):$/;"	kind:member	line:916
+__on_book_selec_changed	../cozy/ui.py	/^    def __on_book_selec_changed(self, flowbox):$/;"	kind:member	line:831
+__on_button_press	../cozy/book_element.py	/^    def __on_button_press(self, eventbox, event):$/;"	kind:member	line:253
+__on_button_press	../cozy/book_element.py	/^    def __on_button_press(self, eventbox, event):$/;"	kind:member	line:354
+__on_clicked	../cozy/search_results.py	/^    def __on_clicked(self, widget, event):$/;"	kind:member	line:52
+__on_command_line	../main.py	/^def __on_command_line():$/;"	kind:function	line:87
+__on_current_changed	../cozy/mpris.py	/^    def __on_current_changed(self):$/;"	kind:member	line:373
+__on_drag_data_received	../cozy/ui.py	/^    def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):$/;"	kind:member	line:772
+__on_folder_changed	../cozy/ui.py	/^    def __on_folder_changed(self, sender):$/;"	kind:member	line:812
+__on_gst_message	../cozy/mpris.py	/^    def __on_gst_message(self, bus, message):$/;"	kind:member	line:320
+__on_gst_message	../cozy/player.py	/^def __on_gst_message(bus, message):$/;"	kind:function	line:13
+__on_listbox_changed	../cozy/ui.py	/^    def __on_listbox_changed(self, sender, row):$/;"	kind:member	line:1149
+__on_no_media_folder_changed	../cozy/ui.py	/^    def __on_no_media_folder_changed(self, sender):$/;"	kind:member	line:802
+__on_play_pause_clicked	../cozy/ui.py	/^    def __on_play_pause_clicked(self, button):$/;"	kind:member	line:844
+__on_popover_close	../cozy/book_element.py	/^    def __on_popover_close(self, popover):$/;"	kind:member	line:261
+__on_progress_clicked	../cozy/ui.py	/^    def __on_progress_clicked(self, widget, sender):$/;"	kind:member	line:763
+__on_progress_key_pressed	../cozy/ui.py	/^    def __on_progress_key_pressed(self, widget, event):$/;"	kind:member	line:783
+__on_progress_press	../cozy/ui.py	/^    def __on_progress_press(self, widget, sender):$/;"	kind:member	line:750
+__on_reader_search_finished	../cozy/ui.py	/^    def __on_reader_search_finished(self, readers):$/;"	kind:member	line:950
+__on_rewind_clicked	../cozy/ui.py	/^    def __on_rewind_clicked(self, button):$/;"	kind:member	line:861
+__on_search_changed	../cozy/ui.py	/^    def __on_search_changed(self, sender):$/;"	kind:member	line:871
+__on_seeked	../cozy/mpris.py	/^    def __on_seeked(self, player, position):$/;"	kind:member	line:370
+__on_status_changed	../cozy/mpris.py	/^    def __on_status_changed(self, data=None):$/;"	kind:member	line:393
+__on_timer_changed	../cozy/ui.py	/^    def __on_timer_changed(self, spinner):$/;"	kind:member	line:676
+__on_timer_focus_out	../cozy/ui.py	/^    def __on_timer_focus_out(self, event, widget):$/;"	kind:member	line:709
+__on_volume_changed	../cozy/ui.py	/^    def __on_volume_changed(self, widget, value):$/;"	kind:member	line:1123
+__pause_sleep_timer	../cozy/ui.py	/^    def __pause_sleep_timer(self):$/;"	kind:member	line:728
+__player	../cozy/player.py	/^__player = Gst.ElementFactory.make("playbin", "player")$/;"	kind:variable	line:37
+__player_changed	../cozy/ui.py	/^    def __player_changed(self, event, message):$/;"	kind:member	line:1072
+__remove_all_children	../cozy/ui.py	/^    def __remove_all_children(self, container):$/;"	kind:member	line:1114
+__remove_file	../cozy/importer.py	/^def __remove_file(path):$/;"	kind:function	line:372
+__sleep_timer_fired	../cozy/ui.py	/^    def __sleep_timer_fired(self):$/;"	kind:member	line:735
+__sort_books	../cozy/ui.py	/^    def __sort_books(self, book_1, book_2, data, notify_destroy):$/;"	kind:member	line:1155
+__start_sleep_timer	../cozy/ui.py	/^    def __start_sleep_timer(self):$/;"	kind:member	line:716
+__timer_switch_changed	../cozy/ui.py	/^    def __timer_switch_changed(self, sender, widget):$/;"	kind:member	line:694
+__toggle_author	../cozy/ui.py	/^    def __toggle_author(self, button):$/;"	kind:member	line:984
+__toggle_reader	../cozy/ui.py	/^    def __toggle_reader(self, button):$/;"	kind:member	line:973
+__track_changed	../cozy/ui.py	/^    def __track_changed(self):$/;"	kind:member	line:1044
+__update_metadata	../cozy/mpris.py	/^    def __update_metadata(self):$/;"	kind:member	line:331
+__update_time	../cozy/ui.py	/^    def __update_time(self):$/;"	kind:member	line:1018
+__update_track_ui	../cozy/ui.py	/^    def __update_track_ui(self):$/;"	kind:member	line:995
+__update_ui_time	../cozy/ui.py	/^    def __update_ui_time(self, widget):$/;"	kind:member	line:1027
+__wait_to_seek	../cozy/player.py	/^__wait_to_seek = False$/;"	kind:variable	line:43
+__window_resized	../cozy/ui.py	/^    def __window_resized(self, window):$/;"	kind:member	line:1100
+_mark_current_track	../cozy/book_element.py	/^    def _mark_current_track(self):$/;"	kind:member	line:268
+_on_enter_notify	../cozy/book_element.py	/^    def _on_enter_notify(self, widget, event):$/;"	kind:member	line:114
+_on_enter_notify	../cozy/book_element.py	/^    def _on_enter_notify(self, widget, event):$/;"	kind:member	line:372
+_on_enter_notify	../cozy/search_results.py	/^    def _on_enter_notify(self, widget, event):$/;"	kind:member	line:36
+_on_leave_notify	../cozy/book_element.py	/^    def _on_leave_notify(self, widget, event):$/;"	kind:member	line:123
+_on_leave_notify	../cozy/book_element.py	/^    def _on_leave_notify(self, widget, event):$/;"	kind:member	line:384
+_on_leave_notify	../cozy/search_results.py	/^    def _on_leave_notify(self, widget, event):$/;"	kind:member	line:44
+_on_play_button_press	../cozy/book_element.py	/^    def _on_play_button_press(self, widget, event):$/;"	kind:member	line:145
+_on_play_enter_notify	../cozy/book_element.py	/^    def _on_play_enter_notify(self, widget, event):$/;"	kind:member	line:133
+_on_play_leave_notify	../cozy/book_element.py	/^    def _on_play_leave_notify(self, widget, event):$/;"	kind:member	line:139
+_run	../cozy/tools.py	/^    def _run(self):$/;"	kind:member	line:20
+about	../cozy/ui.py	/^    def about(self, action, parameter):$/;"	kind:member	line:413
+activate	../cozy/ui.py	/^    def activate(self):$/;"	kind:member	line:44
+add_player_listener	../cozy/player.py	/^def add_player_listener(function):$/;"	kind:function	line:107
+argparse	../main.py	/^import argparse$/;"	kind:namespace	line:20
+author	../cozy/db.py	/^    author = CharField()$/;"	kind:variable	line:32
+authors	../cozy/db.py	/^def authors():$/;"	kind:function	line:81
+auto_import	../cozy/ui.py	/^    def auto_import(self):$/;"	kind:member	line:551
+auto_jump	../cozy/player.py	/^def auto_jump():$/;"	kind:function	line:273
+b64tobinary	../cozy/importer.py	/^def b64tobinary(b64):$/;"	kind:function	line:27
+base64	../cozy/importer.py	/^import base64$/;"	kind:namespace	line:2
+block_ui_buttons	../cozy/ui.py	/^    def block_ui_buttons(self, block, scan=False):$/;"	kind:member	line:451
+book	../cozy/book_element.py	/^    book = None$/;"	kind:variable	line:167
+book	../cozy/db.py	/^    book = ForeignKeyField(Book)$/;"	kind:variable	line:47
+book_element.py	../cozy/book_element.py	1;"	kind:file	line:1
+books	../cozy/db.py	/^def books():$/;"	kind:function	line:72
+check_for_tracks	../cozy/ui.py	/^    def check_for_tracks(self):$/;"	kind:member	line:516
+clean_db	../cozy/db.py	/^def clean_db():$/;"	kind:function	line:115
+close	../cozy/file_not_found_dialog.py	/^    def close(self, button):$/;"	kind:member	line:33
+code	../main.py	/^import code$/;"	kind:namespace	line:21
+copy	../cozy/importer.py	/^def copy(ui, selection):$/;"	kind:function	line:325
+copy_to_audiobook_folder	../cozy/importer.py	/^def copy_to_audiobook_folder(path):$/;"	kind:function	line:347
+cover	../cozy/db.py	/^    cover = BlobField(null=True)$/;"	kind:variable	line:36
+cozy	../cozy/file_not_found_dialog.py	/^import cozy.importer as importer$/;"	kind:namespace	line:6
+cozy	../cozy/importer.py	/^import cozy.db as db$/;"	kind:namespace	line:17
+cozy	../cozy/player.py	/^import cozy.db as db$/;"	kind:namespace	line:8
+cozy	../cozy/ui.py	/^import cozy.db as db$/;"	kind:namespace	line:16
+cozy	../cozy/ui.py	/^import cozy.importer as importer$/;"	kind:namespace	line:17
+cozy	../cozy/ui.py	/^import cozy.player as player$/;"	kind:namespace	line:18
+current_book	../cozy/ui.py	/^    current_book = None$/;"	kind:variable	line:29
+current_book_element	../cozy/ui.py	/^    current_book_element = None$/;"	kind:variable	line:35
+current_timer_time	../cozy/ui.py	/^    current_timer_time = 0$/;"	kind:variable	line:34
+current_track_element	../cozy/ui.py	/^    current_track_element = None$/;"	kind:variable	line:36
+data_dir	../cozy/db.py	/^data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")$/;"	kind:variable	line:7
+database	../cozy/db.py	/^        database = db$/;"	kind:variable	line:24
+datadir	../data/meson_post_install.py	/^datadir = path.join(prefix, 'share')$/;"	kind:variable	line:8
+db	../cozy/db.py	/^db = SqliteDatabase(os.path.join(data_dir, "cozy.db"))$/;"	kind:variable	line:13
+db	../cozy/importer.py	/^import cozy.db as db$/;"	kind:namespace	line:17
+db	../cozy/player.py	/^import cozy.db as db$/;"	kind:namespace	line:8
+db	../cozy/ui.py	/^import cozy.db as db$/;"	kind:namespace	line:16
+db.py	../cozy/db.py	1;"	kind:file	line:1
+debug	../main.py	/^def debug(sig, frame):$/;"	kind:function	line:117
+deselect	../cozy/book_element.py	/^    def deselect(self):$/;"	kind:member	line:404
+dialog_open	../cozy/ui.py	/^    dialog_open = False$/;"	kind:variable	line:37
+disconnect_signals	../cozy/book_element.py	/^    def disconnect_signals(self):$/;"	kind:member	line:107
+disk	../cozy/db.py	/^    disk = IntegerField()$/;"	kind:variable	line:45
+display_failed_imports	../cozy/ui.py	/^    def display_failed_imports(self, files):$/;"	kind:member	line:630
+do_activate	../main.py	/^    def do_activate(self):$/;"	kind:member	line:69
+do_startup	../main.py	/^    def do_startup(self):$/;"	kind:member	line:62
+emit_event	../cozy/file_not_found_dialog.py	/^from cozy.player import stop, get_playbin, emit_event, load_file, play_pause$/;"	kind:namespace	line:4
+emit_event	../cozy/player.py	/^def emit_event(event, message=None):$/;"	kind:function	line:334
+environ	../data/meson_post_install.py	/^from os import path, environ$/;"	kind:namespace	line:3
+errno	../cozy/importer.py	/^import errno$/;"	kind:namespace	line:5
+file	../cozy/db.py	/^    file = CharField()$/;"	kind:variable	line:48
+file	../cozy/importer.py	/^                    log.error("Could not import file " + path)$/;"	kind:namespace	line:360
+file	../cozy/importer.py	/^            log.error("Could not import file " + path)$/;"	kind:namespace	line:365
+file	../cozy/importer.py	/^            log.error("Could not import file " + path)$/;"	kind:namespace	line:368
+file_not_found_dialog.py	../cozy/file_not_found_dialog.py	1;"	kind:file	line:1
+first_start	../cozy/db.py	/^    first_start = BooleanField(default=True)$/;"	kind:variable	line:58
+get_cover_pixbuf	../cozy/db.py	/^def get_cover_pixbuf(book, size=0):$/;"	kind:function	line:145
+get_current_duration	../cozy/player.py	/^def get_current_duration():$/;"	kind:function	line:74
+get_current_duration_ui	../cozy/player.py	/^def get_current_duration_ui():$/;"	kind:function	line:84
+get_current_track	../cozy/player.py	/^def get_current_track():$/;"	kind:function	line:95
+get_gst_bus	../cozy/player.py	/^def get_gst_bus():$/;"	kind:function	line:46
+get_gst_player_state	../cozy/player.py	/^def get_gst_player_state():$/;"	kind:function	line:64
+get_playbin	../cozy/file_not_found_dialog.py	/^from cozy.player import stop, get_playbin, emit_event, load_file, play_pause$/;"	kind:namespace	line:4
+get_playbin	../cozy/player.py	/^def get_playbin():$/;"	kind:function	line:55
+get_track_for_playback	../cozy/db.py	/^def get_track_for_playback(book):$/;"	kind:function	line:181
+gettext	../main.py	/^        import gettext$/;"	kind:namespace	line:56
+gi	../cozy/player.py	/^import gi$/;"	kind:namespace	line:3
+gi	../cozy/ui.py	/^import gi$/;"	kind:namespace	line:5
+gi	../main.py	/^import gi$/;"	kind:namespace	line:29
+help	../cozy/ui.py	/^    def help(self, action, parameter):$/;"	kind:member	line:401
+hide_window	../cozy/ui.py	/^    def hide_window(self, widget, data=None):$/;"	kind:member	line:425
+import_failed_dialog.py	../cozy/import_failed_dialog.py	1;"	kind:file	line:1
+import_file	../cozy/importer.py	/^def import_file(file, directory, path, update=False):$/;"	kind:function	line:124
+importer	../cozy/file_not_found_dialog.py	/^import cozy.importer as importer$/;"	kind:namespace	line:6
+importer	../cozy/ui.py	/^import cozy.importer as importer$/;"	kind:namespace	line:17
+importer.py	../cozy/importer.py	1;"	kind:file	line:1
+init_db	../cozy/db.py	/^def init_db():$/;"	kind:function	line:62
+init_db	../main.py	/^from cozy.db import init_db, Settings$/;"	kind:namespace	line:35
+init_db_settings	../cozy/ui.py	/^    def init_db_settings(self):$/;"	kind:member	line:544
+is_elementary	../cozy/ui.py	/^    is_elementary = False$/;"	kind:variable	line:33
+jump_to	../cozy/player.py	/^def jump_to(seconds):$/;"	kind:function	line:237
+jump_to_ns	../cozy/player.py	/^def jump_to_ns(ns):$/;"	kind:function	line:255
+last_played_book	../cozy/db.py	/^    last_played_book = ForeignKeyField(Book, null=True)$/;"	kind:variable	line:59
+length	../cozy/db.py	/^    length = FloatField()$/;"	kind:variable	line:49
+listen	../main.py	/^def listen():$/;"	kind:function	line:130
+load_file	../cozy/file_not_found_dialog.py	/^from cozy.player import stop, get_playbin, emit_event, load_file, play_pause$/;"	kind:namespace	line:4
+load_file	../cozy/player.py	/^def load_file(track):$/;"	kind:function	line:286
+load_last_book	../cozy/player.py	/^def load_last_book():$/;"	kind:function	line:311
+locale	../main.py	/^import locale$/;"	kind:namespace	line:22
+localedir	../main.py	/^localedir = '@LOCALE_DIR@'$/;"	kind:variable	line:41
+locate	../cozy/file_not_found_dialog.py	/^    def locate(self, button):$/;"	kind:member	line:43
+log	../cozy/db.py	/^log = logging.getLogger("db")$/;"	kind:variable	line:8
+log	../cozy/importer.py	/^log = logging.getLogger("importer")$/;"	kind:variable	line:18
+log	../cozy/player.py	/^log = logging.getLogger("player")$/;"	kind:variable	line:6
+log	../cozy/ui.py	/^log = logging.getLogger("ui")$/;"	kind:variable	line:23
+log	../main.py	/^log = logging.getLogger("main")$/;"	kind:variable	line:38
+logging	../cozy/db.py	/^import logging$/;"	kind:namespace	line:2
+logging	../cozy/importer.py	/^import logging$/;"	kind:namespace	line:6
+logging	../cozy/player.py	/^import logging$/;"	kind:namespace	line:5
+logging	../cozy/ui.py	/^import logging$/;"	kind:namespace	line:22
+logging	../main.py	/^import logging$/;"	kind:namespace	line:23
+main	../main.py	/^def main():$/;"	kind:function	line:101
+main.py	../main.py	1;"	kind:file	line:1
+meson_post_install.py	../data/meson_post_install.py	1;"	kind:file	line:1
+modified	../cozy/db.py	/^    modified = IntegerField()$/;"	kind:variable	line:50
+mpris.py	../cozy/mpris.py	1;"	kind:file	line:1
+mutagen	../cozy/importer.py	/^import mutagen$/;"	kind:namespace	line:7
+name	../cozy/db.py	/^    name = CharField()$/;"	kind:variable	line:31
+name	../cozy/db.py	/^    name = CharField()$/;"	kind:variable	line:43
+next_track	../cozy/player.py	/^def next_track():$/;"	kind:function	line:160
+number	../cozy/db.py	/^    number = IntegerField()$/;"	kind:variable	line:44
+ok	../cozy/import_failed_dialog.py	/^    def ok(self, button):$/;"	kind:member	line:27
+on_close	../cozy/ui.py	/^    def on_close(self, widget, data=None):$/;"	kind:member	line:1129
+on_method_call	../cozy/mpris.py	/^    def on_method_call(self,$/;"	kind:member	line:46
+os	../cozy/db.py	/^import os$/;"	kind:namespace	line:1
+os	../cozy/file_not_found_dialog.py	/^import os$/;"	kind:namespace	line:1
+os	../cozy/importer.py	/^import os$/;"	kind:namespace	line:1
+os	../cozy/ui.py	/^import os$/;"	kind:namespace	line:20
+os	../main.py	/^import os$/;"	kind:namespace	line:24
+parse	../cozy/importer.py	/^import urllib, urllib.parse$/;"	kind:namespace	line:3
+path	../cozy/db.py	/^    path = CharField()$/;"	kind:variable	line:57
+path	../data/meson_post_install.py	/^from os import path, environ$/;"	kind:namespace	line:3
+pause	../cozy/ui.py	/^    def pause(self):$/;"	kind:member	line:445
+pkgdatadir	../main.py	/^pkgdatadir = '@DATA_DIR@'$/;"	kind:variable	line:40
+platform	../cozy/ui.py	/^import platform$/;"	kind:namespace	line:1
+play	../cozy/ui.py	/^    def play(self):$/;"	kind:member	line:437
+play_pause	../cozy/file_not_found_dialog.py	/^from cozy.player import stop, get_playbin, emit_event, load_file, play_pause$/;"	kind:namespace	line:4
+play_pause	../cozy/player.py	/^def play_pause(track, jump=False):$/;"	kind:function	line:133
+play_status_updater	../cozy/ui.py	/^    play_status_updater = None$/;"	kind:variable	line:30
+player	../cozy/ui.py	/^import cozy.player as player$/;"	kind:namespace	line:18
+player.py	../cozy/player.py	1;"	kind:file	line:1
+playing	../cozy/book_element.py	/^    playing = False$/;"	kind:variable	line:171
+position	../cozy/db.py	/^    position = IntegerField()$/;"	kind:variable	line:34
+position	../cozy/db.py	/^    position = IntegerField()$/;"	kind:variable	line:46
+prefix	../data/meson_post_install.py	/^prefix = environ.get('MESON_INSTALL_PREFIX', '\/usr\/local')$/;"	kind:variable	line:6
+prev_track	../cozy/player.py	/^def prev_track():$/;"	kind:function	line:188
+progress_scale_clicked	../cozy/ui.py	/^    progress_scale_clicked = False$/;"	kind:variable	line:32
+quit	../cozy/ui.py	/^    def quit(self, action, parameter):$/;"	kind:member	line:407
+randint	../cozy/mpris.py	/^from random import randint$/;"	kind:namespace	line:21
+rating	../cozy/db.py	/^    rating = IntegerField()$/;"	kind:variable	line:35
+reader	../cozy/db.py	/^    reader = CharField()$/;"	kind:variable	line:33
+readers	../cozy/db.py	/^def readers():$/;"	kind:function	line:90
+rebase_location	../cozy/importer.py	/^def rebase_location(ui, oldPath, newPath):$/;"	kind:function	line:105
+refresh_content	../cozy/ui.py	/^    def refresh_content(self):$/;"	kind:member	line:584
+rewind	../cozy/player.py	/^def rewind(seconds):$/;"	kind:function	line:222
+scan	../cozy/ui.py	/^    def scan(self, action, first_scan):$/;"	kind:member	line:536
+schemadir	../data/meson_post_install.py	/^schemadir = path.join(environ['MESON_INSTALL_PREFIX'], 'share', 'glib-2.0', 'schemas')$/;"	kind:variable	line:7
+search	../cozy/ui.py	/^    def search(self, user_search):$/;"	kind:member	line:555
+search_authors	../cozy/db.py	/^def search_authors(search_string):$/;"	kind:function	line:195
+search_books	../cozy/db.py	/^def search_books(search_string):$/;"	kind:function	line:215
+search_readers	../cozy/db.py	/^def search_readers(search_string):$/;"	kind:function	line:205
+search_results.py	../cozy/search_results.py	1;"	kind:file	line:1
+search_tracks	../cozy/db.py	/^def search_tracks(search_string):$/;"	kind:function	line:227
+seconds_to_str	../cozy/db.py	/^def seconds_to_str(seconds):$/;"	kind:function	line:125
+select	../cozy/book_element.py	/^    def select(self):$/;"	kind:member	line:395
+selected	../cozy/book_element.py	/^    selected = False$/;"	kind:variable	line:169
+selected	../cozy/book_element.py	/^    selected = False$/;"	kind:variable	line:297
+set_mute	../cozy/player.py	/^def set_mute(mute):$/;"	kind:function	line:124
+set_playing	../cozy/book_element.py	/^    def set_playing(self, is_playing):$/;"	kind:member	line:283
+set_title_cover	../cozy/ui.py	/^    def set_title_cover(self, pixbuf):$/;"	kind:member	line:529
+set_volume	../cozy/player.py	/^def set_volume(volume):$/;"	kind:function	line:115
+show	../cozy/file_not_found_dialog.py	/^    def show(self):$/;"	kind:member	line:27
+show	../cozy/import_failed_dialog.py	/^    def show(self):$/;"	kind:member	line:21
+show_prefs	../cozy/ui.py	/^    def show_prefs(self, action, parameter):$/;"	kind:member	line:419
+shutil	../cozy/importer.py	/^import shutil$/;"	kind:namespace	line:4
+signal	../main.py	/^import signal$/;"	kind:namespace	line:25
+sleep_timer	../cozy/ui.py	/^    sleep_timer = None$/;"	kind:variable	line:31
+start	../cozy/tools.py	/^    def start(self):$/;"	kind:member	line:28
+startup	../cozy/ui.py	/^    def startup(self):$/;"	kind:member	line:55
+stop	../cozy/file_not_found_dialog.py	/^from cozy.player import stop, get_playbin, emit_event, load_file, play_pause$/;"	kind:namespace	line:4
+stop	../cozy/player.py	/^def stop():$/;"	kind:function	line:214
+stop	../cozy/tools.py	/^    def stop(self):$/;"	kind:member	line:39
+stop	../cozy/ui.py	/^    def stop(self):$/;"	kind:member	line:467
+subprocess	../data/meson_post_install.py	/^import subprocess$/;"	kind:namespace	line:4
+switch_to_playing	../cozy/ui.py	/^    def switch_to_playing(self):$/;"	kind:member	line:506
+switch_to_working	../cozy/ui.py	/^    def switch_to_working(self, message, first):$/;"	kind:member	line:493
+sys	../main.py	/^import sys$/;"	kind:namespace	line:26
+threading	../cozy/tools.py	/^import threading$/;"	kind:namespace	line:2
+threading	../cozy/ui.py	/^import threading$/;"	kind:namespace	line:3
+time	../cozy/tools.py	/^import time$/;"	kind:namespace	line:1
+tools.py	../cozy/tools.py	1;"	kind:file	line:1
+traceback	../main.py	/^import traceback$/;"	kind:namespace	line:27
+track	../cozy/book_element.py	/^    track = None$/;"	kind:variable	line:296
+tracks	../cozy/db.py	/^def tracks(book):$/;"	kind:function	line:105
+ui	../cozy/book_element.py	/^    ui = None$/;"	kind:variable	line:168
+ui	../cozy/book_element.py	/^    ui = None$/;"	kind:variable	line:298
+ui.py	../cozy/ui.py	1;"	kind:file	line:1
+update_database	../cozy/importer.py	/^def update_database(ui):$/;"	kind:function	line:43
+urllib	../cozy/importer.py	/^import urllib, urllib.parse$/;"	kind:namespace	line:3
+version	../main.py	/^version = '@VERSION@'$/;"	kind:variable	line:42
+wait_to_seek	../cozy/book_element.py	/^    wait_to_seek = False$/;"	kind:variable	line:170
+webbrowser	../cozy/ui.py	/^import webbrowser$/;"	kind:namespace	line:2
