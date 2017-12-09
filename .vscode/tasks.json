@@ -1,0 +1,21 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "meson",
+            "type": "shell",
+            "command": "meson ${workspaceFolder} ${workspaceFolder}/bin --prefix=${workspaceFolder}/app/ && ninja -C ${workspaceFolder}/bin install",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "ninja",
+            "type": "shell",
+            "command": "ninja -C ${workspaceFolder}/bin install",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}

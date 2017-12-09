@@ -9,7 +9,7 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# This program  /home/ju/GitHub/Cozyis distributed in the hope that it will be useful,
+# This program  is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Lesser General Public License for more details.
@@ -17,16 +17,22 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
-import gi
+import argparse
+import code
 import locale
 import logging
-import argparse
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GObject, GLib, Gio
+import os
+import signal
+import sys
+import traceback
 
+import gi
+gi.require_version('Gtk', '3.0')
+
+from pathlib import Path
+from gi.repository import Gtk, GObject, GLib
 from cozy.ui import CozyUI
-from cozy.db import *
+from cozy.db import init_db, Settings
 from cozy.mpris import MPRIS
 
 log = logging.getLogger("main")
@@ -35,67 +41,48 @@ pkgdatadir = '@DATA_DIR@'
 localedir = '@LOCALE_DIR@'
 version = '@VERSION@'
 
+
 class Application(Gtk.Application):
-  def __init__(self, **kwargs):
-    GObject.threads_init()
+    def __init__(self, **kwargs):
+        self.ui = None
 
-    Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
+        GObject.threads_init()
+        listen()
 
-    GLib.setenv("PULSE_PROP_media.role", "music", True)
+        Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
 
-    import gettext
+        GLib.setenv("PULSE_PROP_media.role", "music", True)
 
-    locale.bindtextdomain('cozy', localedir)
-    locale.textdomain('cozy')
-    gettext.install('cozy', localedir)
+        import gettext
 
-  def do_startup(self):
-    log.info("Starting up cozy " + version)
-    self.ui = CozyUI(pkgdatadir, self, version)
-    init_db()
-    Gtk.Application.do_startup(self)
-    self.ui.startup()
+        locale.bindtextdomain('cozy', localedir)
+        locale.textdomain('cozy')
+        gettext.install('cozy', localedir)
 
-  def do_activate(self):
-    if Settings.get().first_start:
-      self.hello = self.ui.hello_builder.get_object("hello_window")
-      self.folder_chooser = self.ui.hello_builder.get_object("book_location")
-      self.start_button = self.ui.hello_builder.get_object("start_button")
-      self.start_button.connect("clicked", self.first_start)
-      self.folder_chooser.connect("file-set", self.__on_folder_changed)
-      auto_scan_switch = self.ui.hello_builder.get_object("auto_scan_switch")
-      self.ui.settings.bind("autoscan", auto_scan_switch, "active", Gio.SettingsBindFlags.DEFAULT)
+    def do_startup(self):
+        log.info("Starting up cozy " + version)
+        self.ui = CozyUI(pkgdatadir, self, version)
+        init_db()
+        Gtk.Application.do_startup(self)
+        self.ui.startup()
 
-      self.hello.show()
-      self.add_window(self.hello)
+    def do_activate(self):
+        self.ui.activate()
 
-    else:
-      self.ui.activate()
-      self.add_window(self.ui.window)
-      MPRIS(self, self.ui)
+        if Settings.get().first_start:
+            Settings.update(first_start=False).execute()
+            path = str(Path.home()) + "/Audiobooks"
+            Settings.update(path=str(Path.home()) + "/Audiobooks").execute()
 
-  def first_start(self, button):
-    """
-    Store the user selected path and start the first import.
-    """
-    log.info("Cozy will now import all audio files from your selected location.")
+            if not os.path.exists(path):
+                os.makedirs(path)
+            else:
+                self.ui.scan(None, True)
+                self.ui.refresh_content()
 
-    location = self.folder_chooser.get_file().get_path()
-    Settings.update(first_start = False).execute()
-    Settings.update(path = location).execute()
-    self.hello.close()
+        self.add_window(self.ui.window)
+        MPRIS(self, self.ui)
 
-    self.ui.activate()
-    self.ui.main_stack.props.visible_child_name = "import"
-    self.add_window(self.ui.window)
-    self.ui.scan(None, True)
-    self.ui.refresh_content()
-
-  def __on_folder_changed(self, sender):
-    """
-    Enable the start button when the user selected a location.
-    """
-    self.start_button.set_sensitive(True)
 
 def __on_command_line():
     """
@@ -105,24 +92,44 @@ def __on_command_line():
     parser.add_argument("-d", "--debug", action="store_true", dest="debug")
     args = parser.parse_args(sys.argv[1:])
 
-    if args.debug == True:
-      logging.basicConfig(level=logging.DEBUG)
+    if args.debug:
+        logging.basicConfig(level=logging.DEBUG)
     else:
-      logging.basicConfig(level=logging.INFO)
+        logging.basicConfig(level=logging.INFO)
+
 
 def main():
-  __on_command_line()
-  print(sys.argv)
-  application = Application()
+    __on_command_line()
+    print(sys.argv)
+    application = Application()
 
-  try:
-    # Handle the debug option seperatly without the Glib stuff
-    if "-d" in sys.argv: sys.argv.remove("-d")
-    ret = application.run(sys.argv)
-  except SystemExit as e:
-    ret = e.code
+    try:
+        # Handle the debug option seperatly without the Glib stuff
+        if "-d" in sys.argv:
+            sys.argv.remove("-d")
+        ret = application.run(sys.argv)
+    except SystemExit as e:
+        ret = e.code
 
-  sys.exit(ret)
+    sys.exit(ret)
+
+
+def debug(sig, frame):
+    """Interrupt running process, and provide a python prompt for
+    interactive debugging."""
+    d = {'_frame': frame}         # Allow access to frame object.
+    d.update(frame.f_globals)  # Unless shadowed by global
+    d.update(frame.f_locals)
+
+    i = code.InteractiveConsole(d)
+    message = "Signal received : entering python shell.\nTraceback:\n"
+    message += ''.join(traceback.format_stack(frame))
+    i.interact(message)
+
+
+def listen():
+    signal.signal(signal.SIGUSR1, debug)  # Register handler
+
 
 if __name__ == '__main__':
-  main()
+    main()

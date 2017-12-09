@@ -2,6 +2,10 @@
 <!-- Generated with glade 3.20.1 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
+  <object class="GtkTextBuffer" id="files_buffer">
+    <property name="text" translatable="no">
+    </property>
+  </object>
   <object class="GtkDialog" id="dialog">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
@@ -15,21 +19,8 @@
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="cancel_button">
-                <property name="label" translatable="yes">Cancel</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="locate_button">
-                <property name="label" translatable="yes">Locate</property>
+              <object class="GtkButton" id="ok_button">
+                <property name="label" translatable="yes">Ok</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -83,7 +74,7 @@
                     <property name="margin_top">5</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="label" translatable="yes">File not found</property>
+                    <property name="label" translatable="yes">Some files could not be imported</property>
                     <style>
                       <class name="h3"/>
                     </style>
@@ -95,14 +86,33 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="file_label">
+                  <object class="GtkScrolledWindow">
+                    <property name="width_request">400</property>
+                    <property name="height_request">100</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">center</property>
-                    <property name="label" translatable="no">&lt;tt&gt;/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3&lt;/tt&gt;</property>
-                    <property name="use_markup">True</property>
-                    <property name="wrap">True</property>
-                    <property name="wrap_mode">char</property>
+                    <property name="can_focus">True</property>
+                    <property name="margin_top">10</property>
+                    <property name="margin_bottom">10</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkViewport">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="vexpand">True</property>
+                        <child>
+                          <object class="GtkTextView">
+                            <property name="name">text-view</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="editable">False</property>
+                            <property name="cursor_visible">False</property>
+                            <property name="buffer">files_buffer</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -114,9 +124,13 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="halign">center</property>
+                    <property name="halign">start</property>
+                    <property name="margin_left">5</property>
                     <property name="vexpand">True</property>
-                    <property name="label" translatable="yes">This file could not be found. Do you want to locate it manually?</property>
+                    <property name="label" translatable="yes">This can have multiple reasons:
+- The audio format is not supported
+- The file(s) are no valid audio files
+- The file(s) are corrupt</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
