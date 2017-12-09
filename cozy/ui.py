@@ -471,6 +471,7 @@ class CozyUI:
         self.volume_button.set_sensitive(sensitive)
         self.prev_button.set_sensitive(sensitive)
         self.timer_button.set_sensitive(sensitive)
+        self.playback_speed_button.set_sensitive(sensitive)
 
         if scan:
             self.scan_action.set_enabled(sensitive)
@@ -1164,6 +1165,8 @@ class CozyUI:
             db.Track.update(position=player.get_current_duration()).where(
                 db.Track.id == player.get_current_track().id).execute()
             player.stop()
+
+        player.dispose()
 
     ####################
     # CONTENT HANDLING #

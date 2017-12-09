@@ -34,7 +34,25 @@ def __on_gst_message(bus, message):
             auto_jump()
 
 
+def print_ele(item, user_data):
+    print(item)
+
 __player = Gst.ElementFactory.make("playbin", "player")
+__scaletempo = Gst.ElementFactory.make("scaletempo", "scaletempo")
+__scaletempo.sync_state_with_parent()
+
+__audiobin = Gst.Bin("audioline")
+__audiobin.add(__scaletempo)
+
+__audiosink = Gst.ElementFactory.make("autoaudiosink", "audiosink")
+__audiobin.add(__audiosink)
+
+__scaletempo.link(__audiosink)
+__pad = __scaletempo.get_static_pad("sink")
+__audiobin.add_pad(Gst.GhostPad("sink", __pad))
+
+__player.set_property("audio-sink", __audiobin)
+
 __bus = __player.get_bus()
 __bus.add_signal_watch()
 __bus.connect("message", __on_gst_message)
@@ -352,3 +370,11 @@ def emit_event(event, message=None):
     """
     for function in __listeners:
         function(event, message)
+
+
+def dispose():
+    """
+    Sets the Gst player state to NULL.
+    """
+    global __player
+    __player.set_state(Gst.State.NULL)
