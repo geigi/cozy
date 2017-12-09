@@ -17,13 +17,13 @@
       <li>Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg audio books</li>
       <li>Remembers your playback position</li>
       <li>Sleep timer!</li>
+      <li>Search your library</li>
       <li>drag and drop import and copy support</li>
       <li>Sort your audio books by author, reader and name</li>
       </ul>
       <p>What's next?</p>
       <ul>
       <li>wav support</li>
-      <li>Search</li>
       <li>Sort by name, added date, last played</li>
       <li>Ratings</li>
       <li>Playback speed control</li>
@@ -58,6 +58,52 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.4.4" timestamp="1512691505">
+      <description>
+        <ul>
+          <li>Cozy now looks a lot nicer!</li>
+          <li>Lots of bug fixes</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.4.3" timestamp="1512409564">
+      <description>
+        <ul>
+          <li>Updated russian translation</li>
+          <li>Fixed bug where cozy could crash on startup when a album cover is not supported</li>
+          <li>Track progressbar can now be controlled by the keyboard and supports incremental changes</li>
+          <li>Fixed a bug where the position of the track was not resetted after the playback finished</li>
+          <li>Probably faster import</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.4.2" timestamp="1511722853">
+      <description>
+        <ul>
+        <li>Russian translation</li>
+        <li>Search your library!</li>
+        <li>More robust importer - notifies you about files that could not be imported</li>
+        <li>UI tweaks</li>
+        <li>Added lots of tooltips</li>
+        <li>Started implementing orca screen reader support</li>
+        <li>Removed hello window</li>
+        <li>Fixed a bug where the importer could crash</li>
+        <li>Lots of behind the scenes changes</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.4.1" timestamp="1511546968">
+      <description>
+        <ul>
+        <li>Russian translation</li>
+        <li>Search your library!</li>
+        <li>More robust importer - notifies you about files that could not be imported</li>
+        <li>UI tweaks</li>
+        <li>Fixed a bug where the importer could crash</li>
+        <li>Lots of behind the scenes changes</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.0" timestamp="1510311368">
       <description>
         <p>The sleep timer has landed!</p>

@@ -16,80 +16,276 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/importer.py:212
+#: cozy/book_element.py:55 cozy/search_results.py:131
+msgid "Play this book"
+msgstr "Höre dieses Buch"
+
+#: cozy/book_element.py:172
+msgid "Open book overview"
+msgstr "Öffne die Buchübersicht"
+
+#: cozy/book_element.py:292
+msgid "Play this track"
+msgstr "Höre diesen Track"
+
+#: cozy/search_results.py:68
+msgid "Jump to author "
+msgstr "Springe zum Autor"
+
+#: cozy/search_results.py:71
+msgid "Jump to reader "
+msgstr "Springe zum Leser"
+
+#: cozy/importer.py:236
 msgid "Unknown Author"
 msgstr "Unbekannter Autor"
 
-#: cozy/importer.py:213
+#: cozy/importer.py:237
 msgid "Unknown Reader"
 msgstr "Unbekannter Leser"
 
-#: cozy/ui.py:295 cozy/ui.py:544 data/ui/timer_popover.ui:71
+#: cozy/ui.py:328 cozy/ui.py:639 data/ui/timer_popover.ui:86
 msgid "min"
 msgstr "min"
 
-#: cozy/ui.py:455
+#: cozy/ui.py:490
 msgid "Importing Audiobooks"
 msgstr "Importiere Hörbücher"
 
-#: cozy/ui.py:502 cozy/ui.py:505 cozy/ui.py:881 cozy/ui.py:890
+#: cozy/ui.py:549 cozy/ui.py:553 cozy/ui.py:1083 cozy/ui.py:1092
 msgid "All"
 msgstr "Alle"
 
-#: cozy/ui.py:663
+#: cozy/ui.py:550 cozy/ui.py:554
+msgid "Display all books"
+msgstr "Zeige alle Bücher"
+
+#: cozy/ui.py:758
 msgid "Changing audio book location..."
 msgstr "Wechsle zu neuem Hörbuch-Ordner..."
 
-#: data/ui/main_window.ui:65
+#: data/ui/main_window.ui:57
+msgid "Select by author"
+msgstr "Filtere nach Autor"
+
+#: data/ui/main_window.ui:66
 msgid "<big>Author</big>"
 msgstr "<big>Autor</big>"
 
+#: data/ui/main_window.ui:75
+msgid "Author filter button"
+msgstr "Autor filter Knopf"
+
+#: data/ui/main_window.ui:76
+msgid "Filter books by author"
+msgstr "Filtere die Bücher nach Autor"
+
 #: data/ui/main_window.ui:92
+msgid "Select by reader"
+msgstr "Filtere nach Leser"
+
+#: data/ui/main_window.ui:100
 msgid "<big>Reader</big>"
 msgstr "<big>Leser</big>"
 
-#: data/ui/main_window.ui:143
+#: data/ui/main_window.ui:109
+msgid "Reader filter button"
+msgstr "Leser filter Knopf"
+
+#: data/ui/main_window.ui:110
+msgid "Filter books by reader"
+msgstr "Filtere die Bücher nach Leser"
+
+#: data/ui/main_window.ui:149
+msgid "List of authors"
+msgstr "Liste der Autoren"
+
+#: data/ui/main_window.ui:162 data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "Autor"
 
-#: data/ui/main_window.ui:169
+#: data/ui/main_window.ui:180
+msgid "List of readers"
+msgstr "Liste der Leser"
+
+#: data/ui/main_window.ui:193 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "Leser"
 
-#: data/ui/main_window.ui:245
+#: data/ui/main_window.ui:240
+msgid "List of books"
+msgstr "Liste aller Bücher"
+
+#: data/ui/main_window.ui:274
 msgid "Importing your audiobooks..."
 msgstr "Importiere deine Hörbücher..."
 
-#: data/ui/main_window.ui:300
+#: data/ui/main_window.ui:329
 msgid "Import your Audiobooks"
 msgstr "Importiere deine Hörbücher"
 
-#: data/ui/main_window.ui:316
+#: data/ui/main_window.ui:345
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 "Cozy verwaltet automatisch alle Hörbücher in einem Ordner - deiner "
 "Bibliothek"
 
-#: data/ui/main_window.ui:356 data/ui/hello.ui:240
+#: data/ui/main_window.ui:385 data/ui/hello.ui:240
 msgid "Drag & Drop"
 msgstr "Drag & Drop"
 
-#: data/ui/main_window.ui:372
+#: data/ui/main_window.ui:401
 msgid ""
 "Drag your audiobooks into cozy and the will be automatically imported to "
 "your library"
 msgstr "Ziehe deine Hörbücher mit der Maus nach Cozy um sie zu importieren"
 
-#: data/ui/main_window.ui:432
+#: data/ui/main_window.ui:461
 msgid "Change Audiobooks Folder"
 msgstr "Wechsle Hörbuch-Ordner"
 
-#: data/ui/main_window.ui:448
+#: data/ui/main_window.ui:477
 msgid "Load audiobooks from a folder, network drive or an external disk"
 msgstr ""
 "Lade Hörbücher von einem Ordner, einer Netzwerkfestplatte oder einer "
 "externen Festplatte"
+
+#: data/ui/main_window.ui:506
+msgid "Location of your audiobooks"
+msgstr "Speicherort Deiner Hörbücher"
+
+#: data/ui/main_window.ui:539
+msgid "Auto scan switch"
+msgstr "Auto-Scan Schalter"
+
+#: data/ui/main_window.ui:540 data/ui/main_window.ui:555 data/ui/hello.ui:154
+msgid "Automatically import new audiobooks on startup"
+msgstr "Importiere neue Hörbücher automatisch beim Start"
+
+#: data/ui/main_window.ui:608
+msgid "Rewind 30 seconds"
+msgstr "Springe 30 Sekunden zurück"
+
+#: data/ui/main_window.ui:616
+msgid "Rewind button"
+msgstr "Zurück springen Knopf"
+
+#: data/ui/main_window.ui:617
+msgid "Jump back 30 seconds"
+msgstr "Springe 30 Sekunden zurück"
+
+#: data/ui/main_window.ui:634
+msgid "Start playback"
+msgstr "Starte die Wiedergabe"
+
+#: data/ui/main_window.ui:642
+msgid "Play/Pause Button"
+msgstr "Play/Pause Knopf"
+
+#: data/ui/main_window.ui:643
+msgid "Start or pause the playback"
+msgstr "Starte oder pausiere die Wiedergabe"
+
+#: data/ui/main_window.ui:719
+msgid "Currently playing"
+msgstr "Wird gerade wiedergegeben"
+
+#: data/ui/main_window.ui:737
+msgid "Booktitle"
+msgstr "Buchtitel"
+
+#: data/ui/main_window.ui:738
+msgid "Title of currently playing book"
+msgstr "Titel des aktuellen Buches"
+
+#: data/ui/main_window.ui:763
+msgid "Track title"
+msgstr "Track Titel"
+
+#: data/ui/main_window.ui:764
+msgid "Title of the currently playing track"
+msgstr "Titel des aktuell abgespielten Tracks"
+
+#: data/ui/main_window.ui:806
+msgid "Elapsed time"
+msgstr "Vergangene Zeit"
+
+#: data/ui/main_window.ui:814
+msgid "Time elapsed"
+msgstr "Vergangene Zeit"
+
+#: data/ui/main_window.ui:815
+msgid "Elapsed time of current track"
+msgstr "Vergangene Zeit des aktuellen Tracks"
+
+#: data/ui/main_window.ui:830
+msgid "Scrubb through current track"
+msgstr "Springe durch den aktuellen Track"
+
+#: data/ui/main_window.ui:836
+msgid "Position slider"
+msgstr "Positions-Slider"
+
+#: data/ui/main_window.ui:837
+msgid "Position of the current track in seconds"
+msgstr "Position des aktuell abgespielten Tracks in Sekunden"
+
+#: data/ui/main_window.ui:851
+msgid "Remaining time"
+msgstr "Verbleibende Zeit"
+
+#: data/ui/main_window.ui:859
+msgid "Time remaining"
+msgstr "Verbleibende Zeit"
+
+#: data/ui/main_window.ui:860
+msgid "Remaining time of current track"
+msgstr "Verbleibende Zeit des aktuellen Tracks"
+
+#: data/ui/main_window.ui:935
+msgid "Working..."
+msgstr "Arbeite..."
+
+#: data/ui/main_window.ui:940
+msgid "Currently working"
+msgstr "Am arbeiten..."
+
+#: data/ui/main_window.ui:956
+msgid "Search your library"
+msgstr "Durchsuche deine Bibliothek"
+
+#: data/ui/main_window.ui:966
+msgid "Search menu button"
+msgstr "Suche Menü-Knopf"
+
+#: data/ui/main_window.ui:967
+msgid "Open the search popover"
+msgstr "Öffne das Suchen Popover"
+
+#: data/ui/main_window.ui:982
+msgid "Sleep timer"
+msgstr "Schlafen Timer"
+
+#: data/ui/main_window.ui:992
+msgid "Timer menu button"
+msgstr "Timer Menü-Knopf"
+
+#: data/ui/main_window.ui:993
+msgid "Open the sleep timer popover"
+msgstr "Öffne das Schlafen Timer Popover"
+
+#: data/ui/main_window.ui:1007
+msgid "Options"
+msgstr "Optionen"
+
+#: data/ui/main_window.ui:1018
+msgid "Options menu button"
+msgstr "Optionen Menü-Knopf"
+
+#: data/ui/main_window.ui:1019
+msgid "Open the options popover"
+msgstr "Öffne das Optionen Popover"
 
 #: data/ui/about.ui:11
 msgid "Support me on Patreon: https://www.patreon.com/geigi"
@@ -127,16 +323,11 @@ msgstr "Abbrechen"
 msgid "Locate"
 msgstr "Auswählen"
 
-#: data/ui/file_not_found.ui:84
+#: data/ui/file_not_found.ui:86
 msgid "File not found"
 msgstr "Datei nicht gefunden"
 
-#: data/ui/file_not_found.ui:100
-msgid ""
-"<tt>/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3</tt>"
-msgstr ""
-
-#: data/ui/file_not_found.ui:117
+#: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
 msgstr "Diese Datei wurde nicht gefunden. Möchtest Du sie selbst auswählen?"
 
@@ -156,10 +347,6 @@ msgstr ""
 "Zu Beginn wähle einen Ordner, in dem du deine Hörbücher speichern möchtest. "
 "Hast du bereits einen Ordner mit Hörbüchern, kannst du ihn hier auswählen:"
 
-#: data/ui/hello.ui:154
-msgid "Automatically import new audiobooks on startup"
-msgstr "Importiere neue Hörbücher automatisch beim Start"
-
 #: data/ui/hello.ui:179
 msgid "How to add new audio books:"
 msgstr "So fügst du neue Bücher hinzu:"
@@ -171,6 +358,30 @@ msgstr "Medienordner scannen im Menü anzeigen"
 #: data/ui/hello.ui:269
 msgid "Let's get cozy"
 msgstr "Let's get cozy"
+
+#: data/ui/hello.ui:292
+msgid "Welcome to Cozy!"
+msgstr "Willkommen zu Cozy!"
+
+#: data/ui/import_failed.ui:23
+msgid "Ok"
+msgstr "Ok"
+
+#: data/ui/import_failed.ui:77
+msgid "Some files could not be imported"
+msgstr "Es konnten nicht alle Dateien importiert werden"
+
+#: data/ui/import_failed.ui:130
+msgid ""
+"This can have multiple reasons:\n"
+"- The audio format is not supported\n"
+"- The file(s) are no valid audio files\n"
+"- The file(s) are corrupt"
+msgstr ""
+"Dies kann verschiedene Gründe haben:\n"
+"- Das Audioformat wird nicht unterstützt\n"
+"- Die Datei(en) sind keine validen Audiodateien\n"
+"- Die Datei(en) sind beschädigt"
 
 #: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
@@ -219,3 +430,59 @@ msgstr "Hörbücher Pfad"
 #: data/ui/settings.ui:351
 msgid "Files"
 msgstr "Dateien"
+
+#: data/ui/search_popover.ui:24
+msgid "Search"
+msgstr "Suche"
+
+#: data/ui/search_popover.ui:36
+msgid "Search box"
+msgstr "Suchen-Textbox"
+
+#: data/ui/search_popover.ui:37
+msgid "Search your audiobook library"
+msgstr "Durchsuche deine Hörbuch Bibliothek"
+
+#: data/ui/search_popover.ui:67
+msgid "Which book are you looking for?"
+msgstr "Welches Buch suchst Du?"
+
+#: data/ui/search_popover.ui:154
+msgid "Book"
+msgstr "Buch"
+
+#: data/ui/search_popover.ui:248
+msgid "Track"
+msgstr "Titel"
+
+#: data/ui/search_popover.ui:295
+msgid "Nothing found :("
+msgstr "Nichts gefunden :("
+
+#: data/ui/timer_popover.ui:32
+msgid "Toggle the timer on/off"
+msgstr "Schalte den Timer an/aus"
+
+#: data/ui/timer_popover.ui:36
+msgid "Timer toggle button"
+msgstr "Timer Menü-Knopf"
+
+#: data/ui/timer_popover.ui:37
+msgid "Switch the sleep timer on or off"
+msgstr "Schalte den Schlafen Timer an oder aus"
+
+#: data/ui/timer_popover.ui:52 data/ui/timer_popover.ui:80
+msgid "Timer duration"
+msgstr "Timer Dauer"
+
+#: data/ui/timer_popover.ui:65
+msgid "Timer duration slider"
+msgstr "Timer-Dauer Slider"
+
+#: data/ui/timer_popover.ui:66 data/ui/timer_popover.ui:93
+msgid "Set the sleep timer duration in minutes"
+msgstr "Setze die Timer Dauer in Minuten"
+
+#: data/ui/timer_popover.ui:92
+msgid "Timer duration spin button"
+msgstr "Timer Dauer Spin Knopf"

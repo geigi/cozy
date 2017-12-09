@@ -14,3 +14,6 @@ peewee/
 
 # Ignore sublime files
 *.sublime-workspace
+
+.vscode/.ropeproject
+.vscode/tags

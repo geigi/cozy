@@ -17,26 +17,26 @@ Cozy is a modern audio book player for Linux.
 - Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg audio books
 - Remembers your playback position
 - Sleep timer!
+- Search your library
 - Sort your audio books by author, reader & name
 - drag & drop to import new audiobooks
 - Mpris integration (Media keys & playback info for desktop environment)
 - developed on Arch Linux and tested under elementaryOS
 
 ## How can I get it?
-An AppImage is in the works. In the meantime:
+Do you like Flatpak? Get Cozy from <a href="https://flathub.org/repo/appstream/com.github.geigi.cozy.flatpakref">Flathub</a>!
 
-If you're running elementaryOS, you can get cozy from the App Center!
+If you're running elementaryOS, you can get cozy from the App Center.
 
 Arch Linux users can find cozy under the name `cozy-audiobooks` in the AUR:
 ```
 $ pacaur -S cozy-audiobooks
 ```
 
-You're using a debian based system (Ubuntu, ...)? I've included a <a href="https://github.com/geigi/cozy/releases/download/0.3.9/com.github.geigi.cozy_0.3.9_amd64.deb">.deb</a> file in the release section!
+You're using a debian based system (Ubuntu, ...) or openSUSE? You can get the latest packages here (there is also a respository provided which you can use): https://software.opensuse.org//download.html?project=home%3Ageigi&package=com.github.geigi.cozy
 
 ### Upcoming:
 - wav support
-- Search
 - Sort by name, added date, last played
 - Ratings
 - Playback speed control
@@ -67,5 +67,8 @@ XDG_DATA_DIRS=desired_installation_directory/share:/usr/share PYTHONPATH=desired
 ```
 
 ## Help me translate cozy!
-Cozy is on Transifex, where anyone can contribute and translate. Can't find your language in the list? Let me know!
-https://www.transifex.com/geigi/cozy/
+Cozy is on <a href="https://www.transifex.com/geigi/cozy/"> Transifex</a>, where anyone can contribute and translate. Can't find your language in the list? Let me know!
+
+
+----
+[![Maintainability](https://api.codeclimate.com/v1/badges/fde8cbdff23033adaca2/maintainability)](https://codeclimate.com/github/geigi/cozy/maintainability)

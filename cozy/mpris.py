@@ -34,7 +34,7 @@ class Server:
                 method_outargs[method.name] = "(" + "".join(
                               [arg.signature for arg in method.out_args]) + ")"
                 method_inargs[method.name] = tuple(
-                                       arg.signature for arg in method.in_args)
+                    arg.signature for arg in method.in_args)
 
             con.register_object(object_path=path,
                                 interface_info=interface,
@@ -163,8 +163,8 @@ class MPRIS(Server):
         self.__rating = None
         self.__cozy_id = 0
         self.__metadata = {"mpris:trackid": GLib.Variant(
-                                  "o",
-                                  "/org/mpris/MediaPlayer2/TrackList/NoTrack")}
+            "o",
+            "/org/mpris/MediaPlayer2/TrackList/NoTrack")}
         self.__track_id = self.__get_media_id(0)
         self.__bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
         Gio.bus_own_name_on_connection(self.__bus,
@@ -209,17 +209,17 @@ class MPRIS(Server):
 
     def SetPosition(self, track_id, position):
         jump_to_ns(position)
-        
+
     def Seek(self, offset):
         pass
 
     def Seeked(self, position):
         self.__bus.emit_signal(
-                          None,
-                          self.__MPRIS_PATH,
-                          self.__MPRIS_PLAYER_IFACE,
-                          "Seeked",
-                          GLib.Variant.new_tuple(GLib.Variant("x", position)))
+            None,
+            self.__MPRIS_PATH,
+            self.__MPRIS_PLAYER_IFACE,
+            "Seeked",
+            GLib.Variant.new_tuple(GLib.Variant("x", position)))
 
     def Get(self, interface, property_name):
         if property_name in ["CanQuit", "CanRaise", "CanSeek",
@@ -244,8 +244,8 @@ class MPRIS(Server):
             return GLib.Variant("a{sv}", self.__metadata)
         elif property_name == "Position":
             return GLib.Variant(
-                               "x",
-                               get_current_duration())
+                "x",
+                get_current_duration())
         elif property_name in ["CanGoNext", "CanGoPrevious",
                                "CanPlay", "CanPause"]:
             return GLib.Variant("b", get_current_track() is not None)
@@ -277,7 +277,7 @@ class MPRIS(Server):
         return ret
 
     def Set(self, interface, property_name, new_value):
-        #if property_name == "Volume":
+        # if property_name == "Volume":
         #    Lp().player.set_volume(new_value)
         pass
 
@@ -332,8 +332,8 @@ class MPRIS(Server):
         track = get_current_track()
         if self.__get_status() == "Stopped":
             self.__metadata = {"mpris:trackid": GLib.Variant(
-                                  "o",
-                                  "/org/mpris/MediaPlayer2/TrackList/NoTrack")}
+                "o",
+                "/org/mpris/MediaPlayer2/TrackList/NoTrack")}
         else:
             self.__metadata["mpris:trackid"] = self.__track_id
             track_number = track.number
@@ -342,21 +342,21 @@ class MPRIS(Server):
             self.__metadata["xesam:trackNumber"] = GLib.Variant("i",
                                                                 track_number)
             self.__metadata["xesam:title"] = GLib.Variant(
-                                                "s",
-                                                track.name)
+                "s",
+                track.name)
             self.__metadata["xesam:album"] = GLib.Variant(
-                                          "s",
-                                          track.book.name)
+                "s",
+                track.book.name)
             self.__metadata["xesam:artist"] = GLib.Variant(
-                                             "s",
-                                             track.book.author)
+                "s",
+                track.book.author)
             self.__metadata["mpris:length"] = GLib.Variant(
-                              "x",
-                              track.length * 1000 * 1000)
+                "x",
+                track.length * 1000 * 1000)
             self.__metadata["xesam:url"] = GLib.Variant(
-                                                 "s",
-                                                 "file:///" + track.file)
-            
+                "s",
+                "file:///" + track.file)
+
             cover_path = "/tmp/cozy_mpris.jpg"
             pixbuf = get_cover_pixbuf(track.book)
             if pixbuf is not None:
@@ -364,8 +364,8 @@ class MPRIS(Server):
                              ["quality"], ["90"])
             if cover_path is not None:
                 self.__metadata["mpris:artUrl"] = GLib.Variant(
-                                                        "s",
-                                                        "file://" + cover_path)
+                    "s",
+                    "file://" + cover_path)
 
     def __on_seeked(self, player, position):
         self.Seeked(position * (1000 * 1000))
