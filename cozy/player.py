@@ -9,11 +9,15 @@ import cozy.db as db
 
 Gst.init(None)
 
+__speed = 1.0
+__set_speed = False
 
 def __on_gst_message(bus, message):
     """
     Handle messages from gst.
     """
+    global __speed
+    global __set_speed
 
     t = message.type
     if t == Gst.MessageType.BUFFERING:
@@ -156,6 +160,7 @@ def play_pause(track, jump=False):
     global __current_track
     global __player
     global __wait_to_seek
+    global __set_speed
 
     __wait_to_seek = jump
 
@@ -173,6 +178,8 @@ def play_pause(track, jump=False):
         load_file(track)
         __player.set_state(Gst.State.PLAYING)
         emit_event("play")
+
+    __set_speed = True
 
 
 def next_track():
@@ -262,6 +269,7 @@ def jump_to(seconds):
     :param seconds: time in seconds
     """
     global __player
+    global __speed
 
     new_position = int(seconds) * 1000000000
     if seconds < 0:
@@ -269,7 +277,7 @@ def jump_to(seconds):
     elif int(seconds) > get_current_track().length:
         new_position = int(get_current_track().length) * 1000000000
 
-    __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, new_position)
+    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH, Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
     db.Track.update(position=new_position).where(
         db.Track.id == __current_track.id).execute()
 
@@ -280,6 +288,7 @@ def jump_to_ns(ns):
     :param ns: time in ns
     """
     global __player
+    global __speed
 
     new_position = ns
     if ns < 0:
@@ -287,7 +296,7 @@ def jump_to_ns(ns):
     elif int(ns / 1000000000) > get_current_track().length:
         new_position = int(get_current_track().length) * 1000000000
 
-    __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, new_position)
+    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH, Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
     db.Track.update(position=new_position).where(
         db.Track.id == __current_track.id).execute()
 
@@ -297,13 +306,21 @@ def auto_jump():
     Automatically jump to the last playback position if posible
     """
     global __wait_to_seek
-    if __wait_to_seek:
+    global __speed
+    global __set_speed
+    
+    if __wait_to_seek or __set_speed:
         query = Gst.Query.new_seeking(Gst.Format.TIME)
         if get_playbin().query(query):
             fmt, seek_enabled, start, end = query.parse_seeking()
             if seek_enabled:
                 jump_to_ns(get_current_track().position)
                 __wait_to_seek = False
+                __set_speed = False
+            if __set_speed:
+                set_playback_speed(__speed)
+                __set_speed = False
+    
 
 
 def set_playback_speed(speed):
@@ -311,7 +328,9 @@ def set_playback_speed(speed):
     Sets the playback speed in the gst player.
     """
     global __player
+    global __speed
 
+    __speed = speed
     position = get_current_duration()
     __player.seek(speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.ACCURATE, Gst.SeekType.SET, position, Gst.SeekType.NONE, 0)
 

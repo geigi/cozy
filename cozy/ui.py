@@ -22,6 +22,7 @@ import os
 import logging
 log = logging.getLogger("ui")
 
+
 class CozyUI:
     """
     CozyUI is the main ui class.
@@ -35,6 +36,8 @@ class CozyUI:
     current_book_element = None
     current_track_element = None
     dialog_open = False
+    speed = 1.0
+    is_playing = False
 
     def __init__(self, pkgdatadir, app, version):
         self.pkgdir = pkgdatadir
@@ -216,15 +219,17 @@ class CozyUI:
             "notify::active", self.__timer_switch_changed)
 
         # init playback speed
-        #self.playback_speed_img = self.window_builder.get_object("playback_speed_img")
-        #self.playback_speed_img.set_from_pixbuf(speedometer_pixbuf)
-        self.playback_speed_scale = self.speed_builder.get_object("playback_speed_scale")
+        self.playback_speed_scale = self.speed_builder.get_object(
+            "playback_speed_scale")
         self.playback_speed_scale.add_mark(1.0, Gtk.PositionType.RIGHT, None)
         self.playback_speed_scale.set_increments(0.02, 0.05)
-        self.playback_speed_scale.connect("value-changed", self.__set_playback_speed)
-        self.playback_speed_label = self.speed_builder.get_object("playback_speed_label")
+        self.playback_speed_scale.connect(
+            "value-changed", self.__set_playback_speed)
+        self.playback_speed_label = self.speed_builder.get_object(
+            "playback_speed_label")
 
-        self.playback_speed_button = self.window_builder.get_object("playback_speed_button")
+        self.playback_speed_button = self.window_builder.get_object(
+            "playback_speed_button")
         playback_speed_popover = self.speed_builder.get_object("speed_popover")
         self.playback_speed_button.set_popover(playback_speed_popover)
 
@@ -279,7 +284,8 @@ class CozyUI:
             "button-release-event", self.__on_progress_clicked)
         self.progress_scale.connect(
             "button-press-event", self.__on_progress_press)
-        self.progress_scale.connect("key-press-event", self.__on_progress_key_pressed)
+        self.progress_scale.connect(
+            "key-press-event", self.__on_progress_key_pressed)
         self.progress_scale.connect("value-changed", self.__update_ui_time)
 
         # shortcuts
@@ -453,14 +459,12 @@ class CozyUI:
         if self.current_book_element is None:
             self.__track_changed()
         self.play_button.set_image(self.pause_img)
-        self.play_status_updater = RepeatedTimer(1, self.__update_time)
-        self.play_status_updater.start()
+        self.__set_play_status_updater(True)
         self.current_book_element.set_playing(True)
 
     def pause(self):
         self.play_button.set_image(self.play_img)
-        if self.play_status_updater is not None:
-            self.play_status_updater.stop()
+        self.__set_play_status_updater(False)
         self.current_book_element.set_playing(False)
 
     def block_ui_buttons(self, block, scan=False):
@@ -485,8 +489,7 @@ class CozyUI:
         Remove all information about a playing book from the ui.
         """
         self.play_button.set_image(self.play_img)
-        if self.play_status_updater is not None:
-            self.play_status_updater.stop()
+        self.__set_play_status_updater(False)
 
         self.title_label.set_text("")
         self.subtitle_label.set_text("")
@@ -535,7 +538,8 @@ class CozyUI:
         If there aren't display a welcome screen.
         """
         if db.books().count() < 1:
-            self.no_media_file_chooser.set_current_folder(db.Settings.get().path)
+            self.no_media_file_chooser.set_current_folder(
+                db.Settings.get().path)
             self.main_stack.props.visible_child_name = "no_media"
             self.block_ui_buttons(True)
             self.progress_scale.set_visible(False)
@@ -1058,14 +1062,30 @@ class CozyUI:
             self.remaining_label.set_markup(
                 "<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
 
+    def __set_play_status_updater(self, enable):
+        """
+        Starts/stops the play status ui update timer.
+        Restarts if enable is True and the timer is already running.
+        :params enable: Boolean
+        """
+        if self.play_status_updater is not None:
+            self.play_status_updater.stop()
+            self.play_status_updater = None
+
+        if enable and self.is_playing:
+            self.play_status_updater = RepeatedTimer(
+                1.0 / self.speed, self.__update_time)
+            self.play_status_updater.start()
+
     def __set_playback_speed(self, widget):
         """
         Set the playback speed.
         Update playback speed label.
         """
-        speed = round(self.playback_speed_scale.get_value(), 2)
-        self.playback_speed_label.set_text(str(round(speed, 1)) + " x")
-        player.set_playback_speed(speed)
+        self.speed = round(self.playback_speed_scale.get_value(), 2)
+        self.playback_speed_label.set_text(str(round(self.speed, 1)) + " x")
+        player.set_playback_speed(self.speed)
+        self.__set_play_status_updater(True)
 
     def __track_changed(self):
         """
@@ -1100,14 +1120,17 @@ class CozyUI:
         Listen to and handle all gst player messages that are important for the ui.
         """
         if event == "stop":
+            self.is_playing = False
             self.stop()
             self.__pause_sleep_timer()
         elif event == "play":
+            self.is_playing = True
             self.play()
             self.__start_sleep_timer()
             self.current_track_element.play_img.set_from_icon_name(
                 "media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
         elif event == "pause":
+            self.is_playing = False
             self.pause()
             self.__pause_sleep_timer()
             self.current_track_element.play_img.set_from_icon_name(
@@ -1120,7 +1143,8 @@ class CozyUI:
                 return
             if "Resource not found" in str(message):
                 self.dialog_open = True
-                dialog = FileNotFoundDialog(player.get_current_track().file, self)
+                dialog = FileNotFoundDialog(
+                    player.get_current_track().file, self)
                 dialog.show()
 
     def __window_resized(self, window):

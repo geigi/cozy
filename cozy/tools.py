@@ -40,5 +40,7 @@ class RepeatedTimer(object):
         """
         Stop the timer.
         """
-        self._timer.cancel()
+        if self._timer is not None:
+            self._timer.cancel()
+            self._timer = None
         self.is_running = False
