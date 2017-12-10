@@ -685,26 +685,6 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkMenuButton" id="playback_speed_button">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Playback speed</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="icon_name">media-seek-forward-symbolic</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkVolumeButton" id="volume_button">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -740,7 +720,7 @@ audio-volume-medium-symbolic</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">3</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
                 <style>
@@ -1020,24 +1000,17 @@ audio-volume-medium-symbolic</property>
               </packing>
             </child>
             <child>
-              <object class="GtkMenuButton" id="search_button">
-                <property name="name">Search toggle button</property>
+              <object class="GtkMenuButton" id="playback_speed_button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Search your library</property>
+                <property name="tooltip_text" translatable="yes">Playback speed</property>
                 <property name="margin_right">7</property>
                 <child>
-                  <object class="GtkImage">
+                  <object class="GtkImage" id="playback_speed_img">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">edit-find-symbolic</property>
-                  </object>
-                </child>
-                <child internal-child="accessible">
-                  <object class="AtkObject" id="search_button-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Search menu button</property>
-                    <property name="AtkObject::accessible-description" translatable="yes">Open the search popover</property>
+                    <property name="icon_name">speedometer-symbolic</property>
                   </object>
                 </child>
               </object>
@@ -1075,6 +1048,34 @@ audio-volume-medium-symbolic</property>
               </packing>
             </child>
             <child>
+              <object class="GtkMenuButton" id="search_button">
+                <property name="name">Search toggle button</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Search your library</property>
+                <property name="margin_right">7</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">edit-find-symbolic</property>
+                  </object>
+                </child>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="search_button-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Search menu button</property>
+                    <property name="AtkObject::accessible-description" translatable="yes">Open the search popover</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkMenuButton" id="menu_button">
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -1097,7 +1098,7 @@ audio-volume-medium-symbolic</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">3</property>
+                <property name="position">4</property>
               </packing>
             </child>
           </object>

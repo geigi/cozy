@@ -216,6 +216,8 @@ class CozyUI:
             "notify::active", self.__timer_switch_changed)
 
         # init playback speed
+        #self.playback_speed_img = self.window_builder.get_object("playback_speed_img")
+        #self.playback_speed_img.set_from_pixbuf(speedometer_pixbuf)
         self.playback_speed_scale = self.speed_builder.get_object("playback_speed_scale")
         self.playback_speed_scale.add_mark(1.0, Gtk.PositionType.RIGHT, None)
         self.playback_speed_scale.set_increments(0.02, 0.05)
