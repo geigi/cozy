@@ -38,9 +38,6 @@ def __on_gst_message(bus, message):
             auto_jump()
 
 
-def print_ele(item, user_data):
-    print(item)
-
 __player = Gst.ElementFactory.make("playbin", "player")
 __scaletempo = Gst.ElementFactory.make("scaletempo", "scaletempo")
 __scaletempo.sync_state_with_parent()
