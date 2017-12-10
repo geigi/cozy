@@ -718,12 +718,12 @@ class CozyUI:
         """
         if self.timer_switch.get_active():
             self.timer_image.set_from_icon_name(
-                "weather-clear-night-symbolic", Gtk.IconSize.BUTTON)
+                "timer-on-symbolic", Gtk.IconSize.BUTTON)
             if player.get_gst_player_state() == Gst.State.PLAYING:
                 self.__start_sleep_timer()
         else:
             self.timer_image.set_from_icon_name(
-                "weather-clear-symbolic", Gtk.IconSize.BUTTON)
+                "timer-off-symbolic", Gtk.IconSize.BUTTON)
             if self.sleep_timer is not None:
                 self.sleep_timer.stop()
 
