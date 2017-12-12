@@ -4,30 +4,23 @@
   <metadata_license>CC0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <name>Cozy</name>
-  <summary>A modern audio book player for Linux</summary>
+  <summary>A modern audio book player</summary>
   <description>
       <p>
       You like audio books? Then lets get cozy!
       </p>
       <p>
-      Cozy is a modern audio book player for Linux. Here are some of the current features:
+      Cozy is a modern audio book player. Here are some of the current features:
       </p>
       <ul>
       <li>Import all your audiobooks into cozy to browse them comfortably</li>
       <li>Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg audio books</li>
       <li>Remembers your playback position</li>
       <li>Sleep timer!</li>
+      <li>Playback speed control</li>
       <li>Search your library</li>
       <li>drag and drop import and copy support</li>
       <li>Sort your audio books by author, reader and name</li>
-      </ul>
-      <p>What's next?</p>
-      <ul>
-      <li>wav support</li>
-      <li>Sort by name, added date, last played</li>
-      <li>Ratings</li>
-      <li>Playback speed control</li>
-      <li>... you tell me!</li>
       </ul>
       <p>
       Note: If you're from the EU and want to support this project, you can find me on Patreon (link down below).
@@ -58,6 +51,15 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.4.5" timestamp="1513103298">
+      <description>
+        <ul>
+          <li>Playback speed control!</li>
+          <li>New icons</li>
+          <li>Added French, Danish & Turkish translations! (Thanks to Vistaus, Distil62, karaagac)</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.4" timestamp="1512691505">
       <description>
         <ul>

@@ -1,3 +1,11 @@
+com.github.geigi.cozy (0.4.5) UNSTABLE; urgency=low
+
+  * Playback speed control!
+  * New icons
+  * Added French, Danish & Turkish translations! (Thanks to Vistaus, Distil62, karaagac)
+
+ -- Julian Geywitz <github@geigi.de>  Wed, 12 Dec 2017 19:25:14 +0200
+
 com.github.geigi.cozy (0.4.4) UNSTABLE; urgency=low
 
   * Cozy now looks a lot nicer!
