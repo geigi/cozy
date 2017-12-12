@@ -1,352 +1,356 @@
-# Copyright (C) 2017
-# This file is distributed under the same license as the cozy package.
-# geigi <transifex@geigi.de>, 2017.
-#
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Ibrahim Karaagac <ikaraagac@gmail.com>, 2017.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: cozy 0.1\n"
+"Project-Id-Version: 0.4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-02 18:42+0200\n"
-"Last-Translator: Julian Geywitz <transifex@geigi.de>\n"
-"Language: en_IE\n"
+"POT-Creation-Date: 2017-12-10 18:43+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Ibrahim Karaagac <ikaraagac@gmail.com>, 2017\n"
+"Language-Team: Turkish (https://www.transifex.com/geigi/teams/78138/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: cozy/book_element.py:62 cozy/search_results.py:126
 msgid "Play this book"
-msgstr "Play this book"
+msgstr "Bu kıtabı oynat"
 
 #: cozy/book_element.py:183
 msgid "Open book overview"
-msgstr "Open book overview"
+msgstr "Kıtap önizlemesini aç"
 
 #: cozy/book_element.py:308
 msgid "Play this track"
-msgstr "Play this track"
+msgstr "Bu parçayı oynat"
 
 #: cozy/file_not_found_dialog.py:64
 msgid "All files"
-msgstr "All files"
+msgstr ""
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
-msgstr "Jump to author "
+msgstr "Yazara geç"
 
 #: cozy/search_results.py:76
 msgid "Jump to reader "
-msgstr "Jump to reader "
+msgstr "Okuyucuya geç"
 
 #: cozy/importer.py:245
 msgid "Unknown Author"
-msgstr "Unknown Author"
+msgstr "Bilinmeyen yazar"
 
 #: cozy/importer.py:247
 msgid "Unknown Reader"
-msgstr "Unknown Reader"
+msgstr "Bilinmeyen okuyucu"
 
 #: cozy/ui.py:392 cozy/ui.py:712 data/ui/timer_popover.ui:86
 msgid "min"
-msgstr "min"
+msgstr "dakika"
 
 #: cozy/ui.py:561
 msgid "Importing Audiobooks"
-msgstr "Importing Audiobooks"
+msgstr "Sesli kitaplar ekleniyor"
 
 #: cozy/ui.py:623 cozy/ui.py:627 cozy/ui.py:1222 cozy/ui.py:1231
 msgid "All"
-msgstr "All"
+msgstr "Hepsi"
 
 #: cozy/ui.py:624 cozy/ui.py:628
 msgid "Display all books"
-msgstr "Display all books"
+msgstr "Bütün kitapları göster"
 
 #: cozy/ui.py:846
 msgid "Changing audio book location..."
-msgstr "Changing audio book location..."
+msgstr "Sesli kitabın konumu değiştiriliyor..."
 
 #: data/ui/main_window.ui:67
 msgid "Select by author"
-msgstr "Select by author"
+msgstr "Yazara göre seç"
 
 #: data/ui/main_window.ui:76
 msgid "<big>Author</big>"
-msgstr "<big>Author</big>"
+msgstr "<big>Yazar</big>"
 
 #: data/ui/main_window.ui:85
 msgid "Author filter button"
-msgstr "Author filter button"
+msgstr "Yazar seçme düğmesi"
 
 #: data/ui/main_window.ui:86
 msgid "Filter books by author"
-msgstr "Filter books by author"
+msgstr "Yazara göre kitap filtrele"
 
 #: data/ui/main_window.ui:106
 msgid "Select by reader"
-msgstr "Select by reader"
+msgstr "Okuyucuya göre seç"
 
 #: data/ui/main_window.ui:114
 msgid "<big>Reader</big>"
-msgstr "<big>Reader</big>"
+msgstr "<big>Okuyucu</big>"
 
 #: data/ui/main_window.ui:123
 msgid "Reader filter button"
-msgstr "Reader filter button"
+msgstr "Okuyucu filtreleme düğmesi"
 
 #: data/ui/main_window.ui:124
 msgid "Filter books by reader"
-msgstr "Filter books by reader"
+msgstr "Okuyucuya göre kitap filtrele"
 
 #: data/ui/main_window.ui:178
 msgid "List of authors"
-msgstr "List of authors"
+msgstr "Yazar listesi"
 
 #: data/ui/main_window.ui:194 data/ui/search_popover.ui:107
 msgid "Author"
-msgstr "Author"
+msgstr "Yazar"
 
 #: data/ui/main_window.ui:212
 msgid "List of readers"
-msgstr "List of readers"
+msgstr "Okuyucu listesi"
 
 #: data/ui/main_window.ui:228 data/ui/search_popover.ui:201
 msgid "Reader"
-msgstr "Reader"
+msgstr "Okuyucu"
 
 #: data/ui/main_window.ui:275
 msgid "List of books"
-msgstr "List of books"
+msgstr "Kitap listesi"
 
 #: data/ui/main_window.ui:309
 msgid "Importing your audiobooks..."
-msgstr "Importing your audiobooks..."
+msgstr "Sesli kitaplarınız ekleniyor..."
 
 #: data/ui/main_window.ui:360
 msgid "Import your Audiobooks"
-msgstr "Import your Audiobooks"
+msgstr "Sesli kitaplarını ekle"
 
 #: data/ui/main_window.ui:376
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy automatically imports your audiobooks in one directory - your library"
+"Cozy sesli kitaplarınızı otomatik olarak bir klasöre ekler - kütüphanenize"
 
 #: data/ui/main_window.ui:416
 msgid "Drag & Drop"
-msgstr "Drag & Drop"
+msgstr "Sürükle & Bırak"
 
 #: data/ui/main_window.ui:432
 msgid ""
 "Drag your audiobooks into cozy and the will be automatically imported to "
 "your library"
 msgstr ""
-"Drag your audiobooks into cozy and the will be automatically imported to "
-"your library"
+"Sesli kitaplarınızı cozye sürükleyip bırakın, kitaplar kütüphanenize "
+"otomatik olarak eklenecektir"
 
 #: data/ui/main_window.ui:492
 msgid "Change Audiobooks Folder"
-msgstr "Change Audiobooks Folder"
+msgstr "Sesli kitap klasörünü değiştir"
 
 #: data/ui/main_window.ui:508
 msgid "Load audiobooks from a folder, network drive or an external disk"
-msgstr "Load audiobooks from a folder, network drive or an external disk"
+msgstr ""
+"Sesli kitapları bir klasörden, ağ sürücüsünden veya harici diskten yükle"
 
 #: data/ui/main_window.ui:537
 msgid "Location of your audiobooks"
-msgstr "Location of your audiobooks"
+msgstr "Sesli kitaplarınızın konumu"
 
 #: data/ui/main_window.ui:573
 msgid "Auto scan switch"
-msgstr "Auto scan switch"
+msgstr "Otomatik tarama düğmesi"
 
 #: data/ui/main_window.ui:574 data/ui/main_window.ui:589
 msgid "Automatically import new audiobooks on startup"
-msgstr "Automatically import new audiobooks on startup"
+msgstr "Sesli kitapları başlangıçta otomatik olarak  aktar"
 
 #: data/ui/main_window.ui:642
 msgid "Rewind 30 seconds"
-msgstr "Rewind 30 seconds"
+msgstr "30 sn geri sar"
 
 #: data/ui/main_window.ui:650
 msgid "Rewind button"
-msgstr "Rewind button"
+msgstr "Geri sarma düğmesi"
 
 #: data/ui/main_window.ui:651
 msgid "Jump back 30 seconds"
-msgstr "Jump back 30 seconds"
+msgstr "30 saniye geriye git"
 
 #: data/ui/main_window.ui:668
 msgid "Start playback"
-msgstr "Start playback"
+msgstr "Çalmaya başla"
 
 #: data/ui/main_window.ui:676
 msgid "Play/Pause Button"
-msgstr "Play/Pause Button"
+msgstr "Oynat/Durdur Düğmesi"
 
 #: data/ui/main_window.ui:677
 msgid "Start or pause the playback"
-msgstr "Start or pause the playback"
+msgstr "Çalmayı Başlat veya durdur"
 
 #: data/ui/main_window.ui:693
 msgid "Volume control"
-msgstr "Volume control"
+msgstr ""
 
 #: data/ui/main_window.ui:771
 msgid "Currently playing"
-msgstr "Currently playing"
+msgstr "Şu anda çalan"
 
 #: data/ui/main_window.ui:789
 msgid "Booktitle"
-msgstr "Booktitle"
+msgstr "Başlık"
 
 #: data/ui/main_window.ui:790
 msgid "Title of currently playing book"
-msgstr "Title of currently playing book"
+msgstr "Şu anda çalan kitabın adı"
 
 #: data/ui/main_window.ui:815
 msgid "Track title"
-msgstr "Track title"
+msgstr "Bölüm adı"
 
 #: data/ui/main_window.ui:816
 msgid "Title of the currently playing track"
-msgstr "Title of the currently playing track"
+msgstr "Şu anda çalan bölümün adı"
 
 #: data/ui/main_window.ui:858
 msgid "Elapsed time"
-msgstr "Elapsed time"
+msgstr "Geçen zaman"
 
 #: data/ui/main_window.ui:866
 msgid "Time elapsed"
-msgstr "Time elapsed"
+msgstr "Zaman geçti"
 
 #: data/ui/main_window.ui:867
 msgid "Elapsed time of current track"
-msgstr "Elapsed time of current track"
+msgstr "Çalan bölümden geçen zaman"
 
 #: data/ui/main_window.ui:882
 msgid "Scrubb through current track"
-msgstr "Scrubb through current track"
+msgstr "Çalan bölümde ileri sarma"
 
 #: data/ui/main_window.ui:888
 msgid "Position slider"
-msgstr "Position slider"
+msgstr "Konum değiştirici"
 
 #: data/ui/main_window.ui:889
 msgid "Position of the current track in seconds"
-msgstr "Position of the current track in seconds"
+msgstr "Çalan bölümdeki güncel konum"
 
 #: data/ui/main_window.ui:903
 msgid "Remaining time"
-msgstr "Remaining time"
+msgstr "Kalan zaman"
 
 #: data/ui/main_window.ui:911
 msgid "Time remaining"
-msgstr "Time remaining"
+msgstr "Zaman kaldı"
 
 #: data/ui/main_window.ui:912
 msgid "Remaining time of current track"
-msgstr "Remaining time of current track"
+msgstr "Çalan bölümden geriye kalan süre"
 
 #: data/ui/main_window.ui:987
 msgid "Working..."
-msgstr "Working..."
+msgstr "Çalışıyor..."
 
 #: data/ui/main_window.ui:992
 msgid "Currently working"
-msgstr "Currently working"
+msgstr "Şu an çalışıyor"
 
 #: data/ui/main_window.ui:1007
 msgid "Playback speed"
-msgstr "Playback speed"
+msgstr ""
 
 #: data/ui/main_window.ui:1028
 msgid "Sleep timer"
-msgstr "Sleep timer"
+msgstr "Uyku zamanlayıcı"
 
 #: data/ui/main_window.ui:1039
 msgid "Timer menu button"
-msgstr "Timer menu button"
+msgstr "Zamanlama menü düğmesi"
 
 #: data/ui/main_window.ui:1040
 msgid "Open the sleep timer popover"
-msgstr "Open the sleep timer popover"
+msgstr "Uyku zamanlama düğmesini aç"
 
 #: data/ui/main_window.ui:1056
 msgid "Search your library"
-msgstr "Search your library"
+msgstr "Kütüphanende ara"
 
 #: data/ui/main_window.ui:1067
 msgid "Search menu button"
-msgstr "Search menu button"
+msgstr "Arama menü düğmesi"
 
 #: data/ui/main_window.ui:1068
 msgid "Open the search popover"
-msgstr "Open the search popover"
+msgstr "Aramayı aç"
 
 #: data/ui/main_window.ui:1082
 msgid "Options"
-msgstr "Options"
+msgstr "Seçenekler"
 
 #: data/ui/main_window.ui:1093
 msgid "Options menu button"
-msgstr "Options menu button"
+msgstr "Seçenekler menü düğmesi"
 
 #: data/ui/main_window.ui:1094
 msgid "Open the options popover"
-msgstr "Open the options popover"
+msgstr "Seçekleri aç"
 
 #: data/ui/about.ui:11
 msgid "Support me on Patreon: https://www.patreon.com/geigi"
-msgstr "Support me on Patreon: https://www.patreon.com/geigi"
+msgstr "Beni Patreonda destekleyin: https://www.patreon.com/geigi"
 
 #: data/ui/about.ui:13
 msgid "GitHub"
-msgstr "GitHub"
+msgstr "Github"
 
 #: data/ui/app_menu.ui:7
 msgid "_Scan Directory"
-msgstr "_Scan Directory"
+msgstr "_Klasörü Tara"
 
 #: data/ui/app_menu.ui:13
 msgid "_Preferences"
-msgstr "_Preferences"
+msgstr "_Seçenekler"
 
 #: data/ui/app_menu.ui:19
 msgid "_Help"
-msgstr "_Help"
+msgstr "_Yardım"
 
 #: data/ui/app_menu.ui:23
 msgid "_About"
-msgstr "_About"
+msgstr "_Hakkında"
 
 #: data/ui/app_menu.ui:27
 msgid "_Quit"
-msgstr "_Quit"
+msgstr "_Çıkış"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "İptal"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
-msgstr "Locate"
+msgstr "Bul"
 
 #: data/ui/file_not_found.ui:86
 msgid "File not found"
-msgstr "File not found"
+msgstr "Dosya bulunamadı"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "This file could not be found. Do you want to locate it manually?"
+msgstr "Dosya bulunamadı. Yerini belirlemek istermisiniz?"
 
 #: data/ui/import_failed.ui:23
 msgid "Ok"
-msgstr "Ok"
+msgstr "Tamam"
 
 #: data/ui/import_failed.ui:77
 msgid "Some files could not be imported"
-msgstr "Some files could not be imported"
+msgstr "Bazı dosyalar eklenemedi"
 
 #: data/ui/import_failed.ui:130
 msgid ""
@@ -355,111 +359,111 @@ msgid ""
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
-"This can have multiple reasons:\n"
-"- The audio format is not supported\n"
-"- The file(s) are no valid audio files\n"
-"- The file(s) are corrupt"
+"Bunun bir kaç sebebi olabilir:\n"
+"- Bu ses formatı desteklenmiyor.\n"
+"- Bu ses dosyaları geçerli ses dosyaları değiller\n"
+"- Bu dosyalar bozuk"
 
 #: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
-msgstr "Order by"
+msgstr "Düzenle"
 
 #: data/ui/settings.ui:37
 msgid "Newest"
-msgstr "Newest"
+msgstr "En yeni"
 
 #: data/ui/settings.ui:54
 msgid "Year"
-msgstr "Year"
+msgstr "Yıl"
 
 #: data/ui/settings.ui:72
 msgid "Name"
-msgstr "Name"
+msgstr "İsim"
 
 #: data/ui/settings.ui:143
 msgid "Appearance"
-msgstr "Appearance"
+msgstr "Görünüş"
 
 #: data/ui/settings.ui:158
 msgid "Suspend system on timer"
-msgstr "Suspend system on timer"
+msgstr "Zamanlayıcıya göre sistemi durdur"
 
 #: data/ui/settings.ui:194
 msgid "Replay 30 seconds"
-msgstr "Replay 30 seconds"
+msgstr "30 saniyeyi tekrar oynat"
 
 #: data/ui/settings.ui:229
 msgid "Automatic media scan"
-msgstr "Automatic media scan"
+msgstr "Otomatik cihaz tarayıcısı"
 
 #: data/ui/settings.ui:260
 msgid "Behaviour"
-msgstr "Behaviour"
+msgstr "Davranış"
 
 #: data/ui/settings.ui:276
 msgid "Follow symlinks"
-msgstr "Follow symlinks"
+msgstr "Sembolik bağı takip et"
 
 #: data/ui/settings.ui:314 data/ui/settings.ui:329
 msgid "Audio books location"
-msgstr "Audio books location"
+msgstr "Sesli kitap konumu"
 
 #: data/ui/settings.ui:351
 msgid "Files"
-msgstr "Files"
+msgstr "Dosyalar"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
-msgstr "Search"
+msgstr "Arama"
 
 #: data/ui/search_popover.ui:36
 msgid "Search box"
-msgstr "Search box"
+msgstr "Arama kutusu"
 
 #: data/ui/search_popover.ui:37
 msgid "Search your audiobook library"
-msgstr "Search your audiobook library"
+msgstr "Sesli kitap kütüphanende ara"
 
 #: data/ui/search_popover.ui:67
 msgid "Which book are you looking for?"
-msgstr "Which book are you looking for?"
+msgstr "Hangi kitapları arıyorsunuz?"
 
 #: data/ui/search_popover.ui:154
 msgid "Book"
-msgstr "Book"
+msgstr "Kitap"
 
 #: data/ui/search_popover.ui:248
 msgid "Track"
-msgstr "Track"
+msgstr "Bölüm"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
-msgstr "Nothing found :("
+msgstr "Hiçbirşey bulunamadı :("
 
 #: data/ui/timer_popover.ui:32
 msgid "Toggle the timer on/off"
-msgstr "Toggle the timer on/off"
+msgstr "Zamanlayıcıyı aç/kapa"
 
 #: data/ui/timer_popover.ui:36
 msgid "Timer toggle button"
-msgstr "Timer toggle button"
+msgstr "Zamanlayıcı düğmesi"
 
 #: data/ui/timer_popover.ui:37
 msgid "Switch the sleep timer on or off"
-msgstr "Switch the sleep timer on or off"
+msgstr "Uyku zamanlayıcıyı aç veya kapa"
 
 #: data/ui/timer_popover.ui:52 data/ui/timer_popover.ui:80
 msgid "Timer duration"
-msgstr "Timer duration"
+msgstr "Uyku zamanlayıcı süresi"
 
 #: data/ui/timer_popover.ui:65
 msgid "Timer duration slider"
-msgstr "Timer duration slider"
+msgstr "Uyku zamanlayıcı kaydıracı"
 
 #: data/ui/timer_popover.ui:66 data/ui/timer_popover.ui:93
 msgid "Set the sleep timer duration in minutes"
-msgstr "Set the sleep timer duration in minutes"
+msgstr "Uyku zamanlayıcıyı dakika olarak belirle"
 
 #: data/ui/timer_popover.ui:92
 msgid "Timer duration spin button"
-msgstr "Timer duration spin button"
+msgstr "Uyku zamanlayıcı süresi"

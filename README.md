@@ -66,6 +66,20 @@ $ ninja -C desired_build_directory install
 XDG_DATA_DIRS=desired_installation_directory/share:/usr/share PYTHONPATH=desired_installation_directory/lib/python3.[your_python3_version]/site-packages app/bin/cozy
 ```
 
+## A big thanks
+To the contributors on GitHub:
+- AsavarTzeth
+- worldofpeace
+- camellan
+
+The translators:
+- camellan
+- Vistaus
+- Distil62
+- karaagac
+
+To nedrichards for the Flatpak.
+
 ## Help me translate cozy!
 Cozy is on <a href="https://www.transifex.com/geigi/cozy/"> Transifex</a>, where anyone can contribute and translate. Can't find your language in the list? Let me know!
 

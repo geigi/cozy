@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.1 -->
+<!-- Generated with glade 3.20.2 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
   <object class="GtkAboutDialog" id="about_dialog">
@@ -15,13 +15,18 @@
 
 Contributions on GitHub:
 AsavarTzeth
+worldofpeace
+camellan
 
 Big thanks to my patreon supporters:
 Fred Warren
 
 And to other open source projects:
 https://github.com/gnumdk/lollypop</property>
-    <property name="translator_credits" translatable="no">camellan</property>
+    <property name="translator_credits">camellan
+Vistaus
+Distil62
+karaagac</property>
     <property name="logo_icon_name">com.github.geigi.cozy</property>
     <property name="license_type">gpl-3-0</property>
     <child internal-child="vbox">
