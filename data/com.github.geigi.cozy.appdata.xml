@@ -51,12 +51,12 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
-    <release version="0.4.5" timestamp="1513103298">
+    <release version="0.4.6" timestamp="1513103298">
       <description>
         <ul>
           <li>Playback speed control!</li>
           <li>New icons</li>
-          <li>Added French, Danish & Turkish translations! (Thanks to Vistaus, Distil62, karaagac)</li>
+          <li>Added French, Danish and Turkish translations! (Thanks to Vistaus, Distil62, karaagac)</li>
         </ul>
       </description>
     </release>
