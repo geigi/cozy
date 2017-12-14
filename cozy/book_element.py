@@ -2,6 +2,7 @@ from gi.repository import Gtk, Gdk, GdkPixbuf, Pango
 
 from cozy.db import *
 from cozy.player import *
+import cozy.tools as tools
 
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
@@ -184,16 +185,14 @@ class BookElement(Gtk.Box):
 
         # label contains the book name and is limited to x chars
         title_label = Gtk.Label.new("")
-        title = (self.book.name[:MAX_BOOK_LENGTH] + '...') if len(
-            self.book.name) > MAX_BOOK_LENGTH else self.book.name
+        title = tools.shorten_string(self.book.name, MAX_BOOK_LENGTH)
         title_label.set_markup("<b>" + title + "</b>")
         title_label.set_xalign(0.5)
         title_label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
         title_label.props.max_width_chars = 30
         title_label.props.justify = Gtk.Justification.CENTER
 
-        author_label = Gtk.Label.new((self.book.author[:MAX_BOOK_LENGTH] + '...') if len(
-            self.book.author) > MAX_BOOK_LENGTH else self.book.author)
+        author_label = Gtk.Label.new(tools.shorten_string(self.book.author, MAX_BOOK_LENGTH))
         author_label.set_xalign(0.5)
         author_label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
         author_label.props.max_width_chars = 30

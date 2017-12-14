@@ -12,6 +12,7 @@ Gst.init(None)
 __speed = 1.0
 __set_speed = False
 
+
 def __on_gst_message(bus, message):
     """
     Handle messages from gst.
@@ -166,8 +167,7 @@ def play_pause(track, jump=False):
         if get_gst_player_state() == Gst.State.PLAYING:
             __player.set_state(Gst.State.PAUSED)
             emit_event("pause")
-            db.Track.update(position=get_current_duration()).where(
-                db.Track.id == get_current_track().id).execute()
+            save_current_track_position()
         else:
             __player.set_state(Gst.State.PLAYING)
             emit_event("play")
@@ -194,15 +194,14 @@ def next_track():
         next_track = album_tracks[index + 1]
 
     play_pause(None)
-    db.Track.update(position=0).where(db.Track.id == current.id).execute()
+    save_current_track_position()
 
     if next_track is not None:
-        db.Book.update(position=next_track.id).where(
-            db.Book.id == next_track.book.id).execute()
+        save_current_book_position(next_track)
         play_pause(next_track)
     else:
         stop()
-        db.Book.update(position=0).where(db.Book.id == current.book.id).execute()
+        save_current_book_position(current, 0)
         __player.set_state(Gst.State.NULL)
         __current_track = None
         db.Settings.update(last_played_book=None).execute()
@@ -223,18 +222,17 @@ def prev_track():
     if index > -1:
         previous = album_tracks[index - 1]
 
-    db.Track.update(position=0).where(db.Track.id == current.id).execute()
+    save_current_track_position()
 
     if previous is not None:
-        db.Book.update(position=previous.id).where(
-            db.Book.id == previous.book.id).execute()
+        save_current_book_position(previous)
         play_pause(previous)
     else:
         first_track = __current_track
         __player.set_state(Gst.State.NULL)
         __current_track = None
         play_pause(first_track)
-        db.Book.update(position=0).where(db.Book.id == current.book.id).execute()
+        save_current_book_position(current, 0)
 
 
 def stop():
@@ -257,7 +255,7 @@ def rewind(seconds):
         # TODO: Go back to previous track
         seek = 0
     __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, seek)
-    db.Track.update(position=seek).where(db.Track.id == __current_track.id).execute()
+    save_current_track_position(seek)
 
 
 def jump_to(seconds):
@@ -274,9 +272,9 @@ def jump_to(seconds):
     elif int(seconds) > get_current_track().length:
         new_position = int(get_current_track().length) * 1000000000
 
-    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH, Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
-    db.Track.update(position=new_position).where(
-        db.Track.id == __current_track.id).execute()
+    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
+                  Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
+    save_current_track_position(new_position)
 
 
 def jump_to_ns(ns):
@@ -293,9 +291,9 @@ def jump_to_ns(ns):
     elif int(ns / 1000000000) > get_current_track().length:
         new_position = int(get_current_track().length) * 1000000000
 
-    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH, Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
-    db.Track.update(position=new_position).where(
-        db.Track.id == __current_track.id).execute()
+    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
+                  Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
+    save_current_track_position(new_position)
 
 
 def auto_jump():
@@ -305,7 +303,7 @@ def auto_jump():
     global __wait_to_seek
     global __speed
     global __set_speed
-    
+
     if __wait_to_seek or __set_speed:
         query = Gst.Query.new_seeking(Gst.Format.TIME)
         if get_playbin().query(query):
@@ -317,7 +315,6 @@ def auto_jump():
             if __set_speed:
                 set_playback_speed(__speed)
                 __set_speed = False
-    
 
 
 def set_playback_speed(speed):
@@ -329,7 +326,8 @@ def set_playback_speed(speed):
 
     __speed = speed
     position = get_current_duration()
-    __player.seek(speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.ACCURATE, Gst.SeekType.SET, position, Gst.SeekType.NONE, 0)
+    __player.seek(speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH |
+                  Gst.SeekFlags.ACCURATE, Gst.SeekType.SET, position, Gst.SeekType.NONE, 0)
 
 
 def load_file(track):
@@ -341,18 +339,15 @@ def load_file(track):
     global __player
 
     if get_gst_player_state() == Gst.State.PLAYING:
-        db.Track.update(position=get_current_duration()).where(
-            db.Track.id == get_current_track().id).execute()
-        db.Book.update(position=__current_track.id).where(
-            db.Book.id == __current_track.book.id).execute()
+        save_current_track_position()
+        save_current_book_position(__current_track)
 
     __current_track = track
     emit_event("stop")
     __player.set_state(Gst.State.NULL)
     __player.set_property("uri", "file://" + track.file)
     __player.set_state(Gst.State.PAUSED)
-    db.Book.update(position=__current_track.id).where(
-        db.Book.id == __current_track.book.id).execute()
+    save_current_book_position(__current_track)
     db.Settings.update(last_played_book=__current_track.book).execute()
     emit_event("track-changed")
 
@@ -378,6 +373,27 @@ def load_last_book():
                 __player.set_state(Gst.State.PAUSED)
                 __current_track = last_track
                 emit_event("track-changed")
+
+
+def save_current_book_position(track, pos=None):
+    """
+    Saves the given track to it's book as the current position to the db.
+    :param track: track object
+    """
+    if pos is None:
+        pos = track.id
+    db.Book.update(position=pos).where(
+        db.Book.id == track.book.id).execute()
+
+
+def save_current_track_position(pos=None):
+    """
+    Saves the current track position to the db.
+    """
+    if pos is None:
+        pos = get_current_duration()
+    db.Track.update(position=pos).where(
+        db.Track.id == get_current_track().id).execute()
 
 
 def emit_event(event, message=None):

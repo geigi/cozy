@@ -1,5 +1,6 @@
 from gi.repository import Gtk
 from cozy.book_element import AlbumElement
+import cozy.tools as tools
 
 MAX_BOOK_LENGTH = 80
 MAX_TRACK_LENGTH = 40
@@ -67,12 +68,10 @@ class ArtistSearchResult(SearchResult):
 
         title_label = Gtk.Label()
         if is_author:
-            title_label.set_text((self.book.author[:MAX_BOOK_LENGTH] + '...') if len(
-                self.book.author) > MAX_BOOK_LENGTH else self.book.author)
+            title_label.set_text(tools.shorten_string(self.book.author, MAX_BOOK_LENGTH))
             self.set_tooltip_text(_("Jump to author ") + book.author)
         else:
-            title_label.set_text((self.book.reader[:MAX_BOOK_LENGTH] + '...') if len(
-                self.book.reader) > MAX_BOOK_LENGTH else self.book.reader)
+            title_label.set_text(tools.shorten_string(self.book.reader, MAX_BOOK_LENGTH))
             self.set_tooltip_text(_("Jump to reader ") + book.reader)
         title_label.set_halign(Gtk.Align.START)
         title_label.props.margin = 4
@@ -99,8 +98,7 @@ class TrackSearchResult(SearchResult):
         self.track = track
 
         title_label = Gtk.Label()
-        title_label.set_text((self.track.name[:MAX_TRACK_LENGTH] + '...') if len(
-            self.track.name) > MAX_TRACK_LENGTH else self.track.name)
+        title_label.set_text(tools.shorten_string(self.track.name, MAX_TRACK_LENGTH))
         title_label.set_halign(Gtk.Align.START)
         title_label.props.margin = 4
         title_label.props.hexpand = True
@@ -134,8 +132,7 @@ class BookSearchResult(SearchResult):
         self.connect("button-press-event", img._on_play_button_press)
 
         title_label = Gtk.Label()
-        title_label.set_text((self.book.name[:MAX_BOOK_LENGTH] + '...') if len(
-            self.book.name) > MAX_BOOK_LENGTH else self.book.name)
+        title_label.set_text(tools.shorten_string(self.book.name, MAX_BOOK_LENGTH))
         title_label.set_halign(Gtk.Align.START)
         title_label.props.margin = 4
         title_label.props.hexpand = True

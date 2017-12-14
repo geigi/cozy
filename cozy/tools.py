@@ -1,8 +1,16 @@
 import time
 import threading
 
-# From https://stackoverflow.com/questions/474528/what-is-the-best-way-to-repeatedly-execute-a-function-every-x-seconds-in-python
+def shorten_string(string, length):
+    """
+    Shortens a string when it is longer than length and adds ... at the end.
+    :param string: Text to be shortened
+    :param length: Max. length of string
+    :return : string or shortened string
+    """
+    return (string[:length] + '...') if len(string) > length else string
 
+# From https://stackoverflow.com/questions/474528/what-is-the-best-way-to-repeatedly-execute-a-function-every-x-seconds-in-python
 class RepeatedTimer(object):
     """
     A timer that gets called after a specified amount of time.
