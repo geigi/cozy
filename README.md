@@ -25,22 +25,30 @@ Cozy is a modern audio book player for Linux.
 - developed on Arch Linux and tested under elementaryOS
 
 ## How can I get it?
-Do you like Flatpak? Get Cozy from <a href="https://flathub.org/repo/appstream/com.github.geigi.cozy.flatpakref">Flathub</a>!
+### Flatpak
+For most distributions you can use Flatpak to install and run cozy: <a href="https://flathub.org/repo/appstream/com.github.geigi.cozy.flatpakref">Flathub</a>
+Or use the following commands:
+```
+flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install --user flathub com.github.geigi.cozy
+```
 
-If you're running elementaryOS, you can get cozy from the App Center.
+### elementaryOS
+If you're running elementaryOS, you can get cozy from the <a href="https://appcenter.elementary.io/com.github.geigi.cozy">App Center</a>.
 
+### Arch Linux
 Arch Linux users can find cozy under the name `cozy-audiobooks` in the AUR:
 ```
 $ pacaur -S cozy-audiobooks
 ```
 
-You're using a debian based system (Ubuntu, ...) or openSUSE? You can get the latest packages here (there is also a respository provided which you can use): https://software.opensuse.org//download.html?project=home%3Ageigi&package=com.github.geigi.cozy
+### Ubuntu, Debian, openSUSE, Fedora repositories
+If you prefer a custom repository - for Ubuntu, Debian, openSUSE and Fedora there are package repositories on the <a href="https://software.opensuse.org//download.html?project=home%3Ageigi&package=com.github.geigi.cozy">openSUSE Build Service</a>.
 
 ### Upcoming:
 - wav support
 - Sort by name, added date, last played
 - Ratings
-- Flatpak or AppImage support
 
 If you like this project, consider supporting me on <a href="https://www.patreon.com/bePatron?u=8147127"> Patreon</a> :)
 
@@ -52,6 +60,8 @@ If you like this project, consider supporting me on <a href="https://www.patreon
 - `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
 - `peewee >= 2.10.1` as object relation mapper
 - `python3-mutagen` for meta tag management
+- `gstreamer1.0-plugins-good`
+- `gstreamer1.0-libav` for mp4 support
 
 ## Build
 ```bash
