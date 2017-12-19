@@ -245,7 +245,7 @@
                             <property name="halign">center</property>
                             <property name="margin_top">2</property>
                             <property name="margin_bottom">3</property>
-                            <property name="label" translatable="yes">Track</property>
+                            <property name="label" translatable="yes">Part</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
                             </attributes>

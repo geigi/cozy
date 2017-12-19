@@ -304,7 +304,7 @@ class TrackElement(Gtk.EventBox):
         self.connect("enter-notify-event", self._on_enter_notify)
         self.connect("leave-notify-event", self._on_leave_notify)
         self.connect("button-press-event", self.__on_button_press)
-        self.set_tooltip_text(_("Play this track"))
+        self.set_tooltip_text(_("Play this part"))
 
         # This box contains all content
         self.box = Gtk.Box()

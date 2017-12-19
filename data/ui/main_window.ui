@@ -812,8 +812,8 @@ audio-volume-medium-symbolic</property>
                     <property name="single_line_mode">True</property>
                     <child internal-child="accessible">
                       <object class="AtkObject" id="subtitle_label-atkobject">
-                        <property name="AtkObject::accessible-name" translatable="yes">Track title</property>
-                        <property name="AtkObject::accessible-description" translatable="yes">Title of the currently playing track</property>
+                        <property name="AtkObject::accessible-name" translatable="yes">Part name</property>
+                        <property name="AtkObject::accessible-description" translatable="yes">Title of the currently playing part</property>
                       </object>
                     </child>
                     <style>
@@ -864,7 +864,7 @@ audio-volume-medium-symbolic</property>
                         <child internal-child="accessible">
                           <object class="AtkObject" id="current_label-atkobject">
                             <property name="AtkObject::accessible-name" translatable="yes">Time elapsed</property>
-                            <property name="AtkObject::accessible-description" translatable="yes">Elapsed time of current track</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Elapsed time of current part</property>
                           </object>
                         </child>
                       </object>
@@ -879,14 +879,14 @@ audio-volume-medium-symbolic</property>
                         <property name="width_request">150</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
-                        <property name="tooltip_text" translatable="yes">Scrubb through current track</property>
+                        <property name="tooltip_text" translatable="yes">Scrubb through current part</property>
                         <property name="hexpand">True</property>
                         <property name="round_digits">1</property>
                         <property name="draw_value">False</property>
                         <child internal-child="accessible">
                           <object class="AtkObject" id="progress_scale-atkobject">
                             <property name="AtkObject::accessible-name" translatable="yes">Position slider</property>
-                            <property name="AtkObject::accessible-description" translatable="yes">Position of the current track in seconds</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Position of the current part in seconds</property>
                           </object>
                         </child>
                       </object>
@@ -909,7 +909,7 @@ audio-volume-medium-symbolic</property>
                         <child internal-child="accessible">
                           <object class="AtkObject" id="remaining_label-atkobject">
                             <property name="AtkObject::accessible-name" translatable="yes">Time remaining</property>
-                            <property name="AtkObject::accessible-description" translatable="yes">Remaining time of current track</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Remaining time of current part</property>
                           </object>
                         </child>
                       </object>

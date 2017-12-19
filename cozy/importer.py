@@ -85,7 +85,7 @@ def update_database(ui):
 
     # remove entries from the db that are no longer existent
     for track in db.Track.select():
-        if not os.path.exists(track.file):
+        if not os.path.isfile(track.file):
             track.delete_instance()
 
     # remove all books that have no tracks
