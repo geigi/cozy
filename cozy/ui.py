@@ -313,6 +313,9 @@ class CozyUI:
         self.current_label.set_visible(False)
         self.remaining_label.set_visible(False)
 
+        # hide throbber
+        self.throbber.set_visible(False)
+
         # menu
         menu = self.menu_builder.get_object("app_menu")
         self.menu_button = self.window_builder.get_object("menu_button")
@@ -516,6 +519,7 @@ class CozyUI:
         This is used for example when an import is currently happening.
         This blocks the user from doing some stuff like starting playback.
         """
+        self.throbber.set_visible(True)
         self.throbber.start()
         self.status_label.set_text(message)
         self.block_ui_buttons(True, True)
@@ -532,6 +536,7 @@ class CozyUI:
         self.status_stack.props.visible_child_name = "playback"
         self.block_ui_buttons(True, False)
         self.throbber.stop()
+        self.throbber.set_visible(False)
 
     def check_for_tracks(self):
         """
@@ -797,7 +802,6 @@ class CozyUI:
         inspired by https://stackoverflow.com/questions/24094186/drag-and-drop-file-example-in-pygobject
         """
         if target_type == 80:
-            self.throbber.start()
             self.switch_to_working("copying new files...", False)
             thread = Thread(target=importer.copy, args=(self, selection, ))
             thread.start()
@@ -836,7 +840,6 @@ class CozyUI:
         Clean the database when the audio book location is changed.
         """
         log.debug("Audio book location changed, rebasing the location in db.")
-        self.throbber.start()
         self.location_chooser.set_sensitive(False)
 
         settings = db.Settings.get()
@@ -895,6 +898,7 @@ class CozyUI:
         Reset the search if running and start a new async search.
         """
         self.search_thread_stop.set()
+        self.throbber.set_visible(True)
         self.throbber.start()
 
         # we want to avoid flickering of the search box size
@@ -932,6 +936,7 @@ class CozyUI:
             self.search_thread.start()
         else:
             self.throbber.stop()
+            self.throbber.set_visible(False)
             self.search_stack.set_visible_child_name("start")
             self.search_popover.set_size_request(-1, -1)
 
@@ -990,6 +995,7 @@ class CozyUI:
         # the reader search is the last that finishes
         # so we stop the throbber and reset the prefered height & width
         self.throbber.stop()
+        self.throbber.set_visible(False)
         self.search_popover.set_size_request(-1, -1)
 
     def __toggle_reader(self, button):
