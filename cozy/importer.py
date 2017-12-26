@@ -193,7 +193,7 @@ def import_file(file, directory, path, update=False):
         length = float(__get_common_track_length(track))
         cover = __get_ogg_cover(track)
         author = __get_common_tag(track, "composer")
-        reader = __get_common_tag(track, "author")
+        reader = __get_common_tag(track, "artist")
         book_name = __get_common_tag(track, "album")
         track_name = __get_common_tag(track, "title")
 
