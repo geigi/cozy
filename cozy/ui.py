@@ -429,6 +429,7 @@ class CozyUI:
         """
         Quit app.
         """
+        self.on_close(None)
         self.app.quit()
 
     def about(self, action, parameter):
