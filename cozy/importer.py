@@ -95,7 +95,7 @@ def update_database(ui):
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
-    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.block_ui_buttons, False)
+    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.block_ui_buttons, False, True)
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.check_for_tracks)
 
     if len(failed) > 0:
