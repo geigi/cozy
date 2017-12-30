@@ -170,6 +170,8 @@ class BookElement(Gtk.Box):
     selected = False
     wait_to_seek = False
     playing = False
+    popover_created = False
+    track_box = None
 
     def __init__(self, b, ui):
         self.book = b
@@ -206,9 +208,6 @@ class BookElement(Gtk.Box):
         self.add(self.art)
         self.add(title_label)
         self.add(author_label)
-
-        # create track list popover
-        self.__create_popover()
 
     def __create_popover(self):
         self.popover = Gtk.Popover.new(self)
@@ -250,6 +249,11 @@ class BookElement(Gtk.Box):
         self._mark_current_track()
 
     def __on_button_press(self, eventbox, event):
+        if self.popover_created is False:
+            # create track list popover
+            self.__create_popover()
+            self.popover_created = True
+
         self.art.selected = True
         if Gtk.get_minor_version() > 20:
             self.popover.popup()

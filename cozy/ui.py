@@ -461,7 +461,7 @@ class CozyUI:
 
     def play(self):
         if self.current_book_element is None:
-            self.__track_changed()
+            self.track_changed()
         self.play_button.set_image(self.pause_img)
         self.__set_play_status_updater(True)
         self.current_book_element.set_playing(True)
@@ -1094,15 +1094,17 @@ class CozyUI:
         player.set_playback_speed(self.speed)
         self.__set_play_status_updater(True)
 
-    def __track_changed(self):
+    def track_changed(self):
         """
         The track loaded in the player has changed.
         Refresh the currently playing track and mark it in the track overview popover.
         """
+        # first reset the old track to the start playing state
         if self.current_track_element is not None:
             self.current_track_element.play_img.set_from_icon_name(
                 "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
 
+        # also reset the book playing state
         if self.current_book_element is not None:
             self.current_book_element.set_playing(False)
 
@@ -1111,14 +1113,19 @@ class CozyUI:
             filter(
                 lambda x: x.get_children()[0].book.id == curr_track.book.id,
                 self.book_box.get_children()), None).get_children()[0]
-        self.current_track_element = next(
-            filter(
-                lambda x: x.track.id == curr_track.id,
-                self.current_book_element.track_box.get_children()), None)
 
-        self.current_track_element.play_img.set_from_icon_name(
-            "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
-        self.current_book_element._mark_current_track()
+        # The track popover is only created on demand
+        # when the user opens it the first time
+        if self.current_book_element.track_box is not None:
+            self.current_track_element = next(
+                filter(
+                    lambda x: x.track.id == curr_track.id,
+                    self.current_book_element.track_box.get_children()), None)
+
+            self.current_track_element.play_img.set_from_icon_name(
+                "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+            self.current_book_element._mark_current_track()
+
         self.remaining_label.set_visible(True)
         self.current_label.set_visible(True)
 
@@ -1144,7 +1151,7 @@ class CozyUI:
                 "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
         elif event == "track-changed":
             self.__update_track_ui()
-            self.__track_changed()
+            self.track_changed()
         elif event == "error":
             if self.dialog_open:
                 return
