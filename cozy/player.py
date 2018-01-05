@@ -1,3 +1,4 @@
+import threading
 from gi.repository import Gst
 
 import gi
@@ -297,6 +298,9 @@ def jump_to_ns(ns):
     save_current_track_position(new_position)
 
 
+__playback_speed_timer_running = False
+
+
 def auto_jump():
     """
     Automatically jump to the last playback position if posible
@@ -321,13 +325,32 @@ def auto_jump():
 def set_playback_speed(speed):
     """
     Sets the playback speed in the gst player.
+    Uses a timer to avoid crackling sound.
     """
     global __player
     global __speed
+    global __playback_speed_timer_running
 
     __speed = speed
+    if __playback_speed_timer_running:
+        return
+
+    __playback_speed_timer_running = True
+    
+    t = threading.Timer(0.2, __on_playback_speed_timer)
+    t.start()
+
+
+def __on_playback_speed_timer():
+    """
+    Get's called after the playback speed changer timer is over.
+    """
+    global __speed
+    global __playback_speed_timer_running
+    __playback_speed_timer_running = False
+
     position = get_current_duration()
-    __player.seek(speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH |
+    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH |
                   Gst.SeekFlags.ACCURATE, Gst.SeekType.SET, position, Gst.SeekType.NONE, 0)
 
 
