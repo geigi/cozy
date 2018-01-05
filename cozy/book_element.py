@@ -247,6 +247,8 @@ class BookElement(Gtk.Box):
         scroller.show_all()
 
         self._mark_current_track()
+        self.popover_created = True
+        self.ui._update_current_track_element()
 
     def __on_button_press(self, eventbox, event):
         if self.popover_created is False:
@@ -410,3 +412,15 @@ class TrackElement(Gtk.EventBox):
         """
         self.selected = False
         self.play_img.clear()
+
+    def set_playing(self, playing):
+        """
+        Update the icon of this track
+        :param playing: Is currently playing?
+        """
+        if playing:
+            self.play_img.set_from_icon_name(
+                    "media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+        else:
+            self.play_img.set_from_icon_name(
+                    "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)

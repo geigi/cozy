@@ -1114,20 +1114,27 @@ class CozyUI:
                 lambda x: x.get_children()[0].book.id == curr_track.book.id,
                 self.book_box.get_children()), None).get_children()[0]
 
+        self._update_current_track_element()
+
+        self.remaining_label.set_visible(True)
+        self.current_label.set_visible(True)
+
+    def _update_current_track_element(self):
+        """
+        Updates the current track element to correctly display the play pause icons
+        in the track popups after it was created.
+        """
         # The track popover is only created on demand
         # when the user opens it the first time
         if self.current_book_element.popover_created is True:
+            curr_track = player.get_current_track()
+
             self.current_track_element = next(
                 filter(
                     lambda x: x.track.id == curr_track.id,
                     self.current_book_element.track_box.get_children()), None)
 
-            self.current_track_element.play_img.set_from_icon_name(
-                "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
-            self.current_book_element._mark_current_track()
-
-        self.remaining_label.set_visible(True)
-        self.current_label.set_visible(True)
+            self.current_track_element.set_playing(self.is_playing)
 
     def __player_changed(self, event, message):
         """
@@ -1141,16 +1148,14 @@ class CozyUI:
             self.is_playing = True
             self.play()
             self.__start_sleep_timer()
-            if self.current_book_element.popover_created is True:
-                self.current_track_element.play_img.set_from_icon_name(
-                    "media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+            if self.current_track_element is not None:
+                self.current_track_element.set_playing(True)
         elif event == "pause":
             self.is_playing = False
             self.pause()
             self.__pause_sleep_timer()
-            if self.current_book_element.popover_created is True:
-                self.current_track_element.play_img.set_from_icon_name(
-                    "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+            if self.current_track_element is not None:
+                self.current_track_element.set_playing(False)
         elif event == "track-changed":
             self.__update_track_ui()
             self.track_changed()
