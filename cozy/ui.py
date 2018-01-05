@@ -1116,7 +1116,7 @@ class CozyUI:
 
         # The track popover is only created on demand
         # when the user opens it the first time
-        if self.current_book_element.track_box is not None:
+        if self.current_book_element.popover_created is True:
             self.current_track_element = next(
                 filter(
                     lambda x: x.track.id == curr_track.id,
@@ -1141,14 +1141,16 @@ class CozyUI:
             self.is_playing = True
             self.play()
             self.__start_sleep_timer()
-            self.current_track_element.play_img.set_from_icon_name(
-                "media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+            if self.current_book_element.popover_created is True:
+                self.current_track_element.play_img.set_from_icon_name(
+                    "media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
         elif event == "pause":
             self.is_playing = False
             self.pause()
             self.__pause_sleep_timer()
-            self.current_track_element.play_img.set_from_icon_name(
-                "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+            if self.current_book_element.popover_created is True:
+                self.current_track_element.play_img.set_from_icon_name(
+                    "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
         elif event == "track-changed":
             self.__update_track_ui()
             self.track_changed()

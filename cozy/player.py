@@ -197,6 +197,7 @@ def next_track():
     save_current_track_position()
 
     if next_track is not None:
+        save_current_track_position(0)
         save_current_book_position(next_track)
         play_pause(next_track)
     else:
