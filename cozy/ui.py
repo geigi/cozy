@@ -1099,14 +1099,12 @@ class CozyUI:
         The track loaded in the player has changed.
         Refresh the currently playing track and mark it in the track overview popover.
         """
-        # first reset the old track to the start playing state
-        if self.current_track_element is not None:
-            self.current_track_element.play_img.set_from_icon_name(
-                "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+        curr_track = player.get_current_track()
 
         # also reset the book playing state
         if self.current_book_element is not None:
             self.current_book_element.set_playing(False)
+            self.current_book_element.select_track(None, False)
 
         curr_track = player.get_current_track()
         self.current_book_element = next(
@@ -1128,13 +1126,7 @@ class CozyUI:
         # when the user opens it the first time
         if self.current_book_element.popover_created is True:
             curr_track = player.get_current_track()
-
-            self.current_track_element = next(
-                filter(
-                    lambda x: x.track.id == curr_track.id,
-                    self.current_book_element.track_box.get_children()), None)
-
-            self.current_track_element.set_playing(self.is_playing)
+            self.current_book_element.select_track(curr_track, self.is_playing)
 
     def __player_changed(self, event, message):
         """
@@ -1148,14 +1140,12 @@ class CozyUI:
             self.is_playing = True
             self.play()
             self.__start_sleep_timer()
-            if self.current_track_element is not None:
-                self.current_track_element.set_playing(True)
+            self.current_book_element.select_track(None, True)
         elif event == "pause":
             self.is_playing = False
             self.pause()
             self.__pause_sleep_timer()
-            if self.current_track_element is not None:
-                self.current_track_element.set_playing(False)
+            self.current_book_element.select_track(None, False)
         elif event == "track-changed":
             self.__update_track_ui()
             self.track_changed()

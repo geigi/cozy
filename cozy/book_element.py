@@ -172,6 +172,7 @@ class BookElement(Gtk.Box):
     playing = False
     popover_created = False
     track_box = None
+    current_track_element = None
 
     def __init__(self, b, ui):
         self.book = b
@@ -281,6 +282,7 @@ class BookElement(Gtk.Box):
 
         for track_element in self.track_box.get_children():
             if track_element.track.id == book.position:
+                self.current_track_element = track_element
                 track_element.select()
             else:
                 track_element.deselect()
@@ -292,6 +294,29 @@ class BookElement(Gtk.Box):
         else:
             self.art.play_button.set_from_resource(
                 "/de/geigi/cozy/play_background.svg")
+
+    def select_track(self, curr_track, playing):
+        """
+        Selects a track in the popover view and sets the play/pause icon.
+        :param curr_track: Track to be selected
+        :param playing: Display play (False) or pause (True) icon
+        """
+        if not self.popover_created:
+            return
+
+        if self.current_track_element is not None:
+            self.current_track_element.set_playing(False)
+            self.current_track_element.deselect()
+
+        if curr_track is not None:
+            self.current_track_element = next(
+                filter(
+                    lambda x: x.track.id == curr_track.id,
+                    self.track_box.get_children()), None)
+
+        self.current_track_element.select()
+        self.current_track_element.set_playing(playing)
+
 
 
 class TrackElement(Gtk.EventBox):
