@@ -1,140 +1,139 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2017
+# This file is distributed under the same license as the cozy package.
+# geigi <transifex@geigi.de>, 2017.
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: cozy 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-05 19:55+0100\n"
-"Last-Translator: Sergey Smith <Foxyriot@ya.ru>, 2017\n"
-"Language-Team: Russian (https://www.transifex.com/geigi/teams/78138/ru/)\n"
+"Last-Translator: Giuseppe Casula <giuseppe.casula@protonmail.com>, 2017\n"
+"Language-Team: Italian (https://www.transifex.com/geigi/teams/78138/it/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/book_element.py:63 cozy/search_results.py:124
 msgid "Play this book"
-msgstr "Слушать эту аудиокнигу"
+msgstr "Riproduci questo libro"
 
 #: cozy/book_element.py:186
 msgid "Open book overview"
-msgstr "Открыть обзор книги"
+msgstr "Apri i dettagli del libro"
 
 #: cozy/book_element.py:313
 msgid "Play this part"
-msgstr "Слушать эту часть"
+msgstr "Riproduci questa traccia"
 
 #: cozy/file_not_found_dialog.py:64
 msgid "All files"
-msgstr "Все файлы"
+msgstr "Tutti i file"
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
-msgstr "Перейти к автору "
+msgstr "Vai all'autore"
 
 #: cozy/search_results.py:75
 msgid "Jump to reader "
-msgstr "Перейти к диктору "
+msgstr "Vai al lettore"
 
 #: cozy/importer.py:246
 msgid "Unknown Author"
-msgstr "Неизвестный автор"
+msgstr "Autore sconosciuto"
 
 #: cozy/importer.py:248
 msgid "Unknown Reader"
-msgstr "Неизвестный диктор"
+msgstr "Lettore sconosciuto"
 
 #: cozy/ui.py:395 cozy/ui.py:718 data/ui/timer_popover.ui:86
 msgid "min"
-msgstr "мин"
+msgstr "min"
 
 #: cozy/ui.py:567
 msgid "Importing Audiobooks"
-msgstr "Импорт аудиокниг"
+msgstr "Importando audiolibri"
 
 #: cozy/ui.py:629 cozy/ui.py:633 cozy/ui.py:1243 cozy/ui.py:1252
 msgid "All"
-msgstr "Все"
+msgstr "Tutti"
 
 #: cozy/ui.py:630 cozy/ui.py:634
 msgid "Display all books"
-msgstr "Отобразить все книги"
+msgstr "Mostra tutti i libri"
 
 #: cozy/ui.py:850
 msgid "Changing audio book location..."
-msgstr "Выбор каталога аудиокниг..."
+msgstr "Cambiando la posizione dell'audiolibro..."
 
 #: data/ui/main_window.ui:67
 msgid "Select by author"
-msgstr "Сортировать по автору"
+msgstr "Seleziona per autore"
 
 #: data/ui/main_window.ui:76
 msgid "<big>Author</big>"
-msgstr "<big>Автор</big>"
+msgstr "Autore"
 
 #: data/ui/main_window.ui:85
 msgid "Author filter button"
-msgstr "Кнопка фильтрации по автору"
+msgstr "Pulsante per filtrare per autore"
 
 #: data/ui/main_window.ui:86
 msgid "Filter books by author"
-msgstr "Фильтровать книги по автору"
+msgstr "Filtra libri per autore"
 
 #: data/ui/main_window.ui:106
 msgid "Select by reader"
-msgstr "Сортировать по диктору"
+msgstr "Seleziona per lettore"
 
 #: data/ui/main_window.ui:114
 msgid "<big>Reader</big>"
-msgstr "<big>Диктор</big>"
+msgstr "Lettore"
 
 #: data/ui/main_window.ui:123
 msgid "Reader filter button"
-msgstr "Кнопка фильтрации по диктору"
+msgstr "Pulsante per filtrare per lettore"
 
 #: data/ui/main_window.ui:124
 msgid "Filter books by reader"
-msgstr "Фильтровать книги по диктору"
+msgstr "Filtra libri per lettore"
 
 #: data/ui/main_window.ui:178
 msgid "List of authors"
-msgstr "Список авторов"
+msgstr "Elenco degli autori"
 
 #: data/ui/main_window.ui:194 data/ui/search_popover.ui:107
 msgid "Author"
-msgstr "Автор"
+msgstr "Autore"
 
 #: data/ui/main_window.ui:212
 msgid "List of readers"
-msgstr "Список дикторов"
+msgstr "Elenco dei lettori"
 
 #: data/ui/main_window.ui:228 data/ui/search_popover.ui:201
 msgid "Reader"
-msgstr "Диктор"
+msgstr "Lettore"
 
 #: data/ui/main_window.ui:275
 msgid "List of books"
-msgstr "Список книг"
+msgstr "Elenco dei libri"
 
 #: data/ui/main_window.ui:309
 msgid "Importing your audiobooks..."
-msgstr "Импортирование аудиокниг..."
+msgstr "Importando i tuoi audiolibri..."
 
 #: data/ui/main_window.ui:360
 msgid "Import your Audiobooks"
-msgstr "Импорт аудиокниг"
+msgstr "Importa i tuoi audiolibri"
 
 #: data/ui/main_window.ui:376
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy автоматически импортирует аудиокниги из указанного каталога в "
-"библиотеку"
+"Cozy importa automaticamente i tuoi audiolibri in una cartella - la tua "
+"libreria"
 
 #: data/ui/main_window.ui:416
 msgid "Drag & Drop"
@@ -145,164 +144,166 @@ msgid ""
 "Drag your audiobooks into cozy and the will be automatically imported to "
 "your library"
 msgstr ""
-"Перетащите ваши аудиокниги в Cozy и они будут автоматически импортированы в "
-"библиотеку"
+"Trascina i tuoi audiolibri in Cozy e verranno importati automaticamente "
+"nella tua libreria"
 
 #: data/ui/main_window.ui:492
 msgid "Change Audiobooks Folder"
-msgstr "Изменить каталог аудиокниг"
+msgstr "Cambia la cartella degli audiolibri"
 
 #: data/ui/main_window.ui:508
 msgid "Load audiobooks from a folder, network drive or an external disk"
-msgstr "Загрузить аудиокниги из папки, сетевого или внешннего диска"
+msgstr ""
+"Carica gli audiolibri da una cartella, da un'unità di rete o da un hard disk"
+" esterno"
 
 #: data/ui/main_window.ui:537
 msgid "Location of your audiobooks"
-msgstr "Расположение аудиокниг"
+msgstr "Posizione dei tuoi audiolibri"
 
 #: data/ui/main_window.ui:573
 msgid "Auto scan switch"
-msgstr "Переключатель автосканирования"
+msgstr "Scansione automatica"
 
 #: data/ui/main_window.ui:574 data/ui/main_window.ui:589
 msgid "Automatically import new audiobooks on startup"
-msgstr "Автоматически импортировать новые аудиокниги при запуске программы"
+msgstr "Importa automaticamente i nuovi audiolibri all'avvio"
 
 #: data/ui/main_window.ui:642
 msgid "Rewind 30 seconds"
-msgstr "Назад на 30 секунд"
+msgstr "Indietro di 30 secondi"
 
 #: data/ui/main_window.ui:650
 msgid "Rewind button"
-msgstr "Кнопка перемотки"
+msgstr "Pulsante Riavvolgi"
 
 #: data/ui/main_window.ui:651
 msgid "Jump back 30 seconds"
-msgstr "Перейти назад 30 секунд"
+msgstr "Avanti di 30 secondi"
 
 #: data/ui/main_window.ui:668
 msgid "Start playback"
-msgstr "Начать воспроизведение"
+msgstr "Inizia a riprodurre"
 
 #: data/ui/main_window.ui:676
 msgid "Play/Pause Button"
-msgstr "Кнопка воспр./паузы"
+msgstr "Pulsante Play/Pausa"
 
 #: data/ui/main_window.ui:677
 msgid "Start or pause the playback"
-msgstr "Запуск или приостановка воспроизведения"
+msgstr "Inizia o metti in pausa la riproduzione"
 
 #: data/ui/main_window.ui:693
 msgid "Volume control"
-msgstr "Регулятор громкости"
+msgstr "Controlla il volume"
 
 #: data/ui/main_window.ui:771
 msgid "Currently playing"
-msgstr "Сейчас воспроизводится"
+msgstr "In esecuzione"
 
 #: data/ui/main_window.ui:789
 msgid "Booktitle"
-msgstr "Заголовок аудиокниги"
+msgstr "Titolo del libro"
 
 #: data/ui/main_window.ui:790
 msgid "Title of currently playing book"
-msgstr "Название текущей аудиокниги"
+msgstr "Titolo del libro in esecuzione"
 
 #: data/ui/main_window.ui:815
 msgid "Part name"
-msgstr "Название части"
+msgstr "Nome della traccia"
 
 #: data/ui/main_window.ui:816
 msgid "Title of the currently playing part"
-msgstr "Название текущей части"
+msgstr "Titolo della traccia in esecuzione"
 
 #: data/ui/main_window.ui:858
 msgid "Elapsed time"
-msgstr "Пройденное время"
+msgstr "Tempo trascorso"
 
 #: data/ui/main_window.ui:866
 msgid "Time elapsed"
-msgstr "Прошло времени"
+msgstr "Tempo trascorso"
 
 #: data/ui/main_window.ui:867
 msgid "Elapsed time of current part"
-msgstr "Истекшее время текущей части"
+msgstr "Tempo trascorso della traccia attuale"
 
 #: data/ui/main_window.ui:882
 msgid "Scrubb through current part"
-msgstr "Прокрутить текущую часть"
+msgstr "Scorri nella traccia attuale"
 
 #: data/ui/main_window.ui:888
 msgid "Position slider"
-msgstr "Ползунок положения"
+msgstr "Cursore della posizione"
 
 #: data/ui/main_window.ui:889
 msgid "Position of the current part in seconds"
-msgstr "Положение текущей части в секундах"
+msgstr "Posizione della traccia attuale in secondi"
 
 #: data/ui/main_window.ui:903
 msgid "Remaining time"
-msgstr "Оставшееся время"
+msgstr "Tempo rimanente"
 
 #: data/ui/main_window.ui:911
 msgid "Time remaining"
-msgstr "Времени осталось"
+msgstr "Tempo rimanente"
 
 #: data/ui/main_window.ui:912
 msgid "Remaining time of current part"
-msgstr "Оставшееся время текущей части"
+msgstr "Tempo rimanente della traccia attuale"
 
 #: data/ui/main_window.ui:987
 msgid "Working..."
-msgstr "Обработка…"
+msgstr "In corso..."
 
 #: data/ui/main_window.ui:992
 msgid "Currently working"
-msgstr "В данный момент работает"
+msgstr "Attualmente in corso"
 
 #: data/ui/main_window.ui:1007
 msgid "Playback speed"
-msgstr "Скорость воспроизведения"
+msgstr "Velocità di riproduzione"
 
 #: data/ui/main_window.ui:1028
 msgid "Sleep timer"
-msgstr "Таймер сна"
+msgstr "Timer"
 
 #: data/ui/main_window.ui:1039
 msgid "Timer menu button"
-msgstr "Кнопка меню таймера"
+msgstr "Pulsante del menu timer"
 
 #: data/ui/main_window.ui:1040
 msgid "Open the sleep timer popover"
-msgstr "Открыть окно таймера сна"
+msgstr "Apri la finestra del timer"
 
 #: data/ui/main_window.ui:1056
 msgid "Search your library"
-msgstr "Поиск в вашей аудиобиблиотеке"
+msgstr "Cerca nella tua libreria"
 
 #: data/ui/main_window.ui:1067
 msgid "Search menu button"
-msgstr "Кнопка меню поиска"
+msgstr "Pulsante del menu ricerca"
 
 #: data/ui/main_window.ui:1068
 msgid "Open the search popover"
-msgstr "Откройте поисковый запрос"
+msgstr "Apri la finestra di ricerca"
 
 #: data/ui/main_window.ui:1082
 msgid "Options"
-msgstr "Настройки"
+msgstr "Opzioni"
 
 #: data/ui/main_window.ui:1093
 msgid "Options menu button"
-msgstr "Кнопка меню настроек"
+msgstr "Pulsante del menu opzioni"
 
 #: data/ui/main_window.ui:1094
 msgid "Open the options popover"
-msgstr "Открыть окно настроек"
+msgstr "Apri la finestra delle opzioni"
 
 #: data/ui/about.ui:11
 msgid "Support me on Patreon: https://www.patreon.com/geigi"
-msgstr "Поддержите меня в Patreon: https://www.patreon.com/geigi"
+msgstr "Sostienimi su Patreon: https://www.patreon.com/geigi"
 
 #: data/ui/about.ui:13
 msgid "GitHub"
@@ -310,47 +311,47 @@ msgstr "GitHub"
 
 #: data/ui/app_menu.ui:7
 msgid "_Scan Directory"
-msgstr "_Найти книги"
+msgstr "_Scansiona cartella"
 
 #: data/ui/app_menu.ui:13
 msgid "_Preferences"
-msgstr "_Параметры"
+msgstr "_Preferenze"
 
 #: data/ui/app_menu.ui:19
 msgid "_Help"
-msgstr "_Справка"
+msgstr "_Aiuto"
 
 #: data/ui/app_menu.ui:23
 msgid "_About"
-msgstr "_О программе"
+msgstr "_Info su"
 
 #: data/ui/app_menu.ui:27
 msgid "_Quit"
-msgstr "_Выход"
+msgstr "_Esci"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
-msgstr "Отмена"
+msgstr "Annulla"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
-msgstr "Найти"
+msgstr "Individua"
 
 #: data/ui/file_not_found.ui:86
 msgid "File not found"
-msgstr "Файл не найден"
+msgstr "File non trovato"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "Файл не найден. Вы хотите найти его самостоятельно?"
+msgstr "Questo file non può essere trovato. Vuoi cercarlo manualmente?"
 
 #: data/ui/import_failed.ui:23
 msgid "Ok"
-msgstr "Да"
+msgstr "Ok"
 
 #: data/ui/import_failed.ui:77
 msgid "Some files could not be imported"
-msgstr "Некоторые файлы не могут быть импортированы"
+msgstr "Alcuni file non possono essere importati"
 
 #: data/ui/import_failed.ui:130
 msgid ""
@@ -359,111 +360,111 @@ msgid ""
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
-"Это может быть по нескольким причинам:\n"
-"- Формат аудио не поддерживается \n"
-"- Файл(ы) не являются допустимыми аудиофайлами\n"
-"- Файл(ы) повреждены"
+"Questo può essere dovuto da vari motivi:\n"
+"- Formato audio non supportato\n"
+"- File non è(sono) file audio\n"
+"- File danneggiato(i)"
 
 #: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
-msgstr "Заказ"
+msgstr "Ordina per"
 
 #: data/ui/settings.ui:37
 msgid "Newest"
-msgstr "Новые"
+msgstr "Più recente"
 
 #: data/ui/settings.ui:54
 msgid "Year"
-msgstr "Год"
+msgstr "Anno"
 
 #: data/ui/settings.ui:72
 msgid "Name"
-msgstr "Имя"
+msgstr "Nome"
 
 #: data/ui/settings.ui:143
 msgid "Appearance"
-msgstr "Внешний вид"
+msgstr "Uscita"
 
 #: data/ui/settings.ui:158
 msgid "Suspend system on timer"
-msgstr "Выключение системы по таймеру"
+msgstr "Sospendi il sistema con il timer"
 
 #: data/ui/settings.ui:194
 msgid "Replay 30 seconds"
-msgstr "Автовозврат на 30 секунд"
+msgstr "Riproduci 30 secondi"
 
 #: data/ui/settings.ui:229
 msgid "Automatic media scan"
-msgstr "Автоматическое сканирование медиа"
+msgstr "Scansiona automaticamente"
 
 #: data/ui/settings.ui:260
 msgid "Behaviour"
-msgstr "Поведение"
+msgstr "Comportamento"
 
 #: data/ui/settings.ui:276
 msgid "Follow symlinks"
-msgstr "Следовать по символическим ссылкам"
+msgstr "Segui i collegamenti simbolici"
 
 #: data/ui/settings.ui:314 data/ui/settings.ui:329
 msgid "Audio books location"
-msgstr "Расположение аудиокниг"
+msgstr "Posizione degli audiolibri"
 
 #: data/ui/settings.ui:351
 msgid "Files"
-msgstr "Файлы"
+msgstr "File"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
-msgstr "Поиск"
+msgstr "Cerca"
 
 #: data/ui/search_popover.ui:36
 msgid "Search box"
-msgstr "Поисковая строка"
+msgstr "Casella di ricerca"
 
 #: data/ui/search_popover.ui:37
 msgid "Search your audiobook library"
-msgstr "Поиск в вашей аудиобиблиотеке"
+msgstr "Cerca nella tua libreria degli audiolibri"
 
 #: data/ui/search_popover.ui:67
 msgid "Which book are you looking for?"
-msgstr "Какую книгу вы ищите?"
+msgstr "Quale libro stai cercando?"
 
 #: data/ui/search_popover.ui:154
 msgid "Book"
-msgstr "Книга"
+msgstr "Libro"
 
 #: data/ui/search_popover.ui:248
 msgid "Part"
-msgstr "Часть"
+msgstr "Traccia"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
-msgstr "Ничего не найдено :("
+msgstr "Non trovato :("
 
 #: data/ui/timer_popover.ui:32
 msgid "Toggle the timer on/off"
-msgstr "Вкл/выкл таймера"
+msgstr "Attiva/disattiva il timer"
 
 #: data/ui/timer_popover.ui:36
 msgid "Timer toggle button"
-msgstr "Кнопка переключения таймера"
+msgstr "Pulsante di attivazione del timer"
 
 #: data/ui/timer_popover.ui:37
 msgid "Switch the sleep timer on or off"
-msgstr "В данный момент работает"
+msgstr "Imposta il timer on/off"
 
 #: data/ui/timer_popover.ui:52 data/ui/timer_popover.ui:80
 msgid "Timer duration"
-msgstr "Длительность таймера"
+msgstr "Durata del timer"
 
 #: data/ui/timer_popover.ui:65
 msgid "Timer duration slider"
-msgstr "Ползунок длительности таймера"
+msgstr "Cursore del timer"
 
 #: data/ui/timer_popover.ui:66 data/ui/timer_popover.ui:93
 msgid "Set the sleep timer duration in minutes"
-msgstr "Установка длительности таймера сна в минутах"
+msgstr "Imposta la durata del timer in minuti"
 
 #: data/ui/timer_popover.ui:92
 msgid "Timer duration spin button"
-msgstr "Кнопка включения таймера"
+msgstr "Pulsante per la durata del timer"

@@ -7,23 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cozy 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-02 18:42+0200\n"
+"POT-Creation-Date: 2018-01-05 19:55+0100\n"
 "Last-Translator: Julian Geywitz <transifex@geigi.de>\n"
 "Language: en_IE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cozy/book_element.py:62 cozy/search_results.py:126
+#: cozy/book_element.py:63 cozy/search_results.py:124
 msgid "Play this book"
 msgstr "Play this book"
 
-#: cozy/book_element.py:183
+#: cozy/book_element.py:186
 msgid "Open book overview"
 msgstr "Open book overview"
 
-#: cozy/book_element.py:308
-msgid "Play this track"
+#: cozy/book_element.py:313
+#, fuzzy
+msgid "Play this part"
 msgstr "Play this track"
 
 #: cozy/file_not_found_dialog.py:64
@@ -34,35 +35,35 @@ msgstr "All files"
 msgid "Jump to author "
 msgstr "Jump to author "
 
-#: cozy/search_results.py:76
+#: cozy/search_results.py:75
 msgid "Jump to reader "
 msgstr "Jump to reader "
 
-#: cozy/importer.py:245
+#: cozy/importer.py:246
 msgid "Unknown Author"
 msgstr "Unknown Author"
 
-#: cozy/importer.py:247
+#: cozy/importer.py:248
 msgid "Unknown Reader"
 msgstr "Unknown Reader"
 
-#: cozy/ui.py:392 cozy/ui.py:712 data/ui/timer_popover.ui:86
+#: cozy/ui.py:395 cozy/ui.py:718 data/ui/timer_popover.ui:86
 msgid "min"
 msgstr "min"
 
-#: cozy/ui.py:561
+#: cozy/ui.py:567
 msgid "Importing Audiobooks"
 msgstr "Importing Audiobooks"
 
-#: cozy/ui.py:623 cozy/ui.py:627 cozy/ui.py:1222 cozy/ui.py:1231
+#: cozy/ui.py:629 cozy/ui.py:633 cozy/ui.py:1243 cozy/ui.py:1252
 msgid "All"
 msgstr "All"
 
-#: cozy/ui.py:624 cozy/ui.py:628
+#: cozy/ui.py:630 cozy/ui.py:634
 msgid "Display all books"
 msgstr "Display all books"
 
-#: cozy/ui.py:846
+#: cozy/ui.py:850
 msgid "Changing audio book location..."
 msgstr "Changing audio book location..."
 
@@ -205,11 +206,12 @@ msgid "Title of currently playing book"
 msgstr "Title of currently playing book"
 
 #: data/ui/main_window.ui:815
-msgid "Track title"
-msgstr "Track title"
+msgid "Part name"
+msgstr ""
 
 #: data/ui/main_window.ui:816
-msgid "Title of the currently playing track"
+#, fuzzy
+msgid "Title of the currently playing part"
 msgstr "Title of the currently playing track"
 
 #: data/ui/main_window.ui:858
@@ -221,11 +223,13 @@ msgid "Time elapsed"
 msgstr "Time elapsed"
 
 #: data/ui/main_window.ui:867
-msgid "Elapsed time of current track"
+#, fuzzy
+msgid "Elapsed time of current part"
 msgstr "Elapsed time of current track"
 
 #: data/ui/main_window.ui:882
-msgid "Scrubb through current track"
+#, fuzzy
+msgid "Scrubb through current part"
 msgstr "Scrubb through current track"
 
 #: data/ui/main_window.ui:888
@@ -233,7 +237,8 @@ msgid "Position slider"
 msgstr "Position slider"
 
 #: data/ui/main_window.ui:889
-msgid "Position of the current track in seconds"
+#, fuzzy
+msgid "Position of the current part in seconds"
 msgstr "Position of the current track in seconds"
 
 #: data/ui/main_window.ui:903
@@ -245,7 +250,8 @@ msgid "Time remaining"
 msgstr "Time remaining"
 
 #: data/ui/main_window.ui:912
-msgid "Remaining time of current track"
+#, fuzzy
+msgid "Remaining time of current part"
 msgstr "Remaining time of current track"
 
 #: data/ui/main_window.ui:987
@@ -429,8 +435,8 @@ msgid "Book"
 msgstr "Book"
 
 #: data/ui/search_popover.ui:248
-msgid "Track"
-msgstr "Track"
+msgid "Part"
+msgstr ""
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
@@ -463,3 +469,9 @@ msgstr "Set the sleep timer duration in minutes"
 #: data/ui/timer_popover.ui:92
 msgid "Timer duration spin button"
 msgstr "Timer duration spin button"
+
+#~ msgid "Track title"
+#~ msgstr "Track title"
+
+#~ msgid "Track"
+#~ msgstr "Track"

@@ -1,14 +1,13 @@
 # Copyright (C) 2017
-# This file is distributed under the same license as the PACKAGE package.
-# Heimen Stoffels <vistausss@outlook.com>, 2017.
+# This file is distributed under the same license as the cozy package.
+# geigi <transifex@geigi.de>, 2017.
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: cozy 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-10 18:43+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-01-05 19:55+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2017\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -17,17 +16,17 @@ msgstr ""
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/book_element.py:62 cozy/search_results.py:126
+#: cozy/book_element.py:63 cozy/search_results.py:124
 msgid "Play this book"
 msgstr "Dit boek afspelen"
 
-#: cozy/book_element.py:183
+#: cozy/book_element.py:186
 msgid "Open book overview"
 msgstr "Boek-overzicht openen"
 
-#: cozy/book_element.py:308
-msgid "Play this track"
-msgstr "Deze audio afspelen"
+#: cozy/book_element.py:313
+msgid "Play this part"
+msgstr "Dit onderdeel afspelen"
 
 #: cozy/file_not_found_dialog.py:64
 msgid "All files"
@@ -37,35 +36,35 @@ msgstr "Alle bestanden"
 msgid "Jump to author "
 msgstr "Snel naar auteur"
 
-#: cozy/search_results.py:76
+#: cozy/search_results.py:75
 msgid "Jump to reader "
 msgstr "Snel naar lezer"
 
-#: cozy/importer.py:245
+#: cozy/importer.py:246
 msgid "Unknown Author"
 msgstr "Onbekende auteur"
 
-#: cozy/importer.py:247
+#: cozy/importer.py:248
 msgid "Unknown Reader"
 msgstr "Onbekende lezer"
 
-#: cozy/ui.py:392 cozy/ui.py:712 data/ui/timer_popover.ui:86
+#: cozy/ui.py:395 cozy/ui.py:718 data/ui/timer_popover.ui:86
 msgid "min"
 msgstr "min"
 
-#: cozy/ui.py:561
+#: cozy/ui.py:567
 msgid "Importing Audiobooks"
 msgstr "Bezig met importeren van audioboeken"
 
-#: cozy/ui.py:623 cozy/ui.py:627 cozy/ui.py:1222 cozy/ui.py:1231
+#: cozy/ui.py:629 cozy/ui.py:633 cozy/ui.py:1243 cozy/ui.py:1252
 msgid "All"
 msgstr "Alles"
 
-#: cozy/ui.py:624 cozy/ui.py:628
+#: cozy/ui.py:630 cozy/ui.py:634
 msgid "Display all books"
 msgstr "Alle boeken weergeven"
 
-#: cozy/ui.py:846
+#: cozy/ui.py:850
 msgid "Changing audio book location..."
 msgstr "Bezig met wijzigen van audioboek-locatie..."
 
@@ -208,12 +207,12 @@ msgid "Title of currently playing book"
 msgstr "Titel van het momenteel spelende boek"
 
 #: data/ui/main_window.ui:815
-msgid "Track title"
-msgstr "Audiotitel"
+msgid "Part name"
+msgstr "Naam van onderdeel"
 
 #: data/ui/main_window.ui:816
-msgid "Title of the currently playing track"
-msgstr "Titel van de momenteel spelende audio"
+msgid "Title of the currently playing part"
+msgstr "Titel van het momenteel spelende onderdeel"
 
 #: data/ui/main_window.ui:858
 msgid "Elapsed time"
@@ -224,20 +223,20 @@ msgid "Time elapsed"
 msgstr "Verstreken tijd"
 
 #: data/ui/main_window.ui:867
-msgid "Elapsed time of current track"
-msgstr "De tot nu toe verstreken tijd"
+msgid "Elapsed time of current part"
+msgstr "De verstreken tijd van het huidige onderdeel"
 
 #: data/ui/main_window.ui:882
-msgid "Scrubb through current track"
-msgstr "Door huidig nummer spoelen"
+msgid "Scrubb through current part"
+msgstr "Door huidig onderdeel spoelen"
 
 #: data/ui/main_window.ui:888
 msgid "Position slider"
 msgstr "Positiebalk"
 
 #: data/ui/main_window.ui:889
-msgid "Position of the current track in seconds"
-msgstr "Positie van de huidige audio, in seconden"
+msgid "Position of the current part in seconds"
+msgstr "Positie van het huidige onderdeel, in seconden"
 
 #: data/ui/main_window.ui:903
 msgid "Remaining time"
@@ -248,8 +247,8 @@ msgid "Time remaining"
 msgstr "Resterende tijd"
 
 #: data/ui/main_window.ui:912
-msgid "Remaining time of current track"
-msgstr "De resterende tijd van de huidige audio"
+msgid "Remaining time of current part"
+msgstr "De resterende tijd van het huidige onderdeel"
 
 #: data/ui/main_window.ui:987
 msgid "Working..."
@@ -433,8 +432,8 @@ msgid "Book"
 msgstr "Boek"
 
 #: data/ui/search_popover.ui:248
-msgid "Track"
-msgstr "Audio"
+msgid "Part"
+msgstr "Deel"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-19 15:59+0100\n"
+"POT-Creation-Date: 2018-01-05 19:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,11 +21,11 @@ msgstr ""
 msgid "Play this book"
 msgstr ""
 
-#: cozy/book_element.py:184
+#: cozy/book_element.py:186
 msgid "Open book overview"
 msgstr ""
 
-#: cozy/book_element.py:307
+#: cozy/book_element.py:313
 msgid "Play this part"
 msgstr ""
 
@@ -49,23 +49,23 @@ msgstr ""
 msgid "Unknown Reader"
 msgstr ""
 
-#: cozy/ui.py:392 cozy/ui.py:712 data/ui/timer_popover.ui:86
+#: cozy/ui.py:395 cozy/ui.py:718 data/ui/timer_popover.ui:86
 msgid "min"
 msgstr ""
 
-#: cozy/ui.py:561
+#: cozy/ui.py:567
 msgid "Importing Audiobooks"
 msgstr ""
 
-#: cozy/ui.py:623 cozy/ui.py:627 cozy/ui.py:1222 cozy/ui.py:1231
+#: cozy/ui.py:629 cozy/ui.py:633 cozy/ui.py:1243 cozy/ui.py:1252
 msgid "All"
 msgstr ""
 
-#: cozy/ui.py:624 cozy/ui.py:628
+#: cozy/ui.py:630 cozy/ui.py:634
 msgid "Display all books"
 msgstr ""
 
-#: cozy/ui.py:846
+#: cozy/ui.py:850
 msgid "Changing audio book location..."
 msgstr ""
 
