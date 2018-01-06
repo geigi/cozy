@@ -26,7 +26,17 @@ https://github.com/gnumdk/lollypop</property>
     <property name="translator_credits">camellan
 Vistaus
 Distil62
-karaagac</property>
+karaagac
+HansCz
+mvainola
+giuscasula
+abuyop
+akodi
+cleitonjfloss
+amadeussss
+nvivant
+Foxyriot
+mardojai</property>
     <property name="logo_icon_name">com.github.geigi.cozy</property>
     <property name="license_type">gpl-3-0</property>
     <child internal-child="vbox">

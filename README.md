@@ -87,6 +87,16 @@ The translators:
 - Vistaus
 - Distil62
 - karaagac
+- HansCz
+- mvainola
+- giuscasula
+- abuyop
+- akodi
+- cleitonjfloss
+- amadeussss
+- nvivant
+- Foxyriot
+- mardojai
 
 To nedrichards for the Flatpak.
 
