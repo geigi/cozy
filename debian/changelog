@@ -1,3 +1,18 @@
+com.github.geigi.cozy (0.4.7) UNSTABLE; urgency=low
+
+  * Thanks to the translators for the new languages: Danish, Spanish, Finnish, Italian, Malay, Polish, Portuguese!
+  * Faster startup! Especially with a lot of books cozy starts now way faster then before.
+  * Fixed ogg tag reading. Please re-import your oggs!
+  * Fixed a bug that could cause crashing cozy with modified playback speed
+  * Fixed crackling when changing the playback speed
+  * Fixed a bug where UI buttons would not get unlocked after a rescan
+  * Fixed a bug where cozy would not stop playing on closing via menu
+  * Fixed more bugs after a database rescan
+  * Fixed a bug where track position was not updated after it finished playing
+  * Fixed some minor UI bugs
+
+ -- Julian Geywitz <github@geigi.de>  Wed, 09 Jan 2018 19:11:14 +0200
+
 com.github.geigi.cozy (0.4.6) UNSTABLE; urgency=low
 
   * Playback speed control!

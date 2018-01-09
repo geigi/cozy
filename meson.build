@@ -1,5 +1,5 @@
 project('cozy',
-  version: '0.4.6',
+  version: '0.4.7',
   meson_version: '>= 0.40.0')
 
 project_name = 'cozy'

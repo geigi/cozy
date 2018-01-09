@@ -51,6 +51,22 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.4.7" timestamp="1515522043">
+      <description>
+        <ul>
+          <li>Thanks to the translators for the new languages: Danish, Spanish, Finnish, Italian, Malay, Polish, Portuguese!</li>
+          <li>Faster startup! Especially with a lot of books cozy starts now way faster then before.</li>
+          <li>Fixed ogg tag reading. Please re-import your oggs!</li>
+          <li>Fixed a bug that could cause crashing cozy with modified playback speed</li>
+          <li>Fixed crackling when changing the playback speed</li>
+          <li>Fixed a bug where UI buttons would not get unlocked after a rescan</li>
+          <li>Fixed a bug where cozy would not stop playing on closing via menu</li>
+          <li>Fixed more bugs after a database rescan</li>
+          <li>Fixed a bug where track position was not updated after it finished playing</li>
+          <li>Fixed some minor UI bugs</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.6" timestamp="1513103298">
       <description>
         <ul>
