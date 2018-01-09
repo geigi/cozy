@@ -1103,8 +1103,6 @@ class CozyUI:
         The track loaded in the player has changed.
         Refresh the currently playing track and mark it in the track overview popover.
         """
-        curr_track = player.get_current_track()
-
         # also reset the book playing state
         if self.current_book_element is not None:
             self.current_book_element.set_playing(False)
