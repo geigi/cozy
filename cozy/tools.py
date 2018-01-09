@@ -1,5 +1,7 @@
 import time
 import threading
+import logging as log
+import platform
 
 def shorten_string(string, length):
     """
@@ -9,6 +11,16 @@ def shorten_string(string, length):
     :return : string or shortened string
     """
     return (string[:length] + '...') if len(string) > length else string
+
+def is_elementary():
+        """
+        Currently we are only checking for elementaryOS
+        """
+        log.debug(platform.dist())
+        if '"elementary"' in platform.dist():
+            return True
+        else:
+            return False
 
 # From https://stackoverflow.com/questions/474528/what-is-the-best-way-to-repeatedly-execute-a-function-every-x-seconds-in-python
 class RepeatedTimer(object):

@@ -8,7 +8,7 @@ gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
 from cozy.book_element import BookElement
-from cozy.tools import RepeatedTimer
+from cozy.tools import RepeatedTimer, is_elementary
 from cozy.import_failed_dialog import ImportFailedDialog
 from cozy.search_results import BookSearchResult, ArtistSearchResult
 from cozy.file_not_found_dialog import FileNotFoundDialog
@@ -56,7 +56,7 @@ class CozyUI:
         self.__load_last_book()
 
     def startup(self):
-        self.__check_current_distro()
+        self.is_elementary = is_elementary()
         self.__init_resources()
         self.__init_css()
         self.__init_actions()
@@ -312,6 +312,7 @@ class CozyUI:
         # hide remaining and current labels
         self.current_label.set_visible(False)
         self.remaining_label.set_visible(False)
+        self.progress_scale.set_visible(False)
 
         # hide throbber
         self.throbber.set_visible(False)
@@ -512,6 +513,9 @@ class CozyUI:
         self.progress_scale.set_sensitive(False)
         if self.current_book_element is not None:
             self.current_book_element.set_playing(False)
+
+        if self.current_book_element is not None:
+            self.current_book_element._mark_current_track()
 
     def switch_to_working(self, message, first):
         """
@@ -1124,6 +1128,9 @@ class CozyUI:
         """
         # The track popover is only created on demand
         # when the user opens it the first time
+        if self.current_book_element is None:
+            return
+
         if self.current_book_element.popover_created is True:
             curr_track = player.get_current_track()
             self.current_book_element.select_track(curr_track, self.is_playing)

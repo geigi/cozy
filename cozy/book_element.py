@@ -277,15 +277,15 @@ class BookElement(Gtk.Box):
         """
         book = Book.select().where(Book.id == self.book.id).get()
 
-        if book.position < 1:
-            return
-
         for track_element in self.track_box.get_children():
             if track_element.track.id == book.position:
                 self.current_track_element = track_element
                 track_element.select()
             else:
                 track_element.deselect()
+
+        if book.position < 1:
+            self.track_box.get_children()[0].select()
 
     def set_playing(self, is_playing):
         if is_playing:
@@ -313,6 +313,9 @@ class BookElement(Gtk.Box):
                 filter(
                     lambda x: x.track.id == curr_track.id,
                     self.track_box.get_children()), None)
+
+        if self.current_track_element is None:
+            self.current_track_elementself.track_box.get_children()[0]
 
         self.current_track_element.select()
         self.current_track_element.set_playing(playing)

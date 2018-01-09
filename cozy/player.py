@@ -12,6 +12,11 @@ Gst.init(None)
 
 __speed = 1.0
 __set_speed = False
+__current_track = None
+__listeners = []
+__wait_to_seek = False
+__player = None
+__bus = None
 
 
 def __on_gst_message(bus, message):
@@ -40,28 +45,36 @@ def __on_gst_message(bus, message):
             auto_jump()
 
 
-__player = Gst.ElementFactory.make("playbin", "player")
-__scaletempo = Gst.ElementFactory.make("scaletempo", "scaletempo")
-__scaletempo.sync_state_with_parent()
+def init():
+    global __player
+    global __bus
 
-__audiobin = Gst.Bin("audioline")
-__audiobin.add(__scaletempo)
+    if __player is not None:
+        dispose()
+        __player = None
 
-__audiosink = Gst.ElementFactory.make("autoaudiosink", "audiosink")
-__audiobin.add(__audiosink)
+    __player = Gst.ElementFactory.make("playbin", "player")
+    __scaletempo = Gst.ElementFactory.make("scaletempo", "scaletempo")
+    __scaletempo.sync_state_with_parent()
 
-__scaletempo.link(__audiosink)
-__pad = __scaletempo.get_static_pad("sink")
-__audiobin.add_pad(Gst.GhostPad("sink", __pad))
+    __audiobin = Gst.Bin("audioline")
+    __audiobin.add(__scaletempo)
 
-__player.set_property("audio-sink", __audiobin)
+    __audiosink = Gst.ElementFactory.make("autoaudiosink", "audiosink")
+    __audiobin.add(__audiosink)
 
-__bus = __player.get_bus()
-__bus.add_signal_watch()
-__bus.connect("message", __on_gst_message)
-__current_track = None
-__listeners = []
-__wait_to_seek = False
+    __scaletempo.link(__audiosink)
+    __pad = __scaletempo.get_static_pad("sink")
+    __audiobin.add_pad(Gst.GhostPad("sink", __pad))
+
+    __player.set_property("audio-sink", __audiobin)
+
+    __bus = __player.get_bus()
+    __bus.add_signal_watch()
+    __bus.connect("message", __on_gst_message)
+
+
+init()
 
 
 def get_gst_bus():
@@ -195,10 +208,9 @@ def next_track():
         next_track = album_tracks[index + 1]
 
     play_pause(None)
-    save_current_track_position()
+    save_current_track_position(0)
 
     if next_track is not None:
-        save_current_track_position(0)
         save_current_book_position(next_track)
         play_pause(next_track)
     else:
@@ -369,6 +381,10 @@ def load_file(track):
     __current_track = track
     emit_event("stop")
     __player.set_state(Gst.State.NULL)
+
+
+    init()
+
     __player.set_property("uri", "file://" + track.file)
     __player.set_state(Gst.State.PAUSED)
     save_current_book_position(__current_track)
