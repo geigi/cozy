@@ -160,6 +160,12 @@ def import_file(file, directory, path, update=False):
         reader = __get_mp3_tag(mp3, "TPE1")
         book_name = __get_common_tag(track, "album")
         track_name = __get_common_tag(track, "title")
+      
+        # other fields for the author and reader 
+        # (audiobooks on rutracker.org, booktracker.org and others)
+        if author is None or author == "":
+            author = __get_mp3_tag(mp3, "TPE1")
+            reader = __get_mp3_tag(mp3, "TPE2")
 
     ### FLAC ###
     elif media_type is "flac":
@@ -478,9 +484,11 @@ def __get_mp3_tag(track, tag):
         value = ""
     elif tag == "TCOM":
         value = ""
+    elif tag == "TPE2":
+        value = ""
 
     try:
-        if tag == "TPE1" or tag == "TCOM":
+        if tag == "TPE1" or tag == "TCOM" or tag == "TRE2":
             value = track.mutagen[tag]
         else:
             value = track.mutagen.getall(tag)[0].data
