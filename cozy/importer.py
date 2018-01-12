@@ -161,8 +161,7 @@ def import_file(file, directory, path, update=False):
         book_name = __get_common_tag(track, "album")
         track_name = __get_common_tag(track, "title")
       
-        # other fields for the author and reader 
-        # (audiobooks on rutracker.org, booktracker.org and others)
+        # other fields for the author and reader
         if author is None or author == "":
             author = __get_mp3_tag(mp3, "TPE1")
             reader = __get_mp3_tag(mp3, "TPE2")
