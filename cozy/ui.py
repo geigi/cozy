@@ -1094,7 +1094,7 @@ class CozyUI:
         Update playback speed label.
         """
         self.speed = round(self.playback_speed_scale.get_value(), 2)
-        self.playback_speed_label.set_text(str(round(self.speed, 1)) + " x")
+        self.playback_speed_label.set_text('{speed:3.1f} x'.format(speed=self.speed))
         player.set_playback_speed(self.speed)
         self.__set_play_status_updater(True)
 

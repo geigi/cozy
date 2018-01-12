@@ -180,7 +180,7 @@ def get_cover_pixbuf(book, size=0):
                 try:
                     pixbuf = GdkPixbuf.Pixbuf.new_from_file(os.path.join(directory, elem))
                 except Exception as e:
-                log.debug(e)
+                    log.debug(e)
                 if pixbuf is not None:
                     break
         if pixbuf is None:
