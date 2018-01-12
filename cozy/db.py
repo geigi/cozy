@@ -162,8 +162,31 @@ def get_cover_pixbuf(book, size=0):
             log.debug(e)
         
     if pixbuf is None:
-        pixbuf = GdkPixbuf.Pixbuf.new_from_resource(
-            "/de/geigi/cozy/blank_album.png")
+        directory = os.path.dirname(os.path.normpath(tracks(book)[0].file))
+        cover_files = [f for f in os.listdir(directory)
+                       if f.lower().endswith('.png') or f.lower().endswith(".jpg") or f.lower().endswith(".gif")]
+        for elem in (x for x in cover_files if os.path.splitext(x.lower())[0] == "cover"):
+            # find cover.[jpg,png,gif]
+            try:
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file(os.path.join(directory, elem))
+            except Exception as e:
+                log.debug(e)
+            if pixbuf is not None:
+                break
+        if pixbuf is None:
+            # find other cover file (sort alphabet)
+            cover_files.sort(key=str.lower)
+            for elem in cover_files:
+                try:
+                    pixbuf = GdkPixbuf.Pixbuf.new_from_file(os.path.join(directory, elem))
+                except Exception as e:
+                log.debug(e)
+                if pixbuf is not None:
+                    break
+        if pixbuf is None:
+            # load base cover
+            pixbuf = GdkPixbuf.Pixbuf.new_from_resource(
+                "/de/geigi/cozy/blank_album.png")
 
     if size > 0:
         if pixbuf.get_height() > pixbuf.get_width():
