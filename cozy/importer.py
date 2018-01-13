@@ -489,6 +489,10 @@ def __get_mp3_tag(track, tag):
     try:
         if tag == "TPE1" or tag == "TCOM" or tag == "TRE2":
             value = track.mutagen[tag]
+        elif tag =="TPOS":
+            disks = str(track.mutagen[tag])
+            disk = disks.split("/")[0]
+            value = int(disk)
         else:
             value = track.mutagen.getall(tag)[0].data
     except Exception as e:
