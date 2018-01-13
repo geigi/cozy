@@ -240,7 +240,9 @@ def import_file(file, directory, path, update=False):
     # try to get all the remaining tags
     try:
         if track_number is None:
-            track_number = int(__get_common_tag(track, "tracknumber"))
+            # The track number can contain the total number of tracks
+            track_text = __get_common_tag(track, "tracknumber")
+            track_number = int(track_text.split("/")[0])
     except Exception as e:
         log.debug(e)
         track_number = 0
@@ -487,7 +489,7 @@ def __get_mp3_tag(track, tag):
         value = ""
 
     try:
-        if tag == "TPE1" or tag == "TCOM" or tag == "TRE2":
+        if tag == "TPE1" or tag == "TCOM" or tag == "TPE2":
             value = track.mutagen[tag]
         else:
             value = track.mutagen.getall(tag)[0].data
