@@ -19,3 +19,4 @@ peewee/
 .vscode/.ropeproject
 .vscode/tags
 .tx
+*.log
