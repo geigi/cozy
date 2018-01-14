@@ -5,6 +5,7 @@ import shutil
 import errno
 import logging
 import mutagen
+import binascii
 
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
