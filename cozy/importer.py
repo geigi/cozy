@@ -15,6 +15,8 @@ from mutagen.oggvorbis import OggVorbis
 from gi.repository import Gdk, GLib
 
 import cozy.db as db
+import cozy.artwork_cache as artwork_cache
+
 log = logging.getLogger("importer")
 
 
@@ -50,7 +52,7 @@ def update_database(ui):
         return
 
     # clean artwork cache
-    db.delete_artwork_cache()
+    artwork_cache.delete_artwork_cache()
 
     i = 0
     percent_counter = 0
@@ -96,7 +98,7 @@ def update_database(ui):
         if db.Track.select().where(db.Track.book == book).count() < 1:
             book.delete_instance()
 
-    db.generate_artwork_cache()
+    artwork_cache.generate_artwork_cache()
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)

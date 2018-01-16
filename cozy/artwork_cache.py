@@ -159,7 +159,7 @@ def __load_cover_pixbuf(book):
     
     # then try from file
     if pixbuf is None:
-        pixbuf = __load_pixbuf_from_file(book, pixbuf)
+        pixbuf = __load_pixbuf_from_file(book)
 
     return pixbuf
 
