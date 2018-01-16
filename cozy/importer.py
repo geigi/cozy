@@ -49,6 +49,9 @@ def update_database(ui):
         # TODO: Notify the user about this
         return
 
+    # clean artwork cache
+    db.delete_artwork_cache()
+
     i = 0
     percent_counter = 0
     file_count = sum([len(files)
@@ -92,6 +95,8 @@ def update_database(ui):
     for book in db.Book.select():
         if db.Track.select().where(db.Track.book == book).count() < 1:
             book.delete_instance()
+
+    db.generate_artwork_cache()
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)

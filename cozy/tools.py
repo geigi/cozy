@@ -2,6 +2,20 @@ import time
 import threading
 import logging as log
 import platform
+import os
+from gi.repository import GLib
+
+def get_cache_dir():
+    """
+    Creates the cache dir if it doesn't exist
+    :return: The path to the own cache dir
+    """
+    cache_dir = os.path.join(GLib.get_user_cache_dir(), "cozy")
+
+    if not os.path.exists(cache_dir):
+        os.makedirs(cache_dir)
+
+    return cache_dir
 
 def shorten_string(string, length):
     """
