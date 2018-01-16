@@ -230,6 +230,4 @@ def get_time_book(book):
             current_track = track.position / 1000000000
         if read_add:
             read += track.length
-    # if read > 0:
-    # read = seconds_to_str(read)
     return duration, read, current_track
