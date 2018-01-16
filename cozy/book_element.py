@@ -3,6 +3,7 @@ from gi.repository import Gtk, Gdk, GdkPixbuf, Pango
 from cozy.db import *
 from cozy.player import *
 import cozy.tools as tools
+import cozy.artwork_cache as artwork_cache
 
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
@@ -27,7 +28,7 @@ class AlbumElement(Gtk.EventBox):
         self.play_signal_ids = []
 
         # scale the book cover to a fix size.
-        pixbuf = get_cover_pixbuf(book, size)
+        pixbuf = artwork_cache.get_cover_pixbuf(book, size)
 
         # box is the main container for the album art
         self.set_halign(Gtk.Align.CENTER)

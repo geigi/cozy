@@ -16,6 +16,7 @@ from cozy.file_not_found_dialog import FileNotFoundDialog
 import cozy.db as db
 import cozy.importer as importer
 import cozy.player as player
+import cozy.artwork_cache as artwork_cache
 
 import os
 
@@ -1040,7 +1041,7 @@ class CozyUI:
                 size = 28
             else:
                 size = 40
-            self.set_title_cover(db.get_cover_pixbuf(track.book, size))
+            self.set_title_cover(artwork_cache.get_cover_pixbuf(track.book, size))
 
         total = player.get_current_track().length
         self.progress_scale.set_range(0, total)

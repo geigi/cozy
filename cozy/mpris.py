@@ -22,6 +22,7 @@ from random import randint
 
 from cozy.player import *
 from cozy.db import *
+import cozy.artwork_cache as artwork_cache
 
 
 class Server:
@@ -358,7 +359,7 @@ class MPRIS(Server):
                 "file:///" + track.file)
 
             cover_path = "/tmp/cozy_mpris.jpg"
-            pixbuf = get_cover_pixbuf(track.book)
+            pixbuf = artwork_cache.get_cover_pixbuf(track.book)
             if pixbuf is not None:
                 pixbuf.savev(cover_path, "jpeg",
                              ["quality"], ["90"])
