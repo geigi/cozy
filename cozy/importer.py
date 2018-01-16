@@ -5,6 +5,7 @@ import shutil
 import errno
 import logging
 import mutagen
+import binascii
 
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
@@ -66,12 +67,13 @@ def update_database(ui):
                 path = os.path.join(directory, file)
 
                 imported = True
+                crc_file = __crc32_from_file(path)
                 # Is the track already in the database?
                 if db.Track.select().where(db.Track.file == path).count() < 1:
-                    imported = import_file(file, directory, path)
+                    imported = import_file(file, directory, path, crc_file)
                 # Has the track changed on disk?
                 elif db.Track.select().where(db.Track.file == path).first().modified < os.path.getmtime(path):
-                    imported = import_file(file, directory, path, update=True)
+                    imported = import_file(file, directory, path, crc_file, update=True)
 
                 if not imported:
                     failed += path + "\n"
@@ -129,7 +131,7 @@ def rebase_location(ui, oldPath, newPath):
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
 
 
-def import_file(file, directory, path, update=False):
+def import_file(file, directory, path, crc_file, update=False):
     """
     Imports all information about a track into the database.
     Note: This creates also a new album object when it doesnt exist yet.
@@ -242,8 +244,6 @@ def import_file(file, directory, path, update=False):
         log.warning("Skipping file: " + path)
         return False
 
-    modified = os.path.getmtime(path)
-
     # try to get all the remaining tags
     try:
         if track_number is None:
@@ -283,7 +283,7 @@ def import_file(file, directory, path, update=False):
                         book=book,
                         disk=disk,
                         length=length,
-                        modified=modified).where(db.Track.file == path).execute()
+                        modified=crc_file).where(db.Track.file == path).execute()
     else:
         # create database entries
         if db.Book.select().where(db.Book.name == book_name).count() < 1:
@@ -303,7 +303,7 @@ def import_file(file, directory, path, update=False):
                         file=path,
                         disk=disk,
                         length=length,
-                        modified=modified)
+                        modified=crc_file)
 
     return True
 
@@ -527,3 +527,16 @@ def __get_common_tag(track, tag):
         log.info(e)
 
     return value
+
+
+def __crc32_from_file(filename):
+    crc_file = 0
+    try:
+        buf = open(filename, 'rb').read()
+        if len(buf) > 0:
+            crc_file = (binascii.crc32(buf) & 0xFFFFFFFF)
+    except Exception as e:
+        log.warning(e)
+    return crc_file
+
+
