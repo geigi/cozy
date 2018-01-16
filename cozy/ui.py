@@ -39,6 +39,8 @@ class CozyUI:
     dialog_open = False
     speed = 1.0
     is_playing = False
+    book_duration = 0
+    book_position = 0
 
     def __init__(self, pkgdatadir, app, version):
         self.pkgdir = pkgdatadir
@@ -193,6 +195,10 @@ class CozyUI:
             "auto_scan_switch")
         self.settings.bind("autoscan", self.auto_scan_switch,
                            "active", Gio.SettingsBindFlags.DEFAULT)
+
+        # time labels
+        self.time_book_label = self.window_builder.get_object("time_book_label")
+        self.percent_read_label = self.window_builder.get_object("percent_read_label")
 
         # get settings window
         self.settings_window = self.settings_builder.get_object(
@@ -499,6 +505,9 @@ class CozyUI:
 
         self.title_label.set_text("")
         self.subtitle_label.set_text("")
+
+        self.time_book_label.set_text("")
+        self.percent_read_label.set_text("")
 
         self.cover_img.set_from_pixbuf(None)
 
@@ -1034,6 +1043,9 @@ class CozyUI:
         self.progress_scale.set_sensitive(True)
         self.progress_scale.set_visible(True)
 
+        self.time_book_label.set_visible(True)
+        self.percent_read_label.set_visible(True)
+
         # only change cover when book has changed
         if self.current_book is not track.book:
             self.current_book = track.book
@@ -1042,6 +1054,7 @@ class CozyUI:
             else:
                 size = 40
             self.set_title_cover(artwork_cache.get_cover_pixbuf(track.book, size))
+            self.book_duration, self.book_position, current_tt = db.get_time_book(track.book)
 
         total = player.get_current_track().length
         self.progress_scale.set_range(0, total)
@@ -1073,6 +1086,17 @@ class CozyUI:
 
             self.remaining_label.set_markup(
                 "<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+
+            # update the time in the current book in player
+            self.time_book_label.set_markup("<tt><b>%s</b></tt>" % (
+                db.seconds_to_str(self.book_duration)))
+            percent, r = divmod(((self.book_position + val) * 100), self.book_duration)
+            self.percent_read_label.set_markup("<b>%s</b> (%d%%)" % (
+                db.seconds_to_str(self.book_position + val), percent))
+
+            # update the time in the current book in the library
+            if self.current_book_element is not None:
+                self.current_book_element.update_time(self.book_position + val, percent)
 
     def __set_play_status_updater(self, enable):
         """

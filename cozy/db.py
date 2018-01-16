@@ -209,3 +209,27 @@ def search_tracks(search_string):
     :return: tracks matching the substring
     """
     return Track.select(Track.name).where(Track.name.contains(search_string)).order_by(Track.name)
+
+
+def get_time_book(book):
+    """
+    Get times for book
+    :param book:
+    :return: duration, time read, time read in current file
+    """
+    duration = 0
+    read = 0
+    read_add = True
+    current_track = 0
+    if book.position == 0:
+        read_add = False
+    for track in tracks(book):
+        duration += track.length
+        if track.id == book.position:
+            read_add = False
+            current_track = track.position / 1000000000
+        if read_add:
+            read += track.length
+    # if read > 0:
+    # read = seconds_to_str(read)
+    return duration, read, current_track

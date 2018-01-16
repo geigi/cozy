@@ -174,10 +174,13 @@ class BookElement(Gtk.Box):
     popover_created = False
     track_box = None
     current_track_element = None
+    book_duration = 0
 
     def __init__(self, b, ui):
         self.book = b
         self.ui = ui
+
+        self.book_duration, book_position, time_cur_file = db.get_time_book(self.book)
 
         super(Gtk.Box, self).__init__()
         self.set_orientation(Gtk.Orientation.VERTICAL)
@@ -202,6 +205,23 @@ class BookElement(Gtk.Box):
         author_label.props.max_width_chars = 30
         author_label.props.justify = Gtk.Justification.CENTER
 
+        # label for the time of the book
+        self.time_label = Gtk.Label.new()
+        if self.book.position == 0:
+            self.time_label.set_markup(tools.shorten_string("<b>%s</b>" %
+                                                            db.seconds_to_str(self.book_duration),
+                                                            MAX_BOOK_LENGTH))
+        else:
+            percent, r = divmod(((book_position + time_cur_file) * 100), self.book_duration)
+            self.time_label.set_markup(tools.shorten_string("<b>%s / %s</b> (%d%%)" %
+                                                            (db.seconds_to_str(book_position + time_cur_file),
+                                                             db.seconds_to_str(self.book_duration),
+                                                             percent), MAX_BOOK_LENGTH))
+        self.time_label.set_xalign(0.5)
+        self.time_label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
+        self.time_label.props.max_width_chars = 30
+        self.time_label.props.justify = Gtk.Justification.CENTER
+
         self.connect("button-press-event", self.__on_button_press)
 
         self.art = AlbumElement(self.book, 180, True)
@@ -210,6 +230,7 @@ class BookElement(Gtk.Box):
         self.add(self.art)
         self.add(title_label)
         self.add(author_label)
+        self.add(self.time_label)
 
     def __create_popover(self):
         self.popover = Gtk.Popover.new(self)
@@ -328,6 +349,17 @@ class BookElement(Gtk.Box):
             self.current_track_element.set_playing(False)
             self.current_track_element.deselect()
 
+    def update_time(self, position, percent):
+        """
+        Updating the time of the book being read
+        :param position: current time read book
+        :param percent: percent read
+        :return:
+        """
+        self.time_label.set_markup(tools.shorten_string("<b>%s / %s</b> (%d%%)" %
+                                                        (db.seconds_to_str(position),
+                                                         db.seconds_to_str(self.book_duration),
+                                                         percent), MAX_BOOK_LENGTH))
 
 
 class TrackElement(Gtk.EventBox):
