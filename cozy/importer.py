@@ -15,6 +15,8 @@ from mutagen.oggvorbis import OggVorbis
 from gi.repository import Gdk, GLib
 
 import cozy.db as db
+import cozy.artwork_cache as artwork_cache
+
 log = logging.getLogger("importer")
 
 
@@ -50,7 +52,7 @@ def update_database(ui):
         return
 
     # clean artwork cache
-    db.delete_artwork_cache()
+    artwork_cache.delete_artwork_cache()
 
     i = 0
     percent_counter = 0
