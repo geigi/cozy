@@ -241,7 +241,7 @@ def import_file(file, directory, path, update=False):
     try:
         if track_number is None:
             # The track number can contain the total number of tracks
-            track_text = __get_common_tag(track, "tracknumber")
+            track_text = str(__get_common_tag(track, "tracknumber"))
             track_number = int(track_text.split("/")[0])
     except Exception as e:
         log.debug(e)
