@@ -70,7 +70,7 @@ def __load_artwork_placeholder(size):
     else:
         pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
         pixbuf = __resize_pixbuf(pixbuf, size)
-        resized_pixbuf.save(file_path, "jpeg")
+        pixbuf.save(file_path, "jpeg")
     
     return pixbuf
 

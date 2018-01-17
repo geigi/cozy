@@ -70,6 +70,9 @@ def update_database(ui):
                 if db.Track.select().where(db.Track.file == path).count() < 1:
                     imported = import_file(file, directory, path)
                 # Has the track changed on disk?
+                elif tools.get_glib_settings().get_boolean("use-crc32"):
+                    if db.Track.select().where(db.Track.file == path).first().modified != os.path.getmtime(path):
+                        imported = import_file(file, directory, path, update=True)
                 elif db.Track.select().where(db.Track.file == path).first().modified < os.path.getmtime(path):
                     imported = import_file(file, directory, path, update=True)
 
@@ -138,7 +141,6 @@ def import_file(file, directory, path, update=False):
     """
 
     media_type = __get_media_type(path)
-    mutagen.File
     track = TrackContainer(None, path)
     cover = None
     reader = None
@@ -242,7 +244,12 @@ def import_file(file, directory, path, update=False):
         log.warning("Skipping file: " + path)
         return False
 
-    modified = os.path.getmtime(path)
+    global settings
+    if tools.get_glib_settings().get_boolean("use-crc32"):
+        import binascii
+        modified = __crc32_from_file(path)
+    else:
+        modified = os.path.getmtime(path)
 
     # try to get all the remaining tags
     try:
@@ -527,3 +534,22 @@ def __get_common_tag(track, tag):
         log.info(e)
 
     return value
+
+    try:
+        value = track.mutagen[tag][0]
+    except Exception as e:
+        log.info("Could not get tag " + tag + " for file " + track.path)
+        log.info(e)
+
+    return value
+
+# thanks to oleg-krv
+def __crc32_from_file(filename):
+    crc_file = 0
+    try:
+        buf = open(filename, 'rb').read()
+        if len(buf) > 0:
+            crc_file = (binascii.crc32(buf) & 0xFFFFFFFF)
+    except Exception as e:
+        log.warning(e)
+    return crc_file
