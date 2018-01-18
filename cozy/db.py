@@ -2,6 +2,7 @@ import os
 import logging
 import uuid
 from peewee import BaseModel, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase
+from playhouse.migrate import SqliteMigrator, migrate
 from gi.repository import GLib, GdkPixbuf
 
 import cozy.tools as tools
@@ -51,6 +52,7 @@ class Track(BaseModel):
     file = CharField()
     length = FloatField()
     modified = IntegerField()
+    crc32 = BooleanField(default=False)
 
 
 class Settings(BaseModel):
@@ -60,6 +62,7 @@ class Settings(BaseModel):
     path = CharField()
     first_start = BooleanField(default=True)
     last_played_book = ForeignKeyField(Book, null=True)
+    version = IntegerField(default=1)
 
 
 class ArtworkCache(BaseModel):
@@ -75,6 +78,7 @@ def init_db():
     # Create tables only when not already present
     #                                           |
     db.create_tables([Track, Book, Settings, ArtworkCache], True)
+    update_db()
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
@@ -209,3 +213,28 @@ def search_tracks(search_string):
     :return: tracks matching the substring
     """
     return Track.select(Track.name).where(Track.name.contains(search_string)).order_by(Track.name)
+
+
+def update_db_1():
+    """
+    Update database to v1.
+    """
+    migrator = SqliteMigrator(db)
+
+    version = IntegerField(default=1)
+    crc32 = BooleanField(default=False)
+
+    migrate(
+        migrator.add_column('settings', 'version', version),
+        migrator.add_column('track', 'crc32', crc32),
+    )
+
+
+def update_db():
+    """
+    Updates the database if not already done.
+    """
+    try:
+        next(c for c in db.get_columns("settings") if c.name == "version")
+    except StopIteration as e:
+        update_db_1()
