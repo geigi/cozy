@@ -1054,7 +1054,6 @@ class CozyUI:
             else:
                 size = 40
             self.set_title_cover(artwork_cache.get_cover_pixbuf(track.book, size))
-            self.book_duration, self.book_position, current_tt = db.get_time_book(track.book)
 
         total = player.get_current_track().length
         self.progress_scale.set_range(0, total)
@@ -1067,8 +1066,23 @@ class CozyUI:
         """
         if not self.progress_scale_clicked:
             cur_m, cur_s = player.get_current_duration_ui()
+            val = cur_m * 60 + cur_s
             Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
-                                 self.progress_scale.set_value, cur_m * 60 + cur_s)
+                                 self.progress_scale.set_value, val)
+
+    def __update_ui_read_time(self, position):
+        """
+        Display read time
+        :param position:
+        :return:
+        """
+        if self.book_duration > 0:
+            percent = int((position * 100) / self.book_duration)
+            self.current_book_element.update_time(position, percent)
+            self.percent_read_label.set_markup("<b>%s</b> (%d%%)" % (
+                db.seconds_to_str(position), percent))
+        else:
+            self.percent_read_label.set_text("")
 
     def __update_ui_time(self, widget):
         """
@@ -1087,16 +1101,7 @@ class CozyUI:
             self.remaining_label.set_markup(
                 "<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
 
-            # update the time in the current book in player
-            self.time_book_label.set_markup("<tt><b>%s</b></tt>" % (
-                db.seconds_to_str(self.book_duration)))
-            percent, r = divmod(((self.book_position + val) * 100), self.book_duration)
-            self.percent_read_label.set_markup("<b>%s</b> (%d%%)" % (
-                db.seconds_to_str(self.book_position + val), percent))
-
-            # update the time in the current book in the library
-            if self.current_book_element is not None:
-                self.current_book_element.update_time(self.book_position + val, percent)
+            self.__update_ui_read_time(self.book_position + val)
 
     def __set_play_status_updater(self, enable):
         """
@@ -1140,6 +1145,10 @@ class CozyUI:
                 self.book_box.get_children()), None).get_children()[0]
 
         self._update_current_track_element()
+
+        self.book_duration, self.book_position, pos_file_read = db.get_time_book(self.current_book)
+        # update the time in the current book in the player
+        self.time_book_label.set_markup("<tt><b>%s</b></tt>" % db.seconds_to_str(self.book_duration))
 
         self.remaining_label.set_visible(True)
         self.current_label.set_visible(True)
