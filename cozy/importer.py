@@ -6,7 +6,7 @@ import shutil
 import errno
 import logging
 import mutagen
-import binascii
+import zlib
 
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
@@ -567,9 +567,11 @@ def __get_common_tag(track, tag):
 def __crc32_from_file(filename):
     crc_file = 0
     try:
-        buf = open(filename, 'rb').read()
-        if len(buf) > 0:
-            crc_file = (binascii.crc32(buf) & 0xFFFFFFFF)
+        prev = 0
+        for eachLine in open(filename, 'rb'):
+            prev = zlib.crc32(eachLine, prev)
+        crc_file = (prev & 0xFFFFFFFF)
     except Exception as e:
         log.warning(e)
+    
     return crc_file
