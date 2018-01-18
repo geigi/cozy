@@ -70,7 +70,7 @@ def __load_artwork_placeholder(size):
     else:
         pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
         pixbuf = __resize_pixbuf(pixbuf, size)
-        resized_pixbuf.save(file_path, "jpeg")
+        pixbuf.save(file_path, "jpeg")
     
     return pixbuf
 
@@ -159,7 +159,7 @@ def __load_cover_pixbuf(book):
     
     # then try from file
     if pixbuf is None:
-        pixbuf = __load_pixbuf_from_file(book, pixbuf)
+        pixbuf = __load_pixbuf_from_file(book)
 
     return pixbuf
 

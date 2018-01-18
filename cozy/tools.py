@@ -3,7 +3,7 @@ import threading
 import logging as log
 import platform
 import os
-from gi.repository import GLib
+from gi.repository import GLib, Gio
 
 def get_cache_dir():
     """
@@ -35,6 +35,13 @@ def is_elementary():
             return True
         else:
             return False
+
+
+settings = Gio.Settings.new("com.github.geigi.cozy")
+def get_glib_settings():
+    global settings
+    return settings
+
 
 # From https://stackoverflow.com/questions/474528/what-is-the-best-way-to-repeatedly-execute-a-function-every-x-seconds-in-python
 class RepeatedTimer(object):

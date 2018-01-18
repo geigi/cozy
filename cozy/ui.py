@@ -17,6 +17,7 @@ import cozy.db as db
 import cozy.importer as importer
 import cozy.player as player
 import cozy.artwork_cache as artwork_cache
+import cozy.tools as tools
 
 import os
 
@@ -76,8 +77,6 @@ class CozyUI:
         resource = Gio.resource_load(
             os.path.join(self.pkgdir, 'cozy.img.gresource'))
         Gio.Resource._register(resource)
-
-        self.settings = Gio.Settings.new("com.github.geigi.cozy")
 
         self.window_builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/main_window.ui")
@@ -193,8 +192,6 @@ class CozyUI:
         self.timer_button = self.window_builder.get_object("timer_button")
         self.auto_scan_switch = self.window_builder.get_object(
             "auto_scan_switch")
-        self.settings.bind("autoscan", self.auto_scan_switch,
-                           "active", Gio.SettingsBindFlags.DEFAULT)
 
         # time labels
         self.time_book_label = self.window_builder.get_object("time_book_label")
@@ -376,27 +373,31 @@ class CozyUI:
         """
 
         sl_switch = self.settings_builder.get_object("symlinks_switch")
-        self.settings.bind("symlinks", sl_switch, "active",
+        tools.get_glib_settings().bind("symlinks", sl_switch, "active",
                            Gio.SettingsBindFlags.DEFAULT)
 
         auto_scan_switch = self.settings_builder.get_object("auto_scan_switch")
-        self.settings.bind("autoscan", auto_scan_switch,
+        tools.get_glib_settings().bind("autoscan", auto_scan_switch,
                            "active", Gio.SettingsBindFlags.DEFAULT)
 
         timer_suspend_switch = self.settings_builder.get_object(
             "timer_suspend_switch")
-        self.settings.bind("suspend", timer_suspend_switch,
+        tools.get_glib_settings().bind("suspend", timer_suspend_switch,
                            "active", Gio.SettingsBindFlags.DEFAULT)
 
         replay_switch = self.settings_builder.get_object("replay_switch")
-        self.settings.bind("replay", replay_switch, "active",
+        tools.get_glib_settings().bind("replay", replay_switch, "active",
+                           Gio.SettingsBindFlags.DEFAULT)
+
+        crc32_switch = self.settings_builder.get_object("crc32_switch")
+        tools.get_glib_settings().bind("use-crc32", crc32_switch, "active",
                            Gio.SettingsBindFlags.DEFAULT)
 
     def __init_timer_buffer(self):
         """
         Add "min" to the timer text field on startup.
         """
-        value = self.settings.get_int("timer")
+        value = tools.get_glib_settings().get_int("timer")
         adjustment = self.timer_spinner.get_adjustment()
         adjustment.set_value(value)
 
@@ -421,7 +422,7 @@ class CozyUI:
             self.progress_scale.set_value(cur_m * 60 + cur_s)
 
             pos = int(player.get_current_track().position)
-            if self.settings.get_boolean("replay"):
+            if tools.get_glib_settings().get_boolean("replay"):
                 log.info("Replaying the previous 30 seconds.")
                 amount = 30 * 1000000000
                 if (pos < amount):
@@ -590,7 +591,7 @@ class CozyUI:
         chooser.set_current_folder(db.Settings.get().path)
 
     def auto_import(self):
-        if self.settings.get_boolean("autoscan"):
+        if tools.get_glib_settings().get_boolean("autoscan"):
             self.scan(None, False)
 
     def search(self, user_search):
@@ -725,7 +726,7 @@ class CozyUI:
         value = adjustment.get_value()
 
         if self.sleep_timer is not None and not self.sleep_timer.is_running:
-            self.settings.set_int("timer", int(value))
+            tools.get_glib_settings().set_int("timer", int(value))
 
         self.current_timer_time = value * 60
 
@@ -889,7 +890,7 @@ class CozyUI:
         if self.__first_play:
             self.__first_play = False
 
-            if self.settings.get_boolean("replay"):
+            if tools.get_glib_settings().get_boolean("replay"):
                 amount = 30 * 1000000000
                 if pos < amount:
                     pos = 0

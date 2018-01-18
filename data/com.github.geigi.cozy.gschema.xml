@@ -26,5 +26,10 @@
       <summary>Last used timer duration</summary>
       <description></description>
     </key>
+    <key type="b" name="use-crc32">
+      <default>false</default> 
+      <summary>Use crc32 instead of last modified time stamp</summary>
+      <description></description>
+    </key>
   </schema>
 </schemalist>

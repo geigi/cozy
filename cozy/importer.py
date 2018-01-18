@@ -1,10 +1,12 @@
 import os
 import base64
-import urllib, urllib.parse
+import urllib
+import urllib.parse
 import shutil
 import errno
 import logging
 import mutagen
+import zlib
 
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
@@ -15,6 +17,9 @@ from mutagen.oggvorbis import OggVorbis
 from gi.repository import Gdk, GLib
 
 import cozy.db as db
+import cozy.artwork_cache as artwork_cache
+import cozy.tools as tools
+
 log = logging.getLogger("importer")
 
 
@@ -50,7 +55,7 @@ def update_database(ui):
         return
 
     # clean artwork cache
-    db.delete_artwork_cache()
+    artwork_cache.delete_artwork_cache()
 
     i = 0
     percent_counter = 0
@@ -68,7 +73,16 @@ def update_database(ui):
                 if db.Track.select().where(db.Track.file == path).count() < 1:
                     imported = import_file(file, directory, path)
                 # Has the track changed on disk?
-                elif db.Track.select().where(db.Track.file == path).first().modified < os.path.getmtime(path):
+                elif tools.get_glib_settings().get_boolean("use-crc32"):
+                    crc = __crc32_from_file(path)
+                    # Is the value in the db already crc32 or is the crc changed?
+                    if (db.Track.select().where(db.Track.file == path).first().modified != crc or 
+                      db.Track.select().where(db.Track.file == path).first().crc32 != True):
+                        imported = import_file(
+                            file, directory, path, True, crc)
+                # Has the modified date changed or is the value still a crc?
+                elif (db.Track.select().where(db.Track.file == path).first().modified < os.path.getmtime(path) or 
+                  db.Track.select().where(db.Track.file == path).first().crc32 != False):
                     imported = import_file(file, directory, path, update=True)
 
                 if not imported:
@@ -96,11 +110,12 @@ def update_database(ui):
         if db.Track.select().where(db.Track.book == book).count() < 1:
             book.delete_instance()
 
-    db.generate_artwork_cache()
+    artwork_cache.generate_artwork_cache()
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
-    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.block_ui_buttons, False, True)
+    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
+                         ui.block_ui_buttons, False, True)
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.check_for_tracks)
 
     if len(failed) > 0:
@@ -127,7 +142,7 @@ def rebase_location(ui, oldPath, newPath):
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
 
 
-def import_file(file, directory, path, update=False):
+def import_file(file, directory, path, update=False, crc=None):
     """
     Imports all information about a track into the database.
     Note: This creates also a new album object when it doesnt exist yet.
@@ -136,7 +151,6 @@ def import_file(file, directory, path, update=False):
     """
 
     media_type = __get_media_type(path)
-    mutagen.File
     track = TrackContainer(None, path)
     cover = None
     reader = None
@@ -165,7 +179,7 @@ def import_file(file, directory, path, update=False):
         reader = __get_mp3_tag(mp3, "TPE1")
         book_name = __get_common_tag(track, "album")
         track_name = __get_common_tag(track, "title")
-      
+
         # other fields for the author and reader
         if author is None or author == "":
             author = __get_mp3_tag(mp3, "TPE1")
@@ -240,7 +254,14 @@ def import_file(file, directory, path, update=False):
         log.warning("Skipping file: " + path)
         return False
 
-    modified = os.path.getmtime(path)
+    global settings
+    if tools.get_glib_settings().get_boolean("use-crc32"):
+        import binascii
+        if crc is None:
+            crc = __crc32_from_file(path)
+        modified = crc
+    else:
+        modified = os.path.getmtime(path)
 
     # try to get all the remaining tags
     try:
@@ -260,6 +281,8 @@ def import_file(file, directory, path, update=False):
         reader = _("Unknown Reader")
     if track_name is None:
         track_name = os.path.splitext(file)[0]
+
+    crc32 = tools.get_glib_settings().get_boolean("use-crc32")
 
     if update:
         if db.Book.select().where(db.Book.name == book_name).count() < 1:
@@ -281,7 +304,8 @@ def import_file(file, directory, path, update=False):
                         book=book,
                         disk=disk,
                         length=length,
-                        modified=modified).where(db.Track.file == path).execute()
+                        modified=modified,
+                        crc32=crc32).where(db.Track.file == path).execute()
     else:
         # create database entries
         if db.Book.select().where(db.Book.name == book_name).count() < 1:
@@ -301,9 +325,11 @@ def import_file(file, directory, path, update=False):
                         file=path,
                         disk=disk,
                         length=length,
-                        modified=modified)
+                        modified=modified,
+                        crc32=crc32)
 
     return True
+
 
 def __get_media_type(path):
     """
@@ -319,7 +345,7 @@ def __get_media_type(path):
         return ""
 
     path = path.lower()
-    
+
     # MP4
     if b"ftyp" in header or b"mp4" in header:
         return "mp4"
@@ -334,6 +360,7 @@ def __get_media_type(path):
         return "mp3"
     else:
         return ""
+
 
 def copy(ui, selection):
     """
@@ -463,7 +490,7 @@ def __get_flac_cover(track):
     :param track: Track object
     """
     cover = None
-    
+
     try:
         cover = track.mutagen.pictures[0].data
     except Exception as e:
@@ -496,7 +523,7 @@ def __get_mp3_tag(track, tag):
     try:
         if tag == "TPE1" or tag == "TCOM" or tag == "TPE2":
             value = track.mutagen[tag]
-        elif tag =="TPOS":
+        elif tag == "TPOS":
             disks = str(track.mutagen[tag])
             disk = disks.split("/")[0]
             value = int(disk)
@@ -525,3 +552,26 @@ def __get_common_tag(track, tag):
         log.info(e)
 
     return value
+
+    try:
+        value = track.mutagen[tag][0]
+    except Exception as e:
+        log.info("Could not get tag " + tag + " for file " + track.path)
+        log.info(e)
+
+    return value
+
+# thanks to oleg-krv
+
+
+def __crc32_from_file(filename):
+    crc_file = 0
+    try:
+        prev = 0
+        for eachLine in open(filename, 'rb'):
+            prev = zlib.crc32(eachLine, prev)
+        crc_file = (prev & 0xFFFFFFFF)
+    except Exception as e:
+        log.warning(e)
+    
+    return crc_file
