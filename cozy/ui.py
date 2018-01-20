@@ -102,18 +102,27 @@ class CozyUI:
             log.debug("Fanciest design possible")
             cssProviderFile = Gio.File.new_for_uri(
                 "resource:///de/geigi/cozy/application.css")
+            css_progressbar_read_ProviderFile = Gio.File.new_for_uri(
+                "resource:///de/geigi/cozy/progressbar_read.css")
         else:
             log.debug("Using legacy css file")
             cssProviderFile = Gio.File.new_for_uri(
                 "resource:///de/geigi/cozy/application_legacy.css")
+            css_progressbar_read_ProviderFile = Gio.File.new_for_uri(
+                "resource:///de/geigi/cozy/progressbar_read_legacy.css")
         cssProvider = Gtk.CssProvider()
         cssProvider.load_from_file(cssProviderFile)
+
+        cssProvider_progressbar_read = Gtk.CssProvider()
+        cssProvider_progressbar_read.load_from_file(css_progressbar_read_ProviderFile)
 
         # add the bordered css class to the default screen for the borders around album art
         screen = Gdk.Screen.get_default()
         styleContext = Gtk.StyleContext()
         styleContext.add_provider_for_screen(
             screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
+        styleContext.add_provider_for_screen(
+            screen, cssProvider_progressbar_read, Gtk.STYLE_PROVIDER_PRIORITY_USER)
         styleContext.add_class("bordered")
 
     def __check_current_distro(self):

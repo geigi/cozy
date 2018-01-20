@@ -1,0 +1,21 @@
+GtkProgressBar.progress, progressbar.progress_read {
+    min-width: 5px;
+    min-height: 10px;
+    font-weight: bold;
+    color: @theme_fg_color;
+}
+
+GtkProgressBar.progress trough, progressbar.progress_read trough {
+    border-width: 0;
+    min-height: 20px;
+    min-width: 5px;
+    border-style: inset;
+    box-shadow: none;
+}
+
+GtkProgressBar.progress progress, progressbar.progress_read progress {
+    border-width: 0;
+    border-radius: 0;
+    min-height: 20px;
+    box-shadow: none;
+}
