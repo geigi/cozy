@@ -105,12 +105,12 @@ class AlbumElement(Gtk.EventBox):
         percent = 0
         if self.book.position == 0:
             self.time_label.set_markup(tools.shorten_string("<b>%s</b>" %
-                                                            db.seconds_to_str(self.book_duration),
+                                                            tools.seconds_to_str(self.book_duration, False),
                                                             MAX_BOOK_LENGTH))
         else:
             percent, r = divmod(((book_position + time_cur_file) * 100), self.book_duration)
             self.time_label.set_markup(tools.shorten_string("<b>%s</b> (%d%%)" %
-                                                            (db.seconds_to_str(self.book_duration),
+                                                            (tools.seconds_to_str(self.book_duration, False),
                                                              percent), MAX_BOOK_LENGTH))
         self.time_label.set_xalign(0.5)
         self.time_label.set_margin_top(0)
@@ -378,7 +378,8 @@ class BookElement(Gtk.Box):
         :param percent: percent read
         :return:
         """
-        self.art.time_label.set_markup("<b>%s</b> (%d%%)" % (db.seconds_to_str(self.art.book_duration), percent))
+        self.art.time_label.set_markup("<b>%s</b> (%d%%)" %
+                                       (tools.seconds_to_str(self.art.book_duration,False), percent))
         self.art.progress_read.set_fraction(percent / 100)
 
 
@@ -435,7 +436,7 @@ class TrackElement(Gtk.EventBox):
         title_label.props.width_request = 100
         title_label.props.xalign = 0.0
 
-        dur_label.set_text(seconds_to_str(self.track.length))
+        dur_label.set_text(tools.seconds_to_str(self.track.length))
         dur_label.set_halign(Gtk.Align.END)
         dur_label.props.margin = 4
 

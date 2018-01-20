@@ -1090,7 +1090,7 @@ class CozyUI:
             percent = int((position * 100) / self.book_duration)
             self.current_book_element.update_time(position, percent)
             self.percent_read_label.set_markup("<b>%s</b> (%d%%)" % (
-                db.seconds_to_str(position), percent))
+                tools.seconds_to_str(position), percent))
         else:
             self.percent_read_label.set_text("")
 
@@ -1158,7 +1158,7 @@ class CozyUI:
 
         self.book_duration, self.book_position, pos_file_read = db.get_time_book(self.current_book)
         # update the time in the current book in the player
-        self.time_book_label.set_markup("<tt><b>%s</b></tt>" % db.seconds_to_str(self.book_duration))
+        self.time_book_label.set_markup("<tt><b>%s</b></tt>" % tools.seconds_to_str(self.book_duration))
 
         self.remaining_label.set_visible(True)
         self.current_label.set_visible(True)
