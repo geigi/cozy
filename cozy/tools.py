@@ -91,7 +91,7 @@ class RepeatedTimer(object):
         self.is_running = False
 
 
-def seconds_to_str(seconds, short = False):
+def seconds_to_str(seconds, short=False):
     """
     Converts seconds to a string with the following apperance:
     hh:mm:ss
@@ -112,7 +112,7 @@ def seconds_to_str(seconds, short = False):
         if h > 0:
             result = "%d %s %d %s" % (h, _("h"), m, _("min"))
         else:
-            result = "%d %s" % (s, _("min"))
+            result = "%d %s" % (m, _("min"))
 
     return result
 
