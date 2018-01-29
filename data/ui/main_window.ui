@@ -691,7 +691,7 @@
                     <property name="focus_on_click">False</property>
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Volume control</property>
-                    <property name="relief">none</property>
+                    <property name="relief">normal</property>
                     <property name="value">1</property>
                     <property name="size">button</property>
                     <property name="sensitive">False</property>
