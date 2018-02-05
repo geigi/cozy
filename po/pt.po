@@ -34,11 +34,11 @@ msgstr "Todos os arquivos"
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
-msgstr "Ir para o autor"
+msgstr "Ir para o autor "
 
 #: cozy/search_results.py:75
 msgid "Jump to reader "
-msgstr "Ir para o narrador"
+msgstr "Ir para o narrador "
 
 #: cozy/importer.py:246
 msgid "Unknown Author"
@@ -132,8 +132,7 @@ msgstr "Importe seus Audiolivros"
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy importa automaticamente seus Audiolivros em um diretório - sua "
-"biblioteca"
+"Cozy importa automaticamente seus Audiolivros em um diretório"
 
 #: data/ui/main_window.ui:416
 msgid "Drag & Drop"
@@ -182,7 +181,7 @@ msgstr "Voltar 30 segundos"
 
 #: data/ui/main_window.ui:668
 msgid "Start playback"
-msgstr "Iniciar reprodução"
+msgstr "Reproduzir"
 
 #: data/ui/main_window.ui:676
 msgid "Play/Pause Button"
@@ -198,7 +197,7 @@ msgstr "Controle de volume"
 
 #: data/ui/main_window.ui:771
 msgid "Currently playing"
-msgstr "Ouvindo atualmente"
+msgstr "Ouvindo"
 
 #: data/ui/main_window.ui:789
 msgid "Booktitle"
@@ -230,7 +229,7 @@ msgstr "Tempo decorrido da parte atual"
 
 #: data/ui/main_window.ui:882
 msgid "Scrubb through current part"
-msgstr "Posicione-se pela parte atual"
+msgstr "Ir para este local"
 
 #: data/ui/main_window.ui:888
 msgid "Position slider"
@@ -258,7 +257,7 @@ msgstr "Trabalhando…"
 
 #: data/ui/main_window.ui:992
 msgid "Currently working"
-msgstr "Trabalhando atualmente"
+msgstr "Trabalhando"
 
 #: data/ui/main_window.ui:1007
 msgid "Playback speed"
@@ -266,7 +265,7 @@ msgstr "Velocidade de reprodução"
 
 #: data/ui/main_window.ui:1028
 msgid "Sleep timer"
-msgstr "Temporizador de dormir"
+msgstr "Temporizador"
 
 #: data/ui/main_window.ui:1039
 msgid "Timer menu button"
