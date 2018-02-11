@@ -215,11 +215,15 @@ class BookElement(Gtk.Box):
         self.popover = Gtk.Popover.new(self)
         self.popover.set_position(Gtk.PositionType.BOTTOM)
 
+        # Main box
+        box = Gtk.Box()
+        box.set_orientation(Gtk.Orientation.VERTICAL)
+
         # We need to scroll when there are many tracks in a Book
         scroller = Gtk.ScrolledWindow()
         scroller.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
-        # This box contains all content
+        # This box contains all track content
         self.track_box = Gtk.Box()
         self.track_box.set_orientation(Gtk.Orientation.VERTICAL)
         self.track_box.set_halign(Gtk.Align.CENTER)
@@ -244,9 +248,17 @@ class BookElement(Gtk.Box):
 
         self.popover.connect("closed", self.__on_popover_close)
 
-        self.popover.add(scroller)
+        builder = Gtk.Builder.new_from_resource(
+            "/de/geigi/cozy/book_progress_element.ui")
+        self.progress_box = builder.get_object("progress_box")
+        self.progress_box.show_all()
+
+        box.add(scroller)
+        box.add(self.progress_box)
+        self.popover.add(box)
         scroller.add_with_viewport(self.track_box)
         scroller.show_all()
+        box.show_all()
 
         self.popover_created = True
         self._mark_current_track()
