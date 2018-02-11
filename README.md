@@ -99,6 +99,7 @@ The translators:
 - nvivant
 - Foxyriot
 - mardojai
+- trampover
 
 To nedrichards for the Flatpak.
 

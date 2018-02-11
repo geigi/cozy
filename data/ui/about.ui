@@ -38,7 +38,8 @@ cleitonjfloss
 amadeussss
 nvivant
 Foxyriot
-mardojai</property>
+mardojai
+trampover</property>
     <property name="logo_icon_name">com.github.geigi.cozy</property>
     <property name="license_type">gpl-3-0</property>
     <child internal-child="vbox">
