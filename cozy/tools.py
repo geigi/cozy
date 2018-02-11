@@ -17,6 +17,7 @@ def get_cache_dir():
 
     return cache_dir
 
+
 def shorten_string(string, length):
     """
     Shortens a string when it is longer than length and adds ... at the end.
@@ -25,6 +26,7 @@ def shorten_string(string, length):
     :return : string or shortened string
     """
     return (string[:length] + '...') if len(string) > length else string
+
 
 def is_elementary():
         """
@@ -38,6 +40,8 @@ def is_elementary():
 
 
 settings = Gio.Settings.new("com.github.geigi.cozy")
+
+
 def get_glib_settings():
     global settings
     return settings
@@ -85,3 +89,30 @@ class RepeatedTimer(object):
             self._timer.cancel()
             self._timer = None
         self.is_running = False
+
+
+def seconds_to_str(seconds, short=False):
+    """
+    Converts seconds to a string with the following apperance:
+    hh:mm:ss
+
+    :param short: short or full view
+    :param seconds: The seconds as float
+    """
+    m, s = divmod(seconds, 60)
+    h, m = divmod(m, 60)
+    if short:
+        if h > 0:
+            result = "%d:%02d:%02d" % (h, m, s)
+        elif m > 0:
+            result = "%02d:%02d" % (m, s)
+        else:
+            result = "00:%02d" % s
+    else:
+        if h > 0:
+            result = "%d %s %d %s" % (h, _("h"), m, _("min"))
+        else:
+            result = "%d %s" % (m, _("min"))
+
+    return result
+

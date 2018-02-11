@@ -467,3 +467,9 @@ msgstr "Установка тривалості таймера сну в хви�
 #: data/ui/timer_popover.ui:92
 msgid "Timer duration spin button"
 msgstr "Кнопка включення таймера"
+
+msgid "h"
+msgstr "год."
+
+msgid "Use crc32 checksum instead of last modified timestamp on folder scan"
+msgstr "Використовуйте crc32 замість дати оновлення в сканері"

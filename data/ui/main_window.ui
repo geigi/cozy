@@ -976,6 +976,74 @@ audio-volume-medium-symbolic</property>
           </packing>
         </child>
         <child>
+          <object class="GtkBox" id="time_box">
+            <property name="name">time_b</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="tooltip_text" translatable="yes">Time book</property>
+            <property name="margin_left">5</property>
+            <property name="margin_right">15</property>
+            <property name="vexpand">True</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="time_book_label">
+                <property name="name">time_book</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">end</property>
+                <property name="vexpand">True</property>
+                <property name="ellipsize">end</property>
+                <property name="width_chars">10</property>
+                <property name="single_line_mode">True</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="time_book-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Time book</property>
+                    <property name="AtkObject::accessible-description" translatable="yes">Time of currently playing book</property>
+                  </object>
+                </child>
+                <style>
+                  <class name="time_book"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="percent_read_label">
+                <property name="name">percent_readed</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">start</property>
+                <property name="vexpand">True</property>
+                <property name="ellipsize">end</property>
+                <property name="width_chars">10</property>
+                <property name="single_line_mode">True</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="percent_read_label-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Percent read</property>
+                    <property name="AtkObject::accessible-description" translatable="yes">Percent read currently playing book</property>
+                  </object>
+                </child>
+                <style>
+                  <class name="percent_read"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkBox" id="tools_box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>

@@ -98,8 +98,50 @@ class AlbumElement(Gtk.EventBox):
         self.play_box.add(self.play_button)
         self.play_overlay.add(self.play_box)
 
+        # progress read book
+        self.book_duration, book_position, time_cur_file = db.get_time_book(self.book)
+        # label for the time of the book
+        self.time_label = Gtk.Label.new()
+        percent = 0
+        if self.book.position == 0:
+            self.time_label.set_markup(tools.shorten_string("<b>%s</b>" %
+                                                            tools.seconds_to_str(self.book_duration, False),
+                                                            MAX_BOOK_LENGTH))
+        else:
+            percent, r = divmod(((book_position + time_cur_file) * 100), self.book_duration)
+            self.time_label.set_markup(tools.shorten_string("<b>%s</b> (%d%%)" %
+                                                            (tools.seconds_to_str(self.book_duration, False),
+                                                             percent), MAX_BOOK_LENGTH))
+        self.time_label.set_xalign(0.5)
+        self.time_label.set_margin_top(0)
+        self.time_label.props.max_width_chars = 30
+        self.time_label.props.justify = Gtk.Justification.CENTER
+        self.time_label.set_property("halign", Gtk.Align.CENTER)
+        self.time_label.set_property("valign", Gtk.Align.CENTER)
+
+        # progressbar read book
+        self.progress_read = Gtk.ProgressBar()
+        self.progress_read.set_fraction(percent / 100)
+        self.progress_read.set_orientation(Gtk.Orientation.HORIZONTAL)
+        self.progress_read.set_margin_top(0)
+        self.progress_read.set_show_text(False)
+        self.progress_read.get_style_context().add_class("progress_read")
+
+        progress_box = Gtk.Box()
+        progress_box.set_orientation(Gtk.Orientation.VERTICAL)
+        progress_box.set_spacing(0)
+        progress_box.set_margin_top(0)
+        progress_box.set_halign(Gtk.Align.CENTER)
+        progress_box.set_valign(Gtk.Align.CENTER)
+
+        overlay_read = Gtk.Overlay.new()
+        overlay_read.add(self.progress_read)
+        overlay_read.add_overlay(self.time_label)
+        progress_box.add(img)
+        progress_box.add(overlay_read)
+
         # assemble overlay with album art
-        self.overlay.add(img)
+        self.overlay.add(progress_box)
         self.overlay.add_overlay(self.play_revealer)
 
         # assemble overlay color
@@ -174,6 +216,7 @@ class BookElement(Gtk.Box):
     popover_created = False
     track_box = None
     current_track_element = None
+    book_duration = 0
 
     def __init__(self, b, ui):
         self.book = b
@@ -328,6 +371,16 @@ class BookElement(Gtk.Box):
             self.current_track_element.set_playing(False)
             self.current_track_element.deselect()
 
+    def update_time(self, position, percent):
+        """
+        Updating the time of the book being read
+        :param position: current time read book
+        :param percent: percent read
+        :return:
+        """
+        self.art.time_label.set_markup("<b>%s</b> (%d%%)" %
+                                       (tools.seconds_to_str(self.art.book_duration,False), percent))
+        self.art.progress_read.set_fraction(percent / 100)
 
 
 class TrackElement(Gtk.EventBox):
@@ -383,7 +436,7 @@ class TrackElement(Gtk.EventBox):
         title_label.props.width_request = 100
         title_label.props.xalign = 0.0
 
-        dur_label.set_text(seconds_to_str(self.track.length))
+        dur_label.set_text(tools.seconds_to_str(self.track.length))
         dur_label.set_halign(Gtk.Align.END)
         dur_label.props.margin = 4
 

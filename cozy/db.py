@@ -139,26 +139,6 @@ def clean_db():
     q.execute()
 
 
-def seconds_to_str(seconds):
-    """
-    Converts seconds to a string with the following apperance:
-    hh:mm:ss
-
-    :param seconds: The seconds as float
-    """
-    m, s = divmod(seconds, 60)
-    h, m = divmod(m, 60)
-
-    if (h > 0):
-        result = "%d:%02d:%02d" % (h, m, s)
-    elif (m > 0):
-        result = "%02d:%02d" % (m, s)
-    else:
-        result = "00:%02d" % (s)
-
-    return result
-
-
 def get_track_for_playback(book):
     """
     Finds the current track to playback for a given book.
@@ -238,3 +218,25 @@ def update_db():
         next(c for c in db.get_columns("settings") if c.name == "version")
     except StopIteration as e:
         update_db_1()
+
+
+def get_time_book(book):
+    """
+    Get times for book
+    :param book:
+    :return: duration, time read, time read in current file
+    """
+    duration = 0
+    read = 0
+    read_add = True
+    current_track = 0
+    if book.position == 0:
+        read_add = False
+    for track in tracks(book):
+        duration += track.length
+        if track.id == book.position:
+            read_add = False
+            current_track = track.position / 1000000000
+        if read_add:
+            read += track.length
+    return duration, read, current_track

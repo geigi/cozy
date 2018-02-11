@@ -40,6 +40,8 @@ class CozyUI:
     dialog_open = False
     speed = 1.0
     is_playing = False
+    book_duration = 0
+    book_position = 0
 
     def __init__(self, pkgdatadir, app, version):
         self.pkgdir = pkgdatadir
@@ -100,18 +102,27 @@ class CozyUI:
             log.debug("Fanciest design possible")
             cssProviderFile = Gio.File.new_for_uri(
                 "resource:///de/geigi/cozy/application.css")
+            css_progressbar_read_ProviderFile = Gio.File.new_for_uri(
+                "resource:///de/geigi/cozy/progressbar_read.css")
         else:
             log.debug("Using legacy css file")
             cssProviderFile = Gio.File.new_for_uri(
                 "resource:///de/geigi/cozy/application_legacy.css")
+            css_progressbar_read_ProviderFile = Gio.File.new_for_uri(
+                "resource:///de/geigi/cozy/progressbar_read_legacy.css")
         cssProvider = Gtk.CssProvider()
         cssProvider.load_from_file(cssProviderFile)
+
+        cssProvider_progressbar_read = Gtk.CssProvider()
+        cssProvider_progressbar_read.load_from_file(css_progressbar_read_ProviderFile)
 
         # add the bordered css class to the default screen for the borders around album art
         screen = Gdk.Screen.get_default()
         styleContext = Gtk.StyleContext()
         styleContext.add_provider_for_screen(
             screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
+        styleContext.add_provider_for_screen(
+            screen, cssProvider_progressbar_read, Gtk.STYLE_PROVIDER_PRIORITY_USER)
         styleContext.add_class("bordered")
 
     def __check_current_distro(self):
@@ -190,6 +201,10 @@ class CozyUI:
         self.timer_button = self.window_builder.get_object("timer_button")
         self.auto_scan_switch = self.window_builder.get_object(
             "auto_scan_switch")
+
+        # time labels
+        self.time_book_label = self.window_builder.get_object("time_book_label")
+        self.percent_read_label = self.window_builder.get_object("percent_read_label")
 
         # get settings window
         self.settings_window = self.settings_builder.get_object(
@@ -507,6 +522,9 @@ class CozyUI:
 
         self.title_label.set_text("")
         self.subtitle_label.set_text("")
+
+        self.time_book_label.set_text("")
+        self.percent_read_label.set_text("")
 
         self.cover_img.set_from_pixbuf(None)
 
@@ -1042,6 +1060,9 @@ class CozyUI:
         self.progress_scale.set_sensitive(True)
         self.progress_scale.set_visible(True)
 
+        self.time_book_label.set_visible(True)
+        self.percent_read_label.set_visible(True)
+
         # only change cover when book has changed
         if self.current_book is not track.book:
             self.current_book = track.book
@@ -1062,8 +1083,23 @@ class CozyUI:
         """
         if not self.progress_scale_clicked:
             cur_m, cur_s = player.get_current_duration_ui()
+            val = cur_m * 60 + cur_s
             Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
-                                 self.progress_scale.set_value, cur_m * 60 + cur_s)
+                                 self.progress_scale.set_value, val)
+
+    def __update_ui_read_time(self, position):
+        """
+        Display read time
+        :param position:
+        :return:
+        """
+        if self.book_duration > 0:
+            percent = int((position * 100) / self.book_duration)
+            self.current_book_element.update_time(position, percent)
+            self.percent_read_label.set_markup("<b>%s</b> (%d%%)" % (
+                tools.seconds_to_str(position), percent))
+        else:
+            self.percent_read_label.set_text("")
 
     def __update_ui_time(self, widget):
         """
@@ -1081,6 +1117,8 @@ class CozyUI:
 
             self.remaining_label.set_markup(
                 "<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+
+            self.__update_ui_read_time(self.book_position + val)
 
     def __set_play_status_updater(self, enable):
         """
@@ -1124,6 +1162,10 @@ class CozyUI:
                 self.book_box.get_children()), None).get_children()[0]
 
         self._update_current_track_element()
+
+        self.book_duration, self.book_position, pos_file_read = db.get_time_book(self.current_book)
+        # update the time in the current book in the player
+        self.time_book_label.set_markup("<tt><b>%s</b></tt>" % tools.seconds_to_str(self.book_duration))
 
         self.remaining_label.set_visible(True)
         self.current_label.set_visible(True)
