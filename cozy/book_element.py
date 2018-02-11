@@ -215,11 +215,15 @@ class BookElement(Gtk.Box):
         self.popover = Gtk.Popover.new(self)
         self.popover.set_position(Gtk.PositionType.BOTTOM)
 
+        # Main box
+        box = Gtk.Box()
+        box.set_orientation(Gtk.Orientation.VERTICAL)
+
         # We need to scroll when there are many tracks in a Book
         scroller = Gtk.ScrolledWindow()
         scroller.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
-        # This box contains all content
+        # This box contains all track content
         self.track_box = Gtk.Box()
         self.track_box.set_orientation(Gtk.Orientation.VERTICAL)
         self.track_box.set_halign(Gtk.Align.CENTER)
@@ -244,13 +248,30 @@ class BookElement(Gtk.Box):
 
         self.popover.connect("closed", self.__on_popover_close)
 
-        self.popover.add(scroller)
+        builder = Gtk.Builder.new_from_resource(
+            "/de/geigi/cozy/book_progress_element.ui")
+        self.progress_box = builder.get_object("progress_box")
+        self.progress_bar = builder.get_object("book_progress_bar")
+        self.duration_label = builder.get_object("duration_label")
+        self.remaining_label = builder.get_object("remaining_label")
+        self.remaining_text_label = builder.get_object("remaining_text_label")
+
+        self.duration = get_book_duration(self.book)
+        self.duration_label.set_text(tools.seconds_to_str(self.duration, False))
+
+        self.progress_box.show_all()
+
+        box.add(scroller)
+        box.add(self.progress_box)
+        self.popover.add(box)
         scroller.add_with_viewport(self.track_box)
         scroller.show_all()
+        box.show_all()
 
         self.popover_created = True
         self._mark_current_track()
         self.ui._update_current_track_element()
+        self.update_time()
 
     def __on_button_press(self, eventbox, event):
         if self.popover_created is False:
@@ -329,6 +350,29 @@ class BookElement(Gtk.Box):
             self.current_track_element.deselect()
 
 
+    def update_time(self):
+        """
+        Update the remaining time in the popover.
+        """
+        if not self.popover_created:
+            return
+        
+        progress = get_book_progress(Book.select().where(Book.id == self.book.id).get())
+        remaining = self.duration - progress
+
+        if progress == 0 or remaining < 15:
+            self.remaining_label.set_visible(False)
+            self.remaining_text_label.set_visible(False)
+        else:
+            if not self.remaining_label.get_visible():
+                self.remaining_label.set_visible(True)
+                self.remaining_text_label.set_visible(True)
+
+            percentage = progress / self.duration
+
+            self.remaining_label.set_text(tools.seconds_to_str(remaining, False))
+            self.progress_bar.set_fraction(percentage)
+
 
 class TrackElement(Gtk.EventBox):
     """
@@ -383,7 +427,7 @@ class TrackElement(Gtk.EventBox):
         title_label.props.width_request = 100
         title_label.props.xalign = 0.0
 
-        dur_label.set_text(seconds_to_str(self.track.length))
+        dur_label.set_text(tools.seconds_to_str(self.track.length))
         dur_label.set_halign(Gtk.Align.END)
         dur_label.props.margin = 4
 

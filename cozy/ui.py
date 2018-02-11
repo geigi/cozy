@@ -40,6 +40,7 @@ class CozyUI:
     dialog_open = False
     speed = 1.0
     is_playing = False
+    current_remaining = 0
 
     def __init__(self, pkgdatadir, app, version):
         self.pkgdir = pkgdatadir
@@ -178,6 +179,7 @@ class CozyUI:
         self.current_label = self.window_builder.get_object("current_label")
         self.remaining_label = self.window_builder.get_object(
             "remaining_label")
+        self.remaining_event_box = self.window_builder.get_object("remaining_event_box")
         self.author_toggle_button = self.window_builder.get_object(
             "author_toggle_button")
         self.reader_toggle_button = self.window_builder.get_object(
@@ -307,6 +309,9 @@ class CozyUI:
         self.volume_button = self.window_builder.get_object("volume_button")
         self.volume_button.connect("value-changed", self.__on_volume_changed)
 
+        # remaining time actions
+        self.remaining_event_box.connect("button-release-event", self.__on_remaining_clicked)
+
         # hide remaining and current labels
         self.current_label.set_visible(False)
         self.remaining_label.set_visible(False)
@@ -393,6 +398,12 @@ class CozyUI:
         crc32_switch = self.settings_builder.get_object("crc32_switch")
         tools.get_glib_settings().bind("use-crc32", crc32_switch, "active",
                            Gio.SettingsBindFlags.DEFAULT)
+
+        titlebar_remaining_time_switch = self.settings_builder.get_object("titlebar_remaining_time_switch")
+        titlebar_remaining_time_eventbox = self.settings_builder.get_object("titlebar_remaining_time_eventbox")
+        tools.get_glib_settings().bind("titlebar-remaining-time", titlebar_remaining_time_switch, "active",
+                           Gio.SettingsBindFlags.DEFAULT)
+        titlebar_remaining_time_eventbox.connect("button-release-event", self.__on_remaining_clicked)
 
     def __init_timer_buffer(self):
         """
@@ -809,6 +820,20 @@ class CozyUI:
 
         return False
 
+    def __on_remaining_clicked(self, widget, sender):
+        """
+        Switch between displaying the remaining time for a track or the whole book.
+        """
+        if widget.get_name is not "titlebar_remaining_time_eventbox":
+            if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+                tools.get_glib_settings().set_boolean("titlebar-remaining-time", False)
+            else:
+                tools.get_glib_settings().set_boolean("titlebar-remaining-time", True)
+
+        self.__update_ui_time(None)
+        
+        return True
+
     def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
         """
         We want to import the files that are dragged onto the window.
@@ -1051,6 +1076,7 @@ class CozyUI:
                 size = 40
             self.set_title_cover(artwork_cache.get_cover_pixbuf(track.book, size))
 
+        self.current_remaining = db.get_book_remaining(self.current_book)
         total = player.get_current_track().length
         self.progress_scale.set_range(0, total)
         self.progress_scale.set_value(int(track.position / 1000000000))
@@ -1077,10 +1103,19 @@ class CozyUI:
 
         if track is not None:
             remaining_secs = int(track.length - val)
-            remaining_mins, remaining_secs = divmod(remaining_secs, 60)
 
-            self.remaining_label.set_markup(
-                "<tt><b>" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+            if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+                remaining_secs += self.current_remaining
+                self.remaining_label.set_markup(
+                    "<tt><b>-" + tools.seconds_to_str(remaining_secs) + "</b></tt>")
+            else:
+                remaining_mins, remaining_secs = divmod(remaining_secs, 60)
+
+                self.remaining_label.set_markup(
+                    "<tt><b>-" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+        
+        if self.current_book_element is not None:
+            self.current_book_element.update_time()
 
     def __set_play_status_updater(self, enable):
         """
@@ -1142,6 +1177,7 @@ class CozyUI:
             curr_track = player.get_current_track()
             self.current_book_element.select_track(curr_track, self.is_playing)
 
+        
     def __player_changed(self, event, message):
         """
         Listen to and handle all gst player messages that are important for the ui.
