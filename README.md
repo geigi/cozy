@@ -82,6 +82,7 @@ To the contributors on GitHub:
 - AsavarTzeth
 - worldofpeace
 - camellan
+- jnbr
 
 The translators:
 - camellan
