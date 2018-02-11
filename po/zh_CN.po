@@ -1,312 +1,305 @@
-# Copyright (C) 2017
-# This file is distributed under the same license as the cozy package.
-# geigi <transifex@geigi.de>, 2017.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: cozy 0.1\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-05 19:55+0100\n"
-"Last-Translator: Amadeus Amadeus <amadorpr@hotmail.com>, 2018\n"
-"Language-Team: Spanish (https://www.transifex.com/geigi/teams/78138/es/)\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2018\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/geigi/teams/78138/zh_CN/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: cozy/book_element.py:63 cozy/search_results.py:124
 msgid "Play this book"
-msgstr "Reproducir este libro"
+msgstr "朗读这本书"
 
 #: cozy/book_element.py:186
 msgid "Open book overview"
-msgstr "Abrir la sinopsis del libro"
+msgstr "打开书籍概览"
 
 #: cozy/book_element.py:313
 msgid "Play this part"
-msgstr "Reproducir esta sección"
+msgstr "朗读这个部分"
 
 #: cozy/file_not_found_dialog.py:64
 msgid "All files"
-msgstr "Todos los archivos"
+msgstr "所有文件"
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
-msgstr "Ir al autor"
+msgstr "跳转到作者"
 
 #: cozy/search_results.py:75
 msgid "Jump to reader "
-msgstr "Ir al lecttor"
+msgstr "跳转到朗读者"
 
 #: cozy/importer.py:246
 msgid "Unknown Author"
-msgstr "Autor desconocido"
+msgstr "未知作者"
 
 #: cozy/importer.py:248
 msgid "Unknown Reader"
-msgstr "Lector desconocido"
+msgstr "未知朗读者"
 
 #: cozy/ui.py:395 cozy/ui.py:718 data/ui/timer_popover.ui:86
 msgid "min"
-msgstr "min"
+msgstr "秒"
 
 #: cozy/ui.py:567
 msgid "Importing Audiobooks"
-msgstr "Importando audiolibros"
+msgstr "导入有声读物"
 
 #: cozy/ui.py:629 cozy/ui.py:633 cozy/ui.py:1243 cozy/ui.py:1252
 msgid "All"
-msgstr "Todos"
+msgstr "所有"
 
 #: cozy/ui.py:630 cozy/ui.py:634
 msgid "Display all books"
-msgstr "Mostrar todos los libros"
+msgstr "显示所有书籍"
 
 #: cozy/ui.py:850
 msgid "Changing audio book location..."
-msgstr "Cambiando ubicación del audiolibro"
+msgstr "更改有声书籍位置..."
 
 #: data/ui/main_window.ui:67
 msgid "Select by author"
-msgstr "Seleccionar por autor"
+msgstr "查看作者"
 
 #: data/ui/main_window.ui:76
 msgid "<big>Author</big>"
-msgstr "Autor"
+msgstr "<big>作者</big>"
 
 #: data/ui/main_window.ui:85
 msgid "Author filter button"
-msgstr "Botón de filtro por autor"
+msgstr "作者过滤按钮"
 
 #: data/ui/main_window.ui:86
 msgid "Filter books by author"
-msgstr "Filtrar libros por autor"
+msgstr "按作者选择"
 
 #: data/ui/main_window.ui:106
 msgid "Select by reader"
-msgstr "Seleccionar por lector"
+msgstr "查看朗读者"
 
 #: data/ui/main_window.ui:114
 msgid "<big>Reader</big>"
-msgstr "Lector"
+msgstr "<big>朗读者</big>"
 
 #: data/ui/main_window.ui:123
 msgid "Reader filter button"
-msgstr "Botón de filtro por lector"
+msgstr "朗读者过滤按钮"
 
 #: data/ui/main_window.ui:124
 msgid "Filter books by reader"
-msgstr "Filtrar libros por lector"
+msgstr "按朗读者选择"
 
 #: data/ui/main_window.ui:178
 msgid "List of authors"
-msgstr "Lista de autores"
+msgstr "作者名单"
 
 #: data/ui/main_window.ui:194 data/ui/search_popover.ui:107
 msgid "Author"
-msgstr "Autor"
+msgstr "作者"
 
 #: data/ui/main_window.ui:212
 msgid "List of readers"
-msgstr "Lista de lectores"
+msgstr "朗读者者名单"
 
 #: data/ui/main_window.ui:228 data/ui/search_popover.ui:201
 msgid "Reader"
-msgstr "Lector"
+msgstr "朗读者"
 
 #: data/ui/main_window.ui:275
 msgid "List of books"
-msgstr "Lista de libros"
+msgstr "书目清单"
 
 #: data/ui/main_window.ui:309
 msgid "Importing your audiobooks..."
-msgstr "Importando sus audiolibros..."
+msgstr "导入您的有声读物..."
 
 #: data/ui/main_window.ui:360
 msgid "Import your Audiobooks"
-msgstr "Importe sus audiolibros"
+msgstr "导入您的有声读物"
 
 #: data/ui/main_window.ui:376
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
-msgstr ""
-"Cozy importa automáticamente tus audiolibros a un directorio - tu "
-"biblioteca."
+msgstr "朗读者自动将您的有声读物导入一个目录 - 您的图书目录"
 
 #: data/ui/main_window.ui:416
 msgid "Drag & Drop"
-msgstr "Arrastrar y soltar"
+msgstr "拖放导入"
 
 #: data/ui/main_window.ui:432
 msgid ""
 "Drag your audiobooks into cozy and the will be automatically imported to "
 "your library"
-msgstr ""
-"Arrastre sus audiolibros hacia Cozy y serán importados automáticamente en su"
-" biblioteca"
+msgstr "将您的有声读物拖到朗读者程序中，那么将被自动导入到您的图书目录"
 
 #: data/ui/main_window.ui:492
 msgid "Change Audiobooks Folder"
-msgstr "Cambiar el directorio de audiolibros"
+msgstr "更改您的图书目录"
 
 #: data/ui/main_window.ui:508
 msgid "Load audiobooks from a folder, network drive or an external disk"
-msgstr ""
-"Cargar audiolibros desde un directorio, almacenamiento de red o disco "
-"externo."
+msgstr "从文件夹，网络驱动器或外部磁盘加载有声读物"
 
 #: data/ui/main_window.ui:537
 msgid "Location of your audiobooks"
-msgstr "Ubicación de sus audiolibros"
+msgstr "你的有声读物的位置"
 
 #: data/ui/main_window.ui:573
 msgid "Auto scan switch"
-msgstr "Interruptor de autoexploración"
+msgstr "自动扫描开关"
 
 #: data/ui/main_window.ui:574 data/ui/main_window.ui:589
 msgid "Automatically import new audiobooks on startup"
-msgstr ""
-"Importar automáticamente los audiolibros nuevos al inicio del programa"
+msgstr "在启动时自动导入新的有声读物"
 
 #: data/ui/main_window.ui:642
 msgid "Rewind 30 seconds"
-msgstr "Retroceder 30 segundos"
+msgstr "后退30秒"
 
 #: data/ui/main_window.ui:650
 msgid "Rewind button"
-msgstr "Retroceder"
+msgstr "后退"
 
 #: data/ui/main_window.ui:651
 msgid "Jump back 30 seconds"
-msgstr "Retroceder 30 segundos"
+msgstr "回跳30分"
 
 #: data/ui/main_window.ui:668
 msgid "Start playback"
-msgstr "Reproducir"
+msgstr "开始播放"
 
 #: data/ui/main_window.ui:676
 msgid "Play/Pause Button"
-msgstr "Botón de reproducción/pausa"
+msgstr "播放/暂停"
 
 #: data/ui/main_window.ui:677
 msgid "Start or pause the playback"
-msgstr "Iniciar o pausar la reproducción"
+msgstr "开始或暂停播放"
 
 #: data/ui/main_window.ui:693
 msgid "Volume control"
-msgstr "Control de volumen"
+msgstr "音量控制"
 
 #: data/ui/main_window.ui:771
 msgid "Currently playing"
-msgstr "Actualmente reproduciendo"
+msgstr "正在播放"
 
 #: data/ui/main_window.ui:789
 msgid "Booktitle"
-msgstr "Titulodellibro"
+msgstr "书名"
 
 #: data/ui/main_window.ui:790
 msgid "Title of currently playing book"
-msgstr "Título del libro que se está reproduciendo"
+msgstr "当前正在播放的书的书名"
 
 #: data/ui/main_window.ui:815
 msgid "Part name"
-msgstr "Nombre de la sección"
+msgstr "章节名字"
 
 #: data/ui/main_window.ui:816
 msgid "Title of the currently playing part"
-msgstr "Título de la sección que se está reproduciendo"
+msgstr "当前播放部分的书名"
 
 #: data/ui/main_window.ui:858
 msgid "Elapsed time"
-msgstr "Tiempo transcurrido"
+msgstr "已用时间"
 
 #: data/ui/main_window.ui:866
 msgid "Time elapsed"
-msgstr "Tiempo transcurrido"
+msgstr "已用时间"
 
 #: data/ui/main_window.ui:867
 msgid "Elapsed time of current part"
-msgstr "Tiempo transcurrido de la sección actual"
+msgstr "正在朗读部分已用时间"
 
 #: data/ui/main_window.ui:882
 msgid "Scrubb through current part"
-msgstr "Desplazarse por la sección actual"
+msgstr "拖动快进或快退当前朗读部分"
 
 #: data/ui/main_window.ui:888
 msgid "Position slider"
-msgstr "Deslizador de posición"
+msgstr "位置"
 
 #: data/ui/main_window.ui:889
 msgid "Position of the current part in seconds"
-msgstr "Posición de la sección actual en segundos"
+msgstr "当前部分的位置，以秒为单位"
 
 #: data/ui/main_window.ui:903
 msgid "Remaining time"
-msgstr "Tiempo restante"
+msgstr "剩余时间:"
 
 #: data/ui/main_window.ui:911
 msgid "Time remaining"
-msgstr "Tiempo restante"
+msgstr "剩余时间:"
 
 #: data/ui/main_window.ui:912
 msgid "Remaining time of current part"
-msgstr "Tiempo restante de la sección actual"
+msgstr "正在朗读部分已用时间"
 
 #: data/ui/main_window.ui:987
 msgid "Working..."
-msgstr "Funcionando..."
+msgstr "进行中..."
 
 #: data/ui/main_window.ui:992
 msgid "Currently working"
-msgstr "Actualmente funcionando"
+msgstr "正在进行"
 
 #: data/ui/main_window.ui:1007
 msgid "Playback speed"
-msgstr "Velocidad de reproducción"
+msgstr "播放速度"
 
 #: data/ui/main_window.ui:1028
 msgid "Sleep timer"
-msgstr "Temporizador de apagado"
+msgstr "睡眠时间"
 
 #: data/ui/main_window.ui:1039
 msgid "Timer menu button"
-msgstr "Botón de temporizador de apagado"
+msgstr "定时器菜单按钮"
 
 #: data/ui/main_window.ui:1040
 msgid "Open the sleep timer popover"
-msgstr "Abrir el cuadro del temporizador"
+msgstr "打开睡眠计时器弹出窗口"
 
 #: data/ui/main_window.ui:1056
 msgid "Search your library"
-msgstr "Buscar en la biblioteca"
+msgstr "在您的书库中查找"
 
 #: data/ui/main_window.ui:1067
 msgid "Search menu button"
-msgstr "Botón de menú de búsqueda"
+msgstr "搜索菜单按钮"
 
 #: data/ui/main_window.ui:1068
 msgid "Open the search popover"
-msgstr "Abrir el cuadro de búsqueda"
+msgstr "打开搜索弹出窗口"
 
 #: data/ui/main_window.ui:1082
 msgid "Options"
-msgstr "Opciones"
+msgstr "显示选项"
 
 #: data/ui/main_window.ui:1093
 msgid "Options menu button"
-msgstr "Botón de menú de opciones"
+msgstr "显示选项按钮"
 
 #: data/ui/main_window.ui:1094
 msgid "Open the options popover"
-msgstr "Abrir el cuadro de opciones"
+msgstr "打开显示选项弹出窗口"
 
 #: data/ui/about.ui:11
 msgid "Support me on Patreon: https://www.patreon.com/geigi"
-msgstr ""
-"Ayúdame en Patreon:\n"
-"https://www.patreon.com/geigi"
+msgstr "在Patreon上支持我:https://www.patreon.com/geigi"
 
 #: data/ui/about.ui:13
 msgid "GitHub"
@@ -314,47 +307,47 @@ msgstr "GitHub"
 
 #: data/ui/app_menu.ui:7
 msgid "_Scan Directory"
-msgstr "_Explorar Directorio"
+msgstr "扫描目录"
 
 #: data/ui/app_menu.ui:13
 msgid "_Preferences"
-msgstr "_Preferencias"
+msgstr "偏好设置"
 
 #: data/ui/app_menu.ui:19
 msgid "_Help"
-msgstr "_Ayuda"
+msgstr "帮助"
 
 #: data/ui/app_menu.ui:23
 msgid "_About"
-msgstr "_Información"
+msgstr "关于"
 
 #: data/ui/app_menu.ui:27
 msgid "_Quit"
-msgstr "_Salir"
+msgstr "退出"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "取消"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
-msgstr "Localizar"
+msgstr "定位"
 
 #: data/ui/file_not_found.ui:86
 msgid "File not found"
-msgstr "Archivo no encontrado"
+msgstr "找不到文件"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "El archivo no se ha encontrado, desea buscarlo manualmente?"
+msgstr "无法找到此文件。 您想手动找到它吗？"
 
 #: data/ui/import_failed.ui:23
 msgid "Ok"
-msgstr "Ok"
+msgstr "好的"
 
 #: data/ui/import_failed.ui:77
 msgid "Some files could not be imported"
-msgstr "Algunos archivos no pudieron ser importados"
+msgstr "有些文件无法导入"
 
 #: data/ui/import_failed.ui:130
 msgid ""
@@ -363,111 +356,111 @@ msgid ""
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
-"Esto puede ocurrir por varias razones:\n"
-"- El formato de audio no está soportado\n"
-"- El archivo no es un archivo de audio válido\n"
-"- El archivo está corrupto"
+"这可能有多种原因：\n"
+"- 不支持音频格式\n"
+"- 文件没有有效的音频文件\n"
+"- 文件已损坏"
 
 #: data/ui/settings.ui:27 data/ui/settings.ui:102
 msgid "Order by"
-msgstr "Ordenar por"
+msgstr "按顺序排列"
 
 #: data/ui/settings.ui:37
 msgid "Newest"
-msgstr "Nuevos"
+msgstr "最新"
 
 #: data/ui/settings.ui:54
 msgid "Year"
-msgstr "Año"
+msgstr "年份"
 
 #: data/ui/settings.ui:72
 msgid "Name"
-msgstr "Nombre"
+msgstr "名字"
 
 #: data/ui/settings.ui:143
 msgid "Appearance"
-msgstr "Apariencia"
+msgstr "外观"
 
 #: data/ui/settings.ui:158
 msgid "Suspend system on timer"
-msgstr "Suspender el sistema al finalizar el temporizador"
+msgstr "系统挂起定时器"
 
 #: data/ui/settings.ui:194
 msgid "Replay 30 seconds"
-msgstr "Volver a reproducir los últimos 30 segundos"
+msgstr "重播30秒"
 
 #: data/ui/settings.ui:229
 msgid "Automatic media scan"
-msgstr "Exploración automática de archivos"
+msgstr "自动扫描您的书籍"
 
 #: data/ui/settings.ui:260
 msgid "Behaviour"
-msgstr "Comportamiento"
+msgstr "行为"
 
 #: data/ui/settings.ui:276
 msgid "Follow symlinks"
-msgstr "Seguir enlaces simbólicos"
+msgstr "符号链接"
 
 #: data/ui/settings.ui:314 data/ui/settings.ui:329
 msgid "Audio books location"
-msgstr "Ubicación de los audiolibros"
+msgstr "书库的位置"
 
 #: data/ui/settings.ui:351
 msgid "Files"
-msgstr "Archivos"
+msgstr "文件"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
-msgstr "Buscar"
+msgstr "搜索"
 
 #: data/ui/search_popover.ui:36
 msgid "Search box"
-msgstr "Cuadro de búsqueda"
+msgstr "搜索框"
 
 #: data/ui/search_popover.ui:37
 msgid "Search your audiobook library"
-msgstr "Buscar en su biblioteca de audiolibros"
+msgstr "在您的书库中搜索"
 
 #: data/ui/search_popover.ui:67
 msgid "Which book are you looking for?"
-msgstr "¿Qué libro está buscando?"
+msgstr "哪本书是您需要看的?"
 
 #: data/ui/search_popover.ui:154
 msgid "Book"
-msgstr "Libro"
+msgstr "书"
 
 #: data/ui/search_popover.ui:248
 msgid "Part"
-msgstr "Sección"
+msgstr "章节"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
-msgstr "No se ha encontrado nada :("
+msgstr "什么也么找到:("
 
 #: data/ui/timer_popover.ui:32
 msgid "Toggle the timer on/off"
-msgstr "Temporizador encendido/apagado"
+msgstr "打开/关闭定时器"
 
 #: data/ui/timer_popover.ui:36
 msgid "Timer toggle button"
-msgstr "Botón de encendido/apagado de temporizador"
+msgstr "定时器按钮"
 
 #: data/ui/timer_popover.ui:37
 msgid "Switch the sleep timer on or off"
-msgstr "Encender/apagar el temporizador"
+msgstr "打开或关闭睡眠定时器"
 
 #: data/ui/timer_popover.ui:52 data/ui/timer_popover.ui:80
 msgid "Timer duration"
-msgstr "Duración del temporizador"
+msgstr "计时器时间"
 
 #: data/ui/timer_popover.ui:65
 msgid "Timer duration slider"
-msgstr "Deslizador del tiempo del temporizador"
+msgstr "计时器滑块"
 
 #: data/ui/timer_popover.ui:66 data/ui/timer_popover.ui:93
 msgid "Set the sleep timer duration in minutes"
-msgstr "Ajustar el temporizador de apagado en minutos"
+msgstr "以分钟为单位设置睡眠定时器的时间"
 
 #: data/ui/timer_popover.ui:92
 msgid "Timer duration spin button"
-msgstr "Botón giratorio de duración del temporizador"
+msgstr "计时器持续时间旋钮"

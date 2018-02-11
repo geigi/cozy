@@ -149,26 +149,6 @@ def clean_db():
     q.execute()
 
 
-def seconds_to_str(seconds):
-    """
-    Converts seconds to a string with the following apperance:
-    hh:mm:ss
-
-    :param seconds: The seconds as float
-    """
-    m, s = divmod(seconds, 60)
-    h, m = divmod(m, 60)
-
-    if (h > 0):
-        result = "%d:%02d:%02d" % (h, m, s)
-    elif (m > 0):
-        result = "%02d:%02d" % (m, s)
-    else:
-        result = "00:%02d" % (s)
-
-    return result
-
-
 def get_track_for_playback(book):
     """
     Finds the current track to playback for a given book.
@@ -248,3 +228,60 @@ def update_db():
         next(c for c in db.get_columns("settings") if c.name == "version")
     except StopIteration as e:
         update_db_1()
+        
+
+# thanks to oleg-krv
+def get_book_duration(book):
+    """
+    Get the duration of a book in seconds.
+    :param book:
+    :return: duration of the book
+    """
+    duration = 0
+    for track in tracks(book):
+        duration += track.length
+    
+    return duration
+
+
+def get_book_progress(book, include_current=True):
+    """
+    Get the progress of a book in seconds.
+    :param book:
+    :param include_current: Include the progress of the current track
+    :return: current progress of the book
+    """
+    progress = 0
+    if book.position == 0:
+        return 0
+    for track in tracks(book):
+        if track.id == book.position:
+            if include_current:
+                progress += int(track.position / 1000000000)
+            return progress
+
+        progress += track.length
+
+    return progress
+
+def get_book_remaining(book, include_current=True):
+    """
+    Get the remaining time of a book in seconds.
+    :param book:
+    :param include_current: Include the progress of the current track
+    :return: remaining time for the book
+    """
+    remaining = 0
+    passed_current = False
+    if book.position == 0:
+        return get_book_duration(book)
+    for track in tracks(book):
+        if passed_current:
+            remaining += track.length
+        
+        if track.id == book.position:
+            passed_current = True
+            if include_current:
+                remaining += int(track.position / 1000000000)
+        
+    return remaining
