@@ -1,7 +1,14 @@
 import os
 import logging
 import uuid
-from peewee import BaseModel, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase
+
+from peewee import __version__ as PeeweeVersion
+if PeeweeVersion[0] == '2':
+    from peewee import BaseModel
+    ModelBase = BaseModel
+else:
+    from peewee import ModelBase
+from peewee import Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase
 from playhouse.migrate import SqliteMigrator, migrate
 from gi.repository import GLib, GdkPixbuf
 
@@ -17,9 +24,9 @@ if not os.path.exists(data_dir):
 db = SqliteDatabase(os.path.join(data_dir, "cozy.db"))
 
 
-class BaseModel(Model):
+class ModelBase(Model):
     """
-    The BaseModel is the base class for all db tables.
+    The ModelBase is the base class for all db tables.
     """
     class Meta:
         """
@@ -28,7 +35,7 @@ class BaseModel(Model):
         database = db
 
 
-class Book(BaseModel):
+class Book(ModelBase):
     """
     Book represents an audio book in the database.
     """
@@ -40,7 +47,7 @@ class Book(BaseModel):
     cover = BlobField(null=True)
 
 
-class Track(BaseModel):
+class Track(ModelBase):
     """
     Track represents a track from an audio book in the database.
     """
@@ -55,7 +62,7 @@ class Track(BaseModel):
     crc32 = BooleanField(default=False)
 
 
-class Settings(BaseModel):
+class Settings(ModelBase):
     """
     Settings contains all settings that are not saved in the gschema.
     """
@@ -65,7 +72,7 @@ class Settings(BaseModel):
     version = IntegerField(default=1)
 
 
-class ArtworkCache(BaseModel):
+class ArtworkCache(ModelBase):
     """
     The artwork cache matches uuids for scaled image files to book objects.
     """
@@ -77,7 +84,10 @@ def init_db():
     db.connect()
     # Create tables only when not already present
     #                                           |
-    db.create_tables([Track, Book, Settings, ArtworkCache], True)
+    if PeeweeVersion[0] == '2':
+        db.create_tables([Track, Book, Settings, ArtworkCache], True)
+    else:
+        db.create_tables([Track, Book, Settings, ArtworkCache])
     update_db()
 
     if (Settings.select().count() == 0):
@@ -218,7 +228,7 @@ def update_db():
         next(c for c in db.get_columns("settings") if c.name == "version")
     except StopIteration as e:
         update_db_1()
-
+        
 
 # thanks to oleg-krv
 def get_book_duration(book):
