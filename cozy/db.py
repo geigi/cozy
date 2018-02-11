@@ -21,7 +21,7 @@ log.debug(data_dir)
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)
 
-db = SqliteDatabase(os.path.join(data_dir, "cozy.db"))
+db = SqliteDatabase(os.path.join(data_dir, "cozy.db"), pragmas=[('journal_mode', 'wal')])
 
 
 class ModelBase(Model):
