@@ -323,9 +323,16 @@ class CozyUI:
         if self.is_elementary:
             self.cover_img_box.props.width_request = 28
             self.cover_img_box.props.height_request = 28
+        
+        try:
             about_close_button = self.about_builder.get_object(
                 "button_box").get_children()[2]
-            about_close_button.connect("clicked", self.__about_close_clicked)
+        
+            if about_close_button is not None:
+                about_close_button.connect("clicked", self.__about_close_clicked)
+        except Exception as e:
+            log.warning("Not connecting about close button.")
+        
 
         player.add_player_listener(self.__player_changed)
 
