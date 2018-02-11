@@ -687,14 +687,13 @@
                 <child>
                   <object class="GtkVolumeButton" id="volume_button">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="focus_on_click">False</property>
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Volume control</property>
-                    <property name="relief">normal</property>
                     <property name="value">1</property>
                     <property name="size">button</property>
-                    <property name="sensitive">False</property>
                     <property name="icons">audio-volume-muted-symbolic
 audio-volume-high-symbolic
 audio-volume-low-symbolic
@@ -898,19 +897,25 @@ audio-volume-medium-symbolic</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="remaining_label">
-                        <property name="width_request">35</property>
+                      <object class="GtkEventBox" id="remaining_event_box">
+                        <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="tooltip_text" translatable="yes">Remaining time</property>
-                        <property name="halign">start</property>
-                        <property name="margin_left">3</property>
-                        <property name="margin_top">2</property>
-                        <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
-                        <property name="use_markup">True</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="remaining_label-atkobject">
-                            <property name="AtkObject::accessible-name" translatable="yes">Time remaining</property>
-                            <property name="AtkObject::accessible-description" translatable="yes">Remaining time of current part</property>
+                        <child>
+                          <object class="GtkLabel" id="remaining_label">
+                            <property name="width_request">35</property>
+                            <property name="can_focus">False</property>
+                            <property name="tooltip_text" translatable="yes">Remaining time</property>
+                            <property name="halign">start</property>
+                            <property name="margin_left">3</property>
+                            <property name="margin_top">2</property>
+                            <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
+                            <property name="use_markup">True</property>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="remaining_label-atkobject">
+                                <property name="AtkObject::accessible-name" translatable="yes">Time remaining</property>
+                                <property name="AtkObject::accessible-description" translatable="yes">Remaining time of current part</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -983,7 +988,6 @@ audio-volume-medium-symbolic</property>
             <property name="vexpand">True</property>
             <child>
               <object class="GtkSpinner" id="spinner">
-                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="tooltip_text" translatable="yes">Working...</property>
                 <property name="margin_left">5</property>
