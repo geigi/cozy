@@ -1,7 +1,14 @@
 import os
 import logging
 import uuid
-from peewee import ModelBase, Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase
+
+from peewee import __version__ as PeeweeVersion
+if PeeweeVersion[0] == '2':
+    from peewee import BaseModel
+    ModelBase = BaseModel
+else:
+    from peewee import ModelBase
+from peewee import Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase
 from playhouse.migrate import SqliteMigrator, migrate
 from gi.repository import GLib, GdkPixbuf
 
@@ -77,7 +84,10 @@ def init_db():
     db.connect()
     # Create tables only when not already present
     #                                           |
-    db.create_tables([Track, Book, Settings, ArtworkCache])
+    if PeeweeVersion[0] == '2':
+        db.create_tables([Track, Book, Settings, ArtworkCache], True)
+    else:
+        db.create_tables([Track, Book, Settings, ArtworkCache])
     update_db()
 
     if (Settings.select().count() == 0):
