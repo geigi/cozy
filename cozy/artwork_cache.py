@@ -30,7 +30,7 @@ def get_cover_pixbuf(book, size=0):
         # create cached version
         pixbuf = __create_artwork_cache(book, pixbuf, size)
     else:
-        pixbuf = __load_placeholder(size)
+        pixbuf = __load_artwork_placeholder(size)
 
     return pixbuf
 
@@ -70,7 +70,7 @@ def __load_artwork_placeholder(size):
     else:
         pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
         pixbuf = __resize_pixbuf(pixbuf, size)
-        pixbuf.save(file_path, "jpeg")
+        pixbuf.savev(file_path, "jpeg", "", "")
     
     return pixbuf
 
@@ -192,8 +192,14 @@ def __load_pixbuf_from_file(book):
     pixbuf = None
 
     directory = os.path.dirname(os.path.normpath(tracks(book)[0].file))
-    cover_files = [f for f in os.listdir(directory)
-                   if f.lower().endswith('.png') or f.lower().endswith(".jpg") or f.lower().endswith(".gif")]
+    cover_files = []
+
+    try:
+        cover_files = [f for f in os.listdir(directory)
+                       if f.lower().endswith('.png') or f.lower().endswith(".jpg") or f.lower().endswith(".gif")]
+    except Exception as e:
+        log.warning("Could not open audiobook directory and look for cover files.")
+        log.warning(e)
     for elem in (x for x in cover_files if os.path.splitext(x.lower())[0] == "cover"):
         # find cover.[jpg,png,gif]
         try:

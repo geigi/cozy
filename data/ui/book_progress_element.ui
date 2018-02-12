@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.20.2 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
+  <requires lib="gtk+" version="3.16"/>
   <object class="GtkBox" id="progress_box">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -30,7 +30,7 @@
           <object class="GtkLabel" id="duration_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">21h32</property>
+            <property name="label" translatable="no">21h32</property>
             <property name="justify">right</property>
           </object>
           <packing>
@@ -57,7 +57,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_left">5</property>
-            <property name="label" translatable="yes">4h32</property>
+            <property name="label" translatable="no">4h32</property>
           </object>
           <packing>
             <property name="expand">False</property>
