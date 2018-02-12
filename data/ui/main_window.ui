@@ -693,6 +693,7 @@
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Volume control</property>
                     <property name="value">1</property>
+                    <property name="relief">normal</property>
                     <property name="size">button</property>
                     <property name="icons">audio-volume-muted-symbolic
 audio-volume-high-symbolic
