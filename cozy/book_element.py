@@ -358,7 +358,8 @@ class BookElement(Gtk.Box):
         if not self.popover_created:
             return
         
-        progress = get_book_progress(Book.select().where(Book.id == self.book.id).get())
+        progress = get_book_progress(Book.select().where(Book.id == self.book.id).get(), False)
+        progress += (get_current_duration()  / 1000000000)
         remaining = (self.duration - progress) / self.ui.speed
 
         if progress == 0 or remaining < 15:
@@ -373,6 +374,7 @@ class BookElement(Gtk.Box):
 
             self.remaining_label.set_text(tools.seconds_to_str(remaining, False))
             self.progress_bar.set_fraction(percentage)
+
 
     def __ui_changed(self, event, message):
         """

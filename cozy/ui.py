@@ -1091,7 +1091,7 @@ class CozyUI:
                 size = 40
             self.set_title_cover(artwork_cache.get_cover_pixbuf(track.book, size))
 
-        self.current_remaining = db.get_book_remaining(self.current_book)
+        self.current_remaining = db.get_book_remaining(self.current_book, False)
         m,s = player.get_current_duration_ui()
         value = 60 * m + s
         total = player.get_current_track().length / self.speed
