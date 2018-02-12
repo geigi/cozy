@@ -29,18 +29,32 @@ class CozyUI:
     """
     CozyUI is the main ui class.
     """
+    # The book that is currently loaded in the player
     current_book = None
+    # Titlebar timer for ui updates on position
     play_status_updater = None
     sleep_timer = None
+    # Is the mouse button currently down on the progress scale?
     progress_scale_clicked = False
+    # Are we running on elementary?
     is_elementary = False
     current_timer_time = 0
+    # Current book ui element
     current_book_element = None
+    # Current track ui element
     current_track_element = None
+    # Is currently an dialog open?
     dialog_open = False
+    # Playback speed
     speed = 1.0
+    # Are we currently playing?
     is_playing = False
+    # Remaining time for this book in seconds
+    # This doesn't include the current track
+    # and will only be refreshed when the loaded track changes!
     current_remaining = 0
+    # Contains listeners to ui events
+    __listeners = []
 
     def __init__(self, pkgdatadir, app, version):
         self.pkgdir = pkgdatadir
@@ -815,7 +829,7 @@ class CozyUI:
         """
         Jump to the slided time and release the progress scale update lock.
         """
-        player.jump_to(self.progress_scale.get_value())
+        player.jump_to(self.progress_scale.get_value() * self.speed)
         self.progress_scale_clicked = False
 
         return False
@@ -925,7 +939,8 @@ class CozyUI:
         """
         Jump back 30 seconds.
         """
-        player.rewind(30)
+        seconds = 30 * self.speed
+        player.rewind(seconds)
         if self.progress_scale.get_value() > 30:
             self.progress_scale.set_value(self.progress_scale.get_value() - 30)
         else:
@@ -1077,9 +1092,11 @@ class CozyUI:
             self.set_title_cover(artwork_cache.get_cover_pixbuf(track.book, size))
 
         self.current_remaining = db.get_book_remaining(self.current_book)
-        total = player.get_current_track().length
+        m,s = player.get_current_duration_ui()
+        value = 60 * m + s
+        total = player.get_current_track().length / self.speed
         self.progress_scale.set_range(0, total)
-        self.progress_scale.set_value(int(track.position / 1000000000))
+        self.progress_scale.set_value(value)
         self.__update_ui_time(None)
 
     def __update_time(self):
@@ -1089,7 +1106,7 @@ class CozyUI:
         if not self.progress_scale_clicked:
             cur_m, cur_s = player.get_current_duration_ui()
             Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
-                                 self.progress_scale.set_value, cur_m * 60 + cur_s)
+                                 self.progress_scale.set_value, (cur_m * 60 + cur_s))
 
     def __update_ui_time(self, widget):
         """
@@ -1102,10 +1119,10 @@ class CozyUI:
         track = player.get_current_track()
 
         if track is not None:
-            remaining_secs = int(track.length - val)
+            remaining_secs = int((track.length / self.speed) - val)
 
             if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-                remaining_secs += self.current_remaining
+                remaining_secs += (self.current_remaining / self.speed)
                 self.remaining_label.set_markup(
                     "<tt><b>-" + tools.seconds_to_str(remaining_secs) + "</b></tt>")
             else:
@@ -1129,7 +1146,7 @@ class CozyUI:
 
         if enable and self.is_playing:
             self.play_status_updater = RepeatedTimer(
-                1.0 / self.speed, self.__update_time)
+                1.0, self.__update_time)
             self.play_status_updater.start()
 
     def __set_playback_speed(self, widget):
@@ -1140,7 +1157,13 @@ class CozyUI:
         self.speed = round(self.playback_speed_scale.get_value(), 2)
         self.playback_speed_label.set_text('{speed:3.1f} x'.format(speed=self.speed))
         player.set_playback_speed(self.speed)
-        self.__set_play_status_updater(True)
+        self.__update_ui_time(None)
+        m,s = player.get_current_duration_ui()
+        value = 60 * m + s
+        total = player.get_current_track().length / self.speed
+        self.progress_scale.set_range(0, total)
+        self.progress_scale.set_value(value)
+        self.emit_event("playback-speed-changed")
 
     def track_changed(self):
         """
@@ -1254,6 +1277,19 @@ class CozyUI:
             player.stop()
 
         player.dispose()
+
+    def emit_event(self, event, message=None):
+        """
+        This function is used to notify listeners of ui state changes.
+        """
+        for function in self.__listeners:
+            function(event, message)
+    
+    def add_listener(self, function):
+        """
+        Add a listener to listen to changes from the io.
+        """
+        self.__listeners.append(function)
 
     ####################
     # CONTENT HANDLING #

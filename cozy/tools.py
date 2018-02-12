@@ -108,7 +108,7 @@ def seconds_to_str(seconds, include_seconds=True):
         if (h > 0):
             result = "%d:%02d" % (h, m)
         elif (m > 0):
-            result = "%02d" % (m)
+            result = "00:%02d" % (m)
         else:
             result = "00:00"
 

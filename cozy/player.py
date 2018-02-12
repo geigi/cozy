@@ -121,7 +121,8 @@ def get_current_duration_ui():
     :return m: minutes
     :return s: seconds
     """
-    s, ns = divmod(get_current_duration(), 1000000000)
+    global __speed
+    s, ns = divmod(get_current_duration() / __speed, 1000000000)
     m, s = divmod(s, 60)
     return m, s
 
@@ -269,7 +270,8 @@ def rewind(seconds):
     if seek < 0:
         prev_track()
         seek = get_current_track().length * 1000000000 + seek
-    __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, seek)
+    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
+                  Gst.SeekType.SET, seek, Gst.SeekType.NONE, 0)
     save_current_track_position(seek)
 
 

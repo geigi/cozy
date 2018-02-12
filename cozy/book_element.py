@@ -257,7 +257,8 @@ class BookElement(Gtk.Box):
         self.remaining_text_label = builder.get_object("remaining_text_label")
 
         self.duration = get_book_duration(self.book)
-        self.duration_label.set_text(tools.seconds_to_str(self.duration, False))
+        self.duration_label.set_text(tools.seconds_to_str(self.duration / self.ui.speed, False))
+        self.ui.add_listener(self.__ui_changed)
 
         self.progress_box.show_all()
 
@@ -358,7 +359,7 @@ class BookElement(Gtk.Box):
             return
         
         progress = get_book_progress(Book.select().where(Book.id == self.book.id).get())
-        remaining = self.duration - progress
+        remaining = (self.duration - progress) / self.ui.speed
 
         if progress == 0 or remaining < 15:
             self.remaining_label.set_visible(False)
@@ -372,6 +373,15 @@ class BookElement(Gtk.Box):
 
             self.remaining_label.set_text(tools.seconds_to_str(remaining, False))
             self.progress_bar.set_fraction(percentage)
+
+    def __ui_changed(self, event, message):
+        """
+        Handler for events that occur in the main ui.
+        """
+        if event == "playback-speed-changed":
+            self.duration = get_book_duration(self.book)
+            self.duration_label.set_text(tools.seconds_to_str(self.duration / self.ui.speed, False))
+            self.update_time()
 
 
 class TrackElement(Gtk.EventBox):
