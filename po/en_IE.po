@@ -7,22 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cozy 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-05 19:55+0100\n"
+"POT-Creation-Date: 2018-02-12 17:58+0100\n"
 "Last-Translator: Julian Geywitz <transifex@geigi.de>\n"
 "Language: en_IE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cozy/book_element.py:63 cozy/search_results.py:124
+#: cozy/book_element.py:64 cozy/search_results.py:124
 msgid "Play this book"
 msgstr "Play this book"
 
-#: cozy/book_element.py:186
+#: cozy/book_element.py:188
 msgid "Open book overview"
 msgstr "Open book overview"
 
-#: cozy/book_element.py:313
+#: cozy/book_element.py:407
 #, fuzzy
 msgid "Play this part"
 msgstr "Play this track"
@@ -39,31 +39,31 @@ msgstr "Jump to author "
 msgid "Jump to reader "
 msgstr "Jump to reader "
 
-#: cozy/importer.py:246
+#: cozy/importer.py:279
 msgid "Unknown Author"
 msgstr "Unknown Author"
 
-#: cozy/importer.py:248
+#: cozy/importer.py:281
 msgid "Unknown Reader"
 msgstr "Unknown Reader"
 
-#: cozy/ui.py:395 cozy/ui.py:718 data/ui/timer_popover.ui:86
+#: cozy/ui.py:430 cozy/ui.py:756 data/ui/timer_popover.ui:86
 msgid "min"
 msgstr "min"
 
-#: cozy/ui.py:567
+#: cozy/ui.py:605
 msgid "Importing Audiobooks"
 msgstr "Importing Audiobooks"
 
-#: cozy/ui.py:629 cozy/ui.py:633 cozy/ui.py:1243 cozy/ui.py:1252
+#: cozy/ui.py:667 cozy/ui.py:671 cozy/ui.py:1319 cozy/ui.py:1328
 msgid "All"
 msgstr "All"
 
-#: cozy/ui.py:630 cozy/ui.py:634
+#: cozy/ui.py:668 cozy/ui.py:672
 msgid "Display all books"
 msgstr "Display all books"
 
-#: cozy/ui.py:850
+#: cozy/ui.py:902
 msgid "Changing audio book location..."
 msgstr "Changing audio book location..."
 
@@ -189,7 +189,7 @@ msgstr "Play/Pause Button"
 msgid "Start or pause the playback"
 msgstr "Start or pause the playback"
 
-#: data/ui/main_window.ui:693
+#: data/ui/main_window.ui:694
 msgid "Volume control"
 msgstr "Volume control"
 
@@ -241,64 +241,64 @@ msgstr "Position slider"
 msgid "Position of the current part in seconds"
 msgstr "Position of the current track in seconds"
 
-#: data/ui/main_window.ui:903
+#: data/ui/main_window.ui:907
 msgid "Remaining time"
 msgstr "Remaining time"
 
-#: data/ui/main_window.ui:911
+#: data/ui/main_window.ui:915
 msgid "Time remaining"
 msgstr "Time remaining"
 
-#: data/ui/main_window.ui:912
+#: data/ui/main_window.ui:916
 #, fuzzy
 msgid "Remaining time of current part"
 msgstr "Remaining time of current track"
 
-#: data/ui/main_window.ui:987
+#: data/ui/main_window.ui:992
 msgid "Working..."
 msgstr "Working..."
 
-#: data/ui/main_window.ui:992
+#: data/ui/main_window.ui:997
 msgid "Currently working"
 msgstr "Currently working"
 
-#: data/ui/main_window.ui:1007
+#: data/ui/main_window.ui:1012
 msgid "Playback speed"
 msgstr "Playback speed"
 
-#: data/ui/main_window.ui:1028
+#: data/ui/main_window.ui:1033
 msgid "Sleep timer"
 msgstr "Sleep timer"
 
-#: data/ui/main_window.ui:1039
+#: data/ui/main_window.ui:1044
 msgid "Timer menu button"
 msgstr "Timer menu button"
 
-#: data/ui/main_window.ui:1040
+#: data/ui/main_window.ui:1045
 msgid "Open the sleep timer popover"
 msgstr "Open the sleep timer popover"
 
-#: data/ui/main_window.ui:1056
+#: data/ui/main_window.ui:1061
 msgid "Search your library"
 msgstr "Search your library"
 
-#: data/ui/main_window.ui:1067
+#: data/ui/main_window.ui:1072
 msgid "Search menu button"
 msgstr "Search menu button"
 
-#: data/ui/main_window.ui:1068
+#: data/ui/main_window.ui:1073
 msgid "Open the search popover"
 msgstr "Open the search popover"
 
-#: data/ui/main_window.ui:1082
+#: data/ui/main_window.ui:1087
 msgid "Options"
 msgstr "Options"
 
-#: data/ui/main_window.ui:1093
+#: data/ui/main_window.ui:1098
 msgid "Options menu button"
 msgstr "Options menu button"
 
-#: data/ui/main_window.ui:1094
+#: data/ui/main_window.ui:1099
 msgid "Open the options popover"
 msgstr "Open the options popover"
 
@@ -366,53 +366,53 @@ msgstr ""
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 
-#: data/ui/settings.ui:27 data/ui/settings.ui:102
-msgid "Order by"
-msgstr "Order by"
+#: data/ui/settings.ui:26
+msgid "Titlebar"
+msgstr "Titlebar"
 
-#: data/ui/settings.ui:37
-msgid "Newest"
-msgstr "Newest"
+#: data/ui/settings.ui:46
+msgid "Display remaining time of whole book"
+msgstr "Display remaining time of whole book"
 
-#: data/ui/settings.ui:54
-msgid "Year"
-msgstr "Year"
-
-#: data/ui/settings.ui:72
-msgid "Name"
-msgstr "Name"
-
-#: data/ui/settings.ui:143
+#: data/ui/settings.ui:84
 msgid "Appearance"
 msgstr "Appearance"
 
-#: data/ui/settings.ui:158
+#: data/ui/settings.ui:99
 msgid "Suspend system on timer"
 msgstr "Suspend system on timer"
 
-#: data/ui/settings.ui:194
+#: data/ui/settings.ui:135
 msgid "Replay 30 seconds"
 msgstr "Replay 30 seconds"
 
-#: data/ui/settings.ui:229
+#: data/ui/settings.ui:170
 msgid "Automatic media scan"
 msgstr "Automatic media scan"
 
-#: data/ui/settings.ui:260
+#: data/ui/settings.ui:201
 msgid "Behaviour"
 msgstr "Behaviour"
 
-#: data/ui/settings.ui:276
+#: data/ui/settings.ui:217
 msgid "Follow symlinks"
 msgstr "Follow symlinks"
 
-#: data/ui/settings.ui:314 data/ui/settings.ui:329
+#: data/ui/settings.ui:255 data/ui/settings.ui:270
 msgid "Audio books location"
 msgstr "Audio books location"
 
-#: data/ui/settings.ui:351
+#: data/ui/settings.ui:292
 msgid "Files"
 msgstr "Files"
+
+#: data/ui/settings.ui:309
+msgid "Use crc32 checksum instead of last modified timestamp on folder scan"
+msgstr "Use crc32 checksum instead of last modified timestamp on folder scan"
+
+#: data/ui/settings.ui:344
+msgid "Advanced"
+msgstr "Advanced"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -436,7 +436,7 @@ msgstr "Book"
 
 #: data/ui/search_popover.ui:248
 msgid "Part"
-msgstr ""
+msgstr "Part"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
@@ -469,6 +469,28 @@ msgstr "Set the sleep timer duration in minutes"
 #: data/ui/timer_popover.ui:92
 msgid "Timer duration spin button"
 msgstr "Timer duration spin button"
+
+#: data/ui/book_progress_element.ui:47
+#, fuzzy
+msgid "remaining"
+msgstr "remaining"
+
+#: data/ui/book_progress_element.ui:75
+#, fuzzy
+msgid "total"
+msgstr "total"
+
+#~ msgid "Order by"
+#~ msgstr "Order by"
+
+#~ msgid "Newest"
+#~ msgstr "Newest"
+
+#~ msgid "Year"
+#~ msgstr "Year"
+
+#~ msgid "Name"
+#~ msgstr "Name"
 
 #~ msgid "Track title"
 #~ msgstr "Track title"

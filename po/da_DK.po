@@ -1,14 +1,15 @@
 # Copyright (C) 2017
 # This file is distributed under the same license as the cozy package.
-# geigi <transifex@geigi.de>, 2017.
+# geigi <transifex@geigi.de>, 2018.
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: cozy 0.1\n"
+"Project-Id-Version: cozy 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-05 19:55+0100\n"
-"Last-Translator: Hans Czajkowski Jørgensen <hans.c.jorgensen@gmail.com>, 2017\n"
+"POT-Creation-Date: 2018-02-12 17:58+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Hans Czajkowski Jørgensen, 2017\n"
 "Language-Team: Danish (Denmark) (https://www.transifex.com/geigi/teams/78138/da_DK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -16,15 +17,15 @@ msgstr ""
 "Language: da_DK\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/book_element.py:63 cozy/search_results.py:124
+#: cozy/book_element.py:64 cozy/search_results.py:124
 msgid "Play this book"
 msgstr "Afspil denne bog"
 
-#: cozy/book_element.py:186
+#: cozy/book_element.py:188
 msgid "Open book overview"
 msgstr "Åbn oversigt over bogen"
 
-#: cozy/book_element.py:313
+#: cozy/book_element.py:407
 msgid "Play this part"
 msgstr "Afspil denne del"
 
@@ -40,31 +41,31 @@ msgstr "Gå til forfatter"
 msgid "Jump to reader "
 msgstr "Gå til oplæser"
 
-#: cozy/importer.py:246
+#: cozy/importer.py:279
 msgid "Unknown Author"
 msgstr "Ukendt Forfatter"
 
-#: cozy/importer.py:248
+#: cozy/importer.py:281
 msgid "Unknown Reader"
 msgstr "Ukendt Oplæser"
 
-#: cozy/ui.py:395 cozy/ui.py:718 data/ui/timer_popover.ui:86
+#: cozy/ui.py:430 cozy/ui.py:756 data/ui/timer_popover.ui:86
 msgid "min"
 msgstr "min"
 
-#: cozy/ui.py:567
+#: cozy/ui.py:605
 msgid "Importing Audiobooks"
 msgstr "Importerer lydbøger"
 
-#: cozy/ui.py:629 cozy/ui.py:633 cozy/ui.py:1243 cozy/ui.py:1252
+#: cozy/ui.py:667 cozy/ui.py:671 cozy/ui.py:1319 cozy/ui.py:1328
 msgid "All"
 msgstr "Alle"
 
-#: cozy/ui.py:630 cozy/ui.py:634
+#: cozy/ui.py:668 cozy/ui.py:672
 msgid "Display all books"
 msgstr "Vis alle bøger"
 
-#: cozy/ui.py:850
+#: cozy/ui.py:902
 msgid "Changing audio book location..."
 msgstr "Ændrer lydbogens placering..."
 
@@ -189,7 +190,7 @@ msgstr "Afspil/Pause-knap"
 msgid "Start or pause the playback"
 msgstr "Start eller sæt afspilningen på pause"
 
-#: data/ui/main_window.ui:693
+#: data/ui/main_window.ui:694
 msgid "Volume control"
 msgstr "Lydstyrke-kontrol"
 
@@ -237,63 +238,63 @@ msgstr ""
 msgid "Position of the current part in seconds"
 msgstr ""
 
-#: data/ui/main_window.ui:903
+#: data/ui/main_window.ui:907
 msgid "Remaining time"
 msgstr "Resterende tid"
 
-#: data/ui/main_window.ui:911
+#: data/ui/main_window.ui:915
 msgid "Time remaining"
 msgstr "Resterende tid"
 
-#: data/ui/main_window.ui:912
+#: data/ui/main_window.ui:916
 msgid "Remaining time of current part"
 msgstr "Den aktuelle dels resterende tid"
 
-#: data/ui/main_window.ui:987
+#: data/ui/main_window.ui:992
 msgid "Working..."
 msgstr "Arbejder..."
 
-#: data/ui/main_window.ui:992
+#: data/ui/main_window.ui:997
 msgid "Currently working"
 msgstr ""
 
-#: data/ui/main_window.ui:1007
+#: data/ui/main_window.ui:1012
 msgid "Playback speed"
 msgstr "Afspilningshastighed"
 
-#: data/ui/main_window.ui:1028
+#: data/ui/main_window.ui:1033
 msgid "Sleep timer"
 msgstr ""
 
-#: data/ui/main_window.ui:1039
+#: data/ui/main_window.ui:1044
 msgid "Timer menu button"
 msgstr ""
 
-#: data/ui/main_window.ui:1040
+#: data/ui/main_window.ui:1045
 msgid "Open the sleep timer popover"
 msgstr ""
 
-#: data/ui/main_window.ui:1056
+#: data/ui/main_window.ui:1061
 msgid "Search your library"
 msgstr "Søg i dit bibliotek"
 
-#: data/ui/main_window.ui:1067
+#: data/ui/main_window.ui:1072
 msgid "Search menu button"
 msgstr ""
 
-#: data/ui/main_window.ui:1068
+#: data/ui/main_window.ui:1073
 msgid "Open the search popover"
 msgstr ""
 
-#: data/ui/main_window.ui:1082
+#: data/ui/main_window.ui:1087
 msgid "Options"
 msgstr "Valgmuligheder"
 
-#: data/ui/main_window.ui:1093
+#: data/ui/main_window.ui:1098
 msgid "Options menu button"
 msgstr ""
 
-#: data/ui/main_window.ui:1094
+#: data/ui/main_window.ui:1099
 msgid "Open the options popover"
 msgstr ""
 
@@ -361,53 +362,53 @@ msgstr ""
 "- Filen/filerne er ikke gyldige lydfiler\n"
 "- Filen/filerne er beskadigede"
 
-#: data/ui/settings.ui:27 data/ui/settings.ui:102
-msgid "Order by"
-msgstr "Sorter efter"
+#: data/ui/settings.ui:26
+msgid "Titlebar"
+msgstr ""
 
-#: data/ui/settings.ui:37
-msgid "Newest"
-msgstr "Nyeste"
+#: data/ui/settings.ui:46
+msgid "Display remaining time of whole book"
+msgstr ""
 
-#: data/ui/settings.ui:54
-msgid "Year"
-msgstr "År"
-
-#: data/ui/settings.ui:72
-msgid "Name"
-msgstr "Navn"
-
-#: data/ui/settings.ui:143
+#: data/ui/settings.ui:84
 msgid "Appearance"
 msgstr "Udseende"
 
-#: data/ui/settings.ui:158
+#: data/ui/settings.ui:99
 msgid "Suspend system on timer"
 msgstr ""
 
-#: data/ui/settings.ui:194
+#: data/ui/settings.ui:135
 msgid "Replay 30 seconds"
 msgstr "Afspil de sidste 30 sekunder igen"
 
-#: data/ui/settings.ui:229
+#: data/ui/settings.ui:170
 msgid "Automatic media scan"
 msgstr ""
 
-#: data/ui/settings.ui:260
+#: data/ui/settings.ui:201
 msgid "Behaviour"
 msgstr "Adfærd"
 
-#: data/ui/settings.ui:276
+#: data/ui/settings.ui:217
 msgid "Follow symlinks"
 msgstr "Følg genveje"
 
-#: data/ui/settings.ui:314 data/ui/settings.ui:329
+#: data/ui/settings.ui:255 data/ui/settings.ui:270
 msgid "Audio books location"
 msgstr "Lydbøgernes placering"
 
-#: data/ui/settings.ui:351
+#: data/ui/settings.ui:292
 msgid "Files"
 msgstr "Filer"
+
+#: data/ui/settings.ui:309
+msgid "Use crc32 checksum instead of last modified timestamp on folder scan"
+msgstr ""
+
+#: data/ui/settings.ui:344
+msgid "Advanced"
+msgstr ""
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -463,4 +464,12 @@ msgstr ""
 
 #: data/ui/timer_popover.ui:92
 msgid "Timer duration spin button"
+msgstr ""
+
+#: data/ui/book_progress_element.ui:47
+msgid "remaining"
+msgstr ""
+
+#: data/ui/book_progress_element.ui:75
+msgid "total"
 msgstr ""

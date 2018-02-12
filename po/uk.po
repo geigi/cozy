@@ -1,31 +1,31 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2017
+# This file is distributed under the same license as the cozy package.
+# geigi <transifex@geigi.de>, 2018.
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: cozy 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-05 19:55+0100\n"
-"Last-Translator: Krivorot Oleg <krivorot.oleg@gmail.com>, 2018\n"
-"Language-Team: Ukranian (https://www.transifex.com/geigi/teams/78138/uk/)\n"
+"POT-Creation-Date: 2018-02-12 17:58+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Oleg Krivorot <krivorot.oleg@gmail.com>, 2018\n"
+"Language-Team: Ukrainian (https://www.transifex.com/geigi/teams/78138/uk/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: uk\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: cozy/book_element.py:63 cozy/search_results.py:124
+#: cozy/book_element.py:64 cozy/search_results.py:124
 msgid "Play this book"
 msgstr "Слухати цю аудіокнигу"
 
-#: cozy/book_element.py:186
+#: cozy/book_element.py:188
 msgid "Open book overview"
 msgstr "Відкрити огляд книги"
 
-#: cozy/book_element.py:313
+#: cozy/book_element.py:407
 msgid "Play this part"
 msgstr "Слухати цю частину"
 
@@ -41,31 +41,31 @@ msgstr "Перейти до автора "
 msgid "Jump to reader "
 msgstr "Перейти до диктора "
 
-#: cozy/importer.py:246
+#: cozy/importer.py:279
 msgid "Unknown Author"
 msgstr "Невідомий автор"
 
-#: cozy/importer.py:248
+#: cozy/importer.py:281
 msgid "Unknown Reader"
 msgstr "Невідомий диктор"
 
-#: cozy/ui.py:395 cozy/ui.py:718 data/ui/timer_popover.ui:86
+#: cozy/ui.py:430 cozy/ui.py:756 data/ui/timer_popover.ui:86
 msgid "min"
 msgstr "хв."
 
-#: cozy/ui.py:567
+#: cozy/ui.py:605
 msgid "Importing Audiobooks"
 msgstr "Імпорт аудіокниг"
 
-#: cozy/ui.py:629 cozy/ui.py:633 cozy/ui.py:1243 cozy/ui.py:1252
+#: cozy/ui.py:667 cozy/ui.py:671 cozy/ui.py:1319 cozy/ui.py:1328
 msgid "All"
 msgstr "Всі"
 
-#: cozy/ui.py:630 cozy/ui.py:634
+#: cozy/ui.py:668 cozy/ui.py:672
 msgid "Display all books"
 msgstr "Відобразити всі книжки"
 
-#: cozy/ui.py:850
+#: cozy/ui.py:902
 msgid "Changing audio book location..."
 msgstr "Вибір каталога аудіокниг..."
 
@@ -133,8 +133,7 @@ msgstr "Імпорт аудіокниг"
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy аавтоматично імпортує аудіокниги з зазначеного каталога в "
-"бібліотеку"
+"Cozy аавтоматично імпортує аудіокниги з зазначеного каталога в бібліотеку"
 
 #: data/ui/main_window.ui:416
 msgid "Drag & Drop"
@@ -192,7 +191,7 @@ msgstr "Кнопка прогр./паузи"
 msgid "Start or pause the playback"
 msgstr "Запуск або призупинення програвання"
 
-#: data/ui/main_window.ui:693
+#: data/ui/main_window.ui:694
 msgid "Volume control"
 msgstr "Регулятор гучності"
 
@@ -240,63 +239,63 @@ msgstr "Повзунок положення"
 msgid "Position of the current part in seconds"
 msgstr "Положення поточної частини в секундах"
 
-#: data/ui/main_window.ui:903
+#: data/ui/main_window.ui:907
 msgid "Remaining time"
 msgstr "Час, що залишився"
 
-#: data/ui/main_window.ui:911
+#: data/ui/main_window.ui:915
 msgid "Time remaining"
 msgstr "Залишилось"
 
-#: data/ui/main_window.ui:912
+#: data/ui/main_window.ui:916
 msgid "Remaining time of current part"
 msgstr "Час, що залишився для поточної частини"
 
-#: data/ui/main_window.ui:987
+#: data/ui/main_window.ui:992
 msgid "Working..."
 msgstr "Обробка…"
 
-#: data/ui/main_window.ui:992
+#: data/ui/main_window.ui:997
 msgid "Currently working"
 msgstr "В даний момент працює"
 
-#: data/ui/main_window.ui:1007
+#: data/ui/main_window.ui:1012
 msgid "Playback speed"
 msgstr "Швидкість відтворення"
 
-#: data/ui/main_window.ui:1028
+#: data/ui/main_window.ui:1033
 msgid "Sleep timer"
 msgstr "Таймер сну"
 
-#: data/ui/main_window.ui:1039
+#: data/ui/main_window.ui:1044
 msgid "Timer menu button"
 msgstr "Кнопка меню таймера"
 
-#: data/ui/main_window.ui:1040
+#: data/ui/main_window.ui:1045
 msgid "Open the sleep timer popover"
 msgstr "Відкрити вікно таймера сну"
 
-#: data/ui/main_window.ui:1056
+#: data/ui/main_window.ui:1061
 msgid "Search your library"
 msgstr "Пошук у вашій аудіобібліотеці"
 
-#: data/ui/main_window.ui:1067
+#: data/ui/main_window.ui:1072
 msgid "Search menu button"
 msgstr "Кнопка меню пошуку"
 
-#: data/ui/main_window.ui:1068
+#: data/ui/main_window.ui:1073
 msgid "Open the search popover"
 msgstr "Відкрийте пошуковий запит"
 
-#: data/ui/main_window.ui:1082
+#: data/ui/main_window.ui:1087
 msgid "Options"
 msgstr "Налаштування"
 
-#: data/ui/main_window.ui:1093
+#: data/ui/main_window.ui:1098
 msgid "Options menu button"
 msgstr "Кнопка меню налаштувань"
 
-#: data/ui/main_window.ui:1094
+#: data/ui/main_window.ui:1099
 msgid "Open the options popover"
 msgstr "Відкрити вікно налаштувань"
 
@@ -364,53 +363,53 @@ msgstr ""
 "- Файл(и) не є допустимими аудіофайлами\n"
 "- Файл(и) пошкоджені"
 
-#: data/ui/settings.ui:27 data/ui/settings.ui:102
-msgid "Order by"
-msgstr "Замовлення"
+#: data/ui/settings.ui:26
+msgid "Titlebar"
+msgstr ""
 
-#: data/ui/settings.ui:37
-msgid "Newest"
-msgstr "Нові"
+#: data/ui/settings.ui:46
+msgid "Display remaining time of whole book"
+msgstr ""
 
-#: data/ui/settings.ui:54
-msgid "Year"
-msgstr "Рік"
-
-#: data/ui/settings.ui:72
-msgid "Name"
-msgstr "Ім'я"
-
-#: data/ui/settings.ui:143
+#: data/ui/settings.ui:84
 msgid "Appearance"
 msgstr "Зовнішній вигляд"
 
-#: data/ui/settings.ui:158
+#: data/ui/settings.ui:99
 msgid "Suspend system on timer"
 msgstr "Вимкнення системи по таймеру"
 
-#: data/ui/settings.ui:194
+#: data/ui/settings.ui:135
 msgid "Replay 30 seconds"
 msgstr "Автоповернення на 30 секунд"
 
-#: data/ui/settings.ui:229
+#: data/ui/settings.ui:170
 msgid "Automatic media scan"
 msgstr "Автоматичне сканування медіа"
 
-#: data/ui/settings.ui:260
+#: data/ui/settings.ui:201
 msgid "Behaviour"
 msgstr "Поведінка"
 
-#: data/ui/settings.ui:276
+#: data/ui/settings.ui:217
 msgid "Follow symlinks"
 msgstr "Слідувати за символічними посиланнями"
 
-#: data/ui/settings.ui:314 data/ui/settings.ui:329
+#: data/ui/settings.ui:255 data/ui/settings.ui:270
 msgid "Audio books location"
 msgstr "Розташування аудіокниг"
 
-#: data/ui/settings.ui:351
+#: data/ui/settings.ui:292
 msgid "Files"
 msgstr "Файли"
+
+#: data/ui/settings.ui:309
+msgid "Use crc32 checksum instead of last modified timestamp on folder scan"
+msgstr ""
+
+#: data/ui/settings.ui:344
+msgid "Advanced"
+msgstr ""
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -467,3 +466,11 @@ msgstr "Установка тривалості таймера сну в хви�
 #: data/ui/timer_popover.ui:92
 msgid "Timer duration spin button"
 msgstr "Кнопка включення таймера"
+
+#: data/ui/book_progress_element.ui:47
+msgid "remaining"
+msgstr ""
+
+#: data/ui/book_progress_element.ui:75
+msgid "total"
+msgstr ""

@@ -16,3 +16,4 @@ data/ui/import_failed.ui
 data/ui/settings.ui
 data/ui/search_popover.ui
 data/ui/timer_popover.ui
+data/ui/book_progress_element.ui

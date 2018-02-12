@@ -30,7 +30,7 @@
           <object class="GtkLabel" id="duration_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="no">21h32</property>
+            <property name="label">21h32</property>
             <property name="justify">right</property>
           </object>
           <packing>
@@ -43,7 +43,8 @@
           <object class="GtkLabel" id="remaining_text_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes"> remaining</property>
+            <property name="margin_left">5</property>
+            <property name="label" translatable="yes">remaining</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -57,7 +58,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_left">5</property>
-            <property name="label" translatable="no">4h32</property>
+            <property name="label">4h32</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -70,7 +71,8 @@
           <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes"> total</property>
+            <property name="margin_left">5</property>
+            <property name="label" translatable="yes">total</property>
           </object>
           <packing>
             <property name="expand">False</property>
