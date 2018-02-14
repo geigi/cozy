@@ -24,14 +24,15 @@
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="halign">center</property>
         <property name="margin_top">5</property>
         <property name="margin_bottom">3</property>
         <child>
-          <object class="GtkLabel" id="duration_label">
+          <object class="GtkLabel" id="remaining_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label">21h32</property>
-            <property name="justify">right</property>
+            <property name="margin_left">5</property>
+            <property name="label">4h32</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -44,35 +45,34 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_left">5</property>
-            <property name="label" translatable="yes">remaining</property>
+            <property name="margin_right">5</property>
+            <property name="label" translatable="yes">of</property>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="pack_type">end</property>
             <property name="position">1</property>
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="remaining_label">
+          <object class="GtkLabel" id="duration_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="label">4h32</property>
+            <property name="label">21h32</property>
+            <property name="justify">right</property>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="pack_type">end</property>
             <property name="position">2</property>
           </packing>
         </child>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkLabel" id="played_text_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_left">5</property>
-            <property name="label" translatable="yes">total</property>
+            <property name="label" translatable="yes">played</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -83,7 +83,7 @@
       </object>
       <packing>
         <property name="expand">False</property>
-        <property name="fill">True</property>
+        <property name="fill">False</property>
         <property name="position">1</property>
       </packing>
     </child>

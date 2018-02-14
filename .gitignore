@@ -1,5 +1,6 @@
 app/
 bin/
+cozy/__pycache__
 debian/build/
 debian/com.github.geigi.cozy.debhelper.log
 debian/com.github.geigi.cozy.substvars
@@ -20,3 +21,5 @@ peewee/
 .vscode/tags
 .tx
 *.log
+*.prof
+*.pyc

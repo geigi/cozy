@@ -51,6 +51,21 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.5.0" timestamp="1518457439">
+      <description>
+        <ul>
+          <li>Display the progress and remaining time of your books</li>
+          <li>Click on the remaining time ;)</li>
+          <li>Support for album art in image files (thanks to oleg-krv)</li>
+          <li>Faster startup! (introducing album art cache)</li>
+          <li>Fixed mp3 disk number on imports</li>
+          <li>More small bugfixes</li>
+          <li>Some UI tweaks (also thanks to jnbr)</li>
+          <li>Support for peewee3 (tanks to jnbr)</li>
+          <li>Chinese translation</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.9" timestamp="1518457439">
       <description>
         <ul>

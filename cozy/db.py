@@ -2,11 +2,14 @@ import os
 import logging
 import uuid
 
+log = logging.getLogger("db")
 from peewee import __version__ as PeeweeVersion
 if PeeweeVersion[0] == '2':
+    log.info("Using peewee 2 backend")
     from peewee import BaseModel
     ModelBase = BaseModel
 else:
+    log.info("Using peewee 3 backend")
     from peewee import ModelBase
 from peewee import Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase
 from playhouse.migrate import SqliteMigrator, migrate
@@ -16,7 +19,6 @@ import cozy.tools as tools
 
 # first we get the data home and find the database if it exists
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
-log = logging.getLogger("db")
 log.debug(data_dir)
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)

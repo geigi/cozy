@@ -1,3 +1,17 @@
+com.github.geigi.cozy (0.5.0) UNSTABLE; urgency=low
+
+  * Display the progress and remaining time of your books
+  * Try clicking on the remaining time ;)
+  * Support for album art in image files (thanks to oleg-krv)
+  * Faster startup! (introducing album art cache)
+  * Fixed mp3 disk number on imports
+  * Other bugfixes
+  * Some UI tweaks (thanks to jnbr)
+  * Support for peewee3 (tanks to jnbr)
+  * Chinese translation
+
+ -- Julian Geywitz <github@geigi.de>  Wed, 12 Feb 2018 18:35:14 +0200
+
 com.github.geigi.cozy (0.4.9) UNSTABLE; urgency=low
 
   * Display the progress and remaining time of your books
@@ -7,7 +21,7 @@ com.github.geigi.cozy (0.4.9) UNSTABLE; urgency=low
   * Fixed mp3 disk number on imports
   * Other bugfixes
   * Some UI tweaks (thanks to jnbr)
-  * Support for peewee3 (tanks to jnbr)<
+  * Support for peewee3 (tanks to jnbr)
   * Chinese translation
 
  -- Julian Geywitz <github@geigi.de>  Wed, 12 Feb 2018 18:35:14 +0200
@@ -21,7 +35,7 @@ com.github.geigi.cozy (0.4.8) UNSTABLE; urgency=low
   * Fixed mp3 disk number on imports
   * Other bugfixes
   * Some UI tweaks (thanks to jnbr)
-  * Support for peewee3 (tanks to jnbr)<
+  * Support for peewee3 (tanks to jnbr)
   * Chinese translation
 
  -- Julian Geywitz <github@geigi.de>  Wed, 12 Feb 2018 18:35:14 +0200

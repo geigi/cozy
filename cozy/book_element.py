@@ -255,6 +255,7 @@ class BookElement(Gtk.Box):
         self.duration_label = builder.get_object("duration_label")
         self.remaining_label = builder.get_object("remaining_label")
         self.remaining_text_label = builder.get_object("remaining_text_label")
+        self.played_text_label = builder.get_object("played_text_label")
 
         self.duration = get_book_duration(self.book)
         self.duration_label.set_text(tools.seconds_to_str(self.duration / self.ui.speed, False))
@@ -365,10 +366,12 @@ class BookElement(Gtk.Box):
         if progress == 0 or remaining < 15:
             self.remaining_label.set_visible(False)
             self.remaining_text_label.set_visible(False)
+            self.played_text_label.set_visible(False)
         else:
             if not self.remaining_label.get_visible():
                 self.remaining_label.set_visible(True)
                 self.remaining_text_label.set_visible(True)
+                self.played_text_label.set_visible(True)
 
             percentage = progress / self.duration
 
