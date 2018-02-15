@@ -31,9 +31,9 @@ FILES = $(shell find -type f -name '*.*')
 
 override_dh_auto_build:
 	# Fix for meson 0.44.0
-	ls -al
-	sed -i -e 's%/data/ui/data/ui%/data/ui%g' $(FILES)
-	sed -i -e 's%/data/img/data/img%/data/img%g' $(FILES)
+	#ls -al
+	#sed -i -e 's%/data/ui/data/ui%/data/ui%g' $(FILES)
+	#sed -i -e 's%/data/img/data/img%/data/img%g' $(FILES)
 	cd debian/build && ninja -v
 
 override_dh_auto_install:
