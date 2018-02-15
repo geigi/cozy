@@ -47,6 +47,7 @@ class Book(ModelBase):
     position = IntegerField()
     rating = IntegerField()
     cover = BlobField(null=True)
+    playback_speed = FloatField(default=1.0)
 
 
 class Track(ModelBase):
@@ -222,14 +223,35 @@ def update_db_1():
     )
 
 
+def update_db_2():
+    """
+    Update database to v2.
+    """
+    migrator = SqliteMigrator(db)
+
+    playback_speed = FloatField(default=1.0)
+
+    migrate(
+        migrator.add_column('book', 'playback_speed', playback_speed),
+    )
+
+    Settings.update(version = 2).execute()
+
+
 def update_db():
     """
     Updates the database if not already done.
     """
+    global db
+    # First test for version 1
     try:
         next(c for c in db.get_columns("settings") if c.name == "version")
     except StopIteration as e:
         update_db_1()
+
+    # then for version 2
+    if Settings.get().version < 2:
+        update_db_2()
         
 
 # thanks to oleg-krv

@@ -258,7 +258,8 @@ class BookElement(Gtk.Box):
         self.played_text_label = builder.get_object("played_text_label")
 
         self.duration = get_book_duration(self.book)
-        self.duration_label.set_text(tools.seconds_to_str(self.duration / self.ui.speed, False))
+        speed = db.Book.select().where(db.Book.id == self.book.id).get().playback_speed
+        self.duration_label.set_text(tools.seconds_to_str(self.duration / speed, False))
         self.ui.add_listener(self.__ui_changed)
 
         self.progress_box.show_all()
@@ -384,9 +385,11 @@ class BookElement(Gtk.Box):
         Handler for events that occur in the main ui.
         """
         if event == "playback-speed-changed":
-            self.duration = get_book_duration(self.book)
-            self.duration_label.set_text(tools.seconds_to_str(self.duration / self.ui.speed, False))
-            self.update_time()
+            if message == self.book.id:
+                self.duration = get_book_duration(self.book)
+                speed = db.Book.select().where(db.Book.id == self.book.id).get().playback_speed
+                self.duration_label.set_text(tools.seconds_to_str(self.duration / speed, False))
+                self.update_time()
 
 
 class TrackElement(Gtk.EventBox):
@@ -456,7 +459,6 @@ class TrackElement(Gtk.EventBox):
     def __on_button_press(self, eventbox, event):
         """
         Play the selected track.
-        TODO Jump to last position
         """
         current_track = get_current_track()
 

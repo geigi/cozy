@@ -1163,7 +1163,7 @@ class CozyUI:
         total = player.get_current_track().length / self.speed
         self.progress_scale.set_range(0, total)
         self.progress_scale.set_value(value)
-        self.emit_event("playback-speed-changed")
+        self.emit_event("playback-speed-changed", self.current_book.id)
 
     def track_changed(self):
         """
@@ -1185,6 +1185,10 @@ class CozyUI:
 
         self.remaining_label.set_visible(True)
         self.current_label.set_visible(True)
+        speed = db.Book.select().where(db.Book.id == self.current_book.id).get().playback_speed
+        self.playback_speed_scale.set_value(speed)
+        self.__set_playback_speed(None)
+
 
     def _update_current_track_element(self):
         """

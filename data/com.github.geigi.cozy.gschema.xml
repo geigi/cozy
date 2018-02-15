@@ -33,7 +33,12 @@
     </key>
     <key type="b" name="titlebar-remaining-time">
       <default>false</default> 
-      <summary>Display the remaining time from the whole book instead of from the current chapter.</summary>
+      <summary>Use the position slider for the whole book instead for the current chapter.</summary>
+      <description></description>
+    </key>
+    <key type="b" name="calculate-acutal-length">
+      <default>true</default> 
+      <summary>Display the time according to the playback speed.</summary>
       <description></description>
     </key>
   </schema>
