@@ -113,3 +113,12 @@ def seconds_to_str(seconds, include_seconds=True):
             result = "00:00"
 
     return result
+
+def remove_all_children(container):
+        """
+        Removes all widgets from a gtk container.
+        """
+        childs = container.get_children()
+        for element in childs:
+            container.remove(element)
+            element.destroy()

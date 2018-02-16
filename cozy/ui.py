@@ -836,7 +836,7 @@ class CozyUI:
 
     def __on_remaining_clicked(self, widget, sender):
         """
-        Switch between displaying the remaining time for a track or the whole book.
+        Switch between displaying the time for a track or the whole book.
         """
         if widget.get_name is not "titlebar_remaining_time_eventbox":
             if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
@@ -966,9 +966,9 @@ class CozyUI:
         self.search_stack.set_visible_child_name("main")
 
         # First clear the boxes
-        self.__remove_all_children(self.search_book_box)
-        self.__remove_all_children(self.search_author_box)
-        self.__remove_all_children(self.search_reader_box)
+        tools.remove_all_children(self.search_book_box)
+        tools.remove_all_children(self.search_author_box)
+        tools.remove_all_children(self.search_reader_box)
 
         # Hide all the labels & separators
         self.search_book_label.set_visible(False)
@@ -1249,14 +1249,6 @@ class CozyUI:
     def __about_close_clicked(self, widget):
         self.about_dialog.hide()
 
-    def __remove_all_children(self, container):
-        """
-        Removes all widgets from a gtk container.
-        """
-        childs = container.get_children()
-        for element in childs:
-            container.remove(element)
-            element.destroy()
 
     def __on_volume_changed(self, widget, value):
         """
@@ -1295,9 +1287,6 @@ class CozyUI:
         """
         self.__listeners.append(function)
 
-    ####################
-    # CONTENT HANDLING #
-    ####################
 
     def __on_listbox_changed(self, sender, row):
         """
