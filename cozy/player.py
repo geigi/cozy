@@ -392,7 +392,7 @@ def load_file(track):
     __player.set_state(Gst.State.PAUSED)
     save_current_book_position(__current_track)
     db.Settings.update(last_played_book=__current_track.book).execute()
-    emit_event("track-changed")
+    emit_event("track-changed", track)
 
 
 def load_last_book():
@@ -415,7 +415,7 @@ def load_last_book():
                 __player.set_property("uri", "file://" + last_track.file)
                 __player.set_state(Gst.State.PAUSED)
                 __current_track = last_track
-                emit_event("track-changed")
+                emit_event("track-changed", last_track)
 
 
 def save_current_playback_speed(book=None, speed=None):

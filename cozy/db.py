@@ -17,14 +17,21 @@ from gi.repository import GLib, GdkPixbuf
 
 import cozy.tools as tools
 
+DB_VERSION = 2
+
 # first we get the data home and find the database if it exists
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
 log.debug(data_dir)
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)
 
-db = SqliteDatabase(os.path.join(data_dir, "cozy.db"), pragmas=[('journal_mode', 'wal')])
+update = None
+if os.path.exists(os.path.join(data_dir, "cozy.db")):
+    update = True
+else:
+    update = False
 
+db = SqliteDatabase(os.path.join(data_dir, "cozy.db"), pragmas=[('journal_mode', 'wal')])
 
 class ModelBase(Model):
     """
@@ -72,7 +79,7 @@ class Settings(ModelBase):
     path = CharField()
     first_start = BooleanField(default=True)
     last_played_book = ForeignKeyField(Book, null=True)
-    version = IntegerField(default=1)
+    version = IntegerField(default=2)
 
 
 class ArtworkCache(ModelBase):
@@ -84,14 +91,17 @@ class ArtworkCache(ModelBase):
 
 
 def init_db():
+    db.bind([Book, Track, Settings, ArtworkCache], bind_refs=False, bind_backrefs=False)
     db.connect()
-    # Create tables only when not already present
-    #                                           |
-    if PeeweeVersion[0] == '2':
-        db.create_tables([Track, Book, Settings, ArtworkCache], True)
+
+    global update
+    if update:
+        update_db()
     else:
-        db.create_tables([Track, Book, Settings, ArtworkCache])
-    update_db()
+        if PeeweeVersion[0] == '2':
+            db.create_tables([Track, Book, Settings, ArtworkCache], True)
+        else:
+            db.create_tables([Track, Book, Settings, ArtworkCache])
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
@@ -252,7 +262,7 @@ def update_db():
     # then for version 2
     if Settings.get().version < 2:
         update_db_2()
-        
+
 
 # thanks to oleg-krv
 def get_book_duration(book):

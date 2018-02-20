@@ -260,7 +260,7 @@ class BookElement(Gtk.Box):
         self.duration = get_book_duration(self.book)
         speed = db.Book.select().where(db.Book.id == self.book.id).get().playback_speed
         self.duration_label.set_text(tools.seconds_to_str(self.duration / speed, False))
-        self.ui.add_listener(self.__ui_changed)
+        self.ui.speed.add_listener(self.__ui_changed)
 
         self.progress_box.show_all()
 
@@ -362,7 +362,7 @@ class BookElement(Gtk.Box):
         
         progress = get_book_progress(Book.select().where(Book.id == self.book.id).get(), False)
         progress += (get_current_duration()  / 1000000000)
-        remaining = (self.duration - progress) / self.ui.speed
+        remaining = (self.duration - progress) / self.ui.speed.get_speed()
 
         if progress == 0 or remaining < 15:
             self.remaining_label.set_visible(False)
@@ -385,7 +385,7 @@ class BookElement(Gtk.Box):
         Handler for events that occur in the main ui.
         """
         if event == "playback-speed-changed":
-            if message == self.book.id:
+            if self.ui.titlebar.current_book.id == self.book.id:
                 self.duration = get_book_duration(self.book)
                 speed = db.Book.select().where(db.Book.id == self.book.id).get().playback_speed
                 self.duration_label.set_text(tools.seconds_to_str(self.duration / speed, False))

@@ -96,9 +96,9 @@ def update_database(ui):
                 else:
                     percent_counter = 1
                     Gdk.threads_add_idle(
-                        GLib.PRIORITY_DEFAULT_IDLE, ui.progress_bar.set_fraction, i / file_count)
+                        GLib.PRIORITY_DEFAULT_IDLE, ui.titlebar.progress_bar.set_fraction, i / file_count)
                     Gdk.threads_add_idle(
-                        GLib.PRIORITY_DEFAULT_IDLE, ui.update_progress_bar.set_fraction, i / file_count)
+                        GLib.PRIORITY_DEFAULT_IDLE, ui.titlebar.update_progress_bar.set_fraction, i / file_count)
 
     # remove entries from the db that are no longer existent
     for track in db.Track.select():
@@ -136,7 +136,7 @@ def rebase_location(ui, oldPath, newPath):
         db.Track.update(file=newFilePath).where(
             db.Track.id == track.id).execute()
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
-                             ui.update_progress_bar.set_fraction, currentTrackCount / trackCount)
+                             ui.titlebar.update_progress_bar.set_fraction, currentTrackCount / trackCount)
         currentTrackCount = currentTrackCount + 1
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
@@ -379,7 +379,7 @@ def copy(ui, selection):
             copy_to_audiobook_folder(path)
             cur = cur + 1
             Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
-                                 ui.update_progress_bar.set_fraction, cur / count)
+                                 ui.titlebar.update_progress_bar.set_fraction, cur / count)
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.scan, None, False)
 

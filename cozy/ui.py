@@ -8,15 +8,18 @@ gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
 from cozy.book_element import BookElement
-from cozy.tools import RepeatedTimer, is_elementary
+from cozy.tools import RepeatedTimer
 from cozy.import_failed_dialog import ImportFailedDialog
-from cozy.search_results import BookSearchResult, ArtistSearchResult
 from cozy.file_not_found_dialog import FileNotFoundDialog
+from cozy.event_sender import EventSender
+from cozy.search import Search
+from cozy.sleep_timer import SleepTimer
+from cozy.playback_speed import PlaybackSpeed
+from cozy.titlebar import Titlebar
 
 import cozy.db as db
 import cozy.importer as importer
 import cozy.player as player
-import cozy.artwork_cache as artwork_cache
 import cozy.tools as tools
 
 import os
@@ -31,41 +34,28 @@ class CozyUI:
     """
     # The book that is currently loaded in the player
     current_book = None
-    # Titlebar timer for ui updates on position
-    play_status_updater = None
-    sleep_timer = None
-    # Is the mouse button currently down on the progress scale?
-    progress_scale_clicked = False
-    # Are we running on elementary?
-    is_elementary = False
-    current_timer_time = 0
     # Current book ui element
     current_book_element = None
     # Current track ui element
     current_track_element = None
     # Is currently an dialog open?
     dialog_open = False
-    # Playback speed
-    speed = 1.0
     # Are we currently playing?
     is_playing = False
-    # Remaining time for this book in seconds
-    # This doesn't include the current track
-    # and will only be refreshed when the loaded track changes!
-    current_remaining = 0
-    # Contains listeners to ui events
-    __listeners = []
+    first_play = True
 
     def __init__(self, pkgdatadir, app, version):
+        super().__init__()
         self.pkgdir = pkgdatadir
         self.app = app
         self.version = version
 
     def activate(self):
-        self.__first_play = True
+        self.first_play = True
 
         self.__init_window()
         self.__init_bindings()
+        self.__init_components()
 
         self.auto_import()
         self.refresh_content()
@@ -73,11 +63,9 @@ class CozyUI:
         self.__load_last_book()
 
     def startup(self):
-        self.is_elementary = is_elementary()
         self.__init_resources()
         self.__init_css()
         self.__init_actions()
-        self.__init_search()
 
     def __init_resources(self):
         """
@@ -93,16 +81,9 @@ class CozyUI:
 
         self.window_builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/main_window.ui")
-        self.search_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/search_popover.ui")
-        self.speed_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/playback_speed_popover.ui")
-        self.timer_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/timer_popover.ui")
         self.settings_builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/settings.ui")
-        self.menu_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/app_menu.ui")
+        
         self.about_builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/about.ui")
 
@@ -129,16 +110,6 @@ class CozyUI:
             screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
         styleContext.add_class("bordered")
 
-    def __check_current_distro(self):
-        """
-        Currently we are only checking for elementaryOS
-        """
-        log.debug(platform.dist())
-        if '"elementary"' in platform.dist():
-            self.is_elementary = True
-        else:
-            self.is_elementary = False
-
     def __init_window(self):
         """
         Add fields for all ui objects we need to access from code.
@@ -154,56 +125,30 @@ class CozyUI:
         self.window.connect("drag_data_received", self.__on_drag_data_received)
         self.window.drag_dest_set(Gtk.DestDefaults.MOTION | Gtk.DestDefaults.HIGHLIGHT | Gtk.DestDefaults.DROP,
                                   [Gtk.TargetEntry.new("text/uri-list", 0, 80)], Gdk.DragAction.COPY)
+        
+        # resizing the progress bar for older gtk versions
         if not Gtk.get_minor_version() > 18:
             self.window.connect("check-resize", self.__window_resized)
 
-        # hide wip stuff
-        self.search_popover = self.search_builder.get_object("search_popover")
-        timer_popover = self.timer_builder.get_object("timer_popover")
-
-        self.timer_switch = self.timer_builder.get_object("timer_switch")
-        self.timer_scale = self.timer_builder.get_object("timer_scale")
-        self.timer_spinner = self.timer_builder.get_object("timer_spinner")
-        self.timer_buffer = self.timer_builder.get_object("timer_buffer")
-        self.cover_img = self.window_builder.get_object("cover_img")
-        self.throbber = self.window_builder.get_object("spinner")
         self.author_box = self.window_builder.get_object("author_box")
         self.reader_box = self.window_builder.get_object("reader_box")
         self.book_box = self.window_builder.get_object("book_box")
         self.book_scroller = self.window_builder.get_object("book_scroller")
         self.sort_stack = self.window_builder.get_object("sort_stack")
         self.sort_box = self.window_builder.get_object("sort_box")
-        self.progress_bar = self.window_builder.get_object("progress_bar")
-        self.update_progress_bar = self.window_builder.get_object(
-            "update_progress_bar")
         self.import_box = self.window_builder.get_object("import_box")
         self.position_box = self.window_builder.get_object("position_box")
         self.location_chooser = self.settings_builder.get_object(
             "location_chooser")
-        self.status_stack = self.window_builder.get_object("status_stack")
-        self.status_label = self.window_builder.get_object("status_label")
-        self.play_button = self.window_builder.get_object("play_button")
-        self.prev_button = self.window_builder.get_object("prev_button")
         self.main_stack = self.window_builder.get_object("main_stack")
-        self.play_img = self.window_builder.get_object("play_img")
-        self.pause_img = self.window_builder.get_object("pause_img")
-        self.title_label = self.window_builder.get_object("title_label")
-        self.subtitle_label = self.window_builder.get_object("subtitle_label")
-        self.progress_scale = self.window_builder.get_object("progress_scale")
-        self.current_label = self.window_builder.get_object("current_label")
-        self.remaining_label = self.window_builder.get_object(
-            "remaining_label")
-        self.remaining_event_box = self.window_builder.get_object("remaining_event_box")
+        
         self.author_toggle_button = self.window_builder.get_object(
             "author_toggle_button")
         self.reader_toggle_button = self.window_builder.get_object(
             "reader_toggle_button")
         self.no_media_file_chooser = self.window_builder.get_object(
             "no_media_file_chooser")
-        self.cover_img_box = self.window_builder.get_object("cover_img_box")
-        self.timer_image = self.window_builder.get_object("timer_image")
-        self.search_button = self.window_builder.get_object("search_button")
-        self.timer_button = self.window_builder.get_object("timer_button")
+        
         self.auto_scan_switch = self.window_builder.get_object(
             "auto_scan_switch")
 
@@ -226,82 +171,6 @@ class CozyUI:
         self.no_media_file_chooser.connect(
             "file-set", self.__on_no_media_folder_changed)
 
-        # init popovers
-        self.search_button.set_popover(self.search_popover)
-        self.timer_button.set_popover(timer_popover)
-        self.timer_switch.connect(
-            "notify::active", self.__timer_switch_changed)
-
-        # init playback speed
-        self.playback_speed_scale = self.speed_builder.get_object(
-            "playback_speed_scale")
-        self.playback_speed_scale.add_mark(1.0, Gtk.PositionType.RIGHT, None)
-        self.playback_speed_scale.set_increments(0.02, 0.05)
-        self.playback_speed_scale.connect(
-            "value-changed", self.__set_playback_speed)
-        self.playback_speed_label = self.speed_builder.get_object(
-            "playback_speed_label")
-
-        self.playback_speed_button = self.window_builder.get_object(
-            "playback_speed_button")
-        playback_speed_popover = self.speed_builder.get_object("speed_popover")
-        self.playback_speed_button.set_popover(playback_speed_popover)
-
-        # init search
-        self.search_book_label = self.search_builder.get_object("book_label")
-        self.search_track_label = self.search_builder.get_object("track_label")
-        self.search_author_label = self.search_builder.get_object(
-            "author_label")
-        self.search_reader_label = self.search_builder.get_object(
-            "reader_label")
-        self.search_reader_box = self.search_builder.get_object(
-            "reader_result_box")
-        self.search_author_box = self.search_builder.get_object(
-            "author_result_box")
-        self.search_book_box = self.search_builder.get_object(
-            "book_result_box")
-        self.search_track_box = self.search_builder.get_object(
-            "track_result_box")
-        self.search_entry = self.search_builder.get_object("search_entry")
-        self.search_scroller = self.search_builder.get_object(
-            "search_scroller")
-        self.search_book_separator = self.search_builder.get_object(
-            "book_separator")
-        self.search_author_separator = self.search_builder.get_object(
-            "author_separator")
-        self.search_reader_separator = self.search_builder.get_object(
-            "reader_separator")
-        self.search_stack = self.search_builder.get_object("search_stack")
-
-        self.search_entry.connect("search-changed", self.__on_search_changed)
-
-        if Gtk.get_minor_version() > 20:
-            self.search_scroller.set_max_content_width(400)
-            self.search_scroller.set_max_content_height(600)
-            self.search_scroller.set_propagate_natural_height(True)
-            self.search_scroller.set_propagate_natural_width(True)
-
-        # add marks to timer scale
-        for i in range(0, 181, 15):
-            self.timer_scale.add_mark(i, Gtk.PositionType.RIGHT, None)
-
-        # this is required otherwise the timer will not show "min" on start
-        self.__init_timer_buffer()
-        # timer SpinButton text format
-        self.timer_spinner.connect("value-changed", self.__on_timer_changed)
-        self.timer_spinner.connect(
-            "focus-out-event", self.__on_timer_focus_out)
-
-        # init progress scale
-        self.progress_scale.set_increments(30.0, 60.0)
-        self.progress_scale.connect(
-            "button-release-event", self.__on_progress_clicked)
-        self.progress_scale.connect(
-            "button-press-event", self.__on_progress_press)
-        self.progress_scale.connect(
-            "key-press-event", self.__on_progress_key_pressed)
-        self.progress_scale.connect("value-changed", self.__update_ui_time)
-
         # shortcuts
         self.accel = Gtk.AccelGroup()
 
@@ -314,34 +183,8 @@ class CozyUI:
                               self.__on_book_selec_changed)
 
         # button actions
-        self.play_button.connect("clicked", self.__on_play_pause_clicked)
-        self.prev_button.connect("clicked", self.__on_rewind_clicked)
         self.author_toggle_button.connect("toggled", self.__toggle_author)
         self.reader_toggle_button.connect("toggled", self.__toggle_reader)
-
-        # volume button
-        self.volume_button = self.window_builder.get_object("volume_button")
-        self.volume_button.connect("value-changed", self.__on_volume_changed)
-
-        # remaining time actions
-        self.remaining_event_box.connect("button-release-event", self.__on_remaining_clicked)
-
-        # hide remaining and current labels
-        self.current_label.set_visible(False)
-        self.remaining_label.set_visible(False)
-        self.progress_scale.set_visible(False)
-
-        # hide throbber
-        self.throbber.set_visible(False)
-
-        # menu
-        menu = self.menu_builder.get_object("app_menu")
-        self.menu_button = self.window_builder.get_object("menu_button")
-        self.menu_button.set_menu_model(menu)
-
-        if self.is_elementary:
-            self.cover_img_box.props.width_request = 28
-            self.cover_img_box.props.height_request = 28
         
         try:
             about_close_button = self.about_builder.get_object(
@@ -350,9 +193,8 @@ class CozyUI:
             if about_close_button is not None:
                 about_close_button.connect("clicked", self.__about_close_clicked)
         except Exception as e:
-            log.warning("Not connecting about close button.")
+            log.info("Not connecting about close button.")
         
-
         player.add_player_listener(self.__player_changed)
 
     def __init_actions(self):
@@ -360,9 +202,6 @@ class CozyUI:
         Init all app actions.
         """
         self.accel = Gtk.AccelGroup()
-
-        #menu = self.menu_builder.get_object("app_menu")
-        # self.app.set_app_menu(menu)
 
         help_action = Gio.SimpleAction.new("help", None)
         help_action.connect("activate", self.help)
@@ -414,48 +253,30 @@ class CozyUI:
                            Gio.SettingsBindFlags.DEFAULT)
 
         titlebar_remaining_time_switch = self.settings_builder.get_object("titlebar_remaining_time_switch")
-        titlebar_remaining_time_eventbox = self.settings_builder.get_object("titlebar_remaining_time_eventbox")
+        self.remaining_time_eventbox = self.settings_builder.get_object("titlebar_remaining_time_eventbox")
         tools.get_glib_settings().bind("titlebar-remaining-time", titlebar_remaining_time_switch, "active",
                            Gio.SettingsBindFlags.DEFAULT)
-        titlebar_remaining_time_eventbox.connect("button-release-event", self.__on_remaining_clicked)
 
-    def __init_timer_buffer(self):
-        """
-        Add "min" to the timer text field on startup.
-        """
-        value = tools.get_glib_settings().get_int("timer")
-        adjustment = self.timer_spinner.get_adjustment()
-        adjustment.set_value(value)
+    def __init_components(self):
+        self.titlebar = Titlebar(self)
 
-        text = str(int(value)) + " " + _("min")
-        self.timer_buffer.set_text(text, len(text))
+        self.sleep_timer = SleepTimer(self)
+        self.speed = PlaybackSpeed(self)
+        self.search = Search(self)
 
-        return True
+        self.titlebar.activate()
 
-    def __init_search(self):
-        self.search_thread = Thread(target=self.search)
-        self.search_thread_stop = threading.Event()
+        self.remaining_time_eventbox.connect("button-release-event", self.titlebar._on_remaining_clicked)
 
     def __load_last_book(self):
         """
         Loads the last book into the player
         """
         player.load_last_book()
-        if db.Settings.get().last_played_book is not None:
-            self.__update_track_ui()
-            self.__update_ui_time(self.progress_scale)
-            cur_m, cur_s = player.get_current_duration_ui()
-            self.progress_scale.set_value(cur_m * 60 + cur_s)
+        self.titlebar.load_last_book()
 
-            pos = int(player.get_current_track().position)
-            if tools.get_glib_settings().get_boolean("replay"):
-                log.info("Replaying the previous 30 seconds.")
-                amount = 30 * 1000000000
-                if (pos < amount):
-                    pos = 0
-                else:
-                    pos = pos - amount
-            self.progress_scale.set_value(int(pos / 1000000000))
+    def get_object(self, name):
+        return self.window_builder.get_object(name)
 
     def help(self, action, parameter):
         """
@@ -497,14 +318,20 @@ class CozyUI:
     def play(self):
         if self.current_book_element is None:
             self.track_changed()
-        self.play_button.set_image(self.pause_img)
-        self.__set_play_status_updater(True)
         self.current_book_element.set_playing(True)
 
     def pause(self):
-        self.play_button.set_image(self.play_img)
-        self.__set_play_status_updater(False)
         self.current_book_element.set_playing(False)
+
+    def stop(self):
+        """
+        Remove all information about a playing book from the ui.
+        """
+        if self.current_book_element is not None:
+            self.current_book_element.set_playing(False)
+
+        if self.current_book_element is not None:
+            self.current_book_element._mark_current_track()
 
     def block_ui_buttons(self, block, scan=False):
         """
@@ -512,44 +339,10 @@ class CozyUI:
         :param block: Boolean
         """
         sensitive = not block
-        self.play_button.set_sensitive(sensitive)
-        self.volume_button.set_sensitive(sensitive)
-        self.prev_button.set_sensitive(sensitive)
-        self.timer_button.set_sensitive(sensitive)
-        self.playback_speed_button.set_sensitive(sensitive)
-
+        self.titlebar.block_ui_buttons(block, scan)
         if scan:
             self.scan_action.set_enabled(sensitive)
             self.location_chooser.set_sensitive(sensitive)
-            self.search_button.set_sensitive(sensitive)
-
-    def stop(self):
-        """
-        Remove all information about a playing book from the ui.
-        """
-        self.play_button.set_image(self.play_img)
-        self.__set_play_status_updater(False)
-
-        self.title_label.set_text("")
-        self.subtitle_label.set_text("")
-
-        self.cover_img.set_from_pixbuf(None)
-
-        self.progress_scale.set_range(0, 0)
-        self.progress_scale.set_range(0, 0)
-        self.progress_scale.set_visible(False)
-
-        self.remaining_label.set_visible(False)
-        self.current_label.set_visible(False)
-
-        self.block_ui_buttons(True)
-
-        self.progress_scale.set_sensitive(False)
-        if self.current_book_element is not None:
-            self.current_book_element.set_playing(False)
-
-        if self.current_book_element is not None:
-            self.current_book_element._mark_current_track()
 
     def switch_to_working(self, message, first):
         """
@@ -557,24 +350,17 @@ class CozyUI:
         This is used for example when an import is currently happening.
         This blocks the user from doing some stuff like starting playback.
         """
-        self.throbber.set_visible(True)
-        self.throbber.start()
-        self.status_label.set_text(message)
+        self.titlebar.switch_to_working(message, first)
         self.block_ui_buttons(True, True)
-        if not first:
-            self.update_progress_bar.set_fraction(0)
-            self.status_stack.props.visible_child_name = "working"
 
     def switch_to_playing(self):
         """
         Switch the UI state back to playing.
         This enables all UI functionality for the user.
         """
+        self.titlebar.switch_to_playing()
         self.main_stack.props.visible_child_name = "main"
-        self.status_stack.props.visible_child_name = "playback"
-        self.block_ui_buttons(True, False)
-        self.throbber.stop()
-        self.throbber.set_visible(False)
+        self.block_ui_buttons(False, True)
 
     def check_for_tracks(self):
         """
@@ -586,17 +372,9 @@ class CozyUI:
                 db.Settings.get().path)
             self.main_stack.props.visible_child_name = "no_media"
             self.block_ui_buttons(True)
-            self.progress_scale.set_visible(False)
+            self.titlebar.stop()
         else:
             self.main_stack.props.visible_child_name = "main"
-            self.search_button.set_sensitive(True)
-
-    def set_title_cover(self, pixbuf):
-        """
-        Sets the cover in the title bar.
-        """
-        self.cover_img.set_from_pixbuf(pixbuf)
-        self.cover_img.set_tooltip_text(player.get_current_track().book.name)
 
     def scan(self, action, first_scan):
         """
@@ -616,35 +394,6 @@ class CozyUI:
     def auto_import(self):
         if tools.get_glib_settings().get_boolean("autoscan"):
             self.scan(None, False)
-
-    def search(self, user_search):
-        """
-        Perform a search with the current search entry
-        """
-        # we need the main context to call methods in the main thread after the search is finished
-        main_context = GLib.MainContext.default()
-
-        books = db.search_books(user_search)
-        if self.search_thread_stop.is_set():
-            return
-        main_context.invoke_full(
-            GLib.PRIORITY_DEFAULT, self.__on_book_search_finished, books)
-
-        authors = db.search_authors(user_search)
-        if self.search_thread_stop.is_set():
-            return
-        main_context.invoke_full(
-            GLib.PRIORITY_DEFAULT, self.__on_author_search_finished, authors)
-
-        readers = db.search_readers(user_search)
-        if self.search_thread_stop.is_set():
-            return
-        main_context.invoke_full(
-            GLib.PRIORITY_DEFAULT, self.__on_reader_search_finished, readers)
-
-        if readers.count() < 1 and authors.count() < 1 and books.count() < 1:
-            main_context.invoke_full(
-                GLib.PRIORITY_DEFAULT, self.search_stack.set_visible_child_name, "nothing")
 
     def refresh_content(self):
         """
@@ -692,6 +441,29 @@ class CozyUI:
 
         return False
 
+    def get_playback_start_position(self):
+        """
+        Returns the position where to start playback of the current track.
+        This checks for the automatic replay option.
+        :return: Position in ns
+        """
+        pos = player.get_current_track().position
+        if self.first_play:
+            self.first_play = False
+
+            if tools.get_glib_settings().get_boolean("replay"):
+                amount = 30 * 1000000000
+                if pos < amount:
+                    pos = 0
+                else:
+                    pos = pos - amount
+
+        return pos
+
+    def update_book_popover_time(self):
+        if self.current_book_element is not None:
+            self.current_book_element.update_time()
+
     def display_failed_imports(self, files):
         """
         Displays a dialog with a list of files that could not be imported.
@@ -699,7 +471,7 @@ class CozyUI:
         dialog = ImportFailedDialog(files, self)
         dialog.show()
 
-    def __jump_to_author(self, book):
+    def jump_to_author(self, book):
         """
         Jump to the given book author.
         This is used from the search popover.
@@ -712,9 +484,9 @@ class CozyUI:
         self.__toggle_author(None)
         self.author_box.select_row(row)
         self.book_box.invalidate_filter()
-        self.__close_search_popover()
+        self.search.close()
 
-    def __jump_to_reader(self, book):
+    def jump_to_reader(self, book):
         """
         Jump to the given book reader.
         This is used from the search popover.
@@ -727,126 +499,7 @@ class CozyUI:
         self.__toggle_reader(None)
         self.reader_box.select_row(row)
         self.book_box.invalidate_filter()
-        self.__close_search_popover()
-
-    def __close_search_popover(self, object=None):
-        """
-        Close the search popover specific to the used gtk version.
-        """
-        if Gtk.get_minor_version() < 22:
-            self.search_popover.hide()
-        else:
-            self.search_popover.popdown()
-
-    def __on_timer_changed(self, spinner):
-        """
-        Add "min" to the timer text box on change.
-        """
-        if not self.timer_switch.get_active():
-            self.timer_switch.set_active(True)
-
-        adjustment = self.timer_spinner.get_adjustment()
-        value = adjustment.get_value()
-
-        if self.sleep_timer is not None and not self.sleep_timer.is_running:
-            tools.get_glib_settings().set_int("timer", int(value))
-
-        self.current_timer_time = value * 60
-
-        text = str(int(value)) + " " + _("min")
-        self.timer_buffer.set_text(text, len(text))
-
-    def __timer_switch_changed(self, sender, widget):
-        """
-        Start/Stop the sleep timer object.
-        """
-        if self.timer_switch.get_active():
-            self.timer_image.set_from_icon_name(
-                "timer-on-symbolic", Gtk.IconSize.BUTTON)
-            if player.get_gst_player_state() == Gst.State.PLAYING:
-                self.__start_sleep_timer()
-        else:
-            self.timer_image.set_from_icon_name(
-                "timer-off-symbolic", Gtk.IconSize.BUTTON)
-            if self.sleep_timer is not None:
-                self.sleep_timer.stop()
-
-    def __on_timer_focus_out(self, event, widget):
-        """
-        Do not propagate event further.
-        This fixes the disappearing ' min' after the spin button looses focus.
-        """
-        return True
-
-    def __start_sleep_timer(self):
-        """
-        Start the sleep timer but only when it is enabled by the user.
-        """
-        if self.timer_switch.get_active():
-            # Enable Timer
-            adjustment = self.timer_spinner.get_adjustment()
-            countdown = int(adjustment.get_value())
-            self.sleep_timer = RepeatedTimer(1, self.__sleep_timer_fired)
-            self.sleep_timer.start()
-            self.current_timer_time = countdown * 60
-
-    def __pause_sleep_timer(self):
-        """
-        Stop the sleep timer.
-        """
-        if self.sleep_timer is not None:
-            self.sleep_timer.stop()
-
-    def __sleep_timer_fired(self):
-        """
-        The sleep timer gets called every second. Here we do the countdown stuff
-        aswell as stop the playback / suspend the machine.
-        """
-        self.current_timer_time = self.current_timer_time - 1
-        adjustment = self.timer_spinner.get_adjustment()
-        adjustment.set_value(int(self.current_timer_time / 60) + 1)
-        if self.current_timer_time < 1:
-            self.timer_switch.set_active(False)
-            if player.get_gst_player_state() == Gst.State.PLAYING:
-                player.play_pause(None)
-
-            self.sleep_timer.stop()
-
-    def __on_progress_press(self, widget, sender):
-        """
-        Remember that progress scale is clicked so it won't get updates from the player.
-        """
-        self.progress_scale_clicked = True
-
-        # If the user drags the slider we don't want to jump back
-        # another 30 seconds on first play
-        if self.__first_play:
-            self.__first_play = False
-
-        return False
-
-    def __on_progress_clicked(self, widget, sender):
-        """
-        Jump to the slided time and release the progress scale update lock.
-        """
-        player.jump_to(self.progress_scale.get_value() * self.speed)
-        self.progress_scale_clicked = False
-
-        return False
-
-    def __on_remaining_clicked(self, widget, sender):
-        """
-        Switch between displaying the time for a track or the whole book.
-        """
-        if widget.get_name is not "titlebar_remaining_time_eventbox":
-            if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-                tools.get_glib_settings().set_boolean("titlebar-remaining-time", False)
-            else:
-                tools.get_glib_settings().set_boolean("titlebar-remaining-time", True)
-
-        self.__update_ui_time(None)
-        
-        return True
+        self.search.close()
 
     def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
         """
@@ -857,25 +510,6 @@ class CozyUI:
             self.switch_to_working("copying new files...", False)
             thread = Thread(target=importer.copy, args=(self, selection, ))
             thread.start()
-
-    def __on_progress_key_pressed(self, widget, event):
-        """
-        Jump to the modified time.
-        """
-        old_val = self.progress_scale.get_value()
-        if event.keyval == Gdk.KEY_Up or event.keyval == Gdk.KEY_Left:
-            if old_val > 30.0:
-                player.jump_to(old_val - 30)
-            else:
-                player.jump_to(0)
-        elif event.keyval == Gdk.KEY_Down or event.keyval == Gdk.KEY_Right:
-            upper = self.progress_scale.get_adjustment().get_upper()
-            if old_val + 30.0 < upper:
-                player.jump_to(old_val + 30)
-            else:
-                player.jump_to(upper)
-
-        return False
 
     def __on_no_media_folder_changed(self, sender):
         """
@@ -918,139 +552,6 @@ class CozyUI:
                     child.get_children()[0].selected = False
                     child.get_children()[0]._on_leave_notify(None, None)
 
-    def __on_play_pause_clicked(self, button):
-        """
-        Play/Pause the player.
-        """
-        player.play_pause(None)
-        pos = player.get_current_track().position
-        if self.__first_play:
-            self.__first_play = False
-
-            if tools.get_glib_settings().get_boolean("replay"):
-                amount = 30 * 1000000000
-                if pos < amount:
-                    pos = 0
-                else:
-                    pos = pos - amount
-        player.jump_to_ns(pos)
-
-    def __on_rewind_clicked(self, button):
-        """
-        Jump back 30 seconds.
-        """
-        seconds = 30 * self.speed
-        player.rewind(seconds)
-        if self.progress_scale.get_value() > 30:
-            self.progress_scale.set_value(self.progress_scale.get_value() - 30)
-        else:
-            self.progress_scale.set_value(0)
-
-    def __on_search_changed(self, sender):
-        """
-        Reset the search if running and start a new async search.
-        """
-        self.search_thread_stop.set()
-        self.throbber.set_visible(True)
-        self.throbber.start()
-
-        # we want to avoid flickering of the search box size
-        # as we remove widgets and add them again
-        # so we get the current search popup size and set it as
-        # the preferred size until the search is finished
-        # this helps only a bit, the widgets are still flickering
-        self.search_popover.set_size_request(self.search_popover.get_allocated_width(),
-                                             self.search_popover.get_allocated_height())
-
-        # hide nothing found
-        self.search_stack.set_visible_child_name("main")
-
-        # First clear the boxes
-        tools.remove_all_children(self.search_book_box)
-        tools.remove_all_children(self.search_author_box)
-        tools.remove_all_children(self.search_reader_box)
-
-        # Hide all the labels & separators
-        self.search_book_label.set_visible(False)
-        self.search_author_label.set_visible(False)
-        self.search_reader_label.set_visible(False)
-        self.search_book_separator.set_visible(False)
-        self.search_author_separator.set_visible(False)
-        self.search_reader_separator.set_visible(False)
-        self.search_track_label.set_visible(False)
-
-        user_search = self.search_entry.get_text()
-        if user_search:
-            if self.search_thread.is_alive():
-                self.search_thread.join(timeout=0.2)
-            self.search_thread_stop.clear()
-            self.search_thread = Thread(
-                target=self.search, args=(user_search, ))
-            self.search_thread.start()
-        else:
-            self.throbber.stop()
-            self.throbber.set_visible(False)
-            self.search_stack.set_visible_child_name("start")
-            self.search_popover.set_size_request(-1, -1)
-
-    def __on_book_search_finished(self, books):
-        """
-        This gets called after the book search is finished.
-        It adds all the results to the gui.
-        :param books: Result peewee query containing the books
-        """
-        if len(books) > 0:
-            self.search_stack.set_visible_child_name("main")
-            self.search_book_label.set_visible(True)
-            self.search_book_separator.set_visible(True)
-
-            for book in books:
-                if self.search_thread_stop.is_set():
-                    return
-                self.search_book_box.add(BookSearchResult(
-                    book, self.__close_search_popover))
-
-    def __on_author_search_finished(self, authors):
-        """
-        This gets called after the author search is finished.
-        It adds all the results to the gui.
-        :param authors: Result peewee query containing the authors
-        """
-        if len(authors) > 0:
-            self.search_stack.set_visible_child_name("main")
-            self.search_author_label.set_visible(True)
-            self.search_author_separator.set_visible(True)
-
-            for author in authors:
-                if self.search_thread_stop.is_set():
-                    return
-                self.search_author_box.add(ArtistSearchResult(
-                    self.__jump_to_author, author, True))
-
-    def __on_reader_search_finished(self, readers):
-        """
-        This gets called after the reader search is finished.
-        It adds all the results to the gui.
-        It also resets the gui to a state before the search.
-        :param readers: Result peewee query containing the readers
-        """
-        if len(readers) > 0:
-            self.search_stack.set_visible_child_name("main")
-            self.search_reader_label.set_visible(True)
-            self.search_reader_separator.set_visible(True)
-
-            for reader in readers:
-                if self.search_thread_stop.is_set():
-                    return
-                self.search_reader_box.add(ArtistSearchResult(
-                    self.__jump_to_reader, reader, False))
-
-        # the reader search is the last that finishes
-        # so we stop the throbber and reset the prefered height & width
-        self.throbber.stop()
-        self.throbber.set_visible(False)
-        self.search_popover.set_size_request(-1, -1)
-
     def __toggle_reader(self, button):
         """
         Switch to reader selection
@@ -1073,98 +574,6 @@ class CozyUI:
         elif self.reader_toggle_button.get_active() is False:
             self.author_toggle_button.set_active(True)
 
-    def __update_track_ui(self):
-        # set data of new stream in ui
-        track = player.get_current_track()
-        self.title_label.set_text(track.book.name)
-        self.subtitle_label.set_text(track.name)
-        self.block_ui_buttons(False, True)
-        self.progress_scale.set_sensitive(True)
-        self.progress_scale.set_visible(True)
-
-        # only change cover when book has changed
-        if self.current_book is not track.book:
-            self.current_book = track.book
-            if self.is_elementary:
-                size = 28
-            else:
-                size = 40
-            self.set_title_cover(artwork_cache.get_cover_pixbuf(track.book, size))
-
-        self.current_remaining = db.get_book_remaining(self.current_book, False)
-        m,s = player.get_current_duration_ui()
-        value = 60 * m + s
-        total = player.get_current_track().length / self.speed
-        self.progress_scale.set_range(0, total)
-        self.progress_scale.set_value(value)
-        self.__update_ui_time(None)
-
-    def __update_time(self):
-        """
-        Update the current and remaining time.
-        """
-        if not self.progress_scale_clicked:
-            cur_m, cur_s = player.get_current_duration_ui()
-            Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
-                                 self.progress_scale.set_value, (cur_m * 60 + cur_s))
-
-    def __update_ui_time(self, widget):
-        """
-        Displays the value of the progress slider in the text boxes as time.
-        """
-        val = int(self.progress_scale.get_value())
-        m, s = divmod(val, 60)
-        self.current_label.set_markup(
-            "<tt><b>" + str(m).zfill(2) + ":" + str(s).zfill(2) + "</b></tt>")
-        track = player.get_current_track()
-
-        if track is not None:
-            remaining_secs = int((track.length / self.speed) - val)
-
-            if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-                remaining_secs += (self.current_remaining / self.speed)
-                self.remaining_label.set_markup(
-                    "<tt><b>-" + tools.seconds_to_str(remaining_secs) + "</b></tt>")
-            else:
-                remaining_mins, remaining_secs = divmod(remaining_secs, 60)
-
-                self.remaining_label.set_markup(
-                    "<tt><b>-" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
-        
-        if self.current_book_element is not None:
-            self.current_book_element.update_time()
-
-    def __set_play_status_updater(self, enable):
-        """
-        Starts/stops the play status ui update timer.
-        Restarts if enable is True and the timer is already running.
-        :params enable: Boolean
-        """
-        if self.play_status_updater is not None:
-            self.play_status_updater.stop()
-            self.play_status_updater = None
-
-        if enable and self.is_playing:
-            self.play_status_updater = RepeatedTimer(
-                1.0, self.__update_time)
-            self.play_status_updater.start()
-
-    def __set_playback_speed(self, widget):
-        """
-        Set the playback speed.
-        Update playback speed label.
-        """
-        self.speed = round(self.playback_speed_scale.get_value(), 2)
-        self.playback_speed_label.set_text('{speed:3.1f} x'.format(speed=self.speed))
-        player.set_playback_speed(self.speed)
-        self.__update_ui_time(None)
-        m,s = player.get_current_duration_ui()
-        value = 60 * m + s
-        total = player.get_current_track().length / self.speed
-        self.progress_scale.set_range(0, total)
-        self.progress_scale.set_value(value)
-        self.emit_event("playback-speed-changed", self.current_book.id)
-
     def track_changed(self):
         """
         The track loaded in the player has changed.
@@ -1182,13 +591,7 @@ class CozyUI:
                 self.book_box.get_children()), None).get_children()[0]
 
         self._update_current_track_element()
-
-        self.remaining_label.set_visible(True)
-        self.current_label.set_visible(True)
-        speed = db.Book.select().where(db.Book.id == self.current_book.id).get().playback_speed
-        self.playback_speed_scale.set_value(speed)
-        self.__set_playback_speed(None)
-
+        self.block_ui_buttons(False, True)
 
     def _update_current_track_element(self):
         """
@@ -1204,7 +607,6 @@ class CozyUI:
             curr_track = player.get_current_track()
             self.current_book_element.select_track(curr_track, self.is_playing)
 
-        
     def __player_changed(self, event, message):
         """
         Listen to and handle all gst player messages that are important for the ui.
@@ -1212,19 +614,21 @@ class CozyUI:
         if event == "stop":
             self.is_playing = False
             self.stop()
-            self.__pause_sleep_timer()
+            self.titlebar.stop()
+            self.sleep_timer.stop()
         elif event == "play":
             self.is_playing = True
             self.play()
-            self.__start_sleep_timer()
+            self.titlebar.play()
+            self.sleep_timer.start()
             self.current_book_element.select_track(None, True)
         elif event == "pause":
             self.is_playing = False
             self.pause()
-            self.__pause_sleep_timer()
+            self.titlebar.pause()
+            self.sleep_timer.stop()
             self.current_book_element.select_track(None, False)
         elif event == "track-changed":
-            self.__update_track_ui()
             self.track_changed()
         elif event == "error":
             if self.dialog_open:
@@ -1244,26 +648,17 @@ class CozyUI:
         value = width - 800
         if value < 80:
             value = 80
-        self.progress_scale.props.width_request = value
+        self.titlebar.set_progress_scale_width(value)
 
     def __about_close_clicked(self, widget):
         self.about_dialog.hide()
-
-
-    def __on_volume_changed(self, widget, value):
-        """
-        Sets the ui value in the player.
-        """
-        player.set_volume(value)
-
+    
     def on_close(self, widget, data=None):
         """
         Close and dispose everything that needs to be when window is closed.
         """
-        # Stop timers
-        if self.play_status_updater is not None:
-            self.play_status_updater.stop()
-        if self.sleep_timer is not None:
+        self.titlebar.close()
+        if self.sleep_timer.is_running():
             self.sleep_timer.stop()
 
         # save current position when still playing
@@ -1273,20 +668,6 @@ class CozyUI:
             player.stop()
 
         player.dispose()
-
-    def emit_event(self, event, message=None):
-        """
-        This function is used to notify listeners of ui state changes.
-        """
-        for function in self.__listeners:
-            function(event, message)
-    
-    def add_listener(self, function):
-        """
-        Add a listener to listen to changes from the io.
-        """
-        self.__listeners.append(function)
-
 
     def __on_listbox_changed(self, sender, row):
         """
