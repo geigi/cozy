@@ -74,6 +74,7 @@ class Titlebar:
         if tools.is_elementary():
             self.cover_img_box.props.width_request = 28
             self.cover_img_box.props.height_request = 28
+            self.volume_button.props.relief = Gtk.ReliefStyle.NONE
 
         # app menu
         self.menu_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")

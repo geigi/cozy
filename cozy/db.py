@@ -91,7 +91,8 @@ class ArtworkCache(ModelBase):
 
 
 def init_db():
-    db.bind([Book, Track, Settings, ArtworkCache], bind_refs=False, bind_backrefs=False)
+    if PeeweeVersion[0] == '3':
+        db.bind([Book, Track, Settings, ArtworkCache], bind_refs=False, bind_backrefs=False)
     db.connect()
 
     global update
