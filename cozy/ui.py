@@ -344,6 +344,12 @@ class CozyUI:
             self.scan_action.set_enabled(sensitive)
             self.location_chooser.set_sensitive(sensitive)
 
+    def get_ui_buttons_blocked(self):
+        """
+        Are the UI buttons currently blocked?
+        """
+        return self.titlebar.get_ui_buttons_blocked(), not self.location_chooser.get_sensitive()
+
     def switch_to_working(self, message, first):
         """
         Switch the UI state to working.

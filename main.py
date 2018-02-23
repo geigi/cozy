@@ -49,13 +49,10 @@ class Application(Gtk.Application):
 
         GObject.threads_init()
         listen()
-
         Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
-
         GLib.setenv("PULSE_PROP_media.role", "music", True)
 
         import gettext
-
         locale.bindtextdomain('cozy', localedir)
         locale.textdomain('cozy')
         gettext.install('cozy', localedir)

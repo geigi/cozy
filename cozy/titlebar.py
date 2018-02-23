@@ -118,6 +118,12 @@ class Titlebar:
         if scan:
             self.search_button.set_sensitive(sensitive)
 
+    def get_ui_buttons_blocked(self):
+        """
+        Are the UI buttons currently blocked?
+        """
+        return not self.play_button.get_sensitive()
+
     def play(self):
         """
         """

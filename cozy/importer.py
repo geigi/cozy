@@ -57,6 +57,8 @@ def update_database(ui):
     # clean artwork cache
     artwork_cache.delete_artwork_cache()
 
+    # are UI buttons currently blocked?
+    player_blocked, importer_blocked = ui.get_ui_buttons_blocked()
     i = 0
     percent_counter = 0
     file_count = sum([len(files)
@@ -116,6 +118,8 @@ def update_database(ui):
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
                          ui.block_ui_buttons, False, True)
+    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
+                         ui.block_ui_buttons, player_blocked, False)
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.check_for_tracks)
 
     if len(failed) > 0:
