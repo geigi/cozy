@@ -1008,6 +1008,7 @@ audio-volume-medium-symbolic</property>
             <child>
               <object class="GtkMenuButton" id="playback_speed_button">
                 <property name="visible">True</property>
+                <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Playback speed</property>
@@ -1029,6 +1030,7 @@ audio-volume-medium-symbolic</property>
             <child>
               <object class="GtkMenuButton" id="timer_button">
                 <property name="visible">True</property>
+                <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Sleep timer</property>

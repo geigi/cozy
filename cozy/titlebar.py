@@ -11,6 +11,7 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gdk, Gst, GLib
 
+
 class Titlebar:
     """
     This class contains all titlebar logic.
@@ -26,6 +27,10 @@ class Titlebar:
     # This doesn't include the current track
     # and will only be refreshed when the loaded track changes!
     current_remaining = 0
+    # Elapsed time for this book in seconds
+    # This doesn't include the current track
+    # and will only be refreshed when the loaded track changes!
+    current_elapsed = 0
 
     def __init__(self, ui):
         self.ui = ui
@@ -35,7 +40,8 @@ class Titlebar:
         self.prev_button = self.ui.get_object("prev_button")
         self.volume_button = self.ui.get_object("volume_button")
         self.timer_button = self.ui.get_object("timer_button")
-        self.playback_speed_button = self.ui.get_object("playback_speed_button")
+        self.playback_speed_button = self.ui.get_object(
+            "playback_speed_button")
         self.search_button = self.ui.get_object("search_button")
         self.menu_button = self.ui.get_object("menu_button")
         self.remaining_event_box = self.ui.get_object("remaining_event_box")
@@ -77,7 +83,8 @@ class Titlebar:
             self.volume_button.props.relief = Gtk.ReliefStyle.NONE
 
         # app menu
-        self.menu_builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")
+        self.menu_builder = Gtk.Builder.new_from_resource(
+            "/de/geigi/cozy/app_menu.ui")
         menu = self.menu_builder.get_object("app_menu")
         self.menu_button.set_menu_model(menu)
 
@@ -85,13 +92,17 @@ class Titlebar:
         self.play_button.connect("clicked", self.__on_play_pause_clicked)
         self.prev_button.connect("clicked", self.__on_rewind_clicked)
         self.volume_button.connect("value-changed", self.__on_volume_changed)
-        self.remaining_event_box.connect("button-release-event", self._on_remaining_clicked)
+        self.remaining_event_box.connect(
+            "button-release-event", self._on_remaining_clicked)
 
         # init progress scale
         self.progress_scale.connect("value-changed", self.update_ui_time)
-        self.progress_scale.connect("button-release-event", self.__on_progress_clicked)
-        self.progress_scale.connect("button-press-event", self.__on_progress_press)
-        self.progress_scale.connect("key-press-event", self.__on_progress_key_pressed)
+        self.progress_scale.connect(
+            "button-release-event", self.__on_progress_clicked)
+        self.progress_scale.connect(
+            "button-press-event", self.__on_progress_press)
+        self.progress_scale.connect(
+            "key-press-event", self.__on_progress_key_pressed)
 
         player.add_player_listener(self.__player_changed)
 
@@ -149,7 +160,6 @@ class Titlebar:
         self.cover_img.set_from_pixbuf(None)
 
         self.progress_scale.set_range(0, 0)
-        self.progress_scale.set_range(0, 0)
         self.progress_scale.set_visible(False)
         self.progress_scale.set_sensitive(False)
 
@@ -173,19 +183,24 @@ class Titlebar:
         Displays the value of the progress slider in the text boxes as time.
         """
         val = int(self.progress_scale.get_value())
-        m, s = divmod(val, 60)
+        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+            label_text = tools.seconds_to_str(val, display_zero_h=True)
+        else:
+            label_text = tools.seconds_to_str(val)
+        
         self.current_label.set_markup(
-            "<tt><b>" + str(m).zfill(2) + ":" + str(s).zfill(2) + "</b></tt>")
+            "<tt><b>" + label_text + "</b></tt>")
         track = player.get_current_track()
 
         if track is not None:
-            remaining_secs = int((track.length / self.ui.speed.get_speed()) - val)
-
             if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-                remaining_secs += (self.current_remaining / self.ui.speed.get_speed())
+                total = self.progress_scale.get_adjustment().get_upper()
+                remaining_secs = int(((total - val)))
                 self.remaining_label.set_markup(
-                    "<tt><b>-" + tools.seconds_to_str(remaining_secs) + "</b></tt>")
+                    "<tt><b>-" + tools.seconds_to_str(remaining_secs, display_zero_h=True) + "</b></tt>")
             else:
+                remaining_secs = int(
+                    (track.length / self.ui.speed.get_speed()) - val)
                 remaining_mins, remaining_secs = divmod(remaining_secs, 60)
 
                 self.remaining_label.set_markup(
@@ -209,14 +224,19 @@ class Titlebar:
                 size = 28
             else:
                 size = 40
-            self.set_title_cover(artwork_cache.get_cover_pixbuf(track.book, size))
+            self.set_title_cover(
+                artwork_cache.get_cover_pixbuf(track.book, size))
 
-        self.current_remaining = db.get_book_remaining(self.current_book, False)
-        m,s = player.get_current_duration_ui()
-        value = 60 * m + s
-        total = player.get_current_track().length / self.ui.speed.get_speed()
-        self.progress_scale.set_range(0, total)
-        self.progress_scale.set_value(value)
+        self.current_remaining = db.get_book_remaining(
+            self.current_book, False)
+        self.current_elapsed = db.get_book_progress(self.current_book, False)
+
+        self.__update_progress_scale_range()
+
+        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+            self.progress_scale.set_value(self.current_elapsed / self.ui.speed.get_speed())
+        else:
+            self.progress_scale.set_value(0)
         self.update_ui_time(None)
 
         self.current_label.set_visible(True)
@@ -249,7 +269,7 @@ class Titlebar:
             self.update_track_ui()
             self.update_ui_time(self.progress_scale)
             cur_m, cur_s = player.get_current_duration_ui()
-            self.progress_scale.set_value(cur_m * 60 + cur_s)
+            self.__set_progress_scale_value(cur_m * 60 + cur_s)
 
             pos = int(player.get_current_track().position)
             if tools.get_glib_settings().get_boolean("replay"):
@@ -259,7 +279,7 @@ class Titlebar:
                     pos = 0
                 else:
                     pos = pos - amount
-            self.progress_scale.set_value(int(pos / 1000000000))
+            self.__set_progress_scale_value(int(pos / 1000000000 / self.ui.speed.get_speed()))
 
     def __on_play_pause_clicked(self, button):
         """
@@ -291,8 +311,10 @@ class Titlebar:
             else:
                 tools.get_glib_settings().set_boolean("titlebar-remaining-time", True)
 
+        self.__update_time()
+        self.__update_progress_scale_range()
         self.update_ui_time(None)
-        
+
         return True
 
     def __on_volume_changed(self, widget, value):
@@ -318,7 +340,21 @@ class Titlebar:
         """
         Jump to the slided time and release the progress scale update lock.
         """
-        player.jump_to(self.progress_scale.get_value() * self.ui.speed.get_speed())
+        value = self.progress_scale.get_value() * self.ui.speed.get_speed()
+
+        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+            track, time = db.get_track_from_book_time(
+                self.current_book, value)
+            if track.id == player.get_current_track().id:
+                player.jump_to(time)
+            else:
+                player.load_file(db.Track.select().where(
+                    db.Track.id == track.id).get())
+                player.play_pause(None, True)
+                self.__set_progress_scale_value(time / self.ui.speed.get_speed())
+                player.jump_to(time)
+        else:
+            player.jump_to(value)
         self.progress_scale_clicked = False
 
         return False
@@ -342,6 +378,27 @@ class Titlebar:
 
         return False
 
+    def __update_progress_scale_range(self):
+        """
+        Update the progress scale range including the current playback speed.
+        """
+        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+            total = db.get_book_duration(
+                self.current_book) / self.ui.speed.get_speed()
+        else:
+            total = player.get_current_track().length / self.ui.speed.get_speed()
+
+        self.progress_scale.set_range(0, total)
+
+    def __set_progress_scale_value(self, value):
+        """
+        Set a given progress scale value.
+        :param value: This value already needs playback speed compensation.
+        """
+        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+            value += (self.current_elapsed / self.ui.speed.get_speed())
+        self.progress_scale.set_value(value)
+
     def __set_play_status_updater(self, enable):
         """
         Starts/stops the play status ui update timer.
@@ -364,7 +421,7 @@ class Titlebar:
         if not self.progress_scale_clicked:
             cur_m, cur_s = player.get_current_duration_ui()
             Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
-                                 self.progress_scale.set_value, (cur_m * 60 + cur_s))
+                                 self.__set_progress_scale_value, (cur_m * 60 + cur_s))
 
     def __on_playback_speed_changed(self, event, message):
         """
@@ -372,11 +429,10 @@ class Titlebar:
         """
         if event == "playback-speed-changed":
             speed = message
-            m,s = player.get_current_duration_ui()
+            m, s = player.get_current_duration_ui()
             value = 60 * m + s
-            total = player.get_current_track().length / speed
-            self.progress_scale.set_range(0, total)
-            self.progress_scale.set_value(value)
+            self.__update_progress_scale_range()
+            self.__set_progress_scale_value(value)
             self.update_ui_time(None)
 
     def __player_changed(self, event, message):

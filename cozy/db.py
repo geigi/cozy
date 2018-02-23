@@ -320,3 +320,29 @@ def get_book_remaining(book, include_current=True):
                 remaining += int(track.position / 1000000000)
         
     return remaining
+
+def get_track_from_book_time(book, seconds):
+    """
+    Return the track and the according time for a given book and it's time.
+    This is used when the user has the whole book position slider enabled
+    and is scrubbing.
+    Note: the seconds must be at 1.0 speed
+    :param book: 
+    :param seconds: seconds as float
+    :return: Track to play
+    :return: According time
+    """
+    elapsed_time = 0.0
+    current_track = None
+    current_time = 0.0
+
+    for track in tracks(book):
+        if elapsed_time + track.length > seconds:
+            current_track = track
+            current_time = seconds - elapsed_time
+            return current_track, current_time
+        else:
+            elapsed_time += track.length
+    
+    last_track = tracks(book)[-1]
+    return last_track, last_track.length

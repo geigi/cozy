@@ -366,7 +366,12 @@ class CozyUI:
         """
         self.titlebar.switch_to_playing()
         self.main_stack.props.visible_child_name = "main"
-        self.block_ui_buttons(False, True)
+        if player.get_current_track() is not None:
+            self.block_ui_buttons(False, True)
+        else:
+            # we want to only block the player controls
+            self.block_ui_buttons(False, True)
+            self.block_ui_buttons(True, False)
 
     def check_for_tracks(self):
         """

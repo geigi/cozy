@@ -87,7 +87,7 @@ class RepeatedTimer(object):
         self.is_running = False
 
 
-def seconds_to_str(seconds, include_seconds=True):
+def seconds_to_str(seconds, include_seconds=True, display_zero_h=False):
     """
     Converts seconds to a string with the following apperance:
     hh:mm:ss
@@ -102,23 +102,31 @@ def seconds_to_str(seconds, include_seconds=True):
             result = "%d:%02d:%02d" % (h, m, s)
         elif (m > 0):
             result = "%02d:%02d" % (m, s)
+            if display_zero_h:
+                result = "0:" + result
         else:
             result = "00:%02d" % (s)
+            if display_zero_h:
+                result = "0:" + result
     else:
         if (h > 0):
             result = "%d:%02d" % (h, m)
         elif (m > 0):
             result = "00:%02d" % (m)
+            if display_zero_h:
+                result = "0:" + result
         else:
             result = "00:00"
+            if display_zero_h:
+                result = "0:" + result
 
     return result
 
 def remove_all_children(container):
-        """
-        Removes all widgets from a gtk container.
-        """
-        childs = container.get_children()
-        for element in childs:
-            container.remove(element)
-            element.destroy()
+    """
+    Removes all widgets from a gtk container.
+    """
+    childs = container.get_children()
+    for element in childs:
+        container.remove(element)
+        element.destroy()
