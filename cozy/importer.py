@@ -50,68 +50,65 @@ def update_database(ui):
     Scans the audio book directory for changes and new files.
     Also removes entries from the db that are no longer existent.
     """
-    if not os.path.exists(db.Settings.get().path):
-        # TODO: Notify the user about this
-        return
+    paths = []
+    for location in db.Storage.select():
+        if os.path.exists(location.path):
+            paths.append(location.path)
 
     # clean artwork cache
     artwork_cache.delete_artwork_cache()
 
     # are UI buttons currently blocked?
     player_blocked, importer_blocked = ui.get_ui_buttons_blocked()
+
     i = 0
     percent_counter = 0
-    file_count = sum([len(files)
-                      for r, d, files in os.walk(db.Settings.get().path)])
+    file_count = 0
+    for path in paths:
+        file_count += sum([len(files) for r, d, files in os.walk(path)])
+    
     percent_threshold = file_count / 1000
     failed = ""
-    for directory, subdirectories, files in os.walk(db.Settings.get().path):
-        for file in files:
-            if file.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a')):
-                path = os.path.join(directory, file)
+    for path in paths:
+        for directory, subdirectories, files in os.walk(path):
+            for file in files:
+                if file.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a')):
+                    path = os.path.join(directory, file)
 
-                imported = True
-                # Is the track already in the database?
-                if db.Track.select().where(db.Track.file == path).count() < 1:
-                    imported = import_file(file, directory, path)
-                # Has the track changed on disk?
-                elif tools.get_glib_settings().get_boolean("use-crc32"):
-                    crc = __crc32_from_file(path)
-                    # Is the value in the db already crc32 or is the crc changed?
-                    if (db.Track.select().where(db.Track.file == path).first().modified != crc or 
-                      db.Track.select().where(db.Track.file == path).first().crc32 != True):
-                        imported = import_file(
-                            file, directory, path, True, crc)
-                # Has the modified date changed or is the value still a crc?
-                elif (db.Track.select().where(db.Track.file == path).first().modified < os.path.getmtime(path) or 
-                  db.Track.select().where(db.Track.file == path).first().crc32 != False):
-                    imported = import_file(file, directory, path, update=True)
+                    imported = True
+                    # Is the track already in the database?
+                    if db.Track.select().where(db.Track.file == path).count() < 1:
+                        imported = import_file(file, directory, path)
+                    # Has the track changed on disk?
+                    elif tools.get_glib_settings().get_boolean("use-crc32"):
+                        crc = __crc32_from_file(path)
+                        # Is the value in the db already crc32 or is the crc changed?
+                        if (db.Track.select().where(db.Track.file == path).first().modified != crc or 
+                          db.Track.select().where(db.Track.file == path).first().crc32 != True):
+                            imported = import_file(
+                                file, directory, path, True, crc)
+                    # Has the modified date changed or is the value still a crc?
+                    elif (db.Track.select().where(db.Track.file == path).first().modified < os.path.getmtime(path) or 
+                      db.Track.select().where(db.Track.file == path).first().crc32 != False):
+                        imported = import_file(file, directory, path, update=True)
 
-                if not imported:
-                    failed += path + "\n"
+                    if not imported:
+                        failed += path + "\n"
 
-                i = i + 1
+                    i = i + 1
 
-                # don't flood gui updates
-                if percent_counter < percent_threshold:
-                    percent_counter = percent_counter + 1
-                else:
-                    percent_counter = 1
-                    Gdk.threads_add_idle(
-                        GLib.PRIORITY_DEFAULT_IDLE, ui.titlebar.progress_bar.set_fraction, i / file_count)
-                    Gdk.threads_add_idle(
-                        GLib.PRIORITY_DEFAULT_IDLE, ui.titlebar.update_progress_bar.set_fraction, i / file_count)
+                    # don't flood gui updates
+                    if percent_counter < percent_threshold:
+                        percent_counter = percent_counter + 1
+                    else:
+                        percent_counter = 1
+                        Gdk.threads_add_idle(
+                            GLib.PRIORITY_DEFAULT_IDLE, ui.titlebar.progress_bar.set_fraction, i / file_count)
+                        Gdk.threads_add_idle(
+                            GLib.PRIORITY_DEFAULT_IDLE, ui.titlebar.update_progress_bar.set_fraction, i / file_count)
 
     # remove entries from the db that are no longer existent
-    for track in db.Track.select():
-        if not os.path.isfile(track.file):
-            track.delete_instance()
-
-    # remove all books that have no tracks
-    for book in db.Book.select():
-        if db.Track.select().where(db.Track.book == book).count() < 1:
-            book.delete_instance()
-
+    db.remove_invalid_entries()
     artwork_cache.generate_artwork_cache()
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
@@ -121,7 +118,6 @@ def update_database(ui):
     if len(failed) > 0:
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
                              ui.display_failed_imports, failed)
-
 
 def rebase_location(ui, oldPath, newPath):
     """
@@ -390,11 +386,11 @@ def copy_to_audiobook_folder(path):
     """
     try:
         name = os.path.basename(os.path.normpath(path))
-        shutil.copytree(path, db.Settings.get().path + "/" + name)
+        shutil.copytree(path, db.Storage.select().where(db.Storage.default == True).get().path + "/" + name)
     except OSError as exc:
         if exc.errno == errno.ENOTDIR:
             try:
-                shutil.copy(path, db.Settings.get().path)
+                shutil.copy(path, db.Storage.select().where(db.Storage.default == True).get().path)
             except OSError as e:
                 if e.errno == 95:
                     log.error("Could not import file " + path)

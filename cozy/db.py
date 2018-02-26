@@ -13,7 +13,7 @@ else:
     from peewee import ModelBase
 from peewee import Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase
 from playhouse.migrate import SqliteMigrator, migrate
-from gi.repository import GLib, GdkPixbuf
+from gi.repository import GLib, GdkPixbuf, Gdk
 
 import cozy.tools as tools
 
@@ -79,7 +79,7 @@ class Settings(ModelBase):
     path = CharField()
     first_start = BooleanField(default=True)
     last_played_book = ForeignKeyField(Book, null=True)
-    version = IntegerField(default=2)
+    version = IntegerField(default=3)
 
 
 class ArtworkCache(ModelBase):
@@ -88,6 +88,14 @@ class ArtworkCache(ModelBase):
     """
     book = ForeignKeyField(Book)
     uuid = CharField()
+
+class Storage(ModelBase):
+    """
+    Contains all locations of audiobooks.
+    """
+    path = CharField()
+    location_type = IntegerField(default=0)
+    default = BooleanField(default=False)
 
 
 def init_db():
@@ -100,9 +108,9 @@ def init_db():
         update_db()
     else:
         if PeeweeVersion[0] == '2':
-            db.create_tables([Track, Book, Settings, ArtworkCache], True)
+            db.create_tables([Track, Book, Settings, ArtworkCache, Storage], True)
         else:
-            db.create_tables([Track, Book, Settings, ArtworkCache])
+            db.create_tables([Track, Book, Settings, ArtworkCache, Storage])
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
@@ -246,7 +254,19 @@ def update_db_2():
         migrator.add_column('book', 'playback_speed', playback_speed),
     )
 
-    Settings.update(version = 2).execute()
+    Settings.update(version=2).execute()
+
+
+def update_db_3():
+    """
+    Update database to v3.
+    """
+    current_path = Settings.get().path
+
+    db.create_tables([Storage])
+    Storage.create(path=current_path, default=True)
+    Settings.update(path="NOT_USED").execute()
+    Settings.update(version=3).execute()
 
 
 def update_db():
@@ -260,9 +280,13 @@ def update_db():
     except StopIteration as e:
         update_db_1()
 
-    # then for version 2
-    if Settings.get().version < 2:
+    version = Settings.get().version
+    # then for version 2 and so on
+    if version < 2:
         update_db_2()
+
+    if version < 3:
+        update_db_3()
 
 
 # thanks to oleg-krv
@@ -346,3 +370,42 @@ def get_track_from_book_time(book, seconds):
     
     last_track = tracks(book)[-1]
     return last_track, last_track.length
+
+def remove_invalid_entries(ui=None, refresh=False):
+    """
+    Remove track entries from db that no longer exist in the filesystem.
+    """
+    # remove entries from the db that are no longer existent
+    for track in Track.select():
+        if not os.path.isfile(track.file):
+            track.delete_instance()
+
+    clean_books()
+
+    if refresh:
+        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
+
+def clean_books():
+    """
+    Remove all books that have no tracks
+    """
+    for book in Book.select():
+        if Track.select().where(Track.book == book).count() < 1:
+            if Settings.get().last_played_book == book.id:
+                Settings.update(last_played_book = None).execute()
+            book.delete_instance()
+
+def remove_tracks_with_path(ui, path):
+    """
+    Remove all tracks that contain the given path.
+    """
+    if path == "":
+        return
+        
+    for track in Track.select():
+        if path in track.file:
+            track.delete_instance()
+    
+    clean_books()
+
+    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)

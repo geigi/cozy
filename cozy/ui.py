@@ -16,6 +16,7 @@ from cozy.search import Search
 from cozy.sleep_timer import SleepTimer
 from cozy.playback_speed import PlaybackSpeed
 from cozy.titlebar import Titlebar
+from cozy.settings import Settings
 
 import cozy.db as db
 import cozy.importer as importer
@@ -54,7 +55,6 @@ class CozyUI:
         self.first_play = True
 
         self.__init_window()
-        self.__init_bindings()
         self.__init_components()
 
         self.auto_import()
@@ -81,8 +81,6 @@ class CozyUI:
 
         self.window_builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/main_window.ui")
-        self.settings_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/settings.ui")
         
         self.about_builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/about.ui")
@@ -138,8 +136,6 @@ class CozyUI:
         self.sort_box = self.window_builder.get_object("sort_box")
         self.import_box = self.window_builder.get_object("import_box")
         self.position_box = self.window_builder.get_object("position_box")
-        self.location_chooser = self.settings_builder.get_object(
-            "location_chooser")
         self.main_stack = self.window_builder.get_object("main_stack")
         
         self.author_toggle_button = self.window_builder.get_object(
@@ -148,28 +144,17 @@ class CozyUI:
             "reader_toggle_button")
         self.no_media_file_chooser = self.window_builder.get_object(
             "no_media_file_chooser")
+        self.no_media_file_chooser.connect(
+            "file-set", self.__on_no_media_folder_changed)
         
         self.auto_scan_switch = self.window_builder.get_object(
             "auto_scan_switch")
-
-        # get settings window
-        self.settings_window = self.settings_builder.get_object(
-            "settings_window")
-        self.settings_window.set_transient_for(self.window)
-        self.settings_window.connect("delete-event", self.hide_window)
-        self.init_db_settings()
 
         # get about dialog
         self.about_dialog = self.about_builder.get_object("about_dialog")
         self.about_dialog.set_transient_for(self.window)
         self.about_dialog.connect("delete-event", self.hide_window)
         self.about_dialog.set_version(self.version)
-
-        # we need to update the database when the audio book location was changed
-        folder_chooser = self.settings_builder.get_object("location_chooser")
-        folder_chooser.connect("file-set", self.__on_folder_changed)
-        self.no_media_file_chooser.connect(
-            "file-set", self.__on_no_media_folder_changed)
 
         # shortcuts
         self.accel = Gtk.AccelGroup()
@@ -226,54 +211,25 @@ class CozyUI:
         self.scan_action.connect("activate", self.scan)
         self.app.add_action(self.scan_action)
 
-    def __init_bindings(self):
-        """
-        Bind Gio.Settings to widgets in settings dialog.
-        """
-
-        sl_switch = self.settings_builder.get_object("symlinks_switch")
-        tools.get_glib_settings().bind("symlinks", sl_switch, "active",
-                           Gio.SettingsBindFlags.DEFAULT)
-
-        auto_scan_switch = self.settings_builder.get_object("auto_scan_switch")
-        tools.get_glib_settings().bind("autoscan", auto_scan_switch,
-                           "active", Gio.SettingsBindFlags.DEFAULT)
-
-        timer_suspend_switch = self.settings_builder.get_object(
-            "timer_suspend_switch")
-        tools.get_glib_settings().bind("suspend", timer_suspend_switch,
-                           "active", Gio.SettingsBindFlags.DEFAULT)
-
-        replay_switch = self.settings_builder.get_object("replay_switch")
-        tools.get_glib_settings().bind("replay", replay_switch, "active",
-                           Gio.SettingsBindFlags.DEFAULT)
-
-        crc32_switch = self.settings_builder.get_object("crc32_switch")
-        tools.get_glib_settings().bind("use-crc32", crc32_switch, "active",
-                           Gio.SettingsBindFlags.DEFAULT)
-
-        titlebar_remaining_time_switch = self.settings_builder.get_object("titlebar_remaining_time_switch")
-        self.remaining_time_eventbox = self.settings_builder.get_object("titlebar_remaining_time_eventbox")
-        tools.get_glib_settings().bind("titlebar-remaining-time", titlebar_remaining_time_switch, "active",
-                           Gio.SettingsBindFlags.DEFAULT)
-
     def __init_components(self):
         self.titlebar = Titlebar(self)
 
         self.sleep_timer = SleepTimer(self)
         self.speed = PlaybackSpeed(self)
         self.search = Search(self)
+        self.settings = Settings(self)
 
         self.titlebar.activate()
 
-        self.remaining_time_eventbox.connect("button-release-event", self.titlebar._on_remaining_clicked)
+        self.settings.remaining_time_eventbox.connect("button-release-event", self.titlebar._on_remaining_clicked)
 
     def __load_last_book(self):
         """
         Loads the last book into the player
         """
         player.load_last_book()
-        self.titlebar.load_last_book()
+        if player.get_current_track() is not None:
+            self.titlebar.load_last_book()
 
     def get_object(self, name):
         return self.window_builder.get_object(name)
@@ -301,7 +257,7 @@ class CozyUI:
         """
         Show preferences window.
         """
-        self.settings_window.show()
+        self.settings.show()
 
     def hide_window(self, widget, data=None):
         """
@@ -342,13 +298,13 @@ class CozyUI:
         self.titlebar.block_ui_buttons(block, scan)
         if scan:
             self.scan_action.set_enabled(sensitive)
-            self.location_chooser.set_sensitive(sensitive)
+            self.settings.block_ui_elements(block)
 
     def get_ui_buttons_blocked(self):
         """
         Are the UI buttons currently blocked?
         """
-        return self.titlebar.get_ui_buttons_blocked(), not self.location_chooser.get_sensitive()
+        return self.titlebar.get_ui_buttons_blocked(), self.settings.get_storage_elements_blocked()
 
     def switch_to_working(self, message, first):
         """
@@ -380,7 +336,7 @@ class CozyUI:
         """
         if db.books().count() < 1:
             self.no_media_file_chooser.set_current_folder(
-                db.Settings.get().path)
+                db.Storage.select().where(db.Storage.default == True).get())
             self.main_stack.props.visible_child_name = "no_media"
             self.block_ui_buttons(True)
             self.titlebar.stop()
@@ -394,13 +350,6 @@ class CozyUI:
         self.switch_to_working(_("Importing Audiobooks"), first_scan)
         thread = Thread(target=importer.update_database, args=(self, ))
         thread.start()
-
-    def init_db_settings(self):
-        """
-        Display settings from the database in the ui.
-        """
-        chooser = self.settings_builder.get_object("location_chooser")
-        chooser.set_current_folder(db.Settings.get().path)
 
     def auto_import(self):
         if tools.get_glib_settings().get_boolean("autoscan"):
@@ -528,27 +477,9 @@ class CozyUI:
         the no media screen. Now we want to do a first scan instead of a rebase.
         """
         location = self.no_media_file_chooser.get_file().get_path()
-        db.Settings.update(path=location).execute()
+        db.Storage.create(path=location, default=True)
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, True)
-
-    def __on_folder_changed(self, sender):
-        """
-        Clean the database when the audio book location is changed.
-        """
-        log.debug("Audio book location changed, rebasing the location in db.")
-        self.location_chooser.set_sensitive(False)
-
-        settings = db.Settings.get()
-        oldPath = settings.path
-        settings.path = self.location_chooser.get_file().get_path()
-        settings.save()
-
-        self.switch_to_working(_("Changing audio book location..."), False)
-
-        thread = Thread(target=importer.rebase_location, args=(
-            self, oldPath, settings.path))
-        thread.start()
 
     def __on_book_selec_changed(self, flowbox):
         """

@@ -24,6 +24,10 @@
   background: @theme_selected_bg_color
 }
 
+.selected {
+  color: @theme_selected_fg_color;
+}
+
 .no_frame {
   border-style: none;
 }

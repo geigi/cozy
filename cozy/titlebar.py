@@ -211,6 +211,9 @@ class Titlebar:
     def update_track_ui(self):
         # set data of new stream in ui
         track = player.get_current_track()
+        if track is None:
+            return
+            
         self.title_label.set_text(track.book.name)
         self.subtitle_label.set_text(track.name)
         self.block_ui_buttons(False)
