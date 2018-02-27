@@ -211,6 +211,11 @@ class CozyUI:
         self.scan_action.connect("activate", self.scan)
         self.app.add_action(self.scan_action)
 
+        play_pause_action = Gio.SimpleAction.new("play_pause", None)
+        play_pause_action.connect("activate", self.play_pause)
+        self.app.add_action(play_pause_action)
+        self.app.set_accels_for_action("app.play_pause", ["space"])
+
     def __init_components(self):
         self.titlebar = Titlebar(self)
 
@@ -275,6 +280,9 @@ class CozyUI:
         if self.current_book_element is None:
             self.track_changed()
         self.current_book_element.set_playing(True)
+
+    def play_pause(self, action, parameter):
+        player.play_pause(None)
 
     def pause(self):
         self.current_book_element.set_playing(False)
