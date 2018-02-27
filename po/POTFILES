@@ -8,6 +8,8 @@ cozy/mpris.py
 cozy/player.py
 cozy/tools.py
 cozy/ui.py
+cozy/sleep_timer.py
+cozy/settings.py
 data/ui/main_window.ui
 data/ui/about.ui
 data/ui/app_menu.ui

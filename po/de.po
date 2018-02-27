@@ -5,9 +5,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: cozy 0.4.8\n"
+"Project-Id-Version: cozy 0.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-12 17:58+0100\n"
+"POT-Creation-Date: 2018-02-27 18:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
@@ -25,7 +25,7 @@ msgstr "Höre dieses Buch"
 msgid "Open book overview"
 msgstr "Öffne die Buchübersicht"
 
-#: cozy/book_element.py:407
+#: cozy/book_element.py:413
 msgid "Play this part"
 msgstr "Höre dieses Kapitel"
 
@@ -41,31 +41,31 @@ msgstr "Springe zum Autor"
 msgid "Jump to reader "
 msgstr "Springe zum Leser"
 
-#: cozy/importer.py:279
+#: cozy/importer.py:275
 msgid "Unknown Author"
 msgstr "Unbekannter Autor"
 
-#: cozy/importer.py:281
+#: cozy/importer.py:277
 msgid "Unknown Reader"
 msgstr "Unbekannter Leser"
 
-#: cozy/ui.py:430 cozy/ui.py:756 data/ui/timer_popover.ui:86
-msgid "min"
-msgstr "min"
-
-#: cozy/ui.py:605
+#: cozy/ui.py:356
 msgid "Importing Audiobooks"
 msgstr "Importiere Hörbücher"
 
-#: cozy/ui.py:667 cozy/ui.py:671 cozy/ui.py:1319 cozy/ui.py:1328
+#: cozy/ui.py:382 cozy/ui.py:386 cozy/ui.py:641 cozy/ui.py:650
 msgid "All"
 msgstr "Alle"
 
-#: cozy/ui.py:668 cozy/ui.py:672
+#: cozy/ui.py:383 cozy/ui.py:387
 msgid "Display all books"
 msgstr "Zeige alle Bücher"
 
-#: cozy/ui.py:902
+#: cozy/sleep_timer.py:52 cozy/sleep_timer.py:103 data/ui/timer_popover.ui:86
+msgid "min"
+msgstr "min"
+
+#: cozy/settings.py:246
 msgid "Changing audio book location..."
 msgstr "Wechsle zu neuem Hörbuch-Ordner..."
 
@@ -196,107 +196,107 @@ msgstr "Starte oder pausiere die Wiedergabe"
 msgid "Volume control"
 msgstr "Lautstärke"
 
-#: data/ui/main_window.ui:771
+#: data/ui/main_window.ui:772
 msgid "Currently playing"
 msgstr "Wird gerade wiedergegeben"
 
-#: data/ui/main_window.ui:789
+#: data/ui/main_window.ui:790
 msgid "Booktitle"
 msgstr "Buchtitel"
 
-#: data/ui/main_window.ui:790
+#: data/ui/main_window.ui:791
 msgid "Title of currently playing book"
 msgstr "Titel des aktuellen Buches"
 
-#: data/ui/main_window.ui:815
+#: data/ui/main_window.ui:816
 msgid "Part name"
 msgstr "Kapitelname"
 
-#: data/ui/main_window.ui:816
+#: data/ui/main_window.ui:817
 msgid "Title of the currently playing part"
 msgstr "Name des aktuell abgespielten Kapitels"
 
-#: data/ui/main_window.ui:858
+#: data/ui/main_window.ui:859
 msgid "Elapsed time"
 msgstr "Vergangene Zeit"
 
-#: data/ui/main_window.ui:866
+#: data/ui/main_window.ui:867
 msgid "Time elapsed"
 msgstr "Vergangene Zeit"
 
-#: data/ui/main_window.ui:867
+#: data/ui/main_window.ui:868
 msgid "Elapsed time of current part"
 msgstr "Vergangene Zeit des aktuellen Kapitels"
 
-#: data/ui/main_window.ui:882
+#: data/ui/main_window.ui:883
 msgid "Scrubb through current part"
 msgstr "Springe durch das aktuelle Kapitel"
 
-#: data/ui/main_window.ui:888
+#: data/ui/main_window.ui:889
 msgid "Position slider"
 msgstr "Positions-Slider"
 
-#: data/ui/main_window.ui:889
+#: data/ui/main_window.ui:890
 msgid "Position of the current part in seconds"
 msgstr "Position des aktuell abgespielten Kapitels in Sekunden"
 
-#: data/ui/main_window.ui:907
+#: data/ui/main_window.ui:908
 msgid "Remaining time"
 msgstr "Verbleibende Zeit"
 
-#: data/ui/main_window.ui:915
+#: data/ui/main_window.ui:916
 msgid "Time remaining"
 msgstr "Verbleibende Zeit"
 
-#: data/ui/main_window.ui:916
+#: data/ui/main_window.ui:917
 msgid "Remaining time of current part"
 msgstr "Verbleibende Zeit des aktuellen Kapitels"
 
-#: data/ui/main_window.ui:992
+#: data/ui/main_window.ui:993
 msgid "Working..."
 msgstr "Arbeite..."
 
-#: data/ui/main_window.ui:997
+#: data/ui/main_window.ui:998
 msgid "Currently working"
 msgstr "Am arbeiten..."
 
-#: data/ui/main_window.ui:1012
+#: data/ui/main_window.ui:1014
 msgid "Playback speed"
 msgstr "Geschwindigkeit"
 
-#: data/ui/main_window.ui:1033
+#: data/ui/main_window.ui:1036
 msgid "Sleep timer"
 msgstr "Schlafen Timer"
 
-#: data/ui/main_window.ui:1044
+#: data/ui/main_window.ui:1047
 msgid "Timer menu button"
 msgstr "Timer Menü-Knopf"
 
-#: data/ui/main_window.ui:1045
+#: data/ui/main_window.ui:1048
 msgid "Open the sleep timer popover"
 msgstr "Öffne das Schlafen Timer Popover"
 
-#: data/ui/main_window.ui:1061
+#: data/ui/main_window.ui:1064
 msgid "Search your library"
 msgstr "Durchsuche deine Bibliothek"
 
-#: data/ui/main_window.ui:1072
+#: data/ui/main_window.ui:1075
 msgid "Search menu button"
 msgstr "Suche Menü-Knopf"
 
-#: data/ui/main_window.ui:1073
+#: data/ui/main_window.ui:1076
 msgid "Open the search popover"
 msgstr "Öffne das Suchen Popover"
 
-#: data/ui/main_window.ui:1087
+#: data/ui/main_window.ui:1090
 msgid "Options"
 msgstr "Optionen"
 
-#: data/ui/main_window.ui:1098
+#: data/ui/main_window.ui:1101
 msgid "Options menu button"
 msgstr "Optionen Menü-Knopf"
 
-#: data/ui/main_window.ui:1099
+#: data/ui/main_window.ui:1102
 msgid "Open the options popover"
 msgstr "Öffne das Optionen Popover"
 
@@ -364,51 +364,67 @@ msgstr ""
 "- Die Datei(en) sind keine validen Audiodateien\n"
 "- Die Datei(en) sind beschädigt"
 
-#: data/ui/settings.ui:26
+#: data/ui/settings.ui:43
 msgid "Titlebar"
 msgstr "Titelleiste"
 
-#: data/ui/settings.ui:46
-msgid "Display remaining time of whole book"
-msgstr "Zeige verbleibende Zeit des ganzen Buches"
+#: data/ui/settings.ui:63
+msgid "Display the whole book instead of the current chaper"
+msgstr "Zeige das komplette Buch anstatt des Kapitels"
 
-#: data/ui/settings.ui:84
+#: data/ui/settings.ui:94
 msgid "Appearance"
 msgstr "Erscheinung"
 
-#: data/ui/settings.ui:99
+#: data/ui/settings.ui:109
 msgid "Suspend system on timer"
 msgstr "Schicke System schlafen nach Timer"
 
-#: data/ui/settings.ui:135
+#: data/ui/settings.ui:145
 msgid "Replay 30 seconds"
 msgstr "30 Sekunden Replay"
 
-#: data/ui/settings.ui:170
+#: data/ui/settings.ui:180
 msgid "Automatic media scan"
 msgstr "Automatischer Medienordner Scan"
 
-#: data/ui/settings.ui:201
+#: data/ui/settings.ui:211
 msgid "Behaviour"
 msgstr "Verhalten"
 
-#: data/ui/settings.ui:217
-msgid "Follow symlinks"
-msgstr "Folge Symlinks"
+#: data/ui/settings.ui:227
+msgid "Storage locations"
+msgstr "Hörbuch Ordner"
 
-#: data/ui/settings.ui:255 data/ui/settings.ui:270
+#: data/ui/settings.ui:286
 msgid "Audio books location"
 msgstr "Hörbücher Pfad"
 
-#: data/ui/settings.ui:292
-msgid "Files"
-msgstr "Dateien"
+#: data/ui/settings.ui:304
+msgid "Add location"
+msgstr "Order hinzufügen"
 
-#: data/ui/settings.ui:309
+#: data/ui/settings.ui:324
+msgid "Remove location"
+msgstr "Ordner entfernen"
+
+#: data/ui/settings.ui:355
+msgid "Set as default storage location for new audiobooks"
+msgstr "Als Standard für neue Hörbücher festlegen"
+
+#: data/ui/settings.ui:396
+msgid "Follow symlinks"
+msgstr "Folge Symlinks"
+
+#: data/ui/settings.ui:428
+msgid "Storage"
+msgstr "Speicher"
+
+#: data/ui/settings.ui:445
 msgid "Use crc32 checksum instead of last modified timestamp on folder scan"
 msgstr "CRC32 anstatt Zeitstempel beim Aktualisierungsscan nutzen"
 
-#: data/ui/settings.ui:344
+#: data/ui/settings.ui:480
 msgid "Advanced"
 msgstr "Erweitert"
 
@@ -468,10 +484,10 @@ msgstr "Setze die Timer Dauer in Minuten"
 msgid "Timer duration spin button"
 msgstr "Timer Dauer Spin Knopf"
 
-#: data/ui/book_progress_element.ui:47
-msgid "remaining"
-msgstr "verbleibend"
+#: data/ui/book_progress_element.ui:49
+msgid "of"
+msgstr "von"
 
 #: data/ui/book_progress_element.ui:75
-msgid "total"
-msgstr "gesamt"
+msgid "remaining"
+msgstr "verbleibend"

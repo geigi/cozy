@@ -17,9 +17,10 @@
       <li>Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg audio books</li>
       <li>Remembers your playback position</li>
       <li>Sleep timer!</li>
-      <li>Playback speed control</li>
+      <li>Playback speed control for each book individually</li>
       <li>Search your library</li>
-      <li>drag and drop import and copy support</li>
+      <li>Multiple storage location support</li>
+      <li>Drag and Drop to import new audiobooks</li>
       <li>Sort your audio books by author, reader and name</li>
       </ul>
       <p>
@@ -51,52 +52,18 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
-    <release version="0.5.1" timestamp="1518457439">
+    <release version="0.5.2" timestamp="1519751027">
       <description>
         <ul>
-          <li>Display the progress and remaining time of your books</li>
-          <li>Click on the remaining time ;)</li>
-          <li>Support for album art in image files (thanks to oleg-krv)</li>
-          <li>Faster startup! (introducing album art cache)</li>
-          <li>Fixed mp3 disk number on imports</li>
-          <li>More small bugfixes</li>
-          <li>Some UI tweaks (also thanks to jnbr)</li>
-          <li>Support for peewee3 (tanks to jnbr)</li>
-          <li>Chinese translation</li>
-        </ul>
-      </description>
-    </release>
-    <release version="0.5.0" timestamp="1518457439">
-      <description>
-        <ul>
-          <li>Display the progress and remaining time of your books</li>
-          <li>Click on the remaining time ;)</li>
-          <li>Support for album art in image files (thanks to oleg-krv)</li>
-          <li>Faster startup! (introducing album art cache)</li>
-          <li>Fixed mp3 disk number on imports</li>
-          <li>More small bugfixes</li>
-          <li>Some UI tweaks (also thanks to jnbr)</li>
-          <li>Support for peewee3 (tanks to jnbr)</li>
-          <li>Chinese translation</li>
+          <li>Choose between displaying the current chapter or the whole book in the titlebar</li>
+          <li>Remember playback speed for each book</li>
+          <li>Press space to play and pause</li>
+          <li>Support for multiple storage locations!</li>
+          <li>Lots of work behind the scenes and small bug fixes</li>
         </ul>
       </description>
     </release>
     <release version="0.4.9" timestamp="1518457439">
-      <description>
-        <ul>
-          <li>Display the progress and remaining time of your books</li>
-          <li>Click on the remaining time ;)</li>
-          <li>Support for album art in image files (thanks to oleg-krv)</li>
-          <li>Faster startup! (introducing album art cache)</li>
-          <li>Fixed mp3 disk number on imports</li>
-          <li>More small bugfixes</li>
-          <li>Some UI tweaks (also thanks to jnbr)</li>
-          <li>Support for peewee3 (tanks to jnbr)</li>
-          <li>Chinese translation</li>
-        </ul>
-      </description>
-    </release>
-    <release version="0.4.8" timestamp="1518457439">
       <description>
         <ul>
           <li>Display the progress and remaining time of your books</li>
@@ -192,46 +159,6 @@
         <p>More robust importing</p>
         <p>New dialog when a file could not be found</p>
         <p>Homepage URL is now corrected</p>
-      </description>
-    </release>
-    <release version="0.3.5" timestamp="1509552782">
-      <description>
-        <p>Fixed peewee dependency install location</p>
-      </description>
-    </release>
-    <release version="0.3.4" timestamp="1509552782">
-      <description>
-        <p>Dependency fixes</p>
-      </description>
-    </release>
-    <release version="0.3.3" timestamp="1509550360">
-      <description>
-        <p>App Center build fix</p>
-      </description>
-    </release>
-    <release version="0.3.2" timestamp="1509548540">
-      <description>
-        <p>App Center build fix</p>
-      </description>
-    </release>
-    <release version="0.3.1" timestamp="1509547979">
-      <description>
-        <p>App Center build fix</p>
-      </description>
-    </release>
-    <release version="0.3.0" timestamp="1509547123">
-      <description>
-        <p>App Center build fix</p>
-      </description>
-    </release>
-    <release version="0.2.9" timestamp="1509546498">
-      <description>
-        <p>Fixed debian build?</p>
-      </description>
-    </release>
-    <release version="0.2.8" timestamp="1509391672">
-      <description>
-        <p>Fixed debian build</p>
       </description>
     </release>
     <release version="0.2.7" timestamp="1509390271">

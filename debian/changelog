@@ -1,3 +1,13 @@
+com.github.geigi.cozy (0.5.2) UNSTABLE; urgency=low
+
+  * Choose between displaying the current chapter or the whole book in the titlebar
+  * Remember playback speed for each book
+  * Press space to play and pause
+  * Support for multiple storage locations!
+  * Lots of work behind the scenes and small bug fixes
+
+ -- Julian Geywitz <github@geigi.de>  Wed, 27 Feb 2018 18:29:14 +0200
+
 com.github.geigi.cozy (0.5.1) UNSTABLE; urgency=low
 
   * Display the progress and remaining time of your books

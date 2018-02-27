@@ -5,9 +5,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: cozy 0.4.8\n"
+"Project-Id-Version: cozy 0.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-12 17:58+0100\n"
+"POT-Creation-Date: 2018-02-27 18:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: abuyop <abuyop@gmail.com>, 2018\n"
 "Language-Team: Malay (Malaysia) (https://www.transifex.com/geigi/teams/78138/ms_MY/)\n"
@@ -25,7 +25,7 @@ msgstr "Baca buku ini"
 msgid "Open book overview"
 msgstr "Buka gambaran keseluruhan buku"
 
-#: cozy/book_element.py:407
+#: cozy/book_element.py:413
 msgid "Play this part"
 msgstr "Baca bahagian ini"
 
@@ -41,33 +41,33 @@ msgstr "Lompat ke pengarang"
 msgid "Jump to reader "
 msgstr "Lompat ke pembaca"
 
-#: cozy/importer.py:279
+#: cozy/importer.py:275
 msgid "Unknown Author"
 msgstr "Pengarang Tidak Diketahui"
 
-#: cozy/importer.py:281
+#: cozy/importer.py:277
 msgid "Unknown Reader"
 msgstr "Pembaca Tidak Diketahui"
 
-#: cozy/ui.py:430 cozy/ui.py:756 data/ui/timer_popover.ui:86
-msgid "min"
-msgstr "min"
-
-#: cozy/ui.py:605
+#: cozy/ui.py:356
 msgid "Importing Audiobooks"
 msgstr "Mengimport Buku Audio"
 
-#: cozy/ui.py:667 cozy/ui.py:671 cozy/ui.py:1319 cozy/ui.py:1328
+#: cozy/ui.py:382 cozy/ui.py:386 cozy/ui.py:641 cozy/ui.py:650
 msgid "All"
 msgstr "Semua"
 
-#: cozy/ui.py:668 cozy/ui.py:672
+#: cozy/ui.py:383 cozy/ui.py:387
 msgid "Display all books"
 msgstr "Papar semua buku"
 
-#: cozy/ui.py:902
+#: cozy/sleep_timer.py:52 cozy/sleep_timer.py:103 data/ui/timer_popover.ui:86
+msgid "min"
+msgstr "min"
+
+#: cozy/settings.py:246
 msgid "Changing audio book location..."
-msgstr "Mengubah lokasi buku audio..."
+msgstr ""
 
 #: data/ui/main_window.ui:67
 msgid "Select by author"
@@ -196,107 +196,107 @@ msgstr "Mula atau jeda main balik"
 msgid "Volume control"
 msgstr "Kawalan suara"
 
-#: data/ui/main_window.ui:771
+#: data/ui/main_window.ui:772
 msgid "Currently playing"
 msgstr "Kini dimainkan"
 
-#: data/ui/main_window.ui:789
+#: data/ui/main_window.ui:790
 msgid "Booktitle"
 msgstr "Tajukbuku"
 
-#: data/ui/main_window.ui:790
+#: data/ui/main_window.ui:791
 msgid "Title of currently playing book"
 msgstr "Tajuk buku yang sedang dimainkan"
 
-#: data/ui/main_window.ui:815
+#: data/ui/main_window.ui:816
 msgid "Part name"
 msgstr "Nama bahagian"
 
-#: data/ui/main_window.ui:816
+#: data/ui/main_window.ui:817
 msgid "Title of the currently playing part"
 msgstr "Tajuk bahagian yang sedang dimainkan"
 
-#: data/ui/main_window.ui:858
+#: data/ui/main_window.ui:859
 msgid "Elapsed time"
 msgstr "Masa berlalu"
 
-#: data/ui/main_window.ui:866
+#: data/ui/main_window.ui:867
 msgid "Time elapsed"
 msgstr "Masa berlalu"
 
-#: data/ui/main_window.ui:867
+#: data/ui/main_window.ui:868
 msgid "Elapsed time of current part"
 msgstr "Masa berlalu bagi bahagian semasa"
 
-#: data/ui/main_window.ui:882
+#: data/ui/main_window.ui:883
 msgid "Scrubb through current part"
 msgstr "Ganyah menerusi bahagian semasa"
 
-#: data/ui/main_window.ui:888
+#: data/ui/main_window.ui:889
 msgid "Position slider"
 msgstr "Lungsur kedudukan"
 
-#: data/ui/main_window.ui:889
+#: data/ui/main_window.ui:890
 msgid "Position of the current part in seconds"
 msgstr "Kedudukan bahagian semasa dalam saat"
 
-#: data/ui/main_window.ui:907
+#: data/ui/main_window.ui:908
 msgid "Remaining time"
 msgstr "Masa berbaki"
 
-#: data/ui/main_window.ui:915
+#: data/ui/main_window.ui:916
 msgid "Time remaining"
 msgstr "Masa berbaki"
 
-#: data/ui/main_window.ui:916
+#: data/ui/main_window.ui:917
 msgid "Remaining time of current part"
 msgstr "Masa berbaki bagi bahagian semasa"
 
-#: data/ui/main_window.ui:992
+#: data/ui/main_window.ui:993
 msgid "Working..."
 msgstr "Bekerja..."
 
-#: data/ui/main_window.ui:997
+#: data/ui/main_window.ui:998
 msgid "Currently working"
 msgstr "Kini dijalankan"
 
-#: data/ui/main_window.ui:1012
+#: data/ui/main_window.ui:1014
 msgid "Playback speed"
 msgstr "Kelajuan main balik"
 
-#: data/ui/main_window.ui:1033
+#: data/ui/main_window.ui:1036
 msgid "Sleep timer"
 msgstr "Pemasa tidur"
 
-#: data/ui/main_window.ui:1044
+#: data/ui/main_window.ui:1047
 msgid "Timer menu button"
 msgstr "Butang menu pemasa"
 
-#: data/ui/main_window.ui:1045
+#: data/ui/main_window.ui:1048
 msgid "Open the sleep timer popover"
 msgstr "Buka tetingkap timbul pemasa tidur"
 
-#: data/ui/main_window.ui:1061
+#: data/ui/main_window.ui:1064
 msgid "Search your library"
 msgstr "Gelintar pustaka anda"
 
-#: data/ui/main_window.ui:1072
+#: data/ui/main_window.ui:1075
 msgid "Search menu button"
 msgstr "Butang menu gelintar"
 
-#: data/ui/main_window.ui:1073
+#: data/ui/main_window.ui:1076
 msgid "Open the search popover"
 msgstr "Buka tetingkap timbul gelintar"
 
-#: data/ui/main_window.ui:1087
+#: data/ui/main_window.ui:1090
 msgid "Options"
 msgstr "Pilihan"
 
-#: data/ui/main_window.ui:1098
+#: data/ui/main_window.ui:1101
 msgid "Options menu button"
 msgstr "Butang menu pilihan"
 
-#: data/ui/main_window.ui:1099
+#: data/ui/main_window.ui:1102
 msgid "Open the options popover"
 msgstr "Buka tetingkap menu pilihan"
 
@@ -364,51 +364,67 @@ msgstr ""
 "- Fail(s) bukan fail audio yang sah\n"
 "- Fail(s) telah rosak"
 
-#: data/ui/settings.ui:26
+#: data/ui/settings.ui:43
 msgid "Titlebar"
 msgstr ""
 
-#: data/ui/settings.ui:46
-msgid "Display remaining time of whole book"
+#: data/ui/settings.ui:63
+msgid "Display the whole book instead of the current chaper"
 msgstr ""
 
-#: data/ui/settings.ui:84
+#: data/ui/settings.ui:94
 msgid "Appearance"
 msgstr "Penampilan"
 
-#: data/ui/settings.ui:99
+#: data/ui/settings.ui:109
 msgid "Suspend system on timer"
 msgstr "Tangguh sistem dengan pemasa"
 
-#: data/ui/settings.ui:135
+#: data/ui/settings.ui:145
 msgid "Replay 30 seconds"
 msgstr "Main semula 30 saat"
 
-#: data/ui/settings.ui:170
+#: data/ui/settings.ui:180
 msgid "Automatic media scan"
 msgstr "Imbas media secara automatik"
 
-#: data/ui/settings.ui:201
+#: data/ui/settings.ui:211
 msgid "Behaviour"
 msgstr "Kelakuan"
 
-#: data/ui/settings.ui:217
-msgid "Follow symlinks"
-msgstr "Ikut pautan simbolik"
+#: data/ui/settings.ui:227
+msgid "Storage locations"
+msgstr ""
 
-#: data/ui/settings.ui:255 data/ui/settings.ui:270
+#: data/ui/settings.ui:286
 msgid "Audio books location"
 msgstr "Lokasi buku audio"
 
-#: data/ui/settings.ui:292
-msgid "Files"
-msgstr "Fail"
+#: data/ui/settings.ui:304
+msgid "Add location"
+msgstr ""
 
-#: data/ui/settings.ui:309
+#: data/ui/settings.ui:324
+msgid "Remove location"
+msgstr ""
+
+#: data/ui/settings.ui:355
+msgid "Set as default storage location for new audiobooks"
+msgstr ""
+
+#: data/ui/settings.ui:396
+msgid "Follow symlinks"
+msgstr "Ikut pautan simbolik"
+
+#: data/ui/settings.ui:428
+msgid "Storage"
+msgstr ""
+
+#: data/ui/settings.ui:445
 msgid "Use crc32 checksum instead of last modified timestamp on folder scan"
 msgstr ""
 
-#: data/ui/settings.ui:344
+#: data/ui/settings.ui:480
 msgid "Advanced"
 msgstr ""
 
@@ -468,10 +484,10 @@ msgstr "Tetapkan tempoh pemasa tidur dalam minit"
 msgid "Timer duration spin button"
 msgstr "Butang pusing tempoh pemasa"
 
-#: data/ui/book_progress_element.ui:47
-msgid "remaining"
+#: data/ui/book_progress_element.ui:49
+msgid "of"
 msgstr ""
 
 #: data/ui/book_progress_element.ui:75
-msgid "total"
+msgid "remaining"
 msgstr ""
