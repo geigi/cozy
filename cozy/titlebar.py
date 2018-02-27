@@ -315,7 +315,17 @@ class Titlebar:
         """
         """
         seconds = 30 * self.ui.speed.get_speed()
-        player.rewind(seconds)
+        if self.ui.first_play:
+            ns = seconds * 1000000000
+            track = player.get_current_track()
+            pos = track.position
+            if (pos > ns):
+                pos -= ns
+            else:
+                pos = 0
+            player.save_current_track_position(pos=pos, track=track)
+        else:
+            player.rewind(seconds)
 
         # we want to see the jump imediatly therefore we apply the new time manually
         if self.progress_scale.get_value() > 30:
