@@ -226,8 +226,6 @@ class CozyUI:
 
         self.titlebar.activate()
 
-        self.settings.remaining_time_eventbox.connect("button-release-event", self.titlebar._on_remaining_clicked)
-
     def __load_last_book(self):
         """
         Loads the last book into the player

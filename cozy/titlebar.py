@@ -284,6 +284,25 @@ class Titlebar:
                     pos = pos - amount
             self.__set_progress_scale_value(int(pos / 1000000000 / self.ui.speed.get_speed()))
 
+    def _on_remaining_clicked(self, widget, sender):
+        """
+        Switch between displaying the time for a track or the whole book.
+        """
+        if widget.get_name is not "titlebar_remaining_time_eventbox":
+            if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+                tools.get_glib_settings().set_boolean("titlebar-remaining-time", False)
+            else:
+                tools.get_glib_settings().set_boolean("titlebar-remaining-time", True)
+
+        self._on_progress_setting_changed()
+
+        return True
+
+    def _on_progress_setting_changed(self):
+        self.__update_time()
+        self.__update_progress_scale_range()
+        self.update_ui_time(None)
+
     def __on_play_pause_clicked(self, button):
         """
         Play/Pause the player.
@@ -303,22 +322,6 @@ class Titlebar:
             self.progress_scale.set_value(self.progress_scale.get_value() - 30)
         else:
             self.progress_scale.set_value(0)
-
-    def _on_remaining_clicked(self, widget, sender):
-        """
-        Switch between displaying the time for a track or the whole book.
-        """
-        if widget.get_name is not "titlebar_remaining_time_eventbox":
-            if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-                tools.get_glib_settings().set_boolean("titlebar-remaining-time", False)
-            else:
-                tools.get_glib_settings().set_boolean("titlebar-remaining-time", True)
-
-        self.__update_time()
-        self.__update_progress_scale_range()
-        self.update_ui_time(None)
-
-        return True
 
     def __on_volume_changed(self, widget, value):
         """

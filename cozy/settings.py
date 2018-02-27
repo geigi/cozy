@@ -50,7 +50,6 @@ class Settings:
         """
         Bind Gio.Settings to widgets in settings dialog.
         """
-
         sl_switch = self.builder.get_object("symlinks_switch")
         tools.get_glib_settings().bind("symlinks", sl_switch, "active",
                            Gio.SettingsBindFlags.DEFAULT)
@@ -73,9 +72,10 @@ class Settings:
                            Gio.SettingsBindFlags.DEFAULT)
 
         titlebar_remaining_time_switch = self.builder.get_object("titlebar_remaining_time_switch")
-        self.remaining_time_eventbox = self.builder.get_object("titlebar_remaining_time_eventbox")
         tools.get_glib_settings().bind("titlebar-remaining-time", titlebar_remaining_time_switch, "active",
                            Gio.SettingsBindFlags.DEFAULT)
+
+        tools.get_glib_settings().connect("changed", self.__on_settings_changed)
 
     def show(self):
         """
@@ -147,6 +147,13 @@ class Settings:
             else:
                 child.set_selected(False)
         
+    def __on_settings_changed(self, settings, key):
+        """
+        Updates cozy's ui to changed Gio settings.
+        """
+        if key == "titlebar-remaining-time":
+            self.ui.titlebar._on_progress_setting_changed()
+
 
 class StorageListBoxRow(Gtk.ListBoxRow):
     """
