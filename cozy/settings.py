@@ -35,16 +35,19 @@ class Settings:
         self.storage_list_box = self.builder.get_object("storage_list_box")
         self.storage_list_box.connect("row-activated", self.__on_storage_box_changed)
 
-        self.__init_storage()
+        self._init_storage()
         self.__init_bindings()
         self.__on_storage_box_changed(None, None)
 
-    def __init_storage(self):
+    def _init_storage(self):
         """
         Display settings from the database in the ui.
         """
         for location in db.Storage.select():
-            self.storage_list_box.add(StorageListBoxRow(self.ui, location.id, location.path, location.default))
+            row = StorageListBoxRow(self.ui, location.id, location.path, location.default)
+            self.storage_list_box.add(row)
+            if location.default == True:
+                self.storage_list_box.select_row(row)
 
     def __init_bindings(self):
         """
@@ -96,8 +99,11 @@ class Settings:
         sensitive = not block
         self.storage_list_box.set_sensitive(sensitive)
         self.add_storage_button.set_sensitive(sensitive)
-        self.remove_storage_button.set_sensitive(sensitive)
-        self.default_storage_button.set_sensitive(sensitive)
+
+        row = self.storage_list_box.get_selected_row()
+        if row is not None and row.get_default() != True:
+            self.remove_storage_button.set_sensitive(sensitive)
+            self.default_storage_button.set_sensitive(sensitive)
 
     def __on_add_storage_clicked(self, widget):
         """
@@ -182,7 +188,6 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         self.default_image.set_margin_right(5)
 
         self.location_chooser = Gtk.FileChooserButton()
-        self.location_chooser.set_select_multiple(False)
         self.location_chooser.set_local_only(False)
         self.location_chooser.set_action(Gtk.FileChooserAction.SELECT_FOLDER)
         if path != "":

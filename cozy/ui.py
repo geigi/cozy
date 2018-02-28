@@ -341,8 +341,9 @@ class CozyUI:
         If there aren't display a welcome screen.
         """
         if db.books().count() < 1:
-            self.no_media_file_chooser.set_current_folder(
-                db.Storage.select().where(db.Storage.default == True).get())
+            if db.Storage.select().count() > 0:
+                path = db.Storage.select().where(db.Storage.default == True).get().path
+                self.no_media_file_chooser.set_current_folder(path)
             self.main_stack.props.visible_child_name = "no_media"
             self.block_ui_buttons(True)
             self.titlebar.stop()
@@ -486,6 +487,7 @@ class CozyUI:
         db.Storage.create(path=location, default=True)
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, True)
+        self.settings._init_storage()
 
     def __on_book_selec_changed(self, flowbox):
         """
