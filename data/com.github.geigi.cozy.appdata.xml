@@ -52,6 +52,19 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.5.3" timestamp="1519809258">
+      <description>
+        <ul>
+          <li>Bugfix release</li>
+          <li>Changelog from 0.5.2:</li>
+          <li>Choose between displaying the current chapter or the whole book in the titlebar</li>
+          <li>Remember playback speed for each book</li>
+          <li>Press space to play and pause</li>
+          <li>Support for multiple storage locations!</li>
+          <li>Lots of work behind the scenes and small bug fixes</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.5.2" timestamp="1519751027">
       <description>
         <ul>
