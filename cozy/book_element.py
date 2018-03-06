@@ -240,32 +240,6 @@ class BookElement(Gtk.FlowBoxChild):
         else:
             self.art.play_button.set_from_icon_name("media-playback-start-symbolic", self.art.icon_size)
 
-    def update_time(self):
-        """
-        Update the remaining time in the popover.
-        """
-        if not self.popover_created:
-            return
-        
-        progress = get_book_progress(Book.select().where(Book.id == self.book.id).get(), False)
-        progress += (get_current_duration()  / 1000000000)
-        remaining = (self.duration - progress) / self.ui.speed.get_speed()
-
-        if progress == 0 or remaining < 15:
-            self.remaining_label.set_visible(False)
-            self.remaining_text_label.set_visible(False)
-            self.played_text_label.set_visible(False)
-        else:
-            if not self.remaining_label.get_visible():
-                self.remaining_label.set_visible(True)
-                self.remaining_text_label.set_visible(True)
-                self.played_text_label.set_visible(True)
-
-            percentage = progress / self.duration
-
-            self.remaining_label.set_text(tools.seconds_to_str(remaining, False))
-            self.progress_bar.set_fraction(percentage)
-
 
 class TrackElement(Gtk.EventBox):
     """

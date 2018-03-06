@@ -157,6 +157,7 @@ class MPRIS(Server):
     __MPRIS_RATINGS_IFACE = "org.mpris.MediaPlayer2.ExtensionSetRatings"
     __MPRIS_COZY = "org.mpris.MediaPlayer2.Cozy"
     __MPRIS_PATH = "/org/mpris/MediaPlayer2"
+    refresh = True
 
     def __init__(self, app, ui):
         self.__app = app
@@ -318,21 +319,23 @@ class MPRIS(Server):
             return "Stopped"
 
     def __on_player_changed(self, event, message):
-        if event == "track-changed" or event == "stop":
+        if event == "track-changed":
             self._on_current_changed(message)
-            pass
-        elif event == "play" or event == "pause":
-            # handle play / pause / skip
-            self.__on_status_changed()
-            pass
+        elif event == "play":
+            self.__on_status_changed("Playing")
+        elif event == "pause":
+            self.__on_status_changed("Paused")
+        elif event == "stop":
+            self.__on_status_changed("Stopped")
 
     def __update_metadata(self, track):
         if track is None:
             track = get_current_track()
-        if self.__get_status() == "Stopped":
+        if track is None:
             self.__metadata = {"mpris:trackid": GLib.Variant(
                 "o",
                 "/org/mpris/MediaPlayer2/TrackList/NoTrack")}
+            self.refresh = True
         else:
             self.__metadata["mpris:trackid"] = self.__track_id
             track_number = track.number
@@ -361,7 +364,7 @@ class MPRIS(Server):
                 uuid = query.first().uuid
             cache_dir = tools.get_cache_dir()
             cache_dir = os.path.join(cache_dir, uuid)
-            file_path = os.path.join(cache_dir, "250.jpg")
+            file_path = os.path.join(cache_dir, "180.jpg")
             if file_path is not None:
                 self.__metadata["mpris:artUrl"] = GLib.Variant(
                     "s",
@@ -390,6 +393,6 @@ class MPRIS(Server):
         except Exception as e:
             print("MPRIS::__on_current_changed(): %s" % e)
 
-    def __on_status_changed(self, data=None):
-        properties = {"PlaybackStatus": GLib.Variant("s", self.__get_status())}
+    def __on_status_changed(self, status, data=None):
+        properties = {"PlaybackStatus": GLib.Variant("s", status)}
         self.PropertiesChanged(self.__MPRIS_PLAYER_IFACE, properties, [])
