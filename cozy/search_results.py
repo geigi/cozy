@@ -1,11 +1,11 @@
 from gi.repository import Gtk
 from cozy.book_element import AlbumElement
+import cozy.artwork_cache as artwork_cache
 import cozy.tools as tools
 
 MAX_BOOK_LENGTH = 80
 MAX_TRACK_LENGTH = 40
 BOOK_ICON_SIZE = 40
-
 
 class SearchResult(Gtk.EventBox):
     """
@@ -123,13 +123,9 @@ class BookSearchResult(SearchResult):
 
         self.set_tooltip_text(_("Play this book"))
 
-        img = AlbumElement(self.book, BOOK_ICON_SIZE, False, True)
-        img.disconnect_signals()
-        self.connect("enter-notify-event", img._on_enter_notify)
-        self.connect("enter-notify-event", img._on_play_enter_notify)
-        self.connect("leave-notify-event", img._on_leave_notify)
-        self.connect("leave-notify-event", img._on_play_leave_notify)
-        self.connect("button-press-event", img._on_play_button_press)
+        pixbuf = artwork_cache.get_cover_pixbuf(book, BOOK_ICON_SIZE)
+        img = Gtk.Image.new_from_pixbuf(pixbuf)
+        img.set_size_request(BOOK_ICON_SIZE, BOOK_ICON_SIZE)
 
         title_label = Gtk.Label()
         title_label.set_text(tools.shorten_string(self.book.name, MAX_BOOK_LENGTH))

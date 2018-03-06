@@ -476,6 +476,19 @@ class CozyUI:
         self.book_box.invalidate_filter()
         self.search.close()
 
+    def jump_to_book(self, book):
+        """
+        Open book overview with the given book.
+        """
+        # first update track ui
+        book = db.Book.select().where(db.Book.id == book.id).get()
+        self.book_overview.set_book(book)
+
+        #then switch the stacks
+        self.main_stack.props.visible_child_name = "book_overview"
+        self.toolbar_stack.props.visible_child_name = "book_overview"
+        self.search.close()
+
     def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
         """
         We want to import the files that are dragged onto the window.
