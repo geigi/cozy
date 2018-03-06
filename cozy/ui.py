@@ -227,6 +227,11 @@ class CozyUI:
         self.app.add_action(play_pause_action)
         self.app.set_accels_for_action("app.play_pause", ["space"])
 
+        back_action = Gio.SimpleAction.new("back", None)
+        back_action.connect("activate", self.back)
+        self.app.add_action(back_action)
+        self.app.set_accels_for_action("app.back", ["Escape"])
+
     def __init_components(self):
         self.titlebar = Titlebar(self)
 
@@ -370,6 +375,9 @@ class CozyUI:
     def auto_import(self):
         if tools.get_glib_settings().get_boolean("autoscan"):
             self.scan(None, False)
+
+    def back(self, action, parameter):
+        self.__on_back_clicked(None)
 
     def refresh_content(self):
         """
