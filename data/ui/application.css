@@ -14,3 +14,7 @@
 .no_frame {
   border-style: none;
 }
+
+.sort_switcher_element {
+  font-size: 110%;
+}

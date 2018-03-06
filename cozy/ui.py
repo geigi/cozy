@@ -397,13 +397,13 @@ class CozyUI:
             self.book_box.remove(element)
 
         # Add the special All element
-        all_row = ListBoxRowWithData(_("All"), True)
+        all_row = ListBoxRowWithData(_("All"), False)
         all_row.set_tooltip_text(_("Display all books"))
         self.author_box.add(all_row)
         self.author_box.add(ListBoxSeparatorRow())
         self.author_box.select_row(all_row)
 
-        all_row = ListBoxRowWithData(_("All"), True)
+        all_row = ListBoxRowWithData(_("All"), False)
         all_row.set_tooltip_text(_("Display all books"))
         self.reader_box.add(all_row)
         self.reader_box.add(ListBoxSeparatorRow())

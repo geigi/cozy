@@ -61,6 +61,9 @@
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
                         <property name="stack">sort_stack</property>
+                        <style>
+                          <class name="sort_switcher_element"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="name">main</property>

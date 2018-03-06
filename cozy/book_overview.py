@@ -78,6 +78,7 @@ class BookOverview:
             return
         
         # update book object
+        # TODO: optimize usage by only asking from the db on track change
         self.book = db.Book.select().where(db.Book.id == self.book.id).get()
         if self.ui.titlebar.current_book is not None and self.book.id == self.ui.titlebar.current_book.id:
             progress = db.get_book_progress(self.book, False)

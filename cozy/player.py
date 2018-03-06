@@ -142,7 +142,7 @@ def get_current_track():
     """
     global __current_track
     if __current_track is not None:
-        return db.Track.select().where(db.Track.id == __current_track.id).get()
+        return db.Track.get_by_id(__current_track.id)
     else:
         return None
 
