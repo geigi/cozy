@@ -106,14 +106,21 @@ def get_gst_player_state():
     return state
 
 
-def get_current_duration():
+def get_current_duration(wait=False):
     """
     Current duration of track
     :returns: duration in ns
     """
     global __player
-    duration = __player.query_position(Gst.Format.TIME)[1]
-    return duration
+
+    res = __player.query_position(Gst.Format.TIME)
+
+    if wait:
+        while not res[0]:
+            time.sleep(0.1)
+            res = __player.query_position(Gst.Format.TIME)
+
+    return res[1]
 
 
 def get_current_duration_ui():
@@ -371,11 +378,12 @@ def __on_playback_speed_timer():
     """
     global __speed
     global __playback_speed_timer_running
-    __playback_speed_timer_running = False
 
-    position = get_current_duration()
+    position = get_current_duration(wait=True)
     __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH |
                   Gst.SeekFlags.ACCURATE, Gst.SeekType.SET, position, Gst.SeekType.NONE, 0)
+    
+    __playback_speed_timer_running = False
 
 
 def load_file(track):
