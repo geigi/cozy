@@ -187,7 +187,7 @@ class Titlebar:
             label_text = tools.seconds_to_str(val, display_zero_h=True)
         else:
             label_text = tools.seconds_to_str(val)
-        
+
         self.current_label.set_markup(
             "<tt><b>" + label_text + "</b></tt>")
         track = player.get_current_track()
@@ -206,14 +206,15 @@ class Titlebar:
                 self.remaining_label.set_markup(
                     "<tt><b>-" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
 
-        self.ui.update_book_popover_time()
+        if self.ui.book_overview.book is not None and self.current_book.id == self.ui.book_overview.book.id:
+            self.ui.book_overview.update_time()
 
     def update_track_ui(self):
         # set data of new stream in ui
         track = player.get_current_track()
         if track is None:
             return
-            
+
         self.title_label.set_text(track.book.name)
         self.subtitle_label.set_text(track.name)
         self.block_ui_buttons(False)
@@ -237,7 +238,8 @@ class Titlebar:
         self.__update_progress_scale_range()
 
         if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-            self.progress_scale.set_value(self.current_elapsed / self.ui.speed.get_speed())
+            self.progress_scale.set_value(
+                self.current_elapsed / self.ui.speed.get_speed())
         else:
             self.progress_scale.set_value(0)
         self.update_ui_time(None)
@@ -282,7 +284,8 @@ class Titlebar:
                     pos = 0
                 else:
                     pos = pos - amount
-            self.__set_progress_scale_value(int(pos / 1000000000 / self.ui.speed.get_speed()))
+            self.__set_progress_scale_value(
+                int(pos / 1000000000 / self.ui.speed.get_speed()))
 
     def _on_remaining_clicked(self, widget, sender):
         """
@@ -367,7 +370,8 @@ class Titlebar:
                 player.load_file(db.Track.select().where(
                     db.Track.id == track.id).get())
                 player.play_pause(None, True)
-                self.__set_progress_scale_value(time / self.ui.speed.get_speed())
+                self.__set_progress_scale_value(
+                    time / self.ui.speed.get_speed())
                 player.jump_to(time)
         else:
             player.jump_to(value)

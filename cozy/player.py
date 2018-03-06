@@ -1,4 +1,5 @@
 import threading
+import time
 from gi.repository import Gst
 
 import gi
@@ -217,12 +218,18 @@ def next_track():
         play_pause(next_track)
     else:
         stop()
-        save_current_book_position(current, 0)
-        __player.set_state(Gst.State.NULL)
-        __current_track = None
+        save_current_book_position(current, -1)
+        unload()
         db.Settings.update(last_played_book=None).execute()
         emit_event("stop")
 
+
+def unload():
+    global __player
+    global __current_track
+
+    __player.set_state(Gst.State.NULL)
+    __current_track = None
 
 def prev_track():
     """
@@ -393,6 +400,7 @@ def load_file(track):
     __player.set_state(Gst.State.PAUSED)
     save_current_book_position(__current_track)
     db.Settings.update(last_played_book=__current_track.book).execute()
+    db.Book.update(last_played=int(time.time())).where(db.Book.id == __current_track.book.id).execute()
     emit_event("track-changed", track)
 
 
@@ -416,6 +424,9 @@ def load_last_book():
                 __player.set_property("uri", "file://" + last_track.file)
                 __player.set_state(Gst.State.PAUSED)
                 __current_track = last_track
+
+                db.Book.update(last_played=int(time.time())).where(db.Book.id == last_book.id).execute()
+
                 emit_event("track-changed", last_track)
 
 

@@ -17,7 +17,7 @@ from gi.repository import GLib, GdkPixbuf, Gdk
 
 import cozy.tools as tools
 
-DB_VERSION = 2
+DB_VERSION = 4
 
 # first we get the data home and find the database if it exists
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
@@ -55,6 +55,7 @@ class Book(ModelBase):
     rating = IntegerField()
     cover = BlobField(null=True)
     playback_speed = FloatField(default=1.0)
+    last_played = IntegerField(default=0)
 
 
 class Track(ModelBase):
@@ -79,7 +80,7 @@ class Settings(ModelBase):
     path = CharField()
     first_start = BooleanField(default=True)
     last_played_book = ForeignKeyField(Book, null=True)
-    version = IntegerField(default=3)
+    version = IntegerField(default=DB_VERSION)
 
 
 class ArtworkCache(ModelBase):
@@ -269,6 +270,21 @@ def update_db_3():
     Settings.update(version=3).execute()
 
 
+def update_db_4():
+    """
+    Update database to v4.
+    """
+    migrator = SqliteMigrator(db)
+
+    last_played = IntegerField(default=0)
+
+    migrate(
+        migrator.add_column('book', 'last_played', last_played),
+    )
+
+    Settings.update(version=4).execute()
+    
+
 def update_db():
     """
     Updates the database if not already done.
@@ -287,6 +303,9 @@ def update_db():
 
     if version < 3:
         update_db_3()
+
+    if version < 4:
+        update_db_4()
 
 
 # thanks to oleg-krv
@@ -341,7 +360,9 @@ def get_book_remaining(book, include_current=True):
         if track.id == book.position:
             passed_current = True
             if include_current:
-                remaining += int(track.position / 1000000000)
+                cur_remaining = track.length - (track.position / 1000000000)
+                if cur_remaining > 0:
+                    remaining += int(cur_remaining)
         
     return remaining
 

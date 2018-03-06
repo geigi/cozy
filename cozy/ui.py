@@ -17,6 +17,7 @@ from cozy.sleep_timer import SleepTimer
 from cozy.playback_speed import PlaybackSpeed
 from cozy.titlebar import Titlebar
 from cozy.settings import Settings
+from cozy.book_overview import BookOverview
 
 import cozy.db as db
 import cozy.importer as importer
@@ -90,10 +91,14 @@ class CozyUI:
         Initialize the main css files and providers.
         Add css classes to the default screen style context.
         """
+        main_cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application.css")
+        main_cssProvider = Gtk.CssProvider()
+        main_cssProvider.load_from_file(main_cssProviderFile)
+
         if Gtk.get_minor_version() > 18:
             log.debug("Fanciest design possible")
             cssProviderFile = Gio.File.new_for_uri(
-                "resource:///de/geigi/cozy/application.css")
+                "resource:///de/geigi/cozy/application_default.css")
         else:
             log.debug("Using legacy css file")
             cssProviderFile = Gio.File.new_for_uri(
@@ -104,6 +109,8 @@ class CozyUI:
         # add the bordered css class to the default screen for the borders around album art
         screen = Gdk.Screen.get_default()
         styleContext = Gtk.StyleContext()
+        styleContext.add_provider_for_screen(
+            screen, main_cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
         styleContext.add_provider_for_screen(
             screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
         styleContext.add_class("bordered")
@@ -133,15 +140,24 @@ class CozyUI:
         self.book_box = self.window_builder.get_object("book_box")
         self.book_scroller = self.window_builder.get_object("book_scroller")
         self.sort_stack = self.window_builder.get_object("sort_stack")
+        self.sort_stack.connect("notify::visible-child", self.__on_sort_stack_changed)
         self.sort_box = self.window_builder.get_object("sort_box")
         self.import_box = self.window_builder.get_object("import_box")
         self.position_box = self.window_builder.get_object("position_box")
         self.main_stack = self.window_builder.get_object("main_stack")
+        self.toolbar_stack = self.window_builder.get_object("toolbar_stack")
+        self.back_button = self.window_builder.get_object("back_button")
+        self.back_button.connect("clicked", self.__on_back_clicked)
+
+        self.sort_stack_revealer = self.window_builder.get_object("sort_stack_revealer")
         
-        self.author_toggle_button = self.window_builder.get_object(
-            "author_toggle_button")
-        self.reader_toggle_button = self.window_builder.get_object(
-            "reader_toggle_button")
+        # This fixes a bug where otherwise expand is
+        # somehow set to true internally
+        # but is still showing false in the inspector
+        self.sort_stack_revealer.props.expand = True
+        self.sort_stack_revealer.props.expand = False
+        
+        self.sort_stack_switcher = self.window_builder.get_object("sort_stack_switcher")
         self.no_media_file_chooser = self.window_builder.get_object(
             "no_media_file_chooser")
         self.no_media_file_chooser.connect(
@@ -160,16 +176,11 @@ class CozyUI:
         self.accel = Gtk.AccelGroup()
 
         # sorting and filtering
-        self.author_box.connect("row-activated", self.__on_listbox_changed)
-        self.reader_box.connect("row-activated", self.__on_listbox_changed)
+        self.author_box.connect("row-selected", self.__on_listbox_changed)
+        self.reader_box.connect("row-selected", self.__on_listbox_changed)
         self.book_box.set_sort_func(self.__sort_books, None, False)
         self.book_box.set_filter_func(self.__filter_books, None, False)
-        self.book_box.connect("selected-children-changed",
-                              self.__on_book_selec_changed)
-
-        # button actions
-        self.author_toggle_button.connect("toggled", self.__toggle_author)
-        self.reader_toggle_button.connect("toggled", self.__toggle_reader)
+        self.book_box.connect("child-activated", self.__on_book_box_selected)
         
         try:
             about_close_button = self.about_builder.get_object(
@@ -223,6 +234,7 @@ class CozyUI:
         self.speed = PlaybackSpeed(self)
         self.search = Search(self)
         self.settings = Settings(self)
+        self.book_overview = BookOverview(self)
 
         self.titlebar.activate()
 
@@ -291,9 +303,6 @@ class CozyUI:
         """
         if self.current_book_element is not None:
             self.current_book_element.set_playing(False)
-
-        if self.current_book_element is not None:
-            self.current_book_element._mark_current_track()
 
     def block_ui_buttons(self, block, scan=False):
         """
@@ -383,10 +392,13 @@ class CozyUI:
         all_row = ListBoxRowWithData(_("All"), True)
         all_row.set_tooltip_text(_("Display all books"))
         self.author_box.add(all_row)
+        self.author_box.add(ListBoxSeparatorRow())
         self.author_box.select_row(all_row)
+
         all_row = ListBoxRowWithData(_("All"), True)
         all_row.set_tooltip_text(_("Display all books"))
         self.reader_box.add(all_row)
+        self.reader_box.add(ListBoxSeparatorRow())
         self.reader_box.select_row(all_row)
 
         for book in db.authors():
@@ -427,10 +439,6 @@ class CozyUI:
 
         return pos
 
-    def update_book_popover_time(self):
-        if self.current_book_element is not None:
-            self.current_book_element.update_time()
-
     def display_failed_imports(self, files):
         """
         Displays a dialog with a list of files that could not be imported.
@@ -447,8 +455,8 @@ class CozyUI:
             lambda x: x.get_children()[0].get_text() == book.author,
             self.author_box.get_children()), None)
 
-        self.author_toggle_button.set_active(True)
-        self.__toggle_author(None)
+        self.sort_stack.props.visible_child_name = "author"
+        self.__on_sort_stack_changed(None)
         self.author_box.select_row(row)
         self.book_box.invalidate_filter()
         self.search.close()
@@ -462,8 +470,8 @@ class CozyUI:
             lambda x: x.get_children()[0].get_text() == book.reader,
             self.reader_box.get_children()), None)
 
-        self.reader_toggle_button.set_active(True)
-        self.__toggle_reader(None)
+        self.sort_stack.props.visible_child_name = "reader"
+        self.__on_sort_stack_changed(None)
         self.reader_box.select_row(row)
         self.book_box.invalidate_filter()
         self.search.close()
@@ -489,40 +497,18 @@ class CozyUI:
         self.scan(None, True)
         self.settings._init_storage()
 
-    def __on_book_selec_changed(self, flowbox):
-        """
-        Fix the overlay on the selected book.
-        """
-        if len(flowbox.get_selected_children()) > 0:
-            selected = flowbox.get_selected_children()[0]
-            for child in flowbox.get_children():
-                if child == selected:
-                    child.get_children()[0].selected = True
-                else:
-                    child.get_children()[0].selected = False
-                    child.get_children()[0]._on_leave_notify(None, None)
-
-    def __toggle_reader(self, button):
-        """
-        Switch to reader selection
-        """
-        if self.reader_toggle_button.get_active():
-            self.author_toggle_button.set_active(False)
-            self.sort_stack.props.visible_child_name = "reader"
-            self.book_box.invalidate_filter()
-        elif self.author_toggle_button.get_active() is False:
-            self.reader_toggle_button.set_active(True)
-
-    def __toggle_author(self, button):
+    def __on_sort_stack_changed(self, widget, page):
         """
         Switch to author selection
         """
-        if self.author_toggle_button.get_active():
-            self.reader_toggle_button.set_active(False)
-            self.sort_stack.props.visible_child_name = "author"
-            self.book_box.invalidate_filter()
-        elif self.reader_toggle_button.get_active() is False:
-            self.author_toggle_button.set_active(True)
+        page = self.sort_stack.props.visible_child_name
+
+        if page == "recent":
+            self.sort_stack_revealer.set_reveal_child(False)
+        else:
+            self.sort_stack_revealer.set_reveal_child(True)
+
+        self.__on_listbox_changed(None, None)
 
     def track_changed(self):
         """
@@ -532,30 +518,14 @@ class CozyUI:
         # also reset the book playing state
         if self.current_book_element is not None:
             self.current_book_element.set_playing(False)
-            self.current_book_element.select_track(None, False)
 
         curr_track = player.get_current_track()
         self.current_book_element = next(
             filter(
-                lambda x: x.get_children()[0].book.id == curr_track.book.id,
-                self.book_box.get_children()), None).get_children()[0]
+                lambda x: x.book.id == curr_track.book.id,
+                self.book_box.get_children()), None)
 
-        self._update_current_track_element()
         self.block_ui_buttons(False, True)
-
-    def _update_current_track_element(self):
-        """
-        Updates the current track element to correctly display the play pause icons
-        in the track popups after it was created.
-        """
-        # The track popover is only created on demand
-        # when the user opens it the first time
-        if self.current_book_element is None:
-            return
-
-        if self.current_book_element.popover_created is True:
-            curr_track = player.get_current_track()
-            self.current_book_element.select_track(curr_track, self.is_playing)
 
     def __player_changed(self, event, message):
         """
@@ -571,15 +541,18 @@ class CozyUI:
             self.play()
             self.titlebar.play()
             self.sleep_timer.start()
-            self.current_book_element.select_track(None, True)
+            self.book_overview.select_track(None, True)
         elif event == "pause":
             self.is_playing = False
             self.pause()
             self.titlebar.pause()
             self.sleep_timer.stop()
-            self.current_book_element.select_track(None, False)
+            self.book_overview.select_track(None, False)
         elif event == "track-changed":
             self.track_changed()
+            if self.sort_stack.props.visible_child_name == "recent":
+                self.book_box.invalidate_filter()
+                self.book_box.invalidate_sort()
         elif event == "error":
             if self.dialog_open:
                 return
@@ -602,6 +575,11 @@ class CozyUI:
 
     def __about_close_clicked(self, widget):
         self.about_dialog.hide()
+
+    def __on_back_clicked(self, widget):
+        self.book_box.unselect_all()
+        self.main_stack.props.visible_child_name = "main"
+        self.toolbar_stack.props.visible_child_name = "main"
     
     def on_close(self, widget, data=None):
         """
@@ -624,18 +602,24 @@ class CozyUI:
         Refresh the filtering on author/reader selection.
         """
         self.book_box.invalidate_filter()
+        self.book_box.invalidate_sort()
 
     def __sort_books(self, book_1, book_2, data, notify_destroy):
         """
         Sort books alphabetically by name.
         """
-        return book_1.get_children()[0].book.name.lower() > book_2.get_children()[0].book.name.lower()
+        selected_stack = self.sort_stack.props.visible_child_name
+        if selected_stack == "recent":
+            return book_1.book.last_played < book_2.book.last_played
+        else:
+            return book_1.book.name.lower() > book_2.book.name.lower()
 
     def __filter_books(self, book, data, notify_destroy):
         """
         Filter the books in the book view according to the selected author/reader or "All".
         """
-        if self.author_toggle_button.get_active():
+        selected_stack = self.sort_stack.props.visible_child_name
+        if selected_stack == "author":
             author = self.author_box.get_selected_row().data
             if author is None:
                 return True
@@ -643,8 +627,8 @@ class CozyUI:
             if author == _("All"):
                 return True
             else:
-                return True if book.get_children()[0].book.author == author else False
-        else:
+                return True if book.book.author == author else False
+        elif selected_stack == "reader":
             reader = self.reader_box.get_selected_row().data
             if reader is None:
                 return True
@@ -652,7 +636,17 @@ class CozyUI:
             if reader == _("All"):
                 return True
             else:
-                return True if book.get_children()[0].book.reader == reader else False
+                return True if book.book.reader == reader else False
+        elif selected_stack == "recent":
+            return True if book.book.last_played > 0 else False
+
+    def __on_book_box_selected(self, flow_box, child):
+        # first update track ui
+        self.book_overview.set_book(child.book)
+
+        #then switch the stacks
+        self.main_stack.props.visible_child_name = "book_overview"
+        self.toolbar_stack.props.visible_child_name = "book_overview"
 
 
 class ListBoxRowWithData(Gtk.ListBoxRow):
@@ -672,3 +666,15 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
         label.set_margin_bottom(self.MARGIN)
         label.set_margin_start(7)
         self.add(label)
+
+class ListBoxSeparatorRow(Gtk.ListBoxRow):
+    """
+    This class represents a separator in a listbox row.
+    """
+
+    def __init__(self):
+        super().__init__()
+        separator = Gtk.Separator()
+        self.add(separator)
+        self.set_sensitive(False)
+        self.props.selectable = False

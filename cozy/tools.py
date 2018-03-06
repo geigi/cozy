@@ -1,3 +1,4 @@
+from datetime import datetime
 import time
 import threading
 import logging as log
@@ -130,3 +131,86 @@ def remove_all_children(container):
     for element in childs:
         container.remove(element)
         element.destroy()
+
+def seconds_to_human_readable(seconds):
+    """
+    Create a string with the following format:
+    6 hours 1 minute
+    45 minutes
+    21 seconds
+    :param seconds: Integer
+    """
+    m, s = divmod(seconds, 60)
+    h, m = divmod(m, 60)
+    h = int(h)
+    m = int(m)
+    s = int(s)
+
+    result = ""
+    if h > 0:
+        result += str(h) + " "
+        if h > 1:
+            result += _("hours")
+        else:
+            result += _("hour")
+    
+        if m > 0:
+            result += " "
+
+    if m > 0:
+        result += str(m) + " "
+        if m > 1:
+            result += _("minutes")
+        else:
+            result += _("minute")
+    
+    if h < 1 and m < 1:
+        if s < 1:
+            result += _("finished")
+        else:
+            result += str(s) + " "
+            if s > 1 or s < 1:
+                result += _("seconds")
+            else:
+                result += _("second")
+
+    return result
+
+def past_date_to_human_readable(unix_time):
+    """
+    Converts the date to the following strings (from today):
+    today
+    yesterday
+    x days ago
+    x week(s) ago
+    x month(s) ago
+    x year(s) ago
+    :param unix_time:
+    """
+    date = datetime.fromtimestamp(unix_time)
+    past = datetime.today().date() - date.date()
+    days = int(past.days)
+    weeks = int(days / 7)
+    months = int(days / 30)
+    years = int(months / 12)
+
+    if unix_time < 1:
+        return _("never")
+    elif days < 1:
+        return _("today")
+    elif days < 2:
+        return _("yesterday")
+    elif days < 7:
+        return str(days) + " " + _("days") + " " + _("ago")
+    elif weeks < 2:
+        return "1 " + _("week") + " " + _("ago")
+    elif weeks < 5:
+        return str(weeks) + " " + _("weeks") + " " + _("ago")
+    elif months < 2:
+        return "1 " + _("month") + " " + _("ago")
+    elif months < 12:
+        return str(months) + " " + _("months") + " " + _("ago")
+    elif years < 2:
+        return "1 " + _("year") + " " + _("ago")
+    else:
+        return str(years) + " " + _("years") + " " + _("ago")
