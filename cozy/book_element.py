@@ -14,7 +14,7 @@ class AlbumElement(Gtk.Box):
     This class represents a clickable album art widget for a book.
     """
 
-    def __init__(self, book, size, bordered=False, square=False):
+    def __init__(self, book, size, scale, bordered=False, square=False):
         """
         :param size: the size for the longer side of the image
         :param bordered: should there be a border around the album art?
@@ -33,7 +33,7 @@ class AlbumElement(Gtk.Box):
         self.event_box.set_property("valign", Gtk.Align.CENTER)
 
         # scale the book cover to a fix size.
-        pixbuf = artwork_cache.get_cover_pixbuf(book, size)
+        pixbuf = artwork_cache.get_cover_pixbuf(book, scale, size)
 
         # box is the main container for the album art
         self.set_halign(Gtk.Align.CENTER)
@@ -45,7 +45,8 @@ class AlbumElement(Gtk.Box):
         img.set_valign(Gtk.Align.CENTER)
         if bordered:
             img.get_style_context().add_class("bordered")
-        img.set_from_pixbuf(pixbuf)
+        surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
+        img.set_from_surface(surface)
 
         self.play_box = Gtk.EventBox()
 
@@ -223,7 +224,7 @@ class BookElement(Gtk.FlowBoxChild):
         author_label.props.justify = Gtk.Justification.CENTER
         author_label.get_style_context().add_class("dim-label")
 
-        self.art = AlbumElement(self.book, 180, True, square=False)
+        self.art = AlbumElement(self.book, 180, self.ui.window.get_scale_factor(), bordered=True, square=False)
 
         # assemble finished element
         self.box.add(self.art)

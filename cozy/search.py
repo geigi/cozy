@@ -155,7 +155,7 @@ class Search:
                 if self.search_thread_stop.is_set():
                     return
                 self.book_box.add(BookSearchResult(
-                    book, self.ui.jump_to_book))
+                    book, self.ui.jump_to_book, self.ui.window.get_scale_factor()))
 
     def __on_author_search_finished(self, authors):
         """

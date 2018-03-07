@@ -7,10 +7,11 @@ from cozy.db import *
 
 log = logging.getLogger("artwork_cache")
 
-def get_cover_pixbuf(book, size=0):
+def get_cover_pixbuf(book, scale, size=0):
     """
     """
     pixbuf = None
+    size *= scale
 
     if size > 0:
         # first try the cache

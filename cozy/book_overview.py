@@ -1,4 +1,4 @@
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 
 import cozy.artwork_cache as artwork_cache
 import cozy.db as db
@@ -41,8 +41,9 @@ class BookOverview:
         self.name_label.set_text(book.name)
         self.author_label.set_text(book.author)
 
-        pixbuf = artwork_cache.get_cover_pixbuf(book, 250)
-        self.cover_img.set_from_pixbuf(pixbuf)
+        pixbuf = artwork_cache.get_cover_pixbuf(book, self.ui.window.get_scale_factor(), 250)
+        surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.ui.window.get_scale_factor(), None)
+        self.cover_img.set_from_surface(surface)
 
         self.duration = db.get_book_duration(book)
         self.speed = db.Book.select().where(db.Book.id == self.book.id).get().playback_speed

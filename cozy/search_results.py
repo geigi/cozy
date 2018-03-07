@@ -1,4 +1,4 @@
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 from cozy.book_element import AlbumElement
 import cozy.artwork_cache as artwork_cache
 import cozy.tools as tools
@@ -118,13 +118,14 @@ class BookSearchResult(SearchResult):
     This class represents a book search result.
     """
 
-    def __init__(self, book, on_click):
+    def __init__(self, book, on_click, scale):
         super().__init__(on_click, book)
 
         self.set_tooltip_text(_("Play this book"))
 
-        pixbuf = artwork_cache.get_cover_pixbuf(book, BOOK_ICON_SIZE)
-        img = Gtk.Image.new_from_pixbuf(pixbuf)
+        pixbuf = artwork_cache.get_cover_pixbuf(book, scale, BOOK_ICON_SIZE)
+        surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
+        img = Gtk.Image.new_from_surface(surface)
         img.set_size_request(BOOK_ICON_SIZE, BOOK_ICON_SIZE)
 
         title_label = Gtk.Label()
