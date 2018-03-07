@@ -41,5 +41,10 @@
       <summary>Display the time according to the playback speed.</summary>
       <description></description>
     </key>
+    <key type="b" name="dark-mode">
+      <default>true</default> 
+      <summary>Enable Dark Mode.</summary>
+      <description></description>
+    </key>
   </schema>
 </schemalist>

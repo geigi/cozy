@@ -15,6 +15,7 @@ class Settings:
     This class contains all logic for cozys preferences.
     """
     ui = None
+    default_dark_mode = None
 
     def __init__(self, ui):
         self.ui = ui
@@ -38,6 +39,8 @@ class Settings:
         self._init_storage()
         self.__init_bindings()
         self.__on_storage_box_changed(None, None)
+
+        self.set_darkmode()
 
     def _init_storage(self):
         """
@@ -76,6 +79,10 @@ class Settings:
 
         titlebar_remaining_time_switch = self.builder.get_object("titlebar_remaining_time_switch")
         tools.get_glib_settings().bind("titlebar-remaining-time", titlebar_remaining_time_switch, "active",
+                           Gio.SettingsBindFlags.DEFAULT)
+
+        dark_mode_switch = self.builder.get_object("dark_mode_switch")
+        tools.get_glib_settings().bind("dark-mode", dark_mode_switch, "active",
                            Gio.SettingsBindFlags.DEFAULT)
 
         tools.get_glib_settings().connect("changed", self.__on_settings_changed)
@@ -159,6 +166,20 @@ class Settings:
         """
         if key == "titlebar-remaining-time":
             self.ui.titlebar._on_progress_setting_changed()
+        elif key == "dark-mode":
+            self.set_darkmode()
+
+    def set_darkmode(self):
+        settings = Gtk.Settings.get_default()
+
+        if self.default_dark_mode is None:
+            self.default_dark_mode = settings.get_property("gtk-application-prefer-dark-theme")
+        
+        user_enabled = tools.get_glib_settings().get_boolean("dark-mode")
+        if user_enabled:
+            settings.set_property("gtk-application-prefer-dark-theme", True)
+        else:
+            settings.set_property("gtk-application-prefer-dark-theme", self.default_dark_mode)
 
 
 class StorageListBoxRow(Gtk.ListBoxRow):

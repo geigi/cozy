@@ -1,5 +1,5 @@
 .bordered {
-  border: 1px solid shade(@theme_bg_color, 0.5);
+  border: 1px solid shade(@theme_bg_color, 0.8);
 }
 
 .h1 {
