@@ -5,18 +5,17 @@
   <object class="GtkImage" id="add_image">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-add</property>
-    <property name="icon_size">3</property>
+    <property name="icon_name">list-add-symbolic</property>
   </object>
   <object class="GtkImage" id="default_image">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-ok</property>
+    <property name="icon_name">emblem-default-symbolic</property>
   </object>
   <object class="GtkImage" id="remove_image">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-remove</property>
+    <property name="icon_name">list-remove-symbolic</property>
   </object>
   <object class="GtkWindow" id="settings_window">
     <property name="height_request">400</property>
@@ -350,6 +349,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="toolbar_style">icons</property>
+                    <property name="height_request">24</property>
                     <child>
                       <object class="GtkToolItem">
                         <property name="visible">True</property>
@@ -362,6 +362,11 @@
                             <property name="receives_default">False</property>
                             <property name="image">add_image</property>
                             <property name="always_show_image">True</property>
+                            <property name="height_request">24</property>
+                            <property name="width_request">24</property>
+                            <style>
+                          <class name="flat"/>
+                        </style>
                           </object>
                         </child>
                       </object>
@@ -382,6 +387,11 @@
                             <property name="receives_default">False</property>
                             <property name="image">remove_image</property>
                             <property name="always_show_image">True</property>
+                            <property name="height_request">24</property>
+                            <property name="width_request">24</property>
+                            <style>
+                          <class name="flat"/>
+                        </style>
                           </object>
                         </child>
                       </object>
@@ -414,6 +424,11 @@
                             <property name="receives_default">False</property>
                             <property name="image">default_image</property>
                             <property name="always_show_image">True</property>
+                            <property name="height_request">24</property>
+                            <property name="width_request">24</property>
+                            <style>
+                          <class name="flat"/>
+                        </style>
                           </object>
                         </child>
                       </object>
@@ -496,6 +511,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Use crc32 checksum instead of last modified timestamp on folder scan</property>
+                    <property name="margin_right">10</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
