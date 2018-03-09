@@ -671,6 +671,9 @@ class CozyUI:
         self.main_stack.props.visible_child_name = "book_overview"
         self.toolbar_stack.props.visible_child_name = "book_overview"
 
+        self.book_overview.play_book_button.grab_remove()
+        self.book_overview.scroller.grab_focus()
+
 
 class ListBoxRowWithData(Gtk.ListBoxRow):
     """

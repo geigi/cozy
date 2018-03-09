@@ -638,6 +638,7 @@
                       <object class="GtkImage" id="info_cover_image">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="receives_default">True</property>
                         <property name="halign">center</property>
                         <property name="margin_bottom">35</property>
                         <property name="stock">gtk-missing-image</property>
@@ -896,6 +897,7 @@
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="receives_default">True</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="orientation">vertical</property>
