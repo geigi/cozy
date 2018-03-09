@@ -5,7 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: cozy 0.5.2\n"
+"Project-Id-Version: cozy 0.5.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-27 18:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/book_element.py:64 cozy/search_results.py:124
+#: cozy/book_element.py:58 cozy/search_results.py:124
 msgid "Play this book"
 msgstr "Dit boek afspelen"
 
-#: cozy/book_element.py:188
+#: cozy/book_element.py:208
 msgid "Open book overview"
 msgstr "Boek-overzicht openen"
 
-#: cozy/book_element.py:413
+#: cozy/book_element.py:265
 msgid "Play this part"
 msgstr "Dit onderdeel afspelen"
 
@@ -49,15 +49,88 @@ msgstr "Onbekende auteur"
 msgid "Unknown Reader"
 msgstr "Onbekende lezer"
 
-#: cozy/ui.py:356
+#: cozy/tools.py:153
+msgid "hours"
+msgstr ""
+
+#: cozy/tools.py:155
+msgid "hour"
+msgstr ""
+
+#: cozy/tools.py:163
+msgid "minutes"
+msgstr ""
+
+#: cozy/tools.py:165
+msgid "minute"
+msgstr ""
+
+#: cozy/tools.py:169
+msgid "finished"
+msgstr ""
+
+#: cozy/tools.py:173
+msgid "seconds"
+msgstr ""
+
+#: cozy/tools.py:175
+msgid "second"
+msgstr ""
+
+#: cozy/tools.py:198
+msgid "never"
+msgstr ""
+
+#: cozy/tools.py:200
+msgid "today"
+msgstr ""
+
+#: cozy/tools.py:202
+msgid "yesterday"
+msgstr ""
+
+#: cozy/tools.py:204
+msgid "days"
+msgstr ""
+
+#: cozy/tools.py:204 cozy/tools.py:206 cozy/tools.py:208 cozy/tools.py:210
+#: cozy/tools.py:212 cozy/tools.py:214 cozy/tools.py:216
+msgid "ago"
+msgstr ""
+
+#: cozy/tools.py:206
+msgid "week"
+msgstr ""
+
+#: cozy/tools.py:208
+msgid "weeks"
+msgstr ""
+
+#: cozy/tools.py:210
+msgid "month"
+msgstr ""
+
+#: cozy/tools.py:212
+msgid "months"
+msgstr ""
+
+#: cozy/tools.py:214
+msgid "year"
+msgstr ""
+
+#: cozy/tools.py:216
+msgid "years"
+msgstr ""
+
+#: cozy/ui.py:371
 msgid "Importing Audiobooks"
 msgstr "Bezig met importeren van audioboeken"
 
-#: cozy/ui.py:382 cozy/ui.py:386 cozy/ui.py:641 cozy/ui.py:650
+#: cozy/ui.py:400 cozy/ui.py:406 cozy/ui.py:661 cozy/ui.py:670
 msgid "All"
 msgstr "Alles"
 
-#: cozy/ui.py:383 cozy/ui.py:387
+#: cozy/ui.py:401 cozy/ui.py:407
 msgid "Display all books"
 msgstr "Alle boeken weergeven"
 
@@ -65,81 +138,54 @@ msgstr "Alle boeken weergeven"
 msgid "min"
 msgstr "min"
 
-#: cozy/settings.py:246
+#: cozy/settings.py:272
 msgid "Changing audio book location..."
+msgstr "Audioboeklocatie wijzigen..."
+
+#: data/ui/main_window.ui:167
+msgid "Recent"
 msgstr ""
 
-#: data/ui/main_window.ui:67
-msgid "Select by author"
-msgstr "Selecteren per auteur"
-
-#: data/ui/main_window.ui:76
-msgid "<big>Author</big>"
-msgstr "<big>Auteur</big>"
-
-#: data/ui/main_window.ui:85
-msgid "Author filter button"
-msgstr "Auteur-filterknop"
-
-#: data/ui/main_window.ui:86
-msgid "Filter books by author"
-msgstr "Boeken filteren op auteur"
-
-#: data/ui/main_window.ui:106
-msgid "Select by reader"
-msgstr "Selecteren per lezer"
-
-#: data/ui/main_window.ui:114
-msgid "<big>Reader</big>"
-msgstr "<big>Lezer</big>"
-
-#: data/ui/main_window.ui:123
-msgid "Reader filter button"
-msgstr "Lezer-filterknop"
-
-#: data/ui/main_window.ui:124
-msgid "Filter books by reader"
-msgstr "Boeken filteren op lezer"
-
-#: data/ui/main_window.ui:178
+#: data/ui/main_window.ui:186
 msgid "List of authors"
 msgstr "Lijst van auteurs"
 
-#: data/ui/main_window.ui:194 data/ui/search_popover.ui:107
+#: data/ui/main_window.ui:202 data/ui/main_window.ui:298
+#: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "Auteur"
 
-#: data/ui/main_window.ui:212
+#: data/ui/main_window.ui:221
 msgid "List of readers"
 msgstr "Lijst van lezers"
 
-#: data/ui/main_window.ui:228 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:237 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "Lezer"
 
-#: data/ui/main_window.ui:275
+#: data/ui/main_window.ui:278
 msgid "List of books"
 msgstr "Boekenlijst"
 
-#: data/ui/main_window.ui:309
+#: data/ui/main_window.ui:313
 msgid "Importing your audiobooks..."
 msgstr "Bezig met importeren van audioboeken..."
 
-#: data/ui/main_window.ui:360
+#: data/ui/main_window.ui:364
 msgid "Import your Audiobooks"
 msgstr "Uw audioboeken importeren"
 
-#: data/ui/main_window.ui:376
+#: data/ui/main_window.ui:380
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 "Cozy importeert uw audioboeken automatisch naar één map - uw bibliotheek"
 
-#: data/ui/main_window.ui:416
+#: data/ui/main_window.ui:420
 msgid "Drag & Drop"
 msgstr "Slepen-en-neerzetten"
 
-#: data/ui/main_window.ui:432
+#: data/ui/main_window.ui:436
 msgid ""
 "Drag your audiobooks into cozy and the will be automatically imported to "
 "your library"
@@ -147,155 +193,175 @@ msgstr ""
 "Sleep uw audioboeken naar cozy om ze automatisch te importeren naar uw "
 "bibliotheek"
 
-#: data/ui/main_window.ui:492
+#: data/ui/main_window.ui:496
 msgid "Change Audiobooks Folder"
 msgstr "Audioboek-map wijzigen"
 
-#: data/ui/main_window.ui:508
+#: data/ui/main_window.ui:512
 msgid "Load audiobooks from a folder, network drive or an external disk"
 msgstr "Audioboeken laden uit een map of van een externe of netwerkschijf"
 
-#: data/ui/main_window.ui:537
+#: data/ui/main_window.ui:541
 msgid "Location of your audiobooks"
 msgstr "Locatie van uw audioboeken"
 
-#: data/ui/main_window.ui:573
+#: data/ui/main_window.ui:577
 msgid "Auto scan switch"
 msgstr "Automatisch scannen-schakelaar"
 
-#: data/ui/main_window.ui:574 data/ui/main_window.ui:589
+#: data/ui/main_window.ui:578 data/ui/main_window.ui:593
 msgid "Automatically import new audiobooks on startup"
 msgstr "Nieuwe audioboeken automatisch importeren bij opstarten"
 
-#: data/ui/main_window.ui:642
+#: data/ui/main_window.ui:717
+msgid "Remaining"
+msgstr ""
+
+#: data/ui/main_window.ui:773
+msgid "Total"
+msgstr ""
+
+#: data/ui/main_window.ui:790
+msgid "Last played"
+msgstr ""
+
+#: data/ui/main_window.ui:807
+msgid "Published"
+msgstr ""
+
+#: data/ui/main_window.ui:945
+msgid "page0"
+msgstr ""
+
+#: data/ui/main_window.ui:984
 msgid "Rewind 30 seconds"
 msgstr "30 seconden terugspoelen"
 
-#: data/ui/main_window.ui:650
+#: data/ui/main_window.ui:992
 msgid "Rewind button"
 msgstr "Terugspoelknop"
 
-#: data/ui/main_window.ui:651
+#: data/ui/main_window.ui:993
 msgid "Jump back 30 seconds"
 msgstr "30 seconden teruggaan"
 
-#: data/ui/main_window.ui:668
+#: data/ui/main_window.ui:1010
 msgid "Start playback"
 msgstr "Afspelen starten"
 
-#: data/ui/main_window.ui:676
+#: data/ui/main_window.ui:1018
 msgid "Play/Pause Button"
 msgstr "Afspelen/Pauzeren-knop"
 
-#: data/ui/main_window.ui:677
+#: data/ui/main_window.ui:1019
 msgid "Start or pause the playback"
 msgstr "Het afspelen starten of pauzeren"
 
-#: data/ui/main_window.ui:694
+#: data/ui/main_window.ui:1036
 msgid "Volume control"
 msgstr "Volumeregeling"
 
-#: data/ui/main_window.ui:772
+#: data/ui/main_window.ui:1113
 msgid "Currently playing"
 msgstr "Nu aan het afspelen"
 
-#: data/ui/main_window.ui:790
+#: data/ui/main_window.ui:1131
 msgid "Booktitle"
 msgstr "Boektitel"
 
-#: data/ui/main_window.ui:791
+#: data/ui/main_window.ui:1132
 msgid "Title of currently playing book"
 msgstr "Titel van het momenteel spelende boek"
 
-#: data/ui/main_window.ui:816
+#: data/ui/main_window.ui:1157
 msgid "Part name"
 msgstr "Naam van onderdeel"
 
-#: data/ui/main_window.ui:817
+#: data/ui/main_window.ui:1158
 msgid "Title of the currently playing part"
 msgstr "Titel van het momenteel spelende onderdeel"
 
-#: data/ui/main_window.ui:859
+#: data/ui/main_window.ui:1200
 msgid "Elapsed time"
 msgstr "Verstreken tijd"
 
-#: data/ui/main_window.ui:867
+#: data/ui/main_window.ui:1208
 msgid "Time elapsed"
 msgstr "Verstreken tijd"
 
-#: data/ui/main_window.ui:868
+#: data/ui/main_window.ui:1209
 msgid "Elapsed time of current part"
 msgstr "De verstreken tijd van het huidige onderdeel"
 
-#: data/ui/main_window.ui:883
+#: data/ui/main_window.ui:1224
 msgid "Scrubb through current part"
 msgstr "Door huidig onderdeel spoelen"
 
-#: data/ui/main_window.ui:889
+#: data/ui/main_window.ui:1230
 msgid "Position slider"
 msgstr "Positiebalk"
 
-#: data/ui/main_window.ui:890
+#: data/ui/main_window.ui:1231
 msgid "Position of the current part in seconds"
 msgstr "Positie van het huidige onderdeel, in seconden"
 
-#: data/ui/main_window.ui:908
+#: data/ui/main_window.ui:1249
 msgid "Remaining time"
 msgstr "Resterende tijd"
 
-#: data/ui/main_window.ui:916
+#: data/ui/main_window.ui:1257
 msgid "Time remaining"
 msgstr "Resterende tijd"
 
-#: data/ui/main_window.ui:917
+#: data/ui/main_window.ui:1258
 msgid "Remaining time of current part"
 msgstr "De resterende tijd van het huidige onderdeel"
 
-#: data/ui/main_window.ui:993
+#: data/ui/main_window.ui:1334
 msgid "Working..."
 msgstr "Bezig met werken..."
 
-#: data/ui/main_window.ui:998
+#: data/ui/main_window.ui:1339
 msgid "Currently working"
 msgstr "Nu aan het werk"
 
-#: data/ui/main_window.ui:1014
+#: data/ui/main_window.ui:1355
 msgid "Playback speed"
 msgstr "Afspeelsnelheid"
 
-#: data/ui/main_window.ui:1036
+#: data/ui/main_window.ui:1377
 msgid "Sleep timer"
 msgstr "Slaaptimer"
 
-#: data/ui/main_window.ui:1047
+#: data/ui/main_window.ui:1388
 msgid "Timer menu button"
 msgstr "Timer-menuknop"
 
-#: data/ui/main_window.ui:1048
+#: data/ui/main_window.ui:1389
 msgid "Open the sleep timer popover"
 msgstr "Slaaptimer-paneel openen"
 
-#: data/ui/main_window.ui:1064
+#: data/ui/main_window.ui:1405
 msgid "Search your library"
 msgstr "Zoeken in uw bibliotheek"
 
-#: data/ui/main_window.ui:1075
+#: data/ui/main_window.ui:1416
 msgid "Search menu button"
 msgstr "Zoek-menuknop"
 
-#: data/ui/main_window.ui:1076
+#: data/ui/main_window.ui:1417
 msgid "Open the search popover"
 msgstr "Zoekpaneel openen"
 
-#: data/ui/main_window.ui:1090
+#: data/ui/main_window.ui:1431
 msgid "Options"
 msgstr "Opties"
 
-#: data/ui/main_window.ui:1101
+#: data/ui/main_window.ui:1442
 msgid "Options menu button"
 msgstr "Opties-menuknop"
 
-#: data/ui/main_window.ui:1102
+#: data/ui/main_window.ui:1443
 msgid "Open the options popover"
 msgstr "Opties-paneel openen"
 
@@ -365,67 +431,75 @@ msgstr ""
 "- Het bestand/De bestanden is/zijn corrupt"
 
 #: data/ui/settings.ui:43
+msgid "General"
+msgstr ""
+
+#: data/ui/settings.ui:62
+msgid "Dark Mode"
+msgstr ""
+
+#: data/ui/settings.ui:96
 msgid "Titlebar"
 msgstr "Titelbalk"
 
-#: data/ui/settings.ui:63
+#: data/ui/settings.ui:116
 msgid "Display the whole book instead of the current chaper"
-msgstr ""
+msgstr "Het gehele boek weergeven i.p.v. het huidige hoofdstuk"
 
-#: data/ui/settings.ui:94
+#: data/ui/settings.ui:147
 msgid "Appearance"
 msgstr "Uiterlijk"
 
-#: data/ui/settings.ui:109
+#: data/ui/settings.ui:162
 msgid "Suspend system on timer"
 msgstr "Systeem in pauzestand zetten na afgaan timer"
 
-#: data/ui/settings.ui:145
+#: data/ui/settings.ui:198
 msgid "Replay 30 seconds"
 msgstr "30 seconden herhalen"
 
-#: data/ui/settings.ui:180
+#: data/ui/settings.ui:233
 msgid "Automatic media scan"
 msgstr "Media automatisch scannen"
 
-#: data/ui/settings.ui:211
+#: data/ui/settings.ui:264
 msgid "Behaviour"
 msgstr "Gedrag"
 
-#: data/ui/settings.ui:227
+#: data/ui/settings.ui:280
 msgid "Storage locations"
-msgstr ""
+msgstr "Opslaglocaties"
 
-#: data/ui/settings.ui:286
+#: data/ui/settings.ui:339
 msgid "Audio books location"
 msgstr "Locatie van audioboeken"
 
-#: data/ui/settings.ui:304
+#: data/ui/settings.ui:357
 msgid "Add location"
-msgstr ""
+msgstr "Locatie toevoegen"
 
-#: data/ui/settings.ui:324
+#: data/ui/settings.ui:377
 msgid "Remove location"
-msgstr ""
+msgstr "Locatie verwijderen"
 
-#: data/ui/settings.ui:355
+#: data/ui/settings.ui:408
 msgid "Set as default storage location for new audiobooks"
-msgstr ""
+msgstr "Instellen als standaard opslaglocatie voor nieuwe audioboeken"
 
-#: data/ui/settings.ui:396
+#: data/ui/settings.ui:449
 msgid "Follow symlinks"
 msgstr "Koppelingen volgen"
 
-#: data/ui/settings.ui:428
+#: data/ui/settings.ui:481
 msgid "Storage"
-msgstr ""
+msgstr "Opslag"
 
-#: data/ui/settings.ui:445
+#: data/ui/settings.ui:498
 msgid "Use crc32 checksum instead of last modified timestamp on folder scan"
 msgstr ""
 "crc32-controlesom gebruiken i.p.v. laatst gewijzigd bij scannen van mappen"
 
-#: data/ui/settings.ui:480
+#: data/ui/settings.ui:533
 msgid "Advanced"
 msgstr "Geavanceerd"
 
@@ -487,7 +561,7 @@ msgstr "Timerduur-kno"
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"
-msgstr ""
+msgstr "van"
 
 #: data/ui/book_progress_element.ui:75
 msgid "remaining"

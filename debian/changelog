@@ -1,3 +1,14 @@
+com.github.geigi.cozy (0.5.4) UNSTABLE; urgency=low
+
+  * One of cozys coolest releases yet
+  * New book overview!
+  * Lots of UI tweaks
+  * HiDPI support
+  * Dark mode can be enabled in settings
+  * Fixed desktop integration (mpris)
+
+ -- Julian Geywitz <github@geigi.de>  Wed, 09 Mar 2018 13:55:14 +0200
+
 com.github.geigi.cozy (0.5.3) UNSTABLE; urgency=low
 
   * Bugfix release

@@ -52,6 +52,18 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.5.4" timestamp="1520600004">
+      <description>
+        <ul>
+          <li>One of Cozys coolest releases yet:</li>
+          <li>New book overview!</li>
+          <li>Lots of UI tweaks</li>
+          <li>HiDPI support</li>
+          <li>Dark mode can be enabled in settings</li>
+          <li>Fixed desktop integration (mpris)</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.5.3" timestamp="1519809258">
       <description>
         <ul>

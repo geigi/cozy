@@ -5,7 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: cozy 0.5.2\n"
+"Project-Id-Version: cozy 0.5.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-27 18:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: cozy/book_element.py:64 cozy/search_results.py:124
+#: cozy/book_element.py:58 cozy/search_results.py:124
 msgid "Play this book"
 msgstr "朗读这本书"
 
-#: cozy/book_element.py:188
+#: cozy/book_element.py:208
 msgid "Open book overview"
 msgstr "打开书籍概览"
 
-#: cozy/book_element.py:413
+#: cozy/book_element.py:265
 msgid "Play this part"
 msgstr "朗读这个部分"
 
@@ -49,15 +49,88 @@ msgstr "未知作者"
 msgid "Unknown Reader"
 msgstr "未知朗读者"
 
-#: cozy/ui.py:356
+#: cozy/tools.py:153
+msgid "hours"
+msgstr ""
+
+#: cozy/tools.py:155
+msgid "hour"
+msgstr ""
+
+#: cozy/tools.py:163
+msgid "minutes"
+msgstr ""
+
+#: cozy/tools.py:165
+msgid "minute"
+msgstr ""
+
+#: cozy/tools.py:169
+msgid "finished"
+msgstr ""
+
+#: cozy/tools.py:173
+msgid "seconds"
+msgstr ""
+
+#: cozy/tools.py:175
+msgid "second"
+msgstr ""
+
+#: cozy/tools.py:198
+msgid "never"
+msgstr ""
+
+#: cozy/tools.py:200
+msgid "today"
+msgstr ""
+
+#: cozy/tools.py:202
+msgid "yesterday"
+msgstr ""
+
+#: cozy/tools.py:204
+msgid "days"
+msgstr ""
+
+#: cozy/tools.py:204 cozy/tools.py:206 cozy/tools.py:208 cozy/tools.py:210
+#: cozy/tools.py:212 cozy/tools.py:214 cozy/tools.py:216
+msgid "ago"
+msgstr ""
+
+#: cozy/tools.py:206
+msgid "week"
+msgstr ""
+
+#: cozy/tools.py:208
+msgid "weeks"
+msgstr ""
+
+#: cozy/tools.py:210
+msgid "month"
+msgstr ""
+
+#: cozy/tools.py:212
+msgid "months"
+msgstr ""
+
+#: cozy/tools.py:214
+msgid "year"
+msgstr ""
+
+#: cozy/tools.py:216
+msgid "years"
+msgstr ""
+
+#: cozy/ui.py:371
 msgid "Importing Audiobooks"
 msgstr "导入有声读物"
 
-#: cozy/ui.py:382 cozy/ui.py:386 cozy/ui.py:641 cozy/ui.py:650
+#: cozy/ui.py:400 cozy/ui.py:406 cozy/ui.py:661 cozy/ui.py:670
 msgid "All"
 msgstr "所有"
 
-#: cozy/ui.py:383 cozy/ui.py:387
+#: cozy/ui.py:401 cozy/ui.py:407
 msgid "Display all books"
 msgstr "显示所有书籍"
 
@@ -65,234 +138,227 @@ msgstr "显示所有书籍"
 msgid "min"
 msgstr "秒"
 
-#: cozy/settings.py:246
+#: cozy/settings.py:272
 msgid "Changing audio book location..."
 msgstr ""
 
-#: data/ui/main_window.ui:67
-msgid "Select by author"
-msgstr "查看作者"
+#: data/ui/main_window.ui:167
+msgid "Recent"
+msgstr ""
 
-#: data/ui/main_window.ui:76
-msgid "<big>Author</big>"
-msgstr "<big>作者</big>"
-
-#: data/ui/main_window.ui:85
-msgid "Author filter button"
-msgstr "作者过滤按钮"
-
-#: data/ui/main_window.ui:86
-msgid "Filter books by author"
-msgstr "按作者选择"
-
-#: data/ui/main_window.ui:106
-msgid "Select by reader"
-msgstr "查看朗读者"
-
-#: data/ui/main_window.ui:114
-msgid "<big>Reader</big>"
-msgstr "<big>朗读者</big>"
-
-#: data/ui/main_window.ui:123
-msgid "Reader filter button"
-msgstr "朗读者过滤按钮"
-
-#: data/ui/main_window.ui:124
-msgid "Filter books by reader"
-msgstr "按朗读者选择"
-
-#: data/ui/main_window.ui:178
+#: data/ui/main_window.ui:186
 msgid "List of authors"
 msgstr "作者名单"
 
-#: data/ui/main_window.ui:194 data/ui/search_popover.ui:107
+#: data/ui/main_window.ui:202 data/ui/main_window.ui:298
+#: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "作者"
 
-#: data/ui/main_window.ui:212
+#: data/ui/main_window.ui:221
 msgid "List of readers"
 msgstr "朗读者者名单"
 
-#: data/ui/main_window.ui:228 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:237 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "朗读者"
 
-#: data/ui/main_window.ui:275
+#: data/ui/main_window.ui:278
 msgid "List of books"
 msgstr "书目清单"
 
-#: data/ui/main_window.ui:309
+#: data/ui/main_window.ui:313
 msgid "Importing your audiobooks..."
 msgstr "导入您的有声读物..."
 
-#: data/ui/main_window.ui:360
+#: data/ui/main_window.ui:364
 msgid "Import your Audiobooks"
 msgstr "导入您的有声读物"
 
-#: data/ui/main_window.ui:376
+#: data/ui/main_window.ui:380
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr "朗读者自动将您的有声读物导入一个目录 - 您的图书目录"
 
-#: data/ui/main_window.ui:416
+#: data/ui/main_window.ui:420
 msgid "Drag & Drop"
 msgstr "拖放导入"
 
-#: data/ui/main_window.ui:432
+#: data/ui/main_window.ui:436
 msgid ""
 "Drag your audiobooks into cozy and the will be automatically imported to "
 "your library"
 msgstr "将您的有声读物拖到朗读者程序中，那么将被自动导入到您的图书目录"
 
-#: data/ui/main_window.ui:492
+#: data/ui/main_window.ui:496
 msgid "Change Audiobooks Folder"
 msgstr "更改您的图书目录"
 
-#: data/ui/main_window.ui:508
+#: data/ui/main_window.ui:512
 msgid "Load audiobooks from a folder, network drive or an external disk"
 msgstr "从文件夹，网络驱动器或外部磁盘加载有声读物"
 
-#: data/ui/main_window.ui:537
+#: data/ui/main_window.ui:541
 msgid "Location of your audiobooks"
 msgstr "你的有声读物的位置"
 
-#: data/ui/main_window.ui:573
+#: data/ui/main_window.ui:577
 msgid "Auto scan switch"
 msgstr "自动扫描开关"
 
-#: data/ui/main_window.ui:574 data/ui/main_window.ui:589
+#: data/ui/main_window.ui:578 data/ui/main_window.ui:593
 msgid "Automatically import new audiobooks on startup"
 msgstr "在启动时自动导入新的有声读物"
 
-#: data/ui/main_window.ui:642
+#: data/ui/main_window.ui:717
+msgid "Remaining"
+msgstr ""
+
+#: data/ui/main_window.ui:773
+msgid "Total"
+msgstr ""
+
+#: data/ui/main_window.ui:790
+msgid "Last played"
+msgstr ""
+
+#: data/ui/main_window.ui:807
+msgid "Published"
+msgstr ""
+
+#: data/ui/main_window.ui:945
+msgid "page0"
+msgstr ""
+
+#: data/ui/main_window.ui:984
 msgid "Rewind 30 seconds"
 msgstr "后退30秒"
 
-#: data/ui/main_window.ui:650
+#: data/ui/main_window.ui:992
 msgid "Rewind button"
 msgstr "后退"
 
-#: data/ui/main_window.ui:651
+#: data/ui/main_window.ui:993
 msgid "Jump back 30 seconds"
 msgstr "回跳30分"
 
-#: data/ui/main_window.ui:668
+#: data/ui/main_window.ui:1010
 msgid "Start playback"
 msgstr "开始播放"
 
-#: data/ui/main_window.ui:676
+#: data/ui/main_window.ui:1018
 msgid "Play/Pause Button"
 msgstr "播放/暂停"
 
-#: data/ui/main_window.ui:677
+#: data/ui/main_window.ui:1019
 msgid "Start or pause the playback"
 msgstr "开始或暂停播放"
 
-#: data/ui/main_window.ui:694
+#: data/ui/main_window.ui:1036
 msgid "Volume control"
 msgstr "音量控制"
 
-#: data/ui/main_window.ui:772
+#: data/ui/main_window.ui:1113
 msgid "Currently playing"
 msgstr "正在播放"
 
-#: data/ui/main_window.ui:790
+#: data/ui/main_window.ui:1131
 msgid "Booktitle"
 msgstr "书名"
 
-#: data/ui/main_window.ui:791
+#: data/ui/main_window.ui:1132
 msgid "Title of currently playing book"
 msgstr "当前正在播放的书的书名"
 
-#: data/ui/main_window.ui:816
+#: data/ui/main_window.ui:1157
 msgid "Part name"
 msgstr "章节名字"
 
-#: data/ui/main_window.ui:817
+#: data/ui/main_window.ui:1158
 msgid "Title of the currently playing part"
 msgstr "当前播放部分的书名"
 
-#: data/ui/main_window.ui:859
+#: data/ui/main_window.ui:1200
 msgid "Elapsed time"
 msgstr "已用时间"
 
-#: data/ui/main_window.ui:867
+#: data/ui/main_window.ui:1208
 msgid "Time elapsed"
 msgstr "已用时间"
 
-#: data/ui/main_window.ui:868
+#: data/ui/main_window.ui:1209
 msgid "Elapsed time of current part"
 msgstr "正在朗读部分已用时间"
 
-#: data/ui/main_window.ui:883
+#: data/ui/main_window.ui:1224
 msgid "Scrubb through current part"
 msgstr "拖动快进或快退当前朗读部分"
 
-#: data/ui/main_window.ui:889
+#: data/ui/main_window.ui:1230
 msgid "Position slider"
 msgstr "位置"
 
-#: data/ui/main_window.ui:890
+#: data/ui/main_window.ui:1231
 msgid "Position of the current part in seconds"
 msgstr "当前部分的位置，以秒为单位"
 
-#: data/ui/main_window.ui:908
+#: data/ui/main_window.ui:1249
 msgid "Remaining time"
 msgstr "剩余时间:"
 
-#: data/ui/main_window.ui:916
+#: data/ui/main_window.ui:1257
 msgid "Time remaining"
 msgstr "剩余时间:"
 
-#: data/ui/main_window.ui:917
+#: data/ui/main_window.ui:1258
 msgid "Remaining time of current part"
 msgstr "正在朗读部分已用时间"
 
-#: data/ui/main_window.ui:993
+#: data/ui/main_window.ui:1334
 msgid "Working..."
 msgstr "进行中..."
 
-#: data/ui/main_window.ui:998
+#: data/ui/main_window.ui:1339
 msgid "Currently working"
 msgstr "正在进行"
 
-#: data/ui/main_window.ui:1014
+#: data/ui/main_window.ui:1355
 msgid "Playback speed"
 msgstr "播放速度"
 
-#: data/ui/main_window.ui:1036
+#: data/ui/main_window.ui:1377
 msgid "Sleep timer"
 msgstr "睡眠时间"
 
-#: data/ui/main_window.ui:1047
+#: data/ui/main_window.ui:1388
 msgid "Timer menu button"
 msgstr "定时器菜单按钮"
 
-#: data/ui/main_window.ui:1048
+#: data/ui/main_window.ui:1389
 msgid "Open the sleep timer popover"
 msgstr "打开睡眠计时器弹出窗口"
 
-#: data/ui/main_window.ui:1064
+#: data/ui/main_window.ui:1405
 msgid "Search your library"
 msgstr "在您的书库中查找"
 
-#: data/ui/main_window.ui:1075
+#: data/ui/main_window.ui:1416
 msgid "Search menu button"
 msgstr "搜索菜单按钮"
 
-#: data/ui/main_window.ui:1076
+#: data/ui/main_window.ui:1417
 msgid "Open the search popover"
 msgstr "打开搜索弹出窗口"
 
-#: data/ui/main_window.ui:1090
+#: data/ui/main_window.ui:1431
 msgid "Options"
 msgstr "显示选项"
 
-#: data/ui/main_window.ui:1101
+#: data/ui/main_window.ui:1442
 msgid "Options menu button"
 msgstr "显示选项按钮"
 
-#: data/ui/main_window.ui:1102
+#: data/ui/main_window.ui:1443
 msgid "Open the options popover"
 msgstr "打开显示选项弹出窗口"
 
@@ -361,66 +427,74 @@ msgstr ""
 "- 文件已损坏"
 
 #: data/ui/settings.ui:43
+msgid "General"
+msgstr ""
+
+#: data/ui/settings.ui:62
+msgid "Dark Mode"
+msgstr ""
+
+#: data/ui/settings.ui:96
 msgid "Titlebar"
 msgstr ""
 
-#: data/ui/settings.ui:63
+#: data/ui/settings.ui:116
 msgid "Display the whole book instead of the current chaper"
 msgstr ""
 
-#: data/ui/settings.ui:94
+#: data/ui/settings.ui:147
 msgid "Appearance"
 msgstr "外观"
 
-#: data/ui/settings.ui:109
+#: data/ui/settings.ui:162
 msgid "Suspend system on timer"
 msgstr "系统挂起定时器"
 
-#: data/ui/settings.ui:145
+#: data/ui/settings.ui:198
 msgid "Replay 30 seconds"
 msgstr "重播30秒"
 
-#: data/ui/settings.ui:180
+#: data/ui/settings.ui:233
 msgid "Automatic media scan"
 msgstr "自动扫描您的书籍"
 
-#: data/ui/settings.ui:211
+#: data/ui/settings.ui:264
 msgid "Behaviour"
 msgstr "行为"
 
-#: data/ui/settings.ui:227
+#: data/ui/settings.ui:280
 msgid "Storage locations"
 msgstr ""
 
-#: data/ui/settings.ui:286
+#: data/ui/settings.ui:339
 msgid "Audio books location"
 msgstr "书库的位置"
 
-#: data/ui/settings.ui:304
+#: data/ui/settings.ui:357
 msgid "Add location"
 msgstr ""
 
-#: data/ui/settings.ui:324
+#: data/ui/settings.ui:377
 msgid "Remove location"
 msgstr ""
 
-#: data/ui/settings.ui:355
+#: data/ui/settings.ui:408
 msgid "Set as default storage location for new audiobooks"
 msgstr ""
 
-#: data/ui/settings.ui:396
+#: data/ui/settings.ui:449
 msgid "Follow symlinks"
 msgstr "符号链接"
 
-#: data/ui/settings.ui:428
+#: data/ui/settings.ui:481
 msgid "Storage"
 msgstr ""
 
-#: data/ui/settings.ui:445
+#: data/ui/settings.ui:498
 msgid "Use crc32 checksum instead of last modified timestamp on folder scan"
 msgstr ""
 
-#: data/ui/settings.ui:480
+#: data/ui/settings.ui:533
 msgid "Advanced"
 msgstr ""
 
