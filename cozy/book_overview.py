@@ -28,6 +28,9 @@ class BookOverview:
         self.track_list_container = builder.get_object("track_list_container")
         self.published_text = builder.get_object("info_published_text")
         self.remaining_text = builder.get_object("info_remaining_text")
+        self.scroller = builder.get_object("book_overview_scroller")
+        if not tools.is_elementary():
+            self.scroller.props.propagate_natural_height = True
 
         self.ui.speed.add_listener(self.__ui_changed)
         player.add_player_listener(self.__player_changed)
