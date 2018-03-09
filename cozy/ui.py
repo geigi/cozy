@@ -460,13 +460,14 @@ class CozyUI:
         This is used from the search popover.
         """
         row = next(filter(
-            lambda x: x.get_children()[0].get_text() == book.author,
+            lambda x: type(x.get_children()[0]) is Gtk.Label and x.get_children()[0].get_text() == book.author,
             self.author_box.get_children()), None)
 
         self.sort_stack.props.visible_child_name = "author"
-        self.__on_sort_stack_changed(None)
+        self.__on_sort_stack_changed(None, None)
         self.author_box.select_row(row)
         self.book_box.invalidate_filter()
+        self.book_box.invalidate_sort()
         self.search.close()
 
     def jump_to_reader(self, book):
@@ -475,13 +476,14 @@ class CozyUI:
         This is used from the search popover.
         """
         row = next(filter(
-            lambda x: x.get_children()[0].get_text() == book.reader,
+            lambda x: type(x.get_children()[0]) is Gtk.Label and x.get_children()[0].get_text() == book.reader,
             self.reader_box.get_children()), None)
 
         self.sort_stack.props.visible_child_name = "reader"
-        self.__on_sort_stack_changed(None)
+        self.__on_sort_stack_changed(None, None)
         self.reader_box.select_row(row)
         self.book_box.invalidate_filter()
+        self.book_box.invalidate_sort()
         self.search.close()
 
     def jump_to_book(self, book):

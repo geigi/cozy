@@ -1,4 +1,4 @@
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, Gst
 
 import cozy.artwork_cache as artwork_cache
 import cozy.db as db
@@ -6,6 +6,7 @@ import cozy.tools as tools
 import cozy.player as player
 
 from cozy.book_element import TrackElement
+
 
 class BookOverview:
     """
@@ -28,6 +29,10 @@ class BookOverview:
         self.track_list_container = builder.get_object("track_list_container")
         self.published_text = builder.get_object("info_published_text")
         self.remaining_text = builder.get_object("info_remaining_text")
+        self.play_book_button = builder.get_object("play_book_button")
+        self.play_book_button.connect("clicked", self.__on_play_clicked)
+        self.play_img = builder.get_object("play_img1")
+        self.pause_img = builder.get_object("pause_img1")
 
         self.ui.speed.add_listener(self.__ui_changed)
         player.add_player_listener(self.__player_changed)
@@ -38,18 +43,28 @@ class BookOverview:
             return
         self.book = book
 
+        if self.ui.is_playing and self.ui.titlebar.current_book is not None and self.book.id == self.ui.titlebar.current_book.id:
+            self.play_book_button.set_image(self.pause_img)
+        else:
+            self.play_book_button.set_image(self.play_img)
+
         self.name_label.set_text(book.name)
         self.author_label.set_text(book.author)
 
-        pixbuf = artwork_cache.get_cover_pixbuf(book, self.ui.window.get_scale_factor(), 250)
-        surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.ui.window.get_scale_factor(), None)
+        pixbuf = artwork_cache.get_cover_pixbuf(
+            book, self.ui.window.get_scale_factor(), 250)
+        surface = Gdk.cairo_surface_create_from_pixbuf(
+            pixbuf, self.ui.window.get_scale_factor(), None)
         self.cover_img.set_from_surface(surface)
 
         self.duration = db.get_book_duration(book)
-        self.speed = db.Book.select().where(db.Book.id == self.book.id).get().playback_speed
-        self.total_label.set_text(tools.seconds_to_human_readable(self.duration / self.speed))
+        self.speed = db.Book.select().where(
+            db.Book.id == self.book.id).get().playback_speed
+        self.total_label.set_text(
+            tools.seconds_to_human_readable(self.duration / self.speed))
 
-        self.last_played_label.set_text(tools.past_date_to_human_readable(book.last_played))
+        self.last_played_label.set_text(
+            tools.past_date_to_human_readable(book.last_played))
 
         self.published_label.set_visible(False)
         self.published_text.set_visible(False)
@@ -66,36 +81,38 @@ class BookOverview:
         for track in db.tracks(book):
             self.track_box.add(TrackElement(track, self.ui, self))
             count += 1
-        
+
         tools.remove_all_children(self.track_list_container)
         self.track_box.show_all()
         self.track_list_container.add(self.track_box)
 
         self._mark_current_track()
         self.update_time()
-    
+
     def update_time(self):
         if self.book is None:
             return
-        
+
         # update book object
         # TODO: optimize usage by only asking from the db on track change
         self.book = db.Book.select().where(db.Book.id == self.book.id).get()
         if self.ui.titlebar.current_book is not None and self.book.id == self.ui.titlebar.current_book.id:
             progress = db.get_book_progress(self.book, False)
-            progress += (player.get_current_duration()  / 1000000000)
+            progress += (player.get_current_duration() / 1000000000)
             remaining = (self.duration - progress)
         else:
             progress = db.get_book_progress(self.book)
             remaining = db.get_book_remaining(self.book)
         percentage = progress / self.duration
 
-        self.total_label.set_text(tools.seconds_to_human_readable(self.duration / self.speed))
+        self.total_label.set_text(
+            tools.seconds_to_human_readable(self.duration / self.speed))
 
         if percentage > 0.005:
             self.remaining_text.set_visible(True)
             self.remaining_label.set_visible(True)
-            self.remaining_label.set_text(tools.seconds_to_human_readable(remaining / self.speed))
+            self.remaining_label.set_text(
+                tools.seconds_to_human_readable(remaining / self.speed))
         else:
             self.remaining_text.set_visible(False)
             self.remaining_label.set_visible(False)
@@ -154,22 +171,23 @@ class BookOverview:
         if book.position == 0:
             self.current_track_element = self.track_box.get_children()[0]
             self.current_track_element.select()
-        
+
         if self.ui.titlebar.current_book is not None and self.ui.titlebar.current_book.id == self.book.id:
             self.current_track_element.set_playing(self.ui.is_playing)
-    
+
     def __ui_changed(self, event, message):
         """
         Handler for events that occur in the main ui.
         """
         if self.book is None or self.ui.titlebar.current_book.id != self.book.id:
             return
-        
+
         if event == "playback-speed-changed":
-            self.speed = db.Book.select().where(db.Book.id == self.book.id).get().playback_speed
+            self.speed = db.Book.select().where(
+                db.Book.id == self.book.id).get().playback_speed
             if self.ui.main_stack.props.visible_child_name == "book_overview":
                 self.update_time()
-    
+
     def __player_changed(self, event, message):
         """
         """
@@ -177,11 +195,29 @@ class BookOverview:
             return
 
         if event == "play":
+            self.play_book_button.set_image(self.pause_img)
             self.current_track_element.set_playing(True)
         elif event == "pause":
+            self.play_book_button.set_image(self.play_img)
             self.current_track_element.set_playing(False)
         elif event == "stop":
             self._mark_current_track()
         elif event == "track-changed":
             track = player.get_current_track()
             self.select_track(track, self.ui.is_playing)
+
+    def __on_play_clicked(self, event):
+        """
+        """
+        track = db.get_track_for_playback(self.book)
+        current_track = player.get_current_track()
+
+        if current_track is not None and current_track.book.id == self.book.id:
+            player.play_pause(None)
+            if player.get_gst_player_state() == Gst.State.PLAYING:
+                player.jump_to_ns(track.position)
+        else:
+            player.load_file(track)
+            player.play_pause(None, True)
+
+        return True
