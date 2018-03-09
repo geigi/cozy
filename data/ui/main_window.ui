@@ -859,7 +859,7 @@
                           <object class="GtkButton" id="play_book_button">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="receives_default">False</property>
                             <child>
                               <object class="GtkImage" id="play_img1">
                                 <property name="visible">True</property>
