@@ -191,7 +191,6 @@ class BookElement(Gtk.FlowBoxChild):
     selected = False
     wait_to_seek = False
     playing = False
-    popover_created = False
     track_box = None
     current_track_element = None
 
@@ -240,6 +239,9 @@ class BookElement(Gtk.FlowBoxChild):
             self.art.play_button.set_from_icon_name("media-playback-pause-symbolic", self.art.icon_size)
         else:
             self.art.play_button.set_from_icon_name("media-playback-start-symbolic", self.art.icon_size)
+
+    def refresh_book_object(self):
+        self.book = db.Book.get_by_id(self.book.id)
 
 
 class TrackElement(Gtk.EventBox):

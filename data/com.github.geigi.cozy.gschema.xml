@@ -42,7 +42,7 @@
       <description></description>
     </key>
     <key type="b" name="dark-mode">
-      <default>true</default> 
+      <default>false</default> 
       <summary>Enable Dark Mode.</summary>
       <description></description>
     </key>

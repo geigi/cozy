@@ -428,6 +428,16 @@ class CozyUI:
 
         return False
 
+    def refresh_recent(self):
+        if self.titlebar.current_book is not None:
+            book_element = next(filter(
+                lambda x: x.book.id == self.titlebar.current_book.id,
+                self.book_box.get_children()), None)
+            book_element.refresh_book_object()
+
+            if self.sort_stack.props.visible_child_name == "recent":
+                self.book_box.invalidate_sort()
+
     def get_playback_start_position(self):
         """
         Returns the position where to start playback of the current track.
@@ -565,6 +575,7 @@ class CozyUI:
             self.titlebar.play()
             self.sleep_timer.start()
             self.book_overview.select_track(None, True)
+            self.refresh_recent()
         elif event == "pause":
             self.is_playing = False
             self.pause()
