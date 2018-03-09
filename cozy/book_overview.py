@@ -33,6 +33,9 @@ class BookOverview:
         self.play_book_button.connect("clicked", self.__on_play_clicked)
         self.play_img = builder.get_object("play_img1")
         self.pause_img = builder.get_object("pause_img1")
+	self.scroller = builder.get_object("book_overview_scroller")
+        if not tools.is_elementary():
+            self.scroller.props.propagate_natural_height = True
 
         self.ui.speed.add_listener(self.__ui_changed)
         player.add_player_listener(self.__player_changed)
