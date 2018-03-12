@@ -81,6 +81,8 @@ class Titlebar:
             self.cover_img_box.props.width_request = 28
             self.cover_img_box.props.height_request = 28
             self.volume_button.props.relief = Gtk.ReliefStyle.NONE
+        else:
+            self.volume_button.get_style_context().remove_class("flat")
 
         # app menu
         self.menu_builder = Gtk.Builder.new_from_resource(
