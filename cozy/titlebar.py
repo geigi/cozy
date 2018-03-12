@@ -11,6 +11,8 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gdk, Gst, GLib
 
+import logging
+log = logging.getLogger("titlebar")
 
 class Titlebar:
     """
