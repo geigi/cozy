@@ -20,10 +20,10 @@ Cozy is a modern audio book player for Linux.
 - Playback speed control for each book individually
 - Search your library
 - Sort your audio books by author, reader & name
-- drag & drop to import new audiobooks
-- multiple storage location support
+- Drag & Drop to import new audiobooks
+- Add mulitple storage locations
 - Mpris integration (Media keys & playback info for desktop environment)
-- developed on Fedora and tested under elementaryOS
+- Developed on Fedora and tested under elementaryOS
 
 ## How can I get it?
 ### Flatpak
@@ -59,7 +59,7 @@ If you like this project, consider supporting me on <a href="https://www.patreon
 - `meson >= 0.40.0` as build system
 - `ninja`
 - `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
-- `peewee >= 2.10.1` as object relation mapper
+- `peewee >= 3.1` as object relation mapper
 - `python3-mutagen` for meta tag management
 - `gstreamer1.0-plugins-good`
 - `gstreamer1.0-libav` for mp4 support
@@ -75,6 +75,25 @@ $ ninja -C desired_build_directory install
 ## Running a local build
 ```
 XDG_DATA_DIRS=desired_installation_directory/share:/usr/share PYTHONPATH=desired_installation_directory/lib/python3.[your_python3_version]/site-packages app/bin/cozy
+```
+
+## Q&A
+### I can't uninstall the Flatpak:
+
+Try
+```
+flatpak uninstall com.github.geigi.cozy/x86_64/stable
+```
+or
+```
+flatpak uninstall --user com.github.geigi.cozy/x86_64/stable
+```
+Thanks to @Meresmata
+
+### I have my audiobooks in a location that is not accessible in the Flatpak sandbox:
+You can override the flatpak settings and allow access to a path (e.g. /media) like this:
+```
+flatpak --user override --filesystem=/media com.github.geigi.cozy
 ```
 
 ## A big thanks
