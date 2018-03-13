@@ -45,6 +45,7 @@ class CozyUI:
     # Are we currently playing?
     is_playing = False
     first_play = True
+    __inhibit_cookie = None
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -569,6 +570,8 @@ class CozyUI:
             self.stop()
             self.titlebar.stop()
             self.sleep_timer.stop()
+            if self.__inhibit_cookie is not None:
+                self.app.uninhibit(self.__inhibit_cookie)
         elif event == "play":
             self.is_playing = True
             self.play()
@@ -576,12 +579,15 @@ class CozyUI:
             self.sleep_timer.start()
             self.book_overview.select_track(None, True)
             self.refresh_recent()
+            self.__inhibit_cookie = self.app.inhibit(self.window, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook")
         elif event == "pause":
             self.is_playing = False
             self.pause()
             self.titlebar.pause()
             self.sleep_timer.stop()
             self.book_overview.select_track(None, False)
+            if self.__inhibit_cookie is not None:
+                self.app.uninhibit(self.__inhibit_cookie)
         elif event == "track-changed":
             self.track_changed()
             if self.sort_stack.props.visible_child_name == "recent":
@@ -630,6 +636,7 @@ class CozyUI:
             player.stop()
 
         player.dispose()
+        self.app.quit()
 
     def __on_listbox_changed(self, sender, row):
         """
