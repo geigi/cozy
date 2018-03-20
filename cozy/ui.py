@@ -233,6 +233,10 @@ class CozyUI:
         self.app.add_action(back_action)
         self.app.set_accels_for_action("app.back", ["Escape"])
 
+        builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")
+        menu = builder.get_object("app_menu")
+        self.app.set_app_menu(menu)
+
     def __init_components(self):
         self.titlebar = Titlebar(self)
 

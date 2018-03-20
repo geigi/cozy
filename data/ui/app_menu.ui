@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <interface>
 	<menu id="app_menu">
+  <section>
+      <item>
+        <attribute name="action">app.play_pause</attribute>
+        <attribute name="label" translatable="yes">_Play/Pause</attribute>
+      </item>
+    </section>
     <section>
       <item>
         <attribute name="action">app.scan</attribute>
