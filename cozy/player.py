@@ -193,11 +193,11 @@ def play_pause(track, jump=False):
             save_current_track_position()
         else:
             __player.set_state(Gst.State.PLAYING)
-            emit_event("play")
+            emit_event("play", db.Track.get_by_id(__current_track.id))
     else:
         load_file(track)
         __player.set_state(Gst.State.PLAYING)
-        emit_event("play")
+        emit_event("play", db.Track.get_by_id(__current_track.id))
 
     __set_speed = True
 

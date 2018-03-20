@@ -200,6 +200,8 @@ class BookOverview:
         if event == "play":
             self.play_book_button.set_image(self.pause_img)
             self.current_track_element.set_playing(True)
+            self.last_played_label.set_text(
+                tools.past_date_to_human_readable(message.book.last_played))
         elif event == "pause":
             self.play_book_button.set_image(self.play_img)
             self.current_track_element.set_playing(False)
