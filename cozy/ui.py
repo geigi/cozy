@@ -150,8 +150,9 @@ class CozyUI:
         self.back_button = self.window_builder.get_object("back_button")
         self.back_button.connect("clicked", self.__on_back_clicked)
 
-        self.sort_stack_revealer = self.window_builder.get_object("sort_stack_revealer")
-        
+        self.category_toolbar = self.window_builder.get_object("category_toolbar")
+
+        self.sort_stack_revealer = self.window_builder.get_object("sort_stack_revealer")        
         # This fixes a bug where otherwise expand is
         # somehow set to true internally
         # but is still showing false in the inspector
@@ -223,9 +224,9 @@ class CozyUI:
         self.scan_action.connect("activate", self.scan)
         self.app.add_action(self.scan_action)
 
-        play_pause_action = Gio.SimpleAction.new("play_pause", None)
-        play_pause_action.connect("activate", self.play_pause)
-        self.app.add_action(play_pause_action)
+        self.play_pause_action = Gio.SimpleAction.new("play_pause", None)
+        self.play_pause_action.connect("activate", self.play_pause)
+        self.app.add_action(self.play_pause_action)
         self.app.set_accels_for_action("app.play_pause", ["space"])
 
         back_action = Gio.SimpleAction.new("back", None)
@@ -323,6 +324,7 @@ class CozyUI:
         self.titlebar.block_ui_buttons(block, scan)
         if scan:
             self.scan_action.set_enabled(sensitive)
+            self.play_pause_action.set_enabled(sensitive)
             self.settings.block_ui_elements(block)
 
     def get_ui_buttons_blocked(self):
@@ -347,6 +349,7 @@ class CozyUI:
         """
         self.titlebar.switch_to_playing()
         self.main_stack.props.visible_child_name = "main"
+        self.category_toolbar.set_visible(True)
         if player.get_current_track() is not None:
             self.block_ui_buttons(False, True)
         else:
@@ -366,6 +369,7 @@ class CozyUI:
             self.main_stack.props.visible_child_name = "no_media"
             self.block_ui_buttons(True)
             self.titlebar.stop()
+            self.category_toolbar.set_visible(False)
         else:
             self.main_stack.props.visible_child_name = "main"
 

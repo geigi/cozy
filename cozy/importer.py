@@ -76,23 +76,28 @@ def update_database(ui):
                     path = os.path.join(directory, file)
 
                     imported = True
-                    # Is the track already in the database?
-                    if db.Track.select().where(db.Track.file == path).count() < 1:
-                        imported = import_file(file, directory, path)
-                    # Has the track changed on disk?
-                    elif tools.get_glib_settings().get_boolean("use-crc32"):
-                        crc = __crc32_from_file(path)
-                        # Is the value in the db already crc32 or is the crc changed?
-                        if (db.Track.select().where(db.Track.file == path).first().modified != crc or 
-                          db.Track.select().where(db.Track.file == path).first().crc32 != True):
-                            imported = import_file(
-                                file, directory, path, True, crc)
-                    # Has the modified date changed or is the value still a crc?
-                    elif (db.Track.select().where(db.Track.file == path).first().modified < os.path.getmtime(path) or 
-                      db.Track.select().where(db.Track.file == path).first().crc32 != False):
-                        imported = import_file(file, directory, path, update=True)
+                    try:
+                        # Is the track already in the database?
+                        if db.Track.select().where(db.Track.file == path).count() < 1:
+                            imported = import_file(file, directory, path)
+                        # Has the track changed on disk?
+                        elif tools.get_glib_settings().get_boolean("use-crc32"):
+                            crc = __crc32_from_file(path)
+                            # Is the value in the db already crc32 or is the crc changed?
+                            if (db.Track.select().where(db.Track.file == path).first().modified != crc or 
+                              db.Track.select().where(db.Track.file == path).first().crc32 != True):
+                                imported = import_file(
+                                    file, directory, path, True, crc)
+                        # Has the modified date changed or is the value still a crc?
+                        elif (db.Track.select().where(db.Track.file == path).first().modified < os.path.getmtime(path) or 
+                          db.Track.select().where(db.Track.file == path).first().crc32 != False):
+                            imported = import_file(file, directory, path, update=True)
 
-                    if not imported:
+                        if not imported:
+                            failed += path + "\n"
+                    except Exception as e:
+                        log.warning("Could not import file: " + path)
+                        log.warning(e)
                         failed += path + "\n"
 
                     i = i + 1

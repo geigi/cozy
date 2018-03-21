@@ -46,11 +46,16 @@ class Settings:
         """
         Display settings from the database in the ui.
         """
+        found_default = False
         for location in db.Storage.select():
             row = StorageListBoxRow(self.ui, location.id, location.path, location.default)
             self.storage_list_box.add(row)
             if location.default == True:
-                self.storage_list_box.select_row(row)
+                if found_default:
+                    row.set_default(False)
+                else:
+                    found_default = True
+                    self.storage_list_box.select_row(row)
 
     def __init_bindings(self):
         """

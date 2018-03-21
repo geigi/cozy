@@ -374,6 +374,9 @@ class MPRIS(Server):
         self.Seeked(position * (1000 * 1000))
 
     def _on_current_changed(self, track):
+        if get_current_track() is None:
+            return
+        
         current_track_id = get_current_track().id
         if current_track_id and current_track_id >= 0:
             self.__cozy_id = current_track_id
