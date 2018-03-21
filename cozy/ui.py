@@ -249,6 +249,9 @@ class CozyUI:
 
         self.titlebar.activate()
 
+        if player.get_current_track() is None:
+            self.block_ui_buttons(True)
+
     def __load_last_book(self):
         """
         Loads the last book into the player
@@ -321,10 +324,10 @@ class CozyUI:
         :param block: Boolean
         """
         sensitive = not block
+        self.play_pause_action.set_enabled(sensitive)
         self.titlebar.block_ui_buttons(block, scan)
         if scan:
             self.scan_action.set_enabled(sensitive)
-            self.play_pause_action.set_enabled(sensitive)
             self.settings.block_ui_elements(block)
 
     def get_ui_buttons_blocked(self):
@@ -372,6 +375,8 @@ class CozyUI:
             self.category_toolbar.set_visible(False)
         else:
             self.main_stack.props.visible_child_name = "main"
+            #This displays the placeholder if there is not a recent book yet
+            self.__on_sort_stack_changed(None, None)
 
     def scan(self, action, first_scan):
         """
@@ -547,8 +552,11 @@ class CozyUI:
 
         if page == "recent":
             self.sort_stack_revealer.set_reveal_child(False)
+            if db.Book.select().where(db.Book.last_played > 0).count() < 1:
+                self.main_stack.props.visible_child_name = "nothing_here"
         else:
             self.sort_stack_revealer.set_reveal_child(True)
+            self.main_stack.props.visible_child_name = "main"
 
         self.__on_listbox_changed(None, None)
 
