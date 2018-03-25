@@ -68,7 +68,8 @@ class AlbumElement(Gtk.Box):
             self.icon_size = Gtk.IconSize.LARGE_TOOLBAR
         else:
             self.icon_size = Gtk.IconSize.DIALOG
-        self.play_button = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", self.icon_size)
+        self.play_button = Gtk.Image.new_from_icon_name(
+            "media-playback-start-symbolic", self.icon_size)
         self.play_button.set_property("halign", Gtk.Align.CENTER)
         self.play_button.set_property("valign", Gtk.Align.CENTER)
         self.play_button.get_style_context().add_class("white")
@@ -126,7 +127,6 @@ class AlbumElement(Gtk.Box):
         self.signal_ids.append(self.event_box.connect(
             "leave-notify-event", self._on_leave_notify))
         # we want to change the mouse cursor if the user is hovering over the play button
-        
 
     def disconnect_signals(self):
         """
@@ -168,6 +168,9 @@ class AlbumElement(Gtk.Box):
         """
         Play this book.
         """
+        if event.type == Gdk.EventType.BUTTON_PRESS and event.button != 1:
+            return
+
         track = get_track_for_playback(self.book)
         current_track = get_current_track()
 
@@ -193,6 +196,7 @@ class BookElement(Gtk.FlowBoxChild):
     playing = False
     track_box = None
     current_track_element = None
+    context_menu = None
 
     def __init__(self, b, ui):
         self.book = b
@@ -216,14 +220,16 @@ class BookElement(Gtk.FlowBoxChild):
         title_label.props.max_width_chars = 30
         title_label.props.justify = Gtk.Justification.CENTER
 
-        author_label = Gtk.Label.new(tools.shorten_string(self.book.author, MAX_BOOK_LENGTH))
+        author_label = Gtk.Label.new(
+            tools.shorten_string(self.book.author, MAX_BOOK_LENGTH))
         author_label.set_xalign(0.5)
         author_label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
         author_label.props.max_width_chars = 30
         author_label.props.justify = Gtk.Justification.CENTER
         author_label.get_style_context().add_class("dim-label")
 
-        self.art = AlbumElement(self.book, 180, self.ui.window.get_scale_factor(), bordered=True, square=False)
+        self.art = AlbumElement(
+            self.book, 180, self.ui.window.get_scale_factor(), bordered=True, square=False)
 
         # assemble finished element
         self.box.add(self.art)
@@ -231,17 +237,44 @@ class BookElement(Gtk.FlowBoxChild):
         self.box.add(author_label)
         self.add(self.box)
 
+        self.connect("button-press-event", self.__on_button_press_event)
+
     def get_book(self):
         return db.Book.select().where(db.Book.id == self.book.id).get()
 
     def set_playing(self, is_playing):
         if is_playing:
-            self.art.play_button.set_from_icon_name("media-playback-pause-symbolic", self.art.icon_size)
+            self.art.play_button.set_from_icon_name(
+                "media-playback-pause-symbolic", self.art.icon_size)
         else:
-            self.art.play_button.set_from_icon_name("media-playback-start-symbolic", self.art.icon_size)
+            self.art.play_button.set_from_icon_name(
+                "media-playback-start-symbolic", self.art.icon_size)
 
     def refresh_book_object(self):
         self.book = db.Book.get_by_id(self.book.id)
+
+    def __on_button_press_event(self, widget, event):
+        if event.type == Gdk.EventType.BUTTON_PRESS and event.button == 3:
+            if self.context_menu is None:
+                self.context_menu = self.__create_context_menu()
+            self.context_menu.popup(
+                None, None, None, None, event.button, event.time)
+            return True
+
+    def __create_context_menu(self):
+        menu = Gtk.Menu()
+        rm_item = Gtk.MenuItem(label=_("Remove from library"))
+        rm_item.connect("button-press-event", self.__remove_book)
+        rm_item.show()
+        menu.append(rm_item)
+        menu.attach_to_widget(self.ui.window)
+        return menu
+
+    def __remove_book(self, widget, parameter):
+        blacklist_book(self.book)
+        self.ui.settings.blacklist_model.clear()
+        self.ui.settings._init_blacklist()
+        self.ui.refresh_content()
 
 
 class TrackElement(Gtk.EventBox):
@@ -374,7 +407,7 @@ class TrackElement(Gtk.EventBox):
         """
         if playing:
             self.play_img.set_from_icon_name(
-                    "media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+                "media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
         else:
             self.play_img.set_from_icon_name(
-                    "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+                "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)

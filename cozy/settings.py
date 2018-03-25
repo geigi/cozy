@@ -2,7 +2,7 @@ from threading import Thread
 import logging
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio
+from gi.repository import Gtk, Gio, Pango
 
 import cozy.db as db
 import cozy.tools as tools
@@ -36,7 +36,15 @@ class Settings:
         self.storage_list_box = self.builder.get_object("storage_list_box")
         self.storage_list_box.connect("row-activated", self.__on_storage_box_changed)
 
+        self.remove_blacklist_button = self.builder.get_object("remove_blacklist_button")
+        self.remove_blacklist_button.connect("clicked", self.__on_remove_blacklist_clicked)
+        #self.remove_blacklist_button.set_sensitive(False)
+        self.blacklist_tree_view = self.builder.get_object("blacklist_tree_view")
+        self.blacklist_model = self.builder.get_object("blacklist_store")
+        self.blacklist_tree_view.get_selection().connect("changed", self.__on_blacklist_selection_changed)
+
         self._init_storage()
+        self._init_blacklist()
         self.__init_bindings()
         self.__on_storage_box_changed(None, None)
 
@@ -56,6 +64,13 @@ class Settings:
                 else:
                     found_default = True
                     self.storage_list_box.select_row(row)
+
+    def _init_blacklist(self):
+        """
+        """
+        for file in db.StorageBlackList.select():
+            self.blacklist_model.append([file.path, file.id])
+        self.__on_blacklist_selection_changed(None)
 
     def __init_bindings(self):
         """
@@ -174,6 +189,27 @@ class Settings:
         elif key == "dark-mode":
             self.set_darkmode()
 
+    def __on_remove_blacklist_clicked(self, widget):
+        """
+        """
+        model, pathlist = self.blacklist_tree_view.get_selection().get_selected_rows()
+        if pathlist is not None:
+            ids = []
+            for path in reversed(pathlist):
+                treeiter = model.get_iter(path)
+                ids.append(self.blacklist_model.get_value(treeiter, 1))
+                self.blacklist_model.remove(treeiter)
+            
+            db.StorageBlackList.delete().where(db.StorageBlackList.id in ids).execute()
+
+        self.__on_blacklist_selection_changed(self.blacklist_tree_view.get_selection())
+
+    def __on_blacklist_selection_changed(self, tree_selection):
+        if tree_selection is None or len(tree_selection.get_selected_rows()[1]) < 1:
+            self.remove_blacklist_button.set_sensitive(False)
+        else:
+            self.remove_blacklist_button.set_sensitive(True)
+
     def set_darkmode(self):
         settings = Gtk.Settings.get_default()
 
@@ -186,6 +222,13 @@ class Settings:
         else:
             settings.set_property("gtk-application-prefer-dark-theme", self.default_dark_mode)
 
+class BlacklistColumn(Gtk.TreeViewColumn):
+    """
+    """
+    def __init__(self, path):
+        super(Gtk.TreeViewColumn, self).__init__()
+        self.path = path
+        
 
 class StorageListBoxRow(Gtk.ListBoxRow):
     """

@@ -98,6 +98,12 @@ class Storage(ModelBase):
     location_type = IntegerField(default=0)
     default = BooleanField(default=False)
 
+class StorageBlackList(ModelBase):
+    """
+    Contains blacklist for directories that will not be included on import scans.
+    """
+    path = CharField()
+
 
 def init_db():
     if PeeweeVersion[0] == '3':
@@ -123,7 +129,8 @@ def books():
 
     :return: all books
     """
-    return Book.select()
+    with db.atomic():
+        return Book.select()
 
 
 def authors():
@@ -132,7 +139,8 @@ def authors():
 
     :return: all authors
     """
-    return Book.select(Book.author).distinct().order_by(Book.author)
+    with db.atomic():
+        return Book.select(Book.author).distinct().order_by(Book.author)
 
 
 def readers():
@@ -141,11 +149,13 @@ def readers():
 
     :return: all readers
     """
-    return Book.select(Book.reader).distinct().order_by(Book.reader)
+    with db.atomic():
+        return Book.select(Book.reader).distinct().order_by(Book.reader)
 
 
 def Search(search):
-    return Track.select().where(search in Track.name)
+    with db.atomic():
+        return Track.select().where(search in Track.name)
 
 # Return ordered after Track ID / name when not available
 
@@ -283,6 +293,13 @@ def update_db_4():
     )
 
     Settings.update(version=4).execute()
+
+def update_db_5():
+    """
+    """
+    db.create_tables([StorageBlackList])
+
+    Settings.update(version=5).execute()
     
 
 def update_db():
@@ -306,6 +323,9 @@ def update_db():
 
     if version < 4:
         update_db_4()
+
+    if version < 5:
+        update_db_5()
 
 
 # thanks to oleg-krv
@@ -422,11 +442,33 @@ def remove_tracks_with_path(ui, path):
     """
     if path == "":
         return
-        
-    for track in Track.select():
-        if path in track.file:
-            track.delete_instance()
+    
+    with db.atomic():
+        for track in Track.select():
+            if path in track.file:
+                track.delete_instance()
     
     clean_books()
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
+
+def blacklist_book(book):
+    """
+    Removes a book from the library and adds the path(s) to the track list.
+    """
+    book_tracks = tracks(book)
+    data = list((t.file, ) for t in book_tracks)
+    StorageBlackList.insert_many(data, fields=[StorageBlackList.path]).execute()
+    ids = list(t.id for t in book_tracks)
+    with db.atomic():
+        Track.delete().where(Track.id << ids).execute()
+        book.delete_instance()
+
+def is_blacklisted(path):
+    """
+    Tests wether a given path is blacklisted.
+    """
+    if StorageBlackList.select().where(StorageBlackList.path == path).count() > 0:
+        return True
+    else:
+        return False

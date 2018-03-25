@@ -20,11 +20,15 @@ msgstr ""
 msgid "Play this book"
 msgstr ""
 
-#: cozy/book_element.py:208
+#: cozy/book_element.py:212
 msgid "Open book overview"
 msgstr ""
 
-#: cozy/book_element.py:265
+#: cozy/book_element.py:266
+msgid "Remove from library"
+msgstr ""
+
+#: cozy/book_element.py:298
 msgid "Play this part"
 msgstr ""
 
@@ -40,11 +44,11 @@ msgstr ""
 msgid "Jump to reader "
 msgstr ""
 
-#: cozy/importer.py:280
+#: cozy/importer.py:283
 msgid "Unknown Author"
 msgstr ""
 
-#: cozy/importer.py:282
+#: cozy/importer.py:285
 msgid "Unknown Reader"
 msgstr ""
 
@@ -125,7 +129,7 @@ msgstr ""
 msgid "Importing Audiobooks"
 msgstr ""
 
-#: cozy/ui.py:414 cozy/ui.py:420 cozy/ui.py:684 cozy/ui.py:693
+#: cozy/ui.py:414 cozy/ui.py:420 cozy/ui.py:688 cozy/ui.py:701
 msgid "All"
 msgstr ""
 
@@ -137,7 +141,7 @@ msgstr ""
 msgid "min"
 msgstr ""
 
-#: cozy/settings.py:277
+#: cozy/settings.py:320
 msgid "Changing audio book location..."
 msgstr ""
 
@@ -414,15 +418,15 @@ msgstr ""
 msgid "This file could not be found. Do you want to locate it manually?"
 msgstr ""
 
-#: data/ui/import_failed.ui:23
+#: data/ui/import_failed.ui:27
 msgid "Ok"
 msgstr ""
 
-#: data/ui/import_failed.ui:77
+#: data/ui/import_failed.ui:81
 msgid "Some files could not be imported"
 msgstr ""
 
-#: data/ui/import_failed.ui:130
+#: data/ui/import_failed.ui:134
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
@@ -430,75 +434,83 @@ msgid ""
 "- The file(s) are corrupt"
 msgstr ""
 
-#: data/ui/settings.ui:42
+#: data/ui/settings.ui:50
 msgid "General"
 msgstr ""
 
-#: data/ui/settings.ui:61
+#: data/ui/settings.ui:69
 msgid "Dark Mode"
 msgstr ""
 
-#: data/ui/settings.ui:95
+#: data/ui/settings.ui:103
 msgid "Titlebar"
 msgstr ""
 
-#: data/ui/settings.ui:115
+#: data/ui/settings.ui:123
 msgid "Display the whole book instead of the current chaper"
 msgstr ""
 
-#: data/ui/settings.ui:146
+#: data/ui/settings.ui:154
 msgid "Appearance"
 msgstr ""
 
-#: data/ui/settings.ui:161
+#: data/ui/settings.ui:169
 msgid "Suspend system on timer"
 msgstr ""
 
-#: data/ui/settings.ui:197
+#: data/ui/settings.ui:205
 msgid "Replay 30 seconds"
 msgstr ""
 
-#: data/ui/settings.ui:232
+#: data/ui/settings.ui:240
 msgid "Automatic media scan"
 msgstr ""
 
-#: data/ui/settings.ui:263
+#: data/ui/settings.ui:271
 msgid "Behaviour"
 msgstr ""
 
-#: data/ui/settings.ui:279
+#: data/ui/settings.ui:287
 msgid "Storage locations"
 msgstr ""
 
-#: data/ui/settings.ui:338
+#: data/ui/settings.ui:346
 msgid "Audio books location"
 msgstr ""
 
-#: data/ui/settings.ui:357
+#: data/ui/settings.ui:365
 msgid "Add location"
 msgstr ""
 
-#: data/ui/settings.ui:382
+#: data/ui/settings.ui:390 data/ui/settings.ui:558
 msgid "Remove location"
 msgstr ""
 
-#: data/ui/settings.ui:418
+#: data/ui/settings.ui:426
 msgid "Set as default storage location for new audiobooks"
 msgstr ""
 
-#: data/ui/settings.ui:464
+#: data/ui/settings.ui:472
+msgid "Blacklist"
+msgstr ""
+
+#: data/ui/settings.ui:521
+msgid "Path"
+msgstr ""
+
+#: data/ui/settings.ui:604
 msgid "Follow symlinks"
 msgstr ""
 
-#: data/ui/settings.ui:496
+#: data/ui/settings.ui:636
 msgid "Storage"
 msgstr ""
 
-#: data/ui/settings.ui:513
+#: data/ui/settings.ui:654
 msgid "Use crc32 checksum instead of last modified timestamp on folder scan"
 msgstr ""
 
-#: data/ui/settings.ui:549
+#: data/ui/settings.ui:689
 msgid "Advanced"
 msgstr ""
 

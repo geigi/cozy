@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.2 -->
+<!-- Generated with glade 3.20.4 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
   <object class="GtkImage" id="add_image">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">list-add-symbolic</property>
+  </object>
+  <object class="GtkListStore" id="blacklist_store">
+    <columns>
+      <!-- column-name path -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
+      <column type="gint"/>
+    </columns>
   </object>
   <object class="GtkImage" id="default_image">
     <property name="visible">True</property>
@@ -346,10 +354,10 @@
                 </child>
                 <child>
                   <object class="GtkToolbar">
+                    <property name="height_request">24</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="toolbar_style">icons</property>
-                    <property name="height_request">24</property>
                     <child>
                       <object class="GtkToolItem">
                         <property name="visible">True</property>
@@ -357,16 +365,16 @@
                         <property name="tooltip_text" translatable="yes">Add location</property>
                         <child>
                           <object class="GtkButton" id="add_location_button">
+                            <property name="width_request">24</property>
+                            <property name="height_request">24</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="receives_default">False</property>
                             <property name="image">add_image</property>
                             <property name="always_show_image">True</property>
-                            <property name="height_request">24</property>
-                            <property name="width_request">24</property>
                             <style>
-                          <class name="flat"/>
-                        </style>
+                              <class name="flat"/>
+                            </style>
                           </object>
                         </child>
                       </object>
@@ -382,16 +390,16 @@
                         <property name="tooltip_text" translatable="yes">Remove location</property>
                         <child>
                           <object class="GtkButton" id="remove_location_button">
+                            <property name="width_request">24</property>
+                            <property name="height_request">24</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="receives_default">False</property>
                             <property name="image">remove_image</property>
                             <property name="always_show_image">True</property>
-                            <property name="height_request">24</property>
-                            <property name="width_request">24</property>
                             <style>
-                          <class name="flat"/>
-                        </style>
+                              <class name="flat"/>
+                            </style>
                           </object>
                         </child>
                       </object>
@@ -419,16 +427,16 @@
                         <property name="halign">end</property>
                         <child>
                           <object class="GtkButton" id="default_location_button">
+                            <property name="width_request">24</property>
+                            <property name="height_request">24</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="receives_default">False</property>
                             <property name="image">default_image</property>
                             <property name="always_show_image">True</property>
-                            <property name="height_request">24</property>
-                            <property name="width_request">24</property>
                             <style>
-                          <class name="flat"/>
-                        </style>
+                              <class name="flat"/>
+                            </style>
                           </object>
                         </child>
                       </object>
@@ -452,6 +460,138 @@
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin_top">20</property>
+                <property name="margin_bottom">5</property>
+                <property name="label" translatable="yes">Blacklist</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkFrame">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label_xalign">0</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <object class="GtkScrolledWindow">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hscrollbar_policy">never</property>
+                        <property name="shadow_type">in</property>
+                        <child>
+                          <object class="GtkViewport">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="vscroll_policy">natural</property>
+                            <child>
+                              <object class="GtkTreeView" id="blacklist_tree_view">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="vexpand">True</property>
+                                <property name="model">blacklist_store</property>
+                                <property name="headers_clickable">False</property>
+                                <property name="activate_on_single_click">True</property>
+                                <child internal-child="selection">
+                                  <object class="GtkTreeSelection">
+                                    <property name="mode">multiple</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkTreeViewColumn" id="blacklist_path_column">
+                                    <property name="sizing">autosize</property>
+                                    <property name="title" translatable="yes">Path</property>
+                                    <child>
+                                      <object class="GtkCellRendererText" id="blacklist_path_renderer">
+                                        <property name="ellipsize">middle</property>
+                                      </object>
+                                      <attributes>
+                                        <attribute name="text">0</attribute>
+                                      </attributes>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child type="label_item">
+                      <placeholder/>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolbar">
+                    <property name="height_request">24</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="toolbar_style">icons</property>
+                    <child>
+                      <object class="GtkToolItem">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Remove location</property>
+                        <child>
+                          <object class="GtkButton" id="remove_blacklist_button">
+                            <property name="width_request">24</property>
+                            <property name="height_request">24</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="image">remove_image1</property>
+                            <property name="relief">none</property>
+                            <property name="always_show_image">True</property>
+                            <style>
+                              <class name="flat"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="homogeneous">False</property>
+                      </packing>
+                    </child>
+                    <style>
+                      <class name="inline-toolbar"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
               </packing>
             </child>
             <child>
@@ -487,7 +627,7 @@
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="padding">5</property>
-                <property name="position">2</property>
+                <property name="position">4</property>
               </packing>
             </child>
           </object>
@@ -510,8 +650,8 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Use crc32 checksum instead of last modified timestamp on folder scan</property>
                     <property name="margin_right">10</property>
+                    <property name="label" translatable="yes">Use crc32 checksum instead of last modified timestamp on folder scan</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -566,5 +706,10 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkImage" id="remove_image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">list-remove-symbolic</property>
   </object>
 </interface>

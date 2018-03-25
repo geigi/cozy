@@ -677,7 +677,11 @@ class CozyUI:
         """
         selected_stack = self.sort_stack.props.visible_child_name
         if selected_stack == "author":
-            author = self.author_box.get_selected_row().data
+            row = self.author_box.get_selected_row()
+            if row is None:
+                return True
+            
+            author = row.data
             if author is None:
                 return True
 
@@ -686,7 +690,11 @@ class CozyUI:
             else:
                 return True if book.book.author == author else False
         elif selected_stack == "reader":
-            reader = self.reader_box.get_selected_row().data
+            row = self.reader_box.get_selected_row()
+            if row is None:
+                return True
+                
+            reader = row.data
             if reader is None:
                 return True
 

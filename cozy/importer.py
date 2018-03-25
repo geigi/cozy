@@ -136,6 +136,7 @@ def rebase_location(ui, oldPath, newPath):
         newFilePath = track.file.replace(oldPath, newPath)
         db.Track.update(file=newFilePath).where(
             db.Track.id == track.id).execute()
+        db.StorageBlackList.update(path=newFilePath).where(db.StorageBlackList.path == track.file).execute()
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
                              ui.titlebar.update_progress_bar.set_fraction, currentTrackCount / trackCount)
         currentTrackCount = currentTrackCount + 1
@@ -150,6 +151,8 @@ def import_file(file, directory, path, update=False, crc=None):
     Note: This does not check whether the file is already imported.
     :return: True if file was imported, otherwise False
     """
+    if db.is_blacklisted(path):
+        return True
 
     media_type = __get_media_type(path)
     track = TrackContainer(None, path)
