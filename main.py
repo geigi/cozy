@@ -21,6 +21,7 @@ import argparse
 import code
 import locale
 import logging
+from logging.config import fileConfig
 import os
 import signal
 import sys
@@ -37,11 +38,20 @@ from cozy.db import init_db, Settings
 from cozy.mpris import MPRIS
 
 log = logging.getLogger("main")
-
+data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
 pkgdatadir = '@DATA_DIR@'
 localedir = '@LOCALE_DIR@'
 version = '@VERSION@'
+LOG_FORMAT = "%(asctime)s [%(threadName)-12.12s] [%(name)-10.10s] [%(levelname)-5.5s]  %(message)s"
+LOG_DATE_FORMAT = "%H:%M:%S"
 
+# setup log files
+log1 = os.path.join(data_dir, "cozy_1.log")
+log0 = os.path.join(data_dir, "cozy.log")
+if os.path.exists(log1):
+    os.remove(log1)
+if os.path.exists(os.path.join(data_dir, "cozy.log")):
+    os.rename(log0, log1)
 
 class Application(Gtk.Application):
     def __init__(self, **kwargs):
@@ -93,9 +103,15 @@ def __on_command_line():
     args = parser.parse_args(sys.argv[1:])
 
     if args.debug:
-        logging.basicConfig(level=logging.DEBUG)
+        logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT, datefmt=LOG_DATE_FORMAT, handlers=[
+            logging.FileHandler(log0),
+            logging.StreamHandler(sys.stdout)
+        ])
     else:
-        logging.basicConfig(level=logging.INFO)
+        logging.basicConfig(level=logging.INFO, format=LOG_FORMAT, datefmt=LOG_DATE_FORMAT, handlers=[
+            logging.FileHandler(log0),
+            logging.StreamHandler(sys.stdout)
+        ])
 
 
 def main():

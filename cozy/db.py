@@ -123,6 +123,11 @@ def init_db():
         Settings.create(path="", last_played_book=None)
 
 
+def get_db():
+    global db
+    return db
+
+
 def books():
     """
     Find all books in the database
