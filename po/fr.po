@@ -27,7 +27,7 @@ msgstr "Voir le résumé"
 
 #: cozy/book_element.py:265
 msgid "Play this part"
-msgstr ""
+msgstr "Lire cette partie"
 
 #: cozy/file_not_found_dialog.py:64
 msgid "All files"
@@ -51,76 +51,76 @@ msgstr "Narrateur inconnu"
 
 #: cozy/tools.py:153
 msgid "hours"
-msgstr ""
+msgstr "heures"
 
 #: cozy/tools.py:155
 msgid "hour"
-msgstr ""
+msgstr "heure"
 
 #: cozy/tools.py:163
 msgid "minutes"
-msgstr ""
+msgstr "minutes"
 
 #: cozy/tools.py:165
 msgid "minute"
-msgstr ""
+msgstr "minute"
 
 #: cozy/tools.py:169
 msgid "finished"
-msgstr ""
+msgstr "terminé"
 
 #: cozy/tools.py:173
 msgid "seconds"
-msgstr ""
+msgstr "secondes"
 
 #: cozy/tools.py:175
 msgid "second"
-msgstr ""
+msgstr "seconde"
 
 #: cozy/tools.py:198
 msgid "never"
-msgstr ""
+msgstr "jamais"
 
 #: cozy/tools.py:200
 msgid "today"
-msgstr ""
+msgstr "aujourd'hui"
 
 #: cozy/tools.py:202
 msgid "yesterday"
-msgstr ""
+msgstr "hier"
 
 #: cozy/tools.py:204
 msgid "days"
-msgstr ""
+msgstr "jours"
 
 #: cozy/tools.py:204 cozy/tools.py:206 cozy/tools.py:208 cozy/tools.py:210
 #: cozy/tools.py:212 cozy/tools.py:214 cozy/tools.py:216
 msgid "ago"
-msgstr ""
+msgstr "avant"
 
 #: cozy/tools.py:206
 msgid "week"
-msgstr ""
+msgstr "semaine"
 
 #: cozy/tools.py:208
 msgid "weeks"
-msgstr ""
+msgstr "semaines"
 
 #: cozy/tools.py:210
 msgid "month"
-msgstr ""
+msgstr "mois"
 
 #: cozy/tools.py:212
 msgid "months"
-msgstr ""
+msgstr "mois"
 
 #: cozy/tools.py:214
 msgid "year"
-msgstr ""
+msgstr "année"
 
 #: cozy/tools.py:216
 msgid "years"
-msgstr ""
+msgstr "années"
 
 #: cozy/ui.py:371
 msgid "Importing Audiobooks"
@@ -140,11 +140,11 @@ msgstr "min"
 
 #: cozy/settings.py:272
 msgid "Changing audio book location..."
-msgstr ""
+msgstr "Changer le repertoire du livre audio"
 
 #: data/ui/main_window.ui:167
 msgid "Recent"
-msgstr ""
+msgstr "Récent"
 
 #: data/ui/main_window.ui:186
 msgid "List of authors"
@@ -217,19 +217,19 @@ msgstr "Importer les nouveaux livres audio au démarrage"
 
 #: data/ui/main_window.ui:717
 msgid "Remaining"
-msgstr ""
+msgstr "Reste"
 
 #: data/ui/main_window.ui:773
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: data/ui/main_window.ui:790
 msgid "Last played"
-msgstr ""
+msgstr "Dernier lu"
 
 #: data/ui/main_window.ui:807
 msgid "Published"
-msgstr ""
+msgstr "Publié"
 
 #: data/ui/main_window.ui:945
 msgid "page0"
@@ -281,7 +281,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:1158
 msgid "Title of the currently playing part"
-msgstr ""
+msgstr "Titre du la partie en cours de lecture"
 
 #: data/ui/main_window.ui:1200
 msgid "Elapsed time"
@@ -437,11 +437,11 @@ msgstr ""
 
 #: data/ui/settings.ui:62
 msgid "Dark Mode"
-msgstr ""
+msgstr "Mode Sombre"
 
 #: data/ui/settings.ui:96
 msgid "Titlebar"
-msgstr ""
+msgstr "Barre de titre"
 
 #: data/ui/settings.ui:116
 msgid "Display the whole book instead of the current chaper"
@@ -477,7 +477,7 @@ msgstr "Emplacement des livres audio"
 
 #: data/ui/settings.ui:357
 msgid "Add location"
-msgstr ""
+msgstr "Ajouter répertoire"
 
 #: data/ui/settings.ui:377
 msgid "Remove location"
@@ -493,7 +493,7 @@ msgstr "Suivre le raccourci"
 
 #: data/ui/settings.ui:481
 msgid "Storage"
-msgstr ""
+msgstr "Stockage"
 
 #: data/ui/settings.ui:498
 msgid "Use crc32 checksum instead of last modified timestamp on folder scan"
@@ -525,7 +525,7 @@ msgstr "Livre"
 
 #: data/ui/search_popover.ui:248
 msgid "Part"
-msgstr ""
+msgstr "Partie"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
@@ -561,7 +561,7 @@ msgstr "Bouton de rotation du décompte avant sommeil"
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"
-msgstr ""
+msgstr "de"
 
 #: data/ui/book_progress_element.ui:75
 msgid "remaining"
