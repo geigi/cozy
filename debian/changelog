@@ -1,3 +1,16 @@
+com.github.geigi.cozy (0.5.5) UNSTABLE; urgency=low
+
+  * Import process is now a lot more robust
+  * Importing should also be quite a bit faster now
+  * You can now remove books from your library (using right click menu)
+  * Blacklist for files that will not be displayed in the library
+  * Cozy now prevents your system from suspend during playback
+  * New app menu
+  * Multiple bug fixes (30 second replay, last played text, ...)
+  * UI fixes
+
+ -- Julian Geywitz <github@geigi.de>  Wed, 29 Mar 2018 23:33:14 +0200
+
 com.github.geigi.cozy (0.5.4) UNSTABLE; urgency=low
 
   * One of cozys coolest releases yet

@@ -52,6 +52,20 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.5.5" timestamp="1522359511">
+      <description>
+        <ul>
+          <li>Import process is now a lot more robust</li>
+          <li>Importing should also be quite a bit faster now</li>
+          <li>You can now remove books from your library (using right click menu)</li>
+          <li>Blacklist for files that will not be displayed in the library</li>
+          <li>Cozy now prevents your system from suspend during playback</li>
+          <li>New app menu</li>
+          <li>Multiple bug fixes (30 second replay, last played text, ...)</li>
+          <li>UI fixes</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.5.4" timestamp="1520600004">
       <description>
         <ul>
