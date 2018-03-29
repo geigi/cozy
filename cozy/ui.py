@@ -344,6 +344,7 @@ class CozyUI:
         """
         self.titlebar.switch_to_working(message, first)
         self.block_ui_buttons(True, True)
+        self.window.props.window.set_cursor(Gdk.Cursor.new_from_name(self.window.get_display(), "progress"))
 
     def switch_to_playing(self):
         """
@@ -359,6 +360,7 @@ class CozyUI:
             # we want to only block the player controls
             self.block_ui_buttons(False, True)
             self.block_ui_buttons(True, False)
+        self.window.props.window.set_cursor(None)
 
     def check_for_tracks(self):
         """

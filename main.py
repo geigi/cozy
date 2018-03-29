@@ -21,7 +21,6 @@ import argparse
 import code
 import locale
 import logging
-from logging.config import fileConfig
 import os
 import signal
 import sys

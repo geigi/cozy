@@ -156,7 +156,7 @@ class AlbumElement(Gtk.Box):
         """
         Change the cursor to pointing hand
         """
-        self.props.window.set_cursor(Gdk.Cursor.new(Gdk.CursorType.HAND2))
+        self.props.window.set_cursor(Gdk.Cursor.new_from_name(self.get_display(), "pointer"))
 
     def _on_play_leave_notify(self, widget, event):
         """
