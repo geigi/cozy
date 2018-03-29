@@ -7,6 +7,8 @@ import errno
 import logging
 import mutagen
 import zlib
+import time
+import traceback
 
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
@@ -28,6 +30,17 @@ class TrackContainer:
         self.mutagen = track
         self.path = path
 
+class TrackData:
+    def __init__(self, track_name, track_number, book, path, disk, length, modified, crc32):
+        self.name = track_name
+        self.number = track_number
+        self.position = 0
+        self.book = book
+        self.file = path
+        self.disk = disk
+        self.length = length
+        self.modified = modified
+        self.crc32 = crc32
 
 def b64tobinary(b64):
     """
@@ -69,6 +82,8 @@ def update_database(ui):
     
     percent_threshold = file_count / 1000
     failed = ""
+    tracks_to_import = []
+    start = time.time()
     for path in paths:
         for directory, subdirectories, files in os.walk(path):
             for file in files:
@@ -79,28 +94,34 @@ def update_database(ui):
                     try:
                         # Is the track already in the database?
                         if db.Track.select().where(db.Track.file == path).count() < 1:
-                            imported = import_file(file, directory, path)
+                            imported, track_data = import_file(file, directory, path)
+                            if track_data is not None:
+                                tracks_to_import.append(track_data)
                         # Has the track changed on disk?
                         elif tools.get_glib_settings().get_boolean("use-crc32"):
                             crc = __crc32_from_file(path)
                             # Is the value in the db already crc32 or is the crc changed?
                             if (db.Track.select().where(db.Track.file == path).first().modified != crc or 
                               db.Track.select().where(db.Track.file == path).first().crc32 != True):
-                                imported = import_file(
+                                imported, ignore = import_file(
                                     file, directory, path, True, crc)
                         # Has the modified date changed or is the value still a crc?
                         elif (db.Track.select().where(db.Track.file == path).first().modified < os.path.getmtime(path) or 
                           db.Track.select().where(db.Track.file == path).first().crc32 != False):
-                            imported = import_file(file, directory, path, update=True)
+                            imported, ignore = import_file(file, directory, path, update=True)
 
                         if not imported:
                             failed += path + "\n"
                     except Exception as e:
                         log.warning("Could not import file: " + path)
-                        log.warning(e)
+                        log.warning(traceback.format_exc())
                         failed += path + "\n"
 
                     i = i + 1
+
+                    if len(tracks_to_import) > 100:
+                        write_tracks_to_db(tracks_to_import)
+                        tracks_to_import = []
 
                     # don't flood gui updates
                     if percent_counter < percent_threshold:
@@ -111,6 +132,11 @@ def update_database(ui):
                             GLib.PRIORITY_DEFAULT_IDLE, ui.titlebar.progress_bar.set_fraction, i / file_count)
                         Gdk.threads_add_idle(
                             GLib.PRIORITY_DEFAULT_IDLE, ui.titlebar.update_progress_bar.set_fraction, i / file_count)
+
+
+    write_tracks_to_db(tracks_to_import)
+    end = time.time()
+    log.info("Total import time: " + str(end - start))
 
     # remove entries from the db that are no longer existent
     db.remove_invalid_entries()
@@ -123,6 +149,16 @@ def update_database(ui):
     if len(failed) > 0:
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
                              ui.display_failed_imports, failed)
+
+def write_tracks_to_db(tracks):
+    """
+    """
+    if tracks is None or len(tracks) < 1:
+        return
+
+    fields = [db.Track.name, db.Track.number, db.Track.disk, db.Track.position, db.Track.book, db.Track.file, db.Track.length, db.Track.modified, db.Track.crc32]
+    data = list((t.name, t.number, t.disk, t.position, t.book, t.file, t.length, t.modified, t.crc32) for t in tracks)
+    db.Track.insert_many(data, fields=fields).execute()
 
 def rebase_location(ui, oldPath, newPath):
     """
@@ -150,9 +186,10 @@ def import_file(file, directory, path, update=False, crc=None):
     Note: This creates also a new album object when it doesnt exist yet.
     Note: This does not check whether the file is already imported.
     :return: True if file was imported, otherwise False
+    :return: Track object to be imported when everything passed successfully and track is not in the db already.
     """
     if db.is_blacklisted(path):
-        return True
+        return True, None
 
     media_type = __get_media_type(path)
     track = TrackContainer(None, path)
@@ -169,7 +206,7 @@ def import_file(file, directory, path, update=False, crc=None):
         except Exception as e:
             log.warning("Track " + track.path +
                         " is no valid MP3 file. Skipping...")
-            return False
+            return False, None
 
         mp3 = TrackContainer(MP3(track.path), path)
         cover = __get_mp3_tag(track, "APIC")
@@ -197,7 +234,7 @@ def import_file(file, directory, path, update=False, crc=None):
         except Exception as e:
             log.warning("Track " + track.path +
                         " is not a valid FLAC file. Skipping...")
-            return False
+            return False, None
 
         disk = int(__get_common_disk_number(track))
         length = float(__get_common_track_length(track))
@@ -215,7 +252,7 @@ def import_file(file, directory, path, update=False, crc=None):
         except Exception as e:
             log.warning("Track " + track.path +
                         " is not a valid OGG file. Skipping...")
-            return False
+            return False, None
 
         disk = int(__get_common_disk_number(track))
         length = float(__get_common_track_length(track))
@@ -234,7 +271,7 @@ def import_file(file, directory, path, update=False, crc=None):
             log.warning("Track " + track.path +
                         " is not a valid MP4 file. Skipping...")
             log.warning(e)
-            return False
+            return False, None
 
         try:
             disk = int(track.mutagen["disk"][0][0])
@@ -256,7 +293,7 @@ def import_file(file, directory, path, update=False, crc=None):
     ### File will not be imported ###
     else:
         log.warning("Skipping file: " + path)
-        return False
+        return False, None
 
     global settings
     if tools.get_glib_settings().get_boolean("use-crc32"):
@@ -322,17 +359,9 @@ def import_file(file, directory, path, update=False, crc=None):
         else:
             book = db.Book.select().where(db.Book.name == book_name).get()
 
-        db.Track.create(name=track_name,
-                        number=track_number,
-                        position=0,
-                        book=book,
-                        file=path,
-                        disk=disk,
-                        length=length,
-                        modified=modified,
-                        crc32=crc32)
+        return True, TrackData(track_name, track_number, book, path, disk, length, modified, crc32)
 
-    return True
+    return True, None
 
 
 def __get_media_type(path):

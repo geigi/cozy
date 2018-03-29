@@ -362,13 +362,13 @@ class MPRIS(Server):
             query = ArtworkCache.select().where(ArtworkCache.book == track.book.id)
             if query.exists():
                 uuid = query.first().uuid
-            cache_dir = tools.get_cache_dir()
-            cache_dir = os.path.join(cache_dir, uuid)
-            file_path = os.path.join(cache_dir, "180.jpg")
-            if file_path is not None:
-                self.__metadata["mpris:artUrl"] = GLib.Variant(
-                    "s",
-                    "file://" + file_path)
+                cache_dir = tools.get_cache_dir()
+                cache_dir = os.path.join(cache_dir, uuid)
+                file_path = os.path.join(cache_dir, "180.jpg")
+                if file_path is not None:
+                    self.__metadata["mpris:artUrl"] = GLib.Variant(
+                        "s",
+                        "file://" + file_path)
 
     def __on_seeked(self, player, position):
         self.Seeked(position * (1000 * 1000))

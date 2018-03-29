@@ -107,7 +107,7 @@ class StorageBlackList(ModelBase):
 
 def init_db():
     if PeeweeVersion[0] == '3':
-        db.bind([Book, Track, Settings, ArtworkCache], bind_refs=False, bind_backrefs=False)
+        db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList], bind_refs=False, bind_backrefs=False)
     db.connect()
 
     global update
@@ -115,9 +115,9 @@ def init_db():
         update_db()
     else:
         if PeeweeVersion[0] == '2':
-            db.create_tables([Track, Book, Settings, ArtworkCache, Storage], True)
+            db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList], True)
         else:
-            db.create_tables([Track, Book, Settings, ArtworkCache, Storage])
+            db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList])
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
