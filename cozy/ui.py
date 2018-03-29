@@ -236,7 +236,8 @@ class CozyUI:
 
         builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")
         menu = builder.get_object("app_menu")
-        self.app.set_app_menu(menu)
+        if not tools.is_elementary():
+            self.app.set_app_menu(menu)
 
     def __init_components(self):
         self.titlebar = Titlebar(self)
