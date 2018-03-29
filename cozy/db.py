@@ -463,7 +463,9 @@ def blacklist_book(book):
     """
     book_tracks = tracks(book)
     data = list((t.file, ) for t in book_tracks)
-    StorageBlackList.insert_many(data, fields=[StorageBlackList.path]).execute()
+    chunks = [data[x:x+500] for x in range(0, len(data), 500)]
+    for chunk in chunks:
+        StorageBlackList.insert_many(chunk, fields=[StorageBlackList.path]).execute()
     ids = list(t.id for t in book_tracks)
     with db.atomic():
         Track.delete().where(Track.id << ids).execute()
