@@ -16,6 +16,7 @@ class FileNotFoundDialog():
         self.builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/file_not_found.ui")
         self.dialog = self.builder.get_object("dialog")
+        self.dialog.set_transient_for(self.parent.window)
         self.builder.get_object("file_label").set_markup(
             "<tt>" + file + "</tt>")
 
