@@ -17,7 +17,7 @@ from gi.repository import GLib, GdkPixbuf, Gdk
 
 import cozy.tools as tools
 
-DB_VERSION = 4
+DB_VERSION = 5
 
 # first we get the data home and find the database if it exists
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")

@@ -644,6 +644,7 @@ class CozyUI:
         """
         Close and dispose everything that needs to be when window is closed.
         """
+        log.info("Closing.")
         self.titlebar.close()
         if self.sleep_timer.is_running():
             self.sleep_timer.stop()
@@ -655,7 +656,9 @@ class CozyUI:
             player.stop()
 
         player.dispose()
+        log.info("Closing app.")
         self.app.quit()
+        log.info("App closed.")
 
     def __on_listbox_changed(self, sender, row):
         """

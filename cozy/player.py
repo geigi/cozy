@@ -31,8 +31,10 @@ def __on_gst_message(bus, message):
     if t == Gst.MessageType.BUFFERING:
         if (message.percentage < 100):
             __player.set_state(Gst.State.PAUSED)
+            log.info("Buffering...")
         else:
             __player.set_state(Gst.State.PLAYING)
+            log.info("Buffering finished.")
     elif t == Gst.MessageType.EOS:
         next_track()
     elif t == Gst.MessageType.ERROR:
@@ -111,12 +113,13 @@ def get_current_duration(wait=False):
     Current duration of track
     :returns: duration in ns
     """
+    global __current_track
     global __player
 
     res = __player.query_position(Gst.Format.TIME)
 
     if wait:
-        while not res[0]:
+        while not res[0] and __current_track:
             time.sleep(0.1)
             res = __player.query_position(Gst.Format.TIME)
 
@@ -491,4 +494,6 @@ def dispose():
     Sets the Gst player state to NULL.
     """
     global __player
+
+    log.info("Closing.")
     __player.set_state(Gst.State.NULL)

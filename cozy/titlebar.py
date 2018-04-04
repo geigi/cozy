@@ -468,5 +468,6 @@ class Titlebar:
             self.update_track_ui()
 
     def close(self):
+        log.info("Closing.")
         if self.play_status_updater is not None:
             self.play_status_updater.stop()
