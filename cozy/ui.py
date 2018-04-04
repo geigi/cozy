@@ -164,6 +164,7 @@ class CozyUI:
             "no_media_file_chooser")
         self.no_media_file_chooser.connect(
             "file-set", self.__on_no_media_folder_changed)
+        self.external_switch = self.window_builder.get_object("external_switch")
         
         self.auto_scan_switch = self.window_builder.get_object(
             "auto_scan_switch")
@@ -542,7 +543,8 @@ class CozyUI:
         the no media screen. Now we want to do a first scan instead of a rebase.
         """
         location = self.no_media_file_chooser.get_file().get_path()
-        db.Storage.create(path=location, default=True)
+        external = self.external_switch.get_active()
+        db.Storage.create(path=location, default=True, external=external)
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, True)
         self.settings._init_storage()
@@ -656,6 +658,9 @@ class CozyUI:
             player.stop()
 
         player.dispose()
+
+        db.close()
+
         log.info("Closing app.")
         self.app.quit()
         log.info("App closed.")

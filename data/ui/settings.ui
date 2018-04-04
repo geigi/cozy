@@ -20,7 +20,17 @@
     <property name="can_focus">False</property>
     <property name="icon_name">emblem-default-symbolic</property>
   </object>
+  <object class="GtkImage" id="external_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">network-server-symbolic</property>
+  </object>
   <object class="GtkImage" id="remove_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">list-remove-symbolic</property>
+  </object>
+  <object class="GtkImage" id="remove_image1">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">list-remove-symbolic</property>
@@ -423,6 +433,32 @@
                       <object class="GtkToolItem">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Toggle this storage location to be internal/external.</property>
+                        <property name="halign">end</property>
+                        <child>
+                          <object class="GtkToggleButton" id="external_button">
+                            <property name="width_request">24</property>
+                            <property name="height_request">24</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
+                            <property name="image">external_image</property>
+                            <property name="always_show_image">True</property>
+                            <style>
+                              <class name="flat"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="homogeneous">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToolItem">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Set as default storage location for new audiobooks</property>
                         <property name="halign">end</property>
                         <child>
@@ -706,10 +742,5 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkImage" id="remove_image1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">list-remove-symbolic</property>
   </object>
 </interface>

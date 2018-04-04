@@ -31,6 +31,8 @@ class Settings:
         self.add_storage_button.connect("clicked", self.__on_add_storage_clicked)
         self.remove_storage_button = self.builder.get_object("remove_location_button")
         self.remove_storage_button.connect("clicked", self.__on_remove_storage_clicked)        
+        self.external_button = self.builder.get_object("external_button")
+        self.external_button.connect("clicked", self.__on_external_clicked)
         self.default_storage_button = self.builder.get_object("default_location_button")
         self.default_storage_button.connect("clicked", self.__on_default_storage_clicked)
         self.storage_list_box = self.builder.get_object("storage_list_box")
@@ -56,14 +58,16 @@ class Settings:
         """
         found_default = False
         for location in db.Storage.select():
-            row = StorageListBoxRow(self.ui, location.id, location.path, location.default)
+            row = StorageListBoxRow(self.ui, location.id, location.path, location.external, location.default)
             self.storage_list_box.add(row)
-            if location.default == True:
+            if location.default:
                 if found_default:
                     row.set_default(False)
                 else:
                     found_default = True
                     self.storage_list_box.select_row(row)
+
+        self.__on_storage_box_changed(None, None)
 
     def _init_blacklist(self):
         """
@@ -137,7 +141,7 @@ class Settings:
         Add a new storage selector to the ui.
         """
         db_obj = db.Storage.create(path="")
-        self.storage_list_box.add(StorageListBoxRow(self.ui, db_obj.id, "", False))
+        self.storage_list_box.add(StorageListBoxRow(self.ui, db_obj.id, "", False, False))
 
     def __on_remove_storage_clicked(self, widget):
         """
@@ -166,13 +170,21 @@ class Settings:
         Disable/enable toolbar buttons
         """
         row = self.storage_list_box.get_selected_row()
-        if row is None or row.get_default() == True:
+        if row is None:
             sensitive = False
+            default_sensitive = False
         else:
             sensitive = True
-        
-        self.remove_storage_button.set_sensitive(sensitive)
-        self.default_storage_button.set_sensitive(sensitive)
+            if row.get_default():
+                default_sensitive = False
+            else:
+                default_sensitive = True
+            
+            self.external_button.set_active(row.external)
+
+        self.remove_storage_button.set_sensitive(default_sensitive)
+        self.external_button.set_sensitive(sensitive)
+        self.default_storage_button.set_sensitive(default_sensitive)
 
         for child in self.storage_list_box.get_children():
             if row is not None and child.db_id == row.db_id:
@@ -210,6 +222,14 @@ class Settings:
         else:
             self.remove_blacklist_button.set_sensitive(True)
 
+    def __on_external_clicked(self, widget):
+        """
+        """
+        external = self.external_button.get_active()
+
+        row = self.storage_list_box.get_selected_row()
+        row.set_external(external)
+
     def set_darkmode(self):
         settings = Gtk.Settings.get_default()
 
@@ -235,12 +255,13 @@ class StorageListBoxRow(Gtk.ListBoxRow):
     This class represents a listboxitem for a storage location.
     """
 
-    def __init__(self, ui, db_id, path, default=False):
+    def __init__(self, ui, db_id, path, external, default=False):
         super(Gtk.ListBoxRow, self).__init__()
         self.ui = ui
         self.db_id = db_id
         self.path = path
         self.default = default
+        self.external = external
 
         box = Gtk.Box()
         box.set_orientation(Gtk.Orientation.HORIZONTAL)
@@ -256,6 +277,8 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         self.default_image.set_from_icon_name("emblem-default-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
         self.default_image.set_margin_right(5)
 
+        self.type_image = self.__get_type_image()
+
         self.location_chooser = Gtk.FileChooserButton()
         self.location_chooser.set_local_only(False)
         self.location_chooser.set_action(Gtk.FileChooserAction.SELECT_FOLDER)
@@ -265,6 +288,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         self.location_chooser.props.hexpand = True
         self.location_chooser.connect("file-set", self.__on_folder_changed)
         
+        box.add(self.type_image)
         box.add(self.location_chooser)
         box.add(self.default_image)
         self.add(box)
@@ -296,6 +320,19 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         else:
             self.default_image.get_style_context().remove_class("selected")
 
+    def set_external(self, external):
+        """
+        """
+        self.external = external
+        if external:
+            self.type_image.set_from_icon_name("network-server-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
+            self.type_image.set_tooltip_text(_("External drive"))
+        else:
+            self.type_image.set_from_icon_name("drive-harddisk-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
+            self.type_image.set_tooltip_text(_("Internal drive"))
+
+        db.Storage.update(external=external).where(db.Storage.id == self.db_id).execute()
+
     def __on_folder_changed(self, widget):
         """
         Update the location in the database.
@@ -321,3 +358,18 @@ class StorageListBoxRow(Gtk.ListBoxRow):
             thread = Thread(target=importer.rebase_location, args=(
                 self.ui, old_path, new_path))
             thread.start()
+    
+    def __get_type_image(self):
+        """
+        """
+        type_image = Gtk.Image()
+        if self.external:
+            icon_name = "network-server-symbolic"
+            type_image.set_tooltip_text(_("External drive"))
+        else:
+            icon_name = "drive-harddisk-symbolic"
+            type_image.set_tooltip_text(_("Internal drive"))
+        type_image.set_from_icon_name(icon_name, Gtk.IconSize.LARGE_TOOLBAR)
+        type_image.set_margin_right(5)
+
+        return type_image

@@ -17,7 +17,7 @@ from gi.repository import GLib, GdkPixbuf, Gdk
 
 import cozy.tools as tools
 
-DB_VERSION = 5
+DB_VERSION = 6
 
 # first we get the data home and find the database if it exists
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
@@ -97,6 +97,7 @@ class Storage(ModelBase):
     path = CharField()
     location_type = IntegerField(default=0)
     default = BooleanField(default=False)
+    external = BooleanField(default=False)
 
 class StorageBlackList(ModelBase):
     """
@@ -305,6 +306,19 @@ def update_db_5():
     db.create_tables([StorageBlackList])
 
     Settings.update(version=5).execute()
+
+def update_db_6():
+    """
+    """
+    migrator = SqliteMigrator(db)
+
+    last_played = BooleanField(default=False)
+
+    migrate(
+        migrator.add_column('storage', 'external', last_played),
+    )
+
+    Settings.update(version=6).execute()
     
 
 def update_db():
@@ -331,6 +345,9 @@ def update_db():
 
     if version < 5:
         update_db_5()
+
+    if version < 6:
+        update_db_6()
 
 
 # thanks to oleg-krv
@@ -479,3 +496,9 @@ def is_blacklisted(path):
         return True
     else:
         return False
+
+def close():
+    global db
+
+    log.info("Closing.")
+    db.close()
