@@ -34,7 +34,7 @@ class BookOverview:
         self.play_img = builder.get_object("play_img1")
         self.pause_img = builder.get_object("pause_img1")
         self.scroller = builder.get_object("book_overview_scroller")
-        if not tools.is_elementary():
+        if Gtk.get_minor_version() > 20:
             self.scroller.props.propagate_natural_height = True
 
         self.ui.speed.add_listener(self.__ui_changed)
