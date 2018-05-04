@@ -438,7 +438,7 @@ class Titlebar:
 
         if enable and self.ui.is_playing:
             self.play_status_updater = RepeatedTimer(
-                1.0, self.__update_time)
+                1.0, self.__update_time, "UpdateTitlebarTimer")
             self.play_status_updater.start()
 
     def __update_time(self):

@@ -71,7 +71,7 @@ class SleepTimer:
             # Enable Timer
             adjustment = self.timer_spinner.get_adjustment()
             countdown = int(adjustment.get_value())
-            self.sleep_timer = RepeatedTimer(1, self.__sleep_timer_fired)
+            self.sleep_timer = RepeatedTimer(1, self.__sleep_timer_fired, "SleepTimer")
             self.sleep_timer.start()
             fadeout = 0
             if tools.get_glib_settings().get_boolean("sleep-timer-fadeout"):

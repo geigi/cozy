@@ -422,8 +422,10 @@ def get_track_from_book_time(book, seconds):
     elapsed_time = 0.0
     current_track = None
     current_time = 0.0
+    last_track = None
 
     for track in tracks(book):
+        last_track = track
         if elapsed_time + track.length > seconds:
             current_track = track
             current_time = seconds - elapsed_time
@@ -431,7 +433,6 @@ def get_track_from_book_time(book, seconds):
         else:
             elapsed_time += track.length
     
-    last_track = tracks(book)[-1]
     return last_track, last_track.length
 
 def remove_invalid_entries(ui=None, refresh=False):

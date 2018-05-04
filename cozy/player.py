@@ -381,6 +381,7 @@ def set_playback_speed(speed):
     __playback_speed_timer_running = True
     
     t = threading.Timer(0.2, __on_playback_speed_timer)
+    t.name = "PlaybackSpeedDelayTimer"
     t.start()
 
 
