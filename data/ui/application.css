@@ -18,3 +18,7 @@
 .sort_switcher_element {
   font-size: 110%;
 }
+
+.no_padding {
+  padding: 0px;
+}

@@ -45,6 +45,16 @@ class Settings:
         self.blacklist_model = self.builder.get_object("blacklist_store")
         self.blacklist_tree_view.get_selection().connect("changed", self.__on_blacklist_selection_changed)
 
+        self.sleep_fadeout_switch = self.builder.get_object("sleep_fadeout_switch")
+        self.sleep_fadeout_switch.connect("state-set", self.__on_fadeout_switch_changed)
+
+        self.fadeout_duration_label = self.builder.get_object("fadeout_duration_label")
+        self.fadeout_duration_row = self.builder.get_object("fadeout_duration_row")
+
+        self.fadeout_duration_adjustment = self.builder.get_object("fadeout_duration_adjustment")
+        self.fadeout_duration_adjustment.connect("value-changed", self.__on_fadeout_adjustment_changed)
+        self.__on_fadeout_adjustment_changed(self.fadeout_duration_adjustment)
+
         self._init_storage()
         self._init_blacklist()
         self.__init_bindings()
@@ -108,6 +118,12 @@ class Settings:
         dark_mode_switch = self.builder.get_object("dark_mode_switch")
         tools.get_glib_settings().bind("dark-mode", dark_mode_switch, "active",
                            Gio.SettingsBindFlags.DEFAULT)
+
+        tools.get_glib_settings().bind("sleep-timer-fadeout", self.sleep_fadeout_switch, "active",
+                           Gio.SettingsBindFlags.DEFAULT)
+
+        tools.get_glib_settings().bind("sleep-timer-fadeout-duration", self.fadeout_duration_adjustment,
+                           "value", Gio.SettingsBindFlags.DEFAULT)
 
         tools.get_glib_settings().connect("changed", self.__on_settings_changed)
 
@@ -229,6 +245,16 @@ class Settings:
 
         row = self.storage_list_box.get_selected_row()
         row.set_external(external)
+
+    def __on_fadeout_adjustment_changed(self, adjustment):
+        """
+        """
+        self.fadeout_duration_label.set_text(str(int(adjustment.get_value())) + " s")
+
+    def __on_fadeout_switch_changed(self, switch, state):
+        """
+        """
+        self.fadeout_duration_row.set_sensitive(state)
 
     def set_darkmode(self):
         settings = Gtk.Settings.get_default()
