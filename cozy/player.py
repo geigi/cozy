@@ -158,6 +158,15 @@ def add_player_listener(function):
     __listeners.append(function)
 
 
+def get_volume():
+    """
+    Get the player volume. 
+    :returns: 0.0 is 0%, 1.0 is 100%
+    """
+    global __player
+    return __player.get_property("volume")
+
+
 def set_volume(volume):
     """
     Set the player volume. 

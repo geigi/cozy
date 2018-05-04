@@ -166,7 +166,7 @@ class Settings:
         row = self.storage_list_box.get_selected_row()
         db.Storage.select().where(db.Storage.path == row.path).get().delete_instance()
         self.storage_list_box.remove(row)
-        thread = Thread(target=db.remove_tracks_with_path, args=(self.ui, row.path))
+        thread = Thread(target=db.remove_tracks_with_path, args=(self.ui, row.path), name=("RemoveStorageFromDB"))
         thread.start()
         self.__on_storage_box_changed(None, None)
         
@@ -382,7 +382,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
             log.info("Audio book location changed, rebasing the location in db.")
             self.ui.switch_to_working(_("Changing audio book location..."), False)
             thread = Thread(target=importer.rebase_location, args=(
-                self.ui, old_path, new_path))
+                self.ui, old_path, new_path), name="RebaseStorageLocationThread")
             thread.start()
     
     def __get_type_image(self):

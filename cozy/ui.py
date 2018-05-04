@@ -387,7 +387,7 @@ class CozyUI:
         Start the db import in a seperate thread
         """
         self.switch_to_working(_("Importing Audiobooks"), first_scan)
-        thread = Thread(target=importer.update_database, args=(self, ))
+        thread = Thread(target=importer.update_database, args=(self, ), name="UpdateDatabaseThread")
         thread.start()
 
     def auto_import(self):
@@ -534,7 +534,7 @@ class CozyUI:
         """
         if target_type == 80:
             self.switch_to_working("copying new files...", False)
-            thread = Thread(target=importer.copy, args=(self, selection, ))
+            thread = Thread(target=importer.copy, args=(self, selection, ), name="DragDropImportThread")
             thread.start()
 
     def __on_no_media_folder_changed(self, sender):

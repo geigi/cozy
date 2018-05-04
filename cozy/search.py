@@ -45,7 +45,7 @@ class Search:
             self.scroller.set_propagate_natural_height(True)
             self.scroller.set_propagate_natural_width(True)
 
-        self.search_thread = Thread(target=self.search)
+        self.search_thread = Thread(target=self.search, name="SearchThread")
         self.search_thread_stop = threading.Event()
 
     def get_popover(self):

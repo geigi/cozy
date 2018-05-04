@@ -41,6 +41,7 @@ class Titlebar:
         self.play_button = self.ui.get_object("play_button")
         self.prev_button = self.ui.get_object("prev_button")
         self.volume_button = self.ui.get_object("volume_button")
+        self.volume_button.set_value(tools.get_glib_settings().get_double("volume"))
         self.timer_button = self.ui.get_object("timer_button")
         self.playback_speed_button = self.ui.get_object(
             "playback_speed_button")
@@ -346,6 +347,7 @@ class Titlebar:
         Sets the ui value in the player.
         """
         player.set_volume(value)
+        tools.get_glib_settings().set_double("volume", value)
 
     def __on_progress_press(self, widget, sender):
         """

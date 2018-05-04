@@ -1,3 +1,6 @@
+from threading import Thread
+import time
+
 import cozy.tools as tools
 from cozy.tools import RepeatedTimer
 import cozy.player as player
@@ -70,7 +73,10 @@ class SleepTimer:
             countdown = int(adjustment.get_value())
             self.sleep_timer = RepeatedTimer(1, self.__sleep_timer_fired)
             self.sleep_timer.start()
-            self.current_timer_time = countdown * 60
+            fadeout = 0
+            if tools.get_glib_settings().get_boolean("sleep-timer-fadeout"):
+                fadeout = tools.get_glib_settings().get_int("sleep-timer-fadeout-duration")
+            self.current_timer_time = countdown * 60 - fadeout
 
     def stop(self):
         """
@@ -134,8 +140,21 @@ class SleepTimer:
         adjustment = self.timer_spinner.get_adjustment()
         adjustment.set_value(int(self.current_timer_time / 60) + 1)
         if self.current_timer_time < 1:
-            self.timer_switch.set_active(False)
-            if player.get_gst_player_state() == Gst.State.PLAYING:
-                player.play_pause(None)
-
+            thread = Thread(target=self.__stop_playback, name="SleepTimerFadeoutThread")
+            thread.start()
             self.sleep_timer.stop()
+
+    def __stop_playback(self):
+        if tools.get_glib_settings().get_boolean("sleep-timer-fadeout"):
+            duration = tools.get_glib_settings().get_int("sleep-timer-fadeout-duration") * 20
+            current_vol = player.get_volume()
+            for i in range(0, duration):
+                player.set_volume(current_vol - (i / duration))
+                time.sleep(0.05)
+
+            player.set_volume(current_vol)
+
+        if player.get_gst_player_state() == Gst.State.PLAYING:
+            player.play_pause(None)
+        
+        self.timer_switch.set_active(False)

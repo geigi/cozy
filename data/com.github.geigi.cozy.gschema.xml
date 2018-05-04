@@ -56,5 +56,10 @@
       <summary>Duration of the sleep timer fadeout.</summary>
       <description></description>
     </key>
+    <key type="d" name="volume">
+      <default>1.0</default> 
+      <summary>Volume.</summary>
+      <description></description>
+    </key>
   </schema>
 </schemalist>
