@@ -21,7 +21,7 @@ class SearchResult(Gtk.EventBox):
 
         self.connect("enter-notify-event", self._on_enter_notify)
         self.connect("leave-notify-event", self._on_leave_notify)
-        if on_click is not None:
+        if on_click:
             self.connect("button-press-event", self.__on_clicked)
 
         self.props.margin_top = 2

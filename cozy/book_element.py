@@ -174,7 +174,7 @@ class AlbumElement(Gtk.Box):
         track = get_track_for_playback(self.book)
         current_track = get_current_track()
 
-        if current_track is not None and current_track.book.id == self.book.id:
+        if current_track and current_track.book.id == self.book.id:
             play_pause(None)
             if get_gst_player_state() == Gst.State.PLAYING:
                 jump_to_ns(track.position)
@@ -349,7 +349,7 @@ class TrackElement(Gtk.EventBox):
         """
         current_track = get_current_track()
 
-        if current_track is not None and current_track.id == self.track.id:
+        if current_track and current_track.id == self.track.id:
             play_pause(None)
             if get_gst_player_state() == Gst.State.PLAYING:
                 jump_to_ns(Track.select().where(

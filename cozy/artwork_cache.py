@@ -17,13 +17,13 @@ def get_cover_pixbuf(book, scale, size=0):
         # first try the cache
         pixbuf = __load_pixbuf_from_cache(book, size)
 
-    if pixbuf is not None:
+    if pixbuf:
         return pixbuf
     else:
         # then try the db or file
         pixbuf = __load_cover_pixbuf(book)
 
-    if pixbuf is not None:
+    if pixbuf:
         # return original size if it is not greater than 0
         if not size > 0:
             return pixbuf
@@ -163,7 +163,7 @@ def __load_cover_pixbuf(book):
 def __load_pixbuf_from_db(book):
     pixbuf = None
 
-    if book is not None and book.cover is not None:
+    if book and book.cover:
         try:
             loader = GdkPixbuf.PixbufLoader.new()
             loader.write(book.cover)
@@ -218,7 +218,7 @@ def __load_pixbuf_from_file(book):
             pixbuf = GdkPixbuf.Pixbuf.new_from_file(os.path.join(directory, elem))
         except Exception as e:
             log.debug(e)
-        if pixbuf is not None:
+        if pixbuf:
             break
     if pixbuf is None:
         # find other cover file (sort alphabet)
@@ -228,6 +228,6 @@ def __load_pixbuf_from_file(book):
                 pixbuf = GdkPixbuf.Pixbuf.new_from_file(os.path.join(directory, elem))
             except Exception as e:
                 log.debug(e)
-            if pixbuf is not None:
+            if pixbuf:
                 break
     return pixbuf

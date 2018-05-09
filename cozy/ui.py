@@ -188,7 +188,7 @@ class CozyUI:
             about_close_button = self.about_builder.get_object(
                 "button_box").get_children()[2]
         
-            if about_close_button is not None:
+            if about_close_button:
                 about_close_button.connect("clicked", self.__about_close_clicked)
         except Exception as e:
             log.info("Not connecting about close button.")
@@ -258,7 +258,7 @@ class CozyUI:
         Loads the last book into the player
         """
         player.load_last_book()
-        if player.get_current_track() is not None:
+        if player.get_current_track():
             self.titlebar.load_last_book()
 
     def get_object(self, name):
@@ -316,7 +316,7 @@ class CozyUI:
         """
         Remove all information about a playing book from the ui.
         """
-        if self.current_book_element is not None:
+        if self.current_book_element:
             self.current_book_element.set_playing(False)
 
     def block_ui_buttons(self, block, scan=False):
@@ -355,7 +355,7 @@ class CozyUI:
         self.titlebar.switch_to_playing()
         self.main_stack.props.visible_child_name = "main"
         self.category_toolbar.set_visible(True)
-        if player.get_current_track() is not None:
+        if player.get_current_track():
             self.block_ui_buttons(False, True)
         else:
             # we want to only block the player controls
@@ -446,7 +446,7 @@ class CozyUI:
         return False
 
     def refresh_recent(self):
-        if self.titlebar.current_book is not None:
+        if self.titlebar.current_book:
             book_element = next(filter(
                 lambda x: x.book.id == self.titlebar.current_book.id,
                 self.book_box.get_children()), None)
@@ -570,7 +570,7 @@ class CozyUI:
         Refresh the currently playing track and mark it in the track overview popover.
         """
         # also reset the book playing state
-        if self.current_book_element is not None:
+        if self.current_book_element:
             self.current_book_element.set_playing(False)
 
         curr_track = player.get_current_track()
@@ -586,7 +586,7 @@ class CozyUI:
         Listen to and handle all gst player messages that are important for the ui.
         """
         if event == "stop":
-            if self.__inhibit_cookie is not None:
+            if self.__inhibit_cookie:
                 self.app.uninhibit(self.__inhibit_cookie)
             self.is_playing = False
             self.stop()
@@ -601,7 +601,7 @@ class CozyUI:
             self.refresh_recent()
             self.__inhibit_cookie = self.app.inhibit(self.window, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook")
         elif event == "pause":
-            if self.__inhibit_cookie is not None:
+            if self.__inhibit_cookie:
                 self.app.uninhibit(self.__inhibit_cookie)
             self.is_playing = False
             self.pause()

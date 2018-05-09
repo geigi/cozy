@@ -85,7 +85,7 @@ class SleepTimer:
         """
         Stop the sleep timer.
         """
-        if self.sleep_timer is not None:
+        if self.sleep_timer:
             self.sleep_timer.stop()
 
     def is_running(self):
@@ -104,7 +104,7 @@ class SleepTimer:
         adjustment = self.timer_spinner.get_adjustment()
         value = adjustment.get_value()
 
-        if self.sleep_timer is not None and not self.sleep_timer.isAlive:
+        if self.sleep_timer and not self.sleep_timer.isAlive:
             tools.get_glib_settings().set_int("timer", int(value))
 
         self.current_timer_time = value * 60
@@ -124,7 +124,7 @@ class SleepTimer:
         else:
             self.timer_image.set_from_icon_name(
                 "timer-off-symbolic", Gtk.IconSize.BUTTON)
-            if self.sleep_timer is not None:
+            if self.sleep_timer:
                 self.sleep_timer.stop()
 
     def __on_timer_focus_out(self, event, widget):

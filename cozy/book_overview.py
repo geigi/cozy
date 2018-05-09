@@ -41,12 +41,12 @@ class BookOverview:
         player.add_player_listener(self.__player_changed)
 
     def set_book(self, book):
-        if self.book is not None and self.book.id == book.id:
+        if self.book and self.book.id == book.id:
             self.update_time()
             return
         self.book = book
 
-        if self.ui.is_playing and self.ui.titlebar.current_book is not None and self.book.id == self.ui.titlebar.current_book.id:
+        if self.ui.is_playing and self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
             self.play_book_button.set_image(self.pause_img)
         else:
             self.play_book_button.set_image(self.play_img)
@@ -99,7 +99,7 @@ class BookOverview:
         # update book object
         # TODO: optimize usage by only asking from the db on track change
         self.book = db.Book.select().where(db.Book.id == self.book.id).get()
-        if self.ui.titlebar.current_book is not None and self.book.id == self.ui.titlebar.current_book.id:
+        if self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
             progress = db.get_book_progress(self.book, False)
             progress += (player.get_current_duration() / 1000000000)
             remaining = (self.duration - progress)
@@ -136,7 +136,7 @@ class BookOverview:
         if self.book.position == -1:
             return
 
-        if curr_track is not None:
+        if curr_track:
             self.current_track_element = next(
                 filter(
                     lambda x: x.track.id == curr_track.id,
@@ -149,7 +149,7 @@ class BookOverview:
         self.current_track_element.set_playing(playing)
 
     def deselect_track_element(self):
-        if self.current_track_element is not None:
+        if self.current_track_element:
             self.current_track_element.set_playing(False)
             self.current_track_element.deselect()
 
@@ -175,7 +175,7 @@ class BookOverview:
             self.current_track_element = self.track_box.get_children()[0]
             self.current_track_element.select()
 
-        if self.ui.titlebar.current_book is not None and self.ui.titlebar.current_book.id == self.book.id:
+        if self.ui.titlebar.current_book and self.ui.titlebar.current_book.id == self.book.id:
             self.current_track_element.set_playing(self.ui.is_playing)
 
     def __ui_changed(self, event, message):
@@ -217,7 +217,7 @@ class BookOverview:
         track = db.get_track_for_playback(self.book)
         current_track = player.get_current_track()
 
-        if current_track is not None and current_track.book.id == self.book.id:
+        if current_track and current_track.book.id == self.book.id:
             player.play_pause(None)
             if player.get_gst_player_state() == Gst.State.PLAYING:
                 player.jump_to_ns(track.position)

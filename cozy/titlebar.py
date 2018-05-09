@@ -200,7 +200,7 @@ class Titlebar:
             "<tt><b>" + label_text + "</b></tt>")
         track = player.get_current_track()
 
-        if track is not None:
+        if track:
             if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
                 total = self.progress_scale.get_adjustment().get_upper()
                 remaining_secs = int(((total - val)))
@@ -214,7 +214,7 @@ class Titlebar:
                 self.remaining_label.set_markup(
                     "<tt><b>-" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
 
-        if self.ui.book_overview.book is not None and self.current_book.id == self.ui.book_overview.book.id:
+        if self.ui.book_overview.book and self.current_book.id == self.ui.book_overview.book.id:
             self.ui.book_overview.update_time()
 
     def update_track_ui(self):
@@ -278,7 +278,7 @@ class Titlebar:
         self.throbber.set_visible(False)
 
     def load_last_book(self):
-        if db.Settings.get().last_played_book is not None:
+        if db.Settings.get().last_played_book:
             self.update_track_ui()
             self.update_ui_time(self.progress_scale)
             cur_m, cur_s = player.get_current_duration_ui()
@@ -434,7 +434,7 @@ class Titlebar:
         Restarts if enable is True and the timer is already running.
         :params enable: Boolean
         """
-        if self.play_status_updater is not None:
+        if self.play_status_updater:
             self.play_status_updater.stop()
             self.play_status_updater = None
 
@@ -473,5 +473,5 @@ class Titlebar:
 
     def close(self):
         log.info("Closing.")
-        if self.play_status_updater is not None:
+        if self.play_status_updater:
             self.play_status_updater.stop()

@@ -156,7 +156,7 @@ class Settings:
         self.add_storage_button.set_sensitive(sensitive)
 
         row = self.storage_list_box.get_selected_row()
-        if row is not None and row.get_default() != True:
+        if row and row.get_default() != True:
             self.remove_storage_button.set_sensitive(sensitive)
             self.default_storage_button.set_sensitive(sensitive)
 
@@ -211,7 +211,7 @@ class Settings:
         self.default_storage_button.set_sensitive(default_sensitive)
 
         for child in self.storage_list_box.get_children():
-            if row is not None and child.db_id == row.db_id:
+            if row and child.db_id == row.db_id:
                 child.set_selected(True)
             else:
                 child.set_selected(False)
@@ -231,7 +231,7 @@ class Settings:
         TODO: Does this trigger a rescan?
         """
         model, pathlist = self.blacklist_tree_view.get_selection().get_selected_rows()
-        if pathlist is not None:
+        if pathlist:
             ids = []
             for path in reversed(pathlist):
                 treeiter = model.get_iter(path)

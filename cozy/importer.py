@@ -95,7 +95,7 @@ def update_database(ui):
                         # Is the track already in the database?
                         if db.Track.select().where(db.Track.file == path).count() < 1:
                             imported, track_data = import_file(file, directory, path)
-                            if track_data is not None:
+                            if track_data:
                                 tracks_to_import.append(track_data)
                         # Has the track changed on disk?
                         elif tools.get_glib_settings().get_boolean("use-crc32"):

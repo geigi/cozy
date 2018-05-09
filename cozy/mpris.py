@@ -365,7 +365,7 @@ class MPRIS(Server):
                 cache_dir = tools.get_cache_dir()
                 cache_dir = os.path.join(cache_dir, uuid)
                 file_path = os.path.join(cache_dir, "180.jpg")
-                if file_path is not None:
+                if file_path:
                     self.__metadata["mpris:artUrl"] = GLib.Variant(
                         "s",
                         "file://" + file_path)

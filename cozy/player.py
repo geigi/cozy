@@ -52,7 +52,7 @@ def init():
     global __player
     global __bus
 
-    if __player is not None:
+    if __player:
         dispose()
         __player = None
 
@@ -144,7 +144,7 @@ def get_current_track():
     :return: currently loaded track object
     """
     global __current_track
-    if __current_track is not None:
+    if __current_track:
         return db.Track.get_by_id(__current_track.id)
     else:
         return None
@@ -231,7 +231,7 @@ def next_track():
     play_pause(None)
     save_current_track_position(0)
 
-    if next_track is not None:
+    if next_track:
         save_current_book_position(next_track)
         save_current_track_position(0, next_track)
         play_pause(next_track)
@@ -266,7 +266,7 @@ def prev_track():
 
     save_current_track_position()
 
-    if previous is not None:
+    if previous:
         play_pause(previous)
         save_current_track_position(track=current, pos=0)
         save_current_book_position(previous)
@@ -434,13 +434,13 @@ def load_last_book():
 
     last_book = db.Settings.get().last_played_book
 
-    if last_book is not None and last_book.position != 0:
+    if last_book and last_book.position != 0:
 
         query = db.Track.select().where(db.Track.id == last_book.position)
         if query.exists():
             last_track = query.get()
 
-            if last_track is not None:
+            if last_track:
                 __player.set_state(Gst.State.NULL)
                 __player.set_property("uri", "file://" + last_track.file)
                 __player.set_state(Gst.State.PAUSED)
