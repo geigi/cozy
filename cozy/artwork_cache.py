@@ -147,7 +147,22 @@ def __load_cover_pixbuf(book):
     """
     pixbuf = None
 
-    # first try to load pixbuf from db
+    if tools.get_glib_settings().get_boolean("prefer-external-cover"):
+        pixbuf = __load_pixbuf_from_file(book)
+
+        if pixbuf is None:
+            pixbuf = __load_pixbuf_from_db(book)
+    else:
+        pixbuf = __load_pixbuf_from_db(book)
+
+        if pixbuf is None:
+            pixbuf = __load_pixbuf_from_file(book)
+
+    return pixbuf
+
+def __load_pixbuf_from_db(book):
+    pixbuf = None
+
     if book is not None and book.cover is not None:
         try:
             loader = GdkPixbuf.PixbufLoader.new()
@@ -158,10 +173,6 @@ def __load_cover_pixbuf(book):
             log.warning("Could not get cover for book " + book.name)
             log.warning(e)
     
-    # then try from file
-    if pixbuf is None:
-        pixbuf = __load_pixbuf_from_file(book)
-
     return pixbuf
 
 

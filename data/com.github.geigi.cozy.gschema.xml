@@ -61,5 +61,10 @@
       <summary>Volume.</summary>
       <description></description>
     </key>
+    <key type="b" name="prefer-external-cover">
+      <default>false</default> 
+      <summary>Prefer external cover images over embedded.</summary>
+      <description></description>
+    </key>
   </schema>
 </schemalist>

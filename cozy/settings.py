@@ -7,6 +7,7 @@ from gi.repository import Gtk, Gio, Pango
 import cozy.db as db
 import cozy.tools as tools
 import cozy.importer as importer
+import cozy.artwork_cache as artwork_cache
 
 log = logging.getLogger("settings")
 
@@ -46,7 +47,10 @@ class Settings:
         self.blacklist_tree_view.get_selection().connect("changed", self.__on_blacklist_selection_changed)
 
         self.sleep_fadeout_switch = self.builder.get_object("sleep_fadeout_switch")
-        self.sleep_fadeout_switch.connect("state-set", self.__on_fadeout_switch_changed)
+        self.sleep_fadeout_switch.connect("notify::active", self.__on_fadeout_switch_changed)
+
+        self.external_cover_switch = self.builder.get_object("external_cover_switch")
+        self.external_cover_switch.connect("state-set", self.__on_external_cover_switch_changed)
 
         self.fadeout_duration_label = self.builder.get_object("fadeout_duration_label")
         self.fadeout_duration_row = self.builder.get_object("fadeout_duration_row")
@@ -117,6 +121,9 @@ class Settings:
 
         dark_mode_switch = self.builder.get_object("dark_mode_switch")
         tools.get_glib_settings().bind("dark-mode", dark_mode_switch, "active",
+                           Gio.SettingsBindFlags.DEFAULT)
+
+        tools.get_glib_settings().bind("prefer-external-cover", self.external_cover_switch, "active",
                            Gio.SettingsBindFlags.DEFAULT)
 
         tools.get_glib_settings().bind("sleep-timer-fadeout", self.sleep_fadeout_switch, "active",
@@ -255,6 +262,13 @@ class Settings:
         """
         """
         self.fadeout_duration_row.set_sensitive(state)
+        
+    def __on_external_cover_switch_changed(self, switch, state):
+        """
+        """
+        tools.get_glib_settings().set_boolean("prefer-external-cover", state)
+        artwork_cache.delete_artwork_cache()
+        self.ui.refresh_content()
 
     def set_darkmode(self):
         settings = Gtk.Settings.get_default()
