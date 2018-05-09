@@ -85,6 +85,7 @@ class Settings:
 
     def _init_blacklist(self):
         """
+        Init the Storage location list.
         """
         for file in db.StorageBlackList.select():
             self.blacklist_model.append([file.path, file.id])
@@ -226,6 +227,8 @@ class Settings:
 
     def __on_remove_blacklist_clicked(self, widget):
         """
+        Remove the selected storage from the db and ui.
+        TODO: Does this trigger a rescan?
         """
         model, pathlist = self.blacklist_tree_view.get_selection().get_selected_rows()
         if pathlist is not None:
@@ -240,6 +243,11 @@ class Settings:
         self.__on_blacklist_selection_changed(self.blacklist_tree_view.get_selection())
 
     def __on_blacklist_selection_changed(self, tree_selection):
+        """
+        The user selected a different storage location.
+        Here we enable or disable the remove button depending on 
+        weather this is the default storage or not.
+        """
         if tree_selection is None or len(tree_selection.get_selected_rows()[1]) < 1:
             self.remove_blacklist_button.set_sensitive(False)
         else:
@@ -247,6 +255,8 @@ class Settings:
 
     def __on_external_clicked(self, widget):
         """
+        The external/internal button was clicked.
+        The new setting will be written to the db.
         """
         external = self.external_button.get_active()
 
@@ -255,22 +265,30 @@ class Settings:
 
     def __on_fadeout_adjustment_changed(self, adjustment):
         """
+        This refreshes the label belonging to the fadeout duration adjustment.
         """
         self.fadeout_duration_label.set_text(str(int(adjustment.get_value())) + " s")
 
     def __on_fadeout_switch_changed(self, switch, state):
         """
+        Enable/Disable sensitivity for the fadeout duration settings row.
         """
         self.fadeout_duration_row.set_sensitive(state)
         
     def __on_external_cover_switch_changed(self, switch, state):
         """
+        Set the glib setting prefer-external-cover.
+        This is needed because the binding gets called after this function.
+        Then refresh the artwork cache.
         """
         tools.get_glib_settings().set_boolean("prefer-external-cover", state)
         artwork_cache.delete_artwork_cache()
         self.ui.refresh_content()
 
     def set_darkmode(self):
+        """
+        Enable or disable the dark gtk theme.
+        """
         settings = Gtk.Settings.get_default()
 
         if self.default_dark_mode is None:
@@ -284,6 +302,7 @@ class Settings:
 
 class BlacklistColumn(Gtk.TreeViewColumn):
     """
+    A column for a storage location.
     """
     def __init__(self, path):
         super(Gtk.TreeViewColumn, self).__init__()
@@ -362,6 +381,8 @@ class StorageListBoxRow(Gtk.ListBoxRow):
 
     def set_external(self, external):
         """
+        Set this entry as external/internal storage.
+        This method also writes the setting to the db.
         """
         self.external = external
         if external:
@@ -401,6 +422,8 @@ class StorageListBoxRow(Gtk.ListBoxRow):
     
     def __get_type_image(self):
         """
+        Returns the matching drive icon for this storage location.
+        :return: External or internal drive gtk image.
         """
         type_image = Gtk.Image()
         if self.external:
