@@ -317,7 +317,11 @@ def import_file(file, directory, path, update=False, crc=None):
     if book_name is None:
         book_name = os.path.basename(os.path.normpath(directory))
     if author is None or author == "":
-        author = _("Unknown Author")
+        if reader and len(reader) > 0:
+            author = reader
+            reader = ""
+        else:
+            author = _("Unknown Author")
     if reader is None or reader == "":
         reader = _("Unknown Reader")
     if track_name is None:
