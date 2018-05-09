@@ -1,10 +1,12 @@
+import threading
+
 import cozy.artwork_cache as artwork_cache
 import cozy.db as db
 import cozy.player as player
 import cozy.tools as tools
 from cozy.sleep_timer import SleepTimer
 from cozy.playback_speed import PlaybackSpeed
-from cozy.tools import RepeatedTimer
+from cozy.tools import IntervalTimer
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -436,9 +438,9 @@ class Titlebar:
             self.play_status_updater.stop()
             self.play_status_updater = None
 
-        if enable and self.ui.is_playing:
-            self.play_status_updater = RepeatedTimer(
-                1.0, self.__update_time, "UpdateTitlebarTimer")
+        if enable and self.ui.is_playing and self.play_status_updater is None:
+            self.play_status_updater = IntervalTimer(
+                1, self.__update_time)
             self.play_status_updater.start()
 
     def __update_time(self):

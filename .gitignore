@@ -1,3 +1,4 @@
+.idea/
 app/
 bin/
 cozy/__pycache__
@@ -8,6 +9,8 @@ debian/com.github.geigi.cozy/
 debian/debhelper-build-stamp
 debian/files
 peewee/
+venv/
+
 
 # Ignore glade tmp files
 *~

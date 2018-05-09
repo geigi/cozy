@@ -8,7 +8,6 @@ gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
 from cozy.book_element import BookElement
-from cozy.tools import RepeatedTimer
 from cozy.import_failed_dialog import ImportFailedDialog
 from cozy.file_not_found_dialog import FileNotFoundDialog
 from cozy.event_sender import EventSender
@@ -587,12 +586,12 @@ class CozyUI:
         Listen to and handle all gst player messages that are important for the ui.
         """
         if event == "stop":
+            if self.__inhibit_cookie is not None:
+                self.app.uninhibit(self.__inhibit_cookie)
             self.is_playing = False
             self.stop()
             self.titlebar.stop()
             self.sleep_timer.stop()
-            if self.__inhibit_cookie is not None:
-                self.app.uninhibit(self.__inhibit_cookie)
         elif event == "play":
             self.is_playing = True
             self.play()
@@ -602,13 +601,13 @@ class CozyUI:
             self.refresh_recent()
             self.__inhibit_cookie = self.app.inhibit(self.window, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook")
         elif event == "pause":
+            if self.__inhibit_cookie is not None:
+                self.app.uninhibit(self.__inhibit_cookie)
             self.is_playing = False
             self.pause()
             self.titlebar.pause()
             self.sleep_timer.stop()
             self.book_overview.select_track(None, False)
-            if self.__inhibit_cookie is not None:
-                self.app.uninhibit(self.__inhibit_cookie)
         elif event == "track-changed":
             self.track_changed()
             if self.sort_stack.props.visible_child_name == "recent":

@@ -1,6 +1,7 @@
 from datetime import datetime
 import time
 import threading
+from threading import Thread, Event
 import logging as log
 import platform
 import os
@@ -43,51 +44,33 @@ def get_glib_settings():
     global settings
     return settings
 
+# StoppableThread is from user Dolphin, from http://stackoverflow.com/questions/5849484/how-to-exit-a-multithreaded-program
+class StoppableThread(Thread):  
 
-# From https://stackoverflow.com/questions/474528/what-is-the-best-way-to-repeatedly-execute-a-function-every-x-seconds-in-python
-class RepeatedTimer(object):
-    """
-    A timer that gets called after a specified amount of time.
-    """
-    def __init__(self, interval, function, name, *args, **kwargs):
-        self._timer = None
-        self.interval = interval
-        self.function = function
-        self.args = args
-        self.kwargs = kwargs
-        self.is_running = False
-        self.next_call = time.time()
-        self.name = name
-        self.start()
+    def __init__(self):
+        Thread.__init__(self)
+        self.stop_event = Event()        
 
-    def _run(self):
-        """
-        Process the timer.
-        """
-        self.is_running = False
-        self.start()
-        self.function(*self.args, **self.kwargs)
+    def stop(self, block=False):
+        if self.isAlive() == True:
+            # set event to signal thread to terminate
+            self.stop_event.set()
+            # block calling thread until thread really has terminated
+            if block:
+                self.join()
 
-    def start(self):
-        """
-        Start the timer.
-        """
-        if not self.is_running:
-            self.next_call += self.interval
-            self._timer = threading.Timer(
-                self.next_call - time.time(), self._run)
-            self._timer.name = self.name
-            self._timer.start()
-            self.is_running = True
+# From https://stackoverflow.com/questions/11488877/periodically-execute-function-in-thread-in-real-time-every-n-seconds
+class IntervalTimer(StoppableThread):
 
-    def stop(self):
-        """
-        Stop the timer.
-        """
-        if self._timer is not None:
-            self._timer.cancel()
-            self._timer = None
-        self.is_running = False
+    def __init__(self, interval, worker_func):
+        super().__init__()
+        self._interval = interval
+        self._worker_func = worker_func
+
+    def run(self):
+        while not self.stop_event.is_set():
+            self._worker_func()
+            time.sleep(self._interval)
 
 
 def seconds_to_str(seconds, include_seconds=True, display_zero_h=False):

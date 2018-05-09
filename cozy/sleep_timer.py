@@ -2,7 +2,7 @@ from threading import Thread
 import time
 
 import cozy.tools as tools
-from cozy.tools import RepeatedTimer
+from cozy.tools import IntervalTimer
 import cozy.player as player
 
 import gi
@@ -17,6 +17,7 @@ class SleepTimer:
     ui = None
     sleep_timer = None
     current_timer_time = 0
+    fadeout_thread = None
 
     def __init__(self, ui):
         self.ui = ui
@@ -71,12 +72,14 @@ class SleepTimer:
             # Enable Timer
             adjustment = self.timer_spinner.get_adjustment()
             countdown = int(adjustment.get_value())
-            self.sleep_timer = RepeatedTimer(1, self.__sleep_timer_fired, "SleepTimer")
-            self.sleep_timer.start()
+
             fadeout = 0
             if tools.get_glib_settings().get_boolean("sleep-timer-fadeout"):
                 fadeout = tools.get_glib_settings().get_int("sleep-timer-fadeout-duration")
             self.current_timer_time = countdown * 60 - fadeout
+
+            self.sleep_timer = tools.IntervalTimer(1, self.__sleep_timer_fired)
+            self.sleep_timer.start()
 
     def stop(self):
         """
@@ -101,7 +104,7 @@ class SleepTimer:
         adjustment = self.timer_spinner.get_adjustment()
         value = adjustment.get_value()
 
-        if self.sleep_timer is not None and not self.sleep_timer.is_running:
+        if self.sleep_timer is not None and not self.sleep_timer.isAlive:
             tools.get_glib_settings().set_int("timer", int(value))
 
         self.current_timer_time = value * 60
@@ -140,8 +143,8 @@ class SleepTimer:
         adjustment = self.timer_spinner.get_adjustment()
         adjustment.set_value(int(self.current_timer_time / 60) + 1)
         if self.current_timer_time < 1:
-            thread = Thread(target=self.__stop_playback, name="SleepTimerFadeoutThread")
-            thread.start()
+            self.fadeout_thread = Thread(target=self.__stop_playback, name="SleepTimerFadeoutThread")
+            self.fadeout_thread.start()
             self.sleep_timer.stop()
 
     def __stop_playback(self):
