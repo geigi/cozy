@@ -8,7 +8,7 @@ import cozy.player as player
 import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
-from gi.repository import Gtk, Gst
+from gi.repository import Gtk, Gst, Gdk, GLib
 
 class SleepTimer:
     """
@@ -26,37 +26,25 @@ class SleepTimer:
             "/de/geigi/cozy/timer_popover.ui")
 
         self.timer_popover = self.builder.get_object("timer_popover")
-        self.timer_switch = self.builder.get_object("timer_switch")
         self.timer_scale = self.builder.get_object("timer_scale")
-        self.timer_spinner = self.builder.get_object("timer_spinner")
-        self.timer_buffer = self.builder.get_object("timer_buffer")
+        self.timer_label = self.builder.get_object("timer_label")
+        self.timer_grid = self.builder.get_object("timer_grid")
+        self.chapter_switch = self.builder.get_object("chapter_switch")
+        self.chapter_switch.connect("state-set", self.__chapter_switch_changed)
         self.timer_image = self.ui.get_object("timer_image")
+        self.min_label = self.builder.get_object("min_label")
 
-        # signals
-        self.timer_switch.connect("notify::active", self.__timer_switch_changed)
         # text formatting
-        self.timer_spinner.connect("value-changed", self.__on_timer_changed)
-        self.timer_spinner.connect("focus-out-event", self.__on_timer_focus_out)
+        self.timer_scale.connect("value-changed", self.__on_timer_changed)
 
         # add marks to timer scale
-        for i in range(0, 181, 15):
+        for i in range(0, 121, 30):
             self.timer_scale.add_mark(i, Gtk.PositionType.RIGHT, None)
 
-        # this is required otherwise the timer will not show "min" on start
-        self.__init_timer_buffer()
+        # initialize timer ui
+        self.__on_timer_changed(None)
 
-    def __init_timer_buffer(self):
-        """
-        Add "min" to the timer text field on startup.
-        """
-        value = tools.get_glib_settings().get_int("timer")
-        adjustment = self.timer_spinner.get_adjustment()
-        adjustment.set_value(value)
-
-        text = str(int(value)) + " " + _("min")
-        self.timer_buffer.set_text(text, len(text))
-
-        return True
+        player.add_player_listener(self.__player_changed)
 
     def get_builder(self):
         return self.builder
@@ -64,20 +52,17 @@ class SleepTimer:
     def get_popover(self):
         return self.timer_popover
 
-    def start(self):
+    def start(self, force=False):
         """
         Start the sleep timer but only when it is enabled by the user.
         """
-        if self.timer_switch.get_active():
-            # Enable Timer
-            adjustment = self.timer_spinner.get_adjustment()
-            countdown = int(adjustment.get_value())
-
-            fadeout = 0
-            if tools.get_glib_settings().get_boolean("sleep-timer-fadeout"):
-                fadeout = tools.get_glib_settings().get_int("sleep-timer-fadeout-duration")
-            self.current_timer_time = countdown * 60 - fadeout
-
+        if self.chapter_switch.get_state() and not force:
+            return
+        
+        adjustment = self.timer_scale.get_adjustment()
+        countdown = int(adjustment.get_value())
+        if countdown > 0:
+            self.set_time(countdown)
             self.sleep_timer = tools.IntervalTimer(1, self.__sleep_timer_fired)
             self.sleep_timer.start()
 
@@ -87,6 +72,18 @@ class SleepTimer:
         """
         if self.sleep_timer:
             self.sleep_timer.stop()
+        
+        self.sleep_timer = None
+
+    def set_time(self, value):
+        """
+        Sets the timer to the new given value respecting the fadeout setting.
+        :param value: Time in minutes.
+        """
+        fadeout = 0
+        if tools.get_glib_settings().get_boolean("sleep-timer-fadeout"):
+            fadeout = tools.get_glib_settings().get_int("sleep-timer-fadeout-duration")
+        self.current_timer_time = value * 60 - fadeout
 
     def is_running(self):
         """
@@ -94,45 +91,49 @@ class SleepTimer:
         :return: Boolean
         """
 
+    def set_icon(self, running):
+        """
+        Set the running/stopped timer icon.
+        :param running: Boolean
+        """
+        if running:
+            icon = "timer-on-symbolic"
+        else:
+            icon = "timer-off-symbolic"
+
+        self.timer_image.set_from_icon_name(icon, Gtk.IconSize.BUTTON)
+
     def __on_timer_changed(self, spinner):
         """
-        Add "min" to the timer text box on change.
+        Start/Stop the timer depending on the current adjustment value.
         """
-        if not self.timer_switch.get_active():
-            self.timer_switch.set_active(True)
-
-        adjustment = self.timer_spinner.get_adjustment()
+        adjustment = self.timer_scale.get_adjustment()
         value = adjustment.get_value()
+
+        if value > 0:
+            if not self.sleep_timer or not self.sleep_timer.isAlive():
+                self.set_icon(True)
+                if player.get_gst_player_state() == Gst.State.PLAYING:
+                    self.start(force=True)
+
+                self.timer_label.set_visible(True)
+                self.min_label.set_text(_("min"))
+            else:
+                self.set_time(value)
+        else:
+            self.set_icon(False)
+            if self.sleep_timer:
+                self.sleep_timer.stop()
+            
+            self.min_label.set_text(_("Off"))
+            self.timer_label.set_visible(False)
+            return
 
         if self.sleep_timer and not self.sleep_timer.isAlive:
             tools.get_glib_settings().set_int("timer", int(value))
 
-        self.current_timer_time = value * 60
-
-        text = str(int(value)) + " " + _("min")
-        self.timer_buffer.set_text(text, len(text))
-
-    def __timer_switch_changed(self, sender, widget):
-        """
-        Start/Stop the sleep timer object.
-        """
-        if self.timer_switch.get_active():
-            self.timer_image.set_from_icon_name(
-                "timer-on-symbolic", Gtk.IconSize.BUTTON)
-            if player.get_gst_player_state() == Gst.State.PLAYING:
-                self.start()
-        else:
-            self.timer_image.set_from_icon_name(
-                "timer-off-symbolic", Gtk.IconSize.BUTTON)
-            if self.sleep_timer:
-                self.sleep_timer.stop()
-
-    def __on_timer_focus_out(self, event, widget):
-        """
-        Do not propagate event further.
-        This fixes the disappearing ' min' after the spin button looses focus.
-        """
-        return True
+        text = str(int(value))
+        self.timer_label.set_text(text)
 
     def __sleep_timer_fired(self):
         """
@@ -140,14 +141,31 @@ class SleepTimer:
         aswell as stop the playback / suspend the machine.
         """
         self.current_timer_time = self.current_timer_time - 1
-        adjustment = self.timer_spinner.get_adjustment()
+        adjustment = self.timer_scale.get_adjustment()
         adjustment.set_value(int(self.current_timer_time / 60) + 1)
         if self.current_timer_time < 1:
             self.fadeout_thread = Thread(target=self.__stop_playback, name="SleepTimerFadeoutThread")
             self.fadeout_thread.start()
             self.sleep_timer.stop()
 
+    def __chapter_switch_changed(self, widget, state):
+        """
+        Enable/disable stop after chapter mode.
+        """
+        self.timer_grid.set_sensitive(not state)
+        if state:
+            if self.sleep_timer and self.sleep_timer.isAlive():
+                self.sleep_timer.stop()
+            
+            self.set_icon(True)
+            player.set_play_next(False)
+        else:
+            self.__on_timer_changed(None)
+
     def __stop_playback(self):
+        """
+        Stops playback after gradually fading out (if enabled).
+        """
         if tools.get_glib_settings().get_boolean("sleep-timer-fadeout"):
             duration = tools.get_glib_settings().get_int("sleep-timer-fadeout-duration") * 20
             current_vol = player.get_volume()
@@ -159,5 +177,13 @@ class SleepTimer:
 
         if player.get_gst_player_state() == Gst.State.PLAYING:
             player.play_pause(None)
-        
-        self.timer_switch.set_active(False)
+
+        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.timer_scale.get_adjustment().set_value, 0.0)
+
+    def __player_changed(self, event, message):
+        """
+        Listen to and handle all gst player messages that are important for the ui.
+        """
+        if event == "track-changed":
+            if self.chapter_switch.get_active():
+                self.chapter_switch.set_active(False)

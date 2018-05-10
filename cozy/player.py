@@ -18,6 +18,7 @@ __listeners = []
 __wait_to_seek = False
 __player = None
 __bus = None
+__play_next = True
 
 
 def __on_gst_message(bus, message):
@@ -220,6 +221,7 @@ def next_track():
     Stops playback if there isn't any.
     """
     global __current_track
+    global __play_next
 
     album_tracks = db.tracks(get_current_track().book)
     current = get_current_track()
@@ -234,7 +236,11 @@ def next_track():
     if next_track:
         save_current_book_position(next_track)
         save_current_track_position(0, next_track)
-        play_pause(next_track)
+        if __play_next:
+            play_pause(next_track)
+        else:
+            load_file(next_track)
+            __play_next = True
     else:
         stop()
         save_current_book_position(current, -1)
@@ -249,6 +255,7 @@ def unload():
 
     __player.set_state(Gst.State.NULL)
     __current_track = None
+
 
 def prev_track():
     """
@@ -384,6 +391,15 @@ def set_playback_speed(speed):
     t.name = "PlaybackSpeedDelayTimer"
     t.start()
 
+
+def set_play_next(play_next):
+    """
+    True continues the playback after the current file.
+    False stops playback after the current file.
+    :param play_next: Boolean
+    """
+    global __play_next
+    __play_next = play_next
 
 def __on_playback_speed_timer():
     """
