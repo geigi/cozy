@@ -21,6 +21,7 @@ class AlbumElement(Gtk.Box):
         :param square: should the widget be always a square?
         """
         super().__init__()
+        self.props.height_request = size
 
         self.book = book
         self.selected = False
