@@ -1,7 +1,7 @@
-from gi.repository import Gtk, Gdk, GdkPixbuf, Pango
+from gi.repository import Gtk, Gdk, GdkPixbuf, Pango, Gst
 
-from cozy.db import *
-from cozy.player import *
+import cozy.db as db
+import cozy.player as player
 import cozy.tools as tools
 import cozy.artwork_cache as artwork_cache
 
@@ -172,16 +172,16 @@ class AlbumElement(Gtk.Box):
         if event.type == Gdk.EventType.BUTTON_PRESS and event.button != 1:
             return
 
-        track = get_track_for_playback(self.book)
-        current_track = get_current_track()
+        track = db.get_track_for_playback(self.book)
+        current_track = player.get_current_track()
 
         if current_track and current_track.book.id == self.book.id:
-            play_pause(None)
-            if get_gst_player_state() == Gst.State.PLAYING:
-                jump_to_ns(track.position)
+            player.play_pause(None)
+            if player.get_gst_player_state() == Gst.State.PLAYING:
+                player.jump_to_ns(track.position)
         else:
-            load_file(track)
-            play_pause(None, True)
+            player.load_file(track)
+            player.play_pause(None, True)
 
         return True
 
@@ -241,9 +241,15 @@ class BookElement(Gtk.FlowBoxChild):
         self.connect("button-press-event", self.__on_button_press_event)
 
     def get_book(self):
+        """
+        Get this book element with the newest values from the db.
+        """
         return db.Book.select().where(db.Book.id == self.book.id).get()
 
     def set_playing(self, is_playing):
+        """
+        Set the UI to play/pause.
+        """
         if is_playing:
             self.art.play_button.set_from_icon_name(
                 "media-playback-pause-symbolic", self.art.icon_size)
@@ -252,9 +258,16 @@ class BookElement(Gtk.FlowBoxChild):
                 "media-playback-start-symbolic", self.art.icon_size)
 
     def refresh_book_object(self):
+        """
+        Refresh the internal book object from the database.
+        """
         self.book = db.Book.get_by_id(self.book.id)
 
     def __on_button_press_event(self, widget, event):
+        """
+        Handle button press events.
+        This is used for the right click context menu.
+        """
         if event.type == Gdk.EventType.BUTTON_PRESS and event.button == 3:
             if self.context_menu is None:
                 self.context_menu = self.__create_context_menu()
@@ -284,7 +297,7 @@ class BookElement(Gtk.FlowBoxChild):
         """
         Adds all tracks of a book to the blacklist and removes it from the library.
         """
-        blacklist_book(self.book)
+        db.blacklist_book(self.book)
         self.ui.settings.blacklist_model.clear()
         self.ui.settings._init_blacklist()
         self.ui.refresh_content()
@@ -310,7 +323,7 @@ class TrackElement(Gtk.EventBox):
         self.ui = ui
         self.book = book
 
-        super(Gtk.EventBox, self).__init__()
+        super().__init__()
         self.connect("enter-notify-event", self._on_enter_notify)
         self.connect("leave-notify-event", self._on_leave_notify)
         self.connect("button-press-event", self.__on_button_press)
@@ -366,18 +379,18 @@ class TrackElement(Gtk.EventBox):
         """
         Play the selected track.
         """
-        current_track = get_current_track()
+        current_track = player.get_current_track()
 
         if current_track and current_track.id == self.track.id:
-            play_pause(None)
-            if get_gst_player_state() == Gst.State.PLAYING:
-                jump_to_ns(Track.select().where(
-                    Track.id == self.track.id).get().position)
+            player.play_pause(None)
+            if player.get_gst_player_state() == Gst.State.PLAYING:
+                player.jump_to_ns(db.Track.select().where(
+                    db.Track.id == self.track.id).get().position)
         else:
-            load_file(Track.select().where(Track.id == self.track.id).get())
-            play_pause(None, True)
-            Book.update(position=self.track).where(
-                Book.id == self.track.book.id).execute()
+            player.load_file(db.Track.select().where(db.Track.id == self.track.id).get())
+            player.play_pause(None, True)
+            db.Book.update(position=self.track).where(
+                db.Book.id == self.track.book.id).execute()
 
     def _on_enter_notify(self, widget, event):
         """
@@ -404,7 +417,7 @@ class TrackElement(Gtk.EventBox):
 
     def select(self):
         """
-        Select this track as the current position of the audio book. 
+        Select this track as the current position of the audio book.
         Permanently displays the play icon.
         """
         self.book.deselect_track_element()
