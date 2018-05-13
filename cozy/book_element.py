@@ -1,3 +1,4 @@
+import os, subprocess
 from gi.repository import Gtk, Gdk, GdkPixbuf, Pango, Gst
 
 import cozy.db as db
@@ -282,15 +283,19 @@ class BookElement(Gtk.FlowBoxChild):
         menu = Gtk.Menu()
         read_item = Gtk.MenuItem(label=_("Mark as read"))
         read_item.connect("button-press-event", self.__mark_as_read)
-        read_item.show()
+
+        jump_item = Gtk.MenuItem(label=_("Open in file browser"))
+        jump_item.connect("button-press-event", self.__jump_to_folder)
 
         rm_item = Gtk.MenuItem(label=_("Remove from library"))
         rm_item.connect("button-press-event", self.__remove_book)
-        rm_item.show()
 
         menu.append(read_item)
+        menu.append(jump_item)
+        menu.append(Gtk.SeparatorMenuItem())
         menu.append(rm_item)
         menu.attach_to_widget(self.ui.window)
+        menu.show_all()
         return menu
 
     def __remove_book(self, widget, parameter):
@@ -307,6 +312,14 @@ class BookElement(Gtk.FlowBoxChild):
         Marks a book as read.
         """
         db.Book.update(position=-1).where(db.Book.id == self.book.id).execute()
+
+    def __jump_to_folder(self, widget, parameter):
+        """
+        Opens the folder containing this books files in the default file explorer.
+        """
+        track = db.tracks(self.book).first()
+        path = os.path.dirname(track.file)
+        subprocess.Popen(['xdg-open', path])
 
 
 class TrackElement(Gtk.EventBox):
