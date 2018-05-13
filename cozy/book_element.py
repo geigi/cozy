@@ -263,19 +263,37 @@ class BookElement(Gtk.FlowBoxChild):
             return True
 
     def __create_context_menu(self):
+        """
+        Creates a context menu for this book element.
+        """
         menu = Gtk.Menu()
+        read_item = Gtk.MenuItem(label=_("Mark as read"))
+        read_item.connect("button-press-event", self.__mark_as_read)
+        read_item.show()
+
         rm_item = Gtk.MenuItem(label=_("Remove from library"))
         rm_item.connect("button-press-event", self.__remove_book)
         rm_item.show()
+
+        menu.append(read_item)
         menu.append(rm_item)
         menu.attach_to_widget(self.ui.window)
         return menu
 
     def __remove_book(self, widget, parameter):
+        """
+        Adds all tracks of a book to the blacklist and removes it from the library.
+        """
         blacklist_book(self.book)
         self.ui.settings.blacklist_model.clear()
         self.ui.settings._init_blacklist()
         self.ui.refresh_content()
+
+    def __mark_as_read(self, widget, parameter):
+        """
+        Marks a book as read.
+        """
+        db.Book.update(position=-1).where(db.Book.id == self.book.id).execute()
 
 
 class TrackElement(Gtk.EventBox):
