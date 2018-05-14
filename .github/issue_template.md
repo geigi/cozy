@@ -1,4 +1,4 @@
-### Bug description
+### Bug/Feature description
 
 ### Steps to reproduce
 
