@@ -31,7 +31,21 @@ class TrackContainer:
         self.path = path
 
 class TrackData:
-    def __init__(self, track_name, track_number, book, path, disk, length, modified, crc32):
+    name = None
+    number = None
+    position = 0
+    book = None
+    book_name = None
+    file = None
+    disk = None
+    length = None
+    modified = None
+    crc32 = None
+
+    def __init__(self, file):
+        self.file = file
+
+    def set_data(self, track_name, track_number, book, path, disk, length, modified, crc32):
         self.name = track_name
         self.number = track_number
         self.position = 0
@@ -157,7 +171,7 @@ def write_tracks_to_db(tracks):
         return
 
     fields = [db.Track.name, db.Track.number, db.Track.disk, db.Track.position, db.Track.book, db.Track.file, db.Track.length, db.Track.modified, db.Track.crc32]
-    data = list((t.name, t.number, t.disk, t.position, t.book, t.file, t.length, t.modified, t.crc32) for t in tracks)
+    data = list((t.name, t.track_number, t.disk, t.position, t.book, t.file, t.length, t.modified, t.crc32) for t in tracks)
     db.Track.insert_many(data, fields=fields).execute()
 
 def rebase_location(ui, oldPath, newPath):
@@ -191,110 +205,101 @@ def import_file(file, directory, path, update=False, crc=None):
     if db.is_blacklisted(path):
         return True, None
 
-    media_type = __get_media_type(path)
+    media_type = tools.__get_media_type(path)
     track = TrackContainer(None, path)
     cover = None
     reader = None
     track_number = None
-
+    track_data = None
+    
     # getting the some data is file specific
     ### MP3 ###
-    if media_type is "mp3":
-        log.debug("Importing mp3 " + track.path)
-        try:
-            track.mutagen = ID3(path)
-        except Exception as e:
-            log.warning("Track " + track.path +
-                        " is no valid MP3 file. Skipping...")
-            return False, None
-
-        mp3 = TrackContainer(MP3(track.path), path)
-        cover = __get_mp3_tag(track, "APIC")
-        length = __get_common_track_length(mp3)
-        disk = __get_mp3_tag(track, "TPOS")
-
-        # for mp3 we are using the easyid3 functionality
-        # because its syntax compatible to the rest
-        track.mutagen = EasyID3(path)
-        author = __get_mp3_tag(mp3, "TCOM")
-        reader = __get_mp3_tag(mp3, "TPE1")
-        book_name = __get_common_tag(track, "album")
-        track_name = __get_common_tag(track, "title")
-
-        # other fields for the author and reader
-        if author is None or author == "":
-            author = __get_mp3_tag(mp3, "TPE1")
-            reader = __get_mp3_tag(mp3, "TPE2")
+    if media_type == "audio/mpeg":
+        track_data = _get_mp3_tags(track, path)
 
     ### FLAC ###
-    elif media_type is "flac":
-        log.debug("Importing flac " + track.path)
-        try:
-            track.mutagen = FLAC(path)
-        except Exception as e:
-            log.warning("Track " + track.path +
-                        " is not a valid FLAC file. Skipping...")
-            return False, None
-
-        disk = int(__get_common_disk_number(track))
-        length = float(__get_common_track_length(track))
-        cover = __get_flac_cover(track)
-        author = __get_common_tag(track, "composer")
-        reader = track.mutagen["artist"][0]
-        book_name = __get_common_tag(track, "album")
-        track_name = __get_common_tag(track, "title")
+    elif media_type == "audio/flac":
+        track_data = _get_flac_tags(track, path)
 
     ### OGG ###
-    elif media_type is "ogg":
-        log.debug("Importing ogg " + track.path)
-        try:
-            track.mutagen = OggVorbis(path)
-        except Exception as e:
-            log.warning("Track " + track.path +
-                        " is not a valid OGG file. Skipping...")
-            return False, None
-
-        disk = int(__get_common_disk_number(track))
-        length = float(__get_common_track_length(track))
-        cover = __get_ogg_cover(track)
-        author = __get_common_tag(track, "composer")
-        reader = __get_common_tag(track, "artist")
-        book_name = __get_common_tag(track, "album")
-        track_name = __get_common_tag(track, "title")
+    elif media_type == "audio/ogg":
+        track_data = _get_ogg_tags(track, path)
 
     ### MP4 ###
-    elif media_type is "mp4":
-        log.debug("Importing mp4 " + track.path)
-        try:
-            track.mutagen = MP4(path)
-        except Exception as e:
-            log.warning("Track " + track.path +
-                        " is not a valid MP4 file. Skipping...")
-            log.warning(e)
-            return False, None
-
-        try:
-            disk = int(track.mutagen["disk"][0][0])
-        except Exception as e:
-            log.debug(e)
-            disk = 0
-        length = float(track.mutagen.info.length)
-        cover = __get_mp4_cover(track)
-        author = __get_common_tag(track, "\xa9wrt")
-        reader = __get_common_tag(track, "\xa9ART")
-        try:
-            track_number = int(track.mutagen["trkn"][0][0])
-        except Exception as e:
-            log.debug(e)
-            track_number = 0
-        book_name = __get_common_tag(track, "\xa9alb")
-        track_name = __get_common_tag(track, "\xa9nam")
+    elif media_type == "audio/mp4" or media_type == "audio/x-m4a":
+        track_data = _get_mp4_tags(track, path)
 
     ### File will not be imported ###
     else:
         log.warning("Skipping file: " + path)
         return False, None
 
+    track_data.modified = __get_last_modified(crc, path)
+
+    # try to get all the remaining tags
+    try:
+        if track_data.track_number is None:
+            # The track number can contain the total number of tracks
+            track_text = str(__get_common_tag(track, "tracknumber"))
+            track_data.track_number = int(track_text.split("/")[0])
+    except Exception as e:
+        log.debug(e)
+        track_data.track_number = 0
+
+    if track_data.book_name is None:
+        track_data.book_name = __guess_book_name(directory)
+    if track_data.author is None or track_data.author == "":
+        if track_data.reader and len(track_data.reader) > 0:
+            track_data.author = track_data.reader
+            track_data.reader = ""
+        else:
+            track_data.author = _("Unknown Author")
+    if track_data.reader is None or track_data.reader == "":
+        track_data.reader = _("Unknown Reader")
+    if track_data.name is None:
+        track_data.name = __guess_title(file)
+
+    track_data.crc32 = tools.get_glib_settings().get_boolean("use-crc32")
+
+    if update:
+        if db.Book.select().where(db.Book.name == track_data.book_name).count() < 1:
+            track_data.book = db.Book.create(name=track_data.book_name,
+                                  author=track_data.author,
+                                  reader=track_data.reader,
+                                  position=0,
+                                  rating=-1,
+                                  cover=track_data.cover)
+        else:
+            track_data.book = db.Book.select().where(db.Book.name == track_data.book_name).get()
+            db.Book.update(name=track_data.book_name,
+                           author=track_data.author,
+                           reader=track_data.reader,
+                           cover=track_data.cover).where(db.Book.id == track_data.book.id).execute()
+
+        db.Track.update(name=track_data.name,
+                        number=track_data.track_number,
+                        book=track_data.book,
+                        disk=track_data.disk,
+                        length=track_data.length,
+                        modified=track_data.modified,
+                        crc32=track_data.crc32).where(db.Track.file == track_data.path).execute()
+    else:
+        # create database entries
+        if db.Book.select().where(db.Book.name == track_data.book_name).count() < 1:
+            track_data.book = db.Book.create(name=track_data.book_name,
+                                  author=track_data.author,
+                                  reader=track_data.reader,
+                                  position=0,
+                                  rating=-1,
+                                  cover=track_data.cover)
+        else:
+            track_data.book = db.Book.select().where(db.Book.name == track_data.book_name).get()
+
+        return True, track_data
+
+    return True, None
+
+def __get_last_modified(crc, path):
     global settings
     if tools.get_glib_settings().get_boolean("use-crc32"):
         import binascii
@@ -303,100 +308,7 @@ def import_file(file, directory, path, update=False, crc=None):
         modified = crc
     else:
         modified = os.path.getmtime(path)
-
-    # try to get all the remaining tags
-    try:
-        if track_number is None:
-            # The track number can contain the total number of tracks
-            track_text = str(__get_common_tag(track, "tracknumber"))
-            track_number = int(track_text.split("/")[0])
-    except Exception as e:
-        log.debug(e)
-        track_number = 0
-
-    if book_name is None:
-        book_name = os.path.basename(os.path.normpath(directory))
-    if author is None or author == "":
-        if reader and len(reader) > 0:
-            author = reader
-            reader = ""
-        else:
-            author = _("Unknown Author")
-    if reader is None or reader == "":
-        reader = _("Unknown Reader")
-    if track_name is None:
-        track_name = os.path.splitext(file)[0]
-
-    crc32 = tools.get_glib_settings().get_boolean("use-crc32")
-
-    if update:
-        if db.Book.select().where(db.Book.name == book_name).count() < 1:
-            book = db.Book.create(name=book_name,
-                                  author=author,
-                                  reader=reader,
-                                  position=0,
-                                  rating=-1,
-                                  cover=cover)
-        else:
-            book = db.Book.select().where(db.Book.name == book_name).get()
-            db.Book.update(name=book_name,
-                           author=author,
-                           reader=reader,
-                           cover=cover).where(db.Book.id == book.id).execute()
-
-        db.Track.update(name=track_name,
-                        number=track_number,
-                        book=book,
-                        disk=disk,
-                        length=length,
-                        modified=modified,
-                        crc32=crc32).where(db.Track.file == path).execute()
-    else:
-        # create database entries
-        if db.Book.select().where(db.Book.name == book_name).count() < 1:
-            book = db.Book.create(name=book_name,
-                                  author=author,
-                                  reader=reader,
-                                  position=0,
-                                  rating=-1,
-                                  cover=cover)
-        else:
-            book = db.Book.select().where(db.Book.name == book_name).get()
-
-        return True, TrackData(track_name, track_number, book, path, disk, length, modified, crc32)
-
-    return True, None
-
-
-def __get_media_type(path):
-    """
-    Tests a given file for the media type.
-    :param path: Path to the file
-    :return: Media type as string
-    """
-    try:
-        fileobj = open(path, "rb")
-        header = fileobj.read(128)
-    except IOError as e:
-        log.warning(e)
-        return ""
-
-    path = path.lower()
-
-    # MP4
-    if b"ftyp" in header or b"mp4" in header:
-        return "mp4"
-    # OGG
-    elif header.startswith(b"OggS") or b"\x01vorbis" in header:
-        return "ogg"
-    # FLAC
-    elif header.startswith(b"fLaC") or path.endswith(".flac"):
-        return "flac"
-    # MP3
-    elif header.startswith(b"ID3") or path.endswith(".mp3") or path.endswith(".mp2") or path.endswith(".mpg") or path.endswith(".mpeg"):
-        return "mp3"
-    else:
-        return ""
+    return modified
 
 
 def copy(ui, selection):
@@ -444,6 +356,140 @@ def copy_to_audiobook_folder(path):
         else:
             log.error("Could not import file " + path)
             log.error(exc)
+
+
+def _get_mp3_tags(track, path):
+    """
+    Tries to load embedded tags from given file.
+    :return: TrackData object
+    """
+    track_data = TrackData(path)
+    log.debug("Importing mp3 " + track.path)
+    try:
+        track.mutagen = ID3(path)
+    except Exception as e:
+        log.warning("Track " + track.path +
+                    " has no mp3 tags. Now guessing from file and folder name...")
+        return track_data
+
+    mp3 = TrackContainer(MP3(track.path), path)
+    track_data.cover = __get_mp3_tag(track, "APIC")
+    track_data.length = __get_common_track_length(mp3)
+    track_data.disk = __get_mp3_tag(track, "TPOS")
+
+    # for mp3 we are using the easyid3 functionality
+    # because its syntax compatible to the rest
+    track.mutagen = EasyID3(path)
+    track_data.author = __get_mp3_tag(mp3, "TCOM")
+    track_data.reader = __get_mp3_tag(mp3, "TPE1")
+    track_data.book_name = __get_common_tag(track, "album")
+    track_data.name = __get_common_tag(track, "title")
+
+    # other fields for the author and reader
+    if track_data.author is None or track_data.author == "":
+        track_data.author = __get_mp3_tag(mp3, "TPE1")
+        track_data.reader = __get_mp3_tag(mp3, "TPE2")
+
+    return track_data
+
+
+def _get_flac_tags(track, path):
+    """
+    Tries to load embedded tags from given file.
+    :return: TrackData object
+    """
+    track_data = TrackData(path)
+    log.debug("Importing flac " + track.path)
+    try:
+        track.mutagen = FLAC(path)
+    except Exception as e:
+        log.warning("Track " + track.path +
+                    " has no valid tags. Now guessing from file and folder name...")
+        return track_data
+
+    track_data.disk = int(__get_common_disk_number(track))
+    track_data.length = float(__get_common_track_length(track))
+    track_data.cover = __get_flac_cover(track)
+    track_data.author = __get_common_tag(track, "composer")
+    track_data.reader = track.mutagen["artist"][0]
+    track_data.book_name = __get_common_tag(track, "album")
+    track_data.name = __get_common_tag(track, "title")
+
+    return track_data
+
+
+def _get_ogg_tags(track, path):
+    """
+    Tries to load embedded tags from given file.
+    :return: TrackData object
+    """
+    track_data = TrackData(path)
+    log.debug("Importing ogg " + track.path)
+    try:
+        track.mutagen = OggVorbis(path)
+    except Exception as e:
+        log.warning("Track " + track.path +
+                    " has no valid tags. Now guessing from file and folder name...")
+        return track_data
+
+    track_data.disk = int(__get_common_disk_number(track))
+    track_data.length = float(__get_common_track_length(track))
+    track_data.cover = __get_ogg_cover(track)
+    track_data.author = __get_common_tag(track, "composer")
+    track_data.reader = __get_common_tag(track, "artist")
+    track_data.book_name = __get_common_tag(track, "album")
+    track_data.name = __get_common_tag(track, "title")
+
+    return track_data
+
+
+def _get_mp4_tags(track, path):
+    """
+    Tries to load embedded tags from given file.
+    :return: TrackData object
+    """
+    track_data = TrackData(path)
+    log.debug("Importing mp4 " + track.path)
+    try:
+        track.mutagen = MP4(path)
+    except Exception as e:
+        log.warning("Track " + track.path +
+                    " has no valid tags. Now guessing from file and folder name...")
+        log.warning(e)
+        return track_data
+
+    try:
+        track_data.disk = int(track.mutagen["disk"][0][0])
+    except Exception as e:
+        log.debug(e)
+        track_data.disk = 0
+    track_data.length = float(track.mutagen.info.length)
+    track_data.cover = __get_mp4_cover(track)
+    track_data.author = __get_common_tag(track, "\xa9wrt")
+    track_data.reader = __get_common_tag(track, "\xa9ART")
+    try:
+        track_data.track_number = int(track.mutagen["trkn"][0][0])
+    except Exception as e:
+        log.debug(e)
+        track_data.track_number = 0
+    track_data.book_name = __get_common_tag(track, "\xa9alb")
+    track_data.name = __get_common_tag(track, "\xa9nam")
+
+    return track_data
+
+
+def __guess_title(file):
+    """
+    Guess the track title based on the filename.
+    """
+    return os.path.splitext(file)[0]
+
+
+def __guess_book_name(directory):
+    """
+    Guess the book title based on the directory name.
+    """
+    return os.path.basename(os.path.normpath(directory))
 
 
 def __remove_file(path):
@@ -598,9 +644,9 @@ def __get_common_tag(track, tag):
 
     return value
 
+
+
 # thanks to oleg-krv
-
-
 def __crc32_from_file(filename):
     crc_file = 0
     try:

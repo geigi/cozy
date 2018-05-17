@@ -5,6 +5,7 @@ from threading import Thread, Event
 import logging as log
 import platform
 import os
+import magic
 from gi.repository import GLib, Gio
 
 def get_cache_dir():
@@ -199,3 +200,15 @@ def past_date_to_human_readable(unix_time):
         return "1 " + _("year") + " " + _("ago")
     else:
         return str(years) + " " + _("years") + " " + _("ago")
+
+def __get_media_type(path):
+    """
+    Get the mime type of a file.
+    :param path: Path to the file
+    :return: mime type as string
+    """
+    m = magic.open(magic.MAGIC_MIME_TYPE)
+    m.load()
+    mime = m.file(path)
+    m.close()
+    return mime
