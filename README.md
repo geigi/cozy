@@ -14,7 +14,7 @@ Cozy is a modern audio book player for Linux.
 
 ### Here are some of the current features:
 - Import all your audiobooks into cozy to browse them comfortably
-- Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg audio books
+- Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg and wav audio books
 - Remembers your playback position
 - Sleep timer!
 - Playback speed control for each book individually
@@ -46,11 +46,6 @@ $ pacaur -S cozy-audiobooks
 ### Ubuntu, Debian, openSUSE, Fedora repositories
 If you prefer a custom repository - for Ubuntu, Debian, openSUSE and Fedora there are package repositories on the <a href="https://software.opensuse.org//download.html?project=home%3Ageigi&package=com.github.geigi.cozy">openSUSE Build Service</a>.
 
-### Upcoming:
-- wav support
-- Sort by name, added date, last played
-- Ratings
-
 If you like this project, consider supporting me on <a href="https://www.patreon.com/bePatron?u=8147127"> Patreon</a> :)
 
 ## Requirements
@@ -61,6 +56,7 @@ If you like this project, consider supporting me on <a href="https://www.patreon
 - `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
 - `peewee >= 3.1` as object relation mapper
 - `python3-mutagen` for meta tag management
+- `python3-magic`
 - `gstreamer1.0-plugins-good`
 - `gstreamer1.0-libav` for mp4 support
 

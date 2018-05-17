@@ -9,6 +9,8 @@ import mutagen
 import zlib
 import time
 import traceback
+import contextlib
+import wave
 
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
@@ -41,6 +43,9 @@ class TrackData:
     length = None
     modified = None
     crc32 = None
+    author = None
+    reader = None
+    cover = None
 
     def __init__(self, file):
         self.file = file
@@ -101,7 +106,7 @@ def update_database(ui):
     for path in paths:
         for directory, subdirectories, files in os.walk(path):
             for file in files:
-                if file.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a')):
+                if file.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a', '.wav')):
                     path = os.path.join(directory, file)
 
                     imported = True
@@ -229,9 +234,14 @@ def import_file(file, directory, path, update=False, crc=None):
     elif media_type == "audio/mp4" or media_type == "audio/x-m4a":
         track_data = _get_mp4_tags(track, path)
 
+    ### WAV ###
+    elif media_type == "audio/wav" or media_type == "audio/x-wav":
+        track_data = TrackData(path)
+        track_data.length = __get_wav_track_length(path)
+
     ### File will not be imported ###
     else:
-        log.warning("Skipping file: " + path)
+        log.warning("Skipping file " + path + " because of mime type " + media_type + ".")
         return False, None
 
     track_data.modified = __get_last_modified(crc, path)
@@ -258,6 +268,8 @@ def import_file(file, directory, path, update=False, crc=None):
         track_data.reader = _("Unknown Reader")
     if track_data.name is None:
         track_data.name = __guess_title(file)
+    if not track_data.disk:
+        track_data.disk = 1
 
     track_data.crc32 = tools.get_glib_settings().get_boolean("use-crc32")
 
@@ -282,7 +294,7 @@ def import_file(file, directory, path, update=False, crc=None):
                         disk=track_data.disk,
                         length=track_data.length,
                         modified=track_data.modified,
-                        crc32=track_data.crc32).where(db.Track.file == track_data.path).execute()
+                        crc32=track_data.crc32).where(db.Track.file == track_data.file).execute()
     else:
         # create database entries
         if db.Book.select().where(db.Book.name == track_data.book_name).count() < 1:
@@ -531,6 +543,18 @@ def __get_common_track_length(track):
 
     return length
 
+
+def __get_wav_track_length(path):
+    """
+    Calculates the length of a wav file.
+    :return: track length as float
+    """
+    with contextlib.closing(wave.open(path, 'r')) as f:
+        frames = f.getnframes()
+        rate = f.getframerate()
+        duration = frames / float(rate)
+
+        return duration
 
 def __get_ogg_cover(track):
     """
