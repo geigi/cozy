@@ -45,10 +45,14 @@ class AlbumElement(Gtk.Box):
         img = Gtk.Image()
         img.set_halign(Gtk.Align.CENTER)
         img.set_valign(Gtk.Align.CENTER)
-        if bordered:
-            img.get_style_context().add_class("bordered")
-        surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
-        img.set_from_surface(surface)
+        if pixbuf:
+            if bordered:
+                img.get_style_context().add_class("bordered")
+            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
+            img.set_from_surface(surface)
+        else:
+            img.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
+            img.props.pixel_size = size
 
         self.play_box = Gtk.EventBox()
 

@@ -31,7 +31,7 @@ def get_cover_pixbuf(book, scale, size=0):
         # create cached version
         pixbuf = __create_artwork_cache(book, pixbuf, size)
     else:
-        pixbuf = __load_artwork_placeholder(size)
+        pixbuf = None
 
     return pixbuf
 
@@ -54,26 +54,6 @@ def generate_artwork_cache():
     """
     for book in Book.select():
         get_cover_pixbuf(book, 180)
-
-
-def __load_artwork_placeholder(size):
-    """
-    Loads the artwork placeholder first from cache and then from file.
-    Creates cached versions if it doesn't exist already at the given size.
-    :param size: Size in px for the placeholder
-    :return: Placeholder pixbuf at given size
-    """
-    pixbuf = None
-
-    file_path = os.path.join(tools.get_cache_dir(), "placeholder_" + str(size) + ".jpg")
-    if os.path.exists(file_path):
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file(file_path)
-    else:
-        pixbuf = GdkPixbuf.Pixbuf.new_from_resource("/de/geigi/cozy/blank_album.png")
-        pixbuf = __resize_pixbuf(pixbuf, size)
-        pixbuf.savev(file_path, "jpeg", "", "")
-    
-    return pixbuf
 
 
 def __create_artwork_cache(book, pixbuf, size):
