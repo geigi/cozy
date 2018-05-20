@@ -1,6 +1,4 @@
-import platform
 import webbrowser
-import threading
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -10,7 +8,6 @@ from threading import Thread
 from cozy.book_element import BookElement
 from cozy.import_failed_dialog import ImportFailedDialog
 from cozy.file_not_found_dialog import FileNotFoundDialog
-from cozy.event_sender import EventSender
 from cozy.search import Search
 from cozy.sleep_timer import SleepTimer
 from cozy.playback_speed import PlaybackSpeed

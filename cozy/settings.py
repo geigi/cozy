@@ -273,7 +273,7 @@ class Settings:
         """
         Enable/Disable sensitivity for the fadeout duration settings row.
         """
-        self.fadeout_duration_row.set_sensitive(state)
+        self.fadeout_duration_row.set_sensitive(switch.get_active())
         
     def __on_external_cover_switch_changed(self, switch, state):
         """
