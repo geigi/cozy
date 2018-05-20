@@ -244,6 +244,17 @@ def search_tracks(search_string):
     return Track.select(Track.name).where(Track.name.contains(search_string)).order_by(Track.name)
 
 
+def get_track_path(track):
+    """
+    Returns the path to the file of a given track.
+    This returns the original path if online and otherwise a cached offline
+    version if available.
+    :param track: DB track object
+    :return: Path as string
+    """
+    pass
+
+
 def update_db_1():
     """
     Update database to v1.

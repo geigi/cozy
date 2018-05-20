@@ -19,6 +19,7 @@ import cozy.db as db
 import cozy.importer as importer
 import cozy.player as player
 import cozy.tools as tools
+import cozy.filesystem_monitor as fs_monitor
 
 import os
 
@@ -244,6 +245,7 @@ class CozyUI:
         self.search = Search(self)
         self.settings = Settings(self)
         self.book_overview = BookOverview(self)
+        self.fs_monitor = fs_monitor.FilesystemMonitor()
 
         self.titlebar.activate()
 
@@ -644,6 +646,7 @@ class CozyUI:
         """
         log.info("Closing.")
         self.titlebar.close()
+        self.fs_monitor.close()
         if self.sleep_timer.is_running():
             self.sleep_timer.stop()
 
