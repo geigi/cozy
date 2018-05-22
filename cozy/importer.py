@@ -34,7 +34,7 @@ class TrackContainer:
 
 class TrackData:
     name = None
-    number = None
+    track_number = None
     position = 0
     book = None
     book_name = None
@@ -49,17 +49,6 @@ class TrackData:
 
     def __init__(self, file):
         self.file = file
-
-    def set_data(self, track_name, track_number, book, path, disk, length, modified, crc32):
-        self.name = track_name
-        self.number = track_number
-        self.position = 0
-        self.book = book
-        self.file = path
-        self.disk = disk
-        self.length = length
-        self.modified = modified
-        self.crc32 = crc32
 
 def b64tobinary(b64):
     """

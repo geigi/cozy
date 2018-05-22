@@ -124,8 +124,12 @@ class BookSearchResult(SearchResult):
         self.set_tooltip_text(_("Play this book"))
 
         pixbuf = artwork_cache.get_cover_pixbuf(book, scale, BOOK_ICON_SIZE)
-        surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
-        img = Gtk.Image.new_from_surface(surface)
+        if pixbuf:
+            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
+            img = Gtk.Image.new_from_surface(surface)
+        else:
+            img = Gtk.Image.new_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.MENU)
+            img.props.pixel_size = BOOK_ICON_SIZE
         img.set_size_request(BOOK_ICON_SIZE, BOOK_ICON_SIZE)
 
         title_label = Gtk.Label()

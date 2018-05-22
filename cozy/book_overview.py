@@ -56,9 +56,13 @@ class BookOverview:
 
         pixbuf = artwork_cache.get_cover_pixbuf(
             book, self.ui.window.get_scale_factor(), 250)
-        surface = Gdk.cairo_surface_create_from_pixbuf(
-            pixbuf, self.ui.window.get_scale_factor(), None)
-        self.cover_img.set_from_surface(surface)
+        if pixbuf:
+            surface = Gdk.cairo_surface_create_from_pixbuf(
+                pixbuf, self.ui.window.get_scale_factor(), None)
+            self.cover_img.set_from_surface(surface)
+        else:
+            self.cover_img.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
+            self.cover_img.props.pixel_size = 250
 
         self.duration = db.get_book_duration(book)
         self.speed = db.Book.select().where(

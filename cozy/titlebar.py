@@ -175,13 +175,17 @@ class Titlebar:
 
         self.block_ui_buttons(True)
 
-    def set_title_cover(self, pixbuf):
+    def set_title_cover(self, pixbuf, size):
         """
         Sets the cover in the title bar.
         """
-        surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.ui.window.get_scale_factor(), None)
-        self.cover_img.set_from_surface(surface)
-        self.cover_img.set_tooltip_text(player.get_current_track().book.name)
+        if pixbuf:
+            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.ui.window.get_scale_factor(), None)
+            self.cover_img.set_from_surface(surface)
+            self.cover_img.set_tooltip_text(player.get_current_track().book.name)
+        else:
+            self.cover_img.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.MENU)
+            self.cover_img.props.pixel_size = size
 
     def set_progress_scale_width(self, width):
         self.progress_scale.props.width_request = width
@@ -237,7 +241,7 @@ class Titlebar:
             else:
                 size = 40
             self.set_title_cover(
-                artwork_cache.get_cover_pixbuf(track.book, self.ui.window.get_scale_factor(), size))
+                artwork_cache.get_cover_pixbuf(track.book, self.ui.window.get_scale_factor(), size), size)
 
         self.current_remaining = db.get_book_remaining(
             self.current_book, False)

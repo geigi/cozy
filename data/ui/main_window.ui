@@ -1206,9 +1206,6 @@ You can add more storage locations later in the settings</property>
                         <property name="margin_bottom">35</property>
                         <property name="stock">gtk-missing-image</property>
                         <property name="icon_size">6</property>
-                        <style>
-                          <class name="bordered"/>
-                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
