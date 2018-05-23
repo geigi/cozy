@@ -446,6 +446,14 @@ def get_track_from_book_time(book, seconds):
     
     return last_track, last_track.length
 
+def get_external_storage_locations():
+    """
+    Returns a list of all external storage locations.
+    """
+    directories = Storage.select().where(Storage.external == True)
+    
+    return directories
+
 def remove_invalid_entries(ui=None, refresh=False):
     """
     Remove track entries from db that no longer exist in the filesystem.

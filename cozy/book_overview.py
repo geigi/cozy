@@ -4,6 +4,7 @@ import cozy.artwork_cache as artwork_cache
 import cozy.db as db
 import cozy.tools as tools
 import cozy.player as player
+import cozy.ui
 
 from cozy.book_element import TrackElement
 
@@ -15,9 +16,9 @@ class BookOverview:
     book = None
     current_track_element = None
 
-    def __init__(self, ui):
-        self.ui = ui
-        builder = ui.window_builder
+    def __init__(self):
+        self.ui = cozy.ui.CozyUI()
+        builder = self.ui.window_builder
         self.name_label = builder.get_object("info_book_label")
         self.author_label = builder.get_object("info_author_label")
         self.published_label = builder.get_object("info_published_label")

@@ -5,6 +5,7 @@ import cozy.db as db
 import cozy.player as player
 import cozy.tools as tools
 import cozy.artwork_cache as artwork_cache
+import cozy.ui
 
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
@@ -204,9 +205,9 @@ class BookElement(Gtk.FlowBoxChild):
     current_track_element = None
     context_menu = None
 
-    def __init__(self, b, ui):
+    def __init__(self, b):
         self.book = b
-        self.ui = ui
+        self.ui = cozy.ui.CozyUI()
 
         super().__init__()
         self.box = Gtk.Box()

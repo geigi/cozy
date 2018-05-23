@@ -14,6 +14,7 @@ from cozy.playback_speed import PlaybackSpeed
 from cozy.titlebar import Titlebar
 from cozy.settings import Settings
 from cozy.book_overview import BookOverview
+from cozy.singleton import Singleton
 
 import cozy.db as db
 import cozy.importer as importer
@@ -27,7 +28,7 @@ import logging
 log = logging.getLogger("ui")
 
 
-class CozyUI:
+class CozyUI(metaclass=Singleton):
     """
     CozyUI is the main ui class.
     """
@@ -238,13 +239,13 @@ class CozyUI:
             self.app.set_app_menu(menu)
 
     def __init_components(self):
-        self.titlebar = Titlebar(self)
+        self.titlebar = Titlebar()
 
-        self.sleep_timer = SleepTimer(self)
-        self.speed = PlaybackSpeed(self)
-        self.search = Search(self)
-        self.settings = Settings(self)
-        self.book_overview = BookOverview(self)
+        self.sleep_timer = SleepTimer()
+        self.speed = PlaybackSpeed()
+        self.search = Search()
+        self.settings = Settings()
+        self.book_overview = BookOverview()
         self.fs_monitor = fs_monitor.FilesystemMonitor()
 
         self.titlebar.activate()
@@ -438,7 +439,7 @@ class CozyUI:
         self.reader_box.show_all()
 
         for b in db.books():
-            self.book_box.add(BookElement(b, self))
+            self.book_box.add(BookElement(b))
 
         self.book_box.show_all()
 
@@ -477,7 +478,7 @@ class CozyUI:
         """
         Displays a dialog with a list of files that could not be imported.
         """
-        dialog = ImportFailedDialog(files, self)
+        dialog = ImportFailedDialog(files)
         dialog.show()
 
     def jump_to_author(self, book):
@@ -618,7 +619,7 @@ class CozyUI:
             if "Resource not found" in str(message):
                 self.dialog_open = True
                 dialog = FileNotFoundDialog(
-                    player.get_current_track().file, self)
+                    player.get_current_track().file)
                 dialog.show()
 
     def __window_resized(self, window):

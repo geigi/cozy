@@ -4,6 +4,7 @@ from threading import Thread
 from cozy.search_results import BookSearchResult, ArtistSearchResult
 import cozy.db as db
 import cozy.tools as tools
+import cozy.ui
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -16,8 +17,8 @@ class Search:
     search_thread = None
     search_thread_stop = None
 
-    def __init__(self, ui):
-        self.ui = ui
+    def __init__(self):
+        self.ui = cozy.ui.CozyUI()
         self.builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/search_popover.ui")
 
         self.popover = self.builder.get_object("search_popover")

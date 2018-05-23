@@ -4,6 +4,7 @@ import cozy.artwork_cache as artwork_cache
 import cozy.db as db
 import cozy.player as player
 import cozy.tools as tools
+import cozy.ui
 from cozy.sleep_timer import SleepTimer
 from cozy.playback_speed import PlaybackSpeed
 from cozy.tools import IntervalTimer
@@ -36,8 +37,8 @@ class Titlebar:
     # and will only be refreshed when the loaded track changes!
     current_elapsed = 0
 
-    def __init__(self, ui):
-        self.ui = ui
+    def __init__(self):
+        self.ui = cozy.ui.CozyUI()
 
         # init buttons
         self.play_button = self.ui.get_object("play_button")

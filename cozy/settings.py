@@ -4,22 +4,26 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio, Pango
 
+from cozy.event_sender import EventSender
+from cozy.singleton import Singleton
+
 import cozy.db as db
 import cozy.tools as tools
 import cozy.importer as importer
 import cozy.artwork_cache as artwork_cache
+import cozy.ui
 
 log = logging.getLogger("settings")
 
-class Settings:
+class Settings(EventSender, metaclass=Singleton):
     """
     This class contains all logic for cozys preferences.
     """
     ui = None
     default_dark_mode = None
 
-    def __init__(self, ui):
-        self.ui = ui
+    def __init__(self):
+        self.ui = cozy.ui.CozyUI()
         self.builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/settings.ui")
 

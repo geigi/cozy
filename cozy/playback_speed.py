@@ -1,6 +1,7 @@
 from cozy.event_sender import EventSender
 import cozy.player as player
 import cozy.db as db
+import cozy.ui
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -13,8 +14,8 @@ class PlaybackSpeed(EventSender):
     ui = None
     speed = 1.0
 
-    def __init__(self, ui):
-        self.ui = ui
+    def __init__(self):
+        self.ui = cozy.ui.CozyUI()
 
         self.builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/playback_speed_popover.ui")
