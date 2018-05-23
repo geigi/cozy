@@ -547,6 +547,7 @@ class CozyUI(metaclass=Singleton):
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, True)
         self.settings._init_storage()
+        self.fs_monitor.init_offline_mode()
 
     def __on_sort_stack_changed(self, widget, page):
         """

@@ -15,13 +15,14 @@ class FilesystemMonitor(EventSender):
     def __init__(self):
         self.volume_monitor = Gio.VolumeMonitor.get()
         self.volume_monitor.connect("mount-added", self.__on_mount_added)
-        self.volume_monitor.connect("mount-removed", self.__on_mount_added)
+        self.volume_monitor.connect("mount-removed", self.__on_mount_removed)
 
         self.init_offline_mode()
 
         Settings().add_listener(self.__on_settings_changed)
 
     def init_offline_mode(self):
+        external_storage = []
         mounts = self.volume_monitor.get_mounts()
         # go through all audiobook locations and test if they can be found in the mounts list
 
@@ -43,11 +44,13 @@ class FilesystemMonitor(EventSender):
         A volume was mounted.
         Disable offline mode for this volume.
         """
-        log.info("Volume mounted: " + mount.get_root().get_path())
+        mount_path = mount.get_root().get_path()
+        log.debug("Volume mounted: " + mount_path)
 
-        storage = next((s for s in self.external_storage if mount in s[0]), None)
+        storage = next((s for s in self.external_storage if mount_path in s[0]), None)
         if storage:
-            self.emit_event("mount-added", mount.get_root().get_path())
+            log.info("Storage online: " + mount_path)
+            self.emit_event("mount-added", mount_path)
             storage[1] = True
 
     def __on_mount_removed(self, monitor, mount):
@@ -55,14 +58,22 @@ class FilesystemMonitor(EventSender):
         A volume was unmounted.
         Enable offline mode for this volume.
         """
-        log.info("Volume unmounted: " + mount.get_root().get_path())
+        mount_path = mount.get_root().get_path()
+        log.debug("Volume unmounted: " + mount_path)
         
-        storage = next((s for s in self.external_storage if mount in s[0]), None)
+        storage = next((s for s in self.external_storage if mount_path in s[0]), None)
         if storage:
-            self.emit_event("mount-removed", mount.get_root().get_path())
+            log.info("Storage offline: " + mount_path)
+            self.emit_event("mount-removed", mount_path)
             storage[1] = False
 
             # switch to offline version if currently playing
 
     def __on_settings_changed(self, event, message):
-        print(event)
+        """
+        This method reacts to storage settings changes.
+        """
+        if event == "external-storage-added" or event == "storage-changed" or (event == "storage-added" and message != ""):
+            self.init_offline_mode()
+        elif event == "storage-removed" or event == "external-storage-removed":
+            self.external_storage = [item for item in self.external_storage if item[0] not in message]

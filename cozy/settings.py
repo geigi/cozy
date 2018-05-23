@@ -76,7 +76,7 @@ class Settings(EventSender, metaclass=Singleton):
         """
         found_default = False
         for location in db.Storage.select():
-            row = StorageListBoxRow(self.ui, location.id, location.path, location.external, location.default)
+            row = StorageListBoxRow(self, location.id, location.path, location.external, location.default)
             self.storage_list_box.add(row)
             if location.default:
                 if found_default:
@@ -169,7 +169,7 @@ class Settings(EventSender, metaclass=Singleton):
         Add a new storage selector to the ui.
         """
         db_obj = db.Storage.create(path="")
-        self.storage_list_box.add(StorageListBoxRow(self.ui, db_obj.id, "", False, False))
+        self.storage_list_box.add(StorageListBoxRow(self, db_obj.id, "", False, False))
 
     def __on_remove_storage_clicked(self, widget):
         """
@@ -178,6 +178,7 @@ class Settings(EventSender, metaclass=Singleton):
         row = self.storage_list_box.get_selected_row()
         db.Storage.select().where(db.Storage.path == row.path).get().delete_instance()
         self.storage_list_box.remove(row)
+        self.emit_event("storage-removed", row.path)
         thread = Thread(target=db.remove_tracks_with_path, args=(self.ui, row.path), name=("RemoveStorageFromDB"))
         thread.start()
         self.__on_storage_box_changed(None, None)
@@ -267,6 +268,11 @@ class Settings(EventSender, metaclass=Singleton):
         row = self.storage_list_box.get_selected_row()
         row.set_external(external)
 
+        if external:
+            self.emit_event("external-storage-added", row.path)
+        else:
+            self.emit_event("external-storage-removed", row.path)
+
     def __on_fadeout_adjustment_changed(self, adjustment):
         """
         This refreshes the label belonging to the fadeout duration adjustment.
@@ -318,13 +324,14 @@ class StorageListBoxRow(Gtk.ListBoxRow):
     This class represents a listboxitem for a storage location.
     """
 
-    def __init__(self, ui, db_id, path, external, default=False):
+    def __init__(self, parent, db_id, path, external, default=False):
         super(Gtk.ListBoxRow, self).__init__()
-        self.ui = ui
+        self.ui = cozy.ui.CozyUI()
         self.db_id = db_id
         self.path = path
         self.default = default
         self.external = external
+        self.parent = parent
 
         box = Gtk.Box()
         box.set_orientation(Gtk.Orientation.HORIZONTAL)
@@ -415,9 +422,11 @@ class StorageListBoxRow(Gtk.ListBoxRow):
 
         # Run a reimport or rebase
         if old_path == "":
+            self.parent.emit_event("storage-added", self.path)
             log.info("New audiobook location added. Starting import scan.")
             self.ui.scan(None, False)
         else:
+            self.parent.emit_event("storage-changed", self.path)
             log.info("Audio book location changed, rebasing the location in db.")
             self.ui.switch_to_working(_("Changing audio book location..."), False)
             thread = Thread(target=importer.rebase_location, args=(
