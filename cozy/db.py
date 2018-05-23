@@ -510,12 +510,18 @@ def blacklist_book(book):
 
 def is_blacklisted(path):
     """
-    Tests wether a given path is blacklisted.
+    Tests whether a given path is blacklisted.
     """
     if StorageBlackList.select().where(StorageBlackList.path == path).count() > 0:
         return True
     else:
         return False
+
+def is_external(book):
+    """
+    Tests whether the given book is saved on external storage.
+    """
+    return any(storage.path in tracks(book).first().file for storage in Storage.select().where(Storage.external == True))
 
 def close():
     global db

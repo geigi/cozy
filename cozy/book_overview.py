@@ -7,6 +7,7 @@ import cozy.player as player
 import cozy.ui
 
 from cozy.book_element import TrackElement
+from cozy.settings import Settings
 
 
 class BookOverview:
@@ -21,6 +22,10 @@ class BookOverview:
         builder = self.ui.window_builder
         self.name_label = builder.get_object("info_book_label")
         self.author_label = builder.get_object("info_author_label")
+        self.download_box = builder.get_object("info_download_box")
+        self.download_label = builder.get_object("info_download_label")
+        self.download_image = builder.get_object("info_download_image")
+        self.download_switch = builder.get_object("info_download_switch")
         self.published_label = builder.get_object("info_published_label")
         self.last_played_label = builder.get_object("info_last_played_label")
         self.total_label = builder.get_object("info_total_label")
@@ -40,6 +45,7 @@ class BookOverview:
 
         self.ui.speed.add_listener(self.__ui_changed)
         player.add_player_listener(self.__player_changed)
+        Settings().add_listener(self.__settings_changed)
 
     def set_book(self, book):
         if self.book and self.book.id == book.id:
@@ -54,6 +60,8 @@ class BookOverview:
 
         self.name_label.set_text(book.name)
         self.author_label.set_text(book.author)
+
+        self.update_offline_status()
 
         pixbuf = artwork_cache.get_cover_pixbuf(
             book, self.ui.window.get_scale_factor(), 250)
@@ -97,6 +105,17 @@ class BookOverview:
         self._mark_current_track()
         self.update_time()
 
+    def update_offline_status(self):
+        """
+        Hide/Show download elements depending on whether the book is on an external storage.
+        """
+        if db.is_external(self.book):
+            self.download_box.set_visible(True)
+            self.download_switch.set_visible(True)
+        else:
+            self.download_box.set_visible(False)
+            self.download_switch.set_visible(False)
+
     def update_time(self):
         if self.book is None:
             return
@@ -126,7 +145,7 @@ class BookOverview:
             self.remaining_label.set_visible(False)
 
         self.progress_bar.set_fraction(percentage)
-
+React to player changes.
     def select_track(self, curr_track, playing):
         """
         Selects a track in the list and sets the play/pause icon.
@@ -198,6 +217,7 @@ class BookOverview:
 
     def __player_changed(self, event, message):
         """
+        React to player changes.
         """
         if self.book is None or self.ui.titlebar.current_book is None or self.ui.titlebar.current_book.id != self.book.id:
             return
@@ -216,8 +236,24 @@ class BookOverview:
             track = player.get_current_track()
             self.select_track(track, self.ui.is_playing)
 
+    def __settings_changed(self, event, message):
+        """
+        React to changes in user settings.
+        """
+        if not self.book:
+            return
+
+        if event == "storage-removed" or event == "external-storage-removed":
+            if message in db.tracks(self.book).first().file:
+                self.download_box.set_visible(False)
+                self.download_switch.set_visible(False)
+        elif "external-storage-added" or event == "storage-changed" or event == "storage-added":
+            self.update_offline_status()
+
     def __on_play_clicked(self, event):
         """
+        Play button clicked.
+        Start/pause playback.
         """
         track = db.get_track_for_playback(self.book)
         current_track = player.get_current_track()
