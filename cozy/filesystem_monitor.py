@@ -3,11 +3,12 @@ from gi.repository import Gio
 
 from cozy.event_sender import EventSender
 from cozy.settings import Settings
+from cozy.singleton import Singleton
 import cozy.db as db
 
 log = logging.getLogger("fs_monitor")
 
-class FilesystemMonitor(EventSender):
+class FilesystemMonitor(EventSender, metaclass=Singleton):
     external_storage = []
     """
     This class handles all filesystem monitoring operations.

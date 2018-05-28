@@ -11,7 +11,8 @@ if PeeweeVersion[0] == '2':
 else:
     log.info("Using peewee 3 backend")
     from peewee import ModelBase
-from peewee import Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase
+from peewee import Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField
+from playhouse.sqliteq import SqliteQueueDatabase
 from playhouse.migrate import SqliteMigrator, migrate
 from gi.repository import GLib, GdkPixbuf, Gdk
 
@@ -31,7 +32,7 @@ if os.path.exists(os.path.join(data_dir, "cozy.db")):
 else:
     update = False
 
-db = SqliteDatabase(os.path.join(data_dir, "cozy.db"), pragmas=[('journal_mode', 'wal')])
+db = SqliteQueueDatabase(os.path.join(data_dir, "cozy.db"), pragmas=[('journal_mode', 'wal')])
 
 class ModelBase(Model):
     """
@@ -56,6 +57,7 @@ class Book(ModelBase):
     cover = BlobField(null=True)
     playback_speed = FloatField(default=1.0)
     last_played = IntegerField(default=0)
+    offline = BooleanField(default=False)
 
 
 class Track(ModelBase):
@@ -105,10 +107,17 @@ class StorageBlackList(ModelBase):
     """
     path = CharField()
 
+class OfflineCache(ModelBase):
+    """
+    Contains all offline available files.
+    """
+    track = ForeignKeyField(Track, unique=True)
+    copied = BooleanField(default=False)
+    file = CharField()
 
 def init_db():
     if PeeweeVersion[0] == '3':
-        db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList], bind_refs=False, bind_backrefs=False)
+        db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache], bind_refs=False, bind_backrefs=False)
     db.connect()
 
     global update
@@ -116,9 +125,9 @@ def init_db():
         update_db()
     else:
         if PeeweeVersion[0] == '2':
-            db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList], True)
+            db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache], True)
         else:
-            db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList])
+            db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache])
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
@@ -135,8 +144,7 @@ def books():
 
     :return: all books
     """
-    with db.atomic():
-        return Book.select()
+    return Book.select()
 
 
 def authors():
@@ -145,8 +153,7 @@ def authors():
 
     :return: all authors
     """
-    with db.atomic():
-        return Book.select(Book.author).distinct().order_by(Book.author)
+    return Book.select(Book.author).distinct().order_by(Book.author)
 
 
 def readers():
@@ -155,13 +162,11 @@ def readers():
 
     :return: all readers
     """
-    with db.atomic():
-        return Book.select(Book.reader).distinct().order_by(Book.reader)
+    return Book.select(Book.reader).distinct().order_by(Book.reader)
 
 
 def Search(search):
-    with db.atomic():
-        return Track.select().where(search in Track.name)
+    return Track.select().where(search in Track.name)
 
 # Return ordered after Track ID / name when not available
 
@@ -323,10 +328,14 @@ def update_db_6():
     """
     migrator = SqliteMigrator(db)
 
-    last_played = BooleanField(default=False)
+    db.create_tables([OfflineCache])
+
+    external = BooleanField(default=False)
+    offline = BooleanField(default=False)
 
     migrate(
-        migrator.add_column('storage', 'external', last_played),
+        migrator.add_column('storage', 'external', external),
+        migrator.add_column('book', 'offline', offline)
     )
 
     Settings.update(version=6).execute()
@@ -485,10 +494,9 @@ def remove_tracks_with_path(ui, path):
     if path == "":
         return
     
-    with db.atomic():
-        for track in Track.select():
-            if path in track.file:
-                track.delete_instance()
+    for track in Track.select():
+        if path in track.file:
+            track.delete_instance()
     
     clean_books()
 
@@ -504,9 +512,8 @@ def blacklist_book(book):
     for chunk in chunks:
         StorageBlackList.insert_many(chunk, fields=[StorageBlackList.path]).execute()
     ids = list(t.id for t in book_tracks)
-    with db.atomic():
-        Track.delete().where(Track.id << ids).execute()
-        book.delete_instance()
+    Track.delete().where(Track.id << ids).execute()
+    book.delete_instance()
 
 def is_blacklisted(path):
     """

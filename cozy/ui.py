@@ -21,6 +21,7 @@ import cozy.importer as importer
 import cozy.player as player
 import cozy.tools as tools
 import cozy.filesystem_monitor as fs_monitor
+import cozy.offline_cache as offline_cache
 
 import os
 
@@ -247,6 +248,7 @@ class CozyUI(metaclass=Singleton):
         self.settings = Settings()
         self.book_overview = BookOverview()
         self.fs_monitor = fs_monitor.FilesystemMonitor()
+        self.offline_cache = offline_cache.OfflineCache()
 
         self.titlebar.activate()
 
@@ -353,7 +355,8 @@ class CozyUI(metaclass=Singleton):
         This enables all UI functionality for the user.
         """
         self.titlebar.switch_to_playing()
-        self.main_stack.props.visible_child_name = "main"
+        if self.main_stack.props.visible_child_name != "book_overview" and self.main_stack.props.visible_child_name != "nothing_here":
+            self.main_stack.props.visible_child_name = "main"
         self.category_toolbar.set_visible(True)
         if player.get_current_track():
             self.block_ui_buttons(False, True)

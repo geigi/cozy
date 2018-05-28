@@ -8,6 +8,7 @@ import cozy.ui
 
 from cozy.book_element import TrackElement
 from cozy.settings import Settings
+from cozy.offline_cache import OfflineCache
 
 
 class BookOverview:
@@ -16,6 +17,7 @@ class BookOverview:
     """
     book = None
     current_track_element = None
+    switch_signal = None
 
     def __init__(self):
         self.ui = cozy.ui.CozyUI()
@@ -51,7 +53,7 @@ class BookOverview:
         if self.book and self.book.id == book.id:
             self.update_time()
             return
-        self.book = book
+        self.book = db.Book.get_by_id(book.id)
 
         if self.ui.is_playing and self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
             self.play_book_button.set_image(self.pause_img)
@@ -95,7 +97,7 @@ class BookOverview:
 
         count = 0
         for track in db.tracks(book):
-            self.track_box.add(TrackElement(track, self.ui, self))
+            self.track_box.add(TrackElement(track, self))
             count += 1
 
         tools.remove_all_children(self.track_list_container)
@@ -109,12 +111,16 @@ class BookOverview:
         """
         Hide/Show download elements depending on whether the book is on an external storage.
         """
+        if self.switch_signal:
+            self.download_switch.disconnect(self.switch_signal)
         if db.is_external(self.book):
             self.download_box.set_visible(True)
             self.download_switch.set_visible(True)
+            self.download_switch.set_active(self.book.offline)
         else:
             self.download_box.set_visible(False)
             self.download_switch.set_visible(False)
+        self.switch_signal = self.download_switch.connect("notify::active", self.__on_download_switch_changed)
 
     def update_time(self):
         if self.book is None:
@@ -145,7 +151,7 @@ class BookOverview:
             self.remaining_label.set_visible(False)
 
         self.progress_bar.set_fraction(percentage)
-React to player changes.
+
     def select_track(self, curr_track, playing):
         """
         Selects a track in the list and sets the play/pause icon.
@@ -206,7 +212,7 @@ React to player changes.
         """
         Handler for events that occur in the main ui.
         """
-        if self.book is None or self.ui.titlebar.current_book.id != self.book.id:
+        if self.book is None or self.ui.titlebar.current_book is None or self.ui.titlebar.current_book.id != self.book.id:
             return
 
         if event == "playback-speed-changed":
@@ -267,3 +273,11 @@ React to player changes.
             player.play_pause(None, True)
 
         return True
+
+    def __on_download_switch_changed(self, switch, state):
+        if self.download_switch.get_active():
+            db.Book.update(offline=True).where(db.Book.id == self.book.id).execute()
+            OfflineCache().add(self.book)
+        else:
+            db.Book.update(offline=False).where(db.Book.id == self.book.id).execute()
+            OfflineCache().remove(self.book)

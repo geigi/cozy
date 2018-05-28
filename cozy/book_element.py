@@ -336,9 +336,9 @@ class TrackElement(Gtk.EventBox):
     ui = None
     book = None
 
-    def __init__(self, t, ui, book):
+    def __init__(self, t, book):
         self.track = t
-        self.ui = ui
+        self.ui = cozy.ui.CozyUI()
         self.book = book
 
         super().__init__()
