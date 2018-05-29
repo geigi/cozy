@@ -47,6 +47,7 @@ conf.set('PYTHON_DIR', python_dir)
 conf.set('PYTHON_EXEC_DIR', join_paths(get_option('prefix'), python.sysconfig_path('stdlib')))
 conf.set('libexecdir', LIBEXEC_DIR)
 conf.set('VERSION', meson.project_version())
+conf.set('PYTHON', python_bin.path())
 
 subdir('data')
 subdir('po')
