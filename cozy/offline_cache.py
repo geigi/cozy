@@ -133,7 +133,7 @@ class OfflineCache(metaclass=Singleton):
 
             if not new_item.copied and os.path.exists(new_item.track.file):
                 log.info("Copying item")
-                Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.ui.switch_to_working, _("Downloading ") + new_item.track.book.name, False)
+                Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.ui.switch_to_working, _("Downloading ") + tools.shorten_string(new_item.track.book.name, 30), False)
                 self.current = new_item
                 
                 destination = Gio.File.new_for_path(os.path.join(self.cache_dir, new_item.file))

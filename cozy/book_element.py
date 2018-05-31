@@ -7,6 +7,7 @@ import cozy.tools as tools
 import cozy.artwork_cache as artwork_cache
 import cozy.ui
 from cozy.filesystem_monitor import FilesystemMonitor
+from cozy.settings import Settings
 
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
@@ -252,6 +253,7 @@ class BookElement(Gtk.FlowBoxChild):
         self.event_box.connect("button-press-event", self.__on_button_press_event)
         self.connect("key-press-event", self.__on_key_press_event)
         FilesystemMonitor().add_listener(self.__on_storage_changed)
+        Settings().add_listener(self.__on_storage_changed)
 
     def get_book(self):
         """
@@ -356,6 +358,9 @@ class BookElement(Gtk.FlowBoxChild):
             self.refresh_book_object()
             if message in db.tracks(self.book).first().file and not self.book.offline:
                 super().set_sensitive(False)
+        elif event == "external-storage-removed":
+            if message in db.tracks(self.book).first().file:
+                super().set_sensitive(True)
 
 
 class TrackElement(Gtk.EventBox):

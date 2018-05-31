@@ -273,12 +273,12 @@ audio-volume-medium-symbolic</property>
               <object class="GtkStack" id="status_stack">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_right">20</property>
                 <property name="transition_type">slide-up-down</property>
                 <child>
                   <object class="GtkBox" id="position_box">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_right">20</property>
                     <property name="hexpand">True</property>
                     <child>
                       <object class="GtkLabel" id="current_label">
