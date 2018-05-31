@@ -23,6 +23,7 @@ from random import randint
 from cozy.player import *
 from cozy.db import *
 import cozy.artwork_cache as artwork_cache
+import cozy.ui
 
 
 class Server:
@@ -159,9 +160,9 @@ class MPRIS(Server):
     __MPRIS_PATH = "/org/mpris/MediaPlayer2"
     refresh = True
 
-    def __init__(self, app, ui):
+    def __init__(self, app):
         self.__app = app
-        self.__ui = ui
+        self.__ui = cozy.ui.CozyUI()
         self.__rating = None
         self.__cozy_id = 0
         self.__metadata = {"mpris:trackid": GLib.Variant(

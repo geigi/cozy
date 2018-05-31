@@ -14,11 +14,14 @@ from cozy.playback_speed import PlaybackSpeed
 from cozy.titlebar import Titlebar
 from cozy.settings import Settings
 from cozy.book_overview import BookOverview
+from cozy.singleton import Singleton
 
 import cozy.db as db
 import cozy.importer as importer
 import cozy.player as player
 import cozy.tools as tools
+import cozy.filesystem_monitor as fs_monitor
+import cozy.offline_cache as offline_cache
 
 import os
 
@@ -26,7 +29,7 @@ import logging
 log = logging.getLogger("ui")
 
 
-class CozyUI:
+class CozyUI(metaclass=Singleton):
     """
     CozyUI is the main ui class.
     """
@@ -179,7 +182,6 @@ class CozyUI:
         self.reader_box.connect("row-selected", self.__on_listbox_changed)
         self.book_box.set_sort_func(self.__sort_books, None, False)
         self.book_box.set_filter_func(self.__filter_books, None, False)
-        self.book_box.connect("child-activated", self.__on_book_box_selected)
         
         try:
             about_close_button = self.about_builder.get_object(
@@ -237,13 +239,16 @@ class CozyUI:
             self.app.set_app_menu(menu)
 
     def __init_components(self):
-        self.titlebar = Titlebar(self)
+        self.titlebar = Titlebar()
 
-        self.sleep_timer = SleepTimer(self)
-        self.speed = PlaybackSpeed(self)
-        self.search = Search(self)
-        self.settings = Settings(self)
-        self.book_overview = BookOverview(self)
+        self.sleep_timer = SleepTimer()
+        self.speed = PlaybackSpeed()
+        self.search = Search()
+        self.settings = Settings()
+        self.book_overview = BookOverview()
+        self.fs_monitor = fs_monitor.FilesystemMonitor()
+        self.offline_cache = offline_cache.OfflineCache()
+        player.init()
 
         self.titlebar.activate()
 
@@ -327,6 +332,7 @@ class CozyUI:
         if scan:
             self.scan_action.set_enabled(sensitive)
             self.settings.block_ui_elements(block)
+            self.book_overview.block_ui_elements(block)
 
     def get_ui_buttons_blocked(self):
         """
@@ -350,8 +356,10 @@ class CozyUI:
         This enables all UI functionality for the user.
         """
         self.titlebar.switch_to_playing()
-        self.main_stack.props.visible_child_name = "main"
-        self.category_toolbar.set_visible(True)
+        if self.main_stack.props.visible_child_name != "book_overview" and self.main_stack.props.visible_child_name != "nothing_here" and self.main_stack.props.visible_child_name != "no_media":
+            self.main_stack.props.visible_child_name = "main"
+        if self.main_stack.props.visible_child_name != "no_media":
+            self.category_toolbar.set_visible(True)
         if player.get_current_track():
             self.block_ui_buttons(False, True)
         else:
@@ -436,7 +444,7 @@ class CozyUI:
         self.reader_box.show_all()
 
         for b in db.books():
-            self.book_box.add(BookElement(b, self))
+            self.book_box.add(BookElement(b))
 
         self.book_box.show_all()
 
@@ -475,7 +483,7 @@ class CozyUI:
         """
         Displays a dialog with a list of files that could not be imported.
         """
-        dialog = ImportFailedDialog(files, self)
+        dialog = ImportFailedDialog(files)
         dialog.show()
 
     def jump_to_author(self, book):
@@ -544,6 +552,7 @@ class CozyUI:
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, True)
         self.settings._init_storage()
+        self.fs_monitor.init_offline_mode()
 
     def __on_sort_stack_changed(self, widget, page):
         """
@@ -616,7 +625,7 @@ class CozyUI:
             if "Resource not found" in str(message):
                 self.dialog_open = True
                 dialog = FileNotFoundDialog(
-                    player.get_current_track().file, self)
+                    player.get_current_track().file)
                 dialog.show()
 
     def __window_resized(self, window):
@@ -644,6 +653,7 @@ class CozyUI:
         """
         log.info("Closing.")
         self.titlebar.close()
+        self.fs_monitor.close()
         if self.sleep_timer.is_running():
             self.sleep_timer.stop()
 
@@ -712,9 +722,9 @@ class CozyUI:
         elif selected_stack == "recent":
             return True if book.book.last_played > 0 else False
 
-    def __on_book_box_selected(self, flow_box, child):
+    def set_book_overview(self, book):
         # first update track ui
-        self.book_overview.set_book(child.book)
+        self.book_overview.set_book(book)
 
         #then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"

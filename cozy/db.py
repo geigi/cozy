@@ -1,3 +1,4 @@
+import time
 import os
 import logging
 import uuid
@@ -12,6 +13,7 @@ else:
     log.info("Using peewee 3 backend")
     from peewee import ModelBase
 from peewee import Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase
+from playhouse.sqliteq import SqliteQueueDatabase
 from playhouse.migrate import SqliteMigrator, migrate
 from gi.repository import GLib, GdkPixbuf, Gdk
 
@@ -31,7 +33,8 @@ if os.path.exists(os.path.join(data_dir, "cozy.db")):
 else:
     update = False
 
-db = SqliteDatabase(os.path.join(data_dir, "cozy.db"), pragmas=[('journal_mode', 'wal')])
+db = SqliteQueueDatabase(os.path.join(data_dir, "cozy.db"), pragmas=[('journal_mode', 'wal')])
+
 
 class ModelBase(Model):
     """
@@ -56,6 +59,7 @@ class Book(ModelBase):
     cover = BlobField(null=True)
     playback_speed = FloatField(default=1.0)
     last_played = IntegerField(default=0)
+    offline = BooleanField(default=False)
 
 
 class Track(ModelBase):
@@ -105,20 +109,46 @@ class StorageBlackList(ModelBase):
     """
     path = CharField()
 
+class OfflineCache(ModelBase):
+    """
+    Contains all offline available files.
+    """
+    track = ForeignKeyField(Track, unique=True)
+    copied = BooleanField(default=False)
+    file = CharField()
 
 def init_db():
-    if PeeweeVersion[0] == '3':
-        db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList], bind_refs=False, bind_backrefs=False)
-    db.connect()
-
+    global db
     global update
+    global data_dir
+
+    tmp_db = None
+    
     if update:
         update_db()
     else:
+        tmp_db = SqliteDatabase(os.path.join(data_dir, "cozy.db"))
         if PeeweeVersion[0] == '2':
-            db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList], True)
+            with tmp_db.connection_context():
+                tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache], True)
         else:
-            db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList])
+            with tmp_db.connection_context():
+                tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache])
+
+    # this is necessary to ensure that the tables have indeed been created
+    if tmp_db:
+        while not tmp_db.table_exists("settings"):
+            time.sleep(0.01)
+
+    try:
+        db.connect()
+    except Exception as e:
+        log.error("Could not connect to database. ")
+        log.error(e)
+
+
+    if PeeweeVersion[0] == '3':
+        db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage], bind_refs=False, bind_backrefs=False)
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
@@ -135,8 +165,7 @@ def books():
 
     :return: all books
     """
-    with db.atomic():
-        return Book.select()
+    return Book.select()
 
 
 def authors():
@@ -145,8 +174,7 @@ def authors():
 
     :return: all authors
     """
-    with db.atomic():
-        return Book.select(Book.author).distinct().order_by(Book.author)
+    return Book.select(Book.author).distinct().order_by(Book.author)
 
 
 def readers():
@@ -155,13 +183,11 @@ def readers():
 
     :return: all readers
     """
-    with db.atomic():
-        return Book.select(Book.reader).distinct().order_by(Book.reader)
+    return Book.select(Book.reader).distinct().order_by(Book.reader)
 
 
 def Search(search):
-    with db.atomic():
-        return Track.select().where(search in Track.name)
+    return Track.select().where(search in Track.name)
 
 # Return ordered after Track ID / name when not available
 
@@ -244,6 +270,17 @@ def search_tracks(search_string):
     return Track.select(Track.name).where(Track.name.contains(search_string)).order_by(Track.name)
 
 
+def get_track_path(track):
+    """
+    Returns the path to the file of a given track.
+    This returns the original path if online and otherwise a cached offline
+    version if available.
+    :param track: DB track object
+    :return: Path as string
+    """
+    pass
+
+
 def update_db_1():
     """
     Update database to v1.
@@ -312,10 +349,14 @@ def update_db_6():
     """
     migrator = SqliteMigrator(db)
 
-    last_played = BooleanField(default=False)
+    db.create_tables([OfflineCache])
+
+    external = BooleanField(default=False)
+    offline = BooleanField(default=False)
 
     migrate(
-        migrator.add_column('storage', 'external', last_played),
+        migrator.add_column('storage', 'external', external),
+        migrator.add_column('book', 'offline', offline)
     )
 
     Settings.update(version=6).execute()
@@ -435,6 +476,14 @@ def get_track_from_book_time(book, seconds):
     
     return last_track, last_track.length
 
+def get_external_storage_locations():
+    """
+    Returns a list of all external storage locations.
+    """
+    directories = Storage.select().where(Storage.external == True)
+    
+    return directories
+
 def remove_invalid_entries(ui=None, refresh=False):
     """
     Remove track entries from db that no longer exist in the filesystem.
@@ -466,10 +515,9 @@ def remove_tracks_with_path(ui, path):
     if path == "":
         return
     
-    with db.atomic():
-        for track in Track.select():
-            if path in track.file:
-                track.delete_instance()
+    for track in Track.select():
+        if path in track.file:
+            track.delete_instance()
     
     clean_books()
 
@@ -485,18 +533,23 @@ def blacklist_book(book):
     for chunk in chunks:
         StorageBlackList.insert_many(chunk, fields=[StorageBlackList.path]).execute()
     ids = list(t.id for t in book_tracks)
-    with db.atomic():
-        Track.delete().where(Track.id << ids).execute()
-        book.delete_instance()
+    Track.delete().where(Track.id << ids).execute()
+    book.delete_instance()
 
 def is_blacklisted(path):
     """
-    Tests wether a given path is blacklisted.
+    Tests whether a given path is blacklisted.
     """
     if StorageBlackList.select().where(StorageBlackList.path == path).count() > 0:
         return True
     else:
         return False
+
+def is_external(book):
+    """
+    Tests whether the given book is saved on external storage.
+    """
+    return any(storage.path in Track.select().join(Book).where(Book.id == book.id).first().file for storage in Storage.select().where(Storage.external == True))
 
 def close():
     global db

@@ -751,6 +751,18 @@ audio-volume-medium-symbolic</property>
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkSeparator">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkScrolledWindow" id="book_scroller">
                     <property name="width_request">600</property>
                     <property name="visible">True</property>
@@ -792,7 +804,7 @@ audio-volume-medium-symbolic</property>
                   <packing>
                     <property name="expand">True</property>
                     <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
@@ -1387,11 +1399,63 @@ You can add more storage locations later in the settings</property>
                             <property name="top_attach">0</property>
                           </packing>
                         </child>
+                        <child>
+                          <object class="GtkBox" id="info_download_box">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">end</property>
+                            <property name="margin_top">20</property>
+                            <child>
+                              <object class="GtkImage" id="info_download_image">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_right">10</property>
+                                <property name="icon_name">download-symbolic</property>
+                                <property name="icon_size">3</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="info_download_label">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Download</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSwitch" id="info_download_switch">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="halign">start</property>
+                            <property name="valign">center</property>
+                            <property name="margin_top">20</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">4</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
                     <child>
@@ -1406,7 +1470,7 @@ You can add more storage locations later in the settings</property>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">4</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
                     <child>
@@ -1443,7 +1507,7 @@ You can add more storage locations later in the settings</property>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                       </packing>
                     </child>
                   </object>

@@ -4,8 +4,11 @@ import cozy.artwork_cache as artwork_cache
 import cozy.db as db
 import cozy.tools as tools
 import cozy.player as player
+import cozy.ui
 
 from cozy.book_element import TrackElement
+from cozy.settings import Settings
+from cozy.offline_cache import OfflineCache
 
 
 class BookOverview:
@@ -14,12 +17,17 @@ class BookOverview:
     """
     book = None
     current_track_element = None
+    switch_signal = None
 
-    def __init__(self, ui):
-        self.ui = ui
-        builder = ui.window_builder
+    def __init__(self):
+        self.ui = cozy.ui.CozyUI()
+        builder = self.ui.window_builder
         self.name_label = builder.get_object("info_book_label")
         self.author_label = builder.get_object("info_author_label")
+        self.download_box = builder.get_object("info_download_box")
+        self.download_label = builder.get_object("info_download_label")
+        self.download_image = builder.get_object("info_download_image")
+        self.download_switch = builder.get_object("info_download_switch")
         self.published_label = builder.get_object("info_published_label")
         self.last_played_label = builder.get_object("info_last_played_label")
         self.total_label = builder.get_object("info_total_label")
@@ -39,12 +47,13 @@ class BookOverview:
 
         self.ui.speed.add_listener(self.__ui_changed)
         player.add_player_listener(self.__player_changed)
+        Settings().add_listener(self.__settings_changed)
 
     def set_book(self, book):
         if self.book and self.book.id == book.id:
             self.update_time()
             return
-        self.book = book
+        self.book = db.Book.get_by_id(book.id)
 
         if self.ui.is_playing and self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
             self.play_book_button.set_image(self.pause_img)
@@ -53,6 +62,8 @@ class BookOverview:
 
         self.name_label.set_text(book.name)
         self.author_label.set_text(book.author)
+
+        self.update_offline_status()
 
         pixbuf = artwork_cache.get_cover_pixbuf(
             book, self.ui.window.get_scale_factor(), 250)
@@ -65,8 +76,7 @@ class BookOverview:
             self.cover_img.props.pixel_size = 250
 
         self.duration = db.get_book_duration(book)
-        self.speed = db.Book.select().where(
-            db.Book.id == self.book.id).get().playback_speed
+        self.speed = self.book.playback_speed
         self.total_label.set_text(
             tools.seconds_to_human_readable(self.duration / self.speed))
 
@@ -84,10 +94,8 @@ class BookOverview:
         self.track_box.set_valign(Gtk.Align.START)
         self.track_box.props.margin = 8
 
-        count = 0
         for track in db.tracks(book):
-            self.track_box.add(TrackElement(track, self.ui, self))
-            count += 1
+            self.track_box.add(TrackElement(track, self))
 
         tools.remove_all_children(self.track_list_container)
         self.track_box.show_all()
@@ -95,6 +103,21 @@ class BookOverview:
 
         self._mark_current_track()
         self.update_time()
+
+    def update_offline_status(self):
+        """
+        Hide/Show download elements depending on whether the book is on an external storage.
+        """
+        if self.switch_signal:
+            self.download_switch.disconnect(self.switch_signal)
+        if db.is_external(self.book):
+            self.download_box.set_visible(True)
+            self.download_switch.set_visible(True)
+            self.download_switch.set_active(self.book.offline)
+        else:
+            self.download_box.set_visible(False)
+            self.download_switch.set_visible(False)
+        self.switch_signal = self.download_switch.connect("notify::active", self.__on_download_switch_changed)
 
     def update_time(self):
         if self.book is None:
@@ -157,6 +180,12 @@ class BookOverview:
             self.current_track_element.set_playing(False)
             self.current_track_element.deselect()
 
+    def block_ui_elements(self, block):
+        """
+        Blocks the download button. This gets called when a db scan is active.
+        """
+        self.download_switch.set_sensitive(not block)
+
     def _mark_current_track(self):
         """
         Mark the current track position.
@@ -186,7 +215,7 @@ class BookOverview:
         """
         Handler for events that occur in the main ui.
         """
-        if self.book is None or self.ui.titlebar.current_book.id != self.book.id:
+        if self.book is None or self.ui.titlebar.current_book is None or self.ui.titlebar.current_book.id != self.book.id:
             return
 
         if event == "playback-speed-changed":
@@ -197,6 +226,7 @@ class BookOverview:
 
     def __player_changed(self, event, message):
         """
+        React to player changes.
         """
         if self.book is None or self.ui.titlebar.current_book is None or self.ui.titlebar.current_book.id != self.book.id:
             return
@@ -215,8 +245,24 @@ class BookOverview:
             track = player.get_current_track()
             self.select_track(track, self.ui.is_playing)
 
+    def __settings_changed(self, event, message):
+        """
+        React to changes in user settings.
+        """
+        if not self.book:
+            return
+
+        if event == "storage-removed" or event == "external-storage-removed":
+            if message in db.tracks(self.book).first().file:
+                self.download_box.set_visible(False)
+                self.download_switch.set_visible(False)
+        elif "external-storage-added" or event == "storage-changed" or event == "storage-added":
+            self.update_offline_status()
+
     def __on_play_clicked(self, event):
         """
+        Play button clicked.
+        Start/pause playback.
         """
         track = db.get_track_for_playback(self.book)
         current_track = player.get_current_track()
@@ -230,3 +276,11 @@ class BookOverview:
             player.play_pause(None, True)
 
         return True
+
+    def __on_download_switch_changed(self, switch, state):
+        if self.download_switch.get_active():
+            db.Book.update(offline=True).where(db.Book.id == self.book.id).execute()
+            OfflineCache().add(self.book)
+        else:
+            db.Book.update(offline=False).where(db.Book.id == self.book.id).execute()
+            OfflineCache().remove(self.book)

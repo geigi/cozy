@@ -89,7 +89,7 @@ class Application(Gtk.Application):
                 self.ui.refresh_content()
 
         self.add_window(self.ui.window)
-        mpris = MPRIS(self, self.ui)
+        mpris = MPRIS(self)
         mpris._on_current_changed(None)
 
 
