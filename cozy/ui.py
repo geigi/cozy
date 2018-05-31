@@ -182,7 +182,6 @@ class CozyUI(metaclass=Singleton):
         self.reader_box.connect("row-selected", self.__on_listbox_changed)
         self.book_box.set_sort_func(self.__sort_books, None, False)
         self.book_box.set_filter_func(self.__filter_books, None, False)
-        self.book_box.connect("child-activated", self.__on_book_box_selected)
         
         try:
             about_close_button = self.about_builder.get_object(
@@ -249,6 +248,7 @@ class CozyUI(metaclass=Singleton):
         self.book_overview = BookOverview()
         self.fs_monitor = fs_monitor.FilesystemMonitor()
         self.offline_cache = offline_cache.OfflineCache()
+        player.init()
 
         self.titlebar.activate()
 
@@ -332,6 +332,7 @@ class CozyUI(metaclass=Singleton):
         if scan:
             self.scan_action.set_enabled(sensitive)
             self.settings.block_ui_elements(block)
+            self.book_overview.block_ui_elements(block)
 
     def get_ui_buttons_blocked(self):
         """
@@ -355,9 +356,10 @@ class CozyUI(metaclass=Singleton):
         This enables all UI functionality for the user.
         """
         self.titlebar.switch_to_playing()
-        if self.main_stack.props.visible_child_name != "book_overview" and self.main_stack.props.visible_child_name != "nothing_here":
+        if self.main_stack.props.visible_child_name != "book_overview" and self.main_stack.props.visible_child_name != "nothing_here" and self.main_stack.props.visible_child_name != "no_media":
             self.main_stack.props.visible_child_name = "main"
-        self.category_toolbar.set_visible(True)
+        if self.main_stack.props.visible_child_name != "no_media":
+            self.category_toolbar.set_visible(True)
         if player.get_current_track():
             self.block_ui_buttons(False, True)
         else:
@@ -720,9 +722,9 @@ class CozyUI(metaclass=Singleton):
         elif selected_stack == "recent":
             return True if book.book.last_played > 0 else False
 
-    def __on_book_box_selected(self, flow_box, child):
+    def set_book_overview(self, book):
         # first update track ui
-        self.book_overview.set_book(child.book)
+        self.book_overview.set_book(book)
 
         #then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"

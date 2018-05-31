@@ -76,8 +76,7 @@ class BookOverview:
             self.cover_img.props.pixel_size = 250
 
         self.duration = db.get_book_duration(book)
-        self.speed = db.Book.select().where(
-            db.Book.id == self.book.id).get().playback_speed
+        self.speed = self.book.playback_speed
         self.total_label.set_text(
             tools.seconds_to_human_readable(self.duration / self.speed))
 
@@ -95,10 +94,8 @@ class BookOverview:
         self.track_box.set_valign(Gtk.Align.START)
         self.track_box.props.margin = 8
 
-        count = 0
         for track in db.tracks(book):
             self.track_box.add(TrackElement(track, self))
-            count += 1
 
         tools.remove_all_children(self.track_list_container)
         self.track_box.show_all()
@@ -182,6 +179,12 @@ class BookOverview:
         if self.current_track_element:
             self.current_track_element.set_playing(False)
             self.current_track_element.deselect()
+
+    def block_ui_elements(self, block):
+        """
+        Blocks the download button. This gets called when a db scan is active.
+        """
+        self.download_switch.set_sensitive(not block)
 
     def _mark_current_track(self):
         """

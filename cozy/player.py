@@ -8,6 +8,8 @@ import logging
 log = logging.getLogger("player")
 
 import cozy.db as db
+from cozy.offline_cache import OfflineCache
+from cozy.filesystem_monitor import FilesystemMonitor
 
 Gst.init(None)
 
@@ -77,8 +79,7 @@ def init():
     __bus.add_signal_watch()
     __bus.connect("message", __on_gst_message)
 
-
-init()
+    FilesystemMonitor().add_listener(__on_storage_changed)
 
 
 def get_gst_bus():
@@ -401,6 +402,7 @@ def set_play_next(play_next):
     global __play_next
     __play_next = play_next
 
+
 def __on_playback_speed_timer():
     """
     Get's called after the playback speed changer timer is over.
@@ -413,6 +415,20 @@ def __on_playback_speed_timer():
                   Gst.SeekFlags.ACCURATE, Gst.SeekType.SET, position, Gst.SeekType.NONE, 0)
     
     __playback_speed_timer_running = False
+
+
+def __on_storage_changed(event, message):
+    """
+    """
+    global __player
+
+    if event == "storage-offline":
+        if get_current_track() and message in get_current_track().file:
+            cached_path = OfflineCache().get_cached_path(get_current_track())
+            if not cached_path:
+                stop()
+                unload()
+                emit_event("stop")
 
 
 def load_file(track):
@@ -433,7 +449,13 @@ def load_file(track):
 
     init()
 
-    __player.set_property("uri", "file://" + track.file)
+    if FilesystemMonitor().is_track_online(track):
+        path = track.file
+    else:
+        path = OfflineCache().get_cached_path(track)
+        if not path:
+            path = track.file
+    __player.set_property("uri", "file://" + path)
     __player.set_state(Gst.State.PAUSED)
     save_current_book_position(__current_track)
     db.Settings.update(last_played_book=__current_track.book).execute()
@@ -458,7 +480,13 @@ def load_last_book():
 
             if last_track:
                 __player.set_state(Gst.State.NULL)
-                __player.set_property("uri", "file://" + last_track.file)
+                if FilesystemMonitor().is_track_online(last_track):
+                    path = last_track.file
+                else:
+                    path = OfflineCache().get_cached_path(last_track)
+                    if not path:
+                        path = last_track.file
+                __player.set_property("uri", "file://" + path)
                 __player.set_state(Gst.State.PAUSED)
                 __current_track = last_track
 

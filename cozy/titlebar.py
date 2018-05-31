@@ -270,7 +270,6 @@ class Titlebar:
         self.throbber.start()
         self.status_label.set_text(message)
         if not first:
-            self.update_progress_bar.set_fraction(0)
             self.status_stack.props.visible_child_name = "working"
 
     def switch_to_playing(self):

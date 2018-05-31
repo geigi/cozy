@@ -1,3 +1,4 @@
+import time
 import os
 import logging
 import uuid
@@ -11,7 +12,7 @@ if PeeweeVersion[0] == '2':
 else:
     log.info("Using peewee 3 backend")
     from peewee import ModelBase
-from peewee import Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField
+from peewee import Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase
 from playhouse.sqliteq import SqliteQueueDatabase
 from playhouse.migrate import SqliteMigrator, migrate
 from gi.repository import GLib, GdkPixbuf, Gdk
@@ -33,6 +34,7 @@ else:
     update = False
 
 db = SqliteQueueDatabase(os.path.join(data_dir, "cozy.db"), pragmas=[('journal_mode', 'wal')])
+
 
 class ModelBase(Model):
     """
@@ -116,18 +118,37 @@ class OfflineCache(ModelBase):
     file = CharField()
 
 def init_db():
-    if PeeweeVersion[0] == '3':
-        db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache], bind_refs=False, bind_backrefs=False)
-    db.connect()
-
+    global db
     global update
+    global data_dir
+
+    tmp_db = None
+    
     if update:
         update_db()
     else:
+        tmp_db = SqliteDatabase(os.path.join(data_dir, "cozy.db"))
         if PeeweeVersion[0] == '2':
-            db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache], True)
+            with tmp_db.connection_context():
+                tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache], True)
         else:
-            db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache])
+            with tmp_db.connection_context():
+                tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache])
+
+    # this is necessary to ensure that the tables have indeed been created
+    if tmp_db:
+        while not tmp_db.table_exists("settings"):
+            time.sleep(0.01)
+
+    try:
+        db.connect()
+    except Exception as e:
+        log.error("Could not connect to database. ")
+        log.error(e)
+
+
+    if PeeweeVersion[0] == '3':
+        db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage], bind_refs=False, bind_backrefs=False)
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
@@ -528,7 +549,7 @@ def is_external(book):
     """
     Tests whether the given book is saved on external storage.
     """
-    return any(storage.path in tracks(book).first().file for storage in Storage.select().where(Storage.external == True))
+    return any(storage.path in Track.select().join(Book).where(Book.id == book.id).first().file for storage in Storage.select().where(Storage.external == True))
 
 def close():
     global db

@@ -2,8 +2,8 @@ import logging
 from gi.repository import Gio
 
 from cozy.event_sender import EventSender
-from cozy.settings import Settings
 from cozy.singleton import Singleton
+import cozy.settings
 import cozy.db as db
 
 log = logging.getLogger("fs_monitor")
@@ -20,7 +20,7 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
 
         self.init_offline_mode()
 
-        Settings().add_listener(self.__on_settings_changed)
+        cozy.settings.Settings().add_listener(self.__on_settings_changed)
 
     def init_offline_mode(self):
         external_storage = []
@@ -40,6 +40,18 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
         #self.volume_monitor.unref()
         pass
 
+    def is_book_online(self, book):
+        """
+        """
+        result = next((storage[1] for storage in self.external_storage if storage[0] in db.tracks(book).first().file), True)
+        return (result)
+
+    def is_track_online(self, track):
+        """
+        """
+        result = next((storage[1] for storage in self.external_storage if storage[0] in track.file), True)
+        return (result)
+
     def __on_mount_added(self, monitor, mount):
         """
         A volume was mounted.
@@ -51,7 +63,7 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
         storage = next((s for s in self.external_storage if mount_path in s[0]), None)
         if storage:
             log.info("Storage online: " + mount_path)
-            self.emit_event("mount-added", mount_path)
+            self.emit_event("storage-online", storage[0])
             storage[1] = True
 
     def __on_mount_removed(self, monitor, mount):
@@ -65,7 +77,7 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
         storage = next((s for s in self.external_storage if mount_path in s[0]), None)
         if storage:
             log.info("Storage offline: " + mount_path)
-            self.emit_event("mount-removed", mount_path)
+            self.emit_event("storage-offline", storage[0])
             storage[1] = False
 
             # switch to offline version if currently playing

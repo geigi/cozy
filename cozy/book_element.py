@@ -6,6 +6,7 @@ import cozy.player as player
 import cozy.tools as tools
 import cozy.artwork_cache as artwork_cache
 import cozy.ui
+from cozy.filesystem_monitor import FilesystemMonitor
 
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
@@ -133,7 +134,6 @@ class AlbumElement(Gtk.Box):
             "enter-notify-event", self._on_enter_notify))
         self.signal_ids.append(self.event_box.connect(
             "leave-notify-event", self._on_leave_notify))
-        # we want to change the mouse cursor if the user is hovering over the play button
 
     def disconnect_signals(self):
         """
@@ -191,7 +191,6 @@ class AlbumElement(Gtk.Box):
 
         return True
 
-
 class BookElement(Gtk.FlowBoxChild):
     """
     This class represents a book with big artwork in the book viewer.
@@ -210,6 +209,8 @@ class BookElement(Gtk.FlowBoxChild):
         self.ui = cozy.ui.CozyUI()
 
         super().__init__()
+        self.event_box = Gtk.EventBox()
+        self.add_events(Gdk.EventMask.KEY_PRESS_MASK)
         self.box = Gtk.Box()
         self.box.set_orientation(Gtk.Orientation.VERTICAL)
         self.box.set_spacing(7)
@@ -238,13 +239,19 @@ class BookElement(Gtk.FlowBoxChild):
         self.art = AlbumElement(
             self.book, 180, self.ui.window.get_scale_factor(), bordered=True, square=False)
 
+        if db.is_external(self.book) and not self.book.offline and not FilesystemMonitor().is_book_online(self.book):
+            super().set_sensitive(False)
+
         # assemble finished element
         self.box.add(self.art)
         self.box.add(title_label)
         self.box.add(author_label)
-        self.add(self.box)
+        self.event_box.add(self.box)
+        self.add(self.event_box)
 
-        self.connect("button-press-event", self.__on_button_press_event)
+        self.event_box.connect("button-press-event", self.__on_button_press_event)
+        self.connect("key-press-event", self.__on_key_press_event)
+        FilesystemMonitor().add_listener(self.__on_storage_changed)
 
     def get_book(self):
         """
@@ -280,6 +287,19 @@ class BookElement(Gtk.FlowBoxChild):
             self.context_menu.popup(
                 None, None, None, None, event.button, event.time)
             return True
+        elif event.type == Gdk.EventType.BUTTON_PRESS and event.button == 1:
+            if super().get_sensitive():
+                self.ui.set_book_overview(self.book)
+        elif event.type == Gdk.EventType.KEY_PRESS and event.keyval == Gdk.KEY_Return:
+            if super().get_sensitive():
+                self.ui.set_book_overview(self.book)
+    
+    def __on_key_press_event(self, widget, key):
+        """
+        Handle key press events.
+        """
+        if key.keyval == Gdk.KEY_Return and super().get_sensitive():
+            self.ui.set_book_overview(self.book)
 
     def __create_context_menu(self):
         """
@@ -325,6 +345,17 @@ class BookElement(Gtk.FlowBoxChild):
         track = db.tracks(self.book).first()
         path = os.path.dirname(track.file)
         subprocess.Popen(['xdg-open', path])
+
+    def __on_storage_changed(self, event, message):
+        """
+        """
+        if event == "storage-online" and not super().get_sensitive():
+            if message in db.tracks(self.book).first().file:
+                super().set_sensitive(True)
+        elif event == "storage-offline" and super().get_sensitive():
+            self.refresh_book_object()
+            if message in db.tracks(self.book).first().file and not self.book.offline:
+                super().set_sensitive(False)
 
 
 class TrackElement(Gtk.EventBox):

@@ -1,4 +1,5 @@
 import logging
+import time
 import uuid
 import os
 
@@ -23,6 +24,7 @@ class OfflineCache(metaclass=Singleton):
     current = None
     thread = None
     filecopy_cancel = None
+    last_ui_update = 0
 
     def __init__(self):
         self.ui = cozy.ui.CozyUI()
@@ -37,12 +39,16 @@ class OfflineCache(metaclass=Singleton):
         """
         Add all tracks of a book to the offline cache and start copying.
         """
+        tracks = []
         for track in db.tracks(book):
             file = str(uuid.uuid4())
-            db_track = db.OfflineCache.create(track=track, file=file)
-            self.queue.append(db_track)
-            self.total_batch_count += 1
-
+            tracks.append((track, file))
+        chunks = [tracks[x:x+500] for x in range(0, len(tracks), 500)]
+        for chunk in chunks:
+            query = db.OfflineCache.insert_many(chunk, fields=[db.OfflineCache.track, db.OfflineCache.file])
+            self.total_batch_count += len(chunk)
+            query.execute()
+            
         self._start_processing()
 
     def remove(self, book):
@@ -50,18 +56,14 @@ class OfflineCache(metaclass=Singleton):
         Remove all tracks of the given book from the cache.
         """
         #self._stop_processing()
+        tracks = db.tracks(book)
+        ids = [t.id for t in tracks]
+        offline_elements = db.OfflineCache.select().where(db.OfflineCache.track in ids)
 
-        for track in db.tracks(book):
-            q = db.OfflineCache.select().where(db.OfflineCache.track == track.id)
-            if q.count() > 0:
-                cache = q.get()
-            else:
-                continue
-                
-            file = Gio.File.new_for_path(os.path.join(self.cache_dir, cache.file))
+        for element in offline_elements:
+            file = Gio.File.new_for_path(os.path.join(self.cache_dir, element.file))
             if file.query_exists():
                 file.delete()
-            cache.delete_instance()
 
             for item in self.queue:
                 if self.current and item.id == self.current.id:
@@ -69,9 +71,21 @@ class OfflineCache(metaclass=Singleton):
 
                 if item.id == track.id:
                     self.queue.remove(item)
+                    break
+
+        db.OfflineCache.delete().where(db.OfflineCache.track in ids).execute()
 
         if len(self.queue) > 0:
             self._start_processing()
+    
+    def get_cached_path(self, track):
+        """
+        """
+        query = db.OfflineCache.select().where(db.OfflineCache.track == track.id, db.OfflineCache.copied == True)
+        if query.count() > 0:
+            return os.path.join(self.cache_dir, query.get().file)
+        else:
+            return None
     
     def _stop_processing(self):
         """
@@ -145,6 +159,6 @@ class OfflineCache(metaclass=Singleton):
                 self.total_batch_count += 1
 
     def __update_copy_status(self, current_num_bytes, total_num_bytes, user_data):
-        progress =  (self.current_batch_count / self.total_batch_count) + ((current_num_bytes / total_num_bytes) / self.total_batch_count)
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
+        progress =  ((self.current_batch_count - 1) / self.total_batch_count) + ((current_num_bytes / total_num_bytes) / self.total_batch_count)
+        Gdk.threads_add_idle(GLib.PRIORITY_HIGH_IDLE ,
                              self.ui.titlebar.update_progress_bar.set_fraction, progress)
