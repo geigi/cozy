@@ -23,6 +23,7 @@ from gi.repository import Gdk, GLib
 import cozy.db as db
 import cozy.artwork_cache as artwork_cache
 import cozy.tools as tools
+from cozy.offline_cache import OfflineCache
 
 log = logging.getLogger("importer")
 
@@ -91,6 +92,8 @@ def update_database(ui):
     percent_threshold = file_count / 1000
     failed = ""
     tracks_to_import = []
+    # Tracks which changed and need to be updated if they are cached
+    tracks_cache_update = []
     start = time.time()
     for path in paths:
         for directory, subdirectories, files in os.walk(path):
@@ -113,10 +116,12 @@ def update_database(ui):
                               db.Track.select().where(db.Track.file == path).first().crc32 != True):
                                 imported, ignore = import_file(
                                     file, directory, path, True, crc)
+                                tracks_cache_update.append(path)
                         # Has the modified date changed or is the value still a crc?
                         elif (db.Track.select().where(db.Track.file == path).first().modified < os.path.getmtime(path) or 
                           db.Track.select().where(db.Track.file == path).first().crc32 != False):
                             imported, ignore = import_file(file, directory, path, update=True)
+                            tracks_cache_update.append(path)
 
                         if not imported:
                             failed += path + "\n"
@@ -157,6 +162,9 @@ def update_database(ui):
     if len(failed) > 0:
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
                              ui.display_failed_imports, failed)
+
+    OfflineCache().update_cache(tracks_cache_update)
+    OfflineCache()._process_queue()
 
 def write_tracks_to_db(tracks):
     """

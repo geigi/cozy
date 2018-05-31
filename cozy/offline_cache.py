@@ -86,7 +86,16 @@ class OfflineCache(metaclass=Singleton):
             return os.path.join(self.cache_dir, query.get().file)
         else:
             return None
-    
+
+    def update_cache(self, paths):
+        """
+        Update the cached version of the given files.
+        """
+        db.OfflineCache.update(copied=False).join(db.Track).where(db.Track.file in paths).execute()
+        #tracks = db.OfflineCache.select(db.Track, db.OfflineCache).join(db.Track).where(db.Track.file in paths)
+        self._fill_queue_from_db()
+
+
     def _stop_processing(self):
         """
         """
