@@ -35,6 +35,8 @@ class OfflineCache(metaclass=Singleton):
 
         self._start_processing()
 
+        cozy.settings.Settings().add_listener(self.__on_settings_changed)
+
     def add(self, book):
         """
         Add all tracks of a book to the offline cache and start copying.
@@ -78,6 +80,20 @@ class OfflineCache(metaclass=Singleton):
         if len(self.queue) > 0:
             self._start_processing()
     
+    def remove_all_for_storage(self, storage_path):
+        """
+        """
+        for element in db.OfflineCache.select().join(db.Track).where(storage_path in db.Track.file):
+            file = Gio.File.new_for_path(os.path.join(self.cache_dir, element.file))
+            if file.query_exists():
+                file.delete()
+            
+            if element.track.book.offline == True:
+                element.track.book.update(offline=False).execute()
+            
+        db.OfflineCache.delete().where(storage_path in db.OfflineCache.track.file).execute()
+
+    
     def get_cached_path(self, track):
         """
         """
@@ -95,7 +111,6 @@ class OfflineCache(metaclass=Singleton):
             db.OfflineCache.update(copied=False).where(db.OfflineCache.track.file in paths).execute()
             #tracks = db.OfflineCache.select(db.Track, db.OfflineCache).join(db.Track).where(db.Track.file in paths)
             self._fill_queue_from_db()
-
 
     def _stop_processing(self):
         """
@@ -172,3 +187,21 @@ class OfflineCache(metaclass=Singleton):
         progress =  ((self.current_batch_count - 1) / self.total_batch_count) + ((current_num_bytes / total_num_bytes) / self.total_batch_count)
         Gdk.threads_add_idle(GLib.PRIORITY_HIGH_IDLE ,
                              self.ui.titlebar.update_progress_bar.set_fraction, progress)
+
+    def _fill_queue_from_db(self):
+        for item in db.OfflineCache.select().where(db.OfflineCache.copied == False):
+            if not any(item.id == queued.id for queued in self.queue):
+                self.queue.append(item)
+                self.total_batch_count += 1
+
+    def __update_copy_status(self, current_num_bytes, total_num_bytes, user_data):
+        progress =  ((self.current_batch_count - 1) / self.total_batch_count) + ((current_num_bytes / total_num_bytes) / self.total_batch_count)
+        Gdk.threads_add_idle(GLib.PRIORITY_HIGH_IDLE ,
+                             self.ui.titlebar.update_progress_bar.set_fraction, progress)
+
+    def __on_settings_changed(self, event, message):
+        """
+        This method reacts to storage settings changes.
+        """
+        if event == "storage-removed" or event == "external-storage-removed":
+            self.remove_all_for_storage(message)

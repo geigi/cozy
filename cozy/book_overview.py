@@ -108,6 +108,7 @@ class BookOverview:
         """
         Hide/Show download elements depending on whether the book is on an external storage.
         """
+        self.book = db.Book.get_by_id(book.id)
         if self.switch_signal:
             self.download_switch.disconnect(self.switch_signal)
         if db.is_external(self.book):
