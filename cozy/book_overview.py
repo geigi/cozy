@@ -48,8 +48,12 @@ class BookOverview:
         self.ui.speed.add_listener(self.__ui_changed)
         player.add_player_listener(self.__player_changed)
         Settings().add_listener(self.__settings_changed)
+        OfflineCache().add_listener(self.__on_offline_cache_changed)
 
     def set_book(self, book):
+        """
+        Display the given book in the book overview.
+        """
         if self.book and self.book.id == book.id:
             self.update_time()
             return
@@ -108,7 +112,7 @@ class BookOverview:
         """
         Hide/Show download elements depending on whether the book is on an external storage.
         """
-        self.book = db.Book.get_by_id(book.id)
+        self.book = db.Book.get_by_id(self.book.id)
         if self.switch_signal:
             self.download_switch.disconnect(self.switch_signal)
         if db.is_external(self.book):
@@ -119,6 +123,8 @@ class BookOverview:
             self.download_box.set_visible(False)
             self.download_switch.set_visible(False)
         self.switch_signal = self.download_switch.connect("notify::active", self.__on_download_switch_changed)
+
+        self._set_book_download_status(self.book.downloaded)
 
     def update_time(self):
         if self.book is None:
@@ -186,6 +192,14 @@ class BookOverview:
         Blocks the download button. This gets called when a db scan is active.
         """
         self.download_switch.set_sensitive(not block)
+
+    def _set_book_download_status(self, downloaded):
+        if downloaded:
+            self.download_image.set_from_icon_name("downloaded-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
+            self.download_label.set_text(_("Downloaded"))
+        else:
+            self.download_image.set_from_icon_name("download-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
+            self.download_label.set_text(_("Download"))
 
     def _mark_current_track(self):
         """
@@ -283,5 +297,14 @@ class BookOverview:
             db.Book.update(offline=True).where(db.Book.id == self.book.id).execute()
             OfflineCache().add(self.book)
         else:
-            db.Book.update(offline=False).where(db.Book.id == self.book.id).execute()
+            db.Book.update(offline=False, downloaded=False).where(db.Book.id == self.book.id).execute()
             OfflineCache().remove(self.book)
+            self._set_book_download_status(False)
+
+    def __on_offline_cache_changed(self, event, message):
+        """
+        """
+        if event == "book-offline":
+            self._set_book_download_status(True)
+        elif event == "book-offline-removed":
+            self._set_book_download_status(False)

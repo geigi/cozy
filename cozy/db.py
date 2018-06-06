@@ -60,6 +60,7 @@ class Book(ModelBase):
     playback_speed = FloatField(default=1.0)
     last_played = IntegerField(default=0)
     offline = BooleanField(default=False)
+    downloaded = BooleanField(default=False)
 
 
 class Track(ModelBase):
@@ -339,6 +340,7 @@ def update_db_4():
 
 def update_db_5():
     """
+    Update database to v5.
     """
     db.create_tables([StorageBlackList])
 
@@ -346,6 +348,7 @@ def update_db_5():
 
 def update_db_6():
     """
+    Update database to v6.
     """
     migrator = SqliteMigrator(db)
 
@@ -353,10 +356,12 @@ def update_db_6():
 
     external = BooleanField(default=False)
     offline = BooleanField(default=False)
+    downloaded = BooleanField(default=False)
 
     migrate(
         migrator.add_column('storage', 'external', external),
-        migrator.add_column('book', 'offline', offline)
+        migrator.add_column('book', 'offline', offline),
+        migrator.add_column('book', 'downloaded', downloaded)
     )
 
     Settings.update(version=6).execute()

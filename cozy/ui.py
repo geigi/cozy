@@ -548,6 +548,7 @@ class CozyUI(metaclass=Singleton):
         """
         location = self.no_media_file_chooser.get_file().get_path()
         external = self.external_switch.get_active()
+        db.Storage.delete().where(db.Storage.path != "").execute()
         db.Storage.create(path=location, default=True, external=external)
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, True)

@@ -18,7 +18,7 @@ from mutagen.flac import FLAC
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 from mutagen.oggvorbis import OggVorbis
-from gi.repository import Gdk, GLib
+from gi.repository import Gdk, GLib, Gst
 
 import cozy.db as db
 import cozy.artwork_cache as artwork_cache
@@ -267,6 +267,11 @@ def import_file(file, directory, path, update=False, crc=None):
         track_data.name = __guess_title(file)
     if not track_data.disk:
         track_data.disk = 1
+    if not track_data.length:
+        # Try to get the length by using gstreamer
+        success, track_data.length = get_gstreamer_length(file)
+        if not success:
+            return False, None
 
     track_data.crc32 = tools.get_glib_settings().get_boolean("use-crc32")
 
@@ -307,6 +312,21 @@ def import_file(file, directory, path, update=False, crc=None):
         return True, track_data
 
     return True, None
+
+def get_gstreamer_length(path):
+    """
+    This function determines the length of an audio file using gstreamer.
+    This should be used as last resort if mutagen doesn't help us.
+    """
+    player = Gst.ElementFactory.make("playbin", "player")
+    player.set_property("uri", "file://" + path)
+    player.set_state(Gst.State.PAUSED)
+    suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
+    while state != Gst.State.PAUSED:
+        suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
+    success, duration = player.query_duration(Gst.Format.TIME)
+    player.set_state(Gst.State.NULL)
+    return success, int(duration / 1000000000)
 
 def __get_last_modified(crc, path):
     global settings

@@ -3,6 +3,7 @@ import time
 import uuid
 import os
 
+from cozy.event_sender import EventSender
 from cozy.singleton import Singleton
 import cozy.db as db
 import cozy.tools as tools
@@ -12,7 +13,7 @@ from gi.repository import Gio, Gdk, GLib
 
 log = logging.getLogger("offline_cache")
 
-class OfflineCache(metaclass=Singleton):
+class OfflineCache(EventSender, metaclass=Singleton):
     """
     This class is responsible for all actions on the offline cache.
     This includes operations like copying to the cache and adding or removing files from
@@ -25,6 +26,7 @@ class OfflineCache(metaclass=Singleton):
     thread = None
     filecopy_cancel = None
     last_ui_update = 0
+    current_book_processing = None
 
     def __init__(self):
         self.ui = cozy.ui.CozyUI()
@@ -89,7 +91,7 @@ class OfflineCache(metaclass=Singleton):
                 file.delete()
             
             if element.track.book.offline == True:
-                element.track.book.update(offline=False).execute()
+                element.track.book.update(offline=False, downloaded=False).execute()
             
         db.OfflineCache.delete().where(storage_path in db.OfflineCache.track.file).execute()
 
@@ -137,6 +139,8 @@ class OfflineCache(metaclass=Singleton):
         self._fill_queue_from_db()
         self.total_batch_count = len(self.queue)
         self.current_batch_count = 0
+        if len(self.queue) > 0:
+            self.current_book_processing = self.queue[0].track.book.id
 
         while len(self.queue) > 0:
             log.info("Processing item")
@@ -146,6 +150,10 @@ class OfflineCache(metaclass=Singleton):
                 break
             
             new_item = db.OfflineCache.get_by_id(item.id)
+
+            if self.current_book_processing != new_item.track.book.id:
+                self.update_book_download_status(db.Book.get_by_id(self.current_book_processing))
+                self.current_book_processing = new_item.track.book.id
 
             if not new_item.copied and os.path.exists(new_item.track.file):
                 log.info("Copying item")
@@ -166,8 +174,33 @@ class OfflineCache(metaclass=Singleton):
                 
             self.queue.remove(item)
 
+        if self.current_book_processing:
+            self.update_book_download_status(db.Book.get_by_id(self.current_book_processing))
+
         self.current = None
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.ui.switch_to_playing)
+
+    def update_book_download_status(self, book):
+        """
+        Updates the downloaded status of a book.
+        """
+        downloaded = True
+        tracks = db.tracks(book)
+        offline_tracks = db.OfflineCache.select().where(db.OfflineCache.track in tracks)
+
+        if offline_tracks.count() < 1:
+            downloaded = False
+        else:
+            for track in offline_tracks:
+                if not track.copied:
+                    downloaded = False
+        
+        db.Book.update(downloaded=downloaded).where(db.Book.id == book.id).execute()
+        if downloaded:
+            self.emit_event("book-offline", book)
+        else:
+            self.emit_event("book-offline-removed", book)
+
 
     def _is_processing(self):
         """

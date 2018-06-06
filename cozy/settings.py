@@ -75,6 +75,7 @@ class Settings(EventSender, metaclass=Singleton):
         Display settings from the database in the ui.
         """
         found_default = False
+        tools.remove_all_children(self.storage_list_box)
         for location in db.Storage.select():
             row = StorageListBoxRow(self, location.id, location.path, location.external, location.default)
             self.storage_list_box.add(row)
