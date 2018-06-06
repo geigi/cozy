@@ -1,3 +1,4 @@
+from pathlib import Path
 import logging
 from gi.repository import Gio
 
@@ -26,6 +27,9 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
         external_storage = []
         mounts = self.volume_monitor.get_mounts()
         # go through all audiobook locations and test if they can be found in the mounts list
+
+        # Assume home is always online
+        self.external_storage.append([str(Path.home()), True])
 
         for dir in db.get_external_storage_locations():
             online = False

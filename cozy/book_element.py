@@ -359,7 +359,8 @@ class BookElement(Gtk.FlowBoxChild):
             if message in db.tracks(self.book).first().file and not self.book.offline:
                 super().set_sensitive(False)
         elif event == "external-storage-removed":
-            if message in db.tracks(self.book).first().file:
+            first_track = db.tracks(self.book).first()
+            if first_track and message in first_track.file:
                 super().set_sensitive(True)
 
 
