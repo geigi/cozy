@@ -304,6 +304,9 @@ class BookOverview:
     def __on_offline_cache_changed(self, event, message):
         """
         """
+        if message is db.Book and message.id != self.book.id:
+            return
+
         if event == "book-offline":
             self._set_book_download_status(True)
         elif event == "book-offline-removed":

@@ -65,7 +65,11 @@ class OfflineCache(EventSender, metaclass=Singleton):
         offline_elements = db.OfflineCache.select().where(db.OfflineCache.track in ids)
 
         for element in offline_elements:
-            file = Gio.File.new_for_path(os.path.join(self.cache_dir, element.file))
+            file_path = os.path.join(self.cache_dir, element.file)
+            if file_path == self.cache_dir:
+                continue
+
+            file = Gio.File.new_for_path(file_path)
             if file.query_exists():
                 file.delete()
 
@@ -86,7 +90,11 @@ class OfflineCache(EventSender, metaclass=Singleton):
         """
         """
         for element in db.OfflineCache.select().join(db.Track).where(storage_path in db.Track.file):
-            file = Gio.File.new_for_path(os.path.join(self.cache_dir, element.file))
+            file_path = os.path.join(self.cache_dir, element.file)
+            if file_path == self.cache_dir:
+                continue
+            
+            file = Gio.File.new_for_path(file_path)
             if file.query_exists():
                 file.delete()
             
@@ -113,6 +121,17 @@ class OfflineCache(EventSender, metaclass=Singleton):
             db.OfflineCache.update(copied=False).where(db.OfflineCache.track.file in paths).execute()
             #tracks = db.OfflineCache.select(db.Track, db.OfflineCache).join(db.Track).where(db.Track.file in paths)
             self._fill_queue_from_db()
+
+    def delete_cache(self):
+        """
+        Deletes the entire offline cache files.
+        Doesn't delete anything from the DB.
+        """
+        cache_dir = os.path.join(tools.get_cache_dir(), "offline")
+
+        import shutil
+        shutil.rmtree(cache_dir)
+
 
     def _stop_processing(self):
         """
@@ -165,7 +184,9 @@ class OfflineCache(EventSender, metaclass=Singleton):
                 flags = Gio.FileCopyFlags.OVERWRITE
                 try:
                     copied = source.copy(destination, flags, self.filecopy_cancel, self.__update_copy_status, None)
-                except:
+                except Exception as e:
+                    log.error("Could not copy file to offline cache: " + new_item.track.file)
+                    log.error(e)
                     self.queue.remove(item)
                     continue
 

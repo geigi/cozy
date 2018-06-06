@@ -40,9 +40,11 @@ def delete_artwork_cache():
     """
     Deletes the artwork cache completely.
     """
-    cache_dir = tools.get_cache_dir()
+    cache_dir = os.path.join(tools.get_cache_dir(), "artwork")
+
     import shutil
-    shutil.rmtree(cache_dir)
+    if os.path.exists(cache_dir):
+        shutil.rmtree(cache_dir)
 
     q = ArtworkCache.delete()
     q.execute()
@@ -74,7 +76,7 @@ def __create_artwork_cache(book, pixbuf, size):
         gen_uuid = str(uuid.uuid4())
         ArtworkCache.create(book = book, uuid=gen_uuid)
 
-    cache_dir = os.path.join(tools.get_cache_dir(), gen_uuid)
+    cache_dir = os.path.join(os.path.join(tools.get_cache_dir(), "artwork"), gen_uuid)
     if not os.path.exists(cache_dir):
         os.makedirs(cache_dir)
 
@@ -101,7 +103,7 @@ def __load_pixbuf_from_cache(book, size):
     else:
         return None
 
-    cache_dir = tools.get_cache_dir()
+    cache_dir = os.path.join(tools.get_cache_dir(), "artwork")
     cache_dir = os.path.join(cache_dir, uuid)
 
     try:

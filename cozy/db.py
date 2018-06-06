@@ -365,6 +365,9 @@ def update_db_6():
     )
 
     Settings.update(version=6).execute()
+
+    import shutil
+    shutil.rmtree(tools.get_cache_dir())
     
 
 def update_db():
