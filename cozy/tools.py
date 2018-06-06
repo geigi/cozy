@@ -5,8 +5,8 @@ from threading import Thread, Event
 import logging as log
 import platform
 import os
-import magic
 from gi.repository import GLib, Gio
+import cozy.magic.magic as magic
 
 def get_cache_dir():
     """
@@ -209,8 +209,4 @@ def __get_media_type(path):
     :param path: Path to the file
     :return: mime type as string
     """
-    m = magic.open(magic.MAGIC_MIME_TYPE)
-    m.load()
-    mime = m.file(path)
-    m.close()
-    return mime
+    return magic.from_file(path, mime=True)

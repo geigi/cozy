@@ -56,7 +56,7 @@ If you like this project, consider supporting me on <a href="https://www.patreon
 - `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
 - `peewee >= 3.1` as object relation mapper
 - `python3-mutagen` for meta tag management
-- `python3-magic`
+- `file`
 - `gstreamer1.0-plugins-good`
 - `gstreamer1.0-libav` for mp4 support
 

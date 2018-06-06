@@ -91,9 +91,10 @@ class OfflineCache(metaclass=Singleton):
         """
         Update the cached version of the given files.
         """
-        db.OfflineCache.update(copied=False).join(db.Track).where(db.Track.file in paths).execute()
-        #tracks = db.OfflineCache.select(db.Track, db.OfflineCache).join(db.Track).where(db.Track.file in paths)
-        self._fill_queue_from_db()
+        if db.OfflineCache.select().count() > 0:
+            db.OfflineCache.update(copied=False).join(db.Track).where(db.Track.file in paths).execute()
+            #tracks = db.OfflineCache.select(db.Track, db.OfflineCache).join(db.Track).where(db.Track.file in paths)
+            self._fill_queue_from_db()
 
 
     def _stop_processing(self):
