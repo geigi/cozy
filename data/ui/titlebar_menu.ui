@@ -1,10 +1,16 @@
 <?xml version="1.0"?>
 <interface>
-	<menu id="app_menu">
-  <section>
+	<menu id="titlebar_menu">
+    <section>
       <item>
-        <attribute name="action">app.play_pause</attribute>
-        <attribute name="label" translatable="yes">_Play/Pause</attribute>
+        <attribute name="action">app.scan</attribute>
+        <attribute name="label" translatable="yes">_Scan Directory</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="action">app.hide_offline</attribute>
+        <attribute name="label" translatable="yes">_Hide unavailable books</attribute>
       </item>
     </section>
     <section>

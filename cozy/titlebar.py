@@ -92,8 +92,8 @@ class Titlebar:
 
         # app menu
         self.menu_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/app_menu.ui")
-        menu = self.menu_builder.get_object("app_menu")
+            "/de/geigi/cozy/titlebar_menu.ui")
+        menu = self.menu_builder.get_object("titlebar_menu")
         self.menu_button.set_menu_model(menu)
 
     def __init_signals(self):
