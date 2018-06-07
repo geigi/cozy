@@ -209,6 +209,9 @@ class BookElement(Gtk.FlowBoxChild):
         self.book = b
         self.ui = cozy.ui.CozyUI()
 
+        self.ONLINE_TOOLTIP_TEXT = _("Open book overview")
+        self.OFFLINE_TOOLTIP_TEXT = _("Currently offline")
+
         super().__init__()
         self.event_box = Gtk.EventBox()
         self.add_events(Gdk.EventMask.KEY_PRESS_MASK)
@@ -218,7 +221,6 @@ class BookElement(Gtk.FlowBoxChild):
         self.box.set_halign(Gtk.Align.CENTER)
         self.box.set_valign(Gtk.Align.START)
         self.box.set_margin_top(10)
-        self.box.set_tooltip_text(_("Open book overview"))
 
         # label contains the book name and is limited to x chars
         title_label = Gtk.Label.new("")
@@ -242,6 +244,9 @@ class BookElement(Gtk.FlowBoxChild):
 
         if db.is_external(self.book) and not self.book.offline and not FilesystemMonitor().is_book_online(self.book):
             super().set_sensitive(False)
+            self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
+        else:
+            self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
 
         # assemble finished element
         self.box.add(self.art)
@@ -276,7 +281,10 @@ class BookElement(Gtk.FlowBoxChild):
         """
         Refresh the internal book object from the database.
         """
-        self.book = db.Book.get_by_id(self.book.id)
+        try:
+            self.book = db.Book.get_by_id(self.book.id)
+        except:
+            pass
 
     def __on_button_press_event(self, widget, event):
         """
@@ -354,14 +362,16 @@ class BookElement(Gtk.FlowBoxChild):
         if event == "storage-online" and not super().get_sensitive():
             if message in db.tracks(self.book).first().file:
                 super().set_sensitive(True)
+                self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
         elif event == "storage-offline" and super().get_sensitive():
             self.refresh_book_object()
             if message in db.tracks(self.book).first().file and not self.book.offline:
                 super().set_sensitive(False)
+                self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         elif event == "external-storage-removed":
             first_track = db.tracks(self.book).first()
             if first_track and message in first_track.file:
-                super().set_sensitive(True)
+                self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
 
 
 class TrackElement(Gtk.EventBox):

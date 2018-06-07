@@ -82,7 +82,7 @@ class CozyUI(metaclass=Singleton):
 
         self.window_builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/main_window.ui")
-        
+
         self.about_builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/about.ui")
 
@@ -91,7 +91,8 @@ class CozyUI(metaclass=Singleton):
         Initialize the main css files and providers.
         Add css classes to the default screen style context.
         """
-        main_cssProviderFile = Gio.File.new_for_uri("resource:///de/geigi/cozy/application.css")
+        main_cssProviderFile = Gio.File.new_for_uri(
+            "resource:///de/geigi/cozy/application.css")
         main_cssProvider = Gtk.CssProvider()
         main_cssProvider.load_from_file(main_cssProviderFile)
 
@@ -130,7 +131,7 @@ class CozyUI(metaclass=Singleton):
         self.window.connect("drag_data_received", self.__on_drag_data_received)
         self.window.drag_dest_set(Gtk.DestDefaults.MOTION | Gtk.DestDefaults.HIGHLIGHT | Gtk.DestDefaults.DROP,
                                   [Gtk.TargetEntry.new("text/uri-list", 0, 80)], Gdk.DragAction.COPY)
-        
+
         # resizing the progress bar for older gtk versions
         if not Gtk.get_minor_version() > 18:
             self.window.connect("check-resize", self.__window_resized)
@@ -140,7 +141,8 @@ class CozyUI(metaclass=Singleton):
         self.book_box = self.window_builder.get_object("book_box")
         self.book_scroller = self.window_builder.get_object("book_scroller")
         self.sort_stack = self.window_builder.get_object("sort_stack")
-        self.sort_stack.connect("notify::visible-child", self.__on_sort_stack_changed)
+        self.sort_stack.connect("notify::visible-child",
+                                self.__on_sort_stack_changed)
         self.sort_box = self.window_builder.get_object("sort_box")
         self.import_box = self.window_builder.get_object("import_box")
         self.position_box = self.window_builder.get_object("position_box")
@@ -149,22 +151,26 @@ class CozyUI(metaclass=Singleton):
         self.back_button = self.window_builder.get_object("back_button")
         self.back_button.connect("clicked", self.__on_back_clicked)
 
-        self.category_toolbar = self.window_builder.get_object("category_toolbar")
+        self.category_toolbar = self.window_builder.get_object(
+            "category_toolbar")
 
-        self.sort_stack_revealer = self.window_builder.get_object("sort_stack_revealer")        
+        self.sort_stack_revealer = self.window_builder.get_object(
+            "sort_stack_revealer")
         # This fixes a bug where otherwise expand is
         # somehow set to true internally
         # but is still showing false in the inspector
         self.sort_stack_revealer.props.expand = True
         self.sort_stack_revealer.props.expand = False
-        
-        self.sort_stack_switcher = self.window_builder.get_object("sort_stack_switcher")
+
+        self.sort_stack_switcher = self.window_builder.get_object(
+            "sort_stack_switcher")
         self.no_media_file_chooser = self.window_builder.get_object(
             "no_media_file_chooser")
         self.no_media_file_chooser.connect(
             "file-set", self.__on_no_media_folder_changed)
-        self.external_switch = self.window_builder.get_object("external_switch")
-        
+        self.external_switch = self.window_builder.get_object(
+            "external_switch")
+
         self.auto_scan_switch = self.window_builder.get_object(
             "auto_scan_switch")
 
@@ -182,16 +188,17 @@ class CozyUI(metaclass=Singleton):
         self.reader_box.connect("row-selected", self.__on_listbox_changed)
         self.book_box.set_sort_func(self.__sort_books, None, False)
         self.book_box.set_filter_func(self.__filter_books, None, False)
-        
+
         try:
             about_close_button = self.about_builder.get_object(
                 "button_box").get_children()[2]
-        
+
             if about_close_button:
-                about_close_button.connect("clicked", self.__about_close_clicked)
+                about_close_button.connect(
+                    "clicked", self.__about_close_clicked)
         except Exception as e:
             log.info("Not connecting about close button.")
-        
+
         player.add_player_listener(self.__player_changed)
 
     def __init_actions(self):
@@ -232,6 +239,11 @@ class CozyUI(metaclass=Singleton):
         back_action.connect("activate", self.back)
         self.app.add_action(back_action)
         self.app.set_accels_for_action("app.back", ["Escape"])
+
+        hide_offline_action = Gio.SimpleAction.new_stateful("hide_offline", None, GLib.Variant.new_boolean(
+            tools.get_glib_settings().get_boolean("hide-offline")))
+        hide_offline_action.connect("change-state", self.__on_hide_offline)
+        self.app.add_action(hide_offline_action)
 
         builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")
         menu = builder.get_object("app_menu")
@@ -348,7 +360,8 @@ class CozyUI(metaclass=Singleton):
         """
         self.titlebar.switch_to_working(message, first)
         self.block_ui_buttons(True, True)
-        self.window.props.window.set_cursor(Gdk.Cursor.new_from_name(self.window.get_display(), "progress"))
+        self.window.props.window.set_cursor(
+            Gdk.Cursor.new_from_name(self.window.get_display(), "progress"))
 
     def switch_to_playing(self):
         """
@@ -383,7 +396,7 @@ class CozyUI(metaclass=Singleton):
             self.category_toolbar.set_visible(False)
         else:
             self.main_stack.props.visible_child_name = "main"
-            #This displays the placeholder if there is not a recent book yet
+            # This displays the placeholder if there is not a recent book yet
             self.__on_sort_stack_changed(None, None)
 
     def scan(self, action, first_scan):
@@ -391,7 +404,8 @@ class CozyUI(metaclass=Singleton):
         Start the db import in a seperate thread
         """
         self.switch_to_working(_("Importing Audiobooks"), first_scan)
-        thread = Thread(target=importer.update_database, args=(self, ), name="UpdateDatabaseThread")
+        thread = Thread(target=importer.update_database,
+                        args=(self, ), name="UpdateDatabaseThread")
         thread.start()
 
     def auto_import(self):
@@ -492,7 +506,8 @@ class CozyUI(metaclass=Singleton):
         This is used from the search popover.
         """
         row = next(filter(
-            lambda x: type(x.get_children()[0]) is Gtk.Label and x.get_children()[0].get_text() == book.author,
+            lambda x: type(x.get_children()[0]) is Gtk.Label and x.get_children()[
+                0].get_text() == book.author,
             self.author_box.get_children()), None)
 
         self.sort_stack.props.visible_child_name = "author"
@@ -508,7 +523,8 @@ class CozyUI(metaclass=Singleton):
         This is used from the search popover.
         """
         row = next(filter(
-            lambda x: type(x.get_children()[0]) is Gtk.Label and x.get_children()[0].get_text() == book.reader,
+            lambda x: type(x.get_children()[0]) is Gtk.Label and x.get_children()[
+                0].get_text() == book.reader,
             self.reader_box.get_children()), None)
 
         self.sort_stack.props.visible_child_name = "reader"
@@ -526,10 +542,19 @@ class CozyUI(metaclass=Singleton):
         book = db.Book.select().where(db.Book.id == book.id).get()
         self.book_overview.set_book(book)
 
-        #then switch the stacks
+        # then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"
         self.toolbar_stack.props.visible_child_name = "book_overview"
         self.search.close()
+
+    def __on_hide_offline(self, action, value):
+        """
+        Show/Hide offline books action handler.
+        """
+        action.set_state(value)
+        tools.get_glib_settings().set_boolean("hide-offline", value.get_boolean())
+
+        self.book_box.invalidate_filter()
 
     def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
         """
@@ -538,7 +563,8 @@ class CozyUI(metaclass=Singleton):
         """
         if target_type == 80:
             self.switch_to_working("copying new files...", False)
-            thread = Thread(target=importer.copy, args=(self, selection, ), name="DragDropImportThread")
+            thread = Thread(target=importer.copy, args=(
+                self, selection, ), name="DragDropImportThread")
             thread.start()
 
     def __on_no_media_folder_changed(self, sender):
@@ -606,7 +632,8 @@ class CozyUI(metaclass=Singleton):
             self.sleep_timer.start()
             self.book_overview.select_track(None, True)
             self.refresh_recent()
-            self.__inhibit_cookie = self.app.inhibit(self.window, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook")
+            self.__inhibit_cookie = self.app.inhibit(
+                self.window, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook")
         elif event == "pause":
             if self.__inhibit_cookie:
                 self.app.uninhibit(self.__inhibit_cookie)
@@ -647,7 +674,7 @@ class CozyUI(metaclass=Singleton):
         self.book_box.unselect_all()
         self.main_stack.props.visible_child_name = "main"
         self.toolbar_stack.props.visible_child_name = "main"
-    
+
     def on_close(self, widget, data=None):
         """
         Close and dispose everything that needs to be when window is closed.
@@ -694,40 +721,36 @@ class CozyUI(metaclass=Singleton):
         Filter the books in the book view according to the selected author/reader or "All".
         """
         selected_stack = self.sort_stack.props.visible_child_name
+        if tools.get_glib_settings().get_boolean("hide-offline"):
+            if not self.fs_monitor.is_book_online(book.book):
+                offline_available = db.Book.get_by_id(book.book.id).downloaded
+            else:
+                offline_available = True
+        else:
+            offline_available = True
+
         if selected_stack == "author":
             row = self.author_box.get_selected_row()
-            if row is None:
-                return True
-            
-            author = row.data
-            if author is None:
-                return True
-
-            if author == _("All"):
-                return True
-            else:
-                return True if book.book.author == author else False
         elif selected_stack == "reader":
             row = self.reader_box.get_selected_row()
-            if row is None:
-                return True
-                
-            reader = row.data
-            if reader is None:
-                return True
 
-            if reader == _("All"):
-                return True
+        if selected_stack == "author" or selected_stack == "reader":
+            if row is None:
+                return True and offline_available
+
+            field = row.data
+            if field is None or field == _("All"):
+                return True and offline_available
             else:
-                return True if book.book.reader == reader else False
+                return True and offline_available if book.book.author == field else False
         elif selected_stack == "recent":
-            return True if book.book.last_played > 0 else False
+            return True and offline_available if book.book.last_played > 0 else False
 
     def set_book_overview(self, book):
         # first update track ui
         self.book_overview.set_book(book)
 
-        #then switch the stacks
+        # then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"
         self.toolbar_stack.props.visible_child_name = "book_overview"
 
@@ -752,6 +775,7 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
         label.set_margin_bottom(self.MARGIN)
         label.set_margin_start(7)
         self.add(label)
+
 
 class ListBoxSeparatorRow(Gtk.ListBoxRow):
     """

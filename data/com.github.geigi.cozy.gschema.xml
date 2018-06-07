@@ -66,5 +66,10 @@
       <summary>Prefer external cover images over embedded.</summary>
       <description></description>
     </key>
+    <key type="b" name="hide-offline">
+      <default>false</default> 
+      <summary>Hide currently unavailable books in the library.</summary>
+      <description></description>
+    </key>
   </schema>
 </schemalist>

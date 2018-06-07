@@ -1256,7 +1256,7 @@ You can add more storage locations later in the settings</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="valign">start</property>
-                        <property name="margin_bottom">10</property>
+                        <property name="margin_bottom">15</property>
                         <property name="label">Book author</property>
                         <property name="justify">center</property>
                         <property name="wrap">True</property>

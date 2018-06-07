@@ -9,6 +9,12 @@
     </section>
     <section>
       <item>
+        <attribute name="action">app.hide_offline</attribute>
+        <attribute name="label" translatable="yes">_Hide unavailable books</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name="action">app.scan</attribute>
         <attribute name="label" translatable="yes">_Scan Directory</attribute>
       </item>
