@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cozy 0.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-27 18:25+0100\n"
+"POT-Creation-Date: 2018-06-08 00:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Amadeus Amadeus <amadorpr@hotmail.com>, 2018\n"
 "Language-Team: Spanish (https://www.transifex.com/geigi/teams/78138/es/)\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/book_element.py:58 cozy/search_results.py:124
+#: cozy/book_element.py:67 cozy/search_results.py:124
 msgid "Play this book"
 msgstr "Reproducir este libro"
 
@@ -25,17 +25,41 @@ msgstr "Reproducir este libro"
 msgid "Open book overview"
 msgstr "Abrir la sinopsis del libro"
 
-#: cozy/book_element.py:266
+#: cozy/book_element.py:213
+msgid "Currently offline"
+msgstr ""
+
+#: cozy/book_element.py:319
+msgid "Mark as read"
+msgstr ""
+
+#: cozy/book_element.py:322
+msgid "Open in file browser"
+msgstr ""
+
+#: cozy/book_element.py:325
 msgid "Remove from library"
 msgstr ""
 
-#: cozy/book_element.py:298
+#: cozy/book_element.py:395
 msgid "Play this part"
 msgstr "Reproducir esta sección"
 
-#: cozy/file_not_found_dialog.py:64
+#: cozy/book_overview.py:199
+msgid "Downloaded"
+msgstr ""
+
+#: cozy/book_overview.py:202 data/ui/main_window.ui:1310
+msgid "Download"
+msgstr ""
+
+#: cozy/file_not_found_dialog.py:66
 msgid "All files"
 msgstr "Todos los archivos"
+
+#: cozy/offline_cache.py:179
+msgid "Downloading "
+msgstr ""
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
@@ -45,339 +69,362 @@ msgstr "Ir al autor"
 msgid "Jump to reader "
 msgstr "Ir al lecttor"
 
-#: cozy/importer.py:283
+#: cozy/importer.py:263
 msgid "Unknown Author"
 msgstr "Autor desconocido"
 
-#: cozy/importer.py:285
+#: cozy/importer.py:265
 msgid "Unknown Reader"
 msgstr "Lector desconocido"
 
-#: cozy/tools.py:153
+#: cozy/tools.py:141
 msgid "hours"
 msgstr ""
 
-#: cozy/tools.py:155
+#: cozy/tools.py:143
 msgid "hour"
 msgstr ""
 
-#: cozy/tools.py:163
+#: cozy/tools.py:151
 msgid "minutes"
 msgstr ""
 
-#: cozy/tools.py:165
+#: cozy/tools.py:153
 msgid "minute"
 msgstr ""
 
-#: cozy/tools.py:169
+#: cozy/tools.py:157
 msgid "finished"
 msgstr ""
 
-#: cozy/tools.py:173
+#: cozy/tools.py:161
 msgid "seconds"
 msgstr ""
 
-#: cozy/tools.py:175
+#: cozy/tools.py:163
 msgid "second"
 msgstr ""
 
-#: cozy/tools.py:198
+#: cozy/tools.py:186
 msgid "never"
 msgstr ""
 
-#: cozy/tools.py:200
+#: cozy/tools.py:188
 msgid "today"
 msgstr ""
 
-#: cozy/tools.py:202
+#: cozy/tools.py:190
 msgid "yesterday"
 msgstr ""
 
-#: cozy/tools.py:204
+#: cozy/tools.py:192
 msgid "days"
 msgstr ""
 
-#: cozy/tools.py:204 cozy/tools.py:206 cozy/tools.py:208 cozy/tools.py:210
-#: cozy/tools.py:212 cozy/tools.py:214 cozy/tools.py:216
+#: cozy/tools.py:192 cozy/tools.py:194 cozy/tools.py:196 cozy/tools.py:198
+#: cozy/tools.py:200 cozy/tools.py:202 cozy/tools.py:204
 msgid "ago"
 msgstr ""
 
-#: cozy/tools.py:206
+#: cozy/tools.py:194
 msgid "week"
 msgstr ""
 
-#: cozy/tools.py:208
+#: cozy/tools.py:196
 msgid "weeks"
 msgstr ""
 
-#: cozy/tools.py:210
+#: cozy/tools.py:198
 msgid "month"
 msgstr ""
 
-#: cozy/tools.py:212
+#: cozy/tools.py:200
 msgid "months"
 msgstr ""
 
-#: cozy/tools.py:214
+#: cozy/tools.py:202
 msgid "year"
 msgstr ""
 
-#: cozy/tools.py:216
+#: cozy/tools.py:204
 msgid "years"
 msgstr ""
 
-#: cozy/ui.py:385
+#: cozy/ui.py:406
 msgid "Importing Audiobooks"
 msgstr "Importando audiolibros"
 
-#: cozy/ui.py:414 cozy/ui.py:420 cozy/ui.py:688 cozy/ui.py:701
+#: cozy/ui.py:436 cozy/ui.py:442 cozy/ui.py:742
 msgid "All"
 msgstr "Todos"
 
-#: cozy/ui.py:415 cozy/ui.py:421
+#: cozy/ui.py:437 cozy/ui.py:443
 msgid "Display all books"
 msgstr "Mostrar todos los libros"
 
-#: cozy/sleep_timer.py:52 cozy/sleep_timer.py:103 data/ui/timer_popover.ui:86
+#: cozy/sleep_timer.py:121 data/ui/timer_popover.ui:105
 msgid "min"
 msgstr "min"
 
-#: cozy/settings.py:320
+#: cozy/sleep_timer.py:129
+msgid "Off"
+msgstr ""
+
+#: cozy/settings.py:402 cozy/settings.py:445
+msgid "External drive"
+msgstr ""
+
+#: cozy/settings.py:405 cozy/settings.py:448
+msgid "Internal drive"
+msgstr ""
+
+#: cozy/settings.py:432
 msgid "Changing audio book location..."
 msgstr ""
 
-#: data/ui/main_window.ui:167
+#: data/ui/main_window.ui:71
+msgid "Rewind 30 seconds"
+msgstr "Retroceder 30 segundos"
+
+#: data/ui/main_window.ui:79
+msgid "Rewind button"
+msgstr "Retroceder"
+
+#: data/ui/main_window.ui:80
+msgid "Jump back 30 seconds"
+msgstr "Retroceder 30 segundos"
+
+#: data/ui/main_window.ui:97
+msgid "Start playback"
+msgstr "Reproducir"
+
+#: data/ui/main_window.ui:105
+msgid "Play/Pause Button"
+msgstr "Botón de reproducción/pausa"
+
+#: data/ui/main_window.ui:106
+msgid "Start or pause the playback"
+msgstr "Iniciar o pausar la reproducción"
+
+#: data/ui/main_window.ui:123
+msgid "Volume control"
+msgstr "Control de volumen"
+
+#: data/ui/main_window.ui:200
+msgid "Currently playing"
+msgstr "Actualmente reproduciendo"
+
+#: data/ui/main_window.ui:218
+msgid "Booktitle"
+msgstr "Titulodellibro"
+
+#: data/ui/main_window.ui:219
+msgid "Title of currently playing book"
+msgstr "Título del libro que se está reproduciendo"
+
+#: data/ui/main_window.ui:244
+msgid "Part name"
+msgstr "Nombre de la sección"
+
+#: data/ui/main_window.ui:245
+msgid "Title of the currently playing part"
+msgstr "Título de la sección que se está reproduciendo"
+
+#: data/ui/main_window.ui:287
+msgid "Elapsed time"
+msgstr "Tiempo transcurrido"
+
+#: data/ui/main_window.ui:295
+msgid "Time elapsed"
+msgstr "Tiempo transcurrido"
+
+#: data/ui/main_window.ui:296
+msgid "Elapsed time of current part"
+msgstr "Tiempo transcurrido de la sección actual"
+
+#: data/ui/main_window.ui:311
+msgid "Scrubb through current part"
+msgstr "Desplazarse por la sección actual"
+
+#: data/ui/main_window.ui:317
+msgid "Position slider"
+msgstr "Deslizador de posición"
+
+#: data/ui/main_window.ui:318
+msgid "Position of the current part in seconds"
+msgstr "Posición de la sección actual en segundos"
+
+#: data/ui/main_window.ui:336
+msgid "Remaining time"
+msgstr "Tiempo restante"
+
+#: data/ui/main_window.ui:344
+msgid "Time remaining"
+msgstr "Tiempo restante"
+
+#: data/ui/main_window.ui:345
+msgid "Remaining time of current part"
+msgstr "Tiempo restante de la sección actual"
+
+#: data/ui/main_window.ui:421
+msgid "Working..."
+msgstr "Funcionando..."
+
+#: data/ui/main_window.ui:426
+msgid "Currently working"
+msgstr "Actualmente funcionando"
+
+#: data/ui/main_window.ui:442
+msgid "Playback speed"
+msgstr "Velocidad de reproducción"
+
+#: data/ui/main_window.ui:464 data/ui/settings.ui:566
+msgid "Sleep timer"
+msgstr "Temporizador de apagado"
+
+#: data/ui/main_window.ui:475
+msgid "Timer menu button"
+msgstr "Botón de temporizador de apagado"
+
+#: data/ui/main_window.ui:476
+msgid "Open the sleep timer popover"
+msgstr "Abrir el cuadro del temporizador"
+
+#: data/ui/main_window.ui:492
+msgid "Search your library"
+msgstr "Buscar en la biblioteca"
+
+#: data/ui/main_window.ui:503
+msgid "Search menu button"
+msgstr "Botón de menú de búsqueda"
+
+#: data/ui/main_window.ui:504
+msgid "Open the search popover"
+msgstr "Abrir el cuadro de búsqueda"
+
+#: data/ui/main_window.ui:518
+msgid "Options"
+msgstr "Opciones"
+
+#: data/ui/main_window.ui:529
+msgid "Options menu button"
+msgstr "Botón de menú de opciones"
+
+#: data/ui/main_window.ui:530
+msgid "Open the options popover"
+msgstr "Abrir el cuadro de opciones"
+
+#: data/ui/main_window.ui:670
 msgid "Recent"
 msgstr ""
 
-#: data/ui/main_window.ui:186
+#: data/ui/main_window.ui:689
 msgid "List of authors"
 msgstr "Lista de autores"
 
-#: data/ui/main_window.ui:202 data/ui/main_window.ui:298
+#: data/ui/main_window.ui:705 data/ui/main_window.ui:813
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "Autor"
 
-#: data/ui/main_window.ui:221
+#: data/ui/main_window.ui:724
 msgid "List of readers"
 msgstr "Lista de lectores"
 
-#: data/ui/main_window.ui:237 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:740 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "Lector"
 
-#: data/ui/main_window.ui:278
+#: data/ui/main_window.ui:793
 msgid "List of books"
 msgstr "Lista de libros"
 
-#: data/ui/main_window.ui:313
+#: data/ui/main_window.ui:829
 msgid "Importing your audiobooks..."
 msgstr "Importando sus audiolibros..."
 
-#: data/ui/main_window.ui:364
+#: data/ui/main_window.ui:881
 msgid "Import your Audiobooks"
 msgstr "Importe sus audiolibros"
 
-#: data/ui/main_window.ui:380
+#: data/ui/main_window.ui:897
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 "Cozy importa automáticamente tus audiolibros a un directorio - tu "
 "biblioteca."
 
-#: data/ui/main_window.ui:420
-msgid "Drag & Drop"
-msgstr "Arrastrar y soltar"
+#: data/ui/main_window.ui:925
+msgid "External or Network drive?"
+msgstr ""
 
-#: data/ui/main_window.ui:436
+#: data/ui/main_window.ui:942
+msgid "Are your audiobooks stored on an external or network drive?"
+msgstr ""
+
+#: data/ui/main_window.ui:957
 msgid ""
-"Drag your audiobooks into cozy and the will be automatically imported to "
-"your library"
+"If they are you can enable offline mode for a book in the book overview\n"
+"This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Arrastre sus audiolibros hacia Cozy y serán importados automáticamente en su"
-" biblioteca"
 
-#: data/ui/main_window.ui:496
-msgid "Change Audiobooks Folder"
-msgstr "Cambiar el directorio de audiolibros"
-
-#: data/ui/main_window.ui:512
-msgid "Load audiobooks from a folder, network drive or an external disk"
-msgstr ""
-"Cargar audiolibros desde un directorio, almacenamiento de red o disco "
-"externo."
-
-#: data/ui/main_window.ui:541
-msgid "Location of your audiobooks"
-msgstr "Ubicación de sus audiolibros"
-
-#: data/ui/main_window.ui:577
+#: data/ui/main_window.ui:983 data/ui/main_window.ui:1040
 msgid "Auto scan switch"
 msgstr "Interruptor de autoexploración"
 
-#: data/ui/main_window.ui:578 data/ui/main_window.ui:593
+#: data/ui/main_window.ui:984 data/ui/main_window.ui:1022
+#: data/ui/main_window.ui:1041
 msgid "Automatically import new audiobooks on startup"
 msgstr ""
 "Importar automáticamente los audiolibros nuevos al inicio del programa"
 
-#: data/ui/main_window.ui:717
+#: data/ui/main_window.ui:1084
+msgid "Drag & Drop"
+msgstr "Arrastrar y soltar"
+
+#: data/ui/main_window.ui:1101
+msgid "Drag your audiobooks into cozy and they will be automatically imported"
+msgstr ""
+
+#: data/ui/main_window.ui:1122
+msgid "Location of your audiobooks"
+msgstr "Ubicación de sus audiolibros"
+
+#: data/ui/main_window.ui:1143
+msgid "Set Audiobooks Directory"
+msgstr ""
+
+#: data/ui/main_window.ui:1160
+msgid ""
+"Load audiobooks from a directory, network drive or an external disk\n"
+"You can add more storage locations later in the settings"
+msgstr ""
+
+#: data/ui/main_window.ui:1358
 msgid "Remaining"
 msgstr ""
 
-#: data/ui/main_window.ui:773
+#: data/ui/main_window.ui:1414
 msgid "Total"
 msgstr ""
 
-#: data/ui/main_window.ui:790
+#: data/ui/main_window.ui:1431
 msgid "Last played"
 msgstr ""
 
-#: data/ui/main_window.ui:807
+#: data/ui/main_window.ui:1448
 msgid "Published"
 msgstr ""
 
-#: data/ui/main_window.ui:945 data/ui/main_window.ui:978
+#: data/ui/main_window.ui:1586 data/ui/main_window.ui:1619
 msgid "page0"
 msgstr ""
 
-#: data/ui/main_window.ui:964
+#: data/ui/main_window.ui:1605
 msgid ""
 "Start exploring your library by switching to the Author or Reader view "
 "above."
 msgstr ""
-
-#: data/ui/main_window.ui:1017
-msgid "Rewind 30 seconds"
-msgstr "Retroceder 30 segundos"
-
-#: data/ui/main_window.ui:1025
-msgid "Rewind button"
-msgstr "Retroceder"
-
-#: data/ui/main_window.ui:1026
-msgid "Jump back 30 seconds"
-msgstr "Retroceder 30 segundos"
-
-#: data/ui/main_window.ui:1043
-msgid "Start playback"
-msgstr "Reproducir"
-
-#: data/ui/main_window.ui:1051
-msgid "Play/Pause Button"
-msgstr "Botón de reproducción/pausa"
-
-#: data/ui/main_window.ui:1052
-msgid "Start or pause the playback"
-msgstr "Iniciar o pausar la reproducción"
-
-#: data/ui/main_window.ui:1069
-msgid "Volume control"
-msgstr "Control de volumen"
-
-#: data/ui/main_window.ui:1146
-msgid "Currently playing"
-msgstr "Actualmente reproduciendo"
-
-#: data/ui/main_window.ui:1164
-msgid "Booktitle"
-msgstr "Titulodellibro"
-
-#: data/ui/main_window.ui:1165
-msgid "Title of currently playing book"
-msgstr "Título del libro que se está reproduciendo"
-
-#: data/ui/main_window.ui:1190
-msgid "Part name"
-msgstr "Nombre de la sección"
-
-#: data/ui/main_window.ui:1191
-msgid "Title of the currently playing part"
-msgstr "Título de la sección que se está reproduciendo"
-
-#: data/ui/main_window.ui:1233
-msgid "Elapsed time"
-msgstr "Tiempo transcurrido"
-
-#: data/ui/main_window.ui:1241
-msgid "Time elapsed"
-msgstr "Tiempo transcurrido"
-
-#: data/ui/main_window.ui:1242
-msgid "Elapsed time of current part"
-msgstr "Tiempo transcurrido de la sección actual"
-
-#: data/ui/main_window.ui:1257
-msgid "Scrubb through current part"
-msgstr "Desplazarse por la sección actual"
-
-#: data/ui/main_window.ui:1263
-msgid "Position slider"
-msgstr "Deslizador de posición"
-
-#: data/ui/main_window.ui:1264
-msgid "Position of the current part in seconds"
-msgstr "Posición de la sección actual en segundos"
-
-#: data/ui/main_window.ui:1282
-msgid "Remaining time"
-msgstr "Tiempo restante"
-
-#: data/ui/main_window.ui:1290
-msgid "Time remaining"
-msgstr "Tiempo restante"
-
-#: data/ui/main_window.ui:1291
-msgid "Remaining time of current part"
-msgstr "Tiempo restante de la sección actual"
-
-#: data/ui/main_window.ui:1367
-msgid "Working..."
-msgstr "Funcionando..."
-
-#: data/ui/main_window.ui:1372
-msgid "Currently working"
-msgstr "Actualmente funcionando"
-
-#: data/ui/main_window.ui:1388
-msgid "Playback speed"
-msgstr "Velocidad de reproducción"
-
-#: data/ui/main_window.ui:1410
-msgid "Sleep timer"
-msgstr "Temporizador de apagado"
-
-#: data/ui/main_window.ui:1421
-msgid "Timer menu button"
-msgstr "Botón de temporizador de apagado"
-
-#: data/ui/main_window.ui:1422
-msgid "Open the sleep timer popover"
-msgstr "Abrir el cuadro del temporizador"
-
-#: data/ui/main_window.ui:1438
-msgid "Search your library"
-msgstr "Buscar en la biblioteca"
-
-#: data/ui/main_window.ui:1449
-msgid "Search menu button"
-msgstr "Botón de menú de búsqueda"
-
-#: data/ui/main_window.ui:1450
-msgid "Open the search popover"
-msgstr "Abrir el cuadro de búsqueda"
-
-#: data/ui/main_window.ui:1464
-msgid "Options"
-msgstr "Opciones"
-
-#: data/ui/main_window.ui:1475
-msgid "Options menu button"
-msgstr "Botón de menú de opciones"
-
-#: data/ui/main_window.ui:1476
-msgid "Open the options popover"
-msgstr "Abrir el cuadro de opciones"
 
 #: data/ui/about.ui:11
 msgid "Support me on Patreon: https://www.patreon.com/geigi"
@@ -394,22 +441,26 @@ msgid "_Play/Pause"
 msgstr ""
 
 #: data/ui/app_menu.ui:13
+msgid "_Hide unavailable books"
+msgstr ""
+
+#: data/ui/app_menu.ui:19
 msgid "_Scan Directory"
 msgstr "_Explorar Directorio"
 
-#: data/ui/app_menu.ui:19
+#: data/ui/app_menu.ui:25
 msgid "_Preferences"
 msgstr "_Preferencias"
 
-#: data/ui/app_menu.ui:25
+#: data/ui/app_menu.ui:31
 msgid "_Help"
 msgstr "_Ayuda"
 
-#: data/ui/app_menu.ui:29
+#: data/ui/app_menu.ui:35
 msgid "_About"
 msgstr "_Información"
 
-#: data/ui/app_menu.ui:33
+#: data/ui/app_menu.ui:39
 msgid "_Quit"
 msgstr "_Salir"
 
@@ -449,83 +500,120 @@ msgstr ""
 "- El archivo no es un archivo de audio válido\n"
 "- El archivo está corrupto"
 
-#: data/ui/settings.ui:50
+#: data/ui/settings.ui:92 data/ui/settings.ui:344
 msgid "General"
 msgstr ""
 
-#: data/ui/settings.ui:69
+#: data/ui/settings.ui:137
 msgid "Dark Mode"
 msgstr ""
 
-#: data/ui/settings.ui:103
+#: data/ui/settings.ui:213
 msgid "Titlebar"
 msgstr ""
 
-#: data/ui/settings.ui:123
+#: data/ui/settings.ui:258
 msgid "Display the whole book instead of the current chaper"
 msgstr ""
 
-#: data/ui/settings.ui:154
+#: data/ui/settings.ui:321
 msgid "Appearance"
 msgstr "Apariencia"
 
-#: data/ui/settings.ui:169
+#: data/ui/settings.ui:387
 msgid "Suspend system on timer"
 msgstr "Suspender el sistema al finalizar el temporizador"
 
-#: data/ui/settings.ui:205
+#: data/ui/settings.ui:447
 msgid "Replay 30 seconds"
 msgstr "Volver a reproducir los últimos 30 segundos"
 
-#: data/ui/settings.ui:240
+#: data/ui/settings.ui:507
 msgid "Automatic media scan"
 msgstr "Exploración automática de archivos"
 
-#: data/ui/settings.ui:271
+#: data/ui/settings.ui:611
+msgid "Fadeout"
+msgstr ""
+
+#: data/ui/settings.ui:672
+msgid "Fadeout duration"
+msgstr ""
+
+#: data/ui/settings.ui:708
+msgid "15 s"
+msgstr ""
+
+#: data/ui/settings.ui:745
 msgid "Behaviour"
 msgstr "Comportamiento"
 
-#: data/ui/settings.ui:287
-msgid "Storage locations"
+#: data/ui/settings.ui:772
+msgid "Artwork"
 msgstr ""
 
-#: data/ui/settings.ui:346
+#: data/ui/settings.ui:824
+msgid "Prefer external images over embedded cover"
+msgstr ""
+
+#: data/ui/settings.ui:837
+msgid "Use images (cover.jpg, *.png, ...) when available"
+msgstr ""
+
+#: data/ui/settings.ui:920
 msgid "Audio books location"
 msgstr "Ubicación de los audiolibros"
 
-#: data/ui/settings.ui:365
+#: data/ui/settings.ui:936
+msgid "Storage locations"
+msgstr ""
+
+#: data/ui/settings.ui:994
 msgid "Add location"
 msgstr ""
 
-#: data/ui/settings.ui:390 data/ui/settings.ui:558
+#: data/ui/settings.ui:1019 data/ui/settings.ui:1215
 msgid "Remove location"
 msgstr ""
 
-#: data/ui/settings.ui:426
+#: data/ui/settings.ui:1055
+msgid "Toggle this storage location to be internal/external."
+msgstr ""
+
+#: data/ui/settings.ui:1081
 msgid "Set as default storage location for new audiobooks"
 msgstr ""
 
-#: data/ui/settings.ui:472
+#: data/ui/settings.ui:1134
 msgid "Blacklist"
 msgstr ""
 
-#: data/ui/settings.ui:521
+#: data/ui/settings.ui:1178
 msgid "Path"
 msgstr ""
 
-#: data/ui/settings.ui:604
+#: data/ui/settings.ui:1261
 msgid "Follow symlinks"
 msgstr "Seguir enlaces simbólicos"
 
-#: data/ui/settings.ui:636
+#: data/ui/settings.ui:1293
 msgid "Storage"
 msgstr ""
 
-#: data/ui/settings.ui:654
-msgid "Use crc32 checksum instead of last modified timestamp on folder scan"
+#: data/ui/settings.ui:1317
+msgid "By request"
 msgstr ""
 
-#: data/ui/settings.ui:689
+#: data/ui/settings.ui:1370
+msgid "Use crc32 checksum for file modification detection"
+msgstr ""
+
+#: data/ui/settings.ui:1383
+msgid ""
+"Only recommended if cozy doesn't detect file modifications while scanning"
+msgstr ""
+
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr ""
 
@@ -557,33 +645,21 @@ msgstr "Sección"
 msgid "Nothing found :("
 msgstr "No se ha encontrado nada :("
 
-#: data/ui/timer_popover.ui:32
-msgid "Toggle the timer on/off"
-msgstr "Temporizador encendido/apagado"
+#: data/ui/timer_popover.ui:39
+msgid "Stop after current chapter"
+msgstr ""
 
-#: data/ui/timer_popover.ui:36
-msgid "Timer toggle button"
-msgstr "Botón de encendido/apagado de temporizador"
-
-#: data/ui/timer_popover.ui:37
-msgid "Switch the sleep timer on or off"
-msgstr "Encender/apagar el temporizador"
-
-#: data/ui/timer_popover.ui:52 data/ui/timer_popover.ui:80
+#: data/ui/timer_popover.ui:76
 msgid "Timer duration"
 msgstr "Duración del temporizador"
 
-#: data/ui/timer_popover.ui:65
+#: data/ui/timer_popover.ui:88
 msgid "Timer duration slider"
 msgstr "Deslizador del tiempo del temporizador"
 
-#: data/ui/timer_popover.ui:66 data/ui/timer_popover.ui:93
+#: data/ui/timer_popover.ui:89
 msgid "Set the sleep timer duration in minutes"
 msgstr "Ajustar el temporizador de apagado en minutos"
-
-#: data/ui/timer_popover.ui:92
-msgid "Timer duration spin button"
-msgstr "Botón giratorio de duración del temporizador"
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"

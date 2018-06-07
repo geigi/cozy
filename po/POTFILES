@@ -1,7 +1,9 @@
 main.py
 cozy/book_element.py
+cozy/book_overview.py
 cozy/db.py
 cozy/file_not_found_dialog.py
+cozy/offline_cache.py
 cozy/search_results.py
 cozy/importer.py
 cozy/mpris.py
