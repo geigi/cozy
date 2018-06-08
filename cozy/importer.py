@@ -67,7 +67,7 @@ def b64tobinary(b64):
     return data
 
 
-def update_database(ui):
+def update_database(ui, force=False):
     """
     Scans the audio book directory for changes and new files.
     Also removes entries from the db that are no longer existent.
@@ -103,8 +103,14 @@ def update_database(ui):
 
                     imported = True
                     try:
+                        if force:
+                            crc = None
+                            if tools.get_glib_settings().get_boolean("use-crc32"):
+                                crc = __crc32_from_file(path)
+                            imported, ignore = import_file(file, directory, path, True, crc)
+                            tracks_cache_update.append(path)
                         # Is the track already in the database?
-                        if db.Track.select().where(db.Track.file == path).count() < 1:
+                        elif db.Track.select().where(db.Track.file == path).count() < 1:
                             imported, track_data = import_file(file, directory, path)
                             if track_data:
                                 tracks_to_import.append(track_data)

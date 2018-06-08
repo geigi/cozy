@@ -399,13 +399,13 @@ class CozyUI(metaclass=Singleton):
             # This displays the placeholder if there is not a recent book yet
             self.__on_sort_stack_changed(None, None)
 
-    def scan(self, action, first_scan):
+    def scan(self, action, first_scan, force=False):
         """
         Start the db import in a seperate thread
         """
         self.switch_to_working(_("Importing Audiobooks"), first_scan)
         thread = Thread(target=importer.update_database,
-                        args=(self, ), name="UpdateDatabaseThread")
+                        args=(self, force, ), name="UpdateDatabaseThread")
         thread.start()
 
     def auto_import(self):

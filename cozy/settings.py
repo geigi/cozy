@@ -63,6 +63,9 @@ class Settings(EventSender, metaclass=Singleton):
         self.fadeout_duration_adjustment.connect("value-changed", self.__on_fadeout_adjustment_changed)
         self.__on_fadeout_adjustment_changed(self.fadeout_duration_adjustment)
 
+        self.force_refresh_button = self.builder.get_object("force_refresh_button")
+        self.force_refresh_button.connect("clicked", self.__on_force_refresh_clicked)
+
         self._init_storage()
         self._init_blacklist()
         self.__init_bindings()
@@ -296,6 +299,13 @@ class Settings(EventSender, metaclass=Singleton):
         artwork_cache.delete_artwork_cache()
         self.ui.refresh_content()
 
+    def __on_force_refresh_clicked(self, widget):
+        """
+        Start a force refresh of the database.
+        """
+        self.ui.scan(None, False, True)
+
+
     def set_darkmode(self):
         """
         Enable or disable the dark gtk theme.
@@ -433,7 +443,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
             thread = Thread(target=importer.rebase_location, args=(
                 self.ui, old_path, new_path), name="RebaseStorageLocationThread")
             thread.start()
-    
+
     def __get_type_image(self):
         """
         Returns the matching drive icon for this storage location.
