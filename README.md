@@ -54,7 +54,7 @@ If you like this project, consider supporting me on <a href="https://www.patreon
 - `meson >= 0.40.0` as build system
 - `ninja`
 - `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
-- `peewee >= 3.1` as object relation mapper
+- `peewee >= 3.5` as object relation mapper
 - `python3-mutagen` for meta tag management
 - `file`
 - `gstreamer1.0-plugins-good`

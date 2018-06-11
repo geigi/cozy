@@ -325,6 +325,9 @@ def get_gstreamer_length(path):
     This should be used as last resort if mutagen doesn't help us.
     """
     player = Gst.ElementFactory.make("playbin", "player")
+    bus = player.get_bus()
+    bus.add_signal_watch()
+    handler_id = bus.connect("message", player.__on_gst_message)
     player.set_property("uri", "file://" + path)
     player.set_state(Gst.State.PAUSED)
     suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
@@ -332,6 +335,8 @@ def get_gstreamer_length(path):
         suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
     success, duration = player.query_duration(Gst.Format.TIME)
     player.set_state(Gst.State.NULL)
+    bus.disconnect(handler_id)
+    bus.remove_signal_watch()
     return success, int(duration / 1000000000)
 
 def __get_last_modified(crc, path):
