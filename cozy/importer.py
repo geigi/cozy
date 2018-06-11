@@ -23,6 +23,7 @@ from gi.repository import Gdk, GLib, Gst
 import cozy.db as db
 import cozy.artwork_cache as artwork_cache
 import cozy.tools as tools
+import cozy.player
 from cozy.offline_cache import OfflineCache
 
 log = logging.getLogger("importer")
@@ -327,7 +328,7 @@ def get_gstreamer_length(path):
     player = Gst.ElementFactory.make("playbin", "player")
     bus = player.get_bus()
     bus.add_signal_watch()
-    handler_id = bus.connect("message", player.__on_gst_message)
+    handler_id = bus.connect("message", cozy.player.__on_gst_message)
     player.set_property("uri", "file://" + path)
     player.set_state(Gst.State.PAUSED)
     suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
