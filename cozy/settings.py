@@ -162,6 +162,7 @@ class Settings(EventSender, metaclass=Singleton):
         sensitive = not block
         self.storage_list_box.set_sensitive(sensitive)
         self.add_storage_button.set_sensitive(sensitive)
+        self.external_button.set_sensitive(sensitive)
 
         row = self.storage_list_box.get_selected_row()
         if row and row.get_default() != True:

@@ -245,10 +245,10 @@ class CozyUI(metaclass=Singleton):
         self.app.add_action(back_action)
         self.app.set_accels_for_action("app.back", ["Escape"])
 
-        hide_offline_action = Gio.SimpleAction.new_stateful("hide_offline", None, GLib.Variant.new_boolean(
+        self.hide_offline_action = Gio.SimpleAction.new_stateful("hide_offline", None, GLib.Variant.new_boolean(
             tools.get_glib_settings().get_boolean("hide-offline")))
-        hide_offline_action.connect("change-state", self.__on_hide_offline)
-        self.app.add_action(hide_offline_action)
+        self.hide_offline_action.connect("change-state", self.__on_hide_offline)
+        self.app.add_action(self.hide_offline_action)
 
         builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")
         menu = builder.get_object("app_menu")
@@ -348,6 +348,7 @@ class CozyUI(metaclass=Singleton):
         self.titlebar.block_ui_buttons(block, scan)
         if scan:
             self.scan_action.set_enabled(sensitive)
+            self.hide_offline_action.set_enabled(sensitive)
             self.settings.block_ui_elements(block)
             self.book_overview.block_ui_elements(block)
 

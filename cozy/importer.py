@@ -226,11 +226,11 @@ def import_file(file, directory, path, update=False, crc=None):
         track_data = _get_mp3_tags(track, path)
 
     ### FLAC ###
-    elif media_type == "audio/flac":
+    elif media_type == "audio/flac" or media_type == "audio/x-flac":
         track_data = _get_flac_tags(track, path)
 
     ### OGG ###
-    elif media_type == "audio/ogg":
+    elif media_type == "audio/ogg" or media_type == "audio/x-ogg":
         track_data = _get_ogg_tags(track, path)
 
     ### MP4 ###
