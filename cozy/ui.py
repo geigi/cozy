@@ -824,9 +824,7 @@ class CozyUI(metaclass=Singleton):
         """
         This method reacts to storage settings changes.
         """
-        if event == "external-storage-removed" or event == "external-storage-added":
-            self.book_box.invalidate_filter()
-            self.filter_author_reader(tools.get_glib_settings().get_boolean("hide-offline"))
+        pass
 
 
 class ListBoxRowWithData(Gtk.ListBoxRow):

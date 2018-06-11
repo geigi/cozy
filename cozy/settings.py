@@ -7,7 +7,7 @@ from gi.repository import Gtk, Gio, Pango
 from cozy.event_sender import EventSender
 from cozy.singleton import Singleton
 
-import cozy.db as db
+import cozy.db
 import cozy.tools as tools
 import cozy.importer as importer
 import cozy.artwork_cache as artwork_cache
@@ -79,7 +79,7 @@ class Settings(EventSender, metaclass=Singleton):
         """
         found_default = False
         tools.remove_all_children(self.storage_list_box)
-        for location in db.Storage.select():
+        for location in cozy.db.Storage.select():
             row = StorageListBoxRow(self, location.id, location.path, location.external, location.default)
             self.storage_list_box.add(row)
             if location.default:
@@ -95,7 +95,7 @@ class Settings(EventSender, metaclass=Singleton):
         """
         Init the Storage location list.
         """
-        for file in db.StorageBlackList.select():
+        for file in cozy.db.StorageBlackList.select():
             self.blacklist_model.append([file.path, file.id])
         self.__on_blacklist_selection_changed(None)
 
@@ -173,7 +173,7 @@ class Settings(EventSender, metaclass=Singleton):
         """
         Add a new storage selector to the ui.
         """
-        db_obj = db.Storage.create(path="")
+        db_obj = cozy.db.Storage.create(path="")
         self.storage_list_box.add(StorageListBoxRow(self, db_obj.id, "", False, False))
 
     def __on_remove_storage_clicked(self, widget):
@@ -181,10 +181,10 @@ class Settings(EventSender, metaclass=Singleton):
         Remove a storage selector from the ui and database.
         """
         row = self.storage_list_box.get_selected_row()
-        db.Storage.select().where(db.Storage.path == row.path).get().delete_instance()
+        cozy.db.Storage.select().where(cozy.db.Storage.path == row.path).get().delete_instance()
         self.storage_list_box.remove(row)
         self.emit_event("storage-removed", row.path)
-        thread = Thread(target=db.remove_tracks_with_path, args=(self.ui, row.path), name=("RemoveStorageFromDB"))
+        thread = Thread(target=cozy.db.remove_tracks_with_path, args=(self.ui, row.path), name=("RemoveStorageFromDB"))
         thread.start()
         self.__on_storage_box_changed(None, None)
         
@@ -248,7 +248,7 @@ class Settings(EventSender, metaclass=Singleton):
                 ids.append(self.blacklist_model.get_value(treeiter, 1))
                 self.blacklist_model.remove(treeiter)
             
-            db.StorageBlackList.delete().where(db.StorageBlackList.id in ids).execute()
+            cozy.db.StorageBlackList.delete().where(cozy.db.StorageBlackList.id in ids).execute()
 
         self.__on_blacklist_selection_changed(self.blacklist_tree_view.get_selection())
 
@@ -266,7 +266,7 @@ class Settings(EventSender, metaclass=Singleton):
     def __on_external_clicked(self, widget):
         """
         The external/internal button was clicked.
-        The new setting will be written to the db.
+        The new setting will be written to the cozy.db.
         """
         external = self.external_button.get_active()
 
@@ -384,7 +384,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         """
         self.default = default
         self.default_image.set_visible(default)
-        db.Storage.update(default=default).where(db.Storage.id == self.db_id).execute()
+        cozy.db.Storage.update(default=default).where(cozy.db.Storage.id == self.db_id).execute()
 
     def get_default(self):
         """
@@ -405,7 +405,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
     def set_external(self, external):
         """
         Set this entry as external/internal storage.
-        This method also writes the setting to the db.
+        This method also writes the setting to the cozy.db.
         """
         self.external = external
         if external:
@@ -415,7 +415,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
             self.type_image.set_from_icon_name("drive-harddisk-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
             self.type_image.set_tooltip_text(_("Internal drive"))
 
-        db.Storage.update(external=external).where(db.Storage.id == self.db_id).execute()
+        cozy.db.Storage.update(external=external).where(cozy.db.Storage.id == self.db_id).execute()
 
     def __on_folder_changed(self, widget):
         """
@@ -424,13 +424,13 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         """
         new_path = self.location_chooser.get_file().get_path()
         # First test if the new location is already in the database
-        if db.Storage.select().where(db.Storage.path == new_path).count() > 0:
+        if cozy.db.Storage.select().where(cozy.db.Storage.path == new_path).count() > 0:
             return
 
         # If not, add it to the database
-        old_path = db.Storage.select().where(db.Storage.id == self.db_id).get().path
+        old_path = cozy.db.Storage.select().where(cozy.db.Storage.id == self.db_id).get().path
         self.path = new_path
-        db.Storage.update(path=new_path).where(db.Storage.id == self.db_id).execute()
+        cozy.db.Storage.update(path=new_path).where(cozy.db.Storage.id == self.db_id).execute()
 
         # Run a reimport or rebase
         if old_path == "":
@@ -439,7 +439,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
             self.ui.scan(None, False)
         else:
             self.parent.emit_event("storage-changed", self.path)
-            log.info("Audio book location changed, rebasing the location in db.")
+            log.info("Audio book location changed, rebasing the location in cozy.db.")
             self.ui.switch_to_working(_("Changing audio book location..."), False)
             thread = Thread(target=importer.rebase_location, args=(
                 self.ui, old_path, new_path), name="RebaseStorageLocationThread")
