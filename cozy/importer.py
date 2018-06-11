@@ -332,8 +332,10 @@ def get_gstreamer_length(path):
     player.set_property("uri", "file://" + path)
     player.set_state(Gst.State.PAUSED)
     suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
-    while state != Gst.State.PAUSED:
+    limit = 0
+    while state != Gst.State.PAUSED and limit < 100:
         suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
+        limit += 1
     success, duration = player.query_duration(Gst.Format.TIME)
     player.set_state(Gst.State.NULL)
     bus.disconnect(handler_id)
