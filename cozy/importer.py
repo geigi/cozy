@@ -340,7 +340,10 @@ def get_gstreamer_length(path):
     player.set_state(Gst.State.NULL)
     bus.disconnect(handler_id)
     bus.remove_signal_watch()
-    return success, int(duration / 1000000000)
+    if success:
+        return success, int(duration / 1000000000)
+    else:
+        success, None
 
 def __get_last_modified(crc, path):
     global settings
