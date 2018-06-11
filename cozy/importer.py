@@ -683,16 +683,6 @@ def __get_common_tag(track, tag):
 
     return value
 
-    try:
-        value = track.mutagen[tag][0]
-    except Exception as e:
-        log.info("Could not get tag " + tag + " for file " + track.path)
-        log.info(e)
-
-    return value
-
-
-
 # thanks to oleg-krv
 def __crc32_from_file(filename):
     crc_file = 0

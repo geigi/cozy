@@ -620,7 +620,7 @@ audio-volume-medium-symbolic</property>
           </packing>
         </child>
         <child>
-          <object class="GtkSeparator">
+          <object class="GtkSeparator" id="category_toolbar_separator">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
           </object>

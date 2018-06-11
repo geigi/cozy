@@ -174,6 +174,11 @@ class CozyUI(metaclass=Singleton):
         self.auto_scan_switch = self.window_builder.get_object(
             "auto_scan_switch")
 
+        # some visual stuff
+        self.category_toolbar_separator = self.window_builder.get_object("category_toolbar_separator")
+        if tools.is_elementary():
+            self.category_toolbar.set_visible(False)
+
         # get about dialog
         self.about_dialog = self.about_builder.get_object("about_dialog")
         self.about_dialog.set_transient_for(self.window)
@@ -415,22 +420,61 @@ class CozyUI(metaclass=Singleton):
     def back(self, action, parameter):
         self.__on_back_clicked(None)
 
-    def refresh_content(self):
+    def filter_author_reader(self, hide_offline):
         """
-        Refresh all content.
+        This method filters unavailable (offline) author and readers from
+        the list boxes.
         """
-        # First clear the boxes
-        childs = self.author_box.get_children()
-        for element in childs:
-            self.author_box.remove(element)
+        offline_authors = []
+        offline_readers = []
+        online_authors = []
+        online_readers = []
 
-        childs = self.reader_box.get_children()
-        for element in childs:
-            self.reader_box.remove(element)
+        if hide_offline:
+            for b in db.books():
+                if not self.fs_monitor.is_book_online(b) and not b.downloaded:
+                    offline_authors.append(b.author)
+                    offline_readers.append(b.reader)
+                else:
+                    online_authors.append(b.author)
+                    online_readers.append(b.reader)
+            
+            offline_authors = sorted(list(set(offline_authors)))
+            offline_readers = sorted(list(set(offline_readers)))
+            online_authors = sorted(list(set(online_authors)))
+            online_readers = sorted(list(set(online_readers)))
 
-        childs = self.book_box.get_children()
-        for element in childs:
-            self.book_box.remove(element)
+            authors = [i for i in offline_authors if i not in online_authors]
+            readers = [i for i in offline_readers if i not in online_readers]
+
+            for row in self.author_box.get_children():
+                if not isinstance(row, ListBoxRowWithData):
+                    continue
+
+                if any(row.data == x for x in authors):
+                    row.set_visible(False)
+                else:
+                    row.set_visible(True)
+            
+            for row in self.reader_box.get_children():
+                if not isinstance(row, ListBoxRowWithData):
+                    continue
+                
+                if any(row.data == x for x in readers):
+                    row.set_visible(False)
+                else:
+                    row.set_visible(True)
+        else:
+            for row in self.author_box:
+                row.set_visible(True)
+
+            for row in self.reader_box:
+                row.set_visible(True)
+            
+
+    def populate_author_reader(self):
+        tools.remove_all_children(self.author_box)
+        tools.remove_all_children(self.reader_box)
 
         # Add the special All element
         all_row = ListBoxRowWithData(_("All"), False)
@@ -456,6 +500,19 @@ class CozyUI(metaclass=Singleton):
         # this is required to see the new items
         self.author_box.show_all()
         self.reader_box.show_all()
+
+
+    def refresh_content(self):
+        """
+        Refresh all content.
+        """
+        # First clear the boxes
+        childs = self.book_box.get_children()
+        for element in childs:
+            self.book_box.remove(element)
+
+        self.populate_author_reader()
+        self.filter_author_reader(tools.get_glib_settings().get_boolean("hide-offline"))
 
         for b in db.books():
             self.book_box.add(BookElement(b))
@@ -555,6 +612,7 @@ class CozyUI(metaclass=Singleton):
         tools.get_glib_settings().set_boolean("hide-offline", value.get_boolean())
 
         self.book_box.invalidate_filter()
+        self.filter_author_reader(value.get_boolean())
 
     def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
         """
@@ -742,7 +800,10 @@ class CozyUI(metaclass=Singleton):
             if field is None or field == _("All"):
                 return True and offline_available
             else:
-                return True and offline_available if book.book.author == field else False
+                if selected_stack == "author":
+                    return True and offline_available if book.book.author == field else False
+                if selected_stack == "reader":
+                    return True and offline_available if book.book.reader == field else False
         elif selected_stack == "recent":
             return True and offline_available if book.book.last_played > 0 else False
 

@@ -7,6 +7,7 @@ from cozy.singleton import Singleton
 import cozy.settings
 import cozy.db as db
 import cozy.ui
+import cozy.tools as tools
 
 log = logging.getLogger("fs_monitor")
 
@@ -56,6 +57,9 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
         """
         result = next((storage[1] for storage in self.external_storage if storage[0] in track.file), True)
         return (result)
+    
+    def get_offline_storages(self):
+        return [i[0] for i in self.external_storage if not i[1]]
 
     def __on_mount_added(self, monitor, mount):
         """
@@ -72,6 +76,7 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
             storage[1] = True
         
         cozy.ui.CozyUI().book_box.invalidate_filter()
+        cozy.ui.CozyUI().filter_author_reader(tools.get_glib_settings().get_boolean("hide-offline"))
 
     def __on_mount_removed(self, monitor, mount):
         """
@@ -90,6 +95,7 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
             # switch to offline version if currently playing
         
         cozy.ui.CozyUI().book_box.invalidate_filter()
+        cozy.ui.CozyUI().filter_author_reader(tools.get_glib_settings().get_boolean("hide-offline"))
 
     def __on_settings_changed(self, event, message):
         """
