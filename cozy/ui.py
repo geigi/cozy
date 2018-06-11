@@ -262,6 +262,7 @@ class CozyUI(metaclass=Singleton):
         self.speed = PlaybackSpeed()
         self.search = Search()
         self.settings = Settings()
+        self.settings.add_listener(self.__on_settings_changed)
         self.book_overview = BookOverview()
         self.fs_monitor = fs_monitor.FilesystemMonitor()
         self.offline_cache = offline_cache.OfflineCache()
@@ -818,6 +819,14 @@ class CozyUI(metaclass=Singleton):
 
         self.book_overview.play_book_button.grab_remove()
         self.book_overview.scroller.grab_focus()
+    
+    def __on_settings_changed(self, event, message):
+        """
+        This method reacts to storage settings changes.
+        """
+        if event == "external-storage-removed" or event == "external-storage-added":
+            self.book_box.invalidate_filter()
+            self.filter_author_reader(tools.get_glib_settings().get_boolean("hide-offline"))
 
 
 class ListBoxRowWithData(Gtk.ListBoxRow):
