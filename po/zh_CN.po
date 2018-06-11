@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cozy 0.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-08 00:22+0200\n"
+"POT-Creation-Date: 2018-06-11 11:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2018\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/geigi/teams/78138/zh_CN/)\n"
@@ -69,11 +69,11 @@ msgstr "跳转到作者"
 msgid "Jump to reader "
 msgstr "跳转到朗读者"
 
-#: cozy/importer.py:263
+#: cozy/importer.py:269
 msgid "Unknown Author"
 msgstr "未知作者"
 
-#: cozy/importer.py:265
+#: cozy/importer.py:271
 msgid "Unknown Reader"
 msgstr "未知朗读者"
 
@@ -150,15 +150,15 @@ msgstr ""
 msgid "years"
 msgstr ""
 
-#: cozy/ui.py:406
+#: cozy/ui.py:411
 msgid "Importing Audiobooks"
 msgstr "导入有声读物"
 
-#: cozy/ui.py:436 cozy/ui.py:442 cozy/ui.py:742
+#: cozy/ui.py:480 cozy/ui.py:486 cozy/ui.py:800
 msgid "All"
 msgstr "所有"
 
-#: cozy/ui.py:437 cozy/ui.py:443
+#: cozy/ui.py:481 cozy/ui.py:487
 msgid "Display all books"
 msgstr "显示所有书籍"
 
@@ -170,15 +170,15 @@ msgstr "秒"
 msgid "Off"
 msgstr ""
 
-#: cozy/settings.py:402 cozy/settings.py:445
+#: cozy/settings.py:412 cozy/settings.py:455
 msgid "External drive"
 msgstr ""
 
-#: cozy/settings.py:405 cozy/settings.py:448
+#: cozy/settings.py:415 cozy/settings.py:458
 msgid "Internal drive"
 msgstr ""
 
-#: cozy/settings.py:432
+#: cozy/settings.py:442
 msgid "Changing audio book location..."
 msgstr ""
 
@@ -423,10 +423,6 @@ msgid ""
 "above."
 msgstr ""
 
-#: data/ui/about.ui:11
-msgid "Support me on Patreon: https://www.patreon.com/geigi"
-msgstr "在Patreon上支持我:https://www.patreon.com/geigi"
-
 #: data/ui/about.ui:13
 msgid "GitHub"
 msgstr "GitHub"
@@ -436,26 +432,18 @@ msgid "_Play/Pause"
 msgstr ""
 
 #: data/ui/app_menu.ui:13
-msgid "_Hide unavailable books"
-msgstr ""
-
-#: data/ui/app_menu.ui:19
-msgid "_Scan Directory"
-msgstr "扫描目录"
-
-#: data/ui/app_menu.ui:25
 msgid "_Preferences"
 msgstr "偏好设置"
 
-#: data/ui/app_menu.ui:31
+#: data/ui/app_menu.ui:19
 msgid "_Help"
 msgstr "帮助"
 
-#: data/ui/app_menu.ui:35
+#: data/ui/app_menu.ui:23
 msgid "_About"
 msgstr "关于"
 
-#: data/ui/app_menu.ui:39
+#: data/ui/app_menu.ui:27
 msgid "_Quit"
 msgstr "退出"
 
@@ -535,10 +523,6 @@ msgstr ""
 msgid "Fadeout duration"
 msgstr ""
 
-#: data/ui/settings.ui:708
-msgid "15 s"
-msgstr ""
-
 #: data/ui/settings.ui:745
 msgid "Behaviour"
 msgstr "行为"
@@ -596,19 +580,35 @@ msgid "Storage"
 msgstr ""
 
 #: data/ui/settings.ui:1317
+msgid "Database"
+msgstr ""
+
+#: data/ui/settings.ui:1369
+msgid "Force refresh the database"
+msgstr ""
+
+#: data/ui/settings.ui:1382
+msgid "This will force update the metadata of all imported books"
+msgstr ""
+
+#: data/ui/settings.ui:1402
+msgid "Force refresh"
+msgstr ""
+
+#: data/ui/settings.ui:1470
 msgid "By request"
 msgstr ""
 
-#: data/ui/settings.ui:1370
+#: data/ui/settings.ui:1523
 msgid "Use crc32 checksum for file modification detection"
 msgstr ""
 
-#: data/ui/settings.ui:1383
+#: data/ui/settings.ui:1536
 msgid ""
 "Only recommended if cozy doesn't detect file modifications while scanning"
 msgstr ""
 
-#: data/ui/settings.ui:1458
+#: data/ui/settings.ui:1611
 msgid "Advanced"
 msgstr ""
 

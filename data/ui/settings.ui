@@ -705,7 +705,7 @@
                                     <property name="halign">end</property>
                                     <property name="valign">center</property>
                                     <property name="margin_left">10</property>
-                                    <property name="label" translatable="yes">15 s</property>
+                                    <property name="label" translatable="no">15 s</property>
                                     <property name="justify">right</property>
                                     <property name="single_line_mode">True</property>
                                   </object>
