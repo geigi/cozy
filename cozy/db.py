@@ -18,6 +18,7 @@ from playhouse.migrate import SqliteMigrator, migrate
 from gi.repository import GLib, GdkPixbuf, Gdk
 
 import cozy.tools as tools
+from cozy.filesystem_monitor import FilesystemMonitor
 
 DB_VERSION = 6
 
@@ -498,7 +499,7 @@ def remove_invalid_entries(ui=None, refresh=False):
     """
     # remove entries from the db that are no longer existent
     for track in Track.select():
-        if not os.path.isfile(track.file):
+        if not os.path.isfile(track.file) and not FilesystemMonitor().is_track_online(track):
             track.delete_instance()
 
     clean_books()
