@@ -276,7 +276,7 @@ def import_file(file, directory, path, update=False, crc=None):
         track_data.disk = 1
     if not track_data.length:
         # Try to get the length by using gstreamer
-        success, track_data.length = get_gstreamer_length(file)
+        success, track_data.length = get_gstreamer_length(path)
         if not success:
             return False, None
 
