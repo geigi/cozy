@@ -147,7 +147,7 @@ class CozyUI(metaclass=Singleton):
         self.import_box = self.window_builder.get_object("import_box")
         self.position_box = self.window_builder.get_object("position_box")
         self.main_stack = self.window_builder.get_object("main_stack")
-        self.toolbar_stack = self.window_builder.get_object("toolbar_stack")
+        self.toolbar_revealer = self.window_builder.get_object("toolbar_revealer")
         self.back_button = self.window_builder.get_object("back_button")
         self.back_button.connect("clicked", self.__on_back_clicked)
 
@@ -378,7 +378,7 @@ class CozyUI(metaclass=Singleton):
         self.titlebar.switch_to_playing()
         if self.main_stack.props.visible_child_name != "book_overview" and self.main_stack.props.visible_child_name != "nothing_here" and self.main_stack.props.visible_child_name != "no_media":
             self.main_stack.props.visible_child_name = "main"
-        if self.main_stack.props.visible_child_name != "no_media":
+        if self.main_stack.props.visible_child_name != "no_media" and self.main_stack.props.visible_child_name != "book_overview":
             self.category_toolbar.set_visible(True)
         if player.get_current_track():
             self.block_ui_buttons(False, True)
@@ -603,7 +603,7 @@ class CozyUI(metaclass=Singleton):
 
         # then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"
-        self.toolbar_stack.props.visible_child_name = "book_overview"
+        self.toolbar_revealer.set_reveal_child(False)
         self.search.close()
 
     def __on_hide_offline(self, action, value):
@@ -733,7 +733,7 @@ class CozyUI(metaclass=Singleton):
     def __on_back_clicked(self, widget):
         self.book_box.unselect_all()
         self.main_stack.props.visible_child_name = "main"
-        self.toolbar_stack.props.visible_child_name = "main"
+        self.toolbar_revealer.set_reveal_child(True)
 
     def on_close(self, widget, data=None):
         """
@@ -815,7 +815,7 @@ class CozyUI(metaclass=Singleton):
 
         # then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"
-        self.toolbar_stack.props.visible_child_name = "book_overview"
+        self.toolbar_revealer.set_reveal_child(False)
 
         self.book_overview.play_book_button.grab_remove()
         self.book_overview.scroller.grab_focus()
