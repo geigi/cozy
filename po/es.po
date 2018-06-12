@@ -5,9 +5,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: cozy 0.5.4\n"
+"Project-Id-Version: cozy 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-11 11:47+0200\n"
+"POT-Creation-Date: 2018-06-12 12:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Amadeus Amadeus <amadorpr@hotmail.com>, 2018\n"
 "Language-Team: Spanish (https://www.transifex.com/geigi/teams/78138/es/)\n"
@@ -49,7 +49,7 @@ msgstr "Reproducir esta sección"
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/book_overview.py:202 data/ui/main_window.ui:1310
+#: cozy/book_overview.py:202 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr ""
 
@@ -57,8 +57,8 @@ msgstr ""
 msgid "All files"
 msgstr "Todos los archivos"
 
-#: cozy/offline_cache.py:179
-msgid "Downloading "
+#: cozy/offline_cache.py:175
+msgid "Copying"
 msgstr ""
 
 #: cozy/search_results.py:72
@@ -69,11 +69,11 @@ msgstr "Ir al autor"
 msgid "Jump to reader "
 msgstr "Ir al lecttor"
 
-#: cozy/importer.py:269
+#: cozy/importer.py:270
 msgid "Unknown Author"
 msgstr "Autor desconocido"
 
-#: cozy/importer.py:271
+#: cozy/importer.py:272
 msgid "Unknown Reader"
 msgstr "Lector desconocido"
 
@@ -150,15 +150,15 @@ msgstr ""
 msgid "years"
 msgstr ""
 
-#: cozy/ui.py:411
+#: cozy/ui.py:414
 msgid "Importing Audiobooks"
 msgstr "Importando audiolibros"
 
-#: cozy/ui.py:480 cozy/ui.py:486 cozy/ui.py:800
+#: cozy/ui.py:483 cozy/ui.py:489 cozy/ui.py:803
 msgid "All"
 msgstr "Todos"
 
-#: cozy/ui.py:481 cozy/ui.py:487
+#: cozy/ui.py:484 cozy/ui.py:490
 msgid "Display all books"
 msgstr "Mostrar todos los libros"
 
@@ -170,15 +170,15 @@ msgstr "min"
 msgid "Off"
 msgstr ""
 
-#: cozy/settings.py:412 cozy/settings.py:455
+#: cozy/settings.py:413 cozy/settings.py:456
 msgid "External drive"
 msgstr ""
 
-#: cozy/settings.py:415 cozy/settings.py:458
+#: cozy/settings.py:416 cozy/settings.py:459
 msgid "Internal drive"
 msgstr ""
 
-#: cozy/settings.py:442
+#: cozy/settings.py:443
 msgid "Changing audio book location..."
 msgstr ""
 
@@ -314,119 +314,119 @@ msgstr "Botón de menú de opciones"
 msgid "Open the options popover"
 msgstr "Abrir el cuadro de opciones"
 
-#: data/ui/main_window.ui:670
+#: data/ui/main_window.ui:655
 msgid "Recent"
 msgstr ""
 
-#: data/ui/main_window.ui:689
+#: data/ui/main_window.ui:674
 msgid "List of authors"
 msgstr "Lista de autores"
 
-#: data/ui/main_window.ui:705 data/ui/main_window.ui:813
+#: data/ui/main_window.ui:690 data/ui/main_window.ui:798
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "Autor"
 
-#: data/ui/main_window.ui:724
+#: data/ui/main_window.ui:709
 msgid "List of readers"
 msgstr "Lista de lectores"
 
-#: data/ui/main_window.ui:740 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:725 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "Lector"
 
-#: data/ui/main_window.ui:793
+#: data/ui/main_window.ui:778
 msgid "List of books"
 msgstr "Lista de libros"
 
-#: data/ui/main_window.ui:829
+#: data/ui/main_window.ui:814
 msgid "Importing your audiobooks..."
 msgstr "Importando sus audiolibros..."
 
-#: data/ui/main_window.ui:881
+#: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
 msgstr "Importe sus audiolibros"
 
-#: data/ui/main_window.ui:897
+#: data/ui/main_window.ui:882
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 "Cozy importa automáticamente tus audiolibros a un directorio - tu "
 "biblioteca."
 
-#: data/ui/main_window.ui:925
+#: data/ui/main_window.ui:910
 msgid "External or Network drive?"
 msgstr ""
 
-#: data/ui/main_window.ui:942
+#: data/ui/main_window.ui:927
 msgid "Are your audiobooks stored on an external or network drive?"
 msgstr ""
 
-#: data/ui/main_window.ui:957
+#: data/ui/main_window.ui:942
 msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
 
-#: data/ui/main_window.ui:983 data/ui/main_window.ui:1040
+#: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
 msgstr "Interruptor de autoexploración"
 
-#: data/ui/main_window.ui:984 data/ui/main_window.ui:1022
-#: data/ui/main_window.ui:1041
+#: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
+#: data/ui/main_window.ui:1026
 msgid "Automatically import new audiobooks on startup"
 msgstr ""
 "Importar automáticamente los audiolibros nuevos al inicio del programa"
 
-#: data/ui/main_window.ui:1084
+#: data/ui/main_window.ui:1069
 msgid "Drag & Drop"
 msgstr "Arrastrar y soltar"
 
-#: data/ui/main_window.ui:1101
+#: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr ""
 
-#: data/ui/main_window.ui:1122
+#: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
 msgstr "Ubicación de sus audiolibros"
 
-#: data/ui/main_window.ui:1143
+#: data/ui/main_window.ui:1128
 msgid "Set Audiobooks Directory"
 msgstr ""
 
-#: data/ui/main_window.ui:1160
+#: data/ui/main_window.ui:1145
 msgid ""
 "Load audiobooks from a directory, network drive or an external disk\n"
 "You can add more storage locations later in the settings"
 msgstr ""
 
-#: data/ui/main_window.ui:1358
+#: data/ui/main_window.ui:1376
 msgid "Remaining"
 msgstr ""
 
-#: data/ui/main_window.ui:1414
+#: data/ui/main_window.ui:1432
 msgid "Total"
 msgstr ""
 
-#: data/ui/main_window.ui:1431
+#: data/ui/main_window.ui:1449
 msgid "Last played"
 msgstr ""
 
-#: data/ui/main_window.ui:1448
+#: data/ui/main_window.ui:1466
 msgid "Published"
 msgstr ""
 
-#: data/ui/main_window.ui:1586 data/ui/main_window.ui:1619
+#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
 msgid "page0"
 msgstr ""
 
-#: data/ui/main_window.ui:1605
+#: data/ui/main_window.ui:1630
 msgid ""
 "Start exploring your library by switching to the Author or Reader view "
 "above."
 msgstr ""
 
-#: data/ui/about.ui:13
+#: data/ui/about.ui:14
 msgid "GitHub"
 msgstr "GitHub"
 

@@ -20,6 +20,7 @@
       <li>Playback speed control for each book individually</li>
       <li>Search your library</li>
       <li>Multiple storage location support</li>
+      <li>Offline Mode! This allows you to keep an audiobook on your internal storage if you store your audiobooks on an external or network drive. Perfect to listen to on the go!</li>
       <li>Drag and Drop to import new audiobooks</li>
       <li>Sort your audio books by author, reader and name</li>
       </ul>
@@ -52,6 +53,26 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.6.0" timestamp="1528790604">
+      <description>
+        <ul>
+          <li>Offline Mode! If your audiobooks are on an external or network drive, you can switch the download button to keep a local cached copy of the book to listen to on the go. To enable this feature you have to set your storage location to external in the settings.</li>
+          <li>Detect online/offline storage devices</li>
+          <li>Option to hide unavailable books</li>
+          <li>Support for wav files</li>
+          <li>Support for audio files that have no tags at all</li>
+          <li>You can mark books as read using the right click menu</li>
+          <li>New setting: Prefer cover image file over embedded covers</li>
+          <li>Redesigned Sleep Timer</li>
+          <li>More Sleep Timer: You can now stop the playback after the current chapter</li>
+          <li>And even more: Fadeout on timer end (in settings)</li>
+          <li>Redesigned hello screen and settings</li>
+          <li>Fixed bug where cozy would not start on GTK older than 3.22</li>
+          <li>If no author field is present, the reader field will be used as author. This requires a force reimport (settings) on already imported books.</li>
+          <li>Optimizations under the hood</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.5.5" timestamp="1522359511">
       <description>
         <ul>

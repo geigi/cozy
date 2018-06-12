@@ -1,3 +1,22 @@
+com.github.geigi.cozy (0.6.0) UNSTABLE; urgency=low
+
+  * Offline Mode! If your audiobooks are on an external or network drive, you can switch the download button to keep a local cached copy of the book to listen to on the go. To enable this feature you have to set your storage location to external in the settings.
+  * Detect online/offline storage devices
+  * Option to hide unavailable books
+  * Support for wav files
+  * Support for audio files that have no tags at all
+  * You can mark books as read using the right click menu
+  * New setting: Prefer cover image file over embedded covers
+  * Redesigned Sleep Timer
+  * More Sleep Timer: You can now stop the playback after the current chapter
+  * And even more: Fadeout on timer end (in settings)
+  * Redesigned hello screen and settings
+  * Fixed bug where cozy would not start on GTK < 3.22
+  * If no author field is present, the reader field will be used as author. This requires a force reimport (settings) on already imported books.
+  * Optimizations under the hood
+
+ -- Julian Geywitz <github@geigi.de>  Wed, 12 Jun 2018 10:03:14 +0200
+
 com.github.geigi.cozy (0.5.5) UNSTABLE; urgency=low
 
   * Import process is now a lot more robust

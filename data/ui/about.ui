@@ -8,7 +8,8 @@
     <property name="type_hint">dialog</property>
     <property name="program_name">Cozy</property>
     <property name="version">0.0.1</property>
-    <property name="comments">Thanks to my supporters on Patreon: https://www.patreon.com/geigi</property>
+    <property name="comments">Thanks to my supporters on Patreon: https://www.patreon.com/geigi
+Help translating Cozy: https://transifex.com/geigi/cozy</property>
     <property name="website">https://github.com/geigi/cozy</property>
     <property name="website_label" translatable="yes">GitHub</property>
     <property name="authors">geigi
@@ -22,6 +23,7 @@ jnbr
 
 Big thanks to my patreon supporters:
 Fred Warren
+Gabriel
 
 And to other open source projects:
 https://github.com/gnumdk/lollypop</property>
