@@ -183,6 +183,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
                 except Exception as e:
                     if e.code == Gio.IOErrorEnum.CANCELLED:
                         log.info("Download of book was cancelled.")
+                        self.thread.stop()
                         break
                     log.error("Could not copy file to offline cache: " + new_item.track.file)
                     log.error(e)
