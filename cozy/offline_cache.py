@@ -62,7 +62,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
         #self._stop_processing()
         tracks = cozy.db.tracks(book)
         ids = [t.id for t in tracks]
-        offline_elements = cozy.db.OfflineCache.select().where(cozy.db.OfflineCache.track in ids)
+        offline_elements = cozy.db.OfflineCache.select().where(cozy.db.OfflineCache.track << ids)
 
         for element in offline_elements:
             file_path = os.path.join(self.cache_dir, element.file)
@@ -76,10 +76,6 @@ class OfflineCache(EventSender, metaclass=Singleton):
             for item in self.queue:
                 if self.current and item.id == self.current.id:
                     self.filecopy_cancel.cancel()
-
-                if item.id == track.id:
-                    self.queue.remove(item)
-                    break
 
         cozy.db.OfflineCache.delete().where(cozy.db.OfflineCache.track in ids).execute()
 
@@ -176,7 +172,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
 
             if not new_item.copied and os.path.exists(new_item.track.file):
                 log.info("Copying item")
-                Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.ui.switch_to_working, _("Downloading ") + tools.shorten_string(new_item.track.book.name, 30), False)
+                Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.ui.switch_to_working, _("Copying ") + tools.shorten_string(new_item.track.book.name, 30), False, False)
                 self.current = new_item
                 
                 destination = Gio.File.new_for_path(os.path.join(self.cache_dir, new_item.file))
@@ -185,6 +181,9 @@ class OfflineCache(EventSender, metaclass=Singleton):
                 try:
                     copied = source.copy(destination, flags, self.filecopy_cancel, self.__update_copy_status, None)
                 except Exception as e:
+                    if e.code == Gio.IOErrorEnum.CANCELLED:
+                        log.info("Download of book was cancelled.")
+                        break
                     log.error("Could not copy file to offline cache: " + new_item.track.file)
                     log.error(e)
                     self.queue.remove(item)
