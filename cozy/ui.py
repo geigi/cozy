@@ -359,14 +359,15 @@ class CozyUI(metaclass=Singleton):
         """
         return self.titlebar.get_ui_buttons_blocked(), self.settings.get_storage_elements_blocked()
 
-    def switch_to_working(self, message, first):
+    def switch_to_working(self, message, first, block=True):
         """
         Switch the UI state to working.
         This is used for example when an import is currently happening.
         This blocks the user from doing some stuff like starting playback.
         """
         self.titlebar.switch_to_working(message, first)
-        self.block_ui_buttons(True, True)
+        if block:
+            self.block_ui_buttons(True, True)
         self.window.props.window.set_cursor(
             Gdk.Cursor.new_from_name(self.window.get_display(), "progress"))
 
@@ -722,7 +723,7 @@ class CozyUI(metaclass=Singleton):
         for older gtk versions.
         """
         width, height = self.window.get_size()
-        value = width - 800
+        value = width - 850
         if value < 80:
             value = 80
         self.titlebar.set_progress_scale_width(value)
