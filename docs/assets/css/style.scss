@@ -32,6 +32,10 @@ $code-text-color: #eeeeee !default;
     .inner {
         float: none;
     }
+
+    .project-name {
+        margin-top: 0em;
+    }
 }
 
 @media screen and (max-width: #{$large-breakpoint}) {
@@ -43,5 +47,15 @@ $code-text-color: #eeeeee !default;
 @media screen and (min-width: #{$large-breakpoint}) {
     .icon {
         width: 140px;
+    }
+
+    .project-name {
+        margin-top: 0em;
+    }
+}
+
+@media screen and (min-width: #{$medium-breakpoint}) and (max-width: #{$large-breakpoint}) {
+    .project-name {
+        margin-top: 0.5em;
     }
 }
