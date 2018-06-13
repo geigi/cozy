@@ -23,8 +23,25 @@ $code-text-color: #eeeeee !default;
     float: left;
 }
 
+.badge {
+    height: 60px;
+    margin-bottom: 20px;
+}
+
 @media screen and (max-width: #{$medium-breakpoint}) {
     .inner {
         float: none;
+    }
+}
+
+@media screen and (max-width: #{$large-breakpoint}) {
+    .icon {
+        width: 110px;
+    }
+}
+
+@media screen and (min-width: #{$large-breakpoint}) {
+    .icon {
+        width: 140px;
     }
 }
