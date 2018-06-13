@@ -15,14 +15,16 @@ $code-text-color: #eeeeee !default;
 
 @import "{{ site.theme }}";
 
-.project-name {
-    margin-top: 0.3em;
-}
-
 .outer {
     display: inline-block;
-  }
+}
   
-  .inner {
+.inner {
     float: left;
-  }
+}
+
+@media screen and (max-width: #{$medium-breakpoint}) {
+    .inner {
+        float: none;
+    }
+}
