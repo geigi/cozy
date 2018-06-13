@@ -6,5 +6,11 @@ $header-bg-color: #ea4949 !default;
 $header-bg-color-secondary: #f28143 !default;
 
 // Text
-$section-headings-color: #f28143 !default;
+$section-headings-color: #ea4949 !default;
+$body-link-color: #f28143 !default;
+
+// Code
+$code-bg-color: #111111 !default;
+$code-text-color: #eeeeee !default;
+
 @import "{{ site.theme }}";
