@@ -19,6 +19,7 @@ All your audio books in one place! Cozy is an audio book player which let's you 
 # How can I get it?
 ## Flatpak
 For most distributions you can use Flatpak to install and run Cozy: <a href="https://flathub.org/repo/appstream/com.github.geigi.cozy.flatpakref">Flathub</a>
+
 Or use the following commands:
 ```
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo

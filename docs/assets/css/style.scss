@@ -18,3 +18,11 @@ $code-text-color: #eeeeee !default;
 .project-name {
     margin-top: 0.3em;
 }
+
+.outer {
+    display: inline-block;
+  }
+  
+  .inner {
+    float: left;
+  }
