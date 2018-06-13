@@ -36,18 +36,18 @@
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot1.png</image>
     </screenshot>
-    <screenshot type="default">
+    <screenshot>
       <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot2.png</image>
     </screenshot>
-    <screenshot type="default">
+    <screenshot>
       <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot3.png</image>
     </screenshot>
-    <screenshot type="default">
+    <screenshot>
       <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot4.png</image>
     </screenshot>
   </screenshots>
   <developer_name>Julian Geywitz</developer_name>
-  <url type="homepage">https://github.com/geigi/cozy</url>
+  <url type="homepage">https://cozy.geigi.de</url>
   <url type="bugtracker">https://github.com/geigi/cozy/issues</url>
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <url type="donation">https://www.patreon.com/geigi</url>
