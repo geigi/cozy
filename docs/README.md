@@ -1,16 +1,6 @@
-# It's getting Cozy
-<span class="badge-patreon"><a href="https://patreon.com/geigi" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
-[![AUR](https://img.shields.io/aur/version/yaourt.svg)](https://aur.archlinux.org/packages/cozy-audiobooks/)
-
-Cozy is a modern audio book player for Linux. 
+All your audio books in one place! That's what cozy is for. The audio book player which let's you manage and play back your collection.
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
-
-<p align="center">
-  <a href="https://appcenter.elementary.io/com.github.geigi.cozy">
-  <img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter">
-  </a>
-</p>
 
 ### Here are some of the current features:
 - Import all your audiobooks into cozy to browse them comfortably
