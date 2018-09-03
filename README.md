@@ -58,8 +58,11 @@ If you like this project, consider supporting me on <a href="https://www.patreon
 - `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
 - `peewee >= 3.5` as object relation mapper
 - `python3-mutagen` for meta tag management
+- `python3-gi-cairo`
 - `file`
 - `gstreamer1.0-plugins-good`
+- `gstreamer1.0-plugins-bad`
+- `gstreamer1.0-plugins-ugly`
 - `gstreamer1.0-libav` for mp4 support
 
 ## Build
@@ -72,7 +75,7 @@ $ ninja -C desired_build_directory install
 
 ## Running a local build
 ```
-XDG_DATA_DIRS=desired_installation_directory/share:/usr/share PYTHONPATH=desired_installation_directory/lib/python3.[your_python3_version]/site-packages app/bin/cozy
+XDG_DATA_DIRS=desired_installation_directory/share:/usr/share PYTHONPATH=desired_installation_directory/lib/python3.[your_python3_version]/site-packages app/bin/com.github.geigi.cozy
 ```
 
 ## Q&A
