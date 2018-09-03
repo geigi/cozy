@@ -1,4 +1,5 @@
 # It's getting Cozy
+[![Build Status](https://travis-ci.org/geigi/cozy.svg?branch=master)](https://travis-ci.org/geigi/cozy)
 <span class="badge-patreon"><a href="https://patreon.com/geigi" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
 [![AUR](https://img.shields.io/aur/version/yaourt.svg)](https://aur.archlinux.org/packages/cozy-audiobooks/)
 
