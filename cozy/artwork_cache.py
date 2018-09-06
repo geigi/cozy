@@ -86,7 +86,7 @@ def __create_artwork_cache(book, pixbuf, size):
     file_path = os.path.join(cache_dir, str(size) + ".jpg")
     if not os.path.exists(file_path):
         try:
-            resized_pixbuf.savev(file_path, "jpeg", "", "")
+            resized_pixbuf.savev(file_path, "jpeg", ["quality", None], ["95"])
         except Exception as e:
             log.warning("Failed to save resized cache albumart for following uuid: " + gen_uuid)
             log.warning(e)
