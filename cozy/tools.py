@@ -33,8 +33,9 @@ def is_elementary():
         """
         Currently we are only checking for elementaryOS
         """
-        log.debug(platform.dist())
-        if '"elementary"' in platform.dist():
+        dist = platform.dist()
+        log.debug(dist)
+        if '"elementary"' in dist or 'elementary' in dist:
             return True
         else:
             return False

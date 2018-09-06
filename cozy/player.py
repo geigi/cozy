@@ -63,7 +63,7 @@ def init():
     __scaletempo = Gst.ElementFactory.make("scaletempo", "scaletempo")
     __scaletempo.sync_state_with_parent()
 
-    __audiobin = Gst.Bin("audioline")
+    __audiobin = Gst.ElementFactory.make("bin", "audiosink")
     __audiobin.add(__scaletempo)
 
     __audiosink = Gst.ElementFactory.make("autoaudiosink", "audiosink")
@@ -71,7 +71,8 @@ def init():
 
     __scaletempo.link(__audiosink)
     __pad = __scaletempo.get_static_pad("sink")
-    __audiobin.add_pad(Gst.GhostPad("sink", __pad))
+    __ghost_pad = Gst.GhostPad.new("sink", __pad)
+    __audiobin.add_pad(__ghost_pad)
 
     __player.set_property("audio-sink", __audiobin)
 
