@@ -65,6 +65,12 @@ If you like this project, consider supporting me on <a href="https://www.patreon
 - `gstreamer1.0-plugins-ugly`
 - `gstreamer1.0-libav` for mp4 support
 
+### Install requirements on Fedora
+```bash
+sudo dnf install meson glib glib2-devel python3 python3-devel file-libs python3-magic python3-mutagen gtk3 ghc-magic-devel python3-gstreamer1 gstreamer1-plugins-good gstreamer1-plugins-good-gtk gstreamer1-libav
+pip3 install --user python-magic libmagic peewee ninja file
+```
+
 ## Build
 ```bash
 $ git clone https://github.com/geigi/cozy.git
