@@ -110,6 +110,7 @@ To the contributors on GitHub:
 - worldofpeace
 - camellan
 - jnbr
+- grenade
 
 The translators:
 - camellan
