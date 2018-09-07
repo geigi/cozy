@@ -1564,10 +1564,10 @@ You can add more storage locations later in the settings</property>
                           <object class="GtkScrolledWindow" id="book_overview_scroller">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="halign">start</property>
                             <property name="vexpand">True</property>
                             <property name="hscrollbar_policy">never</property>
                             <property name="shadow_type">in</property>
+                            <property name="propagate_natural_width">True</property>
                             <child>
                               <object class="GtkViewport" id="track_list_container">
                                 <property name="visible">True</property>

@@ -418,8 +418,7 @@ class TrackElement(Gtk.EventBox):
         no_label.set_size_request(30, -1)
         no_label.set_xalign(1)
 
-        title_label.set_text((self.track.name[:MAX_TRACK_LENGTH] + '...') if len(
-            self.track.name) > MAX_TRACK_LENGTH else self.track.name)
+        title_label.set_text(self.track.name)
         title_label.set_halign(Gtk.Align.START)
         title_label.props.margin = 4
         title_label.props.hexpand = True
@@ -427,6 +426,7 @@ class TrackElement(Gtk.EventBox):
         title_label.set_margin_right(7)
         title_label.props.width_request = 100
         title_label.props.xalign = 0.0
+        title_label.set_ellipsize(Pango.EllipsizeMode.MIDDLE)
 
         dur_label.set_text(tools.seconds_to_str(self.track.length))
         dur_label.set_halign(Gtk.Align.END)

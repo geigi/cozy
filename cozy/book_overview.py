@@ -9,6 +9,7 @@ import cozy.ui
 from cozy.book_element import TrackElement
 from cozy.settings import Settings
 from cozy.offline_cache import OfflineCache
+from cozy.disk_element import DiskElement
 
 
 class BookOverview:
@@ -98,11 +99,33 @@ class BookOverview:
         self.track_box.set_valign(Gtk.Align.START)
         self.track_box.props.margin = 8
 
+        disk_number = -1
+        first_disk_element = None
+        disk_count = 0
+
         for track in db.tracks(book):
-            self.track_box.add(TrackElement(track, self))
+            # Insert disk headers
+            if track.disk != disk_number:
+                disc_element = DiskElement(track.disk)
+                self.track_box.add(disc_element)
+                if disk_number == -1:
+                    first_disk_element = disc_element
+                    if track.disk < 2:
+                        first_disk_element.set_hidden(True)
+                else:
+                    first_disk_element.show_all()
+                    disc_element.show_all()
+
+                disk_number = track.disk
+                disk_count += 1
+
+            track_element = TrackElement(track, self)
+            self.track_box.add(track_element)
+            track_element.show_all()
 
         tools.remove_all_children(self.track_list_container)
-        self.track_box.show_all()
+        self.track_box.show()
+        self.track_box.set_halign(Gtk.Align.FILL)
         self.track_list_container.add(self.track_box)
 
         self._mark_current_track()
@@ -213,14 +236,16 @@ class BookOverview:
             return
 
         for track_element in self.track_box.get_children():
-            if track_element.track.id == book.position:
+            if isinstance(track_element, DiskElement):
+                continue
+            elif track_element.track.id == book.position:
                 self.current_track_element = track_element
                 track_element.select()
             else:
                 track_element.deselect()
 
         if book.position == 0:
-            self.current_track_element = self.track_box.get_children()[0]
+            self.current_track_element = self.track_box.get_children()[1]
             self.current_track_element.select()
 
         if self.ui.titlebar.current_book and self.ui.titlebar.current_book.id == self.book.id:
