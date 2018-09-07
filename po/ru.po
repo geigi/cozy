@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cozy 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-12 12:36+0200\n"
+"POT-Creation-Date: 2018-09-07 15:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Sergey Smith <Foxyriot@ya.ru>, 2017\n"
+"Last-Translator: Alexander Yachmenev <yachmenev.aleksandr2000@gmail.com>, 2017\n"
 "Language-Team: Russian (https://www.transifex.com/geigi/teams/78138/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -27,15 +27,15 @@ msgstr "Открыть обзор книги"
 
 #: cozy/book_element.py:213
 msgid "Currently offline"
-msgstr ""
+msgstr "Сейчас оффлайн"
 
 #: cozy/book_element.py:319
 msgid "Mark as read"
-msgstr ""
+msgstr "Отметить как прочитанное"
 
 #: cozy/book_element.py:322
 msgid "Open in file browser"
-msgstr ""
+msgstr "Открыть в файловом менеджере"
 
 #: cozy/book_element.py:325
 msgid "Remove from library"
@@ -45,13 +45,13 @@ msgstr "Удалить из библиотеки"
 msgid "Play this part"
 msgstr "Слушать эту часть"
 
-#: cozy/book_overview.py:199
+#: cozy/book_overview.py:222
 msgid "Downloaded"
-msgstr ""
+msgstr "Загружено"
 
-#: cozy/book_overview.py:202 data/ui/main_window.ui:1328
+#: cozy/book_overview.py:225 data/ui/main_window.ui:1328
 msgid "Download"
-msgstr ""
+msgstr "Загрузить"
 
 #: cozy/file_not_found_dialog.py:66
 msgid "All files"
@@ -59,7 +59,7 @@ msgstr "Все файлы"
 
 #: cozy/offline_cache.py:175
 msgid "Copying"
-msgstr ""
+msgstr "Копирование"
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
@@ -77,84 +77,84 @@ msgstr "Неизвестный автор"
 msgid "Unknown Reader"
 msgstr "Неизвестный диктор"
 
-#: cozy/tools.py:141
+#: cozy/tools.py:142
 msgid "hours"
 msgstr "часов"
 
-#: cozy/tools.py:143
+#: cozy/tools.py:144
 msgid "hour"
 msgstr "час"
 
-#: cozy/tools.py:151
+#: cozy/tools.py:152
 msgid "minutes"
 msgstr "минут"
 
-#: cozy/tools.py:153
+#: cozy/tools.py:154
 msgid "minute"
 msgstr "минуту"
 
-#: cozy/tools.py:157
+#: cozy/tools.py:158
 msgid "finished"
-msgstr "окончание"
+msgstr "завершено"
 
-#: cozy/tools.py:161
+#: cozy/tools.py:162
 msgid "seconds"
 msgstr "секунд"
 
-#: cozy/tools.py:163
+#: cozy/tools.py:164
 msgid "second"
 msgstr "секунда"
 
-#: cozy/tools.py:186
+#: cozy/tools.py:187
 msgid "never"
 msgstr "никогда"
 
-#: cozy/tools.py:188
+#: cozy/tools.py:189
 msgid "today"
 msgstr "сегодня"
 
-#: cozy/tools.py:190
+#: cozy/tools.py:191
 msgid "yesterday"
 msgstr "вчера"
 
-#: cozy/tools.py:192
+#: cozy/tools.py:193
 msgid "days"
 msgstr "дней"
 
-#: cozy/tools.py:192 cozy/tools.py:194 cozy/tools.py:196 cozy/tools.py:198
-#: cozy/tools.py:200 cozy/tools.py:202 cozy/tools.py:204
+#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
+#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
 msgid "ago"
 msgstr "назад"
 
-#: cozy/tools.py:194
+#: cozy/tools.py:195
 msgid "week"
 msgstr "неделя"
 
-#: cozy/tools.py:196
+#: cozy/tools.py:197
 msgid "weeks"
 msgstr "недель"
 
-#: cozy/tools.py:198
+#: cozy/tools.py:199
 msgid "month"
 msgstr "месяц"
 
-#: cozy/tools.py:200
+#: cozy/tools.py:201
 msgid "months"
 msgstr "месяцев"
 
-#: cozy/tools.py:202
+#: cozy/tools.py:203
 msgid "year"
 msgstr "год"
 
-#: cozy/tools.py:204
+#: cozy/tools.py:205
 msgid "years"
 msgstr "лет"
 
 #: cozy/ui.py:414
 msgid "Importing Audiobooks"
-msgstr "Импорт аудиокниг"
+msgstr "Импортирование аудиокниги"
 
-#: cozy/ui.py:483 cozy/ui.py:489 cozy/ui.py:803
+#: cozy/ui.py:483 cozy/ui.py:489 cozy/ui.py:809
 msgid "All"
 msgstr "Все"
 
@@ -168,19 +168,23 @@ msgstr "мин"
 
 #: cozy/sleep_timer.py:129
 msgid "Off"
-msgstr ""
+msgstr "Отключено"
 
 #: cozy/settings.py:413 cozy/settings.py:456
 msgid "External drive"
-msgstr ""
+msgstr "Внешняя память"
 
 #: cozy/settings.py:416 cozy/settings.py:459
 msgid "Internal drive"
-msgstr ""
+msgstr "Внутрення память"
 
 #: cozy/settings.py:443
 msgid "Changing audio book location..."
 msgstr "Изменение каталога аудиокниг..."
+
+#: cozy/disk_element.py:26
+msgid "Disc"
+msgstr ""
 
 #: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
@@ -192,7 +196,7 @@ msgstr "Кнопка перемотки"
 
 #: data/ui/main_window.ui:80
 msgid "Jump back 30 seconds"
-msgstr "Перейти назад 30 секунд"
+msgstr "Перейти назад на 30 секунд"
 
 #: data/ui/main_window.ui:97
 msgid "Start playback"
@@ -316,7 +320,7 @@ msgstr "Открыть окно настроек"
 
 #: data/ui/main_window.ui:655
 msgid "Recent"
-msgstr "Последние"
+msgstr "Предыдущие"
 
 #: data/ui/main_window.ui:674
 msgid "List of authors"
@@ -356,17 +360,19 @@ msgstr ""
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
-msgstr ""
+msgstr "Внешний или сетевой диск?"
 
 #: data/ui/main_window.ui:927
 msgid "Are your audiobooks stored on an external or network drive?"
-msgstr ""
+msgstr "Ваши аудиокниги хранятся на внешнем или сетевом диске?"
 
 #: data/ui/main_window.ui:942
 msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
+"Если это так, то можно включить автономный режим для книги в обзоре книг\n"
+"Это сохраняет локальную копию книги, которую вы можете слушать в пути"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
@@ -383,7 +389,7 @@ msgstr "Drag & Drop"
 
 #: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr ""
+msgstr "Перенесите ваши аудиокниги в cozy, и они автоматически импортируются"
 
 #: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
@@ -391,13 +397,15 @@ msgstr "Расположение аудиокниг"
 
 #: data/ui/main_window.ui:1128
 msgid "Set Audiobooks Directory"
-msgstr ""
+msgstr "Указать каталог аудиокниг"
 
 #: data/ui/main_window.ui:1145
 msgid ""
 "Load audiobooks from a directory, network drive or an external disk\n"
 "You can add more storage locations later in the settings"
 msgstr ""
+"Загрузить аудиокниги из папки, облака или внешней памяти\n"
+"Вы можете добавить больше вариантов памяти в настройках позже"
 
 #: data/ui/main_window.ui:1376
 msgid "Remaining"
@@ -457,7 +465,7 @@ msgstr "Отмена"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
-msgstr "Найти"
+msgstr "Расположение"
 
 #: data/ui/file_not_found.ui:86
 msgid "File not found"
@@ -500,8 +508,8 @@ msgid "Titlebar"
 msgstr "Заголовок"
 
 #: data/ui/settings.ui:258
-msgid "Display the whole book instead of the current chaper"
-msgstr "Отображать имя книги вместо текущей главы"
+msgid "Display the whole book instead of the current chapter"
+msgstr ""
 
 #: data/ui/settings.ui:321
 msgid "Appearance"
@@ -521,11 +529,11 @@ msgstr "Автоматическое сканирование медиа"
 
 #: data/ui/settings.ui:611
 msgid "Fadeout"
-msgstr ""
+msgstr "Затухание"
 
 #: data/ui/settings.ui:672
 msgid "Fadeout duration"
-msgstr ""
+msgstr "Продолжительность затухания"
 
 #: data/ui/settings.ui:745
 msgid "Behaviour"
@@ -533,15 +541,15 @@ msgstr "Поведение"
 
 #: data/ui/settings.ui:772
 msgid "Artwork"
-msgstr ""
+msgstr "Произведение"
 
 #: data/ui/settings.ui:824
 msgid "Prefer external images over embedded cover"
-msgstr ""
+msgstr "Предпочитать внешние изображения встроенной обложке"
 
 #: data/ui/settings.ui:837
 msgid "Use images (cover.jpg, *.png, ...) when available"
-msgstr ""
+msgstr "Использовать изображения (cover.jpg, *.png, ...), когда возможно"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
@@ -561,7 +569,7 @@ msgstr "Удалить расположение"
 
 #: data/ui/settings.ui:1055
 msgid "Toggle this storage location to be internal/external."
-msgstr ""
+msgstr "Изменить память на внутреннюю/внешнюю"
 
 #: data/ui/settings.ui:1081
 msgid "Set as default storage location for new audiobooks"
@@ -585,32 +593,33 @@ msgstr "Хранилище"
 
 #: data/ui/settings.ui:1317
 msgid "Database"
-msgstr ""
+msgstr "База данных"
 
 #: data/ui/settings.ui:1369
 msgid "Force refresh the database"
-msgstr ""
+msgstr "Принудительное обновление базы данных"
 
 #: data/ui/settings.ui:1382
 msgid "This will force update the metadata of all imported books"
-msgstr ""
+msgstr "Это обновит метаданные всех импортированных книг"
 
 #: data/ui/settings.ui:1402
 msgid "Force refresh"
-msgstr ""
+msgstr "Принудительное обновление"
 
 #: data/ui/settings.ui:1470
 msgid "By request"
-msgstr ""
+msgstr "По запросу"
 
 #: data/ui/settings.ui:1523
 msgid "Use crc32 checksum for file modification detection"
-msgstr ""
+msgstr "Использовать контрольную сумму crc32 для обнаружения изменений файлов"
 
 #: data/ui/settings.ui:1536
 msgid ""
 "Only recommended if cozy doesn't detect file modifications while scanning"
 msgstr ""
+"Рекомендуется, если cozy не определяет изменение файла во время сканирования"
 
 #: data/ui/settings.ui:1611
 msgid "Advanced"
@@ -646,11 +655,11 @@ msgstr "Ничего не найдено :("
 
 #: data/ui/timer_popover.ui:39
 msgid "Stop after current chapter"
-msgstr ""
+msgstr "Остановить после текущей главы"
 
 #: data/ui/timer_popover.ui:76
 msgid "Timer duration"
-msgstr "Длительность таймера"
+msgstr "Продолжительность таймера"
 
 #: data/ui/timer_popover.ui:88
 msgid "Timer duration slider"
@@ -658,7 +667,7 @@ msgstr "Ползунок длительности таймера"
 
 #: data/ui/timer_popover.ui:89
 msgid "Set the sleep timer duration in minutes"
-msgstr "Установка длительности таймера сна в минутах"
+msgstr "Установить таймер сна в минутах"
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"

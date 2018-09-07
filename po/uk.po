@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cozy 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-12 12:36+0200\n"
+"POT-Creation-Date: 2018-09-07 15:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Oleg Krivorot <krivorot.oleg@gmail.com>, 2018\n"
 "Language-Team: Ukrainian (https://www.transifex.com/geigi/teams/78138/uk/)\n"
@@ -27,15 +27,15 @@ msgstr "Відкрити огляд книги"
 
 #: cozy/book_element.py:213
 msgid "Currently offline"
-msgstr ""
+msgstr "В даний час офлайн"
 
 #: cozy/book_element.py:319
 msgid "Mark as read"
-msgstr ""
+msgstr "Відзначити як прочитане"
 
 #: cozy/book_element.py:322
 msgid "Open in file browser"
-msgstr ""
+msgstr "Відкрити у файловому браузері"
 
 #: cozy/book_element.py:325
 msgid "Remove from library"
@@ -45,13 +45,13 @@ msgstr "Видалити з бібліотеки"
 msgid "Play this part"
 msgstr "Слухати цю частину"
 
-#: cozy/book_overview.py:199
+#: cozy/book_overview.py:222
 msgid "Downloaded"
-msgstr ""
+msgstr "Завантажено"
 
-#: cozy/book_overview.py:202 data/ui/main_window.ui:1328
+#: cozy/book_overview.py:225 data/ui/main_window.ui:1328
 msgid "Download"
-msgstr ""
+msgstr "Завантажити"
 
 #: cozy/file_not_found_dialog.py:66
 msgid "All files"
@@ -59,7 +59,7 @@ msgstr "Всі файли"
 
 #: cozy/offline_cache.py:175
 msgid "Copying"
-msgstr ""
+msgstr "Копіювання"
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
@@ -77,76 +77,76 @@ msgstr "Невідомий автор"
 msgid "Unknown Reader"
 msgstr "Невідомий диктор"
 
-#: cozy/tools.py:141
+#: cozy/tools.py:142
 msgid "hours"
 msgstr "год."
 
-#: cozy/tools.py:143
+#: cozy/tools.py:144
 msgid "hour"
 msgstr "год."
 
-#: cozy/tools.py:151
+#: cozy/tools.py:152
 msgid "minutes"
 msgstr "хв."
 
-#: cozy/tools.py:153
+#: cozy/tools.py:154
 msgid "minute"
 msgstr "хв."
 
-#: cozy/tools.py:157
+#: cozy/tools.py:158
 msgid "finished"
 msgstr "завершена"
 
-#: cozy/tools.py:161
+#: cozy/tools.py:162
 msgid "seconds"
 msgstr "сек."
 
-#: cozy/tools.py:163
+#: cozy/tools.py:164
 msgid "second"
 msgstr "сек."
 
-#: cozy/tools.py:186
+#: cozy/tools.py:187
 msgid "never"
 msgstr "ніколи"
 
-#: cozy/tools.py:188
+#: cozy/tools.py:189
 msgid "today"
 msgstr "сьогодні"
 
-#: cozy/tools.py:190
+#: cozy/tools.py:191
 msgid "yesterday"
 msgstr "вчора"
 
-#: cozy/tools.py:192
+#: cozy/tools.py:193
 msgid "days"
 msgstr "днів"
 
-#: cozy/tools.py:192 cozy/tools.py:194 cozy/tools.py:196 cozy/tools.py:198
-#: cozy/tools.py:200 cozy/tools.py:202 cozy/tools.py:204
+#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
+#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
 msgid "ago"
 msgstr "тому назад"
 
-#: cozy/tools.py:194
+#: cozy/tools.py:195
 msgid "week"
 msgstr "тиждень"
 
-#: cozy/tools.py:196
+#: cozy/tools.py:197
 msgid "weeks"
 msgstr "тижнів"
 
-#: cozy/tools.py:198
+#: cozy/tools.py:199
 msgid "month"
 msgstr "місяць"
 
-#: cozy/tools.py:200
+#: cozy/tools.py:201
 msgid "months"
 msgstr "місяців"
 
-#: cozy/tools.py:202
+#: cozy/tools.py:203
 msgid "year"
 msgstr "рік"
 
-#: cozy/tools.py:204
+#: cozy/tools.py:205
 msgid "years"
 msgstr "років"
 
@@ -154,7 +154,7 @@ msgstr "років"
 msgid "Importing Audiobooks"
 msgstr "Імпорт аудіокниг"
 
-#: cozy/ui.py:483 cozy/ui.py:489 cozy/ui.py:803
+#: cozy/ui.py:483 cozy/ui.py:489 cozy/ui.py:809
 msgid "All"
 msgstr "Всі"
 
@@ -168,19 +168,23 @@ msgstr "хв."
 
 #: cozy/sleep_timer.py:129
 msgid "Off"
-msgstr ""
+msgstr "Вимк."
 
 #: cozy/settings.py:413 cozy/settings.py:456
 msgid "External drive"
-msgstr ""
+msgstr "Зовнішній диск"
 
 #: cozy/settings.py:416 cozy/settings.py:459
 msgid "Internal drive"
-msgstr ""
+msgstr "Внутрішній диск"
 
 #: cozy/settings.py:443
 msgid "Changing audio book location..."
 msgstr "Зміна місця розташування книги ..."
+
+#: cozy/disk_element.py:26
+msgid "Disc"
+msgstr ""
 
 #: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
@@ -355,17 +359,19 @@ msgstr ""
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
-msgstr ""
+msgstr "Зовнішній або мережевий диск?"
 
 #: data/ui/main_window.ui:927
 msgid "Are your audiobooks stored on an external or network drive?"
-msgstr ""
+msgstr "Ваші аудіокниги зберігаються на зовнішньому або мережевому диску?"
 
 #: data/ui/main_window.ui:942
 msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
+"Якщо потрібно, ви можете включити автономний режим для книги в огляді книг. \n"
+"Це зберігає локальну копію книги, яку ви можете слухати в дорозі"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
@@ -382,7 +388,7 @@ msgstr "Drag & Drop"
 
 #: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr ""
+msgstr "Перетягніть аудіокниги в cozy, і вони будуть автоматично імпортовані"
 
 #: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
@@ -390,13 +396,15 @@ msgstr "Розташування аудіокниг"
 
 #: data/ui/main_window.ui:1128
 msgid "Set Audiobooks Directory"
-msgstr ""
+msgstr "Встановити каталог аудіокниг"
 
 #: data/ui/main_window.ui:1145
 msgid ""
 "Load audiobooks from a directory, network drive or an external disk\n"
 "You can add more storage locations later in the settings"
 msgstr ""
+"Завантажте аудіокниги з каталогу, мережевого або зовнішнього диску\n"
+"Ви можете додавати нові місця зберігання пізніше в налаштуваннях"
 
 #: data/ui/main_window.ui:1376
 msgid "Remaining"
@@ -499,8 +507,8 @@ msgid "Titlebar"
 msgstr "Рядок заголовку"
 
 #: data/ui/settings.ui:258
-msgid "Display the whole book instead of the current chaper"
-msgstr "Відобразити час всієї книги замість часу поточної глави"
+msgid "Display the whole book instead of the current chapter"
+msgstr ""
 
 #: data/ui/settings.ui:321
 msgid "Appearance"
@@ -520,11 +528,11 @@ msgstr "Автоматичне сканування медіа"
 
 #: data/ui/settings.ui:611
 msgid "Fadeout"
-msgstr ""
+msgstr "Затухання"
 
 #: data/ui/settings.ui:672
 msgid "Fadeout duration"
-msgstr ""
+msgstr "Тривалість затухання"
 
 #: data/ui/settings.ui:745
 msgid "Behaviour"
@@ -532,15 +540,16 @@ msgstr "Поведінка"
 
 #: data/ui/settings.ui:772
 msgid "Artwork"
-msgstr ""
+msgstr "Обкладинка"
 
 #: data/ui/settings.ui:824
 msgid "Prefer external images over embedded cover"
-msgstr ""
+msgstr "Перевага зовнішніх зображеннь над вбудованими обкладинками "
 
 #: data/ui/settings.ui:837
 msgid "Use images (cover.jpg, *.png, ...) when available"
 msgstr ""
+"Використовувати зображення (cover.jpg, * .png, ...), коли вони доступні"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
@@ -560,7 +569,7 @@ msgstr "Видалити місцеположення"
 
 #: data/ui/settings.ui:1055
 msgid "Toggle this storage location to be internal/external."
-msgstr ""
+msgstr "Тип місця зберігання внутрішнє/зовнішнє."
 
 #: data/ui/settings.ui:1081
 msgid "Set as default storage location for new audiobooks"
@@ -584,32 +593,33 @@ msgstr "Бібліотеки"
 
 #: data/ui/settings.ui:1317
 msgid "Database"
-msgstr ""
+msgstr "База даних"
 
 #: data/ui/settings.ui:1369
 msgid "Force refresh the database"
-msgstr ""
+msgstr "Примусово оновити базу даних"
 
 #: data/ui/settings.ui:1382
 msgid "This will force update the metadata of all imported books"
-msgstr ""
+msgstr "Це оновить метадані всіх імпортованих книг"
 
 #: data/ui/settings.ui:1402
 msgid "Force refresh"
-msgstr ""
+msgstr "Примусити оновити"
 
 #: data/ui/settings.ui:1470
 msgid "By request"
-msgstr ""
+msgstr "За запитом"
 
 #: data/ui/settings.ui:1523
 msgid "Use crc32 checksum for file modification detection"
-msgstr ""
+msgstr "Контрольна сума crc32 для виявлення модифікації файлів"
 
 #: data/ui/settings.ui:1536
 msgid ""
 "Only recommended if cozy doesn't detect file modifications while scanning"
 msgstr ""
+"Рекомендується, лише якщо cozy не виявляє модифікацію файлу при скануванні"
 
 #: data/ui/settings.ui:1611
 msgid "Advanced"
@@ -645,7 +655,7 @@ msgstr "Нічого не знайдено :("
 
 #: data/ui/timer_popover.ui:39
 msgid "Stop after current chapter"
-msgstr ""
+msgstr "Зупиніться після поточного розділу"
 
 #: data/ui/timer_popover.ui:76
 msgid "Timer duration"

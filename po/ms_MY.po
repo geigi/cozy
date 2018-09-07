@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cozy 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-12 12:36+0200\n"
+"POT-Creation-Date: 2018-09-07 15:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: abuyop <abuyop@gmail.com>, 2018\n"
 "Language-Team: Malay (Malaysia) (https://www.transifex.com/geigi/teams/78138/ms_MY/)\n"
@@ -45,11 +45,11 @@ msgstr ""
 msgid "Play this part"
 msgstr "Baca bahagian ini"
 
-#: cozy/book_overview.py:199
+#: cozy/book_overview.py:222
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/book_overview.py:202 data/ui/main_window.ui:1328
+#: cozy/book_overview.py:225 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr ""
 
@@ -77,76 +77,76 @@ msgstr "Pengarang Tidak Diketahui"
 msgid "Unknown Reader"
 msgstr "Pembaca Tidak Diketahui"
 
-#: cozy/tools.py:141
+#: cozy/tools.py:142
 msgid "hours"
 msgstr "jam"
 
-#: cozy/tools.py:143
+#: cozy/tools.py:144
 msgid "hour"
 msgstr "jam"
 
-#: cozy/tools.py:151
+#: cozy/tools.py:152
 msgid "minutes"
 msgstr "minit"
 
-#: cozy/tools.py:153
+#: cozy/tools.py:154
 msgid "minute"
 msgstr "minit"
 
-#: cozy/tools.py:157
+#: cozy/tools.py:158
 msgid "finished"
 msgstr "selesai"
 
-#: cozy/tools.py:161
+#: cozy/tools.py:162
 msgid "seconds"
 msgstr "saat"
 
-#: cozy/tools.py:163
+#: cozy/tools.py:164
 msgid "second"
 msgstr "saat"
 
-#: cozy/tools.py:186
+#: cozy/tools.py:187
 msgid "never"
 msgstr "tidak sesekali"
 
-#: cozy/tools.py:188
+#: cozy/tools.py:189
 msgid "today"
 msgstr "hari ini"
 
-#: cozy/tools.py:190
+#: cozy/tools.py:191
 msgid "yesterday"
 msgstr "semalam"
 
-#: cozy/tools.py:192
+#: cozy/tools.py:193
 msgid "days"
 msgstr "hari"
 
-#: cozy/tools.py:192 cozy/tools.py:194 cozy/tools.py:196 cozy/tools.py:198
-#: cozy/tools.py:200 cozy/tools.py:202 cozy/tools.py:204
+#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
+#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
 msgid "ago"
 msgstr "yang lalu"
 
-#: cozy/tools.py:194
+#: cozy/tools.py:195
 msgid "week"
 msgstr "minggu"
 
-#: cozy/tools.py:196
+#: cozy/tools.py:197
 msgid "weeks"
 msgstr "minggu"
 
-#: cozy/tools.py:198
+#: cozy/tools.py:199
 msgid "month"
 msgstr "bulan"
 
-#: cozy/tools.py:200
+#: cozy/tools.py:201
 msgid "months"
 msgstr "bulan"
 
-#: cozy/tools.py:202
+#: cozy/tools.py:203
 msgid "year"
 msgstr "tahun"
 
-#: cozy/tools.py:204
+#: cozy/tools.py:205
 msgid "years"
 msgstr "tahun"
 
@@ -154,7 +154,7 @@ msgstr "tahun"
 msgid "Importing Audiobooks"
 msgstr "Mengimport Buku Audio"
 
-#: cozy/ui.py:483 cozy/ui.py:489 cozy/ui.py:803
+#: cozy/ui.py:483 cozy/ui.py:489 cozy/ui.py:809
 msgid "All"
 msgstr "Semua"
 
@@ -181,6 +181,10 @@ msgstr ""
 #: cozy/settings.py:443
 msgid "Changing audio book location..."
 msgstr "Mengubah lokasi buku audio..."
+
+#: cozy/disk_element.py:26
+msgid "Disc"
+msgstr ""
 
 #: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
@@ -498,8 +502,8 @@ msgid "Titlebar"
 msgstr "Palangtajuk"
 
 #: data/ui/settings.ui:258
-msgid "Display the whole book instead of the current chaper"
-msgstr "Papar keseluruhan buku selain dari bab semasa"
+msgid "Display the whole book instead of the current chapter"
+msgstr ""
 
 #: data/ui/settings.ui:321
 msgid "Appearance"

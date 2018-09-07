@@ -12,6 +12,7 @@ cozy/tools.py
 cozy/ui.py
 cozy/sleep_timer.py
 cozy/settings.py
+cozy/disk_element.py
 data/ui/main_window.ui
 data/ui/about.ui
 data/ui/app_menu.ui
