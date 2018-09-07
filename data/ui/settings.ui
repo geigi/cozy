@@ -255,7 +255,7 @@
                                   <object class="GtkLabel">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">Display the whole book instead of the current chaper</property>
+                                    <property name="label" translatable="yes">Display the whole book instead of the current chapter</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
