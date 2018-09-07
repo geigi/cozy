@@ -1,3 +1,14 @@
+com.github.geigi.cozy (0.6.1) UNSTABLE; urgency=low
+
+  * Improved artwork image quality
+  * The book overview now supports multiple disks in audiobooks
+  * The file not found window will only open when the file is on the internal drive
+  * Fixed a typo
+  * Support for elementaryOS 5.0
+  * Updated translations
+
+ -- Julian Geywitz <github@geigi.de>  Wed, 07 Sep 2018 16:00:14 +0200
+
 com.github.geigi.cozy (0.6.0) UNSTABLE; urgency=low
 
   * Offline Mode! If your audiobooks are on an external or network drive, you can switch the download button to keep a local cached copy of the book to listen to on the go. To enable this feature you have to set your storage location to external in the settings.

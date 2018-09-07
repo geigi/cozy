@@ -41,6 +41,14 @@ If you prefer a custom repository - for Ubuntu, Debian, openSUSE and Fedora ther
 If you like this project, consider supporting me on <a href="https://www.patreon.com/bePatron?u=8147127"> Patreon</a> :)
 
 # Changelog
+## 0.6.1
+- Improved artwork image quality
+- The book overview now supports multiple disks in audiobooks
+- The file not found window will only open when the file is on the internal drive
+- Fixed a typo
+- Support for elementaryOS 5.0
+- Updated translations
+
 ## 0.6.0
 - **Offline Mode!** If your audiobooks are on an external or network drive, you can switch the download button to keep a local cached copy of the book to listen to on the go. To enable this feature you have to set your storage location to external in the settings.
 -  Detect online/offline storage devices
@@ -83,6 +91,7 @@ To the contributors on GitHub:
 - worldofpeace
 - camellan
 - jnbr
+- grenade
 
 The translators:
 - camellan

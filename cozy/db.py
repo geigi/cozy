@@ -368,7 +368,14 @@ def update_db_6():
 
     import shutil
     shutil.rmtree(tools.get_cache_dir())
-    
+
+def update_db_7():
+    """
+    Update database to v7.
+    """
+    import cozy.artwork_cache as artwork_cache
+    artwork_cache.delete_artwork_cache()
+    Settings.update(version=7).execute()
 
 def update_db():
     """
@@ -397,6 +404,9 @@ def update_db():
 
     if version < 6:
         update_db_6()
+
+    if version < 7:
+        update_db_7()
 
 
 # thanks to oleg-krv
