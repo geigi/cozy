@@ -712,10 +712,16 @@ class CozyUI(metaclass=Singleton):
             if self.dialog_open:
                 return
             if "Resource not found" in str(message):
-                self.dialog_open = True
-                dialog = FileNotFoundDialog(
-                    player.get_current_track().file)
-                dialog.show()
+                current_track = player.get_current_track()
+                if db.is_external(current_track.book):
+                    player.stop()
+                    player.unload()
+                    player.emit_event("stop")
+                else:
+                    self.dialog_open = True
+                    dialog = FileNotFoundDialog(
+                        current_track.file)
+                    dialog.show()
 
     def __window_resized(self, window):
         """
