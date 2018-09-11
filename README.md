@@ -85,6 +85,14 @@ XDG_DATA_DIRS=desired_installation_directory/share:/usr/share PYTHONPATH=desired
 ```
 
 ## Q&A
+### I have imported wrong files and cannot get rid of them:
+Delete the following folders to reset cozy (this will loose all saved progress):
+```
+~/.local/share/cozy
+~/.cache/cozy
+```
+
+
 ### I can't uninstall the Flatpak:
 
 Try
