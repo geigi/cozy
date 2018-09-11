@@ -67,6 +67,13 @@ If you like this project, consider supporting me on <a href="https://www.patreon
 
 
 # Q&A
+## I have imported wrong files and cannot get rid of them:
+Delete the following folders to reset cozy (this will loose all saved progress):
+```
+~/.local/share/cozy
+~/.cache/cozy
+```
+
 ## I can't uninstall the Flatpak:
 
 Try
