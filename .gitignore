@@ -1,3 +1,4 @@
+.debhelper/
 .idea/
 app/
 bin/

@@ -22,8 +22,6 @@ override_dh_auto_clean:
 
 override_dh_auto_configure:
 	mkdir -p debian/build
-	mkdir -p peewee
-	PYTHONUSERBASE=${CURDIR}/peewee pip3 install --user peewee
 	cd debian/build && meson --prefix=/usr ../..
 
 DIRS = .
