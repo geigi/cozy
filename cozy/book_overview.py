@@ -194,10 +194,11 @@ class BookOverview:
             return
 
         if curr_track:
+            track_box_children = [e for e in self.track_box.get_children() if isinstance(e, TrackElement)]
             self.current_track_element = next(
                 filter(
                     lambda x: x.track.id == curr_track.id,
-                    self.track_box.get_children()), None)
+                    track_box_children), None)
 
         if self.current_track_element is None:
             self.current_track_element = self.track_box.get_children()[0]
