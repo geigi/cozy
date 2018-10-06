@@ -18,6 +18,7 @@ from mutagen.flac import FLAC
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 from mutagen.oggvorbis import OggVorbis
+from mutagen.oggopus import OggOpus
 from gi.repository import Gdk, GLib, Gst
 
 import cozy.db
@@ -99,7 +100,7 @@ def update_database(ui, force=False):
     for path in paths:
         for directory, subdirectories, files in os.walk(path):
             for file in files:
-                if file.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a', '.wav')):
+                if file.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a', '.wav', 'opus')):
                     path = os.path.join(directory, file)
 
                     imported = True
@@ -233,6 +234,10 @@ def import_file(file, directory, path, update=False, crc=None):
     ### OGG ###
     elif media_type == "audio/ogg" or media_type == "audio/x-ogg":
         track_data = _get_ogg_tags(track, path)
+        
+    ### OPUS
+  ###  elif media_type == "audio/ogg" or media_type == "audio/x-ogg":
+  ###      track_data = _get_ogg_tags(track, path)
 
     ### MP4 ###
     elif media_type == "audio/mp4" or media_type == "audio/x-m4a":
