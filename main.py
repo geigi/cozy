@@ -34,7 +34,8 @@ from pathlib import Path
 from gi.repository import Gtk, GObject, GLib
 from cozy.ui import CozyUI
 from cozy.db import init_db, Settings
-from cozy.mpris import MPRIS
+if platform.system() != 'Darwin':
+  from cozy.mpris import MPRIS
 
 log = logging.getLogger("main")
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
@@ -62,8 +63,12 @@ class Application(Gtk.Application):
         GLib.setenv("PULSE_PROP_media.role", "music", True)
 
         import gettext
-        locale.bindtextdomain('cozy', localedir)
-        locale.textdomain('cozy')
+        if platform.system() == 'Darwin':
+            gettext.bindtextdomain('cozy', localedir)
+            gettext.textdomain('cozy')
+        else:
+            locale.bindtextdomain('cozy', localedir)
+            locale.textdomain('cozy')
         gettext.install('cozy', localedir)
 
     def do_startup(self):
@@ -89,8 +94,9 @@ class Application(Gtk.Application):
                 self.ui.refresh_content()
 
         self.add_window(self.ui.window)
-        mpris = MPRIS(self)
-        mpris._on_current_changed(None)
+        if platform.system() != 'Darwin':
+            mpris = MPRIS(self)
+            mpris._on_current_changed(None)
 
 
 def __on_command_line():
