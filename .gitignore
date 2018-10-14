@@ -26,3 +26,6 @@ venv/
 *.log
 *.prof
 *.pyc
+build
+dist
+.DS_Store

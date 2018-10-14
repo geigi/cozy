@@ -304,8 +304,14 @@ def rewind(seconds):
     duration = get_current_duration()
     seek = duration - (seconds * 1000000000)
     if seek < 0:
-        prev_track()
-        seek = get_current_track().length * 1000000000 + seek
+        album_tracks = cozy.db.tracks(get_current_track().book)
+        current = get_current_track()
+        index = list(album_tracks).index(current)
+        if index < 1:
+            seek = 0
+        else:
+            prev_track()
+            seek = get_current_track().length * 1000000000 + seek
     __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
                   Gst.SeekType.SET, seek, Gst.SeekType.NONE, 0)
     save_current_track_position(seek)
