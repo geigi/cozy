@@ -53,10 +53,12 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
-    <release version="0.6.3" timestamp="1537635898">
+    <release version="0.6.4" timestamp="1540414183">
       <description>
         <ul>
-          <li>Support for elementaryOS 5.0</li>
+          <li>Support for elementaryOS 5.0 Juno</li>
+          <li>Fixed a bug which prevented cozy from automatically playing the next chapter</li>
+          <li>Updated translations</li>
         </ul>
       </description>
     </release>
