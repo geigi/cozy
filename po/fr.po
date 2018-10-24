@@ -27,15 +27,15 @@ msgstr "Voir le résumé"
 
 #: cozy/book_element.py:213
 msgid "Currently offline"
-msgstr ""
+msgstr "Hors-ligne"
 
 #: cozy/book_element.py:319
 msgid "Mark as read"
-msgstr ""
+msgstr "Marquer comme lu"
 
 #: cozy/book_element.py:322
 msgid "Open in file browser"
-msgstr ""
+msgstr "Ouvrir dans le navigateur"
 
 #: cozy/book_element.py:325
 msgid "Remove from library"
@@ -47,11 +47,11 @@ msgstr "Lire cette partie"
 
 #: cozy/book_overview.py:222
 msgid "Downloaded"
-msgstr ""
+msgstr "Téléchargement terminé"
 
 #: cozy/book_overview.py:225 data/ui/main_window.ui:1328
 msgid "Download"
-msgstr ""
+msgstr "Téléchargement"
 
 #: cozy/file_not_found_dialog.py:66
 msgid "All files"
@@ -59,7 +59,7 @@ msgstr "Tous les fichiers"
 
 #: cozy/offline_cache.py:175
 msgid "Copying"
-msgstr ""
+msgstr "Copie"
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
@@ -168,15 +168,15 @@ msgstr "min"
 
 #: cozy/sleep_timer.py:129
 msgid "Off"
-msgstr ""
+msgstr "Off"
 
 #: cozy/settings.py:413 cozy/settings.py:456
 msgid "External drive"
-msgstr ""
+msgstr "Stockage externe"
 
 #: cozy/settings.py:416 cozy/settings.py:459
 msgid "Internal drive"
-msgstr ""
+msgstr "Stockage interne"
 
 #: cozy/settings.py:443
 msgid "Changing audio book location..."
@@ -184,7 +184,7 @@ msgstr "Changer le repertoire du livre audio"
 
 #: cozy/disk_element.py:26
 msgid "Disc"
-msgstr ""
+msgstr "Disque"
 
 #: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
@@ -256,7 +256,7 @@ msgstr "Position du slider"
 
 #: data/ui/main_window.ui:318
 msgid "Position of the current part in seconds"
-msgstr "Position dans le chapitre courant (sec)"
+msgstr "Position dans le chapitre courant en secondes"
 
 #: data/ui/main_window.ui:336
 msgid "Remaining time"
@@ -360,17 +360,20 @@ msgstr ""
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
-msgstr ""
+msgstr "Stockage externe ou via le réseau"
 
 #: data/ui/main_window.ui:927
 msgid "Are your audiobooks stored on an external or network drive?"
 msgstr ""
+"Vos livres audio sont-ils stockés sur un support externe ou sur le réseau ?"
 
 #: data/ui/main_window.ui:942
 msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
+"Si il le sont vous pouvez activer le mode hors-ligne dans l'aperçu de votre livre\n"
+"Cette action conservera une copie locale de votre livre audio"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
@@ -388,6 +391,7 @@ msgstr "Glisser & Déposer"
 #: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr ""
+"Faite glisser vos livres audio directement dans cozy pour les importer"
 
 #: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
@@ -395,13 +399,15 @@ msgstr "Emplacement de vos livres audio"
 
 #: data/ui/main_window.ui:1128
 msgid "Set Audiobooks Directory"
-msgstr ""
+msgstr "Sélectionner un dossier pour vos livres audio."
 
 #: data/ui/main_window.ui:1145
 msgid ""
 "Load audiobooks from a directory, network drive or an external disk\n"
 "You can add more storage locations later in the settings"
 msgstr ""
+"Charger vos livres audio depuis un dossier local, depuis le réseau ou un stockage externe\n"
+"Vous pourrez ajouter d'autres emplacement plus tard dans les paramètres"
 
 #: data/ui/main_window.ui:1376
 msgid "Remaining"
@@ -505,7 +511,7 @@ msgstr "Barre de titre"
 
 #: data/ui/settings.ui:258
 msgid "Display the whole book instead of the current chapter"
-msgstr ""
+msgstr "Afficher l'intégralité du livre au lieu d'afficher le chapitre actuel"
 
 #: data/ui/settings.ui:321
 msgid "Appearance"
@@ -525,11 +531,11 @@ msgstr "Scan automatique du média"
 
 #: data/ui/settings.ui:611
 msgid "Fadeout"
-msgstr ""
+msgstr "Fondu de transition"
 
 #: data/ui/settings.ui:672
 msgid "Fadeout duration"
-msgstr ""
+msgstr "Durée du fondu de transition"
 
 #: data/ui/settings.ui:745
 msgid "Behaviour"
@@ -537,15 +543,17 @@ msgstr "Comportement"
 
 #: data/ui/settings.ui:772
 msgid "Artwork"
-msgstr ""
+msgstr "Artwork"
 
 #: data/ui/settings.ui:824
 msgid "Prefer external images over embedded cover"
-msgstr ""
+msgstr "Prendre une image externe au lieu de la couverture intégrée"
 
 #: data/ui/settings.ui:837
 msgid "Use images (cover.jpg, *.png, ...) when available"
 msgstr ""
+"Utiliser des images (cover.jpg, *.png, ...) lorsque celles-ci sont "
+"disponibles"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
@@ -565,7 +573,7 @@ msgstr "Retirer l'emplacement"
 
 #: data/ui/settings.ui:1055
 msgid "Toggle this storage location to be internal/external."
-msgstr ""
+msgstr "Basculer d'état interne / externe pour cet emplacement"
 
 #: data/ui/settings.ui:1081
 msgid "Set as default storage location for new audiobooks"
@@ -589,32 +597,36 @@ msgstr "Stockage"
 
 #: data/ui/settings.ui:1317
 msgid "Database"
-msgstr ""
+msgstr "Base de donnée"
 
 #: data/ui/settings.ui:1369
 msgid "Force refresh the database"
-msgstr ""
+msgstr "Rafraîchir la base de donnée"
 
 #: data/ui/settings.ui:1382
 msgid "This will force update the metadata of all imported books"
 msgstr ""
+"Cela va forcer la mise à jours de toutes les informations complémentaires de"
+" tous les livres importés"
 
 #: data/ui/settings.ui:1402
 msgid "Force refresh"
-msgstr ""
+msgstr "Forcer le rafraîchissement"
 
 #: data/ui/settings.ui:1470
 msgid "By request"
-msgstr ""
+msgstr "Par requête"
 
 #: data/ui/settings.ui:1523
 msgid "Use crc32 checksum for file modification detection"
-msgstr ""
+msgstr "Utiliser crc32 checksum for détecter la modification de fichier"
 
 #: data/ui/settings.ui:1536
 msgid ""
 "Only recommended if cozy doesn't detect file modifications while scanning"
 msgstr ""
+"Recommandé uniquement dans le cas où Cozy ne détecterais pas une "
+"modification de fichier pendant le scan"
 
 #: data/ui/settings.ui:1611
 msgid "Advanced"
@@ -650,7 +662,7 @@ msgstr "Rien n'as été trouvé :("
 
 #: data/ui/timer_popover.ui:39
 msgid "Stop after current chapter"
-msgstr ""
+msgstr "Arrêter la lecture à la fin de ce chapitre"
 
 #: data/ui/timer_popover.ui:76
 msgid "Timer duration"

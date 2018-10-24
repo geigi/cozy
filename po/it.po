@@ -184,7 +184,7 @@ msgstr "Cambiando la posizione dell'audiolibro..."
 
 #: cozy/disk_element.py:26
 msgid "Disc"
-msgstr ""
+msgstr "DIsc"
 
 #: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
@@ -509,7 +509,7 @@ msgstr "Barra del titolo"
 
 #: data/ui/settings.ui:258
 msgid "Display the whole book instead of the current chapter"
-msgstr ""
+msgstr "Mostra l'intero libro invece che il capitolo corrente"
 
 #: data/ui/settings.ui:321
 msgid "Appearance"

@@ -184,7 +184,7 @@ msgstr "Bezig met wijzigen van audioboeklocatie..."
 
 #: cozy/disk_element.py:26
 msgid "Disc"
-msgstr ""
+msgstr "Schijf"
 
 #: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
@@ -511,7 +511,7 @@ msgstr "Titelbalk"
 
 #: data/ui/settings.ui:258
 msgid "Display the whole book instead of the current chapter"
-msgstr ""
+msgstr "Gehele boek tonen in plaats van huidige hoofdstuk"
 
 #: data/ui/settings.ui:321
 msgid "Appearance"
