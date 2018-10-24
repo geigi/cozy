@@ -1,3 +1,11 @@
+com.github.geigi.cozy (0.6.4) UNSTABLE; urgency=low
+
+  * Support for elementaryOS 5.0
+  * Fixed a bug which prevented cozy from automatically playing the next chapter
+  * Updated translations
+
+ -- Julian Geywitz <github@geigi.de>  Wed, 24 Oct 2018 22:55:14 +0200
+
 com.github.geigi.cozy (0.6.3) UNSTABLE; urgency=low
 
   * Support for elementaryOS 5.0
