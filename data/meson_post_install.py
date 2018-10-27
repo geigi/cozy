@@ -12,7 +12,4 @@ if not environ.get('DESTDIR'):
   print('Compiling gsettings schemas...')
   subprocess.call(['glib-compile-schemas', schemadir])
   print('Updating icon cache...')
-  if platform.system() == 'Darwin':
-    subprocess.call(['gtk3-update-icon-cache', '-qtf', path.join(datadir, 'icons', 'hicolor')])
-  else:
-    subprocess.call(['gtk-update-icon-cache', '-qtf', path.join(datadir, 'icons', 'hicolor')])
+  subprocess.call(['gtk-update-icon-cache', '-qtf', path.join(datadir, 'icons', 'hicolor')])

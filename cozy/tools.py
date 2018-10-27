@@ -210,4 +210,10 @@ def __get_media_type(path):
     :param path: Path to the file
     :return: mime type as string
     """
-    return magic.from_file(path, mime=True)
+    if platform.system() != 'Darwin':
+        return magic.from_file(path, mime=True)
+    else:
+        bundle_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        magic_file = bundle_dir + ('/share/misc/magic.mgc')
+        mag = magic.Magic(mime=True, magic_file=magic_file)
+        return mag.from_file(path)

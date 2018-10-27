@@ -1,6 +1,7 @@
 .idea/
 app/
 bin/
+build/
 cozy/__pycache__
 debian/build/
 debian/com.github.geigi.cozy.debhelper.log
@@ -8,9 +9,9 @@ debian/com.github.geigi.cozy.substvars
 debian/com.github.geigi.cozy/
 debian/debhelper-build-stamp
 debian/files
+dist/
 peewee/
 venv/
-
 
 # Ignore glade tmp files
 *~
@@ -26,3 +27,5 @@ venv/
 *.log
 *.prof
 *.pyc
+
+.DS_STORE

@@ -27,6 +27,8 @@ import sys
 import traceback
 import platform
 
+os.environ['GTK_THEME'] = 'Ant-slim'
+
 import gi
 gi.require_version('Gtk', '3.0')
 
