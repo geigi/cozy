@@ -27,7 +27,7 @@ import sys
 import traceback
 import platform
 
-os.environ['GTK_THEME'] = 'Ant-slim'
+os.environ['GTK_THEME'] = 'McOS-MJV'
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -39,6 +39,9 @@ from cozy.db import init_db, Settings
 if platform.system() != 'Darwin':
   from cozy.mpris import MPRIS
 
+if platform.system() == 'Darwin':
+  settings = Gtk.Settings.get_default()
+  settings.set_property("gtk-enable-animations", False)
 log = logging.getLogger("main")
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
 pkgdatadir = '@DATA_DIR@'
