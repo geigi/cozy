@@ -27,15 +27,15 @@ msgstr "Avaa kirjan esittely"
 
 #: cozy/book_element.py:213
 msgid "Currently offline"
-msgstr ""
+msgstr "Yhteydetön"
 
 #: cozy/book_element.py:319
 msgid "Mark as read"
-msgstr ""
+msgstr "Merkitse luetuksi"
 
 #: cozy/book_element.py:322
 msgid "Open in file browser"
-msgstr ""
+msgstr "Avaa tiedostoselaimessa"
 
 #: cozy/book_element.py:325
 msgid "Remove from library"
@@ -47,11 +47,11 @@ msgstr "Toista tämä osa"
 
 #: cozy/book_overview.py:222
 msgid "Downloaded"
-msgstr ""
+msgstr "Ladattu"
 
 #: cozy/book_overview.py:225 data/ui/main_window.ui:1328
 msgid "Download"
-msgstr ""
+msgstr "Lataa"
 
 #: cozy/file_not_found_dialog.py:66
 msgid "All files"
@@ -59,7 +59,7 @@ msgstr "Kaikki tiedostot"
 
 #: cozy/offline_cache.py:175
 msgid "Copying"
-msgstr ""
+msgstr "Kopioidaan"
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
@@ -168,15 +168,15 @@ msgstr "min"
 
 #: cozy/sleep_timer.py:129
 msgid "Off"
-msgstr ""
+msgstr "Pois"
 
 #: cozy/settings.py:413 cozy/settings.py:456
 msgid "External drive"
-msgstr ""
+msgstr "Ulkoinen asema"
 
 #: cozy/settings.py:416 cozy/settings.py:459
 msgid "Internal drive"
-msgstr ""
+msgstr "Sisäinen asema"
 
 #: cozy/settings.py:443
 msgid "Changing audio book location..."
@@ -184,7 +184,7 @@ msgstr "Muutetaan äänikirjojen sijaintia..."
 
 #: cozy/disk_element.py:26
 msgid "Disc"
-msgstr ""
+msgstr "Levy"
 
 #: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
@@ -359,17 +359,19 @@ msgstr ""
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
-msgstr ""
+msgstr "Ulkoinen tai verkkoasema?"
 
 #: data/ui/main_window.ui:927
 msgid "Are your audiobooks stored on an external or network drive?"
-msgstr ""
+msgstr "Ovatko äänikirjat ulkoisella tai verkkoasemalla?"
 
 #: data/ui/main_window.ui:942
 msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
+"Jos ne ovat, voit kytkeä yhteydettömän tilan kirjan esittelyssä\n"
+"Tämä säilyttää kopion kirjasta paikallisesti matkakuuntelua varten"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
@@ -386,7 +388,7 @@ msgstr "Vedä ja pudota"
 
 #: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr ""
+msgstr "Vedä äänikirjasi Cozyyn ja ne tuodaan automaattisesti"
 
 #: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
@@ -394,13 +396,15 @@ msgstr "Äänikirjojesi sijainti"
 
 #: data/ui/main_window.ui:1128
 msgid "Set Audiobooks Directory"
-msgstr ""
+msgstr "Aseta äänikirjahakemisto"
 
 #: data/ui/main_window.ui:1145
 msgid ""
 "Load audiobooks from a directory, network drive or an external disk\n"
 "You can add more storage locations later in the settings"
 msgstr ""
+"Lataa äänikirjoja hakemistosta, verkkoasemalta tai ulkoiselta asemalta\n"
+"Voit myöhemmin lisätä tallennussijainteja asetuksissa"
 
 #: data/ui/main_window.ui:1376
 msgid "Remaining"
@@ -502,7 +506,7 @@ msgstr "Otsikkopalkki"
 
 #: data/ui/settings.ui:258
 msgid "Display the whole book instead of the current chapter"
-msgstr ""
+msgstr "Näytä koko kirja tämänhetkisen kappaleen sijaan"
 
 #: data/ui/settings.ui:321
 msgid "Appearance"
@@ -522,11 +526,11 @@ msgstr "Automaattinen mediaskannaus"
 
 #: data/ui/settings.ui:611
 msgid "Fadeout"
-msgstr ""
+msgstr "Häivitys"
 
 #: data/ui/settings.ui:672
 msgid "Fadeout duration"
-msgstr ""
+msgstr "Häivytyksen kesto"
 
 #: data/ui/settings.ui:745
 msgid "Behaviour"
@@ -534,15 +538,15 @@ msgstr "Käytös"
 
 #: data/ui/settings.ui:772
 msgid "Artwork"
-msgstr ""
+msgstr "Kansitaide"
 
 #: data/ui/settings.ui:824
 msgid "Prefer external images over embedded cover"
-msgstr ""
+msgstr "Suosi ulkoisia kuvia upotetun kannen sijaan"
 
 #: data/ui/settings.ui:837
 msgid "Use images (cover.jpg, *.png, ...) when available"
-msgstr ""
+msgstr "Käytä kuvia (cover.jpg, *.png, ...) jos saatavilla"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
@@ -562,7 +566,7 @@ msgstr "Poista sijainti"
 
 #: data/ui/settings.ui:1055
 msgid "Toggle this storage location to be internal/external."
-msgstr ""
+msgstr "Aseta tallennussijainti sisäiseksi tai ulkoiseksi."
 
 #: data/ui/settings.ui:1081
 msgid "Set as default storage location for new audiobooks"
@@ -586,32 +590,34 @@ msgstr "Tallennustila"
 
 #: data/ui/settings.ui:1317
 msgid "Database"
-msgstr ""
+msgstr "Tietokanta"
 
 #: data/ui/settings.ui:1369
 msgid "Force refresh the database"
-msgstr ""
+msgstr "Pakota tietokannan päivitys"
 
 #: data/ui/settings.ui:1382
 msgid "This will force update the metadata of all imported books"
-msgstr ""
+msgstr "Tämä pakottaa metatiedon päivityksen kaikille tuoduille kirjoille"
 
 #: data/ui/settings.ui:1402
 msgid "Force refresh"
-msgstr ""
+msgstr "Pakota päivitys"
 
 #: data/ui/settings.ui:1470
 msgid "By request"
-msgstr ""
+msgstr "Pyynnöstä"
 
 #: data/ui/settings.ui:1523
 msgid "Use crc32 checksum for file modification detection"
-msgstr ""
+msgstr "Käytä CRC32-tarkistussummaa tiedostonmuokkauksen tunnistamiseen"
 
 #: data/ui/settings.ui:1536
 msgid ""
 "Only recommended if cozy doesn't detect file modifications while scanning"
 msgstr ""
+"Suositellaan vain jos Cozy ei tunnista tiedostonmuokkauksia skannauksen "
+"aikana"
 
 #: data/ui/settings.ui:1611
 msgid "Advanced"
@@ -647,7 +653,7 @@ msgstr "Mitään ei löytynyt :("
 
 #: data/ui/timer_popover.ui:39
 msgid "Stop after current chapter"
-msgstr ""
+msgstr "Pysäytä tämänhtekisen kappaleen jälkeen"
 
 #: data/ui/timer_popover.ui:76
 msgid "Timer duration"
