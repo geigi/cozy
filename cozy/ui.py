@@ -126,6 +126,13 @@ class CozyUI(metaclass=Singleton):
             screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
         styleContext.add_class("bordered")
 
+        if platform.system() == 'Darwin':
+            mac_cssProviderFile = Gio.File.new_for_uri(
+                "resource:///de/geigi/cozy/application_macos.css")
+            mac_cssProvider = Gtk.CssProvider()
+            mac_cssProvider.load_from_file(mac_cssProviderFile)
+            styleContext.add_provider_for_screen(screen, mac_cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
+
     def __init_window(self):
         """
         Add fields for all ui objects we need to access from code.
