@@ -239,7 +239,7 @@ class Settings(EventSender, metaclass=Singleton):
         if key == "titlebar-remaining-time":
             self.ui.titlebar._on_progress_setting_changed()
         elif key == "dark-mode":
-            self.set_darkmode()
+            self.set_darkmode(enable=not tools.get_glib_settings().get_boolean("dark-mode"))
 
     def __on_remove_blacklist_clicked(self, widget):
         """
@@ -313,7 +313,7 @@ class Settings(EventSender, metaclass=Singleton):
         self.ui.scan(None, False, True)
 
 
-    def set_darkmode(self):
+    def set_darkmode(self, enable=None):
         """
         Enable or disable the dark gtk theme.
         """
@@ -322,17 +322,21 @@ class Settings(EventSender, metaclass=Singleton):
         if self.default_dark_mode is None:
             self.default_dark_mode = settings.get_property("gtk-application-prefer-dark-theme")
         
-        user_enabled = tools.get_glib_settings().get_boolean("dark-mode")
+        if enable == None:
+            user_enabled = tools.get_glib_settings().get_boolean("dark-mode")
+        else:
+            user_enabled = enable
+        
         if user_enabled:
             settings.set_property("gtk-application-prefer-dark-theme", True)
 
             if platform.system() == 'Darwin':
-                os.environ['GTK_THEME'] = tools.MACOS_GTK_THEME_DARK
+                os.environ['GTK_THEME'] = tools.MACOS_GTK_THEME
         else:
             settings.set_property("gtk-application-prefer-dark-theme", self.default_dark_mode)
 
             if platform.system() == 'Darwin':
-                os.environ['GTK_THEME'] = tools.MACOS_GTK_THEME
+                os.environ['GTK_THEME'] = tools.MACOS_GTK_THEME_DARK
 
 class BlacklistColumn(Gtk.TreeViewColumn):
     """
