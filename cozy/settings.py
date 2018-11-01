@@ -1,6 +1,7 @@
 from threading import Thread
 import logging
 import platform
+import os
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio, Pango
@@ -324,8 +325,14 @@ class Settings(EventSender, metaclass=Singleton):
         user_enabled = tools.get_glib_settings().get_boolean("dark-mode")
         if user_enabled:
             settings.set_property("gtk-application-prefer-dark-theme", True)
+
+            if platform.system() == 'Darwin':
+                os.environ['GTK_THEME'] = 'McOS-MJV:dark'
         else:
             settings.set_property("gtk-application-prefer-dark-theme", self.default_dark_mode)
+
+            if platform.system() == 'Darwin':
+                os.environ['GTK_THEME'] = 'McOS-MJV'
 
 class BlacklistColumn(Gtk.TreeViewColumn):
     """
