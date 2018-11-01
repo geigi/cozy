@@ -1,4 +1,5 @@
 import threading
+import platform
 
 import cozy.artwork_cache as artwork_cache
 import cozy.db as db
@@ -95,6 +96,10 @@ class Titlebar:
             "/de/geigi/cozy/titlebar_menu.ui")
         menu = self.menu_builder.get_object("titlebar_menu")
         self.menu_button.set_menu_model(menu)
+
+        if platform.system() == 'Darwin':
+            headerbar = self.ui.get_object('headerbar')
+            headerbar.set_decoration_layout("close,minimize,maximize:menu")
 
     def __init_signals(self):
         self.play_button.connect("clicked", self.__on_play_pause_clicked)

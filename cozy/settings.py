@@ -1,5 +1,6 @@
 from threading import Thread
 import logging
+import platform
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio, Pango
@@ -31,6 +32,10 @@ class Settings(EventSender, metaclass=Singleton):
         self.window = self.builder.get_object("settings_window")
         self.window.set_transient_for(self.ui.window)
         self.window.connect("delete-event", self.ui.hide_window)
+
+        if platform.system() == 'Darwin':
+            headerbar = self.builder.get_object('headerbar')
+            headerbar.set_decoration_layout("close:menu")
 
         self.add_storage_button = self.builder.get_object("add_location_button")
         self.add_storage_button.connect("clicked", self.__on_add_storage_clicked)
