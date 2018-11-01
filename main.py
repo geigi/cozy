@@ -27,7 +27,8 @@ import sys
 import traceback
 import platform
 
-os.environ['GTK_THEME'] = 'McOS-MJV'
+MACOS_GTK_THEME = 'Ant-slim'
+os.environ['GTK_THEME'] = MACOS_GTK_THEME
 
 import gi
 gi.require_version('Gtk', '3.0')
