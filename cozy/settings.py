@@ -331,12 +331,12 @@ class Settings(EventSender, metaclass=Singleton):
             settings.set_property("gtk-application-prefer-dark-theme", True)
 
             if platform.system() == 'Darwin':
-                os.environ['GTK_THEME'] = tools.MACOS_GTK_THEME
+                os.environ['GTK_THEME'] = tools.MACOS_GTK_THEME_DARK
         else:
             settings.set_property("gtk-application-prefer-dark-theme", self.default_dark_mode)
 
             if platform.system() == 'Darwin':
-                os.environ['GTK_THEME'] = tools.MACOS_GTK_THEME_DARK
+                os.environ['GTK_THEME'] = tools.MACOS_GTK_THEME
 
 class BlacklistColumn(Gtk.TreeViewColumn):
     """
