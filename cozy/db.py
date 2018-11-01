@@ -522,7 +522,7 @@ def clean_books():
     """
     for book in Book.select():
         if Track.select().where(Track.book == book).count() < 1:
-            if Settings.get().last_played_book == book.id:
+            if Settings.get().last_played_book is not None and Settings.get().last_played_book.id == book.id:
                 Settings.update(last_played_book = None).execute()
             book.delete_instance()
 
