@@ -73,7 +73,22 @@ class CozyUI(metaclass=Singleton):
         """
         Initialize all resources like gresource and glade windows.
         """
-        if platform.system() != 'Darwin':
+        success = False
+        if platform.system() == 'Darwin':
+            try:
+                bundle_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                resource = Gio.resource_load(
+                    os.path.join(bundle_dir, 'cozy.ui.gresource'))
+                Gio.Resource._register(resource)
+
+                resource = Gio.resource_load(
+                    os.path.join(bundle_dir, 'cozy.img.gresource'))
+                Gio.Resource._register(resource)
+                success = True
+            except:
+                pass
+        
+        if not success:
             resource = Gio.resource_load(
                 os.path.join(self.pkgdir, 'cozy.ui.gresource'))
             Gio.Resource._register(resource)
@@ -81,15 +96,7 @@ class CozyUI(metaclass=Singleton):
             resource = Gio.resource_load(
                 os.path.join(self.pkgdir, 'cozy.img.gresource'))
             Gio.Resource._register(resource)
-        else:
-            bundle_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            resource = Gio.resource_load(
-                os.path.join(bundle_dir, 'cozy.ui.gresource'))
-            Gio.Resource._register(resource)
-
-            resource = Gio.resource_load(
-                os.path.join(bundle_dir, 'cozy.img.gresource'))
-            Gio.Resource._register(resource)
+            
         self.window_builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/main_window.ui")
 

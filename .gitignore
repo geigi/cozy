@@ -28,4 +28,4 @@ venv/
 *.prof
 *.pyc
 
-.DS_STORE
+*.DS_STORE
