@@ -8,6 +8,8 @@ import os
 from gi.repository import GLib, Gio
 import cozy.magic.magic as magic
 
+MACOS_GTK_THEME = 'Ant-slim'
+
 def get_cache_dir():
     """
     Creates the cache dir if it doesn't exist

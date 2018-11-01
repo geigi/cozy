@@ -27,8 +27,9 @@ import sys
 import traceback
 import platform
 
-MACOS_GTK_THEME = 'Ant-slim'
-os.environ['GTK_THEME'] = MACOS_GTK_THEME
+import cozy.tools as tools
+
+os.environ['GTK_THEME'] = tools.MACOS_GTK_THEME
 
 import gi
 gi.require_version('Gtk', '3.0')
