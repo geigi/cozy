@@ -248,12 +248,12 @@ class CozyUI(metaclass=Singleton):
         quit_action.connect("activate", self.quit)
         self.app.add_action(quit_action)
         self.app.set_accels_for_action(
-            "app.quit", ["<Control>q", "<Control>w"])
+            "app.quit", ["<Primary>q", "<Primary>w"])
 
         pref_action = Gio.SimpleAction.new("prefs", None)
         pref_action.connect("activate", self.show_prefs)
         self.app.add_action(pref_action)
-        self.app.set_accels_for_action("app.prefs", ["<Control>comma"])
+        self.app.set_accels_for_action("app.prefs", ["<Primary>comma"])
 
         self.scan_action = Gio.SimpleAction.new("scan", None)
         self.scan_action.connect("activate", self.scan)
