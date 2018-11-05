@@ -1,4 +1,4 @@
-All your audio books in one place! Cozy is an audio book player which let's you manage and play back your collection.
+All your audio books in one place! Cozy is an audio book player for Linux and macOS which let's you manage and play back your collection.
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
 
@@ -40,7 +40,21 @@ If you prefer a custom repository - for Ubuntu, Debian, openSUSE and Fedora ther
 
 If you like this project, consider supporting me on <a href="https://www.patreon.com/bePatron?u=8147127"> Patreon</a> :)
 
+### macOS
+Cozy for macOS is currently on beta. It's tested only on 10.14 Mojave so far and there are some known bugs:
+- no integration in notification center or any other desktop integration really
+- media keys are not working
+- dark mode requires 2x switching in settings + is not loading automatically at startup
+- large Cozy.app
+
+You can download it here: <a href="https://github.com/geigi/cozy/releases/download/0.6.4/cozy_macos_0.6.4_beta2.dmg">Cozy 0.6.4 beta2 for macOS</a>
+
 # Changelog
+## 0.6.4
+- Fixed a bug which prevented cozy from automatically playing the next chapter
+- Updated translations
+- macOS beta release
+
 ## 0.6.1
 - Improved artwork image quality
 - The book overview now supports multiple disks in audiobooks
