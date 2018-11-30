@@ -65,7 +65,7 @@ You can download it here: <a href="https://github.com/geigi/cozy/releases/downlo
 - `meson >= 0.40.0` as build system
 - `ninja`
 - `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
-- `peewee >= 3.5` as object relation mapper
+- `peewee = 2.10.2` or `peewee >= 3.5` as object relation mapper
 - `python3-mutagen` for meta tag management
 - `python3-gi-cairo`
 - `file`
