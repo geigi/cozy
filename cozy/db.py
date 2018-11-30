@@ -130,16 +130,19 @@ def init_db():
     else:
         tmp_db = SqliteDatabase(os.path.join(data_dir, "cozy.db"))
         if PeeweeVersion[0] == '2':
-            with tmp_db.connection_context():
-                tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache], True)
+            tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache], True)
         else:
             with tmp_db.connection_context():
                 tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache])
 
     # this is necessary to ensure that the tables have indeed been created
     if tmp_db:
-        while not tmp_db.table_exists("settings"):
-            time.sleep(0.01)
+        if PeeweeVersion[0] == '2':
+            while not Settings.table_exists():
+                time.sleep(0.01)
+        else:
+            while not tmp_db.table_exists("settings"):
+                time.sleep(0.01)
 
     try:
         db.connect()
@@ -385,7 +388,12 @@ def update_db():
     # First test for version 1
     try:
         next(c for c in db.get_columns("settings") if c.name == "version")
-    except StopIteration as e:
+    except Exception as e:
+        if len(db.get_tables()) == 0:
+            if os.path.exists(os.path.join(data_dir, "cozy.db")):
+                os.remove(os.path.join(data_dir, "cozy.db"))
+                os.remove(os.path.join(data_dir, "cozy.db-shm"))
+                os.remove(os.path.join(data_dir, "cozy.db-wal"))
         update_db_1()
 
     version = Settings.get().version
