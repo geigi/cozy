@@ -282,7 +282,7 @@ class BookElement(Gtk.FlowBoxChild):
         Refresh the internal book object from the database.
         """
         try:
-            self.book = db.Book.get_by_id(self.book.id)
+            self.book = db.Book.get(db.Book.id == self.book.id)
         except:
             pass
 

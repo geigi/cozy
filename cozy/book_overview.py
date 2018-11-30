@@ -58,7 +58,7 @@ class BookOverview:
         if self.book and self.book.id == book.id:
             self.update_time()
             return
-        self.book = db.Book.get_by_id(book.id)
+        self.book = db.Book.get(db.Book.id == book.id)
 
         if self.ui.is_playing and self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
             self.play_book_button.set_image(self.pause_img)
@@ -135,7 +135,7 @@ class BookOverview:
         """
         Hide/Show download elements depending on whether the book is on an external storage.
         """
-        self.book = db.Book.get_by_id(self.book.id)
+        self.book = db.Book.get(db.Book.id == self.book.id)
         if self.switch_signal:
             self.download_switch.disconnect(self.switch_signal)
         if db.is_external(self.book):

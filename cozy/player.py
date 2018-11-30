@@ -148,7 +148,7 @@ def get_current_track():
     """
     global __current_track
     if __current_track:
-        return cozy.db.Track.get_by_id(__current_track.id)
+        return cozy.db.Track.get(cozy.db.Track.id == __current_track.id)
     else:
         return None
 
@@ -208,11 +208,11 @@ def play_pause(track, jump=False):
             save_current_track_position()
         else:
             __player.set_state(Gst.State.PLAYING)
-            emit_event("play", cozy.db.Track.get_by_id(__current_track.id))
+            emit_event("play", cozy.db.Track.get(cozy.db.Track.id == __current_track.id))
     else:
         load_file(track)
         __player.set_state(Gst.State.PLAYING)
-        emit_event("play", cozy.db.Track.get_by_id(__current_track.id))
+        emit_event("play", cozy.db.Track.get(cozy.db.Track.id == __current_track.id))
 
     __set_speed = True
 
