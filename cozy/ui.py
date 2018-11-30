@@ -406,7 +406,7 @@ class CozyUI(metaclass=Singleton):
                 if not os.path.exists(path):
                     os.mkdir(path)
 
-                db.Storage.create(path=path, default=True).execute()
+                db.Storage.create(path=path, default=True)
 
             self.no_media_file_chooser.set_current_folder(path)
             self.main_stack.props.visible_child_name = "no_media"
@@ -801,7 +801,7 @@ class CozyUI(metaclass=Singleton):
         selected_stack = self.sort_stack.props.visible_child_name
         if tools.get_glib_settings().get_boolean("hide-offline"):
             if not self.fs_monitor.is_book_online(book.book):
-                offline_available = db.Book.get_by_id(book.book.id).downloaded
+                offline_available = db.Book.get(db.Book.id == book.book.id).downloaded
             else:
                 offline_available = True
         else:

@@ -18,6 +18,7 @@ from mutagen.flac import FLAC
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 from mutagen.oggvorbis import OggVorbis
+from peewee import __version__ as PeeweeVersion
 from gi.repository import Gdk, GLib, Gst
 
 import cozy.db
@@ -179,9 +180,13 @@ def write_tracks_to_db(tracks):
     if tracks is None or len(tracks) < 1:
         return
 
-    fields = [cozy.db.Track.name, cozy.db.Track.number, cozy.db.Track.disk, cozy.db.Track.position, cozy.db.Track.book, cozy.db.Track.file, cozy.db.Track.length, cozy.db.Track.modified, cozy.db.Track.crc32]
-    data = list((t.name, t.track_number, t.disk, t.position, t.book, t.file, t.length, t.modified, t.crc32) for t in tracks)
-    cozy.db.Track.insert_many(data, fields=fields).execute()
+    if PeeweeVersion[0] == '2':
+        data = list({"name": t.name, "number": t.track_number, "disk": t.disk, "position": t.position, "book": t.book, "file": t.file, "length": t.length, "modified": t.modified, "crc32": t.crc32} for t in tracks)
+        cozy.db.Track.insert_many(data).execute()
+    else:
+        fields = [cozy.db.Track.name, cozy.db.Track.number, cozy.db.Track.disk, cozy.db.Track.position, cozy.db.Track.book, cozy.db.Track.file, cozy.db.Track.length, cozy.db.Track.modified, cozy.db.Track.crc32]
+        data = list((t.name, t.track_number, t.disk, t.position, t.book, t.file, t.length, t.modified, t.crc32) for t in tracks)
+        cozy.db.Track.insert_many(data, fields=fields).execute()
 
 def rebase_location(ui, oldPath, newPath):
     """
