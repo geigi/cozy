@@ -1,6 +1,4 @@
 # It's getting Cozy
-[![Build Status](https://travis-ci.org/geigi/cozy.svg?branch=master)](https://travis-ci.org/geigi/cozy)
-<span class="badge-patreon"><a href="https://patreon.com/geigi" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
 
 Cozy is a modern audiobook player for Linux and macOS. 
 
@@ -21,6 +19,7 @@ Cozy is a modern audiobook player for Linux and macOS.
 - Developed on Fedora and tested under elementaryOS
 
 # Install
+
 | elementaryOS | openSUSE | Arch Linux | Flatpak (other) | macOS |
 |--------------|:----------:|:------------:|-----------------|:-------:|
 | {::nomarkdown}<a href="https://appcenter.elementary.io/com.github.geigi.cozy"><img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter"></a>{:/} | {::nomarkdown}<center><a href="https://software.opensuse.org/package/cozy">cozy</a>{:/} | {::nomarkdown}<a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center>{:/} | {::nomarkdown}<a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>{:/} | {::nomarkdown}<center><a href="https://github.com/geigi/cozy/releases/download/0.6.4/cozy_macos_0.6.4_beta2.dmg">Beta 2</a></center>{:/} |  
