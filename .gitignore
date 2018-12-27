@@ -1,5 +1,7 @@
+.idea/
 app/
 bin/
+cozy/__pycache__
 debian/build/
 debian/com.github.geigi.cozy.debhelper.log
 debian/com.github.geigi.cozy.substvars
@@ -7,6 +9,8 @@ debian/com.github.geigi.cozy/
 debian/debhelper-build-stamp
 debian/files
 peewee/
+venv/
+
 
 # Ignore glade tmp files
 *~
@@ -14,6 +18,11 @@ peewee/
 
 # Ignore sublime files
 *.sublime-workspace
+*.sublime-project
 
 .vscode/.ropeproject
 .vscode/tags
+.tx
+*.log
+*.prof
+*.pyc

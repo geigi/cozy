@@ -1,16 +1,19 @@
 from gi.repository import Gtk
 
+import cozy.ui
+
 
 class ImportFailedDialog():
     """
     Dialog that displays failed files on import.
     """
 
-    def __init__(self, files, parent):
-        self.parent = parent
+    def __init__(self, files):
+        self.parent = cozy.ui.CozyUI()
         self.builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/import_failed.ui")
         self.dialog = self.builder.get_object("dialog")
+        self.dialog.set_transient_for(self.parent.window)
         self.text = self.builder.get_object("files_buffer")
 
         self.text.set_text(files)

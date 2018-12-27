@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!@PYTHON@
 
 # main.py
 #
@@ -25,6 +25,7 @@ import os
 import signal
 import sys
 import traceback
+import platform
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -36,11 +37,20 @@ from cozy.db import init_db, Settings
 from cozy.mpris import MPRIS
 
 log = logging.getLogger("main")
-
+data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
 pkgdatadir = '@DATA_DIR@'
 localedir = '@LOCALE_DIR@'
 version = '@VERSION@'
+LOG_FORMAT = "%(asctime)s [%(threadName)-12.12s] [%(name)-10.10s] [%(levelname)-5.5s]  %(message)s"
+LOG_DATE_FORMAT = "%H:%M:%S"
 
+# setup log files
+log1 = os.path.join(data_dir, "cozy_1.log")
+log0 = os.path.join(data_dir, "cozy.log")
+if os.path.exists(log1):
+    os.remove(log1)
+if os.path.exists(os.path.join(data_dir, "cozy.log")):
+    os.rename(log0, log1)
 
 class Application(Gtk.Application):
     def __init__(self, **kwargs):
@@ -48,18 +58,16 @@ class Application(Gtk.Application):
 
         GObject.threads_init()
         listen()
-
         Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
-
         GLib.setenv("PULSE_PROP_media.role", "music", True)
 
         import gettext
-
         locale.bindtextdomain('cozy', localedir)
         locale.textdomain('cozy')
         gettext.install('cozy', localedir)
 
     def do_startup(self):
+        log.info(platform.dist())
         log.info("Starting up cozy " + version)
         self.ui = CozyUI(pkgdatadir, self, version)
         init_db()
@@ -81,7 +89,8 @@ class Application(Gtk.Application):
                 self.ui.refresh_content()
 
         self.add_window(self.ui.window)
-        MPRIS(self, self.ui)
+        mpris = MPRIS(self)
+        mpris._on_current_changed(None)
 
 
 def __on_command_line():
@@ -93,9 +102,15 @@ def __on_command_line():
     args = parser.parse_args(sys.argv[1:])
 
     if args.debug:
-        logging.basicConfig(level=logging.DEBUG)
+        logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT, datefmt=LOG_DATE_FORMAT, handlers=[
+            logging.FileHandler(log0),
+            logging.StreamHandler(sys.stdout)
+        ])
     else:
-        logging.basicConfig(level=logging.INFO)
+        logging.basicConfig(level=logging.INFO, format=LOG_FORMAT, datefmt=LOG_DATE_FORMAT, handlers=[
+            logging.FileHandler(log0),
+            logging.StreamHandler(sys.stdout)
+        ])
 
 
 def main():

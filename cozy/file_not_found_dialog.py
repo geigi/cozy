@@ -1,21 +1,23 @@
 import os
 
 from cozy.db import Track, Book
-from cozy.player import stop, get_playbin, emit_event, load_file, play_pause
 from gi.repository import Gtk, Gst
 import cozy.importer as importer
+import cozy.player as player
+import cozy.ui
 
 class FileNotFoundDialog():
     """
     Dialog that prompts the user to update a files location.
     """
 
-    def __init__(self, file, parent):
+    def __init__(self, file):
         self.missing_file = file
-        self.parent = parent
+        self.parent = cozy.ui.CozyUI()
         self.builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/file_not_found.ui")
         self.dialog = self.builder.get_object("dialog")
+        self.dialog.set_transient_for(self.parent.window)
         self.builder.get_object("file_label").set_markup(
             "<tt>" + file + "</tt>")
 
@@ -36,9 +38,9 @@ class FileNotFoundDialog():
         """
         self.parent.dialog_open = False
         self.dialog.destroy()
-        stop()
-        get_playbin().set_state(Gst.State.NULL)
-        emit_event("stop")
+        player.stop()
+        player.unload()
+        player.emit_event("stop")
 
     def locate(self, button):
         """
@@ -76,7 +78,7 @@ class FileNotFoundDialog():
             self.parent.refresh_content()
             self.dialog.destroy()
             self.parent.dialog_open = False
-            load_file(Track.select().where(Track.file == new_location).get())
-            play_pause(None, True)
+            player.load_file(Track.select().where(Track.file == new_location).get())
+            player.play_pause(None, True)
 
         dialog.destroy()

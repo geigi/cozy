@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.1 -->
+<!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
   <object class="GtkAboutDialog" id="about_dialog">
@@ -8,22 +8,45 @@
     <property name="type_hint">dialog</property>
     <property name="program_name">Cozy</property>
     <property name="version">0.0.1</property>
-    <property name="comments" translatable="yes">Support me on Patreon: https://www.patreon.com/geigi</property>
+    <property name="comments">Thanks to my supporters on Patreon: https://www.patreon.com/geigi
+Help translating Cozy: https://transifex.com/geigi/cozy</property>
     <property name="website">https://github.com/geigi/cozy</property>
     <property name="website_label" translatable="yes">GitHub</property>
     <property name="authors">geigi
 
 Contributions on GitHub:
+oleg-krv 
 AsavarTzeth
+worldofpeace
+camellan
+jnbr
 
 Big thanks to my patreon supporters:
 Fred Warren
+Gabriel
 
 And to other open source projects:
 https://github.com/gnumdk/lollypop</property>
-    <property name="translator_credits" translatable="no">camellan</property>
+    <property name="translator_credits">camellan
+Vistaus
+Distil62
+karaagac
+HansCz
+mvainola
+giuscasula
+abuyop
+akodi
+cleitonjfloss
+amadeussss
+nvivant
+Foxyriot
+mardojai
+trampover</property>
     <property name="logo_icon_name">com.github.geigi.cozy</property>
     <property name="license_type">gpl-3-0</property>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -50,9 +73,6 @@ https://github.com/gnumdk/lollypop</property>
           <placeholder/>
         </child>
       </object>
-    </child>
-    <child>
-      <placeholder/>
     </child>
   </object>
 </interface>

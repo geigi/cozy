@@ -1,31 +1,5 @@
-.bold {
-  font-weight: bold;
-}
-
 .bordered {
   border: 2px solid shade(@theme_bg_color, 0.85);
-}
-
-.mouse_hover {
-  background-color: @theme_selected_fg_color;
-  border-radius: 4px;
-}
-
-.black_opacity {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.white {
-  color: white;
-}
-
-.box_hover {
-  color: @theme_selected_fg_color;
-  background: @theme_selected_bg_color
-}
-
-.no_frame {
-  border-style: none;
 }
 
 .h4 {
@@ -35,21 +9,4 @@
 
 .h5 {
   font-size: 115%;
-}
-
-.bg_default {
-	background-color: shade(@theme_bg_color, 0.95);
-}
-
-.roundless_button {
-  border-radius: 0;
-  border-color: shade(@theme_bg_color, 0.8);
-}
-
-.toggle_button_left {
-  border-width: 1px 1px 1px 1px;
-}
-
-.toggle_button_right {
-  border-width: 1px 1px 1px 0px;
 }

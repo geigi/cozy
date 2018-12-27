@@ -8,4 +8,4 @@ Terminal=false
 Type=Application
 Categories=GNOME;GTK;AudioVideo;Player;Audio;
 StartupNotify=true
-MimeType=application-x;
+MimeType=x-content/audio-player;

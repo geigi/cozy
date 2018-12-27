@@ -1,5 +1,5 @@
 project('cozy',
-  version: '0.4.4',
+  version: '0.6.5',
   meson_version: '>= 0.40.0')
 
 project_name = 'cozy'
@@ -47,6 +47,7 @@ conf.set('PYTHON_DIR', python_dir)
 conf.set('PYTHON_EXEC_DIR', join_paths(get_option('prefix'), python.sysconfig_path('stdlib')))
 conf.set('libexecdir', LIBEXEC_DIR)
 conf.set('VERSION', meson.project_version())
+conf.set('PYTHON', python_bin.path())
 
 subdir('data')
 subdir('po')

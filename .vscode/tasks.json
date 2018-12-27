@@ -14,7 +14,10 @@
             "label": "ninja",
             "type": "shell",
             "command": "ninja -C ${workspaceFolder}/bin install",
-            "group": "build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "problemMatcher": []
         }
     ]

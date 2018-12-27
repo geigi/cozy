@@ -20,7 +20,8 @@
                 "WaitOnNormalExit",
                 "RedirectOutput"
             ],
-            "preLaunchTask": "ninja"
+            "preLaunchTask": "ninja",
+            "console": "none"
         },
         {
             "name": "Python: Attach",

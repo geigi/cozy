@@ -1,10 +1,11 @@
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 from cozy.book_element import AlbumElement
+import cozy.artwork_cache as artwork_cache
+import cozy.tools as tools
 
 MAX_BOOK_LENGTH = 80
 MAX_TRACK_LENGTH = 40
 BOOK_ICON_SIZE = 40
-
 
 class SearchResult(Gtk.EventBox):
     """
@@ -20,7 +21,7 @@ class SearchResult(Gtk.EventBox):
 
         self.connect("enter-notify-event", self._on_enter_notify)
         self.connect("leave-notify-event", self._on_leave_notify)
-        if on_click is not None:
+        if on_click:
             self.connect("button-press-event", self.__on_clicked)
 
         self.props.margin_top = 2
@@ -67,12 +68,10 @@ class ArtistSearchResult(SearchResult):
 
         title_label = Gtk.Label()
         if is_author:
-            title_label.set_text((self.book.author[:MAX_BOOK_LENGTH] + '...') if len(
-                self.book.author) > MAX_BOOK_LENGTH else self.book.author)
+            title_label.set_text(tools.shorten_string(self.book.author, MAX_BOOK_LENGTH))
             self.set_tooltip_text(_("Jump to author ") + book.author)
         else:
-            title_label.set_text((self.book.reader[:MAX_BOOK_LENGTH] + '...') if len(
-                self.book.reader) > MAX_BOOK_LENGTH else self.book.reader)
+            title_label.set_text(tools.shorten_string(self.book.reader, MAX_BOOK_LENGTH))
             self.set_tooltip_text(_("Jump to reader ") + book.reader)
         title_label.set_halign(Gtk.Align.START)
         title_label.props.margin = 4
@@ -99,8 +98,7 @@ class TrackSearchResult(SearchResult):
         self.track = track
 
         title_label = Gtk.Label()
-        title_label.set_text((self.track.name[:MAX_TRACK_LENGTH] + '...') if len(
-            self.track.name) > MAX_TRACK_LENGTH else self.track.name)
+        title_label.set_text(tools.shorten_string(self.track.name, MAX_TRACK_LENGTH))
         title_label.set_halign(Gtk.Align.START)
         title_label.props.margin = 4
         title_label.props.hexpand = True
@@ -120,22 +118,22 @@ class BookSearchResult(SearchResult):
     This class represents a book search result.
     """
 
-    def __init__(self, book, on_click):
+    def __init__(self, book, on_click, scale):
         super().__init__(on_click, book)
 
         self.set_tooltip_text(_("Play this book"))
 
-        img = AlbumElement(self.book, BOOK_ICON_SIZE, False, True)
-        img.disconnect_signals()
-        self.connect("enter-notify-event", img._on_enter_notify)
-        self.connect("enter-notify-event", img._on_play_enter_notify)
-        self.connect("leave-notify-event", img._on_leave_notify)
-        self.connect("leave-notify-event", img._on_play_leave_notify)
-        self.connect("button-press-event", img._on_play_button_press)
+        pixbuf = artwork_cache.get_cover_pixbuf(book, scale, BOOK_ICON_SIZE)
+        if pixbuf:
+            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
+            img = Gtk.Image.new_from_surface(surface)
+        else:
+            img = Gtk.Image.new_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.MENU)
+            img.props.pixel_size = BOOK_ICON_SIZE
+        img.set_size_request(BOOK_ICON_SIZE, BOOK_ICON_SIZE)
 
         title_label = Gtk.Label()
-        title_label.set_text((self.book.name[:MAX_BOOK_LENGTH] + '...') if len(
-            self.book.name) > MAX_BOOK_LENGTH else self.book.name)
+        title_label.set_text(tools.shorten_string(self.book.name, MAX_BOOK_LENGTH))
         title_label.set_halign(Gtk.Align.START)
         title_label.props.margin = 4
         title_label.props.hexpand = True

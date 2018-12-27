@@ -1,3 +1,5 @@
+import threading
+import time
 from gi.repository import Gst
 
 import gi
@@ -5,22 +7,37 @@ gi.require_version('Gst', '1.0')
 import logging
 log = logging.getLogger("player")
 
-import cozy.db as db
+import cozy.db
+from cozy.offline_cache import OfflineCache
+import cozy.filesystem_monitor
 
 Gst.init(None)
+
+__speed = 1.0
+__set_speed = False
+__current_track = None
+__listeners = []
+__wait_to_seek = False
+__player = None
+__bus = None
+__play_next = True
 
 
 def __on_gst_message(bus, message):
     """
     Handle messages from gst.
     """
+    global __speed
+    global __set_speed
 
     t = message.type
     if t == Gst.MessageType.BUFFERING:
         if (message.percentage < 100):
             __player.set_state(Gst.State.PAUSED)
+            log.info("Buffering...")
         else:
             __player.set_state(Gst.State.PLAYING)
+            log.info("Buffering finished.")
     elif t == Gst.MessageType.EOS:
         next_track()
     elif t == Gst.MessageType.ERROR:
@@ -34,13 +51,36 @@ def __on_gst_message(bus, message):
             auto_jump()
 
 
-__player = Gst.ElementFactory.make("playbin", "player")
-__bus = __player.get_bus()
-__bus.add_signal_watch()
-__bus.connect("message", __on_gst_message)
-__current_track = None
-__listeners = []
-__wait_to_seek = False
+def init():
+    global __player
+    global __bus
+
+    if __player:
+        dispose()
+        __player = None
+
+    __player = Gst.ElementFactory.make("playbin", "player")
+    __scaletempo = Gst.ElementFactory.make("scaletempo", "scaletempo")
+    __scaletempo.sync_state_with_parent()
+
+    __audiobin = Gst.ElementFactory.make("bin", "audiosink")
+    __audiobin.add(__scaletempo)
+
+    __audiosink = Gst.ElementFactory.make("autoaudiosink", "audiosink")
+    __audiobin.add(__audiosink)
+
+    __scaletempo.link(__audiosink)
+    __pad = __scaletempo.get_static_pad("sink")
+    __ghost_pad = Gst.GhostPad.new("sink", __pad)
+    __audiobin.add_pad(__ghost_pad)
+
+    __player.set_property("audio-sink", __audiobin)
+
+    __bus = __player.get_bus()
+    __bus.add_signal_watch()
+    __bus.connect("message", __on_gst_message)
+
+    cozy.filesystem_monitor.FilesystemMonitor().add_listener(__on_storage_changed)
 
 
 def get_gst_bus():
@@ -71,14 +111,22 @@ def get_gst_player_state():
     return state
 
 
-def get_current_duration():
+def get_current_duration(wait=False):
     """
     Current duration of track
     :returns: duration in ns
     """
+    global __current_track
     global __player
-    duration = __player.query_position(Gst.Format.TIME)[1]
-    return duration
+
+    res = __player.query_position(Gst.Format.TIME)
+
+    if wait:
+        while not res[0] and __current_track:
+            time.sleep(0.1)
+            res = __player.query_position(Gst.Format.TIME)
+
+    return res[1]
 
 
 def get_current_duration_ui():
@@ -87,7 +135,8 @@ def get_current_duration_ui():
     :return m: minutes
     :return s: seconds
     """
-    s, ns = divmod(get_current_duration(), 1000000000)
+    global __speed
+    s, ns = divmod(get_current_duration() / __speed, 1000000000)
     m, s = divmod(s, 60)
     return m, s
 
@@ -98,8 +147,8 @@ def get_current_track():
     :return: currently loaded track object
     """
     global __current_track
-    if __current_track is not None:
-        return db.Track.select().where(db.Track.id == __current_track.id).get()
+    if __current_track:
+        return cozy.db.Track.get(cozy.db.Track.id == __current_track.id)
     else:
         return None
 
@@ -110,6 +159,15 @@ def add_player_listener(function):
     """
     global __listeners
     __listeners.append(function)
+
+
+def get_volume():
+    """
+    Get the player volume. 
+    :returns: 0.0 is 0%, 1.0 is 100%
+    """
+    global __player
+    return __player.get_property("volume")
 
 
 def set_volume(volume):
@@ -138,6 +196,7 @@ def play_pause(track, jump=False):
     global __current_track
     global __player
     global __wait_to_seek
+    global __set_speed
 
     __wait_to_seek = jump
 
@@ -146,15 +205,16 @@ def play_pause(track, jump=False):
         if get_gst_player_state() == Gst.State.PLAYING:
             __player.set_state(Gst.State.PAUSED)
             emit_event("pause")
-            db.Track.update(position=get_current_duration()).where(
-                db.Track.id == get_current_track().id).execute()
+            save_current_track_position()
         else:
             __player.set_state(Gst.State.PLAYING)
-            emit_event("play")
+            emit_event("play", cozy.db.Track.get(cozy.db.Track.id == __current_track.id))
     else:
         load_file(track)
         __player.set_state(Gst.State.PLAYING)
-        emit_event("play")
+        emit_event("play", cozy.db.Track.get(cozy.db.Track.id == __current_track.id))
+
+    __set_speed = True
 
 
 def next_track():
@@ -163,8 +223,9 @@ def next_track():
     Stops playback if there isn't any.
     """
     global __current_track
+    global __play_next
 
-    album_tracks = db.tracks(get_current_track().book)
+    album_tracks = cozy.db.tracks(get_current_track().book)
     current = get_current_track()
     index = list(album_tracks).index(current)
     next_track = None
@@ -172,19 +233,30 @@ def next_track():
         next_track = album_tracks[index + 1]
 
     play_pause(None)
-    db.Track.update(position=0).where(db.Track.id == current.id).execute()
+    save_current_track_position(0)
 
-    if next_track is not None:
-        db.Book.update(position=next_track.id).where(
-            db.Book.id == next_track.book.id).execute()
-        play_pause(next_track)
+    if next_track:
+        save_current_book_position(next_track)
+        save_current_track_position(0, next_track)
+        if __play_next:
+            play_pause(next_track)
+        else:
+            load_file(next_track)
+            __play_next = True
     else:
         stop()
-        db.Book.update(position=0).where(db.Book.id == current.book.id).execute()
-        __player.set_state(Gst.State.NULL)
-        __current_track = None
-        db.Settings.update(last_played_book=None).execute()
+        save_current_book_position(current, -1)
+        unload()
+        cozy.db.Settings.update(last_played_book=None).execute()
         emit_event("stop")
+
+
+def unload():
+    global __player
+    global __current_track
+
+    __player.set_state(Gst.State.NULL)
+    __current_track = None
 
 
 def prev_track():
@@ -194,25 +266,25 @@ def prev_track():
     """
     global __player
     global __current_track
-    album_tracks = db.tracks(get_current_track().book)
+    album_tracks = cozy.db.tracks(get_current_track().book)
     current = get_current_track()
     index = list(album_tracks).index(current)
     previous = None
     if index > -1:
         previous = album_tracks[index - 1]
 
-    db.Track.update(position=0).where(db.Track.id == current.id).execute()
+    save_current_track_position()
 
-    if previous is not None:
-        db.Book.update(position=previous.id).where(
-            db.Book.id == previous.book.id).execute()
+    if previous:
         play_pause(previous)
+        save_current_track_position(track=current, pos=0)
+        save_current_book_position(previous)
     else:
         first_track = __current_track
         __player.set_state(Gst.State.NULL)
         __current_track = None
         play_pause(first_track)
-        db.Book.update(position=0).where(db.Book.id == current.book.id).execute()
+        save_current_book_position(current, 0)
 
 
 def stop():
@@ -232,10 +304,11 @@ def rewind(seconds):
     duration = get_current_duration()
     seek = duration - (seconds * 1000000000)
     if seek < 0:
-        # TODO: Go back to previous track
-        seek = 0
-    __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, seek)
-    db.Track.update(position=seek).where(db.Track.id == __current_track.id).execute()
+        prev_track()
+        seek = get_current_track().length * 1000000000 + seek
+    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
+                  Gst.SeekType.SET, seek, Gst.SeekType.NONE, 0)
+    save_current_track_position(seek)
 
 
 def jump_to(seconds):
@@ -244,6 +317,7 @@ def jump_to(seconds):
     :param seconds: time in seconds
     """
     global __player
+    global __speed
 
     new_position = int(seconds) * 1000000000
     if seconds < 0:
@@ -251,9 +325,9 @@ def jump_to(seconds):
     elif int(seconds) > get_current_track().length:
         new_position = int(get_current_track().length) * 1000000000
 
-    __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, new_position)
-    db.Track.update(position=new_position).where(
-        db.Track.id == __current_track.id).execute()
+    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
+                  Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
+    save_current_track_position(new_position)
 
 
 def jump_to_ns(ns):
@@ -262,6 +336,7 @@ def jump_to_ns(ns):
     :param ns: time in ns
     """
     global __player
+    global __speed
 
     new_position = ns
     if ns < 0:
@@ -269,9 +344,12 @@ def jump_to_ns(ns):
     elif int(ns / 1000000000) > get_current_track().length:
         new_position = int(get_current_track().length) * 1000000000
 
-    __player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, new_position)
-    db.Track.update(position=new_position).where(
-        db.Track.id == __current_track.id).execute()
+    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
+                  Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
+    save_current_track_position(new_position)
+
+
+__playback_speed_timer_running = False
 
 
 def auto_jump():
@@ -279,23 +357,79 @@ def auto_jump():
     Automatically jump to the last playback position if posible
     """
     global __wait_to_seek
-    if __wait_to_seek:
+    global __speed
+    global __set_speed
+
+    if __wait_to_seek or __set_speed:
         query = Gst.Query.new_seeking(Gst.Format.TIME)
         if get_playbin().query(query):
             fmt, seek_enabled, start, end = query.parse_seeking()
             if seek_enabled:
                 jump_to_ns(get_current_track().position)
                 __wait_to_seek = False
+                __set_speed = False
+            if __set_speed:
+                set_playback_speed(__speed)
+                __set_speed = False
 
 
 def set_playback_speed(speed):
     """
     Sets the playback speed in the gst player.
+    Uses a timer to avoid crackling sound.
+    """
+    global __player
+    global __speed
+    global __playback_speed_timer_running
+
+    __speed = speed
+    save_current_playback_speed()
+    if __playback_speed_timer_running:
+        return
+
+    __playback_speed_timer_running = True
+    
+    t = threading.Timer(0.2, __on_playback_speed_timer)
+    t.name = "PlaybackSpeedDelayTimer"
+    t.start()
+
+
+def set_play_next(play_next):
+    """
+    True continues the playback after the current file.
+    False stops playback after the current file.
+    :param play_next: Boolean
+    """
+    global __play_next
+    __play_next = play_next
+
+
+def __on_playback_speed_timer():
+    """
+    Get's called after the playback speed changer timer is over.
+    """
+    global __speed
+    global __playback_speed_timer_running
+
+    position = get_current_duration(wait=True)
+    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH |
+                  Gst.SeekFlags.ACCURATE, Gst.SeekType.SET, position, Gst.SeekType.NONE, 0)
+    
+    __playback_speed_timer_running = False
+
+
+def __on_storage_changed(event, message):
+    """
     """
     global __player
 
-    position = get_current_duration()
-    __player.seek(speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.ACCURATE, Gst.SeekType.SET, position, Gst.SeekType.NONE, 0)
+    if event == "storage-offline":
+        if get_current_track() and message in get_current_track().file:
+            cached_path = OfflineCache().get_cached_path(get_current_track())
+            if not cached_path:
+                stop()
+                unload()
+                emit_event("stop")
 
 
 def load_file(track):
@@ -307,20 +441,27 @@ def load_file(track):
     global __player
 
     if get_gst_player_state() == Gst.State.PLAYING:
-        db.Track.update(position=get_current_duration()).where(
-            db.Track.id == get_current_track().id).execute()
-        db.Book.update(position=__current_track.id).where(
-            db.Book.id == __current_track.book.id).execute()
+        save_current_track_position()
+        save_current_book_position(__current_track)
 
     __current_track = track
     emit_event("stop")
     __player.set_state(Gst.State.NULL)
-    __player.set_property("uri", "file://" + track.file)
+
+    init()
+
+    if cozy.filesystem_monitor.FilesystemMonitor().is_track_online(track):
+        path = track.file
+    else:
+        path = OfflineCache().get_cached_path(track)
+        if not path:
+            path = track.file
+    __player.set_property("uri", "file://" + path)
     __player.set_state(Gst.State.PAUSED)
-    db.Book.update(position=__current_track.id).where(
-        db.Book.id == __current_track.book.id).execute()
-    db.Settings.update(last_played_book=__current_track.book).execute()
-    emit_event("track-changed")
+    save_current_book_position(__current_track)
+    cozy.db.Settings.update(last_played_book=__current_track.book).execute()
+    cozy.db.Book.update(last_played=int(time.time())).where(cozy.db.Book.id == __current_track.book.id).execute()
+    emit_event("track-changed", track)
 
 
 def load_last_book():
@@ -330,20 +471,69 @@ def load_last_book():
     global __current_track
     global __player
 
-    last_book = db.Settings.get().last_played_book
+    last_book = cozy.db.Settings.get().last_played_book
 
-    if last_book is not None and last_book.position != 0:
+    if last_book and last_book.position != 0:
 
-        query = db.Track.select().where(db.Track.id == last_book.position)
+        query = cozy.db.Track.select().where(cozy.db.Track.id == last_book.position)
         if query.exists():
             last_track = query.get()
 
-            if last_track is not None:
+            if last_track:
                 __player.set_state(Gst.State.NULL)
-                __player.set_property("uri", "file://" + last_track.file)
+                if cozy.filesystem_monitor.FilesystemMonitor().is_track_online(last_track):
+                    path = last_track.file
+                else:
+                    path = OfflineCache().get_cached_path(last_track)
+                    if not path:
+                        path = last_track.file
+                __player.set_property("uri", "file://" + path)
                 __player.set_state(Gst.State.PAUSED)
                 __current_track = last_track
-                emit_event("track-changed")
+
+                cozy.db.Book.update(last_played=int(time.time())).where(cozy.db.Book.id == last_book.id).execute()
+
+                emit_event("track-changed", last_track)
+
+
+def save_current_playback_speed(book=None, speed=None):
+    """
+    Save the current or given playback speed to the cozy.db.
+    :param book: Optional: Save for the given book
+    :param speed: Optional: Save the given speed
+    """
+    global __speed
+    if book is None:
+        book = get_current_track().book
+    if speed is None:
+        speed = __speed
+
+    cozy.db.Book.update(playback_speed=speed).where(cozy.db.Book.id == book.id).execute()
+
+
+def save_current_book_position(track, pos=None):
+    """
+    Saves the given track to it's book as the current position to the cozy.db.
+    :param track: track object
+    """
+    if pos is None:
+        pos = track.id
+    cozy.db.Book.update(position=pos).where(
+        cozy.db.Book.id == track.book.id).execute()
+
+
+def save_current_track_position(pos=None, track=None):
+    """
+    Saves the current track position to the cozy.db.
+    """
+    if pos is None:
+        pos = get_current_duration()
+
+    if track is None:
+        track = get_current_track()
+    
+    cozy.db.Track.update(position=pos).where(
+        cozy.db.Track.id == track.id).execute()
 
 
 def emit_event(event, message=None):
@@ -352,3 +542,13 @@ def emit_event(event, message=None):
     """
     for function in __listeners:
         function(event, message)
+
+
+def dispose():
+    """
+    Sets the Gst player state to NULL.
+    """
+    global __player
+
+    log.info("Closing.")
+    __player.set_state(Gst.State.NULL)

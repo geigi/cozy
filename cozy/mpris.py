@@ -22,6 +22,8 @@ from random import randint
 
 from cozy.player import *
 from cozy.db import *
+import cozy.artwork_cache as artwork_cache
+import cozy.ui
 
 
 class Server:
@@ -156,10 +158,11 @@ class MPRIS(Server):
     __MPRIS_RATINGS_IFACE = "org.mpris.MediaPlayer2.ExtensionSetRatings"
     __MPRIS_COZY = "org.mpris.MediaPlayer2.Cozy"
     __MPRIS_PATH = "/org/mpris/MediaPlayer2"
+    refresh = True
 
-    def __init__(self, app, ui):
+    def __init__(self, app):
         self.__app = app
-        self.__ui = ui
+        self.__ui = cozy.ui.CozyUI()
         self.__rating = None
         self.__cozy_id = 0
         self.__metadata = {"mpris:trackid": GLib.Variant(
@@ -174,8 +177,7 @@ class MPRIS(Server):
                                        None)
         Server.__init__(self, self.__bus, self.__MPRIS_PATH)
 
-        bus = get_gst_bus()
-        bus.connect("message", self.__on_gst_message)
+        add_player_listener(self.__on_player_changed)
 
         #Lp().player.connect("current-changed", self.__on_current_changed)
         #Lp().player.connect("seeked", self.__on_seeked)
@@ -202,7 +204,7 @@ class MPRIS(Server):
         play_pause(None)
 
     def Stop(self):
-        stop(None)
+        stop()
 
     def Play(self):
         play_pause(None)
@@ -217,7 +219,7 @@ class MPRIS(Server):
         self.__bus.emit_signal(
             None,
             self.__MPRIS_PATH,
-            self.__MPRIS_PLAYER_IFACE,
+            "org.freedesktop.DBus.Properties",
             "Seeked",
             GLib.Variant.new_tuple(GLib.Variant("x", position)))
 
@@ -317,23 +319,24 @@ class MPRIS(Server):
         else:
             return "Stopped"
 
-    def __on_gst_message(self, bus, message):
-        t = message.type
-        if t == Gst.MessageType.STREAM_START:
-            # new track is playing
-            self.__on_current_changed()
-            pass
-        elif t == Gst.MessageType.STATE_CHANGED:
-            # handle play / pause / skip
-            self.__on_status_changed()
-            pass
+    def __on_player_changed(self, event, message):
+        if event == "track-changed":
+            self._on_current_changed(message)
+        elif event == "play":
+            self.__on_status_changed("Playing")
+        elif event == "pause":
+            self.__on_status_changed("Paused")
+        elif event == "stop":
+            self.__on_status_changed("Stopped")
 
-    def __update_metadata(self):
-        track = get_current_track()
-        if self.__get_status() == "Stopped":
+    def __update_metadata(self, track):
+        if track is None:
+            track = get_current_track()
+        if track is None:
             self.__metadata = {"mpris:trackid": GLib.Variant(
                 "o",
                 "/org/mpris/MediaPlayer2/TrackList/NoTrack")}
+            self.refresh = True
         else:
             self.__metadata["mpris:trackid"] = self.__track_id
             track_number = track.number
@@ -348,8 +351,8 @@ class MPRIS(Server):
                 "s",
                 track.book.name)
             self.__metadata["xesam:artist"] = GLib.Variant(
-                "s",
-                track.book.author)
+                "as",
+                [track.book.author])
             self.__metadata["mpris:length"] = GLib.Variant(
                 "x",
                 track.length * 1000 * 1000)
@@ -357,20 +360,24 @@ class MPRIS(Server):
                 "s",
                 "file:///" + track.file)
 
-            cover_path = "/tmp/cozy_mpris.jpg"
-            pixbuf = get_cover_pixbuf(track.book)
-            if pixbuf is not None:
-                pixbuf.savev(cover_path, "jpeg",
-                             ["quality"], ["90"])
-            if cover_path is not None:
-                self.__metadata["mpris:artUrl"] = GLib.Variant(
-                    "s",
-                    "file://" + cover_path)
+            query = ArtworkCache.select().where(ArtworkCache.book == track.book.id)
+            if query.exists():
+                uuid = query.first().uuid
+                cache_dir = tools.get_cache_dir()
+                cache_dir = os.path.join(cache_dir, uuid)
+                file_path = os.path.join(cache_dir, "180.jpg")
+                if file_path:
+                    self.__metadata["mpris:artUrl"] = GLib.Variant(
+                        "s",
+                        "file://" + file_path)
 
     def __on_seeked(self, player, position):
         self.Seeked(position * (1000 * 1000))
 
-    def __on_current_changed(self):
+    def _on_current_changed(self, track):
+        if get_current_track() is None:
+            return
+        
         current_track_id = get_current_track().id
         if current_track_id and current_track_id >= 0:
             self.__cozy_id = current_track_id
@@ -379,7 +386,7 @@ class MPRIS(Server):
         # We only need to recalculate a new trackId at song changes.
         self.__track_id = self.__get_media_id(self.__cozy_id)
         self.__rating = None
-        self.__update_metadata()
+        self.__update_metadata(track)
         properties = {"Metadata": GLib.Variant("a{sv}", self.__metadata),
                       "CanPlay": GLib.Variant("b", True),
                       "CanPause": GLib.Variant("b", True),
@@ -390,6 +397,6 @@ class MPRIS(Server):
         except Exception as e:
             print("MPRIS::__on_current_changed(): %s" % e)
 
-    def __on_status_changed(self, data=None):
-        properties = {"PlaybackStatus": GLib.Variant("s", self.__get_status())}
+    def __on_status_changed(self, status, data=None):
+        properties = {"PlaybackStatus": GLib.Variant("s", status)}
         self.PropertiesChanged(self.__MPRIS_PLAYER_IFACE, properties, [])
