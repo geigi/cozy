@@ -19,6 +19,10 @@
   font-size: 110%;
 }
 
+.sort_switcher_element > .radio {
+  min-width: 100px;
+}
+
 .no_padding {
   padding: 0px;
 }
