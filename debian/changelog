@@ -1,3 +1,9 @@
+com.github.geigi.cozy (0.6.6) UNSTABLE; urgency=low
+
+  * Fix: Cozy crashed on startup when prefering cover image files over embedded album art
+
+ -- Julian Geywitz <github@geigi.de>  Wed, 12 Jan 2019 21:26:14 +0200
+
 com.github.geigi.cozy (0.6.5) UNSTABLE; urgency=low
 
   * Fixed startup crash on Juno
