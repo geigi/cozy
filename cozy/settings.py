@@ -298,7 +298,7 @@ class Settings(EventSender, metaclass=Singleton):
         """
         # We have to test if everything is initialized before triggering the refresh
         # otherwise this might be just the initial call when starting up
-        if (self.ui.is_inizialized):
+        if self.ui.is_initialized:
             tools.get_glib_settings().set_boolean("prefer-external-cover", state)
             artwork_cache.delete_artwork_cache()
             self.ui.refresh_content()
