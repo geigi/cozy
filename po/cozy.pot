@@ -430,22 +430,26 @@ msgid "GitHub"
 msgstr ""
 
 #: data/ui/app_menu.ui:7
-msgid "_Play/Pause"
+msgid "_Scan Directory"
 msgstr ""
 
 #: data/ui/app_menu.ui:13
-msgid "_Preferences"
+msgid "_Hide unavailable books"
 msgstr ""
 
 #: data/ui/app_menu.ui:19
+msgid "_Preferences"
+msgstr ""
+
+#: data/ui/app_menu.ui:25
 msgid "_Help"
 msgstr ""
 
-#: data/ui/app_menu.ui:23
+#: data/ui/app_menu.ui:29
 msgid "_About"
 msgstr ""
 
-#: data/ui/app_menu.ui:27
+#: data/ui/app_menu.ui:33
 msgid "_Quit"
 msgstr ""
 
