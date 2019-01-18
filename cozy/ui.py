@@ -43,6 +43,7 @@ class CozyUI(metaclass=Singleton):
     dialog_open = False
     # Are we currently playing?
     is_playing = False
+    is_initialized = False
     first_play = True
     __inhibit_cookie = None
 
@@ -62,6 +63,8 @@ class CozyUI(metaclass=Singleton):
         self.refresh_content()
         self.check_for_tracks()
         self.__load_last_book()
+
+        self.is_initialized = True
 
     def startup(self):
         self.__init_resources()
