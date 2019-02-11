@@ -24,10 +24,6 @@
       <li>Drag and Drop to import new audiobooks</li>
       <li>Sort your audio books by author, reader and name</li>
       </ul>
-      <p>
-      Note: If you're from the EU and want to support this project, you can find me on Patreon (link down below).
-      Because of tax reasons I cannot accept payments from the EU except from Germany.
-      </p>
   </description>
   <provides>
     <binary>com.github.geigi.cozy</binary>
