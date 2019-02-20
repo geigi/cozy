@@ -39,9 +39,10 @@ coll = COLLECT(exe,
 app = BUNDLE(coll,
              name='Cozy.app',
              icon='data/icons/com.github.geigi.cozy.icns',
-             bundle_identifier=None,
+             bundle_identifier='com.github.geigi.cozy',
 info_plist={
             'NSPrincipleClass': 'NSApplication',
             'NSAppleScriptEnabled': False,
+            
             },
          )
