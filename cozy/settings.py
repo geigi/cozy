@@ -302,9 +302,12 @@ class Settings(EventSender, metaclass=Singleton):
         This is needed because the binding gets called after this function.
         Then refresh the artwork cache.
         """
-        tools.get_glib_settings().set_boolean("prefer-external-cover", state)
-        artwork_cache.delete_artwork_cache()
-        self.ui.refresh_content()
+        # We have to test if everything is initialized before triggering the refresh
+        # otherwise this might be just the initial call when starting up
+        if self.ui.is_initialized:
+            tools.get_glib_settings().set_boolean("prefer-external-cover", state)
+            artwork_cache.delete_artwork_cache()
+            self.ui.refresh_content()
 
     def __on_force_refresh_clicked(self, widget):
         """

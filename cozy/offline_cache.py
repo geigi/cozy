@@ -164,10 +164,10 @@ class OfflineCache(EventSender, metaclass=Singleton):
             if self.thread.stopped():
                 break
             
-            new_item = cozy.db.OfflineCache.get_by_id(item.id)
+            new_item = cozy.db.OfflineCache.get(cozy.db.OfflineCache.id == item.id)
 
             if self.current_book_processing != new_item.track.book.id:
-                self.update_book_download_status(cozy.db.Book.get_by_id(self.current_book_processing))
+                self.update_book_download_status(cozy.db.Book.get(cozy.db.Book.id == self.current_book_processing))
                 self.current_book_processing = new_item.track.book.id
 
             if not new_item.copied and os.path.exists(new_item.track.file):
@@ -196,7 +196,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
             self.queue.remove(item)
 
         if self.current_book_processing:
-            self.update_book_download_status(cozy.db.Book.get_by_id(self.current_book_processing))
+            self.update_book_download_status(cozy.db.Book.get(cozy.db.Book.id == self.current_book_processing))
 
         self.current = None
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.ui.switch_to_playing)
