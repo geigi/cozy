@@ -31,7 +31,7 @@ Cozy for macOS is currently in beta. It's tested on 10.14 Mojave so far. Known b
 - dark mode requires 2x switching in settings + is not loading automatically at startup
 - large Cozy.app
 
-You can download it here: <a href="https://github.com/geigi/cozy/releases/download/0.6.4/cozy_macos_0.6.4_beta2.dmg">Cozy 0.6.4 beta2 for macOS</a>
+You can download it here: <a href="https://github.com/geigi/cozy/releases/download/0.6.7/cozy_macos_0.6.7_beta3.dmg">Cozy 0.6.7 beta3 for macOS</a>
 
 ## Q&A
 ### I have imported wrong files and cannot get rid of them:
