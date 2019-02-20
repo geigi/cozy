@@ -8,7 +8,7 @@ import os
 from gi.repository import GLib, Gio
 import cozy.magic.magic as magic
 
-MACOS_GTK_THEME = 'Ant-slim'
+MACOS_GTK_THEME = 'NewAdwaita'
 MACOS_GTK_THEME_DARK = 'Nordic'
 
 def get_cache_dir():
