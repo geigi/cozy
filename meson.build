@@ -1,12 +1,11 @@
 project('com.github.geigi.cozy', ['vala', 'c'],
   version: '0.6.7',
-  meson_version: '>= 0.40.0'
 )
 
 project_name = 'cozy'
+project_id = 'com.github.geigi.cozy'
 
 python = import('python3')
-project_id = 'com.github.geigi.cozy'
 i18n = import('i18n')
 gnome = import('gnome')
 
