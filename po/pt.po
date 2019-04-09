@@ -1,15 +1,15 @@
 # Portuguese translations for com.github.geigi.cozy package.
 # Copyright (C) 2019 THE com.github.geigi.cozy'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
-# Automatically generated, 2019.
+# Cleiton Floss, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-09 10:50+0200\n"
+"POT-Creation-Date: 2019-04-09 12:41+0200\n"
 "PO-Revision-Date: 2019-04-09 10:50+0200\n"
-"Last-Translator: Automatically generated\n"
+"Last-Translator: Cleiton Floss\n"
 "Language-Team: none\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: cozy/book_element.py:67 cozy/search_results.py:124
 msgid "Play this book"
-msgstr ""
+msgstr "Ouvir este livro"
 
 #: cozy/book_element.py:212
 msgid "Open book overview"
-msgstr ""
+msgstr "Ver capítulos do livro"
 
 #: cozy/book_element.py:213
 msgid "Currently offline"
@@ -43,7 +43,7 @@ msgstr ""
 
 #: cozy/book_element.py:395
 msgid "Play this part"
-msgstr ""
+msgstr "Ouvir esta parte"
 
 #: cozy/book_overview.py:223
 msgid "Downloaded"
@@ -55,7 +55,7 @@ msgstr ""
 
 #: cozy/file_not_found_dialog.py:66
 msgid "All files"
-msgstr ""
+msgstr "Todos os arquivos"
 
 #: cozy/offline_cache.py:175
 msgid "Copying"
@@ -63,19 +63,19 @@ msgstr ""
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
-msgstr ""
+msgstr "Ir para o autor"
 
 #: cozy/search_results.py:75
 msgid "Jump to reader "
-msgstr ""
+msgstr "Ir para o narrador"
 
 #: cozy/importer.py:275
 msgid "Unknown Author"
-msgstr ""
+msgstr "Autor Desconhecido"
 
 #: cozy/importer.py:277
 msgid "Unknown Reader"
-msgstr ""
+msgstr "Narrador Desconhecido"
 
 #: cozy/tools.py:142
 msgid "hours"
@@ -156,20 +156,20 @@ msgstr ""
 
 #: cozy/ui.py:428
 msgid "Importing Audiobooks"
-msgstr ""
+msgstr "Importando Audiolivros"
 
 #. Add the special All element
 #: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
 msgid "All"
-msgstr ""
+msgstr "Todos"
 
 #: cozy/ui.py:498 cozy/ui.py:504
 msgid "Display all books"
-msgstr ""
+msgstr "Mostrar todos os livros"
 
 #: cozy/sleep_timer.py:121 data/ui/timer_popover.ui:105
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: cozy/sleep_timer.py:129
 msgid "Off"
@@ -193,135 +193,135 @@ msgstr ""
 
 #: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
-msgstr ""
+msgstr "Voltar 30 segundos"
 
 #: data/ui/main_window.ui:79
 msgid "Rewind button"
-msgstr ""
+msgstr "Botão de retroceder"
 
 #: data/ui/main_window.ui:80
 msgid "Jump back 30 seconds"
-msgstr ""
+msgstr "Voltar 30 segundos"
 
 #: data/ui/main_window.ui:97
 msgid "Start playback"
-msgstr ""
+msgstr "Iniciar reprodução"
 
 #: data/ui/main_window.ui:105
 msgid "Play/Pause Button"
-msgstr ""
+msgstr "Botão de Iniciar/Parar"
 
 #: data/ui/main_window.ui:106
 msgid "Start or pause the playback"
-msgstr ""
+msgstr "Inicie ou pare uma reprodução"
 
 #: data/ui/main_window.ui:123
 msgid "Volume control"
-msgstr ""
+msgstr "Controle de volume"
 
 #: data/ui/main_window.ui:200
 msgid "Currently playing"
-msgstr ""
+msgstr "Ouvindo atualmente"
 
 #: data/ui/main_window.ui:218
 msgid "Booktitle"
-msgstr ""
+msgstr "Título do livro"
 
 #: data/ui/main_window.ui:219
 msgid "Title of currently playing book"
-msgstr ""
+msgstr "Título do livro em reprodução"
 
 #: data/ui/main_window.ui:244
 msgid "Part name"
-msgstr ""
+msgstr "Nome da parte"
 
 #: data/ui/main_window.ui:245
 msgid "Title of the currently playing part"
-msgstr ""
+msgstr "Título da parte em reprodução"
 
 #: data/ui/main_window.ui:287
 msgid "Elapsed time"
-msgstr ""
+msgstr "Tempo decorrido"
 
 #: data/ui/main_window.ui:295
 msgid "Time elapsed"
-msgstr ""
+msgstr "Tempo decorrido"
 
 #: data/ui/main_window.ui:296
 msgid "Elapsed time of current part"
-msgstr ""
+msgstr "Tempo decorrido da parte atual"
 
 #: data/ui/main_window.ui:311
 msgid "Scrubb through current part"
-msgstr ""
+msgstr "Posicione-se pela parte atual"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
-msgstr ""
+msgstr "Posicionar o indicador"
 
 #: data/ui/main_window.ui:318
 msgid "Position of the current part in seconds"
-msgstr ""
+msgstr "Posição da parte atual em segundos"
 
 #: data/ui/main_window.ui:336
 msgid "Remaining time"
-msgstr ""
+msgstr "Tempo restante"
 
 #: data/ui/main_window.ui:344
 msgid "Time remaining"
-msgstr ""
+msgstr "Tempo restante"
 
 #: data/ui/main_window.ui:345
 msgid "Remaining time of current part"
-msgstr ""
+msgstr "Tempo restante da parte atual"
 
 #: data/ui/main_window.ui:421
 msgid "Working..."
-msgstr ""
+msgstr "Trabalhando…"
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
-msgstr ""
+msgstr "Trabalhando atualmente"
 
 #: data/ui/main_window.ui:442
 msgid "Playback speed"
-msgstr ""
+msgstr "Velocidade de reprodução"
 
 #: data/ui/main_window.ui:464 data/ui/settings.ui:566
 msgid "Sleep timer"
-msgstr ""
+msgstr "Temporizador de dormir"
 
 #: data/ui/main_window.ui:475
 msgid "Timer menu button"
-msgstr ""
+msgstr "Botão de menu do temporizador"
 
 #: data/ui/main_window.ui:476
 msgid "Open the sleep timer popover"
-msgstr ""
+msgstr "Abrir o popover do temporizador"
 
 #: data/ui/main_window.ui:492
 msgid "Search your library"
-msgstr ""
+msgstr "Buscar em sua biblioteca"
 
 #: data/ui/main_window.ui:503
 msgid "Search menu button"
-msgstr ""
+msgstr "Menu de busca"
 
 #: data/ui/main_window.ui:504
 msgid "Open the search popover"
-msgstr ""
+msgstr "Abrir o popover de busca"
 
 #: data/ui/main_window.ui:518
 msgid "Options"
-msgstr ""
+msgstr "Opções"
 
 #: data/ui/main_window.ui:529
 msgid "Options menu button"
-msgstr ""
+msgstr "Botão de menu de opções"
 
 #: data/ui/main_window.ui:530
 msgid "Open the options popover"
-msgstr ""
+msgstr "Abrir o popover de opções"
 
 #: data/ui/main_window.ui:655
 msgid "Recent"
@@ -329,37 +329,39 @@ msgstr ""
 
 #: data/ui/main_window.ui:674
 msgid "List of authors"
-msgstr ""
+msgstr "Lista de autores"
 
 #: data/ui/main_window.ui:690 data/ui/main_window.ui:798
 #: data/ui/search_popover.ui:107
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: data/ui/main_window.ui:709
 msgid "List of readers"
-msgstr ""
+msgstr "Lista de narradores"
 
 #: data/ui/main_window.ui:725 data/ui/search_popover.ui:201
 msgid "Reader"
-msgstr ""
+msgstr "Narrador"
 
 #: data/ui/main_window.ui:778
 msgid "List of books"
-msgstr ""
+msgstr "Lista de Livros"
 
 #: data/ui/main_window.ui:814
 msgid "Importing your audiobooks..."
-msgstr ""
+msgstr "Importando seus Audiolivros…"
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
-msgstr ""
+msgstr "Importe seus Audiolivros"
 
 #: data/ui/main_window.ui:882
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
+"Cozy importa automaticamente seus Audiolivros em um diretório - sua "
+"biblioteca"
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
@@ -377,16 +379,16 @@ msgstr ""
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr ""
+msgstr "Interruptor de escaneamento automático"
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
 msgid "Automatically import new audiobooks on startup"
-msgstr ""
+msgstr "Importar automaticamente novos audiolivros ao iniciar"
 
 #: data/ui/main_window.ui:1069
 msgid "Drag & Drop"
-msgstr ""
+msgstr "Arrastar & Soltar"
 
 #: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
@@ -394,7 +396,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
-msgstr ""
+msgstr "Local de seus audiolivros"
 
 #: data/ui/main_window.ui:1128
 msgid "Set Audiobooks Directory"
@@ -433,7 +435,7 @@ msgstr ""
 
 #: data/ui/about.ui:14
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: data/ui/app_menu.ui:7
 msgid "_Play/Pause"
@@ -441,43 +443,43 @@ msgstr ""
 
 #: data/ui/app_menu.ui:13
 msgid "_Preferences"
-msgstr ""
+msgstr "_Preferências"
 
 #: data/ui/app_menu.ui:19
 msgid "_Help"
-msgstr ""
+msgstr "_Ajuda"
 
 #: data/ui/app_menu.ui:23
 msgid "_About"
-msgstr ""
+msgstr "_Sobre"
 
 #: data/ui/app_menu.ui:27
 msgid "_Quit"
-msgstr ""
+msgstr "_Terminar"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
-msgstr ""
+msgstr "Localizar"
 
 #: data/ui/file_not_found.ui:86
 msgid "File not found"
-msgstr ""
+msgstr "Arquivo não encontrado"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr ""
+msgstr "O arquivo não pode ser localizado. Você quer localizá-lo manualmente?"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: data/ui/import_failed.ui:81
 msgid "Some files could not be imported"
-msgstr ""
+msgstr "Alguns arquivos não puderam ser importados"
 
 #: data/ui/import_failed.ui:134
 msgid ""
@@ -486,6 +488,10 @@ msgid ""
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
+"Isso pode acontecer por múltiplas razões:\n"
+"- O formato do arquivo não é suportado\n"
+"- O(s) arquivo(s) de áudio não é/são válido(s)\n"
+"- O(s) arquivo(s) está/estão corrompido(s)"
 
 #: data/ui/settings.ui:92 data/ui/settings.ui:344
 msgid "General"
@@ -505,19 +511,19 @@ msgstr ""
 
 #: data/ui/settings.ui:321
 msgid "Appearance"
-msgstr ""
+msgstr "Aparência"
 
 #: data/ui/settings.ui:387
 msgid "Suspend system on timer"
-msgstr ""
+msgstr "Suspender o sistema ao final do temporizador"
 
 #: data/ui/settings.ui:447
 msgid "Replay 30 seconds"
-msgstr ""
+msgstr "Reprisar 30 segundos"
 
 #: data/ui/settings.ui:507
 msgid "Automatic media scan"
-msgstr ""
+msgstr "Escaneamento de mídia automático"
 
 #: data/ui/settings.ui:611
 msgid "Fadeout"
@@ -529,7 +535,7 @@ msgstr ""
 
 #: data/ui/settings.ui:745
 msgid "Behaviour"
-msgstr ""
+msgstr "Comportamento"
 
 #: data/ui/settings.ui:772
 msgid "Artwork"
@@ -545,7 +551,7 @@ msgstr ""
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
-msgstr ""
+msgstr "Localização dos Audiolivros"
 
 #: data/ui/settings.ui:936
 msgid "Storage locations"
@@ -577,7 +583,7 @@ msgstr ""
 
 #: data/ui/settings.ui:1261
 msgid "Follow symlinks"
-msgstr ""
+msgstr "Seguir links simbólicos"
 
 #: data/ui/settings.ui:1293
 msgid "Storage"
@@ -618,31 +624,31 @@ msgstr ""
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
-msgstr ""
+msgstr "Busca"
 
 #: data/ui/search_popover.ui:36
 msgid "Search box"
-msgstr ""
+msgstr "Caixa de busca"
 
 #: data/ui/search_popover.ui:37
 msgid "Search your audiobook library"
-msgstr ""
+msgstr "Buscar em sua biblioteca"
 
 #: data/ui/search_popover.ui:67
 msgid "Which book are you looking for?"
-msgstr ""
+msgstr "Qual livro você está procurando?"
 
 #: data/ui/search_popover.ui:154
 msgid "Book"
-msgstr ""
+msgstr "Livro"
 
 #: data/ui/search_popover.ui:248
 msgid "Part"
-msgstr ""
+msgstr "Parte"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
-msgstr ""
+msgstr "Nada encontrado :("
 
 #: data/ui/timer_popover.ui:39
 msgid "Stop after current chapter"
@@ -650,15 +656,15 @@ msgstr ""
 
 #: data/ui/timer_popover.ui:76
 msgid "Timer duration"
-msgstr ""
+msgstr "Duração do temporizador"
 
 #: data/ui/timer_popover.ui:88
 msgid "Timer duration slider"
-msgstr ""
+msgstr "Slider de duração do temporizador"
 
 #: data/ui/timer_popover.ui:89
 msgid "Set the sleep timer duration in minutes"
-msgstr ""
+msgstr "Defina a duração do temporizador em minutos"
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"
