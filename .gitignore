@@ -1,4 +1,6 @@
+.vscode/
 .idea/
+build/
 app/
 bin/
 cozy/__pycache__

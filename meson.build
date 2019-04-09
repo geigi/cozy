@@ -1,6 +1,7 @@
-project('cozy',
+project('com.github.geigi.cozy', ['vala', 'c'],
   version: '0.6.7',
-  meson_version: '>= 0.40.0')
+  meson_version: '>= 0.40.0'
+)
 
 project_name = 'cozy'
 
