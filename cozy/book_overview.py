@@ -155,7 +155,12 @@ class BookOverview:
 
         # update book object
         # TODO: optimize usage by only asking from the db on track change
-        self.book = db.Book.select().where(db.Book.id == self.book.id).get()
+        query = db.Book.select().where(db.Book.id == self.book.id)
+        if (query.exists()):
+            self.book = query.get()
+        else:
+            self.book = None
+            return
         if self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
             progress = db.get_book_progress(self.book, False)
             progress += (player.get_current_duration() / 1000000000)
