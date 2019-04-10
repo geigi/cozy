@@ -1,9 +1,4 @@
-project('com.github.geigi.cozy', ['vala', 'c'],
-  version: '0.6.7',
-)
-
-project_name = 'cozy'
-project_id = 'com.github.geigi.cozy'
+project('com.github.geigi.cozy', version: '0.6.7')
 
 python = import('python3')
 i18n = import('i18n')
