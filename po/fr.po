@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-09 12:41+0200\n"
+"POT-Creation-Date: 2019-04-11 15:12+0200\n"
 "PO-Revision-Date: 2019-04-09 10:50+0200\n"
 "Last-Translator: NathanBnm\n"
 "Language-Team: French\n"
@@ -23,11 +23,11 @@ msgstr "Lire ce livre"
 
 #: cozy/book_element.py:212
 msgid "Open book overview"
-msgstr "Voir le résumé"
+msgstr "Ouvrir la vue d'ensemble du livre"
 
 #: cozy/book_element.py:213
 msgid "Currently offline"
-msgstr "Hors-ligne"
+msgstr "Actuellement hors-ligne"
 
 #: cozy/book_element.py:319
 msgid "Mark as read"
@@ -35,11 +35,11 @@ msgstr "Marquer comme lu"
 
 #: cozy/book_element.py:322
 msgid "Open in file browser"
-msgstr "Ouvrir dans le navigateur"
+msgstr "Ouvrir dans l'explorateur de fichiers"
 
 #: cozy/book_element.py:325
 msgid "Remove from library"
-msgstr "Supprimer"
+msgstr "Supprimer de la bibliothèque"
 
 #: cozy/book_element.py:395
 msgid "Play this part"
@@ -63,11 +63,11 @@ msgstr "Copie"
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
-msgstr "Recherche par auteur"
+msgstr "Recherche par auteur "
 
 #: cozy/search_results.py:75
 msgid "Jump to reader "
-msgstr "Recherche par narrateur"
+msgstr "Recherche par narrateur "
 
 #: cozy/importer.py:275
 msgid "Unknown Author"
@@ -156,7 +156,7 @@ msgstr "Livres audio"
 
 #: cozy/ui.py:428
 msgid "Importing Audiobooks"
-msgstr "Importer des livres audio"
+msgstr "Importation des livres audio"
 
 #. Add the special All element
 #: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
@@ -173,7 +173,7 @@ msgstr "min"
 
 #: cozy/sleep_timer.py:129
 msgid "Off"
-msgstr "Off"
+msgstr "Désactivé"
 
 #: cozy/settings.py:416 cozy/settings.py:459
 msgid "External drive"
@@ -354,13 +354,13 @@ msgstr "Importation de vos livres audio..."
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
-msgstr "Importer vos livres audios"
+msgstr "Importez vos livres audio"
 
 #: data/ui/main_window.ui:882
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy va automatiquement importer vos livres audios dans un répertoire unique "
+"Cozy va automatiquement importer vos livres audio dans un répertoire unique "
 "- votre bibliothèque"
 
 #: data/ui/main_window.ui:910
@@ -377,13 +377,13 @@ msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Si il le sont vous pouvez activer le mode hors-ligne dans l'aperçu de votre "
+"S'il le sont, vous pouvez activer le mode hors-ligne dans l'aperçu de votre "
 "livre\n"
 "Cette action conservera une copie locale de votre livre audio"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr "Scan automatique"
+msgstr "Activer/Désactiver le scan automatique"
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
@@ -405,7 +405,7 @@ msgstr "Emplacement de vos livres audio"
 
 #: data/ui/main_window.ui:1128
 msgid "Set Audiobooks Directory"
-msgstr "Sélectionnez un dossier pour vos livres audio."
+msgstr "Sélectionner le dossier des livres audio"
 
 #: data/ui/main_window.ui:1145
 msgid ""
@@ -441,7 +441,7 @@ msgid ""
 "Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 "Commencez à explorer votre bibliothèque en passant à la vue Auteur ou "
-"Lecteur ci-dessus"
+"Narrateur ci-dessus"
 
 #: data/ui/about.ui:14
 msgid "GitHub"
@@ -451,19 +451,19 @@ msgstr "GitHub"
 msgid "_Play/Pause"
 msgstr "_Lecture/Pause"
 
-#: data/ui/app_menu.ui:13
+#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
 msgstr "_Préférences"
 
-#: data/ui/app_menu.ui:19
+#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
 msgid "_Help"
 msgstr "_Aide"
 
-#: data/ui/app_menu.ui:23
+#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
 msgid "_About"
-msgstr "_A Propos"
+msgstr "_À propos"
 
-#: data/ui/app_menu.ui:27
+#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Quitter"
 
@@ -500,7 +500,7 @@ msgid ""
 msgstr ""
 "Pour de multiples raisons :\n"
 "- L'encodage audio n'est pas supporté\n"
-"- Il ne s'agit pas de fichiers audios valides\n"
+"- Il ne s'agit pas de fichiers audio valides\n"
 "- Il s'agit de fichiers corrompus"
 
 #: data/ui/settings.ui:92 data/ui/settings.ui:344
@@ -612,8 +612,7 @@ msgstr "Forcer le rafraîchissement de la base de données"
 #: data/ui/settings.ui:1382
 msgid "This will force update the metadata of all imported books"
 msgstr ""
-"Cela va forcer la mise à jour de toutes les informations complémentaires de "
-"tous les livres importés"
+"Cela va forcer la mise à jour des informations de tous les livres importés"
 
 #: data/ui/settings.ui:1402
 msgid "Force refresh"
@@ -632,8 +631,8 @@ msgstr ""
 msgid ""
 "Only recommended if cozy doesn't detect file modifications while scanning"
 msgstr ""
-"Recommandé uniquement dans le cas où Cozy ne détecterait pas une "
-"modification de fichier pendant le scan"
+"Recommandé uniquement si Cozy ne détecte pas de modifications des fichiers "
+"pendant le scan"
 
 #: data/ui/settings.ui:1611
 msgid "Advanced"
@@ -682,6 +681,14 @@ msgstr "Slider du décompte"
 #: data/ui/timer_popover.ui:89
 msgid "Set the sleep timer duration in minutes"
 msgstr "Ajuster la durée de la minuterie"
+
+#: data/ui/titlebar_menu.ui:7
+msgid "_Scan Directory"
+msgstr "_Scanner le répertoire"
+
+#: data/ui/titlebar_menu.ui:13
+msgid "_Hide unavailable books"
+msgstr "_Masquer les livres non disponibles"
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"

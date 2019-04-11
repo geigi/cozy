@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-09 12:41+0200\n"
+"POT-Creation-Date: 2019-04-11 15:12+0200\n"
 "PO-Revision-Date: 2019-04-09 10:50+0200\n"
 "Last-Translator: Ibrahim Karaagac <ikaraagac@gmail.com>\n"
 "Language-Team: none\n"
@@ -378,7 +378,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr "Otomatik tarama düğmesi"
+msgstr ""
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
@@ -440,19 +440,19 @@ msgstr "Github"
 msgid "_Play/Pause"
 msgstr ""
 
-#: data/ui/app_menu.ui:13
+#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
 msgstr "_Seçenekler"
 
-#: data/ui/app_menu.ui:19
+#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
 msgid "_Help"
 msgstr "_Yardım"
 
-#: data/ui/app_menu.ui:23
+#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
 msgid "_About"
 msgstr "_Hakkında"
 
-#: data/ui/app_menu.ui:27
+#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Çıkış"
 
@@ -664,6 +664,14 @@ msgstr "Uyku zamanlayıcı kaydıracı"
 #: data/ui/timer_popover.ui:89
 msgid "Set the sleep timer duration in minutes"
 msgstr "Uyku zamanlayıcıyı dakika olarak belirle"
+
+#: data/ui/titlebar_menu.ui:7
+msgid "_Scan Directory"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:13
+msgid "_Hide unavailable books"
+msgstr ""
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"
