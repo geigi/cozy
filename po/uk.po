@@ -185,8 +185,8 @@ msgid "Internal drive"
 msgstr "Внутрішній диск"
 
 #: cozy/settings.py:446
-msgid "Changing audio book location..."
-msgstr "Зміна місця розташування книги ..."
+msgid "Changing audio book location…"
+msgstr "Зміна місця розташування книги …"
 
 #: cozy/disk_element.py:26
 msgid "Disc"
@@ -277,7 +277,7 @@ msgid "Remaining time of current part"
 msgstr "Час, що залишився для поточної частини"
 
 #: data/ui/main_window.ui:421
-msgid "Working..."
+msgid "Working…"
 msgstr "Обробка…"
 
 #: data/ui/main_window.ui:426
@@ -350,8 +350,8 @@ msgid "List of books"
 msgstr "Список книжок"
 
 #: data/ui/main_window.ui:814
-msgid "Importing your audiobooks..."
-msgstr "Імпорт аудіокниг..."
+msgid "Importing your audiobooks…"
+msgstr "Імпорт аудіокниг…"
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
@@ -553,9 +553,9 @@ msgid "Prefer external images over embedded cover"
 msgstr "Перевага зовнішніх зображеннь над вбудованими обкладинками "
 
 #: data/ui/settings.ui:837
-msgid "Use images (cover.jpg, *.png, ...) when available"
+msgid "Use images (cover.jpg, *.png, …) when available"
 msgstr ""
-"Використовувати зображення (cover.jpg, * .png, ...), коли вони доступні"
+"Використовувати зображення (cover.jpg, * .png, …), коли вони доступні"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"

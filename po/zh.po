@@ -183,7 +183,7 @@ msgid "Internal drive"
 msgstr ""
 
 #: cozy/settings.py:446
-msgid "Changing audio book location..."
+msgid "Changing audio book location…"
 msgstr ""
 
 #: cozy/disk_element.py:26
@@ -275,8 +275,8 @@ msgid "Remaining time of current part"
 msgstr "正在朗读部分已用时间"
 
 #: data/ui/main_window.ui:421
-msgid "Working..."
-msgstr "进行中..."
+msgid "Working…"
+msgstr "进行中…"
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
@@ -348,8 +348,8 @@ msgid "List of books"
 msgstr "书目清单"
 
 #: data/ui/main_window.ui:814
-msgid "Importing your audiobooks..."
-msgstr "导入您的有声读物..."
+msgid "Importing your audiobooks…"
+msgstr "导入您的有声读物…"
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
@@ -543,7 +543,7 @@ msgid "Prefer external images over embedded cover"
 msgstr ""
 
 #: data/ui/settings.ui:837
-msgid "Use images (cover.jpg, *.png, ...) when available"
+msgid "Use images (cover.jpg, *.png, …) when available"
 msgstr ""
 
 #: data/ui/settings.ui:920

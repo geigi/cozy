@@ -16,7 +16,7 @@ Cozy is a modern audiobook player for Linux and macOS.
 - **Offline Mode!** This allows you to keep an audio book on your internal storage if you store your audiobooks on an external or network drive. Perfect for listening on the go!
 - Add **mulitple storage locations**
 - **Drag & Drop** to import new audio books
-- Support for DRM free **mp3, m4a (aac, ALAC, ...), flac, ogg, wav** files
+- Support for DRM free **mp3, m4a (aac, ALAC, …), flac, ogg, wav** files
 - Mpris integration (**Media keys** & playback info for desktop environment)
 - Developed on Fedora and tested under elementaryOS
 

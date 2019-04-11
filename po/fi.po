@@ -184,8 +184,8 @@ msgid "Internal drive"
 msgstr "Sisäinen asema"
 
 #: cozy/settings.py:446
-msgid "Changing audio book location..."
-msgstr "Muutetaan äänikirjojen sijaintia..."
+msgid "Changing audio book location…"
+msgstr "Muutetaan äänikirjojen sijaintia…"
 
 #: cozy/disk_element.py:26
 msgid "Disc"
@@ -276,8 +276,8 @@ msgid "Remaining time of current part"
 msgstr "Osan jäljellä oleva aika"
 
 #: data/ui/main_window.ui:421
-msgid "Working..."
-msgstr "Työskennellään..."
+msgid "Working…"
+msgstr "Työskennellään…"
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
@@ -349,8 +349,8 @@ msgid "List of books"
 msgstr "Lista kirjoista"
 
 #: data/ui/main_window.ui:814
-msgid "Importing your audiobooks..."
-msgstr "Tuodaan äänikirjojasi..."
+msgid "Importing your audiobooks…"
+msgstr "Tuodaan äänikirjojasi…"
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
@@ -549,8 +549,8 @@ msgid "Prefer external images over embedded cover"
 msgstr "Suosi ulkoisia kuvia upotetun kannen sijaan"
 
 #: data/ui/settings.ui:837
-msgid "Use images (cover.jpg, *.png, ...) when available"
-msgstr "Käytä kuvia (cover.jpg, *.png, ...) jos saatavilla"
+msgid "Use images (cover.jpg, *.png, …) when available"
+msgstr "Käytä kuvia (cover.jpg, *.png, …) jos saatavilla"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"

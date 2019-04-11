@@ -59,7 +59,7 @@ msgstr "Alle bestanden"
 
 #: cozy/offline_cache.py:175
 msgid "Copying"
-msgstr "Bezig met kopiëren..."
+msgstr "Bezig met kopiëren…"
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
@@ -184,8 +184,8 @@ msgid "Internal drive"
 msgstr "Interne schijf"
 
 #: cozy/settings.py:446
-msgid "Changing audio book location..."
-msgstr "Bezig met wijzigen van audioboeklocatie..."
+msgid "Changing audio book location…"
+msgstr "Bezig met wijzigen van audioboeklocatie…"
 
 #: cozy/disk_element.py:26
 msgid "Disc"
@@ -276,8 +276,8 @@ msgid "Remaining time of current part"
 msgstr "De resterende tijd van het huidige deel"
 
 #: data/ui/main_window.ui:421
-msgid "Working..."
-msgstr "Bezig met werken..."
+msgid "Working…"
+msgstr "Bezig met werken…"
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
@@ -349,8 +349,8 @@ msgid "List of books"
 msgstr "Lijst met boeken"
 
 #: data/ui/main_window.ui:814
-msgid "Importing your audiobooks..."
-msgstr "Bezig met importeren van audioboeken..."
+msgid "Importing your audiobooks…"
+msgstr "Bezig met importeren van audioboeken…"
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
@@ -554,8 +554,8 @@ msgid "Prefer external images over embedded cover"
 msgstr "Externe afbeeldingen prefereren boven meegeleverde omslag"
 
 #: data/ui/settings.ui:837
-msgid "Use images (cover.jpg, *.png, ...) when available"
-msgstr "Afbeeldingen (cover.jpg, *.png, ...) gebruiken indien beschikbaar"
+msgid "Use images (cover.jpg, *.png, …) when available"
+msgstr "Afbeeldingen (cover.jpg, *.png, …) gebruiken indien beschikbaar"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"

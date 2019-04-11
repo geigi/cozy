@@ -55,7 +55,7 @@ msgstr "Importez tous vos livres audio dans Cozy et retrouvez-les facilement"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:17
 msgid ""
-"Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg and wav audio "
+"Listen to your DRM free mp3, m4a (aac, ALAC, …), flac, ogg and wav audio "
 "books"
 msgstr ""
 "Écoutez vos livres audio en MP3, M4A (AAC, ALAC, …), FLAC, OGG ou WAV sans "
@@ -269,10 +269,10 @@ msgid "New app menu"
 msgstr "Nouveau menu d'application"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:130
-msgid "Multiple bug fixes (30 second replay, last played text, ...)"
+msgid "Multiple bug fixes (30 second replay, last played text, …)"
 msgstr ""
 "Corrections de bug multiples (Retour 30 secondes en arière, dernier texte "
-"lu, ...)"
+"lu, …)"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:131
 msgid "UI fixes"

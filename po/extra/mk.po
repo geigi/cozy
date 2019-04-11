@@ -52,7 +52,7 @@ msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:17
 msgid ""
-"Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg and wav audio "
+"Listen to your DRM free mp3, m4a (aac, ALAC, …), flac, ogg and wav audio "
 "books"
 msgstr ""
 
@@ -231,7 +231,7 @@ msgid "New app menu"
 msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:130
-msgid "Multiple bug fixes (30 second replay, last played text, ...)"
+msgid "Multiple bug fixes (30 second replay, last played text, …)"
 msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:131

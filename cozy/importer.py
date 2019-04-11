@@ -420,7 +420,7 @@ def _get_mp3_tags(track, path):
         track.mutagen = ID3(path)
     except Exception as e:
         log.warning("Track " + track.path +
-                    " has no mp3 tags. Now guessing from file and folder name...")
+                    " has no mp3 tags. Now guessing from file and folder name…")
         return track_data
 
     mp3 = TrackContainer(MP3(track.path), path)
@@ -455,7 +455,7 @@ def _get_flac_tags(track, path):
         track.mutagen = FLAC(path)
     except Exception as e:
         log.warning("Track " + track.path +
-                    " has no valid tags. Now guessing from file and folder name...")
+                    " has no valid tags. Now guessing from file and folder name…")
         return track_data
 
     track_data.disk = int(__get_common_disk_number(track))
@@ -480,7 +480,7 @@ def _get_ogg_tags(track, path):
         track.mutagen = OggVorbis(path)
     except Exception as e:
         log.warning("Track " + track.path +
-                    " has no valid tags. Now guessing from file and folder name...")
+                    " has no valid tags. Now guessing from file and folder name…")
         return track_data
 
     track_data.disk = int(__get_common_disk_number(track))
@@ -505,7 +505,7 @@ def _get_mp4_tags(track, path):
         track.mutagen = MP4(path)
     except Exception as e:
         log.warning("Track " + track.path +
-                    " has no valid tags. Now guessing from file and folder name...")
+                    " has no valid tags. Now guessing from file and folder name…")
         log.warning(e)
         return track_data
 

@@ -443,7 +443,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         else:
             self.parent.emit_event("storage-changed", self.path)
             log.info("Audio book location changed, rebasing the location in cozy.db.")
-            self.ui.switch_to_working(_("Changing audio book location..."), False)
+            self.ui.switch_to_working(_("Changing audio book location…"), False)
             thread = Thread(target=importer.rebase_location, args=(
                 self.ui, old_path, new_path), name="RebaseStorageLocationThread")
             thread.start()
