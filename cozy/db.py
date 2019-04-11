@@ -225,10 +225,17 @@ def get_track_for_playback(book):
     :return: current track position from book db
     """
     book = Book.select().where(Book.id == book.id).get()
+    query = Track.select().where(Track.id == book.position)
     if book.position < 1:
-        track = tracks(book)[0]
+        track_items = tracks(book)
+        if len(track_items) > 0:
+            track = tracks(book)[0]
+        else:
+            track = None
+    elif query.exists():
+        track = query.get()
     else:
-        track = Track.select().where(Track.id == book.position).get()
+        track = None
     return track
 
 
@@ -529,9 +536,11 @@ def clean_books():
     Remove all books that have no tracks
     """
     for book in Book.select():
+        if not get_track_for_playback(book):
+            Book.update(position = 0).where(Book.id == book.id).execute()
         if Track.select().where(Track.book == book).count() < 1:
-            if Settings.get().last_played_book == book.id:
-                Settings.update(last_played_book = None).execute()
+            if Settings.get().last_played_book.id == book.id:
+                Settings.update(last_played_book=None).execute()
             book.delete_instance()
 
 def remove_tracks_with_path(ui, path):

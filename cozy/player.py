@@ -148,7 +148,12 @@ def get_current_track():
     """
     global __current_track
     if __current_track:
-        return cozy.db.Track.get(cozy.db.Track.id == __current_track.id)
+        query = cozy.db.Track.select().where(cozy.db.Track.id == __current_track.id)
+        if query.exists():
+            return query.get()
+        else:
+            __current_track = None
+            return None
     else:
         return None
 
