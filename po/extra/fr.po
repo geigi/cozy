@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-11 15:12+0200\n"
+"POT-Creation-Date: 2019-04-11 15:33+0200\n"
 "PO-Revision-Date: 2019-04-09 10:50+0200\n"
 "Last-Translator: NathanBnm\n"
 "Language-Team: none\n"
@@ -113,11 +113,11 @@ msgstr ""
 "fichiers d'image plutôt que les couvertures intégrées était activée"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:69
-msgid "Fixed startup crash on elementaryOS 5.0 Juno"
+msgid "Fixed startup crash on elemntary OS 5.0 Juno"
 msgstr "Correction du plantage au démarrage dans elementary OS 5.0 Juno"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:76
-msgid "Support for elementaryOS 5.0 Juno"
+msgid "Support for elemntary OS 5.0 Juno"
 msgstr "Prise en charge d'elementary OS 5.0 Juno"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:77
@@ -156,7 +156,7 @@ msgid "Fixed a typo"
 msgstr "Correction d'une faute de frappe"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:96
-msgid "Support for elementaryOS 5.0"
+msgid "Support for elemntary OS 5.0"
 msgstr "Prise en charge d'elementary OS 5.0"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:104

@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-11 15:12+0200\n"
+"POT-Creation-Date: 2019-04-11 15:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/com.github.geigi.cozy.desktop.in:3
@@ -104,11 +104,11 @@ msgid ""
 msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:69
-msgid "Fixed startup crash on elementaryOS 5.0 Juno"
+msgid "Fixed startup crash on elemntary OS 5.0 Juno"
 msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:76
-msgid "Support for elementaryOS 5.0 Juno"
+msgid "Support for elemntary OS 5.0 Juno"
 msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:77
@@ -141,7 +141,7 @@ msgid "Fixed a typo"
 msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:96
-msgid "Support for elementaryOS 5.0"
+msgid "Support for elemntary OS 5.0"
 msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:104
