@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 from os import path, environ
 import subprocess
 
@@ -11,4 +12,4 @@ if not environ.get('DESTDIR'):
     subprocess.call(['glib-compile-schemas', schemadir])
 
     print('Updating icon cache…')
-    subprocess.call(['gtk-update-icon-cache', iconchachedir]) 
+    subprocess.call(['gtk-update-icon-cache', '-qtf', iconchachedir]) 
