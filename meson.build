@@ -87,4 +87,4 @@ if run_command('[', '-d', peewee_dir, ']').returncode() == 0
     endif
 endif
 
-
+meson.add_install_script('meson/post_install.py')
