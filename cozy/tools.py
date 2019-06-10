@@ -22,12 +22,12 @@ def get_cache_dir():
 
 def shorten_string(string, length):
     """
-    Shortens a string when it is longer than length and adds ... at the end.
+    Shortens a string when it is longer than length and adds … at the end.
     :param string: Text to be shortened
     :param length: Max. length of string
     :return : string or shortened string
     """
-    return (string[:length] + '...') if len(string) > length else string
+    return (string[:length] + '…') if len(string) > length else string
 
 def is_elementary():
         """

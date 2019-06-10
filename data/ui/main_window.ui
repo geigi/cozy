@@ -418,7 +418,7 @@ audio-volume-medium-symbolic</property>
             <child>
               <object class="GtkSpinner" id="spinner">
                 <property name="can_focus">False</property>
-                <property name="tooltip_text" translatable="yes">Working...</property>
+                <property name="tooltip_text" translatable="yes">Working…</property>
                 <property name="margin_left">5</property>
                 <property name="margin_right">8</property>
                 <child internal-child="accessible">
@@ -811,7 +811,7 @@ audio-volume-medium-symbolic</property>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Importing your audiobooks...</property>
+                    <property name="label" translatable="yes">Importing your audiobooks…</property>
                     <style>
                       <class name="h2"/>
                     </style>

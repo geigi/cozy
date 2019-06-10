@@ -34,7 +34,7 @@ def __on_gst_message(bus, message):
     if t == Gst.MessageType.BUFFERING:
         if (message.percentage < 100):
             __player.set_state(Gst.State.PAUSED)
-            log.info("Buffering...")
+            log.info("Buffering…")
         else:
             __player.set_state(Gst.State.PLAYING)
             log.info("Buffering finished.")

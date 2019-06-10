@@ -76,11 +76,11 @@ class CozyUI(metaclass=Singleton):
         Initialize all resources like gresource and glade windows.
         """
         resource = Gio.resource_load(
-            os.path.join(self.pkgdir, 'cozy.ui.gresource'))
+            os.path.join(self.pkgdir, 'com.github.geigi.cozy.ui.gresource'))
         Gio.Resource._register(resource)
 
         resource = Gio.resource_load(
-            os.path.join(self.pkgdir, 'cozy.img.gresource'))
+            os.path.join(self.pkgdir, 'com.github.geigi.cozy.img.gresource'))
         Gio.Resource._register(resource)
 
         self.window_builder = Gtk.Builder.new_from_resource(
@@ -637,7 +637,7 @@ class CozyUI(metaclass=Singleton):
         inspired by https://stackoverflow.com/questions/24094186/drag-and-drop-file-example-in-pygobject
         """
         if target_type == 80:
-            self.switch_to_working("copying new files...", False)
+            self.switch_to_working("copying new files…", False)
             thread = Thread(target=importer.copy, args=(
                 self, selection, ), name="DragDropImportThread")
             thread.start()

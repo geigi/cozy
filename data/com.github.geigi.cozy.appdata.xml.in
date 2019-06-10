@@ -14,7 +14,7 @@
       </p>
       <ul>
       <li>Import all your audiobooks into cozy to browse them comfortably</li>
-      <li>Listen to your DRM free mp3, m4a (aac, ALAC, ...), flac, ogg and wav audio books</li>
+      <li>Listen to your DRM free mp3, m4a (aac, ALAC, …), flac, ogg and wav audio books</li>
       <li>Remembers your playback position</li>
       <li>Sleep timer!</li>
       <li>Playback speed control for each book individually</li>
@@ -66,14 +66,14 @@
     <release version="0.6.5" timestamp="1543573312">
       <description>
         <ul>
-          <li>Fixed startup crash on elementaryOS 5.0 Juno</li>
+          <li>Fixed startup crash on elemntary OS 5.0 Juno</li>
         </ul>
       </description>
     </release>
     <release version="0.6.4" timestamp="1540414183">
       <description>
         <ul>
-          <li>Support for elementaryOS 5.0 Juno</li>
+          <li>Support for elemntary OS 5.0 Juno</li>
           <li>Fixed a bug which prevented cozy from automatically playing the next chapter</li>
           <li>Updated translations</li>
         </ul>
@@ -93,7 +93,7 @@
           <li>The book overview now supports multiple disks in audiobooks</li>
           <li>The file not found window will only open when the file is on the internal drive</li>
           <li>Fixed a typo</li>
-          <li>Support for elementaryOS 5.0</li>
+          <li>Support for elemntary OS 5.0</li>
           <li>Updated translations</li>
         </ul>
       </description>
@@ -127,7 +127,7 @@
           <li>Blacklist for files that will not be displayed in the library</li>
           <li>Cozy now prevents your system from suspend during playback</li>
           <li>New app menu</li>
-          <li>Multiple bug fixes (30 second replay, last played text, ...)</li>
+          <li>Multiple bug fixes (30 second replay, last played text, …)</li>
           <li>UI fixes</li>
         </ul>
       </description>

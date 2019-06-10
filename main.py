@@ -62,9 +62,9 @@ class Application(Gtk.Application):
         GLib.setenv("PULSE_PROP_media.role", "music", True)
 
         import gettext
-        locale.bindtextdomain('cozy', localedir)
-        locale.textdomain('cozy')
-        gettext.install('cozy', localedir)
+        locale.bindtextdomain('com.github.geigi.cozy', localedir)
+        locale.textdomain('com.github.geigi.cozy')
+        gettext.install('com.github.geigi.cozy', localedir)
 
     def do_startup(self):
         log.info(platform.dist())

@@ -1,20 +1,20 @@
-# Copyright (C) 2017
-# This file is distributed under the same license as the cozy package.
-# geigi <transifex@geigi.de>, 2018.
-# 
-#, fuzzy
+# Finnish translations for com.github.geigi.cozy package.
+# Copyright (C) 2019 THE com.github.geigi.cozy'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.geigi.cozy package.
+# Mika Väinölä, 2019.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: cozy 0.6.0\n"
+"Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 15:56+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Mika Väinölä <mikavainola@fastmail.com>, 2017\n"
-"Language-Team: Finnish (https://www.transifex.com/geigi/teams/78138/fi/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-04-11 15:12+0200\n"
+"PO-Revision-Date: 2019-04-09 10:50+0200\n"
+"Last-Translator: Mika Väinölä <mikavainola@fastmail.com>\n"
+"Language-Team: none\n"
 "Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/book_element.py:67 cozy/search_results.py:124
@@ -45,11 +45,11 @@ msgstr "Poista kirjastosta"
 msgid "Play this part"
 msgstr "Toista tämä osa"
 
-#: cozy/book_overview.py:222
+#: cozy/book_overview.py:223
 msgid "Downloaded"
 msgstr "Ladattu"
 
-#: cozy/book_overview.py:225 data/ui/main_window.ui:1328
+#: cozy/book_overview.py:226 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Lataa"
 
@@ -69,11 +69,11 @@ msgstr "Siirry tekijään"
 msgid "Jump to reader "
 msgstr "Siirry lukijaan"
 
-#: cozy/importer.py:270
+#: cozy/importer.py:275
 msgid "Unknown Author"
 msgstr "Tuntematon tekijä"
 
-#: cozy/importer.py:272
+#: cozy/importer.py:277
 msgid "Unknown Reader"
 msgstr "Tuntematon lukija"
 
@@ -150,15 +150,20 @@ msgstr "vuosi"
 msgid "years"
 msgstr "vuotta"
 
-#: cozy/ui.py:414
+#: cozy/ui.py:407
+msgid "Audiobooks"
+msgstr ""
+
+#: cozy/ui.py:428
 msgid "Importing Audiobooks"
 msgstr "Tuodaan äänikirjoja"
 
-#: cozy/ui.py:483 cozy/ui.py:489 cozy/ui.py:809
+#. Add the special All element
+#: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
 msgid "All"
 msgstr "Kaikki"
 
-#: cozy/ui.py:484 cozy/ui.py:490
+#: cozy/ui.py:498 cozy/ui.py:504
 msgid "Display all books"
 msgstr "Näytä kaikki kirjat"
 
@@ -170,17 +175,17 @@ msgstr "min"
 msgid "Off"
 msgstr "Pois"
 
-#: cozy/settings.py:413 cozy/settings.py:456
+#: cozy/settings.py:416 cozy/settings.py:459
 msgid "External drive"
 msgstr "Ulkoinen asema"
 
-#: cozy/settings.py:416 cozy/settings.py:459
+#: cozy/settings.py:419 cozy/settings.py:462
 msgid "Internal drive"
 msgstr "Sisäinen asema"
 
-#: cozy/settings.py:443
-msgid "Changing audio book location..."
-msgstr "Muutetaan äänikirjojen sijaintia..."
+#: cozy/settings.py:446
+msgid "Changing audio book location…"
+msgstr "Muutetaan äänikirjojen sijaintia…"
 
 #: cozy/disk_element.py:26
 msgid "Disc"
@@ -271,8 +276,8 @@ msgid "Remaining time of current part"
 msgstr "Osan jäljellä oleva aika"
 
 #: data/ui/main_window.ui:421
-msgid "Working..."
-msgstr "Työskennellään..."
+msgid "Working…"
+msgstr "Työskennellään…"
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
@@ -344,8 +349,8 @@ msgid "List of books"
 msgstr "Lista kirjoista"
 
 #: data/ui/main_window.ui:814
-msgid "Importing your audiobooks..."
-msgstr "Tuodaan äänikirjojasi..."
+msgid "Importing your audiobooks…"
+msgstr "Tuodaan äänikirjojasi…"
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
@@ -375,7 +380,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr "Automaattisen skannauksen kytkin"
+msgstr ""
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
@@ -428,8 +433,7 @@ msgstr "page0"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr "Ala selaamaan kirjastoasi valitsemalla näkymäksi Tekijä tai Lukija."
 
 #: data/ui/about.ui:14
@@ -440,19 +444,19 @@ msgstr "GitHub"
 msgid "_Play/Pause"
 msgstr "Toista/_Pysäytä"
 
-#: data/ui/app_menu.ui:13
+#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
 msgstr "_Asetukset"
 
-#: data/ui/app_menu.ui:19
+#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
 msgid "_Help"
 msgstr "O_hje"
 
-#: data/ui/app_menu.ui:23
+#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
 msgid "_About"
 msgstr "_Tietoja"
 
-#: data/ui/app_menu.ui:27
+#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Lopeta"
 
@@ -545,8 +549,8 @@ msgid "Prefer external images over embedded cover"
 msgstr "Suosi ulkoisia kuvia upotetun kannen sijaan"
 
 #: data/ui/settings.ui:837
-msgid "Use images (cover.jpg, *.png, ...) when available"
-msgstr "Käytä kuvia (cover.jpg, *.png, ...) jos saatavilla"
+msgid "Use images (cover.jpg, *.png, …) when available"
+msgstr "Käytä kuvia (cover.jpg, *.png, …) jos saatavilla"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
@@ -666,6 +670,14 @@ msgstr "Ajastimen keston säädin"
 #: data/ui/timer_popover.ui:89
 msgid "Set the sleep timer duration in minutes"
 msgstr "Aseta ajastimen kesto minuuteissa"
+
+#: data/ui/titlebar_menu.ui:7
+msgid "_Scan Directory"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:13
+msgid "_Hide unavailable books"
+msgstr ""
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"

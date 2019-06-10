@@ -1,20 +1,20 @@
-# Copyright (C) 2017
-# This file is distributed under the same license as the cozy package.
-# geigi <transifex@geigi.de>, 2018.
-# 
-#, fuzzy
+# Spanish translations for com.github.geigi.cozy package.
+# Copyright (C) 2019 THE com.github.geigi.cozy'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.geigi.cozy package.
+# Amadeus Amadeus, 2019.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: cozy 0.6.0\n"
+"Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 15:56+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Amadeus Amadeus <amadorpr@hotmail.com>, 2018\n"
-"Language-Team: Spanish (https://www.transifex.com/geigi/teams/78138/es/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-04-11 15:12+0200\n"
+"PO-Revision-Date: 2019-04-09 10:50+0200\n"
+"Last-Translator: Amadeus Amadeus <amadorpr@hotmail.com>\n"
+"Language-Team: none\n"
 "Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/book_element.py:67 cozy/search_results.py:124
@@ -45,11 +45,11 @@ msgstr ""
 msgid "Play this part"
 msgstr "Reproducir esta sección"
 
-#: cozy/book_overview.py:222
+#: cozy/book_overview.py:223
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/book_overview.py:225 data/ui/main_window.ui:1328
+#: cozy/book_overview.py:226 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr ""
 
@@ -69,11 +69,11 @@ msgstr "Ir al autor"
 msgid "Jump to reader "
 msgstr "Ir al lecttor"
 
-#: cozy/importer.py:270
+#: cozy/importer.py:275
 msgid "Unknown Author"
 msgstr "Autor desconocido"
 
-#: cozy/importer.py:272
+#: cozy/importer.py:277
 msgid "Unknown Reader"
 msgstr "Lector desconocido"
 
@@ -150,15 +150,20 @@ msgstr ""
 msgid "years"
 msgstr ""
 
-#: cozy/ui.py:414
+#: cozy/ui.py:407
+msgid "Audiobooks"
+msgstr ""
+
+#: cozy/ui.py:428
 msgid "Importing Audiobooks"
 msgstr "Importando audiolibros"
 
-#: cozy/ui.py:483 cozy/ui.py:489 cozy/ui.py:809
+#. Add the special All element
+#: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
 msgid "All"
 msgstr "Todos"
 
-#: cozy/ui.py:484 cozy/ui.py:490
+#: cozy/ui.py:498 cozy/ui.py:504
 msgid "Display all books"
 msgstr "Mostrar todos los libros"
 
@@ -170,16 +175,16 @@ msgstr "min"
 msgid "Off"
 msgstr ""
 
-#: cozy/settings.py:413 cozy/settings.py:456
+#: cozy/settings.py:416 cozy/settings.py:459
 msgid "External drive"
 msgstr ""
 
-#: cozy/settings.py:416 cozy/settings.py:459
+#: cozy/settings.py:419 cozy/settings.py:462
 msgid "Internal drive"
 msgstr ""
 
-#: cozy/settings.py:443
-msgid "Changing audio book location..."
+#: cozy/settings.py:446
+msgid "Changing audio book location…"
 msgstr ""
 
 #: cozy/disk_element.py:26
@@ -271,8 +276,8 @@ msgid "Remaining time of current part"
 msgstr "Tiempo restante de la sección actual"
 
 #: data/ui/main_window.ui:421
-msgid "Working..."
-msgstr "Funcionando..."
+msgid "Working…"
+msgstr "Funcionando…"
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
@@ -344,8 +349,8 @@ msgid "List of books"
 msgstr "Lista de libros"
 
 #: data/ui/main_window.ui:814
-msgid "Importing your audiobooks..."
-msgstr "Importando sus audiolibros..."
+msgid "Importing your audiobooks…"
+msgstr "Importando sus audiolibros…"
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
@@ -355,8 +360,7 @@ msgstr "Importe sus audiolibros"
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy importa automáticamente tus audiolibros a un directorio - tu "
-"biblioteca."
+"Cozy importa automáticamente tus audiolibros a un directorio - tu biblioteca."
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
@@ -374,13 +378,12 @@ msgstr ""
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr "Interruptor de autoexploración"
+msgstr ""
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
 msgid "Automatically import new audiobooks on startup"
-msgstr ""
-"Importar automáticamente los audiolibros nuevos al inicio del programa"
+msgstr "Importar automáticamente los audiolibros nuevos al inicio del programa"
 
 #: data/ui/main_window.ui:1069
 msgid "Drag & Drop"
@@ -426,8 +429,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 
 #: data/ui/about.ui:14
@@ -438,19 +440,19 @@ msgstr "GitHub"
 msgid "_Play/Pause"
 msgstr ""
 
-#: data/ui/app_menu.ui:13
+#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
 msgstr "_Preferencias"
 
-#: data/ui/app_menu.ui:19
+#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
 msgid "_Help"
 msgstr "_Ayuda"
 
-#: data/ui/app_menu.ui:23
+#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
 msgid "_About"
 msgstr "_Información"
 
-#: data/ui/app_menu.ui:27
+#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Salir"
 
@@ -543,7 +545,7 @@ msgid "Prefer external images over embedded cover"
 msgstr ""
 
 #: data/ui/settings.ui:837
-msgid "Use images (cover.jpg, *.png, ...) when available"
+msgid "Use images (cover.jpg, *.png, …) when available"
 msgstr ""
 
 #: data/ui/settings.ui:920
@@ -662,6 +664,14 @@ msgstr "Deslizador del tiempo del temporizador"
 #: data/ui/timer_popover.ui:89
 msgid "Set the sleep timer duration in minutes"
 msgstr "Ajustar el temporizador de apagado en minutos"
+
+#: data/ui/titlebar_menu.ui:7
+msgid "_Scan Directory"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:13
+msgid "_Hide unavailable books"
+msgstr ""
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"

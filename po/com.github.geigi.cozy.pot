@@ -1,29 +1,28 @@
-# Copyright (C) 2017
-# This file is distributed under the same license as the cozy package.
-# geigi <transifex@geigi.de>, 2018.
-# 
-#, fuzzy
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.geigi.cozy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: cozy 0.6.0\n"
+"Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 15:56+0200\n"
+"POT-Creation-Date: 2019-04-11 15:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Hans Czajkowski Jørgensen, 2017\n"
-"Language-Team: Danish (Denmark) (https://www.transifex.com/geigi/teams/78138/da_DK/)\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: da_DK\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/book_element.py:67 cozy/search_results.py:124
 msgid "Play this book"
-msgstr "Afspil denne bog"
+msgstr ""
 
 #: cozy/book_element.py:212
 msgid "Open book overview"
-msgstr "Åbn oversigt over bogen"
+msgstr ""
 
 #: cozy/book_element.py:213
 msgid "Currently offline"
@@ -43,19 +42,19 @@ msgstr ""
 
 #: cozy/book_element.py:395
 msgid "Play this part"
-msgstr "Afspil denne del"
+msgstr ""
 
-#: cozy/book_overview.py:222
+#: cozy/book_overview.py:223
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/book_overview.py:225 data/ui/main_window.ui:1328
+#: cozy/book_overview.py:226 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr ""
 
 #: cozy/file_not_found_dialog.py:66
 msgid "All files"
-msgstr "Alle filer"
+msgstr ""
 
 #: cozy/offline_cache.py:175
 msgid "Copying"
@@ -63,19 +62,19 @@ msgstr ""
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
-msgstr "Gå til forfatter"
+msgstr ""
 
 #: cozy/search_results.py:75
 msgid "Jump to reader "
-msgstr "Gå til oplæser"
+msgstr ""
 
-#: cozy/importer.py:270
+#: cozy/importer.py:275
 msgid "Unknown Author"
-msgstr "Ukendt Forfatter"
+msgstr ""
 
-#: cozy/importer.py:272
+#: cozy/importer.py:277
 msgid "Unknown Reader"
-msgstr "Ukendt Oplæser"
+msgstr ""
 
 #: cozy/tools.py:142
 msgid "hours"
@@ -150,36 +149,41 @@ msgstr ""
 msgid "years"
 msgstr ""
 
-#: cozy/ui.py:414
+#: cozy/ui.py:407
+msgid "Audiobooks"
+msgstr ""
+
+#: cozy/ui.py:428
 msgid "Importing Audiobooks"
-msgstr "Importerer lydbøger"
+msgstr ""
 
-#: cozy/ui.py:483 cozy/ui.py:489 cozy/ui.py:809
+#. Add the special All element
+#: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
 msgid "All"
-msgstr "Alle"
+msgstr ""
 
-#: cozy/ui.py:484 cozy/ui.py:490
+#: cozy/ui.py:498 cozy/ui.py:504
 msgid "Display all books"
-msgstr "Vis alle bøger"
+msgstr ""
 
 #: cozy/sleep_timer.py:121 data/ui/timer_popover.ui:105
 msgid "min"
-msgstr "min"
+msgstr ""
 
 #: cozy/sleep_timer.py:129
 msgid "Off"
 msgstr ""
 
-#: cozy/settings.py:413 cozy/settings.py:456
+#: cozy/settings.py:416 cozy/settings.py:459
 msgid "External drive"
 msgstr ""
 
-#: cozy/settings.py:416 cozy/settings.py:459
+#: cozy/settings.py:419 cozy/settings.py:462
 msgid "Internal drive"
 msgstr ""
 
-#: cozy/settings.py:443
-msgid "Changing audio book location..."
+#: cozy/settings.py:446
+msgid "Changing audio book location…"
 msgstr ""
 
 #: cozy/disk_element.py:26
@@ -188,39 +192,39 @@ msgstr ""
 
 #: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
-msgstr "Spol 30 sekunder tilbage"
+msgstr ""
 
 #: data/ui/main_window.ui:79
 msgid "Rewind button"
-msgstr "Tilbagespolings-knap"
+msgstr ""
 
 #: data/ui/main_window.ui:80
 msgid "Jump back 30 seconds"
-msgstr "Spring 30 sekunder tilbage"
+msgstr ""
 
 #: data/ui/main_window.ui:97
 msgid "Start playback"
-msgstr "Start afspilning"
+msgstr ""
 
 #: data/ui/main_window.ui:105
 msgid "Play/Pause Button"
-msgstr "Afspil/Pause-knap"
+msgstr ""
 
 #: data/ui/main_window.ui:106
 msgid "Start or pause the playback"
-msgstr "Start eller sæt afspilningen på pause"
+msgstr ""
 
 #: data/ui/main_window.ui:123
 msgid "Volume control"
-msgstr "Lydstyrke-kontrol"
+msgstr ""
 
 #: data/ui/main_window.ui:200
 msgid "Currently playing"
-msgstr "Afspiller nu"
+msgstr ""
 
 #: data/ui/main_window.ui:218
 msgid "Booktitle"
-msgstr "Bogens titel"
+msgstr ""
 
 #: data/ui/main_window.ui:219
 msgid "Title of currently playing book"
@@ -228,7 +232,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:244
 msgid "Part name"
-msgstr "Delens navn"
+msgstr ""
 
 #: data/ui/main_window.ui:245
 msgid "Title of the currently playing part"
@@ -260,19 +264,19 @@ msgstr ""
 
 #: data/ui/main_window.ui:336
 msgid "Remaining time"
-msgstr "Resterende tid"
+msgstr ""
 
 #: data/ui/main_window.ui:344
 msgid "Time remaining"
-msgstr "Resterende tid"
+msgstr ""
 
 #: data/ui/main_window.ui:345
 msgid "Remaining time of current part"
-msgstr "Den aktuelle dels resterende tid"
+msgstr ""
 
 #: data/ui/main_window.ui:421
-msgid "Working..."
-msgstr "Arbejder..."
+msgid "Working…"
+msgstr ""
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
@@ -280,7 +284,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:442
 msgid "Playback speed"
-msgstr "Afspilningshastighed"
+msgstr ""
 
 #: data/ui/main_window.ui:464 data/ui/settings.ui:566
 msgid "Sleep timer"
@@ -296,7 +300,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:492
 msgid "Search your library"
-msgstr "Søg i dit bibliotek"
+msgstr ""
 
 #: data/ui/main_window.ui:503
 msgid "Search menu button"
@@ -308,7 +312,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:518
 msgid "Options"
-msgstr "Valgmuligheder"
+msgstr ""
 
 #: data/ui/main_window.ui:529
 msgid "Options menu button"
@@ -324,37 +328,37 @@ msgstr ""
 
 #: data/ui/main_window.ui:674
 msgid "List of authors"
-msgstr "Liste over forfattere"
+msgstr ""
 
 #: data/ui/main_window.ui:690 data/ui/main_window.ui:798
 #: data/ui/search_popover.ui:107
 msgid "Author"
-msgstr "Forfatter"
+msgstr ""
 
 #: data/ui/main_window.ui:709
 msgid "List of readers"
-msgstr "Liste over oplæsere"
+msgstr ""
 
 #: data/ui/main_window.ui:725 data/ui/search_popover.ui:201
 msgid "Reader"
-msgstr "Oplæser"
+msgstr ""
 
 #: data/ui/main_window.ui:778
 msgid "List of books"
-msgstr "Liste over bøger"
+msgstr ""
 
 #: data/ui/main_window.ui:814
-msgid "Importing your audiobooks..."
-msgstr "Importerer dine lydbøger..."
+msgid "Importing your audiobooks…"
+msgstr ""
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
-msgstr "Importer dine Lydbøger"
+msgstr ""
 
 #: data/ui/main_window.ui:882
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
-msgstr "Cozy importerer automatisk dine lydbøger til én mappe - dit bibliotek"
+msgstr ""
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
@@ -377,11 +381,11 @@ msgstr ""
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
 msgid "Automatically import new audiobooks on startup"
-msgstr "Importer automatisk nye lydbøger under opstart"
+msgstr ""
 
 #: data/ui/main_window.ui:1069
 msgid "Drag & Drop"
-msgstr "Træk & Slip"
+msgstr ""
 
 #: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
@@ -389,7 +393,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
-msgstr "Dine lydbøgers placering"
+msgstr ""
 
 #: data/ui/main_window.ui:1128
 msgid "Set Audiobooks Directory"
@@ -423,57 +427,56 @@ msgstr ""
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 
 #: data/ui/about.ui:14
 msgid "GitHub"
-msgstr "GitHub"
+msgstr ""
 
 #: data/ui/app_menu.ui:7
 msgid "_Play/Pause"
 msgstr ""
 
-#: data/ui/app_menu.ui:13
+#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
-msgstr "_Indstillinger"
+msgstr ""
 
-#: data/ui/app_menu.ui:19
+#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
 msgid "_Help"
-msgstr "_Hjælp"
+msgstr ""
 
-#: data/ui/app_menu.ui:23
+#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
 msgid "_About"
-msgstr "_Om"
+msgstr ""
 
-#: data/ui/app_menu.ui:27
+#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
 msgid "_Quit"
-msgstr "_Afslut"
+msgstr ""
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
-msgstr "Annuller"
+msgstr ""
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
-msgstr "Lokaliser"
+msgstr ""
 
 #: data/ui/file_not_found.ui:86
 msgid "File not found"
-msgstr "Fil blev ikke fundet"
+msgstr ""
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "Denne fil kunne ikke findes. Vil du lokalisere den selv? "
+msgstr ""
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
-msgstr "Ok"
+msgstr ""
 
 #: data/ui/import_failed.ui:81
 msgid "Some files could not be imported"
-msgstr "Visse filer kunne ikke importeres"
+msgstr ""
 
 #: data/ui/import_failed.ui:134
 msgid ""
@@ -482,10 +485,6 @@ msgid ""
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
-"Det kan der være flere grunde til:\n"
-"- Lydformatet er ikke understøttet\n"
-"- Filen/filerne er ikke gyldige lydfiler\n"
-"- Filen/filerne er beskadigede"
 
 #: data/ui/settings.ui:92 data/ui/settings.ui:344
 msgid "General"
@@ -505,7 +504,7 @@ msgstr ""
 
 #: data/ui/settings.ui:321
 msgid "Appearance"
-msgstr "Udseende"
+msgstr ""
 
 #: data/ui/settings.ui:387
 msgid "Suspend system on timer"
@@ -513,7 +512,7 @@ msgstr ""
 
 #: data/ui/settings.ui:447
 msgid "Replay 30 seconds"
-msgstr "Afspil de sidste 30 sekunder igen"
+msgstr ""
 
 #: data/ui/settings.ui:507
 msgid "Automatic media scan"
@@ -529,7 +528,7 @@ msgstr ""
 
 #: data/ui/settings.ui:745
 msgid "Behaviour"
-msgstr "Adfærd"
+msgstr ""
 
 #: data/ui/settings.ui:772
 msgid "Artwork"
@@ -540,12 +539,12 @@ msgid "Prefer external images over embedded cover"
 msgstr ""
 
 #: data/ui/settings.ui:837
-msgid "Use images (cover.jpg, *.png, ...) when available"
+msgid "Use images (cover.jpg, *.png, …) when available"
 msgstr ""
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
-msgstr "Lydbøgernes placering"
+msgstr ""
 
 #: data/ui/settings.ui:936
 msgid "Storage locations"
@@ -577,7 +576,7 @@ msgstr ""
 
 #: data/ui/settings.ui:1261
 msgid "Follow symlinks"
-msgstr "Følg genveje"
+msgstr ""
 
 #: data/ui/settings.ui:1293
 msgid "Storage"
@@ -618,31 +617,31 @@ msgstr ""
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
-msgstr "Søg"
+msgstr ""
 
 #: data/ui/search_popover.ui:36
 msgid "Search box"
-msgstr "Søgefelt"
+msgstr ""
 
 #: data/ui/search_popover.ui:37
 msgid "Search your audiobook library"
-msgstr "Søg i dit lydbogsbibliotek"
+msgstr ""
 
 #: data/ui/search_popover.ui:67
 msgid "Which book are you looking for?"
-msgstr "Hvilken bog leder du efter?"
+msgstr ""
 
 #: data/ui/search_popover.ui:154
 msgid "Book"
-msgstr "Bog"
+msgstr ""
 
 #: data/ui/search_popover.ui:248
 msgid "Part"
-msgstr "Del"
+msgstr ""
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
-msgstr "Intet blev fundet :("
+msgstr ""
 
 #: data/ui/timer_popover.ui:39
 msgid "Stop after current chapter"
@@ -658,6 +657,14 @@ msgstr ""
 
 #: data/ui/timer_popover.ui:89
 msgid "Set the sleep timer duration in minutes"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:7
+msgid "_Scan Directory"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:13
+msgid "_Hide unavailable books"
 msgstr ""
 
 #: data/ui/book_progress_element.ui:49

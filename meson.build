@@ -1,11 +1,6 @@
-project('cozy',
-  version: '0.6.7',
-  meson_version: '>= 0.40.0')
-
-project_name = 'cozy'
+project('com.github.geigi.cozy', version: '0.6.7')
 
 python = import('python3')
-project_id = 'com.github.geigi.cozy'
 i18n = import('i18n')
 gnome = import('gnome')
 
@@ -92,4 +87,4 @@ if run_command('[', '-d', peewee_dir, ']').returncode() == 0
     endif
 endif
 
-
+meson.add_install_script('meson/post_install.py')
