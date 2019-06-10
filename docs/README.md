@@ -67,6 +67,7 @@ To the contributors on GitHub:
 - camellan
 - jnbr
 - grenade
+- NathanBnm
 
 The translators:
 - camellan
