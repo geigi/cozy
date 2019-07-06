@@ -32,9 +32,9 @@ gi.require_version('Gtk', '3.0')
 
 from pathlib import Path
 from gi.repository import Gtk, GObject, GLib
-from cozy.ui import CozyUI
-from cozy.db import init_db, Settings
-from cozy.mpris import MPRIS
+from cozy.ui.main_view import CozyUI
+from cozy.control.db import init_db, Settings
+from cozy.control.mpris import MPRIS
 
 log = logging.getLogger("main")
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")

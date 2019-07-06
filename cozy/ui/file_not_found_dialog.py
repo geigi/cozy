@@ -1,9 +1,9 @@
 import os
 
-from cozy.db import Track, Book
-from gi.repository import Gtk, Gst
-import cozy.importer as importer
-import cozy.player as player
+from cozy.control.db import Track
+from gi.repository import Gtk
+import cozy.control.importer as importer
+import cozy.control.player as player
 import cozy.ui
 
 class FileNotFoundDialog():
@@ -13,7 +13,7 @@ class FileNotFoundDialog():
 
     def __init__(self, file):
         self.missing_file = file
-        self.parent = cozy.ui.CozyUI()
+        self.parent = cozy.ui.main_view.CozyUI()
         self.builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/file_not_found.ui")
         self.dialog = self.builder.get_object("dialog")

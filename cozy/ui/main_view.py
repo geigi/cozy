@@ -5,23 +5,23 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
-from cozy.book_element import BookElement
-from cozy.import_failed_dialog import ImportFailedDialog
-from cozy.file_not_found_dialog import FileNotFoundDialog
-from cozy.search import Search
-from cozy.sleep_timer import SleepTimer
-from cozy.playback_speed import PlaybackSpeed
-from cozy.titlebar import Titlebar
-from cozy.settings import Settings
-from cozy.book_overview import BookOverview
-from cozy.singleton import Singleton
+from cozy.ui.book_element import BookElement
+from cozy.ui.import_failed_dialog import ImportFailedDialog
+from cozy.ui.file_not_found_dialog import FileNotFoundDialog
+from cozy.ui.search import Search
+from cozy.control.sleep_timer import SleepTimer
+from cozy.control.playback_speed import PlaybackSpeed
+from cozy.ui.titlebar import Titlebar
+from cozy.ui.settings import Settings
+from cozy.ui.book_overview import BookOverview
+from cozy.architecture.singleton import Singleton
 
-import cozy.db as db
-import cozy.importer as importer
-import cozy.player as player
+import cozy.control.db as db
+import cozy.control.importer as importer
+import cozy.control.player as player
 import cozy.tools as tools
-import cozy.filesystem_monitor as fs_monitor
-import cozy.offline_cache as offline_cache
+import cozy.control.filesystem_monitor as fs_monitor
+import cozy.control.offline_cache as offline_cache
 
 import os
 

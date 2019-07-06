@@ -1,7 +1,6 @@
 import time
 import os
 import logging
-import uuid
 
 log = logging.getLogger("db")
 from peewee import __version__ as PeeweeVersion
@@ -11,14 +10,13 @@ if PeeweeVersion[0] == '2':
     ModelBase = BaseModel
 else:
     log.info("Using peewee 3 backend")
-    from peewee import ModelBase
 from peewee import Model, CharField, IntegerField, BlobField, ForeignKeyField, FloatField, BooleanField, SqliteDatabase
 from playhouse.sqliteq import SqliteQueueDatabase
 from playhouse.migrate import SqliteMigrator, migrate
-from gi.repository import GLib, GdkPixbuf, Gdk
+from gi.repository import GLib, Gdk
 
 import cozy.tools as tools
-import cozy.filesystem_monitor
+import cozy.control.filesystem_monitor
 DB_VERSION = 6
 
 # first we get the data home and find the database if it exists
@@ -383,7 +381,7 @@ def update_db_7():
     """
     Update database to v7.
     """
-    import cozy.artwork_cache as artwork_cache
+    import cozy.control.artwork_cache as artwork_cache
     artwork_cache.delete_artwork_cache()
     Settings.update(version=7).execute()
 
@@ -523,7 +521,7 @@ def remove_invalid_entries(ui=None, refresh=False):
     """
     # remove entries from the db that are no longer existent
     for track in Track.select():
-        if not os.path.isfile(track.file) and cozy.filesystem_monitor.FilesystemMonitor().is_track_online(track):
+        if not os.path.isfile(track.file) and cozy.control.filesystem_monitor.FilesystemMonitor().is_track_online(track):
             track.delete_instance()
 
     clean_books()

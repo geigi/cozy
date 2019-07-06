@@ -1,6 +1,6 @@
-from cozy.event_sender import EventSender
-import cozy.player as player
-import cozy.db as db
+from cozy.architecture.event_sender import EventSender
+import cozy.control.player as player
+import cozy.control.db as db
 import cozy.ui
 
 import gi
@@ -15,7 +15,7 @@ class PlaybackSpeed(EventSender):
     speed = 1.0
 
     def __init__(self):
-        self.ui = cozy.ui.CozyUI()
+        self.ui = cozy.ui.main_view.CozyUI()
 
         self.builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/playback_speed_popover.ui")

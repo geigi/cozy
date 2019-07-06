@@ -1,13 +1,13 @@
 import os, subprocess
 from gi.repository import Gtk, Gdk, GdkPixbuf, Pango, Gst
 
-import cozy.db as db
-import cozy.player as player
+import cozy.control.db as db
+import cozy.control.player as player
 import cozy.tools as tools
-import cozy.artwork_cache as artwork_cache
+import cozy.control.artwork_cache as artwork_cache
 import cozy.ui
-from cozy.filesystem_monitor import FilesystemMonitor
-from cozy.settings import Settings
+from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.ui.settings import Settings
 
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
@@ -207,7 +207,7 @@ class BookElement(Gtk.FlowBoxChild):
 
     def __init__(self, b):
         self.book = b
-        self.ui = cozy.ui.CozyUI()
+        self.ui = cozy.ui.main_view.CozyUI()
 
         self.ONLINE_TOOLTIP_TEXT = _("Open book overview")
         self.OFFLINE_TOOLTIP_TEXT = _("Currently offline")
@@ -385,7 +385,7 @@ class TrackElement(Gtk.EventBox):
 
     def __init__(self, t, book):
         self.track = t
-        self.ui = cozy.ui.CozyUI()
+        self.ui = cozy.ui.main_view.CozyUI()
         self.book = book
 
         super().__init__()

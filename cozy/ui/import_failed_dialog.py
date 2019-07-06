@@ -9,7 +9,7 @@ class ImportFailedDialog():
     """
 
     def __init__(self, files):
-        self.parent = cozy.ui.CozyUI()
+        self.parent = cozy.ui.main_view.CozyUI()
         self.builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/import_failed.ui")
         self.dialog = self.builder.get_object("dialog")

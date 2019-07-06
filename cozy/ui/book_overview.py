@@ -1,15 +1,15 @@
 from gi.repository import Gtk, Gdk, Gst
 
-import cozy.artwork_cache as artwork_cache
-import cozy.db as db
+import cozy.control.artwork_cache as artwork_cache
+import cozy.control.db as db
 import cozy.tools as tools
-import cozy.player as player
+import cozy.control.player as player
 import cozy.ui
 
-from cozy.book_element import TrackElement
-from cozy.settings import Settings
-from cozy.offline_cache import OfflineCache
-from cozy.disk_element import DiskElement
+from cozy.ui.book_element import TrackElement
+from cozy.ui.settings import Settings
+from cozy.control.offline_cache import OfflineCache
+from cozy.ui.disk_element import DiskElement
 
 
 class BookOverview:
@@ -21,7 +21,7 @@ class BookOverview:
     switch_signal = None
 
     def __init__(self):
-        self.ui = cozy.ui.CozyUI()
+        self.ui = cozy.ui.main_view.CozyUI()
         builder = self.ui.window_builder
         self.name_label = builder.get_object("info_book_label")
         self.author_label = builder.get_object("info_author_label")

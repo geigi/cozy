@@ -1,18 +1,14 @@
-import threading
-
-import cozy.artwork_cache as artwork_cache
-import cozy.db as db
-import cozy.player as player
+import cozy.control.artwork_cache as artwork_cache
+import cozy.control.db as db
+import cozy.control.player as player
 import cozy.tools as tools
 import cozy.ui
-from cozy.sleep_timer import SleepTimer
-from cozy.playback_speed import PlaybackSpeed
 from cozy.tools import IntervalTimer
 
 import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
-from gi.repository import Gtk, Gdk, Gst, GLib
+from gi.repository import Gtk, Gdk, GLib
 
 import logging
 log = logging.getLogger("titlebar")
@@ -38,7 +34,7 @@ class Titlebar:
     current_elapsed = 0
 
     def __init__(self):
-        self.ui = cozy.ui.CozyUI()
+        self.ui = cozy.ui.main_view.CozyUI()
 
         # init buttons
         self.play_button = self.ui.get_object("play_button")

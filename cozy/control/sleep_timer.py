@@ -2,8 +2,7 @@ from threading import Thread
 import time
 
 import cozy.tools as tools
-from cozy.tools import IntervalTimer
-import cozy.player as player
+import cozy.control.player as player
 import cozy.ui
 
 import gi
@@ -21,7 +20,7 @@ class SleepTimer:
     fadeout_thread = None
 
     def __init__(self):
-        self.ui = cozy.ui.CozyUI()
+        self.ui = cozy.ui.main_view.CozyUI()
 
         self.builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/timer_popover.ui")
