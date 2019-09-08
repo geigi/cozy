@@ -1,20 +1,24 @@
-# English translations for extra package.
-# Copyright (C) 2019 THE extra'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the extra package.
-# Automatically generated, 2019.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Julian Geywitz <github@geigi.de>, 2019
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-11 15:33+0200\n"
-"PO-Revision-Date: 2019-04-09 10:50+0200\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: en_GB\n"
+"PO-Revision-Date: 2019-09-08 09:39+0000\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
+"Language-Team: English (United Kingdom) (https://www.transifex.com/geigi/teams/78138/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/com.github.geigi.cozy.desktop.in:3
@@ -215,11 +219,11 @@ msgstr "Fixed bug where cozy would not start on GTK older than 3.22"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:116
 msgid ""
-"If no author field is present, the reader field will be used as author. This "
-"requires a force reimport (settings) on already imported books."
+"If no author field is present, the reader field will be used as author. This"
+" requires a force reimport (settings) on already imported books."
 msgstr ""
-"If no author field is present, the reader field will be used as author. This "
-"requires a force reimport (settings) on already imported books."
+"If no author field is present, the reader field will be used as author. This"
+" requires a force reimport (settings) on already imported books."
 
 #: data/com.github.geigi.cozy.appdata.xml.in:117
 msgid "Optimizations under the hood"
@@ -375,7 +379,8 @@ msgid "Fixed ogg tag reading. Please re-import your oggs!"
 msgstr "Fixed ogg tag reading. Please re-import your oggs!"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:192
-msgid "Fixed a bug that could cause crashing cozy with modified playback speed"
+msgid ""
+"Fixed a bug that could cause crashing cozy with modified playback speed"
 msgstr ""
 "Fixed a bug that could cause crashing cozy with modified playback speed"
 
@@ -415,11 +420,11 @@ msgstr "New icons"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:207
 msgid ""
-"Added French, Danish and Turkish translations! (Thanks to Vistaus, Distil62, "
-"karaagac)"
+"Added French, Danish and Turkish translations! (Thanks to Vistaus, Distil62,"
+" karaagac)"
 msgstr ""
-"Added French, Danish and Turkish translations! (Thanks to Vistaus, Distil62, "
-"karaagac)"
+"Added French, Danish and Turkish translations! (Thanks to Vistaus, Distil62,"
+" karaagac)"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:214
 msgid "Cozy now looks a lot nicer!"
@@ -599,8 +604,8 @@ msgstr "Fixed missing track list"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:309
 msgid ""
-"Cozy's first release! This release includes everything to start listening to "
-"your audiobooks. More features are coming soon!"
+"Cozy's first release! This release includes everything to start listening to"
+" your audiobooks. More features are coming soon!"
 msgstr ""
-"Cozy's first release! This release includes everything to start listening to "
-"your audiobooks. More features are coming soon!"
+"Cozy's first release! This release includes everything to start listening to"
+" your audiobooks. More features are coming soon!"
