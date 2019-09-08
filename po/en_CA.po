@@ -1,20 +1,23 @@
-# English translations for com.github.geigi.cozy package.
-# Copyright (C) 2019 THE com.github.geigi.cozy'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
-# Automatically generated, 2019.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Julian Geywitz <github@geigi.de>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-11 15:12+0200\n"
-"PO-Revision-Date: 2019-04-09 10:50+0200\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: en_CA\n"
+"PO-Revision-Date: 2019-09-08 09:31+0000\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
+"Language-Team: English (Canada) (https://www.transifex.com/geigi/teams/78138/en_CA/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: en_CA\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/book_element.py:67 cozy/search_results.py:124
@@ -380,7 +383,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr ""
+msgstr "Auto scan switch"
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
@@ -393,7 +396,8 @@ msgstr "Drag & Drop"
 
 #: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr "Drag your audiobooks into cozy and they will be automatically imported"
+msgstr ""
+"Drag your audiobooks into cozy and they will be automatically imported"
 
 #: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
@@ -433,9 +437,11 @@ msgstr "page0"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view above."
+"Start exploring your library by switching to the Author or Reader view "
+"above."
 msgstr ""
-"Start exploring your library by switching to the Author or Reader view above."
+"Start exploring your library by switching to the Author or Reader view "
+"above."
 
 #: data/ui/about.ui:14
 msgid "GitHub"
@@ -673,11 +679,11 @@ msgstr "Set the sleep timer duration in minutes"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
-msgstr ""
+msgstr "_Scan Directory"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
-msgstr ""
+msgstr "_Hide unavailable books"
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"
