@@ -60,6 +60,7 @@ class Application(Gtk.Application):
         listen()
         Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
         GLib.setenv("PULSE_PROP_media.role", "music", True)
+        GLib.set_application_name("Cozy")
 
         import gettext
         locale.bindtextdomain('com.github.geigi.cozy', localedir)

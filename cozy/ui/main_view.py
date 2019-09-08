@@ -125,7 +125,7 @@ class CozyUI(metaclass=Singleton):
         Initialize everything we can't do from glade like events and other stuff.
         """
         log.info("Initialize main window")
-        self.window = self.window_builder.get_object("app_window")
+        self.window: Gtk.Window = self.window_builder.get_object("app_window")
         self.window.set_default_size(1100, 700)
         self.window.set_application(self.app)
         self.window.show_all()
@@ -134,6 +134,7 @@ class CozyUI(metaclass=Singleton):
         self.window.connect("drag_data_received", self.__on_drag_data_received)
         self.window.drag_dest_set(Gtk.DestDefaults.MOTION | Gtk.DestDefaults.HIGHLIGHT | Gtk.DestDefaults.DROP,
                                   [Gtk.TargetEntry.new("text/uri-list", 0, 80)], Gdk.DragAction.COPY)
+        self.window.title = "Cozy"
 
         # resizing the progress bar for older gtk versions
         if not Gtk.get_minor_version() > 18:
