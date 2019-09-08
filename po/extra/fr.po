@@ -1,20 +1,24 @@
-# French translations for extra package.
-# Copyright (C) 2019 THE extra'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the extra package.
-# NathanBnm, 2019.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Julian Geywitz <github@geigi.de>, 2019
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-11 15:33+0200\n"
-"PO-Revision-Date: 2019-04-09 10:50+0200\n"
-"Last-Translator: NathanBnm\n"
-"Language-Team: none\n"
-"Language: fr\n"
+"PO-Revision-Date: 2019-09-08 09:39+0000\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
+"Language-Team: French (https://www.transifex.com/geigi/teams/78138/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: data/com.github.geigi.cozy.desktop.in:3
@@ -148,8 +152,8 @@ msgid ""
 "The file not found window will only open when the file is on the internal "
 "drive"
 msgstr ""
-"La fenêtre de fichier non trouvé s'ouvrira seulement si le fichier se trouve "
-"dans le disque interne"
+"La fenêtre de fichier non trouvé s'ouvrira seulement si le fichier se trouve"
+" dans le disque interne"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:95
 msgid "Fixed a typo"
@@ -196,8 +200,8 @@ msgstr ""
 #: data/com.github.geigi.cozy.appdata.xml.in:110
 msgid "New setting: Prefer cover image file over embedded covers"
 msgstr ""
-"Nouveau paramètre : Préférer les fichiers d'image plutôt que les couvertures "
-"intégrées"
+"Nouveau paramètre : Préférer les fichiers d'image plutôt que les couvertures"
+" intégrées"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:111
 msgid "Redesigned Sleep Timer"
@@ -207,8 +211,8 @@ msgstr "Reconception de la minuterie"
 msgid ""
 "More Sleep Timer: You can now stop the playback after the current chapter"
 msgstr ""
-"Encore plus de minuterie : Vous pouvez désormais arrêter la lecture après le "
-"chapitre courant"
+"Encore plus de minuterie : Vous pouvez désormais arrêter la lecture après le"
+" chapitre courant"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:113
 msgid "And even more: Fadeout on timer end (in settings)"
@@ -223,13 +227,13 @@ msgstr "Reconception de l'écran de bienvenue et des paramètres"
 #: data/com.github.geigi.cozy.appdata.xml.in:115
 msgid "Fixed bug where cozy would not start on GTK older than 3.22"
 msgstr ""
-"Correction d'un bug où Cozy ne voulait pas démarrer avec les versions de GTK "
-"inférieures à 3.22"
+"Correction d'un bug où Cozy ne voulait pas démarrer avec les versions de GTK"
+" inférieures à 3.22"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:116
 msgid ""
-"If no author field is present, the reader field will be used as author. This "
-"requires a force reimport (settings) on already imported books."
+"If no author field is present, the reader field will be used as author. This"
+" requires a force reimport (settings) on already imported books."
 msgstr ""
 "Si il n'y a pas de champ d'auteur, le champ narrateur sera utilisé en tant "
 "qu'auteur. Cela nécessite une réimportation forcée (paramètres) sur les "
@@ -256,7 +260,8 @@ msgstr ""
 #: data/com.github.geigi.cozy.appdata.xml.in:127
 msgid "Blacklist for files that will not be displayed in the library"
 msgstr ""
-"Liste noire pour les fichiers qui ne seront pas affichés dans la bibliothèque"
+"Liste noire pour les fichiers qui ne seront pas affichés dans la "
+"bibliothèque"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:128
 msgid "Cozy now prevents your system from suspend during playback"
@@ -316,8 +321,8 @@ msgid ""
 "Choose between displaying the current chapter or the whole book in the "
 "titlebar"
 msgstr ""
-"Choisissez entre l'affichage du chapitre courant ou du livre complet dans la "
-"barre de titre"
+"Choisissez entre l'affichage du chapitre courant ou du livre complet dans la"
+" barre de titre"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:153
 #: data/com.github.geigi.cozy.appdata.xml.in:164
@@ -400,7 +405,8 @@ msgstr ""
 "réimporter vos fichiers OGG !"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:192
-msgid "Fixed a bug that could cause crashing cozy with modified playback speed"
+msgid ""
+"Fixed a bug that could cause crashing cozy with modified playback speed"
 msgstr ""
 "Correction d'un bug qui pouvait faire planter Cozy lors de la modification "
 "de la vitesse de lecture"
@@ -413,8 +419,8 @@ msgstr ""
 #: data/com.github.geigi.cozy.appdata.xml.in:194
 msgid "Fixed a bug where UI buttons would not get unlocked after a rescan"
 msgstr ""
-"Correction d'un bug où les boutons de l'interface n'étaient pas vérrouillés, "
-"sans raison apparente"
+"Correction d'un bug où les boutons de l'interface n'étaient pas vérrouillés,"
+" sans raison apparente"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:195
 msgid "Fixed a bug where cozy would not stop playing on closing via menu"
@@ -447,8 +453,8 @@ msgstr "Nouvelles icônes"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:207
 msgid ""
-"Added French, Danish and Turkish translations! (Thanks to Vistaus, Distil62, "
-"karaagac)"
+"Added French, Danish and Turkish translations! (Thanks to Vistaus, Distil62,"
+" karaagac)"
 msgstr ""
 "Ajout des traductions en français, danois et turc ! (Grâce à Vistaus, "
 "Distil62, karaagac)"
@@ -639,8 +645,8 @@ msgstr "Correction de la liste des pistes manquante"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:309
 msgid ""
-"Cozy's first release! This release includes everything to start listening to "
-"your audiobooks. More features are coming soon!"
+"Cozy's first release! This release includes everything to start listening to"
+" your audiobooks. More features are coming soon!"
 msgstr ""
 "Première version de Cozy ! Cette version inclue tout ce qu'il faut pout "
 "commenver à écouter vos livres audio. De nouvelles fonctionnalités sont à "
