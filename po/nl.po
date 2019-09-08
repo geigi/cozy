@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2019
 # Heimen Stoffels <vistausss@outlook.com>, 2019
+# Julian Geywitz <github@geigi.de>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-11 15:12+0200\n"
-"PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2019\n"
+"PO-Revision-Date: 2017-08-25 21:47+0000\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: cozy/book_element.py:67 cozy/search_results.py:124
 msgid "Play this book"
-msgstr "Boek afspelen"
+msgstr "Dit boek afspelen"
 
 #: cozy/book_element.py:212
 msgid "Open book overview"
@@ -47,7 +47,7 @@ msgstr "Verwijderen uit bibliotheek"
 
 #: cozy/book_element.py:395
 msgid "Play this part"
-msgstr "Onderdeel afspelen"
+msgstr "Dit onderdeel afspelen"
 
 #: cozy/book_overview.py:223
 msgid "Downloaded"
@@ -63,7 +63,7 @@ msgstr "Alle bestanden"
 
 #: cozy/offline_cache.py:175
 msgid "Copying"
-msgstr "Bezig met kopiëren…"
+msgstr "Bezig met kopiëren..."
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
@@ -205,7 +205,7 @@ msgstr "Terugspoelknop"
 
 #: data/ui/main_window.ui:80
 msgid "Jump back 30 seconds"
-msgstr "30 seconden terugspoelen"
+msgstr "30 seconden teruggaan"
 
 #: data/ui/main_window.ui:97
 msgid "Start playback"
@@ -237,11 +237,11 @@ msgstr "Titel van het momenteel spelende boek"
 
 #: data/ui/main_window.ui:244
 msgid "Part name"
-msgstr "Naam van onderdeel"
+msgstr "Naam van deel"
 
 #: data/ui/main_window.ui:245
 msgid "Title of the currently playing part"
-msgstr "Naam van het momenteel spelende onderdeel"
+msgstr "Titel van het momenteel spelende deel"
 
 #: data/ui/main_window.ui:287
 msgid "Elapsed time"
@@ -253,11 +253,11 @@ msgstr "Verstreken tijd"
 
 #: data/ui/main_window.ui:296
 msgid "Elapsed time of current part"
-msgstr "De verstreken tijd van het huidige onderdeel"
+msgstr "De verstreken tijd van het huidige deel"
 
 #: data/ui/main_window.ui:311
 msgid "Scrubb through current part"
-msgstr "Door huidig onderdeel spoelen"
+msgstr "Door huidig deel spoelen"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -265,7 +265,7 @@ msgstr "Positiebalk"
 
 #: data/ui/main_window.ui:318
 msgid "Position of the current part in seconds"
-msgstr "Positie van het huidige onderdeel, in seconden"
+msgstr "Positie van het huidige deel, in seconden"
 
 #: data/ui/main_window.ui:336
 msgid "Remaining time"
@@ -277,7 +277,7 @@ msgstr "Resterende tijd"
 
 #: data/ui/main_window.ui:345
 msgid "Remaining time of current part"
-msgstr "De resterende tijd van het huidige onderdeel"
+msgstr "De resterende tijd van het huidige deel"
 
 #: data/ui/main_window.ui:421
 msgid "Working…"
@@ -305,7 +305,7 @@ msgstr "Open het slaaptimer-paneel"
 
 #: data/ui/main_window.ui:492
 msgid "Search your library"
-msgstr "Doorzoek je bibliotheek"
+msgstr "Zoeken in je bibliotheek"
 
 #: data/ui/main_window.ui:503
 msgid "Search menu button"
@@ -442,8 +442,8 @@ msgid ""
 "Start exploring your library by switching to the Author or Reader view "
 "above."
 msgstr ""
-"Begin met het verkennen van je bibliotheek door hierboven te kiezen voor de "
-"auteur- of leesweergave."
+"Begin met verkennen van je bibliotheek door hierboven te kiezen voor de "
+"Auteur- of Leesweergave."
 
 #: data/ui/about.ui:14
 msgid "GitHub"
@@ -604,20 +604,20 @@ msgstr "Opslag"
 
 #: data/ui/settings.ui:1317
 msgid "Database"
-msgstr "Databank"
+msgstr "Database"
 
 #: data/ui/settings.ui:1369
 msgid "Force refresh the database"
-msgstr "Databankvernieuwing afdwingen"
+msgstr "Database geforceerd vernieuwen"
 
 #: data/ui/settings.ui:1382
 msgid "This will force update the metadata of all imported books"
 msgstr ""
-"Dit werkt de metagegevens gedwongen bij van alle geïmporteerde boeken."
+"Dit zal de metagegevens van alle geïmporteerde boeken geforceerd bijwerken."
 
 #: data/ui/settings.ui:1402
 msgid "Force refresh"
-msgstr "Vernieuwen afdwingen"
+msgstr "Geforceerd vernieuwen"
 
 #: data/ui/settings.ui:1470
 msgid "By request"
@@ -649,11 +649,11 @@ msgstr "Zoekvak"
 
 #: data/ui/search_popover.ui:37
 msgid "Search your audiobook library"
-msgstr "Doorzoek je bibliotheek"
+msgstr "Zoeken in je bibliotheek"
 
 #: data/ui/search_popover.ui:67
 msgid "Which book are you looking for?"
-msgstr "Welk boek zoek je?"
+msgstr "Naar welk boek ben je op zoek?"
 
 #: data/ui/search_popover.ui:154
 msgid "Book"
@@ -661,7 +661,7 @@ msgstr "Boek"
 
 #: data/ui/search_popover.ui:248
 msgid "Part"
-msgstr "Onderdeel"
+msgstr "Deel"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
@@ -689,7 +689,7 @@ msgstr "Map door_zoeken"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
-msgstr "Onbeschikbare boeken _verbergen"
+msgstr "Niet-beschikbare boeken _verbergen"
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"

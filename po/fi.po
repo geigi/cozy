@@ -1,20 +1,24 @@
-# Finnish translations for com.github.geigi.cozy package.
-# Copyright (C) 2019 THE com.github.geigi.cozy'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
-# Mika Väinölä, 2019.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Julian Geywitz <github@geigi.de>, 2019
+# Mika Väinölä <mikavainola@fastmail.com>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-11 15:12+0200\n"
-"PO-Revision-Date: 2019-04-09 10:50+0200\n"
-"Last-Translator: Mika Väinölä <mikavainola@fastmail.com>\n"
-"Language-Team: none\n"
-"Language: fi\n"
+"PO-Revision-Date: 2017-08-25 21:47+0000\n"
+"Last-Translator: Mika Väinölä <mikavainola@fastmail.com>, 2019\n"
+"Language-Team: Finnish (https://www.transifex.com/geigi/teams/78138/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/book_element.py:67 cozy/search_results.py:124
@@ -380,7 +384,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr ""
+msgstr "Automaattisen skannauksen kytkin"
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
@@ -433,7 +437,8 @@ msgstr "page0"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view above."
+"Start exploring your library by switching to the Author or Reader view "
+"above."
 msgstr "Ala selaamaan kirjastoasi valitsemalla näkymäksi Tekijä tai Lukija."
 
 #: data/ui/about.ui:14
@@ -673,7 +678,7 @@ msgstr "Aseta ajastimen kesto minuuteissa"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
-msgstr ""
+msgstr "_Skannaa hakemisto"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"

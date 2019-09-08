@@ -5,7 +5,6 @@
 # 
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
-# Oleg Krivorot <krivorot.oleg@gmail.com>, 2019
 # 
 msgid ""
 msgstr ""
@@ -13,146 +12,146 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-11 15:12+0200\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
-"Last-Translator: Oleg Krivorot <krivorot.oleg@gmail.com>, 2019\n"
-"Language-Team: Ukrainian (https://www.transifex.com/geigi/teams/78138/uk/)\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/geigi/teams/78138/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk\n"
-"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: cozy/book_element.py:67 cozy/search_results.py:124
 msgid "Play this book"
-msgstr "Слухати цю аудіокнигу"
+msgstr "朗读这本书"
 
 #: cozy/book_element.py:212
 msgid "Open book overview"
-msgstr "Відкрити огляд книги"
+msgstr "打开书籍概览"
 
 #: cozy/book_element.py:213
 msgid "Currently offline"
-msgstr "В даний час офлайн"
+msgstr ""
 
 #: cozy/book_element.py:319
 msgid "Mark as read"
-msgstr "Відзначити як прочитане"
+msgstr ""
 
 #: cozy/book_element.py:322
 msgid "Open in file browser"
-msgstr "Відкрити у файловому браузері"
+msgstr ""
 
 #: cozy/book_element.py:325
 msgid "Remove from library"
-msgstr "Видалити з бібліотеки"
+msgstr ""
 
 #: cozy/book_element.py:395
 msgid "Play this part"
-msgstr "Слухати цю частину"
+msgstr "朗读这个部分"
 
 #: cozy/book_overview.py:223
 msgid "Downloaded"
-msgstr "Завантажено"
+msgstr ""
 
 #: cozy/book_overview.py:226 data/ui/main_window.ui:1328
 msgid "Download"
-msgstr "Завантажити"
+msgstr ""
 
 #: cozy/file_not_found_dialog.py:66
 msgid "All files"
-msgstr "Всі файли"
+msgstr "所有文件"
 
 #: cozy/offline_cache.py:175
 msgid "Copying"
-msgstr "Копіювання"
+msgstr ""
 
 #: cozy/search_results.py:72
 msgid "Jump to author "
-msgstr "Перейти до автора "
+msgstr "跳转到作者"
 
 #: cozy/search_results.py:75
 msgid "Jump to reader "
-msgstr "Перейти до диктора "
+msgstr "跳转到朗读者"
 
 #: cozy/importer.py:275
 msgid "Unknown Author"
-msgstr "Невідомий автор"
+msgstr "未知作者"
 
 #: cozy/importer.py:277
 msgid "Unknown Reader"
-msgstr "Невідомий диктор"
+msgstr "未知朗读者"
 
 #: cozy/tools.py:142
 msgid "hours"
-msgstr "год."
+msgstr ""
 
 #: cozy/tools.py:144
 msgid "hour"
-msgstr "год."
+msgstr ""
 
 #: cozy/tools.py:152
 msgid "minutes"
-msgstr "хв."
+msgstr ""
 
 #: cozy/tools.py:154
 msgid "minute"
-msgstr "хв."
+msgstr ""
 
 #: cozy/tools.py:158
 msgid "finished"
-msgstr "завершена"
+msgstr ""
 
 #: cozy/tools.py:162
 msgid "seconds"
-msgstr "сек."
+msgstr ""
 
 #: cozy/tools.py:164
 msgid "second"
-msgstr "сек."
+msgstr ""
 
 #: cozy/tools.py:187
 msgid "never"
-msgstr "ніколи"
+msgstr ""
 
 #: cozy/tools.py:189
 msgid "today"
-msgstr "сьогодні"
+msgstr ""
 
 #: cozy/tools.py:191
 msgid "yesterday"
-msgstr "вчора"
+msgstr ""
 
 #: cozy/tools.py:193
 msgid "days"
-msgstr "днів"
+msgstr ""
 
 #: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
 #: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
 msgid "ago"
-msgstr "тому назад"
+msgstr ""
 
 #: cozy/tools.py:195
 msgid "week"
-msgstr "тиждень"
+msgstr ""
 
 #: cozy/tools.py:197
 msgid "weeks"
-msgstr "тижнів"
+msgstr ""
 
 #: cozy/tools.py:199
 msgid "month"
-msgstr "місяць"
+msgstr ""
 
 #: cozy/tools.py:201
 msgid "months"
-msgstr "місяців"
+msgstr ""
 
 #: cozy/tools.py:203
 msgid "year"
-msgstr "рік"
+msgstr ""
 
 #: cozy/tools.py:205
 msgid "years"
-msgstr "років"
+msgstr ""
 
 #: cozy/ui.py:407
 msgid "Audiobooks"
@@ -160,36 +159,36 @@ msgstr ""
 
 #: cozy/ui.py:428
 msgid "Importing Audiobooks"
-msgstr "Імпорт аудіокниг"
+msgstr "导入有声读物"
 
 #. Add the special All element
 #: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
 msgid "All"
-msgstr "Всі"
+msgstr "所有"
 
 #: cozy/ui.py:498 cozy/ui.py:504
 msgid "Display all books"
-msgstr "Відобразити всі книжки"
+msgstr "显示所有书籍"
 
 #: cozy/sleep_timer.py:121 data/ui/timer_popover.ui:105
 msgid "min"
-msgstr "хв."
+msgstr "秒"
 
 #: cozy/sleep_timer.py:129
 msgid "Off"
-msgstr "Вимк."
+msgstr ""
 
 #: cozy/settings.py:416 cozy/settings.py:459
 msgid "External drive"
-msgstr "Зовнішній диск"
+msgstr ""
 
 #: cozy/settings.py:419 cozy/settings.py:462
 msgid "Internal drive"
-msgstr "Внутрішній диск"
+msgstr ""
 
 #: cozy/settings.py:446
 msgid "Changing audio book location…"
-msgstr "Зміна місця розташування книги …"
+msgstr ""
 
 #: cozy/disk_element.py:26
 msgid "Disc"
@@ -197,251 +196,244 @@ msgstr ""
 
 #: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
-msgstr "Назад на 30 секунд"
+msgstr "后退30秒"
 
 #: data/ui/main_window.ui:79
 msgid "Rewind button"
-msgstr "Кнопка перемотування"
+msgstr "后退"
 
 #: data/ui/main_window.ui:80
 msgid "Jump back 30 seconds"
-msgstr "Перейти назад 30 секунд"
+msgstr "回跳30分"
 
 #: data/ui/main_window.ui:97
 msgid "Start playback"
-msgstr "Почати програвання"
+msgstr "开始播放"
 
 #: data/ui/main_window.ui:105
 msgid "Play/Pause Button"
-msgstr "Кнопка прогр./паузи"
+msgstr "播放/暂停"
 
 #: data/ui/main_window.ui:106
 msgid "Start or pause the playback"
-msgstr "Запуск або призупинення програвання"
+msgstr "开始或暂停播放"
 
 #: data/ui/main_window.ui:123
 msgid "Volume control"
-msgstr "Регулятор гучності"
+msgstr "音量控制"
 
 #: data/ui/main_window.ui:200
 msgid "Currently playing"
-msgstr "Зараз програється"
+msgstr "正在播放"
 
 #: data/ui/main_window.ui:218
 msgid "Booktitle"
-msgstr "Назва аудіокниги"
+msgstr "书名"
 
 #: data/ui/main_window.ui:219
 msgid "Title of currently playing book"
-msgstr "Назва поточної аудіокниги"
+msgstr "当前正在播放的书的书名"
 
 #: data/ui/main_window.ui:244
 msgid "Part name"
-msgstr "Назва частини"
+msgstr "章节名字"
 
 #: data/ui/main_window.ui:245
 msgid "Title of the currently playing part"
-msgstr "Назва поточної частини"
+msgstr "当前播放部分的书名"
 
 #: data/ui/main_window.ui:287
 msgid "Elapsed time"
-msgstr "Пройдений час"
+msgstr "已用时间"
 
 #: data/ui/main_window.ui:295
 msgid "Time elapsed"
-msgstr "Пройшло часу"
+msgstr "已用时间"
 
 #: data/ui/main_window.ui:296
 msgid "Elapsed time of current part"
-msgstr "Час, що минув для поточної частини"
+msgstr "正在朗读部分已用时间"
 
 #: data/ui/main_window.ui:311
 msgid "Scrubb through current part"
-msgstr "Прокрутити поточну частину"
+msgstr "拖动快进或快退当前朗读部分"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
-msgstr "Повзунок положення"
+msgstr "位置"
 
 #: data/ui/main_window.ui:318
 msgid "Position of the current part in seconds"
-msgstr "Положення поточної частини в секундах"
+msgstr "当前部分的位置，以秒为单位"
 
 #: data/ui/main_window.ui:336
 msgid "Remaining time"
-msgstr "Час, що залишився"
+msgstr "剩余时间:"
 
 #: data/ui/main_window.ui:344
 msgid "Time remaining"
-msgstr "Залишилось"
+msgstr "剩余时间:"
 
 #: data/ui/main_window.ui:345
 msgid "Remaining time of current part"
-msgstr "Час, що залишився для поточної частини"
+msgstr "正在朗读部分已用时间"
 
 #: data/ui/main_window.ui:421
 msgid "Working…"
-msgstr "Обробка…"
+msgstr ""
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
-msgstr "В даний момент працює"
+msgstr "正在进行"
 
 #: data/ui/main_window.ui:442
 msgid "Playback speed"
-msgstr "Швидкість відтворення"
+msgstr "播放速度"
 
 #: data/ui/main_window.ui:464 data/ui/settings.ui:566
 msgid "Sleep timer"
-msgstr "Таймер сну"
+msgstr "睡眠时间"
 
 #: data/ui/main_window.ui:475
 msgid "Timer menu button"
-msgstr "Кнопка меню таймера"
+msgstr "定时器菜单按钮"
 
 #: data/ui/main_window.ui:476
 msgid "Open the sleep timer popover"
-msgstr "Відкрити вікно таймера сну"
+msgstr "打开睡眠计时器弹出窗口"
 
 #: data/ui/main_window.ui:492
 msgid "Search your library"
-msgstr "Пошук у вашій аудіобібліотеці"
+msgstr "在您的书库中查找"
 
 #: data/ui/main_window.ui:503
 msgid "Search menu button"
-msgstr "Кнопка меню пошуку"
+msgstr "搜索菜单按钮"
 
 #: data/ui/main_window.ui:504
 msgid "Open the search popover"
-msgstr "Відкрийте пошуковий запит"
+msgstr "打开搜索弹出窗口"
 
 #: data/ui/main_window.ui:518
 msgid "Options"
-msgstr "Налаштування"
+msgstr "显示选项"
 
 #: data/ui/main_window.ui:529
 msgid "Options menu button"
-msgstr "Кнопка меню налаштувань"
+msgstr "显示选项按钮"
 
 #: data/ui/main_window.ui:530
 msgid "Open the options popover"
-msgstr "Відкрити вікно налаштувань"
+msgstr "打开显示选项弹出窗口"
 
 #: data/ui/main_window.ui:655
 msgid "Recent"
-msgstr "Останні"
+msgstr ""
 
 #: data/ui/main_window.ui:674
 msgid "List of authors"
-msgstr "Список авторів"
+msgstr "作者名单"
 
 #: data/ui/main_window.ui:690 data/ui/main_window.ui:798
 #: data/ui/search_popover.ui:107
 msgid "Author"
-msgstr "Автор"
+msgstr "作者"
 
 #: data/ui/main_window.ui:709
 msgid "List of readers"
-msgstr "Список дикторів"
+msgstr "朗读者者名单"
 
 #: data/ui/main_window.ui:725 data/ui/search_popover.ui:201
 msgid "Reader"
-msgstr "Диктор"
+msgstr "朗读者"
 
 #: data/ui/main_window.ui:778
 msgid "List of books"
-msgstr "Список книжок"
+msgstr "书目清单"
 
 #: data/ui/main_window.ui:814
 msgid "Importing your audiobooks…"
-msgstr "Імпорт аудіокниг…"
+msgstr ""
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
-msgstr "Імпорт аудіокниг"
+msgstr "导入您的有声读物"
 
 #: data/ui/main_window.ui:882
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
-msgstr ""
-"Cozy аавтоматично імпортує аудіокниги з зазначеного каталога в бібліотеку"
+msgstr "朗读者自动将您的有声读物导入一个目录 - 您的图书目录"
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
-msgstr "Зовнішній або мережевий диск?"
+msgstr ""
 
 #: data/ui/main_window.ui:927
 msgid "Are your audiobooks stored on an external or network drive?"
-msgstr "Ваші аудіокниги зберігаються на зовнішньому або мережевому диску?"
+msgstr ""
 
 #: data/ui/main_window.ui:942
 msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Якщо потрібно, ви можете включити автономний режим для книги в огляді книг. \n"
-"Це зберігає локальну копію книги, яку ви можете слухати в дорозі"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr "Перемикач автосканування"
+msgstr "自动扫描开关"
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
 msgid "Automatically import new audiobooks on startup"
-msgstr "Автоматично імпортувати нові аудіокниги при запуску програми"
+msgstr "在启动时自动导入新的有声读物"
 
 #: data/ui/main_window.ui:1069
 msgid "Drag & Drop"
-msgstr "Drag & Drop"
+msgstr "拖放导入"
 
 #: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr "Перетягніть аудіокниги в cozy, і вони будуть автоматично імпортовані"
+msgstr ""
 
 #: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
-msgstr "Розташування аудіокниг"
+msgstr "你的有声读物的位置"
 
 #: data/ui/main_window.ui:1128
 msgid "Set Audiobooks Directory"
-msgstr "Встановити каталог аудіокниг"
+msgstr ""
 
 #: data/ui/main_window.ui:1145
 msgid ""
 "Load audiobooks from a directory, network drive or an external disk\n"
 "You can add more storage locations later in the settings"
 msgstr ""
-"Завантажте аудіокниги з каталогу, мережевого або зовнішнього диску\n"
-"Ви можете додавати нові місця зберігання пізніше в налаштуваннях"
 
 #: data/ui/main_window.ui:1376
 msgid "Remaining"
-msgstr "Залишилось"
+msgstr ""
 
 #: data/ui/main_window.ui:1432
 msgid "Total"
-msgstr "Тривалість"
+msgstr ""
 
 #: data/ui/main_window.ui:1449
 msgid "Last played"
-msgstr "Останнє програвання"
+msgstr ""
 
 #: data/ui/main_window.ui:1466
 msgid "Published"
-msgstr "Опубліковано"
+msgstr ""
 
 #: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
 msgid "page0"
-msgstr "сторінка0"
+msgstr ""
 
 #: data/ui/main_window.ui:1630
 msgid ""
 "Start exploring your library by switching to the Author or Reader view "
 "above."
 msgstr ""
-"Почніть використовувати вашу бібліотеку, перейшовши до вікна \"Автор\" або "
-"\"Диктор\"."
 
 #: data/ui/about.ui:14
 msgid "GitHub"
@@ -449,47 +441,47 @@ msgstr "GitHub"
 
 #: data/ui/app_menu.ui:7
 msgid "_Play/Pause"
-msgstr "_Програвати/призупинити"
+msgstr ""
 
 #: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
-msgstr "_Параметри"
+msgstr "偏好设置"
 
 #: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
 msgid "_Help"
-msgstr "_Довідка"
+msgstr "帮助"
 
 #: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
 msgid "_About"
-msgstr "П_ро програму"
+msgstr "关于"
 
 #: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
 msgid "_Quit"
-msgstr "_Вихід"
+msgstr "退出"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
-msgstr "Відміна"
+msgstr "取消"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
-msgstr "Знайти"
+msgstr "定位"
 
 #: data/ui/file_not_found.ui:86
 msgid "File not found"
-msgstr "Файл не знайдено"
+msgstr "找不到文件"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "Файл не знайдено. Ви хочете знайти його самостійно?"
+msgstr "无法找到此文件。 您想手动找到它吗？"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
-msgstr "Так"
+msgstr "好的"
 
 #: data/ui/import_failed.ui:81
 msgid "Some files could not be imported"
-msgstr "Деякі файли не можуть бути імпортовані"
+msgstr "有些文件无法导入"
 
 #: data/ui/import_failed.ui:134
 msgid ""
@@ -498,22 +490,22 @@ msgid ""
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
-"Це може бути з кількох причин:\n"
-"- Формат аудіо не підтримуються\n"
-"- Файл(и) не є допустимими аудіофайлами\n"
-"- Файл(и) пошкоджені"
+"这可能有多种原因：\n"
+"- 不支持音频格式\n"
+"- 文件没有有效的音频文件\n"
+"- 文件已损坏"
 
 #: data/ui/settings.ui:92 data/ui/settings.ui:344
 msgid "General"
-msgstr "Основні"
+msgstr ""
 
 #: data/ui/settings.ui:137
 msgid "Dark Mode"
-msgstr "Темний режим"
+msgstr ""
 
 #: data/ui/settings.ui:213
 msgid "Titlebar"
-msgstr "Рядок заголовку"
+msgstr ""
 
 #: data/ui/settings.ui:258
 msgid "Display the whole book instead of the current chapter"
@@ -521,165 +513,164 @@ msgstr ""
 
 #: data/ui/settings.ui:321
 msgid "Appearance"
-msgstr "Зовнішній вигляд"
+msgstr "外观"
 
 #: data/ui/settings.ui:387
 msgid "Suspend system on timer"
-msgstr "Вимкнення системи по таймеру"
+msgstr "系统挂起定时器"
 
 #: data/ui/settings.ui:447
 msgid "Replay 30 seconds"
-msgstr "Автоповернення на 30 секунд"
+msgstr "重播30秒"
 
 #: data/ui/settings.ui:507
 msgid "Automatic media scan"
-msgstr "Автоматичне сканування медіа"
+msgstr "自动扫描您的书籍"
 
 #: data/ui/settings.ui:611
 msgid "Fadeout"
-msgstr "Затухання"
+msgstr ""
 
 #: data/ui/settings.ui:672
 msgid "Fadeout duration"
-msgstr "Тривалість затухання"
+msgstr ""
 
 #: data/ui/settings.ui:745
 msgid "Behaviour"
-msgstr "Поведінка"
+msgstr "行为"
 
 #: data/ui/settings.ui:772
 msgid "Artwork"
-msgstr "Обкладинка"
+msgstr ""
 
 #: data/ui/settings.ui:824
 msgid "Prefer external images over embedded cover"
-msgstr "Перевага зовнішніх зображеннь над вбудованими обкладинками "
+msgstr ""
 
 #: data/ui/settings.ui:837
 msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr "Використовувати зображення (cover.jpg, * .png, …), коли вони доступні"
+msgstr ""
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
-msgstr "Розташування аудіокниг"
+msgstr "书库的位置"
 
 #: data/ui/settings.ui:936
 msgid "Storage locations"
-msgstr "Місця зберігання"
+msgstr ""
 
 #: data/ui/settings.ui:994
 msgid "Add location"
-msgstr "Додати місцеположення"
+msgstr ""
 
 #: data/ui/settings.ui:1019 data/ui/settings.ui:1215
 msgid "Remove location"
-msgstr "Видалити місцеположення"
+msgstr ""
 
 #: data/ui/settings.ui:1055
 msgid "Toggle this storage location to be internal/external."
-msgstr "Тип місця зберігання внутрішнє/зовнішнє."
+msgstr ""
 
 #: data/ui/settings.ui:1081
 msgid "Set as default storage location for new audiobooks"
-msgstr "Встановити за умовчанням для нових аудіокниг"
+msgstr ""
 
 #: data/ui/settings.ui:1134
 msgid "Blacklist"
-msgstr "Чорний список"
+msgstr ""
 
 #: data/ui/settings.ui:1178
 msgid "Path"
-msgstr "Шлях"
+msgstr ""
 
 #: data/ui/settings.ui:1261
 msgid "Follow symlinks"
-msgstr "Слідувати за символічними посиланнями"
+msgstr "符号链接"
 
 #: data/ui/settings.ui:1293
 msgid "Storage"
-msgstr "Бібліотеки"
+msgstr ""
 
 #: data/ui/settings.ui:1317
 msgid "Database"
-msgstr "База даних"
+msgstr ""
 
 #: data/ui/settings.ui:1369
 msgid "Force refresh the database"
-msgstr "Примусово оновити базу даних"
+msgstr ""
 
 #: data/ui/settings.ui:1382
 msgid "This will force update the metadata of all imported books"
-msgstr "Це оновить метадані всіх імпортованих книг"
+msgstr ""
 
 #: data/ui/settings.ui:1402
 msgid "Force refresh"
-msgstr "Примусити оновити"
+msgstr ""
 
 #: data/ui/settings.ui:1470
 msgid "By request"
-msgstr "За запитом"
+msgstr ""
 
 #: data/ui/settings.ui:1523
 msgid "Use crc32 checksum for file modification detection"
-msgstr "Контрольна сума crc32 для виявлення модифікації файлів"
+msgstr ""
 
 #: data/ui/settings.ui:1536
 msgid ""
 "Only recommended if cozy doesn't detect file modifications while scanning"
 msgstr ""
-"Рекомендується, лише якщо cozy не виявляє модифікацію файлу при скануванні"
 
 #: data/ui/settings.ui:1611
 msgid "Advanced"
-msgstr "Розширені"
+msgstr ""
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
-msgstr "Пошук"
+msgstr "搜索"
 
 #: data/ui/search_popover.ui:36
 msgid "Search box"
-msgstr "Пошукова строка"
+msgstr "搜索框"
 
 #: data/ui/search_popover.ui:37
 msgid "Search your audiobook library"
-msgstr "Пошук у вашій аудіобібліотеці"
+msgstr "在您的书库中搜索"
 
 #: data/ui/search_popover.ui:67
 msgid "Which book are you looking for?"
-msgstr "Яку книгу ви шукайте?"
+msgstr "哪本书是您需要看的?"
 
 #: data/ui/search_popover.ui:154
 msgid "Book"
-msgstr "Книга"
+msgstr "书"
 
 #: data/ui/search_popover.ui:248
 msgid "Part"
-msgstr "Частина"
+msgstr "章节"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
-msgstr "Нічого не знайдено :("
+msgstr "什么也么找到:("
 
 #: data/ui/timer_popover.ui:39
 msgid "Stop after current chapter"
-msgstr "Зупиніться після поточного розділу"
+msgstr ""
 
 #: data/ui/timer_popover.ui:76
 msgid "Timer duration"
-msgstr "Тривалість таймера"
+msgstr "计时器时间"
 
 #: data/ui/timer_popover.ui:88
 msgid "Timer duration slider"
-msgstr "Повзунок тривалості таймера"
+msgstr "计时器滑块"
 
 #: data/ui/timer_popover.ui:89
 msgid "Set the sleep timer duration in minutes"
-msgstr "Установка тривалості таймера сну в хвилинах"
+msgstr "以分钟为单位设置睡眠定时器的时间"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
-msgstr "С_канувати каталог"
+msgstr "扫描目录"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
@@ -687,8 +678,8 @@ msgstr ""
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"
-msgstr "з"
+msgstr ""
 
 #: data/ui/book_progress_element.ui:75
 msgid "remaining"
-msgstr "залишилось"
+msgstr ""

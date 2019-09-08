@@ -1,20 +1,24 @@
-# Spanish translations for com.github.geigi.cozy package.
-# Copyright (C) 2019 THE com.github.geigi.cozy'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
-# Amadeus Amadeus, 2019.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Julian Geywitz <github@geigi.de>, 2019
+# Amadeus Amadeus <amadorpr@hotmail.com>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-11 15:12+0200\n"
-"PO-Revision-Date: 2019-04-09 10:50+0200\n"
-"Last-Translator: Amadeus Amadeus <amadorpr@hotmail.com>\n"
-"Language-Team: none\n"
-"Language: es\n"
+"PO-Revision-Date: 2017-08-25 21:47+0000\n"
+"Last-Translator: Amadeus Amadeus <amadorpr@hotmail.com>, 2019\n"
+"Language-Team: Spanish (https://www.transifex.com/geigi/teams/78138/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/book_element.py:67 cozy/search_results.py:124
@@ -360,7 +364,8 @@ msgstr "Importe sus audiolibros"
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy importa automáticamente tus audiolibros a un directorio - tu biblioteca."
+"Cozy importa automáticamente tus audiolibros a un directorio - tu "
+"biblioteca."
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
@@ -378,12 +383,13 @@ msgstr ""
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr ""
+msgstr "Interruptor de autoexploración"
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
 msgid "Automatically import new audiobooks on startup"
-msgstr "Importar automáticamente los audiolibros nuevos al inicio del programa"
+msgstr ""
+"Importar automáticamente los audiolibros nuevos al inicio del programa"
 
 #: data/ui/main_window.ui:1069
 msgid "Drag & Drop"
@@ -429,7 +435,8 @@ msgstr ""
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view above."
+"Start exploring your library by switching to the Author or Reader view "
+"above."
 msgstr ""
 
 #: data/ui/about.ui:14
@@ -667,7 +674,7 @@ msgstr "Ajustar el temporizador de apagado en minutos"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
-msgstr ""
+msgstr "_Explorar Directorio"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"

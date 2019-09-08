@@ -1,20 +1,23 @@
-# German translations for com.github.geigi.cozy package.
-# Copyright (C) 2019 THE com.github.geigi.cozy'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
-# Julian Geywitz, 2019.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Julian Geywitz <github@geigi.de>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-11 15:12+0200\n"
-"PO-Revision-Date: 2019-04-09 10:50+0200\n"
-"Last-Translator: Julian Geywitz <github@geigi.de>\n"
-"Language-Team: none\n"
-"Language: de\n"
+"PO-Revision-Date: 2017-08-25 21:47+0000\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
+"Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/book_element.py:67 cozy/search_results.py:124
@@ -281,7 +284,7 @@ msgstr "Arbeite…"
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
-msgstr "Am arbeiten…"
+msgstr "Am arbeiten..."
 
 #: data/ui/main_window.ui:442
 msgid "Playback speed"
@@ -360,7 +363,8 @@ msgstr "Importiere deine Hörbücher"
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy verwaltet automatisch alle Hörbücher in einem Ordner - deiner Bibliothek"
+"Cozy verwaltet automatisch alle Hörbücher in einem Ordner - deiner "
+"Bibliothek"
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
@@ -369,20 +373,20 @@ msgstr "Externer Datenträger oder Netzwerklaufwerk?"
 #: data/ui/main_window.ui:927
 msgid "Are your audiobooks stored on an external or network drive?"
 msgstr ""
-"Sind Deine Hörbücher auf einem externen oder Netzwerkdatenträger gespeichert?"
+"Sind Deine Hörbücher auf einem externen oder Netzwerkdatenträger "
+"gespeichert?"
 
 #: data/ui/main_window.ui:942
 msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Ist das der Fall kannst du den Offline Modus in der Buchübersicht "
-"aktivieren\n"
-"Diese Funktion behält eine lokale Kopie des Buches um es unterwegs zu hören"
+"Ist das der Fall, kannst du den Offline Modus in der Buchübersicht aktivieren.\n"
+"Diese Funktion behält eine lokale Kopie des Buches, um es unterwegs zu hören."
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr ""
+msgstr "Auto-Scan Schalter"
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
@@ -435,7 +439,8 @@ msgstr "page0"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view above."
+"Start exploring your library by switching to the Author or Reader view "
+"above."
 msgstr ""
 "Erkunde Deine Bibliothek indem du zur Autor oder Leser Ansicht wechselst."
 
@@ -674,7 +679,7 @@ msgstr "Setze die Timer Dauer in Minuten"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
-msgstr ""
+msgstr "_Suche nach neuen Medien"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"

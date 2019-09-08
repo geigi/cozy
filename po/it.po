@@ -1,20 +1,25 @@
-# Italian translations for com.github.geigi.cozy package.
-# Copyright (C) 2019 THE com.github.geigi.cozy'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
-# Andrea Pillai, 2019.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Andrea Pillai <andrea.pillai@gmail.com>, 2018
+# Julian Geywitz <github@geigi.de>, 2019
+# Giuseppe Casula <giuseppe.casula@protonmail.com>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-11 15:12+0200\n"
-"PO-Revision-Date: 2019-04-09 10:50+0200\n"
-"Last-Translator: Andrea Pillai <andrea.pillai@gmail.com>\n"
-"Language-Team: none\n"
-"Language: it\n"
+"PO-Revision-Date: 2017-08-25 21:47+0000\n"
+"Last-Translator: Giuseppe Casula <giuseppe.casula@protonmail.com>, 2019\n"
+"Language-Team: Italian (https://www.transifex.com/geigi/teams/78138/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/book_element.py:67 cozy/search_results.py:124
@@ -376,13 +381,12 @@ msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Se lo sono, puoi abilitare la modalità offline per un libro dall'anteprima "
-"del libro\n"
+"Se lo sono, puoi abilitare la modalità offline per un libro dall'anteprima del libro\n"
 "Manterrai una copia locale del libro da ascoltare quando vuoi"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr ""
+msgstr "Scansione automatica"
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
@@ -410,10 +414,8 @@ msgid ""
 "Load audiobooks from a directory, network drive or an external disk\n"
 "You can add more storage locations later in the settings"
 msgstr ""
-"Carica gli audiolibri da una cartella, da un'unità di rete o da un hard disk "
-"esterno\n"
-"Potrai aggiungere successivamente più posizioni di archiviazione dalle "
-"impostazioni"
+"Carica gli audiolibri da una cartella, da un'unità di rete o da un hard disk esterno\n"
+"Potrai aggiungere successivamente più posizioni di archiviazione dalle impostazioni"
 
 #: data/ui/main_window.ui:1376
 msgid "Remaining"
@@ -437,7 +439,8 @@ msgstr "pagina0"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view above."
+"Start exploring your library by switching to the Author or Reader view "
+"above."
 msgstr ""
 "Comincia a esplorare la tua biblioteca passando alla vista per Autore o per "
 "Lettore"
@@ -609,7 +612,8 @@ msgstr "Forza l'aggiornamento del database"
 
 #: data/ui/settings.ui:1382
 msgid "This will force update the metadata of all imported books"
-msgstr "Questo forzerà l'aggiornamento dei metadati di tutti i libri importati"
+msgstr ""
+"Questo forzerà l'aggiornamento dei metadati di tutti i libri importati"
 
 #: data/ui/settings.ui:1402
 msgid "Force refresh"
@@ -679,7 +683,7 @@ msgstr "Imposta la durata del timer in minuti"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
-msgstr ""
+msgstr "_Scansiona cartella"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
