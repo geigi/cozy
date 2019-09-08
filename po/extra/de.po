@@ -14,11 +14,11 @@ msgstr ""
 "POT-Creation-Date: 2019-04-11 15:33+0200\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
-"Language-Team: English (Canada) (https://www.transifex.com/geigi/teams/78138/en_CA/)\n"
+"Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en_CA\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/com.github.geigi.cozy.desktop.in:3
@@ -28,11 +28,11 @@ msgstr "Cozy"
 
 #: data/com.github.geigi.cozy.desktop.in:4
 msgid "Audio Book Player"
-msgstr "Audio Book Player"
+msgstr "Hörbuch Player"
 
 #: data/com.github.geigi.cozy.desktop.in:5
 msgid "Play and organize your audio book collection"
-msgstr "Play and organize your audio book collection"
+msgstr "Höre und organisiere deine Hörbuchsammlung"
 
 #: data/com.github.geigi.cozy.desktop.in:6
 msgid "com.github.geigi.cozy"
@@ -40,49 +40,52 @@ msgstr "com.github.geigi.cozy"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:7
 msgid "A modern audio book player"
-msgstr "A modern audio book player"
+msgstr "Ein moderner Hörbuch Player"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:9
 msgid "You like audio books? Then lets get cozy!"
-msgstr "You like audio books? Then lets get cozy!"
+msgstr "Du magst Hörbücher? Teste Cozy!"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:12
 msgid ""
 "Cozy is a modern audio book player. Here are some of the current features:"
 msgstr ""
-"Cozy is a modern audio book player. Here are some of the current features:"
+"Cozy ist ein moderner Hörbuch Player. Das sind ein paar seiner aktuellen "
+"Features:"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:16
 msgid "Import all your audiobooks into cozy to browse them comfortably"
-msgstr "Import all your audiobooks into cozy to browse them comfortably"
+msgstr "Importiere deine Hörbücher um sie auf einen Blick zu sehen"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:17
 msgid ""
 "Listen to your DRM free mp3, m4a (aac, ALAC, …), flac, ogg and wav audio "
 "books"
 msgstr ""
-"Listen to your DRM free mp3, m4a (aac, ALAC, …), flac, ogg and wav audio "
-"books"
+"Höre deine DRM-freien mp3, m4a (aac, ALAC, ...), flac, ogg und wav Hörbücher"
+" an"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:18
 msgid "Remembers your playback position"
-msgstr "Remembers your playback position"
+msgstr "Merkt sich, wo du das letzte mal aufgehört hast"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:19
 msgid "Sleep timer!"
-msgstr "Sleep timer!"
+msgstr "Schlaf-Timer!"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:20
 msgid "Playback speed control for each book individually"
-msgstr "Playback speed control for each book individually"
+msgstr ""
+"Die Wiedergabegeschwindigkeit kann für jedes Hörbuch separat eingestellt "
+"werden"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:21
 msgid "Search your library"
-msgstr "Search your library"
+msgstr "Durchsuche deine Bibliothek"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:22
 msgid "Multiple storage location support"
-msgstr "Multiple storage location support"
+msgstr "Unterstützung mehrer Speicherorte"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:23
 msgid ""
@@ -90,17 +93,17 @@ msgid ""
 "if you store your audiobooks on an external or network drive. Perfect to "
 "listen to on the go!"
 msgstr ""
-"Offline Mode! This allows you to keep an audiobook on your internal storage "
-"if you store your audiobooks on an external or network drive. Perfect to "
-"listen to on the go!"
+"Offline Modus: Er erlaubt es dir Hörbücher, die du auf einer externen "
+"Festplatte oder auf einer Netzwerkfestplatte gespeichert hast, für unterwegs"
+" auf deinem internen Speicher zu speichern."
 
 #: data/com.github.geigi.cozy.appdata.xml.in:24
 msgid "Drag and Drop to import new audiobooks"
-msgstr "Drag and Drop to import new audiobooks"
+msgstr "Drag&Drop um neue Hörbücher zu impoertieren"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:25
 msgid "Sort your audio books by author, reader and name"
-msgstr "Sort your audio books by author, reader and name"
+msgstr "Sortiere deine Hörbücher nach Autor, Leser und Name"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:45
 msgid "Julian Geywitz"
@@ -117,11 +120,11 @@ msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:69
 msgid "Fixed startup crash on elemntary OS 5.0 Juno"
-msgstr "Fixed startup crash on elementaryOS 5.0 Juno"
+msgstr "Fixed startup crash on elemntary OS 5.0 Juno"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:76
 msgid "Support for elemntary OS 5.0 Juno"
-msgstr "Support for elementaryOS 5.0 Juno"
+msgstr "Support for elemntary OS 5.0 Juno"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:77
 #: data/com.github.geigi.cozy.appdata.xml.in:85
@@ -157,7 +160,7 @@ msgstr "Fixed a typo"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:96
 msgid "Support for elemntary OS 5.0"
-msgstr "Support for elementaryOS 5.0"
+msgstr "Support for elemntary OS 5.0"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:104
 msgid ""
