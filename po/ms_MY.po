@@ -4,14 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# Julian Geywitz <github@geigi.de>, 2019
 # abuyop <abuyop@gmail.com>, 2019
 # 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-11 15:12+0200\n"
-"PO-Revision-Date: 2017-08-25 21:47+0000\n"
+"POT-Creation-Date: 2019-09-08 17:01+0200\n"
+"PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: abuyop <abuyop@gmail.com>, 2019\n"
 "Language-Team: Malay (Malaysia) (https://www.transifex.com/geigi/teams/78138/ms_MY/)\n"
 "MIME-Version: 1.0\n"
@@ -20,63 +22,63 @@ msgstr ""
 "Language: ms_MY\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: cozy/book_element.py:67 cozy/search_results.py:124
+#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Baca buku ini"
 
-#: cozy/book_element.py:212
+#: cozy/ui/book_element.py:212
 msgid "Open book overview"
 msgstr "Buka gambaran keseluruhan buku"
 
-#: cozy/book_element.py:213
+#: cozy/ui/book_element.py:213
 msgid "Currently offline"
 msgstr "Kini diluar talian"
 
-#: cozy/book_element.py:319
+#: cozy/ui/book_element.py:319
 msgid "Mark as read"
 msgstr "Tanda sebagai dibaca"
 
-#: cozy/book_element.py:322
+#: cozy/ui/book_element.py:322
 msgid "Open in file browser"
 msgstr "Buka dalam pelayar fail"
 
-#: cozy/book_element.py:325
+#: cozy/ui/book_element.py:325
 msgid "Remove from library"
 msgstr "Buang dari pustaka"
 
-#: cozy/book_element.py:395
+#: cozy/ui/book_element.py:395
 msgid "Play this part"
 msgstr "Baca bahagian ini"
 
-#: cozy/book_overview.py:223
+#: cozy/ui/book_overview.py:228
 msgid "Downloaded"
 msgstr "Dimuat Turun"
 
-#: cozy/book_overview.py:226 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Muat Turun"
 
-#: cozy/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:66
 msgid "All files"
 msgstr "Semua fail"
 
-#: cozy/offline_cache.py:175
+#: cozy/control/offline_cache.py:176
 msgid "Copying"
 msgstr "Menyalin"
 
-#: cozy/search_results.py:72
+#: cozy/ui/search_results.py:71
 msgid "Jump to author "
 msgstr "Lompat ke pengarang"
 
-#: cozy/search_results.py:75
+#: cozy/ui/search_results.py:74
 msgid "Jump to reader "
 msgstr "Lompat ke pembaca"
 
-#: cozy/importer.py:275
+#: cozy/control/importer.py:278
 msgid "Unknown Author"
 msgstr "Pengarang Tidak Diketahui"
 
-#: cozy/importer.py:277
+#: cozy/control/importer.py:280
 msgid "Unknown Reader"
 msgstr "Pembaca Tidak Diketahui"
 
@@ -153,44 +155,44 @@ msgstr "tahun"
 msgid "years"
 msgstr "tahun"
 
-#: cozy/ui.py:407
+#: cozy/ui/main_view.py:408
 msgid "Audiobooks"
-msgstr ""
+msgstr "Buku audio"
 
-#: cozy/ui.py:428
+#: cozy/ui/main_view.py:429
 msgid "Importing Audiobooks"
 msgstr "Mengimport Buku Audio"
 
 #. Add the special All element
-#: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
+#: cozy/ui/main_view.py:498 cozy/ui/main_view.py:504 cozy/ui/main_view.py:824
 msgid "All"
 msgstr "Semua"
 
-#: cozy/ui.py:498 cozy/ui.py:504
+#: cozy/ui/main_view.py:499 cozy/ui/main_view.py:505
 msgid "Display all books"
 msgstr "Papar semua buku"
 
-#: cozy/sleep_timer.py:121 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
 msgid "min"
 msgstr "min"
 
-#: cozy/sleep_timer.py:129
+#: cozy/control/sleep_timer.py:128
 msgid "Off"
 msgstr "Mati"
 
-#: cozy/settings.py:416 cozy/settings.py:459
+#: cozy/ui/settings.py:416 cozy/ui/settings.py:459
 msgid "External drive"
 msgstr "Pemacu luar"
 
-#: cozy/settings.py:419 cozy/settings.py:462
+#: cozy/ui/settings.py:419 cozy/ui/settings.py:462
 msgid "Internal drive"
 msgstr "Pemacu dalam"
 
-#: cozy/settings.py:446
+#: cozy/ui/settings.py:446
 msgid "Changing audio book location…"
-msgstr ""
+msgstr "Mengubah lokasi buku audio..."
 
-#: cozy/disk_element.py:26
+#: cozy/ui/disk_element.py:26
 msgid "Disc"
 msgstr "Cakera"
 
@@ -280,7 +282,7 @@ msgstr "Masa berbaki bagi bahagian semasa"
 
 #: data/ui/main_window.ui:421
 msgid "Working…"
-msgstr ""
+msgstr "Sedang berusaha..."
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
@@ -353,7 +355,7 @@ msgstr "Senarai buku"
 
 #: data/ui/main_window.ui:814
 msgid "Importing your audiobooks…"
-msgstr ""
+msgstr "Mengimport buku audio anda..."
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
@@ -558,7 +560,7 @@ msgstr "Utamakan imej luar dari kulit terbenam"
 
 #: data/ui/settings.ui:837
 msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr ""
+msgstr "Guna imej (cover.jpg, *.png, …) bila ada"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
@@ -686,7 +688,7 @@ msgstr "_Imbas Direktori"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
-msgstr ""
+msgstr "_Sembunyi buku-buku yang tiada"
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"
