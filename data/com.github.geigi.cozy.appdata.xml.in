@@ -49,6 +49,16 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.6.9" timestamp="1571404884">
+      <description>
+        <ul>
+          <li>Cozy features a new icon! Cheers to Fatih20</li>
+          <li>App information is now translated! Cheers to NathanBnm</li>
+          <li>Updated translations</li>
+          <li>Fix: Sometimes the app name was not correctly displayed</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.8" timestamp="1567959472">
       <description>
         <ul>
