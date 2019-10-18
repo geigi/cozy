@@ -63,6 +63,12 @@ $ meson desired_build_directory --prefix=desired_installation_directory
 $ ninja -C desired_build_directory install
 ```
 
+## Update `po` files
+```bash
+$ ninja -C build com.github.geigi.cozy-update-po
+$ ninja -C build extra-update-po
+```
+
 ## Running a local build
 ```
 XDG_DATA_DIRS=desired_installation_directory/share:/usr/share PYTHONPATH=desired_installation_directory/lib/python3.[your_python3_version]/site-packages app/bin/com.github.geigi.cozy

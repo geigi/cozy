@@ -2,82 +2,82 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Charavner Louis <lcharavn@student.42.fr>, 2018
 # Julian Geywitz <github@geigi.de>, 2019
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-11 15:12+0200\n"
+"POT-Creation-Date: 2019-10-18 15:37+0200\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: French (https://www.transifex.com/geigi/teams/78138/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: cozy/book_element.py:67 cozy/search_results.py:124
+#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Lecture"
 
-#: cozy/book_element.py:212
+#: cozy/ui/book_element.py:212
 msgid "Open book overview"
 msgstr "Voir le résumé"
 
-#: cozy/book_element.py:213
+#: cozy/ui/book_element.py:213
 msgid "Currently offline"
 msgstr "Hors-ligne"
 
-#: cozy/book_element.py:319
+#: cozy/ui/book_element.py:319
 msgid "Mark as read"
 msgstr "Marquer comme lu"
 
-#: cozy/book_element.py:322
+#: cozy/ui/book_element.py:322
 msgid "Open in file browser"
 msgstr "Ouvrir dans le navigateur"
 
-#: cozy/book_element.py:325
+#: cozy/ui/book_element.py:325
 msgid "Remove from library"
 msgstr "Supprimer"
 
-#: cozy/book_element.py:395
+#: cozy/ui/book_element.py:395
 msgid "Play this part"
 msgstr "Lire cette partie"
 
-#: cozy/book_overview.py:223
+#: cozy/ui/book_overview.py:228
 msgid "Downloaded"
 msgstr "Téléchargement terminé"
 
-#: cozy/book_overview.py:226 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Téléchargement"
 
-#: cozy/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:66
 msgid "All files"
 msgstr "Tous les fichiers"
 
-#: cozy/offline_cache.py:175
+#: cozy/control/offline_cache.py:176
 msgid "Copying"
 msgstr "Copie"
 
-#: cozy/search_results.py:72
+#: cozy/ui/search_results.py:71
 msgid "Jump to author "
 msgstr "Recherche par auteur"
 
-#: cozy/search_results.py:75
+#: cozy/ui/search_results.py:74
 msgid "Jump to reader "
 msgstr "Recherche par narrateur"
 
-#: cozy/importer.py:275
+#: cozy/control/importer.py:278
 msgid "Unknown Author"
 msgstr "Auteur inconnu"
 
-#: cozy/importer.py:277
+#: cozy/control/importer.py:280
 msgid "Unknown Reader"
 msgstr "Narrateur inconnu"
 
@@ -154,44 +154,44 @@ msgstr "année"
 msgid "years"
 msgstr "années"
 
-#: cozy/ui.py:407
+#: cozy/ui/main_view.py:403
 msgid "Audiobooks"
 msgstr "Livres audio"
 
-#: cozy/ui.py:428
+#: cozy/ui/main_view.py:424
 msgid "Importing Audiobooks"
 msgstr "Importer livres audio"
 
 #. Add the special All element
-#: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
+#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
 msgid "All"
 msgstr "Tous"
 
-#: cozy/ui.py:498 cozy/ui.py:504
+#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
 msgid "Display all books"
 msgstr "Afficher tous les livres"
 
-#: cozy/sleep_timer.py:121 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
 msgid "min"
 msgstr "min"
 
-#: cozy/sleep_timer.py:129
+#: cozy/control/sleep_timer.py:128
 msgid "Off"
 msgstr "Off"
 
-#: cozy/settings.py:416 cozy/settings.py:459
+#: cozy/ui/settings.py:416 cozy/ui/settings.py:459
 msgid "External drive"
 msgstr "Stockage externe"
 
-#: cozy/settings.py:419 cozy/settings.py:462
+#: cozy/ui/settings.py:419 cozy/ui/settings.py:462
 msgid "Internal drive"
 msgstr "Stockage interne"
 
-#: cozy/settings.py:446
+#: cozy/ui/settings.py:446
 msgid "Changing audio book location…"
 msgstr "Modifier le répertoire du livre audio…"
 
-#: cozy/disk_element.py:26
+#: cozy/ui/disk_element.py:26
 msgid "Disc"
 msgstr "Disque"
 
@@ -364,8 +364,8 @@ msgstr "Importer vos livres audios"
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy va automatiquement importer vos livres audios dans un répertoire unique"
-" - votre libraire"
+"Cozy va automatiquement importer vos livres audios dans un répertoire unique "
+"- votre libraire"
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
@@ -381,7 +381,8 @@ msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Si il le sont vous pouvez activer le mode hors-ligne dans l'aperçu de votre livre\n"
+"Si il le sont vous pouvez activer le mode hors-ligne dans l'aperçu de votre "
+"livre\n"
 "Cette action conservera une copie locale de votre livre audio"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
@@ -399,8 +400,7 @@ msgstr "Glisser & Déposer"
 
 #: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr ""
-"Faite glisser vos livres audio directement dans cozy pour les importer"
+msgstr "Faite glisser vos livres audio directement dans cozy pour les importer"
 
 #: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
@@ -415,7 +415,8 @@ msgid ""
 "Load audiobooks from a directory, network drive or an external disk\n"
 "You can add more storage locations later in the settings"
 msgstr ""
-"Charger vos livres audio depuis un dossier local, depuis le réseau ou un stockage externe\n"
+"Charger vos livres audio depuis un dossier local, depuis le réseau ou un "
+"stockage externe\n"
 "Vous pourrez ajouter d'autres emplacement plus tard dans les paramètres"
 
 #: data/ui/main_window.ui:1376
@@ -440,8 +441,7 @@ msgstr "page0"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 "Commencez à explorer votre bibliothèque en passant à la vue Auteur ou "
 "Lecteur ci-dessus"
@@ -449,26 +449,6 @@ msgstr ""
 #: data/ui/about.ui:14
 msgid "GitHub"
 msgstr "GitHub"
-
-#: data/ui/app_menu.ui:7
-msgid "_Play/Pause"
-msgstr "_Play/Pause"
-
-#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
-msgid "_Preferences"
-msgstr "_Preferences"
-
-#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
-msgid "_Help"
-msgstr "_Help"
-
-#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
-msgid "_About"
-msgstr "_About"
-
-#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
-msgid "_Quit"
-msgstr "_Quit"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
@@ -614,8 +594,8 @@ msgstr "Rafraîchir la base de donnée"
 #: data/ui/settings.ui:1382
 msgid "This will force update the metadata of all imported books"
 msgstr ""
-"Cela va forcer la mise à jours de toutes les informations complémentaires de"
-" tous les livres importés"
+"Cela va forcer la mise à jours de toutes les informations complémentaires de "
+"tous les livres importés"
 
 #: data/ui/settings.ui:1402
 msgid "Force refresh"
@@ -692,6 +672,22 @@ msgstr "_Scanner le répertoire"
 msgid "_Hide unavailable books"
 msgstr "_Masquer les livres non disponibles"
 
+#: data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
+msgstr "_Preferences"
+
+#: data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr "_Help"
+
+#: data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr "_About"
+
+#: data/ui/titlebar_menu.ui:33
+msgid "_Quit"
+msgstr "_Quit"
+
 #: data/ui/book_progress_element.ui:49
 msgid "of"
 msgstr "de"
@@ -699,3 +695,6 @@ msgstr "de"
 #: data/ui/book_progress_element.ui:75
 msgid "remaining"
 msgstr "restante"
+
+#~ msgid "_Play/Pause"
+#~ msgstr "_Play/Pause"
