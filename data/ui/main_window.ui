@@ -1608,7 +1608,7 @@ You can add more storage locations later in the settings</property>
               </object>
               <packing>
                 <property name="name">book_overview</property>
-                <property name="title" translatable="yes">page0</property>
+                <property name="title" translatable="no">page0</property>
                 <property name="position">3</property>
               </packing>
             </child>
@@ -1641,7 +1641,7 @@ You can add more storage locations later in the settings</property>
               </object>
               <packing>
                 <property name="name">nothing_here</property>
-                <property name="title" translatable="yes">page0</property>
+                <property name="title" translatable="no">page0</property>
                 <property name="position">4</property>
               </packing>
             </child>
