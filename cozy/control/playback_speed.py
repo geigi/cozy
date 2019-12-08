@@ -1,6 +1,5 @@
 from cozy.architecture.event_sender import EventSender
 import cozy.control.player as player
-import cozy.control.db as db
 import cozy.ui
 
 import gi
