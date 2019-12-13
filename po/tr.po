@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-18 15:37+0200\n"
+"POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>, 2019\n"
 "Language-Team: Turkish (https://www.transifex.com/geigi/teams/78138/tr/)\n"
@@ -82,78 +82,71 @@ msgstr "Bilinmeyen Yazar"
 msgid "Unknown Reader"
 msgstr "Bilinmeyen Seslendiren"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr "saat"
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr "saat"
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr "dakîka"
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr "dakika"
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr "bitti"
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr " saniye"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr "saniye"
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr "hiçbir zaman"
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr "bugün"
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr "dün"
 
-#: cozy/tools.py:193
-msgid "days"
-msgstr " gün"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
+msgstr "%s gün önce"
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr "önce"
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] "{weeks} hafta önce"
+msgstr[1] "{weeks} hafta önce"
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr "hafta"
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] "{months} ay önce"
+msgstr[1] "{months} ay önce"
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr "hafta"
-
-#: cozy/tools.py:199
-msgid "month"
-msgstr "ay"
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr "ay"
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr "yıl"
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr "yıl"
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] "{years} yıl önce"
+msgstr[1] "{years} yıl önce"
 
 #: cozy/ui/main_view.py:403
 msgid "Audiobooks"
@@ -257,8 +250,8 @@ msgid "Elapsed time of current part"
 msgstr "Geçerli bölümün geçen süresi"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Geçerli bölümü üstünkörü tara"
+msgid "Jump to position in current chapter"
+msgstr "Geçerli bölümdeki konuma atla"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -433,10 +426,6 @@ msgstr "Son Oynatılan"
 #: data/ui/main_window.ui:1466
 msgid "Published"
 msgstr "Yayınlayan"
-
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr "page0"
 
 #: data/ui/main_window.ui:1630
 msgid ""
@@ -683,11 +672,3 @@ msgstr "_Hakkında"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Çık"
-
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "/"
-
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "kalan"
