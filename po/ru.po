@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-18 15:37+0200\n"
+"POT-Creation-Date: 2019-12-13 14:51+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Camellan <camellan@yandex.ru>, 2019\n"
 "Language-Team: Russian (https://www.transifex.com/geigi/teams/78138/ru/)\n"
@@ -84,78 +84,77 @@ msgstr "Неизвестный автор"
 msgid "Unknown Reader"
 msgstr "Неизвестный диктор"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr "часов"
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr "час"
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr "минут"
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr "минуту"
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr "завершено"
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr "секунд"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr "секунда"
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr "никогда"
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr "сегодня"
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr "вчера"
 
-#: cozy/tools.py:193
-msgid "days"
-msgstr "дней"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
+msgstr ""
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr "назад"
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr "неделя"
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr "недель"
-
-#: cozy/tools.py:199
-msgid "month"
-msgstr "месяц"
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr "месяцев"
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr "год"
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr "лет"
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: cozy/ui/main_view.py:403
 msgid "Audiobooks"
@@ -434,10 +433,6 @@ msgstr "Последний раз воспроизводилось"
 msgid "Published"
 msgstr "Опубликовано"
 
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr "страница 0"
-
 #: data/ui/main_window.ui:1630
 msgid ""
 "Start exploring your library by switching to the Author or Reader view above."
@@ -690,6 +685,33 @@ msgstr "из"
 #: data/ui/book_progress_element.ui:75
 msgid "remaining"
 msgstr "оставшиеся"
+
+#~ msgid "days"
+#~ msgstr "дней"
+
+#~ msgid "ago"
+#~ msgstr "назад"
+
+#~ msgid "week"
+#~ msgstr "неделя"
+
+#~ msgid "weeks"
+#~ msgstr "недель"
+
+#~ msgid "month"
+#~ msgstr "месяц"
+
+#~ msgid "months"
+#~ msgstr "месяцев"
+
+#~ msgid "year"
+#~ msgstr "год"
+
+#~ msgid "years"
+#~ msgstr "лет"
+
+#~ msgid "page0"
+#~ msgstr "страница 0"
 
 #~ msgid "_Play/Pause"
 #~ msgstr "_Воспр./Пауза"
