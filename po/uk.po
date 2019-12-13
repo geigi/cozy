@@ -1,80 +1,86 @@
-# Ukrainian translations for com.github.geigi.cozy package.
-# Copyright (C) 2019 THE com.github.geigi.cozy'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
-# Oleg Krivorot, 2019.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Julian Geywitz <github@geigi.de>, 2019
+# Oleg Krivorot <krivorot.oleg@gmail.com>, 2019
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-11 15:12+0200\n"
-"PO-Revision-Date: 2019-04-09 10:50+0200\n"
-"Last-Translator: Oleg Krivorot <krivorot.oleg@gmail.com>\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2019-10-18 15:37+0200\n"
+"PO-Revision-Date: 2017-08-25 21:47+0000\n"
+"Last-Translator: Oleg Krivorot <krivorot.oleg@gmail.com>, 2019\n"
+"Language-Team: Ukrainian (https://www.transifex.com/geigi/teams/78138/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: cozy/book_element.py:67 cozy/search_results.py:124
+#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Слухати цю аудіокнигу"
 
-#: cozy/book_element.py:212
+#: cozy/ui/book_element.py:212
 msgid "Open book overview"
 msgstr "Відкрити огляд книги"
 
-#: cozy/book_element.py:213
+#: cozy/ui/book_element.py:213
 msgid "Currently offline"
 msgstr "В даний час офлайн"
 
-#: cozy/book_element.py:319
+#: cozy/ui/book_element.py:319
 msgid "Mark as read"
 msgstr "Відзначити як прочитане"
 
-#: cozy/book_element.py:322
+#: cozy/ui/book_element.py:322
 msgid "Open in file browser"
 msgstr "Відкрити у файловому браузері"
 
-#: cozy/book_element.py:325
+#: cozy/ui/book_element.py:325
 msgid "Remove from library"
 msgstr "Видалити з бібліотеки"
 
-#: cozy/book_element.py:395
+#: cozy/ui/book_element.py:395
 msgid "Play this part"
 msgstr "Слухати цю частину"
 
-#: cozy/book_overview.py:223
+#: cozy/ui/book_overview.py:228
 msgid "Downloaded"
 msgstr "Завантажено"
 
-#: cozy/book_overview.py:226 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Завантажити"
 
-#: cozy/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:66
 msgid "All files"
 msgstr "Всі файли"
 
-#: cozy/offline_cache.py:175
+#: cozy/control/offline_cache.py:176
 msgid "Copying"
 msgstr "Копіювання"
 
-#: cozy/search_results.py:72
+#: cozy/ui/search_results.py:71
 msgid "Jump to author "
 msgstr "Перейти до автора "
 
-#: cozy/search_results.py:75
+#: cozy/ui/search_results.py:74
 msgid "Jump to reader "
 msgstr "Перейти до диктора "
 
-#: cozy/importer.py:275
+#: cozy/control/importer.py:278
 msgid "Unknown Author"
 msgstr "Невідомий автор"
 
-#: cozy/importer.py:277
+#: cozy/control/importer.py:280
 msgid "Unknown Reader"
 msgstr "Невідомий диктор"
 
@@ -151,44 +157,44 @@ msgstr "рік"
 msgid "years"
 msgstr "років"
 
-#: cozy/ui.py:407
+#: cozy/ui/main_view.py:403
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui.py:428
+#: cozy/ui/main_view.py:424
 msgid "Importing Audiobooks"
 msgstr "Імпорт аудіокниг"
 
 #. Add the special All element
-#: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
+#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
 msgid "All"
 msgstr "Всі"
 
-#: cozy/ui.py:498 cozy/ui.py:504
+#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
 msgid "Display all books"
 msgstr "Відобразити всі книжки"
 
-#: cozy/sleep_timer.py:121 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
 msgid "min"
 msgstr "хв."
 
-#: cozy/sleep_timer.py:129
+#: cozy/control/sleep_timer.py:128
 msgid "Off"
 msgstr "Вимк."
 
-#: cozy/settings.py:416 cozy/settings.py:459
+#: cozy/ui/settings.py:416 cozy/ui/settings.py:459
 msgid "External drive"
 msgstr "Зовнішній диск"
 
-#: cozy/settings.py:419 cozy/settings.py:462
+#: cozy/ui/settings.py:419 cozy/ui/settings.py:462
 msgid "Internal drive"
 msgstr "Внутрішній диск"
 
-#: cozy/settings.py:446
+#: cozy/ui/settings.py:446
 msgid "Changing audio book location…"
 msgstr "Зміна місця розташування книги …"
 
-#: cozy/disk_element.py:26
+#: cozy/ui/disk_element.py:26
 msgid "Disc"
 msgstr ""
 
@@ -382,7 +388,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr ""
+msgstr "Перемикач автосканування"
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
@@ -443,26 +449,6 @@ msgstr ""
 #: data/ui/about.ui:14
 msgid "GitHub"
 msgstr "GitHub"
-
-#: data/ui/app_menu.ui:7
-msgid "_Play/Pause"
-msgstr "_Програвати/призупинити"
-
-#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
-msgid "_Preferences"
-msgstr "_Параметри"
-
-#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
-msgid "_Help"
-msgstr "_Довідка"
-
-#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
-msgid "_About"
-msgstr "П_ро програму"
-
-#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
-msgid "_Quit"
-msgstr "_Вихід"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
@@ -554,8 +540,7 @@ msgstr "Перевага зовнішніх зображеннь над вбуд
 
 #: data/ui/settings.ui:837
 msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr ""
-"Використовувати зображення (cover.jpg, * .png, …), коли вони доступні"
+msgstr "Використовувати зображення (cover.jpg, * .png, …), коли вони доступні"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
@@ -677,11 +662,27 @@ msgstr "Установка тривалості таймера сну в хви�
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
-msgstr ""
+msgstr "С_канувати каталог"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
 msgstr ""
+
+#: data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
+msgstr "_Параметри"
+
+#: data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr "_Довідка"
+
+#: data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr "П_ро програму"
+
+#: data/ui/titlebar_menu.ui:33
+msgid "_Quit"
+msgstr "_Вихід"
 
 #: data/ui/book_progress_element.ui:49
 msgid "of"
@@ -690,3 +691,6 @@ msgstr "з"
 #: data/ui/book_progress_element.ui:75
 msgid "remaining"
 msgstr "залишилось"
+
+#~ msgid "_Play/Pause"
+#~ msgstr "_Програвати/призупинити"

@@ -3,7 +3,7 @@ import time
 import threading
 from threading import Thread, Event
 import logging as log
-import platform
+import distro
 import os
 from gi.repository import GLib, Gio
 import cozy.magic.magic as magic
@@ -33,7 +33,7 @@ def is_elementary():
         """
         Currently we are only checking for elementaryOS
         """
-        dist = platform.dist()
+        dist = distro.linux_distribution(full_distribution_name=False)
         log.debug(dist)
         if '"elementary"' in dist or 'elementary' in dist:
             return True
