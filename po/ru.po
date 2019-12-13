@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 14:51+0100\n"
+"POT-Creation-Date: 2019-12-13 15:57+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Camellan <camellan@yandex.ru>, 2019\n"
 "Language-Team: Russian (https://www.transifex.com/geigi/teams/78138/ru/)\n"
@@ -678,13 +678,11 @@ msgstr "_О программе"
 msgid "_Quit"
 msgstr "_Выход"
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "из"
+#~ msgid "of"
+#~ msgstr "из"
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "оставшиеся"
+#~ msgid "remaining"
+#~ msgstr "оставшиеся"
 
 #~ msgid "days"
 #~ msgstr "дней"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 14:51+0100\n"
+"POT-Creation-Date: 2019-12-13 15:57+0100\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: Malay (https://www.transifex.com/geigi/teams/78138/ms/)\n"
@@ -659,13 +659,11 @@ msgstr "_Perihal"
 msgid "_Quit"
 msgstr "_Keluar"
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "dari"
+#~ msgid "of"
+#~ msgstr "dari"
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "berbaki"
+#~ msgid "remaining"
+#~ msgstr "berbaki"
 
 #~ msgid "days"
 #~ msgstr "hari"

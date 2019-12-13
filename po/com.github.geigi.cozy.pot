@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 14:51+0100\n"
+"POT-Creation-Date: 2019-12-13 15:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -652,12 +652,4 @@ msgstr ""
 
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
-msgstr ""
-
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr ""
-
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
 msgstr ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 14:51+0100\n"
+"POT-Creation-Date: 2019-12-13 15:57+0100\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
@@ -668,13 +668,11 @@ msgstr "_Über"
 msgid "_Quit"
 msgstr "_Beenden"
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "von"
+#~ msgid "of"
+#~ msgstr "von"
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "verbleibend"
+#~ msgid "remaining"
+#~ msgstr "verbleibend"
 
 #~ msgid "days"
 #~ msgstr "Tage"
