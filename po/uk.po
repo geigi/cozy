@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 15:57+0100\n"
+"POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Oleg Krivorot <krivorot.oleg@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/geigi/teams/78138/uk/)\n"
@@ -258,8 +258,9 @@ msgid "Elapsed time of current part"
 msgstr "Час, що минув для поточної частини"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Прокрутити поточну частину"
+#, fuzzy
+msgid "Jump to position in current chapter"
+msgstr "Зупиніться після поточного розділу"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -678,6 +679,9 @@ msgstr "П_ро програму"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Вихід"
+
+#~ msgid "Scrubb through current part"
+#~ msgstr "Прокрутити поточну частину"
 
 #~ msgid "of"
 #~ msgstr "з"

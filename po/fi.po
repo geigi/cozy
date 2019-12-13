@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 15:57+0100\n"
+"POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Mika Väinölä <mikavainola@fastmail.com>, 2019\n"
 "Language-Team: Finnish (https://www.transifex.com/geigi/teams/78138/fi/)\n"
@@ -249,8 +249,9 @@ msgid "Elapsed time of current part"
 msgstr "Osan toistoon kulunut aika"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Siirry toistettavassa osassa"
+#, fuzzy
+msgid "Jump to position in current chapter"
+msgstr "Pysäytä tämänhtekisen kappaleen jälkeen"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -667,6 +668,9 @@ msgstr "_Tietoja"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Lopeta"
+
+#~ msgid "Scrubb through current part"
+#~ msgstr "Siirry toistettavassa osassa"
 
 #~ msgid "of"
 #~ msgstr "kokonaisajasta"

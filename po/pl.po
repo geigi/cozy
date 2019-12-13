@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 15:57+0100\n"
+"POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Akodi Zen <azzy.true@gmail.com>, 2019\n"
 "Language-Team: Polish (https://www.transifex.com/geigi/teams/78138/pl/)\n"
@@ -257,8 +257,9 @@ msgid "Elapsed time of current part"
 msgstr "Czas aktualnej części, który upłynął"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Przeczesuj aktualną część"
+#, fuzzy
+msgid "Jump to position in current chapter"
+msgstr "Zatrzymaj po tym rozdziale"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -679,6 +680,9 @@ msgstr "_Informacje"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Wyjście"
+
+#~ msgid "Scrubb through current part"
+#~ msgstr "Przeczesuj aktualną część"
 
 #~ msgid "of"
 #~ msgstr "z"

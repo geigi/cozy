@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 15:57+0100\n"
+"POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
@@ -249,8 +249,9 @@ msgid "Elapsed time of current part"
 msgstr "De verstreken tijd van het huidige deel"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Door huidig deel spoelen"
+#, fuzzy
+msgid "Jump to position in current chapter"
+msgstr "Stoppen na huidig hoofdstuk"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -674,6 +675,9 @@ msgstr "_Over"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Afsluiten"
+
+#~ msgid "Scrubb through current part"
+#~ msgstr "Door huidig deel spoelen"
 
 #~ msgid "of"
 #~ msgstr "van"
