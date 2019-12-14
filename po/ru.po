@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-08 17:01+0200\n"
+"POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Camellan <camellan@yandex.ru>, 2019\n"
 "Language-Team: Russian (https://www.transifex.com/geigi/teams/78138/ru/)\n"
@@ -82,93 +82,92 @@ msgstr "Неизвестный автор"
 msgid "Unknown Reader"
 msgstr "Неизвестный диктор"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr "часов"
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr "час"
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr "минут"
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr "минуту"
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr "завершено"
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr "секунд"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr "секунда"
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr "никогда"
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr "сегодня"
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr "вчера"
 
-#: cozy/tools.py:193
-msgid "days"
-msgstr "дней"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
+msgstr "%s день назад"
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr "назад"
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] "{weeks} неделя назад"
+msgstr[1] "{weeks} недели назад"
+msgstr[2] "{weeks} недель назад"
+msgstr[3] "{weeks} недель назад"
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr "неделя"
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] "{months} месяц назад"
+msgstr[1] "{months} месяцев назад"
+msgstr[2] "{months} месяцев назад"
+msgstr[3] "{months} месяцев назад"
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr "недель"
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] "{years} год назад"
+msgstr[1] "{years} года назад"
+msgstr[2] "{years} лет назад"
+msgstr[3] "{years} лет назад"
 
-#: cozy/tools.py:199
-msgid "month"
-msgstr "месяц"
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr "месяцев"
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr "год"
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr "лет"
-
-#: cozy/ui/main_view.py:408
+#: cozy/ui/main_view.py:403
 msgid "Audiobooks"
 msgstr "Аудиокниги"
 
-#: cozy/ui/main_view.py:429
+#: cozy/ui/main_view.py:424
 msgid "Importing Audiobooks"
 msgstr "Импортирование аудиокниги"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:498 cozy/ui/main_view.py:504 cozy/ui/main_view.py:824
+#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
 msgid "All"
 msgstr "Все"
 
-#: cozy/ui/main_view.py:499 cozy/ui/main_view.py:505
+#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
 msgid "Display all books"
 msgstr "Отобразить все книги"
 
@@ -182,7 +181,7 @@ msgstr "Отключено"
 
 #: cozy/ui/settings.py:416 cozy/ui/settings.py:459
 msgid "External drive"
-msgstr "Внешняя память"
+msgstr "Внешний диск"
 
 #: cozy/ui/settings.py:419 cozy/ui/settings.py:462
 msgid "Internal drive"
@@ -257,8 +256,8 @@ msgid "Elapsed time of current part"
 msgstr "Истекшее время текущей части"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Прокрутить текущую часть"
+msgid "Jump to position in current chapter"
+msgstr "Перейти на позицию в текущей главе"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -433,10 +432,6 @@ msgstr "Последний раз воспроизводилось"
 msgid "Published"
 msgstr "Опубликовано"
 
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr "страница 0"
-
 #: data/ui/main_window.ui:1630
 msgid ""
 "Start exploring your library by switching to the Author or Reader view "
@@ -448,26 +443,6 @@ msgstr ""
 #: data/ui/about.ui:14
 msgid "GitHub"
 msgstr "GitHub"
-
-#: data/ui/app_menu.ui:7
-msgid "_Play/Pause"
-msgstr "_Воспр./Пауза"
-
-#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
-msgid "_Preferences"
-msgstr "_Параметры"
-
-#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
-msgid "_Help"
-msgstr "_Справка"
-
-#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
-msgid "_About"
-msgstr "_О программе"
-
-#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
-msgid "_Quit"
-msgstr "_Выход"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
@@ -687,10 +662,18 @@ msgstr "_Найти книги"
 msgid "_Hide unavailable books"
 msgstr "_Скрыть недоступные книги"
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "из"
+#: data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
+msgstr "_Параметры"
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "оставшиеся"
+#: data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr "_Справка"
+
+#: data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr "_О программе"
+
+#: data/ui/titlebar_menu.ui:33
+msgid "_Quit"
+msgstr "_Выход"
