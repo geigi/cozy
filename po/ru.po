@@ -2,11 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
 # Camellan <camellan@yandex.ru>, 2019
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -16,13 +16,11 @@ msgstr ""
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Camellan <camellan@yandex.ru>, 2019\n"
 "Language-Team: Russian (https://www.transifex.com/geigi/teams/78138/ru/)\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
 msgid "Play this book"
@@ -127,34 +125,34 @@ msgstr "вчера"
 #: cozy/tools.py:194
 #, python-format
 msgid "%s days ago"
-msgstr ""
+msgstr "%s день назад"
 
 #: cozy/tools.py:196
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "{weeks} неделя назад"
+msgstr[1] "{weeks} недели назад"
+msgstr[2] "{weeks} недель назад"
+msgstr[3] "{weeks} недель назад"
 
 #: cozy/tools.py:198
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "{months} месяц назад"
+msgstr[1] "{months} месяцев назад"
+msgstr[2] "{months} месяцев назад"
+msgstr[3] "{months} месяцев назад"
 
 #: cozy/tools.py:200
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "{years} год назад"
+msgstr[1] "{years} года назад"
+msgstr[2] "{years} лет назад"
+msgstr[3] "{years} лет назад"
 
 #: cozy/ui/main_view.py:403
 msgid "Audiobooks"
@@ -183,7 +181,7 @@ msgstr "Отключено"
 
 #: cozy/ui/settings.py:416 cozy/ui/settings.py:459
 msgid "External drive"
-msgstr "Внешняя память"
+msgstr "Внешний диск"
 
 #: cozy/ui/settings.py:419 cozy/ui/settings.py:462
 msgid "Internal drive"
@@ -258,9 +256,8 @@ msgid "Elapsed time of current part"
 msgstr "Истекшее время текущей части"
 
 #: data/ui/main_window.ui:311
-#, fuzzy
 msgid "Jump to position in current chapter"
-msgstr "Остановить после текущей главы"
+msgstr "Перейти на позицию в текущей главе"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -367,7 +364,8 @@ msgstr "Импорт аудиокниг"
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy автоматически импортирует аудиокниги из указанного каталога в библиотеку"
+"Cozy автоматически импортирует аудиокниги из указанного каталога в "
+"библиотеку"
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
@@ -436,10 +434,11 @@ msgstr "Опубликовано"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view above."
+"Start exploring your library by switching to the Author or Reader view "
+"above."
 msgstr ""
-"Начните исследовать свою библиотеку, переключившись на вкладку \"Автор\" или "
-"\"Диктор\", расположенные выше."
+"Начните исследовать свою библиотеку, переключившись на вкладку \"Автор\" или"
+" \"Диктор\", расположенные выше."
 
 #: data/ui/about.ui:14
 msgid "GitHub"
@@ -678,42 +677,3 @@ msgstr "_О программе"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Выход"
-
-#~ msgid "Scrubb through current part"
-#~ msgstr "Прокрутить текущую часть"
-
-#~ msgid "of"
-#~ msgstr "из"
-
-#~ msgid "remaining"
-#~ msgstr "оставшиеся"
-
-#~ msgid "days"
-#~ msgstr "дней"
-
-#~ msgid "ago"
-#~ msgstr "назад"
-
-#~ msgid "week"
-#~ msgstr "неделя"
-
-#~ msgid "weeks"
-#~ msgstr "недель"
-
-#~ msgid "month"
-#~ msgstr "месяц"
-
-#~ msgid "months"
-#~ msgstr "месяцев"
-
-#~ msgid "year"
-#~ msgstr "год"
-
-#~ msgid "years"
-#~ msgstr "лет"
-
-#~ msgid "page0"
-#~ msgstr "страница 0"
-
-#~ msgid "_Play/Pause"
-#~ msgstr "_Воспр./Пауза"
