@@ -58,7 +58,7 @@ class BookOverview:
         if self.book and self.book.id == book.id:
             self.update_time()
             return
-        self.book = db.Book.get(db.Book.id == book.id)
+        self.book = db.Book[book.id]
 
         if self.ui.is_playing and self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
             self.play_book_button.set_image(self.pause_img)
@@ -234,7 +234,7 @@ class BookOverview:
         """
         Mark the current track position.
         """
-        book = db.Book.select().where(db.Book.id == self.book.id).get()
+        book = db.Book[self.book.id]
 
         if book.position == -1:
             self.deselect_track_element()

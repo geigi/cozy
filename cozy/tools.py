@@ -2,8 +2,9 @@ from datetime import datetime
 import time
 import threading
 from threading import Thread, Event
+from gettext import ngettext
 import logging as log
-import platform
+import distro
 import os
 from gi.repository import GLib, Gio
 import cozy.magic.magic as magic
@@ -33,7 +34,7 @@ def is_elementary():
         """
         Currently we are only checking for elementaryOS
         """
-        dist = platform.dist()
+        dist = distro.linux_distribution(full_distribution_name=False)
         log.debug(dist)
         if '"elementary"' in dist or 'elementary' in dist:
             return True
@@ -190,19 +191,13 @@ def past_date_to_human_readable(unix_time):
     elif days < 2:
         return _("yesterday")
     elif days < 7:
-        return str(days) + " " + _("days") + " " + _("ago")
-    elif weeks < 2:
-        return "1 " + _("week") + " " + _("ago")
+        return _("%s days ago") % str(days)
     elif weeks < 5:
-        return str(weeks) + " " + _("weeks") + " " + _("ago")
-    elif months < 2:
-        return "1 " + _("month") + " " + _("ago")
+        return ngettext('{weeks} week ago', '{weeks} weeks ago', weeks).format(weeks=weeks)
     elif months < 12:
-        return str(months) + " " + _("months") + " " + _("ago")
-    elif years < 2:
-        return "1 " + _("year") + " " + _("ago")
+        return ngettext('{months} month ago', '{months} months ago', months).format(months=months)
     else:
-        return str(years) + " " + _("years") + " " + _("ago")
+        return ngettext('{years} year ago', '{years} years ago', years).format(years=years)
 
 def __get_media_type(path):
     """

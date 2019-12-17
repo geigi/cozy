@@ -15,11 +15,9 @@ cozy/ui/settings.py
 cozy/ui/disk_element.py
 data/ui/main_window.ui
 data/ui/about.ui
-data/ui/app_menu.ui
 data/ui/file_not_found.ui
 data/ui/import_failed.ui
 data/ui/settings.ui
 data/ui/search_popover.ui
 data/ui/timer_popover.ui
 data/ui/titlebar_menu.ui
-data/ui/book_progress_element.ui

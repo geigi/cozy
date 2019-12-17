@@ -376,8 +376,7 @@ class Titlebar:
             if track.id == player.get_current_track().id:
                 player.jump_to(time)
             else:
-                player.load_file(db.Track.select().where(
-                    db.Track.id == track.id).get())
+                player.load_file(track)
                 player.play_pause(None, True)
                 self.__set_progress_scale_value(
                     time / self.ui.speed.get_speed())

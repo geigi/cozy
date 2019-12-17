@@ -2,195 +2,185 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-11 15:12+0200\n"
+"POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: Malay (https://www.transifex.com/geigi/teams/78138/ms/)\n"
+"Language: ms\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ms\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: cozy/book_element.py:67 cozy/search_results.py:124
+#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Baca buku ini"
 
-#: cozy/book_element.py:212
+#: cozy/ui/book_element.py:212
 msgid "Open book overview"
 msgstr "Buka gambaran keseluruhan buku"
 
-#: cozy/book_element.py:213
+#: cozy/ui/book_element.py:213
 msgid "Currently offline"
 msgstr ""
 
-#: cozy/book_element.py:319
+#: cozy/ui/book_element.py:319
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/book_element.py:322
+#: cozy/ui/book_element.py:322
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/book_element.py:325
+#: cozy/ui/book_element.py:325
 msgid "Remove from library"
 msgstr ""
 
-#: cozy/book_element.py:395
+#: cozy/ui/book_element.py:395
 msgid "Play this part"
 msgstr "Baca bahagian ini"
 
-#: cozy/book_overview.py:223
+#: cozy/ui/book_overview.py:228
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/book_overview.py:226 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr ""
 
-#: cozy/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:66
 msgid "All files"
 msgstr "Semua fail"
 
-#: cozy/offline_cache.py:175
+#: cozy/control/offline_cache.py:176
 msgid "Copying"
 msgstr ""
 
-#: cozy/search_results.py:72
+#: cozy/ui/search_results.py:71
 msgid "Jump to author "
 msgstr "Lompat ke pengarang"
 
-#: cozy/search_results.py:75
+#: cozy/ui/search_results.py:74
 msgid "Jump to reader "
 msgstr "Lompat ke pembaca"
 
-#: cozy/importer.py:275
+#: cozy/control/importer.py:278
 msgid "Unknown Author"
 msgstr "Pengarang Tidak Diketahui"
 
-#: cozy/importer.py:277
+#: cozy/control/importer.py:280
 msgid "Unknown Reader"
 msgstr "Pembaca Tidak Diketahui"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr "jam"
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr "jam"
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr "minit"
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr "minit"
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr "selesai"
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr "saat"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr "saat"
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr "tidak sesekali"
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr "hari ini"
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr "semalam"
 
-#: cozy/tools.py:193
-msgid "days"
-msgstr "hari"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
+msgstr ""
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr "yang lalu"
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] ""
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr "minggu"
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] ""
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr "minggu"
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] ""
 
-#: cozy/tools.py:199
-msgid "month"
-msgstr "bulan"
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr "bulan"
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr "tahun"
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr "tahun"
-
-#: cozy/ui.py:407
+#: cozy/ui/main_view.py:403
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui.py:428
+#: cozy/ui/main_view.py:424
 msgid "Importing Audiobooks"
 msgstr "Mengimport Buku Audio"
 
 #. Add the special All element
-#: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
+#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
 msgid "All"
 msgstr "Semua"
 
-#: cozy/ui.py:498 cozy/ui.py:504
+#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
 msgid "Display all books"
 msgstr "Papar semua buku"
 
-#: cozy/sleep_timer.py:121 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
 msgid "min"
 msgstr "min"
 
-#: cozy/sleep_timer.py:129
+#: cozy/control/sleep_timer.py:128
 msgid "Off"
 msgstr ""
 
-#: cozy/settings.py:416 cozy/settings.py:459
+#: cozy/ui/settings.py:416 cozy/ui/settings.py:459
 msgid "External drive"
 msgstr ""
 
-#: cozy/settings.py:419 cozy/settings.py:462
+#: cozy/ui/settings.py:419 cozy/ui/settings.py:462
 msgid "Internal drive"
 msgstr ""
 
-#: cozy/settings.py:446
+#: cozy/ui/settings.py:446
 msgid "Changing audio book location…"
 msgstr "Mengubah lokasi buku audio…"
 
-#: cozy/disk_element.py:26
+#: cozy/ui/disk_element.py:26
 msgid "Disc"
 msgstr ""
 
@@ -255,8 +245,8 @@ msgid "Elapsed time of current part"
 msgstr "Masa berlalu bagi bahagian semasa"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Ganyah menerusi bahagian semasa"
+msgid "Jump to position in current chapter"
+msgstr ""
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -427,39 +417,14 @@ msgstr "Terakhir dimainkan"
 msgid "Published"
 msgstr "Diterbitkan"
 
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr "muka0"
-
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 
 #: data/ui/about.ui:14
 msgid "GitHub"
 msgstr "GitHub"
-
-#: data/ui/app_menu.ui:7
-msgid "_Play/Pause"
-msgstr ""
-
-#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
-msgid "_Preferences"
-msgstr "_Keutamaan"
-
-#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
-msgid "_Help"
-msgstr "_Bantuan"
-
-#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
-msgid "_About"
-msgstr "_Perihal"
-
-#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
-msgid "_Quit"
-msgstr "_Keluar"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
@@ -678,10 +643,54 @@ msgstr ""
 msgid "_Hide unavailable books"
 msgstr ""
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "dari"
+#: data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
+msgstr "_Keutamaan"
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "berbaki"
+#: data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr "_Bantuan"
+
+#: data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr "_Perihal"
+
+#: data/ui/titlebar_menu.ui:33
+msgid "_Quit"
+msgstr "_Keluar"
+
+#~ msgid "Scrubb through current part"
+#~ msgstr "Ganyah menerusi bahagian semasa"
+
+#~ msgid "of"
+#~ msgstr "dari"
+
+#~ msgid "remaining"
+#~ msgstr "berbaki"
+
+#~ msgid "days"
+#~ msgstr "hari"
+
+#~ msgid "ago"
+#~ msgstr "yang lalu"
+
+#~ msgid "week"
+#~ msgstr "minggu"
+
+#~ msgid "weeks"
+#~ msgstr "minggu"
+
+#~ msgid "month"
+#~ msgstr "bulan"
+
+#~ msgid "months"
+#~ msgstr "bulan"
+
+#~ msgid "year"
+#~ msgstr "tahun"
+
+#~ msgid "years"
+#~ msgstr "tahun"
+
+#~ msgid "page0"
+#~ msgstr "muka0"

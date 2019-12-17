@@ -25,7 +25,7 @@ import os
 import signal
 import sys
 import traceback
-import platform
+import distro
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -68,7 +68,7 @@ class Application(Gtk.Application):
         gettext.install('com.github.geigi.cozy', localedir)
 
     def do_startup(self):
-        log.info(platform.dist())
+        log.info(distro.linux_distribution(full_distribution_name=False))
         log.info("Starting up cozy " + version)
         self.ui = CozyUI(pkgdatadir, self, version)
         init_db()

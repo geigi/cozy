@@ -254,11 +254,6 @@ class CozyUI(metaclass=Singleton):
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
 
-        builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")
-        menu = builder.get_object("app_menu")
-        if not tools.is_elementary():
-            self.app.set_app_menu(menu)
-
     def __init_components(self):
         self.titlebar = Titlebar()
 
