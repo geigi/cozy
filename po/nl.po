@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-18 15:37+0200\n"
+"POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
@@ -81,78 +81,71 @@ msgstr "Onbekende auteur"
 msgid "Unknown Reader"
 msgstr "Onbekende lezer"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr "uur"
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr "uur"
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr "minuten"
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr "minuut"
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr "afgerond"
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr "seconden"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr "seconde"
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr "nooit"
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr "vandaag"
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr "gisteren"
 
-#: cozy/tools.py:193
-msgid "days"
-msgstr "dagen"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
+msgstr ""
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr "geleden"
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr "week"
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr "weken"
-
-#: cozy/tools.py:199
-msgid "month"
-msgstr "maand"
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr "maanden"
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr "jaar"
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr "jaar"
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] ""
+msgstr[1] ""
 
 #: cozy/ui/main_view.py:403
 msgid "Audiobooks"
@@ -256,8 +249,9 @@ msgid "Elapsed time of current part"
 msgstr "De verstreken tijd van het huidige deel"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Door huidig deel spoelen"
+#, fuzzy
+msgid "Jump to position in current chapter"
+msgstr "Stoppen na huidig hoofdstuk"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -433,10 +427,6 @@ msgstr "Laatst afgespeeld"
 #: data/ui/main_window.ui:1466
 msgid "Published"
 msgstr "Gepubliceerd"
-
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr "pagina0"
 
 #: data/ui/main_window.ui:1630
 msgid ""
@@ -686,13 +676,41 @@ msgstr "_Over"
 msgid "_Quit"
 msgstr "_Afsluiten"
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "van"
+#~ msgid "Scrubb through current part"
+#~ msgstr "Door huidig deel spoelen"
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "resterend"
+#~ msgid "of"
+#~ msgstr "van"
+
+#~ msgid "remaining"
+#~ msgstr "resterend"
+
+#~ msgid "days"
+#~ msgstr "dagen"
+
+#~ msgid "ago"
+#~ msgstr "geleden"
+
+#~ msgid "week"
+#~ msgstr "week"
+
+#~ msgid "weeks"
+#~ msgstr "weken"
+
+#~ msgid "month"
+#~ msgstr "maand"
+
+#~ msgid "months"
+#~ msgstr "maanden"
+
+#~ msgid "year"
+#~ msgstr "jaar"
+
+#~ msgid "years"
+#~ msgstr "jaar"
+
+#~ msgid "page0"
+#~ msgstr "pagina0"
 
 #~ msgid "_Play/Pause"
 #~ msgstr "Afs_pelen/Pauzeren"

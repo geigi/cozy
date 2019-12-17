@@ -12,8 +12,7 @@ else
     message('Found python3 binary')
 endif
 
-# dependency('gtk+-3.0', version :'>=3.14')
-# dependency('glib-2.0')
+dependency('glib-2.0')
 
 # from https://github.com/AsavarTzeth/pulseeffects/blob/master/meson.build
 # Support Debian non-standard python paths
@@ -47,6 +46,8 @@ conf.set('PYTHON', python_bin.path())
 subdir('data')
 subdir('po')
 
+message('Compile gnome schemas')
+
 message('Preparing init file')
 configure_file(
   input: 'main.py',
@@ -60,31 +61,5 @@ install_subdir(
   install_dir: python_dir
 )
 
-peewee_dir = join_paths(meson.source_root(), 'peewee/lib/python3.5/site-packages')
-new_peewee_dir = join_paths(meson.source_root(), 'peewee/lib/python3.5/dist-packages')
-components = python_dir.split('/')
-
-final_components = []
-length = components.length()
-i = 1
-
-foreach c : components
-  if i < length
-    i += 1
-    final_components += c
-  endif
-endforeach
-
-peewee_install_dir = '/'.join(final_components)
-
-if run_command('[', '-d', peewee_dir, ']').returncode() == 0
-    message('Installing peewee dependency')
-    run_command('mv', peewee_dir, new_peewee_dir)
-    if r.returncode() == 0
-      install_subdir(
-        'peewee/lib/python3.5/dist-packages',
-        install_dir: peewee_install_dir)
-    endif
-endif
 
 meson.add_install_script('meson/post_install.py')

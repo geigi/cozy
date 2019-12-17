@@ -124,6 +124,7 @@ def init_db():
     tmp_db = None
     
     if update:
+        _connect_db(db)
         update_db()
     else:
         tmp_db = SqliteDatabase(os.path.join(data_dir, "cozy.db"))
@@ -142,12 +143,7 @@ def init_db():
             while not tmp_db.table_exists("settings"):
                 time.sleep(0.01)
 
-    try:
-        db.connect()
-    except Exception as e:
-        log.error("Could not connect to database. ")
-        log.error(e)
-
+    _connect_db(db)
 
     if PeeweeVersion[0] == '3':
         db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage], bind_refs=False, bind_backrefs=False)
@@ -155,6 +151,12 @@ def init_db():
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
 
+def _connect_db(db):
+    try:
+        db.connect(reuse_if_open=True)
+    except Exception as e:
+        log.error("Could not connect to database. ")
+        log.error(e)
 
 def get_db():
     global db

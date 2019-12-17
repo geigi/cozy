@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-18 15:37+0200\n"
+"POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Mika Väinölä <mikavainola@fastmail.com>, 2019\n"
 "Language-Team: Finnish (https://www.transifex.com/geigi/teams/78138/fi/)\n"
@@ -81,78 +81,71 @@ msgstr "Tuntematon tekijä"
 msgid "Unknown Reader"
 msgstr "Tuntematon lukija"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr "tuntia"
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr "tunti"
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr "minuuttia"
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr "minuutti"
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr "päättynyt"
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr "sekuntia"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr "sekunti"
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr "ei koskaan"
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr "tänään"
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr "eilen"
 
-#: cozy/tools.py:193
-msgid "days"
-msgstr "päivää"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
+msgstr ""
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr "sitten"
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr "viikko"
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr "viikkoa"
-
-#: cozy/tools.py:199
-msgid "month"
-msgstr "kuukausi"
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr "kuukautta"
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr "vuosi"
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr "vuotta"
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] ""
+msgstr[1] ""
 
 #: cozy/ui/main_view.py:403
 msgid "Audiobooks"
@@ -256,8 +249,9 @@ msgid "Elapsed time of current part"
 msgstr "Osan toistoon kulunut aika"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Siirry toistettavassa osassa"
+#, fuzzy
+msgid "Jump to position in current chapter"
+msgstr "Pysäytä tämänhtekisen kappaleen jälkeen"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -430,10 +424,6 @@ msgstr "Viimeksi toistettu"
 #: data/ui/main_window.ui:1466
 msgid "Published"
 msgstr "Julkaistu"
-
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr "page0"
 
 #: data/ui/main_window.ui:1630
 msgid ""
@@ -679,13 +669,41 @@ msgstr "_Tietoja"
 msgid "_Quit"
 msgstr "_Lopeta"
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "kokonaisajasta"
+#~ msgid "Scrubb through current part"
+#~ msgstr "Siirry toistettavassa osassa"
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "jäljellä"
+#~ msgid "of"
+#~ msgstr "kokonaisajasta"
+
+#~ msgid "remaining"
+#~ msgstr "jäljellä"
+
+#~ msgid "days"
+#~ msgstr "päivää"
+
+#~ msgid "ago"
+#~ msgstr "sitten"
+
+#~ msgid "week"
+#~ msgstr "viikko"
+
+#~ msgid "weeks"
+#~ msgstr "viikkoa"
+
+#~ msgid "month"
+#~ msgstr "kuukausi"
+
+#~ msgid "months"
+#~ msgstr "kuukautta"
+
+#~ msgid "year"
+#~ msgstr "vuosi"
+
+#~ msgid "years"
+#~ msgstr "vuotta"
+
+#~ msgid "page0"
+#~ msgstr "page0"
 
 #~ msgid "_Play/Pause"
 #~ msgstr "Toista/_Pysäytä"

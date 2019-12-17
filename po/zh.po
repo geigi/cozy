@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-18 15:37+0200\n"
+"POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: Chinese (https://www.transifex.com/geigi/teams/78138/zh/)\n"
@@ -80,78 +80,68 @@ msgstr "未知作者"
 msgid "Unknown Reader"
 msgstr "未知朗读者"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr ""
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr ""
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr ""
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr ""
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr ""
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr ""
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr ""
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr ""
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr ""
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr ""
 
-#: cozy/tools.py:193
-msgid "days"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
 msgstr ""
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr ""
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] ""
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr ""
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] ""
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr ""
-
-#: cozy/tools.py:199
-msgid "month"
-msgstr ""
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr ""
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr ""
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr ""
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] ""
 
 #: cozy/ui/main_view.py:403
 msgid "Audiobooks"
@@ -255,8 +245,8 @@ msgid "Elapsed time of current part"
 msgstr "正在朗读部分已用时间"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "拖动快进或快退当前朗读部分"
+msgid "Jump to position in current chapter"
+msgstr ""
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -423,10 +413,6 @@ msgstr ""
 
 #: data/ui/main_window.ui:1466
 msgid "Published"
-msgstr ""
-
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
 msgstr ""
 
 #: data/ui/main_window.ui:1630
@@ -671,10 +657,5 @@ msgstr "关于"
 msgid "_Quit"
 msgstr "退出"
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr ""
-
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr ""
+#~ msgid "Scrubb through current part"
+#~ msgstr "拖动快进或快退当前朗读部分"

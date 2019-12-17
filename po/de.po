@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-18 15:37+0200\n"
+"POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2017-08-25 21:47+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
@@ -80,78 +80,71 @@ msgstr "Unbekannter Autor"
 msgid "Unknown Reader"
 msgstr "Unbekannter Leser"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr "Stunden"
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr "Stunde"
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr "Minuten"
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr "Minute"
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr "fertig"
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr "Sekunden"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr "Sekunde"
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr "nie"
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr "heute"
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr "gestern"
 
-#: cozy/tools.py:193
-msgid "days"
-msgstr "Tage"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
+msgstr ""
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr " "
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr "Woche"
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr "Wochen"
-
-#: cozy/tools.py:199
-msgid "month"
-msgstr "Monat"
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr "Monate"
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr "Jahr"
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr "Jahre"
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] ""
+msgstr[1] ""
 
 #: cozy/ui/main_view.py:403
 msgid "Audiobooks"
@@ -255,8 +248,9 @@ msgid "Elapsed time of current part"
 msgstr "Vergangene Zeit des aktuellen Kapitels"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Springe durch das aktuelle Kapitel"
+#, fuzzy
+msgid "Jump to position in current chapter"
+msgstr "Stoppe nach aktuellen Kapitel"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -431,10 +425,6 @@ msgstr "Zuletzt gehört"
 #: data/ui/main_window.ui:1466
 msgid "Published"
 msgstr "Veröffentlicht"
-
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr "page0"
 
 #: data/ui/main_window.ui:1630
 msgid ""
@@ -679,13 +669,41 @@ msgstr "_Über"
 msgid "_Quit"
 msgstr "_Beenden"
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "von"
+#~ msgid "Scrubb through current part"
+#~ msgstr "Springe durch das aktuelle Kapitel"
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "verbleibend"
+#~ msgid "of"
+#~ msgstr "von"
+
+#~ msgid "remaining"
+#~ msgstr "verbleibend"
+
+#~ msgid "days"
+#~ msgstr "Tage"
+
+#~ msgid "ago"
+#~ msgstr " "
+
+#~ msgid "week"
+#~ msgstr "Woche"
+
+#~ msgid "weeks"
+#~ msgstr "Wochen"
+
+#~ msgid "month"
+#~ msgstr "Monat"
+
+#~ msgid "months"
+#~ msgstr "Monate"
+
+#~ msgid "year"
+#~ msgstr "Jahr"
+
+#~ msgid "years"
+#~ msgstr "Jahre"
+
+#~ msgid "page0"
+#~ msgstr "page0"
 
 #~ msgid "_Play/Pause"
 #~ msgstr "_Play/Pause"
