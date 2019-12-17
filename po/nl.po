@@ -2,28 +2,29 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
-# Heimen Stoffels <vistausss@outlook.com>, 2019
 # Julian Geywitz <github@geigi.de>, 2019
+# Heimen Stoffels <vistausss@outlook.com>, 2019
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-13 16:01+0100\n"
-"PO-Revision-Date: 2017-08-25 21:47+0000\n"
-"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
+"PO-Revision-Date: 2019-09-08 09:31+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2019\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
-"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
 msgid "Play this book"
-msgstr "Dit boek afspelen"
+msgstr "Boek afspelen"
 
 #: cozy/ui/book_element.py:212
 msgid "Open book overview"
@@ -47,7 +48,7 @@ msgstr "Verwijderen uit bibliotheek"
 
 #: cozy/ui/book_element.py:395
 msgid "Play this part"
-msgstr "Dit onderdeel afspelen"
+msgstr "Onderdeel afspelen"
 
 #: cozy/ui/book_overview.py:228
 msgid "Downloaded"
@@ -71,7 +72,7 @@ msgstr "Snel naar auteur"
 
 #: cozy/ui/search_results.py:74
 msgid "Jump to reader "
-msgstr "Snel naar lezer"
+msgstr "Snel naar voorlezer"
 
 #: cozy/control/importer.py:278
 msgid "Unknown Author"
@@ -79,7 +80,7 @@ msgstr "Onbekende auteur"
 
 #: cozy/control/importer.py:280
 msgid "Unknown Reader"
-msgstr "Onbekende lezer"
+msgstr "Onbekende voorlezer"
 
 #: cozy/tools.py:143
 msgid "hours"
@@ -124,28 +125,28 @@ msgstr "gisteren"
 #: cozy/tools.py:194
 #, python-format
 msgid "%s days ago"
-msgstr ""
+msgstr "%s dagen geleden"
 
 #: cozy/tools.py:196
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{weeks} week geleden"
+msgstr[1] "{weeks} weken geleden"
 
 #: cozy/tools.py:198
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{months} maand geleden"
+msgstr[1] "{months} maanden geleden"
 
 #: cozy/tools.py:200
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{years} jaar geleden"
+msgstr[1] "{years} jaar geleden"
 
 #: cozy/ui/main_view.py:403
 msgid "Audiobooks"
@@ -249,9 +250,8 @@ msgid "Elapsed time of current part"
 msgstr "De verstreken tijd van het huidige deel"
 
 #: data/ui/main_window.ui:311
-#, fuzzy
 msgid "Jump to position in current chapter"
-msgstr "Stoppen na huidig hoofdstuk"
+msgstr "Spoel door naar positie in huidige hoofdstuk"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -336,11 +336,11 @@ msgstr "Auteur"
 
 #: data/ui/main_window.ui:709
 msgid "List of readers"
-msgstr "Lijst met lezers"
+msgstr "Lijst met voorlezers"
 
 #: data/ui/main_window.ui:725 data/ui/search_popover.ui:201
 msgid "Reader"
-msgstr "Lezer"
+msgstr "Voorlezer"
 
 #: data/ui/main_window.ui:778
 msgid "List of books"
@@ -373,8 +373,7 @@ msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Als dat zo is, dan kun je de offline-modus inschakelen voor een boek in het "
-"overzicht.\n"
+"Als dat zo is, dan kun je de offline-modus inschakelen voor een boek in het overzicht.\n"
 "Dit slaat een kopie op van het boek wordt zodat je onderweg kunt luisteren."
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
@@ -430,7 +429,8 @@ msgstr "Gepubliceerd"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view above."
+"Start exploring your library by switching to the Author or Reader view "
+"above."
 msgstr ""
 "Begin met verkennen van je bibliotheek door hierboven te kiezen voor de "
 "Auteur- of Leesweergave."
@@ -453,7 +453,8 @@ msgstr "Bestand niet gevonden"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "Dit bestand kan niet worden gevonden. Wil je er handmatig naar zoeken?"
+msgstr ""
+"Dit bestand kan niet worden gevonden. Wil je er handmatig naar zoeken?"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
@@ -675,42 +676,3 @@ msgstr "_Over"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Afsluiten"
-
-#~ msgid "Scrubb through current part"
-#~ msgstr "Door huidig deel spoelen"
-
-#~ msgid "of"
-#~ msgstr "van"
-
-#~ msgid "remaining"
-#~ msgstr "resterend"
-
-#~ msgid "days"
-#~ msgstr "dagen"
-
-#~ msgid "ago"
-#~ msgstr "geleden"
-
-#~ msgid "week"
-#~ msgstr "week"
-
-#~ msgid "weeks"
-#~ msgstr "weken"
-
-#~ msgid "month"
-#~ msgstr "maand"
-
-#~ msgid "months"
-#~ msgstr "maanden"
-
-#~ msgid "year"
-#~ msgstr "jaar"
-
-#~ msgid "years"
-#~ msgstr "jaar"
-
-#~ msgid "page0"
-#~ msgstr "pagina0"
-
-#~ msgid "_Play/Pause"
-#~ msgstr "Afs_pelen/Pauzeren"
