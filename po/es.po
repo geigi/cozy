@@ -2,11 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
 # Jose Luis Tirado <joseluis.tirado@gmail.com>, 2019
-#
+# Adolfo Jayme-Barrientos, 2019
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -14,12 +15,12 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-13 16:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Jose Luis Tirado <joseluis.tirado@gmail.com>, 2019\n"
+"Last-Translator: Adolfo Jayme-Barrientos, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/geigi/teams/78138/es/)\n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
@@ -125,28 +126,28 @@ msgstr "yer"
 #: cozy/tools.py:194
 #, python-format
 msgid "%s days ago"
-msgstr ""
+msgstr "Hace %s días"
 
 #: cozy/tools.py:196
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hace {weeks} semana"
+msgstr[1] "Hace {weeks} semanas"
 
 #: cozy/tools.py:198
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hace {months} mes"
+msgstr[1] "Hace {months} meses"
 
 #: cozy/tools.py:200
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hace {years} año"
+msgstr[1] "Hace {years} años"
 
 #: cozy/ui/main_view.py:403
 msgid "Audiobooks"
@@ -250,9 +251,8 @@ msgid "Elapsed time of current part"
 msgstr "Tiempo transcurrido de la sección actual"
 
 #: data/ui/main_window.ui:311
-#, fuzzy
 msgid "Jump to position in current chapter"
-msgstr "Parar tras el capítulo actual"
+msgstr "Saltar a la posición en el capítulo actual"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -359,7 +359,8 @@ msgstr "Importe sus audiolibros"
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy importa automáticamente tus audiolibros a un directorio - tu biblioteca."
+"Cozy importa automáticamente tus audiolibros a un directorio - tu "
+"biblioteca."
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
@@ -374,10 +375,8 @@ msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Si es así,  puede activar el modo fuera de línea para el libro en el resumen "
-"del mismo.\n"
-"Esto mantiene una copia local del libro que puede escuchar en cualquier "
-"lugar."
+"Si es así,  puede activar el modo fuera de línea para el libro en el resumen del mismo.\n"
+"Esto mantiene una copia local del libro que puede escuchar en cualquier lugar."
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
@@ -386,7 +385,8 @@ msgstr "Interruptor de autoexploración"
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
 msgid "Automatically import new audiobooks on startup"
-msgstr "Importar automáticamente los audiolibros nuevos al inicio del programa"
+msgstr ""
+"Importar automáticamente los audiolibros nuevos al inicio del programa"
 
 #: data/ui/main_window.ui:1069
 msgid "Drag & Drop"
@@ -394,7 +394,7 @@ msgstr "Arrastrar y soltar"
 
 #: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr "Arrastre sus audiolibros a cozy y se importarán automáticamente."
+msgstr "Arrastre sus audiolibros a Cozy y se importarán automáticamente."
 
 #: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
@@ -430,10 +430,11 @@ msgstr "Publicado"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view above."
+"Start exploring your library by switching to the Author or Reader view "
+"above."
 msgstr ""
-"Comience a explorar su biblioteca cambiando a la vista de Autor o Lector más "
-"arriba."
+"Comience a explorar su biblioteca cambiando a la vista de Autor o Lector más"
+" arriba."
 
 #: data/ui/about.ui:14
 msgid "GitHub"
@@ -525,7 +526,7 @@ msgstr "Material gráfico"
 
 #: data/ui/settings.ui:824
 msgid "Prefer external images over embedded cover"
-msgstr "Preferir imágenes externas a la cubierta incluida"
+msgstr "Preferir imágenes externas a la cubierta incluida."
 
 #: data/ui/settings.ui:837
 msgid "Use images (cover.jpg, *.png, …) when available"
@@ -584,7 +585,8 @@ msgstr "Forzar el refresco de la base de datos"
 #: data/ui/settings.ui:1382
 msgid "This will force update the metadata of all imported books"
 msgstr ""
-"Esto forzará la actualización de los metadatos de todos los libros importados"
+"Esto forzará la actualización de los metadatos de todos los libros "
+"importados"
 
 #: data/ui/settings.ui:1402
 msgid "Force refresh"
@@ -603,7 +605,7 @@ msgstr ""
 msgid ""
 "Only recommended if cozy doesn't detect file modifications while scanning"
 msgstr ""
-"Solo se recomienda si cozy no detecta modificaciones de archivos al escanear"
+"Solo se recomienda si Cozy no detecta modificaciones de archivos al escanear"
 
 #: data/ui/settings.ui:1611
 msgid "Advanced"
@@ -676,39 +678,3 @@ msgstr "_Información"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Salir"
-
-#~ msgid "Scrubb through current part"
-#~ msgstr "Desplazarse por la sección actual"
-
-#~ msgid "of"
-#~ msgstr "de"
-
-#~ msgid "remaining"
-#~ msgstr "restantes"
-
-#~ msgid "days"
-#~ msgstr "días"
-
-#~ msgid "ago"
-#~ msgstr "hace"
-
-#~ msgid "week"
-#~ msgstr "semana"
-
-#~ msgid "weeks"
-#~ msgstr "semanas"
-
-#~ msgid "month"
-#~ msgstr "mes"
-
-#~ msgid "months"
-#~ msgstr "meses"
-
-#~ msgid "year"
-#~ msgstr "año"
-
-#~ msgid "years"
-#~ msgstr "años"
-
-#~ msgid "page0"
-#~ msgstr "página0"
