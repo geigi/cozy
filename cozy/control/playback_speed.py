@@ -1,6 +1,5 @@
 from cozy.architecture.event_sender import EventSender
 import cozy.control.player as player
-import cozy.control.db as db
 import cozy.ui
 
 import gi
@@ -27,6 +26,7 @@ class PlaybackSpeed(EventSender):
         self.speed_scale.add_mark(1.0, Gtk.PositionType.RIGHT, None)
         self.speed_scale.set_increments(0.02, 0.05)
         self.speed_scale.connect("value-changed", self.__set_playback_speed)
+        self.speed_scale.connect("button-release-event", self.__on_scale_click_released)
 
         player.add_player_listener(self.__player_changed)
 
@@ -52,12 +52,15 @@ class PlaybackSpeed(EventSender):
 
         self.emit_event("playback-speed-changed", self.speed)
 
+    def __on_scale_click_released(self, widget, sender):
+        player.save_current_playback_speed()
+
     def __player_changed(self, event, message):
         """
         Listen to and handle all gst player messages that are important for the ui.
         """
         if event == "track-changed":
             track = message
-            speed = db.Book.select().where(db.Book.id == track.book.id).get().playback_speed
+            speed = track.book.playback_speed
             self.speed_scale.set_value(speed)
             self.__set_playback_speed(None)

@@ -388,7 +388,6 @@ def set_playback_speed(speed):
     global __playback_speed_timer_running
 
     __speed = speed
-    save_current_playback_speed()
     if __playback_speed_timer_running:
         return
 

@@ -2,166 +2,175 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
-#
+# abuyop <abuyop@gmail.com>, 2019
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 16:01+0100\n"
-"PO-Revision-Date: 2017-08-25 21:47+0000\n"
-"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
-"Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
-"Language: de\n"
+"POT-Creation-Date: 2019-09-08 17:01+0200\n"
+"PO-Revision-Date: 2019-09-08 09:31+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>, 2019\n"
+"Language-Team: Malay (Malaysia) (https://www.transifex.com/geigi/teams/78138/ms_MY/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ms_MY\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
 msgid "Play this book"
-msgstr "Höre dieses Buch"
+msgstr "Baca buku ini"
 
 #: cozy/ui/book_element.py:212
 msgid "Open book overview"
-msgstr "Öffne die Buchübersicht"
+msgstr "Buka gambaran keseluruhan buku"
 
 #: cozy/ui/book_element.py:213
 msgid "Currently offline"
-msgstr "Aktuell offline"
+msgstr "Kini diluar talian"
 
 #: cozy/ui/book_element.py:319
 msgid "Mark as read"
-msgstr "Markiere: Abgeschlossen"
+msgstr "Tanda sebagai dibaca"
 
 #: cozy/ui/book_element.py:322
 msgid "Open in file browser"
-msgstr "Öffne in Dateibrowser"
+msgstr "Buka dalam pelayar fail"
 
 #: cozy/ui/book_element.py:325
 msgid "Remove from library"
-msgstr "Aus Bibliothek entfernen"
+msgstr "Buang dari pustaka"
 
 #: cozy/ui/book_element.py:395
 msgid "Play this part"
-msgstr "Höre dieses Kapitel"
+msgstr "Baca bahagian ini"
 
 #: cozy/ui/book_overview.py:228
 msgid "Downloaded"
-msgstr "Heruntergeladen"
+msgstr "Dimuat Turun"
 
 #: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
 msgid "Download"
-msgstr "Herunterladen"
+msgstr "Muat Turun"
 
 #: cozy/ui/file_not_found_dialog.py:66
 msgid "All files"
-msgstr "Alle Dateien"
+msgstr "Semua fail"
 
 #: cozy/control/offline_cache.py:176
 msgid "Copying"
-msgstr "Kopiere"
+msgstr "Menyalin"
 
 #: cozy/ui/search_results.py:71
 msgid "Jump to author "
-msgstr "Springe zum Autor"
+msgstr "Lompat ke pengarang"
 
 #: cozy/ui/search_results.py:74
 msgid "Jump to reader "
-msgstr "Springe zum Leser"
+msgstr "Lompat ke pembaca"
 
 #: cozy/control/importer.py:278
 msgid "Unknown Author"
-msgstr "Unbekannter Autor"
+msgstr "Pengarang Tidak Diketahui"
 
 #: cozy/control/importer.py:280
 msgid "Unknown Reader"
-msgstr "Unbekannter Leser"
+msgstr "Pembaca Tidak Diketahui"
 
-#: cozy/tools.py:143
+#: cozy/tools.py:142
 msgid "hours"
-msgstr "Stunden"
+msgstr "jam"
 
-#: cozy/tools.py:145
+#: cozy/tools.py:144
 msgid "hour"
-msgstr "Stunde"
+msgstr "jam"
 
-#: cozy/tools.py:153
+#: cozy/tools.py:152
 msgid "minutes"
-msgstr "Minuten"
+msgstr "minit"
 
-#: cozy/tools.py:155
+#: cozy/tools.py:154
 msgid "minute"
-msgstr "Minute"
+msgstr "minit"
 
-#: cozy/tools.py:159
+#: cozy/tools.py:158
 msgid "finished"
-msgstr "fertig"
+msgstr "selesai"
 
-#: cozy/tools.py:163
+#: cozy/tools.py:162
 msgid "seconds"
-msgstr "Sekunden"
+msgstr "saat"
 
-#: cozy/tools.py:165
+#: cozy/tools.py:164
 msgid "second"
-msgstr "Sekunde"
+msgstr "saat"
 
-#: cozy/tools.py:188
+#: cozy/tools.py:187
 msgid "never"
-msgstr "nie"
+msgstr "tidak sesekali"
 
-#: cozy/tools.py:190
+#: cozy/tools.py:189
 msgid "today"
-msgstr "heute"
+msgstr "hari ini"
 
-#: cozy/tools.py:192
+#: cozy/tools.py:191
 msgid "yesterday"
-msgstr "gestern"
+msgstr "semalam"
 
-#: cozy/tools.py:194
-#, python-format
-msgid "%s days ago"
-msgstr ""
+#: cozy/tools.py:193
+msgid "days"
+msgstr "hari"
 
-#: cozy/tools.py:196
-#, python-brace-format
-msgid "{weeks} week ago"
-msgid_plural "{weeks} weeks ago"
-msgstr[0] ""
-msgstr[1] ""
+#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
+#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
+msgid "ago"
+msgstr "yang lalu"
 
-#: cozy/tools.py:198
-#, python-brace-format
-msgid "{months} month ago"
-msgid_plural "{months} months ago"
-msgstr[0] ""
-msgstr[1] ""
+#: cozy/tools.py:195
+msgid "week"
+msgstr "minggu"
 
-#: cozy/tools.py:200
-#, python-brace-format
-msgid "{years} year ago"
-msgid_plural "{years} years ago"
-msgstr[0] ""
-msgstr[1] ""
+#: cozy/tools.py:197
+msgid "weeks"
+msgstr "minggu"
 
-#: cozy/ui/main_view.py:403
+#: cozy/tools.py:199
+msgid "month"
+msgstr "bulan"
+
+#: cozy/tools.py:201
+msgid "months"
+msgstr "bulan"
+
+#: cozy/tools.py:203
+msgid "year"
+msgstr "tahun"
+
+#: cozy/tools.py:205
+msgid "years"
+msgstr "tahun"
+
+#: cozy/ui/main_view.py:408
 msgid "Audiobooks"
-msgstr ""
+msgstr "Buku audio"
 
-#: cozy/ui/main_view.py:424
+#: cozy/ui/main_view.py:429
 msgid "Importing Audiobooks"
-msgstr "Importiere Hörbücher"
+msgstr "Mengimport Buku Audio"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
+#: cozy/ui/main_view.py:498 cozy/ui/main_view.py:504 cozy/ui/main_view.py:824
 msgid "All"
-msgstr "Alle"
+msgstr "Semua"
 
-#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
+#: cozy/ui/main_view.py:499 cozy/ui/main_view.py:505
 msgid "Display all books"
-msgstr "Zeige alle Bücher"
+msgstr "Papar semua buku"
 
 #: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
 msgid "min"
@@ -169,288 +178,313 @@ msgstr "min"
 
 #: cozy/control/sleep_timer.py:128
 msgid "Off"
-msgstr "Aus"
+msgstr "Mati"
 
 #: cozy/ui/settings.py:416 cozy/ui/settings.py:459
 msgid "External drive"
-msgstr "Externer Datenträger"
+msgstr "Pemacu luar"
 
 #: cozy/ui/settings.py:419 cozy/ui/settings.py:462
 msgid "Internal drive"
-msgstr "Interner Datenträger"
+msgstr "Pemacu dalam"
 
 #: cozy/ui/settings.py:446
 msgid "Changing audio book location…"
-msgstr "Wechsle zu neuem Hörbuch-Ordner…"
+msgstr "Mengubah lokasi buku audio..."
 
 #: cozy/ui/disk_element.py:26
 msgid "Disc"
-msgstr "Disc"
+msgstr "Cakera"
 
 #: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
-msgstr "Springe 30 Sekunden zurück"
+msgstr "Mandir 30 saat"
 
 #: data/ui/main_window.ui:79
 msgid "Rewind button"
-msgstr "Zurück springen Knopf"
+msgstr "Butang mandir"
 
 #: data/ui/main_window.ui:80
 msgid "Jump back 30 seconds"
-msgstr "Springe 30 Sekunden zurück"
+msgstr "Lompat balik 30 saat"
 
 #: data/ui/main_window.ui:97
 msgid "Start playback"
-msgstr "Starte die Wiedergabe"
+msgstr "Mula main balik"
 
 #: data/ui/main_window.ui:105
 msgid "Play/Pause Button"
-msgstr "Play/Pause Knopf"
+msgstr "Butang Main/Jeda"
 
 #: data/ui/main_window.ui:106
 msgid "Start or pause the playback"
-msgstr "Starte oder pausiere die Wiedergabe"
+msgstr "Mula atau jeda main balik"
 
 #: data/ui/main_window.ui:123
 msgid "Volume control"
-msgstr "Lautstärke"
+msgstr "Kawalan suara"
 
 #: data/ui/main_window.ui:200
 msgid "Currently playing"
-msgstr "Wird gerade wiedergegeben"
+msgstr "Kini dimainkan"
 
 #: data/ui/main_window.ui:218
 msgid "Booktitle"
-msgstr "Buchtitel"
+msgstr "Tajukbuku"
 
 #: data/ui/main_window.ui:219
 msgid "Title of currently playing book"
-msgstr "Titel des aktuellen Buches"
+msgstr "Tajuk buku yang sedang dimainkan"
 
 #: data/ui/main_window.ui:244
 msgid "Part name"
-msgstr "Kapitelname"
+msgstr "Nama bahagian"
 
 #: data/ui/main_window.ui:245
 msgid "Title of the currently playing part"
-msgstr "Name des aktuell abgespielten Kapitels"
+msgstr "Tajuk bahagian yang sedang dimainkan"
 
 #: data/ui/main_window.ui:287
 msgid "Elapsed time"
-msgstr "Vergangene Zeit"
+msgstr "Masa berlalu"
 
 #: data/ui/main_window.ui:295
 msgid "Time elapsed"
-msgstr "Vergangene Zeit"
+msgstr "Masa berlalu"
 
 #: data/ui/main_window.ui:296
 msgid "Elapsed time of current part"
-msgstr "Vergangene Zeit des aktuellen Kapitels"
+msgstr "Masa berlalu bagi bahagian semasa"
 
 #: data/ui/main_window.ui:311
-#, fuzzy
-msgid "Jump to position in current chapter"
-msgstr "Stoppe nach aktuellen Kapitel"
+msgid "Scrubb through current part"
+msgstr "Ganyah menerusi bahagian semasa"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
-msgstr "Positions-Slider"
+msgstr "Lungsur kedudukan"
 
 #: data/ui/main_window.ui:318
 msgid "Position of the current part in seconds"
-msgstr "Position des aktuell abgespielten Kapitels in Sekunden"
+msgstr "Kedudukan bahagian semasa dalam saat"
 
 #: data/ui/main_window.ui:336
 msgid "Remaining time"
-msgstr "Verbleibende Zeit"
+msgstr "Masa berbaki"
 
 #: data/ui/main_window.ui:344
 msgid "Time remaining"
-msgstr "Verbleibende Zeit"
+msgstr "Masa berbaki"
 
 #: data/ui/main_window.ui:345
 msgid "Remaining time of current part"
-msgstr "Verbleibende Zeit des aktuellen Kapitels"
+msgstr "Masa berbaki bagi bahagian semasa"
 
 #: data/ui/main_window.ui:421
 msgid "Working…"
-msgstr "Arbeite…"
+msgstr "Sedang berusaha..."
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
-msgstr "Am arbeiten..."
+msgstr "Kini dijalankan"
 
 #: data/ui/main_window.ui:442
 msgid "Playback speed"
-msgstr "Geschwindigkeit"
+msgstr "Kelajuan main balik"
 
 #: data/ui/main_window.ui:464 data/ui/settings.ui:566
 msgid "Sleep timer"
-msgstr "Schlafen Timer"
+msgstr "Pemasa tidur"
 
 #: data/ui/main_window.ui:475
 msgid "Timer menu button"
-msgstr "Timer Menü-Knopf"
+msgstr "Butang menu pemasa"
 
 #: data/ui/main_window.ui:476
 msgid "Open the sleep timer popover"
-msgstr "Öffne das Schlafen Timer Popover"
+msgstr "Buka tetingkap timbul pemasa tidur"
 
 #: data/ui/main_window.ui:492
 msgid "Search your library"
-msgstr "Durchsuche deine Bibliothek"
+msgstr "Gelintar pustaka anda"
 
 #: data/ui/main_window.ui:503
 msgid "Search menu button"
-msgstr "Suche Menü-Knopf"
+msgstr "Butang menu gelintar"
 
 #: data/ui/main_window.ui:504
 msgid "Open the search popover"
-msgstr "Öffne das Suchen Popover"
+msgstr "Buka tetingkap timbul gelintar"
 
 #: data/ui/main_window.ui:518
 msgid "Options"
-msgstr "Optionen"
+msgstr "Pilihan"
 
 #: data/ui/main_window.ui:529
 msgid "Options menu button"
-msgstr "Optionen Menü-Knopf"
+msgstr "Butang menu pilihan"
 
 #: data/ui/main_window.ui:530
 msgid "Open the options popover"
-msgstr "Öffne das Optionen Popover"
+msgstr "Buka tetingkap menu pilihan"
 
 #: data/ui/main_window.ui:655
 msgid "Recent"
-msgstr "Zuletzt"
+msgstr "Baru-baru Ini"
 
 #: data/ui/main_window.ui:674
 msgid "List of authors"
-msgstr "Liste der Autoren"
+msgstr "Senarai pengarang"
 
 #: data/ui/main_window.ui:690 data/ui/main_window.ui:798
 #: data/ui/search_popover.ui:107
 msgid "Author"
-msgstr "Autor"
+msgstr "Pengarang"
 
 #: data/ui/main_window.ui:709
 msgid "List of readers"
-msgstr "Liste der Leser"
+msgstr "Senarai pembaca"
 
 #: data/ui/main_window.ui:725 data/ui/search_popover.ui:201
 msgid "Reader"
-msgstr "Leser"
+msgstr "Pembaca"
 
 #: data/ui/main_window.ui:778
 msgid "List of books"
-msgstr "Liste aller Bücher"
+msgstr "Senarai buku"
 
 #: data/ui/main_window.ui:814
 msgid "Importing your audiobooks…"
-msgstr "Importiere deine Hörbücher…"
+msgstr "Mengimport buku audio anda..."
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
-msgstr "Importiere deine Hörbücher"
+msgstr "Import Buku Audio anda"
 
 #: data/ui/main_window.ui:882
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy verwaltet automatisch alle Hörbücher in einem Ordner - deiner Bibliothek"
+"Cozy mengimport secara automatik buku audio anda ke dalam satu direktori - "
+"pustaka anda"
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
-msgstr "Externer Datenträger oder Netzwerklaufwerk?"
+msgstr "Pemacu luar atau Rangkaian?"
 
 #: data/ui/main_window.ui:927
 msgid "Are your audiobooks stored on an external or network drive?"
-msgstr ""
-"Sind Deine Hörbücher auf einem externen oder Netzwerkdatenträger gespeichert?"
+msgstr "Adakah buku audio anda disimpan dalam pemacu luar atau rangkaian?"
 
 #: data/ui/main_window.ui:942
 msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Ist das der Fall, kannst du den Offline Modus in der Buchübersicht "
-"aktivieren.\n"
-"Diese Funktion behält eine lokale Kopie des Buches, um es unterwegs zu hören."
+"Jika anda benarkan mod luar talian bagi buku dalam selayang pandang buku\n"
+"Ia akan menyimpan satu salinan setempat buku yang anda mahu dengar ketika keluar"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr "Auto-Scan Schalter"
+msgstr "Tukaran auto imbas"
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
 msgid "Automatically import new audiobooks on startup"
-msgstr "Importiere neue Hörbücher automatisch beim Start"
+msgstr "Import secara automatik buku audio ketika permulaan"
 
 #: data/ui/main_window.ui:1069
 msgid "Drag & Drop"
-msgstr "Drag & Drop"
+msgstr "Seret & Lepas"
 
 #: data/ui/main_window.ui:1086
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr "Ziehe deine Hörbücher in Cozy um sie automatisch zu importieren"
+msgstr ""
+"Seret buku audio anda ke dalam cozy dan ia akan diimport secara automatik"
 
 #: data/ui/main_window.ui:1107
 msgid "Location of your audiobooks"
-msgstr "Speicherort Deiner Hörbücher"
+msgstr "Lokasi buku audio anda"
 
 #: data/ui/main_window.ui:1128
 msgid "Set Audiobooks Directory"
-msgstr "Wähle den Speicherort der Hörbücher"
+msgstr "Tetapkan Direktori Buku Audio"
 
 #: data/ui/main_window.ui:1145
 msgid ""
 "Load audiobooks from a directory, network drive or an external disk\n"
 "You can add more storage locations later in the settings"
 msgstr ""
-"Lade Hörbücher von einem Ordner, Netzwerklaufwerk oder externem Laufwerk\n"
-"Du kannst später mehr Speicherorte in den Einstellungen hinzufügen"
+"Muat buku audio dari direktori, pemacu rangkaain atau cakera luar\n"
+"Anda boleh tambah lagi lokasi storan kemudian menerusi tetapan"
 
 #: data/ui/main_window.ui:1376
 msgid "Remaining"
-msgstr "Verbleibend"
+msgstr "Berbaki"
 
 #: data/ui/main_window.ui:1432
 msgid "Total"
-msgstr "Gesamt"
+msgstr "Jumlah"
 
 #: data/ui/main_window.ui:1449
 msgid "Last played"
-msgstr "Zuletzt gehört"
+msgstr "Terakhir dimainkan"
 
 #: data/ui/main_window.ui:1466
 msgid "Published"
-msgstr "Veröffentlicht"
+msgstr "Diterbitkan"
+
+#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
+msgid "page0"
+msgstr "muka0"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view above."
+"Start exploring your library by switching to the Author or Reader view "
+"above."
 msgstr ""
-"Erkunde Deine Bibliothek indem du zur Autor oder Leser Ansicht wechselst."
+"Mula menjelajah pustaka anda dengan bertukar ke paparan Pengarang atau "
+"Pembaca di atas."
 
 #: data/ui/about.ui:14
 msgid "GitHub"
 msgstr "GitHub"
 
+#: data/ui/app_menu.ui:7
+msgid "_Play/Pause"
+msgstr "_Main/Jeda"
+
+#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
+msgstr "_Keutamaan"
+
+#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr "_Bantuan"
+
+#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr "_Perihal"
+
+#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
+msgid "_Quit"
+msgstr "_Keluar"
+
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Batal"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
-msgstr "Auswählen"
+msgstr "Cari"
 
 #: data/ui/file_not_found.ui:86
 msgid "File not found"
-msgstr "Datei nicht gefunden"
+msgstr "Fail tidak ditemui"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "Diese Datei wurde nicht gefunden. Möchtest Du sie selbst auswählen?"
+msgstr "Fail ini tidak ditemui. Anda mahu cari ia secara manual?"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
@@ -458,7 +492,7 @@ msgstr "Ok"
 
 #: data/ui/import_failed.ui:81
 msgid "Some files could not be imported"
-msgstr "Es konnten nicht alle Dateien importiert werden"
+msgstr "Sesetengah fail tidak dapat diimport"
 
 #: data/ui/import_failed.ui:134
 msgid ""
@@ -467,243 +501,199 @@ msgid ""
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
-"Dies kann verschiedene Gründe haben:\n"
-"- Das Audioformat wird nicht unterstützt\n"
-"- Die Datei(en) sind keine validen Audiodateien\n"
-"- Die Datei(en) sind beschädigt"
+"Ia berlaku atas beberapa sebab:\n"
+"- Format audio tidak disokong\n"
+"- Fail(s) bukan fail audio yang sah\n"
+"- Fail(s) telah rosak"
 
 #: data/ui/settings.ui:92 data/ui/settings.ui:344
 msgid "General"
-msgstr "Allgemein"
+msgstr "Am"
 
 #: data/ui/settings.ui:137
 msgid "Dark Mode"
-msgstr "Dark Mode"
+msgstr "Mod Gelap"
 
 #: data/ui/settings.ui:213
 msgid "Titlebar"
-msgstr "Titelleiste"
+msgstr "Palangtajuk"
 
 #: data/ui/settings.ui:258
 msgid "Display the whole book instead of the current chapter"
-msgstr "Zeige das komplette Buch anstatt des Kapitels"
+msgstr "Papar keseluruhan buku selain dari bab semasa"
 
 #: data/ui/settings.ui:321
 msgid "Appearance"
-msgstr "Erscheinung"
+msgstr "Penampilan"
 
 #: data/ui/settings.ui:387
 msgid "Suspend system on timer"
-msgstr "Schicke System schlafen nach Timer"
+msgstr "Tangguh sistem dengan pemasa"
 
 #: data/ui/settings.ui:447
 msgid "Replay 30 seconds"
-msgstr "30 Sekunden Replay"
+msgstr "Main semula 30 saat"
 
 #: data/ui/settings.ui:507
 msgid "Automatic media scan"
-msgstr "Automatischer Medienordner Scan"
+msgstr "Imbas media secara automatik"
 
 #: data/ui/settings.ui:611
 msgid "Fadeout"
-msgstr "Fadeout"
+msgstr "Resap Lenyap"
 
 #: data/ui/settings.ui:672
 msgid "Fadeout duration"
-msgstr "Fadeout Dauer"
+msgstr "Tempoh resap lenyap"
 
 #: data/ui/settings.ui:745
 msgid "Behaviour"
-msgstr "Verhalten"
+msgstr "Kelakuan"
 
 #: data/ui/settings.ui:772
 msgid "Artwork"
-msgstr "Artwork"
+msgstr "Kerja Seni"
 
 #: data/ui/settings.ui:824
 msgid "Prefer external images over embedded cover"
-msgstr "Bevorzuge externes Cover über eingebettetes Cover"
+msgstr "Utamakan imej luar dari kulit terbenam"
 
 #: data/ui/settings.ui:837
 msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr "Nutze Cover Bilder (cover.jpg, *.png, …) wenn verfügbar"
+msgstr "Guna imej (cover.jpg, *.png, …) bila ada"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
-msgstr "Hörbücher Pfad"
+msgstr "Lokasi buku audio"
 
 #: data/ui/settings.ui:936
 msgid "Storage locations"
-msgstr "Hörbuch Ordner"
+msgstr "Lokasi storan"
 
 #: data/ui/settings.ui:994
 msgid "Add location"
-msgstr "Order hinzufügen"
+msgstr "Tambah lokasi"
 
 #: data/ui/settings.ui:1019 data/ui/settings.ui:1215
 msgid "Remove location"
-msgstr "Ordner entfernen"
+msgstr "Buang lokasi"
 
 #: data/ui/settings.ui:1055
 msgid "Toggle this storage location to be internal/external."
-msgstr "Schalte diesen Speicherort auf intern/extern."
+msgstr "Togol lokasi storan ini ke dalaman/luaran."
 
 #: data/ui/settings.ui:1081
 msgid "Set as default storage location for new audiobooks"
-msgstr "Als Standard für neue Hörbücher festlegen"
+msgstr "Tetapkan sebagai lokasi storan lalai untuk buku audio baharu"
 
 #: data/ui/settings.ui:1134
 msgid "Blacklist"
-msgstr "Blacklist"
+msgstr "Senarai Hitam"
 
 #: data/ui/settings.ui:1178
 msgid "Path"
-msgstr "Pfad"
+msgstr "Laluan"
 
 #: data/ui/settings.ui:1261
 msgid "Follow symlinks"
-msgstr "Folge Symlinks"
+msgstr "Ikut pautan simbolik"
 
 #: data/ui/settings.ui:1293
 msgid "Storage"
-msgstr "Speicher"
+msgstr "Storan"
 
 #: data/ui/settings.ui:1317
 msgid "Database"
-msgstr "Datenbank"
+msgstr "Pangkalan Data"
 
 #: data/ui/settings.ui:1369
 msgid "Force refresh the database"
-msgstr "Aktualisieren der Datenbank"
+msgstr "Paksa segar semula pangkalan data"
 
 #: data/ui/settings.ui:1382
 msgid "This will force update the metadata of all imported books"
-msgstr "Führt ein Update aller Metadaten der Datenbank durch"
+msgstr "Tindakan ini akan memaksa kemaskini data meta bagi semua buku import"
 
 #: data/ui/settings.ui:1402
 msgid "Force refresh"
-msgstr "Aktualisieren"
+msgstr "Paksa segara semula"
 
 #: data/ui/settings.ui:1470
 msgid "By request"
-msgstr "Auf Nachfrage"
+msgstr "Mengikut permintaan"
 
 #: data/ui/settings.ui:1523
 msgid "Use crc32 checksum for file modification detection"
-msgstr "Nutze crc32 Prüfsumme um geänderte Dateien zu erkennen"
+msgstr ""
+"Guna hasil tambah semak crc32 untuk pengecaman bagi pengubahsuaian fail"
 
 #: data/ui/settings.ui:1536
 msgid ""
 "Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr "Nur empfohlen falls Cozy geänderte Dateien beim Scan nicht erkennt"
+msgstr ""
+"Hanya disarankan sekiranya cozy tidak mengesan pengubahsuaian fail ketika "
+"mengimbas"
 
 #: data/ui/settings.ui:1611
 msgid "Advanced"
-msgstr "Erweitert"
+msgstr "Lanjutan"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
-msgstr "Suche"
+msgstr "Gelintar"
 
 #: data/ui/search_popover.ui:36
 msgid "Search box"
-msgstr "Suchen-Textbox"
+msgstr "Kotak gelintar"
 
 #: data/ui/search_popover.ui:37
 msgid "Search your audiobook library"
-msgstr "Durchsuche deine Hörbuch Bibliothek"
+msgstr "Gelintar pustaka buku audio anda"
 
 #: data/ui/search_popover.ui:67
 msgid "Which book are you looking for?"
-msgstr "Welches Buch suchst Du?"
+msgstr "Buku apakah yang mahu dicari?"
 
 #: data/ui/search_popover.ui:154
 msgid "Book"
-msgstr "Buch"
+msgstr "Buku"
 
 #: data/ui/search_popover.ui:248
 msgid "Part"
-msgstr "Kapitel"
+msgstr "Bahagian"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
-msgstr "Nichts gefunden :("
+msgstr "Tiada apa-apa ditemui :("
 
 #: data/ui/timer_popover.ui:39
 msgid "Stop after current chapter"
-msgstr "Stoppe nach aktuellen Kapitel"
+msgstr "Henti selepas bab semasa"
 
 #: data/ui/timer_popover.ui:76
 msgid "Timer duration"
-msgstr "Timer Dauer"
+msgstr "Tempoh pemasa"
 
 #: data/ui/timer_popover.ui:88
 msgid "Timer duration slider"
-msgstr "Timer-Dauer Slider"
+msgstr "Lungsur tempoh pemasa"
 
 #: data/ui/timer_popover.ui:89
 msgid "Set the sleep timer duration in minutes"
-msgstr "Setze die Timer Dauer in Minuten"
+msgstr "Tetapkan tempoh pemasa tidur dalam minit"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
-msgstr "_Suche nach neuen Medien"
+msgstr "_Imbas Direktori"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
-msgstr ""
+msgstr "_Sembunyi buku-buku yang tiada"
 
-#: data/ui/titlebar_menu.ui:19
-msgid "_Preferences"
-msgstr "_Einstellungen"
+#: data/ui/book_progress_element.ui:49
+msgid "of"
+msgstr "dari"
 
-#: data/ui/titlebar_menu.ui:25
-msgid "_Help"
-msgstr "_Hilfe"
-
-#: data/ui/titlebar_menu.ui:29
-msgid "_About"
-msgstr "_Über"
-
-#: data/ui/titlebar_menu.ui:33
-msgid "_Quit"
-msgstr "_Beenden"
-
-#~ msgid "Scrubb through current part"
-#~ msgstr "Springe durch das aktuelle Kapitel"
-
-#~ msgid "of"
-#~ msgstr "von"
-
-#~ msgid "remaining"
-#~ msgstr "verbleibend"
-
-#~ msgid "days"
-#~ msgstr "Tage"
-
-#~ msgid "ago"
-#~ msgstr " "
-
-#~ msgid "week"
-#~ msgstr "Woche"
-
-#~ msgid "weeks"
-#~ msgstr "Wochen"
-
-#~ msgid "month"
-#~ msgstr "Monat"
-
-#~ msgid "months"
-#~ msgstr "Monate"
-
-#~ msgid "year"
-#~ msgstr "Jahr"
-
-#~ msgid "years"
-#~ msgstr "Jahre"
-
-#~ msgid "page0"
-#~ msgstr "page0"
-
-#~ msgid "_Play/Pause"
-#~ msgstr "_Play/Pause"
+#: data/ui/book_progress_element.ui:75
+msgid "remaining"
+msgstr "berbaki"

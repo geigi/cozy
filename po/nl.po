@@ -6,7 +6,7 @@
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
 # Heimen Stoffels <vistausss@outlook.com>, 2019
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""

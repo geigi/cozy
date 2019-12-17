@@ -1,0 +1,252 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# abuyop <abuyop@gmail.com>, 2019
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-08 18:25+0200\n"
+"PO-Revision-Date: 2019-09-08 09:39+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>, 2019\n"
+"Language-Team: Malay (Malaysia) (https://www.transifex.com/geigi/teams/78138/ms_MY/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ms_MY\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: data/com.github.geigi.cozy.desktop.in:3
+#: data/com.github.geigi.cozy.appdata.xml.in:6
+msgid "Cozy"
+msgstr "Cozy"
+
+#: data/com.github.geigi.cozy.desktop.in:4
+msgid "Audio Book Player"
+msgstr "Pemain Buku Audio"
+
+#: data/com.github.geigi.cozy.desktop.in:5
+msgid "Play and organize your audio book collection"
+msgstr "Baca dan urus koleksi buku audio anda"
+
+#: data/com.github.geigi.cozy.desktop.in:6
+msgid "com.github.geigi.cozy"
+msgstr "com.github.geigi.cozy"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:7
+msgid "A modern audio book player"
+msgstr "Sebuah pembaca buku audio yang modern"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:9
+msgid "You like audio books? Then lets get cozy!"
+msgstr "Anda suka mendengar buku audio? Jom dapatkan cozy!"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:12
+msgid ""
+"Cozy is a modern audio book player. Here are some of the current features:"
+msgstr ""
+"Cozy merupakan sebuah pembaca buku audio yang modern. Senarai di bawah "
+"merupakan beberapa fitur semasa:"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:16
+msgid "Import all your audiobooks into cozy to browse them comfortably"
+msgstr ""
+"Import semua buku audio anda ke dalam direktori cozy supaya dapat "
+"melayarinya dengan selesa"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:17
+msgid ""
+"Listen to your DRM free mp3, m4a (aac, ALAC, …), flac, ogg and wav audio "
+"books"
+msgstr ""
+"Dengar buku audio mp3, m4a (aac, ALAC, …), flac, ogg and wav yang bebas DRM"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:18
+msgid "Remembers your playback position"
+msgstr "Ingat kedudukan main balik anda"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:19
+msgid "Sleep timer!"
+msgstr "Pemasa tidur!"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:20
+msgid "Playback speed control for each book individually"
+msgstr "Kawal kelajuan main balik untuk setiap buku secara individu"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:21
+msgid "Search your library"
+msgstr "Gelintar pustaka anda"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:22
+msgid "Multiple storage location support"
+msgstr "Sokongan lokasi storan berbilang"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:23
+msgid ""
+"Offline Mode! This allows you to keep an audiobook on your internal storage "
+"if you store your audiobooks on an external or network drive. Perfect to "
+"listen to on the go!"
+msgstr ""
+"Mod luar talian! Ia membolehkan anda menyimpan buku audio anda ke dalam "
+"storan dalaman anda sekiranya anda menyimpan buku audio pada pemacu luar "
+"atau rangkaian. Mudah mendengar ketika berada di luar!"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:24
+msgid "Drag and Drop to import new audiobooks"
+msgstr "Serert dan Lepas untuk mengimport buku audio baharu"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:25
+msgid "Sort your audio books by author, reader and name"
+msgstr "Isih buku audio anda mengikut pengarang, pembaca dan nama"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:45
+msgid "Julian Geywitz"
+msgstr "Julian Geywitz"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:55
+msgid "Cozy features a new icon! Cheers to Fatih20"
+msgstr "Cozy kini memfiturkan satu ikon baharu! Yay buat Fatih20"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:56
+msgid "App information is now translated! Cheers to NathanBnm"
+msgstr "Maklumat Apl kini boleh diterjemah! Yay buat NathanBnm"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:57
+#: data/com.github.geigi.cozy.appdata.xml.in:88
+#: data/com.github.geigi.cozy.appdata.xml.in:107
+msgid "Updated translations"
+msgstr "Terjemahan dikemaskini"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:58
+msgid "Fix: Sometimes the app name was not correctly displayed"
+msgstr "Baiki: Kadang kala nama apl tidak dipaparkan dengan betul"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:65
+#: data/com.github.geigi.cozy.appdata.xml.in:72
+msgid ""
+"Fix: Cozy crashed on startup when prefering cover image files over embedded "
+"album art"
+msgstr ""
+"Baiki: Cozy mengalami kerosakan ketika mula sekiranya fail imej muka hadapan"
+" diutamakan berbanding seni album terbenam"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:79
+msgid "Fixed startup crash on elemntary OS 5.0 Juno"
+msgstr "Kerosakan ketika permulaan dibaiki pada elementary OS 5.0 Juno"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:86
+msgid "Support for elemntary OS 5.0 Juno"
+msgstr "Sokongan untuk elementary OS 5.0 Juno"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:87
+#: data/com.github.geigi.cozy.appdata.xml.in:95
+msgid ""
+"Fixed a bug which prevented cozy from automatically playing the next chapter"
+msgstr ""
+"Baiki pepijat yang menghalang cozy memainkan bab berikutnya secara automatik"
+" "
+
+#: data/com.github.geigi.cozy.appdata.xml.in:102
+msgid "Improved artwork image quality"
+msgstr "Kualiti imej kerja seni ditambah baik"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:103
+msgid "The book overview now supports multiple disks in audiobooks"
+msgstr ""
+"Selayang pandang buku kini menyokong cakera berbilang dalam buku audio"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:104
+msgid ""
+"The file not found window will only open when the file is on the internal "
+"drive"
+msgstr ""
+"Tetingkap fail tidak ditemui hanya terbuka ketika fail berada dalam pemacu "
+"dalaman"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:105
+msgid "Fixed a typo"
+msgstr "Baiki salah eja"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:106
+msgid "Support for elemntary OS 5.0"
+msgstr "Sokongan untuk elementary OS 5.0"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:114
+msgid ""
+"Offline Mode! If your audiobooks are on an external or network drive, you "
+"can switch the download button to keep a local cached copy of the book to "
+"listen to on the go. To enable this feature you have to set your storage "
+"location to external in the settings."
+msgstr ""
+"Mod Luar Talian! Jika buku audio anda berada dalam pemacu luar atau "
+"rangkaian, anda boleh arahkan butang muat turun menyimpan salinan cache buku"
+" supaya mudah mendengarnya ketika di luar. Untuk membenarkan fitur ini, anda"
+" perlu tetapkan lokasi storan ke luaran dalam tetapan."
+
+#: data/com.github.geigi.cozy.appdata.xml.in:115
+msgid "Detect online/offline storage devices"
+msgstr "Kesan peranti storan dalam/luar talian"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:116
+msgid "Option to hide unavailable books"
+msgstr "Pilihan untuk menyembunyikan buku-buku yang tiada"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:117
+msgid "Support for wav files"
+msgstr "Sokongan untuk fail wav"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:118
+msgid "Support for audio files that have no tags at all"
+msgstr "Sokongan untuk fail audio yang tidak mempunyai tag langsung"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:119
+msgid "You can mark books as read using the right click menu"
+msgstr ""
+"Anda boleh tanda buku sebagai telah dibaca menggunakan menu klik kanan"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:120
+msgid "New setting: Prefer cover image file over embedded covers"
+msgstr ""
+"Tetapan baharu: Utamakan fail imej muka hadapan berbanding kulit terbenam"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:121
+msgid "Redesigned Sleep Timer"
+msgstr "Pemasa tidur telah direka semula"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:122
+msgid ""
+"More Sleep Timer: You can now stop the playback after the current chapter"
+msgstr ""
+"Lagi Berkenaan Pemasa Tidur: Kini anda boleh hentikan main balik selepas bab"
+" semasa"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:123
+msgid "And even more: Fadeout on timer end (in settings)"
+msgstr "Dan lagi: Resap leyap pada hujung pemasa (dalam tetapan)"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:124
+msgid "Redesigned hello screen and settings"
+msgstr "Skrin hello dan tetapan telah direka semula"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:125
+msgid "Fixed bug where cozy would not start on GTK older than 3.22"
+msgstr ""
+"Pepijat dibaiki ketika cozy gagal dimulakan pada GTK lebih lama dari versi "
+"3.22"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:126
+msgid ""
+"If no author field is present, the reader field will be used as author. This"
+" requires a force reimport (settings) on already imported books."
+msgstr ""
+"Jika medan pengarang tiada, medan pembaca akan digunakan sebagai pengarang. "
+"Ia perlu mengimport semula (tetapan) pada buku-buku import."
+
+#: data/com.github.geigi.cozy.appdata.xml.in:127
+msgid "Optimizations under the hood"
+msgstr "Pengoptimuman pada aplikasi"
