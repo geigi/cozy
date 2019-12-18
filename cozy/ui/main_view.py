@@ -585,6 +585,7 @@ class CozyUI(metaclass=Singleton):
         self.author_box.select_row(row)
         self.book_box.invalidate_filter()
         self.book_box.invalidate_sort()
+        self.toolbar_revealer.set_reveal_child(True)
         self.search.close()
 
     def jump_to_reader(self, book):
@@ -602,6 +603,7 @@ class CozyUI(metaclass=Singleton):
         self.reader_box.select_row(row)
         self.book_box.invalidate_filter()
         self.book_box.invalidate_sort()
+        self.toolbar_revealer.set_reveal_child(True)
         self.search.close()
 
     def jump_to_book(self, book):
