@@ -204,16 +204,14 @@ class Titlebar:
         if track:
             if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
                 total = self.progress_scale.get_adjustment().get_upper()
-                remaining_secs = int(((total - val)))
+                remaining_secs: int = int((total - val))
                 self.remaining_label.set_markup(
                     "<tt><b>-" + tools.seconds_to_str(remaining_secs, display_zero_h=True) + "</b></tt>")
             else:
-                remaining_secs = int(
+                remaining_secs: int = int(
                     (track.length / self.ui.speed.get_speed()) - val)
-                remaining_mins, remaining_secs = divmod(remaining_secs, 60)
-
                 self.remaining_label.set_markup(
-                    "<tt><b>-" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+                    "<tt><b>-" + tools.seconds_to_str(remaining_secs, display_zero_h=False) + "</b></tt>")
 
         if self.ui.book_overview.book and self.current_book.id == self.ui.book_overview.book.id:
             self.ui.book_overview.update_time()
