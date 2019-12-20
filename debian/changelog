@@ -1,3 +1,13 @@
+com.github.geigi.cozy (0.6.10) UNSTABLE; urgency=low
+
+  * Support for python 3.8. Cheers to emmaliddell
+  * Updated translations
+  * Fixes in the titlebar
+  * Fix: show navigation bar when searching from book overview
+  * Other small fixes
+
+ -- Julian Geywitz <github@geigi.de>  Fri, 20 Dec 2019 12:55:14 +0200
+
 com.github.geigi.cozy (0.6.9) UNSTABLE; urgency=low
 
   * Cozy features a new icon! Cheers to Fatih20
