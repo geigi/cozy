@@ -1,18 +1,14 @@
-import threading
-
-import cozy.artwork_cache as artwork_cache
-import cozy.db as db
-import cozy.player as player
+import cozy.control.artwork_cache as artwork_cache
+import cozy.control.db as db
+import cozy.control.player as player
 import cozy.tools as tools
 import cozy.ui
-from cozy.sleep_timer import SleepTimer
-from cozy.playback_speed import PlaybackSpeed
 from cozy.tools import IntervalTimer
 
 import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
-from gi.repository import Gtk, Gdk, Gst, GLib
+from gi.repository import Gtk, Gdk, GLib
 
 import logging
 log = logging.getLogger("titlebar")
@@ -38,7 +34,7 @@ class Titlebar:
     current_elapsed = 0
 
     def __init__(self):
-        self.ui = cozy.ui.CozyUI()
+        self.ui = cozy.ui.main_view.CozyUI()
 
         # init buttons
         self.play_button = self.ui.get_object("play_button")
@@ -208,16 +204,14 @@ class Titlebar:
         if track:
             if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
                 total = self.progress_scale.get_adjustment().get_upper()
-                remaining_secs = int(((total - val)))
+                remaining_secs: int = int((total - val))
                 self.remaining_label.set_markup(
                     "<tt><b>-" + tools.seconds_to_str(remaining_secs, display_zero_h=True) + "</b></tt>")
             else:
-                remaining_secs = int(
+                remaining_secs: int = int(
                     (track.length / self.ui.speed.get_speed()) - val)
-                remaining_mins, remaining_secs = divmod(remaining_secs, 60)
-
                 self.remaining_label.set_markup(
-                    "<tt><b>-" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+                    "<tt><b>-" + tools.seconds_to_str(remaining_secs, display_zero_h=False) + "</b></tt>")
 
         if self.ui.book_overview.book and self.current_book.id == self.ui.book_overview.book.id:
             self.ui.book_overview.update_time()
@@ -380,8 +374,7 @@ class Titlebar:
             if track.id == player.get_current_track().id:
                 player.jump_to(time)
             else:
-                player.load_file(db.Track.select().where(
-                    db.Track.id == track.id).get())
+                player.load_file(track)
                 player.play_pause(None, True)
                 self.__set_progress_scale_value(
                     time / self.ui.speed.get_speed())

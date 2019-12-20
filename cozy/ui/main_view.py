@@ -5,23 +5,23 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
-from cozy.book_element import BookElement
-from cozy.import_failed_dialog import ImportFailedDialog
-from cozy.file_not_found_dialog import FileNotFoundDialog
-from cozy.search import Search
-from cozy.sleep_timer import SleepTimer
-from cozy.playback_speed import PlaybackSpeed
-from cozy.titlebar import Titlebar
-from cozy.settings import Settings
-from cozy.book_overview import BookOverview
-from cozy.singleton import Singleton
+from cozy.ui.book_element import BookElement
+from cozy.ui.import_failed_dialog import ImportFailedDialog
+from cozy.ui.file_not_found_dialog import FileNotFoundDialog
+from cozy.ui.search import Search
+from cozy.control.sleep_timer import SleepTimer
+from cozy.control.playback_speed import PlaybackSpeed
+from cozy.ui.titlebar import Titlebar
+from cozy.ui.settings import Settings
+from cozy.ui.book_overview import BookOverview
+from cozy.architecture.singleton import Singleton
 
-import cozy.db as db
-import cozy.importer as importer
-import cozy.player as player
+import cozy.control.db as db
+import cozy.control.importer as importer
+import cozy.control.player as player
 import cozy.tools as tools
-import cozy.filesystem_monitor as fs_monitor
-import cozy.offline_cache as offline_cache
+import cozy.control.filesystem_monitor as fs_monitor
+import cozy.control.offline_cache as offline_cache
 
 import os
 
@@ -125,7 +125,7 @@ class CozyUI(metaclass=Singleton):
         Initialize everything we can't do from glade like events and other stuff.
         """
         log.info("Initialize main window")
-        self.window = self.window_builder.get_object("app_window")
+        self.window: Gtk.Window = self.window_builder.get_object("app_window")
         self.window.set_default_size(1100, 700)
         self.window.set_application(self.app)
         self.window.show_all()
@@ -134,6 +134,7 @@ class CozyUI(metaclass=Singleton):
         self.window.connect("drag_data_received", self.__on_drag_data_received)
         self.window.drag_dest_set(Gtk.DestDefaults.MOTION | Gtk.DestDefaults.HIGHLIGHT | Gtk.DestDefaults.DROP,
                                   [Gtk.TargetEntry.new("text/uri-list", 0, 80)], Gdk.DragAction.COPY)
+        self.window.title = "Cozy"
 
         # resizing the progress bar for older gtk versions
         if not Gtk.get_minor_version() > 18:
@@ -252,11 +253,6 @@ class CozyUI(metaclass=Singleton):
             tools.get_glib_settings().get_boolean("hide-offline")))
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
-
-        builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/app_menu.ui")
-        menu = builder.get_object("app_menu")
-        if not tools.is_elementary():
-            self.app.set_app_menu(menu)
 
     def __init_components(self):
         self.titlebar = Titlebar()
@@ -589,6 +585,7 @@ class CozyUI(metaclass=Singleton):
         self.author_box.select_row(row)
         self.book_box.invalidate_filter()
         self.book_box.invalidate_sort()
+        self.toolbar_revealer.set_reveal_child(True)
         self.search.close()
 
     def jump_to_reader(self, book):
@@ -606,6 +603,7 @@ class CozyUI(metaclass=Singleton):
         self.reader_box.select_row(row)
         self.book_box.invalidate_filter()
         self.book_box.invalidate_sort()
+        self.toolbar_revealer.set_reveal_child(True)
         self.search.close()
 
     def jump_to_book(self, book):

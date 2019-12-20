@@ -5,7 +5,6 @@ import urllib.parse
 import shutil
 import errno
 import logging
-import mutagen
 import zlib
 import time
 import traceback
@@ -21,11 +20,11 @@ from mutagen.oggvorbis import OggVorbis
 from peewee import __version__ as PeeweeVersion
 from gi.repository import Gdk, GLib, Gst
 
-import cozy.db
-import cozy.artwork_cache as artwork_cache
+import cozy.control.db
+import cozy.control.artwork_cache as artwork_cache
 import cozy.tools as tools
-import cozy.player
-from cozy.offline_cache import OfflineCache
+import cozy.control.player
+from cozy.control.offline_cache import OfflineCache
 
 log = logging.getLogger("importer")
 
@@ -75,7 +74,7 @@ def update_database(ui, force=False):
     Also removes entries from the db that are no longer existent.
     """
     paths = []
-    for location in cozy.db.Storage.select():
+    for location in cozy.control.db.Storage.select():
         if os.path.exists(location.path):
             paths.append(location.path)
 
@@ -112,7 +111,7 @@ def update_database(ui, force=False):
                             imported, ignore = import_file(file, directory, path, True, crc)
                             tracks_cache_update.append(path)
                         # Is the track already in the database?
-                        elif cozy.db.Track.select().where(cozy.db.Track.file == path).count() < 1:
+                        elif cozy.control.db.Track.select().where(cozy.control.db.Track.file == path).count() < 1:
                             imported, track_data = import_file(file, directory, path)
                             if track_data:
                                 tracks_to_import.append(track_data)
@@ -120,14 +119,17 @@ def update_database(ui, force=False):
                         elif tools.get_glib_settings().get_boolean("use-crc32"):
                             crc = __crc32_from_file(path)
                             # Is the value in the db already crc32 or is the crc changed?
-                            if (cozy.db.Track.select().where(cozy.db.Track.file == path).first().modified != crc or 
-                              cozy.db.Track.select().where(cozy.db.Track.file == path).first().crc32 != True):
+                            if (cozy.control.db.Track.select().where(cozy.control.db.Track.file == path).first().modified != crc or
+                              cozy.control.db.Track.select().where(
+                                  cozy.control.db.Track.file == path).first().crc32 != True):
                                 imported, ignore = import_file(
                                     file, directory, path, True, crc)
                                 tracks_cache_update.append(path)
                         # Has the modified date changed or is the value still a crc?
-                        elif (cozy.db.Track.select().where(cozy.db.Track.file == path).first().modified < os.path.getmtime(path) or 
-                          cozy.db.Track.select().where(cozy.db.Track.file == path).first().crc32 != False):
+                        elif (cozy.control.db.Track.select().where(
+                                cozy.control.db.Track.file == path).first().modified < os.path.getmtime(path) or
+                              cozy.control.db.Track.select().where(
+                                  cozy.control.db.Track.file == path).first().crc32 != False):
                             imported, ignore = import_file(file, directory, path, update=True)
                             tracks_cache_update.append(path)
 
@@ -160,7 +162,7 @@ def update_database(ui, force=False):
     log.info("Total import time: " + str(end - start))
 
     # remove entries from the db that are no longer existent
-    cozy.db.remove_invalid_entries()
+    cozy.control.db.remove_invalid_entries()
     artwork_cache.generate_artwork_cache()
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
@@ -182,11 +184,11 @@ def write_tracks_to_db(tracks):
 
     if PeeweeVersion[0] == '2':
         data = list({"name": t.name, "number": t.track_number, "disk": t.disk, "position": t.position, "book": t.book, "file": t.file, "length": t.length, "modified": t.modified, "crc32": t.crc32} for t in tracks)
-        cozy.db.Track.insert_many(data).execute()
+        cozy.control.db.Track.insert_many(data).execute()
     else:
-        fields = [cozy.db.Track.name, cozy.db.Track.number, cozy.db.Track.disk, cozy.db.Track.position, cozy.db.Track.book, cozy.db.Track.file, cozy.db.Track.length, cozy.db.Track.modified, cozy.db.Track.crc32]
+        fields = [cozy.control.db.Track.name, cozy.control.db.Track.number, cozy.control.db.Track.disk, cozy.control.db.Track.position, cozy.control.db.Track.book, cozy.control.db.Track.file, cozy.control.db.Track.length, cozy.control.db.Track.modified, cozy.control.db.Track.crc32]
         data = list((t.name, t.track_number, t.disk, t.position, t.book, t.file, t.length, t.modified, t.crc32) for t in tracks)
-        cozy.db.Track.insert_many(data, fields=fields).execute()
+        cozy.control.db.Track.insert_many(data, fields=fields).execute()
 
 def rebase_location(ui, oldPath, newPath):
     """
@@ -194,13 +196,14 @@ def rebase_location(ui, oldPath, newPath):
     Every file in the database updated with the new path.
     Note: This does not check for the existence of those files.
     """
-    trackCount = cozy.db.Track.select().count()
+    trackCount = cozy.control.db.Track.select().count()
     currentTrackCount = 0
-    for track in cozy.db.Track.select():
+    for track in cozy.control.db.Track.select():
         newFilePath = track.file.replace(oldPath, newPath)
-        cozy.db.Track.update(file=newFilePath).where(
-            cozy.db.Track.id == track.id).execute()
-        cozy.db.StorageBlackList.update(path=newFilePath).where(cozy.db.StorageBlackList.path == track.file).execute()
+        cozy.control.db.Track.update(file=newFilePath).where(
+            cozy.control.db.Track.id == track.id).execute()
+        cozy.control.db.StorageBlackList.update(path=newFilePath).where(
+            cozy.control.db.StorageBlackList.path == track.file).execute()
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
                              ui.titlebar.update_progress_bar.set_fraction, currentTrackCount / trackCount)
         currentTrackCount = currentTrackCount + 1
@@ -216,7 +219,7 @@ def import_file(file, directory, path, update=False, crc=None):
     :return: True if file was imported, otherwise False
     :return: Track object to be imported when everything passed successfully and track is not in the db already.
     """
-    if cozy.db.is_blacklisted(path):
+    if cozy.control.db.is_blacklisted(path):
         return True, None
 
     media_type = tools.__get_media_type(path)
@@ -288,38 +291,42 @@ def import_file(file, directory, path, update=False, crc=None):
     track_data.crc32 = tools.get_glib_settings().get_boolean("use-crc32")
 
     if update:
-        if cozy.db.Book.select().where(cozy.db.Book.name == track_data.book_name).count() < 1:
-            track_data.book = cozy.db.Book.create(name=track_data.book_name,
-                                  author=track_data.author,
-                                  reader=track_data.reader,
-                                  position=0,
-                                  rating=-1,
-                                  cover=track_data.cover)
+        if cozy.control.db.Book.select().where(cozy.control.db.Book.name == track_data.book_name).count() < 1:
+            track_data.book = cozy.control.db.Book.create(name=track_data.book_name,
+                                                          author=track_data.author,
+                                                          reader=track_data.reader,
+                                                          position=0,
+                                                          rating=-1,
+                                                          cover=track_data.cover)
         else:
-            track_data.book = cozy.db.Book.select().where(cozy.db.Book.name == track_data.book_name).get()
-            cozy.db.Book.update(name=track_data.book_name,
-                           author=track_data.author,
-                           reader=track_data.reader,
-                           cover=track_data.cover).where(cozy.db.Book.id == track_data.book.id).execute()
+            track_data.book = cozy.control.db.Book.select().where(
+                cozy.control.db.Book.name == track_data.book_name).get()
+            cozy.control.db.Book.update(name=track_data.book_name,
+                                        author=track_data.author,
+                                        reader=track_data.reader,
+                                        cover=track_data.cover).where(
+                cozy.control.db.Book.id == track_data.book.id).execute()
 
-        cozy.db.Track.update(name=track_data.name,
-                        number=track_data.track_number,
-                        book=track_data.book,
-                        disk=track_data.disk,
-                        length=track_data.length,
-                        modified=track_data.modified,
-                        crc32=track_data.crc32).where(cozy.db.Track.file == track_data.file).execute()
+        cozy.control.db.Track.update(name=track_data.name,
+                                     number=track_data.track_number,
+                                     book=track_data.book,
+                                     disk=track_data.disk,
+                                     length=track_data.length,
+                                     modified=track_data.modified,
+                                     crc32=track_data.crc32).where(
+            cozy.control.db.Track.file == track_data.file).execute()
     else:
         # create database entries
-        if cozy.db.Book.select().where(cozy.db.Book.name == track_data.book_name).count() < 1:
-            track_data.book = cozy.db.Book.create(name=track_data.book_name,
-                                  author=track_data.author,
-                                  reader=track_data.reader,
-                                  position=0,
-                                  rating=-1,
-                                  cover=track_data.cover)
+        if cozy.control.db.Book.select().where(cozy.control.db.Book.name == track_data.book_name).count() < 1:
+            track_data.book = cozy.control.db.Book.create(name=track_data.book_name,
+                                                          author=track_data.author,
+                                                          reader=track_data.reader,
+                                                          position=0,
+                                                          rating=-1,
+                                                          cover=track_data.cover)
         else:
-            track_data.book = cozy.db.Book.select().where(cozy.db.Book.name == track_data.book_name).get()
+            track_data.book = cozy.control.db.Book.select().where(
+                cozy.control.db.Book.name == track_data.book_name).get()
 
         return True, track_data
 
@@ -333,7 +340,7 @@ def get_gstreamer_length(path):
     player = Gst.ElementFactory.make("playbin", "player")
     bus = player.get_bus()
     bus.add_signal_watch()
-    handler_id = bus.connect("message", cozy.player.__on_gst_message)
+    handler_id = bus.connect("message", cozy.control.player.__on_gst_message)
     player.set_property("uri", "file://" + path)
     player.set_state(Gst.State.PAUSED)
     suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
@@ -353,7 +360,6 @@ def get_gstreamer_length(path):
 def __get_last_modified(crc, path):
     global settings
     if tools.get_glib_settings().get_boolean("use-crc32"):
-        import binascii
         if crc is None:
             crc = __crc32_from_file(path)
         modified = crc
@@ -390,11 +396,13 @@ def copy_to_audiobook_folder(path):
     """
     try:
         name = os.path.basename(os.path.normpath(path))
-        shutil.copytree(path, cozy.db.Storage.select().where(cozy.db.Storage.default == True).get().path + "/" + name)
+        shutil.copytree(path, cozy.control.db.Storage.select().where(
+            cozy.control.db.Storage.default == True).get().path + "/" + name)
     except OSError as exc:
         if exc.errno == errno.ENOTDIR:
             try:
-                shutil.copy(path, cozy.db.Storage.select().where(cozy.db.Storage.default == True).get().path)
+                shutil.copy(path, cozy.control.db.Storage.select().where(
+                    cozy.control.db.Storage.default == True).get().path)
             except OSError as e:
                 if e.errno == 95:
                     log.error("Could not import file " + path)

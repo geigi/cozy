@@ -3,7 +3,7 @@ import uuid
 import logging
 import cozy.tools as tools
 
-import cozy.db
+import cozy.control.db
 
 from gi.repository import GdkPixbuf
 
@@ -48,7 +48,7 @@ def delete_artwork_cache():
     if os.path.exists(cache_dir):
         shutil.rmtree(cache_dir)
 
-    q = cozy.db.ArtworkCache.delete()
+    q = cozy.control.db.ArtworkCache.delete()
     q.execute()
 
 
@@ -56,7 +56,7 @@ def generate_artwork_cache():
     """
     Generates the default artwork cache for cover preview.
     """
-    for book in cozy.db.Book.select():
+    for book in cozy.control.db.Book.select():
         get_cover_pixbuf(book, 180)
 
 
@@ -69,14 +69,14 @@ def __create_artwork_cache(book, pixbuf, size):
     :param size: Size for the cached version
     :return: Resized pixbuf
     """
-    query = cozy.db.ArtworkCache.select().where(cozy.db.ArtworkCache.book == book.id)
+    query = cozy.control.db.ArtworkCache.select().where(cozy.control.db.ArtworkCache.book == book.id)
     gen_uuid = ""
 
     if query.exists():
         gen_uuid = str(query.first().uuid)
     else:
         gen_uuid = str(uuid.uuid4())
-        cozy.db.ArtworkCache.create(book = book, uuid=gen_uuid)
+        cozy.control.db.ArtworkCache.create(book = book, uuid=gen_uuid)
 
     cache_dir = os.path.join(os.path.join(tools.get_cache_dir(), "artwork"), gen_uuid)
     if not os.path.exists(cache_dir):
@@ -99,7 +99,7 @@ def __load_pixbuf_from_cache(book, size):
     """
     pixbuf = None
 
-    query = cozy.db.ArtworkCache.select().where(cozy.db.ArtworkCache.book == book.id)
+    query = cozy.control.db.ArtworkCache.select().where(cozy.control.db.ArtworkCache.book == book.id)
     if query.exists():
         uuid = query.first().uuid
     else:
@@ -187,7 +187,7 @@ def __load_pixbuf_from_file(book):
     """
     pixbuf = None
 
-    directory = os.path.dirname(os.path.normpath(cozy.db.tracks(book)[0].file))
+    directory = os.path.dirname(os.path.normpath(cozy.control.db.tracks(book)[0].file))
     cover_files = []
 
     try:

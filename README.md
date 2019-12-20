@@ -36,24 +36,19 @@ You can download it here: <a href="https://github.com/geigi/cozy/releases/downlo
 
 ## Requirements
 - `python3`
-- `pip` for `peewee`
 - `meson >= 0.40.0` as build system
-- `ninja`
 - `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
 - `peewee >= 3.5` as object relation mapper
 - `python3-mutagen` for meta tag management
+- `python3-distro`
 - `python3-gi-cairo`
+- `python3-gst-1.0`
 - `file`
 - `gstreamer1.0-plugins-good`
 - `gstreamer1.0-plugins-bad`
 - `gstreamer1.0-plugins-ugly`
 - `gstreamer1.0-libav` for mp4 support
 
-### Install requirements on Fedora
-```bash
-sudo dnf install meson glib glib2-devel python3 python3-devel file-libs python3-magic python3-mutagen gtk3 ghc-magic-devel python3-gstreamer1 gstreamer1-plugins-good gstreamer1-plugins-good-gtk gstreamer1-libav
-pip3 install --user python-magic libmagic peewee ninja file
-```
 
 ## Build
 ```bash
@@ -61,6 +56,12 @@ $ git clone https://github.com/geigi/cozy.git
 $ cd cozy
 $ meson desired_build_directory --prefix=desired_installation_directory
 $ ninja -C desired_build_directory install
+```
+
+## Update `po` files
+```bash
+$ ninja -C build com.github.geigi.cozy-update-po
+$ ninja -C build extra-update-po
 ```
 
 ## Running a local build
@@ -103,6 +104,7 @@ To the contributors on GitHub:
 - jnbr
 - grenade
 - NathanBnm
+- Fatih20
 
 The translators:
 - camellan

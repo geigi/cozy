@@ -308,7 +308,7 @@ audio-volume-medium-symbolic</property>
                         <property name="width_request">150</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
-                        <property name="tooltip_text" translatable="yes">Scrubb through current part</property>
+                        <property name="tooltip_text" translatable="yes">Jump to position in current chapter</property>
                         <property name="hexpand">True</property>
                         <property name="round_digits">1</property>
                         <property name="draw_value">False</property>
@@ -1608,7 +1608,7 @@ You can add more storage locations later in the settings</property>
               </object>
               <packing>
                 <property name="name">book_overview</property>
-                <property name="title" translatable="yes">page0</property>
+                <property name="title" translatable="no">page0</property>
                 <property name="position">3</property>
               </packing>
             </child>
@@ -1641,7 +1641,7 @@ You can add more storage locations later in the settings</property>
               </object>
               <packing>
                 <property name="name">nothing_here</property>
-                <property name="title" translatable="yes">page0</property>
+                <property name="title" translatable="no">page0</property>
                 <property name="position">4</property>
               </packing>
             </child>

@@ -1,6 +1,5 @@
 from gi.repository import Gtk, Gdk
-from cozy.book_element import AlbumElement
-import cozy.artwork_cache as artwork_cache
+import cozy.control.artwork_cache as artwork_cache
 import cozy.tools as tools
 
 MAX_BOOK_LENGTH = 80

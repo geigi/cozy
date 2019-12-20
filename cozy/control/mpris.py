@@ -20,9 +20,8 @@ from gi.repository import Gio, Gst, GLib, Gtk
 
 from random import randint
 
-from cozy.player import *
-from cozy.db import *
-import cozy.artwork_cache as artwork_cache
+from cozy.control.player import *
+from cozy.control.db import *
 import cozy.ui
 
 
@@ -162,7 +161,7 @@ class MPRIS(Server):
 
     def __init__(self, app):
         self.__app = app
-        self.__ui = cozy.ui.CozyUI()
+        self.__ui = cozy.ui.main_view.CozyUI()
         self.__rating = None
         self.__cozy_id = 0
         self.__metadata = {"mpris:trackid": GLib.Variant(

@@ -1,15 +1,15 @@
 from gi.repository import Gtk, Gdk, Gst
 
-import cozy.artwork_cache as artwork_cache
-import cozy.db as db
+import cozy.control.artwork_cache as artwork_cache
+import cozy.control.db as db
 import cozy.tools as tools
-import cozy.player as player
+import cozy.control.player as player
 import cozy.ui
 
-from cozy.book_element import TrackElement
-from cozy.settings import Settings
-from cozy.offline_cache import OfflineCache
-from cozy.disk_element import DiskElement
+from cozy.ui.book_element import TrackElement
+from cozy.ui.settings import Settings
+from cozy.control.offline_cache import OfflineCache
+from cozy.ui.disk_element import DiskElement
 
 
 class BookOverview:
@@ -21,7 +21,7 @@ class BookOverview:
     switch_signal = None
 
     def __init__(self):
-        self.ui = cozy.ui.CozyUI()
+        self.ui = cozy.ui.main_view.CozyUI()
         builder = self.ui.window_builder
         self.name_label = builder.get_object("info_book_label")
         self.author_label = builder.get_object("info_author_label")
@@ -58,7 +58,7 @@ class BookOverview:
         if self.book and self.book.id == book.id:
             self.update_time()
             return
-        self.book = db.Book.get(db.Book.id == book.id)
+        self.book = db.Book[book.id]
 
         if self.ui.is_playing and self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
             self.play_book_button.set_image(self.pause_img)
@@ -234,7 +234,7 @@ class BookOverview:
         """
         Mark the current track position.
         """
-        book = db.Book.select().where(db.Book.id == self.book.id).get()
+        book = db.Book[self.book.id]
 
         if book.position == -1:
             self.deselect_track_element()
