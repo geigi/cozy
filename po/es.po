@@ -73,7 +73,7 @@ msgstr "Ir al autor"
 
 #: cozy/ui/search_results.py:74
 msgid "Jump to reader "
-msgstr "Ir al lecttor"
+msgstr "Ir al lector"
 
 #: cozy/control/importer.py:278
 msgid "Unknown Author"
@@ -121,7 +121,7 @@ msgstr "hoy"
 
 #: cozy/tools.py:192
 msgid "yesterday"
-msgstr "yer"
+msgstr "ayer"
 
 #: cozy/tools.py:194
 #, python-format
@@ -359,8 +359,7 @@ msgstr "Importe sus audiolibros"
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy importa automáticamente tus audiolibros a un directorio - tu "
-"biblioteca."
+"Cozy importa automáticamente sus audiolibros a un directorio: su biblioteca."
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
@@ -454,15 +453,15 @@ msgstr "Archivo no encontrado"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "El archivo no se ha encontrado, desea buscarlo manualmente?"
+msgstr "El archivo no se ha encontrado. ¿Quiere localizarlo manualmente?"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
-msgstr "Ok"
+msgstr "Aceptar"
 
 #: data/ui/import_failed.ui:81
 msgid "Some files could not be imported"
-msgstr "Algunos archivos no pudieron ser importados"
+msgstr "Algunos archivos no pudieron importarse"
 
 #: data/ui/import_failed.ui:134
 msgid ""
@@ -472,9 +471,9 @@ msgid ""
 "- The file(s) are corrupt"
 msgstr ""
 "Esto puede ocurrir por varias razones:\n"
-"- El formato de audio no está soportado\n"
-"- El archivo no es un archivo de audio válido\n"
-"- El archivo está corrupto"
+"• El formato de audio no se admite\n"
+"• No se trata de un archivo de audio válido\n"
+"• El archivo está dañado"
 
 #: data/ui/settings.ui:92 data/ui/settings.ui:344
 msgid "General"
@@ -486,7 +485,7 @@ msgstr "Modo oscuro"
 
 #: data/ui/settings.ui:213
 msgid "Titlebar"
-msgstr "Barradetítulo"
+msgstr "Barra de título"
 
 #: data/ui/settings.ui:258
 msgid "Display the whole book instead of the current chapter"
@@ -560,7 +559,7 @@ msgstr ""
 
 #: data/ui/settings.ui:1134
 msgid "Blacklist"
-msgstr "Listanegra"
+msgstr "Lista negra"
 
 #: data/ui/settings.ui:1178
 msgid "Path"
@@ -657,7 +656,7 @@ msgstr "Ajustar el temporizador de apagado en minutos"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
-msgstr "_Explorar Directorio"
+msgstr "_Explorar directorio"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
@@ -669,11 +668,11 @@ msgstr "_Preferencias"
 
 #: data/ui/titlebar_menu.ui:25
 msgid "_Help"
-msgstr "_Ayuda"
+msgstr "Ay_uda"
 
 #: data/ui/titlebar_menu.ui:29
 msgid "_About"
-msgstr "_Información"
+msgstr "_Acerca de"
 
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
