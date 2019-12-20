@@ -2,10 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the extra package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
-# Nathan BONNEMAINS <bonnemainsnathan@gmail.com>, 2019
+# e78dfa95e8487a60e89adc3a5c3879f2, 2019
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -13,12 +14,12 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-13 14:51+0100\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
-"Last-Translator: Nathan BONNEMAINS <bonnemainsnathan@gmail.com>, 2019\n"
+"Last-Translator: e78dfa95e8487a60e89adc3a5c3879f2, 2019\n"
 "Language-Team: French (https://www.transifex.com/geigi/teams/78138/fr/)\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: data/com.github.geigi.cozy.desktop.in:3
@@ -171,8 +172,8 @@ msgid ""
 "The file not found window will only open when the file is on the internal "
 "drive"
 msgstr ""
-"La fenêtre de fichier non trouvé s'ouvrira seulement si le fichier se trouve "
-"dans le disque interne"
+"La fenêtre de fichier non trouvé s'ouvrira seulement si le fichier se trouve"
+" dans le disque interne"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:115
 msgid "Fixed a typo"
@@ -219,8 +220,8 @@ msgstr ""
 #: data/com.github.geigi.cozy.appdata.xml.in:130
 msgid "New setting: Prefer cover image file over embedded covers"
 msgstr ""
-"Nouveau paramètre : Préférer les fichiers d'image plutôt que les couvertures "
-"intégrées"
+"Nouveau paramètre : Préférer les fichiers d'image plutôt que les couvertures"
+" intégrées"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:131
 msgid "Redesigned Sleep Timer"
@@ -230,8 +231,8 @@ msgstr "Reconception de la minuterie"
 msgid ""
 "More Sleep Timer: You can now stop the playback after the current chapter"
 msgstr ""
-"Encore plus de minuterie : Vous pouvez désormais arrêter la lecture après le "
-"chapitre courant"
+"Encore plus de minuterie : Vous pouvez désormais arrêter la lecture après le"
+" chapitre courant"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:133
 msgid "And even more: Fadeout on timer end (in settings)"
@@ -246,13 +247,13 @@ msgstr "Reconception de l'écran de bienvenue et des paramètres"
 #: data/com.github.geigi.cozy.appdata.xml.in:135
 msgid "Fixed bug where cozy would not start on GTK older than 3.22"
 msgstr ""
-"Correction d'un bug où Cozy ne voulait pas démarrer avec les versions de GTK "
-"inférieures à 3.22"
+"Correction d'un bug où Cozy ne voulait pas démarrer avec les versions de GTK"
+" inférieures à 3.22"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:136
 msgid ""
-"If no author field is present, the reader field will be used as author. This "
-"requires a force reimport (settings) on already imported books."
+"If no author field is present, the reader field will be used as author. This"
+" requires a force reimport (settings) on already imported books."
 msgstr ""
 "Si il n'y a pas de champ d'auteur, le champ narrateur sera utilisé en tant "
 "qu'auteur. Cela nécessite une réimportation forcée (paramètres) sur les "
