@@ -49,7 +49,7 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
     def is_book_online(self, book):
         """
         """
-        result = next((storage[1] for storage in self.external_storage if storage[0] in cozy.control.db.tracks(book).first().file), True)
+        result = next((storage[1] for storage in self.external_storage if storage[0] in cozy.control.db.get_tracks(book).first().file), True)
         return (result)
 
     def is_track_online(self, track):

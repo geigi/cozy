@@ -103,7 +103,7 @@ class BookOverview:
         first_disk_element = None
         disk_count = 0
 
-        for track in db.tracks(book):
+        for track in db.get_tracks(book):
             # Insert disk headers
             if track.disk != disk_number:
                 disc_element = DiskElement(track.disk)
@@ -299,7 +299,7 @@ class BookOverview:
             return
 
         if event == "storage-removed" or event == "external-storage-removed":
-            if message in db.tracks(self.book).first().file:
+            if message in db.get_tracks(self.book).first().file:
                 self.download_box.set_visible(False)
                 self.download_switch.set_visible(False)
         elif "external-storage-added" or event == "storage-changed" or event == "storage-added":

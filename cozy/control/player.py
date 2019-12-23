@@ -230,7 +230,7 @@ def next_track():
     global __current_track
     global __play_next
 
-    album_tracks = cozy.control.db.tracks(get_current_track().book)
+    album_tracks = cozy.control.db.get_tracks(get_current_track().book)
     current = get_current_track()
     index = list(album_tracks).index(current)
     next_track = None
@@ -271,7 +271,7 @@ def prev_track():
     """
     global __player
     global __current_track
-    album_tracks = cozy.control.db.tracks(get_current_track().book)
+    album_tracks = cozy.control.db.get_tracks(get_current_track().book)
     current = get_current_track()
     index = list(album_tracks).index(current)
     previous = None

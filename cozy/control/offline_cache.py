@@ -4,11 +4,15 @@ import os
 
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.singleton import Singleton
-import cozy.control.db
+from cozy.control.db import get_tracks
 import cozy.tools as tools
 import cozy.ui
 
 from gi.repository import Gio, Gdk, GLib
+
+from cozy.model.book import Book
+from cozy.model.track import Track
+from cozy.model.offline_cache import OfflineCache as OfflineCacheModel
 
 log = logging.getLogger("offline_cache")
 
@@ -43,12 +47,12 @@ class OfflineCache(EventSender, metaclass=Singleton):
         Add all tracks of a book to the offline cache and start copying.
         """
         tracks = []
-        for track in cozy.control.db.tracks(book):
+        for track in get_tracks(book):
             file = str(uuid.uuid4())
             tracks.append((track, file))
         chunks = [tracks[x:x+500] for x in range(0, len(tracks), 500)]
         for chunk in chunks:
-            query = cozy.control.db.OfflineCache.insert_many(chunk, fields=[cozy.control.db.OfflineCache.track, cozy.control.db.OfflineCache.file])
+            query = OfflineCacheModel.insert_many(chunk, fields=[OfflineCacheModel.track, OfflineCacheModel.file])
             self.total_batch_count += len(chunk)
             query.execute()
             
@@ -59,9 +63,9 @@ class OfflineCache(EventSender, metaclass=Singleton):
         Remove all tracks of the given book from the cache.
         """
         #self._stop_processing()
-        tracks = cozy.control.db.tracks(book)
+        tracks = get_tracks(book)
         ids = [t.id for t in tracks]
-        offline_elements = cozy.control.db.OfflineCache.select().where(cozy.control.db.OfflineCache.track << ids)
+        offline_elements = OfflineCacheModel.select().where(OfflineCacheModel.track << ids)
 
         for element in offline_elements:
             file_path = os.path.join(self.cache_dir, element.file)
@@ -76,7 +80,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
                 if self.current and item.id == self.current.id:
                     self.filecopy_cancel.cancel()
 
-        cozy.control.db.OfflineCache.delete().where(cozy.control.db.OfflineCache.track in ids).execute()
+        OfflineCacheModel.delete().where(OfflineCacheModel.track in ids).execute()
 
         if len(self.queue) > 0:
             self._start_processing()
@@ -84,7 +88,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
     def remove_all_for_storage(self, storage_path):
         """
         """
-        for element in cozy.control.db.OfflineCache.select().join(cozy.control.db.Track).where(storage_path in cozy.control.db.Track.file):
+        for element in OfflineCacheModel.select().join(Track).where(storage_path in Track.file):
             file_path = os.path.join(self.cache_dir, element.file)
             if file_path == self.cache_dir:
                 continue
@@ -96,13 +100,13 @@ class OfflineCache(EventSender, metaclass=Singleton):
             if element.track.book.offline == True:
                 element.track.book.update(offline=False, downloaded=False).execute()
             
-        cozy.control.db.OfflineCache.delete().where(storage_path in cozy.control.db.OfflineCache.track.file).execute()
+        OfflineCacheModel.delete().where(storage_path in OfflineCacheModel.track.file).execute()
 
     
     def get_cached_path(self, track):
         """
         """
-        query = cozy.control.db.OfflineCache.select().where(cozy.control.db.OfflineCache.track == track.id, cozy.control.db.OfflineCache.copied == True)
+        query = OfflineCacheModel.select().where(OfflineCacheModel.track == track.id, OfflineCacheModel.copied == True)
         if query.count() > 0:
             return os.path.join(self.cache_dir, query.get().file)
         else:
@@ -112,10 +116,9 @@ class OfflineCache(EventSender, metaclass=Singleton):
         """
         Update the cached version of the given files.
         """
-        if cozy.control.db.OfflineCache.select().count() > 0:
-            cozy.control.db.OfflineCache.update(copied=False).where(
-                cozy.control.db.OfflineCache.track.file in paths).execute()
-            #tracks = cozy.db.OfflineCache.select(cozy.db.Track, cozy.db.OfflineCache).join(cozy.db.Track).where(cozy.db.Track.file in paths)
+        if OfflineCacheModel.select().count() > 0:
+            OfflineCacheModel.update(copied=False).where(
+                OfflineCacheModel.track.file in paths).execute()
             self._fill_queue_from_db()
 
     def delete_cache(self):
@@ -164,11 +167,11 @@ class OfflineCache(EventSender, metaclass=Singleton):
             if self.thread.stopped():
                 break
             
-            new_item = cozy.control.db.OfflineCache.get(cozy.control.db.OfflineCache.id == item.id)
+            new_item = OfflineCacheModel.get(OfflineCacheModel.id == item.id)
 
             if self.current_book_processing != new_item.track.book.id:
                 self.update_book_download_status(
-                    cozy.control.db.Book.get(cozy.control.db.Book.id == self.current_book_processing))
+                    Book.get(Book.id == self.current_book_processing))
                 self.current_book_processing = new_item.track.book.id
 
             if not new_item.copied and os.path.exists(new_item.track.file):
@@ -192,14 +195,14 @@ class OfflineCache(EventSender, metaclass=Singleton):
                     continue
 
                 if copied:
-                    cozy.control.db.OfflineCache.update(copied=True).where(
-                        cozy.control.db.OfflineCache.id == new_item.id).execute()
+                    OfflineCacheModel.update(copied=True).where(
+                        OfflineCacheModel.id == new_item.id).execute()
                 
             self.queue.remove(item)
 
         if self.current_book_processing:
             self.update_book_download_status(
-                cozy.control.db.Book.get(cozy.control.db.Book.id == self.current_book_processing))
+                Book.get(Book.id == self.current_book_processing))
 
         self.current = None
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.ui.switch_to_playing)
@@ -209,8 +212,8 @@ class OfflineCache(EventSender, metaclass=Singleton):
         Updates the downloaded status of a book.
         """
         downloaded = True
-        tracks = cozy.control.db.tracks(book)
-        offline_tracks = cozy.control.db.OfflineCache.select().where(cozy.control.db.OfflineCache.track in tracks)
+        tracks = get_tracks(book)
+        offline_tracks = OfflineCacheModel.select().where(OfflineCacheModel.track in tracks)
 
         if offline_tracks.count() < 1:
             downloaded = False
@@ -219,7 +222,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
                 if not track.copied:
                     downloaded = False
         
-        cozy.control.db.Book.update(downloaded=downloaded).where(cozy.control.db.Book.id == book.id).execute()
+        Book.update(downloaded=downloaded).where(Book.id == book.id).execute()
         if downloaded:
             self.emit_event("book-offline", book)
         else:
@@ -235,7 +238,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
             return False
 
     def _fill_queue_from_db(self):
-        for item in cozy.control.db.OfflineCache.select().where(cozy.control.db.OfflineCache.copied == False):
+        for item in OfflineCacheModel.select().where(OfflineCacheModel.copied == False):
             if not any(item.id == queued.id for queued in self.queue):
                 self.queue.append(item)
                 self.total_batch_count += 1
@@ -246,7 +249,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
                              self.ui.titlebar.update_progress_bar.set_fraction, progress)
 
     def _fill_queue_from_db(self):
-        for item in cozy.control.db.OfflineCache.select().where(cozy.control.db.OfflineCache.copied == False):
+        for item in OfflineCacheModel.select().where(OfflineCacheModel.copied == False):
             if not any(item.id == queued.id for queued in self.queue):
                 self.queue.append(item)
                 self.total_batch_count += 1

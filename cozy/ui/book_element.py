@@ -352,7 +352,7 @@ class BookElement(Gtk.FlowBoxChild):
         """
         Opens the folder containing this books files in the default file explorer.
         """
-        track = db.tracks(self.book).first()
+        track = db.get_tracks(self.book).first()
         path = os.path.dirname(track.file)
         subprocess.Popen(['xdg-open', path])
 
@@ -360,16 +360,16 @@ class BookElement(Gtk.FlowBoxChild):
         """
         """
         if (event == "storage-online" and not super().get_sensitive()) or event == "external-storage-removed":
-            if message in db.tracks(self.book).first().file:
+            if message in db.get_tracks(self.book).first().file:
                 super().set_sensitive(True)
                 self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
         elif (event == "storage-offline" and super().get_sensitive()) or event == "external-storage-added":
             self.refresh_book_object()
-            if message in db.tracks(self.book).first().file and not self.book.offline:
+            if message in db.get_tracks(self.book).first().file and not self.book.offline:
                 super().set_sensitive(False)
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         if event == "external-storage-removed":
-            first_track = db.tracks(self.book).first()
+            first_track = db.get_tracks(self.book).first()
             if first_track and message in first_track.file:
                 self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
 
