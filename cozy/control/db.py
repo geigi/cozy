@@ -1,11 +1,11 @@
-import time
-import os
 import logging
+import os
+import time
 
 import cozy
 from cozy.model.artwork_cache import ArtworkCache
 from cozy.model.book import Book
-from cozy.model.model_base import get_db, get_data_dir, get_update
+from cozy.model.model_base import get_sqlite_database, get_data_dir, database_file_exists
 from cozy.model.offline_cache import OfflineCache
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage
@@ -22,28 +22,23 @@ if PeeweeVersion[0] == '2':
     ModelBase = BaseModel
 else:
     log.info("Using peewee 3 backend")
-from peewee import Model, IntegerField, FloatField, BooleanField, SqliteDatabase
-from playhouse.sqliteq import SqliteQueueDatabase
+from peewee import IntegerField, FloatField, BooleanField, SqliteDatabase
 from playhouse.migrate import SqliteMigrator, migrate
 from gi.repository import GLib, Gdk
 
 import cozy.tools as tools
 
-db = get_db()
-data_dir = get_data_dir()
-update = get_update()
+_db = get_sqlite_database()
+
 
 def init_db():
-    global update
-    global data_dir
-
     tmp_db = None
 
-    if update:
-        _connect_db(db)
+    if database_file_exists():
+        _connect_db(_db)
         update_db()
     else:
-        tmp_db = SqliteDatabase(os.path.join(data_dir, "cozy.db"))
+        tmp_db = SqliteDatabase(os.path.join(get_data_dir(), "cozy.db"))
         if PeeweeVersion[0] == '2':
             tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache], True)
         else:
@@ -59,11 +54,11 @@ def init_db():
             while not tmp_db.table_exists("settings"):
                 time.sleep(0.01)
 
-    _connect_db(db)
+    _connect_db(_db)
 
     if PeeweeVersion[0] == '3':
-        db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage], bind_refs=False,
-                bind_backrefs=False)
+        _db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage], bind_refs=False,
+                 bind_backrefs=False)
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
@@ -212,7 +207,7 @@ def update_db_1():
     """
     Update database to v1.
     """
-    migrator = SqliteMigrator(db)
+    migrator = SqliteMigrator(_db)
 
     version = IntegerField(default=1)
     crc32 = BooleanField(default=False)
@@ -227,7 +222,7 @@ def update_db_2():
     """
     Update database to v2.
     """
-    migrator = SqliteMigrator(db)
+    migrator = SqliteMigrator(_db)
 
     playback_speed = FloatField(default=1.0)
 
@@ -244,7 +239,7 @@ def update_db_3():
     """
     current_path = Settings.get().path
 
-    db.create_tables([Storage])
+    _db.create_tables([Storage])
     Storage.create(path=current_path, default=True)
     Settings.update(path="NOT_USED").execute()
     Settings.update(version=3).execute()
@@ -254,7 +249,7 @@ def update_db_4():
     """
     Update database to v4.
     """
-    migrator = SqliteMigrator(db)
+    migrator = SqliteMigrator(_db)
 
     last_played = IntegerField(default=0)
 
@@ -269,7 +264,7 @@ def update_db_5():
     """
     Update database to v5.
     """
-    db.create_tables([StorageBlackList])
+    _db.create_tables([StorageBlackList])
 
     Settings.update(version=5).execute()
 
@@ -278,9 +273,9 @@ def update_db_6():
     """
     Update database to v6.
     """
-    migrator = SqliteMigrator(db)
+    migrator = SqliteMigrator(_db)
 
-    db.create_tables([OfflineCache])
+    _db.create_tables([OfflineCache])
 
     external = BooleanField(default=False)
     offline = BooleanField(default=False)
@@ -308,9 +303,9 @@ def update_db_7():
 
 
 def update_db_8():
-    db.execute_sql('UPDATE track SET modified=0 WHERE crc32=1')
+    _db.execute_sql('UPDATE track SET modified=0 WHERE crc32=1')
 
-    migrator: SqliteMigrator = SqliteMigrator(db)
+    migrator: SqliteMigrator = SqliteMigrator(_db)
 
     migrate(
         migrator.drop_column("track", "crc32")
@@ -323,12 +318,13 @@ def update_db():
     """
     Updates the database if not already done.
     """
-    global db
+    global _db
     # First test for version 1
     try:
-        next(c for c in db.get_columns("settings") if c.name == "version")
+        next(c for c in _db.get_columns("settings") if c.name == "version")
     except Exception as e:
-        if len(db.get_tables()) == 0:
+        if len(_db.get_tables()) == 0:
+            data_dir = get_data_dir()
             if os.path.exists(os.path.join(data_dir, "cozy.db")):
                 os.remove(os.path.join(data_dir, "cozy.db"))
                 os.remove(os.path.join(data_dir, "cozy.db-shm"))
@@ -534,7 +530,7 @@ def is_external(book):
 
 
 def close_db():
-    global db
+    global _db
 
     log.info("Closing.")
-    db.close()
+    _db.close()

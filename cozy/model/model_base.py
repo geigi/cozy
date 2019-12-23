@@ -7,34 +7,32 @@ from playhouse.sqliteq import SqliteQueueDatabase
 
 log = logging.getLogger("db")
 
-data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
-
-update = None
-if os.path.exists(os.path.join(data_dir, "cozy.db")):
-    update = True
-else:
-    update = False
-
-if not os.path.exists(data_dir):
-    os.makedirs(data_dir)
-
-db = SqliteQueueDatabase(os.path.join(data_dir, "cozy.db"), pragmas=[('journal_mode', 'wal')])
-
-class ModelBase(Model):
-    class Meta:
-        database = db
+_db = None
 
 
-def get_db():
-    global db
-    return db
+def get_sqlite_database():
+    global _db
+    return _db
 
 
 def get_data_dir():
-    global data_dir
-    return data_dir
+    return os.path.join(GLib.get_user_data_dir(), "cozy")
 
 
-def get_update():
-    global update
-    return update
+def database_file_exists():
+    return os.path.exists(os.path.join(get_data_dir(), "cozy.db"))
+
+
+def __open_database():
+    global _db
+    if not os.path.exists(get_data_dir()):
+        os.makedirs(get_data_dir())
+    _db = SqliteQueueDatabase(os.path.join(get_data_dir(), "cozy.db"), pragmas=[('journal_mode', 'wal')])
+
+
+__open_database()
+
+
+class ModelBase(Model):
+    class Meta:
+        database = _db
