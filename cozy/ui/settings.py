@@ -120,10 +120,6 @@ class Settings(EventSender, metaclass=Singleton):
         tools.get_glib_settings().bind("replay", replay_switch, "active",
                            Gio.SettingsBindFlags.DEFAULT)
 
-        crc32_switch = self.builder.get_object("crc32_switch")
-        tools.get_glib_settings().bind("use-crc32", crc32_switch, "active",
-                           Gio.SettingsBindFlags.DEFAULT)
-
         titlebar_remaining_time_switch = self.builder.get_object("titlebar_remaining_time_switch")
         tools.get_glib_settings().bind("titlebar-remaining-time", titlebar_remaining_time_switch, "active",
                            Gio.SettingsBindFlags.DEFAULT)

@@ -73,7 +73,6 @@ class Track(ModelBase):
     file = CharField()
     length = FloatField()
     modified = IntegerField()
-    crc32 = BooleanField(default=False)
 
 
 class Settings(ModelBase):
@@ -387,6 +386,17 @@ def update_db_7():
     artwork_cache.delete_artwork_cache()
     Settings.update(version=7).execute()
 
+def update_db_8():
+    db.execute_sql('UPDATE track SET modified=0 WHERE crc32=1')
+
+    migrator: SqliteMigrator = SqliteMigrator(db)
+
+    migrate(
+        migrator.drop_column("track", "crc32")
+    )
+
+    Settings.update(version=8).execute()
+
 def update_db():
     """
     Updates the database if not already done.
@@ -422,6 +432,9 @@ def update_db():
 
     if version < 7:
         update_db_7()
+
+    if version < 8:
+        update_db_8()
 
 
 # thanks to oleg-krv
@@ -522,7 +535,7 @@ def remove_invalid_entries(ui=None, refresh=False):
     Remove track entries from db that no longer exist in the filesystem.
     """
     # remove entries from the db that are no longer existent
-    for track in Track.select():
+    for track in Track.select(Track.file):
         if not os.path.isfile(track.file) and cozy.control.filesystem_monitor.FilesystemMonitor().is_track_online(track):
             track.delete_instance()
 

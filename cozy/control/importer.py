@@ -34,6 +34,7 @@ class TrackContainer:
         self.mutagen = track
         self.path = path
 
+
 class TrackData:
     name = None
     track_number = None
@@ -44,13 +45,13 @@ class TrackData:
     disk = None
     length = None
     modified = None
-    crc32 = None
     author = None
     reader = None
     cover = None
 
     def __init__(self, file):
         self.file = file
+
 
 def b64tobinary(b64):
     """
@@ -89,7 +90,7 @@ def update_database(ui, force=False):
     file_count = 0
     for path in paths:
         file_count += sum([len(files) for r, d, files in os.walk(path)])
-    
+
     percent_threshold = file_count / 1000
     failed = ""
     tracks_to_import = []
@@ -105,31 +106,16 @@ def update_database(ui, force=False):
                     imported = True
                     try:
                         if force:
-                            crc = None
-                            if tools.get_glib_settings().get_boolean("use-crc32"):
-                                crc = __crc32_from_file(path)
-                            imported, ignore = import_file(file, directory, path, True, crc)
+                            imported, ignore = import_file(file, directory, path, True)
                             tracks_cache_update.append(path)
                         # Is the track already in the database?
                         elif cozy.control.db.Track.select().where(cozy.control.db.Track.file == path).count() < 1:
                             imported, track_data = import_file(file, directory, path)
                             if track_data:
                                 tracks_to_import.append(track_data)
-                        # Has the track changed on disk?
-                        elif tools.get_glib_settings().get_boolean("use-crc32"):
-                            crc = __crc32_from_file(path)
-                            # Is the value in the db already crc32 or is the crc changed?
-                            if (cozy.control.db.Track.select().where(cozy.control.db.Track.file == path).first().modified != crc or
-                              cozy.control.db.Track.select().where(
-                                  cozy.control.db.Track.file == path).first().crc32 != True):
-                                imported, ignore = import_file(
-                                    file, directory, path, True, crc)
-                                tracks_cache_update.append(path)
-                        # Has the modified date changed or is the value still a crc?
+                        # Has the modified date changed?
                         elif (cozy.control.db.Track.select().where(
-                                cozy.control.db.Track.file == path).first().modified < os.path.getmtime(path) or
-                              cozy.control.db.Track.select().where(
-                                  cozy.control.db.Track.file == path).first().crc32 != False):
+                                cozy.control.db.Track.file == path).first().modified < os.path.getmtime(path)):
                             imported, ignore = import_file(file, directory, path, update=True)
                             tracks_cache_update.append(path)
 
@@ -159,7 +145,6 @@ def update_database(ui, force=False):
                         Gdk.threads_add_idle(
                             GLib.PRIORITY_DEFAULT_IDLE, ui.titlebar.update_progress_bar.set_fraction, i / file_count)
 
-
     write_tracks_to_db(tracks_to_import)
     end = time.time()
     log.info("Total import time: " + str(end - start))
@@ -179,6 +164,7 @@ def update_database(ui, force=False):
     OfflineCache().update_cache(tracks_cache_update)
     OfflineCache()._process_queue()
 
+
 def write_tracks_to_db(tracks):
     """
     """
@@ -186,12 +172,16 @@ def write_tracks_to_db(tracks):
         return
 
     if PeeweeVersion[0] == '2':
-        data = list({"name": t.name, "number": t.track_number, "disk": t.disk, "position": t.position, "book": t.book, "file": t.file, "length": t.length, "modified": t.modified, "crc32": t.crc32} for t in tracks)
+        data = list({"name": t.name, "number": t.track_number, "disk": t.disk, "position": t.position, "book": t.book,
+                     "file": t.file, "length": t.length, "modified": t.modified} for t in tracks)
         cozy.control.db.Track.insert_many(data).execute()
     else:
-        fields = [cozy.control.db.Track.name, cozy.control.db.Track.number, cozy.control.db.Track.disk, cozy.control.db.Track.position, cozy.control.db.Track.book, cozy.control.db.Track.file, cozy.control.db.Track.length, cozy.control.db.Track.modified, cozy.control.db.Track.crc32]
-        data = list((t.name, t.track_number, t.disk, t.position, t.book, t.file, t.length, t.modified, t.crc32) for t in tracks)
+        fields = [cozy.control.db.Track.name, cozy.control.db.Track.number, cozy.control.db.Track.disk,
+                  cozy.control.db.Track.position, cozy.control.db.Track.book, cozy.control.db.Track.file,
+                  cozy.control.db.Track.length, cozy.control.db.Track.modified]
+        data = list((t.name, t.track_number, t.disk, t.position, t.book, t.file, t.length, t.modified) for t in tracks)
         cozy.control.db.Track.insert_many(data, fields=fields).execute()
+
 
 def rebase_location(ui, oldPath, newPath):
     """
@@ -214,7 +204,7 @@ def rebase_location(ui, oldPath, newPath):
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
 
 
-def import_file(file, directory, path, update=False, crc=None):
+def import_file(file, directory, path, update=False):
     """
     Imports all information about a track into the database.
     Note: This creates also a new album object when it doesnt exist yet.
@@ -231,7 +221,7 @@ def import_file(file, directory, path, update=False, crc=None):
     reader = None
     track_number = None
     track_data = None
-    
+
     # getting the some data is file specific
     ### MP3 ###
     if media_type == "audio/mpeg":
@@ -259,7 +249,7 @@ def import_file(file, directory, path, update=False, crc=None):
         log.warning("Skipping file " + path + " because of mime type " + media_type + ".")
         return False, None
 
-    track_data.modified = __get_last_modified(crc, path)
+    track_data.modified = __get_last_modified(path)
 
     # try to get all the remaining tags
     try:
@@ -291,8 +281,6 @@ def import_file(file, directory, path, update=False, crc=None):
         if not success:
             return False, None
 
-    track_data.crc32 = tools.get_glib_settings().get_boolean("use-crc32")
-
     if update:
         if cozy.control.db.Book.select().where(cozy.control.db.Book.name == track_data.book_name).count() < 1:
             track_data.book = cozy.control.db.Book.create(name=track_data.book_name,
@@ -315,8 +303,7 @@ def import_file(file, directory, path, update=False, crc=None):
                                      book=track_data.book,
                                      disk=track_data.disk,
                                      length=track_data.length,
-                                     modified=track_data.modified,
-                                     crc32=track_data.crc32).where(
+                                     modified=track_data.modified).where(
             cozy.control.db.Track.file == track_data.file).execute()
     else:
         # create database entries
@@ -334,6 +321,7 @@ def import_file(file, directory, path, update=False, crc=None):
         return True, track_data
 
     return True, None
+
 
 def get_gstreamer_length(path):
     """
@@ -360,14 +348,9 @@ def get_gstreamer_length(path):
     else:
         success, None
 
-def __get_last_modified(crc, path):
-    global settings
-    if tools.get_glib_settings().get_boolean("use-crc32"):
-        if crc is None:
-            crc = __crc32_from_file(path)
-        modified = crc
-    else:
-        modified = os.path.getmtime(path)
+
+def __get_last_modified(path: str):
+    modified = os.path.getmtime(path)
     return modified
 
 
@@ -606,6 +589,7 @@ def __get_wav_track_length(path):
 
         return duration
 
+
 def __get_ogg_cover(track):
     """
     Get the cover of an OGG file.
@@ -710,15 +694,3 @@ def __get_common_tag(track, tag):
 
     return value
 
-# thanks to oleg-krv
-def __crc32_from_file(filename):
-    crc_file = 0
-    try:
-        prev = 0
-        for eachLine in open(filename, 'rb'):
-            prev = zlib.crc32(eachLine, prev)
-        crc_file = (prev & 0xFFFFFFFF)
-    except Exception as e:
-        log.warning(e)
-    
-    return crc_file
