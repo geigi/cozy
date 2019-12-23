@@ -8,7 +8,13 @@ from playhouse.sqliteq import SqliteQueueDatabase
 log = logging.getLogger("db")
 
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
-log.debug(data_dir)
+
+update = None
+if os.path.exists(os.path.join(data_dir, "cozy.db")):
+    update = True
+else:
+    update = False
+
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)
 
@@ -27,3 +33,8 @@ def get_db():
 def get_data_dir():
     global data_dir
     return data_dir
+
+
+def get_update():
+    global update
+    return update

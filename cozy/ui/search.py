@@ -1,8 +1,8 @@
 import threading
 from threading import Thread
 
+from cozy.control.db import search_books, search_authors, search_readers
 from cozy.ui.search_results import BookSearchResult, ArtistSearchResult
-import cozy.control.db as db
 import cozy.tools as tools
 import cozy.ui
 
@@ -63,19 +63,19 @@ class Search:
         # we need the main context to call methods in the main thread after the search is finished
         main_context = GLib.MainContext.default()
 
-        books = db.search_books(user_search)
+        books = search_books(user_search)
         if self.search_thread_stop.is_set():
             return
         main_context.invoke_full(
             GLib.PRIORITY_DEFAULT, self.__on_book_search_finished, books)
 
-        authors = db.search_authors(user_search)
+        authors = search_authors(user_search)
         if self.search_thread_stop.is_set():
             return
         main_context.invoke_full(
             GLib.PRIORITY_DEFAULT, self.__on_author_search_finished, authors)
 
-        readers = db.search_readers(user_search)
+        readers = search_readers(user_search)
         if self.search_thread_stop.is_set():
             return
         main_context.invoke_full(

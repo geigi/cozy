@@ -1,8 +1,9 @@
 import cozy.control.artwork_cache as artwork_cache
-import cozy.control.db as db
 import cozy.control.player as player
 import cozy.tools as tools
 import cozy.ui
+from cozy.control.db import get_book_remaining, get_book_progress, get_track_from_book_time, get_book_duration
+from cozy.model.settings import Settings
 from cozy.tools import IntervalTimer
 
 import gi
@@ -238,9 +239,9 @@ class Titlebar:
             self.set_title_cover(
                 artwork_cache.get_cover_pixbuf(track.book, self.ui.window.get_scale_factor(), size), size)
 
-        self.current_remaining = db.get_book_remaining(
+        self.current_remaining = get_book_remaining(
             self.current_book, False)
-        self.current_elapsed = db.get_book_progress(self.current_book, False)
+        self.current_elapsed = get_book_progress(self.current_book, False)
 
         self.__update_progress_scale_range()
 
@@ -276,7 +277,7 @@ class Titlebar:
         self.throbber.set_visible(False)
 
     def load_last_book(self):
-        if db.Settings.get().last_played_book:
+        if Settings.get().last_played_book:
             self.update_track_ui()
             self.update_ui_time(self.progress_scale)
             cur_m, cur_s = player.get_current_duration_ui()
@@ -369,7 +370,7 @@ class Titlebar:
         value = self.progress_scale.get_value() * self.ui.speed.get_speed()
 
         if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-            track, time = db.get_track_from_book_time(
+            track, time = get_track_from_book_time(
                 self.current_book, value)
             if track.id == player.get_current_track().id:
                 player.jump_to(time)
@@ -409,7 +410,7 @@ class Titlebar:
         Update the progress scale range including the current playback speed.
         """
         if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-            total = db.get_book_duration(
+            total = get_book_duration(
                 self.current_book) / self.ui.speed.get_speed()
         else:
             total = player.get_current_track().length / self.ui.speed.get_speed()

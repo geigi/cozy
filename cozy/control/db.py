@@ -5,7 +5,7 @@ import logging
 import cozy
 from cozy.model.artwork_cache import ArtworkCache
 from cozy.model.book import Book
-from cozy.model.model_base import get_db, get_data_dir
+from cozy.model.model_base import get_db, get_data_dir, get_update
 from cozy.model.offline_cache import OfflineCache
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage
@@ -29,15 +29,9 @@ from gi.repository import GLib, Gdk
 
 import cozy.tools as tools
 
-
 db = get_db()
 data_dir = get_data_dir()
-
-update = None
-if os.path.exists(os.path.join(data_dir, "cozy.db")):
-    update = True
-else:
-    update = False
+update = get_update()
 
 def init_db():
     global update
@@ -539,7 +533,7 @@ def is_external(book):
                Storage.select().where(Storage.external == True))
 
 
-def close():
+def close_db():
     global db
 
     log.info("Closing.")

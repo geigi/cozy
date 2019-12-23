@@ -3,11 +3,16 @@ import time
 from gi.repository import Gst
 
 import gi
+
+from cozy.control.db import get_tracks
+from cozy.model.book import Book
+from cozy.model.settings import Settings
+from cozy.model.track import Track
+
 gi.require_version('Gst', '1.0')
 import logging
 log = logging.getLogger("player")
 
-import cozy.control.db
 from cozy.control.offline_cache import OfflineCache
 import cozy.control.filesystem_monitor
 
@@ -148,7 +153,7 @@ def get_current_track():
     """
     global __current_track
     if __current_track:
-        query = cozy.control.db.Track.select().where(cozy.control.db.Track.id == __current_track.id)
+        query = Track.select().where(Track.id == __current_track.id)
         if query.exists():
             return query.get()
         else:
@@ -213,11 +218,11 @@ def play_pause(track, jump=False):
             save_current_track_position()
         else:
             __player.set_state(Gst.State.PLAYING)
-            emit_event("play", cozy.control.db.Track.get(cozy.control.db.Track.id == __current_track.id))
+            emit_event("play", Track.get(Track.id == __current_track.id))
     else:
         load_file(track)
         __player.set_state(Gst.State.PLAYING)
-        emit_event("play", cozy.control.db.Track.get(cozy.control.db.Track.id == __current_track.id))
+        emit_event("play", Track.get(Track.id == __current_track.id))
 
     __set_speed = True
 
@@ -230,7 +235,7 @@ def next_track():
     global __current_track
     global __play_next
 
-    album_tracks = cozy.control.db.get_tracks(get_current_track().book)
+    album_tracks = get_tracks(get_current_track().book)
     current = get_current_track()
     index = list(album_tracks).index(current)
     next_track = None
@@ -252,7 +257,7 @@ def next_track():
         stop()
         save_current_book_position(current, -1)
         unload()
-        cozy.control.db.Settings.update(last_played_book=None).execute()
+        Settings.update(last_played_book=None).execute()
         emit_event("stop")
 
 
@@ -271,7 +276,7 @@ def prev_track():
     """
     global __player
     global __current_track
-    album_tracks = cozy.control.db.get_tracks(get_current_track().book)
+    album_tracks = get_tracks(get_current_track().book)
     current = get_current_track()
     index = list(album_tracks).index(current)
     previous = None
@@ -463,9 +468,9 @@ def load_file(track):
     __player.set_property("uri", "file://" + path)
     __player.set_state(Gst.State.PAUSED)
     save_current_book_position(__current_track)
-    cozy.control.db.Settings.update(last_played_book=__current_track.book).execute()
-    cozy.control.db.Book.update(last_played=int(time.time())).where(
-        cozy.control.db.Book.id == __current_track.book.id).execute()
+    Settings.update(last_played_book=__current_track.book).execute()
+    Book.update(last_played=int(time.time())).where(
+        Book.id == __current_track.book.id).execute()
     emit_event("track-changed", track)
 
 
@@ -476,11 +481,11 @@ def load_last_book():
     global __current_track
     global __player
 
-    last_book = cozy.control.db.Settings.get().last_played_book
+    last_book = Settings.get().last_played_book
 
     if last_book and last_book.position != 0:
 
-        query = cozy.control.db.Track.select().where(cozy.control.db.Track.id == last_book.position)
+        query = Track.select().where(Track.id == last_book.position)
         if query.exists():
             last_track = query.get()
 
@@ -496,8 +501,8 @@ def load_last_book():
                 __player.set_state(Gst.State.PAUSED)
                 __current_track = last_track
 
-                cozy.control.db.Book.update(last_played=int(time.time())).where(
-                    cozy.control.db.Book.id == last_book.id).execute()
+                Book.update(last_played=int(time.time())).where(
+                    Book.id == last_book.id).execute()
 
                 emit_event("track-changed", last_track)
 
@@ -514,7 +519,7 @@ def save_current_playback_speed(book=None, speed=None):
     if speed is None:
         speed = __speed
 
-    cozy.control.db.Book.update(playback_speed=speed).where(cozy.control.db.Book.id == book.id).execute()
+    Book.update(playback_speed=speed).where(Book.id == book.id).execute()
 
 
 def save_current_book_position(track, pos=None):
@@ -524,8 +529,8 @@ def save_current_book_position(track, pos=None):
     """
     if pos is None:
         pos = track.id
-    cozy.control.db.Book.update(position=pos).where(
-        cozy.control.db.Book.id == track.book.id).execute()
+    Book.update(position=pos).where(
+        Book.id == track.book.id).execute()
 
 
 def save_current_track_position(pos=None, track=None):
@@ -538,8 +543,8 @@ def save_current_track_position(pos=None, track=None):
     if track is None:
         track = get_current_track()
     
-    cozy.control.db.Track.update(position=pos).where(
-        cozy.control.db.Track.id == track.id).execute()
+    Track.update(position=pos).where(
+        Track.id == track.id).execute()
 
 
 def emit_event(event, message=None):

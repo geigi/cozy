@@ -153,7 +153,7 @@ def __load_pixbuf_from_db(book):
         try:
             loader = GdkPixbuf.PixbufLoader.new()
             loader.write(book.cover)
-            loader.close()
+            loader.close_db()
             pixbuf = loader.get_pixbuf()
         except Exception as e:
             log.warning("Could not get cover for book " + book.name)
