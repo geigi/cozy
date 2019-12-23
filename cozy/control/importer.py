@@ -135,6 +135,9 @@ def update_database(ui, force=False):
 
                         if not imported:
                             failed += path + "\n"
+                    except UnicodeEncodeError as e:
+                        log.warning("Could not import file because of invalid path or filename: " + path)
+                        failed += path + "\n"
                     except Exception as e:
                         log.warning("Could not import file: " + path)
                         log.warning(traceback.format_exc())

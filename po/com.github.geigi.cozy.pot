@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 16:01+0100\n"
+"POT-Creation-Date: 2019-12-23 12:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,11 +70,11 @@ msgstr ""
 msgid "Jump to reader "
 msgstr ""
 
-#: cozy/control/importer.py:278
+#: cozy/control/importer.py:281
 msgid "Unknown Author"
 msgstr ""
 
-#: cozy/control/importer.py:280
+#: cozy/control/importer.py:283
 msgid "Unknown Reader"
 msgstr ""
 
@@ -153,7 +153,7 @@ msgid "Importing Audiobooks"
 msgstr ""
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
+#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:821
 msgid "All"
 msgstr ""
 
@@ -453,6 +453,7 @@ msgstr ""
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
