@@ -4,6 +4,7 @@ import os
 
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.singleton import Singleton
+from cozy.control.application_directories import get_cache_dir
 from cozy.control.db import get_tracks
 import cozy.tools as tools
 import cozy.ui
@@ -34,7 +35,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
     def __init__(self):
         self.ui = cozy.ui.main_view.CozyUI()
 
-        self.cache_dir = os.path.join(tools.get_cache_dir(), "offline")
+        self.cache_dir = os.path.join(get_cache_dir(), "offline")
         if not os.path.exists(self.cache_dir):
             os.makedirs(self.cache_dir)
 
@@ -126,7 +127,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
         Deletes the entire offline cache files.
         Doesn't delete anything from the cozy.db.
         """
-        cache_dir = os.path.join(tools.get_cache_dir(), "offline")
+        cache_dir = os.path.join(get_cache_dir(), "offline")
 
         import shutil
         shutil.rmtree(cache_dir)

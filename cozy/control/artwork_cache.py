@@ -5,6 +5,7 @@ import cozy.tools as tools
 
 from gi.repository import GdkPixbuf
 
+from cozy.control.application_directories import get_cache_dir
 from cozy.control.db import get_tracks
 from cozy.model.artwork_cache import ArtworkCache
 from cozy.model.book import Book
@@ -44,7 +45,7 @@ def delete_artwork_cache():
     """
     Deletes the artwork cache completely.
     """
-    cache_dir = os.path.join(tools.get_cache_dir(), "artwork")
+    cache_dir = os.path.join(get_cache_dir(), "artwork")
 
     import shutil
     if os.path.exists(cache_dir):
@@ -80,7 +81,7 @@ def __create_artwork_cache(book, pixbuf, size):
         gen_uuid = str(uuid.uuid4())
         ArtworkCache.create(book = book, uuid=gen_uuid)
 
-    cache_dir = os.path.join(os.path.join(tools.get_cache_dir(), "artwork"), gen_uuid)
+    cache_dir = os.path.join(os.path.join(get_cache_dir(), "artwork"), gen_uuid)
     if not os.path.exists(cache_dir):
         os.makedirs(cache_dir)
 
@@ -107,7 +108,7 @@ def __load_pixbuf_from_cache(book, size):
     else:
         return None
 
-    cache_dir = os.path.join(tools.get_cache_dir(), "artwork")
+    cache_dir = os.path.join(get_cache_dir(), "artwork")
     cache_dir = os.path.join(cache_dir, uuid)
 
     try:

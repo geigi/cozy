@@ -1,9 +1,10 @@
 import logging
 import os
 
-from gi.repository import GLib
 from peewee import Model
 from playhouse.sqliteq import SqliteQueueDatabase
+
+from cozy.control.application_directories import get_data_dir
 
 log = logging.getLogger("db")
 
@@ -13,10 +14,6 @@ _db = None
 def get_sqlite_database():
     global _db
     return _db
-
-
-def get_data_dir():
-    return os.path.join(GLib.get_user_data_dir(), "cozy")
 
 
 def database_file_exists():

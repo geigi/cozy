@@ -3,6 +3,7 @@ import os
 import time
 
 import cozy
+from cozy.control.db_updater import update_db
 from cozy.model.artwork_cache import ArtworkCache
 from cozy.model.book import Book
 from cozy.model.model_base import get_sqlite_database, get_data_dir, database_file_exists
@@ -22,11 +23,8 @@ if PeeweeVersion[0] == '2':
     ModelBase = BaseModel
 else:
     log.info("Using peewee 3 backend")
-from peewee import IntegerField, FloatField, BooleanField, SqliteDatabase
-from playhouse.migrate import SqliteMigrator, migrate
+from peewee import SqliteDatabase
 from gi.repository import GLib, Gdk
-
-import cozy.tools as tools
 
 _db = get_sqlite_database()
 
@@ -201,158 +199,6 @@ def get_track_path(track):
     :return: Path as string
     """
     pass
-
-
-def update_db_1():
-    """
-    Update database to v1.
-    """
-    migrator = SqliteMigrator(_db)
-
-    version = IntegerField(default=1)
-    crc32 = BooleanField(default=False)
-
-    migrate(
-        migrator.add_column('settings', 'version', version),
-        migrator.add_column('track', 'crc32', crc32),
-    )
-
-
-def update_db_2():
-    """
-    Update database to v2.
-    """
-    migrator = SqliteMigrator(_db)
-
-    playback_speed = FloatField(default=1.0)
-
-    migrate(
-        migrator.add_column('book', 'playback_speed', playback_speed),
-    )
-
-    Settings.update(version=2).execute()
-
-
-def update_db_3():
-    """
-    Update database to v3.
-    """
-    current_path = Settings.get().path
-
-    _db.create_tables([Storage])
-    Storage.create(path=current_path, default=True)
-    Settings.update(path="NOT_USED").execute()
-    Settings.update(version=3).execute()
-
-
-def update_db_4():
-    """
-    Update database to v4.
-    """
-    migrator = SqliteMigrator(_db)
-
-    last_played = IntegerField(default=0)
-
-    migrate(
-        migrator.add_column('book', 'last_played', last_played),
-    )
-
-    Settings.update(version=4).execute()
-
-
-def update_db_5():
-    """
-    Update database to v5.
-    """
-    _db.create_tables([StorageBlackList])
-
-    Settings.update(version=5).execute()
-
-
-def update_db_6():
-    """
-    Update database to v6.
-    """
-    migrator = SqliteMigrator(_db)
-
-    _db.create_tables([OfflineCache])
-
-    external = BooleanField(default=False)
-    offline = BooleanField(default=False)
-    downloaded = BooleanField(default=False)
-
-    migrate(
-        migrator.add_column('storage', 'external', external),
-        migrator.add_column('book', 'offline', offline),
-        migrator.add_column('book', 'downloaded', downloaded)
-    )
-
-    Settings.update(version=6).execute()
-
-    import shutil
-    shutil.rmtree(tools.get_cache_dir())
-
-
-def update_db_7():
-    """
-    Update database to v7.
-    """
-    import cozy.control.artwork_cache as artwork_cache
-    artwork_cache.delete_artwork_cache()
-    Settings.update(version=7).execute()
-
-
-def update_db_8():
-    _db.execute_sql('UPDATE track SET modified=0 WHERE crc32=1')
-
-    migrator: SqliteMigrator = SqliteMigrator(_db)
-
-    migrate(
-        migrator.drop_column("track", "crc32")
-    )
-
-    Settings.update(version=8).execute()
-
-
-def update_db():
-    """
-    Updates the database if not already done.
-    """
-    global _db
-    # First test for version 1
-    try:
-        next(c for c in _db.get_columns("settings") if c.name == "version")
-    except Exception as e:
-        if len(_db.get_tables()) == 0:
-            data_dir = get_data_dir()
-            if os.path.exists(os.path.join(data_dir, "cozy.db")):
-                os.remove(os.path.join(data_dir, "cozy.db"))
-                os.remove(os.path.join(data_dir, "cozy.db-shm"))
-                os.remove(os.path.join(data_dir, "cozy.db-wal"))
-        update_db_1()
-
-    version = Settings.get().version
-    # then for version 2 and so on
-    if version < 2:
-        update_db_2()
-
-    if version < 3:
-        update_db_3()
-
-    if version < 4:
-        update_db_4()
-
-    if version < 5:
-        update_db_5()
-
-    if version < 6:
-        update_db_6()
-
-    if version < 7:
-        update_db_7()
-
-    if version < 8:
-        update_db_8()
 
 
 # thanks to oleg-krv
