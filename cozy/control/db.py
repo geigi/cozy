@@ -2,7 +2,6 @@ import logging
 import os
 import time
 
-import cozy
 from cozy.control.db_updater import update_db
 from cozy.model.artwork_cache import ArtworkCache
 from cozy.model.book import Book
@@ -304,7 +303,8 @@ def remove_invalid_entries(ui=None, refresh=False):
     """
     # remove entries from the db that are no longer existent
     for track in Track.select(Track.file):
-        if not os.path.isfile(track.file) and cozy.control.filesystem_monitor.FilesystemMonitor().is_track_online(
+        from cozy.control.filesystem_monitor import FilesystemMonitor
+        if not os.path.isfile(track.file) and FilesystemMonitor().is_track_online(
                 track):
             track.delete_instance()
 

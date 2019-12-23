@@ -97,31 +97,63 @@ flatpak --user override --filesystem=/media com.github.geigi.cozy
 
 ## A big thanks
 To the contributors on GitHub:
-- oleg-krv 
 - AsavarTzeth
-- worldofpeace
-- camellan
-- jnbr
-- grenade
-- NathanBnm
 - Fatih20
+- NathanBnm
+- camellan
+- grenade
+- jnbr
+- meisenzahl
+- oleg-krv
+- umeboshi2
+- worldofpeace
 
 The translators:
-- camellan
-- Vistaus
 - Distil62
-- karaagac
+- Fitoschido
+- Floflr
+- Foxyriot
 - HansCz
-- mvainola
-- giuscasula
+- IvoIliev
+- MageJohn
+- Nimmerliefde
+- Potty0
+- TheMBTH
+- TheRuleOfMike
+- Vistaus
+- W2hJ3MOmIRovEpTeahe80jC
+- aKodi
 - abuyop
 - akodi
-- cleitonjfloss
+- albanobattistella
 - amadeussss
-- nvivant
-- Foxyriot
+- andreapillai
+- arejano
+- camellan
+- chris109b
+- cjfloss
+- cleitonjfloss
+- corentinbettiol
+- dtgoitia
+- fishcake13
+- fountain
+- georgelemental
+- giuscasula
+- jan.sundman
+- jan_nekvasil
+- jouselt
+- karaagac
+- libreajans
+- linuxmasterclub
 - mardojai
+- mvainola
+- nvivant
+- oleg_krv
+- test21
 - trampover
+- twardowskidev
+- txelu
+- yalexaner
 
 To nedrichards for the Flatpak.
 
