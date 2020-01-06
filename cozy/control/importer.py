@@ -219,6 +219,7 @@ def import_file(file, directory, path, update=False):
         return True, None
 
     media_type = tools.__get_media_type(path)
+    print(media_type)
     track = TrackContainer(None, path)
     cover = None
     reader = None
@@ -227,23 +228,23 @@ def import_file(file, directory, path, update=False):
 
     # getting the some data is file specific
     ### MP3 ###
-    if media_type == "audio/mpeg":
+    if "audio/mpeg" in media_type:
         track_data = _get_mp3_tags(track, path)
 
     ### FLAC ###
-    elif media_type == "audio/flac" or media_type == "audio/x-flac":
+    elif "audio/flac" in media_type or "audio/x-flac" in media_type:
         track_data = _get_flac_tags(track, path)
 
     ### OGG ###
-    elif media_type == "audio/ogg" or media_type == "audio/x-ogg":
+    elif "audio/ogg" in media_type or "audio/x-ogg" in media_type:
         track_data = _get_ogg_tags(track, path)
 
     ### MP4 ###
-    elif media_type == "audio/mp4" or media_type == "audio/x-m4a":
+    elif "audio/mp4" in media_type or "audio/x-m4a" in media_type:
         track_data = _get_mp4_tags(track, path)
 
     ### WAV ###
-    elif media_type == "audio/wav" or media_type == "audio/x-wav":
+    elif "audio/wav" in media_type or "audio/x-wav" in media_type:
         track_data = TrackData(path)
         track_data.length = __get_wav_track_length(path)
 
