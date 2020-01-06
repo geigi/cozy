@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-23 12:37+0100\n"
+"POT-Creation-Date: 2020-01-06 20:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
+#: cozy/ui/book_element.py:69 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr ""
 
-#: cozy/ui/book_element.py:212
+#: cozy/ui/book_element.py:214
 msgid "Open book overview"
 msgstr ""
 
-#: cozy/ui/book_element.py:213
+#: cozy/ui/book_element.py:215
 msgid "Currently offline"
 msgstr ""
 
-#: cozy/ui/book_element.py:319
+#: cozy/ui/book_element.py:321
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/ui/book_element.py:322
+#: cozy/ui/book_element.py:324
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/ui/book_element.py:325
+#: cozy/ui/book_element.py:327
 msgid "Remove from library"
 msgstr ""
 
-#: cozy/ui/book_element.py:395
+#: cozy/ui/book_element.py:397
 msgid "Play this part"
 msgstr ""
 
-#: cozy/ui/book_overview.py:228
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr ""
 
-#: cozy/ui/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr ""
 
-#: cozy/control/offline_cache.py:176
+#: cozy/control/offline_cache.py:180
 msgid "Copying"
 msgstr ""
 
@@ -70,94 +70,94 @@ msgstr ""
 msgid "Jump to reader "
 msgstr ""
 
-#: cozy/control/importer.py:281
+#: cozy/control/importer.py:275
 msgid "Unknown Author"
 msgstr ""
 
-#: cozy/control/importer.py:283
+#: cozy/control/importer.py:277
 msgid "Unknown Reader"
 msgstr ""
 
-#: cozy/tools.py:143
+#: cozy/tools.py:133
 msgid "hours"
 msgstr ""
 
-#: cozy/tools.py:145
+#: cozy/tools.py:135
 msgid "hour"
 msgstr ""
 
-#: cozy/tools.py:153
+#: cozy/tools.py:143
 msgid "minutes"
 msgstr ""
 
-#: cozy/tools.py:155
+#: cozy/tools.py:145
 msgid "minute"
 msgstr ""
 
-#: cozy/tools.py:159
+#: cozy/tools.py:149
 msgid "finished"
 msgstr ""
 
-#: cozy/tools.py:163
+#: cozy/tools.py:153
 msgid "seconds"
 msgstr ""
 
-#: cozy/tools.py:165
+#: cozy/tools.py:155
 msgid "second"
 msgstr ""
 
-#: cozy/tools.py:188
+#: cozy/tools.py:178
 msgid "never"
 msgstr ""
 
-#: cozy/tools.py:190
+#: cozy/tools.py:180
 msgid "today"
 msgstr ""
 
-#: cozy/tools.py:192
+#: cozy/tools.py:182
 msgid "yesterday"
 msgstr ""
 
-#: cozy/tools.py:194
+#: cozy/tools.py:184
 #, python-format
 msgid "%s days ago"
 msgstr ""
 
-#: cozy/tools.py:196
+#: cozy/tools.py:186
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:198
+#: cozy/tools.py:188
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:200
+#: cozy/tools.py:190
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/ui/main_view.py:403
+#: cozy/ui/main_view.py:408
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui/main_view.py:424
+#: cozy/ui/main_view.py:429
 msgid "Importing Audiobooks"
 msgstr ""
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:821
+#: cozy/ui/main_view.py:498 cozy/ui/main_view.py:504 cozy/ui/main_view.py:826
 msgid "All"
 msgstr ""
 
-#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
+#: cozy/ui/main_view.py:499 cozy/ui/main_view.py:505
 msgid "Display all books"
 msgstr ""
 
@@ -570,20 +570,7 @@ msgstr ""
 msgid "Force refresh"
 msgstr ""
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr ""
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr ""
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr ""
 
