@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
+# Cleiton Floss <cleitonfloss@gmail.com>, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 16:01+0100\n"
+"POT-Creation-Date: 2019-12-23 12:37+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
+"Last-Translator: Cleiton Floss <cleitonfloss@gmail.com>, 2020\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/geigi/teams/78138/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,11 +74,11 @@ msgstr "Ir para o autor"
 msgid "Jump to reader "
 msgstr "Ir para o narrador"
 
-#: cozy/control/importer.py:278
+#: cozy/control/importer.py:281
 msgid "Unknown Author"
 msgstr "Autor Desconhecido"
 
-#: cozy/control/importer.py:280
+#: cozy/control/importer.py:283
 msgid "Unknown Reader"
 msgstr "Narrador Desconhecido"
 
@@ -124,39 +125,39 @@ msgstr "ontem"
 #: cozy/tools.py:194
 #, python-format
 msgid "%s days ago"
-msgstr ""
+msgstr "%s dias atrás"
 
 #: cozy/tools.py:196
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{weeks} semana atrás"
+msgstr[1] "{weeks} semanas atrás"
 
 #: cozy/tools.py:198
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{months} mês atrás"
+msgstr[1] "{months} meses atrás"
 
 #: cozy/tools.py:200
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{years} ano atrás"
+msgstr[1] "{years} anos atrás"
 
 #: cozy/ui/main_view.py:403
 msgid "Audiobooks"
-msgstr ""
+msgstr "Audiolivros"
 
 #: cozy/ui/main_view.py:424
 msgid "Importing Audiobooks"
 msgstr "Importar Audiolivro"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
+#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:821
 msgid "All"
 msgstr "Todos"
 
@@ -182,7 +183,7 @@ msgstr "Dispositivo interno"
 
 #: cozy/ui/settings.py:446
 msgid "Changing audio book location…"
-msgstr ""
+msgstr "Alterando localização do audiolivro…"
 
 #: cozy/ui/disk_element.py:26
 msgid "Disc"
@@ -250,11 +251,11 @@ msgstr "Tempo passado do trecho atual"
 
 #: data/ui/main_window.ui:311
 msgid "Jump to position in current chapter"
-msgstr ""
+msgstr "Pular para a posição no capítulo atual"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
-msgstr ""
+msgstr "Deslize de posição"
 
 #: data/ui/main_window.ui:318
 msgid "Position of the current part in seconds"
@@ -274,7 +275,7 @@ msgstr "Tempo restante do trecho atual"
 
 #: data/ui/main_window.ui:421
 msgid "Working…"
-msgstr ""
+msgstr "Trabalhando…"
 
 #: data/ui/main_window.ui:426
 msgid "Currently working"
@@ -347,7 +348,7 @@ msgstr "Lista de livros"
 
 #: data/ui/main_window.ui:814
 msgid "Importing your audiobooks…"
-msgstr ""
+msgstr "Importando seus audiolivros…"
 
 #: data/ui/main_window.ui:866
 msgid "Import your Audiobooks"
@@ -469,11 +470,13 @@ msgstr "Alguns arquivos não puderam ser importados"
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
-"Isso pode ter vários motivos:\n"
-"- O formato de áudio não é suportado\n"
+"Isso pode ser devido a várias razões:\n"
+"- O formato do áudio não é suportado\n"
+"- O caminho do arquivo contém caracteres fora do padrão UTF-8\n"
 "- O(s) arquivo(s) não é/são válido(s)\n"
 "- O(s) arquivo(s) está/estão corrompido(s)"
 
@@ -531,7 +534,7 @@ msgstr "Preferir imagens externas do que as capas embutidas"
 
 #: data/ui/settings.ui:837
 msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr ""
+msgstr "Usar imagens (cover.jpg, *png, …) quando disponíveis"
 
 #: data/ui/settings.ui:920
 msgid "Audio books location"
@@ -648,7 +651,7 @@ msgstr "Duração do temporizador"
 
 #: data/ui/timer_popover.ui:88
 msgid "Timer duration slider"
-msgstr ""
+msgstr "Deslize do temporizador"
 
 #: data/ui/timer_popover.ui:89
 msgid "Set the sleep timer duration in minutes"
@@ -656,11 +659,11 @@ msgstr "Definir a duração do temporizador em minutos"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
-msgstr ""
+msgstr "_Examinar Pasta"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
-msgstr ""
+msgstr "_Ocultar livros indisponíveis"
 
 #: data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
@@ -672,7 +675,7 @@ msgstr "_Ajuda"
 
 #: data/ui/titlebar_menu.ui:29
 msgid "_About"
-msgstr "_Sobre"
+msgstr "S_obre"
 
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
