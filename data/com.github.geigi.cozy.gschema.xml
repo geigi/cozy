@@ -46,6 +46,11 @@
       <summary>Enable Dark Mode.</summary>
       <description></description>
     </key>
+    <key type="b" name="swap-author-reader">
+      <default>false</default>
+      <summary>Swap author and reader tag assignment.</summary>
+      <description></description>
+    </key>
     <key type="b" name="sleep-timer-fadeout">
       <default>false</default> 
       <summary>Enable fading out when using the sleep timer.</summary>

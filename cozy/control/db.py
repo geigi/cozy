@@ -2,6 +2,7 @@ import logging
 import os
 import time
 
+from cozy import tools
 from cozy.control.db_updater import update_db
 from cozy.model.artwork_cache import ArtworkCache
 from cozy.model.book import Book
@@ -79,28 +80,17 @@ def books():
 
 
 def authors():
-    """
-    Find all authors in the database
-
-    :return: all authors
-    """
-    return Book.select(Book.author).distinct().order_by(Book.author)
+    author_field = Book.author if tools.get_glib_settings().get_boolean("swap-author-reader") else Book.reader
+    return Book.select(author_field).distinct().order_by(author_field)
 
 
 def readers():
-    """
-    Find all readers in the database
-
-    :return: all readers
-    """
-    return Book.select(Book.reader).distinct().order_by(Book.reader)
+    reader_field = Book.reader if tools.get_glib_settings().get_boolean("swap-author-reader") else Book.author
+    return Book.select(reader_field).distinct().order_by(reader_field)
 
 
 def Search(search):
     return Track.select().where(search in Track.name)
-
-
-# Return ordered after Track ID / name when not available
 
 
 def get_tracks(book):

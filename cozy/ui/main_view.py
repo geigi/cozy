@@ -6,6 +6,7 @@ from cozy.control.db import books, authors, readers, is_external, close_db
 from cozy.model.book import Book
 from cozy.model.storage import Storage
 from cozy.model.track import Track
+from cozy.ui.library_view import LibraryView
 
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
@@ -58,6 +59,8 @@ class CozyUI(metaclass=Singleton):
         self.app = app
         self.version = version
 
+        self._library_view = None
+
     def activate(self):
         self.first_play = True
 
@@ -68,6 +71,8 @@ class CozyUI(metaclass=Singleton):
         self.refresh_content()
         self.check_for_tracks()
         self.__load_last_book()
+
+        self._library_view = LibraryView(self.window_builder)
 
         self.is_initialized = True
 
@@ -150,8 +155,6 @@ class CozyUI(metaclass=Singleton):
         self.book_box = self.window_builder.get_object("book_box")
         self.book_scroller = self.window_builder.get_object("book_scroller")
         self.sort_stack = self.window_builder.get_object("sort_stack")
-        self.sort_stack.connect("notify::visible-child",
-                                self.__on_sort_stack_changed)
         self.sort_box = self.window_builder.get_object("sort_box")
         self.import_box = self.window_builder.get_object("import_box")
         self.position_box = self.window_builder.get_object("position_box")
@@ -196,12 +199,6 @@ class CozyUI(metaclass=Singleton):
 
         # shortcuts
         self.accel = Gtk.AccelGroup()
-
-        # sorting and filtering
-        self.author_box.connect("row-selected", self.__on_listbox_changed)
-        self.reader_box.connect("row-selected", self.__on_listbox_changed)
-        self.book_box.set_sort_func(self.__sort_books, None, False)
-        self.book_box.set_filter_func(self.__filter_books, None, False)
 
         try:
             about_close_button = self.about_builder.get_object(
@@ -508,11 +505,11 @@ class CozyUI(metaclass=Singleton):
         self.reader_box.select_row(all_row)
 
         for book in authors():
-            row = ListBoxRowWithData(book.author, False)
+            row = ListBoxRowWithData(book.get_author(), False)
             self.author_box.add(row)
 
         for book in readers():
-            row = ListBoxRowWithData(book.reader, False)
+            row = ListBoxRowWithData(book.get_reader(), False)
             self.reader_box.add(row)
 
         # this is required to see the new items
@@ -789,16 +786,6 @@ class CozyUI(metaclass=Singleton):
         """
         self.book_box.invalidate_filter()
         self.book_box.invalidate_sort()
-
-    def __sort_books(self, book_1, book_2, data, notify_destroy):
-        """
-        Sort books alphabetically by name.
-        """
-        selected_stack = self.sort_stack.props.visible_child_name
-        if selected_stack == "recent":
-            return book_1.book.last_played < book_2.book.last_played
-        else:
-            return book_1.book.name.lower() > book_2.book.name.lower()
 
     def __filter_books(self, book, data, notify_destroy):
         """
