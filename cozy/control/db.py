@@ -5,7 +5,7 @@ import time
 from cozy.control.db_updater import update_db
 from cozy.model.artwork_cache import ArtworkCache
 from cozy.model.book import Book
-from cozy.model.model_base import get_sqlite_database, get_data_dir, database_file_exists
+from cozy.model.model_base import get_sqlite_database, get_data_dir, database_file_exists, __open_database
 from cozy.model.offline_cache import OfflineCache
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage
@@ -31,8 +31,9 @@ _db = get_sqlite_database()
 def init_db():
     tmp_db = None
 
-    if database_file_exists():
-        _connect_db(_db)
+    _connect_db(_db)
+
+    if Settings.table_exists():
         update_db()
     else:
         tmp_db = SqliteDatabase(os.path.join(get_data_dir(), "cozy.db"))

@@ -26,9 +26,7 @@ def __open_database():
         os.makedirs(get_data_dir())
     _db = SqliteQueueDatabase(os.path.join(get_data_dir(), "cozy.db"), pragmas=[('journal_mode', 'wal')])
 
-
 __open_database()
-
 
 class ModelBase(Model):
     class Meta:

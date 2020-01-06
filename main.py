@@ -38,6 +38,8 @@ from cozy.control.mpris import MPRIS
 
 log = logging.getLogger("main")
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
+if not os.path.exists(data_dir):
+    os.makedirs(data_dir)
 pkgdatadir = '@DATA_DIR@'
 localedir = '@LOCALE_DIR@'
 version = '@VERSION@'

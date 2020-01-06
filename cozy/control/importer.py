@@ -219,7 +219,6 @@ def import_file(file, directory, path, update=False):
         return True, None
 
     media_type = tools.__get_media_type(path)
-    print(media_type)
     track = TrackContainer(None, path)
     cover = None
     reader = None
