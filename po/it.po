@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
+# albanobattistella <albano_battistella@hotmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 16:01+0100\n"
+"POT-Creation-Date: 2019-12-23 12:37+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/geigi/teams/78138/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,11 +74,11 @@ msgstr "Vai all'autore"
 msgid "Jump to reader "
 msgstr "Vai al lettore"
 
-#: cozy/control/importer.py:278
+#: cozy/control/importer.py:281
 msgid "Unknown Author"
 msgstr "Autore sconosciuto"
 
-#: cozy/control/importer.py:280
+#: cozy/control/importer.py:283
 msgid "Unknown Reader"
 msgstr "Lettore sconosciuto"
 
@@ -124,39 +125,39 @@ msgstr "ieri"
 #: cozy/tools.py:194
 #, python-format
 msgid "%s days ago"
-msgstr ""
+msgstr "%s giorni fa"
 
 #: cozy/tools.py:196
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{weeks} settimane fa"
+msgstr[1] "{weeks} weeks ago"
 
 #: cozy/tools.py:198
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{months} mesi fa"
+msgstr[1] "{months} mesi fa"
 
 #: cozy/tools.py:200
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{years} anni fa"
+msgstr[1] "{years}  ago"
 
 #: cozy/ui/main_view.py:403
 msgid "Audiobooks"
-msgstr ""
+msgstr "Audiolibri"
 
 #: cozy/ui/main_view.py:424
 msgid "Importing Audiobooks"
 msgstr "Importando audiolibri"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
+#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:821
 msgid "All"
 msgstr "Tutti"
 
@@ -250,7 +251,7 @@ msgstr "Tempo trascorso della traccia attuale"
 
 #: data/ui/main_window.ui:311
 msgid "Jump to position in current chapter"
-msgstr ""
+msgstr "Passa alla posizione nel capitolo corrente"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -465,13 +466,15 @@ msgstr "Alcuni file non possono essere importati"
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
-"Questo può essere dovuto a vari motivi:\n"
-"- Formato audio non supportato\n"
-"- File non è(sono) file audio\n"
-"- File danneggiato(i)"
+"Ciò può avere diversi motivi:\n"
+"- Il formato audio non è supportato\n"
+"- Il percorso o il nome file contiene caratteri non utf-8\n"
+"- I file non sono file audio validi\n"
+"- I file sono corrotti"
 
 #: data/ui/settings.ui:92 data/ui/settings.ui:344
 msgid "General"
@@ -655,7 +658,7 @@ msgstr "_Scansiona cartella"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
-msgstr ""
+msgstr "_Nascondi libri non disponibili"
 
 #: data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
