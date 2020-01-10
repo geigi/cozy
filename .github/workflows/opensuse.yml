@@ -1,0 +1,29 @@
+name: Deploy on OBS (OpenSuse)
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo apt-get install osc
+    - name: Setup osc login
+      run: echo Setup osc login
+    - name: Pull osc repo
+      run: echo Pull osc
+    - name: Download latest version of cozy
+      run: echo Downloading
+    - name: Update rpm spec file
+      run: echo updating spec
+    - name: Osc checkin
+      run: echo checkin
+    - name: Wait for successful build
+      run: echo waiting
+    - name: Submit package
+      run: echo submitting
