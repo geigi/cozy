@@ -23,7 +23,7 @@ jobs:
 
     - name: Download latest cozy release
       run: |
-        curl -s https://api.github.com/repos/geigi/cozy/releases/latest | grep tag_name | cut -d '"' -f 4 > /tmp/VERSION
+        curl -s https://api.github.com/repos/geigi/cozy/releases/latest | json tag_name > /tmp/VERSION
         echo https://github.com/geigi/cozy/archive/$(cat /tmp/VERSION).tar.gz > /tmp/RELEASE_URL
         wget -O /tmp/cozy.tar.gz $(cat /tmp/RELEASE_URL)
         sha256sum /tmp/cozy.tar.gz | cut -d " " -f 1 > /tmp/SHA256SUM
