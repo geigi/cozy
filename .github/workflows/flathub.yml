@@ -1,4 +1,4 @@
-name: CI
+name: Deploy on Flathub
 
 on:
   release:
@@ -9,7 +9,7 @@ on:
 #    types: [started]
 
 jobs:
-  build:
+  deploy:
 
     runs-on: ubuntu-latest
 
