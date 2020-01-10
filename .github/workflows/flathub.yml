@@ -1,8 +1,12 @@
 name: CI
 
+#on:
+#  release:
+#    types: [published]
+
 on:
-  release:
-    types: [published]
+  watch:
+    types: [started]
 
 jobs:
   build:
@@ -32,6 +36,13 @@ jobs:
         cd /tmp/com.github.geigi.cozy/
         json -I -f com.github.geigi.cozy.json -e "this.modules[0].sources[0].url='https://github.com/geigi/cozy/archive/$(cat /tmp/VERSION).tar.gz'"
         json -I -f com.github.geigi.cozy.json -e "this.modules[0].sources[0].sha256='$(cat /tmp/SHA256SUM)'"
+
+    - name: Debug
+      run: |
+        echo "RELEASE URL: $(cat /tmp/RELEASE_URL)"
+        echo "VERSION: $(cat /tmp/VERSION)"
+        echo "SHA URL: $(cat /tmp/SHA256SUM)"
+        cat /tmp/com.github.geigi.cozy/com.github.geigi.cozy.json
 
     - name: Push changes
       run: |
