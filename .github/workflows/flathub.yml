@@ -29,7 +29,7 @@ jobs:
         sha256sum /tmp/cozy.tar.gz | cut -d " " -f 1 > /tmp/SHA256SUM
         
     - name: Clone Flathub repository
-      run: git clone https://geigi:${{ secrets.FLATHUB_TOKEN }}@github.com/geigi/cozy.git /tmp/flathub
+      run: git clone https://geigi:${{ secrets.FLATHUB_TOKEN }}@github.com/flathub/com.github.geigi.cozy.git /tmp/flathub
       
     - name: Update Flathub json
       run: |
