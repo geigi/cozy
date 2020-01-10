@@ -23,8 +23,8 @@ jobs:
 
     - name: Download latest cozy release
       run: |
-        curl -s https://api.github.com/repos/geigi/cozy/releases/latest | grep tarball_url | cut -d '"' -f 4 > /tmp/RELEASE_URL
         curl -s https://api.github.com/repos/geigi/cozy/releases/latest | grep tag_name | cut -d '"' -f 4 > /tmp/VERSION
+        echo https://github.com/geigi/cozy/archive/$(cat /tmp/VERSION).tar.gz > /tmp/RELEASE_URL
         wget -O /tmp/cozy.tar.gz $(cat /tmp/RELEASE_URL)
         sha256sum /tmp/cozy.tar.gz | cut -d " " -f 1 > /tmp/SHA256SUM
         
@@ -46,6 +46,6 @@ jobs:
 
     - name: Push changes
       run: |
-        cd /tmp/com.github.geigi.cozy
+        cd /tmp/flathub
         git commit -am "Bump version to $(cat /tmp/VERSION)"
         git push
