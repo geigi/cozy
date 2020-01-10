@@ -18,8 +18,8 @@ jobs:
       
     - name: Install dependencies
       run: |
-        apt-get install npm
-        npm install -g json
+        sudo apt-get install npm
+        sudo npm install -g json
 
     - name: Download latest cozy release
       run: |
