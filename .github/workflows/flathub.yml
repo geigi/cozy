@@ -34,8 +34,8 @@ jobs:
     - name: Update Flathub json
       run: |
         ls /tmp/flathub
-        json -I -f /tmp/flathub/com.github.geigi.cozy.json -e "this.modules[0].sources[0].url='https://github.com/geigi/cozy/archive/$(cat /tmp/VERSION).tar.gz'"
-        json -I -f /tmp/flathub/com.github.geigi.cozy.json -e "this.modules[0].sources[0].sha256='$(cat /tmp/SHA256SUM)'"
+        json -I -f /tmp/flathub/com.github.geigi.cozy.json -e "this.modules[this.modules.length - 1].sources[0].url='https://github.com/geigi/cozy/archive/$(cat /tmp/VERSION).tar.gz'"
+        json -I -f /tmp/flathub/com.github.geigi.cozy.json -e "this.modules[this.modules.length - 1].sources[0].sha256='$(cat /tmp/SHA256SUM)'"
 
     - name: Debug
       run: |
