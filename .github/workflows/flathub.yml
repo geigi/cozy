@@ -25,15 +25,15 @@ jobs:
       run: |
         curl -s https://api.github.com/repos/geigi/cozy/releases/latest | grep tarball_url | cut -d '"' -f 4 > /tmp/RELEASE_URL
         curl -s https://api.github.com/repos/geigi/cozy/releases/latest | grep tag_name | cut -d '"' -f 4 > /tmp/VERSION
-        wget $(cat /tmp/RELEASE_URL) /tmp/cozy.tar.gz
+        wget -O /tmp/cozy.tar.gz $(cat /tmp/RELEASE_URL)
         sha256sum /tmp/cozy.tar.gz | cut -d " " -f 1 > /tmp/SHA256SUM
         
     - name: Clone Flathub repository
-      run: git clone https://geigi:${{ secrets.FLATHUB_TOKEN }}@github.com/geigi/cozy.git /tmp/
+      run: git clone https://geigi:${{ secrets.FLATHUB_TOKEN }}@github.com/geigi/cozy.git /tmp/flathub
       
     - name: Update Flathub json
       run: |
-        cd /tmp/com.github.geigi.cozy/
+        cd /tmp/flathub
         json -I -f com.github.geigi.cozy.json -e "this.modules[0].sources[0].url='https://github.com/geigi/cozy/archive/$(cat /tmp/VERSION).tar.gz'"
         json -I -f com.github.geigi.cozy.json -e "this.modules[0].sources[0].sha256='$(cat /tmp/SHA256SUM)'"
 
@@ -42,7 +42,7 @@ jobs:
         echo "RELEASE URL: $(cat /tmp/RELEASE_URL)"
         echo "VERSION: $(cat /tmp/VERSION)"
         echo "SHA URL: $(cat /tmp/SHA256SUM)"
-        cat /tmp/com.github.geigi.cozy/com.github.geigi.cozy.json
+        cat /tmp/flathub/com.github.geigi.cozy.json
 
     - name: Push changes
       run: |
