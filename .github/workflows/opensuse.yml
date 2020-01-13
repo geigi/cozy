@@ -11,19 +11,46 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
     - name: Install dependencies
       run: sudo apt-get install osc
+
     - name: Setup osc login
-      run: echo Setup osc login
-    - name: Pull osc repo
-      run: echo Pull osc
+      run: echo $OSCRC > ~/.config/osc/oscrc
+
+    - name: Clone cozy repo
+      run: osc co X11:Pantheon:Apps/cozy
+
     - name: Download latest version of cozy
-      run: echo Downloading
-    - name: Update rpm spec file
-      run: echo updating spec
-    - name: Osc checkin
-      run: echo checkin
-    - name: Wait for successful build
-      run: echo waiting
+      run: |
+        curl -s https://api.github.com/repos/geigi/cozy/releases/latest | json tag_name > /tmp/VERSION
+        curl -s https://api.github.com/repos/geigi/cozy/releases/latest | json body > /tmp/CHANGES
+        echo https://github.com/geigi/cozy/archive/$(cat /tmp/VERSION).tar.gz > /tmp/RELEASE_URL
+        cd X11:Pantheon:Apps/cozy
+        rm cozy-*.tar.gz
+        wget -O cozy-$(cat /tmp/VERSION).tar.gz $(cat /tmp/RELEASE_URL)
+
+    - name: Update rpm info files
+      run: |
+        cd X11:Pantheon:Apps/cozy
+        sed -i -e 's/- /  * /g' /tmp/CHANGES
+        sed -i '1s/^/Update to $(cat /tmp/VERSION)\n/' /tmp/CHANGES
+        osc vc -F /tmp/CHANGES
+        sed -i -e 's/Version:.*/Version:        $(cat /tmp/VERSION)/g' cozy.spec
+
+    - name: Osc check-in
+      run: |
+        cd X11:Pantheon:Apps/cozy
+        osc addremove
+        osc ci --noservice -m "Update to version $(cat /tmp/VERSION)."
+
+    - name: Wait for obs build to complete
+      run: |
+        chmod +x $GITHUB_WORKSPACE/.ci/*.sh
+        cd X11:Pantheon:Apps/cozy
+        $GITHUB_WORKSPACE/.ci/obs_wait_for_build.sh
+
     - name: Submit package
-      run: echo submitting
+      run: |
+        cd X11:Pantheon:Apps/cozy
+        osc submitrequest -m "Update to version $(cat /tmp/VERSION)."
