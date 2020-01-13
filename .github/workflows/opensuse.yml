@@ -20,7 +20,9 @@ jobs:
       run: sudo apt-get install osc
 
     - name: Setup osc login
-      run: echo $OSCRC > ~/.config/osc/oscrc
+      run: |
+        mkdir -p ~/.config/osc
+        echo $OSCRC > ~/.config/osc/oscrc
 
     - name: Clone cozy repo
       run: osc co X11:Pantheon:Apps/cozy
