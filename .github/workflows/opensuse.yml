@@ -22,7 +22,7 @@ jobs:
     - name: Setup osc login
       run: |
         mkdir -p ~/.config/osc
-        echo $OSCRC > ~/.config/osc/oscrc
+        echo ${{ secrets.OSCRC }} > ~/.config/osc/oscrc
 
     - name: Clone cozy repo
       run: osc co X11:Pantheon:Apps/cozy
