@@ -44,3 +44,9 @@ jobs:
         cd /tmp/flathub
         git commit -am "Bump version to $(cat /tmp/VERSION)"
         git push
+
+    - name: Wait for flathub build to complete
+      run: |
+        cd $GITHUB_WORKSPACE/.ci
+        chmod +x *.sh
+        ./flathub_wait_for_build.sh
