@@ -303,7 +303,7 @@ def remove_invalid_entries(ui=None, refresh=False):
     Remove track entries from db that no longer exist in the filesystem.
     """
     # remove entries from the db that are no longer existent
-    for track in Track.select(Track.file):
+    for track in Track.select():
         from cozy.control.filesystem_monitor import FilesystemMonitor
         if not os.path.isfile(track.file) and FilesystemMonitor().is_track_online(
                 track):
