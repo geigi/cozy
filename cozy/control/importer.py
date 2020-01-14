@@ -15,6 +15,7 @@ from mutagen.id3 import ID3
 from mutagen.flac import FLAC
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
+from mutagen.oggopus import OggOpus
 from mutagen.oggvorbis import OggVorbis
 from peewee import __version__ as PeeweeVersion
 from gi.repository import Gdk, GLib, Gst
@@ -103,7 +104,7 @@ def update_database(ui, force=False):
     for path in paths:
         for directory, subdirectories, files in os.walk(path):
             for file in files:
-                if file.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a', '.wav')):
+                if file.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a', '.wav', '.opus')):
                     path = os.path.join(directory, file)
 
                     imported = True
@@ -225,6 +226,8 @@ def import_file(file, directory, path, update=False):
     track_number = None
     track_data = None
 
+    print(media_type)
+
     # getting the some data is file specific
     ### MP3 ###
     if "audio/mpeg" in media_type:
@@ -237,6 +240,10 @@ def import_file(file, directory, path, update=False):
     ### OGG ###
     elif "audio/ogg" in media_type or "audio/x-ogg" in media_type:
         track_data = _get_ogg_tags(track, path)
+
+    ### OPUS ###
+    elif "audio/opus" in media_type or "audio/x-opus" in media_type or "codecs=opus" in media_type:
+        track_data = _get_opus_tags(track, path)
 
     ### MP4 ###
     elif "audio/mp4" in media_type or "audio/x-m4a" in media_type:
@@ -477,6 +484,32 @@ def _get_ogg_tags(track, path):
         track.mutagen = OggVorbis(path)
     except Exception as e:
         log.warning("Track " + track.path +
+                    " has no valid ogg tags. Trying opus…")
+        track_data = _get_opus_tags(track, path)
+        return track_data
+
+    track_data.disk = int(__get_common_disk_number(track))
+    track_data.length = float(__get_common_track_length(track))
+    track_data.cover = __get_ogg_cover(track)
+    track_data.author = __get_common_tag(track, "composer")
+    track_data.reader = __get_common_tag(track, "artist")
+    track_data.book_name = __get_common_tag(track, "album")
+    track_data.name = __get_common_tag(track, "title")
+
+    return track_data
+
+
+def _get_opus_tags(track, path):
+    """
+    Tries to load embedded tags from given file.
+    :return: TrackData object
+    """
+    track_data = TrackData(path)
+    log.debug("Importing ogg " + track.path)
+    try:
+        track.mutagen = OggOpus(path)
+    except Exception as e:
+        log.warning("Track " + track.path +
                     " has no valid tags. Now guessing from file and folder name…")
         return track_data
 
@@ -554,14 +587,21 @@ def __get_common_disk_number(track):
 
     :param track: Track object
     """
-    disk = 0
     try:
         disk = int(track.mutagen["disk"][0])
-    except Exception as e:
-        log.debug("Could not find disk number for file " + track.path)
-        log.debug(e)
+        return disk
+    except:
+        pass
 
-    return disk
+    try:
+        disk = int(track.mutagen["discnumber"][0])
+        return disk
+    except:
+        pass
+
+    log.debug("Could not find disk number for file " + track.path)
+
+    return 0
 
 
 def __get_common_track_length(track):
@@ -602,7 +642,8 @@ def __get_ogg_cover(track):
     cover = None
 
     try:
-        cover = track.mutagen.get("metadata_block_picture", [])[0]
+        base64_string = track.mutagen.get("metadata_block_picture", [])[0]
+        cover = b64tobinary(base64_string)
     except Exception as e:
         log.debug("Could not load cover for file " + track.path)
         log.debug(e)

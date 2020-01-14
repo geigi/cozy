@@ -323,7 +323,7 @@ def clean_books():
         if not get_track_for_playback(book):
             Book.update(position=0).where(Book.id == book.id).execute()
         if Track.select().where(Track.book == book).count() < 1:
-            if Settings.get().last_played_book.id == book.id:
+            if Settings.get().last_played_book and Settings.get().last_played_book.id == book.id:
                 Settings.update(last_played_book=None).execute()
             book.delete_instance()
 
