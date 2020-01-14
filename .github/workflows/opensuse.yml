@@ -1,12 +1,12 @@
 name: Deploy on OBS (OpenSuse)
 
-#on:
-#  release:
-#    types: [published]
-    
 on:
-  watch:
-    types: [started]
+  release:
+    types: [published]
+    
+#on:
+#  watch:
+#    types: [started]
 
 jobs:
   build:
@@ -52,9 +52,7 @@ jobs:
       run: |
         cd X11:Pantheon:Apps/cozy
         osc addremove
-        #osc ci --noservice -m "Update to version $(cat /tmp/VERSION)."
-        ls -la
-        cat cozy.spec
+        osc ci --noservice -m "Update to version $(cat /tmp/VERSION)."
 
     - name: Wait for obs build to complete
       run: |
@@ -65,4 +63,4 @@ jobs:
     - name: Submit package
       run: |
         cd X11:Pantheon:Apps/cozy
-        #osc submitrequest -m "Update to version $(cat /tmp/VERSION)."
+        osc submitrequest -m "Update to version $(cat /tmp/VERSION)."
