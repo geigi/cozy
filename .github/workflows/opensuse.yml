@@ -44,7 +44,7 @@ jobs:
       run: |
         cd X11:Pantheon:Apps/cozy
         sed -i -e 's/- /  * /g' /tmp/CHANGES
-        sed -i '1s/^/Update to $(cat /tmp/VERSION)\n/' /tmp/CHANGES
+        sed -i "1s/^/Update to $(cat /tmp/VERSION)\n/" /tmp/CHANGES
         osc vc -F /tmp/CHANGES
         sed -i -e "s/Version:.*/Version:        $(cat /tmp/VERSION)/g" cozy.spec
 
