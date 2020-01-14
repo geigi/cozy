@@ -18,12 +18,12 @@ jobs:
 
     - name: Install dependencies
       run: |
+        mkdir -p ~/.config/osc
         sudo apt-get install osc npm
         sudo npm install -g json
 
     - name: Setup osc login
       run: |
-        mkdir -p ~/.config/osc
         cat >~/.config/osc/oscrc <<EOL
         ${{ secrets.OSCRC }}
         EOL
