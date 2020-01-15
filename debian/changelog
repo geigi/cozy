@@ -1,3 +1,12 @@
+com.github.geigi.cozy (0.6.12) UNSTABLE; urgency=low
+
+  * Fix: book overview
+  * Support for opus files
+  * Support for diverse ogg cover art
+  * Swedish translation
+
+ -- Julian Geywitz <github@geigi.de>  Mon, 15 Jan 2020 22:02:14 +0200
+
 com.github.geigi.cozy (0.6.11) UNSTABLE; urgency=low
 
   * Fix: some valid media files were not detected
