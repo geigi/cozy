@@ -49,6 +49,15 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.6.12" timestamp="1579121802">
+      <description>
+        <ul>
+          <li>Support for opus files</li>
+          <li>Better support for ogg cover art</li>
+          <li>Swedish translation</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.11" timestamp="1578341831">
       <description>
         <ul>
