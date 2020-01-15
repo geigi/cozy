@@ -12,7 +12,7 @@ import wave
 
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
-from mutagen.flac import FLAC
+from mutagen.flac import FLAC, Picture
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 from mutagen.oggopus import OggOpus
@@ -643,7 +643,9 @@ def __get_ogg_cover(track):
 
     try:
         base64_string = track.mutagen.get("metadata_block_picture", [])[0]
-        cover = b64tobinary(base64_string)
+        decoded = b64tobinary(base64_string)
+        pic = Picture(decoded)
+        cover = pic.data
     except Exception as e:
         log.debug("Could not load cover for file " + track.path)
         log.debug(e)
