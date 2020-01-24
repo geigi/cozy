@@ -1,3 +1,4 @@
+import os
 from threading import Thread
 import time
 
@@ -6,9 +7,15 @@ import cozy.control.player as player
 import cozy.ui
 
 import gi
+
+# from cozy.magic.magic import platform as osplatform
+
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gst, Gdk, GLib
+
+import logging
+log = logging.getLogger("sleep_timer")
 
 class SleepTimer:
     """
@@ -22,8 +29,8 @@ class SleepTimer:
     def __init__(self):
         self.ui = cozy.ui.main_view.CozyUI()
 
-        self.builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/timer_popover.ui")
+        self.builder = Gtk.Builder.new_from_resource( "/de/geigi/cozy/timer_popover_power.ui")
+        # self.builder = Gtk.Builder.new_from_resource( "/de/geigi/cozy/timer_popover.ui")
 
         self.timer_popover = self.builder.get_object("timer_popover")
         self.timer_scale = self.builder.get_object("timer_scale")
@@ -33,6 +40,17 @@ class SleepTimer:
         self.chapter_switch.connect("state-set", self.__chapter_switch_changed)
         self.timer_image = self.ui.get_object("timer_image")
         self.min_label = self.builder.get_object("min_label")
+
+        # enable system power control
+        self.power_control_switch = self.builder.get_object("power_control_switch")
+        self.power_control_switch.connect("state-set", self.__power_options_switch_changed)
+        self.power_control_options = self.builder.get_object("power_control_options")
+
+        # radio buttons for sleep and shutdown
+        self.system_shutdown_radiob = self.builder.get_object("system_shutdown_radiob")
+        self.system_suspend_radiob = self.builder.get_object("system_suspend_radiob")
+        # self.radiob_system_shutdown.connect("toggled", self.on_button_toggled, "1")
+
 
         # text formatting
         self.timer_scale.connect("value-changed", self.__on_timer_changed)
@@ -147,6 +165,31 @@ class SleepTimer:
             self.fadeout_thread = Thread(target=self.__stop_playback, name="SleepTimerFadeoutThread")
             self.fadeout_thread.start()
             self.sleep_timer.stop()
+            self.__handle_system_power_event()
+
+
+
+
+
+    def __handle_system_power_event(self):
+        platform = tools.system_platform()
+
+        if self.power_control_switch.get_state():
+            if self.system_shutdown_radiob.get_active():
+                log.info("system will attempt to shutdown now!")
+                if platform is tools.Platform.Linux:
+                    os.system("systemctl poweroff")
+                else:
+                    os.system("shutdown -h now")
+            elif self.system_suspend_radiob.get_active():
+                log.info("system will attempt to suspend now!")
+                if platform is tools.Platform.Linux:
+                    os.system("systemctl suspend")
+                else:
+                    pass
+
+    def __power_options_switch_changed(self, widget, state):
+        self.power_control_options.set_sensitive(state)
 
     def __chapter_switch_changed(self, widget, state):
         """
@@ -178,7 +221,10 @@ class SleepTimer:
         if player.get_gst_player_state() == Gst.State.PLAYING:
             player.play_pause(None)
 
+        self.__handle_system_power_event()
+
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.timer_scale.get_adjustment().set_value, 0.0)
+
 
     def __player_changed(self, event, message):
         """

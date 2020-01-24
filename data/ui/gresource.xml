@@ -7,6 +7,7 @@
     <file preprocess="xml-stripblanks">main_window.ui</file>
     <file preprocess="xml-stripblanks">settings.ui</file>
     <file preprocess="xml-stripblanks">search_popover.ui</file>
+    <file preprocess="xml-stripblanks">timer_popover_power.ui</file>
     <file preprocess="xml-stripblanks">timer_popover.ui</file>
     <file preprocess="xml-stripblanks">about.ui</file>
     <file preprocess="xml-stripblanks">file_not_found.ui</file>
