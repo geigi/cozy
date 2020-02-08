@@ -30,6 +30,7 @@ import distro
 import gi
 gi.require_version('Gtk', '3.0')
 
+from cozy.version import __version__
 from pathlib import Path
 from gi.repository import Gtk, GObject, GLib
 from cozy.ui.main_view import CozyUI
@@ -42,7 +43,6 @@ if not os.path.exists(data_dir):
     os.makedirs(data_dir)
 pkgdatadir = '@DATA_DIR@'
 localedir = '@LOCALE_DIR@'
-version = '@VERSION@'
 LOG_FORMAT = "%(asctime)s [%(threadName)-12.12s] [%(name)-10.10s] [%(levelname)-5.5s]  %(message)s"
 LOG_DATE_FORMAT = "%H:%M:%S"
 
@@ -71,8 +71,8 @@ class Application(Gtk.Application):
 
     def do_startup(self):
         log.info(distro.linux_distribution(full_distribution_name=False))
-        log.info("Starting up cozy " + version)
-        self.ui = CozyUI(pkgdatadir, self, version)
+        log.info("Starting up cozy " + __version__)
+        self.ui = CozyUI(pkgdatadir, self, __version__)
         init_db()
         Gtk.Application.do_startup(self)
         self.ui.startup()

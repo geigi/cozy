@@ -72,5 +72,11 @@ install_subdir(
   install_dir: python_dir
 )
 
+configure_file(
+  input: 'cozy/version.py',
+  output: 'version.py',
+  configuration: conf,
+  install_dir: python_dir + '/cozy'
+)
 
 meson.add_install_script('meson/post_install.py')

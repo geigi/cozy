@@ -21,7 +21,7 @@ from cozy.ui.titlebar import Titlebar
 from cozy.ui.settings import Settings
 from cozy.ui.book_overview import BookOverview
 from cozy.architecture.singleton import Singleton
-
+import cozy.report.reporter as report
 import cozy.control.importer as importer
 import cozy.control.player as player
 import cozy.tools as tools
@@ -75,6 +75,7 @@ class CozyUI(metaclass=Singleton):
         self.__init_resources()
         self.__init_css()
         self.__init_actions()
+        report.info("main", "startup")
 
     def __init_resources(self):
         """
@@ -778,6 +779,8 @@ class CozyUI(metaclass=Singleton):
         player.dispose()
 
         close_db()
+
+        report.close()
 
         log.info("Closing app.")
         self.app.quit()

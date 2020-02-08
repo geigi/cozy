@@ -226,8 +226,6 @@ def import_file(file, directory, path, update=False):
     track_number = None
     track_data = None
 
-    print(media_type)
-
     # getting the some data is file specific
     ### MP3 ###
     if "audio/mpeg" in media_type:

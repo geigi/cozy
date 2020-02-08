@@ -5,7 +5,7 @@ import time
 from cozy.control.db_updater import update_db
 from cozy.model.artwork_cache import ArtworkCache
 from cozy.model.book import Book
-from cozy.model.model_base import get_sqlite_database, get_data_dir, database_file_exists, __open_database
+from cozy.model.model_base import get_sqlite_database, get_data_dir
 from cozy.model.offline_cache import OfflineCache
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage

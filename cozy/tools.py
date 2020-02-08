@@ -1,12 +1,10 @@
 from datetime import datetime
 import time
 import threading
-from threading import Thread, Event
 from gettext import ngettext
 import logging as log
 import distro
-import os
-from gi.repository import GLib, Gio
+from gi.repository import Gio
 import cozy.magic.magic as magic
 
 

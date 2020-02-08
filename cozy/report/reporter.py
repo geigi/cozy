@@ -1,79 +1,31 @@
-# https://github.com/sleleko/devops-kb
-import requests
-import json
-import datetime
-import pytz
-from enum import Enum
+import traceback
 
-URL = 'https://cozy.geigi.dev:3100/api/prom/push'
+from cozy.report.log_level import LogLevel
 
-class LogLevel(Enum):
-    DEBUG = 1
-    INFO = 2
-    WARNING = 3
-    ERROR = 4
+from multiprocessing import Pool
 
-LOG_LEVEL_MAP = {
-    LogLevel.DEBUG: "DEBUG",
-    LogLevel.INFO: "INFO",
-    LogLevel.WARNING: "WARN",
-    LogLevel.ERROR: "ERROR"
-}
+from cozy.report.report_to_loki import report
 
-def info():
-    pass
+report_pool = Pool(5)
 
-def warning():
-    pass
 
-def error():
-    pass
+def info(component: str, message: str):
+    report_pool.apply_async(report, [component, LogLevel.INFO, message, None])
 
-def exception():
-    pass
 
-def __report(component:str, type: LogLevel, message: str, exception: Exception):
-    curr_datetime = datetime.datetime.now(pytz.timezone('Europe/Berlin'))
-    curr_datetime = curr_datetime.isoformat('T')
+def warning(component: str, message: str):
+    report_pool.apply_async(report, [component, LogLevel.WARNING, message, None])
 
-    if not component or not type or not message:
-        raise ValueError("component, type and message are mandatory")
 
-    labels = __append_label("", "component", component)
-    labels =__append_label(labels, "message", message)
+def error(component: str, message: str):
+    report_pool.apply_async(report, [component, LogLevel.ERROR, message, None])
 
-    if exception:
-        labels = __append_label(labels, "exception_type", exception.__class__.__name__)
 
-    # dist dist_version version
+def exception(component: str, exception: Exception):
+    message = traceback.format_exc()
+    report_pool.apply_async(report, [component, LogLevel.ERROR, message, exception])
 
-    line = "[{}] {}".format(LOG_LEVEL_MAP[type], message)
 
-    headers = {
-        'Content-type': 'application/json'
-    }
-    payload = {
-        'streams': [
-            {
-                'labels': labels,
-                'entries': [
-                    {
-                        'ts': curr_datetime,
-                        'line': line
-                    }
-                ]
-            }
-        ]
-    }
-    payload = json.dumps(payload)
-    response = requests.post(URL, data=payload, headers=headers)
-
-def __append_label(labels, new_label_name, new_label_content):
-    if labels:
-        labels += ","
-    else:
-        labels = ""
-
-    labels += "{}=\"{}\"".format(new_label_name, new_label_content)
-
-    return labels
+def close():
+    report_pool.close()
+    report_pool.terminate()
