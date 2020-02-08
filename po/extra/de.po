@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
+# Benjamin Schneider <b3nj4m1n@gmx.net>, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 14:51+0100\n"
+"POT-Creation-Date: 2020-01-06 21:18+0100\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
-"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
+"Last-Translator: Benjamin Schneider <b3nj4m1n@gmx.net>, 2020\n"
 "Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -110,29 +111,52 @@ msgid "Julian Geywitz"
 msgstr "Julian Geywitz"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:55
-#: data/com.github.geigi.cozy.appdata.xml.in:65
-msgid "Cozy features a new icon! Cheers to Fatih20"
-msgstr "Ein neues Icon für Cozy! Danke an Fatih20"
+msgid "Fix: some valid media files were not detected"
+msgstr "Fehler behoben: Einige Medien Dateien konnten nicht gefunden werden"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:56
-#: data/com.github.geigi.cozy.appdata.xml.in:66
-msgid "App information is now translated! Cheers to NathanBnm"
-msgstr "App Informationen können nun übersetzt werden! Danke an NathanBnm"
-
-#: data/com.github.geigi.cozy.appdata.xml.in:57
-#: data/com.github.geigi.cozy.appdata.xml.in:67
-#: data/com.github.geigi.cozy.appdata.xml.in:98
-#: data/com.github.geigi.cozy.appdata.xml.in:117
+#: data/com.github.geigi.cozy.appdata.xml.in:65
+#: data/com.github.geigi.cozy.appdata.xml.in:77
+#: data/com.github.geigi.cozy.appdata.xml.in:87
+#: data/com.github.geigi.cozy.appdata.xml.in:118
+#: data/com.github.geigi.cozy.appdata.xml.in:137
 msgid "Updated translations"
 msgstr "Updated translations"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:58
+#: data/com.github.geigi.cozy.appdata.xml.in:57
 #: data/com.github.geigi.cozy.appdata.xml.in:68
+msgid "Other small fixes"
+msgstr "Andere kleine Fehlerbehebungen"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:64
+msgid "Support for python 3.8. Cheers to emmaliddell"
+msgstr "Unterstützung für Python 3.8, danke an emmaliddell"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:66
+msgid "Fixes in the titlebar"
+msgstr "Fehler in der Titelleiste behoben"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:67
+msgid "Fix: show navigation bar when searching from book overview"
+msgstr "Fehler behoben: Navigationsleiste beim suchen in der Buch Übersicht"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:75
+#: data/com.github.geigi.cozy.appdata.xml.in:85
+msgid "Cozy features a new icon! Cheers to Fatih20"
+msgstr "Ein neues Icon für Cozy! Danke an Fatih20"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:76
+#: data/com.github.geigi.cozy.appdata.xml.in:86
+msgid "App information is now translated! Cheers to NathanBnm"
+msgstr "App Informationen können nun übersetzt werden! Danke an NathanBnm"
+
+#: data/com.github.geigi.cozy.appdata.xml.in:78
+#: data/com.github.geigi.cozy.appdata.xml.in:88
 msgid "Fix: Sometimes the app name was not correctly displayed"
 msgstr "Fix: Manchmal wurde der App Name nicht richtig angezeigt"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:75
-#: data/com.github.geigi.cozy.appdata.xml.in:82
+#: data/com.github.geigi.cozy.appdata.xml.in:95
+#: data/com.github.geigi.cozy.appdata.xml.in:102
 msgid ""
 "Fix: Cozy crashed on startup when prefering cover image files over embedded "
 "album art"
@@ -140,30 +164,30 @@ msgstr ""
 "Fix: Cozy crashed on startup when prefering cover image files over embedded "
 "album art"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:89
+#: data/com.github.geigi.cozy.appdata.xml.in:109
 msgid "Fixed startup crash on elemntary OS 5.0 Juno"
 msgstr "Fixed startup crash on elemntary OS 5.0 Juno"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:96
+#: data/com.github.geigi.cozy.appdata.xml.in:116
 msgid "Support for elemntary OS 5.0 Juno"
 msgstr "Support for elemntary OS 5.0 Juno"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:97
-#: data/com.github.geigi.cozy.appdata.xml.in:105
+#: data/com.github.geigi.cozy.appdata.xml.in:117
+#: data/com.github.geigi.cozy.appdata.xml.in:125
 msgid ""
 "Fixed a bug which prevented cozy from automatically playing the next chapter"
 msgstr ""
 "Fixed a bug which prevented cozy from automatically playing the next chapter"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:112
+#: data/com.github.geigi.cozy.appdata.xml.in:132
 msgid "Improved artwork image quality"
 msgstr "Improved artwork image quality"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:113
+#: data/com.github.geigi.cozy.appdata.xml.in:133
 msgid "The book overview now supports multiple disks in audiobooks"
 msgstr "The book overview now supports multiple disks in audiobooks"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:114
+#: data/com.github.geigi.cozy.appdata.xml.in:134
 msgid ""
 "The file not found window will only open when the file is on the internal "
 "drive"
@@ -171,15 +195,15 @@ msgstr ""
 "The file not found window will only open when the file is on the internal "
 "drive"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:115
+#: data/com.github.geigi.cozy.appdata.xml.in:135
 msgid "Fixed a typo"
 msgstr "Fixed a typo"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:116
+#: data/com.github.geigi.cozy.appdata.xml.in:136
 msgid "Support for elemntary OS 5.0"
 msgstr "Support for elemntary OS 5.0"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:124
+#: data/com.github.geigi.cozy.appdata.xml.in:144
 msgid ""
 "Offline Mode! If your audiobooks are on an external or network drive, you "
 "can switch the download button to keep a local cached copy of the book to "
@@ -191,53 +215,53 @@ msgstr ""
 "listen to on the go. To enable this feature you have to set your storage "
 "location to external in the settings."
 
-#: data/com.github.geigi.cozy.appdata.xml.in:125
+#: data/com.github.geigi.cozy.appdata.xml.in:145
 msgid "Detect online/offline storage devices"
 msgstr "Detect online/offline storage devices"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:126
+#: data/com.github.geigi.cozy.appdata.xml.in:146
 msgid "Option to hide unavailable books"
 msgstr "Option to hide unavailable books"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:127
+#: data/com.github.geigi.cozy.appdata.xml.in:147
 msgid "Support for wav files"
 msgstr "Support for wav files"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:128
+#: data/com.github.geigi.cozy.appdata.xml.in:148
 msgid "Support for audio files that have no tags at all"
 msgstr "Support for audio files that have no tags at all"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:129
+#: data/com.github.geigi.cozy.appdata.xml.in:149
 msgid "You can mark books as read using the right click menu"
 msgstr "You can mark books as read using the right click menu"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:130
+#: data/com.github.geigi.cozy.appdata.xml.in:150
 msgid "New setting: Prefer cover image file over embedded covers"
 msgstr "New setting: Prefer cover image file over embedded covers"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:131
+#: data/com.github.geigi.cozy.appdata.xml.in:151
 msgid "Redesigned Sleep Timer"
 msgstr "Redesigned Sleep Timer"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:132
+#: data/com.github.geigi.cozy.appdata.xml.in:152
 msgid ""
 "More Sleep Timer: You can now stop the playback after the current chapter"
 msgstr ""
 "More Sleep Timer: You can now stop the playback after the current chapter"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:133
+#: data/com.github.geigi.cozy.appdata.xml.in:153
 msgid "And even more: Fadeout on timer end (in settings)"
 msgstr "And even more: Fadeout on timer end (in settings)"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:134
+#: data/com.github.geigi.cozy.appdata.xml.in:154
 msgid "Redesigned hello screen and settings"
 msgstr "Redesigned hello screen and settings"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:135
+#: data/com.github.geigi.cozy.appdata.xml.in:155
 msgid "Fixed bug where cozy would not start on GTK older than 3.22"
 msgstr "Fixed bug where cozy would not start on GTK older than 3.22"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:136
+#: data/com.github.geigi.cozy.appdata.xml.in:156
 msgid ""
 "If no author field is present, the reader field will be used as author. This"
 " requires a force reimport (settings) on already imported books."
@@ -245,6 +269,6 @@ msgstr ""
 "If no author field is present, the reader field will be used as author. This"
 " requires a force reimport (settings) on already imported books."
 
-#: data/com.github.geigi.cozy.appdata.xml.in:137
+#: data/com.github.geigi.cozy.appdata.xml.in:157
 msgid "Optimizations under the hood"
 msgstr "Optimizations under the hood"
