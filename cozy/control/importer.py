@@ -258,6 +258,7 @@ def import_file(file, directory, path, update=False):
     ### File will not be imported ###
     else:
         log.warning("Skipping file " + path + " because of mime type " + media_type + ".")
+        reporter.warning("importer", "skipping file because of mime type: " + media_type)
         return False, None
 
     track_data.modified = __get_last_modified(path)

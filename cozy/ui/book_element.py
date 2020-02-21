@@ -9,6 +9,7 @@ from cozy.control.db import get_track_for_playback, is_external, blacklist_book,
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.model.book import Book
 from cozy.model.track import Track
+from cozy.report import reporter
 from cozy.ui.settings import Settings
 
 MAX_BOOK_LENGTH = 60
@@ -285,8 +286,8 @@ class BookElement(Gtk.FlowBoxChild):
         """
         try:
             self.book = Book.get(Book.id == self.book.id)
-        except:
-            pass
+        except Exception as e:
+            reporter.exception("book_element", e)
 
     def __on_button_press_event(self, widget, event):
         """

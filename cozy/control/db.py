@@ -11,6 +11,7 @@ from cozy.model.settings import Settings
 from cozy.model.storage import Storage
 from cozy.model.storage_blacklist import StorageBlackList
 from cozy.model.track import Track
+from cozy.report import reporter
 
 log = logging.getLogger("db")
 from peewee import __version__ as PeeweeVersion
@@ -66,6 +67,7 @@ def _connect_db(db):
     try:
         db.connect(reuse_if_open=True)
     except Exception as e:
+        reporter.exception("db", e)
         log.error("Could not connect to database. ")
         log.error(e)
 

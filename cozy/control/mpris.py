@@ -25,6 +25,7 @@ from cozy.control.application_directories import get_cache_dir
 from cozy.control.player import *
 import cozy.ui
 from cozy.model.artwork_cache import ArtworkCache
+from cozy.report import reporter
 
 
 class Server:
@@ -77,6 +78,7 @@ class Server:
             else:
                 invocation.return_value(None)
         except:
+            reporter.error("mpris", "MPRIS method call failed")
             pass
 
 
