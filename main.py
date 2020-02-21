@@ -27,13 +27,12 @@ import sys
 import traceback
 import distro
 from traceback import format_exception
-
 import gi
 
-from cozy.report import reporter
-
 gi.require_version('Gtk', '3.0')
+gi.require_version('Gst', '1.0')
 
+from cozy.report import reporter
 from cozy.version import __version__
 from pathlib import Path
 from gi.repository import Gtk, GObject, GLib
@@ -59,6 +58,7 @@ if os.path.exists(log1):
     os.remove(log1)
 if os.path.exists(os.path.join(data_dir, "cozy.log")):
     os.rename(log0, log1)
+
 
 class Application(Gtk.Application):
     def __init__(self, **kwargs):
@@ -103,7 +103,6 @@ class Application(Gtk.Application):
         self.add_window(self.ui.window)
         mpris = MPRIS(self)
         mpris._on_current_changed(None)
-
 
     def handle_exception(self, exc_type, exc_value, exc_traceback):
         print("handle exception")
