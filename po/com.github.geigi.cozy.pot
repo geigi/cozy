@@ -3,190 +3,185 @@
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-11 15:12+0200\n"
+"POT-Creation-Date: 2020-01-06 20:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: cozy/book_element.py:67 cozy/search_results.py:124
+#: cozy/ui/book_element.py:69 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr ""
 
-#: cozy/book_element.py:212
+#: cozy/ui/book_element.py:214
 msgid "Open book overview"
 msgstr ""
 
-#: cozy/book_element.py:213
+#: cozy/ui/book_element.py:215
 msgid "Currently offline"
 msgstr ""
 
-#: cozy/book_element.py:319
+#: cozy/ui/book_element.py:321
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/book_element.py:322
+#: cozy/ui/book_element.py:324
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/book_element.py:325
+#: cozy/ui/book_element.py:327
 msgid "Remove from library"
 msgstr ""
 
-#: cozy/book_element.py:395
+#: cozy/ui/book_element.py:397
 msgid "Play this part"
 msgstr ""
 
-#: cozy/book_overview.py:223
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/book_overview.py:226 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr ""
 
-#: cozy/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr ""
 
-#: cozy/offline_cache.py:175
+#: cozy/control/offline_cache.py:180
 msgid "Copying"
 msgstr ""
 
-#: cozy/search_results.py:72
+#: cozy/ui/search_results.py:71
 msgid "Jump to author "
 msgstr ""
 
-#: cozy/search_results.py:75
+#: cozy/ui/search_results.py:74
 msgid "Jump to reader "
 msgstr ""
 
-#: cozy/importer.py:275
+#: cozy/control/importer.py:275
 msgid "Unknown Author"
 msgstr ""
 
-#: cozy/importer.py:277
+#: cozy/control/importer.py:277
 msgid "Unknown Reader"
 msgstr ""
 
-#: cozy/tools.py:142
+#: cozy/tools.py:133
 msgid "hours"
 msgstr ""
 
-#: cozy/tools.py:144
+#: cozy/tools.py:135
 msgid "hour"
 msgstr ""
 
-#: cozy/tools.py:152
+#: cozy/tools.py:143
 msgid "minutes"
 msgstr ""
 
-#: cozy/tools.py:154
+#: cozy/tools.py:145
 msgid "minute"
 msgstr ""
 
-#: cozy/tools.py:158
+#: cozy/tools.py:149
 msgid "finished"
 msgstr ""
 
-#: cozy/tools.py:162
+#: cozy/tools.py:153
 msgid "seconds"
 msgstr ""
 
-#: cozy/tools.py:164
+#: cozy/tools.py:155
 msgid "second"
 msgstr ""
 
-#: cozy/tools.py:187
+#: cozy/tools.py:178
 msgid "never"
 msgstr ""
 
-#: cozy/tools.py:189
+#: cozy/tools.py:180
 msgid "today"
 msgstr ""
 
-#: cozy/tools.py:191
+#: cozy/tools.py:182
 msgid "yesterday"
 msgstr ""
 
-#: cozy/tools.py:193
-msgid "days"
+#: cozy/tools.py:184
+#, python-format
+msgid "%s days ago"
 msgstr ""
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr ""
+#: cozy/tools.py:186
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr ""
+#: cozy/tools.py:188
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr ""
+#: cozy/tools.py:190
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:199
-msgid "month"
-msgstr ""
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr ""
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr ""
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr ""
-
-#: cozy/ui.py:407
+#: cozy/ui/main_view.py:408
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui.py:428
+#: cozy/ui/main_view.py:429
 msgid "Importing Audiobooks"
 msgstr ""
 
 #. Add the special All element
-#: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
+#: cozy/ui/main_view.py:498 cozy/ui/main_view.py:504 cozy/ui/main_view.py:826
 msgid "All"
 msgstr ""
 
-#: cozy/ui.py:498 cozy/ui.py:504
+#: cozy/ui/main_view.py:499 cozy/ui/main_view.py:505
 msgid "Display all books"
 msgstr ""
 
-#: cozy/sleep_timer.py:121 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
 msgid "min"
 msgstr ""
 
-#: cozy/sleep_timer.py:129
+#: cozy/control/sleep_timer.py:128
 msgid "Off"
 msgstr ""
 
-#: cozy/settings.py:416 cozy/settings.py:459
+#: cozy/ui/settings.py:416 cozy/ui/settings.py:459
 msgid "External drive"
 msgstr ""
 
-#: cozy/settings.py:419 cozy/settings.py:462
+#: cozy/ui/settings.py:419 cozy/ui/settings.py:462
 msgid "Internal drive"
 msgstr ""
 
-#: cozy/settings.py:446
+#: cozy/ui/settings.py:446
 msgid "Changing audio book location…"
 msgstr ""
 
-#: cozy/disk_element.py:26
+#: cozy/ui/disk_element.py:26
 msgid "Disc"
 msgstr ""
 
@@ -251,7 +246,7 @@ msgid "Elapsed time of current part"
 msgstr ""
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
+msgid "Jump to position in current chapter"
 msgstr ""
 
 #: data/ui/main_window.ui:317
@@ -421,10 +416,6 @@ msgstr ""
 msgid "Published"
 msgstr ""
 
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr ""
-
 #: data/ui/main_window.ui:1630
 msgid ""
 "Start exploring your library by switching to the Author or Reader view above."
@@ -432,26 +423,6 @@ msgstr ""
 
 #: data/ui/about.ui:14
 msgid "GitHub"
-msgstr ""
-
-#: data/ui/app_menu.ui:7
-msgid "_Play/Pause"
-msgstr ""
-
-#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
-msgid "_Preferences"
-msgstr ""
-
-#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
-msgid "_Help"
-msgstr ""
-
-#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
-msgid "_About"
-msgstr ""
-
-#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
-msgid "_Quit"
 msgstr ""
 
 #: data/ui/file_not_found.ui:19
@@ -482,6 +453,7 @@ msgstr ""
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
@@ -598,20 +570,7 @@ msgstr ""
 msgid "Force refresh"
 msgstr ""
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr ""
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr ""
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr ""
 
@@ -667,10 +626,18 @@ msgstr ""
 msgid "_Hide unavailable books"
 msgstr ""
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
+#: data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
 msgstr ""
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
+#: data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:33
+msgid "_Quit"
 msgstr ""

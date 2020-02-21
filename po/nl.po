@@ -1,193 +1,191 @@
-# Dutch translations for com.github.geigi.cozy package.
-# Copyright (C) 2019 THE com.github.geigi.cozy'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
-# Heimen Stoffels, 2019.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Julian Geywitz <github@geigi.de>, 2019
+# Heimen Stoffels <vistausss@outlook.com>, 2019
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-11 15:12+0200\n"
-"PO-Revision-Date: 2019-04-09 10:50+0200\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
-"Language-Team: none\n"
-"Language: nl\n"
+"POT-Creation-Date: 2019-12-23 12:37+0100\n"
+"PO-Revision-Date: 2019-09-08 09:31+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2019\n"
+"Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/book_element.py:67 cozy/search_results.py:124
+#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
 msgid "Play this book"
-msgstr "Dit boek afspelen"
+msgstr "Boek afspelen"
 
-#: cozy/book_element.py:212
+#: cozy/ui/book_element.py:212
 msgid "Open book overview"
 msgstr "Boekoverzicht openen"
 
-#: cozy/book_element.py:213
+#: cozy/ui/book_element.py:213
 msgid "Currently offline"
 msgstr "Momenteel offline"
 
-#: cozy/book_element.py:319
+#: cozy/ui/book_element.py:319
 msgid "Mark as read"
 msgstr "Markeren als gelezen"
 
-#: cozy/book_element.py:322
+#: cozy/ui/book_element.py:322
 msgid "Open in file browser"
 msgstr "Openen in bestandsbeheerder"
 
-#: cozy/book_element.py:325
+#: cozy/ui/book_element.py:325
 msgid "Remove from library"
 msgstr "Verwijderen uit bibliotheek"
 
-#: cozy/book_element.py:395
+#: cozy/ui/book_element.py:395
 msgid "Play this part"
-msgstr "Dit onderdeel afspelen"
+msgstr "Onderdeel afspelen"
 
-#: cozy/book_overview.py:223
+#: cozy/ui/book_overview.py:228
 msgid "Downloaded"
 msgstr "Gedownload"
 
-#: cozy/book_overview.py:226 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Downloaden"
 
-#: cozy/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:66
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: cozy/offline_cache.py:175
+#: cozy/control/offline_cache.py:176
 msgid "Copying"
-msgstr "Bezig met kopiëren…"
+msgstr "Bezig met kopiëren..."
 
-#: cozy/search_results.py:72
+#: cozy/ui/search_results.py:71
 msgid "Jump to author "
 msgstr "Snel naar auteur"
 
-#: cozy/search_results.py:75
+#: cozy/ui/search_results.py:74
 msgid "Jump to reader "
-msgstr "Snel naar lezer"
+msgstr "Snel naar voorlezer"
 
-#: cozy/importer.py:275
+#: cozy/control/importer.py:281
 msgid "Unknown Author"
 msgstr "Onbekende auteur"
 
-#: cozy/importer.py:277
+#: cozy/control/importer.py:283
 msgid "Unknown Reader"
-msgstr "Onbekende lezer"
+msgstr "Onbekende voorlezer"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr "uur"
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr "uur"
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr "minuten"
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr "minuut"
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr "afgerond"
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr "seconden"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr "seconde"
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr "nooit"
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr "vandaag"
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr "gisteren"
 
-#: cozy/tools.py:193
-msgid "days"
-msgstr "dagen"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
+msgstr "%s dagen geleden"
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr "geleden"
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] "{weeks} week geleden"
+msgstr[1] "{weeks} weken geleden"
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr "week"
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] "{months} maand geleden"
+msgstr[1] "{months} maanden geleden"
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr "weken"
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] "{years} jaar geleden"
+msgstr[1] "{years} jaar geleden"
 
-#: cozy/tools.py:199
-msgid "month"
-msgstr "maand"
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr "maanden"
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr "jaar"
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr "jaar"
-
-#: cozy/ui.py:407
+#: cozy/ui/main_view.py:403
 msgid "Audiobooks"
-msgstr ""
+msgstr "Audioboeken"
 
-#: cozy/ui.py:428
+#: cozy/ui/main_view.py:424
 msgid "Importing Audiobooks"
 msgstr "Bezig met importeren van audioboeken"
 
 #. Add the special All element
-#: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
+#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:821
 msgid "All"
 msgstr "Alles"
 
-#: cozy/ui.py:498 cozy/ui.py:504
+#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
 msgid "Display all books"
 msgstr "Alle boeken tonen"
 
-#: cozy/sleep_timer.py:121 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
 msgid "min"
 msgstr "min"
 
-#: cozy/sleep_timer.py:129
+#: cozy/control/sleep_timer.py:128
 msgid "Off"
 msgstr "Uit"
 
-#: cozy/settings.py:416 cozy/settings.py:459
+#: cozy/ui/settings.py:416 cozy/ui/settings.py:459
 msgid "External drive"
 msgstr "Externe schijf"
 
-#: cozy/settings.py:419 cozy/settings.py:462
+#: cozy/ui/settings.py:419 cozy/ui/settings.py:462
 msgid "Internal drive"
 msgstr "Interne schijf"
 
-#: cozy/settings.py:446
+#: cozy/ui/settings.py:446
 msgid "Changing audio book location…"
 msgstr "Bezig met wijzigen van audioboeklocatie…"
 
-#: cozy/disk_element.py:26
+#: cozy/ui/disk_element.py:26
 msgid "Disc"
 msgstr "Schijf"
 
@@ -252,8 +250,8 @@ msgid "Elapsed time of current part"
 msgstr "De verstreken tijd van het huidige deel"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Door huidig deel spoelen"
+msgid "Jump to position in current chapter"
+msgstr "Spoel door naar positie in huidige hoofdstuk"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -338,11 +336,11 @@ msgstr "Auteur"
 
 #: data/ui/main_window.ui:709
 msgid "List of readers"
-msgstr "Lijst met lezers"
+msgstr "Lijst met voorlezers"
 
 #: data/ui/main_window.ui:725 data/ui/search_popover.ui:201
 msgid "Reader"
-msgstr "Lezer"
+msgstr "Voorlezer"
 
 #: data/ui/main_window.ui:778
 msgid "List of books"
@@ -375,13 +373,12 @@ msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Als dat zo is, dan kun je de offline-modus inschakelen voor een boek in het "
-"overzicht.\n"
+"Als dat zo is, dan kun je de offline-modus inschakelen voor een boek in het overzicht.\n"
 "Dit slaat een kopie op van het boek wordt zodat je onderweg kunt luisteren."
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
-msgstr ""
+msgstr "Automatisch doorzoeken-schakelaar"
 
 #: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
 #: data/ui/main_window.ui:1026
@@ -430,13 +427,10 @@ msgstr "Laatst afgespeeld"
 msgid "Published"
 msgstr "Gepubliceerd"
 
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr "pagina0"
-
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view above."
+"Start exploring your library by switching to the Author or Reader view "
+"above."
 msgstr ""
 "Begin met verkennen van je bibliotheek door hierboven te kiezen voor de "
 "Auteur- of Leesweergave."
@@ -444,26 +438,6 @@ msgstr ""
 #: data/ui/about.ui:14
 msgid "GitHub"
 msgstr "GitHub"
-
-#: data/ui/app_menu.ui:7
-msgid "_Play/Pause"
-msgstr "Afs_pelen/Pauzeren"
-
-#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
-msgid "_Preferences"
-msgstr "_Voorkeuren"
-
-#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
-msgid "_Help"
-msgstr "_Hulp"
-
-#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
-msgid "_About"
-msgstr "_Over"
-
-#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
-msgid "_Quit"
-msgstr "_Afsluiten"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
@@ -479,7 +453,8 @@ msgstr "Bestand niet gevonden"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "Dit bestand kan niet worden gevonden. Wil je er handmatig naar zoeken?"
+msgstr ""
+"Dit bestand kan niet worden gevonden. Wil je er handmatig naar zoeken?"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
@@ -493,11 +468,13 @@ msgstr "Sommige bestanden kunnen niet worden geïmporteerd"
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
 "Hier kunnen meerdere oorzaken voor zijn:\n"
 "- De audio-indeling wordt niet ondersteund\n"
+"-Het pad/De bestandsnaam bevat tekens die niet onder UTF-8 vallen\n"
 "- Het is/zijn geen geldige audiobestand(en)\n"
 "- Het bestand/De bestanden is/zijn beschadigd"
 
@@ -680,16 +657,24 @@ msgstr "De slaaptimerduur, in minuten"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
-msgstr ""
+msgstr "Map door_zoeken"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
-msgstr ""
+msgstr "Niet-beschikbare boeken _verbergen"
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "van"
+#: data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
+msgstr "_Voorkeuren"
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "resterend"
+#: data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr "_Hulp"
+
+#: data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr "_Over"
+
+#: data/ui/titlebar_menu.ui:33
+msgid "_Quit"
+msgstr "_Afsluiten"

@@ -133,6 +133,7 @@
                     <property name="vexpand">True</property>
                     <property name="label" translatable="yes">This can have multiple reasons:
 - The audio format is not supported
+- The path or filename contains non utf-8 characters
 - The file(s) are no valid audio files
 - The file(s) are corrupt</property>
                   </object>
