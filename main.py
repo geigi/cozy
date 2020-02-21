@@ -26,8 +26,12 @@ import signal
 import sys
 import traceback
 import distro
+from traceback import format_exception
 
 import gi
+
+from cozy.report import reporter
+
 gi.require_version('Gtk', '3.0')
 
 from cozy.version import __version__
@@ -36,6 +40,8 @@ from gi.repository import Gtk, GObject, GLib
 from cozy.ui.main_view import CozyUI
 from cozy.control.db import init_db, Settings
 from cozy.control.mpris import MPRIS
+
+old_except_hook = None
 
 log = logging.getLogger("main")
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
@@ -63,6 +69,9 @@ class Application(Gtk.Application):
         Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
         GLib.setenv("PULSE_PROP_media.role", "music", True)
         GLib.set_application_name("Cozy")
+
+        self.old_except_hook = sys.excepthook
+        sys.excepthook = self.handle_exception
 
         import gettext
         locale.bindtextdomain('com.github.geigi.cozy', localedir)
@@ -94,6 +103,16 @@ class Application(Gtk.Application):
         self.add_window(self.ui.window)
         mpris = MPRIS(self)
         mpris._on_current_changed(None)
+
+
+    def handle_exception(self, exc_type, exc_value, exc_traceback):
+        print("handle exception")
+        try:
+            reporter.exception("uncaught", exc_value, "\n".join(format_exception(exc_type, exc_value, exc_traceback)))
+        except:
+            pass
+
+        self.old_except_hook(exc_type, exc_value, exc_traceback)
 
 
 def __on_command_line():
@@ -135,7 +154,7 @@ def main():
 def debug(sig, frame):
     """Interrupt running process, and provide a python prompt for
     interactive debugging."""
-    d = {'_frame': frame}         # Allow access to frame object.
+    d = {'_frame': frame}  # Allow access to frame object.
     d.update(frame.f_globals)  # Unless shadowed by global
     d.update(frame.f_locals)
 

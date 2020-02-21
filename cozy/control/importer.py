@@ -29,6 +29,7 @@ from cozy.model.book import Book
 from cozy.model.storage import Storage
 from cozy.model.storage_blacklist import StorageBlackList
 from cozy.model.track import Track
+from cozy.report import reporter
 
 log = logging.getLogger("importer")
 
@@ -127,10 +128,12 @@ def update_database(ui, force=False):
                             failed += path + "\n"
                     except UnicodeEncodeError as e:
                         log.warning("Could not import file because of invalid path or filename: " + path)
+                        reporter.exception("importer", e)
                         failed += path + "\n"
                     except Exception as e:
                         log.warning("Could not import file: " + path)
                         log.warning(traceback.format_exc())
+                        reporter.exception("importer", e)
                         failed += path + "\n"
 
                     i = i + 1
@@ -393,6 +396,7 @@ def copy_to_audiobook_folder(path):
         shutil.copytree(path, Storage.select().where(
             Storage.default == True).get().path + "/" + name)
     except OSError as exc:
+        reporter.exception("importer", exc)
         if exc.errno == errno.ENOTDIR:
             try:
                 shutil.copy(path, Storage.select().where(

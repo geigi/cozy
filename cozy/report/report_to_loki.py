@@ -12,7 +12,7 @@ from gi.repository import Gtk
 
 
 URL = 'https://cozy.geigi.dev:3100/api/prom/push'
-
+ENABLE = '@INSTALLED@'
 
 LOG_LEVEL_MAP = {
     LogLevel.DEBUG: "DEBUG",
@@ -23,6 +23,9 @@ LOG_LEVEL_MAP = {
 
 
 def report(component: str, type: LogLevel, message: str, exception: Exception):
+    if ENABLE != 'true':
+        return
+
     curr_datetime = datetime.datetime.now(pytz.timezone('Europe/Berlin'))
     curr_datetime = curr_datetime.isoformat('T')
 

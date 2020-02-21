@@ -8,7 +8,6 @@ from cozy.report.report_to_loki import report
 
 report_pool = Pool(5)
 
-
 def info(component: str, message: str):
     report_pool.apply_async(report, [component, LogLevel.INFO, message, None])
 
@@ -21,8 +20,7 @@ def error(component: str, message: str):
     report_pool.apply_async(report, [component, LogLevel.ERROR, message, None])
 
 
-def exception(component: str, exception: Exception):
-    message = traceback.format_exc()
+def exception(component: str, exception: Exception, message=traceback):
     report_pool.apply_async(report, [component, LogLevel.ERROR, message, exception])
 
 
