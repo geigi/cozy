@@ -113,7 +113,7 @@
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="margin_right">10</property>
-                <property name="label" translatable="yes">Stop after current chapter:</property>
+                <property name="label" translatable="yes">Stop after current chapter</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -161,7 +161,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">Enable system power control:</property>
+                <property name="label" translatable="yes">Enable system power control</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -203,7 +203,7 @@
 "suspend" will attempt to suspend your system (also known as sleep).</property>
                 <property name="halign">start</property>
                 <property name="label" translatable="yes">System power action
-to perform:</property>
+to perform</property>
               </object>
               <packing>
                 <property name="expand">True</property>
