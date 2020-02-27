@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-06 20:44+0100\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Åke Engelbrektson, 2020\n"
 "Language-Team: Swedish (https://www.transifex.com/geigi/teams/78138/sv/)\n"
@@ -21,31 +21,31 @@ msgstr ""
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/ui/book_element.py:69 cozy/ui/search_results.py:123
+#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Spela upp denna bok"
 
-#: cozy/ui/book_element.py:214
+#: cozy/ui/book_element.py:215
 msgid "Open book overview"
 msgstr "Öppna boköversikt"
 
-#: cozy/ui/book_element.py:215
+#: cozy/ui/book_element.py:216
 msgid "Currently offline"
 msgstr "Offline just nu"
 
-#: cozy/ui/book_element.py:321
+#: cozy/ui/book_element.py:322
 msgid "Mark as read"
 msgstr "Markera som läst"
 
-#: cozy/ui/book_element.py:324
+#: cozy/ui/book_element.py:325
 msgid "Open in file browser"
 msgstr "Öppna i filhanterare"
 
-#: cozy/ui/book_element.py:327
+#: cozy/ui/book_element.py:328
 msgid "Remove from library"
 msgstr "Ta bort från biblioteket"
 
-#: cozy/ui/book_element.py:397
+#: cozy/ui/book_element.py:398
 msgid "Play this part"
 msgstr "Spela upp denna del"
 
@@ -61,7 +61,7 @@ msgstr "Ladda ner"
 msgid "All files"
 msgstr "Alla filer"
 
-#: cozy/control/offline_cache.py:180
+#: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr "Kopierar"
 
@@ -73,102 +73,102 @@ msgstr "Gå till författare "
 msgid "Jump to reader "
 msgstr "Gå till uppläsare "
 
-#: cozy/control/importer.py:275
+#: cozy/control/importer.py:284
 msgid "Unknown Author"
 msgstr "Okänd författare"
 
-#: cozy/control/importer.py:277
+#: cozy/control/importer.py:286
 msgid "Unknown Reader"
 msgstr "Okänd uppläsare"
 
-#: cozy/tools.py:133
+#: cozy/tools.py:143
 msgid "hours"
 msgstr "timmar"
 
-#: cozy/tools.py:135
+#: cozy/tools.py:145
 msgid "hour"
 msgstr "timma"
 
-#: cozy/tools.py:143
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr "minuter"
 
-#: cozy/tools.py:145
+#: cozy/tools.py:155
 msgid "minute"
 msgstr "minut"
 
-#: cozy/tools.py:149
+#: cozy/tools.py:159
 msgid "finished"
 msgstr "slutfört"
 
-#: cozy/tools.py:153
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr "sekunder"
 
-#: cozy/tools.py:155
+#: cozy/tools.py:165
 msgid "second"
 msgstr "sekund"
 
-#: cozy/tools.py:178
+#: cozy/tools.py:188
 msgid "never"
 msgstr "aldrig"
 
-#: cozy/tools.py:180
+#: cozy/tools.py:190
 msgid "today"
 msgstr "idag"
 
-#: cozy/tools.py:182
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr "igår"
 
-#: cozy/tools.py:184
+#: cozy/tools.py:194
 #, python-format
 msgid "%s days ago"
 msgstr "%s dagar sedan"
 
-#: cozy/tools.py:186
+#: cozy/tools.py:196
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
 msgstr[0] "{weeks} vecka sedan"
 msgstr[1] "{weeks} veckor sedan"
 
-#: cozy/tools.py:188
+#: cozy/tools.py:198
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
 msgstr[0] "{months} månad sedan"
 msgstr[1] "{months} månader sedan"
 
-#: cozy/tools.py:190
+#: cozy/tools.py:200
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
 msgstr[0] "{years} år sedan"
 msgstr[1] "{years} år sedan"
 
-#: cozy/ui/main_view.py:408
+#: cozy/ui/main_view.py:405
 msgid "Audiobooks"
 msgstr "Ljudböcker"
 
-#: cozy/ui/main_view.py:429
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr "Importerar ljudböcker"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:498 cozy/ui/main_view.py:504 cozy/ui/main_view.py:826
+#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
 msgid "All"
 msgstr "Alla"
 
-#: cozy/ui/main_view.py:499 cozy/ui/main_view.py:505
+#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
 msgid "Display all books"
 msgstr "Visa alla böcker"
 
-#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "min"
 
-#: cozy/control/sleep_timer.py:128
+#: cozy/control/sleep_timer.py:146
 msgid "Off"
 msgstr "Av"
 
@@ -618,21 +618,51 @@ msgstr "Del"
 msgid "Nothing found :("
 msgstr "Inget hittades :("
 
-#: data/ui/timer_popover.ui:39
-msgid "Stop after current chapter"
-msgstr "Stoppa efter aktuell kapitel"
-
-#: data/ui/timer_popover.ui:76
+#: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Tidurets varaktighet"
 
-#: data/ui/timer_popover.ui:88
+#: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
 msgstr "Insomningstidens varaktighet"
 
-#: data/ui/timer_popover.ui:89
+#: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
 msgstr "Ange varaktighet för insomningsuret i minuter"
+
+#: data/ui/timer_popover.ui:116
+msgid "Stop after current chapter"
+msgstr "Stoppa efter aktuell kapitel"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr "Aktivera systemkraftkontroll"
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+"Typ av åtgärd när insomningstiden gått ut.\n"
+"\"Stäng av\" försöker stänga av systemet.\n"
+"\"Viloläge\" försöker försätta datorn i viloläge."
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+"Systemkraftåtgärd\n"
+"att utföra"
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr "Viloläge"
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr "Stäng av"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
