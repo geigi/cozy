@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-27 16:48+0100\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Adolfo Jayme-Barrientos, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/geigi/teams/78138/es/)\n"
@@ -638,11 +638,11 @@ msgstr "Ajustar el temporizador de apagado en minutos"
 
 #: data/ui/timer_popover.ui:116
 #, fuzzy
-msgid "Stop after current chapter:"
+msgid "Stop after current chapter"
 msgstr "Parar tras el capítulo actual"
 
 #: data/ui/timer_popover.ui:164
-msgid "Enable system power control:"
+msgid "Enable system power control"
 msgstr ""
 
 #: data/ui/timer_popover.ui:201
@@ -655,7 +655,7 @@ msgstr ""
 #: data/ui/timer_popover.ui:205
 msgid ""
 "System power action\n"
-"to perform:"
+"to perform"
 msgstr ""
 
 #: data/ui/timer_popover.ui:221

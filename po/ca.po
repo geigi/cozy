@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-27 16:48+0100\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-12-18 12:19+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -614,11 +614,11 @@ msgid "Set the sleep timer duration in minutes"
 msgstr ""
 
 #: data/ui/timer_popover.ui:116
-msgid "Stop after current chapter:"
+msgid "Stop after current chapter"
 msgstr ""
 
 #: data/ui/timer_popover.ui:164
-msgid "Enable system power control:"
+msgid "Enable system power control"
 msgstr ""
 
 #: data/ui/timer_popover.ui:201
@@ -631,7 +631,7 @@ msgstr ""
 #: data/ui/timer_popover.ui:205
 msgid ""
 "System power action\n"
-"to perform:"
+"to perform"
 msgstr ""
 
 #: data/ui/timer_popover.ui:221
