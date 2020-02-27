@@ -1,25 +1,25 @@
 from datetime import datetime
 import time
 import threading
-from threading import Thread, Event
+from platform import system as get_system
+from enum import Enum
 from gettext import ngettext
 import logging as log
 import distro
-import os
-from gi.repository import GLib, Gio
+from gi.repository import Gio
 import cozy.magic.magic as magic
 
-def get_cache_dir():
-    """
-    Creates the cache dir if it doesn't exist
-    :return: The path to the own cache dir
-    """
-    cache_dir = os.path.join(GLib.get_user_cache_dir(), "cozy")
+class Platform(Enum):
+    Linux = 0
+    Mac = 1
 
-    if not os.path.exists(cache_dir):
-        os.makedirs(cache_dir)
+def system_platform():
+    os = get_system().upper()
+    if "LINUX" in os:
+        return Platform.Linux
+    else:
+        return Platform.Mac
 
-    return cache_dir
 
 def shorten_string(string, length):
     """

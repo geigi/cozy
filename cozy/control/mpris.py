@@ -15,14 +15,17 @@
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
+import os
 
-from gi.repository import Gio, Gst, GLib, Gtk
+from gi.repository import Gio, GLib, Gtk
 
 from random import randint
 
+from cozy.control.application_directories import get_cache_dir, get_artwork_cache_dir
 from cozy.control.player import *
-from cozy.control.db import *
 import cozy.ui
+from cozy.model.artwork_cache import ArtworkCache
+from cozy.report import reporter
 
 
 class Server:
@@ -75,6 +78,7 @@ class Server:
             else:
                 invocation.return_value(None)
         except:
+            reporter.error("mpris", "MPRIS method call failed")
             pass
 
 
@@ -362,7 +366,7 @@ class MPRIS(Server):
             query = ArtworkCache.select().where(ArtworkCache.book == track.book.id)
             if query.exists():
                 uuid = query.first().uuid
-                cache_dir = tools.get_cache_dir()
+                cache_dir = get_artwork_cache_dir()
                 cache_dir = os.path.join(cache_dir, uuid)
                 file_path = os.path.join(cache_dir, "180.jpg")
                 if file_path:

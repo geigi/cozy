@@ -1,12 +1,15 @@
 import os, subprocess
 from gi.repository import Gtk, Gdk, GdkPixbuf, Pango, Gst
 
-import cozy.control.db as db
 import cozy.control.player as player
 import cozy.tools as tools
 import cozy.control.artwork_cache as artwork_cache
 import cozy.ui
+from cozy.control.db import get_track_for_playback, is_external, blacklist_book, get_tracks
 from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.model.book import Book
+from cozy.model.track import Track
+from cozy.report import reporter
 from cozy.ui.settings import Settings
 
 MAX_BOOK_LENGTH = 60
@@ -179,7 +182,7 @@ class AlbumElement(Gtk.Box):
         if event.type == Gdk.EventType.BUTTON_PRESS and event.button != 1:
             return
 
-        track = db.get_track_for_playback(self.book)
+        track = get_track_for_playback(self.book)
         current_track = player.get_current_track()
 
         if current_track and current_track.book.id == self.book.id:
@@ -242,7 +245,7 @@ class BookElement(Gtk.FlowBoxChild):
         self.art = AlbumElement(
             self.book, 180, self.ui.window.get_scale_factor(), bordered=True, square=False)
 
-        if db.is_external(self.book) and not self.book.offline and not FilesystemMonitor().is_book_online(self.book):
+        if is_external(self.book) and not self.book.offline and not FilesystemMonitor().is_book_online(self.book):
             super().set_sensitive(False)
             self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         else:
@@ -262,9 +265,9 @@ class BookElement(Gtk.FlowBoxChild):
 
     def get_book(self):
         """
-        Get this book element with the newest values from the db.
+        Get this book element with the newest values from the 
         """
-        return db.Book.select().where(db.Book.id == self.book.id).get()
+        return Book.select().where(Book.id == self.book.id).get()
 
     def set_playing(self, is_playing):
         """
@@ -282,9 +285,9 @@ class BookElement(Gtk.FlowBoxChild):
         Refresh the internal book object from the database.
         """
         try:
-            self.book = db.Book.get(db.Book.id == self.book.id)
-        except:
-            pass
+            self.book = Book.get(Book.id == self.book.id)
+        except Exception as e:
+            reporter.exception("book_element", e)
 
     def __on_button_press_event(self, widget, event):
         """
@@ -337,7 +340,7 @@ class BookElement(Gtk.FlowBoxChild):
         """
         Adds all tracks of a book to the blacklist and removes it from the library.
         """
-        db.blacklist_book(self.book)
+        blacklist_book(self.book)
         self.ui.settings.blacklist_model.clear()
         self.ui.settings._init_blacklist()
         self.ui.refresh_content()
@@ -346,13 +349,13 @@ class BookElement(Gtk.FlowBoxChild):
         """
         Marks a book as read.
         """
-        db.Book.update(position=-1).where(db.Book.id == self.book.id).execute()
+        Book.update(position=-1).where(Book.id == self.book.id).execute()
 
     def __jump_to_folder(self, widget, parameter):
         """
         Opens the folder containing this books files in the default file explorer.
         """
-        track = db.tracks(self.book).first()
+        track = get_tracks(self.book).first()
         path = os.path.dirname(track.file)
         subprocess.Popen(['xdg-open', path])
 
@@ -360,16 +363,16 @@ class BookElement(Gtk.FlowBoxChild):
         """
         """
         if (event == "storage-online" and not super().get_sensitive()) or event == "external-storage-removed":
-            if message in db.tracks(self.book).first().file:
+            if message in get_tracks(self.book).first().file:
                 super().set_sensitive(True)
                 self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
         elif (event == "storage-offline" and super().get_sensitive()) or event == "external-storage-added":
             self.refresh_book_object()
-            if message in db.tracks(self.book).first().file and not self.book.offline:
+            if message in get_tracks(self.book).first().file and not self.book.offline:
                 super().set_sensitive(False)
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         if event == "external-storage-removed":
-            first_track = db.tracks(self.book).first()
+            first_track = get_tracks(self.book).first()
             if first_track and message in first_track.file:
                 self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
 
@@ -449,13 +452,13 @@ class TrackElement(Gtk.EventBox):
         if current_track and current_track.id == self.track.id:
             player.play_pause(None)
             if player.get_gst_player_state() == Gst.State.PLAYING:
-                player.jump_to_ns(db.Track.select().where(
-                    db.Track.id == self.track.id).get().position)
+                player.jump_to_ns(Track.select().where(
+                    Track.id == self.track.id).get().position)
         else:
-            player.load_file(db.Track.select().where(db.Track.id == self.track.id).get())
+            player.load_file(Track.select().where(Track.id == self.track.id).get())
             player.play_pause(None, True)
-            db.Book.update(position=self.track).where(
-                db.Book.id == self.track.book.id).execute()
+            Book.update(position=self.track).where(
+                Book.id == self.track.book.id).execute()
 
     def _on_enter_notify(self, widget, event):
         """

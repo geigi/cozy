@@ -123,7 +123,7 @@ _instances = {}
 def _get_magic_type(mime):
     i = _instances.get(mime)
     if i is None:
-        i = _instances[mime] = Magic(mime=mime)
+        i = _instances[mime] = Magic(mime=mime, keep_going=True)
     return i
 
 
