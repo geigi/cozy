@@ -8,6 +8,7 @@ from cozy.control.db import get_tracks
 from cozy.model.book import Book
 from cozy.model.settings import Settings
 from cozy.model.track import Track
+from cozy.report import reporter
 
 gi.require_version('Gst', '1.0')
 import logging
@@ -49,6 +50,7 @@ def __on_gst_message(bus, message):
         err, debug = message.parse_error()
         log.error(err)
         log.debug(debug)
+        reporter.error("player", err)
         emit_event("error", err)
     elif t == Gst.MessageType.STATE_CHANGED:
         state = get_gst_player_state()

@@ -15,7 +15,9 @@ gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gst, Gdk, GLib
 
 import logging
+
 log = logging.getLogger("sleep_timer")
+
 
 class SleepTimer:
     """
@@ -29,8 +31,7 @@ class SleepTimer:
     def __init__(self):
         self.ui = cozy.ui.main_view.CozyUI()
 
-        self.builder = Gtk.Builder.new_from_resource( "/de/geigi/cozy/timer_popover_power.ui")
-        # self.builder = Gtk.Builder.new_from_resource( "/de/geigi/cozy/timer_popover.ui")
+        self.builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/timer_popover.ui")
 
         self.timer_popover = self.builder.get_object("timer_popover")
         self.timer_scale = self.builder.get_object("timer_scale")
@@ -50,7 +51,6 @@ class SleepTimer:
         self.system_shutdown_radiob = self.builder.get_object("system_shutdown_radiob")
         self.system_suspend_radiob = self.builder.get_object("system_suspend_radiob")
         # self.radiob_system_shutdown.connect("toggled", self.on_button_toggled, "1")
-
 
         # text formatting
         self.timer_scale.connect("value-changed", self.__on_timer_changed)
@@ -76,7 +76,7 @@ class SleepTimer:
         """
         if self.chapter_switch.get_state() and not force:
             return
-        
+
         adjustment = self.timer_scale.get_adjustment()
         countdown = int(adjustment.get_value())
         if countdown > 0:
@@ -90,7 +90,7 @@ class SleepTimer:
         """
         if self.sleep_timer:
             self.sleep_timer.stop()
-        
+
         self.sleep_timer = None
 
     def set_time(self, value):
@@ -142,7 +142,7 @@ class SleepTimer:
             self.set_icon(False)
             if self.sleep_timer:
                 self.sleep_timer.stop()
-            
+
             self.min_label.set_text(_("Off"))
             self.timer_label.set_visible(False)
             return
@@ -165,11 +165,6 @@ class SleepTimer:
             self.fadeout_thread = Thread(target=self.__stop_playback, name="SleepTimerFadeoutThread")
             self.fadeout_thread.start()
             self.sleep_timer.stop()
-            self.__handle_system_power_event()
-
-
-
-
 
     def __handle_system_power_event(self):
         platform = tools.system_platform()
@@ -199,7 +194,7 @@ class SleepTimer:
         if state:
             if self.sleep_timer and self.sleep_timer.isAlive():
                 self.sleep_timer.stop()
-            
+
             self.set_icon(True)
             player.set_play_next(False)
         else:
@@ -213,18 +208,17 @@ class SleepTimer:
             duration = tools.get_glib_settings().get_int("sleep-timer-fadeout-duration") * 20
             current_vol = player.get_volume()
             for i in range(0, duration):
-                player.set_volume(current_vol - (i / duration))
+                player.set_volume(max(current_vol - (i / duration), 0))
                 time.sleep(0.05)
 
             player.set_volume(current_vol)
 
         if player.get_gst_player_state() == Gst.State.PLAYING:
-            player.play_pause(None)
+            Gdk.threads_add_idle(GLib.PRIORITY_HIGH, player.play_pause, None)
+
+        Gdk.threads_add_idle(GLib.PRIORITY_HIGH, self.timer_scale.get_adjustment().set_value, 0.0)
 
         self.__handle_system_power_event()
-
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.timer_scale.get_adjustment().set_value, 0.0)
-
 
     def __player_changed(self, event, message):
         """
