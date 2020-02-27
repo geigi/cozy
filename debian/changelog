@@ -1,3 +1,10 @@
+com.github.geigi.cozy (0.6.13) UNSTABLE; urgency=low
+
+  * Sleep timer: Automatic system power control
+  * Updated translations
+
+ -- Julian Geywitz <github@geigi.de>  Thu, 27 Feb 2020 18:52:14 +0200
+
 com.github.geigi.cozy (0.6.12) UNSTABLE; urgency=low
 
   * Fix: book overview
