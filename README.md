@@ -41,6 +41,8 @@ You can download it here: <a href="https://github.com/geigi/cozy/releases/downlo
 - `peewee >= 3.5` as object relation mapper
 - `python3-mutagen` for meta tag management
 - `python3-distro`
+- `python3-requests`
+- `python3-pytz`
 - `python3-gi-cairo`
 - `python3-gst-1.0`
 - `file`
