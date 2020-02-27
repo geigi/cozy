@@ -66,6 +66,7 @@ To the contributors on GitHub:
 - camellan
 - grenade
 - jnbr
+- kaphula
 - meisenzahl
 - oleg-krv
 - umeboshi2

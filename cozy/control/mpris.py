@@ -21,7 +21,7 @@ from gi.repository import Gio, GLib, Gtk
 
 from random import randint
 
-from cozy.control.application_directories import get_cache_dir
+from cozy.control.application_directories import get_cache_dir, get_artwork_cache_dir
 from cozy.control.player import *
 import cozy.ui
 from cozy.model.artwork_cache import ArtworkCache
@@ -366,7 +366,7 @@ class MPRIS(Server):
             query = ArtworkCache.select().where(ArtworkCache.book == track.book.id)
             if query.exists():
                 uuid = query.first().uuid
-                cache_dir = get_cache_dir()
+                cache_dir = get_artwork_cache_dir()
                 cache_dir = os.path.join(cache_dir, uuid)
                 file_path = os.path.join(cache_dir, "180.jpg")
                 if file_path:

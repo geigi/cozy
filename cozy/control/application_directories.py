@@ -3,6 +3,10 @@ import os
 from gi.repository import GLib
 
 
+def get_artwork_cache_dir():
+    return os.path.join(get_cache_dir(), "artwork")
+
+
 def get_cache_dir():
     cache_dir = os.path.join(GLib.get_user_cache_dir(), "cozy")
 
