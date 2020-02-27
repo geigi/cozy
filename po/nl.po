@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2019
-# Heimen Stoffels <vistausss@outlook.com>, 2019
+# Julian Geywitz <github@geigi.de>, 2020
+# Heimen Stoffels <vistausss@outlook.com>, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-23 12:37+0100\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2019\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,47 +22,47 @@ msgstr ""
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
+#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Boek afspelen"
 
-#: cozy/ui/book_element.py:212
+#: cozy/ui/book_element.py:215
 msgid "Open book overview"
 msgstr "Boekoverzicht openen"
 
-#: cozy/ui/book_element.py:213
+#: cozy/ui/book_element.py:216
 msgid "Currently offline"
 msgstr "Momenteel offline"
 
-#: cozy/ui/book_element.py:319
+#: cozy/ui/book_element.py:322
 msgid "Mark as read"
 msgstr "Markeren als gelezen"
 
-#: cozy/ui/book_element.py:322
+#: cozy/ui/book_element.py:325
 msgid "Open in file browser"
 msgstr "Openen in bestandsbeheerder"
 
-#: cozy/ui/book_element.py:325
+#: cozy/ui/book_element.py:328
 msgid "Remove from library"
 msgstr "Verwijderen uit bibliotheek"
 
-#: cozy/ui/book_element.py:395
+#: cozy/ui/book_element.py:398
 msgid "Play this part"
 msgstr "Onderdeel afspelen"
 
-#: cozy/ui/book_overview.py:228
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr "Gedownload"
 
-#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Downloaden"
 
-#: cozy/ui/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: cozy/control/offline_cache.py:176
+#: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr "Bezig met kopiëren..."
 
@@ -74,11 +74,11 @@ msgstr "Snel naar auteur"
 msgid "Jump to reader "
 msgstr "Snel naar voorlezer"
 
-#: cozy/control/importer.py:281
+#: cozy/control/importer.py:284
 msgid "Unknown Author"
 msgstr "Onbekende auteur"
 
-#: cozy/control/importer.py:283
+#: cozy/control/importer.py:286
 msgid "Unknown Reader"
 msgstr "Onbekende voorlezer"
 
@@ -148,28 +148,28 @@ msgid_plural "{years} years ago"
 msgstr[0] "{years} jaar geleden"
 msgstr[1] "{years} jaar geleden"
 
-#: cozy/ui/main_view.py:403
+#: cozy/ui/main_view.py:405
 msgid "Audiobooks"
 msgstr "Audioboeken"
 
-#: cozy/ui/main_view.py:424
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr "Bezig met importeren van audioboeken"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:821
+#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
 msgid "All"
 msgstr "Alles"
 
-#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
+#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
 msgid "Display all books"
 msgstr "Alle boeken tonen"
 
-#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "min"
 
-#: cozy/control/sleep_timer.py:128
+#: cozy/control/sleep_timer.py:146
 msgid "Off"
 msgstr "Uit"
 
@@ -591,23 +591,7 @@ msgstr ""
 msgid "Force refresh"
 msgstr "Geforceerd vernieuwen"
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr "Op verzoek"
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr ""
-"crc32-controlesom gebruiken voor het detecteren van bestandswijzigingen"
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-"Gebruik deze instelling alleen als cozy geen bestandswijzigingen detecteert "
-"tijdens het doorzoeken."
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr "Geavanceerd"
 
@@ -639,21 +623,51 @@ msgstr "Deel"
 msgid "Nothing found :("
 msgstr "Niks gevonden :("
 
-#: data/ui/timer_popover.ui:39
-msgid "Stop after current chapter"
-msgstr "Stoppen na huidig hoofdstuk"
-
-#: data/ui/timer_popover.ui:76
+#: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Timerduur"
 
-#: data/ui/timer_popover.ui:88
+#: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
 msgstr "Timerduur-schuifbalk"
 
-#: data/ui/timer_popover.ui:89
+#: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
 msgstr "De slaaptimerduur, in minuten"
+
+#: data/ui/timer_popover.ui:116
+msgid "Stop after current chapter"
+msgstr "Stoppen na huidig hoofdstuk"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr "Energiebeheer inschakelen"
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+"De uit te voeren actie na afloop van de timer.\n"
+"'Afsluiten' tracht de computer af te sluiten (ook wel: 'uitschakelen')\n"
+"'Pauzestand' tracht de computer in de pauzestand te zetten (ook wel: 'slaapstand')"
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+"De uit te voeren\n"
+"energie-actie"
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr "Pauzestand"
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr "Afsluiten"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
