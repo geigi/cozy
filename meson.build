@@ -1,4 +1,4 @@
-project('com.github.geigi.cozy', version: '0.6.13')
+project('com.github.geigi.cozy', version: '0.6.14')
 
 python = import('python3')
 i18n = import('i18n')
