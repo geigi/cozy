@@ -27,9 +27,20 @@ jobs:
         echo https://github.com/geigi/cozy/archive/$(cat /tmp/VERSION).tar.gz > /tmp/RELEASE_URL
         wget -O /tmp/cozy.tar.gz $(cat /tmp/RELEASE_URL)
         sha256sum /tmp/cozy.tar.gz | cut -d " " -f 1 > /tmp/SHA256SUM
-        
+
+    - name: Setup SSH Keys and known_hosts
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: |
+        mkdir -p ~/.ssh
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+        ssh-add - <<< "${{ secrets.AUR_PRIVATE }}"
+
     - name: Clone cozy-audiobooks repository
-      run: git clone https://geigi:${{ secrets.AUR_PW }}@aur.archlinux.org/cozy-audiobooks.git /tmp/aur
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: git clone https://aur.archlinux.org/cozy-audiobooks.git /tmp/aur
       
     - name: Update PKGBUILD
       run: |
@@ -41,6 +52,8 @@ jobs:
         sed -i "s/.*sha256sums.*\$/        sha256sums = $(cat /tmp/SHA256SUM)/" .SRCINFO
 
     - name: Push changes
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
         git config --global user.email "github@geigi.de"
         git config --global user.name "Github Actions"
