@@ -41,7 +41,7 @@ jobs:
     - name: Clone cozy-audiobooks repository
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      run: git clone https://aur.archlinux.org/cozy-audiobooks.git /tmp/aur
+      run: git clone ssh://aur@aur.archlinux.org/cozy-audiobooks.git /tmp/aur
       
     - name: Update PKGBUILD
       run: |
@@ -57,7 +57,6 @@ jobs:
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
-        ssh -v aur.archlinux.org
         git config --global user.email "github@geigi.de"
         git config --global user.name "Github Actions"
         cd /tmp/aur
