@@ -461,6 +461,8 @@ class Titlebar:
         """
         Handler for events that occur the playback speed object.
         """
+        self.__ensure_book_object_is_up_to_date()
+
         if event == "playback-speed-changed":
             speed = message
             m, s = player.get_current_duration_ui()
@@ -468,6 +470,14 @@ class Titlebar:
             self.__update_progress_scale_range()
             self.__set_progress_scale_value(value)
             self.update_ui_time(None)
+
+    def __ensure_book_object_is_up_to_date(self):
+        # Racecondition: Sometimes the "track-changed" event is fired in playback_speed first before titlebar. Then it might happen, that the current_book is None or not uptodate.
+        # Only way to fix this is having a global truth that is accessed from everywhere.
+        # TODO
+        if player.get_current_track() and (
+                not self.current_book or player.get_current_track() and self.current_book.id != player.get_current_track().book.id):
+            self.update_track_ui()
 
     def __player_changed(self, event, message):
         """
