@@ -61,7 +61,7 @@ class Server:
 
         args = list(parameters.unpack())
         for i, sig in enumerate(self.method_inargs[method_name]):
-            if sig is "h":
+            if sig == "h":
                 msg = invocation.get_message()
                 fd_list = msg.get_unix_fd_list()
                 args[i] = fd_list.get(args[i])
@@ -199,25 +199,31 @@ class MPRIS(Server):
         self.__app.quit()
 
     def Next(self):
-        next_track()
+        if get_current_track():
+            next_track()
 
     def Previous(self):
-        prev_track()
+        if get_current_track():
+            prev_track()
 
     def Pause(self):
-        play_pause(None)
+        if get_current_track():
+            play_pause(None)
 
     def PlayPause(self):
-        play_pause(None)
+        if get_current_track():
+            play_pause(None)
 
     def Stop(self):
         stop()
 
     def Play(self):
-        play_pause(None)
+        if get_current_track():
+            play_pause(None)
 
     def SetPosition(self, track_id, position):
-        jump_to_ns(position)
+        print(position)
+        jump_to_ns(position * 1e3)
 
     def Seek(self, offset):
         pass
@@ -254,7 +260,7 @@ class MPRIS(Server):
         elif property_name == "Position":
             return GLib.Variant(
                 "x",
-                get_current_duration())
+                round(get_current_duration() * 1e-3))
         elif property_name in ["CanGoNext", "CanGoPrevious",
                                "CanPlay", "CanPause"]:
             return GLib.Variant("b", get_current_track() is not None)
