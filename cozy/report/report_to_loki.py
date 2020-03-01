@@ -1,3 +1,5 @@
+import os
+
 import requests
 import datetime
 import pytz
@@ -46,6 +48,7 @@ def report(component: str, type: LogLevel, message: str, exception: Exception):
     labels = __append_label(labels, "peewee_version", PeeweeVersion)
     labels = __append_label(labels, "mutagen_version", MutagenVersion)
     labels = __append_label(labels, "gtk_version", "{}.{}".format(Gtk.get_major_version(), Gtk.get_minor_version()))
+    labels = __append_label(labels, "desktop_environment", os.environ.get('DESKTOP_SESSION'))
 
     labels = __append_label(labels, "version", CozyVersion)
 

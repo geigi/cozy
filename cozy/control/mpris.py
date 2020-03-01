@@ -77,8 +77,9 @@ class Server:
                 invocation.return_value(variant)
             else:
                 invocation.return_value(None)
-        except:
-            reporter.error("mpris", "MPRIS method call failed")
+        except Exception as e:
+            log.error(e)
+            reporter.exception("mpris", e)
             pass
 
 

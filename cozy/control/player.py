@@ -377,7 +377,11 @@ def auto_jump():
         if get_playbin().query(query):
             fmt, seek_enabled, start, end = query.parse_seeking()
             if seek_enabled:
-                jump_to_ns(get_current_track().position)
+                track = get_current_track()
+                if not track:
+                    return
+
+                jump_to_ns(track.position)
                 __wait_to_seek = False
                 __set_speed = False
             if __set_speed:
