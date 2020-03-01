@@ -629,13 +629,12 @@ msgid "Set the sleep timer duration in minutes"
 msgstr "Ange varaktighet för insomningsuret i minuter"
 
 #: data/ui/timer_popover.ui:116
-#, fuzzy
 msgid "Stop after current chapter"
 msgstr "Stoppa efter aktuell kapitel"
 
 #: data/ui/timer_popover.ui:164
 msgid "Enable system power control"
-msgstr ""
+msgstr "Aktivera systemkraftkontroll"
 
 #: data/ui/timer_popover.ui:201
 msgid ""
@@ -643,20 +642,25 @@ msgid ""
 "\"shutdown\" will attempt to turn your system off (also known as power off)\n"
 "\"suspend\" will attempt to suspend your system (also known as sleep)."
 msgstr ""
+"Typ av åtgärd när insomningstiden gått ut.\n"
+"\"Stäng av\" försöker stänga av systemet.\n"
+"\"Viloläge\" försöker försätta datorn i viloläge."
 
 #: data/ui/timer_popover.ui:205
 msgid ""
 "System power action\n"
 "to perform"
 msgstr ""
+"Systemkraftåtgärd\n"
+"att utföra"
 
 #: data/ui/timer_popover.ui:221
 msgid "suspend"
-msgstr ""
+msgstr "Viloläge"
 
 #: data/ui/timer_popover.ui:237
 msgid "shutdown"
-msgstr ""
+msgstr "Stäng av"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
