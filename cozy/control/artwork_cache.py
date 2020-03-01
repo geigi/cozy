@@ -9,6 +9,7 @@ from cozy.control.application_directories import get_cache_dir
 from cozy.control.db import get_tracks
 from cozy.model.artwork_cache import ArtworkCache
 from cozy.model.book import Book
+from cozy.report import reporter
 
 log = logging.getLogger("artwork_cache")
 
@@ -91,6 +92,7 @@ def __create_artwork_cache(book, pixbuf, size):
         try:
             resized_pixbuf.savev(file_path, "jpeg", ["quality", None], ["95"])
         except Exception as e:
+            reporter.warning("artwork_cache", "Failed to save resized cache albumart")
             log.warning("Failed to save resized cache albumart for following uuid: " + gen_uuid)
             log.warning(e)
 
@@ -104,7 +106,11 @@ def __load_pixbuf_from_cache(book, size):
 
     query = ArtworkCache.select().where(ArtworkCache.book == book.id)
     if query.exists():
-        uuid = query.first().uuid
+        try:
+            uuid = query.first().uuid
+        except Exception as e:
+            reporter.error("artwork_cache", "load_pixbuf_from_cache: query exists but query.first().uuid crashed.")
+            return None
     else:
         return None
 
@@ -154,9 +160,10 @@ def __load_pixbuf_from_db(book):
         try:
             loader = GdkPixbuf.PixbufLoader.new()
             loader.write(book.cover)
-            loader.close_db()
+            loader.close()
             pixbuf = loader.get_pixbuf()
         except Exception as e:
+            reporter.warning("artwork_cache", "Could not get book cover from db.")
             log.warning("Could not get cover for book " + book.name)
             log.warning(e)
     

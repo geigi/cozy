@@ -2,67 +2,67 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
 # Heimen Stoffels <vistausss@outlook.com>, 2019
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-23 12:37+0100\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2019\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
+#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Boek afspelen"
 
-#: cozy/ui/book_element.py:212
+#: cozy/ui/book_element.py:215
 msgid "Open book overview"
 msgstr "Boekoverzicht openen"
 
-#: cozy/ui/book_element.py:213
+#: cozy/ui/book_element.py:216
 msgid "Currently offline"
 msgstr "Momenteel offline"
 
-#: cozy/ui/book_element.py:319
+#: cozy/ui/book_element.py:322
 msgid "Mark as read"
 msgstr "Markeren als gelezen"
 
-#: cozy/ui/book_element.py:322
+#: cozy/ui/book_element.py:325
 msgid "Open in file browser"
 msgstr "Openen in bestandsbeheerder"
 
-#: cozy/ui/book_element.py:325
+#: cozy/ui/book_element.py:328
 msgid "Remove from library"
 msgstr "Verwijderen uit bibliotheek"
 
-#: cozy/ui/book_element.py:395
+#: cozy/ui/book_element.py:398
 msgid "Play this part"
 msgstr "Onderdeel afspelen"
 
-#: cozy/ui/book_overview.py:228
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr "Gedownload"
 
-#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Downloaden"
 
-#: cozy/ui/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: cozy/control/offline_cache.py:176
+#: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr "Bezig met kopiëren..."
 
@@ -74,11 +74,11 @@ msgstr "Snel naar auteur"
 msgid "Jump to reader "
 msgstr "Snel naar voorlezer"
 
-#: cozy/control/importer.py:281
+#: cozy/control/importer.py:284
 msgid "Unknown Author"
 msgstr "Onbekende auteur"
 
-#: cozy/control/importer.py:283
+#: cozy/control/importer.py:286
 msgid "Unknown Reader"
 msgstr "Onbekende voorlezer"
 
@@ -148,28 +148,28 @@ msgid_plural "{years} years ago"
 msgstr[0] "{years} jaar geleden"
 msgstr[1] "{years} jaar geleden"
 
-#: cozy/ui/main_view.py:403
+#: cozy/ui/main_view.py:405
 msgid "Audiobooks"
 msgstr "Audioboeken"
 
-#: cozy/ui/main_view.py:424
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr "Bezig met importeren van audioboeken"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:821
+#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
 msgid "All"
 msgstr "Alles"
 
-#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
+#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
 msgid "Display all books"
 msgstr "Alle boeken tonen"
 
-#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "min"
 
-#: cozy/control/sleep_timer.py:128
+#: cozy/control/sleep_timer.py:146
 msgid "Off"
 msgstr "Uit"
 
@@ -373,7 +373,8 @@ msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Als dat zo is, dan kun je de offline-modus inschakelen voor een boek in het overzicht.\n"
+"Als dat zo is, dan kun je de offline-modus inschakelen voor een boek in het "
+"overzicht.\n"
 "Dit slaat een kopie op van het boek wordt zodat je onderweg kunt luisteren."
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
@@ -429,8 +430,7 @@ msgstr "Gepubliceerd"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 "Begin met verkennen van je bibliotheek door hierboven te kiezen voor de "
 "Auteur- of Leesweergave."
@@ -453,8 +453,7 @@ msgstr "Bestand niet gevonden"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr ""
-"Dit bestand kan niet worden gevonden. Wil je er handmatig naar zoeken?"
+msgstr "Dit bestand kan niet worden gevonden. Wil je er handmatig naar zoeken?"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
@@ -591,23 +590,7 @@ msgstr ""
 msgid "Force refresh"
 msgstr "Geforceerd vernieuwen"
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr "Op verzoek"
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr ""
-"crc32-controlesom gebruiken voor het detecteren van bestandswijzigingen"
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-"Gebruik deze instelling alleen als cozy geen bestandswijzigingen detecteert "
-"tijdens het doorzoeken."
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr "Geavanceerd"
 
@@ -639,21 +622,47 @@ msgstr "Deel"
 msgid "Nothing found :("
 msgstr "Niks gevonden :("
 
-#: data/ui/timer_popover.ui:39
-msgid "Stop after current chapter"
-msgstr "Stoppen na huidig hoofdstuk"
-
-#: data/ui/timer_popover.ui:76
+#: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Timerduur"
 
-#: data/ui/timer_popover.ui:88
+#: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
 msgstr "Timerduur-schuifbalk"
 
-#: data/ui/timer_popover.ui:89
+#: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
 msgstr "De slaaptimerduur, in minuten"
+
+#: data/ui/timer_popover.ui:116
+#, fuzzy
+msgid "Stop after current chapter"
+msgstr "Stoppen na huidig hoofdstuk"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr ""
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr ""
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr ""
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
@@ -678,3 +687,16 @@ msgstr "_Over"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Afsluiten"
+
+#~ msgid "By request"
+#~ msgstr "Op verzoek"
+
+#~ msgid "Use crc32 checksum for file modification detection"
+#~ msgstr ""
+#~ "crc32-controlesom gebruiken voor het detecteren van bestandswijzigingen"
+
+#~ msgid ""
+#~ "Only recommended if cozy doesn't detect file modifications while scanning"
+#~ msgstr ""
+#~ "Gebruik deze instelling alleen als cozy geen bestandswijzigingen "
+#~ "detecteert tijdens het doorzoeken."

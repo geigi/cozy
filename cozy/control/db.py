@@ -5,12 +5,13 @@ import time
 from cozy.control.db_updater import update_db
 from cozy.model.artwork_cache import ArtworkCache
 from cozy.model.book import Book
-from cozy.model.model_base import get_sqlite_database, get_data_dir, database_file_exists
+from cozy.model.model_base import get_sqlite_database, get_data_dir
 from cozy.model.offline_cache import OfflineCache
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage
 from cozy.model.storage_blacklist import StorageBlackList
 from cozy.model.track import Track
+from cozy.report import reporter
 
 log = logging.getLogger("db")
 from peewee import __version__ as PeeweeVersion
@@ -31,8 +32,9 @@ _db = get_sqlite_database()
 def init_db():
     tmp_db = None
 
-    if database_file_exists():
-        _connect_db(_db)
+    _connect_db(_db)
+
+    if Settings.table_exists():
         update_db()
     else:
         tmp_db = SqliteDatabase(os.path.join(get_data_dir(), "cozy.db"))
@@ -65,6 +67,7 @@ def _connect_db(db):
     try:
         db.connect(reuse_if_open=True)
     except Exception as e:
+        reporter.exception("db", e)
         log.error("Could not connect to database. ")
         log.error(e)
 
@@ -302,7 +305,7 @@ def remove_invalid_entries(ui=None, refresh=False):
     Remove track entries from db that no longer exist in the filesystem.
     """
     # remove entries from the db that are no longer existent
-    for track in Track.select(Track.file):
+    for track in Track.select():
         from cozy.control.filesystem_monitor import FilesystemMonitor
         if not os.path.isfile(track.file) and FilesystemMonitor().is_track_online(
                 track):
@@ -322,7 +325,7 @@ def clean_books():
         if not get_track_for_playback(book):
             Book.update(position=0).where(Book.id == book.id).execute()
         if Track.select().where(Track.book == book).count() < 1:
-            if Settings.get().last_played_book.id == book.id:
+            if Settings.get().last_played_book and Settings.get().last_played_book.id == book.id:
                 Settings.update(last_played_book=None).execute()
             book.delete_instance()
 

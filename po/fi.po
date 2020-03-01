@@ -2,66 +2,66 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 16:01+0100\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: Finnish (https://www.transifex.com/geigi/teams/78138/fi/)\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
+#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Toista tämä kirja"
 
-#: cozy/ui/book_element.py:212
+#: cozy/ui/book_element.py:215
 msgid "Open book overview"
 msgstr "Avaa kirjan esittely"
 
-#: cozy/ui/book_element.py:213
+#: cozy/ui/book_element.py:216
 msgid "Currently offline"
 msgstr "Yhteydetön"
 
-#: cozy/ui/book_element.py:319
+#: cozy/ui/book_element.py:322
 msgid "Mark as read"
 msgstr "Merkitse luetuksi"
 
-#: cozy/ui/book_element.py:322
+#: cozy/ui/book_element.py:325
 msgid "Open in file browser"
 msgstr "Avaa tiedostoselaimessa"
 
-#: cozy/ui/book_element.py:325
+#: cozy/ui/book_element.py:328
 msgid "Remove from library"
 msgstr "Poista kirjastosta"
 
-#: cozy/ui/book_element.py:395
+#: cozy/ui/book_element.py:398
 msgid "Play this part"
 msgstr "Toista tämä osa"
 
-#: cozy/ui/book_overview.py:228
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr "Ladattu"
 
-#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Lataa"
 
-#: cozy/ui/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
-#: cozy/control/offline_cache.py:176
+#: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr "Kopioidaan"
 
@@ -73,11 +73,11 @@ msgstr "Siirry tekijään"
 msgid "Jump to reader "
 msgstr "Siirry lukijaan"
 
-#: cozy/control/importer.py:278
+#: cozy/control/importer.py:284
 msgid "Unknown Author"
 msgstr "Tuntematon tekijä"
 
-#: cozy/control/importer.py:280
+#: cozy/control/importer.py:286
 msgid "Unknown Reader"
 msgstr "Tuntematon lukija"
 
@@ -147,28 +147,28 @@ msgid_plural "{years} years ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/ui/main_view.py:403
+#: cozy/ui/main_view.py:405
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui/main_view.py:424
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr "Tuodaan äänikirjoja"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
+#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
 msgid "All"
 msgstr "Kaikki"
 
-#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
+#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
 msgid "Display all books"
 msgstr "Näytä kaikki kirjat"
 
-#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "min"
 
-#: cozy/control/sleep_timer.py:128
+#: cozy/control/sleep_timer.py:146
 msgid "Off"
 msgstr "Pois"
 
@@ -426,8 +426,7 @@ msgstr "Julkaistu"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr "Ala selaamaan kirjastoasi valitsemalla näkymäksi Tekijä tai Lukija."
 
 #: data/ui/about.ui:14
@@ -459,9 +458,11 @@ msgid "Some files could not be imported"
 msgstr "Joitakin tiedostoja ei voitu tuoda"
 
 #: data/ui/import_failed.ui:134
+#, fuzzy
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
@@ -582,22 +583,7 @@ msgstr "Tämä pakottaa metatiedon päivityksen kaikille tuoduille kirjoille"
 msgid "Force refresh"
 msgstr "Pakota päivitys"
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr "Pyynnöstä"
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr "Käytä CRC32-tarkistussummaa tiedostonmuokkauksen tunnistamiseen"
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-"Suositellaan vain jos Cozy ei tunnista tiedostonmuokkauksia skannauksen "
-"aikana"
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr "Lisäasetukset"
 
@@ -629,21 +615,47 @@ msgstr "Osa"
 msgid "Nothing found :("
 msgstr "Mitään ei löytynyt :("
 
-#: data/ui/timer_popover.ui:39
-msgid "Stop after current chapter"
-msgstr "Pysäytä tämänhtekisen kappaleen jälkeen"
-
-#: data/ui/timer_popover.ui:76
+#: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Ajastimen kesto"
 
-#: data/ui/timer_popover.ui:88
+#: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
 msgstr "Ajastimen keston säädin"
 
-#: data/ui/timer_popover.ui:89
+#: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
 msgstr "Aseta ajastimen kesto minuuteissa"
+
+#: data/ui/timer_popover.ui:116
+#, fuzzy
+msgid "Stop after current chapter"
+msgstr "Pysäytä tämänhtekisen kappaleen jälkeen"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr ""
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr ""
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr ""
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
@@ -668,3 +680,15 @@ msgstr "_Tietoja"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Lopeta"
+
+#~ msgid "By request"
+#~ msgstr "Pyynnöstä"
+
+#~ msgid "Use crc32 checksum for file modification detection"
+#~ msgstr "Käytä CRC32-tarkistussummaa tiedostonmuokkauksen tunnistamiseen"
+
+#~ msgid ""
+#~ "Only recommended if cozy doesn't detect file modifications while scanning"
+#~ msgstr ""
+#~ "Suositellaan vain jos Cozy ei tunnista tiedostonmuokkauksia skannauksen "
+#~ "aikana"

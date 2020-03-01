@@ -17,14 +17,15 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 import os
 
-from gi.repository import Gio, Gst, GLib, Gtk
+from gi.repository import Gio, GLib, Gtk
 
 from random import randint
 
-from cozy.control.application_directories import get_cache_dir
+from cozy.control.application_directories import get_cache_dir, get_artwork_cache_dir
 from cozy.control.player import *
 import cozy.ui
 from cozy.model.artwork_cache import ArtworkCache
+from cozy.report import reporter
 
 
 class Server:
@@ -39,9 +40,12 @@ class Server:
                 method_inargs[method.name] = tuple(
                     arg.signature for arg in method.in_args)
 
-            con.register_object(object_path=path,
-                                interface_info=interface,
-                                method_call_closure=self.on_method_call)
+            try:
+                con.register_object(object_path=path,
+                                    interface_info=interface,
+                                    method_call_closure=self.on_method_call)
+            except:
+                log.error("MPRIS is already connected from another cozy process.")
 
         self.method_inargs = method_inargs
         self.method_outargs = method_outargs
@@ -57,7 +61,7 @@ class Server:
 
         args = list(parameters.unpack())
         for i, sig in enumerate(self.method_inargs[method_name]):
-            if sig is "h":
+            if sig == "h":
                 msg = invocation.get_message()
                 fd_list = msg.get_unix_fd_list()
                 args[i] = fd_list.get(args[i])
@@ -76,7 +80,9 @@ class Server:
                 invocation.return_value(variant)
             else:
                 invocation.return_value(None)
-        except:
+        except Exception as e:
+            log.error(e)
+            reporter.exception("mpris", e)
             pass
 
 
@@ -193,25 +199,31 @@ class MPRIS(Server):
         self.__app.quit()
 
     def Next(self):
-        next_track()
+        if get_current_track():
+            next_track()
 
     def Previous(self):
-        prev_track()
+        if get_current_track():
+            prev_track()
 
     def Pause(self):
-        play_pause(None)
+        if get_current_track():
+            play_pause(None)
 
     def PlayPause(self):
-        play_pause(None)
+        if get_current_track():
+            play_pause(None)
 
     def Stop(self):
         stop()
 
     def Play(self):
-        play_pause(None)
+        if get_current_track():
+            play_pause(None)
 
     def SetPosition(self, track_id, position):
-        jump_to_ns(position)
+        print(position)
+        jump_to_ns(position * 1e3)
 
     def Seek(self, offset):
         pass
@@ -248,7 +260,7 @@ class MPRIS(Server):
         elif property_name == "Position":
             return GLib.Variant(
                 "x",
-                get_current_duration())
+                round(get_current_duration() * 1e-3))
         elif property_name in ["CanGoNext", "CanGoPrevious",
                                "CanPlay", "CanPause"]:
             return GLib.Variant("b", get_current_track() is not None)
@@ -364,7 +376,7 @@ class MPRIS(Server):
             query = ArtworkCache.select().where(ArtworkCache.book == track.book.id)
             if query.exists():
                 uuid = query.first().uuid
-                cache_dir = get_cache_dir()
+                cache_dir = get_artwork_cache_dir()
                 cache_dir = os.path.join(cache_dir, uuid)
                 file_path = os.path.join(cache_dir, "180.jpg")
                 if file_path:

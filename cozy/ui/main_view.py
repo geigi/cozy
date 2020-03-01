@@ -1,14 +1,10 @@
 import webbrowser
 
-import gi
-
 from cozy.control.db import books, authors, readers, is_external, close_db
 from cozy.model.book import Book
 from cozy.model.storage import Storage
 from cozy.model.track import Track
 
-gi.require_version('Gtk', '3.0')
-gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
 from cozy.ui.book_element import BookElement
@@ -21,7 +17,7 @@ from cozy.ui.titlebar import Titlebar
 from cozy.ui.settings import Settings
 from cozy.ui.book_overview import BookOverview
 from cozy.architecture.singleton import Singleton
-
+import cozy.report.reporter as report
 import cozy.control.importer as importer
 import cozy.control.player as player
 import cozy.tools as tools
@@ -75,6 +71,7 @@ class CozyUI(metaclass=Singleton):
         self.__init_resources()
         self.__init_css()
         self.__init_actions()
+        report.info("main", "startup")
 
     def __init_resources(self):
         """
@@ -778,6 +775,8 @@ class CozyUI(metaclass=Singleton):
         player.dispose()
 
         close_db()
+
+        report.close()
 
         log.info("Closing app.")
         self.app.quit()

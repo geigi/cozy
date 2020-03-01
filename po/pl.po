@@ -2,66 +2,68 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 16:01+0100\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: Polish (https://www.transifex.com/geigi/teams/78138/pl/)\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pl\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
+#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Odtwórz tę książkę"
 
-#: cozy/ui/book_element.py:212
+#: cozy/ui/book_element.py:215
 msgid "Open book overview"
 msgstr "Otwórz ogólny opis książki"
 
-#: cozy/ui/book_element.py:213
+#: cozy/ui/book_element.py:216
 msgid "Currently offline"
 msgstr "Aktualnie offline"
 
-#: cozy/ui/book_element.py:319
+#: cozy/ui/book_element.py:322
 msgid "Mark as read"
 msgstr "Oznacz jako przeczytane"
 
-#: cozy/ui/book_element.py:322
+#: cozy/ui/book_element.py:325
 msgid "Open in file browser"
 msgstr "Otwórz w przeglądarce plików"
 
-#: cozy/ui/book_element.py:325
+#: cozy/ui/book_element.py:328
 msgid "Remove from library"
 msgstr "Usuń z bilbioteki"
 
-#: cozy/ui/book_element.py:395
+#: cozy/ui/book_element.py:398
 msgid "Play this part"
 msgstr "Odtwórz tę część"
 
-#: cozy/ui/book_overview.py:228
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr "Pobrane"
 
-#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Pobierz"
 
-#: cozy/ui/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr "Wszystkie pliki"
 
-#: cozy/control/offline_cache.py:176
+#: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr "Kopiowanie"
 
@@ -73,11 +75,11 @@ msgstr "Przejdź do autora"
 msgid "Jump to reader "
 msgstr "Przejdź do lektora"
 
-#: cozy/control/importer.py:278
+#: cozy/control/importer.py:284
 msgid "Unknown Author"
 msgstr "Nieznany autor"
 
-#: cozy/control/importer.py:280
+#: cozy/control/importer.py:286
 msgid "Unknown Reader"
 msgstr "Nieznany lektor"
 
@@ -153,28 +155,28 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: cozy/ui/main_view.py:403
+#: cozy/ui/main_view.py:405
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui/main_view.py:424
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr "Importowanie audiobooków"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
+#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
 msgid "All"
 msgstr "Wszystkie"
 
-#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
+#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
 msgid "Display all books"
 msgstr "Wyświetl wszystkie książki"
 
-#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "min"
 
-#: cozy/control/sleep_timer.py:128
+#: cozy/control/sleep_timer.py:146
 msgid "Off"
 msgstr "Wył."
 
@@ -381,7 +383,8 @@ msgid ""
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
 "Jeśli możliwe, możesz włączyć tryb offline dla książki w ogólnym opisie\n"
-"To ustawienie zachowa kopię lokalną książki, którą będzie można słuchać w drodze"
+"To ustawienie zachowa kopię lokalną książki, którą będzie można słuchać w "
+"drodze"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
@@ -434,11 +437,10 @@ msgstr "Opublikowano"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
-"Zacznij przeglądać swoją bibliotekę poprzez kliknięcie na Autora lub Lektora"
-" powyżej"
+"Zacznij przeglądać swoją bibliotekę poprzez kliknięcie na Autora lub Lektora "
+"powyżej"
 
 #: data/ui/about.ui:14
 msgid "GitHub"
@@ -469,9 +471,11 @@ msgid "Some files could not be imported"
 msgstr "Niektóre pliki nie mogły być zaimportowane"
 
 #: data/ui/import_failed.ui:134
+#, fuzzy
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
@@ -592,22 +596,7 @@ msgstr "To wymusi odświeżenie metadanych wszystkich zaimportowanych książek"
 msgid "Force refresh"
 msgstr "Wymuś odświeżenie"
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr "Na żądanie"
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr "Użyj sumy kontrolnej crc32 do wykrywania zmian w plikach"
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-"Zalecane tylko wtedy, gdy cozy nie zauważy zmian w plikach podczas "
-"skanowania"
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr "Zaawansowane"
 
@@ -639,21 +628,47 @@ msgstr "Część"
 msgid "Nothing found :("
 msgstr "Nic nie znaleziono :("
 
-#: data/ui/timer_popover.ui:39
-msgid "Stop after current chapter"
-msgstr "Zatrzymaj po tym rozdziale"
-
-#: data/ui/timer_popover.ui:76
+#: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Czas minutnika"
 
-#: data/ui/timer_popover.ui:88
+#: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
 msgstr "Suwak czasu minutnika"
 
-#: data/ui/timer_popover.ui:89
+#: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
 msgstr "Ustaw czas minutnika uśpienia"
+
+#: data/ui/timer_popover.ui:116
+#, fuzzy
+msgid "Stop after current chapter"
+msgstr "Zatrzymaj po tym rozdziale"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr ""
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr ""
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr ""
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
@@ -678,3 +693,15 @@ msgstr "_Informacje"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Wyjście"
+
+#~ msgid "By request"
+#~ msgstr "Na żądanie"
+
+#~ msgid "Use crc32 checksum for file modification detection"
+#~ msgstr "Użyj sumy kontrolnej crc32 do wykrywania zmian w plikach"
+
+#~ msgid ""
+#~ "Only recommended if cozy doesn't detect file modifications while scanning"
+#~ msgstr ""
+#~ "Zalecane tylko wtedy, gdy cozy nie zauważy zmian w plikach podczas "
+#~ "skanowania"

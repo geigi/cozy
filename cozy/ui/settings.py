@@ -41,7 +41,7 @@ class Settings(EventSender, metaclass=Singleton):
         self.remove_storage_button = self.builder.get_object("remove_location_button")
         self.remove_storage_button.connect("clicked", self.__on_remove_storage_clicked)        
         self.external_button = self.builder.get_object("external_button")
-        self.external_button.connect("clicked", self.__on_external_clicked)
+        self.external_button_handle_id = self.external_button.connect("clicked", self.__on_external_clicked)
         self.default_storage_button = self.builder.get_object("default_location_button")
         self.default_storage_button.connect("clicked", self.__on_default_storage_clicked)
         self.storage_list_box = self.builder.get_object("storage_list_box")
@@ -213,8 +213,9 @@ class Settings(EventSender, metaclass=Singleton):
                 default_sensitive = False
             else:
                 default_sensitive = True
-            
+            self.external_button.handler_block(self.external_button_handle_id)
             self.external_button.set_active(row.external)
+            self.external_button.handler_unblock(self.external_button_handle_id)
 
         self.remove_storage_button.set_sensitive(default_sensitive)
         self.external_button.set_sensitive(sensitive)

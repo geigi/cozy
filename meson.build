@@ -1,4 +1,4 @@
-project('com.github.geigi.cozy', version: '0.6.10')
+project('com.github.geigi.cozy', version: '0.6.13')
 
 python = import('python3')
 i18n = import('i18n')
@@ -53,6 +53,7 @@ conf.set('PYTHON_EXEC_DIR', join_paths(get_option('prefix'), python.sysconfig_pa
 conf.set('libexecdir', LIBEXEC_DIR)
 conf.set('VERSION', meson.project_version())
 conf.set('PYTHON', python_bin.path())
+conf.set('INSTALLED', 'true')
 
 subdir('data')
 subdir('po')
@@ -72,5 +73,18 @@ install_subdir(
   install_dir: python_dir
 )
 
+configure_file(
+  input: 'cozy/version.py',
+  output: 'version.py',
+  configuration: conf,
+  install_dir: python_dir + '/cozy'
+)
+
+configure_file(
+  input: 'cozy/report/report_to_loki.py',
+  output: 'report_to_loki.py',
+  configuration: conf,
+  install_dir: python_dir + '/cozy/report'
+)
 
 meson.add_install_script('meson/post_install.py')
