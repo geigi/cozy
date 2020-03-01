@@ -4,9 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2019
-# albanobattistella <albano_battistella@hotmail.com>, 2019
-#
+# Julian Geywitz <github@geigi.de>, 2020
+# albanobattistella <albano_battistella@hotmail.com>, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>, 2019\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>, 2020\n"
 "Language-Team: Italian (https://www.transifex.com/geigi/teams/78138/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -132,7 +132,7 @@ msgstr "%s giorni fa"
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
 msgstr[0] "{weeks} settimane fa"
-msgstr[1] "{weeks} weeks ago"
+msgstr[1] "{weeks} settimane fa"
 
 #: cozy/tools.py:198
 #, python-brace-format
@@ -146,7 +146,7 @@ msgstr[1] "{months} mesi fa"
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
 msgstr[0] "{years} anni fa"
-msgstr[1] "{years}  ago"
+msgstr[1] "{years}  anni fa"
 
 #: cozy/ui/main_view.py:405
 msgid "Audiobooks"
@@ -642,7 +642,7 @@ msgstr "Ferma dopo il capitolo corrente"
 
 #: data/ui/timer_popover.ui:164
 msgid "Enable system power control"
-msgstr ""
+msgstr "Abilita il controllo dell'alimentazione del sistema"
 
 #: data/ui/timer_popover.ui:201
 msgid ""
@@ -650,20 +650,25 @@ msgid ""
 "\"shutdown\" will attempt to turn your system off (also known as power off)\n"
 "\"suspend\" will attempt to suspend your system (also known as sleep)."
 msgstr ""
+"Tipo di azione al termine del timer.\n"
+"\"spegnimento\" tenterà di spegnere il sistema (noto anche come power off)\n"
+"\"suspendi\" tenterà di sospendere il tuo sistema (noto anche come sleep)."
 
 #: data/ui/timer_popover.ui:205
 msgid ""
 "System power action\n"
 "to perform"
 msgstr ""
+"Azione di alimentazione del sistema\n"
+"da eseguire"
 
 #: data/ui/timer_popover.ui:221
 msgid "suspend"
-msgstr ""
+msgstr "sospendere"
 
 #: data/ui/timer_popover.ui:237
 msgid "shutdown"
-msgstr ""
+msgstr "Spegnere"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
