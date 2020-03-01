@@ -1,192 +1,186 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Catalan translations for com.github.geigi.cozy package.
+# Copyright (C) 2019 THE com.github.geigi.cozy'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+# Automatically generated, 2019.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-11 15:12+0200\n"
-"PO-Revision-Date: 2017-08-25 21:47+0000\n"
-"Language-Team: Ukrainian (Ukraine) (https://www.transifex.com/geigi/teams/78138/uk_UA/)\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
+"PO-Revision-Date: 2019-12-18 12:19+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk_UA\n"
-"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: cozy/book_element.py:67 cozy/search_results.py:124
+#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr ""
 
-#: cozy/book_element.py:212
+#: cozy/ui/book_element.py:215
 msgid "Open book overview"
 msgstr ""
 
-#: cozy/book_element.py:213
+#: cozy/ui/book_element.py:216
 msgid "Currently offline"
 msgstr ""
 
-#: cozy/book_element.py:319
+#: cozy/ui/book_element.py:322
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/book_element.py:322
+#: cozy/ui/book_element.py:325
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/book_element.py:325
+#: cozy/ui/book_element.py:328
 msgid "Remove from library"
 msgstr ""
 
-#: cozy/book_element.py:395
+#: cozy/ui/book_element.py:398
 msgid "Play this part"
 msgstr ""
 
-#: cozy/book_overview.py:223
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/book_overview.py:226 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr ""
 
-#: cozy/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr ""
 
-#: cozy/offline_cache.py:175
+#: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr ""
 
-#: cozy/search_results.py:72
+#: cozy/ui/search_results.py:71
 msgid "Jump to author "
 msgstr ""
 
-#: cozy/search_results.py:75
+#: cozy/ui/search_results.py:74
 msgid "Jump to reader "
 msgstr ""
 
-#: cozy/importer.py:275
+#: cozy/control/importer.py:284
 msgid "Unknown Author"
 msgstr ""
 
-#: cozy/importer.py:277
+#: cozy/control/importer.py:286
 msgid "Unknown Reader"
 msgstr ""
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr ""
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr ""
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr ""
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr ""
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr ""
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr ""
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr ""
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr ""
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr ""
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr ""
 
-#: cozy/tools.py:193
-msgid "days"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
 msgstr ""
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr ""
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr ""
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr ""
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:199
-msgid "month"
-msgstr ""
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr ""
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr ""
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr ""
-
-#: cozy/ui.py:407
+#: cozy/ui/main_view.py:405
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui.py:428
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr ""
 
 #. Add the special All element
-#: cozy/ui.py:497 cozy/ui.py:503 cozy/ui.py:823
+#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
 msgid "All"
 msgstr ""
 
-#: cozy/ui.py:498 cozy/ui.py:504
+#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
 msgid "Display all books"
 msgstr ""
 
-#: cozy/sleep_timer.py:121 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr ""
 
-#: cozy/sleep_timer.py:129
+#: cozy/control/sleep_timer.py:146
 msgid "Off"
 msgstr ""
 
-#: cozy/settings.py:416 cozy/settings.py:459
+#: cozy/ui/settings.py:416 cozy/ui/settings.py:459
 msgid "External drive"
 msgstr ""
 
-#: cozy/settings.py:419 cozy/settings.py:462
+#: cozy/ui/settings.py:419 cozy/ui/settings.py:462
 msgid "Internal drive"
 msgstr ""
 
-#: cozy/settings.py:446
+#: cozy/ui/settings.py:446
 msgid "Changing audio book location…"
 msgstr ""
 
-#: cozy/disk_element.py:26
+#: cozy/ui/disk_element.py:26
 msgid "Disc"
 msgstr ""
 
@@ -251,7 +245,7 @@ msgid "Elapsed time of current part"
 msgstr ""
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
+msgid "Jump to position in current chapter"
 msgstr ""
 
 #: data/ui/main_window.ui:317
@@ -421,38 +415,13 @@ msgstr ""
 msgid "Published"
 msgstr ""
 
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr ""
-
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 
 #: data/ui/about.ui:14
 msgid "GitHub"
-msgstr ""
-
-#: data/ui/app_menu.ui:7
-msgid "_Play/Pause"
-msgstr ""
-
-#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
-msgid "_Preferences"
-msgstr ""
-
-#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
-msgid "_Help"
-msgstr ""
-
-#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
-msgid "_About"
-msgstr ""
-
-#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
-msgid "_Quit"
 msgstr ""
 
 #: data/ui/file_not_found.ui:19
@@ -483,6 +452,7 @@ msgstr ""
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
@@ -599,20 +569,7 @@ msgstr ""
 msgid "Force refresh"
 msgstr ""
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr ""
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr ""
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr ""
 
@@ -644,20 +601,45 @@ msgstr ""
 msgid "Nothing found :("
 msgstr ""
 
-#: data/ui/timer_popover.ui:39
-msgid "Stop after current chapter"
-msgstr ""
-
-#: data/ui/timer_popover.ui:76
+#: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr ""
 
-#: data/ui/timer_popover.ui:88
+#: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
 msgstr ""
 
-#: data/ui/timer_popover.ui:89
+#: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
+msgstr ""
+
+#: data/ui/timer_popover.ui:116
+msgid "Stop after current chapter"
+msgstr ""
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr ""
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr ""
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
 msgstr ""
 
 #: data/ui/titlebar_menu.ui:7
@@ -668,10 +650,18 @@ msgstr ""
 msgid "_Hide unavailable books"
 msgstr ""
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
+#: data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
 msgstr ""
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
+#: data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:33
+msgid "_Quit"
 msgstr ""

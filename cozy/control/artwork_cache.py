@@ -3,9 +3,13 @@ import uuid
 import logging
 import cozy.tools as tools
 
-import cozy.control.db
-
 from gi.repository import GdkPixbuf
+
+from cozy.control.application_directories import get_cache_dir
+from cozy.control.db import get_tracks
+from cozy.model.artwork_cache import ArtworkCache
+from cozy.model.book import Book
+from cozy.report import reporter
 
 log = logging.getLogger("artwork_cache")
 
@@ -42,13 +46,13 @@ def delete_artwork_cache():
     """
     Deletes the artwork cache completely.
     """
-    cache_dir = os.path.join(tools.get_cache_dir(), "artwork")
+    cache_dir = os.path.join(get_cache_dir(), "artwork")
 
     import shutil
     if os.path.exists(cache_dir):
         shutil.rmtree(cache_dir)
 
-    q = cozy.control.db.ArtworkCache.delete()
+    q = ArtworkCache.delete()
     q.execute()
 
 
@@ -56,7 +60,7 @@ def generate_artwork_cache():
     """
     Generates the default artwork cache for cover preview.
     """
-    for book in cozy.control.db.Book.select():
+    for book in Book.select():
         get_cover_pixbuf(book, 180)
 
 
@@ -69,16 +73,16 @@ def __create_artwork_cache(book, pixbuf, size):
     :param size: Size for the cached version
     :return: Resized pixbuf
     """
-    query = cozy.control.db.ArtworkCache.select().where(cozy.control.db.ArtworkCache.book == book.id)
+    query = ArtworkCache.select().where(ArtworkCache.book == book.id)
     gen_uuid = ""
 
     if query.exists():
         gen_uuid = str(query.first().uuid)
     else:
         gen_uuid = str(uuid.uuid4())
-        cozy.control.db.ArtworkCache.create(book = book, uuid=gen_uuid)
+        ArtworkCache.create(book = book, uuid=gen_uuid)
 
-    cache_dir = os.path.join(os.path.join(tools.get_cache_dir(), "artwork"), gen_uuid)
+    cache_dir = os.path.join(os.path.join(get_cache_dir(), "artwork"), gen_uuid)
     if not os.path.exists(cache_dir):
         os.makedirs(cache_dir)
 
@@ -88,6 +92,7 @@ def __create_artwork_cache(book, pixbuf, size):
         try:
             resized_pixbuf.savev(file_path, "jpeg", ["quality", None], ["95"])
         except Exception as e:
+            reporter.warning("artwork_cache", "Failed to save resized cache albumart")
             log.warning("Failed to save resized cache albumart for following uuid: " + gen_uuid)
             log.warning(e)
 
@@ -99,13 +104,17 @@ def __load_pixbuf_from_cache(book, size):
     """
     pixbuf = None
 
-    query = cozy.control.db.ArtworkCache.select().where(cozy.control.db.ArtworkCache.book == book.id)
+    query = ArtworkCache.select().where(ArtworkCache.book == book.id)
     if query.exists():
-        uuid = query.first().uuid
+        try:
+            uuid = query.first().uuid
+        except Exception as e:
+            reporter.error("artwork_cache", "load_pixbuf_from_cache: query exists but query.first().uuid crashed.")
+            return None
     else:
         return None
 
-    cache_dir = os.path.join(tools.get_cache_dir(), "artwork")
+    cache_dir = os.path.join(get_cache_dir(), "artwork")
     cache_dir = os.path.join(cache_dir, uuid)
 
     try:
@@ -154,6 +163,7 @@ def __load_pixbuf_from_db(book):
             loader.close()
             pixbuf = loader.get_pixbuf()
         except Exception as e:
+            reporter.warning("artwork_cache", "Could not get book cover from db.")
             log.warning("Could not get cover for book " + book.name)
             log.warning(e)
     
@@ -187,7 +197,7 @@ def __load_pixbuf_from_file(book):
     """
     pixbuf = None
 
-    directory = os.path.dirname(os.path.normpath(cozy.control.db.tracks(book)[0].file))
+    directory = os.path.dirname(os.path.normpath(get_tracks(book)[0].file))
     cover_files = []
 
     try:

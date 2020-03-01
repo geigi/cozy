@@ -1,17 +1,24 @@
 import cozy.control.artwork_cache as artwork_cache
-import cozy.control.db as db
 import cozy.control.player as player
 import cozy.tools as tools
 import cozy.ui
+from cozy.control.db import get_book_remaining, get_book_progress, get_track_from_book_time, get_book_duration
+from cozy.control.string_representation import seconds_to_str
+from cozy.model.settings import Settings
 from cozy.tools import IntervalTimer
 
 import gi
+
+from cozy.ui.warnings import Warnings
+
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gdk, GLib
 
 import logging
+
 log = logging.getLogger("titlebar")
+
 
 class Titlebar:
     """
@@ -45,6 +52,7 @@ class Titlebar:
         self.playback_speed_button = self.ui.get_object(
             "playback_speed_button")
         self.search_button = self.ui.get_object("search_button")
+        self.warnings_button = self.ui.get_object("warnings_button")
         self.menu_button = self.ui.get_object("menu_button")
         self.remaining_event_box = self.ui.get_object("remaining_event_box")
 
@@ -118,6 +126,8 @@ class Titlebar:
         self.timer_button.set_popover(self.ui.sleep_timer.get_popover())
         self.playback_speed_button.set_popover(self.ui.speed.get_popover())
         self.search_button.set_popover(self.ui.search.get_popover())
+        self.warnings = Warnings(self.warnings_button)
+        self.warnings_button.set_popover(self.warnings.get_popover())
 
     def block_ui_buttons(self, block, scan=False):
         """
@@ -191,29 +201,25 @@ class Titlebar:
         """
         Displays the value of the progress slider in the text boxes as time.
         """
-        val = int(self.progress_scale.get_value())
-        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-            label_text = tools.seconds_to_str(val, display_zero_h=True)
-        else:
-            label_text = tools.seconds_to_str(val)
-
-        self.current_label.set_markup(
-            "<tt><b>" + label_text + "</b></tt>")
         track = player.get_current_track()
 
-        if track:
-            if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-                total = self.progress_scale.get_adjustment().get_upper()
-                remaining_secs = int(((total - val)))
-                self.remaining_label.set_markup(
-                    "<tt><b>-" + tools.seconds_to_str(remaining_secs, display_zero_h=True) + "</b></tt>")
-            else:
-                remaining_secs = int(
-                    (track.length / self.ui.speed.get_speed()) - val)
-                remaining_mins, remaining_secs = divmod(remaining_secs, 60)
+        if not track:
+            log.debug("update_ui_time: track was None.")
+            return
 
-                self.remaining_label.set_markup(
-                    "<tt><b>-" + str(remaining_mins).zfill(2) + ":" + str(remaining_secs).zfill(2) + "</b></tt>")
+        val = int(self.progress_scale.get_value())
+        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+            total = self.progress_scale.get_adjustment().get_upper()
+            remaining_secs: int = int((total - val))
+            current_text = seconds_to_str(val, total)
+            remaining_text = seconds_to_str(remaining_secs, total)
+        else:
+            remaining_secs = int((track.length / self.ui.speed.get_speed()) - val)
+            remaining_text = seconds_to_str(remaining_secs, track.length)
+            current_text = seconds_to_str(val, track.length)
+
+        self.current_label.set_markup("<tt><b>" + current_text + "</b></tt>")
+        self.remaining_label.set_markup("<tt><b>-" + remaining_text + "</b></tt>")
 
         if self.ui.book_overview.book and self.current_book.id == self.ui.book_overview.book.id:
             self.ui.book_overview.update_time()
@@ -240,9 +246,9 @@ class Titlebar:
             self.set_title_cover(
                 artwork_cache.get_cover_pixbuf(track.book, self.ui.window.get_scale_factor(), size), size)
 
-        self.current_remaining = db.get_book_remaining(
+        self.current_remaining = get_book_remaining(
             self.current_book, False)
-        self.current_elapsed = db.get_book_progress(self.current_book, False)
+        self.current_elapsed = get_book_progress(self.current_book, False)
 
         self.__update_progress_scale_range()
 
@@ -278,7 +284,7 @@ class Titlebar:
         self.throbber.set_visible(False)
 
     def load_last_book(self):
-        if db.Settings.get().last_played_book:
+        if Settings.get().last_played_book:
             self.update_track_ui()
             self.update_ui_time(self.progress_scale)
             cur_m, cur_s = player.get_current_duration_ui()
@@ -299,7 +305,7 @@ class Titlebar:
         """
         Switch between displaying the time for a track or the whole book.
         """
-        if widget.get_name is not "titlebar_remaining_time_eventbox":
+        if widget.get_name != "titlebar_remaining_time_eventbox":
             if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
                 tools.get_glib_settings().set_boolean("titlebar-remaining-time", False)
             else:
@@ -371,7 +377,7 @@ class Titlebar:
         value = self.progress_scale.get_value() * self.ui.speed.get_speed()
 
         if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-            track, time = db.get_track_from_book_time(
+            track, time = get_track_from_book_time(
                 self.current_book, value)
             if track.id == player.get_current_track().id:
                 player.jump_to(time)
@@ -411,7 +417,7 @@ class Titlebar:
         Update the progress scale range including the current playback speed.
         """
         if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-            total = db.get_book_duration(
+            total = get_book_duration(
                 self.current_book) / self.ui.speed.get_speed()
         else:
             total = player.get_current_track().length / self.ui.speed.get_speed()
@@ -455,6 +461,8 @@ class Titlebar:
         """
         Handler for events that occur the playback speed object.
         """
+        self.__ensure_book_object_is_up_to_date()
+
         if event == "playback-speed-changed":
             speed = message
             m, s = player.get_current_duration_ui()
@@ -462,6 +470,14 @@ class Titlebar:
             self.__update_progress_scale_range()
             self.__set_progress_scale_value(value)
             self.update_ui_time(None)
+
+    def __ensure_book_object_is_up_to_date(self):
+        # Racecondition: Sometimes the "track-changed" event is fired in playback_speed first before titlebar. Then it might happen, that the current_book is None or not uptodate.
+        # Only way to fix this is having a global truth that is accessed from everywhere.
+        # TODO
+        if player.get_current_track() and (
+                not self.current_book or player.get_current_track() and self.current_book.id != player.get_current_track().book.id):
+            self.update_track_ui()
 
     def __player_changed(self, event, message):
         """

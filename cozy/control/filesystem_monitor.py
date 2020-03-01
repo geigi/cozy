@@ -5,9 +5,9 @@ from gi.repository import Gio
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.singleton import Singleton
 import cozy.ui.settings
-import cozy.control.db
 import cozy.ui
 import cozy.tools as tools
+from cozy.control.db import get_external_storage_locations, get_tracks
 
 log = logging.getLogger("fs_monitor")
 
@@ -33,7 +33,7 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
         # Assume home is always online
         self.external_storage.append([str(Path.home()), True])
 
-        for dir in cozy.control.db.get_external_storage_locations():
+        for dir in get_external_storage_locations():
             online = False
             if any(mount.get_root().get_path() in dir.path for mount in mounts):
                 online = True
@@ -49,7 +49,7 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
     def is_book_online(self, book):
         """
         """
-        result = next((storage[1] for storage in self.external_storage if storage[0] in cozy.control.db.tracks(book).first().file), True)
+        result = next((storage[1] for storage in self.external_storage if storage[0] in get_tracks(book).first().file), True)
         return (result)
 
     def is_track_online(self, track):

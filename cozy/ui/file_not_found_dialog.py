@@ -1,10 +1,11 @@
 import os
 
-from cozy.control.db import Track
 from gi.repository import Gtk
 import cozy.control.importer as importer
 import cozy.control.player as player
 import cozy.ui
+from cozy.model.track import Track
+
 
 class FileNotFoundDialog():
     """
