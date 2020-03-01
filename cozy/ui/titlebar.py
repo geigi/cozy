@@ -9,6 +9,8 @@ from cozy.tools import IntervalTimer
 
 import gi
 
+from cozy.ui.warnings import Warnings
+
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gdk, GLib
@@ -50,6 +52,7 @@ class Titlebar:
         self.playback_speed_button = self.ui.get_object(
             "playback_speed_button")
         self.search_button = self.ui.get_object("search_button")
+        self.warnings_button = self.ui.get_object("warnings_button")
         self.menu_button = self.ui.get_object("menu_button")
         self.remaining_event_box = self.ui.get_object("remaining_event_box")
 
@@ -123,6 +126,8 @@ class Titlebar:
         self.timer_button.set_popover(self.ui.sleep_timer.get_popover())
         self.playback_speed_button.set_popover(self.ui.speed.get_popover())
         self.search_button.set_popover(self.ui.search.get_popover())
+        self.warnings = Warnings(self.warnings_button)
+        self.warnings_button.set_popover(self.warnings.get_popover())
 
     def block_ui_buttons(self, block, scan=False):
         """
