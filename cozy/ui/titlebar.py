@@ -3,16 +3,20 @@ import cozy.control.player as player
 import cozy.tools as tools
 import cozy.ui
 from cozy.control.db import get_book_remaining, get_book_progress, get_track_from_book_time, get_book_duration
+from cozy.control.string_representation import seconds_to_str
 from cozy.model.settings import Settings
 from cozy.tools import IntervalTimer
 
 import gi
+
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gdk, GLib
 
 import logging
+
 log = logging.getLogger("titlebar")
+
 
 class Titlebar:
     """
@@ -192,27 +196,25 @@ class Titlebar:
         """
         Displays the value of the progress slider in the text boxes as time.
         """
-        val = int(self.progress_scale.get_value())
-        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-            label_text = tools.seconds_to_str(val, display_zero_h=True)
-        else:
-            label_text = tools.seconds_to_str(val)
-
-        self.current_label.set_markup(
-            "<tt><b>" + label_text + "</b></tt>")
         track = player.get_current_track()
 
-        if track:
-            if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-                total = self.progress_scale.get_adjustment().get_upper()
-                remaining_secs: int = int((total - val))
-                self.remaining_label.set_markup(
-                    "<tt><b>-" + tools.seconds_to_str(remaining_secs, display_zero_h=True) + "</b></tt>")
-            else:
-                remaining_secs: int = int(
-                    (track.length / self.ui.speed.get_speed()) - val)
-                self.remaining_label.set_markup(
-                    "<tt><b>-" + tools.seconds_to_str(remaining_secs, display_zero_h=False) + "</b></tt>")
+        if not track:
+            log.debug("update_ui_time: track was None.")
+            return
+
+        val = int(self.progress_scale.get_value())
+        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+            total = self.progress_scale.get_adjustment().get_upper()
+            remaining_secs: int = int((total - val))
+            current_text = seconds_to_str(val, total)
+            remaining_text = seconds_to_str(remaining_secs, total)
+        else:
+            remaining_secs = int((track.length / self.ui.speed.get_speed()) - val)
+            remaining_text = seconds_to_str(remaining_secs, track.length)
+            current_text = seconds_to_str(val, track.length)
+
+        self.current_label.set_markup("<tt><b>" + current_text + "</b></tt>")
+        self.remaining_label.set_markup("<tt><b>-" + remaining_text + "</b></tt>")
 
         if self.ui.book_overview.book and self.current_book.id == self.ui.book_overview.book.id:
             self.ui.book_overview.update_time()
