@@ -502,7 +502,7 @@ def load_last_book():
                 else:
                     path = OfflineCache().get_cached_path(last_track)
                     if not path:
-                        path = last_track.file
+                        return
                 __player.set_property("uri", "file://" + path)
                 __player.set_state(Gst.State.PAUSED)
                 __current_track = last_track
