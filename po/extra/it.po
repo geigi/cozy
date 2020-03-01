@@ -112,6 +112,7 @@ msgstr "Julian Geywitz"
 #: data/com.github.geigi.cozy.appdata.xml.in:55
 msgid "Sleep timer: Automatic system power control"
 msgstr ""
+"Timer di spegnimento: controllo automatico dell'alimentazione del sistema"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:56
 #: data/com.github.geigi.cozy.appdata.xml.in:73
@@ -124,18 +125,16 @@ msgid "Updated translations"
 msgstr "Traduzioni aggiornate"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:63
-#, fuzzy
 msgid "Support for opus files"
-msgstr "Supporto per file wav"
+msgstr "Supporto per file opus"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:64
 msgid "Better support for ogg cover art"
-msgstr ""
+msgstr "Migliore supporto per la copertina  ogg"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:65
-#, fuzzy
 msgid "Swedish translation"
-msgstr "Traduzioni aggiornate"
+msgstr "Traduzione svedese"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:72
 msgid "Fix: some valid media files were not detected"
