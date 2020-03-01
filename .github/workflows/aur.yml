@@ -45,6 +45,7 @@ jobs:
     - name: Update PKGBUILD
       run: |
         ls /tmp/aur
+        cd /tmp/aur
         sed -i "s/^pkgver.*\$/pkgver=$(cat /tmp/VERSION)/" PKGBUILD
         sed -i "s/^sha256sum.*\$/sha256sums=('$(cat /tmp/SHA256SUM)')/" PKGBUILD
         sed -i "s/.*pkgver.*\$/        pkgver = $(cat /tmp/VERSION)/" .SRCINFO
