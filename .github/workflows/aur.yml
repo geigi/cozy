@@ -56,8 +56,6 @@ jobs:
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
-        git config --global user.email "github@geigi.de"
-        git config --global user.name "Github Actions"
         cd /tmp/aur
         git commit -am "Bump version to $(cat /tmp/VERSION)"
         git push
