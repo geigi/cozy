@@ -28,14 +28,11 @@ jobs:
         wget -O /tmp/cozy.tar.gz $(cat /tmp/RELEASE_URL)
         sha256sum /tmp/cozy.tar.gz | cut -d " " -f 1 > /tmp/SHA256SUM
 
-    - name: Setup SSH Keys and known_hosts
-      env:
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      run: |
-        mkdir -p ~/.ssh
-        ssh-keyscan aur.archlinux.org >> ~/.ssh/known_hosts
-        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-        ssh-add - <<< "${{ secrets.AUR_PRIVATE }}"
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.AUR_PRIVATE }}
+        known_hosts: ${{ secrets.AUR_KNOWN_HOSTS }}
 
     - name: Clone cozy-audiobooks repository
       env:
