@@ -106,7 +106,11 @@ def __load_pixbuf_from_cache(book, size):
 
     query = ArtworkCache.select().where(ArtworkCache.book == book.id)
     if query.exists():
-        uuid = query.first().uuid
+        try:
+            uuid = query.first().uuid
+        except Exception as e:
+            reporter.error("artwork_cache", "load_pixbuf_from_cache: query exists but query.first().uuid crashed.")
+            return None
     else:
         return None
 
