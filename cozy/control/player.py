@@ -548,9 +548,10 @@ def save_current_track_position(pos=None, track=None):
 
     if track is None:
         track = get_current_track()
-    
-    Track.update(position=pos).where(
-        Track.id == track.id).execute()
+
+    if track:
+        Track.update(position=pos).where(
+            Track.id == track.id).execute()
 
 
 def emit_event(event, message=None):

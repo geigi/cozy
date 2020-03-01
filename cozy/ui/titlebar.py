@@ -305,7 +305,7 @@ class Titlebar:
         """
         Switch between displaying the time for a track or the whole book.
         """
-        if widget.get_name is not "titlebar_remaining_time_eventbox":
+        if widget.get_name != "titlebar_remaining_time_eventbox":
             if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
                 tools.get_glib_settings().set_boolean("titlebar-remaining-time", False)
             else:
