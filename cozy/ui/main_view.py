@@ -637,6 +637,7 @@ class CozyUI(metaclass=Singleton):
         inspired by https://stackoverflow.com/questions/24094186/drag-and-drop-file-example-in-pygobject
         """
         if target_type == 80:
+            log.debug(selection)
             self.switch_to_working("copying new files…", False)
             thread = Thread(target=importer.copy, args=(
                 self, selection, ), name="DragDropImportThread")
