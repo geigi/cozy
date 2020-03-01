@@ -4,9 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2019
-# Heimen Stoffels <vistausss@outlook.com>, 2019
-#
+# Julian Geywitz <github@geigi.de>, 2020
+# Heimen Stoffels <vistausss@outlook.com>, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2019\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -635,13 +635,12 @@ msgid "Set the sleep timer duration in minutes"
 msgstr "De slaaptimerduur, in minuten"
 
 #: data/ui/timer_popover.ui:116
-#, fuzzy
 msgid "Stop after current chapter"
 msgstr "Stoppen na huidig hoofdstuk"
 
 #: data/ui/timer_popover.ui:164
 msgid "Enable system power control"
-msgstr ""
+msgstr "Energiebeheer inschakelen"
 
 #: data/ui/timer_popover.ui:201
 msgid ""
@@ -649,20 +648,25 @@ msgid ""
 "\"shutdown\" will attempt to turn your system off (also known as power off)\n"
 "\"suspend\" will attempt to suspend your system (also known as sleep)."
 msgstr ""
+"De uit te voeren actie na afloop van de timer.\n"
+"'Afsluiten' tracht de computer af te sluiten (ook wel: 'uitschakelen')\n"
+"'Pauzestand' tracht de computer in de pauzestand te zetten (ook wel: 'slaapstand')"
 
 #: data/ui/timer_popover.ui:205
 msgid ""
 "System power action\n"
 "to perform"
 msgstr ""
+"De uit te voeren\n"
+"energie-actie"
 
 #: data/ui/timer_popover.ui:221
 msgid "suspend"
-msgstr ""
+msgstr "Pauzestand"
 
 #: data/ui/timer_popover.ui:237
 msgid "shutdown"
-msgstr ""
+msgstr "Afsluiten"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
