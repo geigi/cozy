@@ -33,7 +33,7 @@ jobs:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
         mkdir -p ~/.ssh
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        ssh-keyscan aur.archlinux.org >> ~/.ssh/known_hosts
         ssh-agent -a $SSH_AUTH_SOCK > /dev/null
         ssh-add - <<< "${{ secrets.AUR_PRIVATE }}"
 
@@ -56,6 +56,8 @@ jobs:
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
+        git config --global user.email "github@geigi.de"
+        git config --global user.name "Github Actions"
         cd /tmp/aur
         git commit -am "Bump version to $(cat /tmp/VERSION)"
         git push
