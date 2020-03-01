@@ -40,9 +40,12 @@ class Server:
                 method_inargs[method.name] = tuple(
                     arg.signature for arg in method.in_args)
 
-            con.register_object(object_path=path,
-                                interface_info=interface,
-                                method_call_closure=self.on_method_call)
+            try:
+                con.register_object(object_path=path,
+                                    interface_info=interface,
+                                    method_call_closure=self.on_method_call)
+            except:
+                log.error("MPRIS is already connected from another cozy process.")
 
         self.method_inargs = method_inargs
         self.method_outargs = method_outargs
