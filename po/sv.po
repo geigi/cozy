@@ -2,10 +2,10 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Åke Engelbrektson, 2020
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
@@ -15,10 +15,10 @@ msgstr ""
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Åke Engelbrektson, 2020\n"
 "Language-Team: Swedish (https://www.transifex.com/geigi/teams/78138/sv/)\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
@@ -356,8 +356,7 @@ msgstr "Importera dina ljudböcker"
 #: data/ui/main_window.ui:882
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
-msgstr ""
-"Cosy importerar dina ljudböcker automatiskt i en mapp - ditt bibliotek"
+msgstr "Cosy importerar dina ljudböcker automatiskt i en mapp - ditt bibliotek"
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
@@ -426,8 +425,7 @@ msgstr "Publicerad"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 "Börja utforska ditt bibliotek genom att växla till Författare eller "
 "Uppläsare ovan."

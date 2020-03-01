@@ -1,14 +1,26 @@
 from datetime import datetime
 import time
 import threading
-from threading import Thread, Event
+from platform import system as get_system
+from enum import Enum
 from gettext import ngettext
 import logging as log
 import distro
-import os
-from gi.repository import GLib, Gio
+from gi.repository import Gio
 import cozy.magic.magic as magic
 
+
+class Platform(Enum):
+    Linux = 0
+    Mac = 1
+
+
+def system_platform():
+    os = get_system().upper()
+    if "LINUX" in os:
+        return Platform.Linux
+    else:
+        return Platform.Mac
 
 
 def shorten_string(string, length):
@@ -20,22 +32,26 @@ def shorten_string(string, length):
     """
     return (string[:length] + '…') if len(string) > length else string
 
+
 def is_elementary():
-        """
-        Currently we are only checking for elementaryOS
-        """
-        dist = distro.linux_distribution(full_distribution_name=False)
-        log.debug(dist)
-        if '"elementary"' in dist or 'elementary' in dist:
-            return True
-        else:
-            return False
+    """
+    Currently we are only checking for elementaryOS
+    """
+    dist = distro.linux_distribution(full_distribution_name=False)
+    log.debug(dist)
+    if '"elementary"' in dist or 'elementary' in dist:
+        return True
+    else:
+        return False
 
 
 settings = Gio.Settings.new("com.github.geigi.cozy")
+
+
 def get_glib_settings():
     global settings
     return settings
+
 
 # https://stackoverflow.com/questions/323972/is-there-any-way-to-kill-a-thread-in-python
 class StoppableThread(threading.Thread):
@@ -52,6 +68,7 @@ class StoppableThread(threading.Thread):
     def stopped(self):
         return self._stop_event.is_set()
 
+
 # From https://stackoverflow.com/questions/11488877/periodically-execute-function-in-thread-in-real-time-every-n-seconds
 class IntervalTimer(StoppableThread):
 
@@ -66,41 +83,6 @@ class IntervalTimer(StoppableThread):
             time.sleep(self._interval)
 
 
-def seconds_to_str(seconds, include_seconds=True, display_zero_h=False):
-    """
-    Converts seconds to a string with the following apperance:
-    hh:mm:ss
-
-    :param seconds: The seconds as float
-    """
-    m, s = divmod(seconds, 60)
-    h, m = divmod(m, 60)
-
-    if include_seconds:
-        if (h > 0):
-            result = "%d:%02d:%02d" % (h, m, s)
-        elif (m > 0):
-            result = "%02d:%02d" % (m, s)
-            if display_zero_h:
-                result = "0:" + result
-        else:
-            result = "00:%02d" % (s)
-            if display_zero_h:
-                result = "0:" + result
-    else:
-        if (h > 0):
-            result = "%d:%02d" % (h, m)
-        elif (m > 0):
-            result = "00:%02d" % (m)
-            if display_zero_h:
-                result = "0:" + result
-        else:
-            result = "00:00"
-            if display_zero_h:
-                result = "0:" + result
-
-    return result
-
 def remove_all_children(container):
     """
     Removes all widgets from a gtk container.
@@ -109,8 +91,9 @@ def remove_all_children(container):
     childs = container.get_children()
     for element in childs:
         container.remove(element)
-        #element.destroy()
+        # element.destroy()
     container.set_visible(True)
+
 
 def seconds_to_human_readable(seconds):
     """
@@ -133,7 +116,7 @@ def seconds_to_human_readable(seconds):
             result += _("hours")
         else:
             result += _("hour")
-    
+
         if m > 0:
             result += " "
 
@@ -143,7 +126,7 @@ def seconds_to_human_readable(seconds):
             result += _("minutes")
         else:
             result += _("minute")
-    
+
     if h < 1 and m < 1:
         if s < 1:
             result += _("finished")
@@ -155,6 +138,7 @@ def seconds_to_human_readable(seconds):
                 result += _("second")
 
     return result
+
 
 def past_date_to_human_readable(unix_time):
     """
@@ -188,6 +172,7 @@ def past_date_to_human_readable(unix_time):
         return ngettext('{months} month ago', '{months} months ago', months).format(months=months)
     else:
         return ngettext('{years} year ago', '{years} years ago', years).format(years=years)
+
 
 def __get_media_type(path):
     """

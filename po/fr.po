@@ -2,67 +2,67 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
 # e78dfa95e8487a60e89adc3a5c3879f2, 2019
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 16:01+0100\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: e78dfa95e8487a60e89adc3a5c3879f2, 2019\n"
 "Language-Team: French (https://www.transifex.com/geigi/teams/78138/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
+#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Lire ce livre"
 
-#: cozy/ui/book_element.py:212
+#: cozy/ui/book_element.py:215
 msgid "Open book overview"
 msgstr "Voir le résumé"
 
-#: cozy/ui/book_element.py:213
+#: cozy/ui/book_element.py:216
 msgid "Currently offline"
 msgstr "Hors-ligne"
 
-#: cozy/ui/book_element.py:319
+#: cozy/ui/book_element.py:322
 msgid "Mark as read"
 msgstr "Marquer comme lu"
 
-#: cozy/ui/book_element.py:322
+#: cozy/ui/book_element.py:325
 msgid "Open in file browser"
 msgstr "Ouvrir dans l'explorateur de fichiers"
 
-#: cozy/ui/book_element.py:325
+#: cozy/ui/book_element.py:328
 msgid "Remove from library"
 msgstr "Supprimer"
 
-#: cozy/ui/book_element.py:395
+#: cozy/ui/book_element.py:398
 msgid "Play this part"
 msgstr "Lire cette partie"
 
-#: cozy/ui/book_overview.py:228
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr "Téléchargement terminé"
 
-#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Télécharger"
 
-#: cozy/ui/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr "Tous les fichiers"
 
-#: cozy/control/offline_cache.py:176
+#: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr "Copie en cours"
 
@@ -74,11 +74,11 @@ msgstr "Aller à l'auteur"
 msgid "Jump to reader "
 msgstr "Aller au narrateur"
 
-#: cozy/control/importer.py:278
+#: cozy/control/importer.py:284
 msgid "Unknown Author"
 msgstr "Auteur inconnu"
 
-#: cozy/control/importer.py:280
+#: cozy/control/importer.py:286
 msgid "Unknown Reader"
 msgstr "Narrateur inconnu"
 
@@ -148,28 +148,28 @@ msgid_plural "{years} years ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/ui/main_view.py:403
+#: cozy/ui/main_view.py:405
 msgid "Audiobooks"
 msgstr "Livres audio"
 
-#: cozy/ui/main_view.py:424
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr "Importer des livres audio"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
+#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
 msgid "All"
 msgstr "Tous"
 
-#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
+#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
 msgid "Display all books"
 msgstr "Afficher tous les livres"
 
-#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "min"
 
-#: cozy/control/sleep_timer.py:128
+#: cozy/control/sleep_timer.py:146
 msgid "Off"
 msgstr "Off"
 
@@ -358,8 +358,8 @@ msgstr "Importer vos livres audios"
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy va automatiquement importer vos livres audios dans un répertoire unique"
-" - votre bibliothèque"
+"Cozy va automatiquement importer vos livres audios dans un répertoire unique "
+"- votre bibliothèque"
 
 #: data/ui/main_window.ui:910
 msgid "External or Network drive?"
@@ -375,7 +375,8 @@ msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Si il le sont vous pouvez activer le mode hors-ligne dans l'aperçu de votre livre\n"
+"Si il le sont vous pouvez activer le mode hors-ligne dans l'aperçu de votre "
+"livre\n"
 "Cette action conservera une copie locale de votre livre audio"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
@@ -409,7 +410,8 @@ msgid ""
 "Load audiobooks from a directory, network drive or an external disk\n"
 "You can add more storage locations later in the settings"
 msgstr ""
-"Charger vos livres audio depuis un dossier local, depuis le réseau ou un stockage externe\n"
+"Charger vos livres audio depuis un dossier local, depuis le réseau ou un "
+"stockage externe\n"
 "Vous pourrez ajouter d'autres emplacement plus tard dans les paramètres"
 
 #: data/ui/main_window.ui:1376
@@ -430,8 +432,7 @@ msgstr "Publié"
 
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 "Commencez à explorer votre bibliothèque en passant à la vue Auteur ou "
 "Narrateur ci-dessus."
@@ -465,9 +466,11 @@ msgid "Some files could not be imported"
 msgstr "Certains fichiers n'ont pas pu être importés"
 
 #: data/ui/import_failed.ui:134
+#, fuzzy
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
@@ -490,8 +493,7 @@ msgstr "Barre de titre"
 
 #: data/ui/settings.ui:258
 msgid "Display the whole book instead of the current chapter"
-msgstr ""
-"Afficher l'intégralité du livre au lieu d'afficher le chapitre courant"
+msgstr "Afficher l'intégralité du livre au lieu d'afficher le chapitre courant"
 
 #: data/ui/settings.ui:321
 msgid "Appearance"
@@ -591,23 +593,7 @@ msgstr ""
 msgid "Force refresh"
 msgstr "Forcer la mise à jour"
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr "Par requête"
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr ""
-"Utiliser la somme de contrôle crc32 pour détecter la modification de fichier"
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-"Recommandé uniquement dans le cas où Cozy ne détecterait pas une "
-"modification de fichier pendant l'analyse"
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr "Avancé"
 
@@ -639,21 +625,47 @@ msgstr "Chapitre"
 msgid "Nothing found :("
 msgstr "Rien n'a été trouvé :("
 
-#: data/ui/timer_popover.ui:39
-msgid "Stop after current chapter"
-msgstr "Arrêter la lecture à la fin de ce chapitre"
-
-#: data/ui/timer_popover.ui:76
+#: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Durée du décompte"
 
-#: data/ui/timer_popover.ui:88
+#: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
 msgstr "Indicateur du décompte"
 
-#: data/ui/timer_popover.ui:89
+#: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
 msgstr "Ajuster la durée du chronomètre"
+
+#: data/ui/timer_popover.ui:116
+#, fuzzy
+msgid "Stop after current chapter"
+msgstr "Arrêter la lecture à la fin de ce chapitre"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr ""
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr ""
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr ""
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
@@ -678,3 +690,17 @@ msgstr "_À propos"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Quitter"
+
+#~ msgid "By request"
+#~ msgstr "Par requête"
+
+#~ msgid "Use crc32 checksum for file modification detection"
+#~ msgstr ""
+#~ "Utiliser la somme de contrôle crc32 pour détecter la modification de "
+#~ "fichier"
+
+#~ msgid ""
+#~ "Only recommended if cozy doesn't detect file modifications while scanning"
+#~ msgstr ""
+#~ "Recommandé uniquement dans le cas où Cozy ne détecterait pas une "
+#~ "modification de fichier pendant l'analyse"

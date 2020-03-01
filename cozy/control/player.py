@@ -8,6 +8,7 @@ from cozy.control.db import get_tracks
 from cozy.model.book import Book
 from cozy.model.settings import Settings
 from cozy.model.track import Track
+from cozy.report import reporter
 
 gi.require_version('Gst', '1.0')
 import logging
@@ -49,6 +50,7 @@ def __on_gst_message(bus, message):
         err, debug = message.parse_error()
         log.error(err)
         log.debug(debug)
+        reporter.error("player", err)
         emit_event("error", err)
     elif t == Gst.MessageType.STATE_CHANGED:
         state = get_gst_player_state()
@@ -375,7 +377,11 @@ def auto_jump():
         if get_playbin().query(query):
             fmt, seek_enabled, start, end = query.parse_seeking()
             if seek_enabled:
-                jump_to_ns(get_current_track().position)
+                track = get_current_track()
+                if not track:
+                    return
+
+                jump_to_ns(track.position)
                 __wait_to_seek = False
                 __set_speed = False
             if __set_speed:
@@ -496,7 +502,7 @@ def load_last_book():
                 else:
                     path = OfflineCache().get_cached_path(last_track)
                     if not path:
-                        path = last_track.file
+                        return
                 __player.set_property("uri", "file://" + path)
                 __player.set_state(Gst.State.PAUSED)
                 __current_track = last_track
@@ -542,9 +548,10 @@ def save_current_track_position(pos=None, track=None):
 
     if track is None:
         track = get_current_track()
-    
-    Track.update(position=pos).where(
-        Track.id == track.id).execute()
+
+    if track:
+        Track.update(position=pos).where(
+            Track.id == track.id).execute()
 
 
 def emit_event(event, message=None):

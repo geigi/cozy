@@ -7,8 +7,10 @@ import cozy.control.artwork_cache as artwork_cache
 import cozy.ui
 from cozy.control.db import get_track_for_playback, is_external, blacklist_book, get_tracks
 from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.control.string_representation import seconds_to_str
 from cozy.model.book import Book
 from cozy.model.track import Track
+from cozy.report import reporter
 from cozy.ui.settings import Settings
 
 MAX_BOOK_LENGTH = 60
@@ -285,8 +287,8 @@ class BookElement(Gtk.FlowBoxChild):
         """
         try:
             self.book = Book.get(Book.id == self.book.id)
-        except:
-            pass
+        except Exception as e:
+            reporter.exception("book_element", e)
 
     def __on_button_press_event(self, widget, event):
         """
@@ -365,9 +367,16 @@ class BookElement(Gtk.FlowBoxChild):
             if message in get_tracks(self.book).first().file:
                 super().set_sensitive(True)
                 self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
-        elif (event == "storage-offline" and super().get_sensitive()) or event == "external-storage-added":
+        elif (event == "storage-offline" and super().get_sensitive()):
             self.refresh_book_object()
             if message in get_tracks(self.book).first().file and not self.book.offline:
+                super().set_sensitive(False)
+                self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
+        elif event == "external-storage-added":
+            self.refresh_book_object()
+            if FilesystemMonitor().is_book_online(self.book):
+                super().set_sensitive(True)
+            else:
                 super().set_sensitive(False)
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         if event == "external-storage-removed":
@@ -430,7 +439,7 @@ class TrackElement(Gtk.EventBox):
         title_label.props.xalign = 0.0
         title_label.set_ellipsize(Pango.EllipsizeMode.MIDDLE)
 
-        dur_label.set_text(tools.seconds_to_str(self.track.length))
+        dur_label.set_text(seconds_to_str(self.track.length))
         dur_label.set_halign(Gtk.Align.END)
         dur_label.props.margin = 4
         dur_label.set_margin_left(60)
