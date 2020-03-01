@@ -2,67 +2,68 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
 # abuyop <abuyop@gmail.com>, 2019
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-08 17:01+0200\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: abuyop <abuyop@gmail.com>, 2019\n"
-"Language-Team: Malay (Malaysia) (https://www.transifex.com/geigi/teams/78138/ms_MY/)\n"
+"Language-Team: Malay (Malaysia) (https://www.transifex.com/geigi/teams/78138/"
+"ms_MY/)\n"
+"Language: ms_MY\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ms_MY\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
+#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Baca buku ini"
 
-#: cozy/ui/book_element.py:212
+#: cozy/ui/book_element.py:215
 msgid "Open book overview"
 msgstr "Buka gambaran keseluruhan buku"
 
-#: cozy/ui/book_element.py:213
+#: cozy/ui/book_element.py:216
 msgid "Currently offline"
 msgstr "Kini diluar talian"
 
-#: cozy/ui/book_element.py:319
+#: cozy/ui/book_element.py:322
 msgid "Mark as read"
 msgstr "Tanda sebagai dibaca"
 
-#: cozy/ui/book_element.py:322
+#: cozy/ui/book_element.py:325
 msgid "Open in file browser"
 msgstr "Buka dalam pelayar fail"
 
-#: cozy/ui/book_element.py:325
+#: cozy/ui/book_element.py:328
 msgid "Remove from library"
 msgstr "Buang dari pustaka"
 
-#: cozy/ui/book_element.py:395
+#: cozy/ui/book_element.py:398
 msgid "Play this part"
 msgstr "Baca bahagian ini"
 
-#: cozy/ui/book_overview.py:228
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr "Dimuat Turun"
 
-#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Muat Turun"
 
-#: cozy/ui/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr "Semua fail"
 
-#: cozy/control/offline_cache.py:176
+#: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr "Menyalin"
 
@@ -74,109 +75,99 @@ msgstr "Lompat ke pengarang"
 msgid "Jump to reader "
 msgstr "Lompat ke pembaca"
 
-#: cozy/control/importer.py:278
+#: cozy/control/importer.py:284
 msgid "Unknown Author"
 msgstr "Pengarang Tidak Diketahui"
 
-#: cozy/control/importer.py:280
+#: cozy/control/importer.py:286
 msgid "Unknown Reader"
 msgstr "Pembaca Tidak Diketahui"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr "jam"
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr "jam"
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr "minit"
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr "minit"
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr "selesai"
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr "saat"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr "saat"
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr "tidak sesekali"
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr "hari ini"
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr "semalam"
 
-#: cozy/tools.py:193
-msgid "days"
-msgstr "hari"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
+msgstr ""
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr "yang lalu"
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] ""
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr "minggu"
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] ""
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr "minggu"
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] ""
 
-#: cozy/tools.py:199
-msgid "month"
-msgstr "bulan"
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr "bulan"
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr "tahun"
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr "tahun"
-
-#: cozy/ui/main_view.py:408
+#: cozy/ui/main_view.py:405
 msgid "Audiobooks"
 msgstr "Buku audio"
 
-#: cozy/ui/main_view.py:429
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr "Mengimport Buku Audio"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:498 cozy/ui/main_view.py:504 cozy/ui/main_view.py:824
+#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
 msgid "All"
 msgstr "Semua"
 
-#: cozy/ui/main_view.py:499 cozy/ui/main_view.py:505
+#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
 msgid "Display all books"
 msgstr "Papar semua buku"
 
-#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "min"
 
-#: cozy/control/sleep_timer.py:128
+#: cozy/control/sleep_timer.py:146
 msgid "Off"
 msgstr "Mati"
 
@@ -257,8 +248,8 @@ msgid "Elapsed time of current part"
 msgstr "Masa berlalu bagi bahagian semasa"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Ganyah menerusi bahagian semasa"
+msgid "Jump to position in current chapter"
+msgstr ""
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -382,7 +373,8 @@ msgid ""
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
 "Jika anda benarkan mod luar talian bagi buku dalam selayang pandang buku\n"
-"Ia akan menyimpan satu salinan setempat buku yang anda mahu dengar ketika keluar"
+"Ia akan menyimpan satu salinan setempat buku yang anda mahu dengar ketika "
+"keluar"
 
 #: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
 msgid "Auto scan switch"
@@ -434,14 +426,9 @@ msgstr "Terakhir dimainkan"
 msgid "Published"
 msgstr "Diterbitkan"
 
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr "muka0"
-
 #: data/ui/main_window.ui:1630
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 "Mula menjelajah pustaka anda dengan bertukar ke paparan Pengarang atau "
 "Pembaca di atas."
@@ -449,26 +436,6 @@ msgstr ""
 #: data/ui/about.ui:14
 msgid "GitHub"
 msgstr "GitHub"
-
-#: data/ui/app_menu.ui:7
-msgid "_Play/Pause"
-msgstr "_Main/Jeda"
-
-#: data/ui/app_menu.ui:13 data/ui/titlebar_menu.ui:19
-msgid "_Preferences"
-msgstr "_Keutamaan"
-
-#: data/ui/app_menu.ui:19 data/ui/titlebar_menu.ui:25
-msgid "_Help"
-msgstr "_Bantuan"
-
-#: data/ui/app_menu.ui:23 data/ui/titlebar_menu.ui:29
-msgid "_About"
-msgstr "_Perihal"
-
-#: data/ui/app_menu.ui:27 data/ui/titlebar_menu.ui:33
-msgid "_Quit"
-msgstr "_Keluar"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
@@ -495,9 +462,11 @@ msgid "Some files could not be imported"
 msgstr "Sesetengah fail tidak dapat diimport"
 
 #: data/ui/import_failed.ui:134
+#, fuzzy
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
@@ -618,23 +587,7 @@ msgstr "Tindakan ini akan memaksa kemaskini data meta bagi semua buku import"
 msgid "Force refresh"
 msgstr "Paksa segara semula"
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr "Mengikut permintaan"
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr ""
-"Guna hasil tambah semak crc32 untuk pengecaman bagi pengubahsuaian fail"
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-"Hanya disarankan sekiranya cozy tidak mengesan pengubahsuaian fail ketika "
-"mengimbas"
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr "Lanjutan"
 
@@ -666,21 +619,47 @@ msgstr "Bahagian"
 msgid "Nothing found :("
 msgstr "Tiada apa-apa ditemui :("
 
-#: data/ui/timer_popover.ui:39
-msgid "Stop after current chapter"
-msgstr "Henti selepas bab semasa"
-
-#: data/ui/timer_popover.ui:76
+#: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Tempoh pemasa"
 
-#: data/ui/timer_popover.ui:88
+#: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
 msgstr "Lungsur tempoh pemasa"
 
-#: data/ui/timer_popover.ui:89
+#: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
 msgstr "Tetapkan tempoh pemasa tidur dalam minit"
+
+#: data/ui/timer_popover.ui:116
+#, fuzzy
+msgid "Stop after current chapter"
+msgstr "Henti selepas bab semasa"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr ""
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr ""
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr ""
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
@@ -690,10 +669,31 @@ msgstr "_Imbas Direktori"
 msgid "_Hide unavailable books"
 msgstr "_Sembunyi buku-buku yang tiada"
 
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "dari"
+#: data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
+msgstr "_Keutamaan"
 
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "berbaki"
+#: data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr "_Bantuan"
+
+#: data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr "_Perihal"
+
+#: data/ui/titlebar_menu.ui:33
+msgid "_Quit"
+msgstr "_Keluar"
+
+#~ msgid "By request"
+#~ msgstr "Mengikut permintaan"
+
+#~ msgid "Use crc32 checksum for file modification detection"
+#~ msgstr ""
+#~ "Guna hasil tambah semak crc32 untuk pengecaman bagi pengubahsuaian fail"
+
+#~ msgid ""
+#~ "Only recommended if cozy doesn't detect file modifications while scanning"
+#~ msgstr ""
+#~ "Hanya disarankan sekiranya cozy tidak mengesan pengubahsuaian fail ketika "
+#~ "mengimbas"
