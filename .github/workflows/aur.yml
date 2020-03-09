@@ -1,12 +1,12 @@
 name: Deploy on AUR
 
-#on:
-#  release:
-#    types: [published]
-
 on:
-  watch:
-    types: [started]
+  release:
+    types: [published]
+
+#on:
+#  watch:
+#    types: [started]
 
 jobs:
   deploy:
