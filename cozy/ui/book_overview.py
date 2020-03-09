@@ -1,10 +1,12 @@
 from gi.repository import Gtk, Gdk, Gst
 
 import cozy.control.artwork_cache as artwork_cache
-import cozy.control.db as db
 import cozy.tools as tools
 import cozy.control.player as player
 import cozy.ui
+from cozy.control.db import get_book_duration, get_tracks, is_external, get_book_progress, get_book_remaining, \
+    get_track_for_playback
+from cozy.model.book import Book
 
 from cozy.ui.book_element import TrackElement
 from cozy.ui.settings import Settings
@@ -58,7 +60,7 @@ class BookOverview:
         if self.book and self.book.id == book.id:
             self.update_time()
             return
-        self.book = db.Book[book.id]
+        self.book = Book.get(Book.id == book.id)
 
         if self.ui.is_playing and self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
             self.play_book_button.set_image(self.pause_img)
@@ -80,7 +82,7 @@ class BookOverview:
             self.cover_img.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
             self.cover_img.props.pixel_size = 250
 
-        self.duration = db.get_book_duration(book)
+        self.duration = get_book_duration(book)
         self.speed = self.book.playback_speed
         self.total_label.set_text(
             tools.seconds_to_human_readable(self.duration / self.speed))
@@ -103,7 +105,7 @@ class BookOverview:
         first_disk_element = None
         disk_count = 0
 
-        for track in db.tracks(book):
+        for track in get_tracks(book):
             # Insert disk headers
             if track.disk != disk_number:
                 disc_element = DiskElement(track.disk)
@@ -135,10 +137,10 @@ class BookOverview:
         """
         Hide/Show download elements depending on whether the book is on an external storage.
         """
-        self.book = db.Book.get(db.Book.id == self.book.id)
+        self.book = Book.get(Book.id == self.book.id)
         if self.switch_signal:
             self.download_switch.disconnect(self.switch_signal)
-        if db.is_external(self.book):
+        if is_external(self.book):
             self.download_box.set_visible(True)
             self.download_switch.set_visible(True)
             self.download_switch.set_active(self.book.offline)
@@ -155,19 +157,19 @@ class BookOverview:
 
         # update book object
         # TODO: optimize usage by only asking from the db on track change
-        query = db.Book.select().where(db.Book.id == self.book.id)
+        query = Book.select().where(Book.id == self.book.id)
         if (query.exists()):
             self.book = query.get()
         else:
             self.book = None
             return
         if self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
-            progress = db.get_book_progress(self.book, False)
+            progress = get_book_progress(self.book, False)
             progress += (player.get_current_duration() / 1000000000)
             remaining = (self.duration - progress)
         else:
-            progress = db.get_book_progress(self.book)
-            remaining = db.get_book_remaining(self.book)
+            progress = get_book_progress(self.book)
+            remaining = get_book_remaining(self.book)
         percentage = progress / self.duration
 
         self.total_label.set_text(
@@ -234,7 +236,7 @@ class BookOverview:
         """
         Mark the current track position.
         """
-        book = db.Book[self.book.id]
+        book = Book.get(Book.id == self.book.id)
 
         if book.position == -1:
             self.deselect_track_element()
@@ -265,8 +267,8 @@ class BookOverview:
             return
 
         if event == "playback-speed-changed":
-            self.speed = db.Book.select().where(
-                db.Book.id == self.book.id).get().playback_speed
+            self.speed = Book.select().where(
+                Book.id == self.book.id).get().playback_speed
             if self.ui.main_stack.props.visible_child_name == "book_overview":
                 self.update_time()
 
@@ -299,7 +301,7 @@ class BookOverview:
             return
 
         if event == "storage-removed" or event == "external-storage-removed":
-            if message in db.tracks(self.book).first().file:
+            if message in get_tracks(self.book).first().file:
                 self.download_box.set_visible(False)
                 self.download_switch.set_visible(False)
         elif "external-storage-added" or event == "storage-changed" or event == "storage-added":
@@ -310,7 +312,7 @@ class BookOverview:
         Play button clicked.
         Start/pause playback.
         """
-        track = db.get_track_for_playback(self.book)
+        track = get_track_for_playback(self.book)
         current_track = player.get_current_track()
 
         if current_track and current_track.book.id == self.book.id:
@@ -325,17 +327,17 @@ class BookOverview:
 
     def __on_download_switch_changed(self, switch, state):
         if self.download_switch.get_active():
-            db.Book.update(offline=True).where(db.Book.id == self.book.id).execute()
+            Book.update(offline=True).where(Book.id == self.book.id).execute()
             OfflineCache().add(self.book)
         else:
-            db.Book.update(offline=False, downloaded=False).where(db.Book.id == self.book.id).execute()
+            Book.update(offline=False, downloaded=False).where(Book.id == self.book.id).execute()
             OfflineCache().remove(self.book)
             self._set_book_download_status(False)
 
     def __on_offline_cache_changed(self, event, message):
         """
         """
-        if message is db.Book and message.id != self.book.id:
+        if message is Book and message.id != self.book.id:
             return
 
         if event == "book-offline":

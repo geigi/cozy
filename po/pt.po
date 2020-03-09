@@ -4,15 +4,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# fe2dc5b0508cf164c0ef73bd7bbf072f, 2019
 # Julian Geywitz <github@geigi.de>, 2019
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 16:01+0100\n"
-"PO-Revision-Date: 2017-08-25 21:47+0000\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
+"PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: Portuguese (https://www.transifex.com/geigi/teams/78138/pt/)\n"
 "Language: pt\n"
@@ -21,47 +21,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
+#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Ouvir este livro"
 
-#: cozy/ui/book_element.py:212
+#: cozy/ui/book_element.py:215
 msgid "Open book overview"
 msgstr "Ver capítulos do livro"
 
-#: cozy/ui/book_element.py:213
+#: cozy/ui/book_element.py:216
 msgid "Currently offline"
 msgstr ""
 
-#: cozy/ui/book_element.py:319
+#: cozy/ui/book_element.py:322
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/ui/book_element.py:322
+#: cozy/ui/book_element.py:325
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/ui/book_element.py:325
+#: cozy/ui/book_element.py:328
 msgid "Remove from library"
 msgstr ""
 
-#: cozy/ui/book_element.py:395
+#: cozy/ui/book_element.py:398
 msgid "Play this part"
 msgstr "Ouvir esta parte"
 
-#: cozy/ui/book_overview.py:228
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr ""
 
-#: cozy/ui/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr "Todos os arquivos"
 
-#: cozy/control/offline_cache.py:176
+#: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr ""
 
@@ -73,11 +73,11 @@ msgstr "Ir para o autor"
 msgid "Jump to reader "
 msgstr "Ir para o narrador"
 
-#: cozy/control/importer.py:278
+#: cozy/control/importer.py:284
 msgid "Unknown Author"
 msgstr "Autor Desconhecido"
 
-#: cozy/control/importer.py:280
+#: cozy/control/importer.py:286
 msgid "Unknown Reader"
 msgstr "Narrador Desconhecido"
 
@@ -147,28 +147,28 @@ msgid_plural "{years} years ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/ui/main_view.py:403
+#: cozy/ui/main_view.py:405
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui/main_view.py:424
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr "Importando Audiolivros"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
+#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
 msgid "All"
 msgstr "Todos"
 
-#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
+#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
 msgid "Display all books"
 msgstr "Mostrar todos os livros"
 
-#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "min"
 
-#: cozy/control/sleep_timer.py:128
+#: cozy/control/sleep_timer.py:146
 msgid "Off"
 msgstr ""
 
@@ -455,9 +455,11 @@ msgid "Some files could not be imported"
 msgstr "Alguns arquivos não puderam ser importados"
 
 #: data/ui/import_failed.ui:134
+#, fuzzy
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
@@ -578,20 +580,7 @@ msgstr ""
 msgid "Force refresh"
 msgstr ""
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr ""
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr ""
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr ""
 
@@ -623,21 +612,46 @@ msgstr "Parte"
 msgid "Nothing found :("
 msgstr "Nada encontrado :("
 
-#: data/ui/timer_popover.ui:39
-msgid "Stop after current chapter"
-msgstr ""
-
-#: data/ui/timer_popover.ui:76
+#: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Duração do temporizador"
 
-#: data/ui/timer_popover.ui:88
+#: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
 msgstr "Slider de duração do temporizador"
 
-#: data/ui/timer_popover.ui:89
+#: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
 msgstr "Defina a duração do temporizador em minutos"
+
+#: data/ui/timer_popover.ui:116
+msgid "Stop after current chapter"
+msgstr ""
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr ""
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr ""
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr ""
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
@@ -662,6 +676,3 @@ msgstr "_Sobre"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Terminar"
-
-#~ msgid "Scrubb through current part"
-#~ msgstr "Posicione-se pela parte atual"

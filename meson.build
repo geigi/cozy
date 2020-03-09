@@ -1,4 +1,4 @@
-project('com.github.geigi.cozy', version: '0.6.9')
+project('com.github.geigi.cozy', version: '0.6.14')
 
 python = import('python3')
 i18n = import('i18n')
@@ -30,6 +30,17 @@ else
   python_dir = r.stdout().strip()
 endif
 
+# Python 3 required modules
+python3_required_modules = ['distro', 'peewee', 'mutagen', 'gi']
+
+foreach p : python3_required_modules
+  # Source: https://docs.python.org/3/library/importlib.html#checking-if-a-module-can-be-imported
+  script = 'import importlib.util; import sys; exit(1) if importlib.util.find_spec(\''+ p +'\') is None else exit(0)'
+  if run_command(python_bin, '-c', script).returncode() != 0
+    error('Required Python3 module \'' + p + '\' not found')
+  endif
+endforeach
+
 LIBEXEC_DIR = join_paths(get_option('prefix'), 'libexec')
 DATA_DIR = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
 
@@ -42,6 +53,7 @@ conf.set('PYTHON_EXEC_DIR', join_paths(get_option('prefix'), python.sysconfig_pa
 conf.set('libexecdir', LIBEXEC_DIR)
 conf.set('VERSION', meson.project_version())
 conf.set('PYTHON', python_bin.path())
+conf.set('INSTALLED', 'true')
 
 subdir('data')
 subdir('po')
@@ -61,5 +73,18 @@ install_subdir(
   install_dir: python_dir
 )
 
+configure_file(
+  input: 'cozy/version.py',
+  output: 'version.py',
+  configuration: conf,
+  install_dir: python_dir + '/cozy'
+)
+
+configure_file(
+  input: 'cozy/report/report_to_loki.py',
+  output: 'report_to_loki.py',
+  configuration: conf,
+  install_dir: python_dir + '/cozy/report'
+)
 
 meson.add_install_script('meson/post_install.py')

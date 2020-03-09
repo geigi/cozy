@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the extra package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Heimen Stoffels <vistausss@outlook.com>, 2020
 # 
@@ -15,10 +15,10 @@ msgstr ""
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/com.github.geigi.cozy.desktop.in:3
@@ -62,8 +62,8 @@ msgid ""
 "Listen to your DRM free mp3, m4a (aac, ALAC, …), flac, ogg and wav audio "
 "books"
 msgstr ""
-"Luister naar je DRM-vrije audioboeken (mp3, m4a (aac, ALAC, …), flac, ogg en"
-" wav)"
+"Luister naar je DRM-vrije audioboeken (mp3, m4a (aac, ALAC, …), flac, ogg en "
+"wav)"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:18
 msgid "Remembers your playback position"
@@ -285,8 +285,8 @@ msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:173
 msgid ""
-"If no author field is present, the reader field will be used as author. This"
-" requires a force reimport (settings) on already imported books."
+"If no author field is present, the reader field will be used as author. This "
+"requires a force reimport (settings) on already imported books."
 msgstr ""
 "Als er geen auteursveld is, dan wordt het lezerveld gebruikt als auteur. Dit"
 " vereist het opnieuw importeren (middels de instellingen) van reeds "
