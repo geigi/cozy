@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Heimen Stoffels <vistausss@outlook.com>, 2019
-#
+# Heimen Stoffels <vistausss@outlook.com>, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-27 17:16+0100\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2019\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,7 @@ msgstr "Julian Geywitz"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:55
 msgid "Sleep timer: Automatic system power control"
-msgstr ""
+msgstr "Slaaptimer: automatisch energiebeheer"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:56
 #: data/com.github.geigi.cozy.appdata.xml.in:73
@@ -122,37 +122,39 @@ msgstr "Bijgewerkte vertalingen"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:63
 msgid "Support for opus files"
-msgstr ""
+msgstr "Ondersteuning voor opus-bestanden"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:64
 msgid "Better support for ogg cover art"
-msgstr ""
+msgstr "Betere ondersteuning voor ogg-omslagen"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:65
-#, fuzzy
 msgid "Swedish translation"
-msgstr "Bijgewerkte vertalingen"
+msgstr "Zweedse vertaling"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:72
 msgid "Fix: some valid media files were not detected"
 msgstr ""
+"Foutoplossing: sommige geldige mediabestanden werden niet gedetecteerd"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:74
 #: data/com.github.geigi.cozy.appdata.xml.in:85
 msgid "Other small fixes"
-msgstr ""
+msgstr "Andere kleine foutoplossingen"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:81
 msgid "Support for python 3.8. Cheers to emmaliddell"
-msgstr ""
+msgstr "Ondersteuning voor Python 3.8, met dank aan @emmaliddell"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:83
 msgid "Fixes in the titlebar"
-msgstr ""
+msgstr "Foutoplossingen aan de titelbalk"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:84
 msgid "Fix: show navigation bar when searching from book overview"
 msgstr ""
+"Foutoplossing: navigatiebalk werd getoond tijdens zoeken vanuit "
+"boekoverzicht"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:92
 #: data/com.github.geigi.cozy.appdata.xml.in:102
@@ -191,28 +193,32 @@ msgstr "Ondersteuning voor elementary OS 5.0 Juno"
 msgid ""
 "Fixed a bug which prevented cozy from automatically playing the next chapter"
 msgstr ""
+"Fout opgelost die Cozy weerhield van het automatisch afspelen van het "
+"volgende hoofdstuk"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:149
 msgid "Improved artwork image quality"
-msgstr ""
+msgstr "Afbeeldingskwaliteit verbeterd"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:150
 msgid "The book overview now supports multiple disks in audiobooks"
-msgstr ""
+msgstr "Het boekoverzicht ondersteunt nu meerdere schijven van audioboeken"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:151
 msgid ""
 "The file not found window will only open when the file is on the internal "
 "drive"
 msgstr ""
+"Het venster 'Bestand niet aangetroffen' wordt nu alleen getoond als het "
+"bestand op de interne schijf staat"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:152
 msgid "Fixed a typo"
-msgstr ""
+msgstr "Typfout verbeterd"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:153
 msgid "Support for elemntary OS 5.0"
-msgstr ""
+msgstr "Ondersteuning voor elementary OS 5.0"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:161
 msgid ""
@@ -221,58 +227,71 @@ msgid ""
 "listen to on the go. To enable this feature you have to set your storage "
 "location to external in the settings."
 msgstr ""
+"Offline-modus! Als je audioboeken op een externe of netwerkschijf staan, dan"
+" kun je nu klikken op de knop 'Downloaden' om een lokale kopie op te slaan "
+"in de cache zodat je onderweg kunt luisteren. Zet hiervoor de opslaglocatie "
+"op 'Extern' in de instellingen."
 
 #: data/com.github.geigi.cozy.appdata.xml.in:162
 msgid "Detect online/offline storage devices"
-msgstr ""
+msgstr "Herkenning van online-/offline-opslagapparaten"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:163
 msgid "Option to hide unavailable books"
-msgstr ""
+msgstr "Optie om niet-beschikbare boeken te verbergen"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:164
 msgid "Support for wav files"
-msgstr ""
+msgstr "Ondersteuning voor wav-bestanden"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:165
 msgid "Support for audio files that have no tags at all"
-msgstr ""
+msgstr "Ondersteuning voor audiobestanden zonder tags"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:166
 msgid "You can mark books as read using the right click menu"
-msgstr ""
+msgstr "Je kunt boeken middels het rechtermuisknopmenu als gelezen markeren"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:167
 msgid "New setting: Prefer cover image file over embedded covers"
 msgstr ""
+"Nieuwe instelling: voorkeur voor externe afbeeldingen boven meegeleverde "
+"omslag"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:168
 msgid "Redesigned Sleep Timer"
-msgstr ""
+msgstr "Opnieuw ontworpen slaaptimer"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:169
 msgid ""
 "More Sleep Timer: You can now stop the playback after the current chapter"
 msgstr ""
+"Verbeterde slaaptimer: je kunt het afspelen nu afbreken na het huidige "
+"hoofdstuk"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:170
 msgid "And even more: Fadeout on timer end (in settings)"
-msgstr ""
+msgstr "En nóg meer: vervaging bij aflopen van timer (in de instellingen)"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:171
 msgid "Redesigned hello screen and settings"
-msgstr ""
+msgstr "Opnieuw ontworpen welkomstscherm en instellingen"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:172
 msgid "Fixed bug where cozy would not start on GTK older than 3.22"
 msgstr ""
+"Fout opgelost die Cozy weerhield van het opstarten met een GTK-versie ouder "
+"dan 3.22"
 
 #: data/com.github.geigi.cozy.appdata.xml.in:173
 msgid ""
 "If no author field is present, the reader field will be used as author. This "
 "requires a force reimport (settings) on already imported books."
 msgstr ""
+"Als er geen auteursveld is, dan wordt het lezerveld gebruikt als auteur. Dit"
+" vereist het opnieuw importeren (middels de instellingen) van reeds "
+"geïmporteerde boeken."
 
 #: data/com.github.geigi.cozy.appdata.xml.in:174
 msgid "Optimizations under the hood"
-msgstr ""
+msgstr "Verbeteringen onder de motorkap"
