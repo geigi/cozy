@@ -19,6 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         mkdir -p ~/.config/osc
+        sudo apt-get update
         sudo apt-get install osc npm
         sudo npm install -g json
 
