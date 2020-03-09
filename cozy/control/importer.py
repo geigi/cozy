@@ -257,7 +257,8 @@ def import_file(file, directory, path, update=False):
 
     ### File will not be imported ###
     else:
-        _, file_extension = os.path.splitext(path)
+        # don't use _ for ignored return value -> it is reserved for gettext
+        ignore, file_extension = os.path.splitext(path)
         log.warning("Skipping file " + path + " because of mime type " + media_type + ".")
         reporter.error("importer", "Mime type not detected as audio: " + media_type + " with file ending: " + file_extension)
         return False, None
