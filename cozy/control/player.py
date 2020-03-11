@@ -1,6 +1,6 @@
 import threading
 import time
-from gi.repository import Gst
+from gi.repository import Gst, GLib
 
 import gi
 
@@ -29,7 +29,7 @@ __bus = None
 __play_next = True
 
 
-def __on_gst_message(bus, message):
+def __on_gst_message(bus, message: Gst.Message):
     """
     Handle messages from gst.
     """
@@ -47,6 +47,17 @@ def __on_gst_message(bus, message):
     elif t == Gst.MessageType.EOS:
         next_track()
     elif t == Gst.MessageType.ERROR:
+        error, debug_msg = message.parse_error()
+
+        if error.code == Gst.ResourceError.NOT_FOUND:
+            stop()
+            unload()
+            emit_event("stop")
+
+            log.warning("gst: Resource not found. Stopping player.")
+            reporter.warning("player", "gst: Resource not found. Stopping player.")
+            return
+
         err, debug = message.parse_error()
         log.error(err)
         log.debug(debug)
