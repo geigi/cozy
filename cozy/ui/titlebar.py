@@ -416,11 +416,16 @@ class Titlebar:
         """
         Update the progress scale range including the current playback speed.
         """
+        current_track = player.get_current_track()
+
+        if not current_track:
+            return
+
         if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
             total = get_book_duration(
                 self.current_book) / self.ui.speed.get_speed()
         else:
-            total = player.get_current_track().length / self.ui.speed.get_speed()
+            total = current_track.length / self.ui.speed.get_speed()
 
         self.progress_scale.set_range(0, total)
 
