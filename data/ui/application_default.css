@@ -17,9 +17,13 @@
 
 .h4 {
   font-size: 130%;
-  font-weight: lighter;
+  font-weight: 200;
 }
 
 .h5 {
   font-size: 115%;
+}
+
+.slightly-bold {
+  font-weight: 500;
 }
