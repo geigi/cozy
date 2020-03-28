@@ -64,7 +64,6 @@ class Application(Gtk.Application):
     def __init__(self, **kwargs):
         self.ui = None
 
-        GObject.threads_init()
         listen()
         Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
         GLib.setenv("PULSE_PROP_media.role", "music", True)
