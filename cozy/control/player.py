@@ -24,7 +24,7 @@ __set_speed = False
 __current_track = None
 __listeners = []
 __wait_to_seek = False
-__player = None
+__player: Gst.Bin = None
 __bus = None
 __play_next = True
 
@@ -174,6 +174,15 @@ def get_current_track():
             return None
     else:
         return None
+
+
+def is_playing():
+    if __player:
+        state = __player.get_state(Gst.CLOCK_TIME_NONE)
+        if state.state == Gst.State.PLAYING:
+            return True
+
+    return False
 
 
 def add_player_listener(function):

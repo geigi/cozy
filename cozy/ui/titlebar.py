@@ -418,7 +418,7 @@ class Titlebar:
         """
         current_track = player.get_current_track()
 
-        if not current_track:
+        if not current_track or not self.current_book:
             return
 
         if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
@@ -448,7 +448,7 @@ class Titlebar:
             self.play_status_updater.stop()
             self.play_status_updater = None
 
-        if enable and self.ui.is_playing and self.play_status_updater is None:
+        if enable and player.is_playing() and self.play_status_updater is None:
             self.play_status_updater = IntervalTimer(
                 1, self.__update_time)
             self.play_status_updater.start()

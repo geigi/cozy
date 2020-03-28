@@ -42,8 +42,6 @@ class CozyUI(metaclass=Singleton):
     current_track_element = None
     # Is currently an dialog open?
     dialog_open = False
-    # Are we currently playing?
-    is_playing = False
     is_initialized = False
     first_play = True
     __inhibit_cookie = None
@@ -696,27 +694,22 @@ class CozyUI(metaclass=Singleton):
         if event == "stop":
             if self.__inhibit_cookie:
                 self.app.uninhibit(self.__inhibit_cookie)
-            self.is_playing = False
             self.stop()
             self.titlebar.stop()
             self.sleep_timer.stop()
         elif event == "play":
-            self.is_playing = True
             self.play()
             self.titlebar.play()
             self.sleep_timer.start()
-            self.book_overview.select_track(None, True)
             self.refresh_recent()
             self.__inhibit_cookie = self.app.inhibit(
                 self.window, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook")
         elif event == "pause":
             if self.__inhibit_cookie:
                 self.app.uninhibit(self.__inhibit_cookie)
-            self.is_playing = False
             self.pause()
             self.titlebar.pause()
             self.sleep_timer.stop()
-            self.book_overview.select_track(None, False)
         elif event == "track-changed":
             self.track_changed()
             if self.sort_stack.props.visible_child_name == "recent":
