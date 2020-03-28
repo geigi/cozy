@@ -8,6 +8,7 @@ from cozy.model.track import Track
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
 from cozy.ui.book_element import BookElement
+from cozy.ui.error_reporting import ErrorReporting
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.search import Search
@@ -273,6 +274,8 @@ class CozyUI(metaclass=Singleton):
 
         if player.get_current_track() is None:
             self.block_ui_buttons(True)
+
+        ErrorReporting(self.window)
 
     def __load_last_book(self):
         """
