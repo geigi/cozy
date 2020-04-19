@@ -13,6 +13,7 @@ cozy/ui/main_view.py
 cozy/control/sleep_timer.py
 cozy/ui/settings.py
 cozy/ui/disk_element.py
+cozy/ui/warnings.py
 data/ui/main_window.ui
 data/ui/about.ui
 data/ui/file_not_found.ui
@@ -21,4 +22,3 @@ data/ui/settings.ui
 data/ui/search_popover.ui
 data/ui/timer_popover.ui
 data/ui/titlebar_menu.ui
-data/ui/book_progress_element.ui

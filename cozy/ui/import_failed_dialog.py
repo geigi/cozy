@@ -16,7 +16,7 @@ class ImportFailedDialog():
         self.dialog.set_transient_for(self.parent.window)
         self.text = self.builder.get_object("files_buffer")
 
-        self.text.set_text(files)
+        self.text.set_text(files.encode("utf-8", "replace").decode("utf-8"))
 
         locate_button = self.builder.get_object("ok_button")
         locate_button.connect("clicked", self.ok)

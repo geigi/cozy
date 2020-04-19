@@ -15,14 +15,17 @@ Help translating Cozy: https://transifex.com/geigi/cozy</property>
     <property name="authors">geigi
 
 Contributions on GitHub:
-oleg-krv 
 AsavarTzeth
-worldofpeace
-camellan
-jnbr
-grenade
-NathanBnm
 Fatih20
+NathanBnm
+camellan
+grenade
+jnbr
+kaphula
+meisenzahl
+oleg-krv
+umeboshi2
+worldofpeace
 
 Big thanks to my patreon supporters:
 Fred Warren
@@ -30,21 +33,52 @@ Gabriel
 
 And to other open source projects:
 https://github.com/gnumdk/lollypop</property>
-    <property name="translator_credits">camellan
-Vistaus
-Distil62
-karaagac
+    <property name="translator_credits">Distil62
+Fitoschido
+Floflr
+Foxyriot
 HansCz
-mvainola
-giuscasula
+IvoIliev
+MageJohn
+NHiX
+Nimmerliefde
+Potty0
+TheMBTH
+TheRuleOfMike
+Vistaus
+W2hJ3MOmIRovEpTeahe80jC
+aKodi
 abuyop
 akodi
-cleitonjfloss
+albanobattistella
 amadeussss
-nvivant
-Foxyriot
+andreapillai
+arejano
+camellan
+chris109b
+cjfloss
+cleitonjfloss
+corentinbettiol
+dtgoitia
+fishcake13
+fountain
+georgelemental
+giuscasula
+jan.sundman
+jan_nekvasil
+jouselt
+karaagac
+libreajans
+linuxmasterclub
 mardojai
-trampover</property>
+mvainola
+nvivant
+oleg_krv
+test21
+trampover
+twardowskidev
+txelu
+yalexaner</property>
     <property name="logo_icon_name">com.github.geigi.cozy</property>
     <property name="license_type">gpl-3-0</property>
     <child>

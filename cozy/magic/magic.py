@@ -123,7 +123,7 @@ _instances = {}
 def _get_magic_type(mime):
     i = _instances.get(mime)
     if i is None:
-        i = _instances[mime] = Magic(mime=mime)
+        i = _instances[mime] = Magic(mime=mime, keep_going=True)
     return i
 
 
@@ -195,7 +195,7 @@ def errorcheck_null(result, func, args):
         return result
 
 def errorcheck_negative_one(result, func, args):
-    if result is -1:
+    if result == -1:
         err = magic_error(args[0])
         raise MagicException(err)
     else:

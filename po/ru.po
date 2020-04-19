@@ -6,15 +6,16 @@
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
 # Camellan <camellan@yandex.ru>, 2019
+# Lapunov Yegor <ooverloord@protonmail.com>, 2020
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-18 15:37+0200\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Camellan <camellan@yandex.ru>, 2019\n"
+"Last-Translator: Lapunov Yegor <ooverloord@protonmail.com>, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/geigi/teams/78138/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -24,47 +25,47 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
+#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Слушать эту аудиокнигу"
 
-#: cozy/ui/book_element.py:212
+#: cozy/ui/book_element.py:215
 msgid "Open book overview"
 msgstr "Открыть обзор книги"
 
-#: cozy/ui/book_element.py:213
+#: cozy/ui/book_element.py:216
 msgid "Currently offline"
 msgstr "Сейчас оффлайн"
 
-#: cozy/ui/book_element.py:319
+#: cozy/ui/book_element.py:322
 msgid "Mark as read"
 msgstr "Отметить как прочитанное"
 
-#: cozy/ui/book_element.py:322
+#: cozy/ui/book_element.py:325
 msgid "Open in file browser"
 msgstr "Открыть в файловом менеджере"
 
-#: cozy/ui/book_element.py:325
+#: cozy/ui/book_element.py:328
 msgid "Remove from library"
 msgstr "Удалить из библиотеки"
 
-#: cozy/ui/book_element.py:395
+#: cozy/ui/book_element.py:398
 msgid "Play this part"
 msgstr "Слушать эту часть"
 
-#: cozy/ui/book_overview.py:228
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr "Загружено"
 
-#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Загрузить"
 
-#: cozy/ui/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr "Все файлы"
 
-#: cozy/control/offline_cache.py:176
+#: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr "Копирование"
 
@@ -76,115 +77,114 @@ msgstr "Перейти к автору "
 msgid "Jump to reader "
 msgstr "Перейти к диктору "
 
-#: cozy/control/importer.py:278
+#: cozy/control/importer.py:284
 msgid "Unknown Author"
 msgstr "Неизвестный автор"
 
-#: cozy/control/importer.py:280
+#: cozy/control/importer.py:286
 msgid "Unknown Reader"
 msgstr "Неизвестный диктор"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:143
 msgid "hours"
 msgstr "часов"
 
-#: cozy/tools.py:144
+#: cozy/tools.py:145
 msgid "hour"
 msgstr "час"
 
-#: cozy/tools.py:152
+#: cozy/tools.py:153
 msgid "minutes"
 msgstr "минут"
 
-#: cozy/tools.py:154
+#: cozy/tools.py:155
 msgid "minute"
 msgstr "минуту"
 
-#: cozy/tools.py:158
+#: cozy/tools.py:159
 msgid "finished"
 msgstr "завершено"
 
-#: cozy/tools.py:162
+#: cozy/tools.py:163
 msgid "seconds"
 msgstr "секунд"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:165
 msgid "second"
 msgstr "секунда"
 
-#: cozy/tools.py:187
+#: cozy/tools.py:188
 msgid "never"
 msgstr "никогда"
 
-#: cozy/tools.py:189
+#: cozy/tools.py:190
 msgid "today"
 msgstr "сегодня"
 
-#: cozy/tools.py:191
+#: cozy/tools.py:192
 msgid "yesterday"
 msgstr "вчера"
 
-#: cozy/tools.py:193
-msgid "days"
-msgstr "дней"
+#: cozy/tools.py:194
+#, python-format
+msgid "%s days ago"
+msgstr "%s день назад"
 
-#: cozy/tools.py:193 cozy/tools.py:195 cozy/tools.py:197 cozy/tools.py:199
-#: cozy/tools.py:201 cozy/tools.py:203 cozy/tools.py:205
-msgid "ago"
-msgstr "назад"
+#: cozy/tools.py:196
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] "{weeks} неделя назад"
+msgstr[1] "{weeks} недели назад"
+msgstr[2] "{weeks} недель назад"
+msgstr[3] "{weeks} недель назад"
 
-#: cozy/tools.py:195
-msgid "week"
-msgstr "неделя"
+#: cozy/tools.py:198
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] "{months} месяц назад"
+msgstr[1] "{months} месяцев назад"
+msgstr[2] "{months} месяцев назад"
+msgstr[3] "{months} месяцев назад"
 
-#: cozy/tools.py:197
-msgid "weeks"
-msgstr "недель"
+#: cozy/tools.py:200
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] "{years} год назад"
+msgstr[1] "{years} года назад"
+msgstr[2] "{years} лет назад"
+msgstr[3] "{years} лет назад"
 
-#: cozy/tools.py:199
-msgid "month"
-msgstr "месяц"
-
-#: cozy/tools.py:201
-msgid "months"
-msgstr "месяцев"
-
-#: cozy/tools.py:203
-msgid "year"
-msgstr "год"
-
-#: cozy/tools.py:205
-msgid "years"
-msgstr "лет"
-
-#: cozy/ui/main_view.py:403
+#: cozy/ui/main_view.py:405
 msgid "Audiobooks"
 msgstr "Аудиокниги"
 
-#: cozy/ui/main_view.py:424
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr "Импортирование аудиокниги"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
+#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
 msgid "All"
 msgstr "Все"
 
-#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
+#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
 msgid "Display all books"
 msgstr "Отобразить все книги"
 
-#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "мин"
 
-#: cozy/control/sleep_timer.py:128
+#: cozy/control/sleep_timer.py:146
 msgid "Off"
 msgstr "Отключено"
 
 #: cozy/ui/settings.py:416 cozy/ui/settings.py:459
 msgid "External drive"
-msgstr "Внешняя память"
+msgstr "Внешний диск"
 
 #: cozy/ui/settings.py:419 cozy/ui/settings.py:462
 msgid "Internal drive"
@@ -259,8 +259,8 @@ msgid "Elapsed time of current part"
 msgstr "Истекшее время текущей части"
 
 #: data/ui/main_window.ui:311
-msgid "Scrubb through current part"
-msgstr "Прокрутить текущую часть"
+msgid "Jump to position in current chapter"
+msgstr "Перейти на позицию в текущей главе"
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -434,10 +434,6 @@ msgstr "Последний раз воспроизводилось"
 msgid "Published"
 msgstr "Опубликовано"
 
-#: data/ui/main_window.ui:1611 data/ui/main_window.ui:1644
-msgid "page0"
-msgstr "страница 0"
-
 #: data/ui/main_window.ui:1630
 msgid ""
 "Start exploring your library by switching to the Author or Reader view above."
@@ -477,12 +473,14 @@ msgstr "Некоторые файлы не могут быть импортир�
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
-"Это может быть по нескольким причинам:\n"
-"- Формат аудио не поддерживается \n"
-"- Файл(ы) не являются допустимыми аудиофайлами\n"
+"Это может иметь следующие причины:\n"
+"- Аудиоформат не поддерживается\n"
+"- Путь или имя файла содержит символы не из utf-8\n"
+"- Файл(ы) не являются валидными аудиофайлами\n"
 "- Файл(ы) повреждены"
 
 #: data/ui/settings.ui:92 data/ui/settings.ui:344
@@ -597,21 +595,7 @@ msgstr "Это обновит метаданные всех импортиров
 msgid "Force refresh"
 msgstr "Принудительное обновление"
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr "По запросу"
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr "Использовать контрольную сумму crc32 для обнаружения изменений файлов"
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-"Рекомендуется, если cozy не определяет изменение файла во время сканирования"
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr "Расширенные"
 
@@ -643,21 +627,47 @@ msgstr "Часть"
 msgid "Nothing found :("
 msgstr "Ничего не найдено :("
 
-#: data/ui/timer_popover.ui:39
-msgid "Stop after current chapter"
-msgstr "Остановить после текущей главы"
-
-#: data/ui/timer_popover.ui:76
+#: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Продолжительность таймера"
 
-#: data/ui/timer_popover.ui:88
+#: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
 msgstr "Ползунок длительности таймера"
 
-#: data/ui/timer_popover.ui:89
+#: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
 msgstr "Установить таймер сна в минутах"
+
+#: data/ui/timer_popover.ui:116
+#, fuzzy
+msgid "Stop after current chapter"
+msgstr "Остановить после текущей главы"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr ""
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr ""
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr ""
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
@@ -682,14 +692,3 @@ msgstr "_О программе"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Выход"
-
-#: data/ui/book_progress_element.ui:49
-msgid "of"
-msgstr "из"
-
-#: data/ui/book_progress_element.ui:75
-msgid "remaining"
-msgstr "оставшиеся"
-
-#~ msgid "_Play/Pause"
-#~ msgstr "_Воспр./Пауза"
