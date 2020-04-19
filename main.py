@@ -26,21 +26,28 @@ import signal
 import sys
 import traceback
 import distro
-
+from traceback import format_exception
 import gi
-gi.require_version('Gtk', '3.0')
 
+gi.require_version('Gtk', '3.0')
+gi.require_version('Gst', '1.0')
+
+from cozy.report import reporter
+from cozy.version import __version__
 from pathlib import Path
 from gi.repository import Gtk, GObject, GLib
 from cozy.ui.main_view import CozyUI
 from cozy.control.db import init_db, Settings
 from cozy.control.mpris import MPRIS
 
+old_except_hook = None
+
 log = logging.getLogger("main")
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
+if not os.path.exists(data_dir):
+    os.makedirs(data_dir)
 pkgdatadir = '@DATA_DIR@'
 localedir = '@LOCALE_DIR@'
-version = '@VERSION@'
 LOG_FORMAT = "%(asctime)s [%(threadName)-12.12s] [%(name)-10.10s] [%(levelname)-5.5s]  %(message)s"
 LOG_DATE_FORMAT = "%H:%M:%S"
 
@@ -52,15 +59,18 @@ if os.path.exists(log1):
 if os.path.exists(os.path.join(data_dir, "cozy.log")):
     os.rename(log0, log1)
 
+
 class Application(Gtk.Application):
     def __init__(self, **kwargs):
         self.ui = None
 
-        GObject.threads_init()
         listen()
         Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
         GLib.setenv("PULSE_PROP_media.role", "music", True)
         GLib.set_application_name("Cozy")
+
+        self.old_except_hook = sys.excepthook
+        sys.excepthook = self.handle_exception
 
         import gettext
         locale.bindtextdomain('com.github.geigi.cozy', localedir)
@@ -69,8 +79,8 @@ class Application(Gtk.Application):
 
     def do_startup(self):
         log.info(distro.linux_distribution(full_distribution_name=False))
-        log.info("Starting up cozy " + version)
-        self.ui = CozyUI(pkgdatadir, self, version)
+        log.info("Starting up cozy " + __version__)
+        self.ui = CozyUI(pkgdatadir, self, __version__)
         init_db()
         Gtk.Application.do_startup(self)
         self.ui.startup()
@@ -92,6 +102,15 @@ class Application(Gtk.Application):
         self.add_window(self.ui.window)
         mpris = MPRIS(self)
         mpris._on_current_changed(None)
+
+    def handle_exception(self, exc_type, exc_value, exc_traceback):
+        print("handle exception")
+        try:
+            reporter.exception("uncaught", exc_value, "\n".join(format_exception(exc_type, exc_value, exc_traceback)))
+        except:
+            pass
+
+        self.old_except_hook(exc_type, exc_value, exc_traceback)
 
 
 def __on_command_line():
@@ -133,7 +152,7 @@ def main():
 def debug(sig, frame):
     """Interrupt running process, and provide a python prompt for
     interactive debugging."""
-    d = {'_frame': frame}         # Allow access to frame object.
+    d = {'_frame': frame}  # Allow access to frame object.
     d.update(frame.f_globals)  # Unless shadowed by global
     d.update(frame.f_locals)
 

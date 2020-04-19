@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
 # Sabri Ünal <libreajans@gmail.com>, 2020
@@ -17,10 +17,10 @@ msgstr ""
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: abc Def <hdogan1974@gmail.com>, 2020\n"
 "Language-Team: Turkish (https://www.transifex.com/geigi/teams/78138/tr/)\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: cozy/ui/book_element.py:71 cozy/ui/search_results.py:123
@@ -384,7 +384,8 @@ msgid ""
 "If they are you can enable offline mode for a book in the book overview\n"
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Eğer öyleyse, kitap önizlemesinde ilgili kitap için çevrim dışı kipi etkinleştirebilirsiniz.\n"
+"Eğer öyleyse, kitap önizlemesinde ilgili kitap için çevrim dışı kipi "
+"etkinleştirebilirsiniz.\n"
 "Bu, kitabın hareket halindeyken dinleyebileceğiniz yerel bir kopyasını tutar."
 
 #: data/ui/main_window.ui:993 data/ui/main_window.ui:1050
@@ -439,8 +440,7 @@ msgstr "Yayınlayan"
 
 #: data/ui/main_window.ui:1655
 msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
+"Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 "Yazar veya Seslendiren görünümüne geçerek kütüphanenizi keşfetmeye başlayın."
 
@@ -473,6 +473,7 @@ msgid "Some files could not be imported"
 msgstr "Bazı dosyalar içe aktarılamadı"
 
 #: data/ui/import_failed.ui:134
+#, fuzzy
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
@@ -700,3 +701,15 @@ msgstr "_Hakkında"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Çık"
+
+#~ msgid "By request"
+#~ msgstr "İsteğe bağlı"
+
+#~ msgid "Use crc32 checksum for file modification detection"
+#~ msgstr "Dosya değişikliğinin tespiti için crc32 sağlama toplamını kullan"
+
+#~ msgid ""
+#~ "Only recommended if cozy doesn't detect file modifications while scanning"
+#~ msgstr ""
+#~ "Yalnızca, tarama işlemi sırasında Cozy dosya değişikliklerini "
+#~ "algılamıyorsa önerilir"

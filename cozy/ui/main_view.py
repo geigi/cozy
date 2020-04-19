@@ -1,8 +1,10 @@
 import webbrowser
 
-import gi
-gi.require_version('Gtk', '3.0')
-gi.require_version('Gst', '1.0')
+from cozy.control.db import books, authors, readers, is_external, close_db
+from cozy.model.book import Book
+from cozy.model.storage import Storage
+from cozy.model.track import Track
+
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
 from cozy.ui.book_element import BookElement
@@ -15,8 +17,7 @@ from cozy.ui.titlebar import Titlebar
 from cozy.ui.settings import Settings
 from cozy.ui.book_overview import BookOverview
 from cozy.architecture.singleton import Singleton
-
-import cozy.control.db as db
+import cozy.report.reporter as report
 import cozy.control.importer as importer
 import cozy.control.player as player
 import cozy.tools as tools
@@ -41,8 +42,6 @@ class CozyUI(metaclass=Singleton):
     current_track_element = None
     # Is currently an dialog open?
     dialog_open = False
-    # Are we currently playing?
-    is_playing = False
     is_initialized = False
     first_play = True
     __inhibit_cookie = None
@@ -70,6 +69,7 @@ class CozyUI(metaclass=Singleton):
         self.__init_resources()
         self.__init_css()
         self.__init_actions()
+        report.info("main", "startup")
 
     def __init_resources(self):
         """
@@ -393,10 +393,10 @@ class CozyUI(metaclass=Singleton):
         Check if there are any imported files.
         If there aren't display a welcome screen.
         """
-        if db.books().count() < 1:
+        if books().count() < 1:
             path = ""
-            if db.Storage.select().count() > 0:
-                path = db.Storage.select().where(db.Storage.default == True).get().path
+            if Storage.select().count() > 0:
+                path = Storage.select().where(Storage.default == True).get().path
                     
             
             if not path:
@@ -405,7 +405,7 @@ class CozyUI(metaclass=Singleton):
                 if not os.path.exists(path):
                     os.mkdir(path)
 
-                db.Storage.create(path=path, default=True)
+                Storage.create(path=path, default=True)
 
             self.no_media_file_chooser.set_current_folder(path)
             self.main_stack.props.visible_child_name = "no_media"
@@ -444,7 +444,7 @@ class CozyUI(metaclass=Singleton):
         online_readers = []
 
         if hide_offline:
-            for b in db.books():
+            for b in books():
                 if not self.fs_monitor.is_book_online(b) and not b.downloaded:
                     offline_authors.append(b.author)
                     offline_readers.append(b.reader)
@@ -502,11 +502,11 @@ class CozyUI(metaclass=Singleton):
         self.reader_box.add(ListBoxSeparatorRow())
         self.reader_box.select_row(all_row)
 
-        for book in db.authors():
+        for book in authors():
             row = ListBoxRowWithData(book.author, False)
             self.author_box.add(row)
 
-        for book in db.readers():
+        for book in readers():
             row = ListBoxRowWithData(book.reader, False)
             self.reader_box.add(row)
 
@@ -527,7 +527,7 @@ class CozyUI(metaclass=Singleton):
         self.populate_author_reader()
         self.filter_author_reader(tools.get_glib_settings().get_boolean("hide-offline"))
 
-        for b in db.books():
+        for b in books():
             self.book_box.add(BookElement(b))
 
         self.book_box.show_all()
@@ -585,6 +585,7 @@ class CozyUI(metaclass=Singleton):
         self.author_box.select_row(row)
         self.book_box.invalidate_filter()
         self.book_box.invalidate_sort()
+        self.toolbar_revealer.set_reveal_child(True)
         self.search.close()
 
     def jump_to_reader(self, book):
@@ -602,6 +603,7 @@ class CozyUI(metaclass=Singleton):
         self.reader_box.select_row(row)
         self.book_box.invalidate_filter()
         self.book_box.invalidate_sort()
+        self.toolbar_revealer.set_reveal_child(True)
         self.search.close()
 
     def jump_to_book(self, book):
@@ -609,7 +611,7 @@ class CozyUI(metaclass=Singleton):
         Open book overview with the given book.
         """
         # first update track ui
-        book = db.Book.select().where(db.Book.id == book.id).get()
+        book = Book.select().where(Book.id == book.id).get()
         self.book_overview.set_book(book)
 
         # then switch the stacks
@@ -645,8 +647,8 @@ class CozyUI(metaclass=Singleton):
         """
         location = self.no_media_file_chooser.get_file().get_path()
         external = self.external_switch.get_active()
-        db.Storage.delete().where(db.Storage.path != "").execute()
-        db.Storage.create(path=location, default=True, external=external)
+        Storage.delete().where(Storage.path != "").execute()
+        Storage.create(path=location, default=True, external=external)
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, True)
         self.settings._init_storage()
@@ -660,7 +662,7 @@ class CozyUI(metaclass=Singleton):
 
         if page == "recent":
             self.sort_stack_revealer.set_reveal_child(False)
-            if db.Book.select().where(db.Book.last_played > 0).count() < 1:
+            if Book.select().where(Book.last_played > 0).count() < 1:
                 self.main_stack.props.visible_child_name = "nothing_here"
         else:
             self.sort_stack_revealer.set_reveal_child(True)
@@ -692,27 +694,22 @@ class CozyUI(metaclass=Singleton):
         if event == "stop":
             if self.__inhibit_cookie:
                 self.app.uninhibit(self.__inhibit_cookie)
-            self.is_playing = False
             self.stop()
             self.titlebar.stop()
             self.sleep_timer.stop()
         elif event == "play":
-            self.is_playing = True
             self.play()
             self.titlebar.play()
             self.sleep_timer.start()
-            self.book_overview.select_track(None, True)
             self.refresh_recent()
             self.__inhibit_cookie = self.app.inhibit(
                 self.window, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook")
         elif event == "pause":
             if self.__inhibit_cookie:
                 self.app.uninhibit(self.__inhibit_cookie)
-            self.is_playing = False
             self.pause()
             self.titlebar.pause()
             self.sleep_timer.stop()
-            self.book_overview.select_track(None, False)
         elif event == "track-changed":
             self.track_changed()
             if self.sort_stack.props.visible_child_name == "recent":
@@ -723,7 +720,7 @@ class CozyUI(metaclass=Singleton):
                 return
             if "Resource not found" in str(message):
                 current_track = player.get_current_track()
-                if db.is_external(current_track.book):
+                if is_external(current_track.book):
                     player.stop()
                     player.unload()
                     player.emit_event("stop")
@@ -764,13 +761,15 @@ class CozyUI(metaclass=Singleton):
 
         # save current position when still playing
         if player.get_gst_player_state() == Gst.State.PLAYING:
-            db.Track.update(position=player.get_current_duration()).where(
-                db.Track.id == player.get_current_track().id).execute()
+            Track.update(position=player.get_current_duration()).where(
+                Track.id == player.get_current_track().id).execute()
             player.stop()
 
         player.dispose()
 
-        db.close()
+        close_db()
+
+        report.close()
 
         log.info("Closing app.")
         self.app.quit()
@@ -800,7 +799,7 @@ class CozyUI(metaclass=Singleton):
         selected_stack = self.sort_stack.props.visible_child_name
         if tools.get_glib_settings().get_boolean("hide-offline"):
             if not self.fs_monitor.is_book_online(book.book):
-                offline_available = db.Book.get(db.Book.id == book.book.id).downloaded
+                offline_available = Book.get(Book.id == book.book.id).downloaded
             else:
                 offline_available = True
         else:

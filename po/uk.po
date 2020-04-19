@@ -5,15 +5,15 @@
 #
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
-# Oleg Krivorot <krivorot.oleg@gmail.com>, 2019
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 16:01+0100\n"
-"PO-Revision-Date: 2017-08-25 21:47+0000\n"
-"Last-Translator: Oleg Krivorot <krivorot.oleg@gmail.com>, 2019\n"
+"POT-Creation-Date: 2020-02-27 17:01+0100\n"
+"PO-Revision-Date: 2019-09-08 09:31+0000\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/geigi/teams/78138/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -24,47 +24,47 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: cozy/ui/book_element.py:67 cozy/ui/search_results.py:123
+#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
 msgid "Play this book"
 msgstr "Слухати цю аудіокнигу"
 
-#: cozy/ui/book_element.py:212
+#: cozy/ui/book_element.py:215
 msgid "Open book overview"
 msgstr "Відкрити огляд книги"
 
-#: cozy/ui/book_element.py:213
+#: cozy/ui/book_element.py:216
 msgid "Currently offline"
 msgstr "В даний час офлайн"
 
-#: cozy/ui/book_element.py:319
+#: cozy/ui/book_element.py:322
 msgid "Mark as read"
 msgstr "Відзначити як прочитане"
 
-#: cozy/ui/book_element.py:322
+#: cozy/ui/book_element.py:325
 msgid "Open in file browser"
 msgstr "Відкрити у файловому браузері"
 
-#: cozy/ui/book_element.py:325
+#: cozy/ui/book_element.py:328
 msgid "Remove from library"
 msgstr "Видалити з бібліотеки"
 
-#: cozy/ui/book_element.py:395
+#: cozy/ui/book_element.py:398
 msgid "Play this part"
 msgstr "Слухати цю частину"
 
-#: cozy/ui/book_overview.py:228
+#: cozy/ui/book_overview.py:230
 msgid "Downloaded"
 msgstr "Завантажено"
 
-#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1328
+#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
 msgid "Download"
 msgstr "Завантажити"
 
-#: cozy/ui/file_not_found_dialog.py:66
+#: cozy/ui/file_not_found_dialog.py:67
 msgid "All files"
 msgstr "Всі файли"
 
-#: cozy/control/offline_cache.py:176
+#: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr "Копіювання"
 
@@ -76,11 +76,11 @@ msgstr "Перейти до автора "
 msgid "Jump to reader "
 msgstr "Перейти до диктора "
 
-#: cozy/control/importer.py:278
+#: cozy/control/importer.py:284
 msgid "Unknown Author"
 msgstr "Невідомий автор"
 
-#: cozy/control/importer.py:280
+#: cozy/control/importer.py:286
 msgid "Unknown Reader"
 msgstr "Невідомий диктор"
 
@@ -156,28 +156,28 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: cozy/ui/main_view.py:403
+#: cozy/ui/main_view.py:405
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui/main_view.py:424
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr "Імпорт аудіокниг"
 
 #. Add the special All element
-#: cozy/ui/main_view.py:493 cozy/ui/main_view.py:499 cozy/ui/main_view.py:819
+#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
 msgid "All"
 msgstr "Всі"
 
-#: cozy/ui/main_view.py:494 cozy/ui/main_view.py:500
+#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
 msgid "Display all books"
 msgstr "Відобразити всі книжки"
 
-#: cozy/control/sleep_timer.py:120 data/ui/timer_popover.ui:105
+#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "хв."
 
-#: cozy/control/sleep_timer.py:128
+#: cozy/control/sleep_timer.py:146
 msgid "Off"
 msgstr "Вимк."
 
@@ -258,9 +258,8 @@ msgid "Elapsed time of current part"
 msgstr "Час, що минув для поточної частини"
 
 #: data/ui/main_window.ui:311
-#, fuzzy
 msgid "Jump to position in current chapter"
-msgstr "Зупиніться після поточного розділу"
+msgstr ""
 
 #: data/ui/main_window.ui:317
 msgid "Position slider"
@@ -471,9 +470,11 @@ msgid "Some files could not be imported"
 msgstr "Деякі файли не можуть бути імпортовані"
 
 #: data/ui/import_failed.ui:134
+#, fuzzy
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
@@ -594,21 +595,7 @@ msgstr "Це оновить метадані всіх імпортованих �
 msgid "Force refresh"
 msgstr "Примусити оновити"
 
-#: data/ui/settings.ui:1470
-msgid "By request"
-msgstr "За запитом"
-
-#: data/ui/settings.ui:1523
-msgid "Use crc32 checksum for file modification detection"
-msgstr "Контрольна сума crc32 для виявлення модифікації файлів"
-
-#: data/ui/settings.ui:1536
-msgid ""
-"Only recommended if cozy doesn't detect file modifications while scanning"
-msgstr ""
-"Рекомендується, лише якщо cozy не виявляє модифікацію файлу при скануванні"
-
-#: data/ui/settings.ui:1611
+#: data/ui/settings.ui:1458
 msgid "Advanced"
 msgstr "Розширені"
 
@@ -640,21 +627,47 @@ msgstr "Частина"
 msgid "Nothing found :("
 msgstr "Нічого не знайдено :("
 
-#: data/ui/timer_popover.ui:39
-msgid "Stop after current chapter"
-msgstr "Зупиніться після поточного розділу"
-
-#: data/ui/timer_popover.ui:76
+#: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Тривалість таймера"
 
-#: data/ui/timer_popover.ui:88
+#: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
 msgstr "Повзунок тривалості таймера"
 
-#: data/ui/timer_popover.ui:89
+#: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
 msgstr "Установка тривалості таймера сну в хвилинах"
+
+#: data/ui/timer_popover.ui:116
+#, fuzzy
+msgid "Stop after current chapter"
+msgstr "Зупиніться після поточного розділу"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr ""
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr ""
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr ""
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
@@ -680,41 +693,13 @@ msgstr "П_ро програму"
 msgid "_Quit"
 msgstr "_Вихід"
 
-#~ msgid "Scrubb through current part"
-#~ msgstr "Прокрутити поточну частину"
+#~ msgid "By request"
+#~ msgstr "За запитом"
 
-#~ msgid "of"
-#~ msgstr "з"
+#~ msgid "Use crc32 checksum for file modification detection"
+#~ msgstr "Контрольна сума crc32 для виявлення модифікації файлів"
 
-#~ msgid "remaining"
-#~ msgstr "залишилось"
-
-#~ msgid "days"
-#~ msgstr "днів"
-
-#~ msgid "ago"
-#~ msgstr "тому назад"
-
-#~ msgid "week"
-#~ msgstr "тиждень"
-
-#~ msgid "weeks"
-#~ msgstr "тижнів"
-
-#~ msgid "month"
-#~ msgstr "місяць"
-
-#~ msgid "months"
-#~ msgstr "місяців"
-
-#~ msgid "year"
-#~ msgstr "рік"
-
-#~ msgid "years"
-#~ msgstr "років"
-
-#~ msgid "page0"
-#~ msgstr "сторінка0"
-
-#~ msgid "_Play/Pause"
-#~ msgstr "_Програвати/призупинити"
+#~ msgid ""
+#~ "Only recommended if cozy doesn't detect file modifications while scanning"
+#~ msgstr ""
+#~ "Рекомендується, лише якщо cozy не виявляє модифікацію файлу при скануванні"
