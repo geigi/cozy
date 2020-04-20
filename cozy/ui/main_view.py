@@ -715,20 +715,13 @@ class CozyUI(metaclass=Singleton):
             if self.sort_stack.props.visible_child_name == "recent":
                 self.book_box.invalidate_filter()
                 self.book_box.invalidate_sort()
-        elif event == "error":
+        elif event == "resource-not-found":
             if self.dialog_open:
                 return
-            if "Resource not found" in str(message):
-                current_track = player.get_current_track()
-                if is_external(current_track.book):
-                    player.stop()
-                    player.unload()
-                    player.emit_event("stop")
-                else:
-                    self.dialog_open = True
-                    dialog = FileNotFoundDialog(
-                        current_track.file)
-                    dialog.show()
+
+            self.dialog_open = True
+            dialog = FileNotFoundDialog(message.file)
+            dialog.show()
 
     def __window_resized(self, window):
         """

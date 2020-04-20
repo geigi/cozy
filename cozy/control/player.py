@@ -50,19 +50,20 @@ def __on_gst_message(bus, message: Gst.Message):
         error, debug_msg = message.parse_error()
 
         if error.code == Gst.ResourceError.NOT_FOUND:
+            track = get_current_track()
             stop()
             unload()
             emit_event("stop")
 
             log.warning("gst: Resource not found. Stopping player.")
             reporter.warning("player", "gst: Resource not found. Stopping player.")
+            emit_event("resource-not-found", track)
             return
 
-        err, debug = message.parse_error()
-        log.error(err)
-        log.debug(debug)
-        reporter.error("player", err)
-        emit_event("error", err)
+        reporter.error("player", error)
+        log.error(error)
+        log.debug(debug_msg)
+        emit_event("error", error)
     elif t == Gst.MessageType.STATE_CHANGED:
         state = get_gst_player_state()
         if state == Gst.State.PLAYING or state == Gst.State.PAUSED:
