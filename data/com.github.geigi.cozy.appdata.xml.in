@@ -49,6 +49,18 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.6.16" timestamp="1587397460">
+      <description>
+        <ul>
+          <li>Fix: Crash which could occur while changing the titlebar display mode</li>
+          <li>Fix: Better handling of resources that cannot be found</li>
+          <li>Fix: Fira font is now readable on the welcome screen</li>
+          <li>Fix: Multiple bugs regarding the titlebar</li>
+          <li>Fix: File not found dialog was not displayed for external devices</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.15" timestamp="1583755270">
       <description>
         <ul>
