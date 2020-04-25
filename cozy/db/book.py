@@ -1,4 +1,4 @@
-from cozy.model.model_base import ModelBase
+from cozy.db.model_base import ModelBase
 from peewee import CharField, IntegerField, BlobField, FloatField, BooleanField
 
 

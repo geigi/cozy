@@ -25,10 +25,10 @@ import cozy.tools as tools
 import cozy.control.player
 from cozy.control.db import is_blacklisted, remove_invalid_entries
 from cozy.control.offline_cache import OfflineCache
-from cozy.model.book import Book
-from cozy.model.storage import Storage
-from cozy.model.storage_blacklist import StorageBlackList
-from cozy.model.track import Track
+from cozy.db.book import Book
+from cozy.db.storage import Storage
+from cozy.db.storage_blacklist import StorageBlackList
+from cozy.db.track import Track
 from cozy.report import reporter
 
 log = logging.getLogger("importer")

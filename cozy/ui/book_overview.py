@@ -6,7 +6,7 @@ import cozy.control.player as player
 import cozy.ui
 from cozy.control.db import get_book_duration, get_tracks, is_external, get_book_progress, get_book_remaining, \
     get_track_for_playback
-from cozy.model.book import Book
+from cozy.db.book import Book
 
 from cozy.ui.book_element import TrackElement
 from cozy.ui.settings import Settings

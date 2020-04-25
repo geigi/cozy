@@ -3,14 +3,14 @@ import os
 import time
 
 from cozy.control.db_updater import update_db
-from cozy.model.artwork_cache import ArtworkCache
-from cozy.model.book import Book
-from cozy.model.model_base import get_sqlite_database, get_data_dir
-from cozy.model.offline_cache import OfflineCache
-from cozy.model.settings import Settings
-from cozy.model.storage import Storage
-from cozy.model.storage_blacklist import StorageBlackList
-from cozy.model.track import Track
+from cozy.db.artwork_cache import ArtworkCache
+from cozy.db.book import Book
+from cozy.db.model_base import get_sqlite_database, get_data_dir
+from cozy.db.offline_cache import OfflineCache
+from cozy.db.settings import Settings
+from cozy.db.storage import Storage
+from cozy.db.storage_blacklist import StorageBlackList
+from cozy.db.track import Track
 from cozy.report import reporter
 
 log = logging.getLogger("db")

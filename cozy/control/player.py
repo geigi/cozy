@@ -5,9 +5,9 @@ from gi.repository import Gst, GLib
 import gi
 
 from cozy.control.db import get_tracks
-from cozy.model.book import Book
-from cozy.model.settings import Settings
-from cozy.model.track import Track
+from cozy.db.book import Book
+from cozy.db.settings import Settings
+from cozy.db.track import Track
 from cozy.report import reporter
 
 gi.require_version('Gst', '1.0')

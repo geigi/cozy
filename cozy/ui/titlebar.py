@@ -4,7 +4,7 @@ import cozy.tools as tools
 import cozy.ui
 from cozy.control.db import get_book_remaining, get_book_progress, get_track_from_book_time, get_book_duration
 from cozy.control.string_representation import seconds_to_str
-from cozy.model.settings import Settings
+from cozy.db.settings import Settings
 from cozy.tools import IntervalTimer
 
 import gi

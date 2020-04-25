@@ -11,9 +11,9 @@ import cozy.ui
 
 from gi.repository import Gio, Gdk, GLib
 
-from cozy.model.book import Book
-from cozy.model.track import Track
-from cozy.model.offline_cache import OfflineCache as OfflineCacheModel
+from cozy.db.book import Book
+from cozy.db.track import Track
+from cozy.db.offline_cache import OfflineCache as OfflineCacheModel
 from cozy.report import reporter
 
 log = logging.getLogger("offline_cache")

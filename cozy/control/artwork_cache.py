@@ -7,8 +7,8 @@ from gi.repository import GdkPixbuf
 
 from cozy.control.application_directories import get_cache_dir
 from cozy.control.db import get_tracks
-from cozy.model.artwork_cache import ArtworkCache
-from cozy.model.book import Book
+from cozy.db.artwork_cache import ArtworkCache
+from cozy.db.book import Book
 from cozy.report import reporter
 
 log = logging.getLogger("artwork_cache")

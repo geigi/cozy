@@ -3,8 +3,8 @@ import logging
 import gi
 
 from cozy.control.db import remove_tracks_with_path
-from cozy.model.storage import Storage
-from cozy.model.storage_blacklist import StorageBlackList
+from cozy.db.storage import Storage
+from cozy.db.storage_blacklist import StorageBlackList
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio

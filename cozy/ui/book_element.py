@@ -8,8 +8,8 @@ import cozy.ui
 from cozy.control.db import get_track_for_playback, is_external, blacklist_book, get_tracks
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.control.string_representation import seconds_to_str
-from cozy.model.book import Book
-from cozy.model.track import Track
+from cozy.db.book import Book
+from cozy.db.track import Track
 from cozy.report import reporter
 from cozy.ui.settings import Settings
 

@@ -24,7 +24,7 @@ from random import randint
 from cozy.control.application_directories import get_cache_dir, get_artwork_cache_dir
 from cozy.control.player import *
 import cozy.ui
-from cozy.model.artwork_cache import ArtworkCache
+from cozy.db.artwork_cache import ArtworkCache
 from cozy.report import reporter
 
 

@@ -1,6 +1,6 @@
 from peewee import CharField, IntegerField, BooleanField
 
-from cozy.model.model_base import ModelBase
+from cozy.db.model_base import ModelBase
 
 
 class Storage(ModelBase):

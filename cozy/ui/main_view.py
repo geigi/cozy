@@ -1,9 +1,9 @@
 import webbrowser
 
 from cozy.control.db import books, authors, readers, is_external, close_db
-from cozy.model.book import Book
-from cozy.model.storage import Storage
-from cozy.model.track import Track
+from cozy.db.book import Book
+from cozy.db.storage import Storage
+from cozy.db.track import Track
 
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
