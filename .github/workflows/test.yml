@@ -19,8 +19,8 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt install meson ninja-build
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        sudo -H python -m pip install --upgrade pip
+        sudo -H pip install -r requirements.txt
     - name: Lint with flake8
       run: |
         pip install flake8
