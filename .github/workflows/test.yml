@@ -18,9 +18,9 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        sudo apt install meson ninja-build
-        sudo -H python -m pip install --upgrade pip
-        sudo -H pip install -r requirements.txt
+        python -m pip install --upgrade pip
+        pip install meson ninja
+        pip install -r requirements.txt
     - name: Lint with flake8
       run: |
         pip install flake8
@@ -31,7 +31,7 @@ jobs:
     - name: Install Cozy
       run: |
         meson --prefix=/usr ./build
-        sudo ninja -C build install
+        ninja -C build install
     - name: Test with pytest
       run: |
         pip install pytest
