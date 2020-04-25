@@ -62,6 +62,9 @@ def init_db():
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
 
+    # TODO: Properly handle errors within the database
+    # Remove this later. It prevents empty book objects in the database
+    clean_books()
 
 def _connect_db(db):
     try:
