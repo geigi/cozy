@@ -1,7 +1,11 @@
-# It's getting Cozy
 ![Unit Testing](https://github.com/geigi/cozy/workflows/Unit%20Testing/badge.svg)
-<span class="badge-patreon"><a href="https://patreon.com/geigi" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
-
+<p align="center">
+  <img width="200" height="200" src="https://raw.githubusercontent.com/geigi/cozy/master/data/icons/hicolor/scalable/apps/com.github.geigi.cozy.svg">
+</p>
+<p align="center">
+  <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+</p>
+# It's getting Cozy
 Cozy is a modern audiobook player for Linux and macOS. 
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
