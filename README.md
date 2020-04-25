@@ -1,5 +1,5 @@
 # It's getting Cozy
-[![Build Status](https://travis-ci.org/geigi/cozy.svg?branch=master)](https://travis-ci.org/geigi/cozy)
+![Unit Testing](https://github.com/geigi/cozy/workflows/Unit%20Testing/badge.svg)
 <span class="badge-patreon"><a href="https://patreon.com/geigi" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
 
 Cozy is a modern audiobook player for Linux and macOS. 

@@ -3,12 +3,12 @@ name: Unit Testing
 on: [push]
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8]
+        python-version: [3.6, 3.7, 3.8, pypy3]
 
     steps:
     - uses: actions/checkout@v2
@@ -16,10 +16,11 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
+    - name: Install cozy dependencies
       run: |
+        sudo apt update
+        sudo apt install libgirepository1.0-dev
         python -m pip install --upgrade pip
-        pip install meson ninja
         pip install -r requirements.txt
     - name: Lint with flake8
       run: |
@@ -28,11 +29,14 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --builtins="_"
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --builtins="_"
-    - name: Install Cozy
-      run: |
-        meson --prefix=/usr ./build
-        ninja -C build install
     - name: Test with pytest
       run: |
         pip install pytest
         pytest
+    - name: Install Cozy
+      run: |
+        # meson dependencies
+        sudo apt install libxml2-utils
+        pip install meson ninja
+        meson --prefix=/usr ./build
+        sudo env "PATH=$PATH" ninja -C build install

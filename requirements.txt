@@ -3,5 +3,4 @@ mutagen
 peewee
 pytz
 requests
-vext
-vext.gi
+PyGObject
