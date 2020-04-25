@@ -30,7 +30,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --builtins="_"
     - name: Install Cozy
       run: |
-        meson --prefix=/usr
+        meson --prefix=/usr .
         sudo ninja install
     - name: Test with pytest
       run: |
