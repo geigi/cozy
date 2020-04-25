@@ -5,10 +5,12 @@
 <p align="center">
   <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 </p>
+
 # It's getting Cozy
-Cozy is a modern audiobook player for Linux and macOS. 
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
+
+Cozy is a modern audiobook player for Linux and macOS. 
 
 ## Here are some of the current features:
 - **Import** your audiobooks into Cozy to browse them comfortably
