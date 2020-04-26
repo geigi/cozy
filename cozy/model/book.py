@@ -126,7 +126,7 @@ class Book:
 
     @property
     def current_chapter(self):
-        pass
+        return next((chapter for chapter in self.chapters if chapter.id == self.position), self.chapters[0])
 
     def _fetch_chapters(self):
         with self._db:

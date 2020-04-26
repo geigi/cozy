@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 
 
 class Chapter(ABC):
+    id: int
+
     @property
     @abstractmethod
     def name(self):

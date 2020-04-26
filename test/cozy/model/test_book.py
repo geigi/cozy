@@ -191,3 +191,12 @@ def test_tracks_are_ordered_by_disk_number_name(peewee_database):
     chapters_manually_sorted.sort(key=lambda chapter: (chapter.disk, chapter.number, chapter.name))
 
     assert all([a == b for a, b in zip(book.chapters, chapters_manually_sorted)])
+
+
+def test_current_track_is_actually_current_track(peewee_database):
+    from cozy.model.book import Book
+    from cozy.db.book import Book as BookModel
+
+    book = Book(peewee_database, 9)
+
+    assert book.current_chapter.id == BookModel.get_by_id(9).position
