@@ -127,5 +127,4 @@ class Book:
     def _fetch_chapters(self):
         with self._db:
             tracks = TrackModel.select(TrackModel.id).where(TrackModel.book == self._db_object)
-
-        self._chapters = [Track(self._db, track.id) for track in tracks]
+            self._chapters = [Track(self._db, track.id) for track in tracks]
