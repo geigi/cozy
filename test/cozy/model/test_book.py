@@ -200,3 +200,11 @@ def test_current_track_is_actually_current_track(peewee_database):
     book = Book(peewee_database, 9)
 
     assert book.current_chapter.id == BookModel.get_by_id(9).position
+
+
+def test_book_with_no_tracks_has_empty_track_list(peewee_database):
+    pass
+
+
+def test_book_with_no_tracks_throws_exception_for_current_chapter(peewee_database):
+    pass
