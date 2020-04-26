@@ -4,7 +4,7 @@ import os
 import pytest
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def peewee_database():
     from playhouse.pool import PooledSqliteDatabase
 
