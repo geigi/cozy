@@ -173,3 +173,10 @@ def test_setting_downloaded_updates_in_book_object_and_database(peewee_database)
     book.downloaded = True
     assert book.downloaded is True
     assert BookModel.get_by_id(1).downloaded is True
+
+
+def test_chapters_return_correct_count_of_chapters(peewee_database):
+    from cozy.model.book import Book
+
+    book = Book(peewee_database, 1)
+    assert len(book.chapters) == 1

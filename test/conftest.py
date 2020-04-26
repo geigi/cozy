@@ -3,7 +3,7 @@ import pytest
 
 @pytest.fixture
 def peewee_database():
-    from peewee import SqliteDatabase
+    from playhouse.pool import PooledSqliteDatabase
 
     from cozy.db.artwork_cache import ArtworkCache
     from cozy.db.book import Book
@@ -16,7 +16,7 @@ def peewee_database():
     models = [Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache]
 
     print("Setup database...")
-    test_db = SqliteDatabase('/tmp/cozy_test.db')
+    test_db = PooledSqliteDatabase('/tmp/cozy_test.db', max_connections=32)
     test_db.bind(models, bind_refs=False, bind_backrefs=False)
     test_db.connect()
     test_db.create_tables(models)
