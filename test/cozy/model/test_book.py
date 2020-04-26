@@ -180,3 +180,14 @@ def test_chapters_return_correct_count_of_chapters(peewee_database):
 
     book = Book(peewee_database, 1)
     assert len(book.chapters) == 1
+
+
+def test_tracks_are_ordered_by_disk_number_name(peewee_database):
+    from cozy.model.book import Book
+
+    book = Book(peewee_database, 9)
+
+    chapters_manually_sorted = book.chapters.copy()
+    chapters_manually_sorted.sort(key=lambda chapter: (chapter.disk, chapter.number, chapter.name))
+
+    assert all([a == b for a, b in zip(book.chapters, chapters_manually_sorted)])

@@ -1,3 +1,6 @@
+import json
+import os
+
 import pytest
 
 
@@ -21,10 +24,16 @@ def peewee_database():
     test_db.connect()
     test_db.create_tables(models)
 
-    book = Book.create(name="Test Book", author="Test Author", reader="Test Reader", position=0, rating=0)
-    Book.create(name="Test Book 2", author="Test Author 2", reader="Test Reader 2", position=0, rating=0)
-    track = Track.create(name="Test Track", number=1, disk=1, position=0, book=book, file="test.mp3", length=42.1,
-                         modified=123456)
+    path_of_test_folder = os.path.dirname(os.path.realpath(__file__)) + '/'
+
+    with open(path_of_test_folder + 'books.json') as json_file:
+        book_data = json.load(json_file)
+
+    with open(path_of_test_folder + 'tracks.json') as json_file:
+        track_data = json.load(json_file)
+
+    Book.insert_many(book_data).execute()
+    Track.insert_many(track_data).execute()
 
     print("Provide database...")
     yield test_db

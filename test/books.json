@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Test Book",
+    "author": "Test Author",
+    "reader": "Test Reader",
+    "position": 0,
+    "rating": 0
+  },
+  {
+    "id": 2,
+    "name": "Harry Potter and the Philosophers Stone",
+    "author": "J. K. Rowling",
+    "reader": "Stephen Fry",
+    "position": 0,
+    "rating": 0
+  },
+  {
+    "id": 3,
+    "name": "Harry Potter and the Order of the Phoenix",
+    "author": "J. K. Rowling",
+    "reader": "Stephen Fry",
+    "position": 0,
+    "rating": 0
+  },
+  {
+    "id": 4,
+    "name": "Harry Potter And The Deathly Hallows",
+    "author": "J. K. Rowling",
+    "reader": "Stephen Fry",
+    "position": 0,
+    "rating": 0
+  },
+  {
+    "id": 5,
+    "name": "Harry Potter and the Chamber of Secrets",
+    "author": "J. K. Rowling",
+    "reader": "Stephen Fry",
+    "position": 0,
+    "rating": 0
+  },
+  {
+    "id": 6,
+    "name": "Harry Potter and the Prisoner of Azkaban",
+    "author": "J. K. Rowling",
+    "reader": "Stephen Fry",
+    "position": 0,
+    "rating": 0
+  },
+  {
+    "id": 7,
+    "name": "Harry Potter and the Goblet of Fire",
+    "author": "J. K. Rowling",
+    "reader": "Stephen Fry",
+    "position": 0,
+    "rating": 0
+  },
+  {
+    "id": 8,
+    "name": "Harry Potter and the Half-Blood Prince",
+    "author": "J. K. Rowling",
+    "reader": "Stephen Fry",
+    "position": 0,
+    "rating": 0
+  },
+  {
+    "id": 9,
+    "name": "20.000 Meilen unter den Meeren",
+    "author": "Jules Verne",
+    "reader": "Ernst Jacobi, Gottfried John, Hermann Lause, Peter Gavajda (Sprecher)",
+    "position": 0,
+    "rating": 0
+  }
+]

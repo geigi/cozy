@@ -124,7 +124,14 @@ class Book:
 
         return self._chapters
 
+    @property
+    def current_chapter(self):
+        pass
+
     def _fetch_chapters(self):
         with self._db:
-            tracks = TrackModel.select(TrackModel.id).where(TrackModel.book == self._db_object)
+            tracks = TrackModel \
+                .select(TrackModel.id) \
+                .where(TrackModel.book == self._db_object) \
+                .order_by(TrackModel.disk, TrackModel.number, TrackModel.name)
             self._chapters = [Track(self._db, track.id) for track in tracks]
