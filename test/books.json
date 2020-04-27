@@ -70,5 +70,13 @@
     "reader": "Ernst Jacobi, Gottfried John, Hermann Lause, Peter Gavajda (Sprecher)",
     "position": 222,
     "rating": 0
+  },
+  {
+    "id": 10,
+    "name": "This is a book without tracks",
+    "author": "Test",
+    "reader": "Test",
+    "position": 0,
+    "rating": 0
   }
 ]

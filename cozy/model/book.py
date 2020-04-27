@@ -7,6 +7,10 @@ from cozy.model.chapter import Chapter
 from cozy.model.track import Track
 
 
+class BookIsEmpty(Exception):
+    pass
+
+
 class Book:
     _chapters: List[Chapter] = None
 
@@ -16,6 +20,9 @@ class Book:
 
         with self._db:
             self._db_object: BookModel = BookModel.get(self.id)
+
+            if TrackModel.select().where(TrackModel.book == self._db_object).count() < 1:
+                raise BookIsEmpty
 
     @property
     def name(self):

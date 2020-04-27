@@ -1,3 +1,6 @@
+import pytest
+
+
 def test_db_created(peewee_database):
     from cozy.db.book import Book
 
@@ -202,9 +205,17 @@ def test_current_track_is_actually_current_track(peewee_database):
     assert book.current_chapter.id == BookModel.get_by_id(9).position
 
 
-def test_book_with_no_tracks_has_empty_track_list(peewee_database):
-    pass
+def test_try_to_init_empty_book_should_throw_exception(peewee_database):
+    from cozy.model.book import Book
+    from cozy.model.book import BookIsEmpty
+
+    with pytest.raises(BookIsEmpty):
+        Book(peewee_database, 10)
 
 
-def test_book_with_no_tracks_throws_exception_for_current_chapter(peewee_database):
-    pass
+def test_try_to_init_non_existant_book_throws_exception(peewee_database):
+    from cozy.model.book import Book
+    from peewee import DoesNotExist
+
+    with pytest.raises(DoesNotExist):
+        Book(peewee_database, -42)
