@@ -4,11 +4,11 @@ from peewee import SqliteDatabase
 
 from cozy.db.book import Book as BookModel
 
-from cozy.model.book import Book
+from cozy.model.book import Book, BookIsEmpty
 
 
 class Library:
-    _books: List[Book] = None
+    _books: List[Book] = []
 
     def __init__(self, db: SqliteDatabase):
         self._db = db
@@ -22,4 +22,8 @@ class Library:
 
     def _load_all_books(self):
         with self._db:
-            self._books = [Book(self._db, book_db_obj.id) for book_db_obj in BookModel.select(BookModel.id)]
+            for book_db_obj in BookModel.select(BookModel.id):
+                try:
+                    self._books.append(Book(self._db, book_db_obj.id))
+                except BookIsEmpty:
+                    pass
