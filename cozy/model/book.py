@@ -24,6 +24,13 @@ class Book:
             if TrackModel.select().where(TrackModel.book == self._db_object).count() < 1:
                 raise BookIsEmpty
 
+    # This property is for the transition time only
+    # Because everything is hardwired to the database objects
+    # Step by step, you got this...
+    @property
+    def db_object(self):
+        return self._db_object
+
     @property
     def name(self):
         return self._db_object.name

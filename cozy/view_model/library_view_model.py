@@ -1,6 +1,9 @@
 from enum import Enum, auto
 
 from cozy.architecture.observable import Observable
+from cozy.control.db import get_db
+from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.model.library import Library
 
 
 class LibraryViewMode(Enum):
@@ -14,9 +17,17 @@ class LibraryViewModel(Observable, object):
     def __init__(self):
         super().__init__()
 
+        self._model = Library(get_db())
+
+        self._fs_monitor = FilesystemMonitor()
+
         self._library_view_mode: LibraryViewMode = LibraryViewMode.CURRENT
         self._is_any_book_in_progress_val = False
         self._selected_filter: str = _("All")
+
+    @property
+    def books(self):
+        return self._model.books
 
     @property
     def library_view_mode(self):
@@ -52,7 +63,7 @@ class LibraryViewModel(Observable, object):
     def display_book_filter(self, book_element):
         book = book_element.book
 
-        if not book.is_currently_available():
+        if not self._fs_monitor.is_book_online(book) and not book.downloaded:
             return False
 
         if self.selected_filter == _("All"):
@@ -61,9 +72,9 @@ class LibraryViewModel(Observable, object):
         if self.library_view_mode == LibraryViewMode.CURRENT:
             return True if book.last_played > 0 else False
         elif self.library_view_mode == LibraryViewMode.AUTHOR:
-            return True if book.get_author() == self.selected_filter else False
+            return True if book.author == self.selected_filter else False
         elif self.library_view_mode == LibraryViewMode.READER:
-            return True if book.get_reader() == self.selected_filter else False
+            return True if book.reader == self.selected_filter else False
 
     def display_book_sort(self, book_element1, book_element2):
         if self._library_view_mode == LibraryViewMode.CURRENT:

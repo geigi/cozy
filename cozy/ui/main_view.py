@@ -10,6 +10,7 @@ from threading import Thread
 from cozy.ui.book_element import BookElement
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
+from cozy.ui.library_view import LibraryView
 from cozy.ui.search import Search
 from cozy.control.sleep_timer import SleepTimer
 from cozy.control.playback_speed import PlaybackSpeed
@@ -499,11 +500,11 @@ class CozyUI(metaclass=Singleton):
         self.reader_box.select_row(all_row)
 
         for book in authors():
-            row = ListBoxRowWithData(book.get_author(), False)
+            row = ListBoxRowWithData(book.author, False)
             self.author_box.add(row)
 
         for book in readers():
-            row = ListBoxRowWithData(book.get_reader(), False)
+            row = ListBoxRowWithData(book.reader, False)
             self.reader_box.add(row)
 
         # this is required to see the new items

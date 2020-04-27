@@ -5,6 +5,7 @@ import gi
 from cozy.control.db import remove_tracks_with_path
 from cozy.db.storage import Storage
 from cozy.db.storage_blacklist import StorageBlackList
+from cozy.view_model.settings_view_model import SettingsViewModel
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio

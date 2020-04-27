@@ -86,13 +86,11 @@ def books():
 
 
 def authors():
-    author_field = Book.author if tools.get_glib_settings().get_boolean("swap-author-reader") else Book.reader
-    return Book.select(author_field).distinct().order_by(author_field)
+    return Book.select(Book.author).distinct().order_by(Book.author)
 
 
 def readers():
-    reader_field = Book.reader if tools.get_glib_settings().get_boolean("swap-author-reader") else Book.author
-    return Book.select(reader_field).distinct().order_by(reader_field)
+    return Book.select(Book.reader).distinct().order_by(Book.reader)
 
 
 def Search(search):
@@ -369,6 +367,11 @@ def is_external(book):
     """
     return any(storage.path in Track.select().join(Book).where(Book.id == book.id).first().file for storage in
                Storage.select().where(Storage.external == True))
+
+
+def get_db():
+    global _db
+    return _db
 
 
 def close_db():
