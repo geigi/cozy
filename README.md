@@ -1,10 +1,16 @@
-# It's getting Cozy
-[![Build Status](https://travis-ci.org/geigi/cozy.svg?branch=master)](https://travis-ci.org/geigi/cozy)
-<span class="badge-patreon"><a href="https://patreon.com/geigi" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
+![Unit Testing](https://github.com/geigi/cozy/workflows/Unit%20Testing/badge.svg)
+<p align="center">
+  <img width="200" height="200" src="https://raw.githubusercontent.com/geigi/cozy/master/data/icons/hicolor/scalable/apps/com.github.geigi.cozy.svg">
+</p>
+<p align="center">
+  <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+</p>
 
-Cozy is a modern audiobook player for Linux and macOS. 
+# It's getting Cozy
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
+
+Cozy is a modern audiobook player for Linux and macOS. 
 
 ## Here are some of the current features:
 - **Import** your audiobooks into Cozy to browse them comfortably
@@ -16,7 +22,7 @@ Cozy is a modern audiobook player for Linux and macOS.
 - **Offline Mode!** This allows you to keep an audio book on your internal storage if you store your audiobooks on an external or network drive. Perfect for listening on the go!
 - Add **mulitple storage locations**
 - **Drag & Drop** to import new audio books
-- Support for DRM free **mp3, m4a (aac, ALAC, …), flac, ogg, wav** files
+- Support for DRM free **mp3, m4a (aac, ALAC, …), flac, ogg, opus, wav** files
 - Mpris integration (**Media keys** & playback info for desktop environment)
 - Developed on Fedora and tested under elementaryOS
 
@@ -38,9 +44,11 @@ You can download it here: <a href="https://github.com/geigi/cozy/releases/downlo
 - `python3`
 - `meson >= 0.40.0` as build system
 - `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
-- `peewee >= 3.5` as object relation mapper
+- `peewee >= 3.9.6` as object relation mapper
 - `python3-mutagen` for meta tag management
 - `python3-distro`
+- `python3-requests`
+- `python3-pytz`
 - `python3-gi-cairo`
 - `python3-gst-1.0`
 - `file`
@@ -103,6 +111,7 @@ To the contributors on GitHub:
 - camellan
 - grenade
 - jnbr
+- kaphula
 - meisenzahl
 - oleg-krv
 - umeboshi2

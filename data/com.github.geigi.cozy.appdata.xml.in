@@ -49,6 +49,66 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.6.16" timestamp="1587397460">
+      <description>
+        <ul>
+          <li>Fix: Crash which could occur while changing the titlebar display mode</li>
+          <li>Fix: Better handling of resources that cannot be found</li>
+          <li>Fix: Fira font is now readable on the welcome screen</li>
+          <li>Fix: Multiple bugs regarding the titlebar</li>
+          <li>Fix: File not found dialog was not displayed for external devices</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.6.15" timestamp="1583755270">
+      <description>
+        <ul>
+          <li>Fix: Files with missing tags failed to import</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.6.14" timestamp="1583080049">
+      <description>
+        <ul>
+          <li>A warning is displayed in the titlebar if network/external drives are not connected</li>
+          <li>MPRIS desktop integration is more stable</li>
+          <li>Fix: Last book was loaded on startup even when the storage medium was offline</li>
+          <li>Fix: Bugs in audiobook location settings window</li>
+          <li>Fix: Bug which sometimes could prevent playback of an audiobook</li>
+          <li>Fix: Crash which could occur on startup</li>
+          <li>Fix: Jumping in titlebar while dragging the position slider with long audio files</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.6.13" timestamp="1582820006">
+      <description>
+        <ul>
+          <li>Sleep timer: Automatic system power control</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.6.12" timestamp="1579121802">
+      <description>
+        <ul>
+          <li>Support for opus files</li>
+          <li>Better support for ogg cover art</li>
+          <li>Swedish translation</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.6.11" timestamp="1578341831">
+      <description>
+        <ul>
+          <li>Fix: some valid media files were not detected</li>
+          <li>Updated translations</li>
+          <li>Other small fixes</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.10" timestamp="1576842834">
       <description>
         <ul>

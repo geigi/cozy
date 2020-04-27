@@ -123,7 +123,7 @@ _instances = {}
 def _get_magic_type(mime):
     i = _instances.get(mime)
     if i is None:
-        i = _instances[mime] = Magic(mime=mime)
+        i = _instances[mime] = Magic(mime=mime, keep_going=True)
     return i
 
 
@@ -195,7 +195,7 @@ def errorcheck_null(result, func, args):
         return result
 
 def errorcheck_negative_one(result, func, args):
-    if result is -1:
+    if result == -1:
         err = magic_error(args[0])
         raise MagicException(err)
     else:
@@ -218,10 +218,7 @@ def coerce_filename(filename):
     # .encode('ascii').  If you use the filesystem encoding
     # then you'll get inconsistent behavior (crashes) depending on the user's
     # LANG environment variable
-    is_unicode = (sys.version_info[0] <= 2 and
-                  isinstance(filename, unicode)) or \
-                  (sys.version_info[0] >= 3 and
-                   isinstance(filename, str))
+    is_unicode =  (sys.version_info[0] >= 3 and isinstance(filename, str))
     if is_unicode:
         return filename.encode('utf-8', 'surrogateescape')
     else:

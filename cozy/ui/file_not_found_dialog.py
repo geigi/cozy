@@ -4,7 +4,7 @@ from gi.repository import Gtk
 import cozy.control.importer as importer
 import cozy.control.player as player
 import cozy.ui
-from cozy.model.track import Track
+from cozy.db.track import Track
 
 
 class FileNotFoundDialog():

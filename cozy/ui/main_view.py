@@ -1,15 +1,10 @@
 import webbrowser
 
-import gi
-
 from cozy.control.db import books, authors, readers, is_external, close_db
-from cozy.model.book import Book
-from cozy.model.storage import Storage
-from cozy.model.track import Track
-from cozy.ui.library_view import LibraryView
+from cozy.db.book import Book
+from cozy.db.storage import Storage
+from cozy.db.track import Track
 
-gi.require_version('Gtk', '3.0')
-gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
 from cozy.ui.book_element import BookElement
@@ -22,7 +17,7 @@ from cozy.ui.titlebar import Titlebar
 from cozy.ui.settings import Settings
 from cozy.ui.book_overview import BookOverview
 from cozy.architecture.singleton import Singleton
-
+import cozy.report.reporter as report
 import cozy.control.importer as importer
 import cozy.control.player as player
 import cozy.tools as tools
@@ -47,8 +42,6 @@ class CozyUI(metaclass=Singleton):
     current_track_element = None
     # Is currently an dialog open?
     dialog_open = False
-    # Are we currently playing?
-    is_playing = False
     is_initialized = False
     first_play = True
     __inhibit_cookie = None
@@ -80,6 +73,7 @@ class CozyUI(metaclass=Singleton):
         self.__init_resources()
         self.__init_css()
         self.__init_actions()
+        report.info("main", "startup")
 
     def __init_resources(self):
         """
@@ -696,46 +690,34 @@ class CozyUI(metaclass=Singleton):
         if event == "stop":
             if self.__inhibit_cookie:
                 self.app.uninhibit(self.__inhibit_cookie)
-            self.is_playing = False
             self.stop()
             self.titlebar.stop()
             self.sleep_timer.stop()
         elif event == "play":
-            self.is_playing = True
             self.play()
             self.titlebar.play()
             self.sleep_timer.start()
-            self.book_overview.select_track(None, True)
             self.refresh_recent()
             self.__inhibit_cookie = self.app.inhibit(
                 self.window, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook")
         elif event == "pause":
             if self.__inhibit_cookie:
                 self.app.uninhibit(self.__inhibit_cookie)
-            self.is_playing = False
             self.pause()
             self.titlebar.pause()
             self.sleep_timer.stop()
-            self.book_overview.select_track(None, False)
         elif event == "track-changed":
             self.track_changed()
             if self.sort_stack.props.visible_child_name == "recent":
                 self.book_box.invalidate_filter()
                 self.book_box.invalidate_sort()
-        elif event == "error":
+        elif event == "resource-not-found":
             if self.dialog_open:
                 return
-            if "Resource not found" in str(message):
-                current_track = player.get_current_track()
-                if is_external(current_track.book):
-                    player.stop()
-                    player.unload()
-                    player.emit_event("stop")
-                else:
-                    self.dialog_open = True
-                    dialog = FileNotFoundDialog(
-                        current_track.file)
-                    dialog.show()
+
+            self.dialog_open = True
+            dialog = FileNotFoundDialog(message.file)
+            dialog.show()
 
     def __window_resized(self, window):
         """
@@ -775,6 +757,8 @@ class CozyUI(metaclass=Singleton):
         player.dispose()
 
         close_db()
+
+        report.close()
 
         log.info("Closing app.")
         self.app.quit()

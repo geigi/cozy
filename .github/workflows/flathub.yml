@@ -1,0 +1,54 @@
+name: Deploy on Flathub
+
+on:
+  release:
+    types: [published]
+
+#on:
+#  watch:
+#    types: [started]
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install nodejs-dev node-gyp libssl1.0-dev
+        sudo apt-get install npm
+        sudo npm install -g json
+
+    - name: Download latest cozy release
+      run: |
+        curl -s https://api.github.com/repos/geigi/cozy/releases/latest | json tag_name > /tmp/VERSION
+        echo https://github.com/geigi/cozy/archive/$(cat /tmp/VERSION).tar.gz > /tmp/RELEASE_URL
+        wget -O /tmp/cozy.tar.gz $(cat /tmp/RELEASE_URL)
+        sha256sum /tmp/cozy.tar.gz | cut -d " " -f 1 > /tmp/SHA256SUM
+        
+    - name: Clone Flathub repository
+      run: git clone https://geigi:${{ secrets.FLATHUB_TOKEN }}@github.com/flathub/com.github.geigi.cozy.git /tmp/flathub
+      
+    - name: Update Flathub json
+      run: |
+        ls /tmp/flathub
+        json -I -f /tmp/flathub/com.github.geigi.cozy.json -e "this.modules[this.modules.length - 1].sources[0].url='https://github.com/geigi/cozy/archive/$(cat /tmp/VERSION).tar.gz'"
+        json -I -f /tmp/flathub/com.github.geigi.cozy.json -e "this.modules[this.modules.length - 1].sources[0].sha256='$(cat /tmp/SHA256SUM)'"
+
+    - name: Push changes
+      run: |
+        git config --global user.email "github@geigi.de"
+        git config --global user.name "Github Actions"
+        cd /tmp/flathub
+        git commit -am "Bump version to $(cat /tmp/VERSION)"
+        git push
+
+    - name: Wait for flathub build to complete
+      run: |
+        cd $GITHUB_WORKSPACE/.ci
+        chmod +x *.sh
+        ./flathub_wait_for_build.sh

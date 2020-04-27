@@ -4,11 +4,11 @@ from peewee import IntegerField, BooleanField, FloatField
 from playhouse.migrate import SqliteMigrator, migrate
 
 from cozy.control.application_directories import get_cache_dir
-from cozy.model.model_base import get_data_dir, get_sqlite_database
-from cozy.model.offline_cache import OfflineCache
-from cozy.model.settings import Settings
-from cozy.model.storage import Storage
-from cozy.model.storage_blacklist import StorageBlackList
+from cozy.db.model_base import get_data_dir, get_sqlite_database
+from cozy.db.offline_cache import OfflineCache
+from cozy.db.settings import Settings
+from cozy.db.storage import Storage
+from cozy.db.storage_blacklist import StorageBlackList
 
 
 def __update_db_1(db):

@@ -1,13 +1,14 @@
 import threading
 import time
-from gi.repository import Gst
+from gi.repository import Gst, GLib
 
 import gi
 
 from cozy.control.db import get_tracks
-from cozy.model.book import Book
-from cozy.model.settings import Settings
-from cozy.model.track import Track
+from cozy.db.book import Book
+from cozy.db.settings import Settings
+from cozy.db.track import Track
+from cozy.report import reporter
 
 gi.require_version('Gst', '1.0')
 import logging
@@ -23,12 +24,12 @@ __set_speed = False
 __current_track = None
 __listeners = []
 __wait_to_seek = False
-__player = None
+__player: Gst.Bin = None
 __bus = None
 __play_next = True
 
 
-def __on_gst_message(bus, message):
+def __on_gst_message(bus, message: Gst.Message):
     """
     Handle messages from gst.
     """
@@ -46,10 +47,23 @@ def __on_gst_message(bus, message):
     elif t == Gst.MessageType.EOS:
         next_track()
     elif t == Gst.MessageType.ERROR:
-        err, debug = message.parse_error()
-        log.error(err)
-        log.debug(debug)
-        emit_event("error", err)
+        error, debug_msg = message.parse_error()
+
+        if error.code == Gst.ResourceError.NOT_FOUND:
+            track = get_current_track()
+            stop()
+            unload()
+            emit_event("stop")
+
+            log.warning("gst: Resource not found. Stopping player.")
+            reporter.warning("player", "gst: Resource not found. Stopping player.")
+            emit_event("resource-not-found", track)
+            return
+
+        reporter.error("player", error)
+        log.error(error)
+        log.debug(debug_msg)
+        emit_event("error", error)
     elif t == Gst.MessageType.STATE_CHANGED:
         state = get_gst_player_state()
         if state == Gst.State.PLAYING or state == Gst.State.PAUSED:
@@ -161,6 +175,15 @@ def get_current_track():
             return None
     else:
         return None
+
+
+def is_playing():
+    if __player:
+        state = __player.get_state(Gst.CLOCK_TIME_NONE)
+        if state.state == Gst.State.PLAYING:
+            return True
+
+    return False
 
 
 def add_player_listener(function):
@@ -375,7 +398,11 @@ def auto_jump():
         if get_playbin().query(query):
             fmt, seek_enabled, start, end = query.parse_seeking()
             if seek_enabled:
-                jump_to_ns(get_current_track().position)
+                track = get_current_track()
+                if not track:
+                    return
+
+                jump_to_ns(track.position)
                 __wait_to_seek = False
                 __set_speed = False
             if __set_speed:
@@ -496,7 +523,7 @@ def load_last_book():
                 else:
                     path = OfflineCache().get_cached_path(last_track)
                     if not path:
-                        path = last_track.file
+                        return
                 __player.set_property("uri", "file://" + path)
                 __player.set_state(Gst.State.PAUSED)
                 __current_track = last_track
@@ -542,9 +569,10 @@ def save_current_track_position(pos=None, track=None):
 
     if track is None:
         track = get_current_track()
-    
-    Track.update(position=pos).where(
-        Track.id == track.id).execute()
+
+    if track:
+        Track.update(position=pos).where(
+            Track.id == track.id).execute()
 
 
 def emit_event(event, message=None):

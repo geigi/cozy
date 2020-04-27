@@ -6,7 +6,7 @@ import cozy.control.player as player
 import cozy.ui
 from cozy.control.db import get_book_duration, get_tracks, is_external, get_book_progress, get_book_remaining, \
     get_track_for_playback
-from cozy.model.book import Book
+from cozy.db.book import Book
 
 from cozy.ui.book_element import TrackElement
 from cozy.ui.settings import Settings
@@ -60,9 +60,9 @@ class BookOverview:
         if self.book and self.book.id == book.id:
             self.update_time()
             return
-        self.book = Book[book.id]
+        self.book = Book.get(Book.id == book.id)
 
-        if self.ui.is_playing and self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
+        if player.is_playing() and self.ui.titlebar.current_book and self.book.id == self.ui.titlebar.current_book.id:
             self.play_book_button.set_image(self.pause_img)
         else:
             self.play_book_button.set_image(self.play_img)
@@ -186,12 +186,7 @@ class BookOverview:
 
         self.progress_bar.set_fraction(percentage)
 
-    def select_track(self, curr_track, playing):
-        """
-        Selects a track in the list and sets the play/pause icon.
-        :param curr_track: Track to be selected
-        :param playing: Display play (False) or pause (True) icon
-        """
+    def _set_active_track(self, curr_track, playing):
         if self.book is None or self.ui.titlebar.current_book.id != self.book.id:
             return
 
@@ -200,15 +195,15 @@ class BookOverview:
         if self.book.position == -1:
             return
 
+        track_box_children = [e for e in self.track_box.get_children() if isinstance(e, TrackElement)]
         if curr_track:
-            track_box_children = [e for e in self.track_box.get_children() if isinstance(e, TrackElement)]
             self.current_track_element = next(
                 filter(
                     lambda x: x.track.id == curr_track.id,
                     track_box_children), None)
 
         if self.current_track_element is None:
-            self.current_track_element = self.track_box.get_children()[0]
+            self.current_track_element = track_box_children[0]
 
         self.current_track_element.select()
         self.current_track_element.set_playing(playing)
@@ -236,7 +231,7 @@ class BookOverview:
         """
         Mark the current track position.
         """
-        book = Book[self.book.id]
+        book = Book.get(Book.id == self.book.id)
 
         if book.position == -1:
             self.deselect_track_element()
@@ -257,7 +252,7 @@ class BookOverview:
             self.current_track_element.select()
 
         if self.ui.titlebar.current_book and self.ui.titlebar.current_book.id == self.book.id:
-            self.current_track_element.set_playing(self.ui.is_playing)
+            self.current_track_element.set_playing(player.is_playing())
 
     def __ui_changed(self, event, message):
         """
@@ -291,7 +286,7 @@ class BookOverview:
             self._mark_current_track()
         elif event == "track-changed":
             track = player.get_current_track()
-            self.select_track(track, self.ui.is_playing)
+            self._set_active_track(track, player.is_playing())
 
     def __settings_changed(self, event, message):
         """

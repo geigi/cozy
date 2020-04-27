@@ -1,0 +1,25 @@
+from typing import List
+
+from peewee import SqliteDatabase
+
+from cozy.db.book import Book as BookModel
+
+from cozy.model.book import Book
+
+
+class Library:
+    _books: List[Book] = None
+
+    def __init__(self, db: SqliteDatabase):
+        self._db = db
+
+    @property
+    def books(self):
+        if not self._books:
+            self._load_all_books()
+
+        return self._books
+
+    def _load_all_books(self):
+        with self._db:
+            self._books = [Book(self._db, book_db_obj.id) for book_db_obj in BookModel.select(BookModel.id)]
