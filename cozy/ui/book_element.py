@@ -1,4 +1,4 @@
-import os, subprocess
+import html, os, subprocess
 from gi.repository import Gtk, Gdk, GdkPixbuf, Pango, Gst
 
 import cozy.control.player as player
@@ -228,7 +228,7 @@ class BookElement(Gtk.FlowBoxChild):
 
         # label contains the book name and is limited to x chars
         title_label = Gtk.Label.new("")
-        title = tools.shorten_string(self.book.name, MAX_BOOK_LENGTH)
+        title = html.escape(tools.shorten_string(self.book.name, MAX_BOOK_LENGTH))
         title_label.set_markup("<b>" + title + "</b>")
         title_label.set_xalign(0.5)
         title_label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
