@@ -20,6 +20,10 @@ class LibraryView:
 
         self._connect_view_model()
 
+    def populate_book_box(self):
+        for book in self._view_model.books:
+            self._book_box.add(book)
+
     def _get_ui_elements(self):
         self._filter_stack: Gtk.Stack = self._builder.get_object("sort_stack")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
