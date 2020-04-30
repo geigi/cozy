@@ -53,7 +53,7 @@ class CozyUI(metaclass=Singleton):
         self.app = app
         self.version = version
 
-        self._library_view = None
+        self._library_view: LibraryView = None
 
     def activate(self):
         self.first_play = True
@@ -61,12 +61,13 @@ class CozyUI(metaclass=Singleton):
         self.__init_window()
         self.__init_components()
 
+        self._library_view = LibraryView(self.window_builder)
+
         self.auto_import()
         self.refresh_content()
         self.check_for_tracks()
         self.__load_last_book()
 
-        self._library_view = LibraryView(self.window_builder)
 
         self.is_initialized = True
 
@@ -523,9 +524,7 @@ class CozyUI(metaclass=Singleton):
 
         self.populate_author_reader()
         self.filter_author_reader(tools.get_glib_settings().get_boolean("hide-offline"))
-
-        for b in books():
-            self.book_box.add(BookElement(b))
+        self._library_view.populate_book_box()
 
         self.book_box.show_all()
 
@@ -536,7 +535,6 @@ class CozyUI(metaclass=Singleton):
             book_element = next(filter(
                 lambda x: x.book.id == self.titlebar.current_book.id,
                 self.book_box.get_children()), None)
-            book_element.refresh_book_object()
 
             if self.sort_stack.props.visible_child_name == "recent":
                 self.book_box.invalidate_sort()

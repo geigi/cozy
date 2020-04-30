@@ -1,6 +1,7 @@
 from gi.repository import Gtk
 from gi.repository.Gtk import Builder
 
+from cozy.ui.book_element import BookElement
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
 
 READER_PAGE = "reader"
@@ -20,9 +21,11 @@ class LibraryView:
 
         self._connect_view_model()
 
+        self.populate_book_box()
+
     def populate_book_box(self):
         for book in self._view_model.books:
-            self._book_box.add(book)
+            self._book_box.add(BookElement(book))
 
     def _get_ui_elements(self):
         self._filter_stack: Gtk.Stack = self._builder.get_object("sort_stack")

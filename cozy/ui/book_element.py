@@ -1,12 +1,12 @@
-import os, subprocess
+import os
+import subprocess
 from gi.repository import Gtk, Gdk, Pango
 
 import cozy.tools as tools
 import cozy.ui
-from cozy.control.db import is_external, blacklist_book, get_tracks
+from cozy.control.db import is_external, blacklist_book
 from cozy.control.filesystem_monitor import FilesystemMonitor
-from cozy.db.book import Book
-from cozy.report import reporter
+from cozy.model.book import Book
 from cozy.ui.album_element import AlbumElement
 from cozy.ui.settings import Settings
 
@@ -18,7 +18,6 @@ class BookElement(Gtk.FlowBoxChild):
     """
     This class represents a book with big artwork in the book viewer.
     """
-    book = None
     ui = None
     selected = False
     wait_to_seek = False
@@ -27,8 +26,8 @@ class BookElement(Gtk.FlowBoxChild):
     current_track_element = None
     context_menu = None
 
-    def __init__(self, b):
-        self.book = b
+    def __init__(self, book: Book):
+        self.book: Book = book
         self.ui = cozy.ui.main_view.CozyUI()
 
         self.ONLINE_TOOLTIP_TEXT = _("Open book overview")
@@ -45,7 +44,7 @@ class BookElement(Gtk.FlowBoxChild):
         self.box.set_margin_top(10)
 
         # label contains the book name and is limited to x chars
-        title_label = Gtk.Label.new("")
+        title_label = Gtk.Label()
         title = tools.shorten_string(self.book.name, MAX_BOOK_LENGTH)
         title_label.set_markup("<b>" + title + "</b>")
         title_label.set_xalign(0.5)
@@ -82,12 +81,6 @@ class BookElement(Gtk.FlowBoxChild):
         FilesystemMonitor().add_listener(self.__on_storage_changed)
         Settings().add_listener(self.__on_storage_changed)
 
-    def get_book(self):
-        """
-        Get this book element with the newest values from the 
-        """
-        return Book.select().where(Book.id == self.book.id).get()
-
     def set_playing(self, is_playing):
         """
         Set the UI to play/pause.
@@ -98,15 +91,6 @@ class BookElement(Gtk.FlowBoxChild):
         else:
             self.art.play_button.set_from_icon_name(
                 "media-playback-start-symbolic", self.art.icon_size)
-
-    def refresh_book_object(self):
-        """
-        Refresh the internal book object from the database.
-        """
-        try:
-            self.book = Book.get(Book.id == self.book.id)
-        except Exception as e:
-            reporter.exception("book_element", e)
 
     def __on_button_press_event(self, widget, event):
         """
@@ -165,16 +149,13 @@ class BookElement(Gtk.FlowBoxChild):
         self.ui.refresh_content()
 
     def __mark_as_read(self, widget, parameter):
-        """
-        Marks a book as read.
-        """
-        Book.update(position=-1).where(Book.id == self.book.id).execute()
+        self.book.position = -1
 
     def __jump_to_folder(self, widget, parameter):
         """
         Opens the folder containing this books files in the default file explorer.
         """
-        track = get_tracks(self.book).first()
+        track = self.book.chapters.first()
         path = os.path.dirname(track.file)
         subprocess.Popen(['xdg-open', path])
 
@@ -182,12 +163,12 @@ class BookElement(Gtk.FlowBoxChild):
         """
         """
         if (event == "storage-online" and not super().get_sensitive()) or event == "external-storage-removed":
-            if message in get_tracks(self.book).first().file:
+            if message in self.book.chapters.first().file:
                 super().set_sensitive(True)
                 self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
         elif (event == "storage-offline" and super().get_sensitive()):
             self.refresh_book_object()
-            if message in get_tracks(self.book).first().file and not self.book.offline:
+            if message in self.book.chapters.first().file and not self.book.offline:
                 super().set_sensitive(False)
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         elif event == "external-storage-added":
@@ -198,6 +179,6 @@ class BookElement(Gtk.FlowBoxChild):
                 super().set_sensitive(False)
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         if event == "external-storage-removed":
-            first_track = get_tracks(self.book).first()
+            first_track = self.book.chapters.first()
             if first_track and message in first_track.file:
                 self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)

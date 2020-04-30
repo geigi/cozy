@@ -2,6 +2,8 @@ import logging
 import os
 import time
 
+from playhouse.pool import PooledSqliteDatabase
+
 from cozy import tools
 from cozy.control.db_updater import update_db
 from cozy.db.artwork_cache import ArtworkCache
@@ -24,7 +26,6 @@ if PeeweeVersion[0] == '2':
     ModelBase = BaseModel
 else:
     log.info("Using peewee 3 backend")
-from peewee import SqliteDatabase
 from gi.repository import GLib, Gdk
 
 _db = get_sqlite_database()
@@ -38,7 +39,7 @@ def init_db():
     if Settings.table_exists():
         update_db()
     else:
-        tmp_db = SqliteDatabase(os.path.join(get_data_dir(), "cozy.db"))
+        tmp_db = PooledSqliteDatabase(os.path.join(get_data_dir(), "cozy.db"))
         if PeeweeVersion[0] == '2':
             tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache], True)
         else:
@@ -66,6 +67,7 @@ def init_db():
     # TODO: Properly handle errors within the database
     # Remove this later. It prevents empty book objects in the database
     clean_books()
+
 
 def _connect_db(db):
     try:

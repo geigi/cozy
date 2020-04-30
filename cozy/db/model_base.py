@@ -2,6 +2,7 @@ import logging
 import os
 
 from peewee import Model
+from playhouse.pool import PooledSqliteDatabase
 from playhouse.sqliteq import SqliteQueueDatabase
 
 from cozy.control.application_directories import get_data_dir
@@ -24,7 +25,7 @@ def __open_database():
     global _db
     if not os.path.exists(get_data_dir()):
         os.makedirs(get_data_dir())
-    _db = SqliteQueueDatabase(os.path.join(get_data_dir(), "cozy.db"), pragmas=[('journal_mode', 'wal')])
+    _db = PooledSqliteDatabase(os.path.join(get_data_dir(), "cozy.db"), pragmas=[('journal_mode', 'wal')])
 
 __open_database()
 
