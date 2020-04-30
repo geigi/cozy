@@ -1,3 +1,7 @@
+.bold {
+  font-weight: bold;
+}
+
 .bordered {
   border: 1px solid shade(@theme_bg_color, 0.8);
 }

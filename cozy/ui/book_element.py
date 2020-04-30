@@ -229,7 +229,8 @@ class BookElement(Gtk.FlowBoxChild):
         # label contains the book name and is limited to x chars
         title_label = Gtk.Label.new("")
         title = tools.shorten_string(self.book.name, MAX_BOOK_LENGTH)
-        title_label.set_markup("<b>" + title + "</b>")
+        title_label.set_text(title)
+        title_label.get_style_context().add_class("bold")
         title_label.set_xalign(0.5)
         title_label.set_line_wrap(Pango.WrapMode.WORD_CHAR)
         title_label.props.max_width_chars = 30
