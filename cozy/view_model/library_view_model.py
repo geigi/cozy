@@ -3,6 +3,7 @@ from enum import Enum, auto
 from cozy.architecture.observable import Observable
 from cozy.control.db import get_db
 from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.model.book import Book
 from cozy.model.library import Library
 
 
@@ -59,6 +60,13 @@ class LibraryViewModel(Observable, object):
     def _is_any_book_in_progress(self, value):
         self._is_any_book_in_progress_val = value
         self._notify("is_any_book_in_progress", value)
+
+    def playback_book(self, book: Book):
+        # Pause/Play book here
+        pass
+
+    def switch_screen(self, screen: str):
+        pass
 
     def display_book_filter(self, book_element):
         book = book_element.book

@@ -25,7 +25,10 @@ class LibraryView:
 
     def populate_book_box(self):
         for book in self._view_model.books:
-            self._book_box.add(BookElement(book))
+            book_element = BookElement(book)
+            book_element.connect("play-pause-clicked", self._play_book_clicked)
+            book_element.connect("open-book-overview", self._open_book_overview_clicked)
+            self._book_box.add(book_element)
 
     def _get_ui_elements(self):
         self._filter_stack: Gtk.Stack = self._builder.get_object("sort_stack")
@@ -90,3 +93,9 @@ class LibraryView:
     def _apply_selected_filter(self, sender, row):
         self._view_model.selected_filter = row.data
         self._invalidate_filters()
+
+    def _play_book_clicked(self, widget, book):
+        self._view_model.playback_book(book)
+
+    def _open_book_overview_clicked(self, widget, book):
+        pass

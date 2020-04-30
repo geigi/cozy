@@ -1,4 +1,4 @@
-from gi.repository import Gtk, Gdk, GdkPixbuf, Gst
+from gi.repository import Gtk, Gdk, GdkPixbuf, Gst, GObject
 
 from cozy.control import artwork_cache as artwork_cache, player as player
 from cozy.control.db import get_track_for_playback
@@ -168,8 +168,9 @@ class AlbumElement(Gtk.Box):
         Play this book.
         """
         if event.type == Gdk.EventType.BUTTON_PRESS and event.button != 1:
-            return
+            return False
 
+        self.emit("play-pause-clicked", self.book)
         track = get_track_for_playback(self.book)
         current_track = player.get_current_track()
 
@@ -182,3 +183,8 @@ class AlbumElement(Gtk.Box):
             player.play_pause(None, True)
 
         return True
+
+
+GObject.type_register(AlbumElement)
+GObject.signal_new('play-pause-clicked', AlbumElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
+                   (GObject.TYPE_PYOBJECT,))

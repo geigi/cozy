@@ -1,6 +1,6 @@
 import os
 import subprocess
-from gi.repository import Gtk, Gdk, Pango
+from gi.repository import Gtk, Gdk, Pango, GObject
 
 import cozy.tools as tools
 import cozy.ui
@@ -77,15 +77,13 @@ class BookElement(Gtk.FlowBoxChild):
         self.event_box.add(self.box)
         self.add(self.event_box)
 
+        self.art.connect("play-pause-clicked", self._on_album_art_press_event)
         self.event_box.connect("button-press-event", self.__on_button_press_event)
         self.connect("key-press-event", self.__on_key_press_event)
         FilesystemMonitor().add_listener(self.__on_storage_changed)
         Settings().add_listener(self.__on_storage_changed)
 
     def set_playing(self, is_playing):
-        """
-        Set the UI to play/pause.
-        """
         if is_playing:
             self.art.play_button.set_from_icon_name(
                 "media-playback-pause-symbolic", self.art.icon_size)
@@ -93,11 +91,10 @@ class BookElement(Gtk.FlowBoxChild):
             self.art.play_button.set_from_icon_name(
                 "media-playback-start-symbolic", self.art.icon_size)
 
+    def _on_album_art_press_event(self, widget, book):
+        self.emit("play-pause-clicked", book)
+
     def __on_button_press_event(self, widget, event):
-        """
-        Handle button press events.
-        This is used for the right click context menu.
-        """
         if event.type == Gdk.EventType.BUTTON_PRESS and event.button == 3:
             if self.context_menu is None:
                 self.context_menu = self.__create_context_menu()
@@ -106,22 +103,18 @@ class BookElement(Gtk.FlowBoxChild):
             return True
         elif event.type == Gdk.EventType.BUTTON_PRESS and event.button == 1:
             if super().get_sensitive():
+                self.emit("open-book-overview", self.book)
                 self.ui.set_book_overview(self.book)
         elif event.type == Gdk.EventType.KEY_PRESS and event.keyval == Gdk.KEY_Return:
             if super().get_sensitive():
+                self.emit("open-book-overview", self.book)
                 self.ui.set_book_overview(self.book)
 
     def __on_key_press_event(self, widget, key):
-        """
-        Handle key press events.
-        """
         if key.keyval == Gdk.KEY_Return and super().get_sensitive():
             self.ui.set_book_overview(self.book)
 
     def __create_context_menu(self):
-        """
-        Creates a context menu for this book element.
-        """
         menu = Gtk.Menu()
         read_item = Gtk.MenuItem(label=_("Mark as read"))
         read_item.connect("button-press-event", self.__mark_as_read)
@@ -161,8 +154,6 @@ class BookElement(Gtk.FlowBoxChild):
         subprocess.Popen(['xdg-open', path])
 
     def __on_storage_changed(self, event, message):
-        """
-        """
         if (event == "storage-online" and not super().get_sensitive()) or event == "external-storage-removed":
             if message in self.book.chapters.first().file:
                 super().set_sensitive(True)
@@ -183,3 +174,10 @@ class BookElement(Gtk.FlowBoxChild):
             first_track = self.book.chapters.first()
             if first_track and message in first_track.file:
                 self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
+
+
+GObject.type_register(AlbumElement)
+GObject.signal_new('play-pause-clicked', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
+                   (GObject.TYPE_PYOBJECT,))
+GObject.signal_new('open-book-overview', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
+                   (GObject.TYPE_PYOBJECT,))
