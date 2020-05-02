@@ -19,7 +19,8 @@ def peewee_database():
     models = [Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache]
 
     print("Setup database...")
-    test_db = PooledSqliteDatabase('/tmp/cozy_test.db', max_connections=32)
+    db_path = '/tmp/cozy_test.db'
+    test_db = PooledSqliteDatabase(db_path, max_connections=32)
     test_db.bind(models, bind_refs=False, bind_backrefs=False)
     test_db.connect()
     test_db.create_tables(models)
@@ -41,3 +42,4 @@ def peewee_database():
     print("Teardown database...")
     test_db.drop_tables(models)
     test_db.close()
+    os.remove(db_path)
