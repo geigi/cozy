@@ -14,6 +14,14 @@ class Library:
         self._db = db
 
     @property
+    def authors(self):
+        return {book.author for book in self.books}
+
+    @property
+    def readers(self):
+        return {book.reader for book in self.books}
+
+    @property
     def books(self):
         if not self._books:
             self._load_all_books()
