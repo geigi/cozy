@@ -61,6 +61,14 @@ class LibraryViewModel(Observable, object):
         self._is_any_book_in_progress_val = value
         self._notify("is_any_book_in_progress", value)
 
+    @property
+    def authors(self):
+        return sorted(self._model.authors)
+
+    @property
+    def readers(self):
+        return sorted(self._model.readers)
+
     def playback_book(self, book: Book):
         # Pause/Play book here
         pass

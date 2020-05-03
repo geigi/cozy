@@ -29,6 +29,9 @@ import distro
 from traceback import format_exception
 import gi
 
+from cozy.ui.widgets.filter_list_box import FilterListBox
+from cozy.ui.widgets.list_box_extensions import extend_list_box
+
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 
@@ -133,9 +136,21 @@ def __on_command_line():
         ])
 
 
+def extend_classes():
+    extend_list_box()
+
+
+def init_custom_widgets():
+    FilterListBox()
+
+
 def main():
     __on_command_line()
     print(sys.argv)
+
+    extend_classes()
+    init_custom_widgets()
+
     application = Application()
 
     try:

@@ -691,7 +691,7 @@ audio-volume-medium-symbolic</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
-                                  <object class="GtkListBox" id="author_box">
+                                  <object class="FilterListBox" id="author_box">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child internal-child="accessible">
@@ -726,7 +726,7 @@ audio-volume-medium-symbolic</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
-                                  <object class="GtkListBox" id="reader_box">
+                                  <object class="FilterListBox" id="reader_box">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child internal-child="accessible">

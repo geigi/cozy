@@ -2,6 +2,7 @@ from gi.repository import Gtk
 from gi.repository.Gtk import Builder
 
 from cozy.ui.book_element import BookElement
+from cozy.ui.widgets.filter_list_box import FilterListBox
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
 
 READER_PAGE = "reader"
@@ -23,20 +24,13 @@ class LibraryView:
 
         self.populate_book_box()
 
-    def populate_book_box(self):
-        for book in self._view_model.books:
-            book_element = BookElement(book)
-            book_element.connect("play-pause-clicked", self._play_book_clicked)
-            book_element.connect("open-book-overview", self._open_book_overview_clicked)
-            self._book_box.add(book_element)
-
     def _get_ui_elements(self):
         self._filter_stack: Gtk.Stack = self._builder.get_object("sort_stack")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
         self._book_box = self._builder.get_object("book_box")
-        self._author_box: Gtk.ListBox = self._builder.get_object("author_box")
-        self._reader_box: Gtk.ListBox = self._builder.get_object("reader_box")
+        self._author_box: FilterListBox = self._builder.get_object("author_box")
+        self._reader_box: FilterListBox = self._builder.get_object("reader_box")
 
     def _connect_ui_elements(self):
         self._filter_stack.connect("notify::visible-child", self._on_sort_stack_changed)
@@ -47,6 +41,17 @@ class LibraryView:
 
     def _connect_view_model(self):
         self._view_model.bind_to("library_view_mode", self._on_library_view_mode_changed)
+
+    def populate_book_box(self):
+        for book in self._view_model.books:
+            book_element = BookElement(book)
+            book_element.connect("play-pause-clicked", self._play_book_clicked)
+            book_element.connect("open-book-overview", self._open_book_overview_clicked)
+            self._book_box.add(book_element)
+
+    def populate_author_reader(self):
+        self._author_box.populate(self._view_model.authors)
+        self._reader_box.populate(self._view_model.readers)
 
     def _on_sort_stack_changed(self, widget, property):
         page = widget.props.visible_child_name

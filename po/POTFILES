@@ -14,6 +14,7 @@ cozy/control/sleep_timer.py
 cozy/ui/settings.py
 cozy/ui/disk_element.py
 cozy/ui/warnings.py
+cozy/ui/widgets/filter_list_box.py
 data/ui/main_window.ui
 data/ui/about.ui
 data/ui/file_not_found.ui

@@ -1,16 +1,16 @@
 import webbrowser
 
-from cozy.control.db import books, authors, readers, is_external, close_db
+from cozy.control.db import books, authors, readers, close_db
 from cozy.db.book import Book
 from cozy.db.storage import Storage
 from cozy.db.track import Track
 
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
-from cozy.ui.book_element import BookElement
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
+from cozy.ui.list_box_row_with_data import ListBoxRowWithData
 from cozy.ui.search import Search
 from cozy.control.sleep_timer import SleepTimer
 from cozy.control.playback_speed import PlaybackSpeed
@@ -28,6 +28,7 @@ import cozy.control.offline_cache as offline_cache
 import os
 
 import logging
+
 log = logging.getLogger("ui")
 
 
@@ -67,7 +68,6 @@ class CozyUI(metaclass=Singleton):
         self.refresh_content()
         self.check_for_tracks()
         self.__load_last_book()
-
 
         self.is_initialized = True
 
@@ -395,11 +395,10 @@ class CozyUI(metaclass=Singleton):
             path = ""
             if Storage.select().count() > 0:
                 path = Storage.select().where(Storage.default == True).get().path
-                    
-            
+
             if not path:
                 path = os.path.join(os.path.expanduser("~"), _("Audiobooks"))
-                
+
                 if not os.path.exists(path):
                     os.mkdir(path)
 
@@ -421,7 +420,7 @@ class CozyUI(metaclass=Singleton):
         """
         self.switch_to_working(_("Importing Audiobooks"), first_scan)
         thread = Thread(target=importer.update_database,
-                        args=(self, force, ), name="UpdateDatabaseThread")
+                        args=(self, force,), name="UpdateDatabaseThread")
         thread.start()
 
     def auto_import(self):
@@ -449,7 +448,7 @@ class CozyUI(metaclass=Singleton):
                 else:
                     online_authors.append(b.author)
                     online_readers.append(b.reader)
-            
+
             offline_authors = sorted(list(set(offline_authors)))
             offline_readers = sorted(list(set(offline_readers)))
             online_authors = sorted(list(set(online_authors)))
@@ -466,11 +465,11 @@ class CozyUI(metaclass=Singleton):
                     row.set_visible(False)
                 else:
                     row.set_visible(True)
-            
+
             for row in self.reader_box.get_children():
                 if not isinstance(row, ListBoxRowWithData):
                     continue
-                
+
                 if any(row.data == x for x in readers):
                     row.set_visible(False)
                 else:
@@ -481,37 +480,6 @@ class CozyUI(metaclass=Singleton):
 
             for row in self.reader_box:
                 row.set_visible(True)
-            
-
-    def populate_author_reader(self):
-        tools.remove_all_children(self.author_box)
-        tools.remove_all_children(self.reader_box)
-
-        # Add the special All element
-        all_row = ListBoxRowWithData(_("All"), False)
-        all_row.set_tooltip_text(_("Display all books"))
-        self.author_box.add(all_row)
-        self.author_box.add(ListBoxSeparatorRow())
-        self.author_box.select_row(all_row)
-
-        all_row = ListBoxRowWithData(_("All"), False)
-        all_row.set_tooltip_text(_("Display all books"))
-        self.reader_box.add(all_row)
-        self.reader_box.add(ListBoxSeparatorRow())
-        self.reader_box.select_row(all_row)
-
-        for book in authors():
-            row = ListBoxRowWithData(book.author, False)
-            self.author_box.add(row)
-
-        for book in readers():
-            row = ListBoxRowWithData(book.reader, False)
-            self.reader_box.add(row)
-
-        # this is required to see the new items
-        self.author_box.show_all()
-        self.reader_box.show_all()
-
 
     def refresh_content(self):
         """
@@ -522,7 +490,7 @@ class CozyUI(metaclass=Singleton):
         for element in childs:
             self.book_box.remove(element)
 
-        self.populate_author_reader()
+        self._library_view.populate_author_reader()
         self.filter_author_reader(tools.get_glib_settings().get_boolean("hide-offline"))
         self._library_view.populate_book_box()
 
@@ -632,7 +600,7 @@ class CozyUI(metaclass=Singleton):
         if target_type == 80:
             self.switch_to_working("copying new files…", False)
             thread = Thread(target=importer.copy, args=(
-                self, selection, ), name="DragDropImportThread")
+                self, selection,), name="DragDropImportThread")
             thread.start()
 
     def __on_no_media_folder_changed(self, sender):
@@ -813,41 +781,9 @@ class CozyUI(metaclass=Singleton):
 
         self.book_overview.play_book_button.grab_remove()
         self.book_overview.scroller.grab_focus()
-    
+
     def __on_settings_changed(self, event, message):
         """
         This method reacts to storage settings changes.
         """
         pass
-
-
-class ListBoxRowWithData(Gtk.ListBoxRow):
-    """
-    This class represents a listboxitem for an author/reader.
-    """
-    MARGIN = 5
-
-    def __init__(self, data, bold=False):
-        super(Gtk.ListBoxRow, self).__init__()
-        self.data = data
-        label = Gtk.Label.new(data)
-        if bold:
-            label.set_markup("<b>" + data + "</b>")
-        label.set_xalign(0.0)
-        label.set_margin_top(self.MARGIN)
-        label.set_margin_bottom(self.MARGIN)
-        label.set_margin_start(7)
-        self.add(label)
-
-
-class ListBoxSeparatorRow(Gtk.ListBoxRow):
-    """
-    This class represents a separator in a listbox row.
-    """
-
-    def __init__(self):
-        super().__init__()
-        separator = Gtk.Separator()
-        self.add(separator)
-        self.set_sensitive(False)
-        self.props.selectable = False
