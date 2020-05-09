@@ -3,6 +3,7 @@ from enum import Enum, auto
 from cozy.architecture.observable import Observable
 from cozy.control.db import get_db
 from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library
 
@@ -13,7 +14,7 @@ class LibraryViewMode(Enum):
     READER = auto()
 
 
-class LibraryViewModel(Observable, object):
+class LibraryViewModel(Observable):
 
     def __init__(self):
         super().__init__()
@@ -21,6 +22,7 @@ class LibraryViewModel(Observable, object):
         self._model = Library(get_db())
 
         self._fs_monitor = FilesystemMonitor()
+        self._player:Player = Player()
 
         self._library_view_mode: LibraryViewMode = LibraryViewMode.CURRENT
         self._is_any_book_in_progress_val = False
@@ -70,8 +72,7 @@ class LibraryViewModel(Observable, object):
         return sorted(self._model.readers)
 
     def playback_book(self, book: Book):
-        # Pause/Play book here
-        pass
+        self._player.play_pause(book)
 
     def switch_screen(self, screen: str):
         pass
