@@ -33,6 +33,7 @@ class LibraryViewModel(Observable):
 
     def _connect(self):
         self._fs_monitor.add_listener(self._on_fs_monitor_event)
+        self._application_settings.add_listener(self._on_application_setting_changed)
 
     @property
     def books(self):
@@ -71,19 +72,19 @@ class LibraryViewModel(Observable):
 
     @property
     def authors(self):
-        is_book_online = self._fs_monitor.is_book_online
+        is_book_online = self._fs_monitor.get_book_online
         show_offline_books = not self._application_settings.hide_offline
 
-        authors = {book.author for book in self._model.books if is_book_online(book.db_object) or show_offline_books}
+        authors = {book.author for book in self._model.books if is_book_online(book) or show_offline_books}
 
         return sorted(authors)
 
     @property
     def readers(self):
-        is_book_online = self._fs_monitor.is_book_online
+        is_book_online = self._fs_monitor.get_book_online
         show_offline_books = not self._application_settings.hide_offline
 
-        readers = {book.reader for book in self._model.books if is_book_online(book.db_object) or show_offline_books}
+        readers = {book.reader for book in self._model.books if is_book_online(book) or show_offline_books}
 
         return sorted(readers)
 
@@ -98,7 +99,7 @@ class LibraryViewModel(Observable):
         book = book_element.book
 
         hide_offline_books = self._application_settings.hide_offline
-        book_is_online = self._fs_monitor.is_book_online(book.db_object)
+        book_is_online = self._fs_monitor.get_book_online(book)
 
         if hide_offline_books and not book_is_online and not book.downloaded:
             return False
@@ -122,7 +123,7 @@ class LibraryViewModel(Observable):
     def display_author_reader_filter(self):
         pass
 
-    def _on_fs_monitor_event(self, event, message):
+    def _on_fs_monitor_event(self, event, _):
         if event == "storage-online":
             self._notify("authors")
             self._notify("readers")
@@ -135,3 +136,9 @@ class LibraryViewModel(Observable):
             pass
         elif event == "external-storage-removed":
             pass
+
+    def _on_application_setting_changed(self, event, _):
+        if event == "hide-offline":
+            self._notify("authors")
+            self._notify("readers")
+            self._notify("books-filter")

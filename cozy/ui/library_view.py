@@ -41,22 +41,9 @@ class LibraryView:
 
     def _connect_view_model(self):
         self._view_model.bind_to("library_view_mode", self._on_library_view_mode_changed)
-        self._view_model.bind_to("authors", self.populate_author_reader)
-        self._view_model.bind_to("readers", self.populate_author_reader)
+        self._view_model.bind_to("authors", self.populate_author)
+        self._view_model.bind_to("readers", self.populate_reader)
         self._view_model.bind_to("books-filter", self._book_box.invalidate_filter)
-
-    def populate_book_box(self):
-        self._book_box.remove_all_children()
-
-        for book in self._view_model.books:
-            book_element = BookElement(book)
-            book_element.connect("play-pause-clicked", self._play_book_clicked)
-            book_element.connect("open-book-overview", self._open_book_overview_clicked)
-            self._book_box.add(book_element)
-
-    def populate_author_reader(self):
-        self._author_box.populate(self._view_model.authors)
-        self._reader_box.populate(self._view_model.readers)
 
     def _on_sort_stack_changed(self, widget, property):
         page = widget.props.visible_child_name
@@ -70,6 +57,21 @@ class LibraryView:
             view_mode = LibraryViewMode.READER
 
         self._view_model.library_view_mode = view_mode
+
+    def populate_book_box(self):
+        self._book_box.remove_all_children()
+
+        for book in self._view_model.books:
+            book_element = BookElement(book)
+            book_element.connect("play-pause-clicked", self._play_book_clicked)
+            book_element.connect("open-book-overview", self._open_book_overview_clicked)
+            self._book_box.add(book_element)
+
+    def populate_author(self):
+        self._author_box.populate(self._view_model.authors)
+
+    def populate_reader(self):
+        self._reader_box.populate(self._view_model.readers)
 
     def _on_library_view_mode_changed(self):
         visible_child_name = None

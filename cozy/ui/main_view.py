@@ -438,7 +438,8 @@ class CozyUI(metaclass=Singleton):
         for element in childs:
             self.book_box.remove(element)
 
-        self._library_view.populate_author_reader()
+        self._library_view.populate_author()
+        self._library_view.populate_reader()
         self._library_view.populate_book_box()
 
         self.book_box.show_all()
@@ -535,8 +536,6 @@ class CozyUI(metaclass=Singleton):
         """
         action.set_state(value)
         tools.get_glib_settings().set_boolean("hide-offline", value.get_boolean())
-
-        self.book_box.invalidate_filter()
 
     def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
         """

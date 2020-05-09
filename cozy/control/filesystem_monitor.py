@@ -8,6 +8,7 @@ import cozy.ui.settings
 import cozy.ui
 import cozy.tools as tools
 from cozy.control.db import get_external_storage_locations, get_tracks
+from cozy.model.book import Book
 
 log = logging.getLogger("fs_monitor")
 
@@ -45,6 +46,11 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
         """
         #self.volume_monitor.unref()
         pass
+
+    def get_book_online(self, book: Book):
+        result = next((storage[1] for storage in self.external_storage if storage[0] in book.chapters[0].file),
+                      True)
+        return result
 
     def is_book_online(self, book):
         """
