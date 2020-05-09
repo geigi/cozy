@@ -74,8 +74,14 @@ class LibraryViewModel(Observable):
     def authors(self):
         is_book_online = self._fs_monitor.get_book_online
         show_offline_books = not self._application_settings.hide_offline
+        swap_author_reader = self._application_settings.swap_author_reader
 
-        authors = {book.author for book in self._model.books if is_book_online(book) or show_offline_books}
+        authors = {
+            book.author if not swap_author_reader else book.reader
+            for book
+            in self._model.books
+            if is_book_online(book) or show_offline_books
+        }
 
         return sorted(authors)
 
@@ -83,8 +89,14 @@ class LibraryViewModel(Observable):
     def readers(self):
         is_book_online = self._fs_monitor.get_book_online
         show_offline_books = not self._application_settings.hide_offline
+        swap_author_reader = self._application_settings.swap_author_reader
 
-        readers = {book.reader for book in self._model.books if is_book_online(book) or show_offline_books}
+        readers = {
+            book.reader if not swap_author_reader else book.author
+            for book
+            in self._model.books
+            if is_book_online(book) or show_offline_books
+        }
 
         return sorted(readers)
 
@@ -97,6 +109,9 @@ class LibraryViewModel(Observable):
 
     def display_book_filter(self, book_element: BookElement):
         book = book_element.book
+        swap_author_reader = self._application_settings.swap_author_reader
+        author = book.author if not swap_author_reader else book.reader
+        reader = book.reader if not swap_author_reader else book.author
 
         hide_offline_books = self._application_settings.hide_offline
         book_is_online = self._fs_monitor.get_book_online(book)
@@ -110,18 +125,15 @@ class LibraryViewModel(Observable):
         if self.library_view_mode == LibraryViewMode.CURRENT:
             return True if book.last_played > 0 else False
         elif self.library_view_mode == LibraryViewMode.AUTHOR:
-            return True if book.author == self.selected_filter else False
+            return True if author == self.selected_filter else False
         elif self.library_view_mode == LibraryViewMode.READER:
-            return True if book.reader == self.selected_filter else False
+            return True if reader == self.selected_filter else False
 
     def display_book_sort(self, book_element1, book_element2):
         if self._library_view_mode == LibraryViewMode.CURRENT:
             return book_element1.book.last_played < book_element2.book.last_played
         else:
             return book_element1.book.name.lower() > book_element2.book.name.lower()
-
-    def display_author_reader_filter(self):
-        pass
 
     def _on_fs_monitor_event(self, event, _):
         if event == "storage-online":
@@ -142,3 +154,6 @@ class LibraryViewModel(Observable):
             self._notify("authors")
             self._notify("readers")
             self._notify("books-filter")
+        elif event == "swap-author-reader":
+            self._notify("authors")
+            self._notify("readers")

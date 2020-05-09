@@ -19,3 +19,7 @@ class ApplicationSettings(EventSender, metaclass=Singleton):
     @property
     def hide_offline(self):
         return self._settings.get_boolean("hide-offline")
+
+    @property
+    def swap_author_reader(self):
+        return self._settings.get_boolean("swap-author-reader")
