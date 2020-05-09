@@ -9,9 +9,9 @@ def remove_all_children(self):
     childs = self.get_children()
     for element in childs:
         self.remove(element)
-        # element.destroy()
+        element.destroy()
     self.set_visible(True)
 
 
-def extend_list_box():
-    Gtk.ListBox.remove_all_children = remove_all_children
+def extend_gtk_container():
+    Gtk.Container.remove_all_children = remove_all_children

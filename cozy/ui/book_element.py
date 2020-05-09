@@ -155,23 +155,21 @@ class BookElement(Gtk.FlowBoxChild):
 
     def __on_storage_changed(self, event, message):
         if (event == "storage-online" and not super().get_sensitive()) or event == "external-storage-removed":
-            if message in self.book.chapters.first().file:
+            if message in self.book.chapters[0].file:
                 super().set_sensitive(True)
                 self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
         elif (event == "storage-offline" and super().get_sensitive()):
-            self.refresh_book_object()
-            if message in self.book.chapters.first().file and not self.book.offline:
+            if message in self.book.chapters[0].file and not self.book.offline:
                 super().set_sensitive(False)
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         elif event == "external-storage-added":
-            self.refresh_book_object()
-            if FilesystemMonitor().is_book_online(self.book):
+            if FilesystemMonitor().is_book_online(self.book.db_object):
                 super().set_sensitive(True)
             else:
                 super().set_sensitive(False)
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         if event == "external-storage-removed":
-            first_track = self.book.chapters.first()
+            first_track = self.book.chapters[0]
             if first_track and message in first_track.file:
                 self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
 

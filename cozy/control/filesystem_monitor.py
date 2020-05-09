@@ -72,11 +72,8 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
         storage = next((s for s in self.external_storage if mount_path in s[0]), None)
         if storage:
             log.info("Storage online: " + mount_path)
-            self.emit_event("storage-online", storage[0])
             storage[1] = True
-        
-        cozy.ui.main_view.CozyUI().book_box.invalidate_filter()
-        cozy.ui.main_view.CozyUI().filter_author_reader(tools.get_glib_settings().get_boolean("hide-offline"))
+            self.emit_event("storage-online", storage[0])
 
     def __on_mount_removed(self, monitor, mount):
         """
@@ -89,14 +86,11 @@ class FilesystemMonitor(EventSender, metaclass=Singleton):
         storage = next((s for s in self.external_storage if mount_path in s[0]), None)
         if storage:
             log.info("Storage offline: " + mount_path)
-            self.emit_event("storage-offline", storage[0])
             storage[1] = False
+            self.emit_event("storage-offline", storage[0])
 
             # switch to offline version if currently playing
         
-        cozy.ui.main_view.CozyUI().book_box.invalidate_filter()
-        cozy.ui.main_view.CozyUI().filter_author_reader(tools.get_glib_settings().get_boolean("hide-offline"))
-
     def __on_settings_changed(self, event, message):
         """
         This method reacts to storage settings changes.

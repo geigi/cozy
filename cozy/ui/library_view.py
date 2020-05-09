@@ -28,7 +28,7 @@ class LibraryView:
         self._filter_stack: Gtk.Stack = self._builder.get_object("sort_stack")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
-        self._book_box = self._builder.get_object("book_box")
+        self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._author_box: FilterListBox = self._builder.get_object("author_box")
         self._reader_box: FilterListBox = self._builder.get_object("reader_box")
 
@@ -41,8 +41,13 @@ class LibraryView:
 
     def _connect_view_model(self):
         self._view_model.bind_to("library_view_mode", self._on_library_view_mode_changed)
+        self._view_model.bind_to("authors", self.populate_author_reader)
+        self._view_model.bind_to("readers", self.populate_author_reader)
+        self._view_model.bind_to("books-filter", self._book_box.invalidate_filter)
 
     def populate_book_box(self):
+        self._book_box.remove_all_children()
+
         for book in self._view_model.books:
             book_element = BookElement(book)
             book_element.connect("play-pause-clicked", self._play_book_clicked)
@@ -98,6 +103,9 @@ class LibraryView:
         self._book_box.invalidate_sort()
 
     def _apply_selected_filter(self, sender, row):
+        if not row:
+            return
+
         self._view_model.selected_filter = row.data
         self._invalidate_filters()
 

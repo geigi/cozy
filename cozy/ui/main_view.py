@@ -1,6 +1,6 @@
 import webbrowser
 
-from cozy.control.db import books, authors, readers, close_db
+from cozy.control.db import books, close_db
 from cozy.db.book import Book
 from cozy.db.storage import Storage
 from cozy.db.track import Track
@@ -10,7 +10,6 @@ from threading import Thread
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
-from cozy.ui.list_box_row_with_data import ListBoxRowWithData
 from cozy.ui.search import Search
 from cozy.control.sleep_timer import SleepTimer
 from cozy.control.playback_speed import PlaybackSpeed
@@ -430,57 +429,6 @@ class CozyUI(metaclass=Singleton):
     def back(self, action, parameter):
         self.__on_back_clicked(None)
 
-    def filter_author_reader(self, hide_offline):
-        """
-        This method filters unavailable (offline) author and readers from
-        the list boxes.
-        """
-        offline_authors = []
-        offline_readers = []
-        online_authors = []
-        online_readers = []
-
-        if hide_offline:
-            for b in books():
-                if not self.fs_monitor.is_book_online(b) and not b.downloaded:
-                    offline_authors.append(b.author)
-                    offline_readers.append(b.reader)
-                else:
-                    online_authors.append(b.author)
-                    online_readers.append(b.reader)
-
-            offline_authors = sorted(list(set(offline_authors)))
-            offline_readers = sorted(list(set(offline_readers)))
-            online_authors = sorted(list(set(online_authors)))
-            online_readers = sorted(list(set(online_readers)))
-
-            authors = [i for i in offline_authors if i not in online_authors]
-            readers = [i for i in offline_readers if i not in online_readers]
-
-            for row in self.author_box.get_children():
-                if not isinstance(row, ListBoxRowWithData):
-                    continue
-
-                if any(row.data == x for x in authors):
-                    row.set_visible(False)
-                else:
-                    row.set_visible(True)
-
-            for row in self.reader_box.get_children():
-                if not isinstance(row, ListBoxRowWithData):
-                    continue
-
-                if any(row.data == x for x in readers):
-                    row.set_visible(False)
-                else:
-                    row.set_visible(True)
-        else:
-            for row in self.author_box:
-                row.set_visible(True)
-
-            for row in self.reader_box:
-                row.set_visible(True)
-
     def refresh_content(self):
         """
         Refresh all content.
@@ -491,7 +439,6 @@ class CozyUI(metaclass=Singleton):
             self.book_box.remove(element)
 
         self._library_view.populate_author_reader()
-        self.filter_author_reader(tools.get_glib_settings().get_boolean("hide-offline"))
         self._library_view.populate_book_box()
 
         self.book_box.show_all()
@@ -590,7 +537,6 @@ class CozyUI(metaclass=Singleton):
         tools.get_glib_settings().set_boolean("hide-offline", value.get_boolean())
 
         self.book_box.invalidate_filter()
-        self.filter_author_reader(value.get_boolean())
 
     def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
         """
@@ -737,39 +683,6 @@ class CozyUI(metaclass=Singleton):
         """
         self.book_box.invalidate_filter()
         self.book_box.invalidate_sort()
-
-    def __filter_books(self, book, data, notify_destroy):
-        """
-        Filter the books in the book view according to the selected author/reader or "All".
-        """
-        selected_stack = self.sort_stack.props.visible_child_name
-        if tools.get_glib_settings().get_boolean("hide-offline"):
-            if not self.fs_monitor.is_book_online(book.book):
-                offline_available = Book.get(Book.id == book.book.id).downloaded
-            else:
-                offline_available = True
-        else:
-            offline_available = True
-
-        if selected_stack == "author":
-            row = self.author_box.get_selected_row()
-        elif selected_stack == "reader":
-            row = self.reader_box.get_selected_row()
-
-        if selected_stack == "author" or selected_stack == "reader":
-            if row is None:
-                return True and offline_available
-
-            field = row.data
-            if field is None or field == _("All"):
-                return True and offline_available
-            else:
-                if selected_stack == "author":
-                    return True and offline_available if book.book.author == field else False
-                if selected_stack == "reader":
-                    return True and offline_available if book.book.reader == field else False
-        elif selected_stack == "recent":
-            return True and offline_available if book.book.last_played > 0 else False
 
     def set_book_overview(self, book):
         # first update track ui
