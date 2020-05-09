@@ -11,9 +11,9 @@ class Observable:
         else:
             self._observers[prop] = [callback]
 
-    def _notify(self, prop: str, value):
+    def _notify(self, prop: str):
         try:
             for callback in self._observers[prop]:
-                callback(value)
+                callback()
         except:
             pass

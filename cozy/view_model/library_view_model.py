@@ -39,7 +39,7 @@ class LibraryViewModel(Observable):
     @library_view_mode.setter
     def library_view_mode(self, value):
         self._library_view_mode = value
-        self._notify("library_view_mode", value)
+        self._notify("library_view_mode")
 
     @property
     def selected_filter(self):
@@ -48,7 +48,7 @@ class LibraryViewModel(Observable):
     @selected_filter.setter
     def selected_filter(self, value):
         self._selected_filter = value
-        self._notify("selected_filter", value)
+        self._notify("selected_filter")
 
     @property
     def is_any_book_in_progress(self):
@@ -61,7 +61,7 @@ class LibraryViewModel(Observable):
     @_is_any_book_in_progress.setter
     def _is_any_book_in_progress(self, value):
         self._is_any_book_in_progress_val = value
-        self._notify("is_any_book_in_progress", value)
+        self._notify("is_any_book_in_progress")
 
     @property
     def authors(self):

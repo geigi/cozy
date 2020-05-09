@@ -66,19 +66,21 @@ class LibraryView:
 
         self._view_model.library_view_mode = view_mode
 
-    def _on_library_view_mode_changed(self, value: LibraryViewMode):
+    def _on_library_view_mode_changed(self):
         visible_child_name = None
         reveal_filter_box = True
         active_filter_box: Gtk.ListBox = None
 
-        if value == LibraryViewMode.CURRENT:
+        view_mode = self._view_model.library_view_mode
+
+        if view_mode == LibraryViewMode.CURRENT:
             visible_child_name = RECENT_PAGE
             reveal_filter_box = False
-        elif value == LibraryViewMode.AUTHOR:
+        elif view_mode == LibraryViewMode.AUTHOR:
             visible_child_name = AUTHOR_PAGE
             reveal_filter_box = True
             active_filter_box = self._author_box
-        elif value == LibraryViewMode.READER:
+        elif view_mode == LibraryViewMode.READER:
             visible_child_name = READER_PAGE
             reveal_filter_box = True
             active_filter_box = self._reader_box
