@@ -144,11 +144,11 @@ The translators:
 - cleitonjfloss
 - corentinbettiol
 - dtgoitia
+- eson
 - fishcake13
 - fountain
 - georgelemental
 - giuscasula
-- jan.sundman
 - jan_nekvasil
 - jouselt
 - karaagac
