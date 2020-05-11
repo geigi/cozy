@@ -62,6 +62,7 @@ class TrackElement(Gtk.EventBox):
         title_label.set_ellipsize(Pango.EllipsizeMode.MIDDLE)
 
         dur_label.set_text(seconds_to_str(self.track.length))
+        dur_label.get_style_context().add_class("monospace")
         dur_label.set_halign(Gtk.Align.END)
         dur_label.props.margin = 4
         dur_label.set_margin_left(60)
