@@ -222,7 +222,7 @@ def import_file(file, directory, path, update=False):
     if is_blacklisted(path):
         return True, None
 
-    media_type = tools.__get_media_type(path)
+    media_type, media_type_human = tools.__get_media_type(path)
     track = TrackContainer(None, path)
     cover = None
     reader = None
@@ -254,6 +254,9 @@ def import_file(file, directory, path, update=False):
     elif "audio/wav" in media_type or "audio/x-wav" in media_type:
         track_data = TrackData(path)
         track_data.length = __get_wav_track_length(path)
+
+    elif "ID3" in media_type_human:
+        track_data = _get_mp3_tags(track, path)
 
     ### File will not be imported ###
     else:

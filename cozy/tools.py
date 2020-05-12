@@ -180,4 +180,4 @@ def __get_media_type(path):
     :param path: Path to the file
     :return: mime type as string
     """
-    return magic.from_file(path, mime=True)
+    return magic.from_file(path, mime=True), magic.from_file(path)
