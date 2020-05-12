@@ -52,6 +52,7 @@ class TrackElement(Gtk.EventBox):
         no_label.set_xalign(1)
 
         title_label.set_text(self.track.name)
+        title_label.get_style_context().add_class("semi-bold")
         title_label.set_halign(Gtk.Align.START)
         title_label.props.margin = 4
         title_label.props.hexpand = True
