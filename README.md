@@ -109,6 +109,7 @@ To the contributors on GitHub:
 - Fatih20
 - NathanBnm
 - camellan
+- elya5
 - grenade
 - jnbr
 - kaphula
