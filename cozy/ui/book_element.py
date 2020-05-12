@@ -64,7 +64,7 @@ class BookElement(Gtk.FlowBoxChild):
         self.art = AlbumElement(
             self.book, 180, self.ui.window.get_scale_factor(), bordered=True, square=False)
 
-        if is_external(self.book) and not self.book.offline and not FilesystemMonitor().is_book_online(self.book):
+        if is_external(self.book.db_object) and not self.book.offline and not FilesystemMonitor().get_book_online(self.book):
             super().set_sensitive(False)
             self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         else:
@@ -112,7 +112,7 @@ class BookElement(Gtk.FlowBoxChild):
 
     def __on_key_press_event(self, widget, key):
         if key.keyval == Gdk.KEY_Return and super().get_sensitive():
-            self.ui.set_book_overview(self.book)
+            self.ui.set_book_overview(self.book.db_object)
 
     def __create_context_menu(self):
         menu = Gtk.Menu()
@@ -137,7 +137,7 @@ class BookElement(Gtk.FlowBoxChild):
         """
         Adds all tracks of a book to the blacklist and removes it from the library.
         """
-        blacklist_book(self.book)
+        blacklist_book(self.book.db_object)
         self.ui.settings.blacklist_model.clear()
         self.ui.settings._init_blacklist()
         self.ui.refresh_content()

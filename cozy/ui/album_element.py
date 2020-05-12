@@ -2,6 +2,7 @@ from gi.repository import Gtk, Gdk, GdkPixbuf, Gst, GObject
 
 from cozy.control import artwork_cache as artwork_cache, player as player
 from cozy.control.db import get_track_for_playback
+from cozy.model.book import Book
 
 
 class AlbumElement(Gtk.Box):
@@ -18,7 +19,7 @@ class AlbumElement(Gtk.Box):
         super().__init__()
         self.props.height_request = size
 
-        self.book = book
+        self.book: Book = book
         self.selected = False
         self.signal_ids = []
         self.play_signal_ids = []
@@ -29,7 +30,7 @@ class AlbumElement(Gtk.Box):
         self.event_box.set_property("valign", Gtk.Align.CENTER)
 
         # scale the book cover to a fix size.
-        pixbuf = artwork_cache.get_cover_pixbuf(book, scale, size)
+        pixbuf = artwork_cache.get_cover_pixbuf(book.db_object, scale, size)
 
         # box is the main container for the album art
         self.set_halign(Gtk.Align.CENTER)
@@ -170,11 +171,11 @@ class AlbumElement(Gtk.Box):
         if event.type == Gdk.EventType.BUTTON_PRESS and event.button != 1:
             return False
 
-        self.emit("play-pause-clicked", self.book)
-        track = get_track_for_playback(self.book)
+        self.emit("play-pause-clicked", self.book.db_object)
+        track = get_track_for_playback(self.book.db_object)
         current_track = player.get_current_track()
 
-        if current_track and current_track.book.id == self.book.id:
+        if current_track and current_track.book.db_object.id == self.book.db_object.id:
             player.play_pause(None)
             if player.get_gst_player_state() == Gst.State.PLAYING:
                 player.jump_to_ns(track.position)
