@@ -119,11 +119,11 @@ class LibraryViewModel(Observable):
         if hide_offline_books and not book_is_online and not book.downloaded:
             return False
 
-        if self.selected_filter == _("All"):
-            return True
-
         if self.library_view_mode == LibraryViewMode.CURRENT:
             return True if book.last_played > 0 else False
+
+        if self.selected_filter == _("All"):
+            return True
         elif self.library_view_mode == LibraryViewMode.AUTHOR:
             return True if author == self.selected_filter else False
         elif self.library_view_mode == LibraryViewMode.READER:
