@@ -8,6 +8,8 @@ from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
 READER_PAGE = "reader"
 AUTHOR_PAGE = "author"
 RECENT_PAGE = "recent"
+MAIN_BOOK_PAGE = "main"
+MAIN_NO_RECENT_PAGE = "nothing_here"
 
 
 class LibraryView:
@@ -24,8 +26,11 @@ class LibraryView:
 
         self.populate_book_box()
 
+        self._on_library_view_mode_changed()
+
     def _get_ui_elements(self):
         self._filter_stack: Gtk.Stack = self._builder.get_object("sort_stack")
+        self._main_stack: Gtk.Stack = self._builder.get_object("main_stack")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
@@ -43,6 +48,7 @@ class LibraryView:
         self._view_model.bind_to("library_view_mode", self._on_library_view_mode_changed)
         self._view_model.bind_to("authors", self.populate_author)
         self._view_model.bind_to("readers", self.populate_reader)
+        self._view_model.bind_to("books", self.populate_book_box)
         self._view_model.bind_to("books-filter", self._book_box.invalidate_filter)
 
     def _on_sort_stack_changed(self, widget, property):
@@ -65,6 +71,7 @@ class LibraryView:
             book_element = BookElement(book)
             book_element.connect("play-pause-clicked", self._play_book_clicked)
             book_element.connect("open-book-overview", self._open_book_overview_clicked)
+            book_element.show_all()
             self._book_box.add(book_element)
 
     def populate_author(self):
@@ -79,10 +86,13 @@ class LibraryView:
         active_filter_box: Gtk.ListBox = None
 
         view_mode = self._view_model.library_view_mode
+        main_view_page = MAIN_BOOK_PAGE
 
         if view_mode == LibraryViewMode.CURRENT:
             visible_child_name = RECENT_PAGE
             reveal_filter_box = False
+            if not self._view_model.is_any_book_in_progress:
+                main_view_page = MAIN_NO_RECENT_PAGE
         elif view_mode == LibraryViewMode.AUTHOR:
             visible_child_name = AUTHOR_PAGE
             reveal_filter_box = True
@@ -92,6 +102,8 @@ class LibraryView:
             reveal_filter_box = True
             active_filter_box = self._reader_box
 
+        # https://stackoverflow.com/questions/22178524/gtk-named-stack-childs/22182843#22182843
+        self._main_stack.props.visible_child_name = main_view_page
         self._filter_stack.set_visible_child_name(visible_child_name)
         self._filter_stack_revealer.set_reveal_child(reveal_filter_box)
 

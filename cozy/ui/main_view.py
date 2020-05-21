@@ -408,10 +408,6 @@ class CozyUI(metaclass=Singleton):
             self.block_ui_buttons(True)
             self.titlebar.stop()
             self.category_toolbar.set_visible(False)
-        else:
-            self.main_stack.props.visible_child_name = "main"
-            # This displays the placeholder if there is not a recent book yet
-            self.__on_sort_stack_changed(None, None)
 
     def scan(self, action, first_scan, force=False):
         """
@@ -570,8 +566,6 @@ class CozyUI(metaclass=Singleton):
 
         if page == "recent":
             self.sort_stack_revealer.set_reveal_child(False)
-            if Book.select().where(Book.last_played > 0).count() < 1:
-                self.main_stack.props.visible_child_name = "nothing_here"
         else:
             self.sort_stack_revealer.set_reveal_child(True)
             self.main_stack.props.visible_child_name = "main"

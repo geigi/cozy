@@ -23,6 +23,7 @@ from gi.repository import Gdk, GLib, Gst
 import cozy.control.artwork_cache as artwork_cache
 import cozy.tools as tools
 import cozy.control.player
+from cozy.architecture.event_sender import EventSender
 from cozy.control.db import is_blacklisted, remove_invalid_entries
 from cozy.control.offline_cache import OfflineCache
 from cozy.db.book import Book
@@ -56,6 +57,14 @@ class TrackData:
 
     def __init__(self, file):
         self.file = file
+
+
+class Importer(EventSender):
+    def __init__(self):
+        pass
+
+
+importer = Importer()
 
 
 def b64tobinary(b64):
@@ -160,9 +169,10 @@ def update_database(ui, force=False):
     remove_invalid_entries()
     artwork_cache.generate_artwork_cache()
 
-    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
+    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, importer.emit_event, "import-finished")
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.check_for_tracks)
+
 
     if len(failed) > 0:
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,

@@ -28,6 +28,9 @@ class Library:
 
         return self._books
 
+    def invalidate(self):
+        self._books = []
+
     def _load_all_books(self):
         with self._db:
             for book_db_obj in BookModel.select(BookModel.id):

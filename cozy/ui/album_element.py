@@ -175,7 +175,7 @@ class AlbumElement(Gtk.Box):
         track = get_track_for_playback(self.book.db_object)
         current_track = player.get_current_track()
 
-        if current_track and current_track.book.db_object.id == self.book.db_object.id:
+        if current_track and current_track.book.id == self.book.db_object.id:
             player.play_pause(None)
             if player.get_gst_player_state() == Gst.State.PLAYING:
                 player.jump_to_ns(track.position)

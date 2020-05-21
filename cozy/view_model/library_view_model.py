@@ -4,6 +4,7 @@ from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable
 from cozy.control.db import get_db
 from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.control.importer import Importer, importer as importer_instance
 from cozy.model.book import Book
 from cozy.model.library import Library
 from cozy.ui.book_element import BookElement
@@ -24,9 +25,9 @@ class LibraryViewModel(Observable):
 
         self._fs_monitor: FilesystemMonitor = FilesystemMonitor()
         self._application_settings: ApplicationSettings = ApplicationSettings()
+        self._importer: Importer = importer_instance
 
         self._library_view_mode: LibraryViewMode = LibraryViewMode.CURRENT
-        self._is_any_book_in_progress_val = False
         self._selected_filter: str = _("All")
 
         self._connect()
@@ -34,6 +35,7 @@ class LibraryViewModel(Observable):
     def _connect(self):
         self._fs_monitor.add_listener(self._on_fs_monitor_event)
         self._application_settings.add_listener(self._on_application_setting_changed)
+        self._importer.add_listener(self._on_importer_event)
 
     @property
     def books(self):
@@ -59,16 +61,7 @@ class LibraryViewModel(Observable):
 
     @property
     def is_any_book_in_progress(self):
-        return self._is_any_book_in_progress
-
-    @property
-    def _is_any_book_in_progress(self):
-        return self._is_any_book_in_progress_val
-
-    @_is_any_book_in_progress.setter
-    def _is_any_book_in_progress(self, value):
-        self._is_any_book_in_progress_val = value
-        self._notify("is_any_book_in_progress")
+        return any(book.position > 0 for book in self.books)
 
     @property
     def authors(self):
@@ -157,3 +150,12 @@ class LibraryViewModel(Observable):
         elif event == "swap-author-reader":
             self._notify("authors")
             self._notify("readers")
+
+    def _on_importer_event(self, event, _):
+        if event == "import-finished":
+            self._model.invalidate()
+            self._notify("authors")
+            self._notify("readers")
+            self._notify("books")
+            self._notify("books-filter")
+            self._notify("library_view_mode")
