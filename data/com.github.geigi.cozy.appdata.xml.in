@@ -49,6 +49,21 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.6.17" timestamp="1590341790">
+      <description>
+        <ul>
+          <li>Support for more mp3 files! Let me know if you have problems.</li>
+          <li>Preparations to support chapters within audio files</li>
+          <li>The beginning of the biggest cleanup and refactoring under the hood</li>
+          <li>Visual improvements in book overview, thanks to elya5</li>
+          <li>Support for smaller screen sizes, thanks again to elya5</li>
+          <li>Fix: Some book titles where not displayed, thanks to naglis</li>
+          <li>Fix: Empty books could crash the application</li>
+          <li>Fix: Author and reader can now be swapped from settings</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.16" timestamp="1587397460">
       <description>
         <ul>
