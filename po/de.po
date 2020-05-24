@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 19:16+0200\n"
+"POT-Creation-Date: 2020-05-24 19:26+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2020\n"
 "Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
@@ -447,45 +447,45 @@ msgstr ""
 
 #: data/ui/main_window.ui:1457
 msgid ""
-"If they are you can enable offline mode for a book in the book overview. This keeps a local copy of the book that you can listen to on the go\n"
-"                                "
+"If they are you can enable offline mode for a book in the book overview. "
+"This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
 "Ist das der Fall, kannst du den Offline Modus in der Buchübersicht "
 "aktivieren. Diese Funktion behält eine lokale Kopie des Buches, um es "
-"unterwegs zu hören."
+"unterwegs zu hören"
 
-#: data/ui/main_window.ui:1492 data/ui/main_window.ui:1551
+#: data/ui/main_window.ui:1491 data/ui/main_window.ui:1550
 msgid "Auto scan switch"
 msgstr "Auto-Scan Schalter"
 
-#: data/ui/main_window.ui:1493 data/ui/main_window.ui:1531
-#: data/ui/main_window.ui:1552
+#: data/ui/main_window.ui:1492 data/ui/main_window.ui:1530
+#: data/ui/main_window.ui:1551
 msgid "Automatically import new audiobooks on startup"
 msgstr "Importiere neue Hörbücher automatisch beim Start"
 
-#: data/ui/main_window.ui:1595
+#: data/ui/main_window.ui:1594
 msgid "Drag & Drop"
 msgstr "Drag & Drop"
 
-#: data/ui/main_window.ui:1612
+#: data/ui/main_window.ui:1611
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr "Ziehe deine Hörbücher in Cozy um sie automatisch zu importieren"
 
-#: data/ui/main_window.ui:1635
+#: data/ui/main_window.ui:1634
 msgid "Location of your audiobooks"
 msgstr "Speicherort Deiner Hörbücher"
 
-#: data/ui/main_window.ui:1656
+#: data/ui/main_window.ui:1655
 msgid "Set Audiobooks Directory"
 msgstr "Wähle den Speicherort der Hörbücher"
 
-#: data/ui/main_window.ui:1679
+#: data/ui/main_window.ui:1678
 msgid "Load audiobooks from a directory, network drive or an external disk."
 msgstr ""
 "Lade Hörbücher von einem Ordner, einer Netzwerkfestplatte oder einer "
 "externen Festplatte"
 
-#: data/ui/main_window.ui:1697
+#: data/ui/main_window.ui:1696
 msgid "You can add more storage locations later in the settings"
 msgstr "Du kannst in den Einstellungen weitere Pfade für Hörbücher angeben"
 
