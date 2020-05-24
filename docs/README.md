@@ -69,6 +69,7 @@ To the contributors on GitHub:
 - jnbr
 - kaphula
 - meisenzahl
+- naglis
 - oleg-krv
 - umeboshi2
 - worldofpeace
