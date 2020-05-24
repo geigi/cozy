@@ -1454,8 +1454,7 @@ audio-volume-medium-symbolic</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="halign">start</property>
-                                        <property name="label" translatable="yes">If they are you can enable offline mode for a book in the book overview. This keeps a local copy of the book that you can listen to on the go
-                                </property>
+                                        <property name="label" translatable="yes">If they are you can enable offline mode for a book in the book overview. This keeps a local copy of the book that you can listen to on the go</property>
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                         <style>
