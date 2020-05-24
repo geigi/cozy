@@ -18,6 +18,9 @@ class Book:
         self._db: SqliteDatabase = db
         self.id: int = id
 
+        self._get_db_object()
+
+    def _get_db_object(self):
         with self._db:
             self._db_object: BookModel = BookModel.get(self.id)
 
@@ -141,6 +144,9 @@ class Book:
     @property
     def current_chapter(self):
         return next((chapter for chapter in self.chapters if chapter.id == self.position), self.chapters[0])
+
+    def reload(self):
+        self._get_db_object()
 
     def _fetch_chapters(self):
         with self._db:

@@ -50,6 +50,7 @@ class LibraryView:
         self._view_model.bind_to("readers", self.populate_reader)
         self._view_model.bind_to("books", self.populate_book_box)
         self._view_model.bind_to("books-filter", self._book_box.invalidate_filter)
+        self._view_model.bind_to("books-filter", self._book_box.invalidate_sort)
 
     def _on_sort_stack_changed(self, widget, property):
         page = widget.props.visible_child_name

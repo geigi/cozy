@@ -5,7 +5,9 @@ from cozy.architecture.observable import Observable
 from cozy.control.db import get_db
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.control.importer import Importer, importer as importer_instance
+from cozy.media.player import Player
 from cozy.model.book import Book
+from cozy.model.chapter import Chapter
 from cozy.model.library import Library
 from cozy.ui.book_element import BookElement
 
@@ -26,6 +28,7 @@ class LibraryViewModel(Observable):
         self._fs_monitor: FilesystemMonitor = FilesystemMonitor()
         self._application_settings: ApplicationSettings = ApplicationSettings()
         self._importer: Importer = importer_instance
+        self._player: Player = Player()
 
         self._library_view_mode: LibraryViewMode = LibraryViewMode.CURRENT
         self._selected_filter: str = _("All")
@@ -36,6 +39,7 @@ class LibraryViewModel(Observable):
         self._fs_monitor.add_listener(self._on_fs_monitor_event)
         self._application_settings.add_listener(self._on_application_setting_changed)
         self._importer.add_listener(self._on_importer_event)
+        self._player.add_listener(self._on_player_event)
 
     @property
     def books(self):
@@ -159,3 +163,17 @@ class LibraryViewModel(Observable):
             self._notify("books")
             self._notify("books-filter")
             self._notify("library_view_mode")
+
+    def _on_player_event(self, event, message):
+        if event == "play":
+            track_id = message
+            book = None
+
+            for b in self._model.books:
+                if any(chapter.id == track_id for chapter in b.chapters):
+                    book = b
+                    break
+
+            if book:
+                book.reload()
+                self._notify("books-filter")

@@ -28,6 +28,13 @@ class Library:
 
         return self._books
 
+    @property
+    def chapters(self):
+        if not self._books:
+            self._load_all_books()
+
+        return [chapter for book_chapters in [book.chapters for book in self._books] for chapter in book_chapters]
+
     def invalidate(self):
         self._books = []
 
