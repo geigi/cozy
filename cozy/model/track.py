@@ -5,6 +5,8 @@ from cozy.model.chapter import Chapter
 
 
 class Track(Chapter):
+    """A track is a single file that contains a single chapter of a book"""
+    
     def __init__(self, db: SqliteDatabase, id: int):
         self._db: SqliteDatabase = db
         self.id: int = id
