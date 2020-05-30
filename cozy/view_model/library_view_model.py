@@ -7,7 +7,6 @@ from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.control.importer import Importer, importer as importer_instance
 from cozy.media.player import Player
 from cozy.model.book import Book
-from cozy.model.chapter import Chapter
 from cozy.model.library import Library
 from cozy.ui.book_element import BookElement
 
@@ -100,6 +99,14 @@ class LibraryViewModel(Observable):
     def playback_book(self, book: Book):
         # Pause/Play book here
         pass
+
+    def remove_book(self, book: Book):
+        book.blacklist()
+        self._model.invalidate()
+        self._notify("authors")
+        self._notify("readers")
+        self._notify("books")
+        self._notify("books-filter")
 
     def switch_screen(self, screen: str):
         pass

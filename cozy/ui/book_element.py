@@ -4,7 +4,7 @@ from gi.repository import Gtk, Gdk, Pango, GObject
 
 import cozy.tools as tools
 import cozy.ui
-from cozy.control.db import is_external, blacklist_book
+from cozy.control.db import is_external
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.model.book import Book
 from cozy.ui.album_element import AlbumElement
@@ -134,13 +134,7 @@ class BookElement(Gtk.FlowBoxChild):
         return menu
 
     def __remove_book(self, widget, parameter):
-        """
-        Adds all tracks of a book to the blacklist and removes it from the library.
-        """
-        blacklist_book(self.book.db_object)
-        self.ui.settings.blacklist_model.clear()
-        self.ui.settings._init_blacklist()
-        self.ui.refresh_content()
+        self.emit("book-removed", self.book)
 
     def __mark_as_read(self, widget, parameter):
         self.book.position = -1
@@ -178,4 +172,6 @@ GObject.type_register(AlbumElement)
 GObject.signal_new('play-pause-clicked', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
                    (GObject.TYPE_PYOBJECT,))
 GObject.signal_new('open-book-overview', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
+                   (GObject.TYPE_PYOBJECT,))
+GObject.signal_new('book-removed', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
                    (GObject.TYPE_PYOBJECT,))

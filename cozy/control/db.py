@@ -4,7 +4,6 @@ import time
 
 from playhouse.pool import PooledSqliteDatabase
 
-from cozy import tools
 from cozy.control.db_updater import update_db
 from cozy.db.artwork_cache import ArtworkCache
 from cozy.db.book import Book
@@ -337,20 +336,6 @@ def remove_tracks_with_path(ui, path):
     clean_books()
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
-
-
-def blacklist_book(book):
-    """
-    Removes a book from the library and adds the path(s) to the track list.
-    """
-    book_tracks = get_tracks(book)
-    data = list((t.file,) for t in book_tracks)
-    chunks = [data[x:x + 500] for x in range(0, len(data), 500)]
-    for chunk in chunks:
-        StorageBlackList.insert_many(chunk, fields=[StorageBlackList.path]).execute()
-    ids = list(t.id for t in book_tracks)
-    Track.delete().where(Track.id << ids).execute()
-    book.delete_instance()
 
 
 def is_blacklisted(path):
