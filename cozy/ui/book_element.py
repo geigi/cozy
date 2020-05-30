@@ -149,7 +149,7 @@ class BookElement(Gtk.FlowBoxChild):
         """
         Opens the folder containing this books files in the default file explorer.
         """
-        track = self.book.chapters.first()
+        track = self.book.chapters[0]
         path = os.path.dirname(track.file)
         subprocess.Popen(['xdg-open', path])
 
