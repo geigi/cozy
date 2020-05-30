@@ -104,11 +104,11 @@ class BookElement(Gtk.FlowBoxChild):
         elif event.type == Gdk.EventType.BUTTON_PRESS and event.button == 1:
             if super().get_sensitive():
                 self.emit("open-book-overview", self.book)
-                self.ui.set_book_overview(self.book)
+                self.ui.set_book_overview(self.book.db_object)
         elif event.type == Gdk.EventType.KEY_PRESS and event.keyval == Gdk.KEY_Return:
             if super().get_sensitive():
                 self.emit("open-book-overview", self.book)
-                self.ui.set_book_overview(self.book)
+                self.ui.set_book_overview(self.book.db_object)
 
     def __on_key_press_event(self, widget, key):
         if key.keyval == Gdk.KEY_Return and super().get_sensitive():
