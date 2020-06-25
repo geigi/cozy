@@ -72,6 +72,7 @@ class LibraryView:
             book_element = BookElement(book)
             book_element.connect("play-pause-clicked", self._play_book_clicked)
             book_element.connect("open-book-overview", self._open_book_overview_clicked)
+            book_element.connect("book-removed", self._on_book_removed)
             book_element.show_all()
             self._book_box.add(book_element)
 
@@ -129,3 +130,6 @@ class LibraryView:
 
     def _open_book_overview_clicked(self, widget, book):
         pass
+
+    def _on_book_removed(self, widget, book):
+        self._view_model.remove_book(book)
