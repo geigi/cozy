@@ -10,6 +10,7 @@ import traceback
 import contextlib
 import wave
 
+from gi.repository.GstPbutils import DiscovererInfo
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
 from mutagen.flac import FLAC, Picture
@@ -18,7 +19,7 @@ from mutagen.mp4 import MP4
 from mutagen.oggopus import OggOpus
 from mutagen.oggvorbis import OggVorbis
 from peewee import __version__ as PeeweeVersion
-from gi.repository import Gdk, GLib, Gst
+from gi.repository import Gdk, GLib, Gst, GstPbutils
 
 import cozy.control.artwork_cache as artwork_cache
 import cozy.tools as tools
@@ -351,29 +352,19 @@ def import_file(file, directory, path, update=False):
 
 
 def get_gstreamer_length(path):
-    """
-    This function determines the length of an audio file using gstreamer.
-    This should be used as last resort if mutagen doesn't help us.
-    """
-    player = Gst.ElementFactory.make("playbin", "player")
-    bus = player.get_bus()
-    bus.add_signal_watch()
-    handler_id = bus.connect("message", cozy.control.player.__on_gst_message)
-    player.set_property("uri", "file://" + path)
-    player.set_state(Gst.State.PAUSED)
-    suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
-    limit = 0
-    while state != Gst.State.PAUSED and limit < 100:
-        suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
-        limit += 1
-    success, duration = player.query_duration(Gst.Format.TIME)
-    player.set_state(Gst.State.NULL)
-    bus.disconnect(handler_id)
-    bus.remove_signal_watch()
-    if success:
-        return success, int(duration / 1000000000)
+    uri = "file://" + path
+
+    try:
+        discoverer = GstPbutils.Discoverer()
+        info: DiscovererInfo = discoverer.discover_uri(uri)
+        duration = info.get_duration()
+    except Exception as e:
+        pass
+
+    if duration and duration > 0:
+        return True, int(duration / 1000000000)
     else:
-        success, None
+        return False, None
 
 
 def __get_last_modified(path: str):
