@@ -10,6 +10,9 @@ import traceback
 import contextlib
 import wave
 
+import gi
+
+gi.require_version('GstPbutils', '1.0')
 from gi.repository.GstPbutils import DiscovererInfo
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
@@ -23,7 +26,6 @@ from gi.repository import Gdk, GLib, Gst, GstPbutils
 
 import cozy.control.artwork_cache as artwork_cache
 import cozy.tools as tools
-import cozy.control.player
 from cozy.architecture.event_sender import EventSender
 from cozy.control.db import is_blacklisted, remove_invalid_entries
 from cozy.control.offline_cache import OfflineCache
@@ -174,7 +176,6 @@ def update_database(ui, force=False):
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.check_for_tracks)
 
-
     if len(failed) > 0:
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
                              ui.display_failed_imports, failed)
@@ -274,7 +275,8 @@ def import_file(file, directory, path, update=False):
         # don't use _ for ignored return value -> it is reserved for gettext
         ignore, file_extension = os.path.splitext(path)
         log.warning("Skipping file " + path + " because of mime type " + media_type + ".")
-        reporter.error("importer", "Mime type not detected as audio: " + media_type + " with file ending: " + file_extension)
+        reporter.error("importer",
+                       "Mime type not detected as audio: " + media_type + " with file ending: " + file_extension)
         return False, None
 
     track_data.modified = __get_last_modified(path)
@@ -312,36 +314,36 @@ def import_file(file, directory, path, update=False):
     if update:
         if Book.select().where(Book.name == track_data.book_name).count() < 1:
             track_data.book = Book.create(name=track_data.book_name,
-                                                          author=track_data.author,
-                                                          reader=track_data.reader,
-                                                          position=0,
-                                                          rating=-1,
-                                                          cover=track_data.cover)
+                                          author=track_data.author,
+                                          reader=track_data.reader,
+                                          position=0,
+                                          rating=-1,
+                                          cover=track_data.cover)
         else:
             track_data.book = Book.select().where(
                 Book.name == track_data.book_name).get()
             Book.update(name=track_data.book_name,
-                                        author=track_data.author,
-                                        reader=track_data.reader,
-                                        cover=track_data.cover).where(
+                        author=track_data.author,
+                        reader=track_data.reader,
+                        cover=track_data.cover).where(
                 Book.id == track_data.book.id).execute()
 
         Track.update(name=track_data.name,
-                                     number=track_data.track_number,
-                                     book=track_data.book,
-                                     disk=track_data.disk,
-                                     length=track_data.length,
-                                     modified=track_data.modified).where(
+                     number=track_data.track_number,
+                     book=track_data.book,
+                     disk=track_data.disk,
+                     length=track_data.length,
+                     modified=track_data.modified).where(
             Track.file == track_data.file).execute()
     else:
         # create database entries
         if Book.select().where(Book.name == track_data.book_name).count() < 1:
             track_data.book = Book.create(name=track_data.book_name,
-                                                          author=track_data.author,
-                                                          reader=track_data.reader,
-                                                          position=0,
-                                                          rating=-1,
-                                                          cover=track_data.cover)
+                                          author=track_data.author,
+                                          reader=track_data.reader,
+                                          position=0,
+                                          rating=-1,
+                                          cover=track_data.cover)
         else:
             track_data.book = Book.select().where(
                 Book.name == track_data.book_name).get()
@@ -748,4 +750,3 @@ def __get_common_tag(track, tag):
         log.info(e)
 
     return value
-

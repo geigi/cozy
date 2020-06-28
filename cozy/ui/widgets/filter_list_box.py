@@ -1,5 +1,7 @@
 from typing import List
 
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 from cozy.ui.list_box_row_with_data import ListBoxRowWithData
