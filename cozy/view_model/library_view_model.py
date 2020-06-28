@@ -2,7 +2,6 @@ from enum import Enum, auto
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable
-from cozy.control.db import get_db
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.control.importer import Importer, importer as importer_instance
 from cozy.media.player import Player
@@ -22,7 +21,7 @@ class LibraryViewModel(Observable):
     def __init__(self):
         super().__init__()
 
-        self._model = Library(get_db())
+        self._model = Library()
 
         self._fs_monitor: FilesystemMonitor = FilesystemMonitor()
         self._application_settings: ApplicationSettings = ApplicationSettings()

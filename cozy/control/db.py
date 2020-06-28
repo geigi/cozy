@@ -141,49 +141,6 @@ def get_track_for_playback(book):
     return track
 
 
-def search_authors(search_string):
-    """
-    Search all authors in the db with the given substring.
-    This ignores upper/lowercase and returns each author only once.
-    :param search_string: substring to search for
-    :return: authors matching the substring
-    """
-    return Book.select(Book.author).where(Book.author.contains(search_string)).distinct().order_by(Book.author)
-
-
-def search_readers(search_string):
-    """
-    Search all readers in the db with the given substring.
-    This ignores upper/lowercase and returns each reader only once.
-    :param search_string: substring to search for
-    :return: readers matching the substring
-    """
-    return Book.select(Book.reader).where(Book.reader.contains(search_string)).distinct().order_by(Book.reader)
-
-
-def search_books(search_string):
-    """
-    Search all book names in the db with the given substring.
-    This ignores upper/lowercase and returns each book name only once.
-    :param search_string: substring to search for
-    :return: book names matching the substring
-    """
-    return Book.select(Book.name, Book.cover, Book.id).where(Book.name.contains(search_string)
-                                                             | Book.author.contains(search_string)
-                                                             | Book.reader.contains(search_string)).distinct().order_by(
-        Book.name)
-
-
-def search_tracks(search_string):
-    """
-    Search all tracks in the db with the given substring.
-    This ignores upper/lowercase.
-    :param search_string: substring to search for
-    :return: tracks matching the substring
-    """
-    return Track.select(Track.name).where(Track.name.contains(search_string)).order_by(Track.name)
-
-
 def get_track_path(track):
     """
     Returns the path to the file of a given track.

@@ -2,17 +2,19 @@ from typing import List
 
 from peewee import SqliteDatabase
 
+from cozy.architecture.singleton import Singleton
+from cozy.control.db import get_db
 from cozy.db.book import Book as BookModel
 from cozy.extensions.set import split_strings_to_set
 
 from cozy.model.book import Book, BookIsEmpty
 
 
-class Library:
+class Library(metaclass=Singleton):
     _books: List[Book] = []
 
-    def __init__(self, db: SqliteDatabase):
-        self._db = db
+    def __init__(self):
+        self._db: SqliteDatabase = get_db()
 
     @property
     def authors(self):

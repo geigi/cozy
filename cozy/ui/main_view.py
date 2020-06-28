@@ -10,7 +10,6 @@ from threading import Thread
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
-from cozy.ui.search import Search
 from cozy.control.sleep_timer import SleepTimer
 from cozy.control.playback_speed import PlaybackSpeed
 from cozy.ui.titlebar import Titlebar
@@ -256,7 +255,6 @@ class CozyUI(metaclass=Singleton):
 
         self.sleep_timer = SleepTimer()
         self.speed = PlaybackSpeed()
-        self.search = Search()
         self.settings = Settings()
         self.settings.add_listener(self.__on_settings_changed)
         self.book_overview = BookOverview()
@@ -493,7 +491,7 @@ class CozyUI(metaclass=Singleton):
         self.book_box.invalidate_filter()
         self.book_box.invalidate_sort()
         self.toolbar_revealer.set_reveal_child(True)
-        self.search.close()
+        #self.search.close()
 
     def jump_to_reader(self, book):
         """
@@ -511,7 +509,7 @@ class CozyUI(metaclass=Singleton):
         self.book_box.invalidate_filter()
         self.book_box.invalidate_sort()
         self.toolbar_revealer.set_reveal_child(True)
-        self.search.close()
+        #self.search.close()
 
     def jump_to_book(self, book):
         """
@@ -524,7 +522,7 @@ class CozyUI(metaclass=Singleton):
         # then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"
         self.toolbar_revealer.set_reveal_child(False)
-        self.search.close()
+        #self.search.close()
 
     def __on_hide_offline(self, action, value):
         """
