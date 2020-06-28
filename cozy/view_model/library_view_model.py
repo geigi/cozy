@@ -18,10 +18,10 @@ class LibraryViewMode(Enum):
 
 class LibraryViewModel(Observable):
 
-    def __init__(self):
+    def __init__(self, model: Library):
         super().__init__()
 
-        self._model = Library()
+        self._model = model
 
         self._fs_monitor: FilesystemMonitor = FilesystemMonitor()
         self._application_settings: ApplicationSettings = ApplicationSettings()

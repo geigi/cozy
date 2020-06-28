@@ -16,13 +16,15 @@ class SearchView:
     search_thread = None
     search_thread_stop = None
 
-    def __init__(self):
-        self.view_model: SearchViewModel = SearchViewModel()
+    def __init__(self, main_window_builder: Gtk.Builder, view_model: SearchViewModel):
+        self.view_model: SearchViewModel = view_model
 
         self.builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/search_popover.ui")
+        self.main_window_builder: Gtk.Builder = main_window_builder
 
         self.popover = self.builder.get_object("search_popover")
 
+        self.search_button = self.main_window_builder.get_object("search_button")
         self.book_label = self.builder.get_object("book_label")
         self.track_label = self.builder.get_object("track_label")
         self.author_label = self.builder.get_object("author_label")
@@ -38,6 +40,7 @@ class SearchView:
         self.reader_separator = self.builder.get_object("reader_separator")
         self.stack = self.builder.get_object("search_stack")
 
+        self.search_button.set_popover(self.popover)
         self.entry.connect("search-changed", self.__on_search_changed)
 
         if Gtk.get_minor_version() > 20:
@@ -48,9 +51,6 @@ class SearchView:
 
         self.search_thread = Thread(target=self.search, name="SearchThread")
         self.search_thread_stop = threading.Event()
-
-    def get_popover(self):
-        return self.popover
 
     def search(self, user_search: str):
         # we need the main context to call methods in the main thread after the search is finished

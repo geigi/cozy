@@ -14,10 +14,10 @@ MAIN_NO_RECENT_PAGE = "nothing_here"
 
 class LibraryView:
 
-    def __init__(self, builder: Builder):
+    def __init__(self, builder: Builder, view_model: LibraryViewModel):
         self._builder = builder
 
-        self._view_model = LibraryViewModel()
+        self._view_model = view_model
 
         self._get_ui_elements()
         self._connect_ui_elements()

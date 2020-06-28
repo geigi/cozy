@@ -54,13 +54,12 @@ class CozyUI(metaclass=Singleton):
 
         self._library_view: LibraryView = None
 
-    def activate(self):
+    def activate(self, library_view: LibraryView):
         self.first_play = True
 
-        self.__init_window()
         self.__init_components()
 
-        self._library_view = LibraryView(self.window_builder)
+        self._library_view = library_view
 
         self.auto_import()
         self.refresh_content()
@@ -74,6 +73,8 @@ class CozyUI(metaclass=Singleton):
         self.__init_css()
         self.__init_actions()
         report.info("main", "startup")
+
+        self.__init_window()
 
     def __init_resources(self):
         """
@@ -691,3 +692,6 @@ class CozyUI(metaclass=Singleton):
         This method reacts to storage settings changes.
         """
         pass
+
+    def get_builder(self):
+        return self.window_builder
