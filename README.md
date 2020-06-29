@@ -45,12 +45,13 @@ You can download it here: <a href="https://github.com/geigi/cozy/releases/downlo
 - `meson >= 0.40.0` as build system
 - `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
 - `peewee >= 3.9.6` as object relation mapper
-- `python3-mutagen` for meta tag management
-- `python3-distro`
-- `python3-requests`
-- `python3-pytz`
-- `python3-gi-cairo`
-- `python3-gst-1.0`
+- `mutagen` for meta tag management
+- `apsw`
+- `distro`
+- `requests`
+- `pytz`
+- `gi-cairo`
+- `gst-1.0`
 - `file`
 - `gstreamer1.0-plugins-good`
 - `gstreamer1.0-plugins-bad`

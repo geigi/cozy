@@ -6,7 +6,7 @@ import pytest
 
 @pytest.fixture(scope="module")
 def peewee_database():
-    from playhouse.pool import PooledSqliteDatabase
+    from playhouse.apsw_ext import APSWDatabase
 
     from cozy.db.artwork_cache import ArtworkCache
     from cozy.db.book import Book
@@ -20,7 +20,7 @@ def peewee_database():
 
     print("Setup database...")
     db_path = '/tmp/cozy_test.db'
-    test_db = PooledSqliteDatabase(db_path, max_connections=32)
+    test_db = APSWDatabase(db_path, max_connections=32)
     test_db.bind(models, bind_refs=False, bind_backrefs=False)
     test_db.connect()
     test_db.create_tables(models)
