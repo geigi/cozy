@@ -20,7 +20,7 @@ def peewee_database():
 
     print("Setup database...")
     db_path = '/tmp/cozy_test.db'
-    test_db = APSWDatabase(db_path, max_connections=32)
+    test_db = APSWDatabase(db_path, pragmas=[('journal_mode', 'wal')])
     test_db.bind(models, bind_refs=False, bind_backrefs=False)
     test_db.connect()
     test_db.create_tables(models)
