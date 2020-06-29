@@ -4,6 +4,11 @@ import os
 import pytest
 
 
+def chunks(lst, n):
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+
 @pytest.fixture(scope="module")
 def peewee_database():
     from playhouse.apsw_ext import APSWDatabase
@@ -34,7 +39,8 @@ def peewee_database():
         track_data = json.load(json_file)
 
     Book.insert_many(book_data).execute()
-    Track.insert_many(track_data).execute()
+    for chunk in chunks(track_data, 25):
+        Track.insert_many(chunk).execute()
 
     print("Provide database...")
     yield test_db
