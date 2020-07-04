@@ -4,6 +4,7 @@ from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.control.importer import Importer, importer as importer_instance
+from cozy.extensions.set import split_strings_to_set
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library
@@ -78,7 +79,7 @@ class LibraryViewModel(Observable):
             if is_book_online(book) or show_offline_books
         }
 
-        return sorted(authors)
+        return sorted(split_strings_to_set(authors))
 
     @property
     def readers(self):
@@ -93,7 +94,7 @@ class LibraryViewModel(Observable):
             if is_book_online(book) or show_offline_books
         }
 
-        return sorted(readers)
+        return sorted(split_strings_to_set(readers))
 
     def playback_book(self, book: Book):
         # Pause/Play book here
@@ -128,9 +129,9 @@ class LibraryViewModel(Observable):
         if self.selected_filter == _("All"):
             return True
         elif self.library_view_mode == LibraryViewMode.AUTHOR:
-            return True if author == self.selected_filter else False
+            return True if self.selected_filter in author else False
         elif self.library_view_mode == LibraryViewMode.READER:
-            return True if reader == self.selected_filter else False
+            return True if self.selected_filter in reader else False
 
     def display_book_sort(self, book_element1, book_element2):
         if self._library_view_mode == LibraryViewMode.CURRENT:
