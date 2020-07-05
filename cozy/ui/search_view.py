@@ -71,10 +71,10 @@ class SearchView:
             GLib.PRIORITY_DEFAULT, self.__on_book_search_finished, books)
 
         authors = sorted({
-            book.author
-            for book
-            in self.view_model.books
-            if user_search.lower() in book.author.lower()
+            author
+            for author
+            in self.view_model.authors
+            if user_search.lower() in author.lower()
         })
         if self.search_thread_stop.is_set():
             return
@@ -82,10 +82,10 @@ class SearchView:
             GLib.PRIORITY_DEFAULT, self.__on_author_search_finished, authors)
 
         readers = sorted({
-            book.reader
-            for book
-            in self.view_model.books
-            if user_search.lower() in book.reader.lower()
+            reader
+            for reader
+            in self.view_model.readers
+            if user_search.lower() in reader.lower()
         })
         if self.search_thread_stop.is_set():
             return

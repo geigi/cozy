@@ -108,9 +108,6 @@ class LibraryViewModel(Observable):
         self._notify("books")
         self._notify("books-filter")
 
-    def switch_screen(self, screen: str):
-        pass
-
     def display_book_filter(self, book_element: BookElement):
         book = book_element.book
         swap_author_reader = self._application_settings.swap_author_reader

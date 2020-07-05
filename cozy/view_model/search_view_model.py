@@ -1,11 +1,14 @@
+from cozy.extensions.set import split_strings_to_set
+from cozy.open_view import OpenView
 from cozy.application_settings import ApplicationSettings
+from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.model.book import Book
 from cozy.model.library import Library
 
 
-class SearchViewModel(Observable):
+class SearchViewModel(Observable, EventSender):
     def __init__(self, model: Library):
         super().__init__()
 
@@ -30,7 +33,7 @@ class SearchViewModel(Observable):
             if is_book_online(book) or show_offline_books
         }
 
-        return sorted(authors)
+        return sorted(split_strings_to_set(authors))
 
     @property
     def readers(self):
@@ -45,13 +48,14 @@ class SearchViewModel(Observable):
             if is_book_online(book) or show_offline_books
         }
 
-        return sorted(readers)
+        return sorted(split_strings_to_set(readers))
 
     def jump_to_book(self, book: Book):
         pass
 
-    def jump_to_author(self, book: Book):
-        pass
+    def jump_to_author(self, author: str):
+        self.emit_event(OpenView.AUTHOR, author)
 
-    def jump_to_reader(self, book: Book):
-        pass
+    def jump_to_reader(self, reader: str):
+        self.emit_event(OpenView.READER, reader)
+

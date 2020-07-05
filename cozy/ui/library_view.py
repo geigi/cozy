@@ -51,6 +51,7 @@ class LibraryView:
         self._view_model.bind_to("books", self.populate_book_box)
         self._view_model.bind_to("books-filter", self._book_box.invalidate_filter)
         self._view_model.bind_to("books-filter", self._book_box.invalidate_sort)
+        self._view_model.bind_to("selected_filter", self._select_filter_row)
 
     def _on_sort_stack_changed(self, widget, property):
         page = widget.props.visible_child_name
@@ -124,6 +125,12 @@ class LibraryView:
 
         self._view_model.selected_filter = row.data
         self._invalidate_filters()
+
+    def _select_filter_row(self):
+        if self._view_model.library_view_mode == LibraryViewMode.AUTHOR:
+            self._author_box.select_row_with_content(self._view_model.selected_filter)
+        elif self._view_model.library_view_mode == LibraryViewMode.READER:
+            self._reader_box.select_row_with_content(self._view_model.selected_filter)
 
     def _play_book_clicked(self, widget, book):
         self._view_model.playback_book(book)
