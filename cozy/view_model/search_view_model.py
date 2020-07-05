@@ -16,6 +16,8 @@ class SearchViewModel(Observable, EventSender):
         self._fs_monitor: FilesystemMonitor = FilesystemMonitor()
         self._application_settings: ApplicationSettings = ApplicationSettings()
 
+        self._search_open: bool = False
+
     @property
     def books(self):
         return self._model.books
@@ -50,12 +52,22 @@ class SearchViewModel(Observable, EventSender):
 
         return sorted(split_strings_to_set(readers))
 
+    @property
+    def search_open(self):
+        return self._search_open
+
+    @search_open.setter
+    def search_open(self, value):
+        self._search_open = value
+        self._notify("search_open")
+
     def jump_to_book(self, book: Book):
-        pass
+        self.search_open = False
 
     def jump_to_author(self, author: str):
         self.emit_event(OpenView.AUTHOR, author)
+        self.search_open = False
 
     def jump_to_reader(self, reader: str):
         self.emit_event(OpenView.READER, reader)
-
+        self.search_open = False

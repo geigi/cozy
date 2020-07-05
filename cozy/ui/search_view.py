@@ -52,6 +52,11 @@ class SearchView:
         self.search_thread = Thread(target=self.search, name="SearchThread")
         self.search_thread_stop = threading.Event()
 
+        self._connect_view_model()
+
+    def _connect_view_model(self):
+        self.view_model.bind_to("search_open", self._on_search_open_changed)
+
     def search(self, user_search: str):
         # we need the main context to call methods in the main thread after the search is finished
         main_context = GLib.MainContext.default()
@@ -61,8 +66,8 @@ class SearchView:
             for book
             in self.view_model.books
             if user_search.lower() in book.name.lower()
-            or user_search.lower() in book.author.lower()
-            or user_search.lower() in book.reader.lower()
+               or user_search.lower() in book.author.lower()
+               or user_search.lower() in book.reader.lower()
         })
         books = sorted(books, key=lambda book: book.name.lower())
         if self.search_thread_stop.is_set():
@@ -142,6 +147,10 @@ class SearchView:
             self.stack.set_visible_child_name("start")
             self.popover.set_size_request(-1, -1)
 
+    def _on_search_open_changed(self):
+        if self.view_model.search_open == False:
+            self.close()
+
     def __on_book_search_finished(self, books):
         if len(books) > 0:
             self.stack.set_visible_child_name("main")
@@ -151,7 +160,9 @@ class SearchView:
             for book in books:
                 if self.search_thread_stop.is_set():
                     return
-                self.book_box.add(BookSearchResult(book, self.view_model.jump_to_book))
+
+                book_result = BookSearchResult(book, self.view_model.jump_to_book)
+                self.book_box.add(book_result)
 
     def __on_author_search_finished(self, authors):
         if len(authors) > 0:
@@ -162,7 +173,9 @@ class SearchView:
             for author in authors:
                 if self.search_thread_stop.is_set():
                     return
-                self.author_box.add(ArtistSearchResult(self.view_model.jump_to_author, author, True))
+
+                author_result = ArtistSearchResult(self.view_model.jump_to_author, author, True)
+                self.author_box.add(author_result)
 
     def __on_reader_search_finished(self, readers):
         if len(readers) > 0:
@@ -173,7 +186,8 @@ class SearchView:
             for reader in readers:
                 if self.search_thread_stop.is_set():
                     return
-                self.reader_box.add(ArtistSearchResult(
-                    self.view_model.jump_to_reader, reader, False))
+
+                reader_result = ArtistSearchResult(self.view_model.jump_to_reader, reader, False)
+                self.reader_box.add(reader_result)
 
         self.popover.set_size_request(-1, -1)
