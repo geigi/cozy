@@ -62,6 +62,7 @@ class SearchViewModel(Observable, EventSender):
         self._notify("search_open")
 
     def jump_to_book(self, book: Book):
+        self.emit_event(OpenView.BOOK, book)
         self.search_open = False
 
     def jump_to_author(self, author: str):

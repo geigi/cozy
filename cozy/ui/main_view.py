@@ -486,7 +486,6 @@ class CozyUI(metaclass=Singleton):
         # then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"
         self.toolbar_revealer.set_reveal_child(False)
-        # self.search.close()
 
     def __on_hide_offline(self, action, value):
         """

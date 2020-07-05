@@ -1,15 +1,18 @@
 from cozy.architecture.singleton import Singleton
 from cozy.control.db import get_db
+from cozy.model.book import Book
 from cozy.model.library import Library
 from cozy.open_view import OpenView
 from cozy.ui.library_view import LibraryView
+from cozy.ui.main_view import CozyUI
 from cozy.ui.search_view import SearchView
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
 from cozy.view_model.search_view_model import SearchViewModel
 
 
 class AppController(metaclass=Singleton):
-    def __init__(self, main_window_builder):
+    def __init__(self, main_window_builder, main_window):
+        self.main_window: CozyUI = main_window
         self.library_model: Library = Library(get_db())
 
         self.library_view_model: LibraryViewModel = LibraryViewModel(self.library_model)
@@ -28,11 +31,13 @@ class AppController(metaclass=Singleton):
         self.library_view_model.library_view_mode = LibraryViewMode.READER
         self.library_view_model.selected_filter = reader
 
-    def open_book(self):
-        pass
+    def open_book(self, book: Book):
+        self.main_window.jump_to_book(book.db_object)
 
     def _on_open_view(self, event, data):
         if event == OpenView.AUTHOR:
             self.open_author(data)
         elif event == OpenView.READER:
             self.open_reader(data)
+        elif event == OpenView.BOOK:
+            self.open_book(data)
