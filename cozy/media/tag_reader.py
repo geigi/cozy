@@ -42,17 +42,26 @@ class TagReader:
     def _get_book_name(self):
         success, value = self.tags.get_string_index(Gst.TAG_ALBUM, 0)
 
-        return value.strip() if success else ""
+        return value.strip() if success else self._get_book_name_fallback()
+
+    def _get_book_name_fallback(self):
+        return os.path.basename(os.path.normpath(self.uri))
 
     def _get_author(self):
         authors = self._get_string_list(Gst.TAG_COMPOSER)
 
-        return "; ".join(authors) if len(authors) > 0 else _("Unknown")
+        if len(authors) > 0 and authors[0]:
+            return "; ".join(authors)
+        else:
+            return _("Unknown")
 
     def _get_reader(self):
         readers = self._get_string_list(Gst.TAG_ARTIST)
 
-        return "; ".join(readers) if len(readers) > 0 else _("Unknown")
+        if len(readers) > 0 and readers[0]:
+            return "; ".join(readers)
+        else:
+            return _("Unknown")
 
     def _get_disk(self):
         success, value = self.tags.get_uint_index(Gst.TAG_ALBUM_VOLUME_NUMBER, 0)
@@ -62,12 +71,15 @@ class TagReader:
     def _get_track_number(self):
         success, value = self.tags.get_uint_index(Gst.TAG_TRACK_NUMBER, 0)
 
-        return value if success else 1
+        return value if success else 0
 
     def _get_track_name(self):
         success, value = self.tags.get_string_index(Gst.TAG_TITLE, 0)
 
-        return value.strip() if success else ""
+        return value.strip() if success else self._get_track_name_fallback()
+
+    def _get_track_name_fallback(self):
+        return os.path.splitext(self.uri)[0]
 
     def _get_chapters(self):
         chapter = Chapter(
