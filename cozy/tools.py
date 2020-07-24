@@ -83,18 +83,6 @@ class IntervalTimer(StoppableThread):
             time.sleep(self._interval)
 
 
-def remove_all_children(container):
-    """
-    Removes all widgets from a gtk container.
-    """
-    container.set_visible(False)
-    childs = container.get_children()
-    for element in childs:
-        container.remove(element)
-        # element.destroy()
-    container.set_visible(True)
-
-
 def seconds_to_human_readable(seconds):
     """
     Create a string with the following format:

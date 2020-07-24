@@ -2,7 +2,6 @@ import threading
 from threading import Thread
 
 from cozy.ui.widgets.search_results import BookSearchResult, ArtistSearchResult
-import cozy.tools as tools
 
 import gi
 
@@ -122,9 +121,9 @@ class SearchView:
         self.stack.set_visible_child_name("main")
 
         # First clear the boxes
-        tools.remove_all_children(self.book_box)
-        tools.remove_all_children(self.author_box)
-        tools.remove_all_children(self.reader_box)
+        self.book_box.remove_all_children()
+        self.author_box.remove_all_children()
+        self.reader_box.remove_all_children()
 
         # Hide all the labels & separators
         self.book_label.set_visible(False)
