@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 19:26+0200\n"
+"POT-Creation-Date: 2020-07-24 20:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: cozy/control/importer.py:298
+#: cozy/control/importer.py:301
 msgid "Unknown Author"
 msgstr ""
 
-#: cozy/control/importer.py:300
+#: cozy/control/importer.py:303
 msgid "Unknown Reader"
 msgstr ""
 
@@ -38,73 +38,70 @@ msgstr ""
 msgid "Off"
 msgstr ""
 
-#: cozy/tools.py:116
-msgid "hours"
-msgstr ""
+#: cozy/tools.py:102 cozy/tools.py:106
+#, python-brace-format
+msgid "{hours} hour"
+msgid_plural "{hours} hours"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:118
-msgid "hour"
-msgstr ""
+#: cozy/tools.py:104 cozy/tools.py:108
+#, python-brace-format
+msgid "{minutes} minute"
+msgid_plural "{minutes} minutes"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:126
-msgid "minutes"
-msgstr ""
+#: cozy/tools.py:110
+#, python-brace-format
+msgid "{seconds} second"
+msgid_plural "{seconds} seconds"
+msgstr[0] ""
+msgstr[1] ""
 
-#: cozy/tools.py:128
-msgid "minute"
-msgstr ""
-
-#: cozy/tools.py:132
+#: cozy/tools.py:112
 msgid "finished"
 msgstr ""
 
 #: cozy/tools.py:136
-msgid "seconds"
-msgstr ""
-
-#: cozy/tools.py:138
-msgid "second"
-msgstr ""
-
-#: cozy/tools.py:162
 msgid "never"
 msgstr ""
 
-#: cozy/tools.py:164
+#: cozy/tools.py:138
 msgid "today"
 msgstr ""
 
-#: cozy/tools.py:166
+#: cozy/tools.py:140
 msgid "yesterday"
 msgstr ""
 
-#: cozy/tools.py:168
+#: cozy/tools.py:142
 #, python-format
 msgid "%s days ago"
 msgstr ""
 
-#: cozy/tools.py:170
+#: cozy/tools.py:144
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:172
+#: cozy/tools.py:146
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:174
+#: cozy/tools.py:148
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/ui/album_element.py:59 cozy/ui/search_results.py:123
+#: cozy/ui/album_element.py:59 cozy/ui/widgets/search_results.py:98
 msgid "Play this book"
 msgstr ""
 
@@ -144,31 +141,31 @@ msgstr ""
 msgid "All files"
 msgstr ""
 
-#: cozy/ui/main_view.py:399
+#: cozy/ui/main_view.py:397
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui/main_view.py:416
+#: cozy/ui/main_view.py:414
 msgid "Importing Audiobooks"
 msgstr ""
 
-#: cozy/ui/search_results.py:71
+#: cozy/ui/widgets/search_results.py:72
 msgid "Jump to author "
 msgstr ""
 
-#: cozy/ui/search_results.py:74
+#: cozy/ui/widgets/search_results.py:75
 msgid "Jump to reader "
 msgstr ""
 
-#: cozy/ui/settings.py:427 cozy/ui/settings.py:470
+#: cozy/ui/settings.py:437 cozy/ui/settings.py:480
 msgid "External drive"
 msgstr ""
 
-#: cozy/ui/settings.py:430 cozy/ui/settings.py:473
+#: cozy/ui/settings.py:440 cozy/ui/settings.py:483
 msgid "Internal drive"
 msgstr ""
 
-#: cozy/ui/settings.py:457
+#: cozy/ui/settings.py:467
 msgid "Changing audio book location…"
 msgstr ""
 
@@ -181,13 +178,13 @@ msgstr ""
 msgid "{storage} is offline."
 msgstr ""
 
-#: cozy/ui/widgets/filter_list_box.py:18
-#: cozy/view_model/library_view_model.py:34
-#: cozy/view_model/library_view_model.py:122
+#: cozy/ui/widgets/filter_list_box.py:20
+#: cozy/view_model/library_view_model.py:33
+#: cozy/view_model/library_view_model.py:126
 msgid "All"
 msgstr ""
 
-#: cozy/ui/widgets/filter_list_box.py:19
+#: cozy/ui/widgets/filter_list_box.py:21
 msgid "Display all books"
 msgstr ""
 

@@ -2,12 +2,11 @@ from enum import Enum, auto
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable
-from cozy.control.db import get_db
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.control.importer import Importer, importer as importer_instance
+from cozy.extensions.set import split_strings_to_set
 from cozy.media.player import Player
 from cozy.model.book import Book
-from cozy.model.chapter import Chapter
 from cozy.model.library import Library
 from cozy.ui.book_element import BookElement
 
@@ -20,10 +19,10 @@ class LibraryViewMode(Enum):
 
 class LibraryViewModel(Observable):
 
-    def __init__(self):
+    def __init__(self, model: Library):
         super().__init__()
 
-        self._model = Library(get_db())
+        self._model = model
 
         self._fs_monitor: FilesystemMonitor = FilesystemMonitor()
         self._application_settings: ApplicationSettings = ApplicationSettings()
@@ -80,7 +79,7 @@ class LibraryViewModel(Observable):
             if is_book_online(book) or show_offline_books
         }
 
-        return sorted(authors)
+        return sorted(split_strings_to_set(authors))
 
     @property
     def readers(self):
@@ -95,14 +94,19 @@ class LibraryViewModel(Observable):
             if is_book_online(book) or show_offline_books
         }
 
-        return sorted(readers)
+        return sorted(split_strings_to_set(readers))
 
     def playback_book(self, book: Book):
         # Pause/Play book here
         pass
 
-    def switch_screen(self, screen: str):
-        pass
+    def remove_book(self, book: Book):
+        book.blacklist()
+        self._model.invalidate()
+        self._notify("authors")
+        self._notify("readers")
+        self._notify("books")
+        self._notify("books-filter")
 
     def display_book_filter(self, book_element: BookElement):
         book = book_element.book
@@ -122,9 +126,9 @@ class LibraryViewModel(Observable):
         if self.selected_filter == _("All"):
             return True
         elif self.library_view_mode == LibraryViewMode.AUTHOR:
-            return True if author == self.selected_filter else False
+            return True if self.selected_filter in author else False
         elif self.library_view_mode == LibraryViewMode.READER:
-            return True if reader == self.selected_filter else False
+            return True if self.selected_filter in reader else False
 
     def display_book_sort(self, book_element1, book_element2):
         if self._library_view_mode == LibraryViewMode.CURRENT:

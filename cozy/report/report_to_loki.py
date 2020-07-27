@@ -6,10 +6,15 @@ import pytz
 import distro
 import platform
 
+
 from cozy.report.log_level import LogLevel
 from cozy.version import __version__ as CozyVersion
 from peewee import __version__ as PeeweeVersion
 from mutagen import version_string as MutagenVersion
+
+import gi
+gi.require_version('Gtk', '3.0')
+
 from gi.repository import Gtk
 
 

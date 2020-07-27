@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-10 01:01+0200\n"
+"POT-Creation-Date: 2020-07-24 20:28+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Åke Engelbrektson, 2020\n"
 "Language-Team: Swedish (https://www.transifex.com/geigi/teams/78138/sv/)\n"
@@ -21,11 +21,11 @@ msgstr ""
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/control/importer.py:285
+#: cozy/control/importer.py:301
 msgid "Unknown Author"
 msgstr "Okänd författare"
 
-#: cozy/control/importer.py:287
+#: cozy/control/importer.py:303
 msgid "Unknown Reader"
 msgstr "Okänd uppläsare"
 
@@ -41,73 +41,70 @@ msgstr "min"
 msgid "Off"
 msgstr "Av"
 
-#: cozy/tools.py:116
-msgid "hours"
-msgstr "timmar"
+#: cozy/tools.py:102 cozy/tools.py:106
+#, python-brace-format
+msgid "{hours} hour"
+msgid_plural "{hours} hours"
+msgstr[0] "timma"
+msgstr[1] "timmar"
 
-#: cozy/tools.py:118
-msgid "hour"
-msgstr "timma"
+#: cozy/tools.py:104 cozy/tools.py:108
+#, python-brace-format
+msgid "{minutes} minute"
+msgid_plural "{minutes} minutes"
+msgstr[0] "minut"
+msgstr[1] "minuter"
 
-#: cozy/tools.py:126
-msgid "minutes"
-msgstr "minuter"
+#: cozy/tools.py:110
+#, python-brace-format
+msgid "{seconds} second"
+msgid_plural "{seconds} seconds"
+msgstr[0] "sekund"
+msgstr[1] "sekunder"
 
-#: cozy/tools.py:128
-msgid "minute"
-msgstr "minut"
-
-#: cozy/tools.py:132
+#: cozy/tools.py:112
 msgid "finished"
 msgstr "slutfört"
 
 #: cozy/tools.py:136
-msgid "seconds"
-msgstr "sekunder"
-
-#: cozy/tools.py:138
-msgid "second"
-msgstr "sekund"
-
-#: cozy/tools.py:162
 msgid "never"
 msgstr "aldrig"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:138
 msgid "today"
 msgstr "idag"
 
-#: cozy/tools.py:166
+#: cozy/tools.py:140
 msgid "yesterday"
 msgstr "igår"
 
-#: cozy/tools.py:168
+#: cozy/tools.py:142
 #, python-format
 msgid "%s days ago"
 msgstr "%s dagar sedan"
 
-#: cozy/tools.py:170
+#: cozy/tools.py:144
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
 msgstr[0] "{weeks} vecka sedan"
 msgstr[1] "{weeks} veckor sedan"
 
-#: cozy/tools.py:172
+#: cozy/tools.py:146
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
 msgstr[0] "{months} månad sedan"
 msgstr[1] "{months} månader sedan"
 
-#: cozy/tools.py:174
+#: cozy/tools.py:148
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
 msgstr[0] "{years} år sedan"
 msgstr[1] "{years} år sedan"
 
-#: cozy/ui/album_element.py:58 cozy/ui/search_results.py:123
+#: cozy/ui/album_element.py:59 cozy/ui/widgets/search_results.py:98
 msgid "Play this book"
 msgstr "Spela upp denna bok"
 
@@ -135,7 +132,7 @@ msgstr "Ta bort från biblioteket"
 msgid "Downloaded"
 msgstr "Nerladdat"
 
-#: cozy/ui/book_overview.py:228 data/ui/main_window.ui:1353
+#: cozy/ui/book_overview.py:228 data/ui/main_window.ui:1024
 msgid "Download"
 msgstr "Ladda ner"
 
@@ -147,31 +144,31 @@ msgstr "Skiva"
 msgid "All files"
 msgstr "Alla filer"
 
-#: cozy/ui/main_view.py:399
+#: cozy/ui/main_view.py:397
 msgid "Audiobooks"
 msgstr "Ljudböcker"
 
-#: cozy/ui/main_view.py:420
+#: cozy/ui/main_view.py:414
 msgid "Importing Audiobooks"
 msgstr "Importerar ljudböcker"
 
-#: cozy/ui/search_results.py:71
+#: cozy/ui/widgets/search_results.py:72
 msgid "Jump to author "
 msgstr "Gå till författare "
 
-#: cozy/ui/search_results.py:74
+#: cozy/ui/widgets/search_results.py:75
 msgid "Jump to reader "
 msgstr "Gå till uppläsare "
 
-#: cozy/ui/settings.py:427 cozy/ui/settings.py:470
+#: cozy/ui/settings.py:437 cozy/ui/settings.py:480
 msgid "External drive"
 msgstr "Extern enhet"
 
-#: cozy/ui/settings.py:430 cozy/ui/settings.py:473
+#: cozy/ui/settings.py:440 cozy/ui/settings.py:483
 msgid "Internal drive"
 msgstr "Intern disk"
 
-#: cozy/ui/settings.py:457
+#: cozy/ui/settings.py:467
 msgid "Changing audio book location…"
 msgstr "Ändrar ljudboksplats…"
 
@@ -184,13 +181,13 @@ msgstr "Spela upp denna del"
 msgid "{storage} is offline."
 msgstr "{storage} är offline."
 
-#: cozy/ui/widgets/filter_list_box.py:18
-#: cozy/view_model/library_view_model.py:30
-#: cozy/view_model/library_view_model.py:122
+#: cozy/ui/widgets/filter_list_box.py:20
+#: cozy/view_model/library_view_model.py:33
+#: cozy/view_model/library_view_model.py:126
 msgid "All"
 msgstr "Alla"
 
-#: cozy/ui/widgets/filter_list_box.py:19
+#: cozy/ui/widgets/filter_list_box.py:21
 msgid "Display all books"
 msgstr "Visa alla böcker"
 
@@ -236,253 +233,253 @@ msgstr ""
 "- Filen/Filerna är inte giltiga ljudfiler\n"
 "- Filen/Filerna är skadade"
 
-#: data/ui/main_window.ui:71
+#: data/ui/main_window.ui:72
 msgid "Rewind 30 seconds"
 msgstr "Spola tillbaka 30 sekunder"
 
-#: data/ui/main_window.ui:79
+#: data/ui/main_window.ui:80
 msgid "Rewind button"
 msgstr "Spola tillbaka"
 
-#: data/ui/main_window.ui:80
+#: data/ui/main_window.ui:81
 msgid "Jump back 30 seconds"
 msgstr "Hoppa bakåt 30 sekunder"
 
-#: data/ui/main_window.ui:97
+#: data/ui/main_window.ui:98
 msgid "Start playback"
 msgstr "Starta uppspelning"
 
-#: data/ui/main_window.ui:105
+#: data/ui/main_window.ui:106
 msgid "Play/Pause Button"
 msgstr "Spela upp/Pausa"
 
-#: data/ui/main_window.ui:106
+#: data/ui/main_window.ui:107
 msgid "Start or pause the playback"
 msgstr "Starta eller pausa uppspelning"
 
-#: data/ui/main_window.ui:123
+#: data/ui/main_window.ui:124
 msgid "Volume control"
 msgstr "Volymkontroll"
 
-#: data/ui/main_window.ui:170
+#: data/ui/main_window.ui:171
 msgid "Warnings"
 msgstr "Varningar"
 
-#: data/ui/main_window.ui:225
+#: data/ui/main_window.ui:226
 msgid "Currently playing"
 msgstr "Nu spelas"
 
-#: data/ui/main_window.ui:243
+#: data/ui/main_window.ui:244
 msgid "Booktitle"
 msgstr "Boktitel"
 
-#: data/ui/main_window.ui:244
+#: data/ui/main_window.ui:245
 msgid "Title of currently playing book"
 msgstr "Titel på aktuell ljudbok"
 
-#: data/ui/main_window.ui:269
+#: data/ui/main_window.ui:270
 msgid "Part name"
 msgstr "Delnamn"
 
-#: data/ui/main_window.ui:270
+#: data/ui/main_window.ui:271
 msgid "Title of the currently playing part"
 msgstr "Titel på aktuell ljudboksdel"
 
-#: data/ui/main_window.ui:312
+#: data/ui/main_window.ui:313
 msgid "Elapsed time"
 msgstr "Förfluten tid"
 
-#: data/ui/main_window.ui:320
+#: data/ui/main_window.ui:321
 msgid "Time elapsed"
 msgstr "Förfluten tid"
 
-#: data/ui/main_window.ui:321
+#: data/ui/main_window.ui:322
 msgid "Elapsed time of current part"
 msgstr "Förfluten tid för aktuell del"
 
-#: data/ui/main_window.ui:336
+#: data/ui/main_window.ui:337
 msgid "Jump to position in current chapter"
 msgstr "Hoppa till position i aktuellt kapitel"
 
-#: data/ui/main_window.ui:342
+#: data/ui/main_window.ui:343
 msgid "Position slider"
 msgstr "Positionsreglage"
 
-#: data/ui/main_window.ui:343
+#: data/ui/main_window.ui:344
 msgid "Position of the current part in seconds"
 msgstr "Position för aktuell del i sekunder"
 
-#: data/ui/main_window.ui:361
+#: data/ui/main_window.ui:362
 msgid "Remaining time"
 msgstr "Återstående tid"
 
-#: data/ui/main_window.ui:369
+#: data/ui/main_window.ui:370
 msgid "Time remaining"
 msgstr "Återstående tid"
 
-#: data/ui/main_window.ui:370
+#: data/ui/main_window.ui:371
 msgid "Remaining time of current part"
 msgstr "Återstående tid för aktuell del"
 
-#: data/ui/main_window.ui:446
+#: data/ui/main_window.ui:447
 msgid "Working…"
 msgstr "Arbetar…"
 
-#: data/ui/main_window.ui:451
+#: data/ui/main_window.ui:452
 msgid "Currently working"
 msgstr "Arbetar för närvarande"
 
-#: data/ui/main_window.ui:467
+#: data/ui/main_window.ui:468
 msgid "Playback speed"
 msgstr "Uppspelningshastighet"
 
-#: data/ui/main_window.ui:489 data/ui/settings.ui:724
+#: data/ui/main_window.ui:490 data/ui/settings.ui:724
 msgid "Sleep timer"
 msgstr "Insomningsur"
 
-#: data/ui/main_window.ui:500
+#: data/ui/main_window.ui:501
 msgid "Timer menu button"
 msgstr "Tidmeny"
 
-#: data/ui/main_window.ui:501
+#: data/ui/main_window.ui:502
 msgid "Open the sleep timer popover"
 msgstr "Öppna insomningsfönstret"
 
-#: data/ui/main_window.ui:517
+#: data/ui/main_window.ui:518
 msgid "Search your library"
 msgstr "Sök i ditt bibliotek"
 
-#: data/ui/main_window.ui:528
+#: data/ui/main_window.ui:529
 msgid "Search menu button"
 msgstr "Sökmeny"
 
-#: data/ui/main_window.ui:529
+#: data/ui/main_window.ui:530
 msgid "Open the search popover"
 msgstr "Öppna sökfönstret"
 
-#: data/ui/main_window.ui:543
+#: data/ui/main_window.ui:544
 msgid "Options"
 msgstr "Alternativ"
 
-#: data/ui/main_window.ui:554
+#: data/ui/main_window.ui:555
 msgid "Options menu button"
 msgstr "Alternativmeny"
 
-#: data/ui/main_window.ui:555
+#: data/ui/main_window.ui:556
 msgid "Open the options popover"
 msgstr "Öppna inställningsfönstret"
 
-#: data/ui/main_window.ui:680
+#: data/ui/main_window.ui:681
 msgid "Recent"
 msgstr "Tidigare"
 
-#: data/ui/main_window.ui:699
+#: data/ui/main_window.ui:700
 msgid "List of authors"
 msgstr "Lista över författare"
 
-#: data/ui/main_window.ui:715 data/ui/main_window.ui:823
+#: data/ui/main_window.ui:716 data/ui/main_window.ui:824
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "Författare"
 
-#: data/ui/main_window.ui:734
+#: data/ui/main_window.ui:735
 msgid "List of readers"
 msgstr "Lista över uppläsare"
 
-#: data/ui/main_window.ui:750 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:751 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "Uppläsare"
 
-#: data/ui/main_window.ui:803
+#: data/ui/main_window.ui:804
 msgid "List of books"
 msgstr "Lista över böcker"
 
-#: data/ui/main_window.ui:839
+#: data/ui/main_window.ui:840
 msgid "Importing your audiobooks…"
 msgstr "Importerar dina ljudböcker…"
 
-#: data/ui/main_window.ui:891
-msgid "Import your Audiobooks"
-msgstr "Importera dina ljudböcker"
-
-#: data/ui/main_window.ui:907
-msgid ""
-"Cozy automatically imports your audiobooks in one directory - your library"
-msgstr ""
-"Cosy importerar dina ljudböcker automatiskt i en mapp - ditt bibliotek"
-
-#: data/ui/main_window.ui:935
-msgid "External or Network drive?"
-msgstr "Extern eller nätverksdisk?"
-
-#: data/ui/main_window.ui:952
-msgid "Are your audiobooks stored on an external or network drive?"
-msgstr "Är dina ljudböcker lagrade på en extern eller nätverksdisk?"
-
-#: data/ui/main_window.ui:967
-msgid ""
-"If they are you can enable offline mode for a book in the book overview\n"
-"This keeps a local copy of the book that you can listen to on the go"
-msgstr ""
-"Om dom är, kan du aktivera offline-läge för en bok i boköversikten.\n"
-"Detta lagrar en lokal kopia av boken, som du kan lyssna på, på språng."
-
-#: data/ui/main_window.ui:993 data/ui/main_window.ui:1050
-msgid "Auto scan switch"
-msgstr "Automatisk skanning av/på"
-
-#: data/ui/main_window.ui:994 data/ui/main_window.ui:1032
-#: data/ui/main_window.ui:1051
-msgid "Automatically import new audiobooks on startup"
-msgstr "Importera nya ljudböcker automatiskt vid programstart"
-
-#: data/ui/main_window.ui:1094
-msgid "Drag & Drop"
-msgstr "Dra & släpp"
-
-#: data/ui/main_window.ui:1111
-msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr "Dra och släpp dina ljudböcker i Cozy så importeras de automatiskt"
-
-#: data/ui/main_window.ui:1132
-msgid "Location of your audiobooks"
-msgstr "Plats för dina ljudböcker"
-
-#: data/ui/main_window.ui:1153
-msgid "Set Audiobooks Directory"
-msgstr "Ange ljudboksmapp"
-
-#: data/ui/main_window.ui:1170
-msgid ""
-"Load audiobooks from a directory, network drive or an external disk\n"
-"You can add more storage locations later in the settings"
-msgstr ""
-"Läs in ljudböcker från en mapp, nätverksdisk eller en extern disk.\n"
-"Du kan lägga till fler lagringsplatser senare, i inställningarna."
-
-#: data/ui/main_window.ui:1401
+#: data/ui/main_window.ui:1072
 msgid "Remaining"
 msgstr "Återstår"
 
-#: data/ui/main_window.ui:1457
+#: data/ui/main_window.ui:1128
 msgid "Total"
 msgstr "Sammanlagt"
 
-#: data/ui/main_window.ui:1474
+#: data/ui/main_window.ui:1145
 msgid "Last played"
 msgstr "Senast spelad"
 
-#: data/ui/main_window.ui:1491
+#: data/ui/main_window.ui:1162
 msgid "Published"
 msgstr "Publicerad"
 
-#: data/ui/main_window.ui:1655
+#: data/ui/main_window.ui:1326
 msgid ""
 "Start exploring your library by switching to the Author or Reader view "
 "above."
 msgstr ""
 "Börja utforska ditt bibliotek genom att växla till Författare eller "
 "Uppläsare ovan."
+
+#: data/ui/main_window.ui:1371
+msgid "Import your Audiobooks"
+msgstr "Importera dina ljudböcker"
+
+#: data/ui/main_window.ui:1387
+msgid ""
+"Cozy automatically imports your audiobooks in one directory - your library"
+msgstr ""
+"Cosy importerar dina ljudböcker automatiskt i en mapp - ditt bibliotek"
+
+#: data/ui/main_window.ui:1416
+msgid "External or Network drive?"
+msgstr "Extern eller nätverksdisk?"
+
+#: data/ui/main_window.ui:1439
+msgid "Are your audiobooks stored on an external or network drive?"
+msgstr "Är dina ljudböcker lagrade på en extern eller nätverksdisk?"
+
+#: data/ui/main_window.ui:1457
+msgid ""
+"If they are you can enable offline mode for a book in the book overview. "
+"This keeps a local copy of the book that you can listen to on the go"
+msgstr ""
+"Om de är, kan du aktivera offlineläge för en bok i boköversikten. Detta "
+"lagrar en lokal kopia av boken som du kan lyssna på, på språng."
+
+#: data/ui/main_window.ui:1491 data/ui/main_window.ui:1550
+msgid "Auto scan switch"
+msgstr "Automatisk skanning av/på"
+
+#: data/ui/main_window.ui:1492 data/ui/main_window.ui:1530
+#: data/ui/main_window.ui:1551
+msgid "Automatically import new audiobooks on startup"
+msgstr "Importera nya ljudböcker automatiskt vid programstart"
+
+#: data/ui/main_window.ui:1594
+msgid "Drag & Drop"
+msgstr "Dra & släpp"
+
+#: data/ui/main_window.ui:1611
+msgid "Drag your audiobooks into cozy and they will be automatically imported"
+msgstr "Dra och släpp dina ljudböcker i Cozy så importeras de automatiskt"
+
+#: data/ui/main_window.ui:1634
+msgid "Location of your audiobooks"
+msgstr "Plats för dina ljudböcker"
+
+#: data/ui/main_window.ui:1655
+msgid "Set Audiobooks Directory"
+msgstr "Ange ljudboksmapp"
+
+#: data/ui/main_window.ui:1678
+msgid "Load audiobooks from a directory, network drive or an external disk."
+msgstr "Läs in ljudböcker från en mapp, nätverksdisk eller en extern disk."
+
+#: data/ui/main_window.ui:1696
+msgid "You can add more storage locations later in the settings"
+msgstr "Du kan lägga till fler lagringsplatser senare, i inställningarna."
 
 #: data/ui/search_popover.ui:24
 msgid "Search"

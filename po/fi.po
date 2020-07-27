@@ -2,167 +2,37 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2019
-#
+# Julian Geywitz <github@geigi.de>, 2020
+# Oi Suomi On! <oisuomion@protonmail.com>, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-27 17:01+0100\n"
+"POT-Creation-Date: 2020-05-24 19:26+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Julian Geywitz <github@geigi.de>, 2019\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2020\n"
 "Language-Team: Finnish (https://www.transifex.com/geigi/teams/78138/fi/)\n"
-"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/ui/book_element.py:70 cozy/ui/search_results.py:123
-msgid "Play this book"
-msgstr "Toista tämä kirja"
+#: cozy/control/importer.py:298
+msgid "Unknown Author"
+msgstr "Tuntematon tekijä"
 
-#: cozy/ui/book_element.py:215
-msgid "Open book overview"
-msgstr "Avaa kirjan esittely"
-
-#: cozy/ui/book_element.py:216
-msgid "Currently offline"
-msgstr "Yhteydetön"
-
-#: cozy/ui/book_element.py:322
-msgid "Mark as read"
-msgstr "Merkitse luetuksi"
-
-#: cozy/ui/book_element.py:325
-msgid "Open in file browser"
-msgstr "Avaa tiedostoselaimessa"
-
-#: cozy/ui/book_element.py:328
-msgid "Remove from library"
-msgstr "Poista kirjastosta"
-
-#: cozy/ui/book_element.py:398
-msgid "Play this part"
-msgstr "Toista tämä osa"
-
-#: cozy/ui/book_overview.py:230
-msgid "Downloaded"
-msgstr "Ladattu"
-
-#: cozy/ui/book_overview.py:233 data/ui/main_window.ui:1328
-msgid "Download"
-msgstr "Lataa"
-
-#: cozy/ui/file_not_found_dialog.py:67
-msgid "All files"
-msgstr "Kaikki tiedostot"
+#: cozy/control/importer.py:300
+msgid "Unknown Reader"
+msgstr "Tuntematon lukija"
 
 #: cozy/control/offline_cache.py:181
 msgid "Copying"
 msgstr "Kopioidaan"
-
-#: cozy/ui/search_results.py:71
-msgid "Jump to author "
-msgstr "Siirry tekijään"
-
-#: cozy/ui/search_results.py:74
-msgid "Jump to reader "
-msgstr "Siirry lukijaan"
-
-#: cozy/control/importer.py:284
-msgid "Unknown Author"
-msgstr "Tuntematon tekijä"
-
-#: cozy/control/importer.py:286
-msgid "Unknown Reader"
-msgstr "Tuntematon lukija"
-
-#: cozy/tools.py:143
-msgid "hours"
-msgstr "tuntia"
-
-#: cozy/tools.py:145
-msgid "hour"
-msgstr "tunti"
-
-#: cozy/tools.py:153
-msgid "minutes"
-msgstr "minuuttia"
-
-#: cozy/tools.py:155
-msgid "minute"
-msgstr "minuutti"
-
-#: cozy/tools.py:159
-msgid "finished"
-msgstr "päättynyt"
-
-#: cozy/tools.py:163
-msgid "seconds"
-msgstr "sekuntia"
-
-#: cozy/tools.py:165
-msgid "second"
-msgstr "sekunti"
-
-#: cozy/tools.py:188
-msgid "never"
-msgstr "ei koskaan"
-
-#: cozy/tools.py:190
-msgid "today"
-msgstr "tänään"
-
-#: cozy/tools.py:192
-msgid "yesterday"
-msgstr "eilen"
-
-#: cozy/tools.py:194
-#, python-format
-msgid "%s days ago"
-msgstr ""
-
-#: cozy/tools.py:196
-#, python-brace-format
-msgid "{weeks} week ago"
-msgid_plural "{weeks} weeks ago"
-msgstr[0] ""
-msgstr[1] ""
-
-#: cozy/tools.py:198
-#, python-brace-format
-msgid "{months} month ago"
-msgid_plural "{months} months ago"
-msgstr[0] ""
-msgstr[1] ""
-
-#: cozy/tools.py:200
-#, python-brace-format
-msgid "{years} year ago"
-msgid_plural "{years} years ago"
-msgstr[0] ""
-msgstr[1] ""
-
-#: cozy/ui/main_view.py:405
-msgid "Audiobooks"
-msgstr ""
-
-#: cozy/ui/main_view.py:426
-msgid "Importing Audiobooks"
-msgstr "Tuodaan äänikirjoja"
-
-#. Add the special All element
-#: cozy/ui/main_view.py:495 cozy/ui/main_view.py:501 cozy/ui/main_view.py:825
-msgid "All"
-msgstr "Kaikki"
-
-#: cozy/ui/main_view.py:496 cozy/ui/main_view.py:502
-msgid "Display all books"
-msgstr "Näytä kaikki kirjat"
 
 #: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
 msgid "min"
@@ -172,262 +42,158 @@ msgstr "min"
 msgid "Off"
 msgstr "Pois"
 
-#: cozy/ui/settings.py:416 cozy/ui/settings.py:459
-msgid "External drive"
-msgstr "Ulkoinen asema"
+#: cozy/tools.py:116
+msgid "hours"
+msgstr "tuntia"
 
-#: cozy/ui/settings.py:419 cozy/ui/settings.py:462
-msgid "Internal drive"
-msgstr "Sisäinen asema"
+#: cozy/tools.py:118
+msgid "hour"
+msgstr "tunti"
 
-#: cozy/ui/settings.py:446
-msgid "Changing audio book location…"
-msgstr "Muutetaan äänikirjojen sijaintia…"
+#: cozy/tools.py:126
+msgid "minutes"
+msgstr "minuuttia"
+
+#: cozy/tools.py:128
+msgid "minute"
+msgstr "minuutti"
+
+#: cozy/tools.py:132
+msgid "finished"
+msgstr "päättynyt"
+
+#: cozy/tools.py:136
+msgid "seconds"
+msgstr "sekuntia"
+
+#: cozy/tools.py:138
+msgid "second"
+msgstr "sekunti"
+
+#: cozy/tools.py:162
+msgid "never"
+msgstr "ei koskaan"
+
+#: cozy/tools.py:164
+msgid "today"
+msgstr "tänään"
+
+#: cozy/tools.py:166
+msgid "yesterday"
+msgstr "eilen"
+
+#: cozy/tools.py:168
+#, python-format
+msgid "%s days ago"
+msgstr "%s päivää sitten"
+
+#: cozy/tools.py:170
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] "{weeks} viikko sitten"
+msgstr[1] "{viikot} viikkoa sitten"
+
+#: cozy/tools.py:172
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] "{kuukaudet} kuukausi sitten"
+msgstr[1] "{kuukausia} kuukautta sitten"
+
+#: cozy/tools.py:174
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] "{years} year ago"
+msgstr[1] "{vuosia} vuotta sitten"
+
+#: cozy/ui/album_element.py:59 cozy/ui/search_results.py:123
+msgid "Play this book"
+msgstr "Toista tämä kirja"
+
+#: cozy/ui/book_element.py:33
+msgid "Open book overview"
+msgstr "Avaa kirjan esittely"
+
+#: cozy/ui/book_element.py:34
+msgid "Currently offline"
+msgstr "Yhteydetön"
+
+#: cozy/ui/book_element.py:119
+msgid "Mark as read"
+msgstr "Merkitse luetuksi"
+
+#: cozy/ui/book_element.py:122
+msgid "Open in file browser"
+msgstr "Avaa tiedostoselaimessa"
+
+#: cozy/ui/book_element.py:125
+msgid "Remove from library"
+msgstr "Poista kirjastosta"
+
+#: cozy/ui/book_overview.py:225
+msgid "Downloaded"
+msgstr "Ladattu"
+
+#: cozy/ui/book_overview.py:228 data/ui/main_window.ui:1024
+msgid "Download"
+msgstr "Lataa"
 
 #: cozy/ui/disk_element.py:26
 msgid "Disc"
 msgstr "Levy"
 
-#: data/ui/main_window.ui:71
-msgid "Rewind 30 seconds"
-msgstr "Kelaa takaisin 30 sekuntia"
+#: cozy/ui/file_not_found_dialog.py:67
+msgid "All files"
+msgstr "Kaikki tiedostot"
 
-#: data/ui/main_window.ui:79
-msgid "Rewind button"
-msgstr "Kelauspainike"
+#: cozy/ui/main_view.py:399
+msgid "Audiobooks"
+msgstr "Äänikirjat"
 
-#: data/ui/main_window.ui:80
-msgid "Jump back 30 seconds"
-msgstr "Siirry takaisin 30 sekuntia"
+#: cozy/ui/main_view.py:416
+msgid "Importing Audiobooks"
+msgstr "Tuodaan äänikirjoja"
 
-#: data/ui/main_window.ui:97
-msgid "Start playback"
-msgstr "Aloita toisto"
+#: cozy/ui/search_results.py:71
+msgid "Jump to author "
+msgstr "Siirry tekijään"
 
-#: data/ui/main_window.ui:105
-msgid "Play/Pause Button"
-msgstr "Toisto-/taukopainike"
+#: cozy/ui/search_results.py:74
+msgid "Jump to reader "
+msgstr "Siirry lukijaan"
 
-#: data/ui/main_window.ui:106
-msgid "Start or pause the playback"
-msgstr "Aloita tai keskeytä toisto"
+#: cozy/ui/settings.py:427 cozy/ui/settings.py:470
+msgid "External drive"
+msgstr "Ulkoinen asema"
 
-#: data/ui/main_window.ui:123
-msgid "Volume control"
-msgstr "Äänenvoimakkuuden säätö"
+#: cozy/ui/settings.py:430 cozy/ui/settings.py:473
+msgid "Internal drive"
+msgstr "Sisäinen asema"
 
-#: data/ui/main_window.ui:200
-msgid "Currently playing"
-msgstr "Toistetaan"
+#: cozy/ui/settings.py:457
+msgid "Changing audio book location…"
+msgstr "Muutetaan äänikirjojen sijaintia…"
 
-#: data/ui/main_window.ui:218
-msgid "Booktitle"
-msgstr "Kirjan nimi"
+#: cozy/ui/track_element.py:28
+msgid "Play this part"
+msgstr "Toista tämä osa"
 
-#: data/ui/main_window.ui:219
-msgid "Title of currently playing book"
-msgstr "Toistettavan kirjan nimi"
+#: cozy/ui/warnings.py:24 cozy/ui/warnings.py:39
+#, python-brace-format
+msgid "{storage} is offline."
+msgstr "{varasto} ei ole verkossa."
 
-#: data/ui/main_window.ui:244
-msgid "Part name"
-msgstr "Osan nimi"
+#: cozy/ui/widgets/filter_list_box.py:18
+#: cozy/view_model/library_view_model.py:34
+#: cozy/view_model/library_view_model.py:122
+msgid "All"
+msgstr "Kaikki"
 
-#: data/ui/main_window.ui:245
-msgid "Title of the currently playing part"
-msgstr "Toistettavan osan nimi"
-
-#: data/ui/main_window.ui:287
-msgid "Elapsed time"
-msgstr "Kulunut aika"
-
-#: data/ui/main_window.ui:295
-msgid "Time elapsed"
-msgstr "Kulunut aika"
-
-#: data/ui/main_window.ui:296
-msgid "Elapsed time of current part"
-msgstr "Osan toistoon kulunut aika"
-
-#: data/ui/main_window.ui:311
-msgid "Jump to position in current chapter"
-msgstr ""
-
-#: data/ui/main_window.ui:317
-msgid "Position slider"
-msgstr "Kohdan osoitin"
-
-#: data/ui/main_window.ui:318
-msgid "Position of the current part in seconds"
-msgstr "Toiston kohta sekunneissa"
-
-#: data/ui/main_window.ui:336
-msgid "Remaining time"
-msgstr "Jäljellä oleva aika"
-
-#: data/ui/main_window.ui:344
-msgid "Time remaining"
-msgstr "Jäljellä oleva aika"
-
-#: data/ui/main_window.ui:345
-msgid "Remaining time of current part"
-msgstr "Osan jäljellä oleva aika"
-
-#: data/ui/main_window.ui:421
-msgid "Working…"
-msgstr "Työskennellään…"
-
-#: data/ui/main_window.ui:426
-msgid "Currently working"
-msgstr "Työskennellään parhaillaan"
-
-#: data/ui/main_window.ui:442
-msgid "Playback speed"
-msgstr "Toistonopeus"
-
-#: data/ui/main_window.ui:464 data/ui/settings.ui:566
-msgid "Sleep timer"
-msgstr "Ajastin"
-
-#: data/ui/main_window.ui:475
-msgid "Timer menu button"
-msgstr "Ajastinvalikkopainike"
-
-#: data/ui/main_window.ui:476
-msgid "Open the sleep timer popover"
-msgstr "Avaa ajastimen ponnahdus"
-
-#: data/ui/main_window.ui:492
-msgid "Search your library"
-msgstr "Etsi kirjastostasi"
-
-#: data/ui/main_window.ui:503
-msgid "Search menu button"
-msgstr "Hakuvalikkopainike"
-
-#: data/ui/main_window.ui:504
-msgid "Open the search popover"
-msgstr "Avaa hakuponnahdus"
-
-#: data/ui/main_window.ui:518
-msgid "Options"
-msgstr "Asetukset"
-
-#: data/ui/main_window.ui:529
-msgid "Options menu button"
-msgstr "Asetusvalikkopainike"
-
-#: data/ui/main_window.ui:530
-msgid "Open the options popover"
-msgstr "Avaa asetusten ponnahdus"
-
-#: data/ui/main_window.ui:655
-msgid "Recent"
-msgstr "Viimeisin"
-
-#: data/ui/main_window.ui:674
-msgid "List of authors"
-msgstr "Lista tekijöistä"
-
-#: data/ui/main_window.ui:690 data/ui/main_window.ui:798
-#: data/ui/search_popover.ui:107
-msgid "Author"
-msgstr "Tekijä"
-
-#: data/ui/main_window.ui:709
-msgid "List of readers"
-msgstr "Lista lukijoista"
-
-#: data/ui/main_window.ui:725 data/ui/search_popover.ui:201
-msgid "Reader"
-msgstr "Lukija"
-
-#: data/ui/main_window.ui:778
-msgid "List of books"
-msgstr "Lista kirjoista"
-
-#: data/ui/main_window.ui:814
-msgid "Importing your audiobooks…"
-msgstr "Tuodaan äänikirjojasi…"
-
-#: data/ui/main_window.ui:866
-msgid "Import your Audiobooks"
-msgstr "Tuo äänikirjasi"
-
-#: data/ui/main_window.ui:882
-msgid ""
-"Cozy automatically imports your audiobooks in one directory - your library"
-msgstr ""
-"Cozy tuo automaattisesti kaikki äänikirjasi yhteen hakemistoon - kirjastoosi"
-
-#: data/ui/main_window.ui:910
-msgid "External or Network drive?"
-msgstr "Ulkoinen tai verkkoasema?"
-
-#: data/ui/main_window.ui:927
-msgid "Are your audiobooks stored on an external or network drive?"
-msgstr "Ovatko äänikirjat ulkoisella tai verkkoasemalla?"
-
-#: data/ui/main_window.ui:942
-msgid ""
-"If they are you can enable offline mode for a book in the book overview\n"
-"This keeps a local copy of the book that you can listen to on the go"
-msgstr ""
-"Jos ne ovat, voit kytkeä yhteydettömän tilan kirjan esittelyssä\n"
-"Tämä säilyttää kopion kirjasta paikallisesti matkakuuntelua varten"
-
-#: data/ui/main_window.ui:968 data/ui/main_window.ui:1025
-msgid "Auto scan switch"
-msgstr "Automaattisen skannauksen kytkin"
-
-#: data/ui/main_window.ui:969 data/ui/main_window.ui:1007
-#: data/ui/main_window.ui:1026
-msgid "Automatically import new audiobooks on startup"
-msgstr "Tuo uudet äänikirjat automaattisesti käynnistettäessä"
-
-#: data/ui/main_window.ui:1069
-msgid "Drag & Drop"
-msgstr "Vedä ja pudota"
-
-#: data/ui/main_window.ui:1086
-msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr "Vedä äänikirjasi Cozyyn ja ne tuodaan automaattisesti"
-
-#: data/ui/main_window.ui:1107
-msgid "Location of your audiobooks"
-msgstr "Äänikirjojesi sijainti"
-
-#: data/ui/main_window.ui:1128
-msgid "Set Audiobooks Directory"
-msgstr "Aseta äänikirjahakemisto"
-
-#: data/ui/main_window.ui:1145
-msgid ""
-"Load audiobooks from a directory, network drive or an external disk\n"
-"You can add more storage locations later in the settings"
-msgstr ""
-"Lataa äänikirjoja hakemistosta, verkkoasemalta tai ulkoiselta asemalta\n"
-"Voit myöhemmin lisätä tallennussijainteja asetuksissa"
-
-#: data/ui/main_window.ui:1376
-msgid "Remaining"
-msgstr "Jäljellä"
-
-#: data/ui/main_window.ui:1432
-msgid "Total"
-msgstr "Yhteensä"
-
-#: data/ui/main_window.ui:1449
-msgid "Last played"
-msgstr "Viimeksi toistettu"
-
-#: data/ui/main_window.ui:1466
-msgid "Published"
-msgstr "Julkaistu"
-
-#: data/ui/main_window.ui:1630
-msgid ""
-"Start exploring your library by switching to the Author or Reader view above."
-msgstr "Ala selaamaan kirjastoasi valitsemalla näkymäksi Tekijä tai Lukija."
+#: cozy/ui/widgets/filter_list_box.py:19
+msgid "Display all books"
+msgstr "Näytä kaikki kirjat"
 
 #: data/ui/about.ui:14
 msgid "GitHub"
@@ -458,7 +224,6 @@ msgid "Some files could not be imported"
 msgstr "Joitakin tiedostoja ei voitu tuoda"
 
 #: data/ui/import_failed.ui:134
-#, fuzzy
 msgid ""
 "This can have multiple reasons:\n"
 "- The audio format is not supported\n"
@@ -468,124 +233,255 @@ msgid ""
 msgstr ""
 "Tähän voi olla useita syitä:\n"
 "- Äänimuoto ei ole tuettu\n"
-"- Tiedostot eivät ole äänitiedostoja\n"
-"- Tiedostot ovat korruptoituneita"
+"- Polku tai tiedostonimi sisältää ei utf-8 merkkejä\n"
+"- Tiedosto(t) eivät ole kelvollisia äänitiedostoja\n"
+"- Tiedosto(t) ovat rikkoontuneet"
 
-#: data/ui/settings.ui:92 data/ui/settings.ui:344
-msgid "General"
-msgstr "Yleiset"
+#: data/ui/main_window.ui:72
+msgid "Rewind 30 seconds"
+msgstr "Kelaa takaisin 30 sekuntia"
 
-#: data/ui/settings.ui:137
-msgid "Dark Mode"
-msgstr "Tumma teema"
+#: data/ui/main_window.ui:80
+msgid "Rewind button"
+msgstr "Kelauspainike"
 
-#: data/ui/settings.ui:213
-msgid "Titlebar"
-msgstr "Otsikkopalkki"
+#: data/ui/main_window.ui:81
+msgid "Jump back 30 seconds"
+msgstr "Siirry takaisin 30 sekuntia"
 
-#: data/ui/settings.ui:258
-msgid "Display the whole book instead of the current chapter"
-msgstr "Näytä koko kirja tämänhetkisen kappaleen sijaan"
+#: data/ui/main_window.ui:98
+msgid "Start playback"
+msgstr "Aloita toisto"
 
-#: data/ui/settings.ui:321
-msgid "Appearance"
-msgstr "Ulkoasu"
+#: data/ui/main_window.ui:106
+msgid "Play/Pause Button"
+msgstr "Toisto-/taukopainike"
 
-#: data/ui/settings.ui:387
-msgid "Suspend system on timer"
-msgstr "Sammuta järjestelmä ajastimella"
+#: data/ui/main_window.ui:107
+msgid "Start or pause the playback"
+msgstr "Aloita tai keskeytä toisto"
 
-#: data/ui/settings.ui:447
-msgid "Replay 30 seconds"
-msgstr "Toista uudelleen 30 sekuntia"
+#: data/ui/main_window.ui:124
+msgid "Volume control"
+msgstr "Äänenvoimakkuuden säätö"
 
-#: data/ui/settings.ui:507
-msgid "Automatic media scan"
-msgstr "Automaattinen mediaskannaus"
+#: data/ui/main_window.ui:171
+msgid "Warnings"
+msgstr "Varoitukset"
 
-#: data/ui/settings.ui:611
-msgid "Fadeout"
-msgstr "Häivitys"
+#: data/ui/main_window.ui:226
+msgid "Currently playing"
+msgstr "Toistetaan"
 
-#: data/ui/settings.ui:672
-msgid "Fadeout duration"
-msgstr "Häivytyksen kesto"
+#: data/ui/main_window.ui:244
+msgid "Booktitle"
+msgstr "Kirjan nimi"
 
-#: data/ui/settings.ui:745
-msgid "Behaviour"
-msgstr "Käytös"
+#: data/ui/main_window.ui:245
+msgid "Title of currently playing book"
+msgstr "Toistettavan kirjan nimi"
 
-#: data/ui/settings.ui:772
-msgid "Artwork"
-msgstr "Kansitaide"
+#: data/ui/main_window.ui:270
+msgid "Part name"
+msgstr "Osan nimi"
 
-#: data/ui/settings.ui:824
-msgid "Prefer external images over embedded cover"
-msgstr "Suosi ulkoisia kuvia upotetun kannen sijaan"
+#: data/ui/main_window.ui:271
+msgid "Title of the currently playing part"
+msgstr "Toistettavan osan nimi"
 
-#: data/ui/settings.ui:837
-msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr "Käytä kuvia (cover.jpg, *.png, …) jos saatavilla"
+#: data/ui/main_window.ui:313
+msgid "Elapsed time"
+msgstr "Kulunut aika"
 
-#: data/ui/settings.ui:920
-msgid "Audio books location"
-msgstr "Äänikirjojen sijainti"
+#: data/ui/main_window.ui:321
+msgid "Time elapsed"
+msgstr "Kulunut aika"
 
-#: data/ui/settings.ui:936
-msgid "Storage locations"
-msgstr "Tallennussijainnit"
+#: data/ui/main_window.ui:322
+msgid "Elapsed time of current part"
+msgstr "Osan toistoon kulunut aika"
 
-#: data/ui/settings.ui:994
-msgid "Add location"
-msgstr "Lisää sijainti"
+#: data/ui/main_window.ui:337
+msgid "Jump to position in current chapter"
+msgstr "Hyppää kohtaan tässä luvussa"
 
-#: data/ui/settings.ui:1019 data/ui/settings.ui:1215
-msgid "Remove location"
-msgstr "Poista sijainti"
+#: data/ui/main_window.ui:343
+msgid "Position slider"
+msgstr "Kohdan osoitin"
 
-#: data/ui/settings.ui:1055
-msgid "Toggle this storage location to be internal/external."
-msgstr "Aseta tallennussijainti sisäiseksi tai ulkoiseksi."
+#: data/ui/main_window.ui:344
+msgid "Position of the current part in seconds"
+msgstr "Toiston kohta sekunneissa"
 
-#: data/ui/settings.ui:1081
-msgid "Set as default storage location for new audiobooks"
-msgstr "Aseta oletussijainniksi uusille äänikirjoille"
+#: data/ui/main_window.ui:362
+msgid "Remaining time"
+msgstr "Jäljellä oleva aika"
 
-#: data/ui/settings.ui:1134
-msgid "Blacklist"
-msgstr "Musta lista"
+#: data/ui/main_window.ui:370
+msgid "Time remaining"
+msgstr "Jäljellä oleva aika"
 
-#: data/ui/settings.ui:1178
-msgid "Path"
-msgstr "Polku"
+#: data/ui/main_window.ui:371
+msgid "Remaining time of current part"
+msgstr "Osan jäljellä oleva aika"
 
-#: data/ui/settings.ui:1261
-msgid "Follow symlinks"
-msgstr "Seuraa symbolisia linkkejä"
+#: data/ui/main_window.ui:447
+msgid "Working…"
+msgstr "Työskennellään…"
 
-#: data/ui/settings.ui:1293
-msgid "Storage"
-msgstr "Tallennustila"
+#: data/ui/main_window.ui:452
+msgid "Currently working"
+msgstr "Työskennellään parhaillaan"
 
-#: data/ui/settings.ui:1317
-msgid "Database"
-msgstr "Tietokanta"
+#: data/ui/main_window.ui:468
+msgid "Playback speed"
+msgstr "Toistonopeus"
 
-#: data/ui/settings.ui:1369
-msgid "Force refresh the database"
-msgstr "Pakota tietokannan päivitys"
+#: data/ui/main_window.ui:490 data/ui/settings.ui:724
+msgid "Sleep timer"
+msgstr "Ajastin"
 
-#: data/ui/settings.ui:1382
-msgid "This will force update the metadata of all imported books"
-msgstr "Tämä pakottaa metatiedon päivityksen kaikille tuoduille kirjoille"
+#: data/ui/main_window.ui:501
+msgid "Timer menu button"
+msgstr "Ajastinvalikkopainike"
 
-#: data/ui/settings.ui:1402
-msgid "Force refresh"
-msgstr "Pakota päivitys"
+#: data/ui/main_window.ui:502
+msgid "Open the sleep timer popover"
+msgstr "Avaa ajastimen ponnahdus"
 
-#: data/ui/settings.ui:1458
-msgid "Advanced"
-msgstr "Lisäasetukset"
+#: data/ui/main_window.ui:518
+msgid "Search your library"
+msgstr "Etsi kirjastostasi"
+
+#: data/ui/main_window.ui:529
+msgid "Search menu button"
+msgstr "Hakuvalikkopainike"
+
+#: data/ui/main_window.ui:530
+msgid "Open the search popover"
+msgstr "Avaa hakuponnahdus"
+
+#: data/ui/main_window.ui:544
+msgid "Options"
+msgstr "Asetukset"
+
+#: data/ui/main_window.ui:555
+msgid "Options menu button"
+msgstr "Asetusvalikkopainike"
+
+#: data/ui/main_window.ui:556
+msgid "Open the options popover"
+msgstr "Avaa asetusten ponnahdus"
+
+#: data/ui/main_window.ui:681
+msgid "Recent"
+msgstr "Viimeisin"
+
+#: data/ui/main_window.ui:700
+msgid "List of authors"
+msgstr "Lista tekijöistä"
+
+#: data/ui/main_window.ui:716 data/ui/main_window.ui:824
+#: data/ui/search_popover.ui:107
+msgid "Author"
+msgstr "Tekijä"
+
+#: data/ui/main_window.ui:735
+msgid "List of readers"
+msgstr "Lista lukijoista"
+
+#: data/ui/main_window.ui:751 data/ui/search_popover.ui:201
+msgid "Reader"
+msgstr "Lukija"
+
+#: data/ui/main_window.ui:804
+msgid "List of books"
+msgstr "Lista kirjoista"
+
+#: data/ui/main_window.ui:840
+msgid "Importing your audiobooks…"
+msgstr "Tuodaan äänikirjojasi…"
+
+#: data/ui/main_window.ui:1072
+msgid "Remaining"
+msgstr "Jäljellä"
+
+#: data/ui/main_window.ui:1128
+msgid "Total"
+msgstr "Yhteensä"
+
+#: data/ui/main_window.ui:1145
+msgid "Last played"
+msgstr "Viimeksi toistettu"
+
+#: data/ui/main_window.ui:1162
+msgid "Published"
+msgstr "Julkaistu"
+
+#: data/ui/main_window.ui:1326
+msgid ""
+"Start exploring your library by switching to the Author or Reader view "
+"above."
+msgstr "Ala selaamaan kirjastoasi valitsemalla näkymäksi Tekijä tai Lukija."
+
+#: data/ui/main_window.ui:1371
+msgid "Import your Audiobooks"
+msgstr "Tuo äänikirjasi"
+
+#: data/ui/main_window.ui:1387
+msgid ""
+"Cozy automatically imports your audiobooks in one directory - your library"
+msgstr ""
+"Cozy tuo automaattisesti kaikki äänikirjasi yhteen hakemistoon - kirjastoosi"
+
+#: data/ui/main_window.ui:1416
+msgid "External or Network drive?"
+msgstr "Ulkoinen tai verkkoasema?"
+
+#: data/ui/main_window.ui:1439
+msgid "Are your audiobooks stored on an external or network drive?"
+msgstr "Ovatko äänikirjat ulkoisella tai verkkoasemalla?"
+
+#: data/ui/main_window.ui:1457
+msgid ""
+"If they are you can enable offline mode for a book in the book overview. "
+"This keeps a local copy of the book that you can listen to on the go"
+msgstr ""
+"Jos ne ovat, voit kytkeä yhteydettömän tilan kirjan esittelyssä. Tämä "
+"säilyttää kopion kirjasta paikallisesti matkakuuntelua varten"
+
+#: data/ui/main_window.ui:1491 data/ui/main_window.ui:1550
+msgid "Auto scan switch"
+msgstr "Automaattisen skannauksen kytkin"
+
+#: data/ui/main_window.ui:1492 data/ui/main_window.ui:1530
+#: data/ui/main_window.ui:1551
+msgid "Automatically import new audiobooks on startup"
+msgstr "Tuo uudet äänikirjat automaattisesti käynnistettäessä"
+
+#: data/ui/main_window.ui:1594
+msgid "Drag & Drop"
+msgstr "Vedä ja pudota"
+
+#: data/ui/main_window.ui:1611
+msgid "Drag your audiobooks into cozy and they will be automatically imported"
+msgstr "Vedä äänikirjasi Cozyyn ja ne tuodaan automaattisesti"
+
+#: data/ui/main_window.ui:1634
+msgid "Location of your audiobooks"
+msgstr "Äänikirjojesi sijainti"
+
+#: data/ui/main_window.ui:1655
+msgid "Set Audiobooks Directory"
+msgstr "Aseta äänikirjahakemisto"
+
+#: data/ui/main_window.ui:1678
+msgid "Load audiobooks from a directory, network drive or an external disk."
+msgstr "Lataa äänikirjoja kansiosta, verkkolevyltä tai ulkoiselta levyltä."
+
+#: data/ui/main_window.ui:1696
+msgid "You can add more storage locations later in the settings"
+msgstr "Voit lisätä varastosijainteja myöhemmin asetuksista"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -615,6 +511,138 @@ msgstr "Osa"
 msgid "Nothing found :("
 msgstr "Mitään ei löytynyt :("
 
+#: data/ui/settings.ui:92 data/ui/settings.ui:363
+msgid "General"
+msgstr "Yleiset"
+
+#: data/ui/settings.ui:137
+msgid "Dark Mode"
+msgstr "Tumma teema"
+
+#: data/ui/settings.ui:213
+msgid "Titlebar"
+msgstr "Otsikkopalkki"
+
+#: data/ui/settings.ui:258
+msgid "Display the whole book instead of the current chapter"
+msgstr "Näytä koko kirja tämänhetkisen kappaleen sijaan"
+
+#: data/ui/settings.ui:321
+msgid "Appearance"
+msgstr "Ulkoasu"
+
+#: data/ui/settings.ui:406
+msgid "Suspend system on timer"
+msgstr "Sammuta järjestelmä ajastimella"
+
+#: data/ui/settings.ui:466
+msgid "Replay 30 seconds"
+msgstr "Toista uudelleen 30 sekuntia"
+
+#: data/ui/settings.ui:526
+msgid "Automatic media scan"
+msgstr "Automaattinen mediaskannaus"
+
+#: data/ui/settings.ui:585
+msgid "Tags"
+msgstr "Tunnisteet"
+
+#: data/ui/settings.ui:637
+msgid "Swap author and reader"
+msgstr "Vaihda tekijä ja lukija"
+
+#: data/ui/settings.ui:650
+msgid "Activate this if author and reader are displayed the wrong way"
+msgstr "Toimeenpane tämä mikäli tekijä ja lukija näytetään väärin päin"
+
+#: data/ui/settings.ui:675
+msgid "switch author and reader assignment"
+msgstr "vaihda tekijän ja lukijan toimeksianto"
+
+#: data/ui/settings.ui:769
+msgid "Fadeout"
+msgstr "Häivitys"
+
+#: data/ui/settings.ui:831
+msgid "Fadeout duration"
+msgstr "Häivytyksen kesto"
+
+#: data/ui/settings.ui:912
+msgid "Behaviour"
+msgstr "Käytös"
+
+#: data/ui/settings.ui:939
+msgid "Artwork"
+msgstr "Kansitaide"
+
+#: data/ui/settings.ui:991
+msgid "Prefer external images over embedded cover"
+msgstr "Suosi ulkoisia kuvia upotetun kannen sijaan"
+
+#: data/ui/settings.ui:1004
+msgid "Use images (cover.jpg, *.png, …) when available"
+msgstr "Käytä kuvia (cover.jpg, *.png, …) jos saatavilla"
+
+#: data/ui/settings.ui:1087
+msgid "Audio books location"
+msgstr "Äänikirjojen sijainti"
+
+#: data/ui/settings.ui:1103
+msgid "Storage locations"
+msgstr "Tallennussijainnit"
+
+#: data/ui/settings.ui:1161
+msgid "Add location"
+msgstr "Lisää sijainti"
+
+#: data/ui/settings.ui:1186 data/ui/settings.ui:1382
+msgid "Remove location"
+msgstr "Poista sijainti"
+
+#: data/ui/settings.ui:1222
+msgid "Toggle this storage location to be internal/external."
+msgstr "Aseta tallennussijainti sisäiseksi tai ulkoiseksi."
+
+#: data/ui/settings.ui:1248
+msgid "Set as default storage location for new audiobooks"
+msgstr "Aseta oletussijainniksi uusille äänikirjoille"
+
+#: data/ui/settings.ui:1301
+msgid "Blacklist"
+msgstr "Musta lista"
+
+#: data/ui/settings.ui:1345
+msgid "Path"
+msgstr "Polku"
+
+#: data/ui/settings.ui:1428
+msgid "Follow symlinks"
+msgstr "Seuraa symbolisia linkkejä"
+
+#: data/ui/settings.ui:1460
+msgid "Storage"
+msgstr "Tallennustila"
+
+#: data/ui/settings.ui:1484
+msgid "Database"
+msgstr "Tietokanta"
+
+#: data/ui/settings.ui:1536
+msgid "Force refresh the database"
+msgstr "Pakota tietokannan päivitys"
+
+#: data/ui/settings.ui:1549
+msgid "This will force update the metadata of all imported books"
+msgstr "Tämä pakottaa metatiedon päivityksen kaikille tuoduille kirjoille"
+
+#: data/ui/settings.ui:1569
+msgid "Force refresh"
+msgstr "Pakota päivitys"
+
+#: data/ui/settings.ui:1625
+msgid "Advanced"
+msgstr "Lisäasetukset"
+
 #: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Ajastimen kesto"
@@ -628,13 +656,12 @@ msgid "Set the sleep timer duration in minutes"
 msgstr "Aseta ajastimen kesto minuuteissa"
 
 #: data/ui/timer_popover.ui:116
-#, fuzzy
 msgid "Stop after current chapter"
 msgstr "Pysäytä tämänhtekisen kappaleen jälkeen"
 
 #: data/ui/timer_popover.ui:164
 msgid "Enable system power control"
-msgstr ""
+msgstr "Kytke päälle järjestelmän tehohallinta"
 
 #: data/ui/timer_popover.ui:201
 msgid ""
@@ -642,20 +669,25 @@ msgid ""
 "\"shutdown\" will attempt to turn your system off (also known as power off)\n"
 "\"suspend\" will attempt to suspend your system (also known as sleep)."
 msgstr ""
+"Toimintamalli kun ajastin saapuu päätökseen.\n"
+"\"sammuta\" yrittää sammuttaa järjestelmäsi (tunnetaan myös muodossa virta pois)\n"
+"\"keskeytä\" yrittää järjestelmäsi keskeytystä (tunnetaan myös muodossa nukkuminen)."
 
 #: data/ui/timer_popover.ui:205
 msgid ""
 "System power action\n"
 "to perform"
 msgstr ""
+"Järjestelmän virtatoiminto\n"
+"joka suoritetaan"
 
 #: data/ui/timer_popover.ui:221
 msgid "suspend"
-msgstr ""
+msgstr "keskeytä"
 
 #: data/ui/timer_popover.ui:237
 msgid "shutdown"
-msgstr ""
+msgstr "sammuta"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Directory"
@@ -663,7 +695,7 @@ msgstr "_Skannaa hakemisto"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
-msgstr ""
+msgstr "_Piilota kirjat jotka eivät ole saatavilla"
 
 #: data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
@@ -680,15 +712,3 @@ msgstr "_Tietoja"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Lopeta"
-
-#~ msgid "By request"
-#~ msgstr "Pyynnöstä"
-
-#~ msgid "Use crc32 checksum for file modification detection"
-#~ msgstr "Käytä CRC32-tarkistussummaa tiedostonmuokkauksen tunnistamiseen"
-
-#~ msgid ""
-#~ "Only recommended if cozy doesn't detect file modifications while scanning"
-#~ msgstr ""
-#~ "Suositellaan vain jos Cozy ei tunnista tiedostonmuokkauksia skannauksen "
-#~ "aikana"

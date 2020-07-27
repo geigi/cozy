@@ -10,7 +10,6 @@ from threading import Thread
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
-from cozy.ui.search import Search
 from cozy.control.sleep_timer import SleepTimer
 from cozy.control.playback_speed import PlaybackSpeed
 from cozy.ui.titlebar import Titlebar
@@ -55,13 +54,12 @@ class CozyUI(metaclass=Singleton):
 
         self._library_view: LibraryView = None
 
-    def activate(self):
+    def activate(self, library_view: LibraryView):
         self.first_play = True
 
-        self.__init_window()
         self.__init_components()
 
-        self._library_view = LibraryView(self.window_builder)
+        self._library_view = library_view
 
         self.auto_import()
         self.refresh_content()
@@ -75,6 +73,8 @@ class CozyUI(metaclass=Singleton):
         self.__init_css()
         self.__init_actions()
         report.info("main", "startup")
+
+        self.__init_window()
 
     def __init_resources(self):
         """
@@ -256,9 +256,7 @@ class CozyUI(metaclass=Singleton):
 
         self.sleep_timer = SleepTimer()
         self.speed = PlaybackSpeed()
-        self.search = Search()
         self.settings = Settings()
-        self.settings.add_listener(self.__on_settings_changed)
         self.book_overview = BookOverview()
         self.fs_monitor = fs_monitor.FilesystemMonitor()
         self.offline_cache = offline_cache.OfflineCache()
@@ -477,42 +475,6 @@ class CozyUI(metaclass=Singleton):
         dialog = ImportFailedDialog(files)
         dialog.show()
 
-    def jump_to_author(self, book):
-        """
-        Jump to the given book author.
-        This is used from the search popover.
-        """
-        row = next(filter(
-            lambda x: type(x.get_children()[0]) is Gtk.Label and x.get_children()[
-                0].get_text() == book.author,
-            self.author_box.get_children()), None)
-
-        self.sort_stack.props.visible_child_name = "author"
-        self.__on_sort_stack_changed(None, None)
-        self.author_box.select_row(row)
-        self.book_box.invalidate_filter()
-        self.book_box.invalidate_sort()
-        self.toolbar_revealer.set_reveal_child(True)
-        self.search.close()
-
-    def jump_to_reader(self, book):
-        """
-        Jump to the given book reader.
-        This is used from the search popover.
-        """
-        row = next(filter(
-            lambda x: type(x.get_children()[0]) is Gtk.Label and x.get_children()[
-                0].get_text() == book.reader,
-            self.reader_box.get_children()), None)
-
-        self.sort_stack.props.visible_child_name = "reader"
-        self.__on_sort_stack_changed(None, None)
-        self.reader_box.select_row(row)
-        self.book_box.invalidate_filter()
-        self.book_box.invalidate_sort()
-        self.toolbar_revealer.set_reveal_child(True)
-        self.search.close()
-
     def jump_to_book(self, book):
         """
         Open book overview with the given book.
@@ -524,7 +486,6 @@ class CozyUI(metaclass=Singleton):
         # then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"
         self.toolbar_revealer.set_reveal_child(False)
-        self.search.close()
 
     def __on_hide_offline(self, action, value):
         """
@@ -557,20 +518,6 @@ class CozyUI(metaclass=Singleton):
         self.scan(None, True)
         self.settings._init_storage()
         self.fs_monitor.init_offline_mode()
-
-    def __on_sort_stack_changed(self, widget, page):
-        """
-        Switch to author selection
-        """
-        page = self.sort_stack.props.visible_child_name
-
-        if page == "recent":
-            self.sort_stack_revealer.set_reveal_child(False)
-        else:
-            self.sort_stack_revealer.set_reveal_child(True)
-            self.main_stack.props.visible_child_name = "main"
-
-        self.__on_listbox_changed(None, None)
 
     def track_changed(self):
         """
@@ -670,13 +617,6 @@ class CozyUI(metaclass=Singleton):
         self.app.quit()
         log.info("App closed.")
 
-    def __on_listbox_changed(self, sender, row):
-        """
-        Refresh the filtering on author/reader selection.
-        """
-        self.book_box.invalidate_filter()
-        self.book_box.invalidate_sort()
-
     def set_book_overview(self, book):
         # first update track ui
         self.book_overview.set_book(book)
@@ -688,8 +628,5 @@ class CozyUI(metaclass=Singleton):
         self.book_overview.play_book_button.grab_remove()
         self.book_overview.scroller.grab_focus()
 
-    def __on_settings_changed(self, event, message):
-        """
-        This method reacts to storage settings changes.
-        """
-        pass
+    def get_builder(self):
+        return self.window_builder

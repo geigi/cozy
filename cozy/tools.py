@@ -83,18 +83,6 @@ class IntervalTimer(StoppableThread):
             time.sleep(self._interval)
 
 
-def remove_all_children(container):
-    """
-    Removes all widgets from a gtk container.
-    """
-    container.set_visible(False)
-    childs = container.get_children()
-    for element in childs:
-        container.remove(element)
-        # element.destroy()
-    container.set_visible(True)
-
-
 def seconds_to_human_readable(seconds):
     """
     Create a string with the following format:
@@ -110,32 +98,18 @@ def seconds_to_human_readable(seconds):
     s = int(s)
 
     result = ""
-    if h > 0:
-        result += str(h) + " "
-        if h > 1:
-            result += _("hours")
-        else:
-            result += _("hour")
-
-        if m > 0:
-            result += " "
-
-    if m > 0:
-        result += str(m) + " "
-        if m > 1:
-            result += _("minutes")
-        else:
-            result += _("minute")
-
-    if h < 1 and m < 1:
-        if s < 1:
-            result += _("finished")
-        else:
-            result += str(s) + " "
-            if s > 1 or s < 1:
-                result += _("seconds")
-            else:
-                result += _("second")
+    if h > 0 and m > 0:
+        result = ngettext('{hours} hour', '{hours} hours', h).format(hours=h) + \
+                 " " + \
+                 ngettext('{minutes} minute', '{minutes} minutes', m).format(minutes=m)
+    elif h > 0:
+        result = ngettext('{hours} hour', '{hours} hours', h).format(hours=h)
+    elif m > 0:
+        result = ngettext('{minutes} minute', '{minutes} minutes', m).format(minutes=m)
+    elif s > 0:
+        result = ngettext('{seconds} second', '{seconds} seconds', s).format(seconds=s)
+    else:
+        result = _("finished")
 
     return result
 

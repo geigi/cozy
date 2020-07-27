@@ -4,7 +4,6 @@ import time
 
 from playhouse.pool import PooledSqliteDatabase
 
-from cozy import tools
 from cozy.control.db_updater import update_db
 from cozy.db.artwork_cache import ArtworkCache
 from cozy.db.book import Book
@@ -140,49 +139,6 @@ def get_track_for_playback(book):
     else:
         track = None
     return track
-
-
-def search_authors(search_string):
-    """
-    Search all authors in the db with the given substring.
-    This ignores upper/lowercase and returns each author only once.
-    :param search_string: substring to search for
-    :return: authors matching the substring
-    """
-    return Book.select(Book.author).where(Book.author.contains(search_string)).distinct().order_by(Book.author)
-
-
-def search_readers(search_string):
-    """
-    Search all readers in the db with the given substring.
-    This ignores upper/lowercase and returns each reader only once.
-    :param search_string: substring to search for
-    :return: readers matching the substring
-    """
-    return Book.select(Book.reader).where(Book.reader.contains(search_string)).distinct().order_by(Book.reader)
-
-
-def search_books(search_string):
-    """
-    Search all book names in the db with the given substring.
-    This ignores upper/lowercase and returns each book name only once.
-    :param search_string: substring to search for
-    :return: book names matching the substring
-    """
-    return Book.select(Book.name, Book.cover, Book.id).where(Book.name.contains(search_string)
-                                                             | Book.author.contains(search_string)
-                                                             | Book.reader.contains(search_string)).distinct().order_by(
-        Book.name)
-
-
-def search_tracks(search_string):
-    """
-    Search all tracks in the db with the given substring.
-    This ignores upper/lowercase.
-    :param search_string: substring to search for
-    :return: tracks matching the substring
-    """
-    return Track.select(Track.name).where(Track.name.contains(search_string)).order_by(Track.name)
 
 
 def get_track_path(track):
@@ -337,20 +293,6 @@ def remove_tracks_with_path(ui, path):
     clean_books()
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
-
-
-def blacklist_book(book):
-    """
-    Removes a book from the library and adds the path(s) to the track list.
-    """
-    book_tracks = get_tracks(book)
-    data = list((t.file,) for t in book_tracks)
-    chunks = [data[x:x + 500] for x in range(0, len(data), 500)]
-    for chunk in chunks:
-        StorageBlackList.insert_many(chunk, fields=[StorageBlackList.path]).execute()
-    ids = list(t.id for t in book_tracks)
-    Track.delete().where(Track.id << ids).execute()
-    book.delete_instance()
 
 
 def is_blacklisted(path):

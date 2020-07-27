@@ -4,9 +4,14 @@ import os
 import pytest
 
 
+def chunks(lst, n):
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+
 @pytest.fixture(scope="module")
 def peewee_database():
-    from playhouse.pool import PooledSqliteDatabase
+    from playhouse.apsw_ext import APSWDatabase
 
     from cozy.db.artwork_cache import ArtworkCache
     from cozy.db.book import Book
@@ -20,7 +25,7 @@ def peewee_database():
 
     print("Setup database...")
     db_path = '/tmp/cozy_test.db'
-    test_db = PooledSqliteDatabase(db_path, max_connections=32)
+    test_db = APSWDatabase(db_path, pragmas=[('journal_mode', 'wal')])
     test_db.bind(models, bind_refs=False, bind_backrefs=False)
     test_db.connect()
     test_db.create_tables(models)
@@ -34,7 +39,8 @@ def peewee_database():
         track_data = json.load(json_file)
 
     Book.insert_many(book_data).execute()
-    Track.insert_many(track_data).execute()
+    for chunk in chunks(track_data, 25):
+        Track.insert_many(chunk).execute()
 
     print("Provide database...")
     yield test_db
