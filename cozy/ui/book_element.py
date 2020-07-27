@@ -4,7 +4,7 @@ from gi.repository import Gtk, Gdk, Pango, GObject
 
 import cozy.tools as tools
 import cozy.ui
-from cozy.control.db import is_external, blacklist_book
+from cozy.control.db import is_external
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.model.book import Book
 from cozy.ui.album_element import AlbumElement
@@ -104,11 +104,11 @@ class BookElement(Gtk.FlowBoxChild):
         elif event.type == Gdk.EventType.BUTTON_PRESS and event.button == 1:
             if super().get_sensitive():
                 self.emit("open-book-overview", self.book)
-                self.ui.set_book_overview(self.book)
+                self.ui.set_book_overview(self.book.db_object)
         elif event.type == Gdk.EventType.KEY_PRESS and event.keyval == Gdk.KEY_Return:
             if super().get_sensitive():
                 self.emit("open-book-overview", self.book)
-                self.ui.set_book_overview(self.book)
+                self.ui.set_book_overview(self.book.db_object)
 
     def __on_key_press_event(self, widget, key):
         if key.keyval == Gdk.KEY_Return and super().get_sensitive():
@@ -134,13 +134,7 @@ class BookElement(Gtk.FlowBoxChild):
         return menu
 
     def __remove_book(self, widget, parameter):
-        """
-        Adds all tracks of a book to the blacklist and removes it from the library.
-        """
-        blacklist_book(self.book.db_object)
-        self.ui.settings.blacklist_model.clear()
-        self.ui.settings._init_blacklist()
-        self.ui.refresh_content()
+        self.emit("book-removed", self.book)
 
     def __mark_as_read(self, widget, parameter):
         self.book.position = -1
@@ -149,7 +143,7 @@ class BookElement(Gtk.FlowBoxChild):
         """
         Opens the folder containing this books files in the default file explorer.
         """
-        track = self.book.chapters.first()
+        track = self.book.chapters[0]
         path = os.path.dirname(track.file)
         subprocess.Popen(['xdg-open', path])
 
@@ -178,4 +172,6 @@ GObject.type_register(AlbumElement)
 GObject.signal_new('play-pause-clicked', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
                    (GObject.TYPE_PYOBJECT,))
 GObject.signal_new('open-book-overview', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
+                   (GObject.TYPE_PYOBJECT,))
+GObject.signal_new('book-removed', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
                    (GObject.TYPE_PYOBJECT,))

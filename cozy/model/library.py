@@ -3,6 +3,7 @@ from typing import List
 from peewee import SqliteDatabase
 
 from cozy.db.book import Book as BookModel
+from cozy.extensions.set import split_strings_to_set
 
 from cozy.model.book import Book, BookIsEmpty
 
@@ -10,16 +11,20 @@ from cozy.model.book import Book, BookIsEmpty
 class Library:
     _books: List[Book] = []
 
-    def __init__(self, db: SqliteDatabase):
-        self._db = db
+    def __init__(self, db):
+        self._db: SqliteDatabase = db
 
     @property
     def authors(self):
-        return {book.author for book in self.books}
+        authors = {book.author for book in self.books}
+        authors = split_strings_to_set(authors)
+        return authors
 
     @property
     def readers(self):
-        return {book.reader for book in self.books}
+        readers = {book.reader for book in self.books}
+        readers = split_strings_to_set(readers)
+        return readers
 
     @property
     def books(self):

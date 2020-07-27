@@ -75,6 +75,9 @@ class Settings(EventSender, metaclass=Singleton):
         self.force_refresh_button = self.builder.get_object("force_refresh_button")
         self.force_refresh_button.connect("clicked", self.__on_force_refresh_clicked)
 
+        self.settings_stack = self.builder.get_object("settings_stack")
+        self.settings_stack.connect("notify::visible-child", self._on_settings_stack_changed)
+
         self._init_storage()
         self._init_blacklist()
         self.__init_bindings()
@@ -87,7 +90,7 @@ class Settings(EventSender, metaclass=Singleton):
         Display settings from the database in the ui.
         """
         found_default = False
-        tools.remove_all_children(self.storage_list_box)
+        self.storage_list_box.remove_all_children()
         for location in Storage.select():
             row = StorageListBoxRow(self, location.id, location.path, location.external, location.default)
             self.storage_list_box.add(row)
@@ -318,6 +321,13 @@ class Settings(EventSender, metaclass=Singleton):
         Start a force refresh of the database.
         """
         self.ui.scan(None, False, True)
+
+    def _on_settings_stack_changed(self, widget, property):
+        page = widget.props.visible_child_name
+
+        if page == "files":
+            self.blacklist_model.clear()
+            self._init_blacklist()
 
     def set_darkmode(self):
         """

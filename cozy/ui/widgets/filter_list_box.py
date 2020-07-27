@@ -1,5 +1,7 @@
 from typing import List
 
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 from cozy.ui.list_box_row_with_data import ListBoxRowWithData
@@ -26,3 +28,12 @@ class FilterListBox(Gtk.ListBox):
             self.add(row)
 
         self.show_all()
+
+    def select_row_with_content(self, row_content: str):
+        for row in self.get_children():
+            if not isinstance(row, ListBoxRowWithData):
+                continue
+
+            if row.data == row_content:
+                self.select_row(row)
+                break

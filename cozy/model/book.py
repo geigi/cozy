@@ -2,6 +2,7 @@ from typing import List
 
 from peewee import SqliteDatabase
 from cozy.db.book import Book as BookModel
+from cozy.db.storage_blacklist import StorageBlackList
 from cozy.db.track import Track as TrackModel
 from cozy.model.chapter import Chapter
 from cozy.model.track import Track
@@ -147,6 +148,17 @@ class Book:
 
     def reload(self):
         self._get_db_object()
+
+    def blacklist(self):
+        with self._db:
+            book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self._chapters]
+            data = list((t.file,) for t in book_tracks)
+            chunks = [data[x:x + 500] for x in range(0, len(data), 500)]
+            for chunk in chunks:
+                StorageBlackList.insert_many(chunk, fields=[StorageBlackList.path]).execute()
+            ids = list(t.id for t in book_tracks)
+            TrackModel.delete().where(TrackModel.id << ids).execute()
+            self._db_object.delete_instance()
 
     def _fetch_chapters(self):
         with self._db:
