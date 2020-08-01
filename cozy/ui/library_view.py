@@ -14,10 +14,10 @@ MAIN_NO_RECENT_PAGE = "nothing_here"
 
 class LibraryView:
 
-    def __init__(self, builder: Builder):
+    def __init__(self, builder: Builder, view_model: LibraryViewModel):
         self._builder = builder
 
-        self._view_model = LibraryViewModel()
+        self._view_model = view_model
 
         self._get_ui_elements()
         self._connect_ui_elements()
@@ -33,6 +33,7 @@ class LibraryView:
         self._main_stack: Gtk.Stack = self._builder.get_object("main_stack")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
+        self._toolbar_revealer: Gtk.Revealer = self._builder.get_object("toolbar_revealer")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._author_box: FilterListBox = self._builder.get_object("author_box")
         self._reader_box: FilterListBox = self._builder.get_object("reader_box")
@@ -51,6 +52,7 @@ class LibraryView:
         self._view_model.bind_to("books", self.populate_book_box)
         self._view_model.bind_to("books-filter", self._book_box.invalidate_filter)
         self._view_model.bind_to("books-filter", self._book_box.invalidate_sort)
+        self._view_model.bind_to("selected_filter", self._select_filter_row)
 
     def _on_sort_stack_changed(self, widget, property):
         page = widget.props.visible_child_name
@@ -108,6 +110,7 @@ class LibraryView:
         self._main_stack.props.visible_child_name = main_view_page
         self._filter_stack.set_visible_child_name(visible_child_name)
         self._filter_stack_revealer.set_reveal_child(reveal_filter_box)
+        self._toolbar_revealer.set_reveal_child(True)
 
         if active_filter_box:
             self._apply_selected_filter(active_filter_box, active_filter_box.get_selected_row())
@@ -124,6 +127,12 @@ class LibraryView:
 
         self._view_model.selected_filter = row.data
         self._invalidate_filters()
+
+    def _select_filter_row(self):
+        if self._view_model.library_view_mode == LibraryViewMode.AUTHOR:
+            self._author_box.select_row_with_content(self._view_model.selected_filter)
+        elif self._view_model.library_view_mode == LibraryViewMode.READER:
+            self._reader_box.select_row_with_content(self._view_model.selected_filter)
 
     def _play_book_clicked(self, widget, book):
         self._view_model.playback_book(book)

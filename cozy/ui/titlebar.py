@@ -9,6 +9,7 @@ from cozy.tools import IntervalTimer
 
 import gi
 
+from cozy.ui.search_view import SearchView
 from cozy.ui.warnings import Warnings
 
 gi.require_version('Gtk', '3.0')
@@ -125,7 +126,6 @@ class Titlebar:
         # attach popovers
         self.timer_button.set_popover(self.ui.sleep_timer.get_popover())
         self.playback_speed_button.set_popover(self.ui.speed.get_popover())
-        self.search_button.set_popover(self.ui.search.get_popover())
         self.warnings = Warnings(self.warnings_button)
         self.warnings_button.set_popover(self.warnings.get_popover())
 
