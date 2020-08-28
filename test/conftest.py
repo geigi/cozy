@@ -4,6 +4,13 @@ import os
 import pytest
 
 
+@pytest.fixture(scope='session', autouse=True)
+def install_l10n():
+    import gettext as g
+    trans = g.translation('spam', 'locale', fallback=True)
+    trans.install('gettext')
+
+
 def chunks(lst, n):
     for i in range(0, len(lst), n):
         yield lst[i:i + n]
