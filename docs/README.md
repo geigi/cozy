@@ -68,6 +68,7 @@ To the contributors on GitHub:
 - grenade
 - jnbr
 - kaphula
+- magnickolas
 - meisenzahl
 - naglis
 - oleg-krv
