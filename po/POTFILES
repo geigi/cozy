@@ -11,7 +11,7 @@ cozy/ui/book_overview.py
 cozy/ui/disk_element.py
 cozy/ui/file_not_found_dialog.py
 cozy/ui/main_view.py
-cozy/ui/search_results.py
+cozy/ui/widgets/search_results.py
 cozy/ui/settings.py
 cozy/ui/track_element.py
 cozy/ui/warnings.py

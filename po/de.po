@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 19:26+0200\n"
+"POT-Creation-Date: 2020-07-24 20:28+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2020\n"
 "Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
@@ -21,11 +21,11 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/control/importer.py:298
+#: cozy/control/importer.py:301
 msgid "Unknown Author"
 msgstr "Unbekannter Autor"
 
-#: cozy/control/importer.py:300
+#: cozy/control/importer.py:303
 msgid "Unknown Reader"
 msgstr "Unbekannter Leser"
 
@@ -41,73 +41,70 @@ msgstr "min"
 msgid "Off"
 msgstr "Aus"
 
-#: cozy/tools.py:116
-msgid "hours"
-msgstr "Stunden"
+#: cozy/tools.py:102 cozy/tools.py:106
+#, python-brace-format
+msgid "{hours} hour"
+msgid_plural "{hours} hours"
+msgstr[0] "{hours} Stunde"
+msgstr[1] "{hours} Stunden"
 
-#: cozy/tools.py:118
-msgid "hour"
-msgstr "Stunde"
+#: cozy/tools.py:104 cozy/tools.py:108
+#, python-brace-format
+msgid "{minutes} minute"
+msgid_plural "{minutes} minutes"
+msgstr[0] "{minutes} Minute"
+msgstr[1] "{minutes} Minuten"
 
-#: cozy/tools.py:126
-msgid "minutes"
-msgstr "Minuten"
+#: cozy/tools.py:110
+#, python-brace-format
+msgid "{seconds} second"
+msgid_plural "{seconds} seconds"
+msgstr[0] "{seconds} Sekunde"
+msgstr[1] "{seconds} Sekunden"
 
-#: cozy/tools.py:128
-msgid "minute"
-msgstr "Minute"
-
-#: cozy/tools.py:132
+#: cozy/tools.py:112
 msgid "finished"
 msgstr "fertig"
 
 #: cozy/tools.py:136
-msgid "seconds"
-msgstr "Sekunden"
-
-#: cozy/tools.py:138
-msgid "second"
-msgstr "Sekunde"
-
-#: cozy/tools.py:162
 msgid "never"
 msgstr "nie"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:138
 msgid "today"
 msgstr "heute"
 
-#: cozy/tools.py:166
+#: cozy/tools.py:140
 msgid "yesterday"
 msgstr "gestern"
 
-#: cozy/tools.py:168
+#: cozy/tools.py:142
 #, python-format
 msgid "%s days ago"
 msgstr "vor %s Tagen"
 
-#: cozy/tools.py:170
+#: cozy/tools.py:144
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
 msgstr[0] "vor {weeks} Woche"
 msgstr[1] "vor {weeks} Wochen"
 
-#: cozy/tools.py:172
+#: cozy/tools.py:146
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
 msgstr[0] "vor {months} Monat"
 msgstr[1] "vor {months} Monaten"
 
-#: cozy/tools.py:174
+#: cozy/tools.py:148
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
 msgstr[0] "vor {years} Jahr"
 msgstr[1] "vor {years} Jahren"
 
-#: cozy/ui/album_element.py:59 cozy/ui/search_results.py:123
+#: cozy/ui/album_element.py:59 cozy/ui/widgets/search_results.py:98
 msgid "Play this book"
 msgstr "Höre dieses Buch"
 
@@ -147,31 +144,31 @@ msgstr "Disc"
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: cozy/ui/main_view.py:399
+#: cozy/ui/main_view.py:397
 msgid "Audiobooks"
 msgstr "Hörbücher"
 
-#: cozy/ui/main_view.py:416
+#: cozy/ui/main_view.py:414
 msgid "Importing Audiobooks"
 msgstr "Importiere Hörbücher"
 
-#: cozy/ui/search_results.py:71
+#: cozy/ui/widgets/search_results.py:72
 msgid "Jump to author "
 msgstr "Springe zum Autor"
 
-#: cozy/ui/search_results.py:74
+#: cozy/ui/widgets/search_results.py:75
 msgid "Jump to reader "
 msgstr "Springe zum Leser"
 
-#: cozy/ui/settings.py:427 cozy/ui/settings.py:470
+#: cozy/ui/settings.py:437 cozy/ui/settings.py:480
 msgid "External drive"
 msgstr "Externer Datenträger"
 
-#: cozy/ui/settings.py:430 cozy/ui/settings.py:473
+#: cozy/ui/settings.py:440 cozy/ui/settings.py:483
 msgid "Internal drive"
 msgstr "Interner Datenträger"
 
-#: cozy/ui/settings.py:457
+#: cozy/ui/settings.py:467
 msgid "Changing audio book location…"
 msgstr "Wechsle zu neuem Hörbuch-Ordner…"
 
@@ -184,13 +181,13 @@ msgstr "Höre dieses Kapitel"
 msgid "{storage} is offline."
 msgstr "{storage} ist offline."
 
-#: cozy/ui/widgets/filter_list_box.py:18
-#: cozy/view_model/library_view_model.py:34
-#: cozy/view_model/library_view_model.py:122
+#: cozy/ui/widgets/filter_list_box.py:20
+#: cozy/view_model/library_view_model.py:33
+#: cozy/view_model/library_view_model.py:126
 msgid "All"
 msgstr "Alle"
 
-#: cozy/ui/widgets/filter_list_box.py:19
+#: cozy/ui/widgets/filter_list_box.py:21
 msgid "Display all books"
 msgstr "Zeige alle Bücher"
 

@@ -125,7 +125,7 @@ class BookOverview:
             self.track_box.add(track_element)
             track_element.show_all()
 
-        tools.remove_all_children(self.track_list_container)
+        self.track_list_container.remove_all_children()
         self.track_box.show()
         self.track_box.set_halign(Gtk.Align.FILL)
         self.track_list_container.add(self.track_box)
