@@ -45,7 +45,9 @@ class TagReader:
         return value.strip() if success else self._get_book_name_fallback()
 
     def _get_book_name_fallback(self):
-        return os.path.basename(os.path.normpath(self.uri))
+        path = os.path.normpath(self.uri)
+        directory_path = os.path.dirname(path)
+        return os.path.basename(directory_path)
 
     def _get_author(self):
         authors = self._get_string_list(Gst.TAG_COMPOSER)
@@ -79,7 +81,8 @@ class TagReader:
         return value.strip() if success else self._get_track_name_fallback()
 
     def _get_track_name_fallback(self):
-        return os.path.splitext(self.uri)[0]
+        filename = os.path.basename(self.uri)
+        return os.path.splitext(filename)[0]
 
     def _get_chapters(self):
         chapter = Chapter(

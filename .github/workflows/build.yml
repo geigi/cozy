@@ -19,7 +19,7 @@ jobs:
     - name: Install cozy dependencies
       run: |
         sudo apt update
-        sudo apt install libgirepository1.0-dev
+        sudo apt install libgirepository1.0-dev python3-gst-1.0
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Lint with flake8
@@ -31,7 +31,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --builtins="_"
     - name: Test with pytest
       run: |
-        pip install pytest
+        pip install pytest pytest-mock
         pytest
     - name: Install Cozy
       run: |
