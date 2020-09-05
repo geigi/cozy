@@ -1,0 +1,11 @@
+[
+  {
+    "path": "/media/test"
+  },
+  {
+    "path": "/mnt/test",
+    "location_type": 1,
+    "default": true,
+    "external": true
+  }
+]
