@@ -4,7 +4,6 @@ import time
 
 from playhouse.pool import PooledSqliteDatabase
 
-import cozy.version
 from cozy.control.db_updater import update_db
 from cozy.db.artwork_cache import ArtworkCache
 from cozy.db.book import Book
@@ -37,8 +36,8 @@ def init_db():
 
     _connect_db(_db)
 
-    cozy.version.sqlite_version = ".".join([str(num) for num in _db.server_version])
-    log.info("SQLite version: {}, APSW version: {}".format(cozy.version.sqlite_version, apswversion()))
+    sqlite_version = ".".join([str(num) for num in _db.server_version])
+    log.info("SQLite version: {}, APSW version: {}".format(sqlite_version, apswversion()))
 
     if Settings.table_exists():
         update_db()

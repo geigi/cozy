@@ -9,7 +9,6 @@ import platform
 
 from cozy.report.log_level import LogLevel
 from cozy.version import __version__ as CozyVersion
-from cozy.version import sqlite_version as SQLiteVersion
 from peewee import __version__ as PeeweeVersion
 from mutagen import version_string as MutagenVersion
 from apsw import apswversion as APSWVersion
@@ -54,8 +53,7 @@ def report(component: str, type: LogLevel, message: str, exception: Exception):
     labels = __append_label(labels, "python_version", platform.python_version())
     labels = __append_label(labels, "peewee_version", PeeweeVersion)
     labels = __append_label(labels, "mutagen_version", MutagenVersion)
-    labels = __append_label(labels, "apsw_version", APSWVersion)
-    labels = __append_label(labels, "sqlite_version", SQLiteVersion)
+    labels = __append_label(labels, "apsw_version", APSWVersion())
     labels = __append_label(labels, "gtk_version", "{}.{}".format(Gtk.get_major_version(), Gtk.get_minor_version()))
     labels = __append_label(labels, "desktop_environment", os.environ.get('DESKTOP_SESSION'))
 
