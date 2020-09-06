@@ -5,6 +5,7 @@ import gi
 from cozy.control.db import remove_tracks_with_path
 from cozy.db.storage import Storage
 from cozy.db.storage_blacklist import StorageBlackList
+from cozy.ext import inject
 from cozy.ui.widgets.storage_list_box_row import StorageListBoxRow
 from cozy.view_model.settings_view_model import SettingsViewModel
 
@@ -24,6 +25,8 @@ class Settings(EventSender):
     """
     This class contains all logic for cozys preferences.
     """
+    _glib_settings: Gio.Settings = inject.attr(Gio.Settings)
+
     view_model = None
     ui = None
     default_dark_mode = None
@@ -115,44 +118,44 @@ class Settings(EventSender):
         Bind Gio.Settings to widgets in settings dialog.
         """
         sl_switch = self.builder.get_object("symlinks_switch")
-        tools.get_glib_settings().bind("symlinks", sl_switch, "active",
+        self._glib_settings.bind("symlinks", sl_switch, "active",
                                        Gio.SettingsBindFlags.DEFAULT)
 
         auto_scan_switch = self.builder.get_object("auto_scan_switch")
-        tools.get_glib_settings().bind("autoscan", auto_scan_switch,
+        self._glib_settings.bind("autoscan", auto_scan_switch,
                                        "active", Gio.SettingsBindFlags.DEFAULT)
 
         timer_suspend_switch = self.builder.get_object(
             "timer_suspend_switch")
-        tools.get_glib_settings().bind("suspend", timer_suspend_switch,
+        self._glib_settings.bind("suspend", timer_suspend_switch,
                                        "active", Gio.SettingsBindFlags.DEFAULT)
 
         replay_switch = self.builder.get_object("replay_switch")
-        tools.get_glib_settings().bind("replay", replay_switch, "active",
+        self._glib_settings.bind("replay", replay_switch, "active",
                                        Gio.SettingsBindFlags.DEFAULT)
 
         titlebar_remaining_time_switch = self.builder.get_object("titlebar_remaining_time_switch")
-        tools.get_glib_settings().bind("titlebar-remaining-time", titlebar_remaining_time_switch, "active",
+        self._glib_settings.bind("titlebar-remaining-time", titlebar_remaining_time_switch, "active",
                                        Gio.SettingsBindFlags.DEFAULT)
 
         dark_mode_switch = self.builder.get_object("dark_mode_switch")
-        tools.get_glib_settings().bind("dark-mode", dark_mode_switch, "active",
+        self._glib_settings.bind("dark-mode", dark_mode_switch, "active",
                                        Gio.SettingsBindFlags.DEFAULT)
 
         swap_author_reader_switch = self.builder.get_object("swap_author_reader_switch")
-        tools.get_glib_settings().bind("swap-author-reader", swap_author_reader_switch, "active",
+        self._glib_settings.bind("swap-author-reader", swap_author_reader_switch, "active",
                                        Gio.SettingsBindFlags.DEFAULT)
 
-        tools.get_glib_settings().bind("prefer-external-cover", self.external_cover_switch, "active",
+        self._glib_settings.bind("prefer-external-cover", self.external_cover_switch, "active",
                                        Gio.SettingsBindFlags.DEFAULT)
 
-        tools.get_glib_settings().bind("sleep-timer-fadeout", self.sleep_fadeout_switch, "active",
+        self._glib_settings.bind("sleep-timer-fadeout", self.sleep_fadeout_switch, "active",
                                        Gio.SettingsBindFlags.DEFAULT)
 
-        tools.get_glib_settings().bind("sleep-timer-fadeout-duration", self.fadeout_duration_adjustment,
+        self._glib_settings.bind("sleep-timer-fadeout-duration", self.fadeout_duration_adjustment,
                                        "value", Gio.SettingsBindFlags.DEFAULT)
 
-        tools.get_glib_settings().connect("changed", self.__on_settings_changed)
+        self._glib_settings.connect("changed", self.__on_settings_changed)
 
     def show(self):
         """
@@ -311,7 +314,7 @@ class Settings(EventSender):
         # We have to test if everything is initialized before triggering the refresh
         # otherwise this might be just the initial call when starting up
         if self.ui.is_initialized:
-            tools.get_glib_settings().set_boolean("prefer-external-cover", state)
+            self._glib_settings.set_boolean("prefer-external-cover", state)
             artwork_cache.delete_artwork_cache()
             self.ui.refresh_content()
 
@@ -337,7 +340,7 @@ class Settings(EventSender):
         if self.default_dark_mode is None:
             self.default_dark_mode = settings.get_property("gtk-application-prefer-dark-theme")
 
-        user_enabled = tools.get_glib_settings().get_boolean("dark-mode")
+        user_enabled = self._glib_settings.get_boolean("dark-mode")
         if user_enabled:
             settings.set_property("gtk-application-prefer-dark-theme", True)
         else:

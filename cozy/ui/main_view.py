@@ -1,13 +1,14 @@
 import webbrowser
 
 import cozy.ext.inject as inject
+from cozy.application_settings import ApplicationSettings
 
 from cozy.control.db import books, close_db
 from cozy.db.book import Book
 from cozy.db.storage import Storage
 from cozy.db.track import Track
 
-from gi.repository import Gtk, Gio, Gdk, GLib, Gst
+from gi.repository import Gtk, Gio, Gdk, Gst, GLib
 from threading import Thread
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
@@ -49,6 +50,7 @@ class CozyUI(metaclass=Singleton):
     __inhibit_cookie = None
     fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
     settings = inject.attr(Settings)
+    application_settings = inject.attr(ApplicationSettings)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -61,6 +63,7 @@ class CozyUI(metaclass=Singleton):
     def activate(self, library_view: LibraryView):
         self.first_play = True
 
+        self.__init_actions()
         self.__init_components()
 
         self._library_view = library_view
@@ -75,7 +78,6 @@ class CozyUI(metaclass=Singleton):
     def startup(self):
         self.__init_resources()
         self.__init_css()
-        self.__init_actions()
         report.info("main", "startup")
 
         self.__init_window()
@@ -250,8 +252,10 @@ class CozyUI(metaclass=Singleton):
         self.app.add_action(back_action)
         self.app.set_accels_for_action("app.back", ["Escape"])
 
-        self.hide_offline_action = Gio.SimpleAction.new_stateful("hide_offline", None, GLib.Variant.new_boolean(
-            tools.get_glib_settings().get_boolean("hide-offline")))
+        self.hide_offline_action = Gio.SimpleAction.new_stateful("hide_offline",
+                                                                 None,
+                                                                 GLib.Variant.new_boolean(
+                                                                     self.application_settings.hide_offline))
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
 
@@ -419,7 +423,7 @@ class CozyUI(metaclass=Singleton):
         thread.start()
 
     def auto_import(self):
-        if tools.get_glib_settings().get_boolean("autoscan"):
+        if self.application_settings.autoscan:
             self.scan(None, False)
 
     def back(self, action, parameter):
@@ -461,7 +465,7 @@ class CozyUI(metaclass=Singleton):
         if self.first_play:
             self.first_play = False
 
-            if tools.get_glib_settings().get_boolean("replay"):
+            if self.application_settings.replay:
                 amount = 30 * 1000000000
                 if pos < amount:
                     pos = 0
@@ -494,7 +498,7 @@ class CozyUI(metaclass=Singleton):
         Show/Hide offline books action handler.
         """
         action.set_state(value)
-        tools.get_glib_settings().set_boolean("hide-offline", value.get_boolean())
+        self.application_settings.hide_offline = value.get_boolean()
 
     def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
         """

@@ -20,13 +20,13 @@ class LibraryViewMode(Enum):
 
 
 class LibraryViewModel(Observable):
+    _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
     _fs_monitor: FilesystemMonitor = inject.attr(FilesystemMonitor)
     _model = inject.attr(Library)
 
     def __init__(self):
         super().__init__()
 
-        self._application_settings: ApplicationSettings = ApplicationSettings()
         self._importer: Importer = importer_instance
         self._player: Player = Player()
 

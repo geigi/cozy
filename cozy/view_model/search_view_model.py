@@ -13,13 +13,12 @@ from cozy.model.library import Library
 class SearchViewModel(Observable, EventSender):
     _fs_monitor: FilesystemMonitor = inject.attr(FilesystemMonitor)
     _model: Library = inject.attr(Library)
+    _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
+
+    _search_open: bool = False
 
     def __init__(self):
         super().__init__()
-
-        self._application_settings: ApplicationSettings = ApplicationSettings()
-
-        self._search_open: bool = False
 
     @property
     def books(self):

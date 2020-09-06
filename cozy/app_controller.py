@@ -1,6 +1,9 @@
+from gi.repository import Gio
+
 import cozy.ext.inject as inject
 from peewee import SqliteDatabase
 
+from cozy.application_settings import ApplicationSettings
 from cozy.architecture.singleton import Singleton
 from cozy.control.db import get_db
 from cozy.control.filesystem_monitor import FilesystemMonitor
@@ -34,6 +37,8 @@ class AppController(metaclass=Singleton):
     @staticmethod
     def configure_inject(binder):
         binder.bind_to_provider(SqliteDatabase, get_db)
+        binder.bind_to_constructor(Gio.Settings, lambda: Gio.Settings("com.github.geigi.cozy"))
+        binder.bind_to_constructor(ApplicationSettings, lambda: ApplicationSettings())
         binder.bind_to_constructor(Settings, lambda: Settings())
         binder.bind_to_constructor(FilesystemMonitor, lambda: FilesystemMonitor())
         binder.bind_to_constructor(Library, lambda: Library())

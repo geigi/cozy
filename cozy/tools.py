@@ -45,14 +45,6 @@ def is_elementary():
         return False
 
 
-settings = Gio.Settings.new("com.github.geigi.cozy")
-
-
-def get_glib_settings():
-    global settings
-    return settings
-
-
 # https://stackoverflow.com/questions/323972/is-there-any-way-to-kill-a-thread-in-python
 class StoppableThread(threading.Thread):
     """Thread class with a stop() method. The thread itself has to check
