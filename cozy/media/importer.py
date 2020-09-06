@@ -1,8 +1,10 @@
 import os
 from enum import Enum, auto
+from multiprocessing import Pool
+from typing import List
 
 from cozy.architecture.event_sender import EventSender
-from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
 from cozy.ext import inject
 from cozy.model.library import Library
 from cozy.model.settings import Settings

@@ -21,6 +21,13 @@ class Settings:
 
         return self._storages
 
+    @property
+    def external_storage_locations(self):
+        if not self._storages:
+            self._load_all_storage_locations()
+
+        return [storage for storage in self._storages if storage.external]
+
     def invalidate(self):
         self._storages = []
 
