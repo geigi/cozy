@@ -21,7 +21,7 @@ import cozy.ui
 log = logging.getLogger("settings")
 
 
-class Settings(EventSender, metaclass=Singleton):
+class Settings(EventSender):
     """
     This class contains all logic for cozys preferences.
     """

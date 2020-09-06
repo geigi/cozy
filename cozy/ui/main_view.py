@@ -48,6 +48,7 @@ class CozyUI(metaclass=Singleton):
     first_play = True
     __inhibit_cookie = None
     fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
+    settings = inject.attr(Settings)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -259,7 +260,6 @@ class CozyUI(metaclass=Singleton):
 
         self.sleep_timer = SleepTimer()
         self.speed = PlaybackSpeed()
-        self.settings = Settings()
         self.book_overview = BookOverview()
         self.offline_cache = offline_cache.OfflineCache()
         player.init()

@@ -28,6 +28,7 @@ class BookElement(Gtk.FlowBoxChild):
     current_track_element = None
     context_menu = None
     _filesystem_monitor = inject.attr(FilesystemMonitor)
+    _settings = inject.attr(Settings)
 
     def __init__(self, book: Book):
         self.book: Book = book
@@ -84,7 +85,7 @@ class BookElement(Gtk.FlowBoxChild):
         self.event_box.connect("button-press-event", self.__on_button_press_event)
         self.connect("key-press-event", self.__on_key_press_event)
         self._filesystem_monitor.add_listener(self.__on_storage_changed)
-        Settings().add_listener(self.__on_storage_changed)
+        self._settings.add_listener(self.__on_storage_changed)
 
     def set_playing(self, is_playing):
         if is_playing:

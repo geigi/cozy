@@ -13,6 +13,7 @@ from cozy.ui.main_view import CozyUI
 from cozy.ui.search_view import SearchView
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
 from cozy.view_model.search_view_model import SearchViewModel
+from cozy.ui.settings import Settings as UISettings
 
 
 class AppController(metaclass=Singleton):
@@ -38,6 +39,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(Library, lambda: Library())
         binder.bind_to_constructor(LibraryViewModel, lambda: LibraryViewModel())
         binder.bind_to_constructor(SearchViewModel, lambda: SearchViewModel())
+        binder.bind_to_constructor(UISettings, lambda: UISettings())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR

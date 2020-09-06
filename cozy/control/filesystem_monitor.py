@@ -1,24 +1,22 @@
-from pathlib import Path
 import logging
-from typing import List, Tuple
+from typing import List
 
 import cozy.ext.inject as inject
 from gi.repository import Gio
 
 from cozy.architecture.event_sender import EventSender
-from cozy.architecture.singleton import Singleton
-import cozy.ui.settings
-import cozy.ui
 from cozy.control.db import get_tracks
 from cozy.model.book import Book
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage
+from cozy.ui.settings import Settings as UISettings
 
 log = logging.getLogger("fs_monitor")
 
 class FilesystemMonitor(EventSender):
     external_storage: List[Tuple[Storage, bool]] = []
     _settings: Settings = inject.attr(Settings)
+    _ui_settings: UISettings = inject.attr(UISettings)
 
     def __init__(self):
         self.volume_monitor = Gio.VolumeMonitor.get()

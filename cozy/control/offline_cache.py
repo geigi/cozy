@@ -14,6 +14,7 @@ from gi.repository import Gio, Gdk, GLib
 from cozy.db.book import Book
 from cozy.db.track import Track
 from cozy.db.offline_cache import OfflineCache as OfflineCacheModel
+from cozy.ext import inject
 from cozy.report import reporter
 
 log = logging.getLogger("offline_cache")
@@ -43,7 +44,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
 
         self._start_processing()
 
-        cozy.ui.settings.Settings().add_listener(self.__on_settings_changed)
+        inject.instance(cozy.ui.settings.Settings).add_listener(self.__on_settings_changed)
 
     def add(self, book):
         """
