@@ -2,7 +2,10 @@ import os
 from enum import Enum, auto
 
 from cozy.architecture.event_sender import EventSender
+from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.ext import inject
 from cozy.model.library import Library
+from cozy.model.settings import Settings
 
 
 class ScanStatus(Enum):
@@ -13,6 +16,9 @@ class ScanStatus(Enum):
 
 
 class Importer(EventSender):
+    _fs_monitor = inject.attr(FilesystemMonitor)
+    _settings = inject.attr(Settings)
+
     def __init__(self, library: Library):
         self._library = library
 

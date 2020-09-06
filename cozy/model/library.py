@@ -3,16 +3,16 @@ from typing import List
 from peewee import SqliteDatabase
 
 from cozy.db.book import Book as BookModel
+from cozy.ext import inject
 from cozy.extensions.set import split_strings_to_set
 
 from cozy.model.book import Book, BookIsEmpty
 
 
 class Library:
-    _books: List[Book] = []
+    _db = cache = inject.attr(SqliteDatabase)
 
-    def __init__(self, db):
-        self._db: SqliteDatabase = db
+    _books: List[Book] = []
 
     @property
     def authors(self):

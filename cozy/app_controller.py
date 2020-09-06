@@ -20,13 +20,13 @@ class AppController(metaclass=Singleton):
         inject.configure_once(self.configure_inject)
 
         self.main_window: CozyUI = main_window
-        self.library_model: Library = Library(get_db())
+        self.main_window_builder = main_window_builder
 
-        self.library_view_model: LibraryViewModel = LibraryViewModel(self.library_model)
-        self.search_view_model: SearchViewModel = SearchViewModel(self.library_model)
+        self.library_view: LibraryView = LibraryView(main_window_builder)
+        self.search_view: SearchView = SearchView(main_window_builder)
 
-        self.library_view: LibraryView = LibraryView(main_window_builder, self.library_view_model)
-        self.search_view: SearchView = SearchView(main_window_builder, self.search_view_model)
+        self.library_view_model = inject.instance(LibraryViewModel)
+        self.search_view_model = inject.instance(SearchViewModel)
 
         self.search_view_model.add_listener(self._on_open_view)
 
@@ -35,6 +35,9 @@ class AppController(metaclass=Singleton):
         binder.bind_to_provider(SqliteDatabase, get_db)
         binder.bind_to_constructor(Settings, lambda: Settings())
         binder.bind_to_constructor(FilesystemMonitor, lambda: FilesystemMonitor())
+        binder.bind_to_constructor(Library, lambda: Library())
+        binder.bind_to_constructor(LibraryViewModel, lambda: LibraryViewModel())
+        binder.bind_to_constructor(SearchViewModel, lambda: SearchViewModel())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR
