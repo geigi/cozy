@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-import inject
+import cozy.ext.inject as inject
 from gi.repository import Gtk, Gdk, Pango, GObject
 
 import cozy.tools as tools

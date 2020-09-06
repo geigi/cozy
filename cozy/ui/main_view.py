@@ -1,6 +1,6 @@
 import webbrowser
 
-import inject
+import cozy.ext.inject as inject
 
 from cozy.control.db import books, close_db
 from cozy.db.book import Book

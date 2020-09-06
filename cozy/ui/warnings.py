@@ -1,7 +1,7 @@
 from gettext import gettext
 
 import gi
-import inject
+import cozy.ext.inject as inject
 
 from cozy.control.filesystem_monitor import FilesystemMonitor
 

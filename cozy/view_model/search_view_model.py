@@ -1,4 +1,4 @@
-import inject
+import cozy.ext.inject as inject
 
 from cozy.extensions.set import split_strings_to_set
 from cozy.open_view import OpenView

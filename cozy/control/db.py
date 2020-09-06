@@ -2,7 +2,7 @@ import logging
 import os
 import time
 
-import inject
+import cozy.ext.inject as inject
 from playhouse.pool import PooledSqliteDatabase
 
 from cozy.control.db_updater import update_db

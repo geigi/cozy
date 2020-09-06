@@ -1,6 +1,6 @@
 from enum import Enum, auto
 
-import inject
+import cozy.ext.inject as inject
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable

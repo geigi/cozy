@@ -1,7 +1,7 @@
 import logging
 from typing import List
 
-import inject
+import cozy.ext.inject as inject
 from peewee import SqliteDatabase
 
 from cozy.db.storage import Storage as StorageModel

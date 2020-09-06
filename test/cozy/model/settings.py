@@ -1,4 +1,4 @@
-import inject
+import cozy.ext.inject as inject
 from peewee import SqliteDatabase
 
 

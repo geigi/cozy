@@ -2,7 +2,7 @@ from pathlib import Path
 import logging
 from typing import List, Tuple
 
-import inject
+import cozy.ext.inject as inject
 from gi.repository import Gio
 
 from cozy.architecture.event_sender import EventSender

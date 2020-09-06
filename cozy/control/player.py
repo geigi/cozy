@@ -1,7 +1,7 @@
 import threading
 import time
 
-import inject
+import cozy.ext.inject as inject
 from gi.repository import Gst, GLib
 
 import gi
