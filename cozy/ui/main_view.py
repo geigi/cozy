@@ -1,5 +1,7 @@
 import webbrowser
 
+import inject
+
 from cozy.control.db import books, close_db
 from cozy.db.book import Book
 from cozy.db.storage import Storage
@@ -45,6 +47,7 @@ class CozyUI(metaclass=Singleton):
     is_initialized = False
     first_play = True
     __inhibit_cookie = None
+    fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -258,7 +261,6 @@ class CozyUI(metaclass=Singleton):
         self.speed = PlaybackSpeed()
         self.settings = Settings()
         self.book_overview = BookOverview()
-        self.fs_monitor = fs_monitor.FilesystemMonitor()
         self.offline_cache = offline_cache.OfflineCache()
         player.init()
 

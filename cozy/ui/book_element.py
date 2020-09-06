@@ -1,5 +1,7 @@
 import os
 import subprocess
+
+import inject
 from gi.repository import Gtk, Gdk, Pango, GObject
 
 import cozy.tools as tools
@@ -25,6 +27,7 @@ class BookElement(Gtk.FlowBoxChild):
     track_box = None
     current_track_element = None
     context_menu = None
+    _filesystem_monitor = inject.attr(FilesystemMonitor)
 
     def __init__(self, book: Book):
         self.book: Book = book
@@ -64,7 +67,7 @@ class BookElement(Gtk.FlowBoxChild):
         self.art = AlbumElement(
             self.book, 180, self.ui.window.get_scale_factor(), bordered=True, square=False)
 
-        if is_external(self.book.db_object) and not self.book.offline and not FilesystemMonitor().get_book_online(self.book):
+        if is_external(self.book.db_object) and not self.book.offline and not self._filesystem_monitor.get_book_online(self.book):
             super().set_sensitive(False)
             self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         else:
@@ -80,7 +83,7 @@ class BookElement(Gtk.FlowBoxChild):
         self.art.connect("play-pause-clicked", self._on_album_art_press_event)
         self.event_box.connect("button-press-event", self.__on_button_press_event)
         self.connect("key-press-event", self.__on_key_press_event)
-        FilesystemMonitor().add_listener(self.__on_storage_changed)
+        self._filesystem_monitor.add_listener(self.__on_storage_changed)
         Settings().add_listener(self.__on_storage_changed)
 
     def set_playing(self, is_playing):
@@ -157,7 +160,7 @@ class BookElement(Gtk.FlowBoxChild):
                 super().set_sensitive(False)
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         elif event == "external-storage-added":
-            if FilesystemMonitor().is_book_online(self.book.db_object):
+            if self._filesystem_monitor.is_book_online(self.book.db_object):
                 super().set_sensitive(True)
             else:
                 super().set_sensitive(False)

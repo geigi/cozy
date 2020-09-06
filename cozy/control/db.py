@@ -2,6 +2,7 @@ import logging
 import os
 import time
 
+import inject
 from playhouse.pool import PooledSqliteDatabase
 
 from cozy.control.db_updater import update_db
@@ -258,9 +259,11 @@ def remove_invalid_entries(ui=None, refresh=False):
     Remove track entries from db that no longer exist in the filesystem.
     """
     # remove entries from the db that are no longer existent
+
+    from cozy.control.filesystem_monitor import FilesystemMonitor
+    filesystem_monitor = inject.instance(FilesystemMonitor)
     for track in Track.select():
-        from cozy.control.filesystem_monitor import FilesystemMonitor
-        if not os.path.isfile(track.file) and FilesystemMonitor().is_track_online(
+        if not os.path.isfile(track.file) and filesystem_monitor.is_track_online(
                 track):
             track.delete_instance()
 

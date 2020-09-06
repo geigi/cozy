@@ -1,3 +1,5 @@
+import inject
+
 from cozy.extensions.set import split_strings_to_set
 from cozy.open_view import OpenView
 from cozy.application_settings import ApplicationSettings
@@ -9,11 +11,12 @@ from cozy.model.library import Library
 
 
 class SearchViewModel(Observable, EventSender):
+    _fs_monitor: FilesystemMonitor = inject.attr(FilesystemMonitor)
+
     def __init__(self, model: Library):
         super().__init__()
 
         self._model: Library = model
-        self._fs_monitor: FilesystemMonitor = FilesystemMonitor()
         self._application_settings: ApplicationSettings = ApplicationSettings()
 
         self._search_open: bool = False

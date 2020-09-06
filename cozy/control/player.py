@@ -1,10 +1,13 @@
 import threading
 import time
+
+import inject
 from gi.repository import Gst, GLib
 
 import gi
 
 from cozy.control.db import get_tracks
+from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.db.book import Book
 from cozy.db.settings import Settings
 from cozy.db.track import Track
@@ -15,7 +18,6 @@ import logging
 log = logging.getLogger("player")
 
 from cozy.control.offline_cache import OfflineCache
-import cozy.control.filesystem_monitor
 
 Gst.init(None)
 
@@ -70,7 +72,8 @@ def __on_gst_message(bus, message: Gst.Message):
             auto_jump()
 
 
-def init():
+@inject.autoparams()
+def init(filesystem_monitor: FilesystemMonitor):
     global __player
     global __bus
 
@@ -99,7 +102,7 @@ def init():
     __bus.add_signal_watch()
     __bus.connect("message", __on_gst_message)
 
-    cozy.control.filesystem_monitor.FilesystemMonitor().add_listener(__on_storage_changed)
+    filesystem_monitor.add_listener(__on_storage_changed)
 
 
 def get_gst_bus():
@@ -468,7 +471,8 @@ def __on_storage_changed(event, message):
                 emit_event("stop")
 
 
-def load_file(track):
+@inject.autoparams()
+def load_file(track, filesystem_monitor: FilesystemMonitor):
     """
     Loads a given track into the player.
     :param track: track to be loaded
@@ -486,7 +490,7 @@ def load_file(track):
 
     init()
 
-    if cozy.control.filesystem_monitor.FilesystemMonitor().is_track_online(track):
+    if filesystem_monitor.is_track_online(track):
         path = track.file
     else:
         path = OfflineCache().get_cached_path(track)
@@ -501,7 +505,8 @@ def load_file(track):
     emit_event("track-changed", track)
 
 
-def load_last_book():
+@inject.autoparams()
+def load_last_book(filesystem_monitor: FilesystemMonitor):
     """
     Load the last played book into the player.
     """
@@ -518,7 +523,7 @@ def load_last_book():
 
             if last_track:
                 __player.set_state(Gst.State.NULL)
-                if cozy.control.filesystem_monitor.FilesystemMonitor().is_track_online(last_track):
+                if filesystem_monitor.is_track_online(last_track):
                     path = last_track.file
                 else:
                     path = OfflineCache().get_cached_path(last_track)

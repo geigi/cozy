@@ -1,19 +1,18 @@
 import logging
 from typing import List
 
+import inject
 from peewee import SqliteDatabase
 
 from cozy.db.storage import Storage as StorageModel
 from cozy.model.storage import Storage, InvalidPath
 
-
 log = logging.getLogger("model.storage_location")
 
-class StorageLocations:
-    _storages: List[Storage] = []
 
-    def __init__(self, db):
-        self._db: SqliteDatabase = db
+class Settings:
+    _storages: List[Storage] = []
+    _db = cache = inject.attr(SqliteDatabase)
 
     @property
     def storage_locations(self):

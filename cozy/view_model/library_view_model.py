@@ -1,5 +1,7 @@
 from enum import Enum, auto
 
+import inject
+
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
@@ -18,13 +20,13 @@ class LibraryViewMode(Enum):
 
 
 class LibraryViewModel(Observable):
+    _fs_monitor: FilesystemMonitor = inject.attr(FilesystemMonitor)
 
     def __init__(self, model: Library):
         super().__init__()
 
         self._model = model
 
-        self._fs_monitor: FilesystemMonitor = FilesystemMonitor()
         self._application_settings: ApplicationSettings = ApplicationSettings()
         self._importer: Importer = importer_instance
         self._player: Player = Player()

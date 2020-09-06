@@ -21,6 +21,10 @@ class Storage:
             self._db_object: StorageModel = StorageModel.get(self.id)
 
     @property
+    def db_object(self):
+        return self._db_object
+
+    @property
     def path(self):
         return self._db_object.path
 

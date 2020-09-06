@@ -1,7 +1,12 @@
+import inject
+from peewee import SqliteDatabase
+
 from cozy.architecture.singleton import Singleton
 from cozy.control.db import get_db
+from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.model.book import Book
 from cozy.model.library import Library
+from cozy.model.settings import Settings
 from cozy.open_view import OpenView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.main_view import CozyUI
@@ -12,6 +17,8 @@ from cozy.view_model.search_view_model import SearchViewModel
 
 class AppController(metaclass=Singleton):
     def __init__(self, main_window_builder, main_window):
+        inject.configure_once(self.configure_inject)
+
         self.main_window: CozyUI = main_window
         self.library_model: Library = Library(get_db())
 
@@ -22,6 +29,12 @@ class AppController(metaclass=Singleton):
         self.search_view: SearchView = SearchView(main_window_builder, self.search_view_model)
 
         self.search_view_model.add_listener(self._on_open_view)
+
+    @staticmethod
+    def configure_inject(binder):
+        binder.bind_to_provider(SqliteDatabase, get_db)
+        binder.bind_to_constructor(Settings, lambda: Settings())
+        binder.bind_to_constructor(FilesystemMonitor, lambda: FilesystemMonitor())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR
