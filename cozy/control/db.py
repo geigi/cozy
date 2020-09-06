@@ -17,6 +17,7 @@ from cozy.report import reporter
 
 log = logging.getLogger("db")
 from peewee import __version__ as PeeweeVersion
+from apsw import apswversion
 
 if PeeweeVersion[0] == '2':
     log.info("Using peewee 2 backend")
@@ -34,6 +35,9 @@ def init_db():
     tmp_db = None
 
     _connect_db(_db)
+
+    sqlite_version = ".".join([str(num) for num in _db.server_version])
+    log.info("SQLite version: {}, APSW version: {}".format(sqlite_version, apswversion()))
 
     if Settings.table_exists():
         update_db()
