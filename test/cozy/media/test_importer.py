@@ -64,13 +64,19 @@ def test_import_file_returns_false_for_directory(mocker):
     import os
     from cozy.media.importer import Importer
 
-    class NewDirEntry:
-        def is_file(self, file):
-            return False
-
-    os.DirEntry = NewDirEntry
+    mocker.patch("os.path.isfile", return_value=False)
 
     importer = Importer()
     imported = importer.import_file(MagicMock())
 
     assert not imported
+
+
+def test_scan_emits_start_event(mocker):
+    from cozy.media.importer import Importer, ScanStatus
+
+    importer = Importer()
+    spy = mocker.spy(importer, "emit_event")
+    importer.scan()
+
+    spy.assert_called_once_with("scan", ScanStatus.STARTED)

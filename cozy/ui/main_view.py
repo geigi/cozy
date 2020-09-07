@@ -10,6 +10,8 @@ from cozy.db.track import Track
 
 from gi.repository import Gtk, Gio, Gdk, Gst, GLib
 from threading import Thread
+
+from cozy.media.importer import Importer
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
@@ -242,6 +244,10 @@ class CozyUI(metaclass=Singleton):
         self.scan_action.connect("activate", self.scan)
         self.app.add_action(self.scan_action)
 
+        self.new_scan_action = Gio.SimpleAction.new("new_scan", None)
+        self.new_scan_action.connect("activate", self.new_scan)
+        self.app.add_action(self.new_scan_action)
+
         self.play_pause_action = Gio.SimpleAction.new("play_pause", None)
         self.play_pause_action.connect("activate", self.play_pause)
         self.app.add_action(self.play_pause_action)
@@ -420,6 +426,14 @@ class CozyUI(metaclass=Singleton):
         self.switch_to_working(_("Importing Audiobooks"), first_scan)
         thread = Thread(target=importer.update_database,
                         args=(self, force,), name="UpdateDatabaseThread")
+        thread.start()
+
+    def new_scan(self, action, first_scan, force=False):
+        """
+        Start the db import in a seperate thread
+        """
+        importer = Importer()
+        thread = Thread(target=importer.scan, name="UpdateDatabaseThread")
         thread.start()
 
     def auto_import(self):

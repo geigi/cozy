@@ -23,7 +23,7 @@ class TagReader:
         if not self.tags:
             raise ValueError("Failed to retrieve tags from discoverer_info")
 
-    def get_tags(self):
+    def get_tags(self) -> MediaFile:
         media_file = MediaFile(
             uri=self.uri,
             book_name=self._get_book_name(),
