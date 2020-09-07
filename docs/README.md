@@ -1,6 +1,6 @@
 # It's getting Cozy
 
-Cozy is a modern audiobook player for Linux and macOS. 
+Cozy is a modern audiobook player for Linux. 
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
 
