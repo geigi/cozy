@@ -10,7 +10,7 @@
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
 
-Cozy is a modern audiobook player for Linux and macOS. 
+Cozy is a modern audiobook player for Linux.
 
 ## Here are some of the current features:
 - **Import** your audiobooks into Cozy to browse them comfortably
@@ -27,19 +27,9 @@ Cozy is a modern audiobook player for Linux and macOS.
 - Developed on Fedora and tested under elementaryOS
 
 # Install
-| elementaryOS | openSUSE | Arch Linux | Solus | Flatpak (other) | macOS |
-|--------------|:----------:|:------------:|:-----:|-----------------|:-------:|
-| <a href="https://appcenter.elementary.io/com.github.geigi.cozy"><img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter"></a> | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> | <a href="https://dev.getsol.us/source/cozy/">cozy</a> | <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a> | <center><a href="https://github.com/geigi/cozy/releases/download/0.6.4/cozy_macos_0.6.4_beta2.dmg">Beta 2</a></center> |  
-
-## macOS
-Cozy for macOS is currently in beta. It's tested on 10.14 Mojave so far. Known bugs:
-- no integration in notification center or any other desktop integration really
-- media keys are not working
-- dark mode requires 2x switching in settings + is not loading automatically at startup
-- large Cozy.app
-
-You can download it here: <a href="https://github.com/geigi/cozy/releases/download/0.6.7/cozy_macos_0.6.7_beta3.dmg">Cozy 0.6.7 beta3 for macOS</a>
-
+| elementaryOS | openSUSE | Arch Linux | Solus | Flatpak (other) |
+|--------------|:----------:|:------------:|:-----:|-----------------|
+| <a href="https://appcenter.elementary.io/com.github.geigi.cozy"><img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter"></a> | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> | <a href="https://dev.getsol.us/source/cozy/">cozy</a> | <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a> |
 ## Requirements
 - `python3`
 - `meson >= 0.40.0` as build system
