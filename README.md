@@ -30,6 +30,10 @@ Cozy is a modern audiobook player for Linux.
 | elementaryOS | openSUSE | Arch Linux | Solus | Flatpak (other) |
 |--------------|:----------:|:------------:|:-----:|-----------------|
 | <a href="https://appcenter.elementary.io/com.github.geigi.cozy"><img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter"></a> | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> | <a href="https://dev.getsol.us/source/cozy/">cozy</a> | <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a> |
+
+## macOS
+Discontinued.
+
 ## Requirements
 - `python3`
 - `meson >= 0.40.0` as build system
