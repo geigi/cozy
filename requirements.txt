@@ -4,4 +4,6 @@ mutagen
 peewee>=3.9.6
 pytz
 requests
-PyGObject
+python3-gi
+gobject-introspection
+gir1.2-gtk-3.0
