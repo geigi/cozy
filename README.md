@@ -35,7 +35,8 @@ Cozy is a modern audiobook player for Linux.
 **Currently discontinued**
 
 There is an older beta of Cozy 0.6.7 which is tested on macOS 10.14. It might not work with newer versions of macOS. 
-Because the build process is rather complicated and not easy to automate I've currently discontinued building for macOS. I'll post some information about how I build the macOS beta here soon.
+Because the build process is rather complicated and not easy to automate I've currently discontinued building for macOS. If you're interested in the build process: have a look at my [writeup](https://gist.github.com/geigi/a3b6d661daeb7b181d3bdd3cab517092).
+
 Some information about the old beta:
 
 - no integration in notification center or any other desktop integration really
