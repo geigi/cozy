@@ -14,7 +14,6 @@ from gi.repository import Gtk, Gio
 
 from cozy.architecture.event_sender import EventSender
 
-import cozy.tools as tools
 import cozy.control.artwork_cache as artwork_cache
 import cozy.ui
 

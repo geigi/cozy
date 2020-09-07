@@ -6,7 +6,6 @@ from typing import List
 from cozy.architecture.event_sender import EventSender
 from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
 from cozy.ext import inject
-from cozy.model.library import Library
 from cozy.model.settings import Settings
 
 
@@ -18,7 +17,7 @@ class ScanStatus(Enum):
 
 
 class Importer(EventSender):
-    _fs_monitor = inject.attr(FilesystemMonitor)
+    _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
     _settings = inject.attr(Settings)
 
     def scan(self):
@@ -32,17 +31,19 @@ class Importer(EventSender):
                     pool.map(self.import_file, it)
 
     def _get_paths_to_scan(self) -> List[str]:
-        paths = [storage.path for storage in self._settings.storage_locations if not storage.external]
+        paths = [storage.path
+                 for storage
+                 in self._settings.storage_locations
+                 if not storage.external]
 
         for storage in self._settings.external_storage_locations:
             try:
                 if self._fs_monitor.is_storage_online(storage):
                     paths.append(storage.path)
             except StorageNotFound:
-                if os.path.exists(storage.path):
-                    paths.append(storage.path)
+                paths.append(storage.path)
 
-        return paths
+        return [path for path in paths if os.path.exists(path)]
 
     def _get_file_count_in_dir(self, dir):
         len([name for name in os.listdir(dir) if os.path.isfile(name)])

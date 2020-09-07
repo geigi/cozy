@@ -10,7 +10,7 @@ from gi.repository import Gtk
 
 
 class Warnings():
-    _fs_monitor: FilesystemMonitor = inject.attr(FilesystemMonitor)
+    _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
 
     def __init__(self, button: Gtk.MenuButton):
         self.button = button

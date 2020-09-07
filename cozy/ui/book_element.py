@@ -27,7 +27,7 @@ class BookElement(Gtk.FlowBoxChild):
     track_box = None
     current_track_element = None
     context_menu = None
-    _filesystem_monitor = inject.attr(FilesystemMonitor)
+    _filesystem_monitor = inject.attr("FilesystemMonitor")
     _settings = inject.attr(Settings)
 
     def __init__(self, book: Book):

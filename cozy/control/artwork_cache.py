@@ -1,7 +1,6 @@
 import os
 import uuid
 import logging
-import cozy.tools as tools
 
 from gi.repository import GdkPixbuf
 

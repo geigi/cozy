@@ -40,7 +40,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(Gio.Settings, lambda: Gio.Settings("com.github.geigi.cozy"))
         binder.bind_to_constructor(ApplicationSettings, lambda: ApplicationSettings())
         binder.bind_to_constructor(Settings, lambda: Settings())
-        binder.bind_to_constructor(FilesystemMonitor, lambda: FilesystemMonitor())
+        binder.bind_to_constructor("FilesystemMonitor", lambda: FilesystemMonitor())
         binder.bind_to_constructor(Library, lambda: Library())
         binder.bind_to_constructor(LibraryViewModel, lambda: LibraryViewModel())
         binder.bind_to_constructor(SearchViewModel, lambda: SearchViewModel())

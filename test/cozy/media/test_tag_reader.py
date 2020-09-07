@@ -5,7 +5,7 @@ import pytest
 
 @pytest.fixture(scope="function")
 def discoverer_mocks(mocker):
-    mock_info = mocker.patch("gi.repository.GstPbutils.DiscovererInfo", autospec=True)
+    mock_info = mocker.patch("gi.repository.GstPbutils.DiscovererInfo",)
     mock_tags = mocker.patch("gi.repository.Gst.TagList", autospec=True)
 
     mock_tags = mock_info.get_tags.return_value

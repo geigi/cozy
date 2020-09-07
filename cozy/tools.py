@@ -6,7 +6,6 @@ from enum import Enum
 from gettext import ngettext
 import logging as log
 import distro
-from gi.repository import Gio
 import cozy.magic.magic as magic
 
 

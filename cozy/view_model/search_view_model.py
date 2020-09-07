@@ -11,7 +11,7 @@ from cozy.model.library import Library
 
 
 class SearchViewModel(Observable, EventSender):
-    _fs_monitor: FilesystemMonitor = inject.attr(FilesystemMonitor)
+    _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
     _model: Library = inject.attr(Library)
     _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 

@@ -21,7 +21,7 @@ class LibraryViewMode(Enum):
 
 class LibraryViewModel(Observable):
     _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
-    _fs_monitor: FilesystemMonitor = inject.attr(FilesystemMonitor)
+    _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
     _model = inject.attr(Library)
 
     def __init__(self):
