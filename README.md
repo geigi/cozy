@@ -32,7 +32,18 @@ Cozy is a modern audiobook player for Linux.
 | <a href="https://appcenter.elementary.io/com.github.geigi.cozy"><img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter"></a> | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> | <a href="https://dev.getsol.us/source/cozy/">cozy</a> | <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a> |
 
 ## macOS
-Discontinued.
+**Currently discontinued**
+
+There is an older beta of Cozy 0.6.7 which is tested on macOS 10.14. It might not work with newer versions of macOS. 
+Because the build process is rather complicated and not easy to automate I've currently discontinued building for macOS. I'll post some information about how I build the macOS beta here soon.
+Some information about the old beta:
+
+- no integration in notification center or any other desktop integration really
+- media keys are not working
+- dark mode requires 2x switching in settings + is not loading automatically at startup
+- large Cozy.app
+
+You can download it here: <a href="https://github.com/geigi/cozy/releases/download/0.6.7/cozy_macos_0.6.7_beta3.dmg">Cozy 0.6.7 beta3 for macOS</a>
 
 ## Requirements
 - `python3`
