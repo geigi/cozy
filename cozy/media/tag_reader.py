@@ -1,6 +1,10 @@
 import os
 from urllib.parse import unquote, urlparse
 
+import gi
+
+gi.require_version('Gst', '1.0')
+gi.require_version('GstPbutils', '1.0')
 from gi.repository import GstPbutils, Gst, GLib
 
 from cozy.media.chapter import Chapter
@@ -55,7 +59,7 @@ class TagReader:
         if len(authors) > 0 and authors[0]:
             return "; ".join(authors)
         else:
-            return _("Unknown")
+            return "Unknown"
 
     def _get_reader(self):
         readers = self._get_string_list(Gst.TAG_ARTIST)
@@ -63,7 +67,7 @@ class TagReader:
         if len(readers) > 0 and readers[0]:
             return "; ".join(readers)
         else:
-            return _("Unknown")
+            return "Unknown"
 
     def _get_disk(self):
         success, value = self.tags.get_uint_index(Gst.TAG_ALBUM_VOLUME_NUMBER, 0)
