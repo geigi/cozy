@@ -21,29 +21,19 @@ import argparse
 import code
 import locale
 import logging
-import multiprocessing
 import os
 import signal
 import sys
 import traceback
-import distro
+from pathlib import Path
 from traceback import format_exception
-import gi
 
-from cozy.app_controller import AppController
-from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.ui.widgets.list_box_extensions import extend_gtk_container
+import distro
+import gi
 
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
-
-from cozy.report import reporter
-from cozy.version import __version__
-from pathlib import Path
-from gi.repository import Gtk, GObject, GLib
-from cozy.ui.main_view import CozyUI
-from cozy.control.db import init_db, Settings
-from cozy.control.mpris import MPRIS
+from gi.repository import Gtk, GLib
 
 old_except_hook = None
 
@@ -188,5 +178,19 @@ def listen():
 
 
 if __name__ == '__main__':
-    multiprocessing.set_start_method('spawn', force=True)
+    import multiprocessing as mp
+    mp.set_start_method('spawn')
+
+    # All cozy imports are happening here because multiprocessing needs to be setup first
+    # Some modules import multiprocessing which would lead to an exception
+    # when setting the start method
+    from cozy.app_controller import AppController
+    from cozy.ui.widgets.filter_list_box import FilterListBox
+    from cozy.ui.widgets.list_box_extensions import extend_gtk_container
+    from cozy.report import reporter
+    from cozy.version import __version__
+    from cozy.ui.main_view import CozyUI
+    from cozy.control.db import init_db, Settings
+    from cozy.control.mpris import MPRIS
+
     main()
