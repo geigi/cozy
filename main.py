@@ -21,6 +21,7 @@ import argparse
 import code
 import locale
 import logging
+import multiprocessing
 import os
 import signal
 import sys
@@ -187,4 +188,5 @@ def listen():
 
 
 if __name__ == '__main__':
+    multiprocessing.set_start_method('spawn', force=True)
     main()

@@ -1,7 +1,7 @@
 import logging
 import os
 from enum import Enum, auto
-from multiprocessing import Pool, set_start_method
+from multiprocessing import Pool
 from typing import List
 
 from cozy.architecture.profiler import timing
@@ -33,17 +33,18 @@ class Importer(EventSender):
 
         paths_to_scan = self._get_paths_to_scan()
 
-        paths = []
-        for path in paths_to_scan:
-            for directory, subdirectories, files in os.walk(path):
-                for file in files:
-                    paths.append(os.path.join(directory, file))
-
-        set_start_method("spawn")
-        with Pool() as pool:
-            pool.map(self.import_file, paths)
+        pool = Pool()
+        for res in pool.imap(self.import_file, self._walk_paths_to_scan(paths_to_scan)):
+            print(res)
 
         logging.info("Import finished")
+
+    def _walk_paths_to_scan(self, paths: List[str]):
+        for path in paths:
+            for directory, subdirectories, files in os.walk(path):
+                for file in files:
+                    filepath = os.path.join(directory, file)
+                    yield filepath
 
     def _get_paths_to_scan(self) -> List[str]:
         paths = [storage.path

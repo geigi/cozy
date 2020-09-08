@@ -1,3 +1,4 @@
+import logging
 import pathlib
 
 from cozy.architecture.event_sender import EventSender
@@ -8,8 +9,12 @@ import gi
 from cozy.media.media_file import MediaFile
 from cozy.media.tag_reader import TagReader
 
+gi.require_version('Gst', '1.0')
 gi.require_version('GstPbutils', '1.0')
-from gi.repository import GstPbutils
+from gi.repository import Gst, GstPbutils
+
+
+log = logging.getLogger("media_detector")
 
 
 class NotAnAudioFile(Exception):
@@ -19,10 +24,16 @@ class NotAnAudioFile(Exception):
 class MediaDetector(EventSender, metaclass=Singleton):
     def __init__(self, path: str):
         self.uri = pathlib.Path(path).as_uri()
+
+        Gst.init(None)
         self.discoverer: GstPbutils.Discoverer = GstPbutils.Discoverer()
 
     def get_media_data(self) -> MediaFile:
-        discoverer_info: GstPbutils.DiscovererInfo = self.discoverer.discover_uri(self.uri)
+        try:
+            discoverer_info: GstPbutils.DiscovererInfo = self.discoverer.discover_uri(self.uri)
+        except Exception as e:
+            log.info("Skipping file because it couldn't be detected: {}".format(self.uri))
+            raise NotAnAudioFile
 
         if self._is_valid_audio_file(discoverer_info):
             tag_reader = TagReader(self.uri, discoverer_info)
