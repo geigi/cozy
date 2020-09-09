@@ -4,13 +4,15 @@ import pytest
 from peewee import SqliteDatabase
 
 from cozy.ext import inject
+from cozy.model.library import Library
 
 
 @pytest.fixture(autouse=True)
 def setup_inject(peewee_database_storage):
     inject.clear_and_configure(lambda binder: binder
                                .bind(SqliteDatabase, peewee_database_storage)
-                               .bind_to_constructor("FilesystemMonitor", MagicMock()))
+                               .bind_to_constructor("FilesystemMonitor", MagicMock())
+                               .bind_to_constructor(Library, MagicMock()))
 
     yield
     inject.clear()
@@ -61,7 +63,6 @@ def test_all_existing_paths_are_included(mocker):
 
 
 def test_import_file_returns_false_for_directory(mocker):
-    import os
     from cozy.media.importer import Importer
 
     mocker.patch("os.path.isfile", return_value=False)
@@ -70,6 +71,17 @@ def test_import_file_returns_false_for_directory(mocker):
     imported = importer.import_file(MagicMock())
 
     assert not imported
+
+
+def test_filter_unchanged_files_returns_only_new_or_changed_files(mocker):
+    from cozy.media.importer import Importer
+
+    example_chapters = []
+
+    mocker.patch("cozy.model.library.Library.chapters")
+    mocker.patch("os.path.getmtime", return_value=100)
+
+    importer = Importer()
 
 
 def test_scan_emits_start_event(mocker):
