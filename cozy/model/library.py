@@ -85,7 +85,7 @@ class Library:
                 if media_file.path not in self.files:
                     yield track
                 else:
-                    self._update_track_db_object(book, media_file)
+                    self._update_track_db_object(media_file, book)
 
     def _import_or_update_book(self, media_file):
         if BookModel.select(BookModel.name).where(BookModel.name == media_file.book_name).count() < 1:
@@ -94,7 +94,7 @@ class Library:
             book = self._update_book_db_object(media_file)
         return book
 
-    def _get_track_dictionary_for_db(self, media_file, book):
+    def _get_track_dictionary_for_db(self, media_file: MediaFile, book: BookModel):
         return {
             "name": media_file.chapters[0].name,
             "number": media_file.track_number,
@@ -106,8 +106,8 @@ class Library:
             "position": media_file.chapters[0].position
         }
 
-    def _update_track_db_object(self, book: BookModel, media_file: MediaFile):
-        Track.update(name=media_file.track_number,
+    def _update_track_db_object(self, media_file: MediaFile, book: BookModel):
+        Track.update(name=media_file.chapters[0].name,
                      number=media_file.track_number,
                      book=book,
                      disk=media_file.disk,

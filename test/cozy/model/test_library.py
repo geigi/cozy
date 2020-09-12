@@ -59,9 +59,12 @@ def test_update_track_db_object_updates_object():
     from cozy.model.library import Library
     from cozy.media.media_file import MediaFile
     from cozy.db.book import Book
+    from cozy.media.chapter import Chapter
+    from cozy.db.track import Track
 
     library = Library()
 
+    chapter = Chapter("New Chapter", 0)
     media_file = MediaFile(book_name="New Book Name",
                            author="New Author",
                            reader="New Reader",
@@ -69,10 +72,114 @@ def test_update_track_db_object_updates_object():
                            track_number=999,
                            length=1234567,
                            cover=b"cover",
-                           path="New Path",
+                           path="test.mp3",
                            modified=1234567,
-                           chapters=[])
+                           chapters=[chapter])
 
     book = Book.select().get()
 
-    library._update_track_db_object(book, media_file)
+    library._update_track_db_object(media_file, book)
+
+    track_in_db: Track = Track.select().where(Track.file == "test.mp3").get()
+
+    assert track_in_db.name == "New Chapter"
+    assert track_in_db.disk == 999
+    assert track_in_db.number == 999
+    assert track_in_db.length == 1234567
+    assert track_in_db.modified == 1234567
+
+
+def test_create_track_db_object_creates_object():
+    from cozy.model.library import Library
+    from cozy.media.media_file import MediaFile
+    from cozy.db.book import Book
+    from cozy.media.chapter import Chapter
+
+    library = Library()
+
+    chapter = Chapter("New Chapter", 0)
+    media_file = MediaFile(book_name="New Book Name",
+                           author="New Author",
+                           reader="New Reader",
+                           disk=999,
+                           track_number=999,
+                           length=1234567,
+                           cover=b"cover",
+                           path="New File",
+                           modified=1234567,
+                           chapters=[chapter])
+
+    book = Book.select().get()
+
+    res_dict = library._get_track_dictionary_for_db(media_file, book)
+
+    assert res_dict["name"] == "New Chapter"
+    assert res_dict["disk"] == 999
+    assert res_dict["number"] == 999
+    assert res_dict["book"] == book
+    assert res_dict["file"] == "New File"
+    assert res_dict["length"] == 1234567
+    assert res_dict["modified"] == 1234567
+    assert res_dict["position"] == 0
+
+
+def test_update_book_db_object_updates_object():
+    from cozy.model.library import Library
+    from cozy.media.media_file import MediaFile
+    from cozy.db.book import Book
+    from cozy.media.chapter import Chapter
+
+    library = Library()
+
+    chapter = Chapter("New Chapter", 0)
+    media_file = MediaFile(book_name="Test Book",
+                           author="New Author",
+                           reader="New Reader",
+                           disk=999,
+                           track_number=999,
+                           length=1234567,
+                           cover=b"cover",
+                           path="test.mp3",
+                           modified=1234567,
+                           chapters=[chapter])
+
+    library._update_book_db_object(media_file)
+
+    book_in_db: Book = Book.select().where(Book.name == "Test Book").get()
+
+    assert book_in_db.name == "Test Book"
+    assert book_in_db.author == "New Author"
+    assert book_in_db.reader == "New Reader"
+    assert book_in_db.cover == b"cover"
+
+
+def test_create_book_db_object_creates_object():
+    from cozy.model.library import Library
+    from cozy.media.media_file import MediaFile
+    from cozy.db.book import Book
+    from cozy.media.chapter import Chapter
+
+    library = Library()
+
+    chapter = Chapter("New Chapter", 0)
+    media_file = MediaFile(book_name="New Book",
+                           author="New Author",
+                           reader="New Reader",
+                           disk=999,
+                           track_number=999,
+                           length=1234567,
+                           cover=b"cover",
+                           path="test.mp3",
+                           modified=1234567,
+                           chapters=[chapter])
+
+    library._create_book_db_object(media_file)
+
+    book_in_db: Book = Book.select().where(Book.name == "New Book").get()
+
+    assert book_in_db.name == "New Book"
+    assert book_in_db.author == "New Author"
+    assert book_in_db.reader == "New Reader"
+    assert book_in_db.cover == b"cover"
+    assert book_in_db.position == 0
+    assert book_in_db.rating == -1
