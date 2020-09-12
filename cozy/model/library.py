@@ -57,13 +57,13 @@ class Library:
         self._chapters = set()
         self._files = set()
 
-    def insert_many(self, media_files: List[MediaFile]):
+    def insert_many(self, media_files: Set[MediaFile]):
         tracks = self._prepare_db_objects(media_files)
 
         with self._db:
             Track.insert_many(tracks).execute()
 
-    def _prepare_db_objects(self, media_files: List[MediaFile]) -> List[object]:
+    def _prepare_db_objects(self, media_files: Set[MediaFile]) -> Set[object]:
         book_db_objects: Set[BookModel] = set()
 
         for media_file in media_files:

@@ -1,4 +1,4 @@
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, call
 
 import pytest
 from peewee import SqliteDatabase
@@ -27,7 +27,7 @@ def test_external_paths_are_excluded_when_offline(mocker):
                  return_value=False)
 
     importer = Importer()
-    paths_to_import = importer._get_paths_to_scan()
+    paths_to_import = importer._get_configured_storage_paths()
 
     internal_storages_in_db = Storage.select().where(Storage.external is not False)
     internal_storage_paths = [storage.path for storage in internal_storages_in_db]
@@ -41,7 +41,7 @@ def test_paths_not_existing_are_excluded(mocker):
     mocker.patch("os.path.exists", return_value=False)
 
     importer = Importer()
-    paths_to_import = importer._get_paths_to_scan()
+    paths_to_import = importer._get_configured_storage_paths()
 
     assert len(paths_to_import) == 0
 
@@ -53,7 +53,7 @@ def test_all_existing_paths_are_included(mocker):
     mocker.patch("os.path.exists", return_value=True)
 
     importer = Importer()
-    paths_to_import = importer._get_paths_to_scan()
+    paths_to_import = importer._get_configured_storage_paths()
 
     internal_storages_in_db = Storage.select()
     internal_storage_paths = [storage.path for storage in internal_storages_in_db]
@@ -91,4 +91,34 @@ def test_scan_emits_start_event(mocker):
     spy = mocker.spy(importer, "emit_event")
     importer.scan()
 
-    spy.assert_called_once_with("scan", ScanStatus.STARTED)
+    spy.assert_has_calls(calls=[call("scan", ScanStatus.STARTED), call("scan", ScanStatus.SUCCESS)])
+
+
+def test_scan_returns_file_names_that_could_not_be_imported(mocker):
+    from cozy.media.importer import Importer
+
+    files = {"1", "2"}
+
+    mocker.patch("multiprocessing.pool.ThreadPool.map", return_value=files)
+    mocker.patch("cozy.model.library.Library.insert_many")
+
+    importer = Importer()
+    not_imported = importer._execute_import(files)
+
+    assert not_imported == files
+
+
+def test_scan_returns_none_for_non_audio_files(mocker):
+    from cozy.media.importer import Importer
+
+    def iterator():
+        for item in [None, None]:
+            yield item
+
+    mocker.patch("multiprocessing.pool.ThreadPool.map", return_value=iterator())
+    mocker.patch("cozy.model.library.Library.insert_many")
+
+    importer = Importer()
+    not_imported = importer._execute_import(["a"])
+
+    assert not_imported == set()
