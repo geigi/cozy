@@ -80,7 +80,7 @@ class Library:
                 if len(media_file.chapters) == 1:
                     track = self._get_track_dictionary_for_db(media_file, book)
                 else:
-                    raise NotImplemented
+                    raise NotImplementedError
 
                 if media_file.path not in self.files:
                     yield track

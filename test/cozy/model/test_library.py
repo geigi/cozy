@@ -183,3 +183,131 @@ def test_create_book_db_object_creates_object():
     assert book_in_db.cover == b"cover"
     assert book_in_db.position == 0
     assert book_in_db.rating == -1
+
+
+def test_prepare_db_objects_updates_existing_track(mocker):
+    from cozy.model.library import Library
+    from cozy.media.media_file import MediaFile
+    from cozy.media.chapter import Chapter
+
+    library = Library()
+    spy = mocker.spy(library, "_update_track_db_object")
+
+    chapter = Chapter("New Chapter", 0)
+    media_file = MediaFile(book_name="Test Book",
+                           author="New Author",
+                           reader="New Reader",
+                           disk=999,
+                           track_number=999,
+                           length=1234567,
+                           cover=b"cover",
+                           path="test.mp3",
+                           modified=1234567,
+                           chapters=[chapter])
+
+    res_dict = library._prepare_db_objects([media_file])
+
+    assert len(list(res_dict)) == 0
+    spy.assert_called_once()
+
+
+def test_prepare_db_objects_creates_new_track(mocker):
+    from cozy.model.library import Library
+    from cozy.media.media_file import MediaFile
+    from cozy.media.chapter import Chapter
+
+    library = Library()
+    spy = mocker.spy(library, "_get_track_dictionary_for_db")
+
+    chapter = Chapter("New Chapter", 0)
+    media_file = MediaFile(book_name="Test Book",
+                           author="New Author",
+                           reader="New Reader",
+                           disk=999,
+                           track_number=999,
+                           length=1234567,
+                           cover=b"cover",
+                           path="New test File",
+                           modified=1234567,
+                           chapters=[chapter])
+
+    res_dict = library._prepare_db_objects([media_file])
+
+    assert len(list(res_dict)) == 1
+    spy.assert_called_once()
+
+
+def test_prepare_db_objects_updates_existing_book(mocker):
+    from cozy.model.library import Library
+    from cozy.media.media_file import MediaFile
+    from cozy.media.chapter import Chapter
+
+    library = Library()
+    spy = mocker.spy(library, "_update_book_db_object")
+
+    chapter = Chapter("New Chapter", 0)
+    media_file = MediaFile(book_name="Test Book",
+                           author="New Author2",
+                           reader="New Reader",
+                           disk=999,
+                           track_number=999,
+                           length=1234567,
+                           cover=b"cover",
+                           path="New test File",
+                           modified=1234567,
+                           chapters=[chapter])
+
+    res_dict = library._prepare_db_objects([media_file])
+
+    assert len(list(res_dict)) == 1
+    spy.assert_called_once()
+
+
+def test_prepare_db_objects_creates_new_book(mocker):
+    from cozy.model.library import Library
+    from cozy.media.media_file import MediaFile
+    from cozy.media.chapter import Chapter
+
+    library = Library()
+    spy = mocker.spy(library, "_create_book_db_object")
+
+    chapter = Chapter("New Chapter", 0)
+    media_file = MediaFile(book_name="Test Book New",
+                           author="New Author2",
+                           reader="New Reader",
+                           disk=999,
+                           track_number=999,
+                           length=1234567,
+                           cover=b"cover",
+                           path="New test File",
+                           modified=1234567,
+                           chapters=[chapter])
+
+    res_dict = library._prepare_db_objects([media_file])
+
+    assert len(list(res_dict)) == 1
+    spy.assert_called_once()
+
+
+def test_prepare_db_objects_raises_not_implemented_for_multi_chapter_file(mocker):
+    from cozy.model.library import Library
+    from cozy.media.media_file import MediaFile
+    from cozy.media.chapter import Chapter
+
+    library = Library()
+
+    chapter = Chapter("New Chapter", 0)
+    media_file = MediaFile(book_name="Test Book New",
+                           author="New Author2",
+                           reader="New Reader",
+                           disk=999,
+                           track_number=999,
+                           length=1234567,
+                           cover=b"cover",
+                           path="New test File",
+                           modified=1234567,
+                           chapters=[chapter, chapter])
+
+    with pytest.raises(NotImplementedError):
+        res_dict = library._prepare_db_objects([media_file])
+        list(res_dict)
