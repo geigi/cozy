@@ -1,11 +1,13 @@
+import itertools
 import logging
 import os
 from enum import Enum, auto
-from multiprocessing import Pool
+from multiprocessing.pool import ThreadPool as Pool
 from typing import List
 
 from cozy.architecture.profiler import timing
 from cozy.media.media_detector import MediaDetector, NotAnAudioFile
+from cozy.media.media_file import MediaFile
 from cozy.model.library import Library
 from cozy.report import reporter
 from cozy.architecture.event_sender import EventSender
@@ -40,15 +42,21 @@ class Importer(EventSender):
         files_in_media_folders = self._walk_paths_to_scan(paths_to_scan)
         files_to_scan = self._filter_unchanged_files(files_in_media_folders)
 
-        for res in pool.imap(self.import_file, files_to_scan):
-            print("Scanned file")
+        while True:
+            media_files = pool.map(self.import_file, itertools.islice(files_to_scan, 100))
+
+            if len(media_files) != 0:
+                self._library.insert_many(media_files)
+            else:
+                break
 
         pool.close()
         logging.info("Import finished")
 
+    @timing
     def _filter_unchanged_files(self, files: List[str]) -> List[str]:
         """Filter all files that are already imported and that have not changed from a list of paths."""
-        imported_files = set([chapter.file for chapter in self._library.chapters])
+        imported_files = self._library.files
 
         for file in files:
             if file in imported_files:
@@ -64,6 +72,7 @@ class Importer(EventSender):
 
             yield file
 
+    @timing
     def _walk_paths_to_scan(self, paths: List[str]) -> List[str]:
         """Get all files recursive inside a directory. Returns absolute paths."""
         for path in paths:
@@ -72,6 +81,7 @@ class Importer(EventSender):
                     filepath = os.path.join(directory, file)
                     yield filepath
 
+    @timing
     def _get_paths_to_scan(self) -> List[str]:
         """From all storage path configured by the user,
         we only want to scan those paths that are currently online and exist."""
@@ -92,12 +102,15 @@ class Importer(EventSender):
     def _get_file_count_in_dir(self, dir):
         len([name for name in os.listdir(dir) if os.path.isfile(name)])
 
-    def import_file(self, path: str) -> bool:
+    def import_file(self, path: str) -> MediaFile:
         if not os.path.isfile(path):
-            return False
+            return None
 
         media_detector = MediaDetector(path)
         try:
             media_data = media_detector.get_media_data()
         except NotAnAudioFile as e:
             reporter.exception("importer", e)
+            return None
+
+        return media_data

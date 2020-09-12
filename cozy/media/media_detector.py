@@ -21,7 +21,7 @@ class NotAnAudioFile(Exception):
     pass
 
 
-class MediaDetector(EventSender, metaclass=Singleton):
+class MediaDetector(EventSender):
     def __init__(self, path: str):
         self.uri = pathlib.Path(path).as_uri()
 
@@ -29,6 +29,9 @@ class MediaDetector(EventSender, metaclass=Singleton):
         self.discoverer: GstPbutils.Discoverer = GstPbutils.Discoverer()
 
     def get_media_data(self) -> MediaFile:
+        if not self.uri.endswith(('.mp3', '.ogg', '.flac', '.m4a', '.wav', '.opus')):
+            raise NotAnAudioFile
+
         try:
             discoverer_info: GstPbutils.DiscovererInfo = self.discoverer.discover_uri(self.uri)
         except Exception as e:
@@ -42,9 +45,6 @@ class MediaDetector(EventSender, metaclass=Singleton):
             raise NotAnAudioFile
 
     def _is_valid_audio_file(self, discoverer_info: GstPbutils.DiscovererInfo):
-        if not self.uri.endswith(('.mp3', '.ogg', '.flac', '.m4a', '.wav', '.opus')):
-            return False
-
         audio_streams = discoverer_info.get_audio_streams()
 
         if len(audio_streams) < 1:

@@ -46,3 +46,33 @@ def test_readers_contains_every_reader_from_db():
     # we cannot assert the same content as the library filters books without chapters
     assert len(library.readers) > 0
     assert library.readers.issubset(readers_from_db)
+
+
+def test_prepare_db_objects_skips_none():
+    from cozy.model.library import Library
+    library = Library()
+
+    library._prepare_db_objects([None, None, None])
+
+
+def test_update_track_db_object_updates_object():
+    from cozy.model.library import Library
+    from cozy.media.media_file import MediaFile
+    from cozy.db.book import Book
+
+    library = Library()
+
+    media_file = MediaFile(book_name="New Book Name",
+                           author="New Author",
+                           reader="New Reader",
+                           disk=999,
+                           track_number=999,
+                           length=1234567,
+                           cover=b"cover",
+                           path="New Path",
+                           modified=1234567,
+                           chapters=[])
+
+    book = Book.select().get()
+
+    library._update_track_db_object(book, media_file)

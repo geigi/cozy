@@ -29,7 +29,7 @@ class TagReader:
 
     def get_tags(self) -> MediaFile:
         media_file = MediaFile(
-            uri=self.uri,
+            path=unquote(urlparse(self.uri).path),
             book_name=self._get_book_name(),
             author=self._get_author(),
             reader=self._get_reader(),
