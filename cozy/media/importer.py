@@ -32,20 +32,19 @@ class Importer(EventSender):
     @timing
     def scan(self):
         logging.info("Starting import")
-        self.emit_event("scan", ScanStatus.STARTED)
+        self.emit_event_main_thread("scan", ScanStatus.STARTED)
 
         files_to_scan = self._get_files_to_scan()
-        undetected_files = set()
 
-        self._execute_import(files_to_scan)
+        undetected_files = self._execute_import(files_to_scan)
 
         logging.info("Import finished")
-        self.emit_event("scan", ScanStatus.SUCCESS)
+        self.emit_event_main_thread("scan", ScanStatus.SUCCESS)
 
         if len(undetected_files) > 0:
             logging.info("Some files could not be imported:")
             logging.info(undetected_files)
-            self.emit_event("import_failed", undetected_files)
+            self.emit_event_main_thread("import-failed", undetected_files)
 
     def _execute_import(self, files_to_scan: List[str]):
         undetected_files = set()
