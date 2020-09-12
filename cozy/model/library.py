@@ -64,12 +64,18 @@ class Library:
             Track.insert_many(tracks).execute()
 
     def _prepare_db_objects(self, media_files: List[MediaFile]) -> List[object]:
+        book_db_objects: Set[BookModel] = set()
+
         for media_file in media_files:
             if not media_file:
                 continue
 
             with self._db:
-                book = self._import_or_update_book(media_file)
+                book = next((book for book in book_db_objects if book.name == media_file.book_name), None)
+
+                if not book:
+                    book = self._import_or_update_book(media_file)
+                    book_db_objects.add(book)
 
                 if len(media_file.chapters) == 1:
                     track = self._get_track_dictionary_for_db(media_file, book)
