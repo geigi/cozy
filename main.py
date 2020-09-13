@@ -29,6 +29,10 @@ import distro
 from traceback import format_exception
 import gi
 
+from cozy.app_controller import AppController
+from cozy.ui.widgets.filter_list_box import FilterListBox
+from cozy.ui.widgets.list_box_extensions import extend_gtk_container
+
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 
@@ -62,7 +66,8 @@ if os.path.exists(os.path.join(data_dir, "cozy.log")):
 
 class Application(Gtk.Application):
     def __init__(self, **kwargs):
-        self.ui = None
+        self.ui: CozyUI = None
+        self.app_controller: AppController = None
 
         listen()
         Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
@@ -86,7 +91,10 @@ class Application(Gtk.Application):
         self.ui.startup()
 
     def do_activate(self):
-        self.ui.activate()
+        main_window_builder = self.ui.get_builder()
+        self.app_controller = AppController(main_window_builder, self.ui)
+
+        self.ui.activate(self.app_controller.library_view)
 
         if Settings.get().first_start:
             Settings.update(first_start=False).execute()
@@ -133,9 +141,21 @@ def __on_command_line():
         ])
 
 
+def extend_classes():
+    extend_gtk_container()
+
+
+def init_custom_widgets():
+    FilterListBox()
+
+
 def main():
     __on_command_line()
     print(sys.argv)
+
+    extend_classes()
+    init_custom_widgets()
+
     application = Application()
 
     try:

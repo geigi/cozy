@@ -4,11 +4,12 @@ import cozy.tools as tools
 import cozy.ui
 from cozy.control.db import get_book_remaining, get_book_progress, get_track_from_book_time, get_book_duration
 from cozy.control.string_representation import seconds_to_str
-from cozy.model.settings import Settings
+from cozy.db.settings import Settings
 from cozy.tools import IntervalTimer
 
 import gi
 
+from cozy.ui.search_view import SearchView
 from cozy.ui.warnings import Warnings
 
 gi.require_version('Gtk', '3.0')
@@ -125,7 +126,6 @@ class Titlebar:
         # attach popovers
         self.timer_button.set_popover(self.ui.sleep_timer.get_popover())
         self.playback_speed_button.set_popover(self.ui.speed.get_popover())
-        self.search_button.set_popover(self.ui.search.get_popover())
         self.warnings = Warnings(self.warnings_button)
         self.warnings_button.set_popover(self.warnings.get_popover())
 
@@ -418,7 +418,7 @@ class Titlebar:
         """
         current_track = player.get_current_track()
 
-        if not current_track:
+        if not current_track or not self.current_book:
             return
 
         if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
@@ -448,7 +448,7 @@ class Titlebar:
             self.play_status_updater.stop()
             self.play_status_updater = None
 
-        if enable and self.ui.is_playing and self.play_status_updater is None:
+        if enable and player.is_playing() and self.play_status_updater is None:
             self.play_status_updater = IntervalTimer(
                 1, self.__update_time)
             self.play_status_updater.start()

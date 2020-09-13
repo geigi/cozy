@@ -2,19 +2,22 @@ import logging
 import os
 import time
 
+from playhouse.pool import PooledSqliteDatabase
+
 from cozy.control.db_updater import update_db
-from cozy.model.artwork_cache import ArtworkCache
-from cozy.model.book import Book
-from cozy.model.model_base import get_sqlite_database, get_data_dir
-from cozy.model.offline_cache import OfflineCache
-from cozy.model.settings import Settings
-from cozy.model.storage import Storage
-from cozy.model.storage_blacklist import StorageBlackList
-from cozy.model.track import Track
+from cozy.db.artwork_cache import ArtworkCache
+from cozy.db.book import Book
+from cozy.db.model_base import get_sqlite_database, get_data_dir
+from cozy.db.offline_cache import OfflineCache
+from cozy.db.settings import Settings
+from cozy.db.storage import Storage
+from cozy.db.storage_blacklist import StorageBlackList
+from cozy.db.track import Track
 from cozy.report import reporter
 
 log = logging.getLogger("db")
 from peewee import __version__ as PeeweeVersion
+from apsw import apswversion
 
 if PeeweeVersion[0] == '2':
     log.info("Using peewee 2 backend")
@@ -23,7 +26,6 @@ if PeeweeVersion[0] == '2':
     ModelBase = BaseModel
 else:
     log.info("Using peewee 3 backend")
-from peewee import SqliteDatabase
 from gi.repository import GLib, Gdk
 
 _db = get_sqlite_database()
@@ -34,10 +36,13 @@ def init_db():
 
     _connect_db(_db)
 
+    sqlite_version = ".".join([str(num) for num in _db.server_version])
+    log.info("SQLite version: {}, APSW version: {}".format(sqlite_version, apswversion()))
+
     if Settings.table_exists():
         update_db()
     else:
-        tmp_db = SqliteDatabase(os.path.join(get_data_dir(), "cozy.db"))
+        tmp_db = PooledSqliteDatabase(os.path.join(get_data_dir(), "cozy.db"))
         if PeeweeVersion[0] == '2':
             tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache], True)
         else:
@@ -62,6 +67,10 @@ def init_db():
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
 
+    # TODO: Properly handle errors within the database
+    # Remove this later. It prevents empty book objects in the database
+    clean_books()
+
 
 def _connect_db(db):
     try:
@@ -82,28 +91,15 @@ def books():
 
 
 def authors():
-    """
-    Find all authors in the database
-
-    :return: all authors
-    """
     return Book.select(Book.author).distinct().order_by(Book.author)
 
 
 def readers():
-    """
-    Find all readers in the database
-
-    :return: all readers
-    """
     return Book.select(Book.reader).distinct().order_by(Book.reader)
 
 
 def Search(search):
     return Track.select().where(search in Track.name)
-
-
-# Return ordered after Track ID / name when not available
 
 
 def get_tracks(book):
@@ -147,49 +143,6 @@ def get_track_for_playback(book):
     else:
         track = None
     return track
-
-
-def search_authors(search_string):
-    """
-    Search all authors in the db with the given substring.
-    This ignores upper/lowercase and returns each author only once.
-    :param search_string: substring to search for
-    :return: authors matching the substring
-    """
-    return Book.select(Book.author).where(Book.author.contains(search_string)).distinct().order_by(Book.author)
-
-
-def search_readers(search_string):
-    """
-    Search all readers in the db with the given substring.
-    This ignores upper/lowercase and returns each reader only once.
-    :param search_string: substring to search for
-    :return: readers matching the substring
-    """
-    return Book.select(Book.reader).where(Book.reader.contains(search_string)).distinct().order_by(Book.reader)
-
-
-def search_books(search_string):
-    """
-    Search all book names in the db with the given substring.
-    This ignores upper/lowercase and returns each book name only once.
-    :param search_string: substring to search for
-    :return: book names matching the substring
-    """
-    return Book.select(Book.name, Book.cover, Book.id).where(Book.name.contains(search_string)
-                                                             | Book.author.contains(search_string)
-                                                             | Book.reader.contains(search_string)).distinct().order_by(
-        Book.name)
-
-
-def search_tracks(search_string):
-    """
-    Search all tracks in the db with the given substring.
-    This ignores upper/lowercase.
-    :param search_string: substring to search for
-    :return: tracks matching the substring
-    """
-    return Track.select(Track.name).where(Track.name.contains(search_string)).order_by(Track.name)
 
 
 def get_track_path(track):
@@ -346,20 +299,6 @@ def remove_tracks_with_path(ui, path):
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
 
 
-def blacklist_book(book):
-    """
-    Removes a book from the library and adds the path(s) to the track list.
-    """
-    book_tracks = get_tracks(book)
-    data = list((t.file,) for t in book_tracks)
-    chunks = [data[x:x + 500] for x in range(0, len(data), 500)]
-    for chunk in chunks:
-        StorageBlackList.insert_many(chunk, fields=[StorageBlackList.path]).execute()
-    ids = list(t.id for t in book_tracks)
-    Track.delete().where(Track.id << ids).execute()
-    book.delete_instance()
-
-
 def is_blacklisted(path):
     """
     Tests whether a given path is blacklisted.
@@ -376,6 +315,11 @@ def is_external(book):
     """
     return any(storage.path in Track.select().join(Book).where(Book.id == book.id).first().file for storage in
                Storage.select().where(Storage.external == True))
+
+
+def get_db():
+    global _db
+    return _db
 
 
 def close_db():

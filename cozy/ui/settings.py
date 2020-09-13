@@ -3,8 +3,9 @@ import logging
 import gi
 
 from cozy.control.db import remove_tracks_with_path
-from cozy.model.storage import Storage
-from cozy.model.storage_blacklist import StorageBlackList
+from cozy.db.storage import Storage
+from cozy.db.storage_blacklist import StorageBlackList
+from cozy.view_model.settings_view_model import SettingsViewModel
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio
@@ -19,14 +20,18 @@ import cozy.ui
 
 log = logging.getLogger("settings")
 
+
 class Settings(EventSender, metaclass=Singleton):
     """
     This class contains all logic for cozys preferences.
     """
+    view_model = None
     ui = None
     default_dark_mode = None
 
     def __init__(self):
+        self.view_model = SettingsViewModel()
+
         self.ui = cozy.ui.main_view.CozyUI()
         self.builder = Gtk.Builder.new_from_resource(
             "/de/geigi/cozy/settings.ui")
@@ -39,7 +44,7 @@ class Settings(EventSender, metaclass=Singleton):
         self.add_storage_button = self.builder.get_object("add_location_button")
         self.add_storage_button.connect("clicked", self.__on_add_storage_clicked)
         self.remove_storage_button = self.builder.get_object("remove_location_button")
-        self.remove_storage_button.connect("clicked", self.__on_remove_storage_clicked)        
+        self.remove_storage_button.connect("clicked", self.__on_remove_storage_clicked)
         self.external_button = self.builder.get_object("external_button")
         self.external_button_handle_id = self.external_button.connect("clicked", self.__on_external_clicked)
         self.default_storage_button = self.builder.get_object("default_location_button")
@@ -49,7 +54,7 @@ class Settings(EventSender, metaclass=Singleton):
 
         self.remove_blacklist_button = self.builder.get_object("remove_blacklist_button")
         self.remove_blacklist_button.connect("clicked", self.__on_remove_blacklist_clicked)
-        #self.remove_blacklist_button.set_sensitive(False)
+        # self.remove_blacklist_button.set_sensitive(False)
         self.blacklist_tree_view = self.builder.get_object("blacklist_tree_view")
         self.blacklist_model = self.builder.get_object("blacklist_store")
         self.blacklist_tree_view.get_selection().connect("changed", self.__on_blacklist_selection_changed)
@@ -70,6 +75,9 @@ class Settings(EventSender, metaclass=Singleton):
         self.force_refresh_button = self.builder.get_object("force_refresh_button")
         self.force_refresh_button.connect("clicked", self.__on_force_refresh_clicked)
 
+        self.settings_stack = self.builder.get_object("settings_stack")
+        self.settings_stack.connect("notify::visible-child", self._on_settings_stack_changed)
+
         self._init_storage()
         self._init_blacklist()
         self.__init_bindings()
@@ -82,7 +90,7 @@ class Settings(EventSender, metaclass=Singleton):
         Display settings from the database in the ui.
         """
         found_default = False
-        tools.remove_all_children(self.storage_list_box)
+        self.storage_list_box.remove_all_children()
         for location in Storage.select():
             row = StorageListBoxRow(self, location.id, location.path, location.external, location.default)
             self.storage_list_box.add(row)
@@ -109,37 +117,41 @@ class Settings(EventSender, metaclass=Singleton):
         """
         sl_switch = self.builder.get_object("symlinks_switch")
         tools.get_glib_settings().bind("symlinks", sl_switch, "active",
-                           Gio.SettingsBindFlags.DEFAULT)
+                                       Gio.SettingsBindFlags.DEFAULT)
 
         auto_scan_switch = self.builder.get_object("auto_scan_switch")
         tools.get_glib_settings().bind("autoscan", auto_scan_switch,
-                           "active", Gio.SettingsBindFlags.DEFAULT)
+                                       "active", Gio.SettingsBindFlags.DEFAULT)
 
         timer_suspend_switch = self.builder.get_object(
             "timer_suspend_switch")
         tools.get_glib_settings().bind("suspend", timer_suspend_switch,
-                           "active", Gio.SettingsBindFlags.DEFAULT)
+                                       "active", Gio.SettingsBindFlags.DEFAULT)
 
         replay_switch = self.builder.get_object("replay_switch")
         tools.get_glib_settings().bind("replay", replay_switch, "active",
-                           Gio.SettingsBindFlags.DEFAULT)
+                                       Gio.SettingsBindFlags.DEFAULT)
 
         titlebar_remaining_time_switch = self.builder.get_object("titlebar_remaining_time_switch")
         tools.get_glib_settings().bind("titlebar-remaining-time", titlebar_remaining_time_switch, "active",
-                           Gio.SettingsBindFlags.DEFAULT)
+                                       Gio.SettingsBindFlags.DEFAULT)
 
         dark_mode_switch = self.builder.get_object("dark_mode_switch")
         tools.get_glib_settings().bind("dark-mode", dark_mode_switch, "active",
-                           Gio.SettingsBindFlags.DEFAULT)
+                                       Gio.SettingsBindFlags.DEFAULT)
+
+        swap_author_reader_switch = self.builder.get_object("swap_author_reader_switch")
+        tools.get_glib_settings().bind("swap-author-reader", swap_author_reader_switch, "active",
+                                       Gio.SettingsBindFlags.DEFAULT)
 
         tools.get_glib_settings().bind("prefer-external-cover", self.external_cover_switch, "active",
-                           Gio.SettingsBindFlags.DEFAULT)
+                                       Gio.SettingsBindFlags.DEFAULT)
 
         tools.get_glib_settings().bind("sleep-timer-fadeout", self.sleep_fadeout_switch, "active",
-                           Gio.SettingsBindFlags.DEFAULT)
+                                       Gio.SettingsBindFlags.DEFAULT)
 
         tools.get_glib_settings().bind("sleep-timer-fadeout-duration", self.fadeout_duration_adjustment,
-                           "value", Gio.SettingsBindFlags.DEFAULT)
+                                       "value", Gio.SettingsBindFlags.DEFAULT)
 
         tools.get_glib_settings().connect("changed", self.__on_settings_changed)
 
@@ -187,7 +199,7 @@ class Settings(EventSender, metaclass=Singleton):
         thread = Thread(target=remove_tracks_with_path, args=(self.ui, row.path), name=("RemoveStorageFromDB"))
         thread.start()
         self.__on_storage_box_changed(None, None)
-        
+
     def __on_default_storage_clicked(self, widget):
         """
         Select a location as default storage.
@@ -226,7 +238,7 @@ class Settings(EventSender, metaclass=Singleton):
                 child.set_selected(True)
             else:
                 child.set_selected(False)
-        
+
     def __on_settings_changed(self, settings, key):
         """
         Updates cozy's ui to changed Gio settings.
@@ -248,7 +260,7 @@ class Settings(EventSender, metaclass=Singleton):
                 treeiter = model.get_iter(path)
                 ids.append(self.blacklist_model.get_value(treeiter, 1))
                 self.blacklist_model.remove(treeiter)
-            
+
             StorageBlackList.delete().where(StorageBlackList.id in ids).execute()
 
         self.__on_blacklist_selection_changed(self.blacklist_tree_view.get_selection())
@@ -290,7 +302,7 @@ class Settings(EventSender, metaclass=Singleton):
         Enable/Disable sensitivity for the fadeout duration settings row.
         """
         self.fadeout_duration_row.set_sensitive(switch.get_active())
-        
+
     def __on_external_cover_switch_changed(self, switch, state):
         """
         Set the glib setting prefer-external-cover.
@@ -310,6 +322,12 @@ class Settings(EventSender, metaclass=Singleton):
         """
         self.ui.scan(None, False, True)
 
+    def _on_settings_stack_changed(self, widget, property):
+        page = widget.props.visible_child_name
+
+        if page == "files":
+            self.blacklist_model.clear()
+            self._init_blacklist()
 
     def set_darkmode(self):
         """
@@ -319,21 +337,23 @@ class Settings(EventSender, metaclass=Singleton):
 
         if self.default_dark_mode is None:
             self.default_dark_mode = settings.get_property("gtk-application-prefer-dark-theme")
-        
+
         user_enabled = tools.get_glib_settings().get_boolean("dark-mode")
         if user_enabled:
             settings.set_property("gtk-application-prefer-dark-theme", True)
         else:
             settings.set_property("gtk-application-prefer-dark-theme", self.default_dark_mode)
 
+
 class BlacklistColumn(Gtk.TreeViewColumn):
     """
     A column for a storage location.
     """
+
     def __init__(self, path):
         super(Gtk.TreeViewColumn, self).__init__()
         self.path = path
-        
+
 
 class StorageListBoxRow(Gtk.ListBoxRow):
     """
@@ -373,14 +393,14 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         self.location_chooser.set_halign(Gtk.Align.START)
         self.location_chooser.props.hexpand = True
         self.location_chooser.connect("file-set", self.__on_folder_changed)
-        
+
         box.add(self.type_image)
         box.add(self.location_chooser)
         box.add(self.default_image)
         self.add(box)
         self.show_all()
         self.default_image.set_visible(default)
-    
+
     def set_default(self, default):
         """
         Set this storage location as the default

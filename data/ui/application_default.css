@@ -1,3 +1,11 @@
+.bold {
+  font-weight: bold;
+}
+
+.semi-bold {
+  font-weight: 600;
+}
+
 .bordered {
   border: 1px solid shade(@theme_bg_color, 0.8);
 }
@@ -24,6 +32,7 @@
   font-size: 115%;
 }
 
-.slightly-bold {
-  font-weight: 500;
+.monospace {
+  font-family: monospace;
 }
+

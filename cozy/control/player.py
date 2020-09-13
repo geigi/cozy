@@ -5,9 +5,9 @@ from gi.repository import Gst, GLib
 import gi
 
 from cozy.control.db import get_tracks
-from cozy.model.book import Book
-from cozy.model.settings import Settings
-from cozy.model.track import Track
+from cozy.db.book import Book
+from cozy.db.settings import Settings
+from cozy.db.track import Track
 from cozy.report import reporter
 
 gi.require_version('Gst', '1.0')
@@ -24,7 +24,7 @@ __set_speed = False
 __current_track = None
 __listeners = []
 __wait_to_seek = False
-__player = None
+__player: Gst.Bin = None
 __bus = None
 __play_next = True
 
@@ -50,19 +50,20 @@ def __on_gst_message(bus, message: Gst.Message):
         error, debug_msg = message.parse_error()
 
         if error.code == Gst.ResourceError.NOT_FOUND:
+            track = get_current_track()
             stop()
             unload()
             emit_event("stop")
 
             log.warning("gst: Resource not found. Stopping player.")
             reporter.warning("player", "gst: Resource not found. Stopping player.")
+            emit_event("resource-not-found", track)
             return
 
-        err, debug = message.parse_error()
-        log.error(err)
-        log.debug(debug)
-        reporter.error("player", err)
-        emit_event("error", err)
+        reporter.error("player", error)
+        log.error(error)
+        log.debug(debug_msg)
+        emit_event("error", error)
     elif t == Gst.MessageType.STATE_CHANGED:
         state = get_gst_player_state()
         if state == Gst.State.PLAYING or state == Gst.State.PAUSED:
@@ -174,6 +175,15 @@ def get_current_track():
             return None
     else:
         return None
+
+
+def is_playing():
+    if __player:
+        state = __player.get_state(Gst.CLOCK_TIME_NONE)
+        if state.state == Gst.State.PLAYING:
+            return True
+
+    return False
 
 
 def add_player_listener(function):

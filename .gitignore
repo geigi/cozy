@@ -13,6 +13,8 @@ debian/files
 peewee/
 venv/
 
+.pytest_cache
+
 
 # Ignore glade tmp files
 *~

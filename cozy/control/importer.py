@@ -10,6 +10,10 @@ import traceback
 import contextlib
 import wave
 
+import gi
+
+gi.require_version('GstPbutils', '1.0')
+from gi.repository.GstPbutils import DiscovererInfo
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3
 from mutagen.flac import FLAC, Picture
@@ -18,17 +22,17 @@ from mutagen.mp4 import MP4
 from mutagen.oggopus import OggOpus
 from mutagen.oggvorbis import OggVorbis
 from peewee import __version__ as PeeweeVersion
-from gi.repository import Gdk, GLib, Gst
+from gi.repository import Gdk, GLib, Gst, GstPbutils
 
 import cozy.control.artwork_cache as artwork_cache
 import cozy.tools as tools
-import cozy.control.player
+from cozy.architecture.event_sender import EventSender
 from cozy.control.db import is_blacklisted, remove_invalid_entries
 from cozy.control.offline_cache import OfflineCache
-from cozy.model.book import Book
-from cozy.model.storage import Storage
-from cozy.model.storage_blacklist import StorageBlackList
-from cozy.model.track import Track
+from cozy.db.book import Book
+from cozy.db.storage import Storage
+from cozy.db.storage_blacklist import StorageBlackList
+from cozy.db.track import Track
 from cozy.report import reporter
 
 log = logging.getLogger("importer")
@@ -56,6 +60,14 @@ class TrackData:
 
     def __init__(self, file):
         self.file = file
+
+
+class Importer(EventSender):
+    def __init__(self):
+        pass
+
+
+importer = Importer()
 
 
 def b64tobinary(b64):
@@ -160,7 +172,7 @@ def update_database(ui, force=False):
     remove_invalid_entries()
     artwork_cache.generate_artwork_cache()
 
-    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
+    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, importer.emit_event, "import-finished")
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.check_for_tracks)
 
@@ -222,7 +234,7 @@ def import_file(file, directory, path, update=False):
     if is_blacklisted(path):
         return True, None
 
-    media_type = tools.__get_media_type(path)
+    media_type, media_type_human = tools.__get_media_type(path)
     track = TrackContainer(None, path)
     cover = None
     reader = None
@@ -255,12 +267,16 @@ def import_file(file, directory, path, update=False):
         track_data = TrackData(path)
         track_data.length = __get_wav_track_length(path)
 
+    elif "ID3" in media_type_human:
+        track_data = _get_mp3_tags(track, path)
+
     ### File will not be imported ###
     else:
         # don't use _ for ignored return value -> it is reserved for gettext
         ignore, file_extension = os.path.splitext(path)
         log.warning("Skipping file " + path + " because of mime type " + media_type + ".")
-        reporter.error("importer", "Mime type not detected as audio: " + media_type + " with file ending: " + file_extension)
+        reporter.error("importer",
+                       "Mime type not detected as audio: " + media_type + " with file ending: " + file_extension)
         return False, None
 
     track_data.modified = __get_last_modified(path)
@@ -298,36 +314,36 @@ def import_file(file, directory, path, update=False):
     if update:
         if Book.select().where(Book.name == track_data.book_name).count() < 1:
             track_data.book = Book.create(name=track_data.book_name,
-                                                          author=track_data.author,
-                                                          reader=track_data.reader,
-                                                          position=0,
-                                                          rating=-1,
-                                                          cover=track_data.cover)
+                                          author=track_data.author,
+                                          reader=track_data.reader,
+                                          position=0,
+                                          rating=-1,
+                                          cover=track_data.cover)
         else:
             track_data.book = Book.select().where(
                 Book.name == track_data.book_name).get()
             Book.update(name=track_data.book_name,
-                                        author=track_data.author,
-                                        reader=track_data.reader,
-                                        cover=track_data.cover).where(
+                        author=track_data.author,
+                        reader=track_data.reader,
+                        cover=track_data.cover).where(
                 Book.id == track_data.book.id).execute()
 
         Track.update(name=track_data.name,
-                                     number=track_data.track_number,
-                                     book=track_data.book,
-                                     disk=track_data.disk,
-                                     length=track_data.length,
-                                     modified=track_data.modified).where(
+                     number=track_data.track_number,
+                     book=track_data.book,
+                     disk=track_data.disk,
+                     length=track_data.length,
+                     modified=track_data.modified).where(
             Track.file == track_data.file).execute()
     else:
         # create database entries
         if Book.select().where(Book.name == track_data.book_name).count() < 1:
             track_data.book = Book.create(name=track_data.book_name,
-                                                          author=track_data.author,
-                                                          reader=track_data.reader,
-                                                          position=0,
-                                                          rating=-1,
-                                                          cover=track_data.cover)
+                                          author=track_data.author,
+                                          reader=track_data.reader,
+                                          position=0,
+                                          rating=-1,
+                                          cover=track_data.cover)
         else:
             track_data.book = Book.select().where(
                 Book.name == track_data.book_name).get()
@@ -338,29 +354,19 @@ def import_file(file, directory, path, update=False):
 
 
 def get_gstreamer_length(path):
-    """
-    This function determines the length of an audio file using gstreamer.
-    This should be used as last resort if mutagen doesn't help us.
-    """
-    player = Gst.ElementFactory.make("playbin", "player")
-    bus = player.get_bus()
-    bus.add_signal_watch()
-    handler_id = bus.connect("message", cozy.control.player.__on_gst_message)
-    player.set_property("uri", "file://" + path)
-    player.set_state(Gst.State.PAUSED)
-    suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
-    limit = 0
-    while state != Gst.State.PAUSED and limit < 100:
-        suc, state, pending = player.get_state(Gst.CLOCK_TIME_NONE)
-        limit += 1
-    success, duration = player.query_duration(Gst.Format.TIME)
-    player.set_state(Gst.State.NULL)
-    bus.disconnect(handler_id)
-    bus.remove_signal_watch()
-    if success:
-        return success, int(duration / 1000000000)
+    uri = "file://" + path
+
+    try:
+        discoverer = GstPbutils.Discoverer()
+        info: DiscovererInfo = discoverer.discover_uri(uri)
+        duration = info.get_duration()
+    except Exception as e:
+        pass
+
+    if duration and duration > 0:
+        return True, int(duration / 1000000000)
     else:
-        success, None
+        return False, None
 
 
 def __get_last_modified(path: str):
@@ -744,4 +750,3 @@ def __get_common_tag(track, tag):
         log.info(e)
 
     return value
-

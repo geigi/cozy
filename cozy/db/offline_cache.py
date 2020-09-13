@@ -1,7 +1,7 @@
 from peewee import ForeignKeyField, BooleanField, CharField
 
-from cozy.model.model_base import ModelBase
-from cozy.model.track import Track
+from cozy.db.model_base import ModelBase
+from cozy.db.track import Track
 
 
 class OfflineCache(ModelBase):
