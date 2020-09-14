@@ -36,7 +36,7 @@ jobs:
     - name: Install Cozy
       run: |
         # meson dependencies
-        sudo apt install libxml2-utils appstream-util desktop-file-utils
+        sudo apt install libxml2-utils appstream-util desktop-file-utils gettext
         pip install meson ninja
         meson --prefix=/usr ./build
         sudo env "PATH=$PATH" ninja -C build install
