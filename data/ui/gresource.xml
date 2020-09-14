@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/de/geigi/cozy">
-	  <file>application.css</file>
+  <gresource prefix="/com/github/geigi/cozy">
+    <file>application.css</file>
     <file>application_legacy.css</file>
     <file>application_default.css</file>
     <file preprocess="xml-stripblanks">main_window.ui</file>
@@ -15,5 +15,6 @@
     <file preprocess="xml-stripblanks">titlebar_menu.ui</file>
     <file preprocess="xml-stripblanks">warning_popover.ui</file>
     <file preprocess="xml-stripblanks">error_reporting.ui</file>
+    <file preprocess="xml-stripblanks">whats_new.ui</file>
   </gresource>
 </gresources>

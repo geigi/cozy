@@ -7,8 +7,6 @@ from cozy.db.track import Track
 
 from gi.repository import Gtk, Gio, Gdk, GLib, Gst
 from threading import Thread
-from cozy.ui.book_element import BookElement
-from cozy.ui.error_reporting import ErrorReporting
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
@@ -91,10 +89,10 @@ class CozyUI(metaclass=Singleton):
         Gio.Resource._register(resource)
 
         self.window_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/main_window.ui")
+            "/com/github/geigi/cozy/main_window.ui")
 
         self.about_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/about.ui")
+            "/com/github/geigi/cozy/about.ui")
 
     def __init_css(self):
         """
@@ -102,18 +100,18 @@ class CozyUI(metaclass=Singleton):
         Add css classes to the default screen style context.
         """
         main_cssProviderFile = Gio.File.new_for_uri(
-            "resource:///de/geigi/cozy/application.css")
+            "resource:///com/github/geigi/cozy/application.css")
         main_cssProvider = Gtk.CssProvider()
         main_cssProvider.load_from_file(main_cssProviderFile)
 
         if Gtk.get_minor_version() > 18:
             log.debug("Fanciest design possible")
             cssProviderFile = Gio.File.new_for_uri(
-                "resource:///de/geigi/cozy/application_default.css")
+                "resource:///com/github/geigi/cozy/application_default.css")
         else:
             log.debug("Using legacy css file")
             cssProviderFile = Gio.File.new_for_uri(
-                "resource:///de/geigi/cozy/application_legacy.css")
+                "resource:///com/github/geigi/cozy/application_legacy.css")
         cssProvider = Gtk.CssProvider()
         cssProvider.load_from_file(cssProviderFile)
 
@@ -269,7 +267,7 @@ class CozyUI(metaclass=Singleton):
         if player.get_current_track() is None:
             self.block_ui_buttons(True)
 
-        ErrorReporting(self.window)
+        #WhatsNewWindow()
 
     def __load_last_book(self):
         """

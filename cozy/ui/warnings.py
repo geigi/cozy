@@ -13,7 +13,7 @@ class Warnings():
         self.button = button
 
         self.builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/warning_popover.ui")
+            "/com/github/geigi/cozy/warning_popover.ui")
 
         self.popover = self.builder.get_object("warning_popover")
         self.warning_container: Gtk.Box = self.builder.get_object("warning_container")

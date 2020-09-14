@@ -31,7 +31,7 @@ class SleepTimer:
     def __init__(self):
         self.ui = cozy.ui.main_view.CozyUI()
 
-        self.builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/timer_popover.ui")
+        self.builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/timer_popover.ui")
 
         self.timer_popover = self.builder.get_object("timer_popover")
         self.timer_scale = self.builder.get_object("timer_scale")

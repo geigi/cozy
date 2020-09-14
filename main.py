@@ -36,10 +36,18 @@ from cozy.ui.widgets.list_box_extensions import extend_gtk_container
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 
+pkgdatadir = '@DATA_DIR@'
+localedir = '@LOCALE_DIR@'
+
+from gi.repository import Gio
+
+resource = Gio.Resource.load(os.path.join(pkgdatadir, 'com.github.geigi.cozy.gresource'))
+resource._register()
+
 from cozy.report import reporter
 from cozy.version import __version__
 from pathlib import Path
-from gi.repository import Gtk, GObject, GLib
+from gi.repository import Gtk, GLib
 from cozy.ui.main_view import CozyUI
 from cozy.control.db import init_db, Settings
 from cozy.control.mpris import MPRIS
@@ -50,8 +58,6 @@ log = logging.getLogger("main")
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)
-pkgdatadir = '@DATA_DIR@'
-localedir = '@LOCALE_DIR@'
 LOG_FORMAT = "%(asctime)s [%(threadName)-12.12s] [%(name)-10.10s] [%(levelname)-5.5s]  %(message)s"
 LOG_DATE_FORMAT = "%H:%M:%S"
 

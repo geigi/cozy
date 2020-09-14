@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/de/geigi/cozy">
+  <gresource prefix="/com/github/geigi/cozy">
     <file>blank_album.png</file>
     <file>play_background.svg</file>
     <file>pause_background.svg</file>

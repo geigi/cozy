@@ -321,7 +321,7 @@ class MPRIS(Server):
             it must have a different TrackId.
         """
         track_id = track_id + randint(10000000, 90000000)
-        return GLib.Variant("o", "/de/geigi/Cozy/TrackId/%s" % track_id)
+        return GLib.Variant("o", "/com/github/geigi/cozy/TrackId/%s" % track_id)
 
     def __get_status(self):
         state = get_gst_player_state()

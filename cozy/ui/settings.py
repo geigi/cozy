@@ -34,7 +34,7 @@ class Settings(EventSender, metaclass=Singleton):
 
         self.ui = cozy.ui.main_view.CozyUI()
         self.builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/settings.ui")
+            "/com/github/geigi/cozy/settings.ui")
 
         # get settings window
         self.window = self.builder.get_object("settings_window")

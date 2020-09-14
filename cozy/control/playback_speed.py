@@ -17,7 +17,7 @@ class PlaybackSpeed(EventSender):
         self.ui = cozy.ui.main_view.CozyUI()
 
         self.builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/playback_speed_popover.ui")
+            "/com/github/geigi/cozy/playback_speed_popover.ui")
 
         self.speed_scale = self.builder.get_object("playback_speed_scale")
         self.speed_label = self.builder.get_object("playback_speed_label")
