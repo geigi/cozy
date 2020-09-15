@@ -8,5 +8,6 @@ from gi.repository import Gtk
 class WhatsNewWindow(Gtk.Window):
     __gtype_name__ = 'WhatsNew'
 
-    def __init__(self, **kwargs):
+    def __init__(self, parent: Gtk.Window, **kwargs):
         super().__init__(**kwargs)
+        self.set_parent(parent)

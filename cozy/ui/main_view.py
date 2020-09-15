@@ -27,6 +27,8 @@ import os
 
 import logging
 
+from cozy.ui.widgets.whats_new_window import WhatsNewWindow
+
 log = logging.getLogger("ui")
 
 
@@ -267,7 +269,8 @@ class CozyUI(metaclass=Singleton):
         if player.get_current_track() is None:
             self.block_ui_buttons(True)
 
-        #WhatsNewWindow()
+        whats_new_window = WhatsNewWindow(self.window)
+        whats_new_window.show_all()
 
     def __load_last_book(self):
         """
