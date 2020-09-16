@@ -16,5 +16,6 @@
     <file preprocess="xml-stripblanks">warning_popover.ui</file>
     <file preprocess="xml-stripblanks">error_reporting.ui</file>
     <file preprocess="xml-stripblanks">whats_new.ui</file>
+    <file preprocess="xml-stripblanks">whats_new_importer.ui</file>
   </gresource>
 </gresources>

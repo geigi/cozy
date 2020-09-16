@@ -17,8 +17,7 @@ class ErrorReporting(Gtk.Box):
         self.__init_scale()
         self.__connect()
 
-        self._update_verbose_text(self.adjustment)
-        self.window.show()
+        self._update_verbose_text(self.verbose_adjustment)
 
     def __init_scale(self):
         for i in range(1, 5):

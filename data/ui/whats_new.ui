@@ -24,15 +24,20 @@
             <property name="can_focus">True</property>
             <property name="hexpand">True</property>
             <property name="vexpand">True</property>
+            <property name="hscrollbar_policy">never</property>
             <property name="shadow_type">in</property>
             <child>
               <object class="GtkViewport">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkStack">
+                  <object class="GtkStack" id="content_stack">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_left">10</property>
+                    <property name="margin_right">10</property>
+                    <property name="margin_top">10</property>
+                    <property name="margin_bottom">10</property>
                     <child>
                       <placeholder/>
                     </child>
@@ -53,9 +58,9 @@
             <property name="can_focus">False</property>
             <property name="baseline_position">bottom</property>
             <child>
-              <object class="GtkButton">
+              <object class="GtkButton" id="prev_button">
                 <property name="label" translatable="yes">Previous</property>
-                <property name="visible">True</property>
+                <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
               </object>
@@ -67,8 +72,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton">
-                <property name="label" translatable="yes">Next</property>
+              <object class="GtkButton" id="continue_button">
+                <property name="label" translatable="yes">Continue</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

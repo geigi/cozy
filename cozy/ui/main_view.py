@@ -270,7 +270,7 @@ class CozyUI(metaclass=Singleton):
             self.block_ui_buttons(True)
 
         whats_new_window = WhatsNewWindow(self.window)
-        whats_new_window.show_all()
+        whats_new_window.show()
 
     def __load_last_book(self):
         """
