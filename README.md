@@ -64,6 +64,10 @@ You can download it here: <a href="https://github.com/geigi/cozy/releases/downlo
 - `gstreamer1.0-plugins-ugly`
 - `gstreamer1.0-libav` for mp4 support
 
+## Bundled Requirements
+- `inject`: https://github.com/ivankorobkov/python-inject
+
+This dependency is bundled because it is not generally available as a linux package. The licence is respected and included.
 
 ## Build
 ```bash

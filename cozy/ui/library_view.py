@@ -1,6 +1,7 @@
 from gi.repository import Gtk
 from gi.repository.Gtk import Builder
 
+from cozy.ext import inject
 from cozy.ui.book_element import BookElement
 from cozy.ui.widgets.filter_list_box import FilterListBox
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
@@ -13,11 +14,10 @@ MAIN_NO_RECENT_PAGE = "nothing_here"
 
 
 class LibraryView:
+    _view_model = inject.attr(LibraryViewModel)
 
-    def __init__(self, builder: Builder, view_model: LibraryViewModel):
+    def __init__(self, builder: Builder):
         self._builder = builder
-
-        self._view_model = view_model
 
         self._get_ui_elements()
         self._connect_ui_elements()

@@ -1,14 +1,15 @@
 import os
 import uuid
 import logging
-import cozy.tools as tools
 
 from gi.repository import GdkPixbuf
 
+from cozy.application_settings import ApplicationSettings
 from cozy.control.application_directories import get_cache_dir
 from cozy.control.db import get_tracks
 from cozy.db.artwork_cache import ArtworkCache
 from cozy.db.book import Book
+from cozy.ext import inject
 from cozy.report import reporter
 
 log = logging.getLogger("artwork_cache")
@@ -131,7 +132,8 @@ def __load_pixbuf_from_cache(book, size):
     return pixbuf
 
 
-def __load_cover_pixbuf(book):
+@inject.autoparams()
+def __load_cover_pixbuf(book, app_settings: ApplicationSettings):
     """
     Load the cover from a given book and create a pixbuf object with a given from it.
     :param book: The book object
@@ -140,7 +142,7 @@ def __load_cover_pixbuf(book):
     """
     pixbuf = None
 
-    if tools.get_glib_settings().get_boolean("prefer-external-cover"):
+    if app_settings.prefer_external_cover:
         pixbuf = __load_pixbuf_from_file(book)
 
         if pixbuf is None:
