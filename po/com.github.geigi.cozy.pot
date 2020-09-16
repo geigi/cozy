@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-24 20:28+0200\n"
+"POT-Creation-Date: 2020-09-16 22:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,75 +26,75 @@ msgstr ""
 msgid "Unknown Reader"
 msgstr ""
 
-#: cozy/control/offline_cache.py:181
+#: cozy/control/offline_cache.py:182
 msgid "Copying"
 msgstr ""
 
-#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
+#: cozy/control/sleep_timer.py:142 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr ""
 
-#: cozy/control/sleep_timer.py:146
+#: cozy/control/sleep_timer.py:150
 msgid "Off"
 msgstr ""
 
-#: cozy/tools.py:102 cozy/tools.py:106
+#: cozy/tools.py:93 cozy/tools.py:97
 #, python-brace-format
 msgid "{hours} hour"
 msgid_plural "{hours} hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:104 cozy/tools.py:108
+#: cozy/tools.py:95 cozy/tools.py:99
 #, python-brace-format
 msgid "{minutes} minute"
 msgid_plural "{minutes} minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:110
+#: cozy/tools.py:101
 #, python-brace-format
 msgid "{seconds} second"
 msgid_plural "{seconds} seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:112
+#: cozy/tools.py:103
 msgid "finished"
 msgstr ""
 
-#: cozy/tools.py:136
+#: cozy/tools.py:127
 msgid "never"
 msgstr ""
 
-#: cozy/tools.py:138
+#: cozy/tools.py:129
 msgid "today"
 msgstr ""
 
-#: cozy/tools.py:140
+#: cozy/tools.py:131
 msgid "yesterday"
 msgstr ""
 
-#: cozy/tools.py:142
+#: cozy/tools.py:133
 #, python-format
 msgid "%s days ago"
 msgstr ""
 
-#: cozy/tools.py:144
+#: cozy/tools.py:135
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:146
+#: cozy/tools.py:137
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:148
+#: cozy/tools.py:139
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
@@ -105,31 +105,31 @@ msgstr[1] ""
 msgid "Play this book"
 msgstr ""
 
-#: cozy/ui/book_element.py:33
+#: cozy/ui/book_element.py:37
 msgid "Open book overview"
 msgstr ""
 
-#: cozy/ui/book_element.py:34
+#: cozy/ui/book_element.py:38
 msgid "Currently offline"
 msgstr ""
 
-#: cozy/ui/book_element.py:119
+#: cozy/ui/book_element.py:123
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/ui/book_element.py:122
+#: cozy/ui/book_element.py:126
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/ui/book_element.py:125
+#: cozy/ui/book_element.py:129
 msgid "Remove from library"
 msgstr ""
 
-#: cozy/ui/book_overview.py:225
+#: cozy/ui/book_overview.py:228
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/ui/book_overview.py:228 data/ui/main_window.ui:1024
+#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1024
 msgid "Download"
 msgstr ""
 
@@ -141,11 +141,11 @@ msgstr ""
 msgid "All files"
 msgstr ""
 
-#: cozy/ui/main_view.py:397
+#: cozy/ui/main_view.py:414
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui/main_view.py:414
+#: cozy/ui/main_view.py:431
 msgid "Importing Audiobooks"
 msgstr ""
 
@@ -157,30 +157,18 @@ msgstr ""
 msgid "Jump to reader "
 msgstr ""
 
-#: cozy/ui/settings.py:437 cozy/ui/settings.py:480
-msgid "External drive"
-msgstr ""
-
-#: cozy/ui/settings.py:440 cozy/ui/settings.py:483
-msgid "Internal drive"
-msgstr ""
-
-#: cozy/ui/settings.py:467
-msgid "Changing audio book location…"
-msgstr ""
-
 #: cozy/ui/track_element.py:28
 msgid "Play this part"
 msgstr ""
 
-#: cozy/ui/warnings.py:24 cozy/ui/warnings.py:39
+#: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
 msgid "{storage} is offline."
 msgstr ""
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:33
-#: cozy/view_model/library_view_model.py:126
+#: cozy/view_model/library_view_model.py:34
+#: cozy/view_model/library_view_model.py:127
 msgid "All"
 msgstr ""
 
@@ -188,7 +176,31 @@ msgstr ""
 msgid "Display all books"
 msgstr ""
 
-#: data/ui/about.ui:14
+#: cozy/ui/widgets/error_reporting.py:7
+msgid "Which type of error occurred"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:8
+msgid "Line of code where an error occurred"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:9
+msgid "Cozy's version"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:10
+msgid "Linux distribution"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:11
+msgid "Desktop environment"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:12
+msgid "Media type of files that Cozy couldn't import"
+msgstr ""
+
+#: data/ui/about.ui:16
 msgid "GitHub"
 msgstr ""
 
@@ -672,22 +684,107 @@ msgstr ""
 msgid "_Scan Directory"
 msgstr ""
 
-#: data/ui/titlebar_menu.ui:13
+#: data/ui/titlebar_menu.ui:17
 msgid "_Hide unavailable books"
 msgstr ""
 
-#: data/ui/titlebar_menu.ui:19
+#: data/ui/titlebar_menu.ui:23
 msgid "_Preferences"
 msgstr ""
 
-#: data/ui/titlebar_menu.ui:25
+#: data/ui/titlebar_menu.ui:29
 msgid "_Help"
 msgstr ""
 
-#: data/ui/titlebar_menu.ui:29
+#: data/ui/titlebar_menu.ui:33
 msgid "_About"
 msgstr ""
 
-#: data/ui/titlebar_menu.ui:33
+#: data/ui/titlebar_menu.ui:37
 msgid "_Quit"
+msgstr ""
+
+#: data/ui/error_reporting.ui:25
+msgid "User feedback"
+msgstr ""
+
+#: data/ui/error_reporting.ui:66
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"You can help improve Cozy by contributing information in case of errors and "
+"crashes. "
+msgstr ""
+
+#: data/ui/error_reporting.ui:80
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Contributing this information is optional and completely anonymous. We will "
+"never collect personal data, files you import or any information that could "
+"identify you."
+msgstr ""
+
+#: data/ui/error_reporting.ui:94
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Cozy is opensource and the user feedback source code can be inspected here: "
+msgstr ""
+
+#: data/ui/error_reporting.ui:174
+msgid "Disabled"
+msgstr ""
+
+#: data/ui/error_reporting.ui:192
+msgid "No error or crash reporting."
+msgstr ""
+
+#: data/ui/error_reporting.ui:217
+msgid "Basic error reporting"
+msgstr ""
+
+#: data/ui/error_reporting.ui:235 data/ui/error_reporting.ui:279
+#: data/ui/error_reporting.ui:323
+msgid "The following information will be sent in case of an error or crash:"
+msgstr ""
+
+#: data/ui/error_reporting.ui:261
+msgid "Detailed error reporting"
+msgstr ""
+
+#: data/ui/error_reporting.ui:305
+msgid "Detailed error reporting with import errors"
+msgstr ""
+
+#: data/ui/whats_new_importer.ui:15
+msgid "What's new  in Cozy"
+msgstr ""
+
+#: data/ui/whats_new_importer.ui:43
+msgid "A completely rewritten and far more reliable media importer."
+msgstr ""
+
+#: data/ui/whats_new_importer.ui:59
+msgid ""
+"Did you experience audio files that couldn't be imported? Drag & Drop those "
+"files onto Cozy or use the application menu in the titlebar to rescan your "
+"audiobook directories!"
+msgstr ""
+
+#: data/ui/whats_new_importer.ui:72
+msgid "Supported media files currently are mp3, m4a, flac, ogg, opus and wav."
+msgstr ""
+
+#: data/ui/whats_new_importer.ui:85
+msgid "More to come in a later update."
+msgstr ""
+
+#: data/ui/whats_new.ui:8
+msgid "Whats new?"
+msgstr ""
+
+#: data/ui/whats_new.ui:62
+msgid "Previous"
+msgstr ""
+
+#: data/ui/whats_new.ui:76
+msgid "Continue"
 msgstr ""

@@ -53,18 +53,54 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="halign">start</property>
-            <property name="valign">start</property>
-            <property name="label" translatable="yes">You can help improve Cozy by contributing information in case of errors and crashes. 
-
-Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.
-
-Cozy is opensource and the user feedback source code can be inspected here: </property>
-            <property name="justify">fill</property>
-            <property name="wrap">True</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+                <property name="label" translatable="yes" context="Error and crash reporting dialog">You can help improve Cozy by contributing information in case of errors and crashes. </property>
+                <property name="justify">fill</property>
+                <property name="wrap">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes" context="Error and crash reporting dialog">Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.</property>
+                <property name="justify">fill</property>
+                <property name="wrap">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes" context="Error and crash reporting dialog">Cozy is opensource and the user feedback source code can be inspected here: </property>
+                <property name="justify">fill</property>
+                <property name="wrap">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -196,10 +232,7 @@ Cozy is opensource and the user feedback source code can be inspected here: </pr
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
                     <property name="valign">start</property>
-                    <property name="label" translatable="yes" comments="Please use this symbol for bullet points:&#10;•">The following information will be sent in case of an error or crash:
-• Which type of error
-• Line of code where error occured
-• Cozy's version</property>
+                    <property name="label" translatable="yes">The following information will be sent in case of an error or crash:</property>
                     <property name="justify">fill</property>
                   </object>
                   <packing>
@@ -243,12 +276,7 @@ Cozy is opensource and the user feedback source code can be inspected here: </pr
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
                     <property name="valign">start</property>
-                    <property name="label" translatable="yes" comments="Please use this symbol for bullet points:&#10;•">The following information will be sent in case of an error or crash:
-• Which type of error
-• Line of code where error occured
-• Cozy's version
-• Linux distribution
-• Desktop environment</property>
+                    <property name="label" translatable="yes">The following information will be sent in case of an error or crash:</property>
                     <property name="justify">fill</property>
                   </object>
                   <packing>
@@ -292,13 +320,7 @@ Cozy is opensource and the user feedback source code can be inspected here: </pr
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
                     <property name="valign">start</property>
-                    <property name="label" translatable="yes" comments="Please use this symbol for bullet points:&#10;•">The following information will be sent in case of an error or crash:
-• Which type of error
-• Line of code where error occured
-• Cozy's version
-• Linux distribution
-• Desktop environment
-• Mediatype of files that Cozy couldn't import</property>
+                    <property name="label" translatable="yes">The following information will be sent in case of an error or crash:</property>
                     <property name="justify">fill</property>
                   </object>
                   <packing>

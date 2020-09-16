@@ -3,6 +3,16 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 
+LEVEL_STRINGS = [
+    _("Which type of error occurred"),
+    _("Line of code where an error occurred"),
+    _("Cozy's version"),
+    _("Linux distribution"),
+    _("Desktop environment"),
+    _("Media type of files that Cozy couldn't import")
+]
+
+
 @Gtk.Template.from_resource('/com/github/geigi/cozy/error_reporting.ui')
 class ErrorReporting(Gtk.Box):
     __gtype_name__ = 'ErrorReporting'
