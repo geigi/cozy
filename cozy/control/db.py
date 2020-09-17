@@ -2,6 +2,7 @@ import logging
 import os
 import time
 
+import cozy.ext.inject as inject
 from playhouse.pool import PooledSqliteDatabase
 
 from cozy.control.db_updater import update_db
@@ -17,6 +18,7 @@ from cozy.report import reporter
 
 log = logging.getLogger("db")
 from peewee import __version__ as PeeweeVersion
+from apsw import apswversion
 
 if PeeweeVersion[0] == '2':
     log.info("Using peewee 2 backend")
@@ -34,6 +36,9 @@ def init_db():
     tmp_db = None
 
     _connect_db(_db)
+
+    sqlite_version = ".".join([str(num) for num in _db.server_version])
+    log.info("SQLite version: {}, APSW version: {}".format(sqlite_version, apswversion()))
 
     if Settings.table_exists():
         update_db()
@@ -139,49 +144,6 @@ def get_track_for_playback(book):
     else:
         track = None
     return track
-
-
-def search_authors(search_string):
-    """
-    Search all authors in the db with the given substring.
-    This ignores upper/lowercase and returns each author only once.
-    :param search_string: substring to search for
-    :return: authors matching the substring
-    """
-    return Book.select(Book.author).where(Book.author.contains(search_string)).distinct().order_by(Book.author)
-
-
-def search_readers(search_string):
-    """
-    Search all readers in the db with the given substring.
-    This ignores upper/lowercase and returns each reader only once.
-    :param search_string: substring to search for
-    :return: readers matching the substring
-    """
-    return Book.select(Book.reader).where(Book.reader.contains(search_string)).distinct().order_by(Book.reader)
-
-
-def search_books(search_string):
-    """
-    Search all book names in the db with the given substring.
-    This ignores upper/lowercase and returns each book name only once.
-    :param search_string: substring to search for
-    :return: book names matching the substring
-    """
-    return Book.select(Book.name, Book.cover, Book.id).where(Book.name.contains(search_string)
-                                                             | Book.author.contains(search_string)
-                                                             | Book.reader.contains(search_string)).distinct().order_by(
-        Book.name)
-
-
-def search_tracks(search_string):
-    """
-    Search all tracks in the db with the given substring.
-    This ignores upper/lowercase.
-    :param search_string: substring to search for
-    :return: tracks matching the substring
-    """
-    return Track.select(Track.name).where(Track.name.contains(search_string)).order_by(Track.name)
 
 
 def get_track_path(track):
@@ -297,9 +259,11 @@ def remove_invalid_entries(ui=None, refresh=False):
     Remove track entries from db that no longer exist in the filesystem.
     """
     # remove entries from the db that are no longer existent
+
+    from cozy.control.filesystem_monitor import FilesystemMonitor
+    filesystem_monitor = inject.instance(FilesystemMonitor)
     for track in Track.select():
-        from cozy.control.filesystem_monitor import FilesystemMonitor
-        if not os.path.isfile(track.file) and FilesystemMonitor().is_track_online(
+        if not os.path.isfile(track.file) and filesystem_monitor.is_track_online(
                 track):
             track.delete_instance()
 

@@ -16,7 +16,7 @@ class FileNotFoundDialog():
         self.missing_file = file
         self.parent = cozy.ui.main_view.CozyUI()
         self.builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/file_not_found.ui")
+            "/com/github/geigi/cozy/file_not_found.ui")
         self.dialog = self.builder.get_object("dialog")
         self.dialog.set_transient_for(self.parent.window)
         self.builder.get_object("file_label").set_markup(

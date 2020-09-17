@@ -7,6 +7,7 @@ import cozy.ui
 from cozy.control.db import get_book_duration, get_tracks, is_external, get_book_progress, get_book_remaining, \
     get_track_for_playback
 from cozy.db.book import Book
+from cozy.ext import inject
 
 from cozy.ui.track_element import TrackElement
 from cozy.ui.settings import Settings
@@ -18,6 +19,8 @@ class BookOverview:
     """
     This class contains all logic for the book overview.
     """
+    _settings = inject.attr(Settings)
+
     book = None
     current_track_element = None
     switch_signal = None
@@ -50,7 +53,7 @@ class BookOverview:
 
         self.ui.speed.add_listener(self.__ui_changed)
         player.add_player_listener(self.__player_changed)
-        Settings().add_listener(self.__settings_changed)
+        self._settings.add_listener(self.__settings_changed)
         OfflineCache().add_listener(self.__on_offline_cache_changed)
 
     def set_book(self, book):
@@ -125,7 +128,7 @@ class BookOverview:
             self.track_box.add(track_element)
             track_element.show_all()
 
-        tools.remove_all_children(self.track_list_container)
+        self.track_list_container.remove_all_children()
         self.track_box.show()
         self.track_box.set_halign(Gtk.Align.FILL)
         self.track_list_container.add(self.track_box)

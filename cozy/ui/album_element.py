@@ -61,7 +61,7 @@ class AlbumElement(Gtk.Box):
         # play_color is an overlay for the play button
         # with this it should be visible on any album art color
         play_image = GdkPixbuf.Pixbuf.new_from_resource(
-            "/de/geigi/cozy/play_background.svg")
+            "/com/github/geigi/cozy/play_background.svg")
         if square:
             play_image = play_image.scale_simple(
                 size - 10, size - 10, GdkPixbuf.InterpType.BILINEAR)

@@ -1,10 +1,11 @@
 from gi.repository import Gtk, Gdk
 import cozy.control.artwork_cache as artwork_cache
 import cozy.tools as tools
+from cozy.model.book import Book
 
 MAX_BOOK_LENGTH = 80
-MAX_TRACK_LENGTH = 40
 BOOK_ICON_SIZE = 40
+
 
 class SearchResult(Gtk.EventBox):
     """
@@ -12,11 +13,11 @@ class SearchResult(Gtk.EventBox):
     It features a GTK box that is highlighted when hovered.
     """
 
-    def __init__(self, on_click, book):
+    def __init__(self, on_click, on_click_data):
         super().__init__()
 
         self.on_click = on_click
-        self.book = book
+        self.on_click_data = on_click_data
 
         self.connect("enter-notify-event", self._on_enter_notify)
         self.connect("leave-notify-event", self._on_leave_notify)
@@ -50,7 +51,7 @@ class SearchResult(Gtk.EventBox):
         self.box.get_style_context().remove_class("box_hover")
 
     def __on_clicked(self, widget, event):
-        self.on_click(self.book)
+        self.on_click(self.on_click_data)
 
 
 class ArtistSearchResult(SearchResult):
@@ -58,46 +59,20 @@ class ArtistSearchResult(SearchResult):
     This class represents an author or reader search result.
     """
 
-    def __init__(self, on_click, book, is_author):
+    def __init__(self, on_click, artist: str, is_author):
 
-        super().__init__(on_click, book)
+        super().__init__(on_click, artist)
 
         self.is_author = is_author
         self.on_click = on_click
 
         title_label = Gtk.Label()
         if is_author:
-            title_label.set_text(tools.shorten_string(self.book.author, MAX_BOOK_LENGTH))
-            self.set_tooltip_text(_("Jump to author ") + book.author)
+            title_label.set_text(tools.shorten_string(artist, MAX_BOOK_LENGTH))
+            self.set_tooltip_text(_("Jump to author ") + artist)
         else:
-            title_label.set_text(tools.shorten_string(self.book.reader, MAX_BOOK_LENGTH))
-            self.set_tooltip_text(_("Jump to reader ") + book.reader)
-        title_label.set_halign(Gtk.Align.START)
-        title_label.props.margin = 4
-        title_label.props.hexpand = True
-        title_label.props.hexpand_set = True
-        title_label.set_margin_right(5)
-        title_label.props.width_request = 100
-        title_label.props.xalign = 0.0
-        title_label.set_line_wrap(True)
-
-        self.box.add(title_label)
-        self.add(self.box)
-        self.show_all()
-
-
-class TrackSearchResult(SearchResult):
-    """
-    This class represents a track search result (currently not used).
-    """
-
-    def __init__(self, on_click, track):
-        super().__init__(on_click)
-
-        self.track = track
-
-        title_label = Gtk.Label()
-        title_label.set_text(tools.shorten_string(self.track.name, MAX_TRACK_LENGTH))
+            title_label.set_text(tools.shorten_string(artist, MAX_BOOK_LENGTH))
+            self.set_tooltip_text(_("Jump to reader ") + artist)
         title_label.set_halign(Gtk.Align.START)
         title_label.props.margin = 4
         title_label.props.hexpand = True
@@ -117,12 +92,13 @@ class BookSearchResult(SearchResult):
     This class represents a book search result.
     """
 
-    def __init__(self, book, on_click, scale):
+    def __init__(self, book: Book, on_click):
         super().__init__(on_click, book)
 
         self.set_tooltip_text(_("Play this book"))
+        scale = self.get_scale_factor()
 
-        pixbuf = artwork_cache.get_cover_pixbuf(book, scale, BOOK_ICON_SIZE)
+        pixbuf = artwork_cache.get_cover_pixbuf(book.db_object, scale, BOOK_ICON_SIZE)
         if pixbuf:
             surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
             img = Gtk.Image.new_from_surface(surface)
@@ -132,7 +108,7 @@ class BookSearchResult(SearchResult):
         img.set_size_request(BOOK_ICON_SIZE, BOOK_ICON_SIZE)
 
         title_label = Gtk.Label()
-        title_label.set_text(tools.shorten_string(self.book.name, MAX_BOOK_LENGTH))
+        title_label.set_text(tools.shorten_string(book.name, MAX_BOOK_LENGTH))
         title_label.set_halign(Gtk.Align.START)
         title_label.props.margin = 4
         title_label.props.hexpand = True

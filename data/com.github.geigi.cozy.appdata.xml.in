@@ -49,6 +49,16 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.6.19" timestamp="1599326433">
+      <description>
+        <ul>
+          <li>Multiple author and readers are now separated in the library view</li>
+          <li>Increase maximum playback speed to 3x</li>
+          <li>Fix: playback speed was not saved correctly under some circumstances, thanks to magnickolas</li>
+          <li>Updated translations thanks to all of the translators!</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.18" timestamp="1590874455">
       <description>
         <ul>

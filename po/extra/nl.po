@@ -166,7 +166,6 @@ msgid "Preparations to support chapters within audio files"
 msgstr ""
 "Voorbereidingen getroffen voor het ondersteunen van hoofdstukken in "
 "audiobestanden"
-
 #: data/com.github.geigi.cozy.appdata.xml.in:77
 msgid "The beginning of the biggest cleanup and refactoring under the hood"
 msgstr ""

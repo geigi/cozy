@@ -10,7 +10,7 @@
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
 
-Cozy is a modern audiobook player for Linux and macOS. 
+Cozy is a modern audiobook player for Linux.
 
 ## Here are some of the current features:
 - **Import** your audiobooks into Cozy to browse them comfortably
@@ -27,12 +27,18 @@ Cozy is a modern audiobook player for Linux and macOS.
 - Developed on Fedora and tested under elementaryOS
 
 # Install
-| elementaryOS | openSUSE | Arch Linux | Flatpak (other) | macOS |
-|--------------|:----------:|:------------:|-----------------|:-------:|
-| <a href="https://appcenter.elementary.io/com.github.geigi.cozy"><img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter"></a> | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> | <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a> | <center><a href="https://github.com/geigi/cozy/releases/download/0.6.4/cozy_macos_0.6.4_beta2.dmg">Beta 2</a></center> |  
+| elementaryOS | openSUSE | Arch Linux | Solus | VoidLinux | Flatpak (other) |
+|--------------|:----------:|:------------:|:-----:|:-----------------:| --- |
+| <a href="https://appcenter.elementary.io/com.github.geigi.cozy"><img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter"></a> | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> | <a href="https://dev.getsol.us/source/cozy/">cozy</a> | <a href="https://github.com/void-linux/void-packages/tree/master/srcpkgs/cozy">cozy</a> | <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a> | 
 
 ## macOS
-Cozy for macOS is currently in beta. It's tested on 10.14 Mojave so far. Known bugs:
+**Currently discontinued**
+
+There is an older beta of Cozy 0.6.7 which is tested on macOS 10.14. It might not work with newer versions of macOS. 
+Because the build process is rather complicated and not easy to automate I've currently discontinued building for macOS. If you're interested in the build process: have a look at my [writeup](https://gist.github.com/geigi/a3b6d661daeb7b181d3bdd3cab517092).
+
+Some information about the old beta:
+
 - no integration in notification center or any other desktop integration really
 - media keys are not working
 - dark mode requires 2x switching in settings + is not loading automatically at startup
@@ -45,18 +51,23 @@ You can download it here: <a href="https://github.com/geigi/cozy/releases/downlo
 - `meson >= 0.40.0` as build system
 - `gtk3 >= 3.18` but fancier with `gtk3 >= 3.22`
 - `peewee >= 3.9.6` as object relation mapper
-- `python3-mutagen` for meta tag management
-- `python3-distro`
-- `python3-requests`
-- `python3-pytz`
-- `python3-gi-cairo`
-- `python3-gst-1.0`
+- `mutagen` for meta tag management
+- `apsw`
+- `distro`
+- `requests`
+- `pytz`
+- `gi-cairo`
+- `gst-1.0`
 - `file`
 - `gstreamer1.0-plugins-good`
 - `gstreamer1.0-plugins-bad`
 - `gstreamer1.0-plugins-ugly`
 - `gstreamer1.0-libav` for mp4 support
 
+## Bundled Requirements
+- `inject`: https://github.com/ivankorobkov/python-inject
+
+This dependency is bundled because it is not generally available as a linux package. The licence is respected and included.
 
 ## Build
 ```bash
@@ -113,6 +124,7 @@ To the contributors on GitHub:
 - grenade
 - jnbr
 - kaphula
+- magnickolas
 - meisenzahl
 - naglis
 - oleg-krv

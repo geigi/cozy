@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-24 19:26+0200\n"
+"POT-Creation-Date: 2020-09-16 22:17+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
@@ -22,121 +22,118 @@ msgstr ""
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/control/importer.py:298
+#: cozy/control/importer.py:301
 msgid "Unknown Author"
 msgstr "Onbekende auteur"
 
-#: cozy/control/importer.py:300
+#: cozy/control/importer.py:303
 msgid "Unknown Reader"
 msgstr "Onbekende voorlezer"
 
-#: cozy/control/offline_cache.py:181
+#: cozy/control/offline_cache.py:182
 msgid "Copying"
 msgstr "Bezig met kopiëren..."
 
-#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
+#: cozy/control/sleep_timer.py:142 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "min"
 
-#: cozy/control/sleep_timer.py:146
+#: cozy/control/sleep_timer.py:150
 msgid "Off"
 msgstr "Uit"
 
-#: cozy/tools.py:116
-msgid "hours"
-msgstr "uur"
+#: cozy/tools.py:93 cozy/tools.py:97
+#, python-brace-format
+msgid "{hours} hour"
+msgid_plural "{hours} hours"
+msgstr[0] "{hours} uur"
+msgstr[1] "{hours} uur"
 
-#: cozy/tools.py:118
-msgid "hour"
-msgstr "uur"
+#: cozy/tools.py:95 cozy/tools.py:99
+#, python-brace-format
+msgid "{minutes} minute"
+msgid_plural "{minutes} minutes"
+msgstr[0] "{minutes} minuut"
+msgstr[1] "{minutes} minuten"
 
-#: cozy/tools.py:126
-msgid "minutes"
-msgstr "minuten"
+#: cozy/tools.py:101
+#, python-brace-format
+msgid "{seconds} second"
+msgid_plural "{seconds} seconds"
+msgstr[0] "{seconds} seconde"
+msgstr[1] "{seconds} seconden"
 
-#: cozy/tools.py:128
-msgid "minute"
-msgstr "minuut"
-
-#: cozy/tools.py:132
+#: cozy/tools.py:103
 msgid "finished"
 msgstr "afgerond"
 
-#: cozy/tools.py:136
-msgid "seconds"
-msgstr "seconden"
-
-#: cozy/tools.py:138
-msgid "second"
-msgstr "seconde"
-
-#: cozy/tools.py:162
+#: cozy/tools.py:127
 msgid "never"
 msgstr "nooit"
 
-#: cozy/tools.py:164
+#: cozy/tools.py:129
 msgid "today"
 msgstr "vandaag"
 
-#: cozy/tools.py:166
+#: cozy/tools.py:131
 msgid "yesterday"
 msgstr "gisteren"
 
-#: cozy/tools.py:168
+#: cozy/tools.py:133
 #, python-format
 msgid "%s days ago"
 msgstr "%s dagen geleden"
 
-#: cozy/tools.py:170
+#: cozy/tools.py:135
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
 msgstr[0] "{weeks} week geleden"
 msgstr[1] "{weeks} weken geleden"
 
-#: cozy/tools.py:172
+#: cozy/tools.py:137
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
 msgstr[0] "{months} maand geleden"
 msgstr[1] "{months} maanden geleden"
 
-#: cozy/tools.py:174
+#: cozy/tools.py:139
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
 msgstr[0] "{years} jaar geleden"
 msgstr[1] "{years} jaar geleden"
 
-#: cozy/ui/album_element.py:59 cozy/ui/search_results.py:123
+#: cozy/ui/album_element.py:59 cozy/ui/widgets/search_results.py:98
 msgid "Play this book"
 msgstr "Boek afspelen"
 
-#: cozy/ui/book_element.py:33
+#: cozy/ui/book_element.py:37
 msgid "Open book overview"
 msgstr "Boekoverzicht openen"
 
-#: cozy/ui/book_element.py:34
+#: cozy/ui/book_element.py:38
 msgid "Currently offline"
 msgstr "Momenteel offline"
 
-#: cozy/ui/book_element.py:119
+#: cozy/ui/book_element.py:123
 msgid "Mark as read"
 msgstr "Markeren als gelezen"
 
-#: cozy/ui/book_element.py:122
+#: cozy/ui/book_element.py:126
 msgid "Open in file browser"
 msgstr "Openen in bestandsbeheerder"
 
-#: cozy/ui/book_element.py:125
+#: cozy/ui/book_element.py:129
 msgid "Remove from library"
 msgstr "Verwijderen uit bibliotheek"
 
-#: cozy/ui/book_overview.py:225
+#: cozy/ui/book_overview.py:228
 msgid "Downloaded"
 msgstr "Gedownload"
 
-#: cozy/ui/book_overview.py:228 data/ui/main_window.ui:1024
+#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1024
 msgid "Download"
 msgstr "Downloaden"
 
@@ -148,54 +145,66 @@ msgstr "Schijf"
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: cozy/ui/main_view.py:399
+#: cozy/ui/main_view.py:414
 msgid "Audiobooks"
 msgstr "Audioboeken"
 
-#: cozy/ui/main_view.py:416
+#: cozy/ui/main_view.py:431
 msgid "Importing Audiobooks"
 msgstr "Bezig met importeren van audioboeken"
 
-#: cozy/ui/search_results.py:71
+#: cozy/ui/widgets/search_results.py:72
 msgid "Jump to author "
 msgstr "Snel naar auteur"
 
-#: cozy/ui/search_results.py:74
+#: cozy/ui/widgets/search_results.py:75
 msgid "Jump to reader "
 msgstr "Snel naar voorlezer"
-
-#: cozy/ui/settings.py:427 cozy/ui/settings.py:470
-msgid "External drive"
-msgstr "Externe schijf"
-
-#: cozy/ui/settings.py:430 cozy/ui/settings.py:473
-msgid "Internal drive"
-msgstr "Interne schijf"
-
-#: cozy/ui/settings.py:457
-msgid "Changing audio book location…"
-msgstr "Bezig met wijzigen van audioboeklocatie…"
 
 #: cozy/ui/track_element.py:28
 msgid "Play this part"
 msgstr "Onderdeel afspelen"
 
-#: cozy/ui/warnings.py:24 cozy/ui/warnings.py:39
+#: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
 msgid "{storage} is offline."
 msgstr "{storage} is niet beschikbaar."
 
-#: cozy/ui/widgets/filter_list_box.py:18
+#: cozy/ui/widgets/filter_list_box.py:20
 #: cozy/view_model/library_view_model.py:34
-#: cozy/view_model/library_view_model.py:122
+#: cozy/view_model/library_view_model.py:127
 msgid "All"
 msgstr "Alles"
 
-#: cozy/ui/widgets/filter_list_box.py:19
+#: cozy/ui/widgets/filter_list_box.py:21
 msgid "Display all books"
 msgstr "Alle boeken tonen"
 
-#: data/ui/about.ui:14
+#: cozy/ui/widgets/error_reporting.py:7
+msgid "Which type of error occurred"
+msgstr "Welk soort probleem er optrad"
+
+#: cozy/ui/widgets/error_reporting.py:8
+msgid "Line of code where an error occurred"
+msgstr "Regel met code waar het probleem zich bevindt"
+
+#: cozy/ui/widgets/error_reporting.py:9
+msgid "Cozy's version"
+msgstr "Cozy's versie"
+
+#: cozy/ui/widgets/error_reporting.py:10
+msgid "Linux distribution"
+msgstr "Linux-distributie"
+
+#: cozy/ui/widgets/error_reporting.py:11
+msgid "Desktop environment"
+msgstr "Werkomgeving"
+
+#: cozy/ui/widgets/error_reporting.py:12
+msgid "Media type of files that Cozy couldn't import"
+msgstr "De soorten bestanden die Cozy niet kon importeren"
+
+#: data/ui/about.ui:16
 msgid "GitHub"
 msgstr "GitHub"
 
@@ -701,22 +710,121 @@ msgstr "Afsluiten"
 msgid "_Scan Directory"
 msgstr "Map door_zoeken"
 
-#: data/ui/titlebar_menu.ui:13
+#: data/ui/titlebar_menu.ui:17
 msgid "_Hide unavailable books"
 msgstr "Niet-beschikbare boeken _verbergen"
 
-#: data/ui/titlebar_menu.ui:19
+#: data/ui/titlebar_menu.ui:23
 msgid "_Preferences"
 msgstr "_Voorkeuren"
 
-#: data/ui/titlebar_menu.ui:25
+#: data/ui/titlebar_menu.ui:29
 msgid "_Help"
 msgstr "_Hulp"
 
-#: data/ui/titlebar_menu.ui:29
+#: data/ui/titlebar_menu.ui:33
 msgid "_About"
 msgstr "_Over"
 
-#: data/ui/titlebar_menu.ui:33
+#: data/ui/titlebar_menu.ui:37
 msgid "_Quit"
 msgstr "_Afsluiten"
+
+#: data/ui/error_reporting.ui:25
+msgid "User feedback"
+msgstr "Gebruikersfeedback"
+
+#: data/ui/error_reporting.ui:66
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"You can help improve Cozy by contributing information in case of errors and "
+"crashes. "
+msgstr ""
+"Je kunt helpen Cozy te verbeteren door fout- en crashinformatie te "
+"versturen."
+
+#: data/ui/error_reporting.ui:80
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Contributing this information is optional and completely anonymous. We will "
+"never collect personal data, files you import or any information that could "
+"identify you."
+msgstr ""
+"Het delen van deze informatie is optioneel en volledig anoniem. We "
+"verzamelen geen persoonlijke gegevens, bestanden die je importeert of andere"
+" informatie die naar jou te herleiden is."
+
+#: data/ui/error_reporting.ui:94
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Cozy is opensource and the user feedback source code can be inspected here: "
+msgstr ""
+"Cozy is open source en de code omtrent gebruikersfeedback is hier te vinden:"
+
+#: data/ui/error_reporting.ui:174
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+#: data/ui/error_reporting.ui:192
+msgid "No error or crash reporting."
+msgstr "Geen fout- of crashrapportages"
+
+#: data/ui/error_reporting.ui:217
+msgid "Basic error reporting"
+msgstr "Algemene foutrapportages"
+
+#: data/ui/error_reporting.ui:235 data/ui/error_reporting.ui:279
+#: data/ui/error_reporting.ui:323
+msgid "The following information will be sent in case of an error or crash:"
+msgstr ""
+"De volgende informatie wordt verstuurd als er een fout of crash optreedt:"
+
+#: data/ui/error_reporting.ui:261
+msgid "Detailed error reporting"
+msgstr "Uitgebreide foutrapportages"
+
+#: data/ui/error_reporting.ui:305
+msgid "Detailed error reporting with import errors"
+msgstr "Uitgebreide foutrapportages, inclusief importfouten"
+
+#: data/ui/whats_new_importer.ui:15
+msgid "What's new  in Cozy"
+msgstr "Wijzigingslog"
+
+#: data/ui/whats_new_importer.ui:43
+msgid "A completely rewritten and far more reliable media importer."
+msgstr ""
+"Het media-importgedeelte is volledig opnieuw ontworpen en daardoor "
+"betrouwbaarder."
+
+#: data/ui/whats_new_importer.ui:59
+msgid ""
+"Did you experience audio files that couldn't be imported? Drag & Drop those "
+"files onto Cozy or use the application menu in the titlebar to rescan your "
+"audiobook directories!"
+msgstr ""
+"Heb je wel eens meegemaakt dat audiobestanden niet konden worden "
+"geïmporteerd? Sleep ze naar het Cozy-venster of doorzoek je mappen opnieuw "
+"middels het menu!"
+
+#: data/ui/whats_new_importer.ui:72
+msgid "Supported media files currently are mp3, m4a, flac, ogg, opus and wav."
+msgstr ""
+"Momenteel worden de volgende mediabestanden ondersteund: mp3, m4a, flac, "
+"ogg, opus en wav."
+
+#: data/ui/whats_new_importer.ui:85
+msgid "More to come in a later update."
+msgstr "Binnenkort volgt ondersteuning voor meer formaten."
+
+#: data/ui/whats_new.ui:8
+msgid "Whats new?"
+msgstr "Wijzigingslog"
+
+#: data/ui/whats_new.ui:62
+msgid "Previous"
+msgstr "Vorige"
+
+#: data/ui/whats_new.ui:76
+msgid "Continue"
+msgstr "Doorgaan"
