@@ -1,0 +1,11 @@
+<glade-catalog name="cozy.ui.widgets.error_reporting" library="gladepython" domain="glade-3" depends="gtk+">
+ <init-function>glade_python_init</init-function>
+
+ <glade-widget-classes>
+   <glade-widget-class title="ErrorReporting" name="ErrorReporting" generic-name="error_reporting"/>
+ </glade-widget-classes>
+
+ <glade-widget-group name="cozy" title="Cozy Elements">
+   <glade-widget-class-ref name="ErrorReporting"/>
+ </glade-widget-group>
+</glade-catalog>

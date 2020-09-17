@@ -2,6 +2,7 @@ import logging
 import os
 import time
 
+import cozy.ext.inject as inject
 from playhouse.pool import PooledSqliteDatabase
 
 from cozy.control.db_updater import update_db
@@ -17,6 +18,7 @@ from cozy.report import reporter
 
 log = logging.getLogger("db")
 from peewee import __version__ as PeeweeVersion
+from apsw import apswversion
 
 if PeeweeVersion[0] == '2':
     log.info("Using peewee 2 backend")
@@ -34,6 +36,9 @@ def init_db():
     tmp_db = None
 
     _connect_db(_db)
+
+    sqlite_version = ".".join([str(num) for num in _db.server_version])
+    log.info("SQLite version: {}, APSW version: {}".format(sqlite_version, apswversion()))
 
     if Settings.table_exists():
         update_db()
@@ -254,9 +259,11 @@ def remove_invalid_entries(ui=None, refresh=False):
     Remove track entries from db that no longer exist in the filesystem.
     """
     # remove entries from the db that are no longer existent
+
+    from cozy.control.filesystem_monitor import FilesystemMonitor
+    filesystem_monitor = inject.instance(FilesystemMonitor)
     for track in Track.select():
-        from cozy.control.filesystem_monitor import FilesystemMonitor
-        if not os.path.isfile(track.file) and FilesystemMonitor().is_track_online(
+        if not os.path.isfile(track.file) and filesystem_monitor.is_track_online(
                 track):
             track.delete_instance()
 

@@ -6,7 +6,6 @@ from enum import Enum
 from gettext import ngettext
 import logging as log
 import distro
-from gi.repository import Gio
 import cozy.magic.magic as magic
 
 
@@ -43,14 +42,6 @@ def is_elementary():
         return True
     else:
         return False
-
-
-settings = Gio.Settings.new("com.github.geigi.cozy")
-
-
-def get_glib_settings():
-    global settings
-    return settings
 
 
 # https://stackoverflow.com/questions/323972/is-there-any-way-to-kill-a-thread-in-python

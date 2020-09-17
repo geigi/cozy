@@ -1,12 +1,17 @@
 import webbrowser
 
+import cozy.ext.inject as inject
+from cozy.application_settings import ApplicationSettings
+
 from cozy.control.db import books, close_db
 from cozy.db.book import Book
 from cozy.db.storage import Storage
 from cozy.db.track import Track
 
-from gi.repository import Gtk, Gio, Gdk, GLib, Gst
+from gi.repository import Gtk, Gio, Gdk, Gst, GLib
 from threading import Thread
+
+from cozy.media.importer import Importer
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
@@ -45,6 +50,9 @@ class CozyUI(metaclass=Singleton):
     is_initialized = False
     first_play = True
     __inhibit_cookie = None
+    fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
+    settings = inject.attr(Settings)
+    application_settings = inject.attr(ApplicationSettings)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -57,6 +65,7 @@ class CozyUI(metaclass=Singleton):
     def activate(self, library_view: LibraryView):
         self.first_play = True
 
+        self.__init_actions()
         self.__init_components()
 
         self._library_view = library_view
@@ -71,7 +80,6 @@ class CozyUI(metaclass=Singleton):
     def startup(self):
         self.__init_resources()
         self.__init_css()
-        self.__init_actions()
         report.info("main", "startup")
 
         self.__init_window()
@@ -89,10 +97,10 @@ class CozyUI(metaclass=Singleton):
         Gio.Resource._register(resource)
 
         self.window_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/main_window.ui")
+            "/com/github/geigi/cozy/main_window.ui")
 
         self.about_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/about.ui")
+            "/com/github/geigi/cozy/about.ui")
 
     def __init_css(self):
         """
@@ -100,18 +108,18 @@ class CozyUI(metaclass=Singleton):
         Add css classes to the default screen style context.
         """
         main_cssProviderFile = Gio.File.new_for_uri(
-            "resource:///de/geigi/cozy/application.css")
+            "resource:///com/github/geigi/cozy/application.css")
         main_cssProvider = Gtk.CssProvider()
         main_cssProvider.load_from_file(main_cssProviderFile)
 
         if Gtk.get_minor_version() > 18:
             log.debug("Fanciest design possible")
             cssProviderFile = Gio.File.new_for_uri(
-                "resource:///de/geigi/cozy/application_default.css")
+                "resource:///com/github/geigi/cozy/application_default.css")
         else:
             log.debug("Using legacy css file")
             cssProviderFile = Gio.File.new_for_uri(
-                "resource:///de/geigi/cozy/application_legacy.css")
+                "resource:///com/github/geigi/cozy/application_legacy.css")
         cssProvider = Gtk.CssProvider()
         cssProvider.load_from_file(cssProviderFile)
 
@@ -236,6 +244,10 @@ class CozyUI(metaclass=Singleton):
         self.scan_action.connect("activate", self.scan)
         self.app.add_action(self.scan_action)
 
+        self.new_scan_action = Gio.SimpleAction.new("new_scan", None)
+        self.new_scan_action.connect("activate", self.new_scan)
+        self.app.add_action(self.new_scan_action)
+
         self.play_pause_action = Gio.SimpleAction.new("play_pause", None)
         self.play_pause_action.connect("activate", self.play_pause)
         self.app.add_action(self.play_pause_action)
@@ -246,8 +258,10 @@ class CozyUI(metaclass=Singleton):
         self.app.add_action(back_action)
         self.app.set_accels_for_action("app.back", ["Escape"])
 
-        self.hide_offline_action = Gio.SimpleAction.new_stateful("hide_offline", None, GLib.Variant.new_boolean(
-            tools.get_glib_settings().get_boolean("hide-offline")))
+        self.hide_offline_action = Gio.SimpleAction.new_stateful("hide_offline",
+                                                                 None,
+                                                                 GLib.Variant.new_boolean(
+                                                                     self.application_settings.hide_offline))
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
 
@@ -256,9 +270,7 @@ class CozyUI(metaclass=Singleton):
 
         self.sleep_timer = SleepTimer()
         self.speed = PlaybackSpeed()
-        self.settings = Settings()
         self.book_overview = BookOverview()
-        self.fs_monitor = fs_monitor.FilesystemMonitor()
         self.offline_cache = offline_cache.OfflineCache()
         player.init()
 
@@ -416,8 +428,16 @@ class CozyUI(metaclass=Singleton):
                         args=(self, force,), name="UpdateDatabaseThread")
         thread.start()
 
+    def new_scan(self, action, first_scan, force=False):
+        """
+        Start the db import in a seperate thread
+        """
+        importer = Importer()
+        thread = Thread(target=importer.scan, name="UpdateDatabaseThread")
+        thread.start()
+
     def auto_import(self):
-        if tools.get_glib_settings().get_boolean("autoscan"):
+        if self.application_settings.autoscan:
             self.scan(None, False)
 
     def back(self, action, parameter):
@@ -459,7 +479,7 @@ class CozyUI(metaclass=Singleton):
         if self.first_play:
             self.first_play = False
 
-            if tools.get_glib_settings().get_boolean("replay"):
+            if self.application_settings.replay:
                 amount = 30 * 1000000000
                 if pos < amount:
                     pos = 0
@@ -492,7 +512,7 @@ class CozyUI(metaclass=Singleton):
         Show/Hide offline books action handler.
         """
         action.set_state(value)
-        tools.get_glib_settings().set_boolean("hide-offline", value.get_boolean())
+        self.application_settings.hide_offline = value.get_boolean()
 
     def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
         """

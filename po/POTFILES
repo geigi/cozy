@@ -16,6 +16,7 @@ cozy/ui/settings.py
 cozy/ui/track_element.py
 cozy/ui/warnings.py
 cozy/ui/widgets/filter_list_box.py
+cozy/ui/widgets/error_reporting.py
 cozy/view_model/library_view_model.py
 data/ui/about.ui
 data/ui/file_not_found.ui
@@ -25,4 +26,7 @@ data/ui/search_popover.ui
 data/ui/settings.ui
 data/ui/timer_popover.ui
 data/ui/titlebar_menu.ui
+data/ui/error_reporting.ui
+data/ui/whats_new_importer.ui
+data/ui/whats_new.ui
 main.py
