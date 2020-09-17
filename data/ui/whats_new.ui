@@ -11,7 +11,24 @@
     <property name="type_hint">dialog</property>
     <property name="deletable">False</property>
     <child type="titlebar">
-      <placeholder/>
+      <object class="GtkHeaderBar">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkButton" id="continue_button">
+            <property name="label" translatable="yes">Continue</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <style>
+              <class name="suggested-action"/>
+            </style>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+        </child>
+      </object>
     </child>
     <child>
       <object class="GtkBox">
@@ -34,10 +51,11 @@
                   <object class="GtkStack" id="content_stack">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_left">10</property>
-                    <property name="margin_right">10</property>
+                    <property name="margin_left">30</property>
+                    <property name="margin_right">30</property>
                     <property name="margin_top">10</property>
                     <property name="margin_bottom">10</property>
+                    <property name="transition_type">slide-left</property>
                     <child>
                       <placeholder/>
                     </child>
@@ -50,48 +68,6 @@
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="baseline_position">bottom</property>
-            <child>
-              <object class="GtkButton" id="prev_button">
-                <property name="label" translatable="yes">Previous</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="padding">10</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="continue_button">
-                <property name="label" translatable="yes">Continue</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="padding">10</property>
-                <property name="pack_type">end</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="padding">10</property>
-            <property name="position">1</property>
           </packing>
         </child>
       </object>
