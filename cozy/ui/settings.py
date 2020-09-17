@@ -7,7 +7,6 @@ from cozy.db.storage import Storage
 from cozy.db.storage_blacklist import StorageBlackList
 from cozy.ext import inject
 from cozy.ui.widgets.ScrollWrapper import ScrollWrapper
-from cozy.ui.widgets.error_reporting import ErrorReporting
 from cozy.ui.widgets.storage_list_box_row import StorageListBoxRow
 from cozy.view_model.settings_view_model import SettingsViewModel
 
@@ -81,6 +80,7 @@ class Settings(EventSender):
         self.settings_stack: Gtk.Stack = self.builder.get_object("settings_stack")
         self.settings_stack.connect("notify::visible-child", self._on_settings_stack_changed)
 
+        from cozy.ui.widgets.error_reporting import ErrorReporting
         self.settings_stack.add_titled(ScrollWrapper(ErrorReporting()), "feedback", _("Feedback"))
 
         self._init_storage()
