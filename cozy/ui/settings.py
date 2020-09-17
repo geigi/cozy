@@ -6,6 +6,8 @@ from cozy.control.db import remove_tracks_with_path
 from cozy.db.storage import Storage
 from cozy.db.storage_blacklist import StorageBlackList
 from cozy.ext import inject
+from cozy.ui.widgets.ScrollWrapper import ScrollWrapper
+from cozy.ui.widgets.error_reporting import ErrorReporting
 from cozy.ui.widgets.storage_list_box_row import StorageListBoxRow
 from cozy.view_model.settings_view_model import SettingsViewModel
 
@@ -76,8 +78,10 @@ class Settings(EventSender):
         self.force_refresh_button = self.builder.get_object("force_refresh_button")
         self.force_refresh_button.connect("clicked", self.__on_force_refresh_clicked)
 
-        self.settings_stack = self.builder.get_object("settings_stack")
+        self.settings_stack: Gtk.Stack = self.builder.get_object("settings_stack")
         self.settings_stack.connect("notify::visible-child", self._on_settings_stack_changed)
+
+        self.settings_stack.add_titled(ScrollWrapper(ErrorReporting()), "feedback", _("Feedback"))
 
         self._init_storage()
         self._init_blacklist()
@@ -118,41 +122,41 @@ class Settings(EventSender):
         """
         sl_switch = self.builder.get_object("symlinks_switch")
         self._glib_settings.bind("symlinks", sl_switch, "active",
-                                       Gio.SettingsBindFlags.DEFAULT)
+                                 Gio.SettingsBindFlags.DEFAULT)
 
         auto_scan_switch = self.builder.get_object("auto_scan_switch")
         self._glib_settings.bind("autoscan", auto_scan_switch,
-                                       "active", Gio.SettingsBindFlags.DEFAULT)
+                                 "active", Gio.SettingsBindFlags.DEFAULT)
 
         timer_suspend_switch = self.builder.get_object(
             "timer_suspend_switch")
         self._glib_settings.bind("suspend", timer_suspend_switch,
-                                       "active", Gio.SettingsBindFlags.DEFAULT)
+                                 "active", Gio.SettingsBindFlags.DEFAULT)
 
         replay_switch = self.builder.get_object("replay_switch")
         self._glib_settings.bind("replay", replay_switch, "active",
-                                       Gio.SettingsBindFlags.DEFAULT)
+                                 Gio.SettingsBindFlags.DEFAULT)
 
         titlebar_remaining_time_switch = self.builder.get_object("titlebar_remaining_time_switch")
         self._glib_settings.bind("titlebar-remaining-time", titlebar_remaining_time_switch, "active",
-                                       Gio.SettingsBindFlags.DEFAULT)
+                                 Gio.SettingsBindFlags.DEFAULT)
 
         dark_mode_switch = self.builder.get_object("dark_mode_switch")
         self._glib_settings.bind("dark-mode", dark_mode_switch, "active",
-                                       Gio.SettingsBindFlags.DEFAULT)
+                                 Gio.SettingsBindFlags.DEFAULT)
 
         swap_author_reader_switch = self.builder.get_object("swap_author_reader_switch")
         self._glib_settings.bind("swap-author-reader", swap_author_reader_switch, "active",
-                                       Gio.SettingsBindFlags.DEFAULT)
+                                 Gio.SettingsBindFlags.DEFAULT)
 
         self._glib_settings.bind("prefer-external-cover", self.external_cover_switch, "active",
-                                       Gio.SettingsBindFlags.DEFAULT)
+                                 Gio.SettingsBindFlags.DEFAULT)
 
         self._glib_settings.bind("sleep-timer-fadeout", self.sleep_fadeout_switch, "active",
-                                       Gio.SettingsBindFlags.DEFAULT)
+                                 Gio.SettingsBindFlags.DEFAULT)
 
         self._glib_settings.bind("sleep-timer-fadeout-duration", self.fadeout_duration_adjustment,
-                                       "value", Gio.SettingsBindFlags.DEFAULT)
+                                 "value", Gio.SettingsBindFlags.DEFAULT)
 
         self._glib_settings.connect("changed", self.__on_settings_changed)
 

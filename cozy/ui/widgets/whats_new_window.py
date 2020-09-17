@@ -18,7 +18,7 @@ class WhatsNewWindow(Gtk.Window):
 
     content_stack: Gtk.Stack = Gtk.Template.Child()
     continue_button: Gtk.Button = Gtk.Template.Child()
-    children: List[Gtk.Widget] = [WhatsNewImporter(), ErrorReporting()]
+    children: List[Gtk.Widget]
 
     app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
@@ -29,6 +29,8 @@ class WhatsNewWindow(Gtk.Window):
             return
 
         super().__init__(**kwargs)
+
+        self.children = [WhatsNewImporter(), ErrorReporting()]
 
         self.set_parent(parent)
         self.set_default_size(800, 550)
@@ -43,6 +45,7 @@ class WhatsNewWindow(Gtk.Window):
         if len(self.children) == self.page + 1:
             self.app_settings.last_launched_version = CozyVersion
             self.close()
+            self.destroy()
             return
 
         self.page += 1

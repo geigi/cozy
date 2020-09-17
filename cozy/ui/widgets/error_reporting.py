@@ -2,6 +2,9 @@ from gettext import gettext as _
 
 import gi
 
+from cozy.application_settings import ApplicationSettings
+from cozy.ext import inject
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
@@ -39,13 +42,16 @@ class ErrorReporting(Gtk.Box):
     verbose_adjustment: Gtk.Adjustment = Gtk.Template.Child()
     verbose_scale: Gtk.Scale = Gtk.Template.Child()
 
+    app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         self.__init_scale()
         self.__connect()
 
-        self._update_verbose_text(self.verbose_adjustment)
+        level = self.app_settings.report_level
+        self.verbose_adjustment.set_value(level + 1)
 
     def __init_scale(self):
         for i in range(1, 5):
@@ -53,14 +59,17 @@ class ErrorReporting(Gtk.Box):
         self.verbose_scale.set_round_digits(0)
 
     def __connect(self):
-        self.verbose_adjustment.connect("value-changed", self._update_verbose_text)
+        self.verbose_adjustment.connect("value-changed", self._adjustment_changed)
 
-    def _update_verbose_text(self, adjustment: Gtk.Adjustment):
-        value = int(adjustment.get_value()) - 1
+    def _adjustment_changed(self, adjustment: Gtk.Adjustment):
+        level = int(adjustment.get_value()) - 1
+        self.app_settings.report_level = level
+        self._update_ui_texts(level)
 
-        self.level_label.set_text(LEVELS[value])
-        self._update_description(value)
-        self._update_details(value)
+    def _update_ui_texts(self, level: int):
+        self.level_label.set_text(LEVELS[level])
+        self._update_description(level)
+        self._update_details(level)
 
     def _update_description(self, value):
         detail_index = min(value, 1)

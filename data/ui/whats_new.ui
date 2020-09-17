@@ -7,6 +7,8 @@
     <property name="type">popup</property>
     <property name="title" translatable="yes">Whats new?</property>
     <property name="window_position">center-on-parent</property>
+    <property name="default_width">650</property>
+    <property name="default_height">400</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <property name="deletable">False</property>
