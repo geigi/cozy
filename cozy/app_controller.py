@@ -14,6 +14,7 @@ from cozy.open_view import OpenView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.main_view import CozyUI
 from cozy.ui.search_view import SearchView
+from cozy.ui.widgets.whats_new_window import WhatsNewWindow
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
 from cozy.view_model.search_view_model import SearchViewModel
 from cozy.ui.settings import Settings as UISettings
@@ -25,6 +26,8 @@ class AppController(metaclass=Singleton):
 
         self.main_window: CozyUI = main_window
         self.main_window_builder = main_window_builder
+
+        self.whats_new_window: WhatsNewWindow = WhatsNewWindow(main_window.window)
 
         self.library_view: LibraryView = LibraryView(main_window_builder)
         self.search_view: SearchView = SearchView(main_window_builder)
