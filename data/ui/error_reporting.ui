@@ -42,7 +42,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="pixel_size">64</property>
-            <property name="icon_name">user-idle</property>
+            <property name="icon_name">message-flash-symbolic</property>
           </object>
           <packing>
             <property name="expand">False</property>
