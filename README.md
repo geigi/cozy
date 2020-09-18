@@ -24,12 +24,16 @@ Cozy is a modern audiobook player for Linux.
 - **Drag & Drop** to import new audio books
 - Support for DRM free **mp3, m4a (aac, ALAC, …), flac, ogg, opus, wav** files
 - Mpris integration (**Media keys** & playback info for desktop environment)
-- Developed on Fedora and tested under elementaryOS
 
 # Install
-| elementaryOS | openSUSE | Arch Linux | Solus | VoidLinux | Flatpak (other) |
+| Flatpak | openSUSE | Arch Linux | Solus | VoidLinux | elementaryOS |
 |--------------|:----------:|:------------:|:-----:|:-----------------:| --- |
-| <a href="https://appcenter.elementary.io/com.github.geigi.cozy"><img src="https://appcenter.elementary.io/badge.svg" alt="Get it on AppCenter"></a> | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> | <a href="https://dev.getsol.us/source/cozy/">cozy</a> | <a href="https://github.com/void-linux/void-packages/tree/master/srcpkgs/cozy">cozy</a> | <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a> | 
+| <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a> | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> | <a href="https://dev.getsol.us/source/cozy/">cozy</a> | <a href="https://github.com/void-linux/void-packages/tree/master/srcpkgs/cozy">cozy</a> | Currently out of date. Please use Flatpak for now. | 
+
+## elementaryOS
+The App Center version of Cozy is currently out of date. elementaryOS ships with old versions of dependencies needed by Cozy. Those are not compatible anymore. Therefore I'm unable to update the App Center version to the latest version of Cozy. Please switch over to the Flatpak version for now. If you experience issues with moving your library, let me know!
+
+elementaryOS is working on a new version of App Center which will be based on Flatpak. When the new App Center is live, Cozy will be back on the app center! :) Thanks for everyone who supported me on the App Center.
 
 ## macOS
 **Currently discontinued**
