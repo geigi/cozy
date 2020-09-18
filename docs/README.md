@@ -18,6 +18,7 @@ Cozy is a modern audiobook player for Linux.
 - Mpris integration (**Media keys** & playback info for desktop environment)
 
 # Install
+
 | Flatpak | openSUSE | Arch Linux | Solus | VoidLinux | elementaryOS |
 |--------------|:----------:|:------------:|:-----:|:-----------------:| --- |
 | {::nomarkdown}<a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>{:/} | {::nomarkdown}<center><a href="https://software.opensuse.org/package/cozy">cozy</a>{:/} | {::nomarkdown}<a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center>{:/} | {::nomarkdown}<a href="https://dev.getsol.us/source/cozy/">cozy</a>{:/} | {::nomarkdown}<a href="https://github.com/void-linux/void-packages/tree/master/srcpkgs/cozy">cozy</a>{:/} | Currently out of date. Please use Flatpak for now. | 
