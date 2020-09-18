@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-16 22:17+0200\n"
+"POT-Creation-Date: 2020-09-17 22:06+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
@@ -145,11 +145,11 @@ msgstr "Schijf"
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: cozy/ui/main_view.py:414
+#: cozy/ui/main_view.py:409
 msgid "Audiobooks"
 msgstr "Audioboeken"
 
-#: cozy/ui/main_view.py:431
+#: cozy/ui/main_view.py:426
 msgid "Importing Audiobooks"
 msgstr "Bezig met importeren van audioboeken"
 
@@ -160,6 +160,10 @@ msgstr "Snel naar auteur"
 #: cozy/ui/widgets/search_results.py:75
 msgid "Jump to reader "
 msgstr "Snel naar voorlezer"
+
+#: cozy/ui/settings.py:84
+msgid "Feedback"
+msgstr "Feedback"
 
 #: cozy/ui/track_element.py:28
 msgid "Play this part"
@@ -180,27 +184,52 @@ msgstr "Alles"
 msgid "Display all books"
 msgstr "Alle boeken tonen"
 
-#: cozy/ui/widgets/error_reporting.py:7
+#: cozy/ui/widgets/error_reporting.py:12
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+#: cozy/ui/widgets/error_reporting.py:13
+msgid "Basic error reporting"
+msgstr "Algemene foutrapportages"
+
+#: cozy/ui/widgets/error_reporting.py:14
+msgid "Detailed error reporting"
+msgstr "Uitgebreide foutrapportages"
+
+#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:173
+msgid "Detailed error reporting with import errors"
+msgstr "Uitgebreide foutrapportages, inclusief importfouten"
+
+#: cozy/ui/widgets/error_reporting.py:19
+msgid "No error or crash reporting."
+msgstr "Geen fout- of crashrapportages"
+
+#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:192
+msgid "The following information will be sent in case of an error or crash:"
+msgstr ""
+"De volgende informatie wordt verstuurd als er een fout of crash optreedt:"
+
+#: cozy/ui/widgets/error_reporting.py:25
 msgid "Which type of error occurred"
 msgstr "Welk soort probleem er optrad"
 
-#: cozy/ui/widgets/error_reporting.py:8
+#: cozy/ui/widgets/error_reporting.py:26
 msgid "Line of code where an error occurred"
 msgstr "Regel met code waar het probleem zich bevindt"
 
-#: cozy/ui/widgets/error_reporting.py:9
+#: cozy/ui/widgets/error_reporting.py:27
 msgid "Cozy's version"
 msgstr "Cozy's versie"
 
-#: cozy/ui/widgets/error_reporting.py:10
+#: cozy/ui/widgets/error_reporting.py:28
 msgid "Linux distribution"
 msgstr "Linux-distributie"
 
-#: cozy/ui/widgets/error_reporting.py:11
+#: cozy/ui/widgets/error_reporting.py:29
 msgid "Desktop environment"
 msgstr "Werkomgeving"
 
-#: cozy/ui/widgets/error_reporting.py:12
+#: cozy/ui/widgets/error_reporting.py:30
 msgid "Media type of files that Cozy couldn't import"
 msgstr "De soorten bestanden die Cozy niet kon importeren"
 
@@ -347,7 +376,7 @@ msgstr "Bezig met werken"
 msgid "Playback speed"
 msgstr "Afspeelsnelheid"
 
-#: data/ui/main_window.ui:490 data/ui/settings.ui:724
+#: data/ui/main_window.ui:490 data/ui/settings.ui:727
 msgid "Sleep timer"
 msgstr "Slaaptimer"
 
@@ -526,137 +555,137 @@ msgstr "Deel"
 msgid "Nothing found :("
 msgstr "Niks gevonden :("
 
-#: data/ui/settings.ui:92 data/ui/settings.ui:363
+#: data/ui/settings.ui:95 data/ui/settings.ui:366
 msgid "General"
 msgstr "Algemeen"
 
-#: data/ui/settings.ui:137
+#: data/ui/settings.ui:140
 msgid "Dark Mode"
 msgstr "Donker thema gebruiken"
 
-#: data/ui/settings.ui:213
+#: data/ui/settings.ui:216
 msgid "Titlebar"
 msgstr "Titelbalk"
 
-#: data/ui/settings.ui:258
+#: data/ui/settings.ui:261
 msgid "Display the whole book instead of the current chapter"
 msgstr "Gehele boek tonen in plaats van huidige hoofdstuk"
 
-#: data/ui/settings.ui:321
+#: data/ui/settings.ui:324
 msgid "Appearance"
 msgstr "Uiterlijk"
 
-#: data/ui/settings.ui:406
+#: data/ui/settings.ui:409
 msgid "Suspend system on timer"
 msgstr "Systeem in pauzestand zetten nadat de timer is afgegaan"
 
-#: data/ui/settings.ui:466
+#: data/ui/settings.ui:469
 msgid "Replay 30 seconds"
 msgstr "30 seconden herhalen"
 
-#: data/ui/settings.ui:526
+#: data/ui/settings.ui:529
 msgid "Automatic media scan"
 msgstr "Media automatisch doorzoeken"
 
-#: data/ui/settings.ui:585
+#: data/ui/settings.ui:588
 msgid "Tags"
 msgstr "Labels"
 
-#: data/ui/settings.ui:637
+#: data/ui/settings.ui:640
 msgid "Swap author and reader"
 msgstr "Auteur en lezer omwisselen"
 
-#: data/ui/settings.ui:650
+#: data/ui/settings.ui:653
 msgid "Activate this if author and reader are displayed the wrong way"
 msgstr ""
 "Gebruik deze optie als de auteur en lezer in de verkeerde volgorde staan"
 
-#: data/ui/settings.ui:675
+#: data/ui/settings.ui:678
 msgid "switch author and reader assignment"
 msgstr "auteur- en lezertoewijzing omwisselen"
 
-#: data/ui/settings.ui:769
+#: data/ui/settings.ui:772
 msgid "Fadeout"
 msgstr "Vervagen"
 
-#: data/ui/settings.ui:831
+#: data/ui/settings.ui:834
 msgid "Fadeout duration"
 msgstr "Vervaagduur"
 
-#: data/ui/settings.ui:912
+#: data/ui/settings.ui:915
 msgid "Behaviour"
 msgstr "Gedrag"
 
-#: data/ui/settings.ui:939
+#: data/ui/settings.ui:942
 msgid "Artwork"
 msgstr "Omslag"
 
-#: data/ui/settings.ui:991
+#: data/ui/settings.ui:994
 msgid "Prefer external images over embedded cover"
 msgstr "Externe afbeeldingen prefereren boven meegeleverde omslag"
 
-#: data/ui/settings.ui:1004
+#: data/ui/settings.ui:1007
 msgid "Use images (cover.jpg, *.png, …) when available"
 msgstr "Afbeeldingen (cover.jpg, *.png, …) gebruiken indien beschikbaar"
 
-#: data/ui/settings.ui:1087
+#: data/ui/settings.ui:1090
 msgid "Audio books location"
 msgstr "Locatie van audioboeken"
 
-#: data/ui/settings.ui:1103
+#: data/ui/settings.ui:1106
 msgid "Storage locations"
 msgstr "Opslaglocaties"
 
-#: data/ui/settings.ui:1161
+#: data/ui/settings.ui:1164
 msgid "Add location"
 msgstr "Locatie toevoegen"
 
-#: data/ui/settings.ui:1186 data/ui/settings.ui:1382
+#: data/ui/settings.ui:1189 data/ui/settings.ui:1385
 msgid "Remove location"
 msgstr "Locatie verwijderen"
 
-#: data/ui/settings.ui:1222
+#: data/ui/settings.ui:1225
 msgid "Toggle this storage location to be internal/external."
 msgstr "Stel deze opslaglocatie in als intern of extern."
 
-#: data/ui/settings.ui:1248
+#: data/ui/settings.ui:1251
 msgid "Set as default storage location for new audiobooks"
 msgstr "Instellen als standaard opslaglocatie voor nieuwe audioboeken"
 
-#: data/ui/settings.ui:1301
+#: data/ui/settings.ui:1304
 msgid "Blacklist"
 msgstr "Zwarte lijst"
 
-#: data/ui/settings.ui:1345
+#: data/ui/settings.ui:1348
 msgid "Path"
 msgstr "Pad"
 
-#: data/ui/settings.ui:1428
+#: data/ui/settings.ui:1431
 msgid "Follow symlinks"
 msgstr "Koppelingen volgen"
 
-#: data/ui/settings.ui:1460
+#: data/ui/settings.ui:1463
 msgid "Storage"
 msgstr "Opslag"
 
-#: data/ui/settings.ui:1484
+#: data/ui/settings.ui:1487
 msgid "Database"
 msgstr "Database"
 
-#: data/ui/settings.ui:1536
+#: data/ui/settings.ui:1539
 msgid "Force refresh the database"
 msgstr "Database geforceerd vernieuwen"
 
-#: data/ui/settings.ui:1549
+#: data/ui/settings.ui:1552
 msgid "This will force update the metadata of all imported books"
 msgstr ""
 "Dit zal de metagegevens van alle geïmporteerde boeken geforceerd bijwerken."
 
-#: data/ui/settings.ui:1569
+#: data/ui/settings.ui:1572
 msgid "Force refresh"
 msgstr "Geforceerd vernieuwen"
 
-#: data/ui/settings.ui:1625
+#: data/ui/settings.ui:1628
 msgid "Advanced"
 msgstr "Geavanceerd"
 
@@ -730,7 +759,7 @@ msgstr "_Over"
 msgid "_Quit"
 msgstr "_Afsluiten"
 
-#: data/ui/error_reporting.ui:25
+#: data/ui/error_reporting.ui:23
 msgid "User feedback"
 msgstr "Gebruikersfeedback"
 
@@ -754,50 +783,24 @@ msgstr ""
 "verzamelen geen persoonlijke gegevens, bestanden die je importeert of andere"
 " informatie die naar jou te herleiden is."
 
-#: data/ui/error_reporting.ui:94
+#: data/ui/error_reporting.ui:95
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
 "Cozy is open source en de code omtrent gebruikersfeedback is hier te vinden:"
 
-#: data/ui/error_reporting.ui:174
-msgid "Disabled"
-msgstr "Uitgeschakeld"
-
-#: data/ui/error_reporting.ui:192
-msgid "No error or crash reporting."
-msgstr "Geen fout- of crashrapportages"
-
-#: data/ui/error_reporting.ui:217
-msgid "Basic error reporting"
-msgstr "Algemene foutrapportages"
-
-#: data/ui/error_reporting.ui:235 data/ui/error_reporting.ui:279
-#: data/ui/error_reporting.ui:323
-msgid "The following information will be sent in case of an error or crash:"
-msgstr ""
-"De volgende informatie wordt verstuurd als er een fout of crash optreedt:"
-
-#: data/ui/error_reporting.ui:261
-msgid "Detailed error reporting"
-msgstr "Uitgebreide foutrapportages"
-
-#: data/ui/error_reporting.ui:305
-msgid "Detailed error reporting with import errors"
-msgstr "Uitgebreide foutrapportages, inclusief importfouten"
-
-#: data/ui/whats_new_importer.ui:15
+#: data/ui/whats_new_importer.ui:17
 msgid "What's new  in Cozy"
 msgstr "Wijzigingslog"
 
-#: data/ui/whats_new_importer.ui:43
+#: data/ui/whats_new_importer.ui:52
 msgid "A completely rewritten and far more reliable media importer."
 msgstr ""
 "Het media-importgedeelte is volledig opnieuw ontworpen en daardoor "
 "betrouwbaarder."
 
-#: data/ui/whats_new_importer.ui:59
+#: data/ui/whats_new_importer.ui:77
 msgid ""
 "Did you experience audio files that couldn't be imported? Drag & Drop those "
 "files onto Cozy or use the application menu in the titlebar to rescan your "
@@ -807,13 +810,13 @@ msgstr ""
 "geïmporteerd? Sleep ze naar het Cozy-venster of doorzoek je mappen opnieuw "
 "middels het menu!"
 
-#: data/ui/whats_new_importer.ui:72
+#: data/ui/whats_new_importer.ui:92
 msgid "Supported media files currently are mp3, m4a, flac, ogg, opus and wav."
 msgstr ""
 "Momenteel worden de volgende mediabestanden ondersteund: mp3, m4a, flac, "
 "ogg, opus en wav."
 
-#: data/ui/whats_new_importer.ui:85
+#: data/ui/whats_new_importer.ui:107
 msgid "More to come in a later update."
 msgstr "Binnenkort volgt ondersteuning voor meer formaten."
 
@@ -821,10 +824,6 @@ msgstr "Binnenkort volgt ondersteuning voor meer formaten."
 msgid "Whats new?"
 msgstr "Wijzigingslog"
 
-#: data/ui/whats_new.ui:62
-msgid "Previous"
-msgstr "Vorige"
-
-#: data/ui/whats_new.ui:76
+#: data/ui/whats_new.ui:21
 msgid "Continue"
 msgstr "Doorgaan"
