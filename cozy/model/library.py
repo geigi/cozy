@@ -182,4 +182,4 @@ class Library:
 
     def _on_book_event(self, event: str, book: Book):
         if event == "book-deleted":
-            self._books.remove(book)
+            self.books.remove(book)
