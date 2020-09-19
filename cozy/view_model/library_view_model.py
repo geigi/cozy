@@ -5,12 +5,13 @@ import cozy.ext.inject as inject
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
-from cozy.control.importer import Importer, importer as importer_instance
 from cozy.extensions.set import split_strings_to_set
+from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library
 from cozy.ui.book_element import BookElement
+from cozy.ui.import_failed_dialog import ImportFailedDialog
 
 
 class LibraryViewMode(Enum):
@@ -23,11 +24,11 @@ class LibraryViewModel(Observable):
     _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
     _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
     _model = inject.attr(Library)
+    _importer: Importer = inject.attr(Importer)
 
     def __init__(self):
         super().__init__()
 
-        self._importer: Importer = importer_instance
         self._player: Player = Player()
 
         self._library_view_mode: LibraryViewMode = LibraryViewMode.CURRENT
@@ -160,14 +161,16 @@ class LibraryViewModel(Observable):
             self._notify("authors")
             self._notify("readers")
 
-    def _on_importer_event(self, event, _):
-        if event == "import-finished":
-            self._model.invalidate()
+    def _on_importer_event(self, event, message):
+        if event == "scan" and message == ScanStatus.SUCCESS:
             self._notify("authors")
             self._notify("readers")
             self._notify("books")
             self._notify("books-filter")
             self._notify("library_view_mode")
+        if event == "import-failed":
+            dialog = ImportFailedDialog(message)
+            dialog.show()
 
     def _on_player_event(self, event, message):
         if event == "play":

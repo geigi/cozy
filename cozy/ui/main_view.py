@@ -11,7 +11,7 @@ from cozy.db.track import Track
 from gi.repository import Gtk, Gio, Gdk, Gst, GLib
 from threading import Thread
 
-from cozy.media.importer import Importer
+from cozy.media.importer import Importer, ScanStatus
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
@@ -53,6 +53,7 @@ class CozyUI(metaclass=Singleton):
     fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
     settings = inject.attr(Settings)
     application_settings = inject.attr(ApplicationSettings)
+    _importer: Importer = inject.attr(Importer)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -61,6 +62,7 @@ class CozyUI(metaclass=Singleton):
         self.version = version
 
         self._library_view: LibraryView = None
+        self._importer.add_listener(self._on_importer_event)
 
     def activate(self, library_view: LibraryView):
         self.first_play = True
@@ -650,3 +652,8 @@ class CozyUI(metaclass=Singleton):
 
     def get_builder(self):
         return self.window_builder
+
+    def _on_importer_event(self, event: str, message):
+        if event == "scan" and message == ScanStatus.SUCCESS:
+            self.switch_to_playing()
+            self.check_for_tracks()
