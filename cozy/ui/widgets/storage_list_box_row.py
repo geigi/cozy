@@ -115,7 +115,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         if old_path == "":
             self.parent.emit_event("storage-added", self.path)
             log.info("New audiobook location added. Starting import scan.")
-            self.ui.scan(None)
+            self.ui.scan(None, None)
         else:
             self.parent.emit_event("storage-changed", self.path)
             log.info("Audio book location changed, rebasing the location in cozy.")

@@ -265,7 +265,7 @@ def copy(ui, selection):
             Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
                                  ui.titlebar.update_progress_bar.set_fraction, cur / count)
 
-    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.scan, None, False)
+    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.scan, None, None)
 
 
 def copy_to_audiobook_folder(path):

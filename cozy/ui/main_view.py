@@ -423,7 +423,7 @@ class CozyUI(metaclass=Singleton):
 
     def auto_import(self):
         if self.application_settings.autoscan:
-            self.scan(None)
+            self.scan(None, None)
 
     def back(self, action, parameter):
         self.__on_back_clicked(None)
@@ -520,7 +520,7 @@ class CozyUI(metaclass=Singleton):
         Storage.delete().where(Storage.path != "").execute()
         Storage.create(path=location, default=True, external=external)
         self.main_stack.props.visible_child_name = "import"
-        self.scan(None)
+        self.scan(None, None)
         self.settings._init_storage()
         self.fs_monitor.init_offline_mode()
 
