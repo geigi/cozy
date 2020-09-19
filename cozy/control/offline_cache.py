@@ -15,7 +15,6 @@ from cozy.db.book import Book
 from cozy.db.track import Track
 from cozy.db.offline_cache import OfflineCache as OfflineCacheModel
 from cozy.ext import inject
-from cozy.media.importer import Importer
 from cozy.report import reporter
 
 log = logging.getLogger("offline_cache")
@@ -36,11 +35,12 @@ class OfflineCache(EventSender, metaclass=Singleton):
     last_ui_update = 0
     current_book_processing = None
 
-    _importer: Importer = inject.attr(Importer)
-
     def __init__(self):
         super().__init__()
         self.ui = cozy.ui.main_view.CozyUI()
+
+        from cozy.media.importer import Importer
+        self._importer = inject.instance(Importer)
 
         self._importer.add_listener(self._on_importer_event)
 
