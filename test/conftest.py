@@ -20,6 +20,7 @@ def chunks(lst, n):
 def peewee_database():
     from cozy.db.track import Track
     from cozy.db.book import Book
+    from cozy.db.settings import Settings
 
     db_path, models, test_db = prepare_db()
 
@@ -35,6 +36,8 @@ def peewee_database():
     for chunk in chunks(track_data, 25):
         Track.insert_many(chunk).execute()
 
+    Settings.create(path="", last_played_book=None)
+
     print("Provide database...")
     yield test_db
 
@@ -44,6 +47,7 @@ def peewee_database():
 @pytest.fixture(scope="module")
 def peewee_database_storage():
     from cozy.db.storage import Storage
+    from cozy.db.settings import Settings
 
     db_path, models, test_db = prepare_db()
     path_of_test_folder = os.path.dirname(os.path.realpath(__file__)) + '/'
@@ -52,6 +56,7 @@ def peewee_database_storage():
         storage_data = json.load(json_file)
 
     Storage.insert_many(storage_data).execute()
+    Settings.create(path="", last_played_book=None)
 
     print("Provide database...")
     yield test_db
