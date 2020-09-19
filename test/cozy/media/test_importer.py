@@ -4,6 +4,7 @@ import pytest
 from peewee import SqliteDatabase
 
 from cozy.ext import inject
+from cozy.media.media_file import MediaFile
 from cozy.model.library import Library
 
 
@@ -91,7 +92,7 @@ def test_scan_emits_start_event(mocker):
     spy = mocker.spy(importer, "emit_event_main_thread")
     importer.scan()
 
-    spy.assert_has_calls(calls=[call("scan", ScanStatus.STARTED), call("scan", ScanStatus.SUCCESS), call("scan", ScanStatus.SUCCESS)])
+    spy.assert_has_calls(calls=[call("scan", ScanStatus.STARTED), call("scan", ScanStatus.SUCCESS), call("new-or-updated-files", set())])
 
 
 def test_scan_returns_file_names_that_could_not_be_imported(mocker):
@@ -103,7 +104,7 @@ def test_scan_returns_file_names_that_could_not_be_imported(mocker):
     mocker.patch("cozy.model.library.Library.insert_many")
 
     importer = Importer()
-    not_imported = importer._execute_import(files)
+    _, not_imported = importer._execute_import(files)
 
     assert not_imported == files
 
@@ -119,9 +120,51 @@ def test_scan_returns_none_for_non_audio_files(mocker):
     mocker.patch("cozy.model.library.Library.insert_many")
 
     importer = Importer()
-    not_imported = importer._execute_import(["a"])
+    _, not_imported = importer._execute_import(["a"])
 
     assert not_imported == set()
+
+
+def test_execute_import_returns_list_of_imported_files(mocker):
+    from cozy.media.importer import Importer
+
+    media_file1 = MediaFile(
+        book_name="a",
+        author="a",
+        reader="a",
+        disk=1,
+        track_number=1,
+        length=1,
+        cover=b"",
+        path="path",
+        modified=1,
+        chapters=[]
+    )
+
+    media_file2 = MediaFile(
+        book_name="a",
+        author="a",
+        reader="a",
+        disk=1,
+        track_number=1,
+        length=1,
+        cover=b"",
+        path="path2",
+        modified=1,
+        chapters=[]
+    )
+
+    def iterator():
+        for item in [media_file1, media_file2]:
+            yield item
+
+    mocker.patch("multiprocessing.pool.ThreadPool.map", return_value=iterator())
+    mocker.patch("cozy.model.library.Library.insert_many")
+
+    importer = Importer()
+    imported, _ = importer._execute_import(["a", "b"])
+
+    assert all([a == b for a, b in zip(imported, ["path", "path2"])])
 
 
 def test_delete_files_no_longer_existent_keeps_existent(mocker):

@@ -8,7 +8,6 @@ from urllib.parse import urlparse, unquote
 
 from cozy.architecture.profiler import timing
 from cozy.media.media_detector import MediaDetector, NotAnAudioFile, AudioFileCouldNotBeDiscovered
-from cozy.media.media_file import MediaFile
 from cozy.model.library import Library
 from cozy.architecture.event_sender import EventSender
 from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
