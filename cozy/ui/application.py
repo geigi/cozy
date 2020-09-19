@@ -12,6 +12,7 @@ from cozy.app_controller import AppController
 from cozy.control.db import init_db
 from cozy.control.mpris import MPRIS
 from cozy.db.settings import Settings
+from cozy.media.importer import Importer
 from cozy.report import reporter
 from cozy.ui.main_view import CozyUI
 from cozy.version import __version__
@@ -61,9 +62,6 @@ class Application(Gtk.Application):
 
             if not os.path.exists(path):
                 os.makedirs(path)
-            else:
-                self.ui.scan(None, True)
-                self.ui.refresh_content()
 
         self.add_window(self.ui.window)
         mpris = MPRIS(self)

@@ -1,3 +1,4 @@
+import logging
 from typing import List, Set
 
 from peewee import SqliteDatabase
@@ -10,6 +11,9 @@ from cozy.media.media_file import MediaFile
 
 from cozy.model.book import Book, BookIsEmpty
 from cozy.model.chapter import Chapter
+
+
+log = logging.getLogger("ui")
 
 
 class Library:
@@ -165,8 +169,16 @@ class Library:
 
     def _on_chapter_event(self, event: str, chapter: Chapter):
         if event == "chapter-deleted":
-            self._chapters.remove(chapter)
-            self._files.remove(chapter.file)
+            try:
+                self.chapters.remove(chapter)
+            except KeyError:
+                log.error("Could not remove chapter from library chapter list.")
+
+            try:
+                self.files.remove(chapter.file)
+            except KeyError:
+                log.error("Could not remove file from library file list.")
+                self._files = []
 
     def _on_book_event(self, event: str, book: Book):
         if event == "book-deleted":

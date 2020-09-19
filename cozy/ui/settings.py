@@ -328,7 +328,7 @@ class Settings(EventSender):
         """
         Start a force refresh of the database.
         """
-        self.ui.scan(None, False, True)
+        self.ui.scan(None)
 
     def _on_settings_stack_changed(self, widget, property):
         page = widget.props.visible_child_name

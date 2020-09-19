@@ -9,7 +9,6 @@ from cozy.control.db import get_tracks
 from cozy.model.book import Book
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage
-from cozy.ui.settings import Settings as UISettings
 
 log = logging.getLogger("fs_monitor")
 
@@ -30,7 +29,6 @@ class ExternalStorage:
 class FilesystemMonitor(EventSender):
     external_storage: List[ExternalStorage] = []
     _settings: Settings = inject.attr(Settings)
-    _ui_settings: UISettings = inject.attr(UISettings)
 
     def __init__(self):
         super().__init__()
@@ -40,6 +38,8 @@ class FilesystemMonitor(EventSender):
 
         self.init_offline_mode()
 
+        from cozy.ui.settings import Settings as UISettings
+        self._ui_settings = inject.instance(UISettings)
         self._ui_settings.add_listener(self.__on_settings_changed)
 
     def init_offline_mode(self):

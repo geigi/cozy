@@ -4,6 +4,7 @@ from typing import List
 import cozy.ext.inject as inject
 from peewee import SqliteDatabase
 
+from cozy.db.settings import Settings as SettingsModel
 from cozy.db.storage import Storage as StorageModel
 from cozy.model.storage import Storage, InvalidPath
 
@@ -13,6 +14,14 @@ log = logging.getLogger("model.storage_location")
 class Settings:
     _storages: List[Storage] = []
     _db = cache = inject.attr(SqliteDatabase)
+
+    def __init__(self):
+        with self._db:
+            self._db_object: SettingsModel = SettingsModel.get()
+
+    @property
+    def first_start(self) -> bool:
+        return self._db_object.first_start
 
     @property
     def storage_locations(self):

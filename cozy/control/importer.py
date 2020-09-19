@@ -21,13 +21,10 @@ from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 from mutagen.oggopus import OggOpus
 from mutagen.oggvorbis import OggVorbis
-from peewee import __version__ as PeeweeVersion
-from gi.repository import Gdk, GLib, Gst, GstPbutils
+from gi.repository import Gdk, GLib, GstPbutils
 
 import cozy.tools as tools
-from cozy.architecture.event_sender import EventSender
-from cozy.control.db import is_blacklisted, remove_invalid_entries
-from cozy.control.offline_cache import OfflineCache
+from cozy.control.db import is_blacklisted
 from cozy.db.book import Book
 from cozy.db.storage import Storage
 from cozy.db.storage_blacklist import StorageBlackList
@@ -61,14 +58,6 @@ class TrackData:
         self.file = file
 
 
-class Importer(EventSender):
-    def __init__(self):
-        super().__init__()
-
-
-importer = Importer()
-
-
 def b64tobinary(b64):
     """
     Decode base64 to binary data
@@ -83,118 +72,6 @@ def b64tobinary(b64):
         log.error(e)
 
     return data
-
-
-def update_database(ui, force=False):
-    """
-    Scans the audio book directory for changes and new files.
-    Also removes entries from the db that are no longer existent.
-    """
-    paths = []
-    for location in Storage.select():
-        if os.path.exists(location.path):
-            paths.append(location.path)
-
-    # are UI buttons currently blocked?
-    player_blocked, importer_blocked = ui.get_ui_buttons_blocked()
-
-    i = 0
-    percent_counter = 0
-    file_count = 0
-    for path in paths:
-        file_count += sum([len(files) for r, d, files in os.walk(path)])
-
-    percent_threshold = file_count / 1000
-    failed = ""
-    tracks_to_import = []
-    # Tracks which changed and need to be updated if they are cached
-    tracks_cache_update = []
-    start = time.time()
-    for path in paths:
-        for directory, subdirectories, files in os.walk(path):
-            for file in files:
-                if file.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a', '.wav', '.opus')):
-                    path = os.path.join(directory, file)
-
-                    imported = True
-                    try:
-                        if force:
-                            imported, ignore = import_file(file, directory, path, True)
-                            tracks_cache_update.append(path)
-                        # Is the track already in the database?
-                        elif Track.select().where(Track.file == path).count() < 1:
-                            imported, track_data = import_file(file, directory, path)
-                            if track_data:
-                                tracks_to_import.append(track_data)
-                        # Has the modified date changed?
-                        elif (Track.select().where(
-                                Track.file == path).first().modified < os.path.getmtime(path)):
-                            imported, ignore = import_file(file, directory, path, update=True)
-                            tracks_cache_update.append(path)
-
-                        if not imported:
-                            failed += path + "\n"
-                    except UnicodeEncodeError as e:
-                        log.warning("Could not import file because of invalid path or filename: " + path)
-                        reporter.exception("importer", e)
-                        failed += path + "\n"
-                    except Exception as e:
-                        log.warning("Could not import file: " + path)
-                        log.warning(traceback.format_exc())
-                        reporter.exception("importer", e)
-                        failed += path + "\n"
-
-                    i = i + 1
-
-                    if len(tracks_to_import) > 100:
-                        write_tracks_to_db(tracks_to_import)
-                        tracks_to_import = []
-
-                    # don't flood gui updates
-                    if percent_counter < percent_threshold:
-                        percent_counter = percent_counter + 1
-                    else:
-                        percent_counter = 1
-                        Gdk.threads_add_idle(
-                            GLib.PRIORITY_DEFAULT_IDLE, ui.titlebar.progress_bar.set_fraction, i / file_count)
-                        Gdk.threads_add_idle(
-                            GLib.PRIORITY_DEFAULT_IDLE, ui.titlebar.update_progress_bar.set_fraction, i / file_count)
-
-    write_tracks_to_db(tracks_to_import)
-    end = time.time()
-    log.info("Total import time: " + str(end - start))
-
-    # remove entries from the db that are no longer existent
-    remove_invalid_entries()
-
-    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, importer.emit_event, "import-finished")
-    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
-    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.check_for_tracks)
-
-    if len(failed) > 0:
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
-                             ui.display_failed_imports, failed)
-
-    OfflineCache().update_cache(tracks_cache_update)
-    OfflineCache()._process_queue()
-
-
-def write_tracks_to_db(tracks):
-    """
-    """
-    if tracks is None or len(tracks) < 1:
-        return
-
-    if PeeweeVersion[0] == '2':
-        data = list({"name": t.name, "number": t.track_number, "disk": t.disk, "position": t.position, "book": t.book,
-                     "file": t.file, "length": t.length, "modified": t.modified} for t in tracks)
-        Track.insert_many(data).execute()
-    else:
-        fields = [Track.name, Track.number, Track.disk,
-                  Track.position, Track.book, Track.file,
-                  Track.length, Track.modified]
-        data = list((t.name, t.track_number, t.disk, t.position, t.book, t.file, t.length, t.modified) for t in tracks)
-        Track.insert_many(data, fields=fields).execute()
 
 
 def rebase_location(ui, oldPath, newPath):

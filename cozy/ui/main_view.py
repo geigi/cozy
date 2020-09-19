@@ -62,7 +62,6 @@ class CozyUI(metaclass=Singleton):
         self.version = version
 
         self._library_view: LibraryView = None
-        self._importer.add_listener(self._on_importer_event)
 
     def activate(self, library_view: LibraryView):
         self.first_play = True
@@ -71,6 +70,7 @@ class CozyUI(metaclass=Singleton):
         self.__init_components()
 
         self._library_view = library_view
+        from cozy.ui.settings import Settings as UISettings
 
         self.auto_import()
         self.refresh_content()
@@ -246,10 +246,6 @@ class CozyUI(metaclass=Singleton):
         self.scan_action.connect("activate", self.scan)
         self.app.add_action(self.scan_action)
 
-        self.new_scan_action = Gio.SimpleAction.new("new_scan", None)
-        self.new_scan_action.connect("activate", self.new_scan)
-        self.app.add_action(self.new_scan_action)
-
         self.play_pause_action = Gio.SimpleAction.new("play_pause", None)
         self.play_pause_action.connect("activate", self.play_pause)
         self.app.add_action(self.play_pause_action)
@@ -421,26 +417,13 @@ class CozyUI(metaclass=Singleton):
             self.titlebar.stop()
             self.category_toolbar.set_visible(False)
 
-    def scan(self, action, first_scan, force=False):
-        """
-        Start the db import in a seperate thread
-        """
-        self.switch_to_working(_("Importing Audiobooks"), first_scan)
-        thread = Thread(target=importer.update_database,
-                        args=(self, force,), name="UpdateDatabaseThread")
-        thread.start()
-
-    def new_scan(self, action, first_scan, force=False):
-        """
-        Start the db import in a seperate thread
-        """
-        importer = Importer()
-        thread = Thread(target=importer.scan, name="UpdateDatabaseThread")
+    def scan(self, _, __):
+        thread = Thread(target=self._importer.scan, name="ScanMediaThread")
         thread.start()
 
     def auto_import(self):
         if self.application_settings.autoscan:
-            self.scan(None, False)
+            self.scan(None)
 
     def back(self, action, parameter):
         self.__on_back_clicked(None)
@@ -537,7 +520,7 @@ class CozyUI(metaclass=Singleton):
         Storage.delete().where(Storage.path != "").execute()
         Storage.create(path=location, default=True, external=external)
         self.main_stack.props.visible_child_name = "import"
-        self.scan(None, True)
+        self.scan(None)
         self.settings._init_storage()
         self.fs_monitor.init_offline_mode()
 
