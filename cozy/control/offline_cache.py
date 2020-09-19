@@ -36,6 +36,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
     current_book_processing = None
 
     def __init__(self):
+        super().__init__()
         self.ui = cozy.ui.main_view.CozyUI()
 
         self.cache_dir = os.path.join(get_cache_dir(), "offline")

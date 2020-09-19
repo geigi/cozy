@@ -1,8 +1,13 @@
+from typing import List
+
 from gi.repository import Gdk, GLib
 
 
 class EventSender:
-    __listeners = []
+    _listeners: List
+
+    def __init__(self):
+        self._listeners = []
 
     def emit_event(self, event, message=None):
         if type(event) is tuple and not message:

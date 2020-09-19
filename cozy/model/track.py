@@ -6,6 +6,7 @@ from cozy.model.chapter import Chapter
 
 class Track(Chapter):
     def __init__(self, db: SqliteDatabase, id: int):
+        super().__init__()
         self._db: SqliteDatabase = db
         self.id: int = id
 

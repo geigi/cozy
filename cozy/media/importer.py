@@ -29,6 +29,9 @@ class Importer(EventSender):
     _settings = inject.attr(Settings)
     _library = inject.attr(Library)
 
+    def __init__(self):
+        super().__init__()
+
     @timing
     def scan(self):
         logging.info("Starting import")

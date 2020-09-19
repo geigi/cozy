@@ -63,7 +63,7 @@ class TrackData:
 
 class Importer(EventSender):
     def __init__(self):
-        pass
+        super().__init__()
 
 
 importer = Importer()

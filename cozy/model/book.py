@@ -18,6 +18,7 @@ class Book(EventSender):
     _chapters: List[Chapter] = None
 
     def __init__(self, db: SqliteDatabase, id: int):
+        super().__init__()
         self._db: SqliteDatabase = db
         self.id: int = id
 

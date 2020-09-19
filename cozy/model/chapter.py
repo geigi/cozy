@@ -6,6 +6,10 @@ from cozy.architecture.event_sender import EventSender
 class Chapter(ABC, EventSender):
     id: int
 
+    def __init__(self):
+        super().__init__()
+        super(ABC, self).__init__()
+
     @property
     @abstractmethod
     def name(self):

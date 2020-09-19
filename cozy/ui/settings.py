@@ -31,6 +31,7 @@ class Settings(EventSender):
     default_dark_mode = None
 
     def __init__(self):
+        super().__init__()
         from cozy.control.artwork_cache import ArtworkCache
         self._artwork_cache: ArtworkCache = inject.instance(ArtworkCache)
 

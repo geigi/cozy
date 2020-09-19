@@ -8,6 +8,7 @@ class ApplicationSettings(EventSender):
     _settings: Gio.Settings = inject.attr(Gio.Settings)
 
     def __init__(self):
+        super().__init__()
         self._connect()
 
     def _connect(self):

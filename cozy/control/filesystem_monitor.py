@@ -33,6 +33,7 @@ class FilesystemMonitor(EventSender):
     _ui_settings: UISettings = inject.attr(UISettings)
 
     def __init__(self):
+        super().__init__()
         self.volume_monitor = Gio.VolumeMonitor.get()
         self.volume_monitor.connect("mount-added", self.__on_mount_added)
         self.volume_monitor.connect("mount-removed", self.__on_mount_removed)
