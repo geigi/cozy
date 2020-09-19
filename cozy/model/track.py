@@ -81,3 +81,9 @@ class Track(Chapter):
         with self._db:
             self._db_object.modified = new_modified
             self._db_object.save(only=self._db_object.dirty_fields)
+
+    def delete(self):
+        with self._db:
+            self._db_object.delete().execute()
+            self.emit_event("chapter-deleted", self)
+            self.destroy()

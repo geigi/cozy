@@ -35,8 +35,11 @@ class Importer(EventSender):
         self.emit_event_main_thread("scan", ScanStatus.STARTED)
 
         files_to_scan = self._get_files_to_scan()
-
         undetected_files = self._execute_import(files_to_scan)
+        self._library.invalidate()
+
+        logging.info("Deleting no longer present files from db")
+        self._delete_files_no_longer_existent()
 
         logging.info("Import finished")
         self.emit_event_main_thread("scan", ScanStatus.SUCCESS)
@@ -112,6 +115,11 @@ class Importer(EventSender):
                 continue
 
             yield file
+
+    def _delete_files_no_longer_existent(self):
+        for chapter in self._library.chapters:
+            if not os.path.isfile(chapter.file) and self._fs_monitor.is_path_online(chapter.file):
+                chapter.delete()
 
     def _get_file_count_in_dir(self, dir):
         len([name for name in os.listdir(dir) if os.path.isfile(name)])

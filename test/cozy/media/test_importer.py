@@ -122,3 +122,48 @@ def test_scan_returns_none_for_non_audio_files(mocker):
     not_imported = importer._execute_import(["a"])
 
     assert not_imported == set()
+
+
+def test_delete_files_no_longer_existent_keeps_existent(mocker):
+    from cozy.media.importer import Importer
+
+    mocker.patch("os.path.isfile", return_value=True)
+    mocker.patch("cozy.control.filesystem_monitor.FilesystemMonitor.is_path_online", autospec=True, return_value=False)
+
+    importer = Importer()
+    chapter_count = len(importer._library.chapters)
+    book_count = len(importer._library.books)
+
+    importer._delete_files_no_longer_existent()
+
+    assert len(importer._library.chapters) == chapter_count
+    assert len(importer._library.books) == book_count
+
+
+def test_delete_files_no_longer_existent_keeps_online(mocker):
+    from cozy.media.importer import Importer
+
+    mocker.patch("os.path.isfile", return_value=False)
+    mocker.patch("cozy.control.filesystem_monitor.FilesystemMonitor.is_path_online", autospec=True, return_value=True)
+
+    importer = Importer()
+    chapter_count = len(importer._library.chapters)
+    book_count = len(importer._library.books)
+
+    importer._delete_files_no_longer_existent()
+
+    assert len(importer._library.chapters) == chapter_count
+    assert len(importer._library.books) == book_count
+
+
+def test_delete_files_no_longer_existent_deletes_files(mocker):
+    from cozy.media.importer import Importer
+
+    mocker.patch("os.path.isfile", return_value=False)
+    mocker.patch("cozy.control.filesystem_monitor.FilesystemMonitor.is_path_online", autospec=True, return_value=False)
+
+    importer = Importer()
+    importer._delete_files_no_longer_existent()
+
+    assert len(importer._library.chapters) == 0
+    assert len(importer._library.books) == 0

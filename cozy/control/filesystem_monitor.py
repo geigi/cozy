@@ -71,6 +71,10 @@ class FilesystemMonitor(EventSender):
             (storage.online for storage in self.external_storage if storage.storage.path in get_tracks(book).first().file), True)
         return (result)
 
+    def is_path_online(self, path: str) -> bool:
+        result = next((storage.online for storage in self.external_storage if storage.storage.path in path), True)
+        return result
+
     def is_track_online(self, track):
         """
         """

@@ -53,7 +53,14 @@ class Library:
         return self._files
 
     def invalidate(self):
+        for book in self._books:
+            book.destroy()
+
         self._books = []
+
+        for chapter in self._chapters:
+            chapter.destroy()
+
         self._chapters = set()
         self._files = set()
 
@@ -148,7 +155,19 @@ class Library:
                           for chapter
                           in book_chapters}
 
+        for chapter in self._chapters:
+            chapter.add_listener(self._on_chapter_event)
+
     def _load_all_files(self):
         self._files = {chapter.file
                        for chapter
                        in self.chapters}
+
+    def _on_chapter_event(self, event: str, chapter: Chapter):
+        if event == "chapter-deleted":
+            self._chapters.remove(chapter)
+            self._files.remove(chapter.file)
+
+    def _on_book_event(self, event: str, book: Book):
+        if event == "book-deleted":
+            self._books.remove(book)

@@ -9,11 +9,14 @@ class EventSender:
             message = event[1]
             event = event[0]
 
-        for function in self.__listeners:
+        for function in self._listeners:
             function(event, message)
 
     def emit_event_main_thread(self, event, message=None):
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.emit_event, (event, message))
 
     def add_listener(self, function):
-        self.__listeners.append(function)
+        self._listeners.append(function)
+
+    def destroy(self):
+        self._listeners = []
