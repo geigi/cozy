@@ -8,6 +8,7 @@ from urllib.parse import urlparse, unquote
 
 from cozy.architecture.profiler import timing
 from cozy.media.media_detector import MediaDetector, NotAnAudioFile, AudioFileCouldNotBeDiscovered
+from cozy.media.media_file import MediaFile
 from cozy.model.library import Library
 from cozy.architecture.event_sender import EventSender
 from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
@@ -61,7 +62,7 @@ class Importer(EventSender):
         while True:
             import_result = pool.map(self.import_file, itertools.islice(files_to_scan, 100))
             undetected_files.update({file for file in import_result if isinstance(file, str)})
-            media_files = {file for file in import_result if not isinstance(file, str)}
+            media_files = {file for file in import_result if isinstance(file, MediaFile)}
             new_or_changed_files.update((file.path for file in media_files))
 
             if len(media_files) != 0:

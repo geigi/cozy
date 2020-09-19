@@ -155,7 +155,7 @@ def test_execute_import_returns_list_of_imported_files(mocker):
     )
 
     def iterator():
-        for item in [media_file1, media_file2]:
+        for item in [media_file1, media_file2, None]:
             yield item
 
     mocker.patch("multiprocessing.pool.ThreadPool.map", return_value=iterator())
