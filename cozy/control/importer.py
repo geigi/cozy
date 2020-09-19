@@ -24,7 +24,6 @@ from mutagen.oggvorbis import OggVorbis
 from peewee import __version__ as PeeweeVersion
 from gi.repository import Gdk, GLib, Gst, GstPbutils
 
-import cozy.control.artwork_cache as artwork_cache
 import cozy.tools as tools
 from cozy.architecture.event_sender import EventSender
 from cozy.control.db import is_blacklisted, remove_invalid_entries
@@ -95,9 +94,6 @@ def update_database(ui, force=False):
     for location in Storage.select():
         if os.path.exists(location.path):
             paths.append(location.path)
-
-    # clean artwork cache
-    artwork_cache.delete_artwork_cache()
 
     # are UI buttons currently blocked?
     player_blocked, importer_blocked = ui.get_ui_buttons_blocked()
@@ -170,7 +166,6 @@ def update_database(ui, force=False):
 
     # remove entries from the db that are no longer existent
     remove_invalid_entries()
-    artwork_cache.generate_artwork_cache()
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, importer.emit_event, "import-finished")
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)

@@ -15,7 +15,6 @@ from gi.repository import Gtk, Gio
 
 from cozy.architecture.event_sender import EventSender
 
-import cozy.control.artwork_cache as artwork_cache
 import cozy.ui
 
 log = logging.getLogger("settings")
@@ -32,6 +31,9 @@ class Settings(EventSender):
     default_dark_mode = None
 
     def __init__(self):
+        from cozy.control.artwork_cache import ArtworkCache
+        self._artwork_cache: ArtworkCache = inject.instance(ArtworkCache)
+
         self.view_model = SettingsViewModel()
 
         self.ui = cozy.ui.main_view.CozyUI()
@@ -318,7 +320,7 @@ class Settings(EventSender):
         # otherwise this might be just the initial call when starting up
         if self.ui.is_initialized:
             self._glib_settings.set_boolean("prefer-external-cover", state)
-            artwork_cache.delete_artwork_cache()
+            self._artwork_cache.delete_artwork_cache()
             self.ui.refresh_content()
 
     def __on_force_refresh_clicked(self, widget):

@@ -1,8 +1,8 @@
-import cozy.control.artwork_cache as artwork_cache
 import cozy.control.player as player
 import cozy.tools as tools
 import cozy.ui
 from cozy.application_settings import ApplicationSettings
+from cozy.control.artwork_cache import ArtworkCache
 from cozy.control.db import get_book_remaining, get_book_progress, get_track_from_book_time, get_book_duration
 from cozy.control.string_representation import seconds_to_str
 from cozy.db.settings import Settings
@@ -28,6 +28,7 @@ class Titlebar:
     This class contains all titlebar logic.
     """
     _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
+    _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
     # main ui class
     ui = None
@@ -248,7 +249,7 @@ class Titlebar:
             else:
                 size = 40
             self.set_title_cover(
-                artwork_cache.get_cover_pixbuf(track.book, self.ui.window.get_scale_factor(), size), size)
+                self._artwork_cache.get_cover_pixbuf(track.book, self.ui.window.get_scale_factor(), size), size)
 
         self.current_remaining = get_book_remaining(
             self.current_book, False)

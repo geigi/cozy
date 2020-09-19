@@ -9,6 +9,7 @@ from cozy.db.offline_cache import OfflineCache
 from cozy.db.settings import Settings
 from cozy.db.storage import Storage
 from cozy.db.storage_blacklist import StorageBlackList
+from cozy.ext import inject
 
 
 def __update_db_1(db):
@@ -84,7 +85,8 @@ def __update_db_6(db):
 
 
 def __update_db_7(db):
-    import cozy.control.artwork_cache as artwork_cache
+    from cozy.control.artwork_cache import ArtworkCache
+    artwork_cache = inject.instance(ArtworkCache)
     artwork_cache.delete_artwork_cache()
     Settings.update(version=7).execute()
 

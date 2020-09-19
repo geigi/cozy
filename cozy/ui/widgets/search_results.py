@@ -1,6 +1,7 @@
 from gi.repository import Gtk, Gdk
-import cozy.control.artwork_cache as artwork_cache
 import cozy.tools as tools
+from cozy.control.artwork_cache import ArtworkCache
+from cozy.ext import inject
 from cozy.model.book import Book
 
 MAX_BOOK_LENGTH = 80
@@ -91,6 +92,7 @@ class BookSearchResult(SearchResult):
     """
     This class represents a book search result.
     """
+    _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
     def __init__(self, book: Book, on_click):
         super().__init__(on_click, book)
@@ -98,7 +100,7 @@ class BookSearchResult(SearchResult):
         self.set_tooltip_text(_("Play this book"))
         scale = self.get_scale_factor()
 
-        pixbuf = artwork_cache.get_cover_pixbuf(book.db_object, scale, BOOK_ICON_SIZE)
+        pixbuf = self._artwork_cache.get_cover_pixbuf(book.db_object, scale, BOOK_ICON_SIZE)
         if pixbuf:
             surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
             img = Gtk.Image.new_from_surface(surface)
