@@ -3,11 +3,12 @@ import logging
 import os
 from enum import Enum, auto
 from multiprocessing.pool import ThreadPool as Pool
-from typing import List
+from typing import List, Set
 from urllib.parse import urlparse, unquote
 
 from cozy.architecture.profiler import timing
 from cozy.media.media_detector import MediaDetector, NotAnAudioFile, AudioFileCouldNotBeDiscovered
+from cozy.media.media_file import MediaFile
 from cozy.model.library import Library
 from cozy.architecture.event_sender import EventSender
 from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
@@ -38,7 +39,7 @@ class Importer(EventSender):
         self.emit_event_main_thread("scan", ScanStatus.STARTED)
 
         files_to_scan = self._get_files_to_scan()
-        undetected_files = self._execute_import(files_to_scan)
+        new_or_changed_files, undetected_files = self._execute_import(files_to_scan)
         self._library.invalidate()
 
         logging.info("Deleting no longer present files from db")
@@ -46,20 +47,23 @@ class Importer(EventSender):
 
         logging.info("Import finished")
         self.emit_event_main_thread("scan", ScanStatus.SUCCESS)
+        self.emit_event_main_thread("new-or-updated-files", new_or_changed_files)
 
         if len(undetected_files) > 0:
             logging.info("Some files could not be imported:")
             logging.info(undetected_files)
             self.emit_event_main_thread("import-failed", undetected_files)
 
-    def _execute_import(self, files_to_scan: List[str]):
+    def _execute_import(self, files_to_scan: List[str]) -> (Set[str], Set[str]):
+        new_or_changed_files = set()
         undetected_files = set()
 
         pool = Pool()
         while True:
-            media_files = pool.map(self.import_file, itertools.islice(files_to_scan, 100))
-            undetected_files.update({file for file in media_files if isinstance(file, str)})
-            media_files = {file for file in media_files if not isinstance(file, str)}
+            import_result = pool.map(self.import_file, itertools.islice(files_to_scan, 100))
+            undetected_files.update({file for file in import_result if isinstance(file, str)})
+            media_files = {file for file in import_result if not isinstance(file, str)}
+            new_or_changed_files.update((file.path for file in media_files))
 
             if len(media_files) != 0:
                 self._library.insert_many(media_files)
@@ -67,7 +71,7 @@ class Importer(EventSender):
                 break
         pool.close()
 
-        return undetected_files
+        return new_or_changed_files, undetected_files
 
     def _get_files_to_scan(self) -> List[str]:
         paths_to_scan = self._get_configured_storage_paths()

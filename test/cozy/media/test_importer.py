@@ -91,7 +91,7 @@ def test_scan_emits_start_event(mocker):
     spy = mocker.spy(importer, "emit_event_main_thread")
     importer.scan()
 
-    spy.assert_has_calls(calls=[call("scan", ScanStatus.STARTED), call("scan", ScanStatus.SUCCESS)])
+    spy.assert_has_calls(calls=[call("scan", ScanStatus.STARTED), call("scan", ScanStatus.SUCCESS), call("scan", ScanStatus.SUCCESS)])
 
 
 def test_scan_returns_file_names_that_could_not_be_imported(mocker):
