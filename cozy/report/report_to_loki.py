@@ -6,17 +6,19 @@ import pytz
 import distro
 import platform
 
-
+from cozy.application_settings import ApplicationSettings
+from cozy.ext import inject
 from cozy.report.log_level import LogLevel
 from cozy.version import __version__ as CozyVersion
 from peewee import __version__ as PeeweeVersion
 from mutagen import version_string as MutagenVersion
+from apsw import apswversion as APSWVersion
 
 import gi
+
 gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk
-
 
 URL = 'https://cozy.geigi.dev:3100/api/prom/push'
 ENABLE = '@INSTALLED@'
@@ -33,6 +35,12 @@ def report(component: str, type: LogLevel, message: str, exception: Exception):
     if ENABLE != 'true':
         return
 
+    app_settings = inject.instance(ApplicationSettings)
+    report_level = app_settings.report_level
+
+    if report_level == 0:
+        return
+
     curr_datetime = datetime.datetime.now(pytz.timezone('Europe/Berlin'))
     curr_datetime = curr_datetime.isoformat('T')
 
@@ -46,16 +54,18 @@ def report(component: str, type: LogLevel, message: str, exception: Exception):
 
     labels = __append_label(labels, "app", "cozy")
     labels = __append_label(labels, "level", LOG_LEVEL_MAP[type])
-    labels = __append_label(labels, "distro", distro.name())
-    labels = __append_label(labels, "distro_version", distro.version())
 
+    labels = __append_label(labels, "gtk_version", "{}.{}".format(Gtk.get_major_version(), Gtk.get_minor_version()))
     labels = __append_label(labels, "python_version", platform.python_version())
     labels = __append_label(labels, "peewee_version", PeeweeVersion)
     labels = __append_label(labels, "mutagen_version", MutagenVersion)
-    labels = __append_label(labels, "gtk_version", "{}.{}".format(Gtk.get_major_version(), Gtk.get_minor_version()))
-    labels = __append_label(labels, "desktop_environment", os.environ.get('DESKTOP_SESSION'))
-
+    labels = __append_label(labels, "apsw_version", APSWVersion())
     labels = __append_label(labels, "version", CozyVersion)
+
+    if report_level > 1:
+        labels = __append_label(labels, "distro", distro.name())
+        labels = __append_label(labels, "distro_version", distro.version())
+        labels = __append_label(labels, "desktop_environment", os.environ.get('DESKTOP_SESSION'))
 
     line = "[{}] {}".format(LOG_LEVEL_MAP[type], message)
 

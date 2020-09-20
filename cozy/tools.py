@@ -6,7 +6,6 @@ from enum import Enum
 from gettext import ngettext
 import logging as log
 import distro
-from gi.repository import Gio
 import cozy.magic.magic as magic
 
 
@@ -43,14 +42,6 @@ def is_elementary():
         return True
     else:
         return False
-
-
-settings = Gio.Settings.new("com.github.geigi.cozy")
-
-
-def get_glib_settings():
-    global settings
-    return settings
 
 
 # https://stackoverflow.com/questions/323972/is-there-any-way-to-kill-a-thread-in-python
@@ -146,12 +137,3 @@ def past_date_to_human_readable(unix_time):
         return ngettext('{months} month ago', '{months} months ago', months).format(months=months)
     else:
         return ngettext('{years} year ago', '{years} years ago', years).format(years=years)
-
-
-def __get_media_type(path):
-    """
-    Get the mime type of a file.
-    :param path: Path to the file
-    :return: mime type as string
-    """
-    return magic.from_file(path, mime=True), magic.from_file(path)

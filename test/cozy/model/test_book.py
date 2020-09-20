@@ -219,3 +219,16 @@ def test_try_to_init_non_existant_book_throws_exception(peewee_database):
 
     with pytest.raises(DoesNotExist):
         Book(peewee_database, -42)
+
+
+def test_delete_deletes_book_from_db(peewee_database, mocker):
+    from cozy.model.book import Book
+    from cozy.db.book import Book as BookModel
+
+    book = Book(peewee_database, 1)
+    spy = mocker.spy(book, "emit_event")
+    book._on_chapter_event("chapter-deleted", book.chapters[0])
+
+    assert BookModel.select().where(BookModel.id == 1).count() < 1
+    spy.assert_called_once_with("book-deleted", book)
+    assert len(book._listeners) < 1

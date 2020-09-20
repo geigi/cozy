@@ -1,22 +1,24 @@
 import os
 
 from gi.repository import Gtk
-import cozy.control.importer as importer
 import cozy.control.player as player
 import cozy.ui
 from cozy.db.track import Track
+from cozy.ext import inject
+from cozy.media.importer import Importer
 
 
 class FileNotFoundDialog():
     """
     Dialog that prompts the user to update a files location.
     """
+    _importer: Importer = inject.attr(Importer)
 
     def __init__(self, file):
         self.missing_file = file
         self.parent = cozy.ui.main_view.CozyUI()
         self.builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/file_not_found.ui")
+            "/com/github/geigi/cozy/file_not_found.ui")
         self.dialog = self.builder.get_object("dialog")
         self.dialog.set_transient_for(self.parent.window)
         self.builder.get_object("file_label").set_markup(
@@ -75,7 +77,7 @@ class FileNotFoundDialog():
                 Track.file == self.missing_file).execute()
 
             directory, filename = os.path.split(new_location)
-            importer.import_file(filename, directory, new_location, update=True)
+            self._importer.scan()
             self.parent.refresh_content()
             self.dialog.destroy()
             self.parent.dialog_open = False

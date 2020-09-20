@@ -84,7 +84,8 @@ def __update_db_6(db):
 
 
 def __update_db_7(db):
-    import cozy.control.artwork_cache as artwork_cache
+    from cozy.control.artwork_cache import ArtworkCache
+    artwork_cache = ArtworkCache()
     artwork_cache.delete_artwork_cache()
     Settings.update(version=7).execute()
 

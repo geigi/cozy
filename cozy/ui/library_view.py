@@ -1,6 +1,7 @@
 from gi.repository import Gtk
 from gi.repository.Gtk import Builder
 
+from cozy.ext import inject
 from cozy.ui.book_element import BookElement
 from cozy.ui.widgets.filter_list_box import FilterListBox
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
@@ -10,14 +11,14 @@ AUTHOR_PAGE = "author"
 RECENT_PAGE = "recent"
 MAIN_BOOK_PAGE = "main"
 MAIN_NO_RECENT_PAGE = "nothing_here"
+NO_MEDIA_PAGE = "no_media"
 
 
 class LibraryView:
+    _view_model = inject.attr(LibraryViewModel)
 
-    def __init__(self, builder: Builder, view_model: LibraryViewModel):
+    def __init__(self, builder: Builder):
         self._builder = builder
-
-        self._view_model = view_model
 
         self._get_ui_elements()
         self._connect_ui_elements()
@@ -92,7 +93,11 @@ class LibraryView:
         view_mode = self._view_model.library_view_mode
         main_view_page = MAIN_BOOK_PAGE
 
-        if view_mode == LibraryViewMode.CURRENT:
+        if len(self._view_model.books) < 1:
+            main_view_page = NO_MEDIA_PAGE
+            visible_child_name = RECENT_PAGE
+            reveal_filter_box = False
+        elif view_mode == LibraryViewMode.CURRENT:
             visible_child_name = RECENT_PAGE
             reveal_filter_box = False
             if not self._view_model.is_any_book_in_progress:

@@ -1,8 +1,14 @@
 from abc import ABC, abstractmethod
 
+from cozy.architecture.event_sender import EventSender
 
-class Chapter(ABC):
+
+class Chapter(ABC, EventSender):
     id: int
+
+    def __init__(self):
+        super().__init__()
+        super(ABC, self).__init__()
 
     @property
     @abstractmethod
@@ -46,7 +52,7 @@ class Chapter(ABC):
 
     @property
     @abstractmethod
-    def file(self):
+    def file(self) -> str:
         pass
 
     @file.setter
@@ -72,4 +78,8 @@ class Chapter(ABC):
     @modified.setter
     @abstractmethod
     def modified(self, new_modified: int):
+        pass
+
+    @abstractmethod
+    def delete(self):
         pass

@@ -1,6 +1,7 @@
 from gettext import gettext
 
 import gi
+import cozy.ext.inject as inject
 
 from cozy.control.filesystem_monitor import FilesystemMonitor
 
@@ -9,18 +10,20 @@ from gi.repository import Gtk
 
 
 class Warnings():
+    _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
+
     def __init__(self, button: Gtk.MenuButton):
         self.button = button
 
         self.builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/warning_popover.ui")
+            "/com/github/geigi/cozy/warning_popover.ui")
 
         self.popover = self.builder.get_object("warning_popover")
         self.warning_container: Gtk.Box = self.builder.get_object("warning_container")
 
-        FilesystemMonitor().add_listener(self.__on_storage_changed)
+        self._fs_monitor.add_listener(self.__on_storage_changed)
 
-        for storage in FilesystemMonitor().get_offline_storages():
+        for storage in self._fs_monitor.get_offline_storages():
             self.append_text(gettext('{storage} is offline.').format(storage=storage))
 
         self.__hide_show_button()

@@ -4,7 +4,7 @@
     <section>
       <item>
         <attribute name="action">app.scan</attribute>
-        <attribute name="label" translatable="yes">_Scan Directory</attribute>
+        <attribute name="label" translatable="yes">_Scan Library</attribute>
       </item>
     </section>
     <section>

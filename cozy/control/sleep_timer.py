@@ -9,6 +9,8 @@ import cozy.ui
 import gi
 
 # from cozy.magic.magic import platform as osplatform
+from cozy.application_settings import ApplicationSettings
+from cozy.ext import inject
 
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
@@ -23,6 +25,8 @@ class SleepTimer:
     """
     This class contains all timer logic.
     """
+    _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
+
     ui = None
     sleep_timer = None
     current_timer_time = 0
@@ -31,7 +35,7 @@ class SleepTimer:
     def __init__(self):
         self.ui = cozy.ui.main_view.CozyUI()
 
-        self.builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/timer_popover.ui")
+        self.builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/timer_popover.ui")
 
         self.timer_popover = self.builder.get_object("timer_popover")
         self.timer_scale = self.builder.get_object("timer_scale")
@@ -99,8 +103,8 @@ class SleepTimer:
         :param value: Time in minutes.
         """
         fadeout = 0
-        if tools.get_glib_settings().get_boolean("sleep-timer-fadeout"):
-            fadeout = tools.get_glib_settings().get_int("sleep-timer-fadeout-duration")
+        if self._app_settings.sleep_timer_fadeout:
+            fadeout = self._app_settings.sleep_timer_fadeout_duration
         self.current_timer_time = value * 60 - fadeout
 
     def is_running(self):
@@ -148,7 +152,7 @@ class SleepTimer:
             return
 
         if self.sleep_timer and not self.sleep_timer.isAlive:
-            tools.get_glib_settings().set_int("timer", int(value))
+            self._app_settings.timer = int(value)
 
         text = str(int(value))
         self.timer_label.set_text(text)
@@ -204,8 +208,8 @@ class SleepTimer:
         """
         Stops playback after gradually fading out (if enabled).
         """
-        if tools.get_glib_settings().get_boolean("sleep-timer-fadeout"):
-            duration = tools.get_glib_settings().get_int("sleep-timer-fadeout-duration") * 20
+        if self._app_settings.sleep_timer_fadeout:
+            duration = self._app_settings.sleep_timer_fadeout_duration * 20
             current_vol = player.get_volume()
             for i in range(0, duration):
                 player.set_volume(max(current_vol - (i / duration), 0))

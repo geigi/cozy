@@ -1,6 +1,7 @@
 import threading
 from threading import Thread
 
+from cozy.ext import inject
 from cozy.ui.widgets.search_results import BookSearchResult, ArtistSearchResult
 
 import gi
@@ -12,13 +13,13 @@ from gi.repository import Gtk, GLib
 
 
 class SearchView:
+    view_model = inject.attr(SearchViewModel)
+
     search_thread = None
     search_thread_stop = None
 
-    def __init__(self, main_window_builder: Gtk.Builder, view_model: SearchViewModel):
-        self.view_model: SearchViewModel = view_model
-
-        self.builder = Gtk.Builder.new_from_resource("/de/geigi/cozy/search_popover.ui")
+    def __init__(self, main_window_builder: Gtk.Builder):
+        self.builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/search_popover.ui")
         self.main_window_builder: Gtk.Builder = main_window_builder
 
         self.popover = self.builder.get_object("search_popover")

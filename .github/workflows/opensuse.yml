@@ -11,7 +11,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v1
@@ -21,7 +21,7 @@ jobs:
         mkdir -p ~/.config/osc
         sudo apt-get update
         sudo apt-get install nodejs-dev node-gyp libssl1.0-dev
-        sudo apt-get install osc npm
+        sudo apt-get install osc npm python3-m2crypto
         sudo npm install -g json
 
     - name: Setup osc login

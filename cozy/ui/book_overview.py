@@ -1,12 +1,13 @@
 from gi.repository import Gtk, Gdk, Gst
 
-import cozy.control.artwork_cache as artwork_cache
 import cozy.tools as tools
 import cozy.control.player as player
 import cozy.ui
+from cozy.control.artwork_cache import ArtworkCache
 from cozy.control.db import get_book_duration, get_tracks, is_external, get_book_progress, get_book_remaining, \
     get_track_for_playback
 from cozy.db.book import Book
+from cozy.ext import inject
 
 from cozy.ui.track_element import TrackElement
 from cozy.ui.settings import Settings
@@ -18,6 +19,9 @@ class BookOverview:
     """
     This class contains all logic for the book overview.
     """
+    _settings = inject.attr(Settings)
+    _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
+
     book = None
     current_track_element = None
     switch_signal = None
@@ -50,7 +54,7 @@ class BookOverview:
 
         self.ui.speed.add_listener(self.__ui_changed)
         player.add_player_listener(self.__player_changed)
-        Settings().add_listener(self.__settings_changed)
+        self._settings.add_listener(self.__settings_changed)
         OfflineCache().add_listener(self.__on_offline_cache_changed)
 
     def set_book(self, book):
@@ -72,7 +76,7 @@ class BookOverview:
 
         self.update_offline_status()
 
-        pixbuf = artwork_cache.get_cover_pixbuf(
+        pixbuf = self._artwork_cache.get_cover_pixbuf(
             book, self.ui.window.get_scale_factor(), 250)
         if pixbuf:
             surface = Gdk.cairo_surface_create_from_pixbuf(

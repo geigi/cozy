@@ -19,30 +19,26 @@
 
 import argparse
 import code
-import locale
 import logging
 import os
 import signal
 import sys
 import traceback
-import distro
-from traceback import format_exception
 import gi
-
-from cozy.app_controller import AppController
-from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.ui.widgets.list_box_extensions import extend_gtk_container
 
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 
-from cozy.report import reporter
-from cozy.version import __version__
-from pathlib import Path
-from gi.repository import Gtk, GObject, GLib
-from cozy.ui.main_view import CozyUI
-from cozy.control.db import init_db, Settings
-from cozy.control.mpris import MPRIS
+pkgdatadir = '@DATA_DIR@'
+localedir = '@LOCALE_DIR@'
+
+from gi.repository import Gio
+
+# gresource must be registered  before importing any Gtk.Template annotated classes
+resource = Gio.Resource.load(os.path.join(pkgdatadir, 'com.github.geigi.cozy.ui.gresource'))
+resource._register()
+
+from gi.repository import GLib
 
 old_except_hook = None
 
@@ -50,8 +46,6 @@ log = logging.getLogger("main")
 data_dir = os.path.join(GLib.get_user_data_dir(), "cozy")
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)
-pkgdatadir = '@DATA_DIR@'
-localedir = '@LOCALE_DIR@'
 LOG_FORMAT = "%(asctime)s [%(threadName)-12.12s] [%(name)-10.10s] [%(levelname)-5.5s]  %(message)s"
 LOG_DATE_FORMAT = "%H:%M:%S"
 
@@ -62,63 +56,6 @@ if os.path.exists(log1):
     os.remove(log1)
 if os.path.exists(os.path.join(data_dir, "cozy.log")):
     os.rename(log0, log1)
-
-
-class Application(Gtk.Application):
-    def __init__(self, **kwargs):
-        self.ui: CozyUI = None
-        self.app_controller: AppController = None
-
-        listen()
-        Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
-        GLib.setenv("PULSE_PROP_media.role", "music", True)
-        GLib.set_application_name("Cozy")
-
-        self.old_except_hook = sys.excepthook
-        sys.excepthook = self.handle_exception
-
-        import gettext
-        locale.bindtextdomain('com.github.geigi.cozy', localedir)
-        locale.textdomain('com.github.geigi.cozy')
-        gettext.install('com.github.geigi.cozy', localedir)
-
-    def do_startup(self):
-        log.info(distro.linux_distribution(full_distribution_name=False))
-        log.info("Starting up cozy " + __version__)
-        self.ui = CozyUI(pkgdatadir, self, __version__)
-        init_db()
-        Gtk.Application.do_startup(self)
-        self.ui.startup()
-
-    def do_activate(self):
-        main_window_builder = self.ui.get_builder()
-        self.app_controller = AppController(main_window_builder, self.ui)
-
-        self.ui.activate(self.app_controller.library_view)
-
-        if Settings.get().first_start:
-            Settings.update(first_start=False).execute()
-            path = str(Path.home()) + "/Audiobooks"
-            Settings.update(path=str(Path.home()) + "/Audiobooks").execute()
-
-            if not os.path.exists(path):
-                os.makedirs(path)
-            else:
-                self.ui.scan(None, True)
-                self.ui.refresh_content()
-
-        self.add_window(self.ui.window)
-        mpris = MPRIS(self)
-        mpris._on_current_changed(None)
-
-    def handle_exception(self, exc_type, exc_value, exc_traceback):
-        print("handle exception")
-        try:
-            reporter.exception("uncaught", exc_value, "\n".join(format_exception(exc_type, exc_value, exc_traceback)))
-        except:
-            pass
-
-        self.old_except_hook(exc_type, exc_value, exc_traceback)
 
 
 def __on_command_line():
@@ -156,7 +93,9 @@ def main():
     extend_classes()
     init_custom_widgets()
 
-    application = Application()
+    listen()
+
+    application = Application(localedir, pkgdatadir)
 
     try:
         # Handle the debug option seperatly without the Glib stuff
@@ -187,4 +126,16 @@ def listen():
 
 
 if __name__ == '__main__':
+    import multiprocessing as mp
+    mp.set_start_method('spawn')
+
+    # All cozy imports are happening here because multiprocessing needs to be setup first
+    # Some modules import multiprocessing which would lead to an exception
+    # when setting the start method
+    from cozy.ui.application import Application
+    from cozy.ui.widgets.filter_list_box import FilterListBox
+    from cozy.ui.widgets.list_box_extensions import extend_gtk_container
+    from cozy.ui.widgets.filter_list_box import FilterListBox
+    from cozy.ui.widgets.list_box_extensions import extend_gtk_container
+
     main()
