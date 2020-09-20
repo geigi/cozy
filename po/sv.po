@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-17 22:06+0200\n"
+"POT-Creation-Date: 2020-09-20 18:23+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Åke Engelbrektson, 2020\n"
 "Language-Team: Swedish (https://www.transifex.com/geigi/teams/78138/sv/)\n"
@@ -21,15 +21,7 @@ msgstr ""
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/control/importer.py:301
-msgid "Unknown Author"
-msgstr "Okänd författare"
-
-#: cozy/control/importer.py:303
-msgid "Unknown Reader"
-msgstr "Okänd uppläsare"
-
-#: cozy/control/offline_cache.py:182
+#: cozy/control/offline_cache.py:188
 msgid "Copying"
 msgstr "Kopierar"
 
@@ -104,7 +96,7 @@ msgid_plural "{years} years ago"
 msgstr[0] "{years} år sedan"
 msgstr[1] "{years} år sedan"
 
-#: cozy/ui/album_element.py:59 cozy/ui/widgets/search_results.py:98
+#: cozy/ui/album_element.py:63 cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
 msgstr "Spela upp denna bok"
 
@@ -128,11 +120,11 @@ msgstr "Öppna i filhanterare"
 msgid "Remove from library"
 msgstr "Ta bort från biblioteket"
 
-#: cozy/ui/book_overview.py:228
+#: cozy/ui/book_overview.py:229
 msgid "Downloaded"
 msgstr "Nerladdat"
 
-#: cozy/ui/book_overview.py:231 data/ui/main_window.ui:1024
+#: cozy/ui/book_overview.py:232 data/ui/main_window.ui:1024
 msgid "Download"
 msgstr "Ladda ner"
 
@@ -140,27 +132,27 @@ msgstr "Ladda ner"
 msgid "Disc"
 msgstr "Skiva"
 
-#: cozy/ui/file_not_found_dialog.py:67
+#: cozy/ui/file_not_found_dialog.py:69
 msgid "All files"
 msgstr "Alla filer"
 
-#: cozy/ui/main_view.py:409
+#: cozy/ui/main_view.py:411
 msgid "Audiobooks"
 msgstr "Ljudböcker"
 
-#: cozy/ui/main_view.py:426
+#: cozy/ui/main_view.py:645
 msgid "Importing Audiobooks"
 msgstr "Importerar ljudböcker"
 
-#: cozy/ui/widgets/search_results.py:72
+#: cozy/ui/widgets/search_results.py:73
 msgid "Jump to author "
 msgstr "Gå till författare "
 
-#: cozy/ui/widgets/search_results.py:75
+#: cozy/ui/widgets/search_results.py:76
 msgid "Jump to reader "
 msgstr "Gå till uppläsare "
 
-#: cozy/ui/settings.py:84
+#: cozy/ui/settings.py:87
 msgid "Feedback"
 msgstr "Återkoppling"
 
@@ -174,8 +166,8 @@ msgid "{storage} is offline."
 msgstr "{storage} är offline."
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:34
-#: cozy/view_model/library_view_model.py:127
+#: cozy/view_model/library_view_model.py:37
+#: cozy/view_model/library_view_model.py:131
 msgid "All"
 msgstr "Alla"
 
@@ -729,26 +721,26 @@ msgid "shutdown"
 msgstr "Stäng av"
 
 #: data/ui/titlebar_menu.ui:7
-msgid "_Scan Directory"
-msgstr "_Skanna mappen"
+msgid "_Scan Library"
+msgstr "_Skanna biblioteket"
 
-#: data/ui/titlebar_menu.ui:17
+#: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
 msgstr "_Dölj icke tillgängliga böcker"
 
-#: data/ui/titlebar_menu.ui:23
+#: data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
 msgstr "_Inställningar"
 
-#: data/ui/titlebar_menu.ui:29
+#: data/ui/titlebar_menu.ui:25
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: data/ui/titlebar_menu.ui:33
+#: data/ui/titlebar_menu.ui:29
 msgid "_About"
 msgstr "_Om"
 
-#: data/ui/titlebar_menu.ui:37
+#: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "A_vsluta"
 
