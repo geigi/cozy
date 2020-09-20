@@ -70,7 +70,7 @@ class Importer(EventSender):
             media_files = {file for file in import_result if isinstance(file, MediaFile)}
             new_or_changed_files.update((file.path for file in media_files))
 
-            progress += len(import_result)
+            progress += 100
             self.emit_event_main_thread("scan-progress", progress / files_count)
 
             if len(media_files) != 0:
