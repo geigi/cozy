@@ -21,6 +21,7 @@ from cozy.ui.titlebar import Titlebar
 from cozy.ui.settings import Settings
 from cozy.ui.book_overview import BookOverview
 from cozy.architecture.singleton import Singleton
+from cozy.model.settings import Settings as SettingsModel
 import cozy.report.reporter as report
 import cozy.control.importer as importer
 import cozy.control.player as player
@@ -54,6 +55,7 @@ class CozyUI(metaclass=Singleton):
     settings = inject.attr(Settings)
     application_settings = inject.attr(ApplicationSettings)
     _importer: Importer = inject.attr(Importer)
+    _settings: SettingsModel = inject.attr(SettingsModel)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -519,6 +521,7 @@ class CozyUI(metaclass=Singleton):
         external = self.external_switch.get_active()
         Storage.delete().where(Storage.path != "").execute()
         Storage.create(path=location, default=True, external=external)
+        self._settings.invalidate()
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, None)
         self.settings._init_storage()
@@ -637,6 +640,8 @@ class CozyUI(metaclass=Singleton):
         return self.window_builder
 
     def _on_importer_event(self, event: str, message):
-        if event == "scan" and message == ScanStatus.SUCCESS:
+        if event == "scan" and message == ScanStatus.STARTED:
+            self.switch_to_working(_("Importing Audiobooks"))
+        elif event == "scan" and message == ScanStatus.SUCCESS:
             self.switch_to_playing()
             self.check_for_tracks()

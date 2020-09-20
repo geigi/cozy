@@ -7,7 +7,7 @@ from cozy.control.db import get_book_remaining, get_book_progress, get_track_fro
 from cozy.control.string_representation import seconds_to_str
 from cozy.db.settings import Settings
 from cozy.ext import inject
-from cozy.media.importer import Importer
+from cozy.media.importer import Importer, ScanStatus
 from cozy.model.library import Library
 from cozy.tools import IntervalTimer
 
@@ -292,6 +292,8 @@ class Titlebar:
         self.status_stack.props.visible_child_name = "playback"
         self.throbber.stop()
         self.throbber.set_visible(False)
+        self.progress_bar.set_fraction(0)
+        self.update_progress_bar.set_fraction(0)
 
     def load_last_book(self):
         if Settings.get().last_played_book:
@@ -503,6 +505,7 @@ class Titlebar:
 
     def _on_importer_event(self, event: str, message):
         if event == "scan-progress":
+            self.progress_bar.set_fraction(message)
             self.update_progress_bar.set_fraction(message)
 
     def _on_library_event(self, event: str, message):

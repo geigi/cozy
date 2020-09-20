@@ -81,6 +81,7 @@ class Importer(EventSender):
 
         return new_or_changed_files, undetected_files
 
+    @timing
     def _count_files_to_scan(self) -> int:
         files_to_scan = self._get_files_to_scan()
 
