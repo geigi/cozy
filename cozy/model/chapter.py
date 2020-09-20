@@ -52,7 +52,7 @@ class Chapter(ABC, EventSender):
 
     @property
     @abstractmethod
-    def file(self):
+    def file(self) -> str:
         pass
 
     @file.setter

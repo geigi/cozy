@@ -74,28 +74,6 @@ def b64tobinary(b64):
     return data
 
 
-### TODO ###
-def rebase_location(ui, oldPath, newPath):
-    """
-    This gets called when a user changes the location of the audio book folder.
-    Every file in the database updated with the new path.
-    Note: This does not check for the existence of those files.
-    """
-    trackCount = Track.select().count()
-    currentTrackCount = 0
-    for track in Track.select():
-        newFilePath = track.file.replace(oldPath, newPath)
-        Track.update(file=newFilePath).where(
-            Track.id == track.id).execute()
-        StorageBlackList.update(path=newFilePath).where(
-            StorageBlackList.path == track.file).execute()
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE,
-                             ui.titlebar.update_progress_bar.set_fraction, currentTrackCount / trackCount)
-        currentTrackCount = currentTrackCount + 1
-
-    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.switch_to_playing)
-
-
 def import_file(file, directory, path, update=False):
     """
     Imports all information about a track into the database.

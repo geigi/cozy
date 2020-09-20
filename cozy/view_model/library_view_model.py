@@ -3,6 +3,7 @@ from enum import Enum, auto
 import cozy.ext.inject as inject
 
 from cozy.application_settings import ApplicationSettings
+from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.extensions.set import split_strings_to_set
@@ -20,7 +21,7 @@ class LibraryViewMode(Enum):
     READER = auto()
 
 
-class LibraryViewModel(Observable):
+class LibraryViewModel(Observable, EventSender):
     _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
     _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
     _model = inject.attr(Library)
@@ -28,6 +29,7 @@ class LibraryViewModel(Observable):
 
     def __init__(self):
         super().__init__()
+        super(Observable, self).__init__()
 
         self._player: Player = Player()
 
@@ -41,6 +43,7 @@ class LibraryViewModel(Observable):
         self._application_settings.add_listener(self._on_application_setting_changed)
         self._importer.add_listener(self._on_importer_event)
         self._player.add_listener(self._on_player_event)
+        self._model.add_listener(self._on_model_event)
 
     @property
     def books(self):
@@ -185,3 +188,7 @@ class LibraryViewModel(Observable):
             if book:
                 book.reload()
                 self._notify("books-filter")
+
+    def _on_model_event(self, event: str, message):
+        if event == "rebase-finished":
+            self.emit_event("work-done")

@@ -4,8 +4,10 @@ from threading import Thread
 from gi.repository import Gtk
 
 import cozy.ui
-from cozy.control import importer as importer
 from cozy.db.storage import Storage
+from cozy.ext import inject
+from cozy.model.library import Library
+from cozy.model.storage_block_list import StorageBlockList
 
 log = logging.getLogger("settings")
 
@@ -14,6 +16,8 @@ class StorageListBoxRow(Gtk.ListBoxRow):
     """
     This class represents a listboxitem for a storage location.
     """
+    _library: Library = inject.attr(Library)
+    _block_list: StorageBlockList = inject.attr(StorageBlockList)
 
     def __init__(self, parent, db_id, path, external, default=False):
         super(Gtk.ListBoxRow, self).__init__()
@@ -120,8 +124,8 @@ class StorageListBoxRow(Gtk.ListBoxRow):
             self.parent.emit_event("storage-changed", self.path)
             log.info("Audio book location changed, rebasing the location in cozy.")
             self.ui.switch_to_working(_("Changing audio book location…"), False)
-            thread = Thread(target=importer.rebase_location, args=(
-                self.ui, old_path, new_path), name="RebaseStorageLocationThread")
+            self._block_list.rebase_path(old_path, new_path)
+            thread = Thread(target=self._library.rebase_path, args=(old_path, new_path), name="RebaseStorageLocationThread")
             thread.start()
 
     def __get_type_image(self):

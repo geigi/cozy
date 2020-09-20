@@ -48,6 +48,7 @@ def peewee_database():
 def peewee_database_storage():
     from cozy.db.storage import Storage
     from cozy.db.settings import Settings
+    from cozy.db.storage_blacklist import StorageBlackList
 
     db_path, models, test_db = prepare_db()
     path_of_test_folder = os.path.dirname(os.path.realpath(__file__)) + '/'
@@ -57,6 +58,8 @@ def peewee_database_storage():
 
     Storage.insert_many(storage_data).execute()
     Settings.create(path="", last_played_book=None)
+    StorageBlackList.create(path="/path/to/replace/test1.mp3")
+    StorageBlackList.create(path="/path/to/not/replace/test2.mp3")
 
     print("Provide database...")
     yield test_db

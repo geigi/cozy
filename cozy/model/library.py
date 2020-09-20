@@ -3,6 +3,8 @@ from typing import List, Set
 
 from peewee import SqliteDatabase
 
+from cozy.architecture.event_sender import EventSender
+from cozy.architecture.profiler import timing
 from cozy.db.book import Book as BookModel
 from cozy.db.track import Track
 from cozy.ext import inject
@@ -16,12 +18,15 @@ from cozy.model.chapter import Chapter
 log = logging.getLogger("ui")
 
 
-class Library:
+class Library(EventSender):
     _db = cache = inject.attr(SqliteDatabase)
 
     _books: List[Book] = []
     _chapters: Set[Chapter] = set()
     _files: Set[str] = set()
+
+    def __init__(self):
+        super().__init__()
 
     @property
     def authors(self):
@@ -67,6 +72,18 @@ class Library:
 
         self._chapters = set()
         self._files = set()
+
+    @timing
+    def rebase_path(self, old_path: str, new_path: str):
+        chapter_count = len(self.chapters)
+        progress = 0
+        for chapter in self.chapters:
+            if chapter.file.startswith(old_path):
+                progress += 1
+                chapter.file = chapter.file.replace(old_path, new_path)
+                self.emit_event_main_thread("rebase-progress", progress / chapter_count)
+
+        self.emit_event_main_thread("rebase-finished")
 
     def insert_many(self, media_files: Set[MediaFile]):
         tracks = self._prepare_db_objects(media_files)

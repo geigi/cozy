@@ -10,6 +10,7 @@ from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.model.book import Book
 from cozy.model.library import Library
 from cozy.model.settings import Settings
+from cozy.model.storage_block_list import StorageBlockList
 from cozy.open_view import OpenView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.main_view import CozyUI
@@ -36,6 +37,7 @@ class AppController(metaclass=Singleton):
         self.search_view_model = inject.instance(SearchViewModel)
 
         self.search_view_model.add_listener(self._on_open_view)
+        self.library_view_model.add_listener(self._on_library_view_event)
 
     @staticmethod
     def configure_inject(binder):
@@ -48,6 +50,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(LibraryViewModel, lambda: LibraryViewModel())
         binder.bind_to_constructor(SearchViewModel, lambda: SearchViewModel())
         binder.bind_to_constructor(UISettings, lambda: UISettings())
+        binder.bind_to_constructor(StorageBlockList, lambda: StorageBlockList())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR
@@ -67,3 +70,7 @@ class AppController(metaclass=Singleton):
             self.open_reader(data)
         elif event == OpenView.BOOK:
             self.open_book(data)
+
+    def _on_library_view_event(self, event: str, data):
+        if event == "work-done":
+            self.main_window.switch_to_playing()
