@@ -9,7 +9,6 @@ from cozy.control.db import get_tracks
 from cozy.model.book import Book
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage
-from cozy.ui.settings import Settings as UISettings
 
 log = logging.getLogger("fs_monitor")
 
@@ -30,15 +29,17 @@ class ExternalStorage:
 class FilesystemMonitor(EventSender):
     external_storage: List[ExternalStorage] = []
     _settings: Settings = inject.attr(Settings)
-    _ui_settings: UISettings = inject.attr(UISettings)
 
     def __init__(self):
+        super().__init__()
         self.volume_monitor = Gio.VolumeMonitor.get()
         self.volume_monitor.connect("mount-added", self.__on_mount_added)
         self.volume_monitor.connect("mount-removed", self.__on_mount_removed)
 
         self.init_offline_mode()
 
+        from cozy.ui.settings import Settings as UISettings
+        self._ui_settings = inject.instance(UISettings)
         self._ui_settings.add_listener(self.__on_settings_changed)
 
     def init_offline_mode(self):
@@ -70,6 +71,10 @@ class FilesystemMonitor(EventSender):
         result = next(
             (storage.online for storage in self.external_storage if storage.storage.path in get_tracks(book).first().file), True)
         return (result)
+
+    def is_path_online(self, path: str) -> bool:
+        result = next((storage.online for storage in self.external_storage if storage.storage.path in path), True)
+        return result
 
     def is_track_online(self, track):
         """

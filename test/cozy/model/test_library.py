@@ -311,3 +311,36 @@ def test_prepare_db_objects_raises_not_implemented_for_multi_chapter_file(mocker
     with pytest.raises(NotImplementedError):
         res_dict = library._prepare_db_objects([media_file])
         list(res_dict)
+
+
+def test_deleted_chapter_removed_from_lists():
+    from cozy.model.library import Library
+
+    library = Library()
+
+    chapter = next(iter(library.chapters))
+    library._load_all_files()
+    library._load_all_chapters()
+    library._on_chapter_event("chapter-deleted", next(iter(library.chapters)))
+
+    assert chapter not in library.chapters
+    assert chapter.file not in library.files
+
+
+def test_deleted_book_removed_from_list():
+    from cozy.model.library import Library
+
+    library = Library()
+
+    book = next(iter(library.books))
+    library._on_book_event("book-deleted", next(iter(library.books)))
+
+    assert book not in library.books
+
+
+def test_rebase_path():
+    from cozy.model.library import Library
+
+    library = Library()
+    chapters = {chapter for chapter in library.chapters if chapter.file.startswith("20.000 Meilen unter dem Meer")}
+    library.rebase_path("20.000 Meilen unter dem Meer", "new path")

@@ -4,11 +4,7 @@
     <section>
       <item>
         <attribute name="action">app.scan</attribute>
-        <attribute name="label" translatable="yes">_Scan Directory</attribute>
-      </item>
-      <item>
-        <attribute name="action">app.new_scan</attribute>
-        <attribute name="label" translatable="no">_NEW SCAN</attribute>
+        <attribute name="label" translatable="yes">_Scan Library</attribute>
       </item>
     </section>
     <section>

@@ -8,6 +8,7 @@ class ApplicationSettings(EventSender):
     _settings: Gio.Settings = inject.attr(Gio.Settings)
 
     def __init__(self):
+        super().__init__()
         self._connect()
 
     def _connect(self):
@@ -71,3 +72,19 @@ class ApplicationSettings(EventSender):
     @timer.setter
     def timer(self, new_value: int):
         self._settings.set_int("timer", new_value)
+
+    @property
+    def report_level(self) -> int:
+        return self._settings.get_int("report-level")
+
+    @report_level.setter
+    def report_level(self, new_value: int):
+        self._settings.set_int("report-level", new_value)
+
+    @property
+    def last_launched_version(self) -> str:
+        return self._settings.get_string("last-launched-version")
+
+    @last_launched_version.setter
+    def last_launched_version(self, new_value: str):
+        self._settings.set_string("last-launched-version", new_value)

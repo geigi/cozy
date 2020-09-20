@@ -1,6 +1,8 @@
 from typing import List
 
 from peewee import SqliteDatabase
+
+from cozy.architecture.event_sender import EventSender
 from cozy.db.book import Book as BookModel
 from cozy.db.storage_blacklist import StorageBlackList
 from cozy.db.track import Track as TrackModel
@@ -12,10 +14,11 @@ class BookIsEmpty(Exception):
     pass
 
 
-class Book:
+class Book(EventSender):
     _chapters: List[Chapter] = None
 
     def __init__(self, db: SqliteDatabase, id: int):
+        super().__init__()
         self._db: SqliteDatabase = db
         self.id: int = id
 
@@ -167,3 +170,16 @@ class Book:
                 .where(TrackModel.book == self._db_object) \
                 .order_by(TrackModel.disk, TrackModel.number, TrackModel.name)
             self._chapters = [Track(self._db, track.id) for track in tracks]
+
+        for chapter in self._chapters:
+            chapter.add_listener(self._on_chapter_event)
+
+    def _on_chapter_event(self, event: str, chapter: Chapter):
+        if event == "chapter-deleted":
+            self._chapters.remove(chapter)
+
+            if len(self._chapters) < 1:
+                with self._db:
+                    self._db_object.delete().execute()
+                self.emit_event("book-deleted", self)
+                self.destroy()

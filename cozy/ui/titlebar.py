@@ -1,17 +1,18 @@
-import cozy.control.artwork_cache as artwork_cache
 import cozy.control.player as player
 import cozy.tools as tools
 import cozy.ui
 from cozy.application_settings import ApplicationSettings
+from cozy.control.artwork_cache import ArtworkCache
 from cozy.control.db import get_book_remaining, get_book_progress, get_track_from_book_time, get_book_duration
 from cozy.control.string_representation import seconds_to_str
 from cozy.db.settings import Settings
 from cozy.ext import inject
+from cozy.media.importer import Importer, ScanStatus
+from cozy.model.library import Library
 from cozy.tools import IntervalTimer
 
 import gi
 
-from cozy.ui.search_view import SearchView
 from cozy.ui.warnings import Warnings
 
 gi.require_version('Gtk', '3.0')
@@ -28,6 +29,9 @@ class Titlebar:
     This class contains all titlebar logic.
     """
     _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
+    _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
+    _importer: Importer = inject.attr(Importer)
+    _library: Library = inject.attr(Library)
 
     # main ui class
     ui = None
@@ -122,6 +126,8 @@ class Titlebar:
             "key-press-event", self.__on_progress_key_pressed)
 
         player.add_player_listener(self.__player_changed)
+        self._importer.add_listener(self._on_importer_event)
+        self._library.add_listener(self._on_library_event)
 
     def activate(self):
         # attach to child event signals
@@ -248,7 +254,7 @@ class Titlebar:
             else:
                 size = 40
             self.set_title_cover(
-                artwork_cache.get_cover_pixbuf(track.book, self.ui.window.get_scale_factor(), size), size)
+                self._artwork_cache.get_cover_pixbuf(track.book, self.ui.window.get_scale_factor(), size), size)
 
         self.current_remaining = get_book_remaining(
             self.current_book, False)
@@ -286,6 +292,8 @@ class Titlebar:
         self.status_stack.props.visible_child_name = "playback"
         self.throbber.stop()
         self.throbber.set_visible(False)
+        self.progress_bar.set_fraction(0)
+        self.update_progress_bar.set_fraction(0)
 
     def load_last_book(self):
         if Settings.get().last_played_book:
@@ -494,6 +502,15 @@ class Titlebar:
         """
         if event == "track-changed":
             self.update_track_ui()
+
+    def _on_importer_event(self, event: str, message):
+        if event == "scan-progress":
+            self.progress_bar.set_fraction(message)
+            self.update_progress_bar.set_fraction(message)
+
+    def _on_library_event(self, event: str, message):
+        if event == "rebase-progress":
+            self.update_progress_bar.set_fraction(message)
 
     def close(self):
         log.info("Closing.")

@@ -19,6 +19,7 @@ class SearchViewModel(Observable, EventSender):
 
     def __init__(self):
         super().__init__()
+        super(Observable, self).__init__()
 
     @property
     def books(self):

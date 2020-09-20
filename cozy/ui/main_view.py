@@ -11,7 +11,7 @@ from cozy.db.track import Track
 from gi.repository import Gtk, Gio, Gdk, Gst, GLib
 from threading import Thread
 
-from cozy.media.importer import Importer
+from cozy.media.importer import Importer, ScanStatus
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
@@ -21,6 +21,7 @@ from cozy.ui.titlebar import Titlebar
 from cozy.ui.settings import Settings
 from cozy.ui.book_overview import BookOverview
 from cozy.architecture.singleton import Singleton
+from cozy.model.settings import Settings as SettingsModel
 import cozy.report.reporter as report
 import cozy.control.importer as importer
 import cozy.control.player as player
@@ -31,8 +32,6 @@ import cozy.control.offline_cache as offline_cache
 import os
 
 import logging
-
-from cozy.ui.widgets.whats_new_window import WhatsNewWindow
 
 log = logging.getLogger("ui")
 
@@ -55,6 +54,8 @@ class CozyUI(metaclass=Singleton):
     fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
     settings = inject.attr(Settings)
     application_settings = inject.attr(ApplicationSettings)
+    _importer: Importer = inject.attr(Importer)
+    _settings: SettingsModel = inject.attr(SettingsModel)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -71,6 +72,7 @@ class CozyUI(metaclass=Singleton):
         self.__init_components()
 
         self._library_view = library_view
+        from cozy.ui.settings import Settings as UISettings
 
         self.auto_import()
         self.refresh_content()
@@ -246,10 +248,6 @@ class CozyUI(metaclass=Singleton):
         self.scan_action.connect("activate", self.scan)
         self.app.add_action(self.scan_action)
 
-        self.new_scan_action = Gio.SimpleAction.new("new_scan", None)
-        self.new_scan_action.connect("activate", self.new_scan)
-        self.app.add_action(self.new_scan_action)
-
         self.play_pause_action = Gio.SimpleAction.new("play_pause", None)
         self.play_pause_action.connect("activate", self.play_pause)
         self.app.add_action(self.play_pause_action)
@@ -281,8 +279,7 @@ class CozyUI(metaclass=Singleton):
         if player.get_current_track() is None:
             self.block_ui_buttons(True)
 
-        whats_new_window = WhatsNewWindow(self.window)
-        whats_new_window.show()
+        self._importer.add_listener(self._on_importer_event)
 
     def __load_last_book(self):
         """
@@ -424,26 +421,13 @@ class CozyUI(metaclass=Singleton):
             self.titlebar.stop()
             self.category_toolbar.set_visible(False)
 
-    def scan(self, action, first_scan, force=False):
-        """
-        Start the db import in a seperate thread
-        """
-        self.switch_to_working(_("Importing Audiobooks"), first_scan)
-        thread = Thread(target=importer.update_database,
-                        args=(self, force,), name="UpdateDatabaseThread")
-        thread.start()
-
-    def new_scan(self, action, first_scan, force=False):
-        """
-        Start the db import in a seperate thread
-        """
-        importer = Importer()
-        thread = Thread(target=importer.scan, name="UpdateDatabaseThread")
+    def scan(self, _, __):
+        thread = Thread(target=self._importer.scan, name="ScanMediaThread")
         thread.start()
 
     def auto_import(self):
         if self.application_settings.autoscan:
-            self.scan(None, False)
+            self.scan(None, None)
 
     def back(self, action, parameter):
         self.__on_back_clicked(None)
@@ -526,8 +510,7 @@ class CozyUI(metaclass=Singleton):
         """
         if target_type == 80:
             self.switch_to_working("copying new files…", False)
-            thread = Thread(target=importer.copy, args=(
-                self, selection,), name="DragDropImportThread")
+            thread = Thread(target=importer.copy, args=(self, selection), name="DragDropImportThread")
             thread.start()
 
     def __on_no_media_folder_changed(self, sender):
@@ -539,8 +522,9 @@ class CozyUI(metaclass=Singleton):
         external = self.external_switch.get_active()
         Storage.delete().where(Storage.path != "").execute()
         Storage.create(path=location, default=True, external=external)
+        self._settings.invalidate()
         self.main_stack.props.visible_child_name = "import"
-        self.scan(None, True)
+        self.scan(None, None)
         self.settings._init_storage()
         self.fs_monitor.init_offline_mode()
 
@@ -655,3 +639,10 @@ class CozyUI(metaclass=Singleton):
 
     def get_builder(self):
         return self.window_builder
+
+    def _on_importer_event(self, event: str, message):
+        if event == "scan" and message == ScanStatus.STARTED:
+            self.switch_to_working(_("Importing Audiobooks"), False)
+        elif event == "scan" and message == ScanStatus.SUCCESS:
+            self.switch_to_playing()
+            self.check_for_tracks()

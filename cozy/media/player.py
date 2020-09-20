@@ -6,6 +6,7 @@ from cozy.model.book import Book
 
 class Player(EventSender, metaclass=Singleton):
     def __init__(self):
+        super().__init__()
         self._gst_player: player = player.get_playbin()
         player.add_player_listener(self._pass_legacy_player_events)
 

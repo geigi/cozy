@@ -11,6 +11,7 @@ AUTHOR_PAGE = "author"
 RECENT_PAGE = "recent"
 MAIN_BOOK_PAGE = "main"
 MAIN_NO_RECENT_PAGE = "nothing_here"
+NO_MEDIA_PAGE = "no_media"
 
 
 class LibraryView:
@@ -92,7 +93,11 @@ class LibraryView:
         view_mode = self._view_model.library_view_mode
         main_view_page = MAIN_BOOK_PAGE
 
-        if view_mode == LibraryViewMode.CURRENT:
+        if len(self._view_model.books) < 1:
+            main_view_page = NO_MEDIA_PAGE
+            visible_child_name = RECENT_PAGE
+            reveal_filter_box = False
+        elif view_mode == LibraryViewMode.CURRENT:
             visible_child_name = RECENT_PAGE
             reveal_filter_box = False
             if not self._view_model.is_any_book_in_progress:

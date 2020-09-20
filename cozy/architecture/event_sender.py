@@ -1,19 +1,27 @@
+from typing import List, Callable
+
 from gi.repository import Gdk, GLib
 
 
 class EventSender:
-    __listeners = []
+    _listeners: List[Callable]
 
-    def emit_event(self, event, message=None):
+    def __init__(self):
+        self._listeners = []
+
+    def emit_event(self, event: str, message=None):
         if type(event) is tuple and not message:
             message = event[1]
             event = event[0]
 
-        for function in self.__listeners:
+        for function in self._listeners:
             function(event, message)
 
-    def emit_event_main_thread(self, event, message=None):
+    def emit_event_main_thread(self, event: str, message=None):
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.emit_event, (event, message))
 
-    def add_listener(self, function):
-        self.__listeners.append(function)
+    def add_listener(self, function: Callable[[str, object], None]):
+        self._listeners.append(function)
+
+    def destroy(self):
+        self._listeners = []

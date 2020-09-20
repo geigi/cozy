@@ -3,11 +3,12 @@ import logging
 import os
 from enum import Enum, auto
 from multiprocessing.pool import ThreadPool as Pool
-from typing import List
+from typing import List, Set
 from urllib.parse import urlparse, unquote
 
 from cozy.architecture.profiler import timing
 from cozy.media.media_detector import MediaDetector, NotAnAudioFile, AudioFileCouldNotBeDiscovered
+from cozy.media.media_file import MediaFile
 from cozy.model.library import Library
 from cozy.architecture.event_sender import EventSender
 from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
@@ -29,31 +30,48 @@ class Importer(EventSender):
     _settings = inject.attr(Settings)
     _library = inject.attr(Library)
 
+    def __init__(self):
+        super().__init__()
+
     @timing
     def scan(self):
         logging.info("Starting import")
         self.emit_event_main_thread("scan", ScanStatus.STARTED)
 
         files_to_scan = self._get_files_to_scan()
+        new_or_changed_files, undetected_files = self._execute_import(files_to_scan)
+        self._library.invalidate()
 
-        undetected_files = self._execute_import(files_to_scan)
+        logging.info("Deleting no longer present files from db")
+        self._delete_files_no_longer_existent()
 
         logging.info("Import finished")
         self.emit_event_main_thread("scan", ScanStatus.SUCCESS)
+        self.emit_event_main_thread("new-or-updated-files", new_or_changed_files)
 
         if len(undetected_files) > 0:
             logging.info("Some files could not be imported:")
             logging.info(undetected_files)
             self.emit_event_main_thread("import-failed", undetected_files)
 
-    def _execute_import(self, files_to_scan: List[str]):
+    def _execute_import(self, files_to_scan: List[str]) -> (Set[str], Set[str]):
+        new_or_changed_files = set()
         undetected_files = set()
+
+        files_count = self._count_files_to_scan()
+        if files_count < 1:
+            files_count = 1
+        progress = 0
 
         pool = Pool()
         while True:
-            media_files = pool.map(self.import_file, itertools.islice(files_to_scan, 100))
-            undetected_files.update({file for file in media_files if isinstance(file, str)})
-            media_files = {file for file in media_files if not isinstance(file, str)}
+            import_result = pool.map(self.import_file, itertools.islice(files_to_scan, 100))
+            undetected_files.update({file for file in import_result if isinstance(file, str)})
+            media_files = {file for file in import_result if isinstance(file, MediaFile)}
+            new_or_changed_files.update((file.path for file in media_files))
+
+            progress += 100
+            self.emit_event_main_thread("scan-progress", progress / files_count)
 
             if len(media_files) != 0:
                 self._library.insert_many(media_files)
@@ -61,7 +79,13 @@ class Importer(EventSender):
                 break
         pool.close()
 
-        return undetected_files
+        return new_or_changed_files, undetected_files
+
+    @timing
+    def _count_files_to_scan(self) -> int:
+        files_to_scan = self._get_files_to_scan()
+
+        return sum(1 for _ in files_to_scan)
 
     def _get_files_to_scan(self) -> List[str]:
         paths_to_scan = self._get_configured_storage_paths()
@@ -112,6 +136,11 @@ class Importer(EventSender):
                 continue
 
             yield file
+
+    def _delete_files_no_longer_existent(self):
+        for chapter in self._library.chapters:
+            if not os.path.isfile(chapter.file) and self._fs_monitor.is_path_online(chapter.file):
+                chapter.delete()
 
     def _get_file_count_in_dir(self, dir):
         len([name for name in os.listdir(dir) if os.path.isfile(name)])

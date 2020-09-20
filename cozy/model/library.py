@@ -1,7 +1,10 @@
+import logging
 from typing import List, Set
 
 from peewee import SqliteDatabase
 
+from cozy.architecture.event_sender import EventSender
+from cozy.architecture.profiler import timing
 from cozy.db.book import Book as BookModel
 from cozy.db.track import Track
 from cozy.ext import inject
@@ -12,12 +15,18 @@ from cozy.model.book import Book, BookIsEmpty
 from cozy.model.chapter import Chapter
 
 
-class Library:
+log = logging.getLogger("ui")
+
+
+class Library(EventSender):
     _db = cache = inject.attr(SqliteDatabase)
 
     _books: List[Book] = []
     _chapters: Set[Chapter] = set()
     _files: Set[str] = set()
+
+    def __init__(self):
+        super().__init__()
 
     @property
     def authors(self):
@@ -53,9 +62,28 @@ class Library:
         return self._files
 
     def invalidate(self):
+        for book in self._books:
+            book.destroy()
+
         self._books = []
+
+        for chapter in self._chapters:
+            chapter.destroy()
+
         self._chapters = set()
         self._files = set()
+
+    @timing
+    def rebase_path(self, old_path: str, new_path: str):
+        chapter_count = len(self.chapters)
+        progress = 0
+        for chapter in self.chapters:
+            if chapter.file.startswith(old_path):
+                progress += 1
+                chapter.file = chapter.file.replace(old_path, new_path)
+                self.emit_event_main_thread("rebase-progress", progress / chapter_count)
+
+        self.emit_event_main_thread("rebase-finished")
 
     def insert_many(self, media_files: Set[MediaFile]):
         tracks = self._prepare_db_objects(media_files)
@@ -148,7 +176,27 @@ class Library:
                           for chapter
                           in book_chapters}
 
+        for chapter in self._chapters:
+            chapter.add_listener(self._on_chapter_event)
+
     def _load_all_files(self):
         self._files = {chapter.file
                        for chapter
                        in self.chapters}
+
+    def _on_chapter_event(self, event: str, chapter: Chapter):
+        if event == "chapter-deleted":
+            try:
+                self.chapters.remove(chapter)
+            except KeyError:
+                log.error("Could not remove chapter from library chapter list.")
+
+            try:
+                self.files.remove(chapter.file)
+            except KeyError:
+                log.error("Could not remove file from library file list.")
+                self._files = []
+
+    def _on_book_event(self, event: str, book: Book):
+        if event == "book-deleted":
+            self.books.remove(book)

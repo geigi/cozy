@@ -36,7 +36,13 @@ class OfflineCache(EventSender, metaclass=Singleton):
     current_book_processing = None
 
     def __init__(self):
+        super().__init__()
         self.ui = cozy.ui.main_view.CozyUI()
+
+        from cozy.media.importer import Importer
+        self._importer = inject.instance(Importer)
+
+        self._importer.add_listener(self._on_importer_event)
 
         self.cache_dir = os.path.join(get_cache_dir(), "offline")
         if not os.path.exists(self.cache_dir):
@@ -248,15 +254,20 @@ class OfflineCache(EventSender, metaclass=Singleton):
                     self.queue.append(item)
                     self.total_batch_count += 1
 
+    def _on_importer_event(self, event: str, message):
+        if event == "new-or-updated-files":
+            self.update_cache(message)
+            self._start_processing()
+
     def __update_copy_status(self, current_num_bytes, total_num_bytes, user_data):
         progress = ((self.current_batch_count - 1) / self.total_batch_count) + (
-                    (current_num_bytes / total_num_bytes) / self.total_batch_count)
+                (current_num_bytes / total_num_bytes) / self.total_batch_count)
         Gdk.threads_add_idle(GLib.PRIORITY_HIGH_IDLE,
                              self.ui.titlebar.update_progress_bar.set_fraction, progress)
 
     def __update_copy_status(self, current_num_bytes, total_num_bytes, user_data):
         progress = ((self.current_batch_count - 1) / self.total_batch_count) + (
-                    (current_num_bytes / total_num_bytes) / self.total_batch_count)
+                (current_num_bytes / total_num_bytes) / self.total_batch_count)
         Gdk.threads_add_idle(GLib.PRIORITY_HIGH_IDLE,
                              self.ui.titlebar.update_progress_bar.set_fraction, progress)
 

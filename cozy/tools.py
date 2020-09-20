@@ -137,12 +137,3 @@ def past_date_to_human_readable(unix_time):
         return ngettext('{months} month ago', '{months} months ago', months).format(months=months)
     else:
         return ngettext('{years} year ago', '{years} years ago', years).format(years=years)
-
-
-def __get_media_type(path):
-    """
-    Get the mime type of a file.
-    :param path: Path to the file
-    :return: mime type as string
-    """
-    return magic.from_file(path, mime=True), magic.from_file(path)

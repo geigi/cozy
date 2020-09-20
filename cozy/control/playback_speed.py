@@ -14,6 +14,7 @@ class PlaybackSpeed(EventSender):
     speed = 1.0
 
     def __init__(self):
+        super().__init__()
         self.ui = cozy.ui.main_view.CozyUI()
 
         self.builder = Gtk.Builder.new_from_resource(

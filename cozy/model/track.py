@@ -6,6 +6,7 @@ from cozy.model.chapter import Chapter
 
 class Track(Chapter):
     def __init__(self, db: SqliteDatabase, id: int):
+        super().__init__()
         self._db: SqliteDatabase = db
         self.id: int = id
 
@@ -81,3 +82,9 @@ class Track(Chapter):
         with self._db:
             self._db_object.modified = new_modified
             self._db_object.save(only=self._db_object.dirty_fields)
+
+    def delete(self):
+        with self._db:
+            self._db_object.delete().execute()
+            self.emit_event("chapter-deleted", self)
+            self.destroy()

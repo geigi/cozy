@@ -25,6 +25,7 @@ class AudioFileCouldNotBeDiscovered(Exception):
 
 class MediaDetector(EventSender):
     def __init__(self, path: str):
+        super().__init__()
         self.uri = pathlib.Path(path).as_uri()
 
         Gst.init(None)
