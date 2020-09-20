@@ -1,10 +1,14 @@
-import cozy.control.artwork_cache as artwork_cache
 import cozy.control.player as player
 import cozy.tools as tools
 import cozy.ui
+from cozy.application_settings import ApplicationSettings
+from cozy.control.artwork_cache import ArtworkCache
 from cozy.control.db import get_book_remaining, get_book_progress, get_track_from_book_time, get_book_duration
 from cozy.control.string_representation import seconds_to_str
 from cozy.db.settings import Settings
+from cozy.ext import inject
+from cozy.media.importer import Importer, ScanStatus
+from cozy.model.library import Library
 from cozy.tools import IntervalTimer
 
 import gi
@@ -24,6 +28,11 @@ class Titlebar:
     """
     This class contains all titlebar logic.
     """
+    _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
+    _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
+    _importer: Importer = inject.attr(Importer)
+    _library: Library = inject.attr(Library)
+
     # main ui class
     ui = None
     # Titlebar timer for ui updates on position
@@ -47,7 +56,7 @@ class Titlebar:
         self.play_button = self.ui.get_object("play_button")
         self.prev_button = self.ui.get_object("prev_button")
         self.volume_button = self.ui.get_object("volume_button")
-        self.volume_button.set_value(tools.get_glib_settings().get_double("volume"))
+        self.volume_button.set_value(self._application_settings.volume)
         self.timer_button = self.ui.get_object("timer_button")
         self.playback_speed_button = self.ui.get_object(
             "playback_speed_button")
@@ -96,7 +105,7 @@ class Titlebar:
 
         # app menu
         self.menu_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/titlebar_menu.ui")
+            "/com/github/geigi/cozy/titlebar_menu.ui")
         menu = self.menu_builder.get_object("titlebar_menu")
         self.menu_button.set_menu_model(menu)
 
@@ -117,6 +126,8 @@ class Titlebar:
             "key-press-event", self.__on_progress_key_pressed)
 
         player.add_player_listener(self.__player_changed)
+        self._importer.add_listener(self._on_importer_event)
+        self._library.add_listener(self._on_library_event)
 
     def activate(self):
         # attach to child event signals
@@ -125,7 +136,6 @@ class Titlebar:
         # attach popovers
         self.timer_button.set_popover(self.ui.sleep_timer.get_popover())
         self.playback_speed_button.set_popover(self.ui.speed.get_popover())
-        self.search_button.set_popover(self.ui.search.get_popover())
         self.warnings = Warnings(self.warnings_button)
         self.warnings_button.set_popover(self.warnings.get_popover())
 
@@ -208,7 +218,7 @@ class Titlebar:
             return
 
         val = int(self.progress_scale.get_value())
-        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+        if self._application_settings.titlebar_remaining_time:
             total = self.progress_scale.get_adjustment().get_upper()
             remaining_secs: int = int((total - val))
             current_text = seconds_to_str(val, total)
@@ -244,7 +254,7 @@ class Titlebar:
             else:
                 size = 40
             self.set_title_cover(
-                artwork_cache.get_cover_pixbuf(track.book, self.ui.window.get_scale_factor(), size), size)
+                self._artwork_cache.get_cover_pixbuf(track.book, self.ui.window.get_scale_factor(), size), size)
 
         self.current_remaining = get_book_remaining(
             self.current_book, False)
@@ -252,7 +262,7 @@ class Titlebar:
 
         self.__update_progress_scale_range()
 
-        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+        if self._application_settings.titlebar_remaining_time:
             self.progress_scale.set_value(
                 self.current_elapsed / self.ui.speed.get_speed())
         else:
@@ -282,6 +292,8 @@ class Titlebar:
         self.status_stack.props.visible_child_name = "playback"
         self.throbber.stop()
         self.throbber.set_visible(False)
+        self.progress_bar.set_fraction(0)
+        self.update_progress_bar.set_fraction(0)
 
     def load_last_book(self):
         if Settings.get().last_played_book:
@@ -291,7 +303,7 @@ class Titlebar:
             self.__set_progress_scale_value(cur_m * 60 + cur_s)
 
             pos = int(player.get_current_track().position)
-            if tools.get_glib_settings().get_boolean("replay"):
+            if self._application_settings.replay:
                 log.info("Replaying the previous 30 seconds.")
                 amount = 30 * 1000000000
                 if (pos < amount):
@@ -306,10 +318,10 @@ class Titlebar:
         Switch between displaying the time for a track or the whole book.
         """
         if widget.get_name != "titlebar_remaining_time_eventbox":
-            if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
-                tools.get_glib_settings().set_boolean("titlebar-remaining-time", False)
+            if self._application_settings.titlebar_remaining_time:
+                self._application_settings.titlebar_remaining_time = False
             else:
-                tools.get_glib_settings().set_boolean("titlebar-remaining-time", True)
+                self._application_settings.titlebar_remaining_time = True
 
         self._on_progress_setting_changed()
 
@@ -355,7 +367,7 @@ class Titlebar:
         Sets the ui value in the player.
         """
         player.set_volume(value)
-        tools.get_glib_settings().set_double("volume", value)
+        self._application_settings.volume = value
 
     def __on_progress_press(self, widget, sender):
         """
@@ -376,7 +388,7 @@ class Titlebar:
         """
         value = self.progress_scale.get_value() * self.ui.speed.get_speed()
 
-        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+        if self._application_settings.titlebar_remaining_time:
             track, time = get_track_from_book_time(
                 self.current_book, value)
             if track.id == player.get_current_track().id:
@@ -421,7 +433,7 @@ class Titlebar:
         if not current_track or not self.current_book:
             return
 
-        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+        if self._application_settings.titlebar_remaining_time:
             total = get_book_duration(
                 self.current_book) / self.ui.speed.get_speed()
         else:
@@ -434,7 +446,7 @@ class Titlebar:
         Set a given progress scale value.
         :param value: This value already needs playback speed compensation.
         """
-        if tools.get_glib_settings().get_boolean("titlebar-remaining-time"):
+        if self._application_settings.titlebar_remaining_time:
             value += (self.current_elapsed / self.ui.speed.get_speed())
         self.progress_scale.set_value(value)
 
@@ -490,6 +502,15 @@ class Titlebar:
         """
         if event == "track-changed":
             self.update_track_ui()
+
+    def _on_importer_event(self, event: str, message):
+        if event == "scan-progress":
+            self.progress_bar.set_fraction(message)
+            self.update_progress_bar.set_fraction(message)
+
+    def _on_library_event(self, event: str, message):
+        if event == "rebase-progress":
+            self.update_progress_bar.set_fraction(message)
 
     def close(self):
         log.info("Closing.")

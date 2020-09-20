@@ -3,9 +3,11 @@
 
  <glade-widget-classes>
    <glade-widget-class title="FilterListBox" name="FilterListBox" generic-name="filter_list_box"/>
+   <glade-widget-class title="ErrorReporting" name="ErrorReporting" generic-name="error_reporting"/>
  </glade-widget-classes>
 
  <glade-widget-group name="cozy" title="Cozy Elements">
    <glade-widget-class-ref name="FilterListBox"/>
+   <glade-widget-class-ref name="ErrorReporting"/>
  </glade-widget-group>
 </glade-catalog>

@@ -1,5 +1,10 @@
 from typing import Callable
 
+from cozy.report import reporter
+import logging
+
+log = logging.getLogger("observable")
+
 
 class Observable:
     def __init__(self):
@@ -15,5 +20,6 @@ class Observable:
         try:
             for callback in self._observers[prop]:
                 callback()
-        except:
-            pass
+        except Exception as e:
+            log.error(e)
+            reporter.exception("observable", e)

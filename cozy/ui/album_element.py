@@ -1,7 +1,9 @@
 from gi.repository import Gtk, Gdk, GdkPixbuf, Gst, GObject
 
-from cozy.control import artwork_cache as artwork_cache, player as player
+from cozy.control import player as player
+from cozy.control.artwork_cache import ArtworkCache
 from cozy.control.db import get_track_for_playback
+from cozy.ext import inject
 from cozy.model.book import Book
 
 
@@ -9,6 +11,8 @@ class AlbumElement(Gtk.Box):
     """
     This class represents a clickable album art widget for a book.
     """
+
+    artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
     def __init__(self, book, size, scale, bordered=False, square=False):
         """
@@ -30,7 +34,7 @@ class AlbumElement(Gtk.Box):
         self.event_box.set_property("valign", Gtk.Align.CENTER)
 
         # scale the book cover to a fix size.
-        pixbuf = artwork_cache.get_cover_pixbuf(book.db_object, scale, size)
+        pixbuf = self.artwork_cache.get_cover_pixbuf(book.db_object, scale, size)
 
         # box is the main container for the album art
         self.set_halign(Gtk.Align.CENTER)
@@ -61,7 +65,7 @@ class AlbumElement(Gtk.Box):
         # play_color is an overlay for the play button
         # with this it should be visible on any album art color
         play_image = GdkPixbuf.Pixbuf.new_from_resource(
-            "/de/geigi/cozy/play_background.svg")
+            "/com/github/geigi/cozy/play_background.svg")
         if square:
             play_image = play_image.scale_simple(
                 size - 10, size - 10, GdkPixbuf.InterpType.BILINEAR)

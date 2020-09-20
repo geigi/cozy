@@ -76,5 +76,15 @@
       <summary>Hide currently unavailable books in the library.</summary>
       <description></description>
     </key>
+    <key type="i" name="report-level">
+      <default>2</default>
+      <summary>Level of error report details.</summary>
+      <description></description>
+    </key>
+    <key type="s" name="last-launched-version">
+      <default>"None"</default>
+      <summary>The version of cozy that did launch last.</summary>
+      <description></description>
+    </key>
   </schema>
 </schemalist>

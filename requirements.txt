@@ -1,3 +1,4 @@
+apsw
 distro
 mutagen
 peewee>=3.9.6

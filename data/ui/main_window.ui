@@ -1736,7 +1736,7 @@ audio-volume-medium-symbolic</property>
               </object>
               <packing>
                 <property name="name">no_media</property>
-                <property name="title" translatable="no">page0</property>
+                <property name="title">page0</property>
                 <property name="position">4</property>
               </packing>
             </child>

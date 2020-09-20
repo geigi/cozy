@@ -1,22 +1,27 @@
 import webbrowser
 
+import cozy.ext.inject as inject
+from cozy.application_settings import ApplicationSettings
+
 from cozy.control.db import books, close_db
 from cozy.db.book import Book
 from cozy.db.storage import Storage
 from cozy.db.track import Track
 
-from gi.repository import Gtk, Gio, Gdk, GLib, Gst
+from gi.repository import Gtk, Gio, Gdk, Gst, GLib
 from threading import Thread
+
+from cozy.media.importer import Importer, ScanStatus
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
-from cozy.ui.search import Search
 from cozy.control.sleep_timer import SleepTimer
 from cozy.control.playback_speed import PlaybackSpeed
 from cozy.ui.titlebar import Titlebar
 from cozy.ui.settings import Settings
 from cozy.ui.book_overview import BookOverview
 from cozy.architecture.singleton import Singleton
+from cozy.model.settings import Settings as SettingsModel
 import cozy.report.reporter as report
 import cozy.control.importer as importer
 import cozy.control.player as player
@@ -46,6 +51,11 @@ class CozyUI(metaclass=Singleton):
     is_initialized = False
     first_play = True
     __inhibit_cookie = None
+    fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
+    settings = inject.attr(Settings)
+    application_settings = inject.attr(ApplicationSettings)
+    _importer: Importer = inject.attr(Importer)
+    _settings: SettingsModel = inject.attr(SettingsModel)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -55,13 +65,14 @@ class CozyUI(metaclass=Singleton):
 
         self._library_view: LibraryView = None
 
-    def activate(self):
+    def activate(self, library_view: LibraryView):
         self.first_play = True
 
-        self.__init_window()
+        self.__init_actions()
         self.__init_components()
 
-        self._library_view = LibraryView(self.window_builder)
+        self._library_view = library_view
+        from cozy.ui.settings import Settings as UISettings
 
         self.auto_import()
         self.refresh_content()
@@ -73,8 +84,9 @@ class CozyUI(metaclass=Singleton):
     def startup(self):
         self.__init_resources()
         self.__init_css()
-        self.__init_actions()
         report.info("main", "startup")
+
+        self.__init_window()
 
     def __init_resources(self):
         """
@@ -89,10 +101,10 @@ class CozyUI(metaclass=Singleton):
         Gio.Resource._register(resource)
 
         self.window_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/main_window.ui")
+            "/com/github/geigi/cozy/main_window.ui")
 
         self.about_builder = Gtk.Builder.new_from_resource(
-            "/de/geigi/cozy/about.ui")
+            "/com/github/geigi/cozy/about.ui")
 
     def __init_css(self):
         """
@@ -100,18 +112,18 @@ class CozyUI(metaclass=Singleton):
         Add css classes to the default screen style context.
         """
         main_cssProviderFile = Gio.File.new_for_uri(
-            "resource:///de/geigi/cozy/application.css")
+            "resource:///com/github/geigi/cozy/application.css")
         main_cssProvider = Gtk.CssProvider()
         main_cssProvider.load_from_file(main_cssProviderFile)
 
         if Gtk.get_minor_version() > 18:
             log.debug("Fanciest design possible")
             cssProviderFile = Gio.File.new_for_uri(
-                "resource:///de/geigi/cozy/application_default.css")
+                "resource:///com/github/geigi/cozy/application_default.css")
         else:
             log.debug("Using legacy css file")
             cssProviderFile = Gio.File.new_for_uri(
-                "resource:///de/geigi/cozy/application_legacy.css")
+                "resource:///com/github/geigi/cozy/application_legacy.css")
         cssProvider = Gtk.CssProvider()
         cssProvider.load_from_file(cssProviderFile)
 
@@ -246,8 +258,10 @@ class CozyUI(metaclass=Singleton):
         self.app.add_action(back_action)
         self.app.set_accels_for_action("app.back", ["Escape"])
 
-        self.hide_offline_action = Gio.SimpleAction.new_stateful("hide_offline", None, GLib.Variant.new_boolean(
-            tools.get_glib_settings().get_boolean("hide-offline")))
+        self.hide_offline_action = Gio.SimpleAction.new_stateful("hide_offline",
+                                                                 None,
+                                                                 GLib.Variant.new_boolean(
+                                                                     self.application_settings.hide_offline))
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
 
@@ -256,11 +270,7 @@ class CozyUI(metaclass=Singleton):
 
         self.sleep_timer = SleepTimer()
         self.speed = PlaybackSpeed()
-        self.search = Search()
-        self.settings = Settings()
-        self.settings.add_listener(self.__on_settings_changed)
         self.book_overview = BookOverview()
-        self.fs_monitor = fs_monitor.FilesystemMonitor()
         self.offline_cache = offline_cache.OfflineCache()
         player.init()
 
@@ -268,6 +278,8 @@ class CozyUI(metaclass=Singleton):
 
         if player.get_current_track() is None:
             self.block_ui_buttons(True)
+
+        self._importer.add_listener(self._on_importer_event)
 
     def __load_last_book(self):
         """
@@ -409,18 +421,13 @@ class CozyUI(metaclass=Singleton):
             self.titlebar.stop()
             self.category_toolbar.set_visible(False)
 
-    def scan(self, action, first_scan, force=False):
-        """
-        Start the db import in a seperate thread
-        """
-        self.switch_to_working(_("Importing Audiobooks"), first_scan)
-        thread = Thread(target=importer.update_database,
-                        args=(self, force,), name="UpdateDatabaseThread")
+    def scan(self, _, __):
+        thread = Thread(target=self._importer.scan, name="ScanMediaThread")
         thread.start()
 
     def auto_import(self):
-        if tools.get_glib_settings().get_boolean("autoscan"):
-            self.scan(None, False)
+        if self.application_settings.autoscan:
+            self.scan(None, None)
 
     def back(self, action, parameter):
         self.__on_back_clicked(None)
@@ -461,7 +468,7 @@ class CozyUI(metaclass=Singleton):
         if self.first_play:
             self.first_play = False
 
-            if tools.get_glib_settings().get_boolean("replay"):
+            if self.application_settings.replay:
                 amount = 30 * 1000000000
                 if pos < amount:
                     pos = 0
@@ -477,42 +484,6 @@ class CozyUI(metaclass=Singleton):
         dialog = ImportFailedDialog(files)
         dialog.show()
 
-    def jump_to_author(self, book):
-        """
-        Jump to the given book author.
-        This is used from the search popover.
-        """
-        row = next(filter(
-            lambda x: type(x.get_children()[0]) is Gtk.Label and x.get_children()[
-                0].get_text() == book.author,
-            self.author_box.get_children()), None)
-
-        self.sort_stack.props.visible_child_name = "author"
-        self.__on_sort_stack_changed(None, None)
-        self.author_box.select_row(row)
-        self.book_box.invalidate_filter()
-        self.book_box.invalidate_sort()
-        self.toolbar_revealer.set_reveal_child(True)
-        self.search.close()
-
-    def jump_to_reader(self, book):
-        """
-        Jump to the given book reader.
-        This is used from the search popover.
-        """
-        row = next(filter(
-            lambda x: type(x.get_children()[0]) is Gtk.Label and x.get_children()[
-                0].get_text() == book.reader,
-            self.reader_box.get_children()), None)
-
-        self.sort_stack.props.visible_child_name = "reader"
-        self.__on_sort_stack_changed(None, None)
-        self.reader_box.select_row(row)
-        self.book_box.invalidate_filter()
-        self.book_box.invalidate_sort()
-        self.toolbar_revealer.set_reveal_child(True)
-        self.search.close()
-
     def jump_to_book(self, book):
         """
         Open book overview with the given book.
@@ -524,14 +495,13 @@ class CozyUI(metaclass=Singleton):
         # then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"
         self.toolbar_revealer.set_reveal_child(False)
-        self.search.close()
 
     def __on_hide_offline(self, action, value):
         """
         Show/Hide offline books action handler.
         """
         action.set_state(value)
-        tools.get_glib_settings().set_boolean("hide-offline", value.get_boolean())
+        self.application_settings.hide_offline = value.get_boolean()
 
     def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
         """
@@ -540,8 +510,7 @@ class CozyUI(metaclass=Singleton):
         """
         if target_type == 80:
             self.switch_to_working("copying new files…", False)
-            thread = Thread(target=importer.copy, args=(
-                self, selection,), name="DragDropImportThread")
+            thread = Thread(target=importer.copy, args=(self, selection), name="DragDropImportThread")
             thread.start()
 
     def __on_no_media_folder_changed(self, sender):
@@ -553,24 +522,11 @@ class CozyUI(metaclass=Singleton):
         external = self.external_switch.get_active()
         Storage.delete().where(Storage.path != "").execute()
         Storage.create(path=location, default=True, external=external)
+        self._settings.invalidate()
         self.main_stack.props.visible_child_name = "import"
-        self.scan(None, True)
+        self.scan(None, None)
         self.settings._init_storage()
         self.fs_monitor.init_offline_mode()
-
-    def __on_sort_stack_changed(self, widget, page):
-        """
-        Switch to author selection
-        """
-        page = self.sort_stack.props.visible_child_name
-
-        if page == "recent":
-            self.sort_stack_revealer.set_reveal_child(False)
-        else:
-            self.sort_stack_revealer.set_reveal_child(True)
-            self.main_stack.props.visible_child_name = "main"
-
-        self.__on_listbox_changed(None, None)
 
     def track_changed(self):
         """
@@ -670,13 +626,6 @@ class CozyUI(metaclass=Singleton):
         self.app.quit()
         log.info("App closed.")
 
-    def __on_listbox_changed(self, sender, row):
-        """
-        Refresh the filtering on author/reader selection.
-        """
-        self.book_box.invalidate_filter()
-        self.book_box.invalidate_sort()
-
     def set_book_overview(self, book):
         # first update track ui
         self.book_overview.set_book(book)
@@ -688,8 +637,12 @@ class CozyUI(metaclass=Singleton):
         self.book_overview.play_book_button.grab_remove()
         self.book_overview.scroller.grab_focus()
 
-    def __on_settings_changed(self, event, message):
-        """
-        This method reacts to storage settings changes.
-        """
-        pass
+    def get_builder(self):
+        return self.window_builder
+
+    def _on_importer_event(self, event: str, message):
+        if event == "scan" and message == ScanStatus.STARTED:
+            self.switch_to_working(_("Importing Audiobooks"), False)
+        elif event == "scan" and message == ScanStatus.SUCCESS:
+            self.switch_to_playing()
+            self.check_for_tracks()
