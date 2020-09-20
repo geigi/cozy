@@ -74,6 +74,7 @@ def b64tobinary(b64):
     return data
 
 
+### TODO ###
 def rebase_location(ui, oldPath, newPath):
     """
     This gets called when a user changes the location of the audio book folder.
@@ -246,6 +247,7 @@ def __get_last_modified(path: str):
     return modified
 
 
+### TODO ###
 def copy(ui, selection):
     """
     Copy the selected files to the audiobook location.

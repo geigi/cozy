@@ -58,12 +58,20 @@ class Importer(EventSender):
         new_or_changed_files = set()
         undetected_files = set()
 
+        files_count = self._count_files_to_scan()
+        if files_count < 1:
+            files_count = 1
+        progress = 0
+
         pool = Pool()
         while True:
             import_result = pool.map(self.import_file, itertools.islice(files_to_scan, 100))
             undetected_files.update({file for file in import_result if isinstance(file, str)})
             media_files = {file for file in import_result if isinstance(file, MediaFile)}
             new_or_changed_files.update((file.path for file in media_files))
+
+            progress += len(import_result)
+            self.emit_event_main_thread("scan-progress", progress / files_count)
 
             if len(media_files) != 0:
                 self._library.insert_many(media_files)
@@ -72,6 +80,11 @@ class Importer(EventSender):
         pool.close()
 
         return new_or_changed_files, undetected_files
+
+    def _count_files_to_scan(self) -> int:
+        files_to_scan = self._get_files_to_scan()
+
+        return sum(1 for _ in files_to_scan)
 
     def _get_files_to_scan(self) -> List[str]:
         paths_to_scan = self._get_configured_storage_paths()
