@@ -279,6 +279,8 @@ class CozyUI(metaclass=Singleton):
         if player.get_current_track() is None:
             self.block_ui_buttons(True)
 
+        self._importer.add_listener(self._on_importer_event)
+
     def __load_last_book(self):
         """
         Loads the last book into the player
@@ -641,7 +643,7 @@ class CozyUI(metaclass=Singleton):
 
     def _on_importer_event(self, event: str, message):
         if event == "scan" and message == ScanStatus.STARTED:
-            self.switch_to_working(_("Importing Audiobooks"))
+            self.switch_to_working(_("Importing Audiobooks"), False)
         elif event == "scan" and message == ScanStatus.SUCCESS:
             self.switch_to_playing()
             self.check_for_tracks()
