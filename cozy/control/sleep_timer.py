@@ -8,7 +8,6 @@ import cozy.ui
 
 import gi
 
-# from cozy.magic.magic import platform as osplatform
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
 
