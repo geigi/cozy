@@ -510,8 +510,7 @@ class CozyUI(metaclass=Singleton):
         """
         if target_type == 80:
             self.switch_to_working("copying new files…", False)
-            thread = Thread(target=importer.copy, args=(
-                self, selection,), name="DragDropImportThread")
+            thread = Thread(target=importer.copy, args=(self, selection), name="DragDropImportThread")
             thread.start()
 
     def __on_no_media_folder_changed(self, sender):
