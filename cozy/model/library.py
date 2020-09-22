@@ -166,7 +166,9 @@ class Library(EventSender):
         with self._db:
             for book_db_obj in BookModel.select(BookModel.id):
                 try:
-                    self._books.append(Book(self._db, book_db_obj.id))
+                    book = Book(self._db, book_db_obj.id)
+                    book.add_listener(self._on_book_event)
+                    self._books.append(book)
                 except BookIsEmpty:
                     pass
 
@@ -198,6 +200,6 @@ class Library(EventSender):
                 log.error("Could not remove file from library file list.")
                 self._files = []
 
-    def _on_book_event(self, event: str, book: Book):
+    def _on_book_event(self, event: str, book):
         if event == "book-deleted":
             self.books.remove(book)
