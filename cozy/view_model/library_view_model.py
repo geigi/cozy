@@ -81,7 +81,7 @@ class LibraryViewModel(Observable, EventSender):
             book.author if not swap_author_reader else book.reader
             for book
             in self._model.books
-            if is_book_online(book) or show_offline_books
+            if is_book_online(book) or show_offline_books or book.downloaded
         }
 
         return sorted(split_strings_to_set(authors))
@@ -96,7 +96,7 @@ class LibraryViewModel(Observable, EventSender):
             book.reader if not swap_author_reader else book.author
             for book
             in self._model.books
-            if is_book_online(book) or show_offline_books
+            if is_book_online(book) or show_offline_books or book.downloaded
         }
 
         return sorted(split_strings_to_set(readers))
