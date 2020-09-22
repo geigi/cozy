@@ -281,8 +281,11 @@ class Titlebar:
         self.throbber.set_visible(True)
         self.throbber.start()
         self.status_label.set_text(message)
-        if not first:
-            self.status_stack.props.visible_child_name = "working"
+
+        if len(self._library.books) < 1 and message == _("Importing Audiobooks"):
+            return
+
+        self.status_stack.props.visible_child_name = "working"
 
     def switch_to_playing(self):
         """
