@@ -1,4 +1,14 @@
 import pytest
+from peewee import SqliteDatabase
+
+from cozy.ext import inject
+
+
+@pytest.fixture(autouse=True)
+def setup_inject(peewee_database):
+    inject.clear_and_configure(lambda binder: binder.bind(SqliteDatabase, peewee_database))
+    yield
+    inject.clear()
 
 
 def test_db_created(peewee_database):
@@ -232,3 +242,18 @@ def test_delete_deletes_book_from_db(peewee_database, mocker):
     assert BookModel.select().where(BookModel.id == 1).count() < 1
     spy.assert_called_once_with("book-deleted", book)
     assert len(book._listeners) < 1
+
+
+def test_deleted_book_removed_from_last_played_book_if_necessary(peewee_database):
+    from cozy.model.book import Book
+    from cozy.model.settings import Settings
+
+    settings = Settings()
+    inject.clear_and_configure(
+        lambda binder: binder.bind(SqliteDatabase, peewee_database) and binder.bind(Settings, settings))
+    book = Book(peewee_database, 1)
+
+    settings.last_played_book = book.db_object
+    book._on_chapter_event("chapter-deleted", book.chapters[0])
+
+    assert settings.last_played_book == None

@@ -16,7 +16,7 @@ def chunks(lst, n):
         yield lst[i:i + n]
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def peewee_database():
     from cozy.db.track import Track
     from cozy.db.book import Book
