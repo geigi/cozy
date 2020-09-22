@@ -164,7 +164,7 @@ class Book(EventSender):
                 StorageBlackList.insert_many(chunk, fields=[StorageBlackList.path]).execute()
             ids = list(t.id for t in book_tracks)
             TrackModel.delete().where(TrackModel.id << ids).execute()
-            self._db_object.delete_instance()
+            self._db_object.delete_instance(recursive=True)
 
     def _fetch_chapters(self):
         with self._db:
@@ -186,6 +186,6 @@ class Book(EventSender):
                     self._settings.last_played_book = None
 
                 with self._db:
-                    self._db_object.delete().execute()
+                    self._db_object.delete_instance(recursive=True)
                 self.emit_event("book-deleted", self)
                 self.destroy()

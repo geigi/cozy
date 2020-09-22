@@ -85,6 +85,6 @@ class Track(Chapter):
 
     def delete(self):
         with self._db:
-            self._db_object.delete().execute()
+            self._db_object.delete_instance(recursive=True)
             self.emit_event("chapter-deleted", self)
             self.destroy()
