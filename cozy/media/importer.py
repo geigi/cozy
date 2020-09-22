@@ -1,3 +1,4 @@
+import copy
 import itertools
 import logging
 import os
@@ -138,7 +139,8 @@ class Importer(EventSender):
             yield file
 
     def _delete_files_no_longer_existent(self):
-        for chapter in self._library.chapters:
+        chapters = copy.copy(self._library.chapters)
+        for chapter in chapters:
             if not os.path.isfile(chapter.file) and self._fs_monitor.is_path_online(chapter.file):
                 chapter.delete()
 
