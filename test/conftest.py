@@ -21,6 +21,8 @@ def peewee_database():
     from cozy.db.track import Track
     from cozy.db.book import Book
     from cozy.db.settings import Settings
+    from cozy.db.storage_blacklist import StorageBlackList
+    from cozy.db.storage import Storage
 
     db_path, models, test_db = prepare_db()
 
@@ -36,7 +38,14 @@ def peewee_database():
     for chunk in chunks(track_data, 25):
         Track.insert_many(chunk).execute()
 
-    Settings.create(path="", last_played_book=None)
+    with open(path_of_test_folder + 'storages.json') as json_file:
+        storage_data = json.load(json_file)
+
+    Storage.insert_many(storage_data).execute()
+
+    Settings.create(path="", last_played_book=Book.get())
+    StorageBlackList.create(path="/path/to/replace/test1.mp3")
+    StorageBlackList.create(path="/path/to/not/replace/test2.mp3")
 
     print("Provide database...")
     yield test_db

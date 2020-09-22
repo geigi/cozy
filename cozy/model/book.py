@@ -6,7 +6,9 @@ from cozy.architecture.event_sender import EventSender
 from cozy.db.book import Book as BookModel
 from cozy.db.storage_blacklist import StorageBlackList
 from cozy.db.track import Track as TrackModel
+from cozy.ext import inject
 from cozy.model.chapter import Chapter
+from cozy.model.settings import Settings
 from cozy.model.track import Track
 
 
@@ -16,6 +18,7 @@ class BookIsEmpty(Exception):
 
 class Book(EventSender):
     _chapters: List[Chapter] = None
+    _settings: Settings = inject.attr(Settings)
 
     def __init__(self, db: SqliteDatabase, id: int):
         super().__init__()
@@ -179,6 +182,9 @@ class Book(EventSender):
             self._chapters.remove(chapter)
 
             if len(self._chapters) < 1:
+                if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
+                    self._settings.last_played_book = None
+
                 with self._db:
                     self._db_object.delete().execute()
                 self.emit_event("book-deleted", self)
