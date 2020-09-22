@@ -77,11 +77,12 @@ class Library(EventSender):
     def rebase_path(self, old_path: str, new_path: str):
         chapter_count = len(self.chapters)
         progress = 0
-        for chapter in self.chapters:
-            if chapter.file.startswith(old_path):
-                progress += 1
-                chapter.file = chapter.file.replace(old_path, new_path)
-                self.emit_event_main_thread("rebase-progress", progress / chapter_count)
+        with self._db:
+            for chapter in self.chapters:
+                if chapter.file.startswith(old_path):
+                    progress += 1
+                    chapter.file = chapter.file.replace(old_path, new_path)
+                    self.emit_event_main_thread("rebase-progress", progress / chapter_count)
 
         self.emit_event_main_thread("rebase-finished")
 
