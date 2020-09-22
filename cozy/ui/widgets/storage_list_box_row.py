@@ -5,6 +5,7 @@ from gi.repository import Gtk
 
 import cozy.ui
 from cozy.db.storage import Storage
+from cozy.model.settings import Settings
 from cozy.ext import inject
 from cozy.model.library import Library
 from cozy.model.storage_block_list import StorageBlockList
@@ -18,6 +19,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
     """
     _library: Library = inject.attr(Library)
     _block_list: StorageBlockList = inject.attr(StorageBlockList)
+    _settings: Settings = inject.attr(Settings)
 
     def __init__(self, parent, db_id, path, external, default=False):
         super(Gtk.ListBoxRow, self).__init__()
@@ -114,6 +116,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         old_path = Storage.select().where(Storage.id == self.db_id).get().path
         self.path = new_path
         Storage.update(path=new_path).where(Storage.id == self.db_id).execute()
+        self._settings.invalidate()
 
         # Run a reimport or rebase
         if old_path == "":
