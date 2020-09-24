@@ -20,7 +20,7 @@ jobs:
       run: |
         mkdir -p ~/.config/osc
         sudo apt-get update
-        sudo apt-get install nodejs-dev node-gyp libssl1.0-dev
+        sudo apt-get install libnode-dev node-gyp libssl-dev
         sudo apt-get install osc npm python3-m2crypto
         sudo npm install -g json
 
