@@ -24,7 +24,7 @@ class WhatsNewWindow(Gtk.Window):
 
     page = 0
 
-    def __init__(self, parent: Gtk.Window, **kwargs):
+    def __init__(self, **kwargs):
         if self.app_settings.last_launched_version == CozyVersion:
             return
 
@@ -32,7 +32,6 @@ class WhatsNewWindow(Gtk.Window):
 
         self.children = [WhatsNewImporter(), ErrorReporting()]
 
-        self.set_parent(parent)
         self.set_default_size(800, 550)
 
         for widget in self.children:

@@ -28,7 +28,7 @@ class AppController(metaclass=Singleton):
         self.main_window: CozyUI = main_window
         self.main_window_builder = main_window_builder
 
-        self.whats_new_window: WhatsNewWindow = WhatsNewWindow(main_window.window)
+        self.whats_new_window: WhatsNewWindow = WhatsNewWindow()
 
         self.library_view: LibraryView = LibraryView(main_window_builder)
         self.search_view: SearchView = SearchView(main_window_builder)
