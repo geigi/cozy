@@ -8,7 +8,7 @@
 
 # It's getting Cozy
 
-![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot1.png)
 
 Cozy is a modern audiobook player for Linux.
 

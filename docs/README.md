@@ -2,7 +2,7 @@
 
 Cozy is a modern audiobook player for Linux. 
 
-![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot1.png)
 
 ## Here are some of the current features:
 - **Import** your audiobooks into Cozy to browse them comfortably
