@@ -52,6 +52,7 @@ class ErrorReporting(Gtk.Box):
 
         level = self.app_settings.report_level
         self.verbose_adjustment.set_value(level + 1)
+        self._adjustment_changed(self.verbose_adjustment)
 
     def __init_scale(self):
         for i in range(1, 5):
