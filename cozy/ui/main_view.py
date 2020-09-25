@@ -84,7 +84,6 @@ class CozyUI(metaclass=Singleton):
     def startup(self):
         self.__init_resources()
         self.__init_css()
-        report.info("main", "startup")
 
         self.__init_window()
 

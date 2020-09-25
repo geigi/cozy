@@ -3,6 +3,7 @@ from gi.repository import Gio
 import cozy.ext.inject as inject
 from peewee import SqliteDatabase
 
+from cozy.report import reporter
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.singleton import Singleton
 from cozy.control.db import get_db
@@ -24,6 +25,8 @@ from cozy.ui.settings import Settings as UISettings
 class AppController(metaclass=Singleton):
     def __init__(self, main_window_builder, main_window):
         inject.configure_once(self.configure_inject)
+
+        reporter.info("main", "startup")
 
         self.main_window: CozyUI = main_window
         self.main_window_builder = main_window_builder

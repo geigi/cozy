@@ -15,6 +15,7 @@ from cozy.architecture.event_sender import EventSender
 from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
 from cozy.ext import inject
 from cozy.model.settings import Settings
+from cozy.report import reporter
 
 log = logging.getLogger("importer")
 
@@ -151,12 +152,15 @@ class Importer(EventSender):
         if not os.path.isfile(path):
             return None
 
-        media_detector = MediaDetector(path)
         try:
+            media_detector = MediaDetector(path)
             media_data = media_detector.get_media_data()
         except NotAnAudioFile as e:
             return None
         except AudioFileCouldNotBeDiscovered as e:
             return unquote(urlparse(str(e)).path)
+        except Exception as e:
+            reporter.exception("media_detector", e)
+            return None
 
         return media_data

@@ -20,7 +20,10 @@ def error(component: str, message: str):
     report_pool.apply_async(report, [component, LogLevel.ERROR, message, None])
 
 
-def exception(component: str, exception: Exception, message=traceback):
+def exception(component: str, exception: Exception, message=None):
+    if not message:
+        message = traceback.format_exc()
+
     report_pool.apply_async(report, [component, LogLevel.ERROR, message, exception])
 
 
