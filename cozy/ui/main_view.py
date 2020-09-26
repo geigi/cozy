@@ -11,6 +11,7 @@ from cozy.db.track import Track
 from gi.repository import Gtk, Gio, Gdk, Gst, GLib
 from threading import Thread
 
+from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
@@ -23,7 +24,6 @@ from cozy.ui.book_overview import BookOverview
 from cozy.architecture.singleton import Singleton
 from cozy.model.settings import Settings as SettingsModel
 import cozy.report.reporter as report
-import cozy.control.importer as importer
 import cozy.control.player as player
 import cozy.tools as tools
 import cozy.control.filesystem_monitor as fs_monitor
@@ -56,6 +56,7 @@ class CozyUI(metaclass=Singleton):
     application_settings = inject.attr(ApplicationSettings)
     _importer: Importer = inject.attr(Importer)
     _settings: SettingsModel = inject.attr(SettingsModel)
+    _files: Files = inject.attr(Files)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -509,7 +510,7 @@ class CozyUI(metaclass=Singleton):
         """
         if target_type == 80:
             self.switch_to_working("copying new files…", False)
-            thread = Thread(target=importer.copy, args=(self, selection), name="DragDropImportThread")
+            thread = Thread(target=self._files.copy, args=[selection], name="DragDropImportThread")
             thread.start()
 
     def __on_no_media_folder_changed(self, sender):

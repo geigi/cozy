@@ -35,6 +35,13 @@ class Settings:
             self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
+    def default_location(self):
+        return next(location
+                    for location
+                    in self.storage_locations
+                    if location.default)
+
+    @property
     def storage_locations(self):
         if not self._storages:
             self._load_all_storage_locations()

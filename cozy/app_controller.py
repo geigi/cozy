@@ -3,6 +3,7 @@ from gi.repository import Gio
 import cozy.ext.inject as inject
 from peewee import SqliteDatabase
 
+from cozy.media.files import Files
 from cozy.report import reporter
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.singleton import Singleton
@@ -54,6 +55,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(SearchViewModel, lambda: SearchViewModel())
         binder.bind_to_constructor(UISettings, lambda: UISettings())
         binder.bind_to_constructor(StorageBlockList, lambda: StorageBlockList())
+        binder.bind_to_constructor(Files, lambda: Files())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR

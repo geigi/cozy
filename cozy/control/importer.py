@@ -38,20 +38,26 @@ def copy(ui, selection):
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.scan, None, None)
 
 
+def copy_to_audiobook_folder_new(path):
+    try:
+        name = os.path.basename(os.path.normpath(path))
+        storage_location_path = Storage.select().where(Storage.default == True).get().path
+
+
 def copy_to_audiobook_folder(path):
     """
     Copies the given path (folder or file) to the audio book folder.
     """
     try:
         name = os.path.basename(os.path.normpath(path))
-        shutil.copytree(path, Storage.select().where(
-            Storage.default == True).get().path + "/" + name)
+        storage_location_path = Storage.select().where(Storage.default == True).get().path
+        shutil.copytree(path, os.path.join(storage_location_path, name), dirs_exist_ok=True)
     except OSError as exc:
         reporter.exception("importer", exc)
         if exc.errno == errno.ENOTDIR:
             try:
-                shutil.copy(path, Storage.select().where(
-                    Storage.default == True).get().path)
+                storage_location_path = Storage.select().where(Storage.default == True).get().path
+                shutil.copy(path, storage_location_path)
             except OSError as e:
                 if e.errno == 95:
                     log.error("Could not import file " + path)
