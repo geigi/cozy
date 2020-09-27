@@ -28,5 +28,6 @@ data/ui/timer_popover.ui
 data/ui/titlebar_menu.ui
 data/ui/error_reporting.ui
 data/ui/whats_new_importer.ui
+data/ui/whats_new_m4b.ui
 data/ui/whats_new.ui
 main.py
