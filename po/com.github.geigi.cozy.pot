@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-20 18:23+0200\n"
+"POT-Creation-Date: 2020-09-27 16:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,71 +22,71 @@ msgstr ""
 msgid "Copying"
 msgstr ""
 
-#: cozy/control/sleep_timer.py:142 data/ui/timer_popover.ui:66
+#: cozy/control/sleep_timer.py:141 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr ""
 
-#: cozy/control/sleep_timer.py:150
+#: cozy/control/sleep_timer.py:149
 msgid "Off"
 msgstr ""
 
-#: cozy/tools.py:93 cozy/tools.py:97
+#: cozy/tools.py:92 cozy/tools.py:96
 #, python-brace-format
 msgid "{hours} hour"
 msgid_plural "{hours} hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:95 cozy/tools.py:99
+#: cozy/tools.py:94 cozy/tools.py:98
 #, python-brace-format
 msgid "{minutes} minute"
 msgid_plural "{minutes} minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:101
+#: cozy/tools.py:100
 #, python-brace-format
 msgid "{seconds} second"
 msgid_plural "{seconds} seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:103
+#: cozy/tools.py:102
 msgid "finished"
 msgstr ""
 
-#: cozy/tools.py:127
+#: cozy/tools.py:126
 msgid "never"
 msgstr ""
 
-#: cozy/tools.py:129
+#: cozy/tools.py:128
 msgid "today"
 msgstr ""
 
-#: cozy/tools.py:131
+#: cozy/tools.py:130
 msgid "yesterday"
 msgstr ""
 
-#: cozy/tools.py:133
+#: cozy/tools.py:132
 #, python-format
 msgid "%s days ago"
 msgstr ""
 
-#: cozy/tools.py:135
+#: cozy/tools.py:134
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:137
+#: cozy/tools.py:136
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/tools.py:139
+#: cozy/tools.py:138
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
@@ -749,7 +749,7 @@ msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
 
-#: data/ui/whats_new_importer.ui:17
+#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
 msgid "What's new  in Cozy"
 msgstr ""
 
@@ -770,6 +770,26 @@ msgstr ""
 
 #: data/ui/whats_new_importer.ui:107
 msgid "More to come in a later update."
+msgstr ""
+
+#: data/ui/whats_new_m4b.ui:52
+msgid "Basic support for m4b audio books."
+msgstr ""
+
+#: data/ui/whats_new_m4b.ui:77
+msgid ""
+"Many of you have been waiting for it: Support for m4b audio books! This "
+"version features basic support for m4b files without chapter support."
+msgstr ""
+
+#: data/ui/whats_new_m4b.ui:92
+msgid ""
+"Drag & Drop your m4b files onto Cozy or use the application menu in the "
+"titlebar to rescan your audiobook directories."
+msgstr ""
+
+#: data/ui/whats_new_m4b.ui:107
+msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr ""
 
 #: data/ui/whats_new.ui:8

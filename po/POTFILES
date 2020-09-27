@@ -1,5 +1,4 @@
 cozy/control/db.py
-cozy/control/importer.py
 cozy/control/mpris.py
 cozy/control/offline_cache.py
 cozy/control/player.py
