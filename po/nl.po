@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-20 18:23+0200\n"
+"POT-Creation-Date: 2020-09-27 16:24+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
@@ -26,71 +26,71 @@ msgstr ""
 msgid "Copying"
 msgstr "Bezig met kopiëren..."
 
-#: cozy/control/sleep_timer.py:142 data/ui/timer_popover.ui:66
+#: cozy/control/sleep_timer.py:141 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "min"
 
-#: cozy/control/sleep_timer.py:150
+#: cozy/control/sleep_timer.py:149
 msgid "Off"
 msgstr "Uit"
 
-#: cozy/tools.py:93 cozy/tools.py:97
+#: cozy/tools.py:92 cozy/tools.py:96
 #, python-brace-format
 msgid "{hours} hour"
 msgid_plural "{hours} hours"
 msgstr[0] "{hours} uur"
 msgstr[1] "{hours} uur"
 
-#: cozy/tools.py:95 cozy/tools.py:99
+#: cozy/tools.py:94 cozy/tools.py:98
 #, python-brace-format
 msgid "{minutes} minute"
 msgid_plural "{minutes} minutes"
 msgstr[0] "{minutes} minuut"
 msgstr[1] "{minutes} minuten"
 
-#: cozy/tools.py:101
+#: cozy/tools.py:100
 #, python-brace-format
 msgid "{seconds} second"
 msgid_plural "{seconds} seconds"
 msgstr[0] "{seconds} seconde"
 msgstr[1] "{seconds} seconden"
 
-#: cozy/tools.py:103
+#: cozy/tools.py:102
 msgid "finished"
 msgstr "afgerond"
 
-#: cozy/tools.py:127
+#: cozy/tools.py:126
 msgid "never"
 msgstr "nooit"
 
-#: cozy/tools.py:129
+#: cozy/tools.py:128
 msgid "today"
 msgstr "vandaag"
 
-#: cozy/tools.py:131
+#: cozy/tools.py:130
 msgid "yesterday"
 msgstr "gisteren"
 
-#: cozy/tools.py:133
+#: cozy/tools.py:132
 #, python-format
 msgid "%s days ago"
 msgstr "%s dagen geleden"
 
-#: cozy/tools.py:135
+#: cozy/tools.py:134
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
 msgstr[0] "{weeks} week geleden"
 msgstr[1] "{weeks} weken geleden"
 
-#: cozy/tools.py:137
+#: cozy/tools.py:136
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
 msgstr[0] "{months} maand geleden"
 msgstr[1] "{months} maanden geleden"
 
-#: cozy/tools.py:139
+#: cozy/tools.py:138
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
@@ -252,7 +252,7 @@ msgstr "Oké"
 
 #: data/ui/import_failed.ui:81
 msgid "Some files could not be imported"
-msgstr "Sommige bestanden kunnen niet worden geïmporteerd"
+msgstr "Enkele bestanden kunnen niet worden geïmporteerd"
 
 #: data/ui/import_failed.ui:134
 msgid ""
@@ -264,7 +264,7 @@ msgid ""
 msgstr ""
 "Hier kunnen meerdere oorzaken voor zijn:\n"
 "- De audio-indeling wordt niet ondersteund\n"
-"-Het pad/De bestandsnaam bevat tekens die niet onder UTF-8 vallen\n"
+"- Het pad/De bestandsnaam bevat tekens die niet onder utf-8 vallen\n"
 "- Het is/zijn geen geldige audiobestand(en)\n"
 "- Het bestand/De bestanden is/zijn beschadigd"
 
@@ -290,7 +290,7 @@ msgstr "Afspelen/Pauzeren-knop"
 
 #: data/ui/main_window.ui:107
 msgid "Start or pause the playback"
-msgstr "Het afspelen starten of pauzeren"
+msgstr "Start of pauzeer het afspelen"
 
 #: data/ui/main_window.ui:124
 msgid "Volume control"
@@ -302,7 +302,7 @@ msgstr "Waarschuwingen"
 
 #: data/ui/main_window.ui:226
 msgid "Currently playing"
-msgstr "Nu aan het afspelen"
+msgstr "Je luistert naar"
 
 #: data/ui/main_window.ui:244
 msgid "Booktitle"
@@ -370,19 +370,19 @@ msgstr "Afspeelsnelheid"
 
 #: data/ui/main_window.ui:490 data/ui/settings.ui:727
 msgid "Sleep timer"
-msgstr "Slaaptimer"
+msgstr "Tijdklok"
 
 #: data/ui/main_window.ui:501
 msgid "Timer menu button"
-msgstr "Timer-menuknop"
+msgstr "Tijdklok-menuknop"
 
 #: data/ui/main_window.ui:502
 msgid "Open the sleep timer popover"
-msgstr "Open het slaaptimer-paneel"
+msgstr "Open het tijdklokpaneel"
 
 #: data/ui/main_window.ui:518
 msgid "Search your library"
-msgstr "Zoeken in je bibliotheek"
+msgstr "Doorzoek je bibliotheek"
 
 #: data/ui/main_window.ui:529
 msgid "Search menu button"
@@ -454,8 +454,8 @@ msgid ""
 "Start exploring your library by switching to the Author or Reader view "
 "above."
 msgstr ""
-"Begin met verkennen van je bibliotheek door hierboven te kiezen voor de "
-"Auteur- of Leesweergave."
+"Begin met het verkennen van je bibliotheek door hierboven te kiezen voor de "
+"auteur- of leesweergave."
 
 #: data/ui/main_window.ui:1371
 msgid "Import your Audiobooks"
@@ -480,7 +480,7 @@ msgid ""
 "If they are you can enable offline mode for a book in the book overview. "
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
-"Als dat zo is, dan kun je de offline-modus inschakelen voor een boek in het "
+"Als dat zo is, dan kun je de offline-modus inschakelen voor een boek op het "
 "overzicht. Dit slaat een kopie op van het boek wordt zodat je onderweg kunt "
 "luisteren."
 
@@ -499,9 +499,7 @@ msgstr "Slepen-en-neerzetten"
 
 #: data/ui/main_window.ui:1611
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr ""
-"Sleep je audioboeken naar cozy om ze automatisch te importeren naar je "
-"bibliotheek"
+msgstr "Sleep je audioboeken naar cozy om ze automatisch te importeren"
 
 #: data/ui/main_window.ui:1634
 msgid "Location of your audiobooks"
@@ -513,11 +511,11 @@ msgstr "Audioboek-map instellen"
 
 #: data/ui/main_window.ui:1678
 msgid "Load audiobooks from a directory, network drive or an external disk."
-msgstr "Audioboeken laden uit een map of van een externe of netwerkschijf."
+msgstr "Laad audioboeken uit een map of van een externe of netwerkschijf."
 
 #: data/ui/main_window.ui:1696
 msgid "You can add more storage locations later in the settings"
-msgstr "Je kunt, achteraf, meer locaties toevoegen in de instellingen"
+msgstr "Je kunt nadien meer locaties toevoegen in de instellingen"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -529,7 +527,7 @@ msgstr "Zoekvak"
 
 #: data/ui/search_popover.ui:37
 msgid "Search your audiobook library"
-msgstr "Zoeken in je bibliotheek"
+msgstr "Doorzoek je bibliotheek"
 
 #: data/ui/search_popover.ui:67
 msgid "Which book are you looking for?"
@@ -569,7 +567,7 @@ msgstr "Uiterlijk"
 
 #: data/ui/settings.ui:409
 msgid "Suspend system on timer"
-msgstr "Systeem in pauzestand zetten nadat de timer is afgegaan"
+msgstr "Systeem in pauzestand zetten nadat de tijdklok is verstreken"
 
 #: data/ui/settings.ui:469
 msgid "Replay 30 seconds"
@@ -590,7 +588,7 @@ msgstr "Auteur en lezer omwisselen"
 #: data/ui/settings.ui:653
 msgid "Activate this if author and reader are displayed the wrong way"
 msgstr ""
-"Gebruik deze optie als de auteur en lezer in de verkeerde volgorde staan"
+"Schakel deze optie in als de auteur en lezer in de verkeerde volgorde staan"
 
 #: data/ui/settings.ui:678
 msgid "switch author and reader assignment"
@@ -614,7 +612,7 @@ msgstr "Omslag"
 
 #: data/ui/settings.ui:994
 msgid "Prefer external images over embedded cover"
-msgstr "Externe afbeeldingen prefereren boven meegeleverde omslag"
+msgstr "Externe afbeeldingen verkiezen boven meegeleverde omslag"
 
 #: data/ui/settings.ui:1007
 msgid "Use images (cover.jpg, *.png, …) when available"
@@ -662,11 +660,11 @@ msgstr "Opslag"
 
 #: data/ui/settings.ui:1487
 msgid "Database"
-msgstr "Database"
+msgstr "Databank"
 
 #: data/ui/settings.ui:1539
 msgid "Force refresh the database"
-msgstr "Database geforceerd vernieuwen"
+msgstr "Databank geforceerd vernieuwen"
 
 #: data/ui/settings.ui:1552
 msgid "This will force update the metadata of all imported books"
@@ -683,15 +681,15 @@ msgstr "Geavanceerd"
 
 #: data/ui/timer_popover.ui:37
 msgid "Timer duration"
-msgstr "Timerduur"
+msgstr "Tijdklokduur"
 
 #: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
-msgstr "Timerduur-schuifbalk"
+msgstr "Tijdklokduur-schuifbalk"
 
 #: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
-msgstr "De slaaptimerduur, in minuten"
+msgstr "De tijdklokduur, in minuten"
 
 #: data/ui/timer_popover.ui:116
 msgid "Stop after current chapter"
@@ -707,7 +705,7 @@ msgid ""
 "\"shutdown\" will attempt to turn your system off (also known as power off)\n"
 "\"suspend\" will attempt to suspend your system (also known as sleep)."
 msgstr ""
-"De uit te voeren actie na afloop van de timer.\n"
+"De uit te voeren actie na verstrijken van de tijdklok.\n"
 "'Afsluiten' tracht de computer af te sluiten (ook wel: 'uitschakelen')\n"
 "'Pauzestand' tracht de computer in de pauzestand te zetten (ook wel: 'slaapstand')"
 
@@ -733,7 +731,7 @@ msgstr "Bibliotheek door_zoeken"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
-msgstr "Niet-beschikbare boeken _verbergen"
+msgstr "Onbeschikbare boeken _verbergen"
 
 #: data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
@@ -782,7 +780,7 @@ msgid ""
 msgstr ""
 "Cozy is open source en de code omtrent gebruikersfeedback is hier te vinden:"
 
-#: data/ui/whats_new_importer.ui:17
+#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
 msgid "What's new  in Cozy"
 msgstr "Wijzigingslog"
 
@@ -811,6 +809,31 @@ msgstr ""
 #: data/ui/whats_new_importer.ui:107
 msgid "More to come in a later update."
 msgstr "Binnenkort volgt ondersteuning voor meer formaten."
+
+#: data/ui/whats_new_m4b.ui:52
+msgid "Basic support for m4b audio books."
+msgstr "Basisondersteuning voor m4b-audioboeken."
+
+#: data/ui/whats_new_m4b.ui:77
+msgid ""
+"Many of you have been waiting for it: Support for m4b audio books! This "
+"version features basic support for m4b files without chapter support."
+msgstr ""
+"Velen van jullie hebben er op gewacht: ondersteuning voor m4b-audioboeken. "
+"En nu is het zover: deze versie ondersteunt m4b-bestanden, maar zonder "
+"hoofdstukken."
+
+#: data/ui/whats_new_m4b.ui:92
+msgid ""
+"Drag & Drop your m4b files onto Cozy or use the application menu in the "
+"titlebar to rescan your audiobook directories."
+msgstr ""
+"Sleep je m4b-bestanden naar het Cozy-venster of doorzoek je mappen opnieuw "
+"middels het menu."
+
+#: data/ui/whats_new_m4b.ui:107
+msgid "Chapter support will follow in a later update. Stay tuned!"
+msgstr "Hoofdstukondersteuning volgt binnenkort. Nog even geduld!"
 
 #: data/ui/whats_new.ui:8
 msgid "Whats new?"
