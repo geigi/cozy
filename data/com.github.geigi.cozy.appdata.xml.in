@@ -52,7 +52,7 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
-    <release version="0.7.2" timestamp="1601031066">
+    <release version="0.7.2" timestamp="1601308309">
       <description>
         <p>
         Many of you have been waiting for it: Support for m4b audio books! This version features basic support for m4b files without chapter support, which will follow in a later update. Stay tuned!
