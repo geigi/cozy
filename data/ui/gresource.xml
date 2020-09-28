@@ -17,5 +17,6 @@
     <file preprocess="xml-stripblanks">error_reporting.ui</file>
     <file preprocess="xml-stripblanks">whats_new.ui</file>
     <file preprocess="xml-stripblanks">whats_new_importer.ui</file>
+    <file preprocess="xml-stripblanks">whats_new_m4b.ui</file>
   </gresource>
 </gresources>

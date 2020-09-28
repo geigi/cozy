@@ -1,4 +1,5 @@
 from typing import List
+from packaging import version
 
 import gi
 
@@ -6,6 +7,7 @@ from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
 from cozy.ui.widgets.error_reporting import ErrorReporting
 from cozy.ui.widgets.whats_new_importer import WhatsNewImporter
+from cozy.ui.widgets.whats_new_m4b import WhatsNewM4B, INTRODUCED
 from cozy.version import __version__ as CozyVersion
 
 gi.require_version('Gtk', '3.0')
@@ -30,8 +32,7 @@ class WhatsNewWindow(Gtk.Window):
 
         super().__init__(**kwargs)
 
-        self.children = [WhatsNewImporter(), ErrorReporting()]
-
+        self._fill_window()
         self.set_default_size(800, 550)
 
         for widget in self.children:
@@ -39,6 +40,16 @@ class WhatsNewWindow(Gtk.Window):
 
         self.continue_button.connect("clicked", self.__on_continue_clicked)
         self.show()
+
+    def _fill_window(self):
+        self.children = []
+
+        if version.parse(self.app_settings.last_launched_version) < version.parse(INTRODUCED):
+            self.children.append(WhatsNewM4B())
+
+        if not self.app_settings.last_launched_version:
+            self.children.append(WhatsNewImporter())
+            self.children.append(ErrorReporting())
 
     def __on_continue_clicked(self, widget):
         if len(self.children) == self.page + 1:
