@@ -1,6 +1,7 @@
 apsw
 distro
 mutagen
+packaging
 peewee>=3.9.6
 pytz
 requests

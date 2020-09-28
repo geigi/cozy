@@ -60,6 +60,7 @@ You can download it here: <a href="https://github.com/geigi/cozy/releases/downlo
 - `distro`
 - `requests`
 - `pytz`
+- `packaging`
 - `gi-cairo`
 - `gst-1.0`
 - `file`
