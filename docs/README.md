@@ -79,6 +79,7 @@ To the contributors on GitHub:
 - grenade
 - jnbr
 - kaphula
+- leuc
 - magnickolas
 - meisenzahl
 - naglis
