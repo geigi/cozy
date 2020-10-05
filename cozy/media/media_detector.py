@@ -32,7 +32,7 @@ class MediaDetector(EventSender):
         self.discoverer: GstPbutils.Discoverer = GstPbutils.Discoverer()
 
     def get_media_data(self) -> MediaFile:
-        if not self.uri.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a', '.m4b', '.wav', '.opus')):
+        if not self._has_audio_file_ending():
             raise NotAnAudioFile
 
         try:
@@ -58,3 +58,6 @@ class MediaDetector(EventSender):
             return False
 
         return True
+
+    def _has_audio_file_ending(self) -> bool:
+        return self.uri.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a', '.m4b', '.wav', '.opus'))
