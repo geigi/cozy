@@ -26,12 +26,11 @@ class LibraryViewModel(Observable, EventSender):
     _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
     _model = inject.attr(Library)
     _importer: Importer = inject.attr(Importer)
+    _player: Player = inject.attr(Player)
 
     def __init__(self):
         super().__init__()
         super(Observable, self).__init__()
-
-        self._player: Player = Player()
 
         self._library_view_mode: LibraryViewMode = LibraryViewMode.CURRENT
         self._selected_filter: str = _("All")

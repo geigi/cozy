@@ -4,7 +4,7 @@ from cozy.control import player
 from cozy.model.book import Book
 
 
-class Player(EventSender, metaclass=Singleton):
+class Player(EventSender):
     def __init__(self):
         super().__init__()
         self._gst_player: player = player.get_playbin()
