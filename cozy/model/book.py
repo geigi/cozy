@@ -188,4 +188,4 @@ class Book(EventSender):
                 with self._db:
                     self._db_object.delete_instance(recursive=True)
                 self.emit_event("book-deleted", self)
-                self.destroy()
+                self.destroy_listeners()

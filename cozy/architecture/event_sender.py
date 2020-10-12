@@ -23,5 +23,5 @@ class EventSender:
     def add_listener(self, function: Callable[[str, object], None]):
         self._listeners.append(function)
 
-    def destroy(self):
+    def destroy_listeners(self):
         self._listeners = []

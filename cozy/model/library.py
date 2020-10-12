@@ -63,12 +63,12 @@ class Library(EventSender):
 
     def invalidate(self):
         for book in self._books:
-            book.destroy()
+            book.destroy_listeners()
 
         self._books = []
 
         for chapter in self._chapters:
-            chapter.destroy()
+            chapter.destroy_listeners()
 
         self._chapters = set()
         self._files = set()
