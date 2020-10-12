@@ -5,6 +5,7 @@ import gi
 from cozy.db.artwork_cache import ArtworkCache
 from cozy.ext import inject
 from cozy.model.book import Book
+from cozy.model.chapter import Chapter
 from cozy.report import reporter
 from cozy.ui.disk_element import DiskElement
 from cozy.ui.track_element import ChapterElement
@@ -56,23 +57,42 @@ class BookDetailView(Gtk.Box):
         self.author_label.set_text(book.author)
         self.last_played_label.set_text(self._view_model.last_played_text)
 
+        self._set_duration(book)
         self._set_cover_image(book)
+        self._display_chapters(book)
 
     def _display_chapters(self, book: Book):
         disk_number = -1
 
+        self._clear_chapter_box()
+
         for chapter in book.chapters:
             if disk_number != chapter.disk and self._view_model.disk_count > 1:
-                disc_element = DiskElement(chapter.disk)
-                self.chapter_box.add(disc_element)
+                self._add_disk(chapter)
 
-            track_element = ChapterElement(chapter)
-            self.chapter_box.add(track_element)
-            track_element.show_all()
+            self._add_chapter(chapter)
 
             disk_number = chapter.disk
 
-    def _set_cover_image(self, book):
+    def _add_disk(self, chapter: Chapter):
+        disc_element = DiskElement(chapter.disk)
+        self.chapter_box.add(disc_element)
+
+    def _add_chapter(self, chapter: Chapter):
+        chapter_element = ChapterElement(chapter)
+        self.chapter_box.add(chapter_element)
+        chapter_element.show_all()
+
+    def _clear_chapter_box(self):
+        for childs in self.chapter_box.get_children():
+            childs.destroy_listeners()
+
+        self.chapter_box.remove_all_children()
+
+    def _set_duration(self, book: Book):
+        raise NotImplementedError
+
+    def _set_cover_image(self, book: Book):
         pixbuf = self._artwork_cache.get_cover_pixbuf(book.db_object, self.get_scale_factor(), 250)
         if pixbuf:
             surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.get_scale_factor(), None)
