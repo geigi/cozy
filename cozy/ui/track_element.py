@@ -1,27 +1,25 @@
-from gi.repository import Gtk, Pango, Gst
+from gi.repository import Gtk, Pango
 
-import cozy.ui
-from cozy.control import player as player
+from cozy.architecture.event_sender import EventSender
 from cozy.control.string_representation import seconds_to_str
-from cozy.db.book import Book
-from cozy.db.track import Track
+from cozy.model.chapter import Chapter
 
 
-class TrackElement(Gtk.EventBox):
+class ChapterElement(Gtk.EventBox, EventSender):
     """
     An element to display a track in a book popover.
     """
-    track = None
+    chapter = None
     selected = False
     ui = None
     book = None
 
-    def __init__(self, t, book):
-        self.track = t
-        self.ui = cozy.ui.main_view.CozyUI()
-        self.book = book
+    def __init__(self, chapter: Chapter):
+        self.chapter = chapter
 
         super().__init__()
+        super(Gtk.EventBox, self).__init__()
+
         self.connect("enter-notify-event", self._on_enter_notify)
         self.connect("leave-notify-event", self._on_leave_notify)
         self.connect("button-press-event", self.__on_button_press)
@@ -44,14 +42,14 @@ class TrackElement(Gtk.EventBox):
         self.play_img.set_margin_right(5)
         self.play_img.props.width_request = 16
 
-        no_label.set_text(str(self.track.number))
+        no_label.set_text(str(self.chapter.number))
         no_label.props.margin = 4
         no_label.set_margin_right(7)
         no_label.set_margin_left(0)
         no_label.set_size_request(30, -1)
         no_label.set_xalign(1)
 
-        title_label.set_text(self.track.name)
+        title_label.set_text(self.chapter.name)
         title_label.get_style_context().add_class("semi-bold")
         title_label.set_halign(Gtk.Align.START)
         title_label.props.margin = 4
@@ -62,7 +60,7 @@ class TrackElement(Gtk.EventBox):
         title_label.props.xalign = 0.0
         title_label.set_ellipsize(Pango.EllipsizeMode.MIDDLE)
 
-        dur_label.set_text(seconds_to_str(self.track.length))
+        dur_label.set_text(seconds_to_str(self.chapter.length))
         dur_label.get_style_context().add_class("monospace")
         dur_label.set_halign(Gtk.Align.END)
         dur_label.props.margin = 4
@@ -76,21 +74,7 @@ class TrackElement(Gtk.EventBox):
         self.add(self.box)
 
     def __on_button_press(self, eventbox, event):
-        """
-        Play the selected track.
-        """
-        current_track = player.get_current_track()
-
-        if current_track and current_track.id == self.track.id:
-            player.play_pause(None)
-            if player.get_gst_player_state() == Gst.State.PLAYING:
-                player.jump_to_ns(Track.select().where(
-                    Track.id == self.track.id).get().position)
-        else:
-            player.load_file(Track.select().where(Track.id == self.track.id).get())
-            player.play_pause(None, True)
-            Book.update(position=self.track).where(
-                Book.id == self.track.book.id).execute()
+        self.emit_event("play-button-pressed")
 
     def _on_enter_notify(self, widget, event):
         """
@@ -98,9 +82,8 @@ class TrackElement(Gtk.EventBox):
         :param widget: as Gtk.EventBox
         :param event: as Gdk.Event
         """
-        if self.ui.current_track_element is not self and not self.selected:
-            self.play_img.set_from_icon_name(
-                "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+        if not self.selected:
+            self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
         self.box.get_style_context().add_class("box_hover")
         self.play_img.get_style_context().add_class("box_hover")
 
@@ -112,7 +95,8 @@ class TrackElement(Gtk.EventBox):
         """
         self.box.get_style_context().remove_class("box_hover")
         self.play_img.get_style_context().remove_class("box_hover")
-        if self.ui.current_track_element is not self and not self.selected:
+
+        if not self.selected:
             self.play_img.clear()
 
     def select(self):
@@ -120,10 +104,8 @@ class TrackElement(Gtk.EventBox):
         Select this track as the current position of the audio book.
         Permanently displays the play icon.
         """
-        self.book.deselect_track_element()
         self.selected = True
-        self.play_img.set_from_icon_name(
-            "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+        self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
 
     def deselect(self):
         """
@@ -138,8 +120,6 @@ class TrackElement(Gtk.EventBox):
         :param playing: Is currently playing?
         """
         if playing:
-            self.play_img.set_from_icon_name(
-                "media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+            self.play_img.set_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
         else:
-            self.play_img.set_from_icon_name(
-                "media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+            self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)

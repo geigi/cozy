@@ -13,6 +13,7 @@ from threading import Thread
 
 from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
+from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
@@ -165,10 +166,11 @@ class CozyUI(metaclass=Singleton):
         self.sort_box = self.window_builder.get_object("sort_box")
         self.import_box = self.window_builder.get_object("import_box")
         self.position_box = self.window_builder.get_object("position_box")
-        self.main_stack = self.window_builder.get_object("main_stack")
+        self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
+        self._book_detail_view: BookDetailView = BookDetailView()
+        self.book_overview = self._book_detail_view
+        self.main_stack.add(self._book_detail_view)
         self.toolbar_revealer = self.window_builder.get_object("toolbar_revealer")
-        self.back_button = self.window_builder.get_object("back_button")
-        self.back_button.connect("clicked", self.__on_back_clicked)
 
         self.category_toolbar = self.window_builder.get_object(
             "category_toolbar")
@@ -270,7 +272,7 @@ class CozyUI(metaclass=Singleton):
 
         self.sleep_timer = SleepTimer()
         self.speed = PlaybackSpeed()
-        self.book_overview = BookOverview()
+        #self.book_overview = BookOverview()
         self.offline_cache = offline_cache.OfflineCache()
         player.init()
 
@@ -594,11 +596,6 @@ class CozyUI(metaclass=Singleton):
 
     def __about_close_clicked(self, widget):
         self.about_dialog.hide()
-
-    def __on_back_clicked(self, widget):
-        self.book_box.unselect_all()
-        self.main_stack.props.visible_child_name = "main"
-        self.toolbar_revealer.set_reveal_child(True)
 
     def on_close(self, widget, data=None):
         """
