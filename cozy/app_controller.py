@@ -15,10 +15,12 @@ from cozy.model.library import Library
 from cozy.model.settings import Settings
 from cozy.model.storage_block_list import StorageBlockList
 from cozy.open_view import OpenView
+from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.main_view import CozyUI
 from cozy.ui.search_view import SearchView
 from cozy.ui.widgets.whats_new_window import WhatsNewWindow
+from cozy.view_model.book_detail_view_model import BookDetailViewModel
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
 from cozy.view_model.search_view_model import SearchViewModel
 from cozy.ui.settings import Settings as UISettings
@@ -37,11 +39,14 @@ class AppController(metaclass=Singleton):
 
         self.library_view: LibraryView = LibraryView(main_window_builder)
         self.search_view: SearchView = SearchView(main_window_builder)
+        self.book_detail_view: BookDetailView = BookDetailView(main_window_builder)
 
         self.library_view_model = inject.instance(LibraryViewModel)
         self.search_view_model = inject.instance(SearchViewModel)
+        self.book_detail_view_model = inject.instance(BookDetailViewModel)
 
         self.search_view_model.add_listener(self._on_open_view)
+        self.library_view_model.add_listener(self._on_open_view)
         self.library_view_model.add_listener(self._on_library_view_event)
 
     @staticmethod
@@ -58,6 +63,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(UISettings, lambda: UISettings())
         binder.bind_to_constructor(StorageBlockList, lambda: StorageBlockList())
         binder.bind_to_constructor(Files, lambda: Files())
+        binder.bind_to_constructor(BookDetailViewModel, lambda: BookDetailViewModel())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR
@@ -68,6 +74,7 @@ class AppController(metaclass=Singleton):
         self.library_view_model.selected_filter = reader
 
     def open_book(self, book: Book):
+        self.book_detail_view_model.book = book
         self.main_window.jump_to_book(book.db_object)
 
     def _on_open_view(self, event, data):

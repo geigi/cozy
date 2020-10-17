@@ -167,9 +167,6 @@ class CozyUI(metaclass=Singleton):
         self.import_box = self.window_builder.get_object("import_box")
         self.position_box = self.window_builder.get_object("position_box")
         self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
-        self._book_detail_view: BookDetailView = BookDetailView()
-        self.book_overview = self._book_detail_view
-        self.main_stack.add(self._book_detail_view)
         self.toolbar_revealer = self.window_builder.get_object("toolbar_revealer")
 
         self.category_toolbar = self.window_builder.get_object(
@@ -361,7 +358,6 @@ class CozyUI(metaclass=Singleton):
             self.scan_action.set_enabled(sensitive)
             self.hide_offline_action.set_enabled(sensitive)
             self.settings.block_ui_elements(block)
-            self.book_overview.block_ui_elements(block)
 
     def get_ui_buttons_blocked(self):
         """
@@ -492,7 +488,6 @@ class CozyUI(metaclass=Singleton):
         """
         # first update track ui
         book = Book.select().where(Book.id == book.id).get()
-        self.book_overview.set_book(book)
 
         # then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"

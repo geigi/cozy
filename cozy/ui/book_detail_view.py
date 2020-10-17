@@ -2,7 +2,7 @@ import logging
 
 import gi
 
-from cozy.db.artwork_cache import ArtworkCache
+from cozy.control.artwork_cache import ArtworkCache
 from cozy.ext import inject
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
@@ -26,6 +26,9 @@ class BookDetailView(Gtk.Box):
     author_label: Gtk.Label = Gtk.Template.Child()
     last_played_label: Gtk.Label = Gtk.Template.Child()
 
+    published_label: Gtk.Label = Gtk.Template.Child()
+    published_text: Gtk.Label = Gtk.Template.Child()
+
     cover_image: Gtk.Image = Gtk.Template.Child()
 
     chapter_box: Gtk.Box = Gtk.Template.Child()
@@ -33,13 +36,16 @@ class BookDetailView(Gtk.Box):
     _view_model: BookDetailViewModel = inject.attr(BookDetailViewModel)
     _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, main_window_builder: Gtk.Builder):
+        super().__init__()
+
+        main_stack: Gtk.Stack = main_window_builder.get_object("main_stack")
+        main_stack.add_named(self, "book_overview")
 
         self._connect_view_model()
 
     def _connect_view_model(self):
-        self.view_model.bind_to("book", self._on_book_changed)
+        self._view_model.bind_to("book", self._on_book_changed)
 
     def _on_book_changed(self):
         if not self._view_model.book:
@@ -57,9 +63,9 @@ class BookDetailView(Gtk.Box):
         self.author_label.set_text(book.author)
         self.last_played_label.set_text(self._view_model.last_played_text)
 
-        self._set_duration(book)
         self._set_cover_image(book)
         self._display_chapters(book)
+        self._set_duration(book)
 
     def _display_chapters(self, book: Book):
         disk_number = -1
@@ -90,7 +96,7 @@ class BookDetailView(Gtk.Box):
         self.chapter_box.remove_all_children()
 
     def _set_duration(self, book: Book):
-        raise NotImplementedError
+        raise NotImplementedError("BookDetailView: _set_duration is not implemented yet.")
 
     def _set_cover_image(self, book: Book):
         pixbuf = self._artwork_cache.get_cover_pixbuf(book.db_object, self.get_scale_factor(), 250)
