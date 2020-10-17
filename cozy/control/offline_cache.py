@@ -20,7 +20,7 @@ from cozy.report import reporter
 log = logging.getLogger("offline_cache")
 
 
-class OfflineCache(EventSender, metaclass=Singleton):
+class OfflineCache(EventSender):
     """
     This class is responsible for all actions on the offline cache.
     This includes operations like copying to the cache and adding or removing files from

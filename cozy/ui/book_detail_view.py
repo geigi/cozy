@@ -31,9 +31,15 @@ class BookDetailView(Gtk.Box):
     published_label: Gtk.Label = Gtk.Template.Child()
     published_text: Gtk.Label = Gtk.Template.Child()
 
+    download_box: Gtk.Box = Gtk.Template.Child()
+    download_label: Gtk.Label = Gtk.Template.Child()
+    download_image: Gtk.Image = Gtk.Template.Child()
+    download_switch: Gtk.Switch = Gtk.Template.Child()
+
     cover_image: Gtk.Image = Gtk.Template.Child()
 
     chapter_box: Gtk.Box = Gtk.Template.Child()
+    book_overview_scroller: Gtk.ScrolledWindow = Gtk.Template.Child()
 
     _view_model: BookDetailViewModel = inject.attr(BookDetailViewModel)
     _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
@@ -44,11 +50,16 @@ class BookDetailView(Gtk.Box):
         self._main_stack: Gtk.Stack = main_window_builder.get_object("main_stack")
         self._main_stack.add_named(self, "book_overview")
 
+        if Gtk.get_minor_version() > 20:
+            self.book_overview_scroller.props.propagate_natural_height = True
+
         self._connect_view_model()
         self._connect_widgets()
 
     def _connect_view_model(self):
         self._view_model.bind_to("book", self._on_book_changed)
+        self._view_model.bind_to("is_book_available", self._view_model.open_library)
+        self._view_model.bind_to("downloaded", self._set_book_download_status)
 
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_button_clicked)
@@ -71,6 +82,8 @@ class BookDetailView(Gtk.Box):
 
         self._set_cover_image(book)
         self._display_chapters(book)
+        self._display_external_section()
+        self._set_book_download_status()
         self._set_duration(book)
 
     def _display_chapters(self, book: Book):
@@ -85,6 +98,14 @@ class BookDetailView(Gtk.Box):
             self._add_chapter(chapter)
 
             disk_number = chapter.disk
+
+    def _display_external_section(self):
+        external = self._view_model.is_book_external
+        self.download_box.set_visible(external)
+        self.download_switch.set_visible(external)
+
+        if external:
+            self.download_switch.set_active(self._view_model.is_book_external)
 
     def _add_disk(self, chapter: Chapter):
         disc_element = DiskElement(chapter.disk)
@@ -115,3 +136,20 @@ class BookDetailView(Gtk.Box):
 
     def _back_button_clicked(self, _):
         self._view_model.open_library()
+
+    def _download_switch_changed(self, switch: Gtk.Switch, state: bool):
+        self._view_model.download_book(state)
+
+    def _set_book_download_status(self):
+        if not self._view_model.is_book_external:
+            return
+
+        if self._view_model.book.downloaded:
+            icon_name = "downloaded-symbolic"
+            text = _("Downloaded")
+        else:
+            icon_name = "download-symbolic"
+            text = _("Download")
+
+        self.download_image.set_from_icon_name(icon_name, Gtk.IconSize.LARGE_TOOLBAR)
+        self.download_label.set_text(text)

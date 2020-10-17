@@ -3,6 +3,7 @@ from gi.repository import Gio
 import cozy.ext.inject as inject
 from peewee import SqliteDatabase
 
+from cozy.control.offline_cache import OfflineCache
 from cozy.media.files import Files
 from cozy.media.player import Player
 from cozy.report import reporter
@@ -57,6 +58,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(ApplicationSettings, lambda: ApplicationSettings())
         binder.bind_to_constructor(Settings, lambda: Settings())
         binder.bind_to_constructor("FilesystemMonitor", lambda: FilesystemMonitor())
+        binder.bind_to_constructor(OfflineCache, lambda: OfflineCache())
         binder.bind_to_constructor(Player, lambda: Player())
         binder.bind_to_constructor(Library, lambda: Library())
         binder.bind_to_constructor(LibraryViewModel, lambda: LibraryViewModel())

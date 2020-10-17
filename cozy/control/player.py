@@ -457,14 +457,15 @@ def __on_playback_speed_timer():
     __playback_speed_timer_running = False
 
 
-def __on_storage_changed(event, message):
+@inject.autoparams()
+def __on_storage_changed(event, message, offline_cache: OfflineCache):
     """
     """
     global __player
 
     if event == "storage-offline":
         if get_current_track() and message in get_current_track().file:
-            cached_path = OfflineCache().get_cached_path(get_current_track())
+            cached_path = offline_cache.get_cached_path(get_current_track())
             if not cached_path:
                 stop()
                 unload()
@@ -472,7 +473,7 @@ def __on_storage_changed(event, message):
 
 
 @inject.autoparams()
-def load_file(track, filesystem_monitor: FilesystemMonitor):
+def load_file(track, filesystem_monitor: FilesystemMonitor, offline_cache: OfflineCache):
     """
     Loads a given track into the player.
     :param track: track to be loaded
@@ -493,7 +494,7 @@ def load_file(track, filesystem_monitor: FilesystemMonitor):
     if filesystem_monitor.is_track_online(track):
         path = track.file
     else:
-        path = OfflineCache().get_cached_path(track)
+        path = offline_cache.get_cached_path(track)
         if not path:
             path = track.file
     __player.set_property("uri", "file://" + path)
@@ -506,7 +507,7 @@ def load_file(track, filesystem_monitor: FilesystemMonitor):
 
 
 @inject.autoparams()
-def load_last_book(filesystem_monitor: FilesystemMonitor):
+def load_last_book(filesystem_monitor: FilesystemMonitor, offline_cache: OfflineCache):
     """
     Load the last played book into the player.
     """
@@ -526,7 +527,7 @@ def load_last_book(filesystem_monitor: FilesystemMonitor):
                 if filesystem_monitor.is_track_online(last_track):
                     path = last_track.file
                 else:
-                    path = OfflineCache().get_cached_path(last_track)
+                    path = offline_cache.get_cached_path(last_track)
                     if not path:
                         return
                 __player.set_property("uri", "file://" + path)

@@ -3,21 +3,28 @@ from typing import Optional
 from cozy import tools
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
+from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.control.offline_cache import OfflineCache
 from cozy.ext import inject
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
+from cozy.model.settings import Settings
 from cozy.open_view import OpenView
 
 
 class BookDetailViewModel(Observable, EventSender):
     _player: Player = inject.attr(Player)
+    _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
+    _offline_cache: OfflineCache = inject.attr(OfflineCache)
+    _settings: Settings = inject.attr(Settings)
 
     def __init__(self):
         super().__init__()
         super(Observable, self).__init__()
 
         self._player.add_listener(self._on_player_event)
+        self._fs_monitor.add_listener(self._on_fs_monitor_event)
 
     @property
     def play(self) -> bool:
@@ -62,6 +69,26 @@ class BookDetailViewModel(Observable, EventSender):
                     for chapter
                     in self._book.chapters})
 
+    @property
+    def is_book_available(self) -> bool:
+        return self._fs_monitor.get_book_online(self._book)
+
+    @property
+    def is_book_external(self) -> bool:
+        first_chapter_path = self._book.chapters[0].file
+        return any(first_chapter_path
+                   in storage.path
+                   for storage
+                   in self._settings.external_storage_locations)
+
+    def download_book(self, download: bool):
+        self._book.offline = download
+
+        if download:
+            self._offline_cache.add(self._book.db_object)
+        else:
+            self._offline_cache.remove(self._book.db_object)
+
     def open_library(self):
         self.emit_event(OpenView.LIBRARY)
 
@@ -78,3 +105,21 @@ class BookDetailViewModel(Observable, EventSender):
             if book:
                 book.reload()
                 self._notify("book")
+
+    def _on_fs_monitor_event(self, event, _):
+        if event == "storage-online":
+            self._notify("is_book_available")
+        elif event == "storage-offline":
+            self._notify("is_book_available")
+
+    def __on_offline_cache_event(self, event, message):
+        """
+        """
+        try:
+            if message.id != self._book.db_object.id:
+                return
+        except Exception as e:
+            return
+
+        if event == "book-offline":
+            self._notify("downloaded")

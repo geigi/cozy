@@ -12,6 +12,7 @@
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
         <property name="halign">start</property>
+        <property name="margin_left">10</property>
         <property name="margin_top">10</property>
         <property name="relief">none</property>
         <property name="always_show_image">True</property>
@@ -38,6 +39,8 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="valign">center</property>
+        <property name="margin_left">10</property>
+        <property name="margin_right">10</property>
         <property name="margin_top">40</property>
         <property name="margin_bottom">40</property>
         <property name="hexpand">True</property>
@@ -120,6 +123,7 @@
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="margin_bottom">15</property>
+                <property name="spacing">5</property>
                 <child>
                   <object class="GtkBox" id="download_box">
                     <property name="visible">True</property>
@@ -184,6 +188,7 @@
                 <property name="can_focus">False</property>
                 <property name="margin_bottom">20</property>
                 <property name="hexpand">True</property>
+                <property name="column_spacing">5</property>
                 <child>
                   <object class="GtkLabel" id="remaining_text">
                     <property name="visible">True</property>
@@ -344,6 +349,7 @@
                       </object>
                     </child>
                     <style>
+                      <class name="suggested-action"/>
                       <class name="flat"/>
                     </style>
                   </object>

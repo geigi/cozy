@@ -4,6 +4,7 @@ import cozy.ext.inject as inject
 from cozy.application_settings import ApplicationSettings
 
 from cozy.control.db import books, close_db
+from cozy.control.offline_cache import OfflineCache
 from cozy.db.book import Book
 from cozy.db.storage import Storage
 from cozy.db.track import Track
@@ -13,7 +14,6 @@ from threading import Thread
 
 from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
-from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
@@ -21,14 +21,12 @@ from cozy.control.sleep_timer import SleepTimer
 from cozy.control.playback_speed import PlaybackSpeed
 from cozy.ui.titlebar import Titlebar
 from cozy.ui.settings import Settings
-from cozy.ui.book_overview import BookOverview
 from cozy.architecture.singleton import Singleton
 from cozy.model.settings import Settings as SettingsModel
 import cozy.report.reporter as report
 import cozy.control.player as player
 import cozy.tools as tools
 import cozy.control.filesystem_monitor as fs_monitor
-import cozy.control.offline_cache as offline_cache
 
 import os
 
@@ -53,6 +51,7 @@ class CozyUI(metaclass=Singleton):
     first_play = True
     __inhibit_cookie = None
     fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
+    offline_cache = inject.attr(OfflineCache)
     settings = inject.attr(Settings)
     application_settings = inject.attr(ApplicationSettings)
     _importer: Importer = inject.attr(Importer)
@@ -270,7 +269,6 @@ class CozyUI(metaclass=Singleton):
         self.sleep_timer = SleepTimer()
         self.speed = PlaybackSpeed()
         #self.book_overview = BookOverview()
-        self.offline_cache = offline_cache.OfflineCache()
         player.init()
 
         self.titlebar.activate()
