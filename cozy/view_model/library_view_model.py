@@ -141,6 +141,9 @@ class LibraryViewModel(Observable, EventSender):
         else:
             return book_element1.book.name.lower() > book_element2.book.name.lower()
 
+    def open_library(self):
+        self._notify("library_view_mode")
+
     def _on_fs_monitor_event(self, event, _):
         if event == "storage-online":
             self._notify("authors")

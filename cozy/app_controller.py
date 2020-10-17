@@ -46,6 +46,7 @@ class AppController(metaclass=Singleton):
         self.book_detail_view_model = inject.instance(BookDetailViewModel)
 
         self.search_view_model.add_listener(self._on_open_view)
+        self.book_detail_view_model.add_listener(self._on_open_view)
         self.library_view_model.add_listener(self._on_open_view)
         self.library_view_model.add_listener(self._on_library_view_event)
 
@@ -77,6 +78,9 @@ class AppController(metaclass=Singleton):
         self.book_detail_view_model.book = book
         self.main_window.jump_to_book(book.db_object)
 
+    def open_library(self):
+        self.library_view_model.open_library()
+
     def _on_open_view(self, event, data):
         if event == OpenView.AUTHOR:
             self.open_author(data)
@@ -84,6 +88,8 @@ class AppController(metaclass=Singleton):
             self.open_reader(data)
         elif event == OpenView.BOOK:
             self.open_book(data)
+        elif event == OpenView.LIBRARY:
+            self.open_library()
 
     def _on_library_view_event(self, event: str, data):
         if event == "work-done":

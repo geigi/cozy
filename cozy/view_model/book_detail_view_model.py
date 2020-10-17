@@ -7,6 +7,7 @@ from cozy.ext import inject
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
+from cozy.open_view import OpenView
 
 
 class BookDetailViewModel(Observable, EventSender):
@@ -60,6 +61,9 @@ class BookDetailViewModel(Observable, EventSender):
         return len({chapter.disk
                     for chapter
                     in self._book.chapters})
+
+    def open_library(self):
+        self.emit_event(OpenView.LIBRARY)
 
     def _on_player_event(self, event, message):
         if event == "play":

@@ -22,6 +22,8 @@ log = logging.getLogger("BookDetailView")
 class BookDetailView(Gtk.Box):
     __gtype_name__ = 'BookDetail'
 
+    back_button: Gtk.Button = Gtk.Template.Child()
+
     book_label: Gtk.Label = Gtk.Template.Child()
     author_label: Gtk.Label = Gtk.Template.Child()
     last_played_label: Gtk.Label = Gtk.Template.Child()
@@ -39,13 +41,17 @@ class BookDetailView(Gtk.Box):
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
-        main_stack: Gtk.Stack = main_window_builder.get_object("main_stack")
-        main_stack.add_named(self, "book_overview")
+        self._main_stack: Gtk.Stack = main_window_builder.get_object("main_stack")
+        self._main_stack.add_named(self, "book_overview")
 
         self._connect_view_model()
+        self._connect_widgets()
 
     def _connect_view_model(self):
         self._view_model.bind_to("book", self._on_book_changed)
+
+    def _connect_widgets(self):
+        self.back_button.connect("clicked", self._back_button_clicked)
 
     def _on_book_changed(self):
         if not self._view_model.book:
@@ -106,3 +112,6 @@ class BookDetailView(Gtk.Box):
         else:
             self.cover_image.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
             self.cover_image.props.pixel_size = 250
+
+    def _back_button_clicked(self, _):
+        self._view_model.open_library()
