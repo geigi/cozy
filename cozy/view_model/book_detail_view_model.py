@@ -61,6 +61,31 @@ class BookDetailViewModel(Observable, EventSender):
         return tools.past_date_to_human_readable(self._book.last_played)
 
     @property
+    def total_text(self) -> Optional[str]:
+        if not self._book:
+            return None
+
+        return tools.seconds_to_human_readable(self._book.duration)
+
+    @property
+    def remaining_text(self) -> Optional[str]:
+        if not self._book:
+            return None
+
+        remaining = self._book.duration - self._book.progress
+        return tools.seconds_to_human_readable(remaining)
+
+    @property
+    def progress_percent(self) -> Optional[float]:
+        if not self._book:
+            return None
+
+        if self._book.duration < 1:
+            return 1.0
+
+        return self._book.progress / self._book.duration
+
+    @property
     def disk_count(self) -> int:
         if not self._book:
             return 0

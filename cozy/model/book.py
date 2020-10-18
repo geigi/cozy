@@ -72,7 +72,7 @@ class Book(EventSender):
             self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
-    def position(self):
+    def position(self) -> int:
         return self._db_object.position
 
     @position.setter
@@ -151,6 +151,22 @@ class Book(EventSender):
     @property
     def current_chapter(self):
         return next((chapter for chapter in self.chapters if chapter.id == self.position), self.chapters[0])
+
+    @property
+    def duration(self):
+        return sum((chapter.length for chapter in self.chapters))
+
+    @property
+    def progress(self):
+        progress = 0
+        for chapter in self.chapters:
+            if chapter.id == self.position:
+                progress += int(chapter.position / 1000000000)
+                return progress
+
+            progress += chapter.length
+
+        return progress
 
     def reload(self):
         self._get_db_object()

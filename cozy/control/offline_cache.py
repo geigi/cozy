@@ -3,7 +3,6 @@ import uuid
 import os
 
 from cozy.architecture.event_sender import EventSender
-from cozy.architecture.singleton import Singleton
 from cozy.control.application_directories import get_cache_dir
 from cozy.control.db import get_tracks, get_db
 import cozy.tools as tools

@@ -1,5 +1,4 @@
 from cozy.architecture.event_sender import EventSender
-from cozy.architecture.singleton import Singleton
 from cozy.control import player
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter

@@ -27,6 +27,10 @@ class BookDetailView(Gtk.Box):
     book_label: Gtk.Label = Gtk.Template.Child()
     author_label: Gtk.Label = Gtk.Template.Child()
     last_played_label: Gtk.Label = Gtk.Template.Child()
+    total_label: Gtk.Label = Gtk.Template.Child()
+
+    remaining_label: Gtk.Label = Gtk.Template.Child()
+    book_progress_bar: Gtk.ProgressBar = Gtk.Template.Child()
 
     published_label: Gtk.Label = Gtk.Template.Child()
     published_text: Gtk.Label = Gtk.Template.Child()
@@ -79,12 +83,13 @@ class BookDetailView(Gtk.Box):
         self.book_label.set_text(book.name)
         self.author_label.set_text(book.author)
         self.last_played_label.set_text(self._view_model.last_played_text)
+        self.total_label.set_text(self._view_model.total_text)
 
         self._set_cover_image(book)
         self._display_chapters(book)
         self._display_external_section()
         self._set_book_download_status()
-        self._set_duration(book)
+        self._set_progress(book)
 
     def _display_chapters(self, book: Book):
         disk_number = -1
@@ -125,8 +130,9 @@ class BookDetailView(Gtk.Box):
 
         self.chapter_box.remove_all_children()
 
-    def _set_duration(self, book: Book):
-        raise NotImplementedError("BookDetailView: _set_duration is not implemented yet.")
+    def _set_progress(self, book: Book):
+        self.remaining_label.set_text(self._view_model.remaining_text)
+        self.book_progress_bar.set_fraction(self._view_model.progress_percent)
 
     def _set_cover_image(self, book: Book):
         pixbuf = self._artwork_cache.get_cover_pixbuf(book.db_object, self.get_scale_factor(), 250)
