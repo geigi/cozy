@@ -27,9 +27,3 @@ class DiskElement(Gtk.Box):
         label.set_markup("<b>" + text + "</b>")
         self.container.add(label)
         self.add(self.container)
-    
-    def set_hidden(self, hide):
-        """
-        Hide/show the element.
-        """
-        self.container.set_visible(not hide)

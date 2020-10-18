@@ -93,6 +93,7 @@ class BookDetailView(Gtk.Box):
 
         for chapter in book.chapters:
             if disk_number != chapter.disk and self._view_model.disk_count > 1:
+                disk_number = chapter.disk
                 self._add_disk(chapter)
 
             self._add_chapter(chapter)
@@ -110,6 +111,7 @@ class BookDetailView(Gtk.Box):
     def _add_disk(self, chapter: Chapter):
         disc_element = DiskElement(chapter.disk)
         self.chapter_box.add(disc_element)
+        disc_element.show_all()
 
     def _add_chapter(self, chapter: Chapter):
         chapter_element = ChapterElement(chapter)
@@ -117,8 +119,9 @@ class BookDetailView(Gtk.Box):
         chapter_element.show_all()
 
     def _clear_chapter_box(self):
-        for childs in self.chapter_box.get_children():
-            childs.destroy_listeners()
+        for child in self.chapter_box.get_children():
+            if type(child) == ChapterElement:
+                child.destroy_listeners()
 
         self.chapter_box.remove_all_children()
 

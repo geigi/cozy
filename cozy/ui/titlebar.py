@@ -234,8 +234,8 @@ class Titlebar:
         self.current_label.set_markup("<tt><b>" + current_text + "</b></tt>")
         self.remaining_label.set_markup("<tt><b>-" + remaining_text + "</b></tt>")
 
-        if self.ui.book_overview.book and self.current_book.id == self.ui.book_overview.book.id:
-            self.ui.book_overview.update_time()
+        #if self.ui.book_overview.book and self.current_book.id == self.ui.book_overview.book.id:
+            #self.ui.book_overview.update_time()
 
     def update_track_ui(self):
         # set data of new stream in ui
