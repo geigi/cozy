@@ -155,7 +155,7 @@ class Book(EventSender):
     def reload(self):
         self._get_db_object()
 
-    def blacklist(self):
+    def remove(self):
         with self._db:
             if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
                 self._settings.last_played_book = None

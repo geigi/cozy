@@ -105,7 +105,7 @@ class LibraryViewModel(Observable, EventSender):
         pass
 
     def remove_book(self, book: Book):
-        book.blacklist()
+        book.remove()
         self._model.invalidate()
         self._notify("authors")
         self._notify("readers")
