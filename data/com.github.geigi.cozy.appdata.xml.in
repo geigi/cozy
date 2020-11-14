@@ -61,7 +61,7 @@
           <li>Increase maximum playback speed to 3.5x</li>
           <li>Fix: audio files with uppercase extensions where not detected (thanks to leuc)</li>
           <li>Fix: removing a book from the library was sometimes not possible</li>
-          <li>Fix: sometimes Cozy's database ran into a locking issue</li>
+          <li>Fix: sometimes Cozy's database ran into a locking issue, which could lead to unexpected behaviour of Cozy</li>
           <li>As always, updated translations thanks to all of the translators!</li>
         </ul>
       </description>

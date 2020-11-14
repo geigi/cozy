@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-14 12:42+0100\n"
+"POT-Creation-Date: 2020-11-14 12:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,7 +115,9 @@ msgid "Fix: removing a book from the library was sometimes not possible"
 msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:64
-msgid "Fix: sometimes Cozy's database ran into a locking issue"
+msgid ""
+"Fix: sometimes Cozy's database ran into a locking issue, which could lead to "
+"unexpected behaviour of Cozy"
 msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml.in:65
