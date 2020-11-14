@@ -157,7 +157,10 @@ class Book(EventSender):
 
     def blacklist(self):
         with self._db:
-            book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self._chapters]
+            if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
+                self._settings.last_played_book = None
+
+            book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
             data = list((t.file,) for t in book_tracks)
             chunks = [data[x:x + 500] for x in range(0, len(data), 500)]
             for chunk in chunks:
