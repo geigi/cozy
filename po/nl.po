@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-27 16:24+0200\n"
+"POT-Creation-Date: 2020-11-14 12:17+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
@@ -167,8 +167,8 @@ msgid "{storage} is offline."
 msgstr "{storage} is niet beschikbaar."
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:37
-#: cozy/view_model/library_view_model.py:131
+#: cozy/view_model/library_view_model.py:36
+#: cozy/view_model/library_view_model.py:130
 msgid "All"
 msgstr "Alles"
 
@@ -643,8 +643,8 @@ msgid "Set as default storage location for new audiobooks"
 msgstr "Instellen als standaard opslaglocatie voor nieuwe audioboeken"
 
 #: data/ui/settings.ui:1304
-msgid "Blacklist"
-msgstr "Zwarte lijst"
+msgid "Ignore list"
+msgstr "Negeerlijst"
 
 #: data/ui/settings.ui:1348
 msgid "Path"
