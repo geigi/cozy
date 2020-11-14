@@ -77,20 +77,18 @@ class Library(EventSender):
     def rebase_path(self, old_path: str, new_path: str):
         chapter_count = len(self.chapters)
         progress = 0
-        with self._db:
-            for chapter in self.chapters:
-                if chapter.file.startswith(old_path):
-                    progress += 1
-                    chapter.file = chapter.file.replace(old_path, new_path)
-                    self.emit_event_main_thread("rebase-progress", progress / chapter_count)
+        for chapter in self.chapters:
+            if chapter.file.startswith(old_path):
+                progress += 1
+                chapter.file = chapter.file.replace(old_path, new_path)
+                self.emit_event_main_thread("rebase-progress", progress / chapter_count)
 
         self.emit_event_main_thread("rebase-finished")
 
     def insert_many(self, media_files: Set[MediaFile]):
         tracks = self._prepare_db_objects(media_files)
 
-        with self._db:
-            Track.insert_many(tracks).execute()
+        Track.insert_many(tracks).execute()
 
     def _prepare_db_objects(self, media_files: Set[MediaFile]) -> Set[object]:
         book_db_objects: Set[BookModel] = set()
@@ -99,22 +97,21 @@ class Library(EventSender):
             if not media_file:
                 continue
 
-            with self._db:
-                book = next((book for book in book_db_objects if book.name == media_file.book_name), None)
+            book = next((book for book in book_db_objects if book.name == media_file.book_name), None)
 
-                if not book:
-                    book = self._import_or_update_book(media_file)
-                    book_db_objects.add(book)
+            if not book:
+                book = self._import_or_update_book(media_file)
+                book_db_objects.add(book)
 
-                if len(media_file.chapters) == 1:
-                    track = self._get_track_dictionary_for_db(media_file, book)
-                else:
-                    raise NotImplementedError
+            if len(media_file.chapters) == 1:
+                track = self._get_track_dictionary_for_db(media_file, book)
+            else:
+                raise NotImplementedError
 
-                if media_file.path not in self.files:
-                    yield track
-                else:
-                    self._update_track_db_object(media_file, book)
+            if media_file.path not in self.files:
+                yield track
+            else:
+                self._update_track_db_object(media_file, book)
 
     def _import_or_update_book(self, media_file):
         if BookModel.select(BookModel.name).where(BookModel.name == media_file.book_name).count() < 1:
@@ -163,14 +160,13 @@ class Library(EventSender):
                                 rating=-1)
 
     def _load_all_books(self):
-        with self._db:
-            for book_db_obj in BookModel.select(BookModel.id):
-                try:
-                    book = Book(self._db, book_db_obj.id)
-                    book.add_listener(self._on_book_event)
-                    self._books.append(book)
-                except BookIsEmpty:
-                    pass
+        for book_db_obj in BookModel.select(BookModel.id):
+            try:
+                book = Book(self._db, book_db_obj.id)
+                book.add_listener(self._on_book_event)
+                self._books.append(book)
+            except BookIsEmpty:
+                pass
 
     def _load_all_chapters(self):
         self._chapters = {chapter

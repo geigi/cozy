@@ -1,8 +1,7 @@
 def test_db_created(peewee_database):
     from cozy.db.track import Track
 
-    with peewee_database:
-        assert Track.table_exists()
+    assert Track.table_exists()
 
 
 def test_name_returns_correct_value(peewee_database):

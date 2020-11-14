@@ -28,11 +28,10 @@ class Book(EventSender):
         self._get_db_object()
 
     def _get_db_object(self):
-        with self._db:
-            self._db_object: BookModel = BookModel.get(self.id)
+        self._db_object: BookModel = BookModel.get(self.id)
 
-            if TrackModel.select().where(TrackModel.book == self._db_object).count() < 1:
-                raise BookIsEmpty
+        if TrackModel.select().where(TrackModel.book == self._db_object).count() < 1:
+            raise BookIsEmpty
 
     # This property is for the transition time only
     # Because everything is hardwired to the database objects
@@ -47,9 +46,8 @@ class Book(EventSender):
 
     @name.setter
     def name(self, new_name: str):
-        with self._db:
-            self._db_object.name = new_name
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.name = new_name
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def author(self):
@@ -57,9 +55,8 @@ class Book(EventSender):
 
     @author.setter
     def author(self, new_author: str):
-        with self._db:
-            self._db_object.author = new_author
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.author = new_author
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def reader(self):
@@ -67,9 +64,8 @@ class Book(EventSender):
 
     @reader.setter
     def reader(self, new_reader: str):
-        with self._db:
-            self._db_object.reader = new_reader
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.reader = new_reader
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def position(self):
@@ -77,9 +73,8 @@ class Book(EventSender):
 
     @position.setter
     def position(self, new_position: int):
-        with self._db:
-            self._db_object.position = new_position
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.position = new_position
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def rating(self):
@@ -87,9 +82,8 @@ class Book(EventSender):
 
     @rating.setter
     def rating(self, new_rating: int):
-        with self._db:
-            self._db_object.rating = new_rating
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.rating = new_rating
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def cover(self):
@@ -97,9 +91,8 @@ class Book(EventSender):
 
     @cover.setter
     def cover(self, new_cover: bytes):
-        with self._db:
-            self._db_object.cover = new_cover
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.cover = new_cover
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def playback_speed(self):
@@ -107,9 +100,8 @@ class Book(EventSender):
 
     @playback_speed.setter
     def playback_speed(self, new_playback_speed: float):
-        with self._db:
-            self._db_object.playback_speed = new_playback_speed
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.playback_speed = new_playback_speed
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def last_played(self):
@@ -117,9 +109,8 @@ class Book(EventSender):
 
     @last_played.setter
     def last_played(self, new_last_played: int):
-        with self._db:
-            self._db_object.last_played = new_last_played
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.last_played = new_last_played
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def offline(self):
@@ -127,9 +118,8 @@ class Book(EventSender):
 
     @offline.setter
     def offline(self, new_offline: bool):
-        with self._db:
-            self._db_object.offline = new_offline
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.offline = new_offline
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def downloaded(self):
@@ -137,9 +127,8 @@ class Book(EventSender):
 
     @downloaded.setter
     def downloaded(self, new_downloaded: bool):
-        with self._db:
-            self._db_object.downloaded = new_downloaded
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.downloaded = new_downloaded
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def chapters(self):
@@ -156,26 +145,24 @@ class Book(EventSender):
         self._get_db_object()
 
     def remove(self):
-        with self._db:
-            if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
-                self._settings.last_played_book = None
+        if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
+            self._settings.last_played_book = None
 
-            book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
-            data = list((t.file,) for t in book_tracks)
-            chunks = [data[x:x + 500] for x in range(0, len(data), 500)]
-            for chunk in chunks:
-                StorageBlackList.insert_many(chunk, fields=[StorageBlackList.path]).execute()
-            ids = list(t.id for t in book_tracks)
-            TrackModel.delete().where(TrackModel.id << ids).execute()
-            self._db_object.delete_instance(recursive=True)
+        book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
+        data = list((t.file,) for t in book_tracks)
+        chunks = [data[x:x + 500] for x in range(0, len(data), 500)]
+        for chunk in chunks:
+            StorageBlackList.insert_many(chunk, fields=[StorageBlackList.path]).execute()
+        ids = list(t.id for t in book_tracks)
+        TrackModel.delete().where(TrackModel.id << ids).execute()
+        self._db_object.delete_instance(recursive=True)
 
     def _fetch_chapters(self):
-        with self._db:
-            tracks = TrackModel \
-                .select(TrackModel.id) \
-                .where(TrackModel.book == self._db_object) \
-                .order_by(TrackModel.disk, TrackModel.number, TrackModel.name)
-            self._chapters = [Track(self._db, track.id) for track in tracks]
+        tracks = TrackModel \
+            .select(TrackModel.id) \
+            .where(TrackModel.book == self._db_object) \
+            .order_by(TrackModel.disk, TrackModel.number, TrackModel.name)
+        self._chapters = [Track(self._db, track.id) for track in tracks]
 
         for chapter in self._chapters:
             chapter.add_listener(self._on_chapter_event)
@@ -188,7 +175,6 @@ class Book(EventSender):
                 if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
                     self._settings.last_played_book = None
 
-                with self._db:
-                    self._db_object.delete_instance(recursive=True)
+                self._db_object.delete_instance(recursive=True)
                 self.emit_event("book-deleted", self)
                 self.destroy()

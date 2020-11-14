@@ -40,6 +40,7 @@ def init_db():
     sqlite_version = ".".join([str(num) for num in _db.server_version])
     log.info("SQLite version: {}, APSW version: {}".format(sqlite_version, apswversion()))
 
+    # TODO: This can be simplyfied: https://stackoverflow.com/a/58032844
     if Settings.table_exists():
         update_db()
     else:
