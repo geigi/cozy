@@ -1,4 +1,3 @@
-apsw
 distro
 mutagen
 packaging
