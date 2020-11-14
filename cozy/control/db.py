@@ -3,12 +3,11 @@ import os
 import time
 
 import cozy.ext.inject as inject
-from playhouse.pool import PooledSqliteDatabase
 
 from cozy.control.db_updater import update_db
 from cozy.db.artwork_cache import ArtworkCache
 from cozy.db.book import Book
-from cozy.db.model_base import get_sqlite_database, get_data_dir
+from cozy.db.model_base import get_sqlite_database
 from cozy.db.offline_cache import OfflineCache
 from cozy.db.settings import Settings
 from cozy.db.storage import Storage
@@ -17,54 +16,32 @@ from cozy.db.track import Track
 from cozy.report import reporter
 
 log = logging.getLogger("db")
-from peewee import __version__ as PeeweeVersion
-from apsw import apswversion
-
-if PeeweeVersion[0] == '2':
-    log.info("Using peewee 2 backend")
-    from peewee import BaseModel
-
-    ModelBase = BaseModel
-else:
-    log.info("Using peewee 3 backend")
 from gi.repository import GLib, Gdk
 
 _db = get_sqlite_database()
 
 
 def init_db():
-    tmp_db = None
-
     _connect_db(_db)
 
     sqlite_version = ".".join([str(num) for num in _db.server_version])
-    log.info("SQLite version: {}, APSW version: {}".format(sqlite_version, apswversion()))
+    log.info("SQLite version: {}".format(sqlite_version))
 
-    # TODO: This can be simplyfied: https://stackoverflow.com/a/58032844
     if Settings.table_exists():
         update_db()
     else:
-        tmp_db = PooledSqliteDatabase(os.path.join(get_data_dir(), "cozy.db"))
-        if PeeweeVersion[0] == '2':
-            tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache], True)
-        else:
-            with tmp_db.connection_context():
-                tmp_db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache])
+        _db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache])
 
-    # this is necessary to ensure that the tables have indeed been created
-    if tmp_db:
-        if PeeweeVersion[0] == '2':
-            while not Settings.table_exists():
-                time.sleep(0.01)
-        else:
-            while not tmp_db.table_exists("settings"):
-                time.sleep(0.01)
+    _db.stop()
+    _db.start()
+
+    while not _db.table_exists("settings"):
+        time.sleep(0.01)
 
     _connect_db(_db)
 
-    if PeeweeVersion[0] == '3':
-        _db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage], bind_refs=False,
-                 bind_backrefs=False)
+    _db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage], bind_refs=False,
+             bind_backrefs=False)
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
