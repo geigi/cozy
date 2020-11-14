@@ -57,7 +57,7 @@ class WhatsNewWindow(Gtk.Window):
 
     def __on_continue_clicked(self, widget):
         if len(self.children) == self.page + 1:
-            self.close()
+            self.end()
             return
 
         self.page += 1
