@@ -77,15 +77,19 @@ def peewee_database_storage():
 
 
 def teardown_db(db_path, models, test_db):
+    import time
+
     print("Teardown database...")
     test_db.drop_tables(models)
     test_db.stop()
     test_db.start()
+    time.sleep(0.01)
     test_db.close()
     os.remove(db_path)
 
 
 def prepare_db():
+    import time
     from playhouse.sqliteq import SqliteQueueDatabase
     from cozy.db.artwork_cache import ArtworkCache
     from cozy.db.book import Book
@@ -106,5 +110,6 @@ def prepare_db():
     test_db.create_tables(models)
     test_db.stop()
     test_db.start()
+    time.sleep(0.01)
 
     return db_path, models, test_db
