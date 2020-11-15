@@ -154,6 +154,12 @@ class Book(Observable, EventSender):
     @property
     def progress(self):
         progress = 0
+
+        if self.position == 0:
+            return 0
+        elif self.position == -1:
+            return self.duration
+
         for chapter in self.chapters:
             if chapter.id == self.position:
                 progress += int(chapter.position / 1000000000)
