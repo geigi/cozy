@@ -25,6 +25,7 @@ class BookDetailView(Gtk.Box):
     back_button: Gtk.Button = Gtk.Template.Child()
 
     play_book_button: Gtk.Button = Gtk.Template.Child()
+    play_img: Gtk.Image = Gtk.Template.Child()
 
     book_label: Gtk.Label = Gtk.Template.Child()
     author_label: Gtk.Label = Gtk.Template.Child()
@@ -64,6 +65,7 @@ class BookDetailView(Gtk.Box):
 
     def _connect_view_model(self):
         self._view_model.bind_to("book", self._on_book_changed)
+        self._view_model.bind_to("playing", self._on_play_changed)
         self._view_model.bind_to("is_book_available", self._view_model.open_library)
         self._view_model.bind_to("downloaded", self._set_book_download_status)
 
@@ -93,6 +95,13 @@ class BookDetailView(Gtk.Box):
         self._display_external_section()
         self._set_book_download_status()
         self._set_progress(book)
+        self._on_play_changed()
+
+    def _on_play_changed(self):
+        playing = self._view_model.playing
+
+        play_button_img = "media-playback-pause-symbolic" if playing else "media-playback-start-symbolic"
+        self.play_img.set_from_icon_name(play_button_img, Gtk.IconSize.LARGE_TOOLBAR)
 
     def _display_chapters(self, book: Book):
         disk_number = -1

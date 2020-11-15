@@ -9,6 +9,7 @@ from cozy.ext import inject
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
+from cozy.model.library import Library
 from cozy.model.settings import Settings
 from cozy.open_view import OpenView
 
@@ -18,22 +19,25 @@ class BookDetailViewModel(Observable, EventSender):
     _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
     _offline_cache: OfflineCache = inject.attr(OfflineCache)
     _settings: Settings = inject.attr(Settings)
+    _library = Library = inject.attr(Library)
 
     def __init__(self):
         super().__init__()
         super(Observable, self).__init__()
 
+        self._play = False
+        self._current_chapter = None
+        self._book = None
+
         self._player.add_listener(self._on_player_event)
         self._fs_monitor.add_listener(self._on_fs_monitor_event)
 
     @property
-    def play(self) -> bool:
-        return self._play
+    def playing(self) -> bool:
+        if not self._player.loaded_book or self._player.loaded_book != self._book:
+            return False
 
-    @play.setter
-    def play(self, value: bool):
-        self._play = value
-        self._notify("play")
+        return self._player.playing
 
     @property
     def current_chapter(self) -> Optional[Chapter]:
@@ -126,18 +130,8 @@ class BookDetailViewModel(Observable, EventSender):
         self._player.play_pause_chapter(self._book, self._current_chapter)
 
     def _on_player_event(self, event, message):
-        if event == "play":
-            track_id = message
-            book = None
-
-            # for b in self._model.books:
-            #     if any(chapter.id == track_id for chapter in b.chapters):
-            #         book = b
-            #         break
-            #
-            # if book:
-            #     book.reload()
-            #     self._notify("book")
+        if event == "play" or event == "pause":
+            self._notify("playing")
 
     def _on_fs_monitor_event(self, event, _):
         if event == "storage-online":

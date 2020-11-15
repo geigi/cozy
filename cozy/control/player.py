@@ -240,7 +240,7 @@ def play_pause(track, jump=False):
         # Track is already selected, only play/pause
         if get_gst_player_state() == Gst.State.PLAYING:
             __player.set_state(Gst.State.PAUSED)
-            emit_event("pause")
+            emit_event("pause", Track.get(Track.id == __current_track.id))
             save_current_track_position()
         else:
             __player.set_state(Gst.State.PLAYING)
