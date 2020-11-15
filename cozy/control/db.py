@@ -31,14 +31,11 @@ def init_db():
         update_db()
     else:
         _db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache])
-
-    _db.stop()
-    _db.start()
+        _db.stop()
+        _db.start()
 
     while not _db.table_exists("settings"):
         time.sleep(0.01)
-
-    _connect_db(_db)
 
     _db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage], bind_refs=False,
              bind_backrefs=False)
