@@ -3,6 +3,10 @@ import cozy.control.player as player
 import cozy.ui
 
 import gi
+
+from cozy.ext import inject
+from cozy.media.player import Player
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
@@ -12,6 +16,7 @@ class PlaybackSpeed(EventSender):
     """
     ui = None
     speed = 1.0
+    _player: Player = inject.attr(Player)
 
     def __init__(self):
         super().__init__()
@@ -49,7 +54,10 @@ class PlaybackSpeed(EventSender):
         self.speed_label.set_text('{speed:3.1f} x'.format(speed=self.speed))
         
         player.set_playback_speed(self.speed)
-        player.save_current_playback_speed()
+
+        book = self._player.loaded_book
+        if book:
+            book.playback_speed = self.speed
 
         self.emit_event("playback-speed-changed", self.speed)
 

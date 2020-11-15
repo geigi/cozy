@@ -73,6 +73,9 @@ class BookDetailView(Gtk.Box):
         self._view_model.bind_to("downloaded", self._set_book_download_status)
         self._view_model.bind_to("current_chapter", self._on_current_chapter_changed)
         self._view_model.bind_to("last_played_text", self._on_last_played_text_changed)
+        self._view_model.bind_to("remaining_text", self._on_remaining_text_changed)
+        self._view_model.bind_to("progress_percent", self._on_progress_percent_changed)
+        self._view_model.bind_to("total_text", self._on_total_text_changed)
 
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_button_clicked)
@@ -135,6 +138,15 @@ class BookDetailView(Gtk.Box):
 
     def _on_last_played_text_changed(self):
         self.last_played_label.set_text(self._view_model.last_played_text)
+
+    def _on_progress_percent_changed(self):
+        self._set_progress()
+
+    def _on_total_text_changed(self):
+        self.total_label.set_text(self._view_model.total_text)
+
+    def _on_remaining_text_changed(self):
+        self._set_progress()
 
     def _display_chapters(self, book: Book):
         disk_number = -1

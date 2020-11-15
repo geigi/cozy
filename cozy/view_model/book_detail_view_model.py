@@ -55,11 +55,15 @@ class BookDetailViewModel(Observable, EventSender):
         if self._book:
             self._book.remove_bind("current_chapter", self._on_book_current_chapter_changed)
             self._book.remove_bind("last_played", self._on_book_last_played_changed)
+            self._book.remove_bind("duration", self._on_book_duration_changed)
+            self._book.remove_bind("progress", self._on_book_progress_changed)
 
         self._book = value
         self._current_chapter = None
         self._book.bind_to("current_chapter", self._on_book_current_chapter_changed)
         self._book.bind_to("last_played", self._on_book_last_played_changed)
+        self._book.bind_to("duration", self._on_book_duration_changed)
+        self._book.bind_to("progress", self._on_book_progress_changed)
         self._notify("book")
 
     @property
@@ -147,6 +151,15 @@ class BookDetailViewModel(Observable, EventSender):
 
     def _on_book_last_played_changed(self):
         self._notify("last_played_text")
+
+    def _on_book_progress_changed(self):
+        self._notify("remaining_text")
+        self._notify("progress_percent")
+
+    def _on_book_duration_changed(self):
+        self._notify("progress_percent")
+        self._notify("remaining_text")
+        self._notify("total_text")
 
     def __on_offline_cache_event(self, event, message):
         """

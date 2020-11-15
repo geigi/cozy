@@ -285,3 +285,38 @@ def test_progress_should_be_100_for_finished_book(peewee_database):
     book.position = -1
 
     assert book.progress == book.duration
+
+
+def test_finished_progress_changes_with_playback_speed(peewee_database):
+    from cozy.model.book import Book
+
+    book = Book(peewee_database, 1)
+    book.position = -1
+    progress_original = book.progress
+    book.playback_speed = 2
+
+    assert book.progress == progress_original / 2
+
+
+def test_in_progress_progress_changes_with_playback_speed(peewee_database):
+    from cozy.model.book import Book
+
+    book = Book(peewee_database, 1)
+    chapter = book.chapters[0]
+    chapter.position = 42 * 1000000000
+    book.position = chapter.id
+    progress_original = book.progress
+    book.playback_speed = 2
+
+    assert book.progress == progress_original / 2
+
+
+def test_duration_changes_with_playback_speed(peewee_database):
+    from cozy.model.book import Book
+
+    book = Book(peewee_database, 1)
+    book.position = -1
+    progress_original = book.progress
+    book.playback_speed = 2
+
+    assert book.duration == progress_original / 2

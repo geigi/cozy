@@ -55,6 +55,10 @@ class Player(EventSender):
     def playing(self) -> bool:
         return player.is_playing()
 
+    @property
+    def position(self) -> int:
+        return player.get_current_duration()
+
     def play_pause_book(self, book: Book):
         if not book:
             log.error("Cannot play book which is None.")
