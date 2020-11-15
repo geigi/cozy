@@ -1,18 +1,15 @@
-from gi.repository import Gtk, Pango
+from gi.repository import Gtk, Pango, GObject
 
-from cozy.architecture.event_sender import EventSender
 from cozy.control.string_representation import seconds_to_str
 from cozy.model.chapter import Chapter
 
 
-class ChapterElement(Gtk.EventBox, EventSender):
+class ChapterElement(Gtk.EventBox):
     """
     An element to display a track in a book popover.
     """
     chapter = None
     selected = False
-    ui = None
-    book = None
 
     def __init__(self, chapter: Chapter):
         self.chapter = chapter
@@ -74,7 +71,7 @@ class ChapterElement(Gtk.EventBox, EventSender):
         self.add(self.box)
 
     def __on_button_press(self, eventbox, event):
-        self.emit_event("play-button-pressed")
+        self.emit("play-pause-clicked", self.chapter)
 
     def _on_enter_notify(self, widget, event):
         """
@@ -123,3 +120,8 @@ class ChapterElement(Gtk.EventBox, EventSender):
             self.play_img.set_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
         else:
             self.play_img.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+
+
+GObject.type_register(ChapterElement)
+GObject.signal_new('play-pause-clicked', ChapterElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
+                   (GObject.TYPE_PYOBJECT,))

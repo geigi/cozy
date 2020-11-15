@@ -120,14 +120,11 @@ class BookDetailView(Gtk.Box):
 
     def _add_chapter(self, chapter: Chapter):
         chapter_element = ChapterElement(chapter)
+        chapter_element.connect("play-pause-clicked", self._play_chapter_clicked)
         self.chapter_box.add(chapter_element)
         chapter_element.show_all()
 
     def _clear_chapter_box(self):
-        for child in self.chapter_box.get_children():
-            if type(child) == ChapterElement:
-                child.destroy_listeners()
-
         self.chapter_box.remove_all_children()
 
     def _set_progress(self, book: Book):
@@ -162,3 +159,6 @@ class BookDetailView(Gtk.Box):
 
         self.download_image.set_from_icon_name(icon_name, Gtk.IconSize.LARGE_TOOLBAR)
         self.download_label.set_text(text)
+
+    def _play_chapter_clicked(self, _, chapter: Chapter):
+        self._view_model.current_chapter = chapter
