@@ -247,11 +247,10 @@ class OfflineCache(EventSender):
             return False
 
     def _fill_queue_from_db(self):
-        with get_db():
-            for item in OfflineCacheModel.select().where(OfflineCacheModel.copied == False):
-                if not any(item.id == queued.id for queued in self.queue):
-                    self.queue.append(item)
-                    self.total_batch_count += 1
+        for item in OfflineCacheModel.select().where(OfflineCacheModel.copied == False):
+            if not any(item.id == queued.id for queued in self.queue):
+                self.queue.append(item)
+                self.total_batch_count += 1
 
     def _on_importer_event(self, event: str, message):
         if event == "new-or-updated-files":

@@ -17,8 +17,7 @@ class Storage:
         self._get_db_object()
 
     def _get_db_object(self):
-        with self._db:
-            self._db_object: StorageModel = StorageModel.get(self.id)
+        self._db_object: StorageModel = StorageModel.get(self.id)
 
     @property
     def db_object(self):
@@ -33,9 +32,8 @@ class Storage:
         if not os.path.isabs(new_path):
             raise InvalidPath
 
-        with self._db:
-            self._db_object.path = new_path
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.path = new_path
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def location_type(self):
@@ -43,9 +41,8 @@ class Storage:
 
     @location_type.setter
     def location_type(self, new_location_type: int):
-        with self._db:
-            self._db_object.location_type = new_location_type
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.location_type = new_location_type
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def default(self):
@@ -53,9 +50,8 @@ class Storage:
 
     @default.setter
     def default(self, new_default: bool):
-        with self._db:
-            self._db_object.default = new_default
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.default = new_default
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def external(self):
@@ -63,6 +59,5 @@ class Storage:
 
     @external.setter
     def external(self, new_external: bool):
-        with self._db:
-            self._db_object.external = new_external
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.external = new_external
+        self._db_object.save(only=self._db_object.dirty_fields)

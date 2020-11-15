@@ -14,8 +14,7 @@ def setup_inject(peewee_database):
 def test_db_created(peewee_database):
     from cozy.db.book import Book
 
-    with peewee_database:
-        assert Book.table_exists()
+    assert Book.table_exists()
 
 
 def test_name_returns_correct_value(peewee_database):

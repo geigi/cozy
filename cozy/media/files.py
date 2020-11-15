@@ -9,6 +9,7 @@ from cozy.architecture.event_sender import EventSender
 from cozy.ext import inject
 from cozy.media.importer import Importer
 from cozy.model.settings import Settings
+from cozy.report import reporter
 
 log = logging.getLogger("files")
 
@@ -46,8 +47,8 @@ class Files(EventSender):
                 self._copy_directory(path, destination)
             else:
                 filename = os.path.basename(path)
-                destination = os.path.join(destination, filename)
-                self._copy_file(path, destination)
+                file_copy_destination = os.path.join(destination, filename)
+                self._copy_file(path, file_copy_destination)
 
     def _copy_file(self, source_path: str, dest_path: str):
         log.info("Copy file {} to {}".format(source_path, dest_path))
@@ -57,11 +58,12 @@ class Files(EventSender):
         flags = Gio.FileCopyFlags.OVERWRITE
         self.filecopy_cancel = Gio.Cancellable()
         try:
-            copied = source.copy(destination, flags, self.filecopy_cancel, self._update_copy_status,
-                                 None)
+            copied = source.copy(destination, flags, self.filecopy_cancel, self._update_copy_status, None)
         except Exception as e:
             if e.code == Gio.IOErrorEnum.CANCELLED:
                 pass
+            reporter.exception("files", e)
+            log.error("Failed to copy file: {}".format(e))
         self._file_progess += 1
 
     def _copy_directory(self, path, destination):
@@ -73,8 +75,8 @@ class Files(EventSender):
 
             for file in filenames:
                 source = os.path.join(dirpath, file)
-                destination = os.path.join(destination, dirname, file)
-                self._copy_file(source, destination)
+                file_copy_destination = os.path.join(destination, dirname, file)
+                self._copy_file(source, file_copy_destination)
 
     def _count_all_files(self, uris):
         for uri in uris:

@@ -52,6 +52,50 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.7.5" timestamp="1605380159">
+      <description>
+        <p>
+        A small bugfix release which makes Cozy more reliable.
+        </p>
+        <ul>
+          <li>Increase maximum playback speed to 3.5x</li>
+          <li>Fix: audio files with uppercase extensions where not detected (thanks to leuc)</li>
+          <li>Fix: when using drag and drop some files where not copied and imported correctly</li>
+          <li>Fix: removing a book from the library was sometimes not possible</li>
+          <li>Fix: sometimes Cozy's database ran into a locking issue, which could lead to unexpected behaviour of Cozy</li>
+          <li>As always, updated translations thanks to all of the translators!</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.7.4" timestamp="1605378267">
+      <description>
+        <p>
+        A small bugfix release which makes Cozy more reliable.
+        </p>
+        <ul>
+          <li>Increase maximum playback speed to 3.5x</li>
+          <li>Fix: audio files with uppercase extensions where not detected (thanks to leuc)</li>
+          <li>Fix: when using drag and drop some files where not copied and imported correctly</li>
+          <li>Fix: removing a book from the library was sometimes not possible</li>
+          <li>Fix: sometimes Cozy's database ran into a locking issue, which could lead to unexpected behaviour of Cozy</li>
+          <li>As always, updated translations thanks to all of the translators!</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.7.3" timestamp="1605353796">
+      <description>
+        <p>
+        A small bugfix release which makes Cozy more reliable.
+        </p>
+        <ul>
+          <li>Increase maximum playback speed to 3.5x</li>
+          <li>Fix: audio files with uppercase extensions where not detected (thanks to leuc)</li>
+          <li>Fix: removing a book from the library was sometimes not possible</li>
+          <li>Fix: sometimes Cozy's database ran into a locking issue, which could lead to unexpected behaviour of Cozy</li>
+          <li>As always, updated translations thanks to all of the translators!</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.2" timestamp="1601308309">
       <description>
         <p>

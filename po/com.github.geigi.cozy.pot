@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-27 16:24+0200\n"
+"POT-Creation-Date: 2020-11-14 12:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,8 +163,8 @@ msgid "{storage} is offline."
 msgstr ""
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:37
-#: cozy/view_model/library_view_model.py:131
+#: cozy/view_model/library_view_model.py:36
+#: cozy/view_model/library_view_model.py:130
 msgid "All"
 msgstr ""
 
@@ -624,7 +624,7 @@ msgid "Set as default storage location for new audiobooks"
 msgstr ""
 
 #: data/ui/settings.ui:1304
-msgid "Blacklist"
+msgid "Ignore list"
 msgstr ""
 
 #: data/ui/settings.ui:1348

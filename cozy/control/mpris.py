@@ -36,7 +36,7 @@ class Server:
 
             for method in interface.methods:
                 method_outargs[method.name] = "(" + "".join(
-                              [arg.signature for arg in method.out_args]) + ")"
+                    [arg.signature for arg in method.out_args]) + ")"
                 method_inargs[method.name] = tuple(
                     arg.signature for arg in method.in_args)
 
@@ -75,7 +75,7 @@ class Server:
             result = (result,)
 
             out_args = self.method_outargs[method_name]
-            if out_args != "()":
+            if out_args and out_args != "()" and result:
                 variant = GLib.Variant(out_args, result)
                 invocation.return_value(variant)
             else:
@@ -83,7 +83,8 @@ class Server:
         except Exception as e:
             log.error(e)
             reporter.exception("mpris", e)
-            pass
+            reporter.error("mrpis", "MPRIS method call failed with method name: {}".format(method_name))
+            invocation.return_value(None)
 
 
 class MPRIS(Server):
@@ -186,10 +187,10 @@ class MPRIS(Server):
 
         add_player_listener(self.__on_player_changed)
 
-        #Lp().player.connect("current-changed", self.__on_current_changed)
-        #Lp().player.connect("seeked", self.__on_seeked)
-        #Lp().player.connect("status-changed", self.__on_status_changed)
-        #Lp().player.connect("volume-changed", self.__on_volume_changed)
+        # Lp().player.connect("current-changed", self.__on_current_changed)
+        # Lp().player.connect("seeked", self.__on_seeked)
+        # Lp().player.connect("status-changed", self.__on_status_changed)
+        # Lp().player.connect("volume-changed", self.__on_volume_changed)
 
     def Raise(self):
         self.__app.window.setup_window()
@@ -310,9 +311,9 @@ class MPRIS(Server):
     def Introspect(self):
         return self.__doc__
 
-#######################
-# PRIVATE             #
-#######################
+    #######################
+    # PRIVATE             #
+    #######################
 
     def __get_media_id(self, track_id):
         """
@@ -390,7 +391,7 @@ class MPRIS(Server):
     def _on_current_changed(self, track):
         if get_current_track() is None:
             return
-        
+
         current_track_id = get_current_track().id
         if current_track_id and current_track_id >= 0:
             self.__cozy_id = current_track_id

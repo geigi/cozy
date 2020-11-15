@@ -99,6 +99,10 @@ class FilesystemMonitor(EventSender):
         Disable offline mode for this volume.
         """
         mount_path = mount.get_root().get_path()
+
+        if not mount_path:
+            return
+
         log.debug("Volume mounted: " + mount_path)
 
         storage = next((s for s in self.external_storage if mount_path in s.storage.path), None)

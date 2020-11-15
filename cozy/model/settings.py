@@ -17,8 +17,7 @@ class Settings:
     _db = cache = inject.attr(SqliteDatabase)
 
     def __init__(self):
-        with self._db:
-            self._db_object: SettingsModel = SettingsModel.get()
+        self._db_object: SettingsModel = SettingsModel.get()
 
     @property
     def first_start(self) -> bool:
@@ -30,9 +29,8 @@ class Settings:
 
     @last_played_book.setter
     def last_played_book(self, new_value: Book):
-        with self._db:
-            self._db_object.last_played_book = new_value
-            self._db_object.save(only=self._db_object.dirty_fields)
+        self._db_object.last_played_book = new_value
+        self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def default_location(self):
@@ -59,9 +57,8 @@ class Settings:
         self._storages = []
 
     def _load_all_storage_locations(self):
-        with self._db:
-            for storage_db_obj in StorageModel.select(StorageModel.id):
-                try:
-                    self._storages.append(Storage(self._db, storage_db_obj.id))
-                except InvalidPath:
-                    log.error("Invalid path found in database, skipping: {}".format(storage_db_obj.path))
+        for storage_db_obj in StorageModel.select(StorageModel.id):
+            try:
+                self._storages.append(Storage(self._db, storage_db_obj.id))
+            except InvalidPath:
+                log.error("Invalid path found in database, skipping: {}".format(storage_db_obj.path))

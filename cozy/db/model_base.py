@@ -2,7 +2,7 @@ import logging
 import os
 
 from peewee import Model
-from playhouse.apsw_ext import APSWDatabase
+from playhouse.sqliteq import SqliteQueueDatabase
 
 from cozy.control.application_directories import get_data_dir
 
@@ -24,7 +24,8 @@ def __open_database():
     global _db
     if not os.path.exists(get_data_dir()):
         os.makedirs(get_data_dir())
-    _db = APSWDatabase(os.path.join(get_data_dir(), "cozy.db"), timeout=5, pragmas=[('journal_mode', 'wal')])
+    _db = SqliteQueueDatabase(os.path.join(get_data_dir(), "cozy.db"), queue_max_size=128, results_timeout=5.0,
+                       pragmas=[('cache_size', -1024 * 32), ('journal_mode', 'wal')])
 
 
 __open_database()

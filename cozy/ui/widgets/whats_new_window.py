@@ -33,6 +33,10 @@ class WhatsNewWindow(Gtk.Window):
         super().__init__(**kwargs)
 
         self._fill_window()
+        if len(self.children) < 1:
+            self.end()
+            return
+
         self.set_default_size(800, 550)
 
         for widget in self.children:
@@ -53,10 +57,13 @@ class WhatsNewWindow(Gtk.Window):
 
     def __on_continue_clicked(self, widget):
         if len(self.children) == self.page + 1:
-            self.app_settings.last_launched_version = CozyVersion
-            self.close()
-            self.destroy()
+            self.end()
             return
 
         self.page += 1
         self.content_stack.set_visible_child(self.children[self.page])
+
+    def end(self):
+        self.app_settings.last_launched_version = CozyVersion
+        self.close()
+        self.destroy()

@@ -9,15 +9,16 @@
 # Julian Geywitz <github@geigi.de>, 2020
 # Caarmi, 2020
 # Nikolai Oplachko <magnickolas@gmail.com>, 2020
+# Dellon Zerus <dellonzerus@gmail.com>, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-24 20:28+0200\n"
+"POT-Creation-Date: 2020-09-27 16:24+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Nikolai Oplachko <magnickolas@gmail.com>, 2020\n"
+"Last-Translator: Dellon Zerus <dellonzerus@gmail.com>, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/geigi/teams/78138/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,27 +26,19 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: cozy/control/importer.py:301
-msgid "Unknown Author"
-msgstr "Неизвестный автор"
-
-#: cozy/control/importer.py:303
-msgid "Unknown Reader"
-msgstr "Неизвестный диктор"
-
-#: cozy/control/offline_cache.py:181
+#: cozy/control/offline_cache.py:188
 msgid "Copying"
 msgstr "Копирование"
 
-#: cozy/control/sleep_timer.py:138 data/ui/timer_popover.ui:66
+#: cozy/control/sleep_timer.py:141 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "мин"
 
-#: cozy/control/sleep_timer.py:146
+#: cozy/control/sleep_timer.py:149
 msgid "Off"
 msgstr "Отключено"
 
-#: cozy/tools.py:102 cozy/tools.py:106
+#: cozy/tools.py:92 cozy/tools.py:96
 #, python-brace-format
 msgid "{hours} hour"
 msgid_plural "{hours} hours"
@@ -54,7 +47,7 @@ msgstr[1] "{hours} часов"
 msgstr[2] "{hours} часов"
 msgstr[3] "{hours} часов"
 
-#: cozy/tools.py:104 cozy/tools.py:108
+#: cozy/tools.py:94 cozy/tools.py:98
 #, python-brace-format
 msgid "{minutes} minute"
 msgid_plural "{minutes} minutes"
@@ -63,7 +56,7 @@ msgstr[1] "{minutes} минут"
 msgstr[2] "{minutes} минут"
 msgstr[3] "{minutes} минут"
 
-#: cozy/tools.py:110
+#: cozy/tools.py:100
 #, python-brace-format
 msgid "{seconds} second"
 msgid_plural "{seconds} seconds"
@@ -72,28 +65,28 @@ msgstr[1] "{seconds} секунд"
 msgstr[2] "{seconds} секунд"
 msgstr[3] "{seconds} секунд"
 
-#: cozy/tools.py:112
+#: cozy/tools.py:102
 msgid "finished"
 msgstr "завершено"
 
-#: cozy/tools.py:136
+#: cozy/tools.py:126
 msgid "never"
 msgstr "никогда"
 
-#: cozy/tools.py:138
+#: cozy/tools.py:128
 msgid "today"
 msgstr "сегодня"
 
-#: cozy/tools.py:140
+#: cozy/tools.py:130
 msgid "yesterday"
 msgstr "вчера"
 
-#: cozy/tools.py:142
+#: cozy/tools.py:132
 #, python-format
 msgid "%s days ago"
 msgstr "%s день назад"
 
-#: cozy/tools.py:144
+#: cozy/tools.py:134
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
@@ -102,7 +95,7 @@ msgstr[1] "{weeks} недели назад"
 msgstr[2] "{weeks} недель назад"
 msgstr[3] "{weeks} недель назад"
 
-#: cozy/tools.py:146
+#: cozy/tools.py:136
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
@@ -111,7 +104,7 @@ msgstr[1] "{months} месяцев назад"
 msgstr[2] "{months} месяцев назад"
 msgstr[3] "{months} месяцев назад"
 
-#: cozy/tools.py:148
+#: cozy/tools.py:138
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
@@ -120,35 +113,35 @@ msgstr[1] "{years} года назад"
 msgstr[2] "{years} лет назад"
 msgstr[3] "{years} лет назад"
 
-#: cozy/ui/album_element.py:59 cozy/ui/widgets/search_results.py:98
+#: cozy/ui/album_element.py:63 cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
 msgstr "Слушать эту аудиокнигу"
 
-#: cozy/ui/book_element.py:33
+#: cozy/ui/book_element.py:37
 msgid "Open book overview"
 msgstr "Открыть обзор книги"
 
-#: cozy/ui/book_element.py:34
+#: cozy/ui/book_element.py:38
 msgid "Currently offline"
 msgstr "Сейчас оффлайн"
 
-#: cozy/ui/book_element.py:119
+#: cozy/ui/book_element.py:123
 msgid "Mark as read"
 msgstr "Отметить как прочитанное"
 
-#: cozy/ui/book_element.py:122
+#: cozy/ui/book_element.py:126
 msgid "Open in file browser"
 msgstr "Открыть в файловом менеджере"
 
-#: cozy/ui/book_element.py:125
+#: cozy/ui/book_element.py:129
 msgid "Remove from library"
 msgstr "Удалить из библиотеки"
 
-#: cozy/ui/book_overview.py:225
+#: cozy/ui/book_overview.py:229
 msgid "Downloaded"
 msgstr "Загружено"
 
-#: cozy/ui/book_overview.py:228 data/ui/main_window.ui:1024
+#: cozy/ui/book_overview.py:232 data/ui/main_window.ui:1024
 msgid "Download"
 msgstr "Загрузить"
 
@@ -156,50 +149,42 @@ msgstr "Загрузить"
 msgid "Disc"
 msgstr "Диск"
 
-#: cozy/ui/file_not_found_dialog.py:67
+#: cozy/ui/file_not_found_dialog.py:69
 msgid "All files"
 msgstr "Все файлы"
 
-#: cozy/ui/main_view.py:397
+#: cozy/ui/main_view.py:411
 msgid "Audiobooks"
 msgstr "Аудиокниги"
 
-#: cozy/ui/main_view.py:414
+#: cozy/ui/main_view.py:645
 msgid "Importing Audiobooks"
 msgstr "Импортирование аудиокниги"
 
-#: cozy/ui/widgets/search_results.py:72
+#: cozy/ui/widgets/search_results.py:73
 msgid "Jump to author "
 msgstr "Перейти к автору "
 
-#: cozy/ui/widgets/search_results.py:75
+#: cozy/ui/widgets/search_results.py:76
 msgid "Jump to reader "
 msgstr "Перейти к диктору "
 
-#: cozy/ui/settings.py:437 cozy/ui/settings.py:480
-msgid "External drive"
-msgstr "Внешний диск"
-
-#: cozy/ui/settings.py:440 cozy/ui/settings.py:483
-msgid "Internal drive"
-msgstr "Внутрення память"
-
-#: cozy/ui/settings.py:467
-msgid "Changing audio book location…"
-msgstr "Изменение каталога аудиокниг…"
+#: cozy/ui/settings.py:87
+msgid "Feedback"
+msgstr "Обратная связь"
 
 #: cozy/ui/track_element.py:28
 msgid "Play this part"
 msgstr "Слушать эту часть"
 
-#: cozy/ui/warnings.py:24 cozy/ui/warnings.py:39
+#: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
 msgid "{storage} is offline."
 msgstr "{storage} в автономном режиме."
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:33
-#: cozy/view_model/library_view_model.py:126
+#: cozy/view_model/library_view_model.py:37
+#: cozy/view_model/library_view_model.py:131
 msgid "All"
 msgstr "Все"
 
@@ -207,7 +192,55 @@ msgstr "Все"
 msgid "Display all books"
 msgstr "Отобразить все книги"
 
-#: data/ui/about.ui:14
+#: cozy/ui/widgets/error_reporting.py:12
+msgid "Disabled"
+msgstr "Отключено"
+
+#: cozy/ui/widgets/error_reporting.py:13
+msgid "Basic error reporting"
+msgstr "Докладывать об основных ошибках"
+
+#: cozy/ui/widgets/error_reporting.py:14
+msgid "Detailed error reporting"
+msgstr "Детально докладывать об ошибках"
+
+#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:173
+msgid "Detailed error reporting with import errors"
+msgstr "Детально докладывать об ошибках, включая ошибки во время импортации"
+
+#: cozy/ui/widgets/error_reporting.py:19
+msgid "No error or crash reporting."
+msgstr "Не докладывать об ошибках и сбоях."
+
+#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:192
+msgid "The following information will be sent in case of an error or crash:"
+msgstr "Данная информация будет отправлена в случае сбоя или ошибки:"
+
+#: cozy/ui/widgets/error_reporting.py:25
+msgid "Which type of error occurred"
+msgstr "Вид произошедшей ошибки"
+
+#: cozy/ui/widgets/error_reporting.py:26
+msgid "Line of code where an error occurred"
+msgstr "Линия на которой произошла ошибка"
+
+#: cozy/ui/widgets/error_reporting.py:27
+msgid "Cozy's version"
+msgstr "Версия Cozy"
+
+#: cozy/ui/widgets/error_reporting.py:28
+msgid "Linux distribution"
+msgstr "Дистрибутив Linux"
+
+#: cozy/ui/widgets/error_reporting.py:29
+msgid "Desktop environment"
+msgstr "Среда рабочего стола"
+
+#: cozy/ui/widgets/error_reporting.py:30
+msgid "Media type of files that Cozy couldn't import"
+msgstr "Формат файлов, которые Cody не смог импортировать"
+
+#: data/ui/about.ui:16
 msgid "GitHub"
 msgstr "GitHub"
 
@@ -349,7 +382,7 @@ msgstr "В данный момент работает"
 msgid "Playback speed"
 msgstr "Скорость воспроизведения"
 
-#: data/ui/main_window.ui:490 data/ui/settings.ui:724
+#: data/ui/main_window.ui:490 data/ui/settings.ui:727
 msgid "Sleep timer"
 msgstr "Таймер сна"
 
@@ -528,135 +561,135 @@ msgstr "Часть"
 msgid "Nothing found :("
 msgstr "Ничего не найдено :("
 
-#: data/ui/settings.ui:92 data/ui/settings.ui:363
+#: data/ui/settings.ui:95 data/ui/settings.ui:366
 msgid "General"
 msgstr "Общие"
 
-#: data/ui/settings.ui:137
+#: data/ui/settings.ui:140
 msgid "Dark Mode"
 msgstr "Темная тема"
 
-#: data/ui/settings.ui:213
+#: data/ui/settings.ui:216
 msgid "Titlebar"
 msgstr "Заголовок"
 
-#: data/ui/settings.ui:258
+#: data/ui/settings.ui:261
 msgid "Display the whole book instead of the current chapter"
 msgstr "Отображать имя книги вместо текущей главы"
 
-#: data/ui/settings.ui:321
+#: data/ui/settings.ui:324
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: data/ui/settings.ui:406
+#: data/ui/settings.ui:409
 msgid "Suspend system on timer"
 msgstr "Выключение системы по таймеру"
 
-#: data/ui/settings.ui:466
+#: data/ui/settings.ui:469
 msgid "Replay 30 seconds"
 msgstr "Автовозврат на 30 секунд"
 
-#: data/ui/settings.ui:526
+#: data/ui/settings.ui:529
 msgid "Automatic media scan"
 msgstr "Автоматическое сканирование медиа"
 
-#: data/ui/settings.ui:585
+#: data/ui/settings.ui:588
 msgid "Tags"
 msgstr "Метки"
 
-#: data/ui/settings.ui:637
+#: data/ui/settings.ui:640
 msgid "Swap author and reader"
 msgstr "Поменять местами автора и диктора"
 
-#: data/ui/settings.ui:650
+#: data/ui/settings.ui:653
 msgid "Activate this if author and reader are displayed the wrong way"
 msgstr "Включите, если автор и диктор отображаются в неверном порядке"
 
-#: data/ui/settings.ui:675
+#: data/ui/settings.ui:678
 msgid "switch author and reader assignment"
 msgstr "Назначить автора и диктора"
 
-#: data/ui/settings.ui:769
+#: data/ui/settings.ui:772
 msgid "Fadeout"
 msgstr "Затухание"
 
-#: data/ui/settings.ui:831
+#: data/ui/settings.ui:834
 msgid "Fadeout duration"
 msgstr "Продолжительность затухания"
 
-#: data/ui/settings.ui:912
+#: data/ui/settings.ui:915
 msgid "Behaviour"
 msgstr "Поведение"
 
-#: data/ui/settings.ui:939
+#: data/ui/settings.ui:942
 msgid "Artwork"
 msgstr "Произведение"
 
-#: data/ui/settings.ui:991
+#: data/ui/settings.ui:994
 msgid "Prefer external images over embedded cover"
 msgstr "Предпочитать внешние изображения встроенной обложке"
 
-#: data/ui/settings.ui:1004
+#: data/ui/settings.ui:1007
 msgid "Use images (cover.jpg, *.png, …) when available"
 msgstr "Использовать изображения (cover.jpg, *.png, …), когда возможно"
 
-#: data/ui/settings.ui:1087
+#: data/ui/settings.ui:1090
 msgid "Audio books location"
 msgstr "Расположение аудиокниг"
 
-#: data/ui/settings.ui:1103
+#: data/ui/settings.ui:1106
 msgid "Storage locations"
 msgstr "Места хранения "
 
-#: data/ui/settings.ui:1161
+#: data/ui/settings.ui:1164
 msgid "Add location"
 msgstr "Добавить расположение"
 
-#: data/ui/settings.ui:1186 data/ui/settings.ui:1382
+#: data/ui/settings.ui:1189 data/ui/settings.ui:1385
 msgid "Remove location"
 msgstr "Удалить расположение"
 
-#: data/ui/settings.ui:1222
+#: data/ui/settings.ui:1225
 msgid "Toggle this storage location to be internal/external."
 msgstr "Изменить память на внутреннюю/внешнюю"
 
-#: data/ui/settings.ui:1248
+#: data/ui/settings.ui:1251
 msgid "Set as default storage location for new audiobooks"
 msgstr "Установить как место хранения по умолчанию для новых аудиокниг"
 
-#: data/ui/settings.ui:1301
+#: data/ui/settings.ui:1304
 msgid "Blacklist"
 msgstr "Игнорируемые"
 
-#: data/ui/settings.ui:1345
+#: data/ui/settings.ui:1348
 msgid "Path"
 msgstr "Путь"
 
-#: data/ui/settings.ui:1428
+#: data/ui/settings.ui:1431
 msgid "Follow symlinks"
 msgstr "Следовать по символическим ссылкам"
 
-#: data/ui/settings.ui:1460
+#: data/ui/settings.ui:1463
 msgid "Storage"
 msgstr "Хранилище"
 
-#: data/ui/settings.ui:1484
+#: data/ui/settings.ui:1487
 msgid "Database"
 msgstr "База данных"
 
-#: data/ui/settings.ui:1536
+#: data/ui/settings.ui:1539
 msgid "Force refresh the database"
 msgstr "Принудительное обновление базы данных"
 
-#: data/ui/settings.ui:1549
+#: data/ui/settings.ui:1552
 msgid "This will force update the metadata of all imported books"
 msgstr "Это обновит метаданные всех импортированных книг"
 
-#: data/ui/settings.ui:1569
+#: data/ui/settings.ui:1572
 msgid "Force refresh"
 msgstr "Принудительное обновление"
 
-#: data/ui/settings.ui:1625
+#: data/ui/settings.ui:1628
 msgid "Advanced"
 msgstr "Расширенные"
 
@@ -706,8 +739,8 @@ msgid "shutdown"
 msgstr "выключение"
 
 #: data/ui/titlebar_menu.ui:7
-msgid "_Scan Directory"
-msgstr "_Найти книги"
+msgid "_Scan Library"
+msgstr "_Сканировать библиотеку"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
@@ -728,3 +761,96 @@ msgstr "_О программе"
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
 msgstr "_Выход"
+
+#: data/ui/error_reporting.ui:23
+msgid "User feedback"
+msgstr "Пользовательские отзывы"
+
+#: data/ui/error_reporting.ui:66
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"You can help improve Cozy by contributing information in case of errors and "
+"crashes. "
+msgstr ""
+"Вы можете помочь Cozy, отправляя информацию в случае ошибок или сбоев."
+
+#: data/ui/error_reporting.ui:80
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Contributing this information is optional and completely anonymous. We will "
+"never collect personal data, files you import or any information that could "
+"identify you."
+msgstr ""
+"Отправление этой информации необязательно, и совершенно анонимно. Мы не "
+"никогда не используем информацию о вас, о ваших файлах, или о ваших личных "
+"данных."
+
+#: data/ui/error_reporting.ui:95
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Cozy is opensource and the user feedback source code can be inspected here: "
+msgstr ""
+"Cody является открытой программой. Пользовательские отзывы и программный код"
+" можно найти здесь: "
+
+#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
+msgid "What's new  in Cozy"
+msgstr "Что нового в Cozy"
+
+#: data/ui/whats_new_importer.ui:52
+msgid "A completely rewritten and far more reliable media importer."
+msgstr ""
+"Переписанный с нуля и намного более надёжный метод импортирования файлов. "
+
+#: data/ui/whats_new_importer.ui:77
+msgid ""
+"Did you experience audio files that couldn't be imported? Drag & Drop those "
+"files onto Cozy or use the application menu in the titlebar to rescan your "
+"audiobook directories!"
+msgstr ""
+"Если возникнут проблемы с импортацией аудио файлов, можно перетащить эти "
+"файлы в окно Cody, или воспользоваться меню приложения чтобы ещё раз "
+"сканировать папку с вашими аудиокнигами."
+
+#: data/ui/whats_new_importer.ui:92
+msgid "Supported media files currently are mp3, m4a, flac, ogg, opus and wav."
+msgstr ""
+"На данный момент, программа поддерживает форматы mp3, m4a, flac, ogg, opus и"
+" wav."
+
+#: data/ui/whats_new_importer.ui:107
+msgid "More to come in a later update."
+msgstr "Мы добавим больше в будущем обновлении."
+
+#: data/ui/whats_new_m4b.ui:52
+msgid "Basic support for m4b audio books."
+msgstr "Поддержка аудиокниг формата m4b."
+
+#: data/ui/whats_new_m4b.ui:77
+msgid ""
+"Many of you have been waiting for it: Support for m4b audio books! This "
+"version features basic support for m4b files without chapter support."
+msgstr ""
+"По многочисленным просьбам, мы добавили поддержку книг формата m4b. Эта "
+"версия включает в себя базовую поддержку формата m4b, но не поддерживает "
+"использование глав."
+
+#: data/ui/whats_new_m4b.ui:92
+msgid ""
+"Drag & Drop your m4b files onto Cozy or use the application menu in the "
+"titlebar to rescan your audiobook directories."
+msgstr ""
+"Перетащите файлы m4b в окно Cozy или используйте меню приложения чтобы ещё "
+"раз сканировать папку с вашими аудиокнигами."
+
+#: data/ui/whats_new_m4b.ui:107
+msgid "Chapter support will follow in a later update. Stay tuned!"
+msgstr "Поддержка глав будет добавлена в будущем обновлении."
+
+#: data/ui/whats_new.ui:8
+msgid "Whats new?"
+msgstr "Что нового?"
+
+#: data/ui/whats_new.ui:21
+msgid "Continue"
+msgstr "Продолжить"
