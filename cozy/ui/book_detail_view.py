@@ -72,6 +72,7 @@ class BookDetailView(Gtk.Box):
         self._view_model.bind_to("is_book_available", self._view_model.open_library)
         self._view_model.bind_to("downloaded", self._set_book_download_status)
         self._view_model.bind_to("current_chapter", self._on_current_chapter_changed)
+        self._view_model.bind_to("last_played_text", self._on_last_played_text_changed)
 
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_button_clicked)
@@ -131,6 +132,9 @@ class BookDetailView(Gtk.Box):
                 child.select()
                 child.set_playing(self._view_model.playing)
                 break
+
+    def _on_last_played_text_changed(self):
+        self.last_played_label.set_text(self._view_model.last_played_text)
 
     def _display_chapters(self, book: Book):
         disk_number = -1

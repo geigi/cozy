@@ -1,3 +1,5 @@
+import logging
+import time
 from typing import Optional
 
 from cozy.architecture.event_sender import EventSender
@@ -6,6 +8,9 @@ from cozy.ext import inject
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.model.library import Library
+from cozy.report import reporter
+
+log = logging.getLogger("mediaplayer")
 
 
 class Player(EventSender):
@@ -51,8 +56,14 @@ class Player(EventSender):
         return player.is_playing()
 
     def play_pause_book(self, book: Book):
+        if not book:
+            log.error("Cannot play book which is None.")
+            reporter.error("player", "Cannot play book which is None.")
+            return
+
         current_track = player.get_current_track()
 
+        book.last_played = int(time.time())
         if current_track and book.current_chapter.file == current_track.file:
             player.play_pause(None)
         else:
@@ -60,8 +71,14 @@ class Player(EventSender):
             player.play_pause(None, True)
 
     def play_pause_chapter(self, book: Book, chapter: Chapter):
+        if not book or not chapter:
+            log.error("Cannot play chapter which is None.")
+            reporter.error("player", "Cannot play chapter which is None.")
+            return
+
         current_track = player.get_current_track()
 
+        book.last_played = int(time.time())
         if current_track and current_track.file == chapter.file:
             player.play_pause(None)
         else:

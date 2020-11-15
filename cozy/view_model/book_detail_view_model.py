@@ -54,10 +54,12 @@ class BookDetailViewModel(Observable, EventSender):
     def book(self, value: Book):
         if self._book:
             self._book.remove_bind("current_chapter", self._on_book_current_chapter_changed)
+            self._book.remove_bind("last_played", self._on_book_last_played_changed)
 
         self._book = value
         self._current_chapter = None
         self._book.bind_to("current_chapter", self._on_book_current_chapter_changed)
+        self._book.bind_to("last_played", self._on_book_last_played_changed)
         self._notify("book")
 
     @property
@@ -142,6 +144,9 @@ class BookDetailViewModel(Observable, EventSender):
 
     def _on_book_current_chapter_changed(self):
         self._notify("current_chapter")
+
+    def _on_book_last_played_changed(self):
+        self._notify("last_played_text")
 
     def __on_offline_cache_event(self, event, message):
         """

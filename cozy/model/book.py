@@ -116,6 +116,7 @@ class Book(Observable, EventSender):
     def last_played(self, new_last_played: int):
         self._db_object.last_played = new_last_played
         self._db_object.save(only=self._db_object.dirty_fields)
+        self._notify("last_played")
 
     @property
     def offline(self):
