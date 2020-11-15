@@ -9,7 +9,7 @@ from cozy.control.db import get_book_duration, get_tracks, is_external, get_book
 from cozy.db.book import Book
 from cozy.ext import inject
 
-from cozy.ui.track_element import ChapterElement
+from cozy.ui.chapter_element import ChapterElement
 from cozy.ui.settings import Settings
 from cozy.control.offline_cache import OfflineCache
 from cozy.ui.disk_element import DiskElement

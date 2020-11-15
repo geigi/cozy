@@ -12,7 +12,7 @@ cozy/ui/disk_element.py
 cozy/ui/file_not_found_dialog.py
 cozy/ui/main_view.py
 cozy/ui/settings.py
-cozy/ui/track_element.py
+cozy/ui/chapter_element.py
 cozy/ui/warnings.py
 cozy/ui/widgets/error_reporting.py
 cozy/ui/widgets/filter_list_box.py

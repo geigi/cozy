@@ -8,7 +8,7 @@ from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.report import reporter
 from cozy.ui.disk_element import DiskElement
-from cozy.ui.track_element import ChapterElement
+from cozy.ui.chapter_element import ChapterElement
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
 
 gi.require_version('Gtk', '3.0')
