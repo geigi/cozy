@@ -27,7 +27,7 @@ class BookDetailViewModel(Observable, EventSender):
 
         self._play = False
         self._current_chapter = None
-        self._book = None
+        self._book: Book = None
 
         self._player.add_listener(self._on_player_event)
         self._fs_monitor.add_listener(self._on_fs_monitor_event)
@@ -57,6 +57,7 @@ class BookDetailViewModel(Observable, EventSender):
             self._book.remove_bind("last_played", self._on_book_last_played_changed)
             self._book.remove_bind("duration", self._on_book_duration_changed)
             self._book.remove_bind("progress", self._on_book_progress_changed)
+            self._book.remove_bind("playback_speed", self._on_playback_speed_changed)
 
         self._book = value
         self._current_chapter = None
@@ -64,6 +65,7 @@ class BookDetailViewModel(Observable, EventSender):
         self._book.bind_to("last_played", self._on_book_last_played_changed)
         self._book.bind_to("duration", self._on_book_duration_changed)
         self._book.bind_to("progress", self._on_book_progress_changed)
+        self._book.bind_to("playback_speed", self._on_playback_speed_changed)
         self._notify("book")
 
     @property
@@ -78,14 +80,14 @@ class BookDetailViewModel(Observable, EventSender):
         if not self._book:
             return None
 
-        return tools.seconds_to_human_readable(self._book.duration)
+        return tools.seconds_to_human_readable(self._book.duration / self._book.playback_speed)
 
     @property
     def remaining_text(self) -> Optional[str]:
         if not self._book:
             return None
 
-        remaining = self._book.duration - self._book.progress
+        remaining = self._book.duration / self._book.playback_speed - self._book.progress / self._book.playback_speed
         return tools.seconds_to_human_readable(remaining)
 
     @property
@@ -157,6 +159,11 @@ class BookDetailViewModel(Observable, EventSender):
         self._notify("progress_percent")
 
     def _on_book_duration_changed(self):
+        self._notify("progress_percent")
+        self._notify("remaining_text")
+        self._notify("total_text")
+
+    def _on_playback_speed_changed(self):
         self._notify("progress_percent")
         self._notify("remaining_text")
         self._notify("total_text")

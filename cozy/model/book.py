@@ -108,8 +108,6 @@ class Book(Observable, EventSender):
         self._db_object.playback_speed = new_playback_speed
         self._db_object.save(only=self._db_object.dirty_fields)
         self._notify("playback_speed")
-        self._notify("duration")
-        self._notify("progress")
 
     @property
     def last_played(self):
@@ -152,7 +150,7 @@ class Book(Observable, EventSender):
 
     @property
     def duration(self):
-        return sum((chapter.length for chapter in self.chapters)) / self.playback_speed
+        return sum((chapter.length for chapter in self.chapters))
 
     @property
     def progress(self):
@@ -166,11 +164,11 @@ class Book(Observable, EventSender):
         for chapter in self.chapters:
             if chapter.id == self.position:
                 progress += int(chapter.position / 1000000000)
-                return progress / self.playback_speed
+                return progress
 
             progress += chapter.length
 
-        return progress / self.playback_speed
+        return progress
 
     def reload(self):
         self._get_db_object()
