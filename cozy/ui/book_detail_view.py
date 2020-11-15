@@ -24,6 +24,8 @@ class BookDetailView(Gtk.Box):
 
     back_button: Gtk.Button = Gtk.Template.Child()
 
+    play_book_button: Gtk.Button = Gtk.Template.Child()
+
     book_label: Gtk.Label = Gtk.Template.Child()
     author_label: Gtk.Label = Gtk.Template.Child()
     last_played_label: Gtk.Label = Gtk.Template.Child()
@@ -67,6 +69,7 @@ class BookDetailView(Gtk.Box):
 
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_button_clicked)
+        self.play_book_button.connect("clicked", self._play_book_clicked)
 
     def _on_book_changed(self):
         if not self._view_model.book:
@@ -161,4 +164,7 @@ class BookDetailView(Gtk.Box):
         self.download_label.set_text(text)
 
     def _play_chapter_clicked(self, _, chapter: Chapter):
-        self._view_model.current_chapter = chapter
+        self._view_model.play_chapter(chapter)
+
+    def _play_book_clicked(self, _):
+        self._view_model.play_book()

@@ -51,6 +51,7 @@ class BookDetailViewModel(Observable, EventSender):
     @book.setter
     def book(self, value: Book):
         self._book = value
+        self._current_chapter = None
         self._notify("book")
 
     @property
@@ -117,19 +118,26 @@ class BookDetailViewModel(Observable, EventSender):
     def open_library(self):
         self.emit_event(OpenView.LIBRARY)
 
+    def play_book(self):
+        self._player.play_pause_book(self.book)
+
+    def play_chapter(self, chapter: Chapter):
+        self.current_chapter = chapter
+        self._player.play_pause_chapter(self._book, self._current_chapter)
+
     def _on_player_event(self, event, message):
         if event == "play":
             track_id = message
             book = None
 
-            for b in self._model.books:
-                if any(chapter.id == track_id for chapter in b.chapters):
-                    book = b
-                    break
-
-            if book:
-                book.reload()
-                self._notify("book")
+            # for b in self._model.books:
+            #     if any(chapter.id == track_id for chapter in b.chapters):
+            #         book = b
+            #         break
+            #
+            # if book:
+            #     book.reload()
+            #     self._notify("book")
 
     def _on_fs_monitor_event(self, event, _):
         if event == "storage-online":
