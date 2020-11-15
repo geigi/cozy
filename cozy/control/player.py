@@ -597,4 +597,5 @@ def dispose():
     global __player
 
     log.info("Closing.")
+    emit_event("closing")
     __player.set_state(Gst.State.NULL)

@@ -139,8 +139,14 @@ class BookDetailViewModel(Observable, EventSender):
         self._player.play_pause_chapter(self._book, chapter)
 
     def _on_player_event(self, event, message):
+        if not self.book:
+            return
+
         if event == "play" or event == "pause":
             self._notify("playing")
+        elif event == "position":
+            self._notify("progress_percent")
+            self._notify("remaining_text")
 
     def _on_fs_monitor_event(self, event, _):
         if event == "storage-online":

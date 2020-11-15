@@ -9,6 +9,7 @@ from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.model.library import Library
 from cozy.report import reporter
+from cozy.tools import IntervalTimer
 
 log = logging.getLogger("mediaplayer")
 
@@ -20,6 +21,8 @@ class Player(EventSender):
         super().__init__()
         self._gst_player: player = player.get_playbin()
         player.add_player_listener(self._pass_legacy_player_events)
+
+        self.play_status_updater: IntervalTimer = IntervalTimer(1, self._emit_tick)
 
     @property
     def loaded_book(self) -> Optional[Book]:
@@ -91,6 +94,11 @@ class Player(EventSender):
             book.position = chapter.id
 
     def _pass_legacy_player_events(self, event, message):
+        if event == "play":
+            self._start_tick_thread()
+        elif event == "stop" or event == "pause" or event == "closing":
+            self._stop_tick_thread()
+
         if (event == "play" or event == "pause") and message:
             message = message.id
         # this is evil and will be removed when the old player is replaced
@@ -104,3 +112,14 @@ class Player(EventSender):
                 book.position = -1
 
         self.emit_event(event, message)
+
+    def _start_tick_thread(self):
+        self.play_status_updater = IntervalTimer(1, self._emit_tick)
+        self.play_status_updater.start()
+
+    def _stop_tick_thread(self):
+        self.play_status_updater.stop()
+
+    def _emit_tick(self):
+        self.loaded_chapter.position = self.position
+        self.emit_event_main_thread("position", self.position)
