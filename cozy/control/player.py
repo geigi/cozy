@@ -282,6 +282,7 @@ def next_track():
     else:
         stop()
         save_current_book_position(current, -1)
+        emit_event("book-finished")
         unload()
         Settings.update(last_played_book=None).execute()
         emit_event("stop")

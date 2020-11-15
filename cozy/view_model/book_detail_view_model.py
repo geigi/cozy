@@ -41,12 +41,10 @@ class BookDetailViewModel(Observable, EventSender):
 
     @property
     def current_chapter(self) -> Optional[Chapter]:
-        return self.current_chapter
+        if not self.book:
+            return None
 
-    @current_chapter.setter
-    def current_chapter(self, value: Chapter):
-        self._current_chapter = value
-        self._notify("current_chapter")
+        return self.book.current_chapter
 
     @property
     def book(self) -> Optional[Book]:
@@ -54,8 +52,12 @@ class BookDetailViewModel(Observable, EventSender):
 
     @book.setter
     def book(self, value: Book):
+        if self._book:
+            self._book.remove_bind("current_chapter", self._on_book_current_chapter_changed)
+
         self._book = value
         self._current_chapter = None
+        self._book.bind_to("current_chapter", self._on_book_current_chapter_changed)
         self._notify("book")
 
     @property
@@ -126,8 +128,7 @@ class BookDetailViewModel(Observable, EventSender):
         self._player.play_pause_book(self.book)
 
     def play_chapter(self, chapter: Chapter):
-        self.current_chapter = chapter
-        self._player.play_pause_chapter(self._book, self._current_chapter)
+        self._player.play_pause_chapter(self._book, chapter)
 
     def _on_player_event(self, event, message):
         if event == "play" or event == "pause":
@@ -138,6 +139,9 @@ class BookDetailViewModel(Observable, EventSender):
             self._notify("is_book_available")
         elif event == "storage-offline":
             self._notify("is_book_available")
+
+    def _on_book_current_chapter_changed(self):
+        self._notify("current_chapter")
 
     def __on_offline_cache_event(self, event, message):
         """

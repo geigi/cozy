@@ -1,4 +1,5 @@
 import logging
+from typing import Optional
 
 import gi
 
@@ -51,6 +52,8 @@ class BookDetailView(Gtk.Box):
     _view_model: BookDetailViewModel = inject.attr(BookDetailViewModel)
     _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
+    _current_selected_chapter: Optional[ChapterElement] = None
+
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
@@ -68,6 +71,7 @@ class BookDetailView(Gtk.Box):
         self._view_model.bind_to("playing", self._on_play_changed)
         self._view_model.bind_to("is_book_available", self._view_model.open_library)
         self._view_model.bind_to("downloaded", self._set_book_download_status)
+        self._view_model.bind_to("current_chapter", self._on_current_chapter_changed)
 
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_button_clicked)
@@ -81,6 +85,7 @@ class BookDetailView(Gtk.Box):
             return
 
         book = self._view_model.book
+        self._current_selected_chapter = None
 
         self.published_label.set_visible(False)
         self.published_text.set_visible(False)
@@ -92,9 +97,10 @@ class BookDetailView(Gtk.Box):
 
         self._set_cover_image(book)
         self._display_chapters(book)
+        self._on_current_chapter_changed()
         self._display_external_section()
         self._set_book_download_status()
-        self._set_progress(book)
+        self._set_progress()
         self._on_play_changed()
 
     def _on_play_changed(self):
@@ -103,6 +109,29 @@ class BookDetailView(Gtk.Box):
         play_button_img = "media-playback-pause-symbolic" if playing else "media-playback-start-symbolic"
         self.play_img.set_from_icon_name(play_button_img, Gtk.IconSize.LARGE_TOOLBAR)
 
+        if self._current_selected_chapter:
+            self._current_selected_chapter.set_playing(playing)
+        else:
+            log.error("_current_selected_chapter is null. Skipping...")
+            reporter.error("book_detail_view",
+                           "_current_selected_chapter was NULL. No ply/pause chapter icon was changed")
+
+    def _on_current_chapter_changed(self):
+        if self._current_selected_chapter:
+            self._current_selected_chapter.deselect()
+
+        current_chapter = self._view_model.current_chapter
+
+        for child in self.chapter_box:
+            if not isinstance(child, ChapterElement):
+                continue
+
+            if child.chapter == current_chapter:
+                self._current_selected_chapter = child
+                child.select()
+                child.set_playing(self._view_model.playing)
+                break
+
     def _display_chapters(self, book: Book):
         disk_number = -1
 
@@ -110,7 +139,6 @@ class BookDetailView(Gtk.Box):
 
         for chapter in book.chapters:
             if disk_number != chapter.disk and self._view_model.disk_count > 1:
-                disk_number = chapter.disk
                 self._add_disk(chapter)
 
             self._add_chapter(chapter)
@@ -139,7 +167,7 @@ class BookDetailView(Gtk.Box):
     def _clear_chapter_box(self):
         self.chapter_box.remove_all_children()
 
-    def _set_progress(self, book: Book):
+    def _set_progress(self):
         self.remaining_label.set_text(self._view_model.remaining_text)
         self.book_progress_bar.set_fraction(self._view_model.progress_percent)
 
@@ -155,7 +183,7 @@ class BookDetailView(Gtk.Box):
     def _back_button_clicked(self, _):
         self._view_model.open_library()
 
-    def _download_switch_changed(self, switch: Gtk.Switch, state: bool):
+    def _download_switch_changed(self, _, state: bool):
         self._view_model.download_book(state)
 
     def _set_book_download_status(self):

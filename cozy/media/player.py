@@ -1,3 +1,5 @@
+from typing import Optional
+
 from cozy.architecture.event_sender import EventSender
 from cozy.control import player
 from cozy.ext import inject
@@ -15,7 +17,7 @@ class Player(EventSender):
         player.add_player_listener(self._pass_legacy_player_events)
 
     @property
-    def loaded_book(self) -> Book:
+    def loaded_book(self) -> Optional[Book]:
         current_track = player.get_current_track()
         if not current_track:
             return None
@@ -29,6 +31,20 @@ class Player(EventSender):
                 break
 
         return book
+
+    @property
+    def loaded_chapter(self) -> Optional[Chapter]:
+        current_track = player.get_current_track()
+        if not current_track:
+            return None
+
+        chapter = None
+
+        for c in self._library.chapters:
+            if c.id == current_track.id:
+                chapter = c
+
+        return chapter
 
     @property
     def playing(self) -> bool:
@@ -56,5 +72,14 @@ class Player(EventSender):
     def _pass_legacy_player_events(self, event, message):
         if (event == "play" or event == "pause") and message:
             message = message.id
+        # this is evil and will be removed when the old player is replaced
+        if event == "track-changed":
+            book = self.loaded_book
+            if book and message:
+                book.position = message.id
+        if event == "book-finished":
+            book = self.loaded_book
+            if book:
+                book.position = -1
 
         self.emit_event(event, message)

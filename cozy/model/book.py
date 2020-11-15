@@ -3,6 +3,7 @@ from typing import List
 from peewee import SqliteDatabase
 
 from cozy.architecture.event_sender import EventSender
+from cozy.architecture.observable import Observable
 from cozy.db.book import Book as BookModel
 from cozy.db.storage_blacklist import StorageBlackList
 from cozy.db.track import Track as TrackModel
@@ -16,12 +17,14 @@ class BookIsEmpty(Exception):
     pass
 
 
-class Book(EventSender):
+class Book(Observable, EventSender):
     _chapters: List[Chapter] = None
     _settings: Settings = inject.attr(Settings)
 
     def __init__(self, db: SqliteDatabase, id: int):
         super().__init__()
+        super(Observable, self).__init__()
+
         self._db: SqliteDatabase = db
         self.id: int = id
 
@@ -75,6 +78,8 @@ class Book(EventSender):
     def position(self, new_position: int):
         self._db_object.position = new_position
         self._db_object.save(only=self._db_object.dirty_fields)
+        self._notify("position")
+        self._notify("current_chapter")
 
     @property
     def rating(self):
@@ -172,6 +177,8 @@ class Book(EventSender):
         ids = list(t.id for t in book_tracks)
         TrackModel.delete().where(TrackModel.id << ids).execute()
         self._db_object.delete_instance(recursive=True)
+        self.destroy_listeners()
+        self._destroy_observers()
 
     def _fetch_chapters(self):
         tracks = TrackModel \
@@ -194,3 +201,4 @@ class Book(EventSender):
                 self._db_object.delete_instance(recursive=True)
                 self.emit_event("book-deleted", self)
                 self.destroy_listeners()
+                self._destroy_observers()
