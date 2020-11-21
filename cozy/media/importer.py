@@ -77,7 +77,7 @@ class Importer(EventSender):
 
             if len(media_files) != 0:
                 self._library.insert_many(media_files)
-            else:
+            if progress >= files_count:
                 break
         pool.close()
 
