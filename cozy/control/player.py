@@ -381,8 +381,16 @@ def jump_to_ns(ns):
     elif int(ns / 1000000000) > get_current_track().length:
         new_position = int(get_current_track().length) * 1000000000
 
-    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
-                  Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
+    counter = 0
+    seeked = False
+    while not seeked and counter < 100:
+        counter += 1
+        time.sleep(0.01)
+        seeked = __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
+                               Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
+    if not seeked:
+        log.info("Failed to seek, counter expired.")
+        reporter.warning("player", "Failed to seek, counter expired.")
     save_current_track_position(new_position)
 
 
@@ -504,6 +512,7 @@ def load_file(track, filesystem_monitor: FilesystemMonitor, offline_cache: Offli
     Settings.update(last_played_book=__current_track.book).execute()
     Book.update(last_played=int(time.time())).where(
         Book.id == __current_track.book.id).execute()
+    jump_to_ns(track.position)
     emit_event("track-changed", track)
 
 

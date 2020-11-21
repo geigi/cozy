@@ -98,7 +98,6 @@ class Player(EventSender):
             self._start_tick_thread()
         elif event == "stop" or event == "pause" or event == "closing":
             self._stop_tick_thread()
-
         if (event == "play" or event == "pause") and message:
             message = message.id
         # this is evil and will be removed when the old player is replaced
