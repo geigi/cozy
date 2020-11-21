@@ -88,8 +88,14 @@ class Files(EventSender):
                 self._file_count += 1
 
     def _update_copy_status(self, current_num_bytes, total_num_bytes, _):
-        progress = ((self._file_progess - 1) / self._file_count) + (
-                (current_num_bytes / total_num_bytes) / self._file_count)
+        if total_num_bytes == 0:
+            total_num_bytes = 1
+
+        if self._file_count == 0:
+            progress = 1.0
+        else:
+            progress = ((self._file_progess - 1) / self._file_count) + (
+                    (current_num_bytes / total_num_bytes) / self._file_count)
         self.emit_event_main_thread("copy-progress", progress)
 
     def _count_files_in_folder(self, path: str) -> int:
