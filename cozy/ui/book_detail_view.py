@@ -82,6 +82,7 @@ class BookDetailView(Gtk.Box):
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_button_clicked)
         self.play_book_button.connect("clicked", self._play_book_clicked)
+        self.download_switch.connect("state-set", self._download_switch_changed)
 
     def _on_book_changed(self):
         if not self._view_model.book:
@@ -168,7 +169,9 @@ class BookDetailView(Gtk.Box):
         self.download_switch.set_visible(external)
 
         if external:
-            self.download_switch.set_active(self._view_model.is_book_external)
+            self.download_switch.handler_block_by_func(self._download_switch_changed)
+            self.download_switch.set_active(self._view_model.book.offline)
+            self.download_switch.handler_unblock_by_func(self._download_switch_changed)
 
     def _add_disk(self, chapter: Chapter):
         disc_element = DiskElement(chapter.disk)

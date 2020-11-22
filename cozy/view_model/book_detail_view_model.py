@@ -32,6 +32,7 @@ class BookDetailViewModel(Observable, EventSender):
 
         self._player.add_listener(self._on_player_event)
         self._fs_monitor.add_listener(self._on_fs_monitor_event)
+        self._offline_cache.add_listener(self.__on_offline_cache_event)
 
     @property
     def playing(self) -> bool:
@@ -185,13 +186,16 @@ class BookDetailViewModel(Observable, EventSender):
         self._notify("total_text")
 
     def __on_offline_cache_event(self, event, message):
-        """
-        """
         try:
             if message.id != self._book.db_object.id:
                 return
         except Exception as e:
             return
 
-        if event == "book-offline":
+        if event == "book-offline-removed":
+            # TODO: Remove this when offline cache refactoring is complete
+            self._book.downloaded = False
+            self._notify("downloaded")
+        elif event == "book-offline":
+            self._book.downloaded = True
             self._notify("downloaded")

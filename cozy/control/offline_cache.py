@@ -91,8 +91,7 @@ class OfflineCache(EventSender):
 
         OfflineCacheModel.delete().where(OfflineCacheModel.track in ids).execute()
 
-        if len(self.queue) > 0:
-            self._start_processing()
+        self._start_processing()
 
     def remove_all_for_storage(self, storage_path):
         """
@@ -106,8 +105,8 @@ class OfflineCache(EventSender):
             if file.query_exists():
                 file.delete()
 
-            if element.chapter.book.offline == True:
-                element.chapter.book.update(offline=False, downloaded=False).execute()
+            if element.track.book.offline == True:
+                element.track.book.update(offline=False, downloaded=False).execute()
 
         OfflineCacheModel.delete().where(storage_path in OfflineCacheModel.track.file).execute()
 
@@ -165,7 +164,7 @@ class OfflineCache(EventSender):
         self.total_batch_count = len(self.queue)
         self.current_batch_count = 0
         if len(self.queue) > 0:
-            self.current_book_processing = self.queue[0].chapter.book.id
+            self.current_book_processing = self.queue[0].track.book.id
 
         while len(self.queue) > 0:
             log.info("Processing item")
@@ -176,20 +175,20 @@ class OfflineCache(EventSender):
 
             new_item = OfflineCacheModel.get(OfflineCacheModel.id == item.id)
 
-            if self.current_book_processing != new_item.chapter.book.id:
+            if self.current_book_processing != new_item.track.book.id:
                 self.update_book_download_status(
                     Book.get(Book.id == self.current_book_processing))
-                self.current_book_processing = new_item.chapter.book.id
+                self.current_book_processing = new_item.track.book.id
 
-            if not new_item.copied and os.path.exists(new_item.chapter.file):
+            if not new_item.copied and os.path.exists(new_item.track.file):
                 log.info("Copying item")
                 Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.ui.switch_to_working,
-                                     _("Copying") + " " + tools.shorten_string(new_item.chapter.book.name, 30), False,
+                                     _("Copying") + " " + tools.shorten_string(new_item.track.book.name, 30), False,
                                      False)
                 self.current = new_item
 
                 destination = Gio.File.new_for_path(os.path.join(self.cache_dir, new_item.file))
-                source = Gio.File.new_for_path(new_item.chapter.file)
+                source = Gio.File.new_for_path(new_item.track.file)
                 flags = Gio.FileCopyFlags.OVERWRITE
                 try:
                     copied = source.copy(destination, flags, self.filecopy_cancel, self.__update_copy_status, None)
@@ -199,7 +198,7 @@ class OfflineCache(EventSender):
                         self.thread.stop()
                         break
                     reporter.exception("offline_cache", e)
-                    log.error("Could not copy file to offline cache: " + new_item.chapter.file)
+                    log.error("Could not copy file to offline cache: " + new_item.track.file)
                     log.error(e)
                     self.queue.remove(item)
                     continue
