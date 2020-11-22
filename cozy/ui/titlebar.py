@@ -343,8 +343,6 @@ class Titlebar:
         Play/Pause the player.
         """
         player.play_pause(None)
-        pos = self.ui.get_playback_start_position()
-        player.jump_to_ns(pos)
 
     def __on_rewind_clicked(self, button):
         """

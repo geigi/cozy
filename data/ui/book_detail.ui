@@ -147,6 +147,8 @@
                       <object class="GtkLabel" id="download_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="margin_left">5</property>
+                        <property name="margin_right">4</property>
                         <property name="label" translatable="yes">Download</property>
                       </object>
                       <packing>

@@ -523,6 +523,7 @@ def load_last_book(filesystem_monitor: FilesystemMonitor, offline_cache: Offline
     """
     global __current_track
     global __player
+    global __wait_to_seek
 
     last_book = Settings.get().last_played_book
 
@@ -541,6 +542,7 @@ def load_last_book(filesystem_monitor: FilesystemMonitor, offline_cache: Offline
                     if not path:
                         return
                 __player.set_property("uri", "file://" + path)
+                __wait_to_seek = True
                 __player.set_state(Gst.State.PAUSED)
                 __current_track = last_track
 
