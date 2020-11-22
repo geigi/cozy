@@ -7,13 +7,16 @@ from pathlib import Path
 from traceback import format_exception
 
 import distro
-from gi.repository import Gtk, GLib
+
+import gi
+gi.require_version('Handy', '1')
+
+from gi.repository import Gtk, GLib, Handy
 
 from cozy.app_controller import AppController
 from cozy.control.db import init_db
 from cozy.control.mpris import MPRIS
 from cozy.db.settings import Settings
-from cozy.media.importer import Importer
 from cozy.report import reporter
 from cozy.ui.main_view import CozyUI
 from cozy.version import __version__
@@ -75,6 +78,8 @@ class Application(Gtk.Application):
         self.ui = CozyUI(self.pkgdatadir, self, __version__)
         init_db()
         Gtk.Application.do_startup(self)
+        Handy.init()
+        log.info("libhandy version: {}".format(Handy._version))
         self.ui.startup()
 
     def do_activate(self):

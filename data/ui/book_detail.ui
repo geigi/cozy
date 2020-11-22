@@ -351,7 +351,6 @@
                       </object>
                     </child>
                     <style>
-                      <class name="suggested-action"/>
                       <class name="flat"/>
                     </style>
                   </object>

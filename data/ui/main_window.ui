@@ -2,6 +2,7 @@
 <!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
+  <requires lib="libhandy" version="1.0"/>
   <object class="GtkAdjustment" id="adjustment1">
     <property name="lower">0.25</property>
     <property name="upper">2</property>
@@ -587,32 +588,16 @@ audio-volume-medium-symbolic</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkToolbar" id="category_toolbar">
+                  <object class="HdyViewSwitcherBar" id="category_toolbar">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="hexpand">True</property>
-                    <child>
-                      <object class="GtkToolItem">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="hexpand">True</property>
-                        <child>
-                          <object class="GtkStackSwitcher">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="halign">center</property>
-                            <property name="stack">sort_stack</property>
-                            <style>
-                              <class name="sort_switcher_element"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="homogeneous">False</property>
-                      </packing>
-                    </child>
+                    <property name="policy">auto</property>
+                    <property name="stack">sort_stack</property>
+                    <property name="reveal">True</property>
+                    <style>
+                      <class name="sort_switcher_element"/>
+                      <class name="linked"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -678,6 +663,7 @@ audio-volume-medium-symbolic</property>
                           <packing>
                             <property name="name">recent</property>
                             <property name="title" translatable="yes">Recent</property>
+                            <property name="icon_name">clock-outline-symbolic</property>
                           </packing>
                         </child>
                         <child>
@@ -713,6 +699,7 @@ audio-volume-medium-symbolic</property>
                           <packing>
                             <property name="name">author</property>
                             <property name="title" translatable="yes">Author</property>
+                            <property name="icon_name">account-symbolic</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -748,6 +735,7 @@ audio-volume-medium-symbolic</property>
                           <packing>
                             <property name="name">reader</property>
                             <property name="title" translatable="yes">Reader</property>
+                            <property name="icon_name">microphone-symbolic</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
@@ -873,9 +861,6 @@ audio-volume-medium-symbolic</property>
               </packing>
             </child>
             <child>
-              <placeholder/>
-            </child>
-            <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -906,7 +891,7 @@ audio-volume-medium-symbolic</property>
               <packing>
                 <property name="name">nothing_here</property>
                 <property name="title">page0</property>
-                <property name="position">3</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <child>
@@ -1304,7 +1289,7 @@ audio-volume-medium-symbolic</property>
               <packing>
                 <property name="name">no_media</property>
                 <property name="title">page0</property>
-                <property name="position">4</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
