@@ -15,7 +15,7 @@ if compile_schemas.found()
 endif
 
 desktop_file = i18n.merge_file(
-    input: meson.project_name() + '.desktop.in',
+    input: meson.project_name() + '.desktop',
     output: meson.project_name() + '.desktop',
     po_dir: join_paths(meson.source_root(), 'po', 'extra'),
     type: 'desktop',
@@ -31,7 +31,7 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-    input: meson.project_name() + '.appdata.xml.in',
+    input: meson.project_name() + '.appdata.xml',
     output: meson.project_name() + '.appdata.xml',
     po_dir: join_paths(meson.source_root(), 'po', 'extra'),
     install: true,
