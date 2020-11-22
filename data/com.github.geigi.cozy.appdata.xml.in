@@ -52,6 +52,18 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.7.6" timestamp="1606049165">
+      <description>
+        <p>
+        This release features a rewrite of the book detail view to prepare everything for chapter support with m4b files which will follow in a later update. If something isn't working as expected let me know!
+        </p>
+        <ul>
+          <li>Fix: If an audiobook directory contained a lot of non audio files, Cozy could skip all other files on import (thanks foliva!)</li>
+          <li>Fix: When copying files via Drag and Drop sometimes the progress bar reported an incorrect progress</li>
+          <li>As always, updated translations thanks to all of the translators!</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.5" timestamp="1605380159">
       <description>
         <p>

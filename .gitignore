@@ -1,5 +1,8 @@
 .vscode/
 .idea/
+_build/
+.buildconfig
+com.github.geigi.cozy.json
 build/
 app/
 bin/
