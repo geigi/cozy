@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-14 12:17+0100\n"
+"POT-Creation-Date: 2020-11-22 13:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: cozy/control/offline_cache.py:188
+#: cozy/control/offline_cache.py:186
 msgid "Copying"
 msgstr ""
 
@@ -97,6 +97,14 @@ msgstr[1] ""
 msgid "Play this book"
 msgstr ""
 
+#: cozy/ui/book_detail_view.py:215
+msgid "Downloaded"
+msgstr ""
+
+#: cozy/ui/book_detail_view.py:218 data/ui/book_detail.ui:152
+msgid "Download"
+msgstr ""
+
 #: cozy/ui/book_element.py:37
 msgid "Open book overview"
 msgstr ""
@@ -105,24 +113,16 @@ msgstr ""
 msgid "Currently offline"
 msgstr ""
 
-#: cozy/ui/book_element.py:123
+#: cozy/ui/book_element.py:121
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/ui/book_element.py:126
+#: cozy/ui/book_element.py:124
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/ui/book_element.py:129
+#: cozy/ui/book_element.py:127
 msgid "Remove from library"
-msgstr ""
-
-#: cozy/ui/book_overview.py:229
-msgid "Downloaded"
-msgstr ""
-
-#: cozy/ui/book_overview.py:232 data/ui/main_window.ui:1024
-msgid "Download"
 msgstr ""
 
 #: cozy/ui/disk_element.py:26
@@ -133,43 +133,25 @@ msgstr ""
 msgid "All files"
 msgstr ""
 
-#: cozy/ui/main_view.py:411
+#: cozy/ui/main_view.py:409
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui/main_view.py:645
+#: cozy/ui/main_view.py:626
 msgid "Importing Audiobooks"
-msgstr ""
-
-#: cozy/ui/widgets/search_results.py:73
-msgid "Jump to author "
-msgstr ""
-
-#: cozy/ui/widgets/search_results.py:76
-msgid "Jump to reader "
 msgstr ""
 
 #: cozy/ui/settings.py:87
 msgid "Feedback"
 msgstr ""
 
-#: cozy/ui/track_element.py:28
+#: cozy/ui/chapter_element.py:23
 msgid "Play this part"
 msgstr ""
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
 msgid "{storage} is offline."
-msgstr ""
-
-#: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:36
-#: cozy/view_model/library_view_model.py:130
-msgid "All"
-msgstr ""
-
-#: cozy/ui/widgets/filter_list_box.py:21
-msgid "Display all books"
 msgstr ""
 
 #: cozy/ui/widgets/error_reporting.py:12
@@ -220,8 +202,67 @@ msgstr ""
 msgid "Media type of files that Cozy couldn't import"
 msgstr ""
 
+#: cozy/ui/widgets/filter_list_box.py:20
+#: cozy/view_model/library_view_model.py:37
+#: cozy/view_model/library_view_model.py:131
+msgid "All"
+msgstr ""
+
+#: cozy/ui/widgets/filter_list_box.py:21
+msgid "Display all books"
+msgstr ""
+
+#: cozy/ui/widgets/search_results.py:73
+msgid "Jump to author "
+msgstr ""
+
+#: cozy/ui/widgets/search_results.py:76
+msgid "Jump to reader "
+msgstr ""
+
 #: data/ui/about.ui:16
 msgid "GitHub"
+msgstr ""
+
+#: data/ui/book_detail.ui:200
+msgid "Remaining"
+msgstr ""
+
+#: data/ui/book_detail.ui:255
+msgid "Total"
+msgstr ""
+
+#: data/ui/book_detail.ui:271
+msgid "Last played"
+msgstr ""
+
+#: data/ui/book_detail.ui:287
+msgid "Published"
+msgstr ""
+
+#: data/ui/error_reporting.ui:23
+msgid "User feedback"
+msgstr ""
+
+#: data/ui/error_reporting.ui:66
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"You can help improve Cozy by contributing information in case of errors and "
+"crashes. "
+msgstr ""
+
+#: data/ui/error_reporting.ui:80
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Contributing this information is optional and completely anonymous. We will "
+"never collect personal data, files you import or any information that could "
+"identify you."
+msgstr ""
+
+#: data/ui/error_reporting.ui:95
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
 
 #: data/ui/file_not_found.ui:19
@@ -257,245 +298,229 @@ msgid ""
 "- The file(s) are corrupt"
 msgstr ""
 
-#: data/ui/main_window.ui:72
+#: data/ui/main_window.ui:71
 msgid "Rewind 30 seconds"
 msgstr ""
 
-#: data/ui/main_window.ui:80
+#: data/ui/main_window.ui:79
 msgid "Rewind button"
 msgstr ""
 
-#: data/ui/main_window.ui:81
+#: data/ui/main_window.ui:80
 msgid "Jump back 30 seconds"
 msgstr ""
 
-#: data/ui/main_window.ui:98
+#: data/ui/main_window.ui:97
 msgid "Start playback"
 msgstr ""
 
-#: data/ui/main_window.ui:106
+#: data/ui/main_window.ui:105
 msgid "Play/Pause Button"
 msgstr ""
 
-#: data/ui/main_window.ui:107
+#: data/ui/main_window.ui:106
 msgid "Start or pause the playback"
 msgstr ""
 
-#: data/ui/main_window.ui:124
+#: data/ui/main_window.ui:123
 msgid "Volume control"
 msgstr ""
 
-#: data/ui/main_window.ui:171
+#: data/ui/main_window.ui:170
 msgid "Warnings"
 msgstr ""
 
-#: data/ui/main_window.ui:226
+#: data/ui/main_window.ui:225
 msgid "Currently playing"
 msgstr ""
 
-#: data/ui/main_window.ui:244
+#: data/ui/main_window.ui:243
 msgid "Booktitle"
 msgstr ""
 
-#: data/ui/main_window.ui:245
+#: data/ui/main_window.ui:244
 msgid "Title of currently playing book"
 msgstr ""
 
-#: data/ui/main_window.ui:270
+#: data/ui/main_window.ui:269
 msgid "Part name"
 msgstr ""
 
-#: data/ui/main_window.ui:271
+#: data/ui/main_window.ui:270
 msgid "Title of the currently playing part"
 msgstr ""
 
-#: data/ui/main_window.ui:313
+#: data/ui/main_window.ui:312
 msgid "Elapsed time"
 msgstr ""
 
-#: data/ui/main_window.ui:321
+#: data/ui/main_window.ui:320
 msgid "Time elapsed"
 msgstr ""
 
-#: data/ui/main_window.ui:322
+#: data/ui/main_window.ui:321
 msgid "Elapsed time of current part"
 msgstr ""
 
-#: data/ui/main_window.ui:337
+#: data/ui/main_window.ui:336
 msgid "Jump to position in current chapter"
 msgstr ""
 
-#: data/ui/main_window.ui:343
+#: data/ui/main_window.ui:342
 msgid "Position slider"
 msgstr ""
 
-#: data/ui/main_window.ui:344
+#: data/ui/main_window.ui:343
 msgid "Position of the current part in seconds"
 msgstr ""
 
-#: data/ui/main_window.ui:362
+#: data/ui/main_window.ui:361
 msgid "Remaining time"
 msgstr ""
 
-#: data/ui/main_window.ui:370
+#: data/ui/main_window.ui:369
 msgid "Time remaining"
 msgstr ""
 
-#: data/ui/main_window.ui:371
+#: data/ui/main_window.ui:370
 msgid "Remaining time of current part"
 msgstr ""
 
-#: data/ui/main_window.ui:447
+#: data/ui/main_window.ui:446
 msgid "Working…"
 msgstr ""
 
-#: data/ui/main_window.ui:452
+#: data/ui/main_window.ui:451
 msgid "Currently working"
 msgstr ""
 
-#: data/ui/main_window.ui:468
+#: data/ui/main_window.ui:467
 msgid "Playback speed"
 msgstr ""
 
-#: data/ui/main_window.ui:490 data/ui/settings.ui:727
+#: data/ui/main_window.ui:489 data/ui/settings.ui:727
 msgid "Sleep timer"
 msgstr ""
 
-#: data/ui/main_window.ui:501
+#: data/ui/main_window.ui:500
 msgid "Timer menu button"
 msgstr ""
 
-#: data/ui/main_window.ui:502
+#: data/ui/main_window.ui:501
 msgid "Open the sleep timer popover"
 msgstr ""
 
-#: data/ui/main_window.ui:518
+#: data/ui/main_window.ui:517
 msgid "Search your library"
 msgstr ""
 
-#: data/ui/main_window.ui:529
+#: data/ui/main_window.ui:528
 msgid "Search menu button"
 msgstr ""
 
-#: data/ui/main_window.ui:530
+#: data/ui/main_window.ui:529
 msgid "Open the search popover"
 msgstr ""
 
-#: data/ui/main_window.ui:544
+#: data/ui/main_window.ui:543
 msgid "Options"
 msgstr ""
 
-#: data/ui/main_window.ui:555
+#: data/ui/main_window.ui:554
 msgid "Options menu button"
 msgstr ""
 
-#: data/ui/main_window.ui:556
+#: data/ui/main_window.ui:555
 msgid "Open the options popover"
 msgstr ""
 
-#: data/ui/main_window.ui:681
+#: data/ui/main_window.ui:680
 msgid "Recent"
 msgstr ""
 
-#: data/ui/main_window.ui:700
+#: data/ui/main_window.ui:699
 msgid "List of authors"
 msgstr ""
 
-#: data/ui/main_window.ui:716 data/ui/main_window.ui:824
+#: data/ui/main_window.ui:715 data/ui/main_window.ui:823
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr ""
 
-#: data/ui/main_window.ui:735
+#: data/ui/main_window.ui:734
 msgid "List of readers"
 msgstr ""
 
-#: data/ui/main_window.ui:751 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:750 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr ""
 
-#: data/ui/main_window.ui:804
+#: data/ui/main_window.ui:803
 msgid "List of books"
 msgstr ""
 
-#: data/ui/main_window.ui:840
+#: data/ui/main_window.ui:839
 msgid "Importing your audiobooks…"
 msgstr ""
 
-#: data/ui/main_window.ui:1072
-msgid "Remaining"
-msgstr ""
-
-#: data/ui/main_window.ui:1128
-msgid "Total"
-msgstr ""
-
-#: data/ui/main_window.ui:1145
-msgid "Last played"
-msgstr ""
-
-#: data/ui/main_window.ui:1162
-msgid "Published"
-msgstr ""
-
-#: data/ui/main_window.ui:1326
+#: data/ui/main_window.ui:893
 msgid ""
 "Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 
-#: data/ui/main_window.ui:1371
+#: data/ui/main_window.ui:938
 msgid "Import your Audiobooks"
 msgstr ""
 
-#: data/ui/main_window.ui:1387
+#: data/ui/main_window.ui:954
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 
-#: data/ui/main_window.ui:1416
+#: data/ui/main_window.ui:983
 msgid "External or Network drive?"
 msgstr ""
 
-#: data/ui/main_window.ui:1439
+#: data/ui/main_window.ui:1006
 msgid "Are your audiobooks stored on an external or network drive?"
 msgstr ""
 
-#: data/ui/main_window.ui:1457
+#: data/ui/main_window.ui:1024
 msgid ""
 "If they are you can enable offline mode for a book in the book overview. "
 "This keeps a local copy of the book that you can listen to on the go"
 msgstr ""
 
-#: data/ui/main_window.ui:1491 data/ui/main_window.ui:1550
+#: data/ui/main_window.ui:1058 data/ui/main_window.ui:1117
 msgid "Auto scan switch"
 msgstr ""
 
-#: data/ui/main_window.ui:1492 data/ui/main_window.ui:1530
-#: data/ui/main_window.ui:1551
+#: data/ui/main_window.ui:1059 data/ui/main_window.ui:1097
+#: data/ui/main_window.ui:1118
 msgid "Automatically import new audiobooks on startup"
 msgstr ""
 
-#: data/ui/main_window.ui:1594
+#: data/ui/main_window.ui:1161
 msgid "Drag & Drop"
 msgstr ""
 
-#: data/ui/main_window.ui:1611
+#: data/ui/main_window.ui:1178
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr ""
 
-#: data/ui/main_window.ui:1634
+#: data/ui/main_window.ui:1201
 msgid "Location of your audiobooks"
 msgstr ""
 
-#: data/ui/main_window.ui:1655
+#: data/ui/main_window.ui:1222
 msgid "Set Audiobooks Directory"
 msgstr ""
 
-#: data/ui/main_window.ui:1678
+#: data/ui/main_window.ui:1245
 msgid "Load audiobooks from a directory, network drive or an external disk."
 msgstr ""
 
-#: data/ui/main_window.ui:1696
+#: data/ui/main_window.ui:1263
 msgid "You can add more storage locations later in the settings"
 msgstr ""
 
@@ -724,29 +749,12 @@ msgstr ""
 msgid "_Quit"
 msgstr ""
 
-#: data/ui/error_reporting.ui:23
-msgid "User feedback"
+#: data/ui/whats_new.ui:8
+msgid "Whats new?"
 msgstr ""
 
-#: data/ui/error_reporting.ui:66
-msgctxt "Error and crash reporting dialog"
-msgid ""
-"You can help improve Cozy by contributing information in case of errors and "
-"crashes. "
-msgstr ""
-
-#: data/ui/error_reporting.ui:80
-msgctxt "Error and crash reporting dialog"
-msgid ""
-"Contributing this information is optional and completely anonymous. We will "
-"never collect personal data, files you import or any information that could "
-"identify you."
-msgstr ""
-
-#: data/ui/error_reporting.ui:95
-msgctxt "Error and crash reporting dialog"
-msgid ""
-"Cozy is opensource and the user feedback source code can be inspected here: "
+#: data/ui/whats_new.ui:21
+msgid "Continue"
 msgstr ""
 
 #: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
@@ -790,12 +798,4 @@ msgstr ""
 
 #: data/ui/whats_new_m4b.ui:107
 msgid "Chapter support will follow in a later update. Stay tuned!"
-msgstr ""
-
-#: data/ui/whats_new.ui:8
-msgid "Whats new?"
-msgstr ""
-
-#: data/ui/whats_new.ui:21
-msgid "Continue"
 msgstr ""
