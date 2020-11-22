@@ -9,7 +9,7 @@ from cozy.control.db import get_book_duration, get_tracks, is_external, get_book
 from cozy.db.book import Book
 from cozy.ext import inject
 
-from cozy.ui.track_element import TrackElement
+from cozy.ui.chapter_element import ChapterElement
 from cozy.ui.settings import Settings
 from cozy.control.offline_cache import OfflineCache
 from cozy.ui.disk_element import DiskElement
@@ -125,7 +125,7 @@ class BookOverview:
                 disk_number = track.disk
                 disk_count += 1
 
-            track_element = TrackElement(track, self)
+            track_element = ChapterElement(track, self)
             self.track_box.add(track_element)
             track_element.show_all()
 
@@ -199,11 +199,11 @@ class BookOverview:
         if self.book.position == -1:
             return
 
-        track_box_children = [e for e in self.track_box.get_children() if isinstance(e, TrackElement)]
+        track_box_children = [e for e in self.track_box.get_children() if isinstance(e, ChapterElement)]
         if curr_track:
             self.current_track_element = next(
                 filter(
-                    lambda x: x.track.id == curr_track.id,
+                    lambda x: x.chapter.id == curr_track.id,
                     track_box_children), None)
 
         if self.current_track_element is None:
@@ -245,7 +245,7 @@ class BookOverview:
         for track_element in self.track_box.get_children():
             if isinstance(track_element, DiskElement):
                 continue
-            elif track_element.track.id == book.position:
+            elif track_element.chapter.id == book.position:
                 self.current_track_element = track_element
                 track_element.select()
             else:

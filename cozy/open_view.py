@@ -5,3 +5,4 @@ class OpenView(Enum):
     AUTHOR = auto()
     READER = auto()
     BOOK = auto()
+    LIBRARY = auto()

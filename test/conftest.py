@@ -79,14 +79,12 @@ def peewee_database_storage():
 def teardown_db(db_path, models, test_db):
     print("Teardown database...")
     test_db.drop_tables(models)
-    test_db.stop()
-    test_db.start()
     test_db.close()
     os.remove(db_path)
 
 
 def prepare_db():
-    from playhouse.sqliteq import SqliteQueueDatabase
+    from playhouse.pool import PooledSqliteDatabase
     from cozy.db.artwork_cache import ArtworkCache
     from cozy.db.book import Book
     from cozy.db.offline_cache import OfflineCache
@@ -100,11 +98,9 @@ def prepare_db():
     print("Setup database...")
 
     db_path = '/tmp/cozy_test.db'
-    test_db = SqliteQueueDatabase(db_path, pragmas=[('journal_mode', 'wal')])
+    test_db = PooledSqliteDatabase(db_path, pragmas=[('journal_mode', 'wal')])
     test_db.bind(models, bind_refs=False, bind_backrefs=False)
     test_db.connect()
     test_db.create_tables(models)
-    test_db.stop()
-    test_db.start()
 
     return db_path, models, test_db

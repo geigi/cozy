@@ -3,6 +3,7 @@ from typing import List
 from peewee import SqliteDatabase
 
 from cozy.architecture.event_sender import EventSender
+from cozy.architecture.observable import Observable
 from cozy.db.book import Book as BookModel
 from cozy.db.storage_blacklist import StorageBlackList
 from cozy.db.track import Track as TrackModel
@@ -16,12 +17,14 @@ class BookIsEmpty(Exception):
     pass
 
 
-class Book(EventSender):
+class Book(Observable, EventSender):
     _chapters: List[Chapter] = None
     _settings: Settings = inject.attr(Settings)
 
     def __init__(self, db: SqliteDatabase, id: int):
         super().__init__()
+        super(Observable, self).__init__()
+
         self._db: SqliteDatabase = db
         self.id: int = id
 
@@ -68,13 +71,15 @@ class Book(EventSender):
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
-    def position(self):
+    def position(self) -> int:
         return self._db_object.position
 
     @position.setter
     def position(self, new_position: int):
         self._db_object.position = new_position
         self._db_object.save(only=self._db_object.dirty_fields)
+        self._notify("position")
+        self._notify("current_chapter")
 
     @property
     def rating(self):
@@ -102,6 +107,7 @@ class Book(EventSender):
     def playback_speed(self, new_playback_speed: float):
         self._db_object.playback_speed = new_playback_speed
         self._db_object.save(only=self._db_object.dirty_fields)
+        self._notify("playback_speed")
 
     @property
     def last_played(self):
@@ -111,6 +117,7 @@ class Book(EventSender):
     def last_played(self, new_last_played: int):
         self._db_object.last_played = new_last_played
         self._db_object.save(only=self._db_object.dirty_fields)
+        self._notify("last_played")
 
     @property
     def offline(self):
@@ -141,6 +148,28 @@ class Book(EventSender):
     def current_chapter(self):
         return next((chapter for chapter in self.chapters if chapter.id == self.position), self.chapters[0])
 
+    @property
+    def duration(self):
+        return sum((chapter.length for chapter in self.chapters))
+
+    @property
+    def progress(self):
+        progress = 0
+
+        if self.position == 0:
+            return 0
+        elif self.position == -1:
+            return self.duration
+
+        for chapter in self.chapters:
+            if chapter.id == self.position:
+                progress += int(chapter.position / 1000000000)
+                return progress
+
+            progress += chapter.length
+
+        return progress
+
     def reload(self):
         self._get_db_object()
 
@@ -156,6 +185,8 @@ class Book(EventSender):
         ids = list(t.id for t in book_tracks)
         TrackModel.delete().where(TrackModel.id << ids).execute()
         self._db_object.delete_instance(recursive=True)
+        self.destroy_listeners()
+        self._destroy_observers()
 
     def _fetch_chapters(self):
         tracks = TrackModel \
@@ -177,4 +208,5 @@ class Book(EventSender):
 
                 self._db_object.delete_instance(recursive=True)
                 self.emit_event("book-deleted", self)
-                self.destroy()
+                self.destroy_listeners()
+                self._destroy_observers()

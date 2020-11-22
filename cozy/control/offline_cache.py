@@ -3,7 +3,6 @@ import uuid
 import os
 
 from cozy.architecture.event_sender import EventSender
-from cozy.architecture.singleton import Singleton
 from cozy.control.application_directories import get_cache_dir
 from cozy.control.db import get_tracks, get_db
 import cozy.tools as tools
@@ -20,7 +19,7 @@ from cozy.report import reporter
 log = logging.getLogger("offline_cache")
 
 
-class OfflineCache(EventSender, metaclass=Singleton):
+class OfflineCache(EventSender):
     """
     This class is responsible for all actions on the offline cache.
     This includes operations like copying to the cache and adding or removing files from
@@ -92,8 +91,7 @@ class OfflineCache(EventSender, metaclass=Singleton):
 
         OfflineCacheModel.delete().where(OfflineCacheModel.track in ids).execute()
 
-        if len(self.queue) > 0:
-            self._start_processing()
+        self._start_processing()
 
     def remove_all_for_storage(self, storage_path):
         """

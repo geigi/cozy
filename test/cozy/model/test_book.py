@@ -256,3 +256,32 @@ def test_deleted_book_removed_from_last_played_book_if_necessary(peewee_database
     book._on_chapter_event("chapter-deleted", book.chapters[0])
 
     assert settings.last_played_book == None
+
+
+def test_progress_return_progress_for_started_book(peewee_database):
+    from cozy.model.book import Book
+
+    book = Book(peewee_database, 1)
+    chapter = book.chapters[0]
+    chapter.position = 42 * 1000000000
+    book.position = chapter.id
+
+    assert book.progress == 42
+
+
+def test_progress_should_be_zero_for_unstarted_book(peewee_database):
+    from cozy.model.book import Book
+
+    book = Book(peewee_database, 1)
+    book.position = 0
+
+    assert book.progress == 0
+
+
+def test_progress_should_be_100_for_finished_book(peewee_database):
+    from cozy.model.book import Book
+
+    book = Book(peewee_database, 1)
+    book.position = -1
+
+    assert book.progress == book.duration

@@ -22,11 +22,3 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
         label.set_margin_bottom(self.MARGIN)
         label.set_margin_start(7)
         self.add(label)
-
-    def remove_all_children(self):
-        self.set_visible(False)
-        childs = self.get_children()
-        for element in childs:
-            self.remove(element)
-
-        self.set_visible(True)

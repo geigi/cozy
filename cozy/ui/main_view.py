@@ -2,8 +2,10 @@ import webbrowser
 
 import cozy.ext.inject as inject
 from cozy.application_settings import ApplicationSettings
+from cozy.architecture.event_sender import EventSender
 
 from cozy.control.db import books, close_db
+from cozy.control.offline_cache import OfflineCache
 from cozy.db.book import Book
 from cozy.db.storage import Storage
 from cozy.db.track import Track
@@ -20,14 +22,12 @@ from cozy.control.sleep_timer import SleepTimer
 from cozy.control.playback_speed import PlaybackSpeed
 from cozy.ui.titlebar import Titlebar
 from cozy.ui.settings import Settings
-from cozy.ui.book_overview import BookOverview
 from cozy.architecture.singleton import Singleton
 from cozy.model.settings import Settings as SettingsModel
 import cozy.report.reporter as report
 import cozy.control.player as player
 import cozy.tools as tools
 import cozy.control.filesystem_monitor as fs_monitor
-import cozy.control.offline_cache as offline_cache
 
 import os
 
@@ -36,7 +36,7 @@ import logging
 log = logging.getLogger("ui")
 
 
-class CozyUI(metaclass=Singleton):
+class CozyUI(EventSender, metaclass=Singleton):
     """
     CozyUI is the main ui class.
     """
@@ -52,6 +52,7 @@ class CozyUI(metaclass=Singleton):
     first_play = True
     __inhibit_cookie = None
     fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
+    offline_cache = inject.attr(OfflineCache)
     settings = inject.attr(Settings)
     application_settings = inject.attr(ApplicationSettings)
     _importer: Importer = inject.attr(Importer)
@@ -165,10 +166,8 @@ class CozyUI(metaclass=Singleton):
         self.sort_box = self.window_builder.get_object("sort_box")
         self.import_box = self.window_builder.get_object("import_box")
         self.position_box = self.window_builder.get_object("position_box")
-        self.main_stack = self.window_builder.get_object("main_stack")
+        self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
         self.toolbar_revealer = self.window_builder.get_object("toolbar_revealer")
-        self.back_button = self.window_builder.get_object("back_button")
-        self.back_button.connect("clicked", self.__on_back_clicked)
 
         self.category_toolbar = self.window_builder.get_object(
             "category_toolbar")
@@ -270,8 +269,6 @@ class CozyUI(metaclass=Singleton):
 
         self.sleep_timer = SleepTimer()
         self.speed = PlaybackSpeed()
-        self.book_overview = BookOverview()
-        self.offline_cache = offline_cache.OfflineCache()
         player.init()
 
         self.titlebar.activate()
@@ -359,7 +356,6 @@ class CozyUI(metaclass=Singleton):
             self.scan_action.set_enabled(sensitive)
             self.hide_offline_action.set_enabled(sensitive)
             self.settings.block_ui_elements(block)
-            self.book_overview.block_ui_elements(block)
 
     def get_ui_buttons_blocked(self):
         """
@@ -378,6 +374,7 @@ class CozyUI(metaclass=Singleton):
             self.block_ui_buttons(True, True)
         self.window.props.window.set_cursor(
             Gdk.Cursor.new_from_name(self.window.get_display(), "progress"))
+        self.emit_event_main_thread("working", True)
 
     def switch_to_playing(self):
         """
@@ -396,6 +393,7 @@ class CozyUI(metaclass=Singleton):
             self.block_ui_buttons(False, True)
             self.block_ui_buttons(True, False)
         self.window.props.window.set_cursor(None)
+        self.emit_event_main_thread("working", False)
 
     def check_for_tracks(self):
         """
@@ -490,7 +488,6 @@ class CozyUI(metaclass=Singleton):
         """
         # first update track ui
         book = Book.select().where(Book.id == book.id).get()
-        self.book_overview.set_book(book)
 
         # then switch the stacks
         self.main_stack.props.visible_child_name = "book_overview"
@@ -595,11 +592,6 @@ class CozyUI(metaclass=Singleton):
     def __about_close_clicked(self, widget):
         self.about_dialog.hide()
 
-    def __on_back_clicked(self, widget):
-        self.book_box.unselect_all()
-        self.main_stack.props.visible_child_name = "main"
-        self.toolbar_revealer.set_reveal_child(True)
-
     def on_close(self, widget, data=None):
         """
         Close and dispose everything that needs to be when window is closed.
@@ -625,17 +617,6 @@ class CozyUI(metaclass=Singleton):
         log.info("Closing app.")
         self.app.quit()
         log.info("App closed.")
-
-    def set_book_overview(self, book):
-        # first update track ui
-        self.book_overview.set_book(book)
-
-        # then switch the stacks
-        self.main_stack.props.visible_child_name = "book_overview"
-        self.toolbar_revealer.set_reveal_child(False)
-
-        self.book_overview.play_book_button.grab_remove()
-        self.book_overview.scroller.grab_focus()
 
     def get_builder(self):
         return self.window_builder

@@ -240,7 +240,7 @@ def play_pause(track, jump=False):
         # Track is already selected, only play/pause
         if get_gst_player_state() == Gst.State.PLAYING:
             __player.set_state(Gst.State.PAUSED)
-            emit_event("pause")
+            emit_event("pause", Track.get(Track.id == __current_track.id))
             save_current_track_position()
         else:
             __player.set_state(Gst.State.PLAYING)
@@ -282,6 +282,7 @@ def next_track():
     else:
         stop()
         save_current_book_position(current, -1)
+        emit_event("book-finished")
         unload()
         Settings.update(last_played_book=None).execute()
         emit_event("stop")
@@ -380,8 +381,16 @@ def jump_to_ns(ns):
     elif int(ns / 1000000000) > get_current_track().length:
         new_position = int(get_current_track().length) * 1000000000
 
-    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
-                  Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
+    counter = 0
+    seeked = False
+    while not seeked and counter < 100:
+        counter += 1
+        time.sleep(0.01)
+        seeked = __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
+                               Gst.SeekType.SET, new_position, Gst.SeekType.NONE, 0)
+    if not seeked:
+        log.info("Failed to seek, counter expired.")
+        reporter.warning("player", "Failed to seek, counter expired.")
     save_current_track_position(new_position)
 
 
@@ -457,14 +466,15 @@ def __on_playback_speed_timer():
     __playback_speed_timer_running = False
 
 
-def __on_storage_changed(event, message):
+@inject.autoparams()
+def __on_storage_changed(event, message, offline_cache: OfflineCache):
     """
     """
     global __player
 
     if event == "storage-offline":
         if get_current_track() and message in get_current_track().file:
-            cached_path = OfflineCache().get_cached_path(get_current_track())
+            cached_path = offline_cache.get_cached_path(get_current_track())
             if not cached_path:
                 stop()
                 unload()
@@ -472,7 +482,7 @@ def __on_storage_changed(event, message):
 
 
 @inject.autoparams()
-def load_file(track, filesystem_monitor: FilesystemMonitor):
+def load_file(track, filesystem_monitor: FilesystemMonitor, offline_cache: OfflineCache):
     """
     Loads a given track into the player.
     :param track: track to be loaded
@@ -493,7 +503,7 @@ def load_file(track, filesystem_monitor: FilesystemMonitor):
     if filesystem_monitor.is_track_online(track):
         path = track.file
     else:
-        path = OfflineCache().get_cached_path(track)
+        path = offline_cache.get_cached_path(track)
         if not path:
             path = track.file
     __player.set_property("uri", "file://" + path)
@@ -502,16 +512,18 @@ def load_file(track, filesystem_monitor: FilesystemMonitor):
     Settings.update(last_played_book=__current_track.book).execute()
     Book.update(last_played=int(time.time())).where(
         Book.id == __current_track.book.id).execute()
+    jump_to_ns(track.position)
     emit_event("track-changed", track)
 
 
 @inject.autoparams()
-def load_last_book(filesystem_monitor: FilesystemMonitor):
+def load_last_book(filesystem_monitor: FilesystemMonitor, offline_cache: OfflineCache):
     """
     Load the last played book into the player.
     """
     global __current_track
     global __player
+    global __wait_to_seek
 
     last_book = Settings.get().last_played_book
 
@@ -526,10 +538,11 @@ def load_last_book(filesystem_monitor: FilesystemMonitor):
                 if filesystem_monitor.is_track_online(last_track):
                     path = last_track.file
                 else:
-                    path = OfflineCache().get_cached_path(last_track)
+                    path = offline_cache.get_cached_path(last_track)
                     if not path:
                         return
                 __player.set_property("uri", "file://" + path)
+                __wait_to_seek = True
                 __player.set_state(Gst.State.PAUSED)
                 __current_track = last_track
 
@@ -595,4 +608,5 @@ def dispose():
     global __player
 
     log.info("Closing.")
+    emit_event("closing")
     __player.set_state(Gst.State.NULL)

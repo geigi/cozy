@@ -15,7 +15,7 @@ NO_MEDIA_PAGE = "no_media"
 
 
 class LibraryView:
-    _view_model = inject.attr(LibraryViewModel)
+    _view_model: LibraryViewModel = inject.attr(LibraryViewModel)
 
     def __init__(self, builder: Builder):
         self._builder = builder
@@ -143,7 +143,7 @@ class LibraryView:
         self._view_model.playback_book(book)
 
     def _open_book_overview_clicked(self, widget, book):
-        pass
+        self._view_model.open_book_detail(book)
 
     def _on_book_removed(self, widget, book):
         self._view_model.remove_book(book)

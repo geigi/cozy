@@ -108,15 +108,13 @@ class BookElement(Gtk.FlowBoxChild):
         elif event.type == Gdk.EventType.BUTTON_PRESS and event.button == 1:
             if super().get_sensitive():
                 self.emit("open-book-overview", self.book)
-                self.ui.set_book_overview(self.book.db_object)
         elif event.type == Gdk.EventType.KEY_PRESS and event.keyval == Gdk.KEY_Return:
             if super().get_sensitive():
                 self.emit("open-book-overview", self.book)
-                self.ui.set_book_overview(self.book.db_object)
 
     def __on_key_press_event(self, widget, key):
         if key.keyval == Gdk.KEY_Return and super().get_sensitive():
-            self.ui.set_book_overview(self.book.db_object)
+            self.emit("open-book-overview", self.book)
 
     def __create_context_menu(self):
         menu = Gtk.Menu()
@@ -133,7 +131,7 @@ class BookElement(Gtk.FlowBoxChild):
         menu.append(jump_item)
         menu.append(Gtk.SeparatorMenuItem())
         menu.append(rm_item)
-        menu.attach_to_widget(self.ui.window)
+        menu.attach_to_widget(self)
         menu.show_all()
         return menu
 

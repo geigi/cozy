@@ -11,6 +11,7 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library
+from cozy.open_view import OpenView
 from cozy.ui.book_element import BookElement
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 
@@ -140,6 +141,9 @@ class LibraryViewModel(Observable, EventSender):
         else:
             return book_element1.book.name.lower() > book_element2.book.name.lower()
 
+    def open_library(self):
+        self._notify("library_view_mode")
+
     def _on_fs_monitor_event(self, event, _):
         if event == "storage-online":
             self._notify("authors")
@@ -191,3 +195,6 @@ class LibraryViewModel(Observable, EventSender):
     def _on_model_event(self, event: str, message):
         if event == "rebase-finished":
             self.emit_event("work-done")
+
+    def open_book_detail(self, book: Book):
+        self.emit_event(OpenView.BOOK, book)
