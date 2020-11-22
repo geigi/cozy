@@ -125,6 +125,7 @@ To the contributors on GitHub:
 - NathanBnm
 - camellan
 - elya5
+- foliva
 - grenade
 - jnbr
 - kaphula
