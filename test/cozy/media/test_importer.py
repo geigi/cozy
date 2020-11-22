@@ -125,6 +125,25 @@ def test_scan_returns_none_for_non_audio_files(mocker):
     assert not_imported == set()
 
 
+def test_scan_processes_all_files_even_if_many_are_not_audio_files(mocker):
+    from cozy.media.importer import Importer
+
+    def iterator():
+        items = [None] * 200
+        items.append("test")
+        for item in items:
+            yield item
+
+    mocker.patch("multiprocessing.pool.ThreadPool.map", return_value=iterator())
+    mocker.patch("cozy.model.library.Library.insert_many")
+
+    importer = Importer()
+    _, not_imported = importer._execute_import(["a"])
+
+    assert len(not_imported) == 1
+    assert "test" in not_imported
+
+
 def test_execute_import_returns_list_of_imported_files(mocker):
     from cozy.media.importer import Importer
 
