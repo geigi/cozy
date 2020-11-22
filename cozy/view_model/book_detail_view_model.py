@@ -28,6 +28,7 @@ class BookDetailViewModel(Observable, EventSender):
         self._play = False
         self._current_chapter = None
         self._book: Book = None
+        self._lock_ui: bool = False
 
         self._player.add_listener(self._on_player_event)
         self._fs_monitor.add_listener(self._on_fs_monitor_event)
@@ -116,10 +117,19 @@ class BookDetailViewModel(Observable, EventSender):
     @property
     def is_book_external(self) -> bool:
         first_chapter_path = self._book.chapters[0].file
-        return any(first_chapter_path
-                   in storage.path
+        return any(storage.path
+                   in first_chapter_path
                    for storage
                    in self._settings.external_storage_locations)
+
+    @property
+    def lock_ui(self) -> bool:
+        return self._lock_ui
+
+    @lock_ui.setter
+    def lock_ui(self, new_value: bool):
+        self._lock_ui = new_value
+        self._notify("lock_ui")
 
     def download_book(self, download: bool):
         self._book.offline = download

@@ -51,6 +51,8 @@ class AppController(metaclass=Singleton):
         self.library_view_model.add_listener(self._on_open_view)
         self.library_view_model.add_listener(self._on_library_view_event)
 
+        self.main_window.add_listener(self._on_main_window_event)
+
     @staticmethod
     def configure_inject(binder):
         binder.bind_to_provider(SqliteDatabase, get_db)
@@ -96,3 +98,7 @@ class AppController(metaclass=Singleton):
     def _on_library_view_event(self, event: str, data):
         if event == "work-done":
             self.main_window.switch_to_playing()
+
+    def _on_main_window_event(self, event: str, data):
+        if event == "working":
+            self.book_detail_view_model.lock_ui = data

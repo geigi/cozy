@@ -2,6 +2,7 @@ import webbrowser
 
 import cozy.ext.inject as inject
 from cozy.application_settings import ApplicationSettings
+from cozy.architecture.event_sender import EventSender
 
 from cozy.control.db import books, close_db
 from cozy.control.offline_cache import OfflineCache
@@ -35,7 +36,7 @@ import logging
 log = logging.getLogger("ui")
 
 
-class CozyUI(metaclass=Singleton):
+class CozyUI(EventSender, metaclass=Singleton):
     """
     CozyUI is the main ui class.
     """
@@ -268,7 +269,6 @@ class CozyUI(metaclass=Singleton):
 
         self.sleep_timer = SleepTimer()
         self.speed = PlaybackSpeed()
-        #self.book_overview = BookOverview()
         player.init()
 
         self.titlebar.activate()
@@ -374,6 +374,7 @@ class CozyUI(metaclass=Singleton):
             self.block_ui_buttons(True, True)
         self.window.props.window.set_cursor(
             Gdk.Cursor.new_from_name(self.window.get_display(), "progress"))
+        self.emit_event_main_thread("working", True)
 
     def switch_to_playing(self):
         """
@@ -392,6 +393,7 @@ class CozyUI(metaclass=Singleton):
             self.block_ui_buttons(False, True)
             self.block_ui_buttons(True, False)
         self.window.props.window.set_cursor(None)
+        self.emit_event_main_thread("working", False)
 
     def check_for_tracks(self):
         """
@@ -615,17 +617,6 @@ class CozyUI(metaclass=Singleton):
         log.info("Closing app.")
         self.app.quit()
         log.info("App closed.")
-
-    def set_book_overview(self, book):
-        # first update track ui
-        self.book_overview.set_book(book)
-
-        # then switch the stacks
-        self.main_stack.props.visible_child_name = "book_overview"
-        self.toolbar_revealer.set_reveal_child(False)
-
-        self.book_overview.play_book_button.grab_remove()
-        self.book_overview.scroller.grab_focus()
 
     def get_builder(self):
         return self.window_builder

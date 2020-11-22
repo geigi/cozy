@@ -77,6 +77,7 @@ class BookDetailView(Gtk.Box):
         self._view_model.bind_to("progress_percent", self._on_times_changed)
         self._view_model.bind_to("total_text", self._on_times_changed)
         self._view_model.bind_to("playback_speed", self._on_times_changed)
+        self._view_model.bind_to("lock_ui", self._on_lock_ui_changed)
 
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_button_clicked)
@@ -143,6 +144,10 @@ class BookDetailView(Gtk.Box):
     def _on_times_changed(self):
         self.total_label.set_text(self._view_model.total_text)
         self._set_progress()
+
+    def _on_lock_ui_changed(self):
+        lock = self._view_model.lock_ui
+        self.download_switch.set_sensitive(not lock)
 
     def _display_chapters(self, book: Book):
         disk_number = -1
