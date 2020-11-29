@@ -258,6 +258,13 @@ def test_deleted_book_removed_from_last_played_book_if_necessary(peewee_database
     assert settings.last_played_book == None
 
 
+def test_skipping_removing_a_non_existing_chapter(peewee_database):
+    from cozy.model.book import Book
+
+    book = Book(peewee_database, 1)
+    book._on_chapter_event("chapter-deleted", None)
+
+
 def test_progress_return_progress_for_started_book(peewee_database):
     from cozy.model.book import Book
 
