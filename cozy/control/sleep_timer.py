@@ -167,7 +167,8 @@ class SleepTimer:
         if self.current_timer_time < 1:
             self.fadeout_thread = Thread(target=self.__stop_playback, name="SleepTimerFadeoutThread")
             self.fadeout_thread.start()
-            self.sleep_timer.stop()
+            if self.sleep_timer:
+                self.sleep_timer.stop()
 
     def __handle_system_power_event(self):
         platform = tools.system_platform()
