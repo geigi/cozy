@@ -195,10 +195,9 @@ class ArtworkCache:
         """
         pixbuf = None
 
-        directory = os.path.dirname(os.path.normpath(get_tracks(book)[0].file))
-        cover_files = []
-
         try:
+            directory = os.path.dirname(os.path.normpath(get_tracks(book)[0].file))
+            cover_files = []
             cover_files = [f for f in os.listdir(directory)
                            if f.lower().endswith('.png') or f.lower().endswith(".jpg") or f.lower().endswith(".gif")]
         except Exception as e:
