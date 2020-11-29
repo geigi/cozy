@@ -572,6 +572,11 @@ def save_current_book_position(track, pos=None):
     Saves the given track to it's book as the current position to the cozy.db.
     :param track: track object
     """
+    if not track:
+        log.error("Could not save book position because the given track is NULL")
+        reporter.error("control/player", "Could not save book position because the given track is NULL")
+        return
+
     if pos is None:
         pos = track.id
     Book.update(position=pos).where(
