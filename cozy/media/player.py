@@ -113,12 +113,19 @@ class Player(EventSender):
         self.emit_event(event, message)
 
     def _start_tick_thread(self):
+        if self.play_status_updater:
+            self.play_status_updater.stop()
+
         self.play_status_updater = IntervalTimer(1, self._emit_tick)
         self.play_status_updater.start()
 
     def _stop_tick_thread(self):
-        self.play_status_updater.stop()
+        if self.play_status_updater:
+            self.play_status_updater.stop()
+            self.play_status_updater = None
 
     def _emit_tick(self):
-        self.loaded_chapter.position = self.position
+        if self.loaded_chapter:
+            self.loaded_chapter.position = self.position
+
         self.emit_event_main_thread("position", self.position)
