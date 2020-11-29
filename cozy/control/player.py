@@ -307,7 +307,7 @@ def prev_track():
     current = get_current_track()
     index = list(album_tracks).index(current)
     previous = None
-    if index > -1:
+    if index > 0:
         previous = album_tracks[index - 1]
 
     save_current_track_position()
@@ -316,12 +316,13 @@ def prev_track():
         play_pause(previous)
         save_current_track_position(track=current, pos=0)
         save_current_book_position(previous)
+        return True
     else:
         first_track = __current_track
         __player.set_state(Gst.State.NULL)
         __current_track = None
         play_pause(first_track)
-        save_current_book_position(current, 0)
+        return False
 
 
 def stop():
@@ -338,11 +339,19 @@ def rewind(seconds):
     :param seconds: time in seconds
     """
     global __player
+    global __current_track
     duration = get_current_duration()
+    state = get_gst_player_state()
     seek = duration - (seconds * 1000000000)
     if seek < 0:
-        prev_track()
-        seek = get_current_track().length * 1000000000 + seek
+        if prev_track():
+            __player.set_state(state)
+            if state == Gst.State.PAUSED:
+                emit_event("pause", Track.get(Track.id == __current_track.id))
+            seek = get_current_track().length * 1000000000 + seek
+        else:
+            seek = 0
+
     __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
                   Gst.SeekType.SET, seek, Gst.SeekType.NONE, 0)
     save_current_track_position(seek)

@@ -344,6 +344,8 @@ class Titlebar:
         player.play_pause(None)
 
     def __on_rewind_clicked(self, button):
+        # TODO: this is an ugly workaround. Remove after refactoring the player and titlebar.
+        self._player._first_play = False
         self._player.rewind()
 
         # we want to see the jump imediatly therefore we apply the new time manually
@@ -367,8 +369,8 @@ class Titlebar:
 
         # If the user drags the slider we don't want to jump back
         # another 30 seconds on first play
-        if self.ui.first_play:
-            self.ui.first_play = False
+        # TODO: this is an ugly workaround. Remove after refactoring the player and titlebar.
+        self._player._first_play = False
 
         return False
 

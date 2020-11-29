@@ -2,6 +2,7 @@ import logging
 import time
 from typing import Optional
 
+from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.control import player
 from cozy.ext import inject
@@ -16,9 +17,11 @@ log = logging.getLogger("mediaplayer")
 
 class Player(EventSender):
     _library: Library = inject.attr(Library)
+    _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
     def __init__(self):
         super().__init__()
+        self._first_play = True
         self._gst_player: player = player.get_playbin()
         player.add_player_listener(self._pass_legacy_player_events)
 
@@ -68,14 +71,7 @@ class Player(EventSender):
             reporter.error("player", "Cannot play book which is None.")
             return
 
-        current_track = player.get_current_track()
-
-        book.last_played = int(time.time())
-        if current_track and book.current_chapter.file == current_track.file:
-            player.play_pause(None)
-        else:
-            player.load_file(book.current_chapter._db_object)
-            player.play_pause(None, True)
+        self._play_chapter(book, book.current_chapter)
 
     def play_pause_chapter(self, book: Book, chapter: Chapter):
         if not book or not chapter:
@@ -83,6 +79,10 @@ class Player(EventSender):
             reporter.error("player", "Cannot play chapter which is None.")
             return
 
+        self._play_chapter(book, chapter)
+        book.position = chapter.id
+
+    def _play_chapter(self, book: Book, chapter: Chapter):
         current_track = player.get_current_track()
 
         book.last_played = int(time.time())
@@ -91,10 +91,15 @@ class Player(EventSender):
         else:
             player.load_file(chapter._db_object)
             player.play_pause(None, True)
-            book.position = chapter.id
 
     def rewind(self):
-        player.rewind(30)
+        if self.loaded_book:
+            player.rewind(30 / self.loaded_book.playback_speed)
+
+    def _rewind_feature(self):
+        if self._first_play and self._app_settings.replay:
+            self._first_play = False
+            player.rewind(30 / self.loaded_book.playback_speed)
 
     def _pass_legacy_player_events(self, event, message):
         if event == "play":
@@ -103,6 +108,9 @@ class Player(EventSender):
             self._stop_tick_thread()
         if (event == "play" or event == "pause") and message:
             message = message.id
+            # TODO: This needs to be done when the last chapter is first loaded after startup
+            if self._first_play:
+                self._rewind_feature()
         # this is evil and will be removed when the old player is replaced
         if event == "track-changed":
             book = self.loaded_book
