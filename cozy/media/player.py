@@ -93,6 +93,9 @@ class Player(EventSender):
             player.play_pause(None, True)
             book.position = chapter.id
 
+    def rewind(self):
+        player.rewind(30)
+
     def _pass_legacy_player_events(self, event, message):
         if event == "play":
             self._start_tick_thread()

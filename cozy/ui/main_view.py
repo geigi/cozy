@@ -50,7 +50,6 @@ class CozyUI(EventSender, metaclass=Singleton):
     # Is currently an dialog open?
     dialog_open = False
     is_initialized = False
-    first_play = True
     __inhibit_cookie = None
     fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
     offline_cache = inject.attr(OfflineCache)
@@ -455,25 +454,6 @@ class CozyUI(EventSender, metaclass=Singleton):
 
             if self.sort_stack.props.visible_child_name == "recent":
                 self.book_box.invalidate_sort()
-
-    def get_playback_start_position(self):
-        """
-        Returns the position where to start playback of the current track.
-        This checks for the automatic replay option.
-        :return: Position in ns
-        """
-        pos = player.get_current_track().position
-        if self.first_play:
-            self.first_play = False
-
-            if self.application_settings.replay:
-                amount = 30 * 1000000000
-                if pos < amount:
-                    pos = 0
-                else:
-                    pos = pos - amount
-
-        return pos
 
     def display_failed_imports(self, files):
         """

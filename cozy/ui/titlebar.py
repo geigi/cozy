@@ -9,6 +9,7 @@ from cozy.db.settings import Settings
 from cozy.ext import inject
 from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
+from cozy.media.player import Player
 from cozy.model.library import Library
 from cozy.tools import IntervalTimer
 
@@ -34,6 +35,7 @@ class Titlebar:
     _importer: Importer = inject.attr(Importer)
     _files: Files = inject.attr(Files)
     _library: Library = inject.attr(Library)
+    _player: Player = inject.attr(Player)
 
     # main ui class
     ui = None
@@ -342,20 +344,7 @@ class Titlebar:
         player.play_pause(None)
 
     def __on_rewind_clicked(self, button):
-        """
-        """
-        seconds = 30 * self.ui.speed.get_speed()
-        if self.ui.first_play:
-            ns = seconds * 1000000000
-            track = player.get_current_track()
-            pos = track.position
-            if (pos > ns):
-                pos -= ns
-            else:
-                pos = 0
-            player.save_current_track_position(pos=pos, track=track)
-        else:
-            player.rewind(seconds)
+        self._player.rewind()
 
         # we want to see the jump imediatly therefore we apply the new time manually
         if self.progress_scale.get_value() > 30:
