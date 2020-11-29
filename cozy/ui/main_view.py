@@ -168,7 +168,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.import_box = self.window_builder.get_object("import_box")
         self.position_box = self.window_builder.get_object("position_box")
         self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
-        self.toolbar_revealer = self.window_builder.get_object("toolbar_revealer")
 
         self.category_toolbar = self.window_builder.get_object(
             "category_toolbar")
@@ -482,17 +481,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         dialog = ImportFailedDialog(files)
         dialog.show()
-
-    def jump_to_book(self, book):
-        """
-        Open book overview with the given book.
-        """
-        # first update track ui
-        book = Book.select().where(Book.id == book.id).get()
-
-        # then switch the stacks
-        self.main_stack.props.visible_child_name = "book_overview"
-        self.toolbar_revealer.set_reveal_child(False)
 
     def __on_hide_offline(self, action, value):
         """

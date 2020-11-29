@@ -58,6 +58,7 @@ class BookDetailView(Gtk.Box):
         super().__init__()
 
         self._main_stack: Gtk.Stack = main_window_builder.get_object("main_stack")
+        self._toolbar_revealer: Gtk.Revealer = main_window_builder.get_object("toolbar_revealer")
         self._main_stack.add_named(self, "book_overview")
 
         if Gtk.get_minor_version() > 20:
@@ -109,6 +110,9 @@ class BookDetailView(Gtk.Box):
         self._set_book_download_status()
         self._set_progress()
         self._on_play_changed()
+
+        self._main_stack.set_visible_child_name("book_overview")
+        self._toolbar_revealer.set_reveal_child(False)
 
     def _on_play_changed(self):
         playing = self._view_model.playing

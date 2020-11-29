@@ -80,7 +80,6 @@ class AppController(metaclass=Singleton):
 
     def open_book(self, book: Book):
         self.book_detail_view_model.book = book
-        self.main_window.jump_to_book(book.db_object)
 
     def open_library(self):
         self.library_view_model.open_library()
