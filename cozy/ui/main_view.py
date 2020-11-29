@@ -15,6 +15,7 @@ from threading import Thread
 
 from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
+from cozy.open_view import OpenView
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
@@ -428,7 +429,7 @@ class CozyUI(EventSender, metaclass=Singleton):
             self.scan(None, None)
 
     def back(self, action, parameter):
-        self.__on_back_clicked(None)
+        self.emit_event("open_view", OpenView.LIBRARY)
 
     def refresh_content(self):
         """
