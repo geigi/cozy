@@ -348,6 +348,23 @@ def rewind(seconds):
     save_current_track_position(seek)
 
 
+def fast_forward(seconds):
+    """
+    Seek seconds back in time. Caps at 0 seconds.
+    :param seconds: time in seconds
+    """
+    global __player
+    duration = get_current_duration()
+    seek = duration + (seconds * 1000000000)
+    track_length = get_current_track().length * 1000000000
+    if seek > track_length:
+        seek = seek - track_length
+        next_track()
+    __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
+                  Gst.SeekType.SET, seek, Gst.SeekType.NONE, 0)
+    save_current_track_position(seek)
+
+
 def jump_to(seconds):
     """
     Jumps to the given second. Caps at 0 and the file length

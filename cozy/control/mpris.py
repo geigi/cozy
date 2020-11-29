@@ -66,6 +66,7 @@ class Server:
                 fd_list = msg.get_unix_fd_list()
                 args[i] = fd_list.get(args[i])
 
+        out_args = None
         try:
             result = getattr(self, method_name)(*args)
 
@@ -84,6 +85,8 @@ class Server:
             log.error(e)
             reporter.exception("mpris", e)
             reporter.error("mrpis", "MPRIS method call failed with method name: {}".format(method_name))
+            if out_args:
+                reporter.error("mrpis", "MPRIS method call failed with out_args: {}".format(out_args))
             invocation.return_value(None)
 
 
@@ -201,11 +204,11 @@ class MPRIS(Server):
 
     def Next(self):
         if get_current_track():
-            next_track()
+            fast_forward(30)
 
     def Previous(self):
         if get_current_track():
-            prev_track()
+            rewind(30)
 
     def Pause(self):
         if get_current_track():
