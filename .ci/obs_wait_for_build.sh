@@ -10,7 +10,7 @@ do
 	echo "Build(s) in progress."
 	sleep 5
 	echo $(osc r)
-	osc r | grep building
+	osc r | grep -E "building|scheduled"
 	builds_in_progress=$?
 	counter=$((counter+5))
 	if (( counter > 3600 )); then
