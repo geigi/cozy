@@ -1,0 +1,836 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.geigi.cozy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Panwar108 <caspian7pena@gmail.com>, 2020
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.geigi.cozy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-22 15:19+0100\n"
+"PO-Revision-Date: 2019-09-08 09:31+0000\n"
+"Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2020\n"
+"Language-Team: Hindi (https://www.transifex.com/geigi/teams/78138/hi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cozy/control/offline_cache.py:186
+msgid "Copying"
+msgstr "कॉपी करना जारी"
+
+#: cozy/control/sleep_timer.py:141 data/ui/timer_popover.ui:66
+msgid "min"
+msgstr "मिनट"
+
+#: cozy/control/sleep_timer.py:149
+msgid "Off"
+msgstr "बंद"
+
+#: cozy/tools.py:92 cozy/tools.py:96
+#, python-brace-format
+msgid "{hours} hour"
+msgid_plural "{hours} hours"
+msgstr[0] "{hours} घंटा"
+msgstr[1] "{hours} घंटे"
+
+#: cozy/tools.py:94 cozy/tools.py:98
+#, python-brace-format
+msgid "{minutes} minute"
+msgid_plural "{minutes} minutes"
+msgstr[0] "{minutes} मिनट"
+msgstr[1] "{minutes} मिनट"
+
+#: cozy/tools.py:100
+#, python-brace-format
+msgid "{seconds} second"
+msgid_plural "{seconds} seconds"
+msgstr[0] "{seconds} सेकंड"
+msgstr[1] "{seconds} सेकंड"
+
+#: cozy/tools.py:102
+msgid "finished"
+msgstr "पूर्ण"
+
+#: cozy/tools.py:126
+msgid "never"
+msgstr "कभी नहीं"
+
+#: cozy/tools.py:128
+msgid "today"
+msgstr "आज"
+
+#: cozy/tools.py:130
+msgid "yesterday"
+msgstr "बीता कल"
+
+#: cozy/tools.py:132
+#, python-format
+msgid "%s days ago"
+msgstr "%s दिन पूर्व"
+
+#: cozy/tools.py:134
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] "{weeks} सप्ताह पूर्व"
+msgstr[1] "{weeks} सप्ताह पूर्व"
+
+#: cozy/tools.py:136
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] "{months} माह पूर्व"
+msgstr[1] "{months} माह पूर्व"
+
+#: cozy/tools.py:138
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] "{years} वर्ष पूर्व"
+msgstr[1] "{years} वर्ष पूर्व"
+
+#: cozy/ui/album_element.py:63 cozy/ui/widgets/search_results.py:100
+msgid "Play this book"
+msgstr "यह पुस्तक आरंभ करें"
+
+#: cozy/ui/book_detail_view.py:215
+msgid "Downloaded"
+msgstr "डाउनलोड की गई"
+
+#: cozy/ui/book_detail_view.py:218 data/ui/book_detail.ui:152
+msgid "Download"
+msgstr "डाउनलोड"
+
+#: cozy/ui/book_element.py:37
+msgid "Open book overview"
+msgstr "पुस्तक अवलोकन खोलें"
+
+#: cozy/ui/book_element.py:38
+msgid "Currently offline"
+msgstr "ऑफलाइन"
+
+#: cozy/ui/book_element.py:121
+msgid "Mark as read"
+msgstr "श्रवण पूर्ण के रूप में चिन्हित करें"
+
+#: cozy/ui/book_element.py:124
+msgid "Open in file browser"
+msgstr "फाइल ब्राउज़र में खोलें"
+
+#: cozy/ui/book_element.py:127
+msgid "Remove from library"
+msgstr "संग्रह से हटाएँ"
+
+#: cozy/ui/disk_element.py:26
+msgid "Disc"
+msgstr "डिस्क"
+
+#: cozy/ui/file_not_found_dialog.py:69
+msgid "All files"
+msgstr "सभी फाइलें"
+
+#: cozy/ui/main_view.py:409
+msgid "Audiobooks"
+msgstr "ऑडियो पुस्तकें"
+
+#: cozy/ui/main_view.py:626
+msgid "Importing Audiobooks"
+msgstr "ऑडियो पुस्तक आयात जारी"
+
+#: cozy/ui/settings.py:87
+msgid "Feedback"
+msgstr "प्रतिक्रिया"
+
+#: cozy/ui/chapter_element.py:23
+msgid "Play this part"
+msgstr "यह खंड आरंभ करें"
+
+#: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
+#, python-brace-format
+msgid "{storage} is offline."
+msgstr "{storage} ऑफलाइन है।"
+
+#: cozy/ui/widgets/error_reporting.py:12
+msgid "Disabled"
+msgstr "निष्क्रिय"
+
+#: cozy/ui/widgets/error_reporting.py:13
+msgid "Basic error reporting"
+msgstr "त्रुटि हेतु सामान्य रिपोर्ट"
+
+#: cozy/ui/widgets/error_reporting.py:14
+msgid "Detailed error reporting"
+msgstr "त्रुटि हेतु विस्तृत रिपोर्ट"
+
+#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:173
+msgid "Detailed error reporting with import errors"
+msgstr "आयात त्रुटियों सहित विस्तृत रिपोर्ट"
+
+#: cozy/ui/widgets/error_reporting.py:19
+msgid "No error or crash reporting."
+msgstr "त्रुटि या निरस्त हेतु कोई रिपोर्ट नहीं।"
+
+#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:192
+msgid "The following information will be sent in case of an error or crash:"
+msgstr "कोई त्रुटि या निरस्त होने पर निम्नलिखित सूचना भेजी जाएगी :"
+
+#: cozy/ui/widgets/error_reporting.py:25
+msgid "Which type of error occurred"
+msgstr "त्रुटि प्रकार"
+
+#: cozy/ui/widgets/error_reporting.py:26
+msgid "Line of code where an error occurred"
+msgstr "त्रुटि संबंधी कोड की पंक्ति"
+
+#: cozy/ui/widgets/error_reporting.py:27
+msgid "Cozy's version"
+msgstr "Cozy संस्करण"
+
+#: cozy/ui/widgets/error_reporting.py:28
+msgid "Linux distribution"
+msgstr "लिनक्स वितरण"
+
+#: cozy/ui/widgets/error_reporting.py:29
+msgid "Desktop environment"
+msgstr "डेस्कटॉप वातावरण"
+
+#: cozy/ui/widgets/error_reporting.py:30
+msgid "Media type of files that Cozy couldn't import"
+msgstr "मीडिया फाइल प्रकार जिनका Cozy द्वारा आयात विफल रहा"
+
+#: cozy/ui/widgets/filter_list_box.py:20
+#: cozy/view_model/library_view_model.py:37
+#: cozy/view_model/library_view_model.py:131
+msgid "All"
+msgstr "सभी"
+
+#: cozy/ui/widgets/filter_list_box.py:21
+msgid "Display all books"
+msgstr "सभी पुस्तकें प्रदर्शित करें"
+
+#: cozy/ui/widgets/search_results.py:73
+msgid "Jump to author "
+msgstr "लेखक देखें"
+
+#: cozy/ui/widgets/search_results.py:76
+msgid "Jump to reader "
+msgstr "वाचक देखें"
+
+#: data/ui/about.ui:16
+msgid "GitHub"
+msgstr "GitHub"
+
+#: data/ui/book_detail.ui:200
+msgid "Remaining"
+msgstr "शेष"
+
+#: data/ui/book_detail.ui:255
+msgid "Total"
+msgstr "कुल"
+
+#: data/ui/book_detail.ui:271
+msgid "Last played"
+msgstr "अंतिम बार प्रयुक्त"
+
+#: data/ui/book_detail.ui:287
+msgid "Published"
+msgstr "प्रकाशित"
+
+#: data/ui/error_reporting.ui:23
+msgid "User feedback"
+msgstr "उपयोक्ता प्रतिक्रिया"
+
+#: data/ui/error_reporting.ui:66
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"You can help improve Cozy by contributing information in case of errors and "
+"crashes. "
+msgstr ""
+"आप त्रुटि या निरस्त संबंधी सूचना साझा कर Cozy के सॉफ्टवेयर विकास में योगदान "
+"कर सकते हैं।"
+
+#: data/ui/error_reporting.ui:80
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Contributing this information is optional and completely anonymous. We will "
+"never collect personal data, files you import or any information that could "
+"identify you."
+msgstr ""
+"सूचना सहभाजन प्रक्रिया वैकल्पिक व पूर्णतया आपकी निजता का सम्मान करती है। "
+"आपका निजी डेटा, आयात की गई फाइलें या विशिष्ट पहचान संबंधी सूचना कभी एकत्र "
+"नहीं होगी।"
+
+#: data/ui/error_reporting.ui:95
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Cozy is opensource and the user feedback source code can be inspected here: "
+msgstr ""
+"Cozy एक मुक्त-स्रोत सॉफ्टवेयर है व निरीक्षण हेतु उपयोक्ता प्रतिक्रिया स्रोत "
+"कोड यहाँ उपलब्ध है :"
+
+#: data/ui/file_not_found.ui:19
+msgid "Cancel"
+msgstr "रद्द करें"
+
+#: data/ui/file_not_found.ui:32
+msgid "Locate"
+msgstr "स्थान खोजें"
+
+#: data/ui/file_not_found.ui:86
+msgid "File not found"
+msgstr "फाइल नहीं मिली"
+
+#: data/ui/file_not_found.ui:119
+msgid "This file could not be found. Do you want to locate it manually?"
+msgstr "फाइल खोज विफल। क्या आप स्वयं फोल्डर में खोजना चाहते हैं?"
+
+#: data/ui/import_failed.ui:27
+msgid "Ok"
+msgstr "ठीक है"
+
+#: data/ui/import_failed.ui:81
+msgid "Some files could not be imported"
+msgstr "कुछ फाइलों का आयात विफल"
+
+#: data/ui/import_failed.ui:134
+msgid ""
+"This can have multiple reasons:\n"
+"- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
+"- The file(s) are no valid audio files\n"
+"- The file(s) are corrupt"
+msgstr ""
+"इसके कई कारण संभव हैं :\n"
+"- असमर्थित ऑडियो प्रारूप\n"
+"- फोल्डर पथ या फाइल नाम में यूटीएफ-8 अक्षर न होना\n"
+"- अमान्य ऑडियो फाइल\n"
+"- विकृत फाइल"
+
+#: data/ui/main_window.ui:72
+msgid "Rewind 30 seconds"
+msgstr "पिछले 30 सेकंड पुनः आरंभ करें"
+
+#: data/ui/main_window.ui:80
+msgid "Rewind button"
+msgstr "पुनः आरंभ बटन"
+
+#: data/ui/main_window.ui:81
+msgid "Jump back 30 seconds"
+msgstr "वर्तमान से 30 सेकंड पीछे जाएँ"
+
+#: data/ui/main_window.ui:98
+msgid "Start playback"
+msgstr "वाचक आरंभ करें"
+
+#: data/ui/main_window.ui:106
+msgid "Play/Pause Button"
+msgstr "आरंभ/रोकने हेतु बटन"
+
+#: data/ui/main_window.ui:107
+msgid "Start or pause the playback"
+msgstr "वाचक आरंभ करें व रोकें"
+
+#: data/ui/main_window.ui:124
+msgid "Volume control"
+msgstr "ध्वनि नियंत्रण"
+
+#: data/ui/main_window.ui:171
+msgid "Warnings"
+msgstr "चेतावनी"
+
+#: data/ui/main_window.ui:226
+msgid "Currently playing"
+msgstr "वर्तमान में चालू"
+
+#: data/ui/main_window.ui:244
+msgid "Booktitle"
+msgstr "पुस्तक शीर्षक"
+
+#: data/ui/main_window.ui:245
+msgid "Title of currently playing book"
+msgstr "वर्तमान में चालू पुस्तक का शीर्षक"
+
+#: data/ui/main_window.ui:270
+msgid "Part name"
+msgstr "खंड नाम"
+
+#: data/ui/main_window.ui:271
+msgid "Title of the currently playing part"
+msgstr "वर्तमान खंड का शीर्षक"
+
+#: data/ui/main_window.ui:313
+msgid "Elapsed time"
+msgstr "प्रयुक्त समय"
+
+#: data/ui/main_window.ui:321
+msgid "Time elapsed"
+msgstr "प्रयुक्त समय"
+
+#: data/ui/main_window.ui:322
+msgid "Elapsed time of current part"
+msgstr "वर्तमान खंड हेतु प्रयुक्त समय"
+
+#: data/ui/main_window.ui:337
+msgid "Jump to position in current chapter"
+msgstr "वर्तमान अध्याय में स्थिति देखें"
+
+#: data/ui/main_window.ui:343
+msgid "Position slider"
+msgstr "स्थिति परिवर्तन"
+
+#: data/ui/main_window.ui:344
+msgid "Position of the current part in seconds"
+msgstr "वर्तमान खंड स्थिति, सेकंड में"
+
+#: data/ui/main_window.ui:362
+msgid "Remaining time"
+msgstr "शेष समय"
+
+#: data/ui/main_window.ui:370
+msgid "Time remaining"
+msgstr "शेष समय"
+
+#: data/ui/main_window.ui:371
+msgid "Remaining time of current part"
+msgstr "वर्तमान खंड हेतु शेष समय"
+
+#: data/ui/main_window.ui:447
+msgid "Working…"
+msgstr "कार्य जारी है..."
+
+#: data/ui/main_window.ui:452
+msgid "Currently working"
+msgstr "वर्तमान में कार्यरत"
+
+#: data/ui/main_window.ui:468
+msgid "Playback speed"
+msgstr "वाचक गति"
+
+#: data/ui/main_window.ui:490 data/ui/settings.ui:727
+msgid "Sleep timer"
+msgstr "निद्रा टाइमर"
+
+#: data/ui/main_window.ui:501
+msgid "Timer menu button"
+msgstr "टाइमर मेन्यू बटन"
+
+#: data/ui/main_window.ui:502
+msgid "Open the sleep timer popover"
+msgstr "निद्रा टाइमर साधन खोलें"
+
+#: data/ui/main_window.ui:518
+msgid "Search your library"
+msgstr "संग्रह में खोजें"
+
+#: data/ui/main_window.ui:529
+msgid "Search menu button"
+msgstr "खोज मेन्यू बटन"
+
+#: data/ui/main_window.ui:530
+msgid "Open the search popover"
+msgstr "खोज साधन खोलें"
+
+#: data/ui/main_window.ui:544
+msgid "Options"
+msgstr "विकल्प"
+
+#: data/ui/main_window.ui:555
+msgid "Options menu button"
+msgstr "विकल्प मेन्यू बटन"
+
+#: data/ui/main_window.ui:556
+msgid "Open the options popover"
+msgstr "विकल्प मेन्यू खोलें"
+
+#: data/ui/main_window.ui:665
+msgid "Recent"
+msgstr "हालिया"
+
+#: data/ui/main_window.ui:685
+msgid "List of authors"
+msgstr "लेखक सूची"
+
+#: data/ui/main_window.ui:701 data/ui/main_window.ui:811
+#: data/ui/search_popover.ui:107
+msgid "Author"
+msgstr "लेखक"
+
+#: data/ui/main_window.ui:721
+msgid "List of readers"
+msgstr "वाचक सूची"
+
+#: data/ui/main_window.ui:737 data/ui/search_popover.ui:201
+msgid "Reader"
+msgstr "वाचक"
+
+#: data/ui/main_window.ui:791
+msgid "List of books"
+msgstr "पुस्तक सूची"
+
+#: data/ui/main_window.ui:827
+msgid "Importing your audiobooks…"
+msgstr "ऑडियो पुस्तक आयात जारी..."
+
+#: data/ui/main_window.ui:878
+msgid ""
+"Start exploring your library by switching to the Author or Reader view "
+"above."
+msgstr "शीर्ष से लेखक या वाचक दृश्य उपयोग कर संग्रह में देखें।"
+
+#: data/ui/main_window.ui:923
+msgid "Import your Audiobooks"
+msgstr "आपकी ऑडियो पुस्तकें आयात करें"
+
+#: data/ui/main_window.ui:939
+msgid ""
+"Cozy automatically imports your audiobooks in one directory - your library"
+msgstr ""
+"Cozy स्वतः ही आपकी ऑडियो पुस्तकों को एक डायरेक्टरी यानि संग्रह में आयात कर "
+"देता है"
+
+#: data/ui/main_window.ui:968
+msgid "External or Network drive?"
+msgstr "बाह्य या नेटवर्क ड्राइव?"
+
+#: data/ui/main_window.ui:991
+msgid "Are your audiobooks stored on an external or network drive?"
+msgstr "क्या आपकी ऑडियो पुस्तकें बाह्य या नेटवर्क ड्राइव पर संचित हैं?"
+
+#: data/ui/main_window.ui:1009
+msgid ""
+"If they are you can enable offline mode for a book in the book overview. "
+"This keeps a local copy of the book that you can listen to on the go"
+msgstr ""
+"पुस्तक अवलोकन द्वारा पुस्तक हेतु ऑफलाइन मोड सक्रिय करें। इससे पुस्तक की लोकल"
+" प्रतिलिपि संचित होगी जिसे आप कभी भी कहीं भी श्रवण कर सकते हैं"
+
+#: data/ui/main_window.ui:1043 data/ui/main_window.ui:1102
+msgid "Auto scan switch"
+msgstr "स्वतः स्कैन साधन"
+
+#: data/ui/main_window.ui:1044 data/ui/main_window.ui:1082
+#: data/ui/main_window.ui:1103
+msgid "Automatically import new audiobooks on startup"
+msgstr "आरंभ होने पर स्वतः ही नवीन ऑडियो पुस्तकें आयात करें"
+
+#: data/ui/main_window.ui:1146
+msgid "Drag & Drop"
+msgstr "माउस द्वारा ड्रैग"
+
+#: data/ui/main_window.ui:1163
+msgid "Drag your audiobooks into cozy and they will be automatically imported"
+msgstr ""
+"माउस द्वारा ऑडियो पुस्तकें Cozy में ड्रैग करें और वे स्वयं ही आयात हो जाएँगी"
+
+#: data/ui/main_window.ui:1186
+msgid "Location of your audiobooks"
+msgstr "आपकी ऑडियो पुस्तकों का स्थान"
+
+#: data/ui/main_window.ui:1207
+msgid "Set Audiobooks Directory"
+msgstr "ऑडियो पुस्तक हेतु डायरेक्टरी सेट करें"
+
+#: data/ui/main_window.ui:1230
+msgid "Load audiobooks from a directory, network drive or an external disk."
+msgstr ""
+"डायरेक्टरी, नेटवर्क ड्राइव या बाह्य ड्राइव के लोकल ऑडियो पुस्तकें लोड करें।"
+
+#: data/ui/main_window.ui:1248
+msgid "You can add more storage locations later in the settings"
+msgstr "सेटिंग्स द्वारा अन्य संचय स्थान जोड़ना भी संभव है"
+
+#: data/ui/search_popover.ui:24
+msgid "Search"
+msgstr "खोज"
+
+#: data/ui/search_popover.ui:36
+msgid "Search box"
+msgstr "खोज पट्टी"
+
+#: data/ui/search_popover.ui:37
+msgid "Search your audiobook library"
+msgstr "अपने ऑडियो पुस्तक संग्रह में खोजें"
+
+#: data/ui/search_popover.ui:67
+msgid "Which book are you looking for?"
+msgstr "आप कौन सी पुस्तक खोज रहे हैं?"
+
+#: data/ui/search_popover.ui:154
+msgid "Book"
+msgstr "पुस्तक"
+
+#: data/ui/search_popover.ui:248
+msgid "Part"
+msgstr "खंड"
+
+#: data/ui/search_popover.ui:295
+msgid "Nothing found :("
+msgstr "कोई परिणाम नहीं :("
+
+#: data/ui/settings.ui:95 data/ui/settings.ui:366
+msgid "General"
+msgstr "सामान्य"
+
+#: data/ui/settings.ui:140
+msgid "Dark Mode"
+msgstr "डार्क मोड"
+
+#: data/ui/settings.ui:216
+msgid "Titlebar"
+msgstr "शीर्षक पट्टी"
+
+#: data/ui/settings.ui:261
+msgid "Display the whole book instead of the current chapter"
+msgstr "वर्तमान अध्याय के स्थान पर पूर्ण पुस्तक प्रदर्शित करें"
+
+#: data/ui/settings.ui:324
+msgid "Appearance"
+msgstr "स्वरूप"
+
+#: data/ui/settings.ui:409
+msgid "Suspend system on timer"
+msgstr "टाइमर अवधि पूर्ण होने पर सिस्टम सुप्त करें"
+
+#: data/ui/settings.ui:469
+msgid "Replay 30 seconds"
+msgstr "पिछले 30 सेकंड पुनः चलाएँ"
+
+#: data/ui/settings.ui:529
+msgid "Automatic media scan"
+msgstr "स्वतः मीडिया स्कैन"
+
+#: data/ui/settings.ui:588
+msgid "Tags"
+msgstr "उपनाम"
+
+#: data/ui/settings.ui:640
+msgid "Swap author and reader"
+msgstr "लेखक व वाचक को एक-दूसरे से बदलें"
+
+#: data/ui/settings.ui:653
+msgid "Activate this if author and reader are displayed the wrong way"
+msgstr "लेखक व वाचक के अनुचित नाम प्रदर्शित होने पर इसे सक्रिय करें"
+
+#: data/ui/settings.ui:678
+msgid "switch author and reader assignment"
+msgstr "लेखक व वाचक को आपस में बदलें"
+
+#: data/ui/settings.ui:772
+msgid "Fadeout"
+msgstr "मंद अदृश्य"
+
+#: data/ui/settings.ui:834
+msgid "Fadeout duration"
+msgstr "मंद अदृश्य अवधि"
+
+#: data/ui/settings.ui:915
+msgid "Behaviour"
+msgstr "व्यवहार"
+
+#: data/ui/settings.ui:942
+msgid "Artwork"
+msgstr "पुस्तक कवर"
+
+#: data/ui/settings.ui:994
+msgid "Prefer external images over embedded cover"
+msgstr "संलग्न कवर के स्थान पर बाह्य कवर उपयोग करें"
+
+#: data/ui/settings.ui:1007
+msgid "Use images (cover.jpg, *.png, …) when available"
+msgstr "उपलब्ध होने पर चित्र (cover.jpg, *.png) उपयोग करें"
+
+#: data/ui/settings.ui:1090
+msgid "Audio books location"
+msgstr "ऑडियो पुस्तक फोल्डर स्थान"
+
+#: data/ui/settings.ui:1106
+msgid "Storage locations"
+msgstr "संचय स्थान"
+
+#: data/ui/settings.ui:1164
+msgid "Add location"
+msgstr "स्थान जोड़ें"
+
+#: data/ui/settings.ui:1189 data/ui/settings.ui:1385
+msgid "Remove location"
+msgstr "स्थान हटाएँ"
+
+#: data/ui/settings.ui:1225
+msgid "Toggle this storage location to be internal/external."
+msgstr "यह संचय स्थान बाह्य/आंतरिक सेट करें।"
+
+#: data/ui/settings.ui:1251
+msgid "Set as default storage location for new audiobooks"
+msgstr "नवीन ऑडियो पुस्तकों हेतु डिफ़ॉल्ट संचय स्थान के रूप में सेट करें"
+
+#: data/ui/settings.ui:1304
+msgid "Ignore list"
+msgstr "अपवर्जन सूची"
+
+#: data/ui/settings.ui:1348
+msgid "Path"
+msgstr "फोल्डर पथ"
+
+#: data/ui/settings.ui:1431
+msgid "Follow symlinks"
+msgstr "Symlinks उपयोग करें "
+
+#: data/ui/settings.ui:1463
+msgid "Storage"
+msgstr "संचय"
+
+#: data/ui/settings.ui:1487
+msgid "Database"
+msgstr "डेटाबेस"
+
+#: data/ui/settings.ui:1539
+msgid "Force refresh the database"
+msgstr "डेटाबेस रिफ्रेश हेतु बाध्य करें"
+
+#: data/ui/settings.ui:1552
+msgid "This will force update the metadata of all imported books"
+msgstr "इससे आयात की गई सभी ऑडियो पुस्तकों का मेटाडेटा अपडेट होगा"
+
+#: data/ui/settings.ui:1572
+msgid "Force refresh"
+msgstr "रिफ्रेश हेतु बाध्य करें"
+
+#: data/ui/settings.ui:1628
+msgid "Advanced"
+msgstr "विस्तृत"
+
+#: data/ui/timer_popover.ui:37
+msgid "Timer duration"
+msgstr "टाइमर अवधि"
+
+#: data/ui/timer_popover.ui:49
+msgid "Timer duration slider"
+msgstr "टाइमर अवधि परिवर्तन"
+
+#: data/ui/timer_popover.ui:50
+msgid "Set the sleep timer duration in minutes"
+msgstr "निद्रा टाइमर हेतु अवधि मिनट में सेट करें"
+
+#: data/ui/timer_popover.ui:116
+msgid "Stop after current chapter"
+msgstr "वर्तमान अध्याय के उपरांत रोकें"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr "सिस्टम ऊर्जा नियंत्रण सक्रिय करें"
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+"टाइमर समापन उपरांत कार्य।\n"
+"\"बंद करें\" यानी कंप्यूटर बंद करना (अन्य नाम - ऊर्चा बंद करना)\n"
+"\"सुप्त करें\" यानी कंप्यूटर सुप्त करना (अन्य नाम - स्थगित करना)।"
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+"सिस्टम ऊर्जा कार्य\n"
+"जो निष्पादित होगा"
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr "सुप्त करें"
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr "बंद करें"
+
+#: data/ui/titlebar_menu.ui:7
+msgid "_Scan Library"
+msgstr "संग्रह स्कैन करें (_S)"
+
+#: data/ui/titlebar_menu.ui:13
+msgid "_Hide unavailable books"
+msgstr "अनुपलब्ध पुस्तकें अदृश्य करें (_H)"
+
+#: data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
+msgstr "सेटिंग्स (_P)"
+
+#: data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr "सहायता (_H)"
+
+#: data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr "बारे में (_A)"
+
+#: data/ui/titlebar_menu.ui:33
+msgid "_Quit"
+msgstr "बंद करें (_Q)"
+
+#: data/ui/whats_new.ui:8
+msgid "Whats new?"
+msgstr "नया क्या है?"
+
+#: data/ui/whats_new.ui:21
+msgid "Continue"
+msgstr "जारी रखें"
+
+#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
+msgid "What's new  in Cozy"
+msgstr "Cozy में नया क्या है?"
+
+#: data/ui/whats_new_importer.ui:52
+msgid "A completely rewritten and far more reliable media importer."
+msgstr "पूर्णतया नवीन रचित व श्रेष्ठतर विश्वसनीय मीडिया आयात साधन।"
+
+#: data/ui/whats_new_importer.ui:77
+msgid ""
+"Did you experience audio files that couldn't be imported? Drag & Drop those "
+"files onto Cozy or use the application menu in the titlebar to rescan your "
+"audiobook directories!"
+msgstr ""
+"क्या ऑडियो पुस्तकों का आयात विफल रहा? इच्छित फाइलें माउस द्वारा Cozy में "
+"ड्रैग करें या शीर्षक पट्टी की अनुप्रयोग मेन्यू से ऑडियो पुस्तक डायरेक्टरी "
+"पुनः स्कैन करें।"
+
+#: data/ui/whats_new_importer.ui:92
+msgid "Supported media files currently are mp3, m4a, flac, ogg, opus and wav."
+msgstr ""
+"वर्तमान में समर्थित मीडिया फाइल प्रारूप mp3, m4a, flac, ogg, opus व wav हैं।"
+
+#: data/ui/whats_new_importer.ui:107
+msgid "More to come in a later update."
+msgstr "आगामी अपडेट में और भी सम्मिलित होंगे।"
+
+#: data/ui/whats_new_m4b.ui:52
+msgid "Basic support for m4b audio books."
+msgstr "m4b ऑडियो पुस्तकों हेतु सामान्य समर्थन।"
+
+#: data/ui/whats_new_m4b.ui:77
+msgid ""
+"Many of you have been waiting for it: Support for m4b audio books! This "
+"version features basic support for m4b files without chapter support."
+msgstr ""
+"बहुचर्चित विशेषता : m4b ऑडियो पुस्तक समर्थन। इस संस्करण में m4b फाइलों हेतु "
+"अध्याय रहित सामान्य समर्थन सम्मिलित है।"
+
+#: data/ui/whats_new_m4b.ui:92
+msgid ""
+"Drag & Drop your m4b files onto Cozy or use the application menu in the "
+"titlebar to rescan your audiobook directories."
+msgstr ""
+"m4b फाइलें माउस द्वारा Cozy में ड्रैग करें या शीर्षक पट्टी की अनुप्रयोग "
+"मेन्यू से ऑडियो पुस्तक डायरेक्टरी पुनः स्कैन करें।"
+
+#: data/ui/whats_new_m4b.ui:107
+msgid "Chapter support will follow in a later update. Stay tuned!"
+msgstr "अध्याय समर्थन भावी अपडेट में सम्मिलित होगा। परियोजना से जुड़े रहें!"
