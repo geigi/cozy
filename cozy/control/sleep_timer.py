@@ -132,7 +132,7 @@ class SleepTimer:
         value = adjustment.get_value()
 
         if value > 0:
-            if not self.sleep_timer or not self.sleep_timer.isAlive():
+            if not self.sleep_timer or not self.sleep_timer.is_alive():
                 self.set_icon(True)
                 if player.get_gst_player_state() == Gst.State.PLAYING:
                     self.start(force=True)
@@ -150,7 +150,7 @@ class SleepTimer:
             self.timer_label.set_visible(False)
             return
 
-        if self.sleep_timer and not self.sleep_timer.isAlive:
+        if self.sleep_timer and not self.sleep_timer.is_alive():
             self._app_settings.timer = int(value)
 
         text = str(int(value))
@@ -196,7 +196,7 @@ class SleepTimer:
         """
         self.timer_grid.set_sensitive(not state)
         if state:
-            if self.sleep_timer and self.sleep_timer.isAlive():
+            if self.sleep_timer and self.sleep_timer.is_alive():
                 self.sleep_timer.stop()
 
             self.set_icon(True)
