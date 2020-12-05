@@ -76,7 +76,7 @@ class Server:
             result = (result,)
 
             out_args = self.method_outargs[method_name]
-            if out_args and out_args != "()" and result:
+            if out_args and out_args != "()" and result[0]:
                 variant = GLib.Variant(out_args, result)
                 invocation.return_value(variant)
             else:
@@ -268,6 +268,9 @@ class MPRIS(Server):
         elif property_name in ["CanGoNext", "CanGoPrevious",
                                "CanPlay", "CanPause"]:
             return GLib.Variant("b", get_current_track() is not None)
+        else:
+            reporter.warning("mpris", "MPRIS required an unknown information: {}".format(property_name))
+            return None
 
     def GetAll(self, interface):
         ret = {}
