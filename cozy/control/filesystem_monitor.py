@@ -101,6 +101,7 @@ class FilesystemMonitor(EventSender):
         mount_path = mount.get_root().get_path()
 
         if not mount_path:
+            log.warning("Mount added but no mount_path is present. Skipping...")
             return
 
         log.debug("Volume mounted: " + mount_path)
@@ -117,6 +118,11 @@ class FilesystemMonitor(EventSender):
         Enable offline mode for this volume.
         """
         mount_path = mount.get_root().get_path()
+
+        if not mount_path:
+            log.warning("Mount removed but no mount_path is present. Skipping...")
+            return
+
         log.debug("Volume unmounted: " + mount_path)
 
         storage = next((s for s in self.external_storage if mount_path in s.storage.path), None)
