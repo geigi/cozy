@@ -135,6 +135,7 @@ To the contributors on GitHub:
 - meisenzahl
 - naglis
 - oleg-krv
+- phpwutz
 - umeboshi2
 - worldofpeace
 
