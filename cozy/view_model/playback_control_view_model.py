@@ -21,6 +21,10 @@ class PlaybackControlViewModel(Observable, EventSender):
 
     @property
     def book(self) -> Optional[Book]:
+        if self._book:
+            self._book.remove_bind("playback_speed", self._on_playback_speed_changed)
+
+        self._book.bind_to("playback_speed", self._on_playback_speed_changed)
         return self._book
 
     @property
@@ -35,7 +39,7 @@ class PlaybackControlViewModel(Observable, EventSender):
         if not self._player.loaded_book:
             return None
 
-        return self._player.position / 1000000000
+        return self._player.position / 1000000000 / self._book.playback_speed
 
     @position.setter
     def position(self, new_value: int):
@@ -46,7 +50,7 @@ class PlaybackControlViewModel(Observable, EventSender):
         if not self._player.loaded_book:
             return None
 
-        return self._player.loaded_book.current_chapter.length
+        return self._player.loaded_book.current_chapter.length / self._book.playback_speed
 
     @property
     def lock_ui(self) -> bool:
@@ -90,3 +94,7 @@ class PlaybackControlViewModel(Observable, EventSender):
                 self._notify("volume")
             else:
                 self.lock_ui = True
+
+    def _on_playback_speed_changed(self):
+        self._notify("position")
+        self._notify("length")
