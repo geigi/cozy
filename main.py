@@ -82,16 +82,11 @@ def extend_classes():
     extend_gtk_container()
 
 
-def init_custom_widgets():
-    FilterListBox()
-
-
 def main():
     __on_command_line()
     print(sys.argv)
 
     extend_classes()
-    init_custom_widgets()
 
     listen()
 

@@ -40,7 +40,8 @@ class SearchView:
         self.reader_separator = self.builder.get_object("reader_separator")
         self.stack = self.builder.get_object("search_stack")
 
-        self.search_button.set_popover(self.popover)
+        # TODO: Fix!!
+        #self.search_button.set_popover(self.popover)
         self.entry.connect("search-changed", self.__on_search_changed)
 
         if Gtk.get_minor_version() > 20:

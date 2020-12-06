@@ -116,6 +116,7 @@ class Player(EventSender):
             book = self.loaded_book
             if book and message:
                 book.position = message.id
+            message = book
         if event == "book-finished":
             book = self.loaded_book
             if book:
