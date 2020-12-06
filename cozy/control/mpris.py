@@ -84,9 +84,9 @@ class Server:
         except Exception as e:
             log.error(e)
             reporter.exception("mpris", e)
-            reporter.error("mrpis", "MPRIS method call failed with method name: {}".format(method_name))
+            reporter.error("mpris", "MPRIS method call failed with method name: {}".format(method_name))
             if out_args:
-                reporter.error("mrpis", "MPRIS method call failed with out_args: {}".format(out_args))
+                reporter.error("mpris", "MPRIS method call failed with out_args: {}".format(out_args))
             invocation.return_value(None)
 
 
