@@ -37,6 +37,10 @@ class PlaybackControlViewModel(Observable, EventSender):
 
         return self._player.position / 1000000000
 
+    @position.setter
+    def position(self, new_value: int):
+        self._player.position = new_value
+
     @property
     def length(self) -> Optional[float]:
         if not self._player.loaded_book:
@@ -52,6 +56,20 @@ class PlaybackControlViewModel(Observable, EventSender):
     def lock_ui(self, new_value: bool):
         self._lock_ui = new_value
         self._notify("lock_ui")
+
+    @property
+    def volume(self) -> float:
+        return self._player.volume
+
+    @volume.setter
+    def volume(self, new_value: float):
+        self._player.volume = new_value
+
+    def play_pause(self):
+        self._player.play_pause()
+
+    def rewind(self):
+        self._player.rewind()
 
     def _on_player_event(self, event, message):
         if event == "play" or event == "pause":
@@ -69,5 +87,6 @@ class PlaybackControlViewModel(Observable, EventSender):
                 self._notify("book")
                 self._notify("position")
                 self._notify("length")
+                self._notify("volume")
             else:
                 self.lock_ui = True

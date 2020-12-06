@@ -1,4 +1,5 @@
 import gi
+from gi.repository import GObject, Gdk
 
 from cozy.control.string_representation import seconds_to_str
 
@@ -19,7 +20,7 @@ class SeekBar(Gtk.Box):
         super().__init__(**kwargs)
 
         self._position: int = 0
-        self.progress_scale_pressed = False
+        self._progress_scale_pressed = False
 
         self.progress_scale.connect("value-changed", self._on_progress_scale_changed)
         self.progress_scale.connect("button-release-event", self._on_progress_scale_clicked)
@@ -32,7 +33,8 @@ class SeekBar(Gtk.Box):
 
     @position.setter
     def position(self, new_value: float):
-        self.progress_scale.set_value(new_value)
+        if not self._progress_scale_pressed:
+            self.progress_scale.set_value(new_value)
 
     @property
     def length(self) -> float:
@@ -63,12 +65,24 @@ class SeekBar(Gtk.Box):
         self.remaining_label.set_markup("<tt><b>-" + remaining_text + "</b></tt>")
 
     def _on_progress_scale_clicked(self, _, __):
-        pass
+        self._progress_scale_pressed = False
+        value = self.progress_scale.get_value()
+        self.emit("position-changed", value)
 
-    def _on_progress_key_pressed(self, _, __):
-        pass
+    def _on_progress_key_pressed(self, _, event):
+        if event.keyval == Gdk.KEY_Up or event.keyval == Gdk.KEY_Left:
+            self.position = max(self.position - 30, 0)
+            self.emit("position-changed", self.position)
+        elif event.keyval == Gdk.KEY_Down or event.keyval == Gdk.KEY_Right:
+            max_value = self.progress_scale.get_adjustment().get_upper()
+            self.position = min(self.position + 30, max_value)
+            self.emit("position-changed", self.position)
 
     def _on_progress_scale_press(self, _, __):
-        self.progress_scale_pressed = True
+        self._progress_scale_pressed = True
 
         return False
+
+
+GObject.signal_new('position-changed', SeekBar, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
+                   (GObject.TYPE_PYOBJECT,))

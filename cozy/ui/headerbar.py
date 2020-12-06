@@ -51,6 +51,7 @@ class Headerbar(Gtk.HeaderBar):
         self._headerbar_view_model: HeaderbarViewModel = inject.instance(HeaderbarViewModel)
         self._artwork_cache: ArtworkCache = inject.instance(ArtworkCache)
         self._connect_view_model()
+        self._connect_widgets()
 
     def _connect_view_model(self):
         self._playback_control_view_model.bind_to("book", self._on_book_changed)
@@ -58,7 +59,14 @@ class Headerbar(Gtk.HeaderBar):
         self._playback_control_view_model.bind_to("length", self._on_length_changed)
         self._playback_control_view_model.bind_to("position", self._on_position_changed)
         self._playback_control_view_model.bind_to("lock_ui", self._on_lock_ui_changed)
+        self._playback_control_view_model.bind_to("volume", self._on_volume_changed)
         self._headerbar_view_model.bind_to("lock_ui", self._on_headerbar_lock_ui_changed)
+
+    def _connect_widgets(self):
+        self.play_button.connect("clicked", self._play_clicked)
+        self.prev_button.connect("clicked", self._rewind_clicked)
+        self.volume_button.connect("value-changed", self._on_volume_button_changed)
+        self.seek_bar.connect("position-changed", self._on_seek_bar_position_changed)
 
     def _set_cover_image(self, book: Book):
         pixbuf = self._artwork_cache.get_cover_pixbuf(book.db_object, self.get_scale_factor(), 40)
@@ -76,7 +84,7 @@ class Headerbar(Gtk.HeaderBar):
 
         self._set_cover_image(book)
         self.title_label.set_text(book.name)
-        self.subtitle_label.set_text(book.author)
+        self.subtitle_label.set_text(book.current_chapter.name)
 
     def _on_play_changed(self):
         playing = self._playback_control_view_model.playing
@@ -101,3 +109,18 @@ class Headerbar(Gtk.HeaderBar):
 
     def _on_headerbar_lock_ui_changed(self):
         sensitive = not self._headerbar_view_model.lock_ui
+
+    def _on_volume_changed(self):
+        self.volume_button.set_value(self._playback_control_view_model.volume)
+
+    def _play_clicked(self, _):
+        self._playback_control_view_model.play_pause()
+
+    def _rewind_clicked(self, _):
+        self._playback_control_view_model.rewind()
+
+    def _on_volume_button_changed(self, _, volume):
+        self._playback_control_view_model.volume = volume
+
+    def _on_seek_bar_position_changed(self, _, position):
+        self._playback_control_view_model.position = position

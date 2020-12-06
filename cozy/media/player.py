@@ -65,6 +65,22 @@ class Player(EventSender):
     def position(self) -> int:
         return player.get_current_duration()
 
+    @position.setter
+    def position(self, new_value: int):
+        player.jump_to(new_value)
+
+    @property
+    def volume(self) -> float:
+        return player.get_volume()
+
+    @volume.setter
+    def volume(self, new_value: float):
+        player.set_volume(new_value)
+        self._app_settings.volume = new_value
+
+    def play_pause(self):
+        player.play_pause(None)
+
     def play_pause_book(self, book: Book):
         if not book:
             log.error("Cannot play book which is None.")
@@ -116,6 +132,7 @@ class Player(EventSender):
             book = self.loaded_book
             if book and message:
                 book.position = message.id
+                self.volume = self._app_settings.volume
             message = book
         if event == "book-finished":
             book = self.loaded_book

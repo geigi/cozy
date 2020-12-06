@@ -130,7 +130,6 @@ audio-volume-medium-symbolic</property>
         </child>
         <child>
           <object class="GtkMenuButton" id="warnings_button">
-            <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="tooltip_text" translatable="yes">Warnings</property>
