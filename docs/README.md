@@ -78,6 +78,7 @@ To the contributors on GitHub:
 - elya5
 - foliva
 - grenade
+- jimmac
 - jnbr
 - kaphula
 - leuc
