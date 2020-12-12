@@ -7,16 +7,16 @@
     <property name="can_focus">False</property>
     <property name="valign">center</property>
     <property name="hexpand">True</property>
+    <property name="spacing">5</property>
     <child>
       <object class="GtkLabel" id="current_label">
-        <property name="width_request">35</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Elapsed time</property>
         <property name="halign">end</property>
         <property name="valign">center</property>
         <property name="margin_top">2</property>
-        <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
+        <property name="label">&lt;span font_features='tnum'&gt;--:--&lt;/span&gt;</property>
         <property name="use_markup">True</property>
         <child internal-child="accessible">
           <object class="AtkObject" id="current_label-atkobject">
@@ -65,13 +65,12 @@
         <property name="valign">center</property>
         <child>
           <object class="GtkLabel" id="remaining_label">
-            <property name="width_request">35</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="tooltip_text" translatable="yes">Remaining time</property>
             <property name="halign">start</property>
             <property name="margin_top">2</property>
-            <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
+            <property name="label">&lt;span font_features='tnum'&gt;--:--&lt;/span&gt;</property>
             <property name="use_markup">True</property>
             <child internal-child="accessible">
               <object class="AtkObject" id="remaining_label-atkobject">

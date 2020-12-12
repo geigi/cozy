@@ -60,9 +60,8 @@ class SeekBar(Gtk.Box):
         remaining_secs: int = int(total - position)
         current_text = seconds_to_str(position, total)
         remaining_text = seconds_to_str(remaining_secs, total)
-
-        self.current_label.set_markup("<tt><b>" + current_text + "</b></tt>")
-        self.remaining_label.set_markup("<tt><b>-" + remaining_text + "</b></tt>")
+        self.current_label.set_markup("<span font_features='tnum'>" + current_text + "</span>")
+        self.remaining_label.set_markup("<span font_features='tnum'>-" + remaining_text + "</span>")
 
     def _on_progress_scale_clicked(self, _, __):
         self._progress_scale_pressed = False
