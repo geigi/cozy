@@ -18,6 +18,7 @@
         <property name="margin_top">2</property>
         <property name="label">&lt;span font_features='tnum'&gt;--:--&lt;/span&gt;</property>
         <property name="use_markup">True</property>
+        <property name="single_line_mode">True</property>
         <child internal-child="accessible">
           <object class="AtkObject" id="current_label-atkobject">
             <property name="AtkObject::accessible-name" translatable="yes">Time elapsed</property>
@@ -72,6 +73,7 @@
             <property name="margin_top">2</property>
             <property name="label">&lt;span font_features='tnum'&gt;--:--&lt;/span&gt;</property>
             <property name="use_markup">True</property>
+            <property name="single_line_mode">True</property>
             <child internal-child="accessible">
               <object class="AtkObject" id="remaining_label-atkobject">
                 <property name="AtkObject::accessible-name" translatable="yes">Time remaining</property>

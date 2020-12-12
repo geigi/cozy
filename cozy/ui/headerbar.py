@@ -15,6 +15,8 @@ from gi.repository import Gtk, Gdk
 
 log = logging.getLogger("Headerbar")
 
+COVER_SIZE = 45
+
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/headerbar.ui')
 class Headerbar(Gtk.HeaderBar):
@@ -69,13 +71,13 @@ class Headerbar(Gtk.HeaderBar):
         self.seek_bar.connect("position-changed", self._on_seek_bar_position_changed)
 
     def _set_cover_image(self, book: Book):
-        pixbuf = self._artwork_cache.get_cover_pixbuf(book.db_object, self.get_scale_factor(), 40)
+        pixbuf = self._artwork_cache.get_cover_pixbuf(book.db_object, self.get_scale_factor(), COVER_SIZE)
         if pixbuf:
             surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.get_scale_factor(), None)
             self.cover_img.set_from_surface(surface)
         else:
             self.cover_img.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
-            self.cover_img.props.pixel_size = 40
+            self.cover_img.props.pixel_size = COVER_SIZE
 
     def _on_book_changed(self):
         book = self._playback_control_view_model.book

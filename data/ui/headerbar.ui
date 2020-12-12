@@ -22,7 +22,7 @@
         <property name="can_focus">False</property>
         <property name="halign">start</property>
         <property name="hexpand">True</property>
-        <property name="spacing">3</property>
+        <property name="spacing">6</property>
         <child>
           <object class="GtkBox" id="control_box">
             <property name="visible">True</property>
@@ -95,44 +95,6 @@
                 <property name="position">0</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkVolumeButton" id="volume_button">
-                <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="focus_on_click">False</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Volume control</property>
-                <property name="size">button</property>
-                <property name="icons">audio-volume-muted-symbolic
-audio-volume-high-symbolic
-audio-volume-low-symbolic
-audio-volume-medium-symbolic</property>
-                <child internal-child="plus_button">
-                  <object class="GtkButton">
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="relief">none</property>
-                  </object>
-                </child>
-                <child internal-child="minus_button">
-                  <object class="GtkButton">
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="relief">none</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -163,29 +125,13 @@ audio-volume-medium-symbolic</property>
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="cover_img_box">
-            <property name="width_request">40</property>
-            <property name="height_request">40</property>
+          <object class="GtkImage" id="cover_img">
+            <property name="width_request">45</property>
+            <property name="height_request">45</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="valign">center</property>
-            <property name="margin_top">2</property>
-            <property name="margin_bottom">2</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkImage" id="cover_img">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
+            <property name="halign">center</property>
+            <property name="valign">end</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -209,9 +155,8 @@ audio-volume-medium-symbolic</property>
                 <property name="can_focus">False</property>
                 <property name="valign">end</property>
                 <property name="vexpand">True</property>
-                <property name="justify">right</property>
                 <property name="ellipsize">end</property>
-                <property name="width_chars">10</property>
+                <property name="width_chars">7</property>
                 <property name="single_line_mode">True</property>
                 <child internal-child="accessible">
                   <object class="AtkObject" id="title_label-atkobject">
@@ -237,7 +182,7 @@ audio-volume-medium-symbolic</property>
                 <property name="valign">start</property>
                 <property name="vexpand">True</property>
                 <property name="ellipsize">end</property>
-                <property name="width_chars">10</property>
+                <property name="width_chars">7</property>
                 <property name="single_line_mode">True</property>
                 <child internal-child="accessible">
                   <object class="AtkObject" id="subtitle_label-atkobject">
@@ -338,7 +283,6 @@ audio-volume-medium-symbolic</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="valign">center</property>
-        <property name="margin_left">5</property>
         <property name="vexpand">True</property>
         <property name="spacing">3</property>
         <child>
@@ -355,6 +299,44 @@ audio-volume-medium-symbolic</property>
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkVolumeButton" id="volume_button">
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can_focus">True</property>
+            <property name="focus_on_click">False</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Volume control</property>
+            <property name="size">button</property>
+            <property name="icons">audio-volume-muted-symbolic
+audio-volume-high-symbolic
+audio-volume-low-symbolic
+audio-volume-medium-symbolic</property>
+            <child internal-child="plus_button">
+              <object class="GtkButton">
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="relief">none</property>
+              </object>
+            </child>
+            <child internal-child="minus_button">
+              <object class="GtkButton">
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="relief">none</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
@@ -375,7 +357,7 @@ audio-volume-medium-symbolic</property>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="position">2</property>
           </packing>
         </child>
         <child>
@@ -402,7 +384,7 @@ audio-volume-medium-symbolic</property>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">3</property>
           </packing>
         </child>
         <child>
@@ -429,7 +411,7 @@ audio-volume-medium-symbolic</property>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">3</property>
+            <property name="position">4</property>
           </packing>
         </child>
         <child>
@@ -456,7 +438,7 @@ audio-volume-medium-symbolic</property>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">4</property>
+            <property name="position">5</property>
           </packing>
         </child>
       </object>

@@ -39,18 +39,15 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="valign">start</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="HdyViewSwitcherBar" id="category_toolbar">
+                  <object class="HdyViewSwitcher" id="category_toolbar">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="policy">auto</property>
+                    <property name="halign">center</property>
+                    <property name="policy">wide</property>
                     <property name="stack">sort_stack</property>
-                    <property name="reveal">True</property>
-                    <style>
-                      <class name="sort_switcher_element"/>
-                      <class name="linked"/>
-                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -69,6 +66,9 @@
                     <property name="position">1</property>
                   </packing>
                 </child>
+                <style>
+                  <class name="no_border"/>
+                </style>
               </object>
             </child>
           </object>
