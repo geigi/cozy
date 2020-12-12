@@ -161,6 +161,7 @@ class MPRIS(Server):
             <property name="CanPause" type="b" access="read"/>
             <property name="CanSeek" type="b" access="read"/>
             <property name="CanControl" type="b" access="read"/>
+            <property name="Volume" type="d" access="readwrite"/>
         </interface>
     </node>
     """
@@ -268,6 +269,8 @@ class MPRIS(Server):
         elif property_name in ["CanGoNext", "CanGoPrevious",
                                "CanPlay", "CanPause"]:
             return GLib.Variant("b", get_current_track() is not None)
+        elif property_name == "Volume":
+            return GLib.Variant("d", get_volume())
         else:
             reporter.warning("mpris", "MPRIS required an unknown information: {}".format(property_name))
             return None
@@ -299,9 +302,8 @@ class MPRIS(Server):
         return ret
 
     def Set(self, interface, property_name, new_value):
-        # if property_name == "Volume":
-        #    Lp().player.set_volume(new_value)
-        pass
+        if property_name == "Volume":
+            set_volume(new_value)
 
     def PropertiesChanged(self, interface_name, changed_properties,
                           invalidated_properties):
