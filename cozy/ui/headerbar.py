@@ -12,6 +12,7 @@ from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
+from gi.repository.Handy import HeaderBar
 
 log = logging.getLogger("Headerbar")
 
@@ -19,7 +20,7 @@ COVER_SIZE = 45
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/headerbar.ui')
-class Headerbar(Gtk.HeaderBar):
+class Headerbar(HeaderBar):
     __gtype_name__ = "Headerbar"
 
     seek_bar: SeekBar = Gtk.Template.Child()

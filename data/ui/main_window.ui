@@ -22,6 +22,9 @@
         <child>
           <placeholder/>
         </child>
+        <child type="center">
+          <placeholder/>
+        </child>
       </object>
     </child>
     <child>

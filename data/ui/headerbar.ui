@@ -2,6 +2,7 @@
 <!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <requires lib="libhandy" version="0.0"/>
   <object class="GtkImage" id="play_img">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -12,10 +13,82 @@
     <property name="can_focus">False</property>
     <property name="icon_name">object-rotate-left-symbolic</property>
   </object>
-  <template class="Headerbar" parent="GtkHeaderBar">
+  <template class="Headerbar" parent="HdyHeaderBar">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="show_close_button">True</property>
+    <child type="title">
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_left">5</property>
+        <property name="margin_right">5</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkStack" id="status_stack">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="vexpand">True</property>
+            <property name="transition_type">slide-up-down</property>
+            <child>
+              <object class="SeekBar" id="seek_bar">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="name">playback</property>
+                <property name="title" translatable="yes">page0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel" id="status_label">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_bottom">5</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkProgressBar" id="update_progress_bar">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">working</property>
+                <property name="title" translatable="yes">page1</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="pack_type">end</property>
+      </packing>
+    </child>
     <child>
       <object class="GtkBox" id="mini_player">
         <property name="visible">True</property>
@@ -156,8 +229,8 @@
                 <property name="valign">end</property>
                 <property name="vexpand">True</property>
                 <property name="ellipsize">end</property>
-                <property name="width_chars">7</property>
                 <property name="single_line_mode">True</property>
+                <property name="xalign">0</property>
                 <child internal-child="accessible">
                   <object class="AtkObject" id="title_label-atkobject">
                     <property name="AtkObject::accessible-name" translatable="yes">Booktitle</property>
@@ -166,6 +239,7 @@
                 </child>
                 <style>
                   <class name="title"/>
+                  <class name="no_padding"/>
                 </style>
               </object>
               <packing>
@@ -182,8 +256,8 @@
                 <property name="valign">start</property>
                 <property name="vexpand">True</property>
                 <property name="ellipsize">end</property>
-                <property name="width_chars">7</property>
                 <property name="single_line_mode">True</property>
+                <property name="xalign">0</property>
                 <child internal-child="accessible">
                   <object class="AtkObject" id="subtitle_label-atkobject">
                     <property name="AtkObject::accessible-name" translatable="yes">Part name</property>
@@ -192,6 +266,7 @@
                 </child>
                 <style>
                   <class name="subtitle"/>
+                  <class name="no_padding"/>
                 </style>
               </object>
               <packing>
@@ -208,75 +283,6 @@
           </packing>
         </child>
       </object>
-    </child>
-    <child type="title">
-      <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkStack" id="status_stack">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="transition_type">slide-up-down</property>
-            <child>
-              <object class="SeekBar" id="seek_bar">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-              </object>
-              <packing>
-                <property name="name">playback</property>
-                <property name="title" translatable="yes">page0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel" id="status_label">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_bottom">5</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkProgressBar" id="update_progress_bar">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="hexpand">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="name">working</property>
-                <property name="title" translatable="yes">page1</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-      <packing>
-        <property name="pack_type">end</property>
-      </packing>
     </child>
     <child>
       <object class="GtkBox" id="tools_box">
