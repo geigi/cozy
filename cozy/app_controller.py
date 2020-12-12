@@ -33,12 +33,12 @@ from cozy.ui.settings import Settings as UISettings
 
 class AppController(metaclass=Singleton):
     def __init__(self, main_window_builder, main_window):
+        self.main_window: CozyUI = main_window
+        self.main_window_builder = main_window_builder
+
         inject.configure_once(self.configure_inject)
 
         reporter.info("main", "startup")
-
-        self.main_window: CozyUI = main_window
-        self.main_window_builder = main_window_builder
 
         self.whats_new_window: WhatsNewWindow = WhatsNewWindow()
 
@@ -59,9 +59,9 @@ class AppController(metaclass=Singleton):
 
         self.main_window.add_listener(self._on_main_window_event)
 
-    @staticmethod
-    def configure_inject(binder):
+    def configure_inject(self, binder):
         binder.bind_to_provider(SqliteDatabase, get_db)
+        binder.bind("MainWindow", self.main_window)
         binder.bind_to_constructor(Gio.Settings, lambda: Gio.Settings("com.github.geigi.cozy"))
         binder.bind_to_constructor(ApplicationSettings, lambda: ApplicationSettings())
         binder.bind_to_constructor(Settings, lambda: Settings())

@@ -5,6 +5,7 @@ import gi
 
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
+from cozy.ui.main_view import CozyUI
 from cozy.ui.widgets.error_reporting import ErrorReporting
 from cozy.ui.widgets.whats_new_importer import WhatsNewImporter
 from cozy.ui.widgets.whats_new_m4b import WhatsNewM4B, INTRODUCED
@@ -22,6 +23,7 @@ class WhatsNewWindow(Gtk.Window):
     continue_button: Gtk.Button = Gtk.Template.Child()
     children: List[Gtk.Widget]
 
+    main_window: CozyUI = inject.attr("MainWindow")
     app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
     page = 0
@@ -31,6 +33,8 @@ class WhatsNewWindow(Gtk.Window):
             return
 
         super().__init__(**kwargs)
+
+        self.set_modal(self.main_window.window)
 
         self._fill_window()
         if len(self.children) < 1:
