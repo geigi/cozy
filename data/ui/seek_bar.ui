@@ -15,7 +15,6 @@
         <property name="tooltip_text" translatable="yes">Elapsed time</property>
         <property name="halign">end</property>
         <property name="valign">center</property>
-        <property name="margin_top">2</property>
         <property name="label">&lt;span font_features='tnum'&gt;--:--&lt;/span&gt;</property>
         <property name="use_markup">True</property>
         <property name="single_line_mode">True</property>
@@ -70,7 +69,6 @@
             <property name="can_focus">False</property>
             <property name="tooltip_text" translatable="yes">Remaining time</property>
             <property name="halign">start</property>
-            <property name="margin_top">2</property>
             <property name="label">&lt;span font_features='tnum'&gt;--:--&lt;/span&gt;</property>
             <property name="use_markup">True</property>
             <property name="single_line_mode">True</property>
