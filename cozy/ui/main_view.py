@@ -19,7 +19,6 @@ from cozy.open_view import OpenView
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
-from cozy.control.sleep_timer import SleepTimer
 from cozy.ui.titlebar import Titlebar
 from cozy.ui.settings import Settings
 from cozy.architecture.singleton import Singleton

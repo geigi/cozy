@@ -52,6 +52,7 @@ class Headerbar(HeaderBar):
         self._playback_control_view_model: PlaybackControlViewModel = inject.instance(PlaybackControlViewModel)
         self._headerbar_view_model: HeaderbarViewModel = inject.instance(HeaderbarViewModel)
         self._artwork_cache: ArtworkCache = inject.instance(ArtworkCache)
+        self._init_app_menu()
         self._connect_view_model()
         self._connect_widgets()
 
@@ -69,6 +70,11 @@ class Headerbar(HeaderBar):
         self.prev_button.connect("clicked", self._rewind_clicked)
         self.volume_button.connect("value-changed", self._on_volume_button_changed)
         self.seek_bar.connect("position-changed", self._on_seek_bar_position_changed)
+
+    def _init_app_menu(self):
+        self.menu_builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/titlebar_menu.ui")
+        menu = self.menu_builder.get_object("titlebar_menu")
+        self.menu_button.set_menu_model(menu)
 
     def _set_cover_image(self, book: Book):
         pixbuf = self._artwork_cache.get_cover_pixbuf(book.db_object, self.get_scale_factor(), COVER_SIZE)
