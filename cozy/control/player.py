@@ -15,6 +15,7 @@ from cozy.report import reporter
 
 gi.require_version('Gst', '1.0')
 import logging
+
 log = logging.getLogger("player")
 
 from cozy.control.offline_cache import OfflineCache
@@ -462,7 +463,7 @@ def set_playback_speed(speed):
         return
 
     __playback_speed_timer_running = True
-    
+
     t = threading.Timer(0.2, __on_playback_speed_timer)
     t.name = "PlaybackSpeedDelayTimer"
     t.start()
@@ -478,6 +479,11 @@ def set_play_next(play_next):
     __play_next = play_next
 
 
+def get_play_next() -> bool:
+    global __play_next
+    return __play_next
+
+
 def __on_playback_speed_timer():
     """
     Get's called after the playback speed changer timer is over.
@@ -488,7 +494,7 @@ def __on_playback_speed_timer():
     position = get_current_duration(wait=True)
     __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH |
                   Gst.SeekFlags.ACCURATE, Gst.SeekType.SET, position, Gst.SeekType.NONE, 0)
-    
+
     __playback_speed_timer_running = False
 
 

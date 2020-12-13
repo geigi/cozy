@@ -29,6 +29,7 @@ from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.search_view_model import SearchViewModel
 from cozy.ui.settings import Settings as UISettings
+from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel
 
 
 class AppController(metaclass=Singleton):
@@ -51,6 +52,8 @@ class AppController(metaclass=Singleton):
         self.search_view_model = inject.instance(SearchViewModel)
         self.book_detail_view_model = inject.instance(BookDetailViewModel)
         self.playback_control_view_model = inject.instance(PlaybackControlViewModel)
+        self.sleep_timer_view_model = inject.instance(SleepTimerViewModel)
+        self.player = inject.instance(Player)
 
         self._connect_popovers()
 
@@ -80,6 +83,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(PlaybackControlViewModel, lambda: PlaybackControlViewModel())
         binder.bind_to_constructor(HeaderbarViewModel, lambda: HeaderbarViewModel())
         binder.bind_to_constructor(PlaybackSpeedViewModel, lambda: PlaybackSpeedViewModel())
+        binder.bind_to_constructor(SleepTimerViewModel, lambda: SleepTimerViewModel())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR
@@ -118,3 +122,7 @@ class AppController(metaclass=Singleton):
             self.playback_control_view_model.lock_ui = data
         if event == "open_view":
             self._on_open_view(data, None)
+
+    def quit(self):
+        self.sleep_timer_view_model.destroy()
+        self.player.destory()

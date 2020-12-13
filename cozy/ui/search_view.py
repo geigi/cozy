@@ -12,6 +12,8 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib
 
 
+# TODO: There is a lot of app logic in this class that should be in the view model.
+#  Ideally this class only retrieves lists of results from the view model and only handles displaying them.
 class SearchView:
     view_model = inject.attr(SearchViewModel)
 

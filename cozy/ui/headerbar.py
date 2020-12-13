@@ -7,6 +7,7 @@ from cozy.db.book import Book
 from cozy.ext import inject
 from cozy.ui.widgets.playback_speed_popover import PlaybackSpeedPopover
 from cozy.ui.widgets.seek_bar import SeekBar
+from cozy.ui.widgets.sleep_timer import SleepTimer
 from cozy.view_model.headerbar_view_model import HeaderbarViewModel
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 
@@ -38,6 +39,8 @@ class Headerbar(HeaderBar):
     search_button: Gtk.MenuButton = Gtk.Template.Child()
     menu_button: Gtk.MenuButton = Gtk.Template.Child()
 
+    timer_image: Gtk.Image = Gtk.Template.Child()
+
     play_img: Gtk.Image = Gtk.Template.Child()
 
     def __init__(self, main_window_builder: Gtk.Builder):
@@ -46,8 +49,10 @@ class Headerbar(HeaderBar):
         self._header_container: Gtk.Box = main_window_builder.get_object("header_container")
         self._header_container.add(self)
 
+        self.sleep_timer: SleepTimer = SleepTimer(self.timer_image)
         self.volume_button.get_style_context().remove_class("flat")
         self.playback_speed_button.set_popover(PlaybackSpeedPopover())
+        self.timer_button.set_popover(self.sleep_timer)
 
         self._playback_control_view_model: PlaybackControlViewModel = inject.instance(PlaybackControlViewModel)
         self._headerbar_view_model: HeaderbarViewModel = inject.instance(HeaderbarViewModel)

@@ -139,7 +139,7 @@ class Titlebar:
         self.ui.speed.add_listener(self.__on_playback_speed_changed)
 
         # attach popovers
-        self.timer_button.set_popover(self.ui.sleep_timer.get_popover())
+        self.timer_button.set_popover(self.ui._sleep_timer.get_popover())
         self.playback_speed_button.set_popover(self.ui.speed.get_popover())
         self.warnings = Warnings(self.warnings_button)
         self.warnings_button.set_popover(self.warnings.get_popover())

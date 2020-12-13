@@ -115,6 +115,11 @@ class Application(Gtk.Application):
 
         self.old_except_hook(exc_type, exc_value, exc_traceback)
 
+    def quit(self):
+        self.app_controller.quit()
+        super(Application, self).quit()
+
+
     @staticmethod
     def init_custom_widgets():
         FilterListBox()

@@ -1,5 +1,6 @@
 import logging
 import time
+from threading import Thread
 from typing import Optional
 
 from cozy.application_settings import ApplicationSettings
@@ -26,6 +27,7 @@ class Player(EventSender):
         player.add_player_listener(self._pass_legacy_player_events)
 
         self.play_status_updater: IntervalTimer = IntervalTimer(1, self._emit_tick)
+        self._fadeout_thread: Optional[Thread] = None
 
     @property
     def loaded_book(self) -> Optional[Book]:
@@ -78,6 +80,14 @@ class Player(EventSender):
         player.set_volume(new_value)
         self._app_settings.volume = new_value
 
+    @property
+    def play_next_chapter(self) -> bool:
+        return player.get_play_next()
+
+    @play_next_chapter.setter
+    def play_next_chapter(self, value: bool):
+        player.set_play_next(value)
+
     def play_pause(self):
         player.play_pause(None)
 
@@ -111,6 +121,10 @@ class Player(EventSender):
     def rewind(self):
         if self.loaded_book:
             player.rewind(30 / self.loaded_book.playback_speed)
+
+    def destory(self):
+        if self._fadeout_thread:
+            self._fadeout_thread.stop()
 
     def _rewind_feature(self):
         if self._first_play and self._app_settings.replay:
@@ -158,3 +172,27 @@ class Player(EventSender):
             self.loaded_chapter.position = self.position
 
         self.emit_event_main_thread("position", self.position)
+
+    def pause(self, fadeout: bool = False):
+        if fadeout and not self._fadeout_thread:
+            log.info("Starting fadeout playback")
+            self._fadeout_thread = Thread(target=self._fadeout_playback, name="PlayerFadeoutThread")
+            self._fadeout_thread.start()
+            return
+
+        if self.playing:
+            self.play_pause()
+
+    def _fadeout_playback(self):
+        duration = self._app_settings.sleep_timer_fadeout_duration * 20
+        current_vol = player.get_volume()
+        for i in range(0, duration):
+            player.set_volume(max(current_vol - (i / duration), 0))
+            time.sleep(0.05)
+
+        log.info("Fadeout completed.")
+        self.play_pause()
+        player.set_volume(current_vol)
+        self.emit_event("fadeout-finished", None)
+
+        self._fadeout_thread = None
