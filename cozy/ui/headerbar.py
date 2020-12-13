@@ -47,7 +47,6 @@ class Headerbar(HeaderBar):
         self._header_container.add(self)
 
         self.volume_button.get_style_context().remove_class("flat")
-
         self.playback_speed_button.set_popover(PlaybackSpeedPopover())
 
         self._playback_control_view_model: PlaybackControlViewModel = inject.instance(PlaybackControlViewModel)
