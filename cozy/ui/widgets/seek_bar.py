@@ -53,6 +53,16 @@ class SeekBar(Gtk.Box):
     def sensitive(self, new_value: bool):
         self.progress_scale.set_sensitive(new_value)
 
+    @property
+    def visible(self) -> bool:
+        return self.progress_scale.get_visible()
+
+    @visible.setter
+    def visible(self, value: bool):
+        self.current_label.set_visible(value)
+        self.progress_scale.set_visible(value)
+        self.remaining_event_box.set_visible(value)
+
     def _on_progress_scale_changed(self, _):
         position = int(self.progress_scale.get_value())
         total = self.progress_scale.get_adjustment().get_upper()

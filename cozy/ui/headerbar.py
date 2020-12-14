@@ -61,6 +61,9 @@ class Headerbar(HeaderBar):
         self._connect_view_model()
         self._connect_widgets()
 
+        self._on_book_changed()
+        self._on_lock_ui_changed()
+
     def _connect_view_model(self):
         self._playback_control_view_model.bind_to("book", self._on_book_changed)
         self._playback_control_view_model.bind_to("playing", self._on_play_changed)
@@ -68,7 +71,7 @@ class Headerbar(HeaderBar):
         self._playback_control_view_model.bind_to("position", self._on_position_changed)
         self._playback_control_view_model.bind_to("lock_ui", self._on_lock_ui_changed)
         self._playback_control_view_model.bind_to("volume", self._on_volume_changed)
-        self._headerbar_view_model.bind_to("lock_ui", self._on_headerbar_lock_ui_changed)
+        self._headerbar_view_model.bind_to("lock_ui", self._on_lock_ui_changed)
 
     def _connect_widgets(self):
         self.play_button.connect("clicked", self._play_clicked)
@@ -92,8 +95,22 @@ class Headerbar(HeaderBar):
 
     def _on_book_changed(self):
         book = self._playback_control_view_model.book
-        if not book:
-            return
+        if book:
+            visibility = True
+            self._set_book()
+        else:
+            visibility = False
+
+        self._show_media_information(visibility)
+
+    def _show_media_information(self, visibility):
+        self.title_label.set_visible(visibility)
+        self.subtitle_label.set_visible(visibility)
+        self.cover_img.set_visible(visibility)
+        self.seek_bar.visible = visibility
+
+    def _set_book(self):
+        book = self._playback_control_view_model.book
 
         self._set_cover_image(book)
         self.title_label.set_text(book.name)
@@ -106,10 +123,14 @@ class Headerbar(HeaderBar):
         self.play_img.set_from_icon_name(play_button_img, Gtk.IconSize.BUTTON)
 
     def _on_position_changed(self):
-        self.seek_bar.position = self._playback_control_view_model.position
+        position = self._playback_control_view_model.position
+        if position:
+            self.seek_bar.position = position
 
     def _on_length_changed(self):
-        self.seek_bar.length = self._playback_control_view_model.length
+        length = self._playback_control_view_model.length
+        if length:
+            self.seek_bar.length = length
 
     def _on_lock_ui_changed(self):
         sensitive = not self._playback_control_view_model.lock_ui
@@ -119,9 +140,6 @@ class Headerbar(HeaderBar):
         self.volume_button.set_sensitive(sensitive)
         self.playback_speed_button.set_sensitive(sensitive)
         self.timer_button.set_sensitive(sensitive)
-
-    def _on_headerbar_lock_ui_changed(self):
-        sensitive = not self._headerbar_view_model.lock_ui
 
     def _on_volume_changed(self):
         self.volume_button.set_value(self._playback_control_view_model.volume)
