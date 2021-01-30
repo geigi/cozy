@@ -68,7 +68,8 @@ class BookElement(Gtk.FlowBoxChild):
         self.art = AlbumElement(
             self.book, 180, self.ui.window.get_scale_factor(), bordered=True, square=False)
 
-        if is_external(self.book.db_object) and not self.book.offline and not self._filesystem_monitor.get_book_online(self.book):
+        if is_external(self.book.db_object) and not self.book.offline and not self._filesystem_monitor.get_book_online(
+                self.book):
             super().set_sensitive(False)
             self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         else:
@@ -136,6 +137,9 @@ class BookElement(Gtk.FlowBoxChild):
         return menu
 
     def __remove_book(self, widget, parameter):
+        if self.context_menu:
+            self.context_menu.popdown()
+
         self.emit("book-removed", self.book)
 
     def __mark_as_read(self, widget, parameter):
