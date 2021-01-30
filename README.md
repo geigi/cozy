@@ -137,6 +137,7 @@ To the contributors on GitHub:
 - naglis
 - oleg-krv
 - phpwutz
+- thibaultamartin
 - umeboshi2
 - worldofpeace
 
