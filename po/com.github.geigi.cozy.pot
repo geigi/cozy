@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 14:20+0100\n"
+"POT-Creation-Date: 2021-01-30 21:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: cozy/control/offline_cache.py:187
+#: cozy/control/offline_cache.py:188
 msgid "Copying"
 msgstr ""
 
@@ -97,11 +97,11 @@ msgstr[1] ""
 msgid "Play this book"
 msgstr ""
 
-#: cozy/ui/book_detail_view.py:219
+#: cozy/ui/book_detail_view.py:226
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/ui/book_detail_view.py:222 data/ui/book_detail.ui:152
+#: cozy/ui/book_detail_view.py:229 data/ui/book_detail.ui:156
 msgid "Download"
 msgstr ""
 
@@ -113,15 +113,15 @@ msgstr ""
 msgid "Currently offline"
 msgstr ""
 
-#: cozy/ui/book_element.py:121
+#: cozy/ui/book_element.py:125
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/ui/book_element.py:124
+#: cozy/ui/book_element.py:128
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/ui/book_element.py:127
+#: cozy/ui/book_element.py:131
 msgid "Remove from library"
 msgstr ""
 
@@ -233,19 +233,19 @@ msgstr ""
 msgid "GitHub"
 msgstr ""
 
-#: data/ui/book_detail.ui:200
+#: data/ui/book_detail.ui:204
 msgid "Remaining"
 msgstr ""
 
-#: data/ui/book_detail.ui:255
+#: data/ui/book_detail.ui:259
 msgid "Total"
 msgstr ""
 
-#: data/ui/book_detail.ui:271
+#: data/ui/book_detail.ui:275
 msgid "Last played"
 msgstr ""
 
-#: data/ui/book_detail.ui:287
+#: data/ui/book_detail.ui:291
 msgid "Published"
 msgstr ""
 
@@ -473,7 +473,7 @@ msgstr ""
 msgid "switch author and reader assignment"
 msgstr ""
 
-#: data/ui/settings.ui:727 data/ui/headerbar.ui:379
+#: data/ui/settings.ui:727 data/ui/headerbar.ui:385
 msgid "Sleep timer"
 msgstr ""
 
@@ -677,39 +677,39 @@ msgstr ""
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr ""
 
-#: data/ui/seek_bar.ui:15
+#: data/ui/seek_bar.ui:20
 msgid "Elapsed time"
 msgstr ""
 
-#: data/ui/seek_bar.ui:23
+#: data/ui/seek_bar.ui:28
 msgid "Time elapsed"
 msgstr ""
 
-#: data/ui/seek_bar.ui:24
+#: data/ui/seek_bar.ui:29
 msgid "Elapsed time of current part"
 msgstr ""
 
-#: data/ui/seek_bar.ui:40
+#: data/ui/seek_bar.ui:45
 msgid "Jump to position in current chapter"
 msgstr ""
 
-#: data/ui/seek_bar.ui:50
+#: data/ui/seek_bar.ui:56
 msgid "Position slider"
 msgstr ""
 
-#: data/ui/seek_bar.ui:51
+#: data/ui/seek_bar.ui:57
 msgid "Position of the current part in seconds"
 msgstr ""
 
-#: data/ui/seek_bar.ui:70
+#: data/ui/seek_bar.ui:76
 msgid "Remaining time"
 msgstr ""
 
-#: data/ui/seek_bar.ui:77
+#: data/ui/seek_bar.ui:83
 msgid "Time remaining"
 msgstr ""
 
-#: data/ui/seek_bar.ui:78
+#: data/ui/seek_bar.ui:84
 msgid "Remaining time of current part"
 msgstr ""
 
@@ -749,70 +749,70 @@ msgstr ""
 msgid "Warnings"
 msgstr ""
 
-#: data/ui/headerbar.ui:223
+#: data/ui/headerbar.ui:229
 msgid "Currently playing"
 msgstr ""
 
-#: data/ui/headerbar.ui:239
+#: data/ui/headerbar.ui:245
 msgid "Booktitle"
 msgstr ""
 
-#: data/ui/headerbar.ui:240
+#: data/ui/headerbar.ui:246
 msgid "Title of currently playing book"
 msgstr ""
 
-#: data/ui/headerbar.ui:266
+#: data/ui/headerbar.ui:272
 msgid "Part name"
 msgstr ""
 
-#: data/ui/headerbar.ui:267
+#: data/ui/headerbar.ui:273
 msgid "Title of the currently playing part"
 msgstr ""
 
-#: data/ui/headerbar.ui:300
+#: data/ui/headerbar.ui:306
 msgid "Working…"
 msgstr ""
 
-#: data/ui/headerbar.ui:304
+#: data/ui/headerbar.ui:310
 msgid "Currently working"
 msgstr ""
 
-#: data/ui/headerbar.ui:321
+#: data/ui/headerbar.ui:327
 msgid "Volume control"
 msgstr ""
 
-#: data/ui/headerbar.ui:358
+#: data/ui/headerbar.ui:364
 msgid "Playback speed"
 msgstr ""
 
-#: data/ui/headerbar.ui:389
+#: data/ui/headerbar.ui:395
 msgid "Timer menu button"
 msgstr ""
 
-#: data/ui/headerbar.ui:390
+#: data/ui/headerbar.ui:396
 msgid "Open the sleep timer popover"
 msgstr ""
 
-#: data/ui/headerbar.ui:406
+#: data/ui/headerbar.ui:412
 msgid "Search your library"
 msgstr ""
 
-#: data/ui/headerbar.ui:416
+#: data/ui/headerbar.ui:422
 msgid "Search menu button"
 msgstr ""
 
-#: data/ui/headerbar.ui:417
+#: data/ui/headerbar.ui:423
 msgid "Open the search popover"
 msgstr ""
 
-#: data/ui/headerbar.ui:432
+#: data/ui/headerbar.ui:438
 msgid "Options"
 msgstr ""
 
-#: data/ui/headerbar.ui:443
+#: data/ui/headerbar.ui:449
 msgid "Options menu button"
 msgstr ""
 
-#: data/ui/headerbar.ui:444
+#: data/ui/headerbar.ui:450
 msgid "Open the options popover"
 msgstr ""
