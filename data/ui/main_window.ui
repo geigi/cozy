@@ -294,7 +294,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Stay tuned…</property>
+                    <property name="label" translatable="yes">Stay tuned while Cozy is preparing your library…</property>
                     <style>
                       <class name="h2"/>
                     </style>
