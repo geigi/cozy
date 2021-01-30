@@ -45,6 +45,8 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="valign">center</property>
+                <property name="vexpand">True</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkLabel" id="status_label">
@@ -59,7 +61,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkProgressBar" id="update_progress_bar">
+                  <object class="GtkProgressBar" id="status_progress_bar">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>

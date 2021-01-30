@@ -26,6 +26,7 @@ class Files(EventSender):
 
     def copy(self, selection):
         log.info("Start of copying files")
+        self.emit_event_main_thread("start-copy", None)
         uris = selection.get_uris()
         storage_location = self._settings.default_location.path
 

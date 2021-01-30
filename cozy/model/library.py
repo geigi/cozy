@@ -88,6 +88,8 @@ class Library(EventSender):
 
     @timing
     def rebase_path(self, old_path: str, new_path: str):
+        self.emit_event_main_thread("rebase-started")
+
         chapter_count = len(self.chapters)
         progress = 0
         for chapter in self.chapters:

@@ -8,7 +8,7 @@ from cozy.ext import inject
 from cozy.ui.widgets.playback_speed_popover import PlaybackSpeedPopover
 from cozy.ui.widgets.seek_bar import SeekBar
 from cozy.ui.widgets.sleep_timer import SleepTimer
-from cozy.view_model.headerbar_view_model import HeaderbarViewModel
+from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarState
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 
 gi.require_version('Gtk', '3.0')
@@ -38,6 +38,11 @@ class Headerbar(HeaderBar):
     timer_button: Gtk.MenuButton = Gtk.Template.Child()
     search_button: Gtk.MenuButton = Gtk.Template.Child()
     menu_button: Gtk.MenuButton = Gtk.Template.Child()
+
+    status_stack: Gtk.Stack = Gtk.Template.Child()
+    spinner: Gtk.Spinner = Gtk.Template.Child()
+    status_label: Gtk.Label = Gtk.Template.Child()
+    status_progress_bar: Gtk.ProgressBar = Gtk.Template.Child()
 
     timer_image: Gtk.Image = Gtk.Template.Child()
 
@@ -74,6 +79,9 @@ class Headerbar(HeaderBar):
         self._playback_control_view_model.bind_to("lock_ui", self._on_lock_ui_changed)
         self._playback_control_view_model.bind_to("volume", self._on_volume_changed)
         self._headerbar_view_model.bind_to("lock_ui", self._on_lock_ui_changed)
+        self._headerbar_view_model.bind_to("state", self._on_state_changed)
+        self._headerbar_view_model.bind_to("work_message", self._on_work_message_changed)
+        self._headerbar_view_model.bind_to("work_progress", self._on_work_progress_changed)
 
     def _connect_widgets(self):
         self.play_button.connect("clicked", self._play_clicked)
@@ -142,6 +150,25 @@ class Headerbar(HeaderBar):
         self.volume_button.set_sensitive(sensitive)
         self.playback_speed_button.set_sensitive(sensitive)
         self.timer_button.set_sensitive(sensitive)
+
+    def _on_state_changed(self):
+        if self._headerbar_view_model.state == HeaderBarState.PLAYING:
+            stack_child = "playback"
+            spinner_visible = False
+            self.spinner.stop()
+        else:
+            stack_child = "working"
+            spinner_visible = True
+            self.spinner.start()
+
+        self.status_stack.props.visible_child_name = stack_child
+        self.spinner.set_visible(spinner_visible)
+
+    def _on_work_message_changed(self):
+        self.status_label.set_text(self._headerbar_view_model.work_message)
+
+    def _on_work_progress_changed(self):
+        self.status_progress_bar.set_fraction(self._headerbar_view_model.work_progress)
 
     def _on_volume_changed(self):
         self.volume_button.set_value(self._playback_control_view_model.volume)

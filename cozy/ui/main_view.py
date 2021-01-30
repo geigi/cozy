@@ -469,7 +469,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         inspired by https://stackoverflow.com/questions/24094186/drag-and-drop-file-example-in-pygobject
         """
         if target_type == 80:
-            self.switch_to_working("copying new files…", False)
             thread = Thread(target=self._files.copy, args=[selection], name="DragDropImportThread")
             thread.start()
 
@@ -587,8 +586,5 @@ class CozyUI(EventSender, metaclass=Singleton):
         return self.window_builder
 
     def _on_importer_event(self, event: str, message):
-        if event == "scan" and message == ScanStatus.STARTED:
-            self.switch_to_working(_("Importing Audiobooks"), False)
-        elif event == "scan" and message == ScanStatus.SUCCESS:
-            self.switch_to_playing()
+        if event == "scan" and message == ScanStatus.SUCCESS:
             self.check_for_tracks()

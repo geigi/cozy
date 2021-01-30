@@ -276,32 +276,28 @@
                 <property name="margin_left">40</property>
                 <property name="margin_right">40</property>
                 <property name="orientation">vertical</property>
+                <property name="spacing">20</property>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Importing your audiobooks…</property>
-                    <style>
-                      <class name="h2"/>
-                    </style>
+                    <property name="pixel_size">120</property>
+                    <property name="icon_name">com.github.geigi.cozy</property>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
+                    <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkProgressBar" id="progress_bar">
-                    <property name="width_request">600</property>
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="valign">center</property>
-                    <property name="margin_left">10</property>
-                    <property name="margin_right">10</property>
-                    <property name="margin_top">80</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
+                    <property name="label" translatable="yes">Stay tuned…</property>
+                    <style>
+                      <class name="h2"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">True</property>
