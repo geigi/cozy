@@ -346,12 +346,13 @@ def rewind(seconds):
     seek = duration - (seconds * 1000000000)
     if seek < 0:
         if prev_track():
-            __player.set_state(state)
-            if state == Gst.State.PAUSED:
-                emit_event("pause", Track.get(Track.id == __current_track.id))
             seek = get_current_track().length * 1000000000 + seek
         else:
             seek = 0
+
+        __player.set_state(state)
+        if state == Gst.State.PAUSED:
+            emit_event("pause", Track.get(Track.id == __current_track.id))
 
     __player.seek(__speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH,
                   Gst.SeekType.SET, seek, Gst.SeekType.NONE, 0)

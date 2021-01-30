@@ -325,13 +325,15 @@ class CozyUI(EventSender, metaclass=Singleton):
     def play(self):
         if self.current_book_element is None:
             self.track_changed()
-        self.current_book_element.set_playing(True)
+        if self.current_book_element:
+            self.current_book_element.set_playing(True)
 
     def play_pause(self, action, parameter):
         player.play_pause(None)
 
     def pause(self):
-        self.current_book_element.set_playing(False)
+        if self.current_book_element:
+            self.current_book_element.set_playing(False)
 
     def stop(self):
         """
