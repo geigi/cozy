@@ -6,7 +6,6 @@ from cozy.architecture.event_sender import EventSender
 
 from cozy.control.db import books, close_db
 from cozy.control.offline_cache import OfflineCache
-from cozy.db.book import Book
 from cozy.db.storage import Storage
 from cozy.db.track import Track
 
@@ -19,7 +18,6 @@ from cozy.open_view import OpenView
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
-from cozy.ui.titlebar import Titlebar
 from cozy.ui.settings import Settings
 from cozy.architecture.singleton import Singleton
 from cozy.model.settings import Settings as SettingsModel
@@ -72,7 +70,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.__init_components()
 
         self._library_view = library_view
-        from cozy.ui.settings import Settings as UISettings
 
         self.auto_import()
         self.refresh_content()
@@ -261,13 +258,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.app.add_action(self.hide_offline_action)
 
     def __init_components(self):
-        #self.titlebar = Titlebar()
-
-        # TODO: FIX!!
-        #self.sleep_timer = SleepTimer()
-
-        #self.titlebar.activate()
-
         if player.get_current_track() is None:
             self.block_ui_buttons(True)
 
@@ -280,7 +270,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         player.load_last_book()
         if player.get_current_track():
             pass
-            #self.titlebar.load_last_book()
 
     def get_object(self, name):
         return self.window_builder.get_object(name)
@@ -350,7 +339,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         sensitive = not block
         try:
             self.play_pause_action.set_enabled(sensitive)
-            #self.titlebar.block_ui_buttons(block, scan)
             if scan:
                 self.scan_action.set_enabled(sensitive)
                 self.hide_offline_action.set_enabled(sensitive)
@@ -358,25 +346,11 @@ class CozyUI(EventSender, metaclass=Singleton):
         except:
             pass
 
-    def switch_to_working(self, message, first, block=True):
-        """
-        Switch the UI state to working.
-        This is used for example when an import is currently happening.
-        This blocks the user from doing some stuff like starting playback.
-        """
-        #self.titlebar.switch_to_working(message, first)
-        if block:
-            self.block_ui_buttons(True, True)
-        self.window.props.window.set_cursor(
-            Gdk.Cursor.new_from_name(self.window.get_display(), "progress"))
-        self.emit_event_main_thread("working", True)
-
     def switch_to_playing(self):
         """
         Switch the UI state back to playing.
         This enables all UI functionality for the user.
         """
-        #self.titlebar.switch_to_playing()
         if self.main_stack.props.visible_child_name != "book_overview" and self.main_stack.props.visible_child_name != "nothing_here" and self.main_stack.props.visible_child_name != "no_media":
             self.main_stack.props.visible_child_name = "main"
         if self.main_stack.props.visible_child_name != "no_media" and self.main_stack.props.visible_child_name != "book_overview":
@@ -411,7 +385,6 @@ class CozyUI(EventSender, metaclass=Singleton):
             self.no_media_file_chooser.set_current_folder(path)
             self.main_stack.props.visible_child_name = "no_media"
             self.block_ui_buttons(True)
-            #self.titlebar.stop()
             self.category_toolbar.set_visible(False)
 
     def scan(self, _, __):
@@ -441,15 +414,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.book_box.show_all()
 
         return False
-
-    def refresh_recent(self):
-        if self.titlebar.current_book:
-            book_element = next(filter(
-                lambda x: x.book.id == self.titlebar.current_book.id,
-                self.book_box.get_children()), None)
-
-            if self.sort_stack.props.visible_child_name == "recent":
-                self.book_box.invalidate_sort()
 
     def display_failed_imports(self, files):
         """
@@ -514,23 +478,14 @@ class CozyUI(EventSender, metaclass=Singleton):
             if self.__inhibit_cookie:
                 self.app.uninhibit(self.__inhibit_cookie)
             self.stop()
-            # TODO: Titlebar
-            #self.titlebar.stop()
-            # self.sleep_timer.stop()
         elif event == "play":
             self.play()
-            #self.titlebar.play()
-            #self.sleep_timer.start()
-            # TODO: Titlebar
-            #self.refresh_recent()
             self.__inhibit_cookie = self.app.inhibit(
                 self.window, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook")
         elif event == "pause":
             if self.__inhibit_cookie:
                 self.app.uninhibit(self.__inhibit_cookie)
             self.pause()
-            #self.titlebar.pause()
-            #self.sleep_timer.stop()
         elif event == "track-changed":
             self.track_changed()
             if self.sort_stack.props.visible_child_name == "recent":
@@ -553,7 +508,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         value = width - 850
         if value < 80:
             value = 80
-        #self.titlebar.set_progress_scale_width(value)
 
     def __about_close_clicked(self, widget):
         self.about_dialog.hide()
@@ -563,10 +517,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         Close and dispose everything that needs to be when window is closed.
         """
         log.info("Closing.")
-        #self.titlebar.close()
         self.fs_monitor.close()
-        #if self.sleep_timer.is_running():
-        #    self.sleep_timer.stop()
 
         # save current position when still playing
         if player.get_gst_player_state() == Gst.State.PLAYING:
