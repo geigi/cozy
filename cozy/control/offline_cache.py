@@ -71,7 +71,7 @@ class OfflineCache(EventSender):
         """
         Remove all tracks of the given book from the cache.
         """
-        # self._stop_processing()
+        self._stop_processing()
         tracks = get_tracks(book)
         ids = [t.id for t in tracks]
         offline_elements = OfflineCacheModel.select().where(OfflineCacheModel.track << ids)
@@ -90,6 +90,7 @@ class OfflineCache(EventSender):
                     self.filecopy_cancel.cancel()
 
         OfflineCacheModel.delete().where(OfflineCacheModel.track in ids).execute()
+        self.queue = []
 
         self._start_processing()
 
@@ -144,8 +145,8 @@ class OfflineCache(EventSender):
         if not self._is_processing() or not self.thread:
             return
 
-        self.thread.stop()
         self.filecopy_cancel.cancel()
+        self.thread.stop()
 
     def _start_processing(self):
         """
