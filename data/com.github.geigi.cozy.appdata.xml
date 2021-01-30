@@ -313,15 +313,15 @@
     <release version="0.6.5" timestamp="1543573312">
       <description>
         <ul>
-          <li>Fixed startup crash on elemntary OS 5.0 Juno</li>
+          <li>Fixed startup crash on elementary OS 5.0 Juno</li>
         </ul>
       </description>
     </release>
     <release version="0.6.4" timestamp="1540414183">
       <description>
         <ul>
-          <li>Support for elemntary OS 5.0 Juno</li>
-          <li>Fixed a bug which prevented cozy from automatically playing the next chapter</li>
+          <li>Support for elementary OS 5.0 Juno</li>
+          <li>Fixed a bug which prevented Cozy from automatically playing the next chapter</li>
           <li>Updated translations</li>
         </ul>
       </description>
@@ -340,7 +340,7 @@
           <li>The book overview now supports multiple disks in audiobooks</li>
           <li>The file not found window will only open when the file is on the internal drive</li>
           <li>Fixed a typo</li>
-          <li>Support for elemntary OS 5.0</li>
+          <li>Support for elementary OS 5.0</li>
           <li>Updated translations</li>
         </ul>
       </description>
