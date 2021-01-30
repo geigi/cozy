@@ -71,6 +71,7 @@ class Headerbar(HeaderBar):
         self._on_lock_ui_changed()
         self._on_length_changed()
         self._on_position_changed()
+        self._on_volume_changed()
 
     def _connect_view_model(self):
         self._playback_control_view_model.bind_to("book", self._on_book_changed)
