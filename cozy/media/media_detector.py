@@ -49,15 +49,19 @@ class MediaDetector(EventSender):
 
     def _is_valid_audio_file(self, discoverer_info: GstPbutils.DiscovererInfo):
         audio_streams = discoverer_info.get_audio_streams()
+        video_streams = discoverer_info.get_video_streams()
 
         if len(audio_streams) < 1:
-            print("File contains no audio stream.")
+            log.info("File contains no audio stream.")
             return False
         elif len(audio_streams) > 1:
-            print("File contains more than one audio stream.")
+            log.info("File contains more than one audio stream.")
+            return False
+        elif len(video_streams) > 0:
+            log.info("File contains a video stream.")
             return False
 
         return True
 
     def _has_audio_file_ending(self) -> bool:
-        return self.uri.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a', '.m4b', '.wav', '.opus'))
+        return self.uri.lower().endswith(('.mp3', '.ogg', '.flac', '.m4a', '.m4b', '.mp4', '.wav', '.opus'))
