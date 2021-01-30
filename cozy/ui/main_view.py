@@ -192,7 +192,7 @@ class CozyUI(EventSender, metaclass=Singleton):
 
         # get about dialog
         self.about_dialog = self.about_builder.get_object("about_dialog")
-        self.about_dialog.set_transient_for(self.window)
+        self.about_dialog.set_modal(self.window)
         self.about_dialog.connect("delete-event", self.hide_window)
         self.about_dialog.set_version(self.version)
 

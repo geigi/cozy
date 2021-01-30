@@ -13,7 +13,7 @@ class ImportFailedDialog():
         self.builder = Gtk.Builder.new_from_resource(
             "/com/github/geigi/cozy/import_failed.ui")
         self.dialog = self.builder.get_object("dialog")
-        self.dialog.set_transient_for(self.parent.window)
+        self.dialog.set_modal(self.parent.window)
         self.text = self.builder.get_object("files_buffer")
 
         files_string = "\n".join(files)

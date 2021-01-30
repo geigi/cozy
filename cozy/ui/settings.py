@@ -43,7 +43,7 @@ class Settings(EventSender):
 
         # get settings window
         self.window = self.builder.get_object("settings_window")
-        self.window.set_transient_for(self.ui.window)
+        self.window.set_modal(self.ui.window)
         self.window.connect("delete-event", self.ui.hide_window)
 
         self.add_storage_button = self.builder.get_object("add_location_button")
