@@ -13,7 +13,7 @@ class PlaybackSpeedViewModel(Observable, EventSender):
         super().__init__()
         super(Observable, self).__init__()
 
-        self._book: Book = None
+        self._book: Book = self._player.loaded_book
 
         self._player.add_listener(self._on_player_event)
 
