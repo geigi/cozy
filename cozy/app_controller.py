@@ -61,6 +61,7 @@ class AppController(metaclass=Singleton):
         self.book_detail_view_model.add_listener(self._on_open_view)
         self.library_view_model.add_listener(self._on_open_view)
         self.library_view_model.add_listener(self._on_library_view_event)
+        self.playback_control_view_model.add_listener(self._on_open_view)
 
         self.main_window.add_listener(self._on_main_window_event)
 

@@ -5,6 +5,7 @@ from cozy.architecture.observable import Observable
 from cozy.ext import inject
 from cozy.media.player import Player
 from cozy.model.book import Book
+from cozy.open_view import OpenView
 
 
 class PlaybackControlViewModel(Observable, EventSender):
@@ -78,6 +79,10 @@ class PlaybackControlViewModel(Observable, EventSender):
 
     def rewind(self):
         self._player.rewind()
+
+    def open_book_detail(self):
+        if self.book:
+            self.emit_event(OpenView.BOOK, self.book)
 
     def _on_player_event(self, event, message):
         if event == "play" or event == "pause":

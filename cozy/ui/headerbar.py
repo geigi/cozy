@@ -31,6 +31,7 @@ class Headerbar(HeaderBar):
     volume_button: Gtk.VolumeButton = Gtk.Template.Child()
 
     cover_img: Gtk.Image = Gtk.Template.Child()
+    cover_img_event_box: Gtk.EventBox = Gtk.Template.Child()
     title_label: Gtk.Label = Gtk.Template.Child()
     subtitle_label: Gtk.Label = Gtk.Template.Child()
 
@@ -88,6 +89,9 @@ class Headerbar(HeaderBar):
         self.prev_button.connect("clicked", self._rewind_clicked)
         self.volume_button.connect("value-changed", self._on_volume_button_changed)
         self.seek_bar.connect("position-changed", self._on_seek_bar_position_changed)
+        self.cover_img_event_box.connect("button-press-event", self._cover_clicked)
+        self.cover_img_event_box.connect("enter-notify-event", self._on_cover_enter_notify)
+        self.cover_img_event_box.connect("leave-notify-event", self._on_cover_leave_notify)
 
     def _init_app_menu(self):
         self.menu_builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/titlebar_menu.ui")
@@ -178,6 +182,15 @@ class Headerbar(HeaderBar):
 
     def _rewind_clicked(self, _):
         self._playback_control_view_model.rewind()
+
+    def _cover_clicked(self, _, __):
+        self._playback_control_view_model.open_book_detail()
+
+    def _on_cover_enter_notify(self, widget: Gtk.Widget, __):
+        widget.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND1))
+
+    def _on_cover_leave_notify(self, widget: Gtk.Widget, __):
+        widget.props.window.set_cursor(None)
 
     def _on_volume_button_changed(self, _, volume):
         self._playback_control_view_model.volume = volume
