@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Heimen Stoffels <vistausss@outlook.com>, 2020
+# Heimen Stoffels <vistausss@outlook.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-06 10:52+0100\n"
+"POT-Creation-Date: 2021-01-30 14:24+0100\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2020\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -500,14 +500,20 @@ msgstr ""
 "hoesafbeeldingsbestanden de voorkeur hadden boven de ingesloten afbeeldingen"
 
 #: data/com.github.geigi.cozy.appdata.xml:316
-msgid "Fixed startup crash on elemntary OS 5.0 Juno"
+msgid "Fixed startup crash on elementary OS 5.0 Juno"
 msgstr "Crash tijdens opstarten verholpen op elementary OS 5.0 Juno"
 
 #: data/com.github.geigi.cozy.appdata.xml:323
-msgid "Support for elemntary OS 5.0 Juno"
+msgid "Support for elementary OS 5.0 Juno"
 msgstr "Ondersteuning voor elementary OS 5.0 Juno"
 
 #: data/com.github.geigi.cozy.appdata.xml:324
+msgid ""
+"Fixed a bug which prevented Cozy from automatically playing the next chapter"
+msgstr ""
+"Fout opgelost die Cozy weerhield van het automatisch afspelen van het "
+"volgende hoofdstuk"
+
 #: data/com.github.geigi.cozy.appdata.xml:332
 msgid ""
 "Fixed a bug which prevented cozy from automatically playing the next chapter"
@@ -536,7 +542,7 @@ msgid "Fixed a typo"
 msgstr "Typfout verbeterd"
 
 #: data/com.github.geigi.cozy.appdata.xml:343
-msgid "Support for elemntary OS 5.0"
+msgid "Support for elementary OS 5.0"
 msgstr "Ondersteuning voor elementary OS 5.0"
 
 #: data/com.github.geigi.cozy.appdata.xml:351
