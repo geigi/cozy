@@ -1,4 +1,4 @@
-from gi.repository import Gtk, Pango, GObject
+from gi.repository import Gtk, Pango, GObject, Gdk
 
 from cozy.control.string_representation import seconds_to_str
 from cozy.model.chapter import Chapter
@@ -70,8 +70,12 @@ class ChapterElement(Gtk.EventBox):
 
         self.add(self.box)
 
-    def __on_button_press(self, eventbox, event):
+    def __on_button_press(self, _, event):
+        if event.type == Gdk.EventType.BUTTON_PRESS and event.button != 1:
+            return False
+
         self.emit("play-pause-clicked", self.chapter)
+        return True
 
     def _on_enter_notify(self, widget, event):
         """

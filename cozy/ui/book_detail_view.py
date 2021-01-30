@@ -20,7 +20,7 @@ log = logging.getLogger("BookDetailView")
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/book_detail.ui')
-class BookDetailView(Gtk.Box):
+class BookDetailView(Gtk.EventBox):
     __gtype_name__ = 'BookDetail'
 
     back_button: Gtk.Button = Gtk.Template.Child()
@@ -66,6 +66,7 @@ class BookDetailView(Gtk.Box):
 
         self._connect_view_model()
         self._connect_widgets()
+        self._add_mouse_button_accel()
 
     def _connect_view_model(self):
         self._view_model.bind_to("book", self._on_book_changed)
@@ -84,6 +85,12 @@ class BookDetailView(Gtk.Box):
         self.back_button.connect("clicked", self._back_button_clicked)
         self.play_book_button.connect("clicked", self._play_book_clicked)
         self.download_switch.connect("state-set", self._download_switch_changed)
+
+    def _add_mouse_button_accel(self):
+        self.gesture = Gtk.GestureMultiPress(widget=self)
+        self.gesture.set_button(0)
+        self.gesture.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
+        self.gesture.connect('pressed', self._on_mouse_event)
 
     def _on_book_changed(self):
         if not self._view_model.book:
@@ -229,3 +236,11 @@ class BookDetailView(Gtk.Box):
 
     def _play_book_clicked(self, _):
         self._view_model.play_book()
+
+    def _on_mouse_event(self, gesture: Gtk.GestureMultiPress, _, __, ___):
+        btn = gesture.get_current_button()
+        if btn == 8:
+            self._view_model.open_library()
+            return True
+
+        return False
