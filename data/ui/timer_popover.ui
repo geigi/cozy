@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
+<!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
   <object class="GtkEntryBuffer" id="timer_buffer">
@@ -11,7 +11,7 @@
     <property name="step_increment">1</property>
     <property name="page_increment">5</property>
   </object>
-  <object class="GtkPopover" id="timer_popover">
+  <template class="SleepTimer" parent="GtkPopover">
     <property name="width_request">180</property>
     <property name="can_focus">False</property>
     <child>
@@ -264,5 +264,5 @@ to perform</property>
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>

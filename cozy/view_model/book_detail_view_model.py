@@ -32,7 +32,7 @@ class BookDetailViewModel(Observable, EventSender):
 
         self._player.add_listener(self._on_player_event)
         self._fs_monitor.add_listener(self._on_fs_monitor_event)
-        self._offline_cache.add_listener(self.__on_offline_cache_event)
+        self._offline_cache.add_listener(self._on_offline_cache_event)
 
     @property
     def playing(self) -> bool:
@@ -185,7 +185,7 @@ class BookDetailViewModel(Observable, EventSender):
         self._notify("remaining_text")
         self._notify("total_text")
 
-    def __on_offline_cache_event(self, event, message):
+    def _on_offline_cache_event(self, event, message):
         try:
             if message.id != self._book.db_object.id:
                 return

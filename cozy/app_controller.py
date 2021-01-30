@@ -17,14 +17,19 @@ from cozy.model.settings import Settings
 from cozy.model.storage_block_list import StorageBlockList
 from cozy.open_view import OpenView
 from cozy.ui.book_detail_view import BookDetailView
+from cozy.ui.headerbar import Headerbar
 from cozy.ui.library_view import LibraryView
 from cozy.ui.main_view import CozyUI
 from cozy.ui.search_view import SearchView
 from cozy.ui.widgets.whats_new_window import WhatsNewWindow
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
+from cozy.view_model.headerbar_view_model import HeaderbarViewModel
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
+from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
+from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.search_view_model import SearchViewModel
 from cozy.ui.settings import Settings as UISettings
+from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel
 
 
 class AppController(metaclass=Singleton):
@@ -39,12 +44,18 @@ class AppController(metaclass=Singleton):
         self.whats_new_window: WhatsNewWindow = WhatsNewWindow()
 
         self.library_view: LibraryView = LibraryView(main_window_builder)
-        self.search_view: SearchView = SearchView(main_window_builder)
+        self.search_view: SearchView = SearchView()
         self.book_detail_view: BookDetailView = BookDetailView(main_window_builder)
+        self.headerbar: Headerbar = Headerbar(main_window_builder)
 
         self.library_view_model = inject.instance(LibraryViewModel)
         self.search_view_model = inject.instance(SearchViewModel)
         self.book_detail_view_model = inject.instance(BookDetailViewModel)
+        self.playback_control_view_model = inject.instance(PlaybackControlViewModel)
+        self.sleep_timer_view_model = inject.instance(SleepTimerViewModel)
+        self.player = inject.instance(Player)
+
+        self._connect_popovers()
 
         self.search_view_model.add_listener(self._on_open_view)
         self.book_detail_view_model.add_listener(self._on_open_view)
@@ -69,6 +80,10 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(StorageBlockList, lambda: StorageBlockList())
         binder.bind_to_constructor(Files, lambda: Files())
         binder.bind_to_constructor(BookDetailViewModel, lambda: BookDetailViewModel())
+        binder.bind_to_constructor(PlaybackControlViewModel, lambda: PlaybackControlViewModel())
+        binder.bind_to_constructor(HeaderbarViewModel, lambda: HeaderbarViewModel())
+        binder.bind_to_constructor(PlaybackSpeedViewModel, lambda: PlaybackSpeedViewModel())
+        binder.bind_to_constructor(SleepTimerViewModel, lambda: SleepTimerViewModel())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR
@@ -83,6 +98,9 @@ class AppController(metaclass=Singleton):
 
     def open_library(self):
         self.library_view_model.open_library()
+
+    def _connect_popovers(self):
+        self.headerbar.search_button.set_popover(self.search_view.popover)
 
     def _on_open_view(self, event, data):
         if event == OpenView.AUTHOR:
@@ -103,3 +121,7 @@ class AppController(metaclass=Singleton):
             self.book_detail_view_model.lock_ui = data
         if event == "open_view":
             self._on_open_view(data, None)
+
+    def quit(self):
+        self.sleep_timer_view_model.destroy()
+        self.player.destroy()

@@ -9,6 +9,10 @@ from traceback import format_exception
 import distro
 
 import gi
+
+from cozy.ui.widgets.filter_list_box import FilterListBox
+from cozy.ui.widgets.seek_bar import SeekBar
+
 gi.require_version('Handy', '1')
 
 from gi.repository import Gtk, GLib, Handy
@@ -60,6 +64,8 @@ class Application(Gtk.Application):
         self.pkgdatadir = pkgdatadir
 
         Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
+        self.init_custom_widgets()
+
         GLib.setenv("PULSE_PROP_media.role", "music", True)
         GLib.set_application_name("Cozy")
 
@@ -108,3 +114,13 @@ class Application(Gtk.Application):
             pass
 
         self.old_except_hook(exc_type, exc_value, exc_traceback)
+
+    def quit(self):
+        self.app_controller.quit()
+        super(Application, self).quit()
+
+
+    @staticmethod
+    def init_custom_widgets():
+        FilterListBox()
+        SeekBar()

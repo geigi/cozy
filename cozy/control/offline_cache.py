@@ -165,6 +165,7 @@ class OfflineCache(EventSender):
         self.current_batch_count = 0
         if len(self.queue) > 0:
             self.current_book_processing = self.queue[0].track.book.id
+            self.emit_event_main_thread("start")
 
         while len(self.queue) > 0:
             log.info("Processing item")
@@ -182,9 +183,8 @@ class OfflineCache(EventSender):
 
             if not new_item.copied and os.path.exists(new_item.track.file):
                 log.info("Copying item")
-                Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.ui.switch_to_working,
-                                     _("Copying") + " " + tools.shorten_string(new_item.track.book.name, 30), False,
-                                     False)
+                self.emit_event_main_thread("message",
+                                            _("Copying") + " " + tools.shorten_string(new_item.track.book.name, 30))
                 self.current = new_item
 
                 destination = Gio.File.new_for_path(os.path.join(self.cache_dir, new_item.file))
@@ -214,7 +214,7 @@ class OfflineCache(EventSender):
                 Book.get(Book.id == self.current_book_processing))
 
         self.current = None
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.ui.switch_to_playing)
+        self.emit_event_main_thread("finished")
 
     def update_book_download_status(self, book):
         """
@@ -256,17 +256,10 @@ class OfflineCache(EventSender):
             self.update_cache(message)
             self._start_processing()
 
-    def __update_copy_status(self, current_num_bytes, total_num_bytes, user_data):
+    def __update_copy_status(self, current_num_bytes, total_num_bytes, _):
         progress = ((self.current_batch_count - 1) / self.total_batch_count) + (
                 (current_num_bytes / total_num_bytes) / self.total_batch_count)
-        Gdk.threads_add_idle(GLib.PRIORITY_HIGH_IDLE,
-                             self.ui.titlebar.update_progress_bar.set_fraction, progress)
-
-    def __update_copy_status(self, current_num_bytes, total_num_bytes, user_data):
-        progress = ((self.current_batch_count - 1) / self.total_batch_count) + (
-                (current_num_bytes / total_num_bytes) / self.total_batch_count)
-        Gdk.threads_add_idle(GLib.PRIORITY_HIGH_IDLE,
-                             self.ui.titlebar.update_progress_bar.set_fraction, progress)
+        self.emit_event_main_thread("progress", progress)
 
     def __on_settings_changed(self, event, message):
         """

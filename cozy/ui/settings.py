@@ -251,9 +251,7 @@ class Settings(EventSender):
         """
         Updates cozy's ui to changed Gio settings.
         """
-        if key == "titlebar-remaining-time":
-            self.ui.titlebar._on_progress_setting_changed()
-        elif key == "dark-mode":
+        if key == "dark-mode":
             self.set_darkmode()
 
     def __on_remove_blacklist_clicked(self, widget):

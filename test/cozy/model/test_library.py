@@ -3,11 +3,14 @@ from peewee import SqliteDatabase
 
 from cozy.ext import inject
 from cozy.extensions.set import split_strings_to_set
+from cozy.model.settings import Settings
 
 
 @pytest.fixture(autouse=True)
 def setup_inject(peewee_database):
-    inject.clear_and_configure(lambda binder: binder.bind(SqliteDatabase, peewee_database))
+    inject.clear()
+    inject.configure(lambda binder: (binder.bind(SqliteDatabase, peewee_database),
+                                     binder.bind_to_constructor(Settings, lambda: Settings())))
     yield
     inject.clear()
 
@@ -344,3 +347,21 @@ def test_rebase_path():
     library = Library()
     chapters = {chapter for chapter in library.chapters if chapter.file.startswith("20.000 Meilen unter dem Meer")}
     library.rebase_path("20.000 Meilen unter dem Meer", "new path")
+
+
+def test_empty_last_book_returns_none():
+    from cozy.model.library import Library
+
+    library = Library()
+    library._settings.last_played_book = None
+
+    assert library.last_played_book is None
+
+
+def test_empty_last_book_returns_none():
+    from cozy.model.library import Library
+
+    library = Library()
+    library._settings.last_played_book = library.books[0]._db_object
+
+    assert library.last_played_book is library.books[0]

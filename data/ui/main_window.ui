@@ -10,564 +10,20 @@
     <property name="step_increment">0.050000000000000003</property>
     <property name="page_increment">0.10000000000000001</property>
   </object>
-  <object class="GtkImage" id="pause_img">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_left">10</property>
-    <property name="margin_right">10</property>
-    <property name="icon_name">media-playback-pause-symbolic</property>
-  </object>
-  <object class="GtkImage" id="pause_img1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_left">10</property>
-    <property name="margin_right">10</property>
-    <property name="icon_name">media-playback-pause-symbolic</property>
-    <property name="icon_size">3</property>
-  </object>
-  <object class="GtkImage" id="play_img">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_left">10</property>
-    <property name="margin_right">10</property>
-    <property name="icon_name">media-playback-start-symbolic</property>
-  </object>
-  <object class="GtkImage" id="prev_img">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_left">4</property>
-    <property name="margin_right">4</property>
-    <property name="icon_name">object-rotate-left-symbolic</property>
-  </object>
   <object class="GtkApplicationWindow" id="app_window">
     <property name="name">main_window</property>
     <property name="can_focus">False</property>
     <property name="icon_name">com.github.geigi.cozy</property>
     <child type="titlebar">
-      <object class="GtkHeaderBar" id="headerbar">
+      <object class="GtkBox" id="header_container">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="show_close_button">True</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkBox" id="mini_player">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">start</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">10</property>
-            <property name="hexpand">True</property>
-            <child>
-              <object class="GtkBox" id="control_box">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">end</property>
-                <property name="valign">center</property>
-                <property name="margin_right">7</property>
-                <child>
-                  <object class="GtkButton" id="prev_button">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Rewind 30 seconds</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <property name="image">prev_img</property>
-                    <child internal-child="accessible">
-                      <object class="AtkObject" id="prev_button-atkobject">
-                        <property name="AtkObject::accessible-name" translatable="yes">Rewind button</property>
-                        <property name="AtkObject::accessible-description" translatable="yes">Jump back 30 seconds</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="play_button">
-                    <property name="width_request">42</property>
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Start playback</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <property name="image">play_img</property>
-                    <child internal-child="accessible">
-                      <object class="AtkObject" id="play_button-atkobject">
-                        <property name="AtkObject::accessible-name" translatable="yes">Play/Pause Button</property>
-                        <property name="AtkObject::accessible-description" translatable="yes">Start or pause the playback</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkVolumeButton" id="volume_button">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="can_focus">True</property>
-                    <property name="focus_on_click">False</property>
-                    <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Volume control</property>
-                    <property name="value">1</property>
-                    <property name="size">button</property>
-                    <property name="icons">audio-volume-muted-symbolic
-audio-volume-high-symbolic
-audio-volume-low-symbolic
-audio-volume-medium-symbolic</property>
-                    <child internal-child="plus_button">
-                      <object class="GtkButton">
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <property name="relief">none</property>
-                      </object>
-                    </child>
-                    <child internal-child="minus_button">
-                      <object class="GtkButton">
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <property name="relief">none</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <style>
-                  <class name="linked"/>
-                </style>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkMenuButton" id="warnings_button">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Warnings</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="stock">gtk-dialog-warning</property>
-                    <property name="icon_size">3</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkBox" id="cover_img_box">
-                <property name="width_request">40</property>
-                <property name="height_request">40</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_top">2</property>
-                <property name="margin_bottom">2</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkImage" id="cover_img">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkBox" id="title_box">
-                <property name="name">s</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="tooltip_text" translatable="yes">Currently playing</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="vexpand">True</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel" id="title_label">
-                    <property name="name">title_book</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="valign">end</property>
-                    <property name="vexpand">True</property>
-                    <property name="justify">right</property>
-                    <property name="ellipsize">end</property>
-                    <property name="width_chars">10</property>
-                    <property name="single_line_mode">True</property>
-                    <child internal-child="accessible">
-                      <object class="AtkObject" id="title_label-atkobject">
-                        <property name="AtkObject::accessible-name" translatable="yes">Booktitle</property>
-                        <property name="AtkObject::accessible-description" translatable="yes">Title of currently playing book</property>
-                      </object>
-                    </child>
-                    <style>
-                      <class name="title"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="subtitle_label">
-                    <property name="name">title_track</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="valign">start</property>
-                    <property name="vexpand">True</property>
-                    <property name="ellipsize">end</property>
-                    <property name="width_chars">10</property>
-                    <property name="single_line_mode">True</property>
-                    <child internal-child="accessible">
-                      <object class="AtkObject" id="subtitle_label-atkobject">
-                        <property name="AtkObject::accessible-name" translatable="yes">Part name</property>
-                        <property name="AtkObject::accessible-description" translatable="yes">Title of the currently playing part</property>
-                      </object>
-                    </child>
-                    <style>
-                      <class name="subtitle"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">3</property>
-              </packing>
-            </child>
-          </object>
+          <placeholder/>
         </child>
-        <child type="title">
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkStack" id="status_stack">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_right">20</property>
-                <property name="transition_type">slide-up-down</property>
-                <child>
-                  <object class="GtkBox" id="position_box">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="hexpand">True</property>
-                    <child>
-                      <object class="GtkLabel" id="current_label">
-                        <property name="width_request">35</property>
-                        <property name="can_focus">False</property>
-                        <property name="tooltip_text" translatable="yes">Elapsed time</property>
-                        <property name="halign">end</property>
-                        <property name="margin_right">3</property>
-                        <property name="margin_top">2</property>
-                        <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
-                        <property name="use_markup">True</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="current_label-atkobject">
-                            <property name="AtkObject::accessible-name" translatable="yes">Time elapsed</property>
-                            <property name="AtkObject::accessible-description" translatable="yes">Elapsed time of current part</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkScale" id="progress_scale">
-                        <property name="width_request">150</property>
-                        <property name="sensitive">False</property>
-                        <property name="can_focus">True</property>
-                        <property name="tooltip_text" translatable="yes">Jump to position in current chapter</property>
-                        <property name="hexpand">True</property>
-                        <property name="round_digits">1</property>
-                        <property name="draw_value">False</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="progress_scale-atkobject">
-                            <property name="AtkObject::accessible-name" translatable="yes">Position slider</property>
-                            <property name="AtkObject::accessible-description" translatable="yes">Position of the current part in seconds</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEventBox" id="remaining_event_box">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkLabel" id="remaining_label">
-                            <property name="width_request">35</property>
-                            <property name="can_focus">False</property>
-                            <property name="tooltip_text" translatable="yes">Remaining time</property>
-                            <property name="halign">start</property>
-                            <property name="margin_left">3</property>
-                            <property name="margin_top">2</property>
-                            <property name="label">&lt;tt&gt;&lt;b&gt;--:--&lt;/b&gt;&lt;/tt&gt;</property>
-                            <property name="use_markup">True</property>
-                            <child internal-child="accessible">
-                              <object class="AtkObject" id="remaining_label-atkobject">
-                                <property name="AtkObject::accessible-name" translatable="yes">Time remaining</property>
-                                <property name="AtkObject::accessible-description" translatable="yes">Remaining time of current part</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">3</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="name">playback</property>
-                    <property name="title">page0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkLabel" id="status_label">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_bottom">5</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkProgressBar" id="update_progress_bar">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_right">20</property>
-                        <property name="hexpand">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="name">working</property>
-                    <property name="title">page1</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="pack_type">end</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox" id="tools_box">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="valign">center</property>
-            <property name="vexpand">True</property>
-            <child>
-              <object class="GtkSpinner" id="spinner">
-                <property name="can_focus">False</property>
-                <property name="tooltip_text" translatable="yes">Working…</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">8</property>
-                <child internal-child="accessible">
-                  <object class="AtkObject" id="spinner-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Currently working</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkMenuButton" id="playback_speed_button">
-                <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Playback speed</property>
-                <property name="margin_right">7</property>
-                <child>
-                  <object class="GtkImage" id="playback_speed_img">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">speedometer-symbolic</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkMenuButton" id="timer_button">
-                <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Sleep timer</property>
-                <property name="margin_right">7</property>
-                <child>
-                  <object class="GtkImage" id="timer_image">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">timer-off-symbolic</property>
-                  </object>
-                </child>
-                <child internal-child="accessible">
-                  <object class="AtkObject" id="timer_button-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Timer menu button</property>
-                    <property name="AtkObject::accessible-description" translatable="yes">Open the sleep timer popover</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkMenuButton" id="search_button">
-                <property name="name">Search toggle button</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Search your library</property>
-                <property name="margin_right">7</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">edit-find-symbolic</property>
-                  </object>
-                </child>
-                <child internal-child="accessible">
-                  <object class="AtkObject" id="search_button-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Search menu button</property>
-                    <property name="AtkObject::accessible-description" translatable="yes">Open the search popover</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">3</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkMenuButton" id="menu_button">
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Options</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">open-menu-symbolic</property>
-                    <property name="icon_size">2</property>
-                  </object>
-                </child>
-                <child internal-child="accessible">
-                  <object class="AtkObject" id="menu_button-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Options menu button</property>
-                    <property name="AtkObject::accessible-description" translatable="yes">Open the options popover</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">4</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="pack_type">end</property>
-            <property name="position">1</property>
-          </packing>
+        <child type="center">
+          <placeholder/>
         </child>
       </object>
     </child>
@@ -586,18 +42,15 @@ audio-volume-medium-symbolic</property>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="valign">start</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="HdyViewSwitcherBar" id="category_toolbar">
+                  <object class="HdyViewSwitcher" id="category_toolbar">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="policy">auto</property>
+                    <property name="halign">center</property>
+                    <property name="policy">wide</property>
                     <property name="stack">sort_stack</property>
-                    <property name="reveal">True</property>
-                    <style>
-                      <class name="sort_switcher_element"/>
-                      <class name="linked"/>
-                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -616,6 +69,9 @@ audio-volume-medium-symbolic</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
+                <style>
+                  <class name="no_border"/>
+                </style>
               </object>
             </child>
           </object>
@@ -820,32 +276,28 @@ audio-volume-medium-symbolic</property>
                 <property name="margin_left">40</property>
                 <property name="margin_right">40</property>
                 <property name="orientation">vertical</property>
+                <property name="spacing">20</property>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Importing your audiobooks…</property>
-                    <style>
-                      <class name="h2"/>
-                    </style>
+                    <property name="pixel_size">120</property>
+                    <property name="icon_name">com.github.geigi.cozy</property>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
+                    <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkProgressBar" id="progress_bar">
-                    <property name="width_request">600</property>
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="valign">center</property>
-                    <property name="margin_left">10</property>
-                    <property name="margin_right">10</property>
-                    <property name="margin_top">80</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
+                    <property name="label" translatable="yes">Stay tuned while Cozy is preparing your library…</property>
+                    <style>
+                      <class name="h2"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -1301,5 +753,34 @@ audio-volume-medium-symbolic</property>
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkImage" id="pause_img">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin_left">10</property>
+    <property name="margin_right">10</property>
+    <property name="icon_name">media-playback-pause-symbolic</property>
+  </object>
+  <object class="GtkImage" id="pause_img1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin_left">10</property>
+    <property name="margin_right">10</property>
+    <property name="icon_name">media-playback-pause-symbolic</property>
+    <property name="icon_size">3</property>
+  </object>
+  <object class="GtkImage" id="play_img">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin_left">10</property>
+    <property name="margin_right">10</property>
+    <property name="icon_name">media-playback-start-symbolic</property>
+  </object>
+  <object class="GtkImage" id="prev_img">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin_left">4</property>
+    <property name="margin_right">4</property>
+    <property name="icon_name">object-rotate-left-symbolic</property>
   </object>
 </interface>

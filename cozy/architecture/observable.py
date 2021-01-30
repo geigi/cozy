@@ -1,5 +1,7 @@
 from typing import Callable
 
+from gi.repository import Gdk, GLib
+
 from cozy.report import reporter
 import logging
 
@@ -43,6 +45,9 @@ class Observable:
         except Exception as e:
             log.error(e)
             reporter.exception("observable", e)
+
+    def _notify_main_thread(self, prop: str):
+        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._notify, (prop))
 
     def _destroy_observers(self):
         self._observers = {}

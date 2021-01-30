@@ -1,0 +1,11 @@
+<glade-catalog name="cozy.ui.seek_bar" library="gladepython" domain="glade-3" depends="gtk+">
+ <init-function>glade_python_init</init-function>
+
+ <glade-widget-classes>
+   <glade-widget-class title="SeekBar" name="SeekBar" generic-name="seek_bar"/>
+ </glade-widget-classes>
+
+ <glade-widget-group name="cozy" title="Cozy Elements">
+   <glade-widget-class-ref name="SeekBar"/>
+ </glade-widget-group>
+</glade-catalog>
