@@ -2,7 +2,7 @@ cozy/control/db.py
 cozy/control/mpris.py
 cozy/control/offline_cache.py
 cozy/control/player.py
-cozy/control/sleep_timer.py
+cozy/ui/widgets/sleep_timer.py
 cozy/tools.py
 cozy/ui/album_element.py
 cozy/ui/book_detail_view.py
