@@ -122,7 +122,7 @@ class Player(EventSender):
         if self.loaded_book:
             player.rewind(30 / self.loaded_book.playback_speed)
 
-    def destory(self):
+    def destroy(self):
         if self._fadeout_thread:
             self._fadeout_thread.stop()
 

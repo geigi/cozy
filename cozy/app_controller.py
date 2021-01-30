@@ -124,4 +124,4 @@ class AppController(metaclass=Singleton):
 
     def quit(self):
         self.sleep_timer_view_model.destroy()
-        self.player.destory()
+        self.player.destroy()
