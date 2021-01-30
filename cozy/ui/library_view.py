@@ -145,6 +145,7 @@ class LibraryView:
 
     def _open_book_overview_clicked(self, widget, book):
         self._view_model.open_book_detail(book)
+        return True
 
     def _on_book_removed(self, widget, book):
         self._view_model.remove_book(book)
