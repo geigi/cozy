@@ -18,6 +18,9 @@ class PlaybackControlViewModel(Observable, EventSender):
 
         self._player.add_listener(self._on_player_event)
 
+        if self._player.loaded_book:
+            self.book = self._player.loaded_book
+
     @property
     def book(self) -> Optional[Book]:
         return self._book
@@ -42,10 +45,10 @@ class PlaybackControlViewModel(Observable, EventSender):
 
     @property
     def position(self) -> Optional[float]:
-        if not self._player.loaded_book or not self._book:
+        if not self._book:
             return None
 
-        return self._player.position / 1000000000 / self._book.playback_speed
+        return self._book.current_chapter.position / 1000000000 / self._book.playback_speed
 
     @position.setter
     def position(self, new_value: int):

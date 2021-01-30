@@ -63,6 +63,8 @@ class Headerbar(HeaderBar):
 
         self._on_book_changed()
         self._on_lock_ui_changed()
+        self._on_length_changed()
+        self._on_position_changed()
 
     def _connect_view_model(self):
         self._playback_control_view_model.bind_to("book", self._on_book_changed)
@@ -124,7 +126,7 @@ class Headerbar(HeaderBar):
 
     def _on_position_changed(self):
         position = self._playback_control_view_model.position
-        if position:
+        if position is not None:
             self.seek_bar.position = position
 
     def _on_length_changed(self):

@@ -1,5 +1,5 @@
 import logging
-from typing import List, Set
+from typing import List, Set, Optional
 
 from peewee import SqliteDatabase
 
@@ -13,13 +13,14 @@ from cozy.media.media_file import MediaFile
 
 from cozy.model.book import Book, BookIsEmpty
 from cozy.model.chapter import Chapter
-
+from cozy.model.settings import Settings
 
 log = logging.getLogger("ui")
 
 
 class Library(EventSender):
     _db = cache = inject.attr(SqliteDatabase)
+    _settings: Settings = inject.attr(Settings)
 
     _books: List[Book] = []
     _chapters: Set[Chapter] = set()
@@ -60,6 +61,18 @@ class Library(EventSender):
             self._load_all_files()
 
         return self._files
+
+    @property
+    def last_played_book(self) -> Optional[Book]:
+        if not self._settings.last_played_book:
+            return None
+
+        last_book = next((book
+                          for book
+                          in self.books
+                          if book.id == self._settings.last_played_book.id), None)
+
+        return last_book
 
     def invalidate(self):
         for book in self._books:

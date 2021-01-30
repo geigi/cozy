@@ -19,7 +19,6 @@ class SeekBar(Gtk.Box):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self._position: int = 0
         self._progress_scale_pressed = False
 
         self.progress_scale.connect("value-changed", self._on_progress_scale_changed)

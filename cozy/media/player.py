@@ -22,12 +22,18 @@ class Player(EventSender):
 
     def __init__(self):
         super().__init__()
-        self._first_play = True
         self._gst_player: player = player.get_playbin()
         player.add_player_listener(self._pass_legacy_player_events)
 
         self.play_status_updater: IntervalTimer = IntervalTimer(1, self._emit_tick)
         self._fadeout_thread: Optional[Thread] = None
+
+        player.init()
+        last_book = self._library.last_played_book
+        if last_book:
+            last_book.last_played = int(time.time())
+            player.load_file(last_book.current_chapter._db_object)
+            self._rewind_feature()
 
     @property
     def loaded_book(self) -> Optional[Book]:
@@ -127,8 +133,7 @@ class Player(EventSender):
             self._fadeout_thread.stop()
 
     def _rewind_feature(self):
-        if self._first_play and self._app_settings.replay:
-            self._first_play = False
+        if self._app_settings.replay:
             player.rewind(30 / self.loaded_book.playback_speed)
 
     def _pass_legacy_player_events(self, event, message):
@@ -138,9 +143,6 @@ class Player(EventSender):
             self._stop_tick_thread()
         if (event == "play" or event == "pause") and message:
             message = message.id
-            # TODO: This needs to be done when the last chapter is first loaded after startup
-            if self._first_play:
-                self._rewind_feature()
         # this is evil and will be removed when the old player is replaced
         if event == "track-changed":
             book = self.loaded_book

@@ -77,7 +77,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.auto_import()
         self.refresh_content()
         self.check_for_tracks()
-        self.__load_last_book()
 
         self.is_initialized = True
 
@@ -266,7 +265,6 @@ class CozyUI(EventSender, metaclass=Singleton):
 
         # TODO: FIX!!
         #self.sleep_timer = SleepTimer()
-        player.init()
 
         #self.titlebar.activate()
 
@@ -348,12 +346,15 @@ class CozyUI(EventSender, metaclass=Singleton):
         :param block: Boolean
         """
         sensitive = not block
-        self.play_pause_action.set_enabled(sensitive)
-        #self.titlebar.block_ui_buttons(block, scan)
-        if scan:
-            self.scan_action.set_enabled(sensitive)
-            self.hide_offline_action.set_enabled(sensitive)
-            self.settings.block_ui_elements(block)
+        try:
+            self.play_pause_action.set_enabled(sensitive)
+            #self.titlebar.block_ui_buttons(block, scan)
+            if scan:
+                self.scan_action.set_enabled(sensitive)
+                self.hide_offline_action.set_enabled(sensitive)
+                self.settings.block_ui_elements(block)
+        except:
+            pass
 
     def switch_to_working(self, message, first, block=True):
         """
