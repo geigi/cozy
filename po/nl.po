@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2020
-# Heimen Stoffels <vistausss@outlook.com>, 2020
+# Julian Geywitz <github@geigi.de>, 2021
+# Heimen Stoffels <vistausss@outlook.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-14 12:17+0100\n"
+"POT-Creation-Date: 2021-01-30 14:20+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2020\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,15 +22,15 @@ msgstr ""
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/control/offline_cache.py:188
+#: cozy/control/offline_cache.py:187
 msgid "Copying"
 msgstr "Bezig met kopiëren..."
 
-#: cozy/control/sleep_timer.py:141 data/ui/timer_popover.ui:66
+#: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
 msgid "min"
 msgstr "min"
 
-#: cozy/control/sleep_timer.py:149
+#: cozy/ui/widgets/sleep_timer.py:65
 msgid "Off"
 msgstr "Uit"
 
@@ -101,6 +101,14 @@ msgstr[1] "{years} jaar geleden"
 msgid "Play this book"
 msgstr "Boek afspelen"
 
+#: cozy/ui/book_detail_view.py:219
+msgid "Downloaded"
+msgstr "Gedownload"
+
+#: cozy/ui/book_detail_view.py:222 data/ui/book_detail.ui:152
+msgid "Download"
+msgstr "Downloaden"
+
 #: cozy/ui/book_element.py:37
 msgid "Open book overview"
 msgstr "Boekoverzicht openen"
@@ -109,25 +117,17 @@ msgstr "Boekoverzicht openen"
 msgid "Currently offline"
 msgstr "Momenteel offline"
 
-#: cozy/ui/book_element.py:123
+#: cozy/ui/book_element.py:121
 msgid "Mark as read"
 msgstr "Markeren als gelezen"
 
-#: cozy/ui/book_element.py:126
+#: cozy/ui/book_element.py:124
 msgid "Open in file browser"
 msgstr "Openen in bestandsbeheerder"
 
-#: cozy/ui/book_element.py:129
+#: cozy/ui/book_element.py:127
 msgid "Remove from library"
 msgstr "Verwijderen uit bibliotheek"
-
-#: cozy/ui/book_overview.py:229
-msgid "Downloaded"
-msgstr "Gedownload"
-
-#: cozy/ui/book_overview.py:232 data/ui/main_window.ui:1024
-msgid "Download"
-msgstr "Downloaden"
 
 #: cozy/ui/disk_element.py:26
 msgid "Disc"
@@ -137,27 +137,15 @@ msgstr "Schijf"
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: cozy/ui/main_view.py:411
+#: cozy/ui/main_view.py:378
 msgid "Audiobooks"
 msgstr "Audioboeken"
-
-#: cozy/ui/main_view.py:645
-msgid "Importing Audiobooks"
-msgstr "Bezig met importeren van audioboeken"
-
-#: cozy/ui/widgets/search_results.py:73
-msgid "Jump to author "
-msgstr "Snel naar auteur"
-
-#: cozy/ui/widgets/search_results.py:76
-msgid "Jump to reader "
-msgstr "Snel naar voorlezer"
 
 #: cozy/ui/settings.py:87
 msgid "Feedback"
 msgstr "Feedback"
 
-#: cozy/ui/track_element.py:28
+#: cozy/ui/chapter_element.py:23
 msgid "Play this part"
 msgstr "Onderdeel afspelen"
 
@@ -165,16 +153,6 @@ msgstr "Onderdeel afspelen"
 #, python-brace-format
 msgid "{storage} is offline."
 msgstr "{storage} is niet beschikbaar."
-
-#: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:36
-#: cozy/view_model/library_view_model.py:130
-msgid "All"
-msgstr "Alles"
-
-#: cozy/ui/widgets/filter_list_box.py:21
-msgid "Display all books"
-msgstr "Alle boeken tonen"
 
 #: cozy/ui/widgets/error_reporting.py:12
 msgid "Disabled"
@@ -225,9 +203,87 @@ msgstr "Werkomgeving"
 msgid "Media type of files that Cozy couldn't import"
 msgstr "De soorten bestanden die Cozy niet kon importeren"
 
+#: cozy/ui/widgets/filter_list_box.py:20
+#: cozy/view_model/library_view_model.py:37
+#: cozy/view_model/library_view_model.py:131
+msgid "All"
+msgstr "Alles"
+
+#: cozy/ui/widgets/filter_list_box.py:21
+msgid "Display all books"
+msgstr "Alle boeken tonen"
+
+#: cozy/ui/widgets/search_results.py:73
+msgid "Jump to author "
+msgstr "Snel naar auteur"
+
+#: cozy/ui/widgets/search_results.py:76
+msgid "Jump to reader "
+msgstr "Snel naar voorlezer"
+
+#: cozy/view_model/headerbar_view_model.py:75
+msgid "Importing Audiobooks"
+msgstr "Bezig met importeren van audioboeken"
+
+#: cozy/view_model/headerbar_view_model.py:84
+#: cozy/view_model/headerbar_view_model.py:100
+msgid "Copying new files…"
+msgstr "Bezig met kopiëren van nieuwe bestanden…"
+
+#: cozy/view_model/headerbar_view_model.py:91
+msgid "Changing audio book location…"
+msgstr "Bezig met wijzigen van audioboeklocatie…"
+
 #: data/ui/about.ui:16
 msgid "GitHub"
 msgstr "GitHub"
+
+#: data/ui/book_detail.ui:200
+msgid "Remaining"
+msgstr "Resterend"
+
+#: data/ui/book_detail.ui:255
+msgid "Total"
+msgstr "Totaal"
+
+#: data/ui/book_detail.ui:271
+msgid "Last played"
+msgstr "Laatst afgespeeld"
+
+#: data/ui/book_detail.ui:287
+msgid "Published"
+msgstr "Gepubliceerd"
+
+#: data/ui/error_reporting.ui:23
+msgid "User feedback"
+msgstr "Gebruikersfeedback"
+
+#: data/ui/error_reporting.ui:66
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"You can help improve Cozy by contributing information in case of errors and "
+"crashes. "
+msgstr ""
+"Je kunt helpen Cozy te verbeteren door fout- en crashinformatie te "
+"versturen."
+
+#: data/ui/error_reporting.ui:80
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Contributing this information is optional and completely anonymous. We will "
+"never collect personal data, files you import or any information that could "
+"identify you."
+msgstr ""
+"Het delen van deze informatie is optioneel en volledig anoniem. We "
+"verzamelen geen persoonlijke gegevens, bestanden die je importeert of andere"
+" informatie die naar jou te herleiden is."
+
+#: data/ui/error_reporting.ui:95
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Cozy is opensource and the user feedback source code can be inspected here: "
+msgstr ""
+"Cozy is open source en de code omtrent gebruikersfeedback is hier te vinden:"
 
 #: data/ui/file_not_found.ui:19
 msgid "Cancel"
@@ -268,188 +324,36 @@ msgstr ""
 "- Het is/zijn geen geldige audiobestand(en)\n"
 "- Het bestand/De bestanden is/zijn beschadigd"
 
-#: data/ui/main_window.ui:72
-msgid "Rewind 30 seconds"
-msgstr "30 seconden terugspoelen"
-
-#: data/ui/main_window.ui:80
-msgid "Rewind button"
-msgstr "Terugspoelknop"
-
-#: data/ui/main_window.ui:81
-msgid "Jump back 30 seconds"
-msgstr "30 seconden teruggaan"
-
-#: data/ui/main_window.ui:98
-msgid "Start playback"
-msgstr "Afspelen starten"
-
-#: data/ui/main_window.ui:106
-msgid "Play/Pause Button"
-msgstr "Afspelen/Pauzeren-knop"
-
-#: data/ui/main_window.ui:107
-msgid "Start or pause the playback"
-msgstr "Start of pauzeer het afspelen"
-
-#: data/ui/main_window.ui:124
-msgid "Volume control"
-msgstr "Volumeregeling"
-
-#: data/ui/main_window.ui:171
-msgid "Warnings"
-msgstr "Waarschuwingen"
-
-#: data/ui/main_window.ui:226
-msgid "Currently playing"
-msgstr "Je luistert naar"
-
-#: data/ui/main_window.ui:244
-msgid "Booktitle"
-msgstr "Boektitel"
-
-#: data/ui/main_window.ui:245
-msgid "Title of currently playing book"
-msgstr "Titel van het momenteel spelende boek"
-
-#: data/ui/main_window.ui:270
-msgid "Part name"
-msgstr "Naam van deel"
-
-#: data/ui/main_window.ui:271
-msgid "Title of the currently playing part"
-msgstr "Titel van het momenteel spelende deel"
-
-#: data/ui/main_window.ui:313
-msgid "Elapsed time"
-msgstr "Verstreken tijd"
-
-#: data/ui/main_window.ui:321
-msgid "Time elapsed"
-msgstr "Verstreken tijd"
-
-#: data/ui/main_window.ui:322
-msgid "Elapsed time of current part"
-msgstr "De verstreken tijd van het huidige deel"
-
-#: data/ui/main_window.ui:337
-msgid "Jump to position in current chapter"
-msgstr "Spoel door naar positie in huidige hoofdstuk"
-
-#: data/ui/main_window.ui:343
-msgid "Position slider"
-msgstr "Positiebalk"
-
-#: data/ui/main_window.ui:344
-msgid "Position of the current part in seconds"
-msgstr "Positie van het huidige deel, in seconden"
-
-#: data/ui/main_window.ui:362
-msgid "Remaining time"
-msgstr "Resterende tijd"
-
-#: data/ui/main_window.ui:370
-msgid "Time remaining"
-msgstr "Resterende tijd"
-
-#: data/ui/main_window.ui:371
-msgid "Remaining time of current part"
-msgstr "De resterende tijd van het huidige deel"
-
-#: data/ui/main_window.ui:447
-msgid "Working…"
-msgstr "Bezig met werken…"
-
-#: data/ui/main_window.ui:452
-msgid "Currently working"
-msgstr "Bezig met werken"
-
-#: data/ui/main_window.ui:468
-msgid "Playback speed"
-msgstr "Afspeelsnelheid"
-
-#: data/ui/main_window.ui:490 data/ui/settings.ui:727
-msgid "Sleep timer"
-msgstr "Tijdklok"
-
-#: data/ui/main_window.ui:501
-msgid "Timer menu button"
-msgstr "Tijdklok-menuknop"
-
-#: data/ui/main_window.ui:502
-msgid "Open the sleep timer popover"
-msgstr "Open het tijdklokpaneel"
-
-#: data/ui/main_window.ui:518
-msgid "Search your library"
-msgstr "Doorzoek je bibliotheek"
-
-#: data/ui/main_window.ui:529
-msgid "Search menu button"
-msgstr "Zoek-menuknop"
-
-#: data/ui/main_window.ui:530
-msgid "Open the search popover"
-msgstr "Open het zoekpaneel"
-
-#: data/ui/main_window.ui:544
-msgid "Options"
-msgstr "Opties"
-
-#: data/ui/main_window.ui:555
-msgid "Options menu button"
-msgstr "Opties-menuknop"
-
-#: data/ui/main_window.ui:556
-msgid "Open the options popover"
-msgstr "Open het optiespaneel"
-
-#: data/ui/main_window.ui:681
+#: data/ui/main_window.ui:121
 msgid "Recent"
 msgstr "Recent"
 
-#: data/ui/main_window.ui:700
+#: data/ui/main_window.ui:141
 msgid "List of authors"
 msgstr "Lijst met auteurs"
 
-#: data/ui/main_window.ui:716 data/ui/main_window.ui:824
+#: data/ui/main_window.ui:157 data/ui/main_window.ui:267
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "Auteur"
 
-#: data/ui/main_window.ui:735
+#: data/ui/main_window.ui:177
 msgid "List of readers"
 msgstr "Lijst met voorlezers"
 
-#: data/ui/main_window.ui:751 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:193 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "Voorlezer"
 
-#: data/ui/main_window.ui:804
+#: data/ui/main_window.ui:247
 msgid "List of books"
 msgstr "Lijst met boeken"
 
-#: data/ui/main_window.ui:840
-msgid "Importing your audiobooks…"
-msgstr "Bezig met importeren van audioboeken…"
+#: data/ui/main_window.ui:297
+msgid "Stay tuned while Cozy is preparing your library…"
+msgstr "Bezig met voorbereiden van je verzameling…"
 
-#: data/ui/main_window.ui:1072
-msgid "Remaining"
-msgstr "Resterend"
-
-#: data/ui/main_window.ui:1128
-msgid "Total"
-msgstr "Totaal"
-
-#: data/ui/main_window.ui:1145
-msgid "Last played"
-msgstr "Laatst afgespeeld"
-
-#: data/ui/main_window.ui:1162
-msgid "Published"
-msgstr "Gepubliceerd"
-
-#: data/ui/main_window.ui:1326
+#: data/ui/main_window.ui:330
 msgid ""
 "Start exploring your library by switching to the Author or Reader view "
 "above."
@@ -457,25 +361,25 @@ msgstr ""
 "Begin met het verkennen van je bibliotheek door hierboven te kiezen voor de "
 "auteur- of leesweergave."
 
-#: data/ui/main_window.ui:1371
+#: data/ui/main_window.ui:375
 msgid "Import your Audiobooks"
 msgstr "Importeer je audioboeken"
 
-#: data/ui/main_window.ui:1387
+#: data/ui/main_window.ui:391
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 "Cozy importeert je audioboeken automatisch naar één map - je bibliotheek"
 
-#: data/ui/main_window.ui:1416
+#: data/ui/main_window.ui:420
 msgid "External or Network drive?"
 msgstr "Externe schijf of netwerkschijf?"
 
-#: data/ui/main_window.ui:1439
+#: data/ui/main_window.ui:443
 msgid "Are your audiobooks stored on an external or network drive?"
 msgstr "Sla je je audioboeken op op een externe schijf of een netwerkschijf?"
 
-#: data/ui/main_window.ui:1457
+#: data/ui/main_window.ui:461
 msgid ""
 "If they are you can enable offline mode for a book in the book overview. "
 "This keeps a local copy of the book that you can listen to on the go"
@@ -484,36 +388,36 @@ msgstr ""
 "overzicht. Dit slaat een kopie op van het boek wordt zodat je onderweg kunt "
 "luisteren."
 
-#: data/ui/main_window.ui:1491 data/ui/main_window.ui:1550
+#: data/ui/main_window.ui:495 data/ui/main_window.ui:554
 msgid "Auto scan switch"
 msgstr "Automatisch doorzoeken-schakelaar"
 
-#: data/ui/main_window.ui:1492 data/ui/main_window.ui:1530
-#: data/ui/main_window.ui:1551
+#: data/ui/main_window.ui:496 data/ui/main_window.ui:534
+#: data/ui/main_window.ui:555
 msgid "Automatically import new audiobooks on startup"
 msgstr "Nieuwe audioboeken automatisch importeren bij opstarten"
 
-#: data/ui/main_window.ui:1594
+#: data/ui/main_window.ui:598
 msgid "Drag & Drop"
 msgstr "Slepen-en-neerzetten"
 
-#: data/ui/main_window.ui:1611
+#: data/ui/main_window.ui:615
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr "Sleep je audioboeken naar cozy om ze automatisch te importeren"
 
-#: data/ui/main_window.ui:1634
+#: data/ui/main_window.ui:638
 msgid "Location of your audiobooks"
 msgstr "Locatie van je audioboeken"
 
-#: data/ui/main_window.ui:1655
+#: data/ui/main_window.ui:659
 msgid "Set Audiobooks Directory"
 msgstr "Audioboek-map instellen"
 
-#: data/ui/main_window.ui:1678
+#: data/ui/main_window.ui:682
 msgid "Load audiobooks from a directory, network drive or an external disk."
 msgstr "Laad audioboeken uit een map of van een externe of netwerkschijf."
 
-#: data/ui/main_window.ui:1696
+#: data/ui/main_window.ui:700
 msgid "You can add more storage locations later in the settings"
 msgstr "Je kunt nadien meer locaties toevoegen in de instellingen"
 
@@ -593,6 +497,10 @@ msgstr ""
 #: data/ui/settings.ui:678
 msgid "switch author and reader assignment"
 msgstr "auteur- en lezertoewijzing omwisselen"
+
+#: data/ui/settings.ui:727 data/ui/headerbar.ui:379
+msgid "Sleep timer"
+msgstr "Tijdklok"
 
 #: data/ui/settings.ui:772
 msgid "Fadeout"
@@ -749,36 +657,13 @@ msgstr "_Over"
 msgid "_Quit"
 msgstr "_Afsluiten"
 
-#: data/ui/error_reporting.ui:23
-msgid "User feedback"
-msgstr "Gebruikersfeedback"
+#: data/ui/whats_new.ui:8
+msgid "Whats new?"
+msgstr "Wijzigingslog"
 
-#: data/ui/error_reporting.ui:66
-msgctxt "Error and crash reporting dialog"
-msgid ""
-"You can help improve Cozy by contributing information in case of errors and "
-"crashes. "
-msgstr ""
-"Je kunt helpen Cozy te verbeteren door fout- en crashinformatie te "
-"versturen."
-
-#: data/ui/error_reporting.ui:80
-msgctxt "Error and crash reporting dialog"
-msgid ""
-"Contributing this information is optional and completely anonymous. We will "
-"never collect personal data, files you import or any information that could "
-"identify you."
-msgstr ""
-"Het delen van deze informatie is optioneel en volledig anoniem. We "
-"verzamelen geen persoonlijke gegevens, bestanden die je importeert of andere"
-" informatie die naar jou te herleiden is."
-
-#: data/ui/error_reporting.ui:95
-msgctxt "Error and crash reporting dialog"
-msgid ""
-"Cozy is opensource and the user feedback source code can be inspected here: "
-msgstr ""
-"Cozy is open source en de code omtrent gebruikersfeedback is hier te vinden:"
+#: data/ui/whats_new.ui:21
+msgid "Continue"
+msgstr "Doorgaan"
 
 #: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
 msgid "What's new  in Cozy"
@@ -835,10 +720,142 @@ msgstr ""
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr "Hoofdstukondersteuning volgt binnenkort. Nog even geduld!"
 
-#: data/ui/whats_new.ui:8
-msgid "Whats new?"
-msgstr "Wijzigingslog"
+#: data/ui/seek_bar.ui:15
+msgid "Elapsed time"
+msgstr "Verstreken tijd"
 
-#: data/ui/whats_new.ui:21
-msgid "Continue"
-msgstr "Doorgaan"
+#: data/ui/seek_bar.ui:23
+msgid "Time elapsed"
+msgstr "Verstreken tijd"
+
+#: data/ui/seek_bar.ui:24
+msgid "Elapsed time of current part"
+msgstr "De verstreken tijd van het huidige deel"
+
+#: data/ui/seek_bar.ui:40
+msgid "Jump to position in current chapter"
+msgstr "Spoel door naar positie in huidige hoofdstuk"
+
+#: data/ui/seek_bar.ui:50
+msgid "Position slider"
+msgstr "Positiebalk"
+
+#: data/ui/seek_bar.ui:51
+msgid "Position of the current part in seconds"
+msgstr "Positie van het huidige deel, in seconden"
+
+#: data/ui/seek_bar.ui:70
+msgid "Remaining time"
+msgstr "Resterende tijd"
+
+#: data/ui/seek_bar.ui:77
+msgid "Time remaining"
+msgstr "Resterende tijd"
+
+#: data/ui/seek_bar.ui:78
+msgid "Remaining time of current part"
+msgstr "De resterende tijd van het huidige deel"
+
+#: data/ui/headerbar.ui:41
+msgid "page0"
+msgstr "pagina0"
+
+#: data/ui/headerbar.ui:78
+msgid "page1"
+msgstr "pagina1"
+
+#: data/ui/headerbar.ui:118
+msgid "Rewind 30 seconds"
+msgstr "30 seconden terugspoelen"
+
+#: data/ui/headerbar.ui:126
+msgid "Rewind button"
+msgstr "Terugspoelknop"
+
+#: data/ui/headerbar.ui:127
+msgid "Jump back 30 seconds"
+msgstr "30 seconden teruggaan"
+
+#: data/ui/headerbar.ui:144
+msgid "Start playback"
+msgstr "Afspelen starten"
+
+#: data/ui/headerbar.ui:152
+msgid "Play/Pause Button"
+msgstr "Afspelen/Pauzeren-knop"
+
+#: data/ui/headerbar.ui:153
+msgid "Start or pause the playback"
+msgstr "Start of pauzeer het afspelen"
+
+#: data/ui/headerbar.ui:184
+msgid "Warnings"
+msgstr "Waarschuwingen"
+
+#: data/ui/headerbar.ui:223
+msgid "Currently playing"
+msgstr "Je luistert naar"
+
+#: data/ui/headerbar.ui:239
+msgid "Booktitle"
+msgstr "Boektitel"
+
+#: data/ui/headerbar.ui:240
+msgid "Title of currently playing book"
+msgstr "Titel van het momenteel spelende boek"
+
+#: data/ui/headerbar.ui:266
+msgid "Part name"
+msgstr "Naam van deel"
+
+#: data/ui/headerbar.ui:267
+msgid "Title of the currently playing part"
+msgstr "Titel van het momenteel spelende deel"
+
+#: data/ui/headerbar.ui:300
+msgid "Working…"
+msgstr "Bezig met werken…"
+
+#: data/ui/headerbar.ui:304
+msgid "Currently working"
+msgstr "Bezig met werken"
+
+#: data/ui/headerbar.ui:321
+msgid "Volume control"
+msgstr "Volumeregeling"
+
+#: data/ui/headerbar.ui:358
+msgid "Playback speed"
+msgstr "Afspeelsnelheid"
+
+#: data/ui/headerbar.ui:389
+msgid "Timer menu button"
+msgstr "Tijdklok-menuknop"
+
+#: data/ui/headerbar.ui:390
+msgid "Open the sleep timer popover"
+msgstr "Open het tijdklokpaneel"
+
+#: data/ui/headerbar.ui:406
+msgid "Search your library"
+msgstr "Doorzoek je bibliotheek"
+
+#: data/ui/headerbar.ui:416
+msgid "Search menu button"
+msgstr "Zoek-menuknop"
+
+#: data/ui/headerbar.ui:417
+msgid "Open the search popover"
+msgstr "Open het zoekpaneel"
+
+#: data/ui/headerbar.ui:432
+msgid "Options"
+msgstr "Opties"
+
+#: data/ui/headerbar.ui:443
+msgid "Options menu button"
+msgstr "Opties-menuknop"
+
+#: data/ui/headerbar.ui:444
+msgid "Open the options popover"
+msgstr "Open het optiespaneel"
