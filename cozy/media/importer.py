@@ -2,6 +2,7 @@ import copy
 import itertools
 import logging
 import os
+import time
 from enum import Enum, auto
 from multiprocessing.pool import ThreadPool as Pool
 from typing import List, Set
@@ -67,13 +68,20 @@ class Importer(EventSender):
 
         pool = Pool()
         while True:
-            import_result = pool.map(self.import_file, itertools.islice(files_to_scan, 100))
+            job = pool.map_async(self.import_file, itertools.islice(files_to_scan, 100))
+
+            while not job.ready():
+                jobs_finished = max(0, 100 - job._number_left * job._chunksize)
+                self.emit_event_main_thread("scan-progress", (progress + jobs_finished) / files_count)
+                time.sleep(0.05)
+
+            import_result = job.get()
+
             undetected_files.update({file for file in import_result if isinstance(file, str)})
             media_files = {file for file in import_result if isinstance(file, MediaFile)}
             new_or_changed_files.update((file.path for file in media_files))
 
             progress += 100
-            self.emit_event_main_thread("scan-progress", progress / files_count)
 
             if len(media_files) != 0:
                 self._library.insert_many(media_files)
