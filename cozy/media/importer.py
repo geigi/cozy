@@ -20,6 +20,8 @@ from cozy.report import reporter
 
 log = logging.getLogger("importer")
 
+CHUNK_SIZE = 100
+
 
 class ScanStatus(Enum):
     STARTED = auto()
@@ -36,17 +38,23 @@ class Importer(EventSender):
     def __init__(self):
         super().__init__()
 
+        self._files_count: int = 0
+        self._progress: int = 0
+
     @timing
     def scan(self):
         logging.info("Starting import")
         self.emit_event_main_thread("scan", ScanStatus.STARTED)
+        self.emit_event_main_thread("scan-progress", 0.025)
 
         files_to_scan = self._get_files_to_scan()
+        self.emit_event_main_thread("scan-progress", 0.05)
         new_or_changed_files, undetected_files = self._execute_import(files_to_scan)
         self._library.invalidate()
 
         logging.info("Deleting no longer present files from db")
         self._delete_files_no_longer_existent()
+        self.emit_event_main_thread("scan-progress", 1)
 
         logging.info("Import finished")
         self.emit_event_main_thread("scan", ScanStatus.SUCCESS)
@@ -61,41 +69,41 @@ class Importer(EventSender):
         new_or_changed_files = set()
         undetected_files = set()
 
-        files_count = self._count_files_to_scan()
-        if files_count < 1:
-            files_count = 1
-        progress = 0
+        self._files_count = self._count_files_to_scan()
+        self._progress = 0
 
         pool = Pool()
         while True:
-            job = pool.map_async(self.import_file, itertools.islice(files_to_scan, 100))
-
-            while not job.ready():
-                jobs_finished = max(0, 100 - job._number_left * job._chunksize)
-                self.emit_event_main_thread("scan-progress", (progress + jobs_finished) / files_count)
-                time.sleep(0.05)
-
+            job = pool.map_async(self.import_file, itertools.islice(files_to_scan, CHUNK_SIZE))
+            self._wait_for_job_to_complete(job)
             import_result = job.get()
 
             undetected_files.update({file for file in import_result if isinstance(file, str)})
             media_files = {file for file in import_result if isinstance(file, MediaFile)}
             new_or_changed_files.update((file.path for file in media_files))
 
-            progress += 100
+            self._progress += CHUNK_SIZE
 
             if len(media_files) != 0:
                 self._library.insert_many(media_files)
-            if progress >= files_count:
+            if self._progress >= self._files_count:
                 break
         pool.close()
 
         return new_or_changed_files, undetected_files
 
+    def _wait_for_job_to_complete(self, job):
+        while not job.ready():
+            jobs_finished = max(0, CHUNK_SIZE - job._number_left * job._chunksize)
+            progress = 0.05 + ((self._progress + jobs_finished) / self._files_count) * 0.9
+            self.emit_event_main_thread("scan-progress", progress)
+            time.sleep(0.1)
+
     @timing
     def _count_files_to_scan(self) -> int:
         files_to_scan = self._get_files_to_scan()
 
-        return sum(1 for _ in files_to_scan)
+        return max(1, sum(1 for _ in files_to_scan))
 
     def _get_files_to_scan(self) -> List[str]:
         paths_to_scan = self._get_configured_storage_paths()
