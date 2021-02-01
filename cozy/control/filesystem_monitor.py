@@ -32,7 +32,7 @@ class FilesystemMonitor(EventSender):
 
     def __init__(self):
         super().__init__()
-        self.volume_monitor = Gio.VolumeMonitor.get()
+        self.volume_monitor: Gio.VolumeMonitor = Gio.VolumeMonitor.get()
         self.volume_monitor.connect("mount-added", self.__on_mount_added)
         self.volume_monitor.connect("mount-removed", self.__on_mount_removed)
 
@@ -92,6 +92,15 @@ class FilesystemMonitor(EventSender):
             raise StorageNotFound
 
         return storage.online
+
+    def is_external(self, directory: str) -> bool:
+        mounts: List[Gio.Mount] = self.volume_monitor.get_mounts()
+        for mount in mounts:
+            if mount.get_root().get_path() in directory:
+                if mount.can_unmount():
+                    return True
+
+        return False
 
     def __on_mount_added(self, monitor, mount):
         """
