@@ -1,3 +1,5 @@
+import logging
+
 from gi.repository import Gtk, Gdk, GdkPixbuf, Gst, GObject
 
 from cozy.control import player as player
@@ -5,6 +7,8 @@ from cozy.control.artwork_cache import ArtworkCache
 from cozy.control.db import get_track_for_playback
 from cozy.ext import inject
 from cozy.model.book import Book
+
+log = logging.getLogger("album_element")
 
 
 class AlbumElement(Gtk.Box):
@@ -160,7 +164,10 @@ class AlbumElement(Gtk.Box):
         """
         Change the cursor to pointing hand
         """
-        self.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND1))
+        try:
+            self.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND2))
+        except:
+            log.error("Broken mouse theme, failed to set cursor.")
 
     def _on_play_leave_notify(self, widget, event):
         """
