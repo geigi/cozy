@@ -64,12 +64,11 @@ def test_all_existing_paths_are_included(mocker):
 
 
 def test_import_file_returns_false_for_directory(mocker):
-    from cozy.media.importer import Importer
+    from cozy.media.importer import import_file
 
     mocker.patch("os.path.isfile", return_value=False)
 
-    importer = Importer()
-    imported = importer.import_file(MagicMock())
+    imported = import_file(MagicMock())
 
     assert not imported
 
@@ -104,7 +103,7 @@ def test_scan_returns_file_names_that_could_not_be_imported(mocker):
         def get(self):
             return {"1", "2"}
 
-    mocker.patch("multiprocessing.pool.ThreadPool.map_async", return_value=Mock())
+    mocker.patch("multiprocessing.pool.Pool.map_async", return_value=Mock())
     mocker.patch("cozy.media.importer.Importer._wait_for_job_to_complete")
     mocker.patch("cozy.model.library.Library.insert_many")
 
@@ -127,7 +126,7 @@ def test_scan_returns_none_for_non_audio_files(mocker):
 
 
 
-    mocker.patch("multiprocessing.pool.ThreadPool.map_async", return_value=Mock())
+    mocker.patch("multiprocessing.pool.Pool.map_async", return_value=Mock())
     mocker.patch("cozy.media.importer.Importer._wait_for_job_to_complete")
     mocker.patch("cozy.model.library.Library.insert_many")
 
@@ -150,7 +149,7 @@ def test_scan_processes_all_files_even_if_many_are_not_audio_files(mocker):
             for item in items:
                 yield item
 
-    mocker.patch("multiprocessing.pool.ThreadPool.map_async", return_value=Mock())
+    mocker.patch("multiprocessing.pool.Pool.map_async", return_value=Mock())
     mocker.patch("cozy.media.importer.Importer._wait_for_job_to_complete")
     mocker.patch("cozy.model.library.Library.insert_many")
 
@@ -198,7 +197,7 @@ def test_execute_import_returns_list_of_imported_files(mocker):
             for item in [media_file1, media_file2, None]:
                 yield item
 
-    mocker.patch("multiprocessing.pool.ThreadPool.map_async", return_value=Mock())
+    mocker.patch("multiprocessing.pool.Pool.map_async", return_value=Mock())
     mocker.patch("cozy.media.importer.Importer._wait_for_job_to_complete")
     mocker.patch("cozy.model.library.Library.insert_many")
 

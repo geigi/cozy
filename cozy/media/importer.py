@@ -4,7 +4,7 @@ import logging
 import os
 import time
 from enum import Enum, auto
-from multiprocessing.pool import ThreadPool as Pool
+from multiprocessing.pool import Pool as Pool
 from typing import List, Set
 from urllib.parse import urlparse, unquote
 
@@ -28,6 +28,25 @@ class ScanStatus(Enum):
     SUCCESS = auto()
     ABORTED = auto()
     FINISHED_WITH_ERRORS = auto()
+
+
+def import_file(path: str):
+    if not os.path.isfile(path):
+        return None
+
+    try:
+        media_detector = MediaDetector(path)
+        media_data = media_detector.get_media_data()
+    except NotAnAudioFile as e:
+        return None
+    except AudioFileCouldNotBeDiscovered as e:
+        return unquote(urlparse(str(e)).path)
+    except Exception as e:
+        log.error(e)
+        reporter.exception("media_detector", e)
+        return None
+
+    return media_data
 
 
 class Importer(EventSender):
@@ -74,7 +93,7 @@ class Importer(EventSender):
 
         pool = Pool()
         while True:
-            job = pool.map_async(self.import_file, itertools.islice(files_to_scan, CHUNK_SIZE))
+            job = pool.map_async(import_file, itertools.islice(files_to_scan, CHUNK_SIZE))
             self._wait_for_job_to_complete(job)
             import_result = job.get()
 
@@ -163,21 +182,3 @@ class Importer(EventSender):
 
     def _get_file_count_in_dir(self, dir):
         len([name for name in os.listdir(dir) if os.path.isfile(name)])
-
-    def import_file(self, path: str):
-        if not os.path.isfile(path):
-            return None
-
-        try:
-            media_detector = MediaDetector(path)
-            media_data = media_detector.get_media_data()
-        except NotAnAudioFile as e:
-            return None
-        except AudioFileCouldNotBeDiscovered as e:
-            return unquote(urlparse(str(e)).path)
-        except Exception as e:
-            log.error(e)
-            reporter.exception("media_detector", e)
-            return None
-
-        return media_data
