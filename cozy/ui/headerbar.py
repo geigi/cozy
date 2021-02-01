@@ -188,7 +188,10 @@ class Headerbar(HeaderBar):
         self._playback_control_view_model.open_book_detail()
 
     def _on_cover_enter_notify(self, widget: Gtk.Widget, __):
-        widget.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND1))
+        try:
+            widget.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND2))
+        except:
+            log.error("Broken mouse theme, failed to set cursor.")
 
     def _on_cover_leave_notify(self, widget: Gtk.Widget, __):
         widget.props.window.set_cursor(None)
