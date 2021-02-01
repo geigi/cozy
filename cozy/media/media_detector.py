@@ -42,10 +42,10 @@ class MediaDetector(EventSender):
             raise AudioFileCouldNotBeDiscovered(self.uri)
 
         is_valid_audio_file = self._is_valid_audio_file(discoverer_info)
-        discoverer_info.disconnect()
         if is_valid_audio_file:
             tag_reader = TagReader(self.uri, discoverer_info)
-            return tag_reader.get_tags()
+            tags = tag_reader.get_tags()
+            return tags
         else:
             raise AudioFileCouldNotBeDiscovered(self.uri)
 

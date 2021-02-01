@@ -176,6 +176,7 @@ class Importer(EventSender):
         except AudioFileCouldNotBeDiscovered as e:
             return unquote(urlparse(str(e)).path)
         except Exception as e:
+            log.error(e)
             reporter.exception("media_detector", e)
             return None
 
