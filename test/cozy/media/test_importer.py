@@ -92,7 +92,7 @@ def test_scan_emits_start_event(mocker):
     spy = mocker.spy(importer, "emit_event_main_thread")
     importer.scan()
 
-    spy.assert_has_calls(calls=[call("scan", ScanStatus.STARTED), call('scan-progress', 100.0), call("scan", ScanStatus.SUCCESS), call("new-or-updated-files", set())])
+    spy.assert_has_calls(calls=[call("scan", ScanStatus.STARTED), call('scan-progress', 0.025), call('scan-progress', 0.05), call('scan-progress', 1.0), call("scan", ScanStatus.SUCCESS), call("new-or-updated-files", set())])
 
 
 def test_scan_returns_file_names_that_could_not_be_imported(mocker):
@@ -100,7 +100,12 @@ def test_scan_returns_file_names_that_could_not_be_imported(mocker):
 
     files = {"1", "2"}
 
-    mocker.patch("multiprocessing.pool.ThreadPool.map", return_value=files)
+    class Mock:
+        def get(self):
+            return {"1", "2"}
+
+    mocker.patch("multiprocessing.pool.ThreadPool.map_async", return_value=Mock())
+    mocker.patch("cozy.media.importer.Importer._wait_for_job_to_complete")
     mocker.patch("cozy.model.library.Library.insert_many")
 
     importer = Importer()
@@ -112,11 +117,18 @@ def test_scan_returns_file_names_that_could_not_be_imported(mocker):
 def test_scan_returns_none_for_non_audio_files(mocker):
     from cozy.media.importer import Importer
 
-    def iterator():
-        for item in [None, None]:
-            yield item
+    class Mock:
+        def get(self):
+            return self.iterator()
 
-    mocker.patch("multiprocessing.pool.ThreadPool.map", return_value=iterator())
+        def iterator(self):
+            for item in [None, None]:
+                yield item
+
+
+
+    mocker.patch("multiprocessing.pool.ThreadPool.map_async", return_value=Mock())
+    mocker.patch("cozy.media.importer.Importer._wait_for_job_to_complete")
     mocker.patch("cozy.model.library.Library.insert_many")
 
     importer = Importer()
@@ -128,13 +140,18 @@ def test_scan_returns_none_for_non_audio_files(mocker):
 def test_scan_processes_all_files_even_if_many_are_not_audio_files(mocker):
     from cozy.media.importer import Importer
 
-    def iterator():
-        items = [None] * 200
-        items.append("test")
-        for item in items:
-            yield item
+    class Mock:
+        def get(self):
+            return self.iterator()
 
-    mocker.patch("multiprocessing.pool.ThreadPool.map", return_value=iterator())
+        def iterator(self):
+            items = [None] * 200
+            items.append("test")
+            for item in items:
+                yield item
+
+    mocker.patch("multiprocessing.pool.ThreadPool.map_async", return_value=Mock())
+    mocker.patch("cozy.media.importer.Importer._wait_for_job_to_complete")
     mocker.patch("cozy.model.library.Library.insert_many")
 
     importer = Importer()
@@ -173,11 +190,16 @@ def test_execute_import_returns_list_of_imported_files(mocker):
         chapters=[]
     )
 
-    def iterator():
-        for item in [media_file1, media_file2, None]:
-            yield item
+    class Mock:
+        def get(self):
+            return self.iterator()
 
-    mocker.patch("multiprocessing.pool.ThreadPool.map", return_value=iterator())
+        def iterator(self):
+            for item in [media_file1, media_file2, None]:
+                yield item
+
+    mocker.patch("multiprocessing.pool.ThreadPool.map_async", return_value=Mock())
+    mocker.patch("cozy.media.importer.Importer._wait_for_job_to_complete")
     mocker.patch("cozy.model.library.Library.insert_many")
 
     importer = Importer()
