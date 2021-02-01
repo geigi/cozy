@@ -41,6 +41,7 @@ class TagReader:
             modified=self._get_modified()
         )
 
+        self.discoverer_info.disconnect()
         return media_file
 
     def _get_book_name(self):

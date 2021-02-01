@@ -41,7 +41,9 @@ class MediaDetector(EventSender):
             log.info("Skipping file because it couldn't be detected: {}".format(self.uri))
             raise AudioFileCouldNotBeDiscovered(self.uri)
 
-        if self._is_valid_audio_file(discoverer_info):
+        is_valid_audio_file = self._is_valid_audio_file(discoverer_info)
+        discoverer_info.disconnect()
+        if is_valid_audio_file:
             tag_reader = TagReader(self.uri, discoverer_info)
             return tag_reader.get_tags()
         else:
