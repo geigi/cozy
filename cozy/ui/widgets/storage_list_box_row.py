@@ -4,6 +4,7 @@ from threading import Thread
 from gi.repository import Gtk
 
 import cozy.ui
+from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.db.storage import Storage
 from cozy.model.settings import Settings
 from cozy.ext import inject
@@ -20,6 +21,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
     _library: Library = inject.attr(Library)
     _block_list: StorageBlockList = inject.attr(StorageBlockList)
     _settings: Settings = inject.attr(Settings)
+    _filesystem_monitor = inject.attr(FilesystemMonitor)
 
     def __init__(self, parent, db_id, path, external, default=False):
         super(Gtk.ListBoxRow, self).__init__()
@@ -115,8 +117,10 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         # If not, add it to the database
         old_path = Storage.select().where(Storage.id == self.db_id).get().path
         self.path = new_path
-        Storage.update(path=new_path).where(Storage.id == self.db_id).execute()
+        is_external = self._filesystem_monitor.is_external(new_path)
+        Storage.update(path=new_path, external=is_external).where(Storage.id == self.db_id).execute()
         self._settings.invalidate()
+        self.set_external(is_external)
 
         # Run a reimport or rebase
         if old_path == "":

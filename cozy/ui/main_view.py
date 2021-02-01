@@ -179,8 +179,6 @@ class CozyUI(EventSender, metaclass=Singleton):
             "no_media_file_chooser")
         self.no_media_file_chooser.connect(
             "file-set", self.__on_no_media_folder_changed)
-        self.external_switch = self.window_builder.get_object(
-            "external_switch")
 
         self.auto_scan_switch = self.window_builder.get_object(
             "auto_scan_switch")
@@ -444,7 +442,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         the no media screen. Now we want to do a first scan instead of a rebase.
         """
         location = self.no_media_file_chooser.get_file().get_path()
-        external = self.external_switch.get_active()
+        external = self.fs_monitor.is_external(location)
         Storage.delete().where(Storage.path != "").execute()
         Storage.create(path=location, default=True, external=external)
         self._settings.invalidate()
