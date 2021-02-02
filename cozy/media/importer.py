@@ -1,4 +1,3 @@
-import copy
 import itertools
 import logging
 import os
@@ -8,13 +7,13 @@ from multiprocessing.pool import Pool as Pool
 from typing import List, Set
 from urllib.parse import urlparse, unquote
 
+from cozy.architecture.event_sender import EventSender
 from cozy.architecture.profiler import timing
+from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
+from cozy.ext import inject
 from cozy.media.media_detector import MediaDetector, NotAnAudioFile, AudioFileCouldNotBeDiscovered
 from cozy.media.media_file import MediaFile
 from cozy.model.library import Library
-from cozy.architecture.event_sender import EventSender
-from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
-from cozy.ext import inject
 from cozy.model.settings import Settings
 from cozy.report import reporter
 
@@ -71,8 +70,6 @@ class Importer(EventSender):
         new_or_changed_files, undetected_files = self._execute_import(files_to_scan)
         self._library.invalidate()
 
-        logging.info("Deleting no longer present files from db")
-        self._delete_files_no_longer_existent()
         self.emit_event_main_thread("scan-progress", 1)
 
         logging.info("Import finished")
@@ -173,12 +170,6 @@ class Importer(EventSender):
                 continue
 
             yield file
-
-    def _delete_files_no_longer_existent(self):
-        chapters = copy.copy(self._library.chapters)
-        for chapter in chapters:
-            if not os.path.isfile(chapter.file) and self._fs_monitor.is_path_online(chapter.file):
-                chapter.delete()
 
     def _get_file_count_in_dir(self, dir):
         len([name for name in os.listdir(dir) if os.path.isfile(name)])
