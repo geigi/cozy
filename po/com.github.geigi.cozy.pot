@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 21:56+0100\n"
+"POT-Creation-Date: 2021-02-02 18:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,15 +93,15 @@ msgid_plural "{years} years ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cozy/ui/album_element.py:63 cozy/ui/widgets/search_results.py:100
+#: cozy/ui/album_element.py:67 cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
 msgstr ""
 
-#: cozy/ui/book_detail_view.py:226
+#: cozy/ui/book_detail_view.py:234
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/ui/book_detail_view.py:229 data/ui/book_detail.ui:156
+#: cozy/ui/book_detail_view.py:237 data/ui/book_detail.ui:156
 msgid "Download"
 msgstr ""
 
@@ -113,15 +113,15 @@ msgstr ""
 msgid "Currently offline"
 msgstr ""
 
-#: cozy/ui/book_element.py:125
+#: cozy/ui/book_element.py:124
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/ui/book_element.py:128
+#: cozy/ui/book_element.py:127
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/ui/book_element.py:131
+#: cozy/ui/book_element.py:130
 msgid "Remove from library"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "All files"
 msgstr ""
 
-#: cozy/ui/main_view.py:378
+#: cozy/ui/main_view.py:376
 msgid "Audiobooks"
 msgstr ""
 
@@ -199,8 +199,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr ""
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:37
-#: cozy/view_model/library_view_model.py:131
+#: cozy/view_model/library_view_model.py:39
+#: cozy/view_model/library_view_model.py:133
 msgid "All"
 msgstr ""
 
@@ -247,6 +247,14 @@ msgstr ""
 
 #: data/ui/book_detail.ui:291
 msgid "Published"
+msgstr ""
+
+#: data/ui/book_detail.ui:325
+msgid "Some or all files of this book cannot be found."
+msgstr ""
+
+#: data/ui/book_detail.ui:348
+msgid "unavailable"
 msgstr ""
 
 #: data/ui/error_reporting.ui:23
@@ -350,50 +358,35 @@ msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 
-#: data/ui/main_window.ui:420
-msgid "External or Network drive?"
-msgstr ""
-
-#: data/ui/main_window.ui:443
-msgid "Are your audiobooks stored on an external or network drive?"
-msgstr ""
-
-#: data/ui/main_window.ui:461
-msgid ""
-"If they are you can enable offline mode for a book in the book overview. "
-"This keeps a local copy of the book that you can listen to on the go"
-msgstr ""
-
-#: data/ui/main_window.ui:495 data/ui/main_window.ui:554
-msgid "Auto scan switch"
-msgstr ""
-
-#: data/ui/main_window.ui:496 data/ui/main_window.ui:534
-#: data/ui/main_window.ui:555
+#: data/ui/main_window.ui:427 data/ui/main_window.ui:448
 msgid "Automatically import new audiobooks on startup"
 msgstr ""
 
-#: data/ui/main_window.ui:598
+#: data/ui/main_window.ui:447
+msgid "Auto scan switch"
+msgstr ""
+
+#: data/ui/main_window.ui:491
 msgid "Drag & Drop"
 msgstr ""
 
-#: data/ui/main_window.ui:615
+#: data/ui/main_window.ui:508
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr ""
 
-#: data/ui/main_window.ui:638
+#: data/ui/main_window.ui:531
 msgid "Location of your audiobooks"
 msgstr ""
 
-#: data/ui/main_window.ui:659
+#: data/ui/main_window.ui:552
 msgid "Set Audiobooks Directory"
 msgstr ""
 
-#: data/ui/main_window.ui:682
+#: data/ui/main_window.ui:575
 msgid "Load audiobooks from a directory, network drive or an external disk."
 msgstr ""
 
-#: data/ui/main_window.ui:700
+#: data/ui/main_window.ui:593
 msgid "You can add more storage locations later in the settings"
 msgstr ""
 
