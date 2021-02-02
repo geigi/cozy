@@ -70,7 +70,6 @@ class BookElement(Gtk.FlowBoxChild):
 
         if is_external(self.book.db_object) and not self.book.offline and not self._filesystem_monitor.get_book_online(
                 self.book):
-            super().set_sensitive(False)
             self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         else:
             self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
@@ -157,19 +156,14 @@ class BookElement(Gtk.FlowBoxChild):
         subprocess.Popen(['xdg-open', path])
 
     def __on_storage_changed(self, event, message):
-        if (event == "storage-online" and not super().get_sensitive()) or event == "external-storage-removed":
+        if event == "storage-online" or event == "external-storage-removed":
             if message in self.book.chapters[0].file:
-                super().set_sensitive(True)
                 self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
-        elif (event == "storage-offline" and super().get_sensitive()):
+        elif event == "storage-offline":
             if message in self.book.chapters[0].file and not self.book.offline:
-                super().set_sensitive(False)
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         elif event == "external-storage-added":
-            if self._filesystem_monitor.is_book_online(self.book.db_object):
-                super().set_sensitive(True)
-            else:
-                super().set_sensitive(False)
+            if not self._filesystem_monitor.is_book_online(self.book.db_object):
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         if event == "external-storage-removed":
             first_track = self.book.chapters[0]
