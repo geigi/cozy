@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 21:55+0100\n"
+"POT-Creation-Date: 2021-02-02 18:51+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
@@ -96,15 +96,15 @@ msgid_plural "{years} years ago"
 msgstr[0] "vor {years} Jahr"
 msgstr[1] "vor {years} Jahren"
 
-#: cozy/ui/album_element.py:63 cozy/ui/widgets/search_results.py:100
+#: cozy/ui/album_element.py:67 cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
 msgstr "Höre dieses Buch"
 
-#: cozy/ui/book_detail_view.py:226
+#: cozy/ui/book_detail_view.py:234
 msgid "Downloaded"
 msgstr "Heruntergeladen"
 
-#: cozy/ui/book_detail_view.py:229 data/ui/book_detail.ui:156
+#: cozy/ui/book_detail_view.py:237 data/ui/book_detail.ui:156
 msgid "Download"
 msgstr "Herunterladen"
 
@@ -116,15 +116,15 @@ msgstr "Öffne die Buchübersicht"
 msgid "Currently offline"
 msgstr "Aktuell offline"
 
-#: cozy/ui/book_element.py:125
+#: cozy/ui/book_element.py:124
 msgid "Mark as read"
 msgstr "Markiere: Abgeschlossen"
 
-#: cozy/ui/book_element.py:128
+#: cozy/ui/book_element.py:127
 msgid "Open in file browser"
 msgstr "Öffne in Dateibrowser"
 
-#: cozy/ui/book_element.py:131
+#: cozy/ui/book_element.py:130
 msgid "Remove from library"
 msgstr "Aus Bibliothek entfernen"
 
@@ -136,7 +136,7 @@ msgstr "Disc"
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: cozy/ui/main_view.py:378
+#: cozy/ui/main_view.py:376
 msgid "Audiobooks"
 msgstr "Hörbücher"
 
@@ -203,8 +203,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Dateityp von Dateien, die Cozy nicht importieren konnte"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:37
-#: cozy/view_model/library_view_model.py:131
+#: cozy/view_model/library_view_model.py:39
+#: cozy/view_model/library_view_model.py:133
 msgid "All"
 msgstr "Alle"
 
@@ -252,6 +252,16 @@ msgstr "Zuletzt gehört"
 #: data/ui/book_detail.ui:291
 msgid "Published"
 msgstr "Veröffentlicht"
+
+#: data/ui/book_detail.ui:325
+msgid "Some or all files of this book cannot be found."
+msgstr ""
+"Manche oder alle Dateien die zu diesem Buch gehören können nicht gefunden "
+"werden."
+
+#: data/ui/book_detail.ui:348
+msgid "unavailable"
+msgstr "nicht verfügbar"
 
 #: data/ui/error_reporting.ui:23
 msgid "User feedback"
@@ -371,57 +381,37 @@ msgstr ""
 "Cozy verwaltet automatisch alle Hörbücher in einem Ordner - deiner "
 "Bibliothek"
 
-#: data/ui/main_window.ui:420
-msgid "External or Network drive?"
-msgstr "Externer Datenträger oder Netzwerklaufwerk?"
-
-#: data/ui/main_window.ui:443
-msgid "Are your audiobooks stored on an external or network drive?"
-msgstr ""
-"Sind Deine Hörbücher auf einem externen oder Netzwerkdatenträger "
-"gespeichert?"
-
-#: data/ui/main_window.ui:461
-msgid ""
-"If they are you can enable offline mode for a book in the book overview. "
-"This keeps a local copy of the book that you can listen to on the go"
-msgstr ""
-"Ist das der Fall, kannst du den Offline Modus in der Buchübersicht "
-"aktivieren. Diese Funktion behält eine lokale Kopie des Buches, um es "
-"unterwegs zu hören"
-
-#: data/ui/main_window.ui:495 data/ui/main_window.ui:554
-msgid "Auto scan switch"
-msgstr "Auto-Scan Schalter"
-
-#: data/ui/main_window.ui:496 data/ui/main_window.ui:534
-#: data/ui/main_window.ui:555
+#: data/ui/main_window.ui:427 data/ui/main_window.ui:448
 msgid "Automatically import new audiobooks on startup"
 msgstr "Importiere neue Hörbücher automatisch beim Start"
 
-#: data/ui/main_window.ui:598
+#: data/ui/main_window.ui:447
+msgid "Auto scan switch"
+msgstr "Auto-Scan Schalter"
+
+#: data/ui/main_window.ui:491
 msgid "Drag & Drop"
 msgstr "Drag & Drop"
 
-#: data/ui/main_window.ui:615
+#: data/ui/main_window.ui:508
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr "Ziehe deine Hörbücher in Cozy um sie automatisch zu importieren"
 
-#: data/ui/main_window.ui:638
+#: data/ui/main_window.ui:531
 msgid "Location of your audiobooks"
 msgstr "Speicherort Deiner Hörbücher"
 
-#: data/ui/main_window.ui:659
+#: data/ui/main_window.ui:552
 msgid "Set Audiobooks Directory"
 msgstr "Wähle den Speicherort der Hörbücher"
 
-#: data/ui/main_window.ui:682
+#: data/ui/main_window.ui:575
 msgid "Load audiobooks from a directory, network drive or an external disk."
 msgstr ""
 "Lade Hörbücher von einem Ordner, einer Netzwerkfestplatte oder einer "
 "externen Festplatte"
 
-#: data/ui/main_window.ui:700
+#: data/ui/main_window.ui:593
 msgid "You can add more storage locations later in the settings"
 msgstr "Du kannst in den Einstellungen weitere Pfade für Hörbücher angeben"
 
@@ -752,10 +742,6 @@ msgstr "Verbleibende Zeit"
 #: data/ui/seek_bar.ui:84
 msgid "Remaining time of current part"
 msgstr "Verbleibende Zeit des aktuellen Kapitels"
-
-#: data/ui/headerbar.ui:41
-msgid "page0"
-msgstr "page0"
 
 #: data/ui/headerbar.ui:118
 msgid "Rewind 30 seconds"
