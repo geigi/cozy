@@ -19,9 +19,16 @@ Cozy is a modern audiobook player for Linux.
 
 # Install
 
-| Flatpak | openSUSE | Arch Linux | Solus | VoidLinux | elementaryOS |
-|--------------|:----------:|:------------:|:-----:|:-----------------:| --- |
-| {::nomarkdown}<a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>{:/} | {::nomarkdown}<center><a href="https://software.opensuse.org/package/cozy">cozy</a>{:/} | {::nomarkdown}<a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center>{:/} | {::nomarkdown}<a href="https://dev.getsol.us/source/cozy/">cozy</a>{:/} | {::nomarkdown}<a href="https://github.com/void-linux/void-packages/tree/master/srcpkgs/cozy">cozy</a>{:/} | Currently out of date. Please use Flatpak for now. | 
+| Distro | Package |
+|--------|:---------:|
+| Flatpak | {::nomarkdown}<a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>{:/} |
+| openSUSE | {::nomarkdown}<center><a href="https://software.opensuse.org/package/cozy">cozy</a>{:/} |
+| Arch Linux | {::nomarkdown}<a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center>{:/} |
+| VoidLinux | {::nomarkdown}<a href="https://github.com/void-linux/void-packages/tree/master/srcpkgs/cozy">cozy</a>{:/} |
+| Solus | {::nomarkdown}<a href="https://dev.getsol.us/source/cozy/">cozy</a>{:/} |
+| MX Linux | {::nomarkdown}<center><a href="https://forum.mxlinux.org/viewtopic.php?p=621071#p621071">Cozy</a>{:/} |
+| elementaryOS | Currently out of date. Please use Flatpak for now. |
+
 
 ## elementaryOS
 The App Center version of Cozy is currently out of date. elementaryOS ships with old versions of dependencies needed by Cozy. Those are not compatible anymore. Therefore I'm unable to update the App Center version to the latest version of Cozy. Please switch over to the Flatpak version for now. If you experience issues with moving your library, let me know!
