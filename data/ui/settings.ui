@@ -20,6 +20,11 @@
     <property name="can_focus">False</property>
     <property name="icon_name">emblem-default-symbolic</property>
   </object>
+  <object class="GtkImage" id="external_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">network-server-symbolic</property>
+  </object>
   <object class="GtkAdjustment" id="fadeout_duration_adjustment">
     <property name="lower">5</property>
     <property name="upper">61</property>
@@ -1210,6 +1215,32 @@
                       </object>
                       <packing>
                         <property name="expand">True</property>
+                        <property name="homogeneous">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToolItem">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Toggle this storage location to be internal/external.</property>
+                        <property name="halign">end</property>
+                        <child>
+                          <object class="GtkToggleButton" id="external_button">
+                            <property name="width_request">24</property>
+                            <property name="height_request">24</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
+                            <property name="image">external_image</property>
+                            <property name="always_show_image">True</property>
+                            <style>
+                              <class name="flat"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
                         <property name="homogeneous">False</property>
                       </packing>
                     </child>

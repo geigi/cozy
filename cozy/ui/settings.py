@@ -50,6 +50,8 @@ class Settings(EventSender):
         self.add_storage_button.connect("clicked", self.__on_add_storage_clicked)
         self.remove_storage_button = self.builder.get_object("remove_location_button")
         self.remove_storage_button.connect("clicked", self.__on_remove_storage_clicked)
+        self.external_button = self.builder.get_object("external_button")
+        self.external_button_handle_id = self.external_button.connect("clicked", self.__on_external_clicked)
         self.default_storage_button = self.builder.get_object("default_location_button")
         self.default_storage_button.connect("clicked", self.__on_default_storage_clicked)
         self.storage_list_box = self.builder.get_object("storage_list_box")
@@ -180,6 +182,7 @@ class Settings(EventSender):
         sensitive = not block
         self.storage_list_box.set_sensitive(sensitive)
         self.add_storage_button.set_sensitive(sensitive)
+        self.external_button.set_sensitive(sensitive)
 
         row = self.storage_list_box.get_selected_row()
         if row and row.get_default() != True:
@@ -230,8 +233,12 @@ class Settings(EventSender):
                 default_sensitive = False
             else:
                 default_sensitive = True
+            self.external_button.handler_block(self.external_button_handle_id)
+            self.external_button.set_active(row.external)
+            self.external_button.handler_unblock(self.external_button_handle_id)
 
         self.remove_storage_button.set_sensitive(default_sensitive)
+        self.external_button.set_sensitive(sensitive)
         self.default_storage_button.set_sensitive(default_sensitive)
 
         for child in self.storage_list_box.get_children():
@@ -274,6 +281,21 @@ class Settings(EventSender):
             self.remove_blacklist_button.set_sensitive(False)
         else:
             self.remove_blacklist_button.set_sensitive(True)
+
+    def __on_external_clicked(self, widget):
+        """
+        The external/internal button was clicked.
+        The new setting will be written to the cozy.
+        """
+        external = self.external_button.get_active()
+
+        row = self.storage_list_box.get_selected_row()
+        row.set_external(external)
+
+        if external:
+            self.emit_event("external-storage-added", row.path)
+        else:
+            self.emit_event("external-storage-removed", row.path)
 
     def __on_fadeout_adjustment_changed(self, adjustment):
         """

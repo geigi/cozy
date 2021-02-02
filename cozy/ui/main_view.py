@@ -179,6 +179,8 @@ class CozyUI(EventSender, metaclass=Singleton):
             "no_media_file_chooser")
         self.no_media_file_chooser.connect(
             "file-set", self.__on_no_media_folder_changed)
+        self.external_switch = self.window_builder.get_object(
+            "external_switch")
 
         self.auto_scan_switch = self.window_builder.get_object(
             "auto_scan_switch")
