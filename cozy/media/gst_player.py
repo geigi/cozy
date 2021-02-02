@@ -1,0 +1,215 @@
+import logging
+import threading
+import time
+from typing import Optional
+
+import gi
+
+from cozy.architecture.event_sender import EventSender
+from cozy.report import reporter
+
+gi.require_version('Gst', '1.0')
+from gi.repository import Gst
+
+log = logging.getLogger("gst_player")
+
+
+class GstPlayer(EventSender):
+    def __init__(self):
+        super().__init__()
+
+        self._bus: Optional[Gst.Bus] = None
+        self._player: Optional[Gst.Bin] = None
+        self._bus_signal_id: Optional[int] = None
+        self._playback_speed: float = 1.0
+        self._playback_speed_timer_running: bool = False
+
+    @property
+    def position(self) -> int:
+        if not self._is_player_loaded():
+            return 0
+
+        position = self._query_gst_time(self._player.query_position)
+
+        if position:
+            return position
+
+        log.warning("Failed to query position from player.")
+        reporter.warning("gst_player", "Failed to query position from player.")
+
+        return 0
+
+    @position.setter
+    def position(self, new_position_ns: int):
+        new_position_ns = max(0, new_position_ns)
+        duration = self._query_gst_time(self._player.query_duration)
+
+        if duration:
+            new_position_ns = min(new_position_ns, duration)
+
+        counter = 0
+        seeked = False
+        while not seeked and counter < 100:
+            seeked = self._player.seek(self._playback_speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH, Gst.SeekType.SET,
+                                       new_position_ns, Gst.SeekType.NONE, 0)
+
+            if not seeked:
+                counter += 1
+                time.sleep(0.01)
+
+        if not seeked:
+            log.info("Failed to seek, counter expired.")
+            reporter.warning("gst_player", "Failed to seek, counter expired.")
+
+    @property
+    def playback_speed(self) -> float:
+        return self._playback_speed
+
+    @playback_speed.setter
+    def playback_speed(self, value: float):
+        if not self._is_player_loaded():
+            return
+
+        self._playback_speed = value
+
+        if self._playback_speed_timer_running:
+            return
+
+        self._playback_speed_timer_running = True
+
+        t = threading.Timer(0.2, self._on_playback_speed_timer)
+        t.name = "PlaybackSpeedDelayTimer"
+        t.start()
+
+    @property
+    def loaded_file_path(self) -> Optional[str]:
+        if not self._is_player_loaded():
+            return None
+
+        uri = self._player.get_property()
+        if uri:
+            return uri.replace("file://", "")
+        else:
+            return None
+
+    def init(self):
+        if self._player:
+            self.dispose()
+
+        self._player = Gst.ElementFactory.make("playbin", "player")
+        scaletempo = Gst.ElementFactory.make("scaletempo", "scaletempo")
+        scaletempo.sync_state_with_parent()
+
+        audiobin = Gst.ElementFactory.make("bin", "audiosink")
+        audiobin.add(scaletempo)
+
+        audiosink = Gst.ElementFactory.make("autoaudiosink", "audiosink")
+        audiobin.add(audiosink)
+
+        scaletempo.link(audiosink)
+        pad = scaletempo.get_static_pad("sink")
+        ghost_pad = Gst.GhostPad.new("sink", pad)
+        audiobin.add_pad(ghost_pad)
+
+        self._player.set_property("audio-sink", audiobin)
+
+        self._bus = self._player.get_bus()
+        self._bus.add_signal_watch()
+        self._bus_signal_id = self._bus.connect("message", self._on_gst_message)
+
+    def dispose(self):
+        if not self._player:
+            return
+
+        if self._bus_signal_id:
+            self._bus.disconnect(self._bus_signal_id)
+
+        self._player.set_state(Gst.State.NULL)
+        self._playback_speed = 1.0
+        log.info("Dispose")
+        self.emit_event("dispose")
+
+    def load_file(self, path: str):
+        self.init()
+
+        self._player.set_property("uri", "file://" + path)
+        self._player.set_state(Gst.State.PAUSED)
+
+    def play(self):
+        if not self._is_player_loaded():
+            return
+
+        success = self._player.set_state(Gst.State.PLAYING)
+
+        if success == Gst.StateChangeReturn.FAILURE:
+            log.warning("Failed set gst player to play.")
+            reporter.warning("gst_player", "Failed set gst player to play.")
+
+    def pause(self):
+        if not self._is_player_loaded():
+            return
+
+        success = self._player.set_state(Gst.State.PAUSED)
+
+        if success == Gst.StateChangeReturn.FAILURE:
+            log.warning("Failed set gst player to pause.")
+            reporter.warning("gst_player", "Failed set gst player to pause.")
+
+    def _is_player_loaded(self) -> bool:
+        if not self._player:
+            return False
+
+        state = self._player.get_state(Gst.CLOCK_TIME_NONE)
+        if state != Gst.State.PLAYING and state != Gst.State.PAUSED:
+            return False
+
+        return True
+
+    @staticmethod
+    def _query_gst_time(query_function) -> Optional[int]:
+        success = False
+        counter = 0
+
+        while not success and counter < 10:
+            success, value = query_function(Gst.Format.TIME)
+
+            if success:
+                return value
+            else:
+                counter += 1
+                time.sleep(0.01)
+
+        return None
+
+    def _on_playback_speed_timer(self):
+        self._player.seek(self._playback_speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.ACCURATE,
+                          Gst.SeekType.SET, self.position, Gst.SeekType.NONE, 0)
+
+        __playback_speed_timer_running = False
+
+    def _on_gst_message(self, _, message: Gst.Message):
+        t = message.type
+        if t == Gst.MessageType.BUFFERING:
+            if message.percentage < 100:
+                self._player.set_state(Gst.State.PAUSED)
+                log.info("Buffering…")
+            else:
+                self._player.set_state(Gst.State.PLAYING)
+                log.info("Buffering finished.")
+        elif t == Gst.MessageType.EOS:
+            self.emit_event("file-finished")
+        elif t == Gst.MessageType.ERROR:
+            error, debug_msg = message.parse_error()
+
+            if error.code == Gst.ResourceError.NOT_FOUND:
+                self.emit_event("resource-not-found")
+                self.dispose()
+
+                log.warning("gst: Resource not found. Stopping player.")
+                reporter.warning("gst_player", "gst: Resource not found. Stopping player.")
+                return
+
+            reporter.error("player", error)
+            log.error(error)
+            log.debug(debug_msg)
+            self.emit_event("error", error)

@@ -261,13 +261,6 @@ class CozyUI(EventSender, metaclass=Singleton):
 
         self._importer.add_listener(self._on_importer_event)
 
-    def __load_last_book(self):
-        """
-        Loads the last book into the player
-        """
-        player.load_last_book()
-        if player.get_current_track():
-            pass
 
     def get_object(self, name):
         return self.window_builder.get_object(name)

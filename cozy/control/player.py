@@ -106,15 +106,6 @@ def init(filesystem_monitor: FilesystemMonitor):
     filesystem_monitor.add_listener(__on_storage_changed)
 
 
-def get_gst_bus():
-    """
-    Get the global gst bus.
-    :return: gst bus
-    """
-    global __bus
-    return __bus
-
-
 def get_playbin():
     """
     Get the global gst playbin.
@@ -150,18 +141,6 @@ def get_current_duration(wait=False):
             res = __player.query_position(Gst.Format.TIME)
 
     return res[1]
-
-
-def get_current_duration_ui():
-    """
-    current duration to display in ui
-    :return m: minutes
-    :return s: seconds
-    """
-    global __speed
-    s, ns = divmod(get_current_duration() / __speed, 1000000000)
-    m, s = divmod(s, 60)
-    return m, s
 
 
 def get_current_track():
@@ -214,15 +193,6 @@ def set_volume(volume):
     """
     global __player
     __player.set_property("volume", volume)
-
-
-def set_mute(mute):
-    """
-    Mute the player.
-    :param mute: Boolean
-    """
-    global __player
-    __player.set_property("mute", mute)
 
 
 def play_pause(track, jump=False):
@@ -547,57 +517,6 @@ def load_file(track, filesystem_monitor: FilesystemMonitor, offline_cache: Offli
         Book.id == __current_track.book.id).execute()
     jump_to_ns(track.position)
     emit_event("track-changed", track)
-
-
-@inject.autoparams()
-def load_last_book(filesystem_monitor: FilesystemMonitor, offline_cache: OfflineCache):
-    """
-    Load the last played book into the player.
-    """
-    global __current_track
-    global __player
-    global __wait_to_seek
-
-    last_book = Settings.get().last_played_book
-
-    if last_book and last_book.position != 0:
-
-        query = Track.select().where(Track.id == last_book.position)
-        if query.exists():
-            last_track = query.get()
-
-            if last_track:
-                __player.set_state(Gst.State.NULL)
-                if filesystem_monitor.is_track_online(last_track):
-                    path = last_track.file
-                else:
-                    path = offline_cache.get_cached_path(last_track)
-                    if not path:
-                        return
-                __player.set_property("uri", "file://" + path)
-                __wait_to_seek = True
-                __player.set_state(Gst.State.PAUSED)
-                __current_track = last_track
-
-                Book.update(last_played=int(time.time())).where(
-                    Book.id == last_book.id).execute()
-
-                emit_event("track-changed", last_track)
-
-
-def save_current_playback_speed(book=None, speed=None):
-    """
-    Save the current or given playback speed to the cozy.db.
-    :param book: Optional: Save for the given book
-    :param speed: Optional: Save the given speed
-    """
-    global __speed
-    if book is None:
-        book = get_current_track().book
-    if speed is None:
-        speed = __speed
-
-    Book.update(playback_speed=speed).where(Book.id == book.id).execute()
 
 
 def save_current_book_position(track, pos=None):
