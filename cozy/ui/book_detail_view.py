@@ -46,8 +46,11 @@ class BookDetailView(Gtk.EventBox):
 
     cover_image: Gtk.Image = Gtk.Template.Child()
 
+    unavailable_box: Gtk.Box = Gtk.Template.Child()
+
     chapter_box: Gtk.Box = Gtk.Template.Child()
     book_overview_scroller: Gtk.ScrolledWindow = Gtk.Template.Child()
+
 
     _view_model: BookDetailViewModel = inject.attr(BookDetailViewModel)
     _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
@@ -71,7 +74,7 @@ class BookDetailView(Gtk.EventBox):
     def _connect_view_model(self):
         self._view_model.bind_to("book", self._on_book_changed)
         self._view_model.bind_to("playing", self._on_play_changed)
-        self._view_model.bind_to("is_book_available", self._view_model.open_library)
+        self._view_model.bind_to("is_book_available", self._on_book_available_changed)
         self._view_model.bind_to("downloaded", self._set_book_download_status)
         self._view_model.bind_to("current_chapter", self._on_current_chapter_changed)
         self._view_model.bind_to("last_played_text", self._on_last_played_text_changed)
@@ -117,6 +120,7 @@ class BookDetailView(Gtk.EventBox):
         self._set_book_download_status()
         self._set_progress()
         self._on_play_changed()
+        self._on_book_available_changed()
 
         self._main_stack.set_visible_child_name("book_overview")
         self._toolbar_revealer.set_reveal_child(False)
@@ -133,6 +137,10 @@ class BookDetailView(Gtk.EventBox):
             log.error("_current_selected_chapter is null. Skipping...")
             reporter.error("book_detail_view",
                            "_current_selected_chapter was NULL. No ply/pause chapter icon was changed")
+
+    def _on_book_available_changed(self):
+        info_visibility = not self._view_model.is_book_available
+        self.unavailable_box.set_visible(info_visibility)
 
     def _on_current_chapter_changed(self):
         if self._current_selected_chapter:

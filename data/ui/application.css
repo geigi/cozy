@@ -1,28 +1,43 @@
 .white {
-  color: white;
+    color: white;
 }
 
 .box_hover {
-  color: @theme_selected_fg_color;
-  background: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+    background: @theme_selected_bg_color;
 }
 
 .selected {
-  color: @theme_selected_fg_color;
+    color: @theme_selected_fg_color;
 }
 
 .no_frame {
-  border-style: none;
+    border-style: none;
 }
 
 .sort_switcher_element {
-  font-size: 110%;
+    font-size: 110%;
 }
 
 .sort_switcher_element > .radio {
-  min-width: 100px;
+    min-width: 100px;
 }
 
 .no_padding {
-  padding: 0px;
+    padding: 0px;
+}
+
+.unavailable_box {
+    background-color: #ec4646;
+    border-radius: 25px;
+    padding: 3px;
+    padding-right: 10px;
+}
+
+.unavailable_image {
+    color: white;
+}
+
+.unavailable_label {
+    color: white;
 }
