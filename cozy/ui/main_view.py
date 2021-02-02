@@ -372,14 +372,6 @@ class CozyUI(EventSender, metaclass=Singleton):
             if Storage.select().count() > 0:
                 path = Storage.select().where(Storage.default == True).get().path
 
-            if not path:
-                path = os.path.join(os.path.expanduser("~"), _("Audiobooks"))
-
-                if not os.path.exists(path):
-                    os.mkdir(path)
-
-                Storage.create(path=path, default=True)
-
             self.no_media_file_chooser.set_current_folder(path)
             self.main_stack.props.visible_child_name = "no_media"
             self.block_ui_buttons(True)

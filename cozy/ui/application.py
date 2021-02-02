@@ -10,6 +10,7 @@ import distro
 
 import gi
 
+from cozy.db.storage import Storage
 from cozy.ui.widgets.filter_list_box import FilterListBox
 from cozy.ui.widgets.seek_bar import SeekBar
 
@@ -96,11 +97,11 @@ class Application(Gtk.Application):
 
         if Settings.get().first_start:
             Settings.update(first_start=False).execute()
-            path = str(Path.home()) + "/Audiobooks"
-            Settings.update(path=str(Path.home()) + "/Audiobooks").execute()
 
-            if not os.path.exists(path):
-                os.makedirs(path)
+            path = os.path.join(Path.home(), _("Audiobooks"))
+            Storage.create(path=path, default=True)
+
+            os.makedirs(path, exist_ok=True)
 
         self.add_window(self.ui.window)
         mpris = MPRIS(self)
