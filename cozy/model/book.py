@@ -5,7 +5,6 @@ from peewee import SqliteDatabase
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.db.book import Book as BookModel
-from cozy.db.storage_blacklist import StorageBlackList
 from cozy.db.track import Track as TrackModel
 from cozy.ext import inject
 from cozy.model.chapter import Chapter
@@ -178,10 +177,6 @@ class Book(Observable, EventSender):
             self._settings.last_played_book = None
 
         book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
-        data = list((t.file,) for t in book_tracks)
-        chunks = [data[x:x + 500] for x in range(0, len(data), 500)]
-        for chunk in chunks:
-            StorageBlackList.insert_many(chunk, fields=[StorageBlackList.path]).execute()
         ids = list(t.id for t in book_tracks)
         TrackModel.delete().where(TrackModel.id << ids).execute()
         self._db_object.delete_instance(recursive=True)
