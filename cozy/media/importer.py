@@ -63,10 +63,10 @@ class Importer(EventSender):
     def scan(self):
         logging.info("Starting import")
         self.emit_event_main_thread("scan", ScanStatus.STARTED)
-        self.emit_event_main_thread("scan-progress", 0.025)
 
         files_to_scan = self._get_files_to_scan()
-        self.emit_event_main_thread("scan-progress", 0.05)
+
+        self.emit_event_main_thread("scan-progress", 0.025)
         new_or_changed_files, undetected_files = self._execute_import(files_to_scan)
         self._library.invalidate()
 
@@ -86,6 +86,7 @@ class Importer(EventSender):
         undetected_files = set()
 
         self._files_count = self._count_files_to_scan()
+        self.emit_event_main_thread("scan-progress", 0.05)
         self._progress = 0
 
         pool = Pool()
