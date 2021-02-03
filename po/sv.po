@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-02 18:51+0100\n"
+"POT-Creation-Date: 2021-02-03 17:06+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Åke Engelbrektson, 2021\n"
 "Language-Team: Swedish (https://www.transifex.com/geigi/teams/78138/sv/)\n"
@@ -97,6 +97,10 @@ msgid_plural "{years} years ago"
 msgstr[0] "{years} år sedan"
 msgstr[1] "{years} år sedan"
 
+#: cozy/application.py:101
+msgid "Audiobooks"
+msgstr "Ljudböcker"
+
 #: cozy/ui/album_element.py:67 cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
 msgstr "Spela upp denna bok"
@@ -136,10 +140,6 @@ msgstr "Skiva"
 #: cozy/ui/file_not_found_dialog.py:69
 msgid "All files"
 msgstr "Alla filer"
-
-#: cozy/ui/main_view.py:376
-msgid "Audiobooks"
-msgstr "Ljudböcker"
 
 #: cozy/ui/settings.py:87
 msgid "Feedback"
@@ -204,8 +204,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Typ av mediefil som Cozy inte kunde importera"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:39
-#: cozy/view_model/library_view_model.py:133
+#: cozy/view_model/library_view_model.py:43
+#: cozy/view_model/library_view_model.py:137
 msgid "All"
 msgstr "Alla"
 
@@ -292,7 +292,7 @@ msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr "Cozy är öppen källkod och återkopplingskoden kan inspekteras här:"
 
-#: data/ui/file_not_found.ui:19
+#: data/ui/file_not_found.ui:19 data/ui/delete_book_dialog.ui:31
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -833,3 +833,17 @@ msgstr "Alternativmeny"
 #: data/ui/headerbar.ui:450
 msgid "Open the options popover"
 msgstr "Öppna inställningsfönstret"
+
+#: data/ui/delete_book_dialog.ui:45
+msgid "Delete Audiobook"
+msgstr "Ta bort ljudbok"
+
+#: data/ui/delete_book_dialog.ui:105
+msgid "Are you sure you want to delete the selected audiobook?"
+msgstr "Vill du verkligen ta bort den markerade ljudboken?"
+
+#: data/ui/delete_book_dialog.ui:126
+msgid "The audiobook will be removed from your disk and from Cozy's library."
+msgstr ""
+"Denna ljudbok kommer att tas bort från din hårddisk och från Cozys "
+"bibliotek."
