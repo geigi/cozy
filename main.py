@@ -127,10 +127,8 @@ if __name__ == '__main__':
     # All cozy imports are happening here because multiprocessing needs to be setup first
     # Some modules import multiprocessing which would lead to an exception
     # when setting the start method
-    from cozy.ui.application import Application
-    from cozy.ui.widgets.filter_list_box import FilterListBox
+    from cozy.application import Application
     from cozy.ui.widgets.list_box_extensions import extend_gtk_container
-    from cozy.ui.widgets.filter_list_box import FilterListBox
     from cozy.ui.widgets.list_box_extensions import extend_gtk_container
 
     main()
