@@ -3,6 +3,7 @@ from gi.repository.Gtk import Builder
 
 from cozy.ext import inject
 from cozy.ui.book_element import BookElement
+from cozy.ui.delete_book_view import DeleteBookView
 from cozy.ui.widgets.filter_list_box import FilterListBox
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
 
@@ -148,4 +149,16 @@ class LibraryView:
         return True
 
     def _on_book_removed(self, widget, book):
-        self._view_model.remove_book(book)
+        delete_from_library = True
+        delete_files = False
+
+        if self._view_model.book_files_exist(book):
+            dialog = DeleteBookView()
+            delete_from_library = delete_files = dialog.get_delete_book()
+            dialog.destroy()
+
+        if delete_files:
+            self._view_model.delete_book_files(book)
+
+        if delete_from_library:
+            self._view_model.remove_book(book)
