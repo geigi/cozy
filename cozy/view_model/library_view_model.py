@@ -12,7 +12,6 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library
-from cozy.model.storage_block_list import StorageBlockList
 from cozy.open_view import OpenView
 from cozy.report import reporter
 from cozy.ui.book_element import BookElement
@@ -33,7 +32,6 @@ class LibraryViewModel(Observable, EventSender):
     _model = inject.attr(Library)
     _importer: Importer = inject.attr(Importer)
     _player: Player = inject.attr(Player)
-    _storage_block_list: StorageBlockList = inject.attr(StorageBlockList)
 
     def __init__(self):
         super().__init__()
