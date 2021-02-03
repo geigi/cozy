@@ -66,18 +66,6 @@ def books():
     return Book.select()
 
 
-def authors():
-    return Book.select(Book.author).distinct().order_by(Book.author)
-
-
-def readers():
-    return Book.select(Book.reader).distinct().order_by(Book.reader)
-
-
-def Search(search):
-    return Track.select().where(search in Track.name)
-
-
 def get_tracks(book):
     """
     Find all tracks that belong to a given book
@@ -86,18 +74,6 @@ def get_tracks(book):
     :return: all tracks belonging to the book object
     """
     return Track.select().join(Book).where(Book.id == book.id).order_by(Track.disk, Track.number, Track.name)
-
-
-def clean_db():
-    """
-    Delete everything from the database except settings.
-    """
-    q = Track.delete()
-    q.execute()
-    q = Book.delete()
-    q.execute()
-    q = ArtworkCache.delete()
-    q.execute()
 
 
 def get_track_for_playback(book):
@@ -119,133 +95,6 @@ def get_track_for_playback(book):
     else:
         track = None
     return track
-
-
-def get_track_path(track):
-    """
-    Returns the path to the file of a given track.
-    This returns the original path if online and otherwise a cached offline
-    version if available.
-    :param track: DB track object
-    :return: Path as string
-    """
-    pass
-
-
-# thanks to oleg-krv
-def get_book_duration(book):
-    """
-    Get the duration of a book in seconds.
-    :param book:
-    :return: duration of the book
-    """
-    duration = 0
-    for track in get_tracks(book):
-        duration += track.length
-
-    return duration
-
-
-def get_book_progress(book, include_current=True):
-    """
-    Get the progress of a book in seconds.
-    :param book:
-    :param include_current: Include the progress of the current track
-    :return: current progress of the book
-    """
-    progress = 0
-    if book.position == 0:
-        return 0
-    for track in get_tracks(book):
-        if track.id == book.position:
-            if include_current:
-                progress += int(track.position / 1000000000)
-            return progress
-
-        progress += track.length
-
-    return progress
-
-
-def get_book_remaining(book, include_current=True):
-    """
-    Get the remaining time of a book in seconds.
-    :param book:
-    :param include_current: Include the progress of the current track
-    :return: remaining time for the book
-    """
-    remaining = 0
-    passed_current = False
-    if book.position == 0:
-        return get_book_duration(book)
-    for track in get_tracks(book):
-        if passed_current:
-            remaining += track.length
-
-        if track.id == book.position:
-            passed_current = True
-            if include_current:
-                cur_remaining = track.length - (track.position / 1000000000)
-                if cur_remaining > 0:
-                    remaining += int(cur_remaining)
-
-    return remaining
-
-
-def get_track_from_book_time(book, seconds):
-    """
-    Return the track and the according time for a given book and it's time.
-    This is used when the user has the whole book position slider enabled
-    and is scrubbing.
-    Note: the seconds must be at 1.0 speed
-    :param book: 
-    :param seconds: seconds as float
-    :return: Track to play
-    :return: According time
-    """
-    elapsed_time = 0.0
-    current_track = None
-    current_time = 0.0
-    last_track = None
-
-    for track in get_tracks(book):
-        last_track = track
-        if elapsed_time + track.length > seconds:
-            current_track = track
-            current_time = seconds - elapsed_time
-            return current_track, current_time
-        else:
-            elapsed_time += track.length
-
-    return last_track, last_track.length
-
-
-def get_external_storage_locations():
-    """
-    Returns a list of all external storage locations.
-    """
-    directories = Storage.select().where(Storage.external == True)
-
-    return directories
-
-
-def remove_invalid_entries(ui=None, refresh=False):
-    """
-    Remove track entries from db that no longer exist in the filesystem.
-    """
-    # remove entries from the db that are no longer existent
-
-    from cozy.control.filesystem_monitor import FilesystemMonitor
-    filesystem_monitor = inject.instance(FilesystemMonitor)
-    for track in Track.select():
-        if not os.path.isfile(track.file) and filesystem_monitor.is_track_online(
-                track):
-            track.delete_instance()
-
-    clean_books()
-
-    if refresh:
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
 
 
 def clean_books():
@@ -275,16 +124,6 @@ def remove_tracks_with_path(ui, path):
     clean_books()
 
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
-
-
-def is_blacklisted(path):
-    """
-    Tests whether a given path is blacklisted.
-    """
-    if StorageBlackList.select().where(StorageBlackList.path == path).count() > 0:
-        return True
-    else:
-        return False
 
 
 def is_external(book):
