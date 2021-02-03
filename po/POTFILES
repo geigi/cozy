@@ -4,6 +4,7 @@ cozy/control/offline_cache.py
 cozy/control/player.py
 cozy/ui/widgets/sleep_timer.py
 cozy/tools.py
+cozy/application.py
 cozy/ui/album_element.py
 cozy/ui/book_detail_view.py
 cozy/ui/book_element.py
