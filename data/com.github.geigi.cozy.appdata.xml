@@ -49,6 +49,25 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="0.8.2" timestamp="1612102603">
+      <description>
+        <p>
+        This version of Cozy features an important change in library management.
+        Previously every file which was imported in your library but couldn't be found anymore was removed from the library during a scan.
+        Now audiobooks are not removed from your library automatically anymore. This prevents accidentally loosing the progress of a audiobook when a file can't be found temporarily.
+        To remove an audiobook from the library simply right-click on it and choose the remove from library option.
+        </p>
+        <ul>
+          <li>The download option will be enabled for audiobooks on removable or network drives automatically for each new storage location you add.</li>
+          <li>Unavailable books (books where a file can't be found) can now be opened to display the book detail view. They will be flagged with a little unavailable tag</li>
+          <li>Under the hood improvements in the media importer</li>
+          <li>Fix: When a different system language than English is used Cozy created two folders in the users home directory on the first startup, a translated and a English one. Now only the translated folder will be created.</li>
+          <li>Fix: A wrong mouse pointer was displayed with some pointer themes</li>
+          <li>Fix: A memory leak in the importer</li>
+          <li>As always, updated translations thanks to all of the translators!</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.8.1" timestamp="1612102603">
       <description>
         <p>

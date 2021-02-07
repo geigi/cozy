@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-02 18:51+0100\n"
+"POT-Creation-Date: 2021-02-03 17:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,6 +93,10 @@ msgid_plural "{years} years ago"
 msgstr[0] ""
 msgstr[1] ""
 
+#: cozy/application.py:101
+msgid "Audiobooks"
+msgstr ""
+
 #: cozy/ui/album_element.py:67 cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
 msgstr ""
@@ -131,10 +135,6 @@ msgstr ""
 
 #: cozy/ui/file_not_found_dialog.py:69
 msgid "All files"
-msgstr ""
-
-#: cozy/ui/main_view.py:376
-msgid "Audiobooks"
 msgstr ""
 
 #: cozy/ui/settings.py:87
@@ -199,8 +199,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr ""
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:39
-#: cozy/view_model/library_view_model.py:133
+#: cozy/view_model/library_view_model.py:43
+#: cozy/view_model/library_view_model.py:137
 msgid "All"
 msgstr ""
 
@@ -282,7 +282,7 @@ msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
 
-#: data/ui/file_not_found.ui:19
+#: data/ui/file_not_found.ui:19 data/ui/delete_book_dialog.ui:31
 msgid "Cancel"
 msgstr ""
 
@@ -800,4 +800,16 @@ msgstr ""
 
 #: data/ui/headerbar.ui:450
 msgid "Open the options popover"
+msgstr ""
+
+#: data/ui/delete_book_dialog.ui:45
+msgid "Delete Audiobook"
+msgstr ""
+
+#: data/ui/delete_book_dialog.ui:105
+msgid "Are you sure you want to delete the selected audiobook?"
+msgstr ""
+
+#: data/ui/delete_book_dialog.ui:126
+msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr ""

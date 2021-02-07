@@ -21,5 +21,6 @@
     <file preprocess="xml-stripblanks">book_detail.ui</file>
     <file preprocess="xml-stripblanks">seek_bar.ui</file>
     <file preprocess="xml-stripblanks">headerbar.ui</file>
+    <file preprocess="xml-stripblanks">delete_book_dialog.ui</file>
   </gresource>
 </gresources>

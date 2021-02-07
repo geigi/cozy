@@ -1,7 +1,8 @@
+import logging
+import os
 from enum import Enum, auto
 
 import cozy.ext.inject as inject
-
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
@@ -11,10 +12,12 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library
-from cozy.model.storage_block_list import StorageBlockList
 from cozy.open_view import OpenView
+from cozy.report import reporter
 from cozy.ui.book_element import BookElement
 from cozy.ui.import_failed_dialog import ImportFailedDialog
+
+log = logging.getLogger("library_view_model")
 
 
 class LibraryViewMode(Enum):
@@ -29,7 +32,6 @@ class LibraryViewModel(Observable, EventSender):
     _model = inject.attr(Library)
     _importer: Importer = inject.attr(Importer)
     _player: Player = inject.attr(Player)
-    _storage_block_list: StorageBlockList = inject.attr(StorageBlockList)
 
     def __init__(self):
         super().__init__()
@@ -146,6 +148,9 @@ class LibraryViewModel(Observable, EventSender):
     def open_library(self):
         self._notify("library_view_mode")
 
+    def book_files_exist(self, book: Book) -> bool:
+        return any(os.path.exists(chapter.file) for chapter in book.chapters)
+
     def _on_fs_monitor_event(self, event, _):
         if event == "storage-online":
             self._notify("authors")
@@ -200,3 +205,13 @@ class LibraryViewModel(Observable, EventSender):
 
     def open_book_detail(self, book: Book):
         self.emit_event(OpenView.BOOK, book)
+
+    def delete_book_files(self, book: Book):
+        for chapter in book.chapters:
+            try:
+                os.remove(chapter.file)
+                log.info("Deleted file: {}".format(chapter.file))
+            except Exception as e:
+                log.error("Failed to delete file: {}".format(chapter.file))
+                log.debug(e)
+                reporter.warning("library_view_model", "Failed to delete a file.")

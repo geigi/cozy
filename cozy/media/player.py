@@ -149,6 +149,7 @@ class Player(EventSender):
             if book and message:
                 book.position = message.id
                 self.volume = self._app_settings.volume
+                player.set_playback_speed(book.playback_speed)
             message = book
         if event == "book-finished":
             book = self.loaded_book
