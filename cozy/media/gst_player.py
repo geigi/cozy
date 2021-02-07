@@ -1,6 +1,7 @@
 import logging
 import threading
 import time
+from enum import Enum, auto
 from typing import Optional
 
 import gi
@@ -12,6 +13,12 @@ gi.require_version('Gst', '1.0')
 from gi.repository import Gst
 
 log = logging.getLogger("gst_player")
+
+
+class GstPlayerState(Enum):
+    STOPPED = auto()
+    PAUSED = auto()
+    PLAYING = auto()
 
 
 class GstPlayer(EventSender):
@@ -86,11 +93,42 @@ class GstPlayer(EventSender):
         if not self._is_player_loaded():
             return None
 
-        uri = self._player.get_property()
+        uri = self._player.get_property("uri")
         if uri:
             return uri.replace("file://", "")
         else:
             return None
+
+    @property
+    def state(self) -> GstPlayerState:
+        if not self._is_player_loaded():
+            return GstPlayerState.STOPPED
+
+        _, state, __ = self._player.get_state(Gst.CLOCK_TIME_NONE)
+        if state == Gst.State.PLAYING:
+            return GstPlayerState.PLAYING
+        elif state == Gst.State.PAUSED:
+            return GstPlayerState.PAUSED
+        else:
+            log.debug("GST player state was not playing or paused but {}.".format(state))
+            return GstPlayerState.STOPPED
+
+    @property
+    def volume(self) -> float:
+        if not self._is_player_loaded():
+            log.error("Could not determine volume because player is not loaded.")
+            return 1.0
+
+        return self._player.get_property("volume")
+
+    @volume.setter
+    def volume(self, new_value: float):
+        if not self._is_player_loaded():
+            log.error("Could not set volume because player is not loaded.")
+            return
+
+        volume = max(0.0, min(1.0, new_value))
+        self._player.set_property("volume", volume)
 
     def init(self):
         if self._player:
@@ -144,6 +182,8 @@ class GstPlayer(EventSender):
         if success == Gst.StateChangeReturn.FAILURE:
             log.warning("Failed set gst player to play.")
             reporter.warning("gst_player", "Failed set gst player to play.")
+        else:
+            self.emit_event("state", GstPlayerState.PLAYING)
 
     def pause(self):
         if not self._is_player_loaded():
@@ -154,12 +194,21 @@ class GstPlayer(EventSender):
         if success == Gst.StateChangeReturn.FAILURE:
             log.warning("Failed set gst player to pause.")
             reporter.warning("gst_player", "Failed set gst player to pause.")
+        else:
+            self.emit_event("state", GstPlayerState.PAUSED)
+
+    def stop(self):
+        if not self._is_player_loaded():
+            return
+
+        self.dispose()
+        self.emit_event("state", GstPlayerState.STOPPED)
 
     def _is_player_loaded(self) -> bool:
         if not self._player:
             return False
 
-        state = self._player.get_state(Gst.CLOCK_TIME_NONE)
+        _, state, __ = self._player.get_state(Gst.CLOCK_TIME_NONE)
         if state != Gst.State.PLAYING and state != Gst.State.PAUSED:
             return False
 

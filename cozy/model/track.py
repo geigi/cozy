@@ -3,6 +3,8 @@ from peewee import SqliteDatabase
 from cozy.db.track import Track as TrackModel
 from cozy.model.chapter import Chapter
 
+NS_TO_SEC = 10 ** 9
+
 
 class Track(Chapter):
     def __init__(self, db: SqliteDatabase, id: int):
@@ -49,6 +51,14 @@ class Track(Chapter):
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
+    def start_position(self) -> int:
+        return 0
+
+    @property
+    def end_position(self) -> int:
+        return int(self.length) * NS_TO_SEC
+
+    @property
     def file(self):
         return self._db_object.file
 
@@ -58,7 +68,7 @@ class Track(Chapter):
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
-    def length(self):
+    def length(self) -> float:
         return self._db_object.length
 
     @length.setter

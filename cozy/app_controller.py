@@ -5,6 +5,7 @@ from peewee import SqliteDatabase
 
 from cozy.control.offline_cache import OfflineCache
 from cozy.media.files import Files
+from cozy.media.gst_player import GstPlayer
 from cozy.media.player import Player
 from cozy.report import reporter
 from cozy.application_settings import ApplicationSettings
@@ -85,6 +86,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(HeaderbarViewModel, lambda: HeaderbarViewModel())
         binder.bind_to_constructor(PlaybackSpeedViewModel, lambda: PlaybackSpeedViewModel())
         binder.bind_to_constructor(SleepTimerViewModel, lambda: SleepTimerViewModel())
+        binder.bind_to_constructor(GstPlayer, lambda: GstPlayer())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR

@@ -29,7 +29,11 @@ class Settings:
 
     @last_played_book.setter
     def last_played_book(self, new_value: Book):
-        self._db_object.last_played_book = new_value
+        if new_value:
+            self._db_object.last_played_book = new_value._db_object
+        else:
+            self._db_object.last_played_book = None
+
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property

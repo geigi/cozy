@@ -74,6 +74,10 @@ class Library(EventSender):
 
         return last_book
 
+    @last_played_book.setter
+    def last_played_book(self, new_value: Optional[Book]):
+        self._settings.last_played_book = new_value
+
     def invalidate(self):
         for book in self._books:
             book.destroy_listeners()

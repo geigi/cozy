@@ -93,7 +93,7 @@ class PlaybackControlViewModel(Observable, EventSender):
                 self._notify("position")
                 self._notify("progress_percent")
                 self._notify("remaining_text")
-        elif event == "track-changed":
+        elif event == "chapter-changed":
             if message:
                 self.book = message
                 self._notify("book")

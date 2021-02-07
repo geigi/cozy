@@ -1,6 +1,5 @@
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
-from cozy.control import player
 from cozy.db.book import Book
 from cozy.ext import inject
 from cozy.media.player import Player
@@ -28,9 +27,9 @@ class PlaybackSpeedViewModel(Observable, EventSender):
     def playback_speed(self, new_value: float):
         if self._book:
             self._book.playback_speed = new_value
-            player.set_playback_speed(new_value)
+            self._player.speed = new_value
 
     def _on_player_event(self, event: str, message):
-        if event == "track-changed" and message:
+        if event == "chapter-changed" and message:
             self._book = message
             self._notify("playback_speed")

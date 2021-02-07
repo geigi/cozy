@@ -1,10 +1,8 @@
 import logging
 
-from gi.repository import Gtk, Gdk, GdkPixbuf, Gst, GObject
+from gi.repository import Gtk, Gdk, GdkPixbuf, GObject
 
-from cozy.control import player as player
 from cozy.control.artwork_cache import ArtworkCache
-from cozy.control.db import get_track_for_playback
 from cozy.ext import inject
 from cozy.model.book import Book
 
@@ -183,16 +181,6 @@ class AlbumElement(Gtk.Box):
             return False
 
         self.emit("play-pause-clicked", self.book.db_object)
-        track = get_track_for_playback(self.book.db_object)
-        current_track = player.get_current_track()
-
-        if current_track and current_track.book.id == self.book.db_object.id:
-            player.play_pause(None)
-            if player.get_gst_player_state() == Gst.State.PLAYING:
-                player.jump_to_ns(track.position)
-        else:
-            player.load_file(track)
-            player.play_pause(None, True)
 
         return True
 

@@ -12,7 +12,7 @@ class Chapter(ABC, EventSender):
 
     @property
     @abstractmethod
-    def name(self):
+    def name(self) -> str:
         pass
 
     @name.setter
@@ -22,7 +22,7 @@ class Chapter(ABC, EventSender):
 
     @property
     @abstractmethod
-    def number(self):
+    def number(self) -> int:
         pass
 
     @number.setter
@@ -32,7 +32,7 @@ class Chapter(ABC, EventSender):
 
     @property
     @abstractmethod
-    def disk(self):
+    def disk(self) -> int:
         pass
 
     @disk.setter
@@ -42,7 +42,7 @@ class Chapter(ABC, EventSender):
 
     @property
     @abstractmethod
-    def position(self):
+    def position(self) -> int:
         pass
 
     @position.setter
@@ -62,7 +62,7 @@ class Chapter(ABC, EventSender):
 
     @property
     @abstractmethod
-    def length(self):
+    def length(self) -> float:
         pass
 
     @length.setter
@@ -72,12 +72,22 @@ class Chapter(ABC, EventSender):
 
     @property
     @abstractmethod
-    def modified(self):
+    def modified(self) -> int:
         pass
 
     @modified.setter
     @abstractmethod
     def modified(self, new_modified: int):
+        pass
+
+    @property
+    @abstractmethod
+    def start_position(self) -> int:
+        pass
+
+    @property
+    @abstractmethod
+    def end_position(self) -> int:
         pass
 
     @abstractmethod

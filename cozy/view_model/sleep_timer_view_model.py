@@ -145,7 +145,7 @@ class SleepTimerViewModel(Observable):
             os.system(command)
 
     def _on_player_changed(self, event, _):
-        if event == "track-changed":
+        if event == "chapter-changed":
             self.stop_after_chapter = False
             self._notify("stop_after_chapter")
         elif event == "play":

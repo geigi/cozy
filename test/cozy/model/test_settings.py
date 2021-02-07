@@ -48,7 +48,7 @@ def test_last_played_book_returns_correct_value(peewee_database):
     assert settings.last_played_book == Book.get()
 
 
-def test_setting_last_played_book_updates_in_settings_object_and_database(peewee_database):
+def test_setting_last_played_book_to_none_updates_in_settings_object_and_database(peewee_database):
     from cozy.model.settings import Settings
     from cozy.db.settings import Settings as SettingsModel
 
