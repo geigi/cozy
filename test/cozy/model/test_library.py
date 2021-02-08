@@ -362,6 +362,6 @@ def test_empty_last_book_returns_none():
     from cozy.model.library import Library
 
     library = Library()
-    library._settings.last_played_book = library.books[0]._db_object
+    library._settings.last_played_book = library.books[0]
 
     assert library.last_played_book is library.books[0]

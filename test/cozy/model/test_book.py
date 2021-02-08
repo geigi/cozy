@@ -252,7 +252,7 @@ def test_deleted_book_removed_from_last_played_book_if_necessary(peewee_database
         lambda binder: binder.bind(SqliteDatabase, peewee_database) and binder.bind(Settings, settings))
     book = Book(peewee_database, 1)
 
-    settings.last_played_book = book.db_object
+    settings.last_played_book = book
     book._on_chapter_event("chapter-deleted", book.chapters[0])
 
     assert settings.last_played_book == None
