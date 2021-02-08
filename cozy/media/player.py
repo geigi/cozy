@@ -53,7 +53,10 @@ class Player(EventSender):
 
     @property
     def loaded_chapter(self) -> Optional[Chapter]:
-        return self._book.current_chapter
+        if self._book:
+            return self._book.current_chapter
+        else:
+            return None
 
     @property
     def playing(self) -> bool:
@@ -147,6 +150,13 @@ class Player(EventSender):
         if state == GstPlayerState.PLAYING:
             self._gst_player.play()
 
+    def forward(self):
+        state = self._gst_player.state
+        if state != GstPlayerState.STOPPED:
+            self._forward_in_book()
+        if state == GstPlayerState.PLAYING:
+            self._gst_player.play()
+
     def destroy(self):
         self._gst_player.dispose()
 
@@ -195,6 +205,21 @@ class Player(EventSender):
         else:
             self._gst_player.position = 0
 
+    def _forward_in_book(self):
+        current_position = self._gst_player.position
+        old_chapter = self._book.current_chapter
+        chapter_number = self._book.chapters.index(self._book.current_chapter)
+
+        if current_position / NS_TO_SEC + REWIND_SECONDS < self._book.current_chapter.length:
+            self._gst_player.position = current_position + NS_TO_SEC * REWIND_SECONDS
+        elif chapter_number < len(self._book.chapters) - 1:
+            next_chapter = self._book.chapters[chapter_number + 1]
+            self._load_chapter(next_chapter)
+            self._gst_player.position = next_chapter.start_position + (
+                    NS_TO_SEC * REWIND_SECONDS - (old_chapter.length * NS_TO_SEC - current_position))
+        else:
+            self._gst_player.position = self._book.current_chapter.length * NS_TO_SEC
+
     def _rewind_feature(self):
         pass
         if self._app_settings.replay:
@@ -207,13 +232,13 @@ class Player(EventSender):
 
         index_current_chapter = self._book.chapters.index(self._book.current_chapter)
 
+        self._book.current_chapter.position = self._book.current_chapter.start_position
         if len(self._book.chapters) <= index_current_chapter + 1:
             log.info("Book finished, stopping playback.")
             self._finish_book()
             self._gst_player.stop()
         else:
             chapter = self._book.chapters[index_current_chapter + 1]
-            chapter.position = chapter.start_position
             self.play_pause_chapter(self._book, chapter)
 
     def _on_gst_player_event(self, event: str, message):
@@ -229,8 +254,8 @@ class Player(EventSender):
             self._stop_tick_thread()
             self.emit_event("pause")
         elif event == "state" and message == GstPlayerState.STOPPED:
-            self._book = None
             self._stop_tick_thread()
+            self._book = None
             self.emit_event("pause")
             self.emit_event("stop")
 
@@ -252,10 +277,11 @@ class Player(EventSender):
             self.play_status_updater = None
 
     def _emit_tick(self):
-        if self.loaded_chapter:
-            self.loaded_chapter.position = self.position
+        chapter = self.loaded_chapter
+        if chapter and self.loaded_book:
+            chapter.position = self.position
 
-        self.emit_event_main_thread("position", self.position)
+        self.emit_event_main_thread("position", chapter.position)
 
     def _fadeout_playback(self):
         duration = self._app_settings.sleep_timer_fadeout_duration * 20

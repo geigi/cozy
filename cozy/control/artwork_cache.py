@@ -98,11 +98,7 @@ class ArtworkCache:
 
         return resized_pixbuf
 
-    def _load_pixbuf_from_cache(self, book, size):
-        """
-        """
-        pixbuf = None
-
+    def get_album_art_path(self, book, size):
         query = ArtworkCacheModel.select().where(ArtworkCacheModel.book == book.id)
         if query.exists():
             try:
@@ -120,12 +116,21 @@ class ArtworkCache:
             if os.path.exists(cache_dir):
                 file_path = os.path.join(cache_dir, str(size) + ".jpg")
                 if os.path.exists(file_path):
-                    pixbuf = GdkPixbuf.Pixbuf.new_from_file(os.path.join(cache_dir, str(size) + ".jpg"))
+                    return file_path
                 else:
                     return None
         except Exception as e:
             log.warning(e)
             return None
+
+        return None
+
+    def _load_pixbuf_from_cache(self, book, size):
+        path = self.get_album_art_path(book, size)
+        if path:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
+        else:
+            pixbuf = None
 
         return pixbuf
 
