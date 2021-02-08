@@ -180,6 +180,8 @@ class Player(EventSender):
             log.error("There is no book loaded but there should be.")
             reporter.error("player", "There is no book loaded but there should be.")
 
+        self._library.last_played_book = self._book
+
         if self._gst_player.loaded_file_path == self._book.current_chapter.file:
             log.info("Not loading a new file because the new chapter is within the old file.")
         else:
@@ -239,6 +241,7 @@ class Player(EventSender):
             self._gst_player.stop()
         else:
             chapter = self._book.chapters[index_current_chapter + 1]
+            chapter.position = chapter.start_position
             self.play_pause_chapter(self._book, chapter)
 
     def _on_gst_player_event(self, event: str, message):
