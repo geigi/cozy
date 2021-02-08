@@ -4,11 +4,11 @@ import os
 
 from cozy.architecture.event_sender import EventSender
 from cozy.control.application_directories import get_cache_dir
-from cozy.control.db import get_tracks, get_db
+from cozy.control.db import get_tracks
 import cozy.tools as tools
 import cozy.ui
 
-from gi.repository import Gio, Gdk, GLib
+from gi.repository import Gio
 
 from cozy.db.book import Book
 from cozy.db.track import Track

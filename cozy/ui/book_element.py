@@ -95,10 +95,10 @@ class BookElement(Gtk.FlowBoxChild):
             self.art.play_button.set_from_icon_name(
                 "media-playback-start-symbolic", self.art.icon_size)
 
-    def _on_album_art_press_event(self, widget, book):
-        self.emit("play-pause-clicked", book)
+    def _on_album_art_press_event(self, _, __):
+        self.emit("play-pause-clicked", self.book)
 
-    def __on_button_press_event(self, widget, event):
+    def __on_button_press_event(self, _, event):
         if event.type == Gdk.EventType.BUTTON_PRESS and event.button == 3:
             if self.context_menu is None:
                 self.context_menu = self.__create_context_menu()
@@ -114,7 +114,7 @@ class BookElement(Gtk.FlowBoxChild):
                 self.emit("open-book-overview", self.book)
                 return True
 
-    def __on_key_press_event(self, widget, key):
+    def __on_key_press_event(self, _, key):
         if key.keyval == Gdk.KEY_Return and super().get_sensitive():
             self.emit("open-book-overview", self.book)
             return True
@@ -138,16 +138,16 @@ class BookElement(Gtk.FlowBoxChild):
         menu.show_all()
         return menu
 
-    def __remove_book(self, widget, parameter):
+    def __remove_book(self, _, __):
         if self.context_menu:
             self.context_menu.popdown()
 
         self.emit("book-removed", self.book)
 
-    def __mark_as_read(self, widget, parameter):
+    def __mark_as_read(self, _, __):
         self.book.position = -1
 
-    def __jump_to_folder(self, widget, parameter):
+    def __jump_to_folder(self, _, __):
         """
         Opens the folder containing this books files in the default file explorer.
         """

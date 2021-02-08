@@ -224,7 +224,7 @@ class Player(EventSender):
         elif event == "state" and message == GstPlayerState.PLAYING:
             self._book.last_played = int(time.time())
             self._start_tick_thread()
-            self.emit_event("play")
+            self.emit_event("play", self._book)
         elif event == "state" and message == GstPlayerState.PAUSED:
             self._stop_tick_thread()
             self.emit_event("pause")

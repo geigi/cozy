@@ -1,6 +1,7 @@
 import logging
 import os
 from enum import Enum, auto
+from typing import Optional
 
 import cozy.ext.inject as inject
 from cozy.application_settings import ApplicationSettings
@@ -105,9 +106,13 @@ class LibraryViewModel(Observable, EventSender):
 
         return sorted(split_strings_to_set(readers))
 
-    def playback_book(self, book: Book):
-        # Pause/Play book here
-        pass
+    @property
+    def current_book_in_playback(self) -> Optional[Book]:
+        return self._player.loaded_book
+
+    @property
+    def playing(self) -> bool:
+        return self._player.playing
 
     def remove_book(self, book: Book):
         book.remove()
@@ -187,17 +192,18 @@ class LibraryViewModel(Observable, EventSender):
 
     def _on_player_event(self, event, message):
         if event == "play":
-            track_id = message
-            book = None
-
-            for b in self._model.books:
-                if any(chapter.id == track_id for chapter in b.chapters):
-                    book = b
-                    break
+            book = message
 
             if book:
+                self._notify("current_book_in_playback")
+                self._notify("playing")
                 book.reload()
                 self._notify("books-filter")
+        elif event == "pause":
+            self._notify("playing")
+        elif event == "stop":
+            self._notify("playing")
+            self._notify("current_book_in_playback")
 
     def _on_model_event(self, event: str, message):
         if event == "rebase-finished":
@@ -215,3 +221,6 @@ class LibraryViewModel(Observable, EventSender):
                 log.error("Failed to delete file: {}".format(chapter.file))
                 log.debug(e)
                 reporter.warning("library_view_model", "Failed to delete a file.")
+
+    def play_book(self, book: Book):
+        self._player.play_pause_book(book)

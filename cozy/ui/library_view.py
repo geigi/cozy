@@ -1,7 +1,10 @@
+from typing import Optional
+
 from gi.repository import Gtk
 from gi.repository.Gtk import Builder
 
 from cozy.ext import inject
+from cozy.model.book import Book
 from cozy.ui.book_element import BookElement
 from cozy.ui.delete_book_view import DeleteBookView
 from cozy.ui.widgets.filter_list_box import FilterListBox
@@ -20,6 +23,7 @@ class LibraryView:
 
     def __init__(self, builder: Builder):
         self._builder = builder
+        self._connected_book_element: Optional[BookElement] = None
 
         self._get_ui_elements()
         self._connect_ui_elements()
@@ -55,6 +59,8 @@ class LibraryView:
         self._view_model.bind_to("books-filter", self._book_box.invalidate_filter)
         self._view_model.bind_to("books-filter", self._book_box.invalidate_sort)
         self._view_model.bind_to("selected_filter", self._select_filter_row)
+        self._view_model.bind_to("current_book_in_playback", self._current_book_in_playback)
+        self._view_model.bind_to("playing", self._playing)
 
     def _on_sort_stack_changed(self, widget, property):
         page = widget.props.visible_child_name
@@ -141,14 +147,14 @@ class LibraryView:
         elif self._view_model.library_view_mode == LibraryViewMode.READER:
             self._reader_box.select_row_with_content(self._view_model.selected_filter)
 
-    def _play_book_clicked(self, widget, book):
-        self._view_model.playback_book(book)
+    def _play_book_clicked(self, _, book):
+        self._view_model.play_book(book)
 
-    def _open_book_overview_clicked(self, widget, book):
+    def _open_book_overview_clicked(self, _, book):
         self._view_model.open_book_detail(book)
         return True
 
-    def _on_book_removed(self, widget, book):
+    def _on_book_removed(self, _, book):
         delete_from_library = True
         delete_files = False
 
@@ -162,3 +168,17 @@ class LibraryView:
 
         if delete_from_library:
             self._view_model.remove_book(book)
+
+    def _current_book_in_playback(self):
+        if self._connected_book_element:
+            self._connected_book_element.set_playing(False)
+
+        self._connected_book_element = next((book_element
+                                             for book_element
+                                             in self._book_box.get_children()
+                                             if book_element.book == self._view_model.current_book_in_playback),
+                                            None)
+
+    def _playing(self):
+        if self._connected_book_element:
+            self._connected_book_element.set_playing(self._view_model.playing)

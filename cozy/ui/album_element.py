@@ -180,7 +180,7 @@ class AlbumElement(Gtk.Box):
         if event.type == Gdk.EventType.BUTTON_PRESS and event.button != 1:
             return False
 
-        self.emit("play-pause-clicked", self.book.db_object)
+        self.emit("play-pause-clicked", self.book)
 
         return True
 
