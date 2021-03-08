@@ -105,7 +105,7 @@ class Application(Gtk.Application):
 
         self.add_window(self.ui.window)
         mpris = MPRIS(self)
-        mpris._on_current_changed(None)
+        mpris._on_current_changed()
 
     def handle_exception(self, exc_type, exc_value, exc_traceback):
         print("handle exception")

@@ -81,6 +81,8 @@ def teardown_db(db_path, models, test_db):
     test_db.drop_tables(models)
     test_db.close()
     os.remove(db_path)
+    os.remove(db_path + "-shm")
+    os.remove(db_path + "-wal")
 
 
 def prepare_db():

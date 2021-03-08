@@ -29,10 +29,9 @@ class SearchViewModel(Observable, EventSender):
     def authors(self):
         is_book_online = self._fs_monitor.get_book_online
         show_offline_books = not self._application_settings.hide_offline
-        swap_author_reader = self._application_settings.swap_author_reader
 
         authors = {
-            book.author if not swap_author_reader else book.reader
+            book.author
             for book
             in self._model.books
             if is_book_online(book) or show_offline_books
@@ -44,10 +43,9 @@ class SearchViewModel(Observable, EventSender):
     def readers(self):
         is_book_online = self._fs_monitor.get_book_online
         show_offline_books = not self._application_settings.hide_offline
-        swap_author_reader = self._application_settings.swap_author_reader
 
         readers = {
-            book.reader if not swap_author_reader else book.author
+            book.reader
             for book
             in self._model.books
             if is_book_online(book) or show_offline_books

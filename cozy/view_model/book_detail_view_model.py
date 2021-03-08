@@ -1,6 +1,7 @@
 from typing import Optional
 
 from cozy import tools
+from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
@@ -20,6 +21,7 @@ class BookDetailViewModel(Observable, EventSender):
     _offline_cache: OfflineCache = inject.attr(OfflineCache)
     _settings: Settings = inject.attr(Settings)
     _library = Library = inject.attr(Library)
+    _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
     def __init__(self):
         super().__init__()
@@ -33,6 +35,7 @@ class BookDetailViewModel(Observable, EventSender):
         self._player.add_listener(self._on_player_event)
         self._fs_monitor.add_listener(self._on_fs_monitor_event)
         self._offline_cache.add_listener(self._on_offline_cache_event)
+        self._app_settings.add_listener(self._on_app_setting_changed)
 
     @property
     def playing(self) -> bool:
@@ -199,3 +202,7 @@ class BookDetailViewModel(Observable, EventSender):
         elif event == "book-offline":
             self._book.downloaded = True
             self._notify("downloaded")
+
+    def _on_app_setting_changed(self, event, _):
+        if event == "swap-author-reader":
+            self._notify("book")

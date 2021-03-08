@@ -2,6 +2,7 @@ from typing import List
 
 from peewee import SqliteDatabase
 
+from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.db.book import Book as BookModel
@@ -19,6 +20,7 @@ class BookIsEmpty(Exception):
 class Book(Observable, EventSender):
     _chapters: List[Chapter] = None
     _settings: Settings = inject.attr(Settings)
+    _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
     def __init__(self, db: SqliteDatabase, id: int):
         super().__init__()
@@ -53,20 +55,34 @@ class Book(Observable, EventSender):
 
     @property
     def author(self):
-        return self._db_object.author
+        if not self._app_settings.swap_author_reader:
+            return self._db_object.author
+        else:
+            return self._db_object.reader
 
     @author.setter
     def author(self, new_author: str):
-        self._db_object.author = new_author
+        if not self._app_settings.swap_author_reader:
+            self._db_object.author = new_author
+        else:
+            self._db_object.reader = new_author
+
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
     def reader(self):
-        return self._db_object.reader
+        if not self._app_settings.swap_author_reader:
+            return self._db_object.reader
+        else:
+            return self._db_object.author
 
     @reader.setter
     def reader(self, new_reader: str):
-        self._db_object.reader = new_reader
+        if not self._app_settings.swap_author_reader:
+            self._db_object.reader = new_reader
+        else:
+            self._db_object.author = new_reader
+
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property

@@ -1,16 +1,19 @@
 import pytest
 from peewee import SqliteDatabase
 
+from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
 from cozy.extensions.set import split_strings_to_set
 from cozy.model.settings import Settings
+from test.cozy.mocks import ApplicationSettingsMock
 
 
 @pytest.fixture(autouse=True)
 def setup_inject(peewee_database):
     inject.clear()
     inject.configure(lambda binder: (binder.bind(SqliteDatabase, peewee_database),
-                                     binder.bind_to_constructor(Settings, lambda: Settings())))
+                                     binder.bind_to_constructor(Settings, lambda: Settings())
+                                     .bind_to_constructor(ApplicationSettings, lambda: ApplicationSettingsMock())))
     yield
     inject.clear()
 

@@ -80,10 +80,9 @@ class LibraryViewModel(Observable, EventSender):
     def authors(self):
         is_book_online = self._fs_monitor.get_book_online
         show_offline_books = not self._application_settings.hide_offline
-        swap_author_reader = self._application_settings.swap_author_reader
 
         authors = {
-            book.author if not swap_author_reader else book.reader
+            book.author
             for book
             in self._model.books
             if is_book_online(book) or show_offline_books or book.downloaded
@@ -95,10 +94,9 @@ class LibraryViewModel(Observable, EventSender):
     def readers(self):
         is_book_online = self._fs_monitor.get_book_online
         show_offline_books = not self._application_settings.hide_offline
-        swap_author_reader = self._application_settings.swap_author_reader
 
         readers = {
-            book.reader if not swap_author_reader else book.author
+            book.reader
             for book
             in self._model.books
             if is_book_online(book) or show_offline_books or book.downloaded
@@ -124,9 +122,8 @@ class LibraryViewModel(Observable, EventSender):
 
     def display_book_filter(self, book_element: BookElement):
         book = book_element.book
-        swap_author_reader = self._application_settings.swap_author_reader
-        author = book.author if not swap_author_reader else book.reader
-        reader = book.reader if not swap_author_reader else book.author
+        author = book.author
+        reader = book.reader
 
         hide_offline_books = self._application_settings.hide_offline
         book_is_online = self._fs_monitor.get_book_online(book)
@@ -178,6 +175,8 @@ class LibraryViewModel(Observable, EventSender):
         elif event == "swap-author-reader":
             self._notify("authors")
             self._notify("readers")
+            self._notify("books")
+            self._notify("books-filter")
 
     def _on_importer_event(self, event, message):
         if event == "scan" and message == ScanStatus.SUCCESS:

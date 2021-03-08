@@ -16,14 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 import logging
-import os
-
 from gi.repository import Gio, GLib, Gtk
 
 from random import randint
 
-from cozy.control.application_directories import get_artwork_cache_dir
 import cozy.ui
+from cozy.application_settings import ApplicationSettings
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.ext import inject
 from cozy.media.player import Player
@@ -177,6 +175,7 @@ class MPRIS(Server):
     __MPRIS_PATH = "/org/mpris/MediaPlayer2"
     _player: Player = inject.attr(Player)
     _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
+    _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
     def __init__(self, app):
         self.__app = app
@@ -196,6 +195,7 @@ class MPRIS(Server):
         Server.__init__(self, self.__bus, self.__MPRIS_PATH)
 
         self._player.add_listener(self._on_player_changed)
+        self._app_settings.add_listener(self._on_app_setting_changed)
 
     def Raise(self):
         self.__app.window.setup_window()
@@ -337,13 +337,17 @@ class MPRIS(Server):
 
     def _on_player_changed(self, event, message):
         if event == "chapter-changed":
-            self._on_current_changed(message)
+            self._on_current_changed()
         elif event == "play":
             self.__on_status_changed("Playing")
         elif event == "pause":
             self.__on_status_changed("Paused")
         elif event == "stop":
             self.__on_status_changed("Stopped")
+
+    def _on_app_setting_changed(self, event, _):
+        if event == "swap-author-reader":
+            self._on_current_changed()
 
     def __update_metadata(self, book: Book):
         # if track is None:
@@ -383,7 +387,7 @@ class MPRIS(Server):
     def __on_seeked(self, player, position):
         self.Seeked(position * (1000 * 1000))
 
-    def _on_current_changed(self, track):
+    def _on_current_changed(self):
         if not self._player.loaded_book:
             return
 
