@@ -12,6 +12,7 @@ from cozy.model.chapter import Chapter
 from cozy.model.library import Library
 from cozy.report import reporter
 from cozy.tools import IntervalTimer
+from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 
 log = logging.getLogger("mediaplayer")
 
@@ -186,7 +187,11 @@ class Player(EventSender):
             log.info("Not loading a new file because the new chapter is within the old file.")
         else:
             log.info("Loading new file for chapter.")
-            self._gst_player.load_file(chapter.file)
+            try:
+                self._gst_player.load_file(chapter.file)
+            except FileNotFoundError:
+                self._handle_file_not_found()
+                return
 
         self._gst_player.position = chapter.position
 
@@ -248,7 +253,7 @@ class Player(EventSender):
         if event == "file-finished":
             self._next_chapter()
         elif event == "resource-not-found":
-            self._book = None
+            self._handle_file_not_found()
         elif event == "state" and message == GstPlayerState.PLAYING:
             self._book.last_played = int(time.time())
             self._start_tick_thread()
@@ -257,10 +262,20 @@ class Player(EventSender):
             self._stop_tick_thread()
             self.emit_event("pause")
         elif event == "state" and message == GstPlayerState.STOPPED:
-            self._stop_tick_thread()
-            self._book = None
-            self.emit_event("pause")
-            self.emit_event("stop")
+            self._stop_playback()
+
+    def _handle_file_not_found(self):
+        if self.loaded_chapter:
+            FileNotFoundDialog(self.loaded_chapter).show()
+            self._stop_playback()
+        else:
+            log.warning("No chapter loaded, cannot display file not found dialog.")
+
+    def _stop_playback(self):
+        self._stop_tick_thread()
+        self._book = None
+        self.emit_event("pause")
+        self.emit_event("stop")
 
     def _finish_book(self):
         if self._book:

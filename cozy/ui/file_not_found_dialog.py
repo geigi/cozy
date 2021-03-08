@@ -1,28 +1,28 @@
 import os
 
 from gi.repository import Gtk
-import cozy.control.player as player
+
 import cozy.ui
-from cozy.db.track import Track
 from cozy.ext import inject
 from cozy.media.importer import Importer
+from cozy.model.chapter import Chapter
+from cozy.model.library import Library
 
 
 class FileNotFoundDialog():
-    """
-    Dialog that prompts the user to update a files location.
-    """
     _importer: Importer = inject.attr(Importer)
+    _library: Library = inject.attr(Library)
 
-    def __init__(self, file):
-        self.missing_file = file
+
+    def __init__(self, chapter: Chapter):
+        self.missing_chapter = chapter
         self.parent = cozy.ui.main_view.CozyUI()
         self.builder = Gtk.Builder.new_from_resource(
             "/com/github/geigi/cozy/file_not_found.ui")
         self.dialog = self.builder.get_object("dialog")
         self.dialog.set_modal(self.parent.window)
         self.builder.get_object("file_label").set_markup(
-            "<tt>" + file + "</tt>")
+            "<tt>" + chapter.file + "</tt>")
 
         cancel_button = self.builder.get_object("cancel_button")
         cancel_button.connect("clicked", self.close)
@@ -30,26 +30,13 @@ class FileNotFoundDialog():
         locate_button.connect("clicked", self.locate)
 
     def show(self):
-        """
-        show this dialog
-        """
         self.dialog.show()
 
-    def close(self, button):
-        """
-        Close this dialog and destroy it.
-        """
-        self.parent.dialog_open = False
+    def close(self, _):
         self.dialog.destroy()
-        player.stop()
-        player.unload()
-        player.emit_event("stop")
 
-    def locate(self, button):
-        """
-        Locate the file and update the database if the user selected one.
-        """
-        directory, filename = os.path.split(self.missing_file)
+    def locate(self, __):
+        directory, filename = os.path.split(self.missing_chapter.file)
         dialog = Gtk.FileChooserDialog("Please locate the file " + filename, self.parent.window,
                                        Gtk.FileChooserAction.OPEN,
                                        (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
@@ -59,7 +46,7 @@ class FileNotFoundDialog():
         filter.add_pattern(filename)
         filter.set_name(filename)
         dialog.add_filter(filter)
-        path, file_extension = os.path.splitext(self.missing_file)
+        path, file_extension = os.path.splitext(self.missing_chapter.file)
         filter = Gtk.FileFilter()
         filter.add_pattern("*" + file_extension)
         filter.set_name(file_extension + " files")
@@ -73,15 +60,8 @@ class FileNotFoundDialog():
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             new_location = dialog.get_filename()
-            Track.update(file=new_location).where(
-                Track.file == self.missing_file).execute()
-
-            directory, filename = os.path.split(new_location)
+            self.missing_chapter.file = new_location
             self._importer.scan()
-            self.parent.refresh_content()
             self.dialog.destroy()
-            self.parent.dialog_open = False
-            player.load_file(Track.select().where(Track.file == new_location).get())
-            player.play_pause(None, True)
 
         dialog.destroy()

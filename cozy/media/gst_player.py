@@ -1,4 +1,5 @@
 import logging
+import os
 import threading
 import time
 from enum import Enum, auto
@@ -30,6 +31,8 @@ class GstPlayer(EventSender):
         self._bus_signal_id: Optional[int] = None
         self._playback_speed: float = 1.0
         self._playback_speed_timer_running: bool = False
+
+        Gst.init(None)
 
     @property
     def position(self) -> int:
@@ -170,6 +173,9 @@ class GstPlayer(EventSender):
     def load_file(self, path: str):
         self.init()
 
+        if not os.path.exists(path):
+            raise FileNotFoundError()
+
         self._player.set_property("uri", "file://" + path)
         self._player.set_state(Gst.State.PAUSED)
 
@@ -251,8 +257,8 @@ class GstPlayer(EventSender):
             error, debug_msg = message.parse_error()
 
             if error.code == Gst.ResourceError.NOT_FOUND:
+                self.stop()
                 self.emit_event("resource-not-found")
-                self.dispose()
 
                 log.warning("gst: Resource not found. Stopping player.")
                 reporter.warning("gst_player", "gst: Resource not found. Stopping player.")
