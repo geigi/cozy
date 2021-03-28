@@ -183,6 +183,8 @@ class Player(EventSender):
         self._load_chapter(book.current_chapter)
 
     def _load_chapter(self, chapter: Chapter):
+        file_changed = False
+
         if not self._book:
             log.error("There is no book loaded but there should be.")
             reporter.error("player", "There is no book loaded but there should be.")
@@ -195,13 +197,16 @@ class Player(EventSender):
             log.info("Loading new file for chapter.")
             try:
                 self._gst_player.load_file(chapter.file)
-                self.emit_event("chapter-changed", self._book)
+                file_changed = True
             except FileNotFoundError:
                 self._handle_file_not_found()
                 return
 
         self._gst_player.position = chapter.position
-        self._book.position = chapter.id
+
+        if file_changed or self._book.position != chapter.id:
+            self._book.position = chapter.id
+            self.emit_event("chapter-changed", self._book)
 
     def _rewind_in_book(self):
         current_position = self._gst_player.position
