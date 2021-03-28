@@ -80,9 +80,6 @@ def teardown_db(db_path, models, test_db):
     print("Teardown database...")
     test_db.drop_tables(models)
     test_db.close()
-    os.remove(db_path)
-    os.remove(db_path + "-shm")
-    os.remove(db_path + "-wal")
 
 
 def prepare_db():
@@ -99,7 +96,7 @@ def prepare_db():
 
     print("Setup database...")
 
-    db_path = '/tmp/cozy_test.db'
+    db_path = ':memory:'
     test_db = PooledSqliteDatabase(db_path, pragmas=[('journal_mode', 'wal')])
     test_db.bind(models, bind_refs=False, bind_backrefs=False)
     test_db.connect()
