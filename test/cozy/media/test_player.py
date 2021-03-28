@@ -44,7 +44,7 @@ def test_loading_new_book_loads_chapter_and_book(mocker):
     player = Player()
 
     book = library.books[0]
-    player._load_book(book)
+    player._continue_book(book)
 
     assert player._book == book
     assert player._book.current_chapter == book.current_chapter
@@ -59,7 +59,7 @@ def test_loading_new_book_emits_changed_event(mocker):
     spy = mocker.spy(player, "emit_event")
 
     book = library.books[2]
-    player._load_book(book)
+    player._continue_book(book)
 
     spy.assert_has_calls(calls=[call("chapter-changed", book)])
 

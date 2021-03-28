@@ -45,7 +45,7 @@ class Player(EventSender):
         last_book = self._library.last_played_book
 
         if last_book:
-            self._load_book(last_book)
+            self._continue_book(last_book)
             self._rewind_feature()
 
     @property
@@ -124,7 +124,7 @@ class Player(EventSender):
         if self._book == book:
             self.play_pause()
         else:
-            self._load_book(book)
+            self._continue_book(book)
             self._gst_player.play()
 
     def play_pause_chapter(self, book: Book, chapter: Chapter):
@@ -136,8 +136,8 @@ class Player(EventSender):
         if self._book and self._book.current_chapter == chapter:
             self.play_pause()
 
-        if not self._book:
-            self._book = book
+        if self._book != book:
+            self._load_book(book)
 
         self._load_chapter(chapter)
         self._gst_player.play()
@@ -173,8 +173,14 @@ class Player(EventSender):
 
         self._book = book
         self._book.last_played = int(time.time())
-        self._load_chapter(self._book.current_chapter)
-        self.emit_event("chapter-changed", self._book)
+
+    def _continue_book(self, book: Book):
+        if self._book == book:
+            log.info("Not loading new book because it's unchanged.")
+            return
+
+        self._load_book(book)
+        self._load_chapter(book.current_chapter)
 
     def _load_chapter(self, chapter: Chapter):
         if not self._book:
@@ -189,15 +195,13 @@ class Player(EventSender):
             log.info("Loading new file for chapter.")
             try:
                 self._gst_player.load_file(chapter.file)
+                self.emit_event("chapter-changed", self._book)
             except FileNotFoundError:
                 self._handle_file_not_found()
                 return
 
         self._gst_player.position = chapter.position
-
-        if self._book.position != chapter.id:
-            self._book.position = chapter.id
-            self.emit_event("chapter-changed", self._book)
+        self._book.position = chapter.id
 
     def _rewind_in_book(self):
         current_position = self._gst_player.position
