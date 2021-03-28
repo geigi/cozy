@@ -160,7 +160,7 @@ class BookDetailViewModel(Observable, EventSender):
 
         if event == "play" or event == "pause":
             self._notify("playing")
-        elif event == "position":
+        elif event == "position" or event == "book-finished":
             self._notify("progress_percent")
             self._notify("remaining_text")
 

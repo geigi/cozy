@@ -291,6 +291,8 @@ class Player(EventSender):
             self._book.position = -1
             self._library.last_played_book = None
 
+        self.emit_event("book-finished", self._book)
+
     def _start_tick_thread(self):
         if self.play_status_updater:
             self.play_status_updater.stop()
