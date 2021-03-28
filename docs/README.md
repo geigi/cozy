@@ -136,6 +136,7 @@ The translators:
 - libreajans
 - linuxmasterclub
 - mardojai
+- milotype
 - mvainola
 - nvivant
 - oleg_krv
