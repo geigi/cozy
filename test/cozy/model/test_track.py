@@ -80,13 +80,14 @@ def test_file_returns_default_value(peewee_database):
 
 
 def test_setting_file_updates_in_track_object_and_database(peewee_database):
-    from cozy.db.track import Track as TrackModel
+    from cozy.db.track_to_file import TrackToFile
     from cozy.model.track import Track
 
     track = Track(peewee_database, 1)
     track.file = "altered.mp3"
+    file = TrackToFile.get(TrackToFile.track == track.id).file
     assert track.file == "altered.mp3"
-    assert TrackModel.get_by_id(1).file == "altered.mp3"
+    assert file.path == "altered.mp3"
 
 
 def test_length_returns_default_value(peewee_database):

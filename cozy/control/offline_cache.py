@@ -36,8 +36,6 @@ class OfflineCache(EventSender):
 
     def __init__(self):
         super().__init__()
-        self.ui = cozy.ui.main_view.CozyUI()
-
         from cozy.media.importer import Importer
         self._importer = inject.instance(Importer)
 

@@ -1,6 +1,7 @@
 from peewee import SqliteDatabase
 
 from cozy.db.track import Track as TrackModel
+from cozy.db.track_to_file import TrackToFile
 from cozy.model.chapter import Chapter
 
 NS_TO_SEC = 10 ** 9
@@ -13,6 +14,7 @@ class Track(Chapter):
         self.id: int = id
 
         self._db_object: TrackModel = TrackModel.get(self.id)
+        self._track_to_file_db_object: TrackToFile = TrackToFile.get(TrackToFile.track == self.id)
 
     @property
     def name(self):
@@ -60,12 +62,13 @@ class Track(Chapter):
 
     @property
     def file(self):
-        return self._db_object.file
+        return self._track_to_file_db_object.file.path
 
     @file.setter
     def file(self, new_file: str):
-        self._db_object.file = new_file
-        self._db_object.save(only=self._db_object.dirty_fields)
+        file = self._track_to_file_db_object.file
+        file.path = new_file
+        file.save(only=file.dirty_fields)
 
     @property
     def length(self) -> float:

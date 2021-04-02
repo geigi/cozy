@@ -6,6 +6,7 @@ from peewee import SqliteDatabase
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.profiler import timing
 from cozy.db.book import Book as BookModel
+from cozy.db.file import File
 from cozy.db.track import Track
 from cozy.ext import inject
 from cozy.extensions.set import split_strings_to_set
@@ -117,20 +118,30 @@ class Library(EventSender):
                 continue
 
             book = next((book for book in book_db_objects if book.name == media_file.book_name), None)
+            file = self._get_file_db_object(media_file.path)
 
             if not book:
                 book = self._import_or_update_book(media_file)
                 book_db_objects.add(book)
 
             if len(media_file.chapters) == 1:
-                track = self._get_track_dictionary_for_db(media_file, book)
+                tracks = self._get_track_list_for_db(media_file, book)
             else:
                 raise NotImplementedError
 
             if media_file.path not in self.files:
-                yield track
+                for track in tracks:
+                    yield track
             else:
                 self._update_track_db_object(media_file, book)
+
+    def _get_file_db_object(self, path: str) -> File:
+        query = File.select(File.path == path)
+
+        if query.exists():
+            return query.get()
+        else:
+            return File.create(path=path)
 
     def _import_or_update_book(self, media_file):
         if BookModel.select(BookModel.name).where(BookModel.name == media_file.book_name).count() < 1:
@@ -139,17 +150,21 @@ class Library(EventSender):
             book = self._update_book_db_object(media_file)
         return book
 
-    def _get_track_dictionary_for_db(self, media_file: MediaFile, book: BookModel):
-        return {
-            "name": media_file.chapters[0].name,
-            "number": media_file.track_number,
-            "disk": media_file.disk,
-            "book": book,
-            "file": media_file.path,
-            "length": media_file.length,
-            "modified": media_file.modified,
-            "position": media_file.chapters[0].position
-        }
+    def _get_track_list_for_db(self, media_file: MediaFile, book: BookModel):
+        tracks = []
+
+        for chapter in media_file.chapters:
+            tracks.append({
+                "name": chapter.name,
+                "number": media_file.track_number,
+                "disk": media_file.disk,
+                "book": book,
+                "length": media_file.length,
+                "modified": media_file.modified,
+                "position": media_file.chapters[0].position
+            })
+
+        return tracks
 
     def _update_track_db_object(self, media_file: MediaFile, book: BookModel):
         Track.update(name=media_file.chapters[0].name,
