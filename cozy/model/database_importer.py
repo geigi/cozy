@@ -35,7 +35,6 @@ class DatabaseImporter:
                 continue
 
             book = next((book for book in book_db_objects if book.name == media_file.book_name), None)
-            file = self._get_file_db_object(media_file.path)
 
             if not book:
                 book = self._import_or_update_book(media_file)
@@ -49,14 +48,6 @@ class DatabaseImporter:
                     yield track
             else:
                 self._update_track_db_object(media_file, book)
-
-    def _get_file_db_object(self, path: str) -> File:
-        query = File.select(File.path == path)
-
-        if query.exists():
-            return query.get()
-        else:
-            return File.create(path=path)
 
     def _import_or_update_book(self, media_file):
         if BookModel.select(BookModel.name).where(BookModel.name == media_file.book_name).count() < 1:

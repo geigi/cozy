@@ -66,6 +66,8 @@ def test_update_track_db_object_updates_object():
     from cozy.db.book import Book
     from cozy.media.chapter import Chapter
     from cozy.db.track import Track
+    from cozy.db.file import File
+    from cozy.db.track_to_file import TrackToFile
 
     database_importer = DatabaseImporter()
 
@@ -85,13 +87,14 @@ def test_update_track_db_object_updates_object():
 
     database_importer._update_track_db_object(media_file, book)
 
-    track_in_db: Track = Track.select().where(Track.file == "test.mp3").get()
+    track_to_file: TrackToFile = TrackToFile.select().join(File).where(TrackToFile.file.path == "test.mp3").get()
+    track: Track = track_to_file.track
 
-    assert track_in_db.name == "New Chapter"
-    assert track_in_db.disk == 999
-    assert track_in_db.number == 999
-    assert track_in_db.length == 1234567
-    assert track_in_db.modified == 1234567
+    assert track.name == "New Chapter"
+    assert track.disk == 999
+    assert track.number == 999
+    assert track.length == 1234567
+    assert track.modified == 1234567
 
 
 def test_create_track_db_object_creates_object():
