@@ -6,14 +6,11 @@ from peewee import SqliteDatabase
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.profiler import timing
 from cozy.db.book import Book as BookModel
-from cozy.db.file import File
-from cozy.db.track import Track
 from cozy.ext import inject
 from cozy.extensions.set import split_strings_to_set
-from cozy.media.media_file import MediaFile
-
 from cozy.model.book import Book, BookIsEmpty
 from cozy.model.chapter import Chapter
+from cozy.model.database_importer import DatabaseImporter
 from cozy.model.settings import Settings
 
 log = logging.getLogger("ui")
@@ -22,6 +19,7 @@ log = logging.getLogger("ui")
 class Library(EventSender):
     _db = cache = inject.attr(SqliteDatabase)
     _settings: Settings = inject.attr(Settings)
+    _database_importer: DatabaseImporter = inject.attr(DatabaseImporter)
 
     _books: List[Book] = []
     _chapters: Set[Chapter] = set()
@@ -104,94 +102,6 @@ class Library(EventSender):
                 self.emit_event_main_thread("rebase-progress", progress / chapter_count)
 
         self.emit_event_main_thread("rebase-finished")
-
-    def insert_many(self, media_files: Set[MediaFile]):
-        tracks = self._prepare_db_objects(media_files)
-
-        Track.insert_many(tracks).execute()
-
-    def _prepare_db_objects(self, media_files: Set[MediaFile]) -> Set[object]:
-        book_db_objects: Set[BookModel] = set()
-
-        for media_file in media_files:
-            if not media_file:
-                continue
-
-            book = next((book for book in book_db_objects if book.name == media_file.book_name), None)
-            file = self._get_file_db_object(media_file.path)
-
-            if not book:
-                book = self._import_or_update_book(media_file)
-                book_db_objects.add(book)
-
-            if len(media_file.chapters) == 1:
-                tracks = self._get_track_list_for_db(media_file, book)
-            else:
-                raise NotImplementedError
-
-            if media_file.path not in self.files:
-                for track in tracks:
-                    yield track
-            else:
-                self._update_track_db_object(media_file, book)
-
-    def _get_file_db_object(self, path: str) -> File:
-        query = File.select(File.path == path)
-
-        if query.exists():
-            return query.get()
-        else:
-            return File.create(path=path)
-
-    def _import_or_update_book(self, media_file):
-        if BookModel.select(BookModel.name).where(BookModel.name == media_file.book_name).count() < 1:
-            book = self._create_book_db_object(media_file)
-        else:
-            book = self._update_book_db_object(media_file)
-        return book
-
-    def _get_track_list_for_db(self, media_file: MediaFile, book: BookModel):
-        tracks = []
-
-        for chapter in media_file.chapters:
-            tracks.append({
-                "name": chapter.name,
-                "number": media_file.track_number,
-                "disk": media_file.disk,
-                "book": book,
-                "length": media_file.length,
-                "modified": media_file.modified,
-                "position": media_file.chapters[0].position
-            })
-
-        return tracks
-
-    def _update_track_db_object(self, media_file: MediaFile, book: BookModel):
-        Track.update(name=media_file.chapters[0].name,
-                     number=media_file.track_number,
-                     book=book,
-                     disk=media_file.disk,
-                     length=media_file.length,
-                     modified=media_file.modified) \
-            .where(Track.file == media_file.path) \
-            .execute()
-
-    def _update_book_db_object(self, media_file: MediaFile) -> BookModel:
-        BookModel.update(name=media_file.book_name,
-                         author=media_file.author,
-                         reader=media_file.reader,
-                         cover=media_file.cover) \
-            .where(BookModel.name == media_file.book_name) \
-            .execute()
-        return BookModel.select().where(BookModel.name == media_file.book_name).get()
-
-    def _create_book_db_object(self, media_file: MediaFile) -> BookModel:
-        return BookModel.create(name=media_file.book_name,
-                                author=media_file.author,
-                                reader=media_file.reader,
-                                cover=media_file.cover,
-                                position=0,
-                                rating=-1)
 
     def _load_all_books(self):
         for book_db_obj in BookModel.select(BookModel.id):

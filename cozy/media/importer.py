@@ -13,6 +13,7 @@ from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
 from cozy.ext import inject
 from cozy.media.media_detector import MediaDetector, NotAnAudioFile, AudioFileCouldNotBeDiscovered
 from cozy.media.media_file import MediaFile
+from cozy.model.database_importer import DatabaseImporter
 from cozy.model.library import Library
 from cozy.model.settings import Settings
 from cozy.report import reporter
@@ -52,6 +53,7 @@ class Importer(EventSender):
     _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
     _settings = inject.attr(Settings)
     _library = inject.attr(Library)
+    _database_importer = inject.attr(DatabaseImporter)
 
     def __init__(self):
         super().__init__()
@@ -102,7 +104,7 @@ class Importer(EventSender):
             self._progress += CHUNK_SIZE
 
             if len(media_files) != 0:
-                self._library.insert_many(media_files)
+                self._database_importer.insert_many(media_files)
             if self._progress >= self._files_count:
                 break
         pool.close()
