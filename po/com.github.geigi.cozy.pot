@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-18 22:24+0200\n"
+"POT-Creation-Date: 2021-04-18 22:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -681,17 +681,17 @@ msgstr ""
 #: data/ui/whats_new_library.ui:77
 msgid ""
 "Previously every file which was imported in your library but couldn't be "
-"found anymore was removed from the library during a scan.\n"
+"found anymore was removed from the library during a scan."
 msgstr ""
 
-#: data/ui/whats_new_library.ui:93
+#: data/ui/whats_new_library.ui:92
 msgid ""
 "Now audiobooks are not removed from your library automatically anymore. This "
 "prevents accidentally loosing the progress of a audiobook when a file can't "
 "be found temporarily."
 msgstr ""
 
-#: data/ui/whats_new_library.ui:108
+#: data/ui/whats_new_library.ui:107
 msgid ""
 "To remove an audiobook from the library simply right-click on it and choose "
 "the remove from library option."
