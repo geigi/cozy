@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2021
 # Niklas Haulsen <mail@niklashaulsen.de>, 2021
+# Julian Geywitz <github@geigi.de>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-03 17:06+0100\n"
+"POT-Creation-Date: 2021-04-18 22:29+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Niklas Haulsen <mail@niklashaulsen.de>, 2021\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -101,7 +101,7 @@ msgstr[1] "vor {years} Jahren"
 msgid "Audiobooks"
 msgstr "Hörbücher"
 
-#: cozy/ui/album_element.py:67 cozy/ui/widgets/search_results.py:100
+#: cozy/ui/album_element.py:65 cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
 msgstr "Höre dieses Buch"
 
@@ -137,7 +137,7 @@ msgstr "Aus Bibliothek entfernen"
 msgid "Disc"
 msgstr "Disc"
 
-#: cozy/ui/file_not_found_dialog.py:69
+#: cozy/ui/file_not_found_dialog.py:56
 msgid "All files"
 msgstr "Alle Dateien"
 
@@ -204,7 +204,7 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Dateityp von Dateien, die Cozy nicht importieren konnte"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:43
+#: cozy/view_model/library_view_model.py:42
 #: cozy/view_model/library_view_model.py:137
 msgid "All"
 msgstr "Alle"
@@ -532,7 +532,7 @@ msgstr "Hörbuch Ordner"
 msgid "Add location"
 msgstr "Order hinzufügen"
 
-#: data/ui/settings.ui:1189 data/ui/settings.ui:1385
+#: data/ui/settings.ui:1189 data/ui/settings.ui:1384
 msgid "Remove location"
 msgstr "Ordner entfernen"
 
@@ -544,39 +544,39 @@ msgstr "Schalte diesen Speicherort auf intern/extern."
 msgid "Set as default storage location for new audiobooks"
 msgstr "Als Standard für neue Hörbücher festlegen"
 
-#: data/ui/settings.ui:1304
+#: data/ui/settings.ui:1303
 msgid "Ignore list"
 msgstr "Ignorierte Dateien"
 
-#: data/ui/settings.ui:1348
+#: data/ui/settings.ui:1347
 msgid "Path"
 msgstr "Pfad"
 
-#: data/ui/settings.ui:1431
+#: data/ui/settings.ui:1430
 msgid "Follow symlinks"
 msgstr "Folge Symlinks"
 
-#: data/ui/settings.ui:1463
+#: data/ui/settings.ui:1462
 msgid "Storage"
 msgstr "Speicher"
 
-#: data/ui/settings.ui:1487
+#: data/ui/settings.ui:1486
 msgid "Database"
 msgstr "Datenbank"
 
-#: data/ui/settings.ui:1539
+#: data/ui/settings.ui:1538
 msgid "Force refresh the database"
 msgstr "Aktualisieren der Datenbank"
 
-#: data/ui/settings.ui:1552
+#: data/ui/settings.ui:1551
 msgid "This will force update the metadata of all imported books"
 msgstr "Führt ein Update aller Metadaten der Datenbank durch"
 
-#: data/ui/settings.ui:1572
+#: data/ui/settings.ui:1571
 msgid "Force refresh"
 msgstr "Aktualisieren"
 
-#: data/ui/settings.ui:1628
+#: data/ui/settings.ui:1627
 msgid "Advanced"
 msgstr "Erweitert"
 
@@ -707,6 +707,40 @@ msgstr ""
 #: data/ui/whats_new_m4b.ui:107
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr "Die Unterstützung von Kapiteln folgt in einem späteren Update."
+
+#: data/ui/whats_new_library.ui:17
+msgid "What's new in Cozy"
+msgstr "Was gibts neues bei Cozy"
+
+#: data/ui/whats_new_library.ui:52
+msgid "An important change in library management"
+msgstr "Eine wichtige Änderung in der Bibliotheksverwaltung"
+
+#: data/ui/whats_new_library.ui:77
+msgid ""
+"Previously every file which was imported in your library but couldn't be "
+"found anymore was removed from the library during a scan."
+msgstr ""
+"Bisher wurde jede Datei aus der Bibliothek entfernt, sobald diese nicht mehr"
+" auf der Festplatte gefunden werden konnte."
+
+#: data/ui/whats_new_library.ui:92
+msgid ""
+"Now audiobooks are not removed from your library automatically anymore. This"
+" prevents accidentally loosing the progress of a audiobook when a file can't"
+" be found temporarily."
+msgstr ""
+"Nun werden Dateien nicht mehr automatisch entfernt. Dies verhindert das "
+"Verlieren des Hörfortschritts eines Hörbuches, wenn dieses temporär nicht "
+"gefunden werden kann."
+
+#: data/ui/whats_new_library.ui:107
+msgid ""
+"To remove an audiobook from the library simply right-click on it and choose "
+"the remove from library option."
+msgstr ""
+"Um ein Hörbuch von der Bibliothek zu entfernen klicke mit einem Rechts-Klick"
+" auf das Hörbuch und wähle Entfernen von den Bibliotheksoptionen."
 
 #: data/ui/seek_bar.ui:20
 msgid "Elapsed time"
