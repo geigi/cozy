@@ -6,9 +6,6 @@ import gi
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
 from cozy.ui.main_view import CozyUI
-from cozy.ui.widgets.error_reporting import ErrorReporting
-from cozy.ui.widgets.whats_new_importer import WhatsNewImporter
-from cozy.ui.widgets.whats_new_m4b import WhatsNewM4B, INTRODUCED
 from cozy.version import __version__ as CozyVersion
 
 gi.require_version('Gtk', '3.0')
@@ -52,10 +49,19 @@ class WhatsNewWindow(Gtk.Window):
     def _fill_window(self):
         self.children = []
 
+        from cozy.ui.widgets.whats_new_library import INTRODUCED
         if version.parse(self.app_settings.last_launched_version) < version.parse(INTRODUCED):
+            from cozy.ui.widgets.whats_new_library import WhatsNewLibrary
+            self.children.append(WhatsNewLibrary())
+
+        from cozy.ui.widgets.whats_new_m4b import INTRODUCED
+        if version.parse(self.app_settings.last_launched_version) < version.parse(INTRODUCED):
+            from cozy.ui.widgets.whats_new_m4b import WhatsNewM4B
             self.children.append(WhatsNewM4B())
 
         if not self.app_settings.last_launched_version:
+            from cozy.ui.widgets.whats_new_importer import WhatsNewImporter
+            from cozy.ui.widgets.error_reporting import ErrorReporting
             self.children.append(WhatsNewImporter())
             self.children.append(ErrorReporting())
 

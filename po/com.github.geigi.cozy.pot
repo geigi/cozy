@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-03 17:06+0100\n"
+"POT-Creation-Date: 2021-04-18 22:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,7 +97,7 @@ msgstr[1] ""
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/ui/album_element.py:67 cozy/ui/widgets/search_results.py:100
+#: cozy/ui/album_element.py:65 cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Disc"
 msgstr ""
 
-#: cozy/ui/file_not_found_dialog.py:69
+#: cozy/ui/file_not_found_dialog.py:56
 msgid "All files"
 msgstr ""
 
@@ -199,7 +199,7 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr ""
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:43
+#: cozy/view_model/library_view_model.py:42
 #: cozy/view_model/library_view_model.py:137
 msgid "All"
 msgstr ""
@@ -506,7 +506,7 @@ msgstr ""
 msgid "Add location"
 msgstr ""
 
-#: data/ui/settings.ui:1189 data/ui/settings.ui:1385
+#: data/ui/settings.ui:1189 data/ui/settings.ui:1384
 msgid "Remove location"
 msgstr ""
 
@@ -518,39 +518,39 @@ msgstr ""
 msgid "Set as default storage location for new audiobooks"
 msgstr ""
 
-#: data/ui/settings.ui:1304
+#: data/ui/settings.ui:1303
 msgid "Ignore list"
 msgstr ""
 
-#: data/ui/settings.ui:1348
+#: data/ui/settings.ui:1347
 msgid "Path"
 msgstr ""
 
-#: data/ui/settings.ui:1431
+#: data/ui/settings.ui:1430
 msgid "Follow symlinks"
 msgstr ""
 
-#: data/ui/settings.ui:1463
+#: data/ui/settings.ui:1462
 msgid "Storage"
 msgstr ""
 
-#: data/ui/settings.ui:1487
+#: data/ui/settings.ui:1486
 msgid "Database"
 msgstr ""
 
-#: data/ui/settings.ui:1539
+#: data/ui/settings.ui:1538
 msgid "Force refresh the database"
 msgstr ""
 
-#: data/ui/settings.ui:1552
+#: data/ui/settings.ui:1551
 msgid "This will force update the metadata of all imported books"
 msgstr ""
 
-#: data/ui/settings.ui:1572
+#: data/ui/settings.ui:1571
 msgid "Force refresh"
 msgstr ""
 
-#: data/ui/settings.ui:1628
+#: data/ui/settings.ui:1627
 msgid "Advanced"
 msgstr ""
 
@@ -668,6 +668,33 @@ msgstr ""
 
 #: data/ui/whats_new_m4b.ui:107
 msgid "Chapter support will follow in a later update. Stay tuned!"
+msgstr ""
+
+#: data/ui/whats_new_library.ui:17
+msgid "What's new in Cozy"
+msgstr ""
+
+#: data/ui/whats_new_library.ui:52
+msgid "An important change in library management"
+msgstr ""
+
+#: data/ui/whats_new_library.ui:77
+msgid ""
+"Previously every file which was imported in your library but couldn't be "
+"found anymore was removed from the library during a scan.\n"
+msgstr ""
+
+#: data/ui/whats_new_library.ui:93
+msgid ""
+"Now audiobooks are not removed from your library automatically anymore. This "
+"prevents accidentally loosing the progress of a audiobook when a file can't "
+"be found temporarily."
+msgstr ""
+
+#: data/ui/whats_new_library.ui:108
+msgid ""
+"To remove an audiobook from the library simply right-click on it and choose "
+"the remove from library option."
 msgstr ""
 
 #: data/ui/seek_bar.ui:20

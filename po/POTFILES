@@ -1,7 +1,6 @@
 cozy/control/db.py
 cozy/control/mpris.py
 cozy/control/offline_cache.py
-cozy/control/player.py
 cozy/ui/widgets/sleep_timer.py
 cozy/tools.py
 cozy/application.py
@@ -32,6 +31,7 @@ data/ui/titlebar_menu.ui
 data/ui/whats_new.ui
 data/ui/whats_new_importer.ui
 data/ui/whats_new_m4b.ui
+data/ui/whats_new_library.ui
 data/ui/seek_bar.ui
 data/ui/headerbar.ui
 data/ui/delete_book_dialog.ui
