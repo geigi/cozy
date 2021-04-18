@@ -107,21 +107,16 @@ def test_setting_length_updates_in_track_object_and_database(peewee_database):
     assert TrackModel.get_by_id(1).length == 42.42
 
 
-def test_modified_returns_default_value(peewee_database):
-    from cozy.model.track import Track
-
-    track = Track(peewee_database, 1)
-    assert track.modified == 123456
-
-
 def test_setting_modified_updates_in_track_object_and_database(peewee_database):
-    from cozy.db.track import Track as TrackModel
     from cozy.model.track import Track
+    from cozy.db.track_to_file import TrackToFile
 
     track = Track(peewee_database, 1)
     track.modified = 42
+    track_to_file = TrackToFile.select().where(TrackToFile.track == track._db_object.id).get()
+
     assert track.modified == 42
-    assert TrackModel.get_by_id(1).modified == 42
+    assert track_to_file.file.modified == 42
 
 
 def test_delete_deletes_track_from_db(peewee_database, mocker):

@@ -32,6 +32,29 @@ def test_prepare_files_db_objects_skips_existing_files():
     assert len(file_objects) == 0
 
 
+def test_update_files_db_objects_updates_modified_field():
+    from cozy.model.database_importer import DatabaseImporter
+    from cozy.media.media_file import MediaFile
+    from cozy.db.file import File
+
+    media_file = MediaFile(book_name="New Book Name",
+                           author="New Author",
+                           reader="New Reader",
+                           disk=999,
+                           track_number=999,
+                           length=1234567,
+                           cover=b"cover",
+                           path="test.mp3",
+                           modified=12345678,
+                           chapters=[None])
+
+    database_importer = DatabaseImporter()
+    file = File.select().where(File.path == "test.mp3").get()
+    file_objects = database_importer._update_files_in_db(file, media_file)
+
+    assert File.select().where(File.path == "test.mp3").get().modified == 12345678
+
+
 def test_prepare_files_db_objects_returns_object_for_new_file():
     from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
@@ -94,7 +117,6 @@ def test_update_track_db_object_updates_object():
     assert track.disk == 999
     assert track.number == 999
     assert track.length == 1234567
-    assert track.modified == 1234567
 
 
 def test_create_track_db_object_creates_object():

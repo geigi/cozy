@@ -7,12 +7,14 @@ import cozy.ext.inject as inject
 from cozy.control.db_updater import update_db
 from cozy.db.artwork_cache import ArtworkCache
 from cozy.db.book import Book
+from cozy.db.file import File
 from cozy.db.model_base import get_sqlite_database
 from cozy.db.offline_cache import OfflineCache
 from cozy.db.settings import Settings
 from cozy.db.storage import Storage
 from cozy.db.storage_blacklist import StorageBlackList
 from cozy.db.track import Track
+from cozy.db.track_to_file import TrackToFile
 from cozy.report import reporter
 
 log = logging.getLogger("db")
@@ -30,14 +32,14 @@ def init_db():
     if Settings.table_exists():
         update_db()
     else:
-        _db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache])
+        _db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache, TrackToFile, File])
         _db.stop()
         _db.start()
 
     while not _db.table_exists("settings"):
         time.sleep(0.01)
 
-    _db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage], bind_refs=False,
+    _db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage, TrackToFile, File], bind_refs=False,
              bind_backrefs=False)
 
     if (Settings.select().count() == 0):

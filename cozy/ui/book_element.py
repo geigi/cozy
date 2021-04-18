@@ -68,12 +68,6 @@ class BookElement(Gtk.FlowBoxChild):
         self.art = AlbumElement(
             self.book, 180, self.ui.window.get_scale_factor(), bordered=True, square=False)
 
-        if is_external(self.book.db_object) and not self.book.offline and not self._filesystem_monitor.get_book_online(
-                self.book):
-            self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
-        else:
-            self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
-
         # assemble finished element
         self.box.add(self.art)
         self.box.add(title_label)

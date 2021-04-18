@@ -81,12 +81,13 @@ class Track(Chapter):
 
     @property
     def modified(self):
-        return self._db_object.modified
+        return self._track_to_file_db_object.file.modified
 
     @modified.setter
     def modified(self, new_modified: int):
-        self._db_object.modified = new_modified
-        self._db_object.save(only=self._db_object.dirty_fields)
+        file = self._track_to_file_db_object.file
+        file.modified = new_modified
+        file.save(only=file.dirty_fields)
 
     def delete(self):
         self._db_object.delete_instance(recursive=True)

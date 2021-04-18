@@ -21,11 +21,16 @@ class DatabaseImporter:
             query = File.select().where(File.path == media_file.path)
 
             if query.exists():
+                self._update_files_in_db(query.get(), media_file)
                 continue
 
-            files.append({"path": media_file.path})
+            files.append({"path": media_file.path, "modified": media_file.modified})
 
         return files
+
+    def _update_files_in_db(self, file: File, media_file: MediaFile):
+        file.modified = media_file.modified
+        file.save(only=file.dirty_fields)
 
     def _prepare_track_db_objects(self, media_files: Set[MediaFile]) -> Set[object]:
         book_db_objects: Set[BookModel] = set()
@@ -35,6 +40,7 @@ class DatabaseImporter:
                 continue
 
             book = next((book for book in book_db_objects if book.name == media_file.book_name), None)
+            file = File.select().where(File.path == media_file.path).get()
 
             if not book:
                 book = self._import_or_update_book(media_file)
@@ -66,7 +72,6 @@ class DatabaseImporter:
                 "disk": media_file.disk,
                 "book": book,
                 "length": media_file.length,
-                "modified": media_file.modified,
                 "position": media_file.chapters[0].position
             })
 
@@ -83,8 +88,7 @@ class DatabaseImporter:
                         number=media_file.track_number,
                         book=book,
                         disk=media_file.disk,
-                        length=media_file.length,
-                        modified=media_file.modified) \
+                        length=media_file.length) \
                 .where(Track.id << all_track_mappings) \
                 .execute()
 
@@ -104,7 +108,6 @@ class DatabaseImporter:
                                 cover=media_file.cover,
                                 position=0,
                                 rating=-1)
-
 
     def _get_track_db_objects_for_media_file(self, media_file: MediaFile) -> List[Track]:
         all_track_mappings = TrackToFile.select().join(File).where(TrackToFile.file.path == media_file.path)

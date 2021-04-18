@@ -11,4 +11,3 @@ class Track(ModelBase):
     position = IntegerField()
     book = ForeignKeyField(Book)
     length = FloatField()
-    modified = IntegerField()
