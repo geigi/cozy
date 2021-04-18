@@ -27,7 +27,7 @@ class PlaybackSpeedViewModel(Observable, EventSender):
     def playback_speed(self, new_value: float):
         if self._book:
             self._book.playback_speed = new_value
-            self._player.speed = new_value
+            self._player.playback_speed = new_value
 
     def _on_player_event(self, event: str, message):
         if event == "chapter-changed" and message:
