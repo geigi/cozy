@@ -116,6 +116,9 @@ class BookDetailViewModel(Observable, EventSender):
 
     @property
     def is_book_available(self) -> bool:
+        if self._book.offline and self._book.downloaded:
+            return True
+
         return self._fs_monitor.get_book_online(self._book)
 
     @property
@@ -139,9 +142,9 @@ class BookDetailViewModel(Observable, EventSender):
         self._book.offline = download
 
         if download:
-            self._offline_cache.add(self._book.db_object)
+            self._offline_cache.add(self._book)
         else:
-            self._offline_cache.remove(self._book.db_object)
+            self._offline_cache.remove(self._book)
 
     def open_library(self):
         self.emit_event(OpenView.LIBRARY)

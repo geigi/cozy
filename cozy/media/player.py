@@ -1,10 +1,12 @@
 import logging
+import os
 import time
 from threading import Thread
 from typing import Optional
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
+from cozy.control.offline_cache import OfflineCache
 from cozy.ext import inject
 from cozy.media.gst_player import GstPlayer, GstPlayerState
 from cozy.model.book import Book
@@ -23,6 +25,7 @@ REWIND_SECONDS = 30
 class Player(EventSender):
     _library: Library = inject.attr(Library)
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
+    _offline_cache: OfflineCache = inject.attr(OfflineCache)
 
     _gst_player: GstPlayer = inject.attr(GstPlayer)
 
@@ -190,13 +193,14 @@ class Player(EventSender):
             reporter.error("player", "There is no book loaded but there should be.")
 
         self._library.last_played_book = self._book
+        media_file_path = self._get_playback_path(chapter)
 
-        if self._gst_player.loaded_file_path == self._book.current_chapter.file:
+        if self._gst_player.loaded_file_path == media_file_path:
             log.info("Not loading a new file because the new chapter is within the old file.")
         else:
             log.info("Loading new file for chapter.")
             try:
-                self._gst_player.load_file(chapter.file)
+                self._gst_player.load_file(media_file_path)
                 file_changed = True
             except FileNotFoundError:
                 self._handle_file_not_found()
@@ -207,6 +211,15 @@ class Player(EventSender):
         if file_changed or self._book.position != chapter.id:
             self._book.position = chapter.id
             self.emit_event("chapter-changed", self._book)
+
+    def _get_playback_path(self, chapter: Chapter):
+        if self._book.offline and self._book.downloaded:
+            path = self._offline_cache.get_cached_path(chapter)
+
+            if path and os.path.exists(path):
+                return path
+
+        return chapter.file
 
     def _rewind_in_book(self):
         current_position = self._gst_player.position

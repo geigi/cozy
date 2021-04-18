@@ -10,10 +10,12 @@ import cozy.ui
 
 from gi.repository import Gio
 
-from cozy.db.book import Book
 from cozy.db.track import Track
 from cozy.db.offline_cache import OfflineCache as OfflineCacheModel
+from cozy.db.book import Book as BookDB
 from cozy.ext import inject
+from cozy.model.book import Book
+from cozy.model.chapter import Chapter
 from cozy.report import reporter
 
 log = logging.getLogger("offline_cache")
@@ -36,7 +38,6 @@ class OfflineCache(EventSender):
 
     def __init__(self):
         super().__init__()
-        self.ui = cozy.ui.main_view.CozyUI()
 
         from cozy.media.importer import Importer
         self._importer = inject.instance(Importer)
@@ -51,14 +52,14 @@ class OfflineCache(EventSender):
 
         inject.instance(cozy.ui.settings.Settings).add_listener(self.__on_settings_changed)
 
-    def add(self, book):
+    def add(self, book: Book):
         """
         Add all tracks of a book to the offline cache and start copying.
         """
         tracks = []
-        for track in get_tracks(book):
+        for chapter in book.chapters:
             file = str(uuid.uuid4())
-            tracks.append((track, file))
+            tracks.append((chapter.id, file))
         chunks = [tracks[x:x + 500] for x in range(0, len(tracks), 500)]
         for chunk in chunks:
             query = OfflineCacheModel.insert_many(chunk, fields=[OfflineCacheModel.track, OfflineCacheModel.file])
@@ -67,13 +68,12 @@ class OfflineCache(EventSender):
 
         self._start_processing()
 
-    def remove(self, book):
+    def remove(self, book: Book):
         """
         Remove all tracks of the given book from the cache.
         """
         self._stop_processing()
-        tracks = get_tracks(book)
-        ids = [t.id for t in tracks]
+        ids = [t.id for t in book.chapters]
         offline_elements = OfflineCacheModel.select().where(OfflineCacheModel.track << ids)
 
         for element in offline_elements:
@@ -111,10 +111,10 @@ class OfflineCache(EventSender):
 
         OfflineCacheModel.delete().where(storage_path in OfflineCacheModel.track.file).execute()
 
-    def get_cached_path(self, track):
+    def get_cached_path(self, chapter: Chapter):
         """
         """
-        query = OfflineCacheModel.select().where(OfflineCacheModel.track == track.id, OfflineCacheModel.copied == True)
+        query = OfflineCacheModel.select().where(OfflineCacheModel.track == chapter.id, OfflineCacheModel.copied == True)
         if query.count() > 0:
             return os.path.join(self.cache_dir, query.get().file)
         else:
@@ -179,7 +179,7 @@ class OfflineCache(EventSender):
 
             if self.current_book_processing != new_item.track.book.id:
                 self.update_book_download_status(
-                    Book.get(Book.id == self.current_book_processing))
+                    BookDB.get(BookDB.id == self.current_book_processing))
                 self.current_book_processing = new_item.track.book.id
 
             if not new_item.copied and os.path.exists(new_item.track.file):
@@ -212,7 +212,7 @@ class OfflineCache(EventSender):
 
         if self.current_book_processing:
             self.update_book_download_status(
-                Book.get(Book.id == self.current_book_processing))
+                BookDB.get(BookDB.id == self.current_book_processing))
 
         self.current = None
         self.emit_event_main_thread("finished")
@@ -232,7 +232,7 @@ class OfflineCache(EventSender):
                 if not track.copied:
                     downloaded = False
 
-        Book.update(downloaded=downloaded).where(Book.id == book.id).execute()
+        BookDB.update(downloaded=downloaded).where(BookDB.id == book.id).execute()
         if downloaded:
             self.emit_event("book-offline", book)
         else:
