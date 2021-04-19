@@ -36,7 +36,7 @@ class AlbumElement(Gtk.Box):
         self.event_box.set_property("valign", Gtk.Align.CENTER)
 
         # scale the book cover to a fix size.
-        pixbuf = self.artwork_cache.get_cover_pixbuf(book.db_object, scale, size)
+        pixbuf = self.artwork_cache.get_cover_pixbuf(book, scale, size)
 
         # box is the main container for the album art
         self.set_halign(Gtk.Align.CENTER)

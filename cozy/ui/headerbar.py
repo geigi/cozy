@@ -100,7 +100,7 @@ class Headerbar(HeaderBar):
         self.menu_button.set_menu_model(menu)
 
     def _set_cover_image(self, book: Book):
-        pixbuf = self._artwork_cache.get_cover_pixbuf(book.db_object, self.get_scale_factor(), COVER_SIZE)
+        pixbuf = self._artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), COVER_SIZE)
         if pixbuf:
             surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.get_scale_factor(), None)
             self.cover_img.set_from_surface(surface)
