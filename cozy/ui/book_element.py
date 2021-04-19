@@ -7,7 +7,6 @@ from gi.repository import Gtk, Gdk, Pango, GObject
 import cozy.tools as tools
 import cozy.ui
 from cozy.control.db import is_external
-from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.model.book import Book
 from cozy.ui.album_element import AlbumElement
 from cozy.ui.settings import Settings
@@ -163,7 +162,7 @@ class BookElement(Gtk.FlowBoxChild):
             if message in self.book.chapters[0].file and not self.book.offline:
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         elif event == "external-storage-added":
-            if not self._filesystem_monitor.is_book_online(self.book.db_object):
+            if not self._filesystem_monitor.get_book_online(self.book):
                 self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
         if event == "external-storage-removed":
             first_track = self.book.chapters[0]
