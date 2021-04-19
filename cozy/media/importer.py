@@ -120,7 +120,11 @@ class Importer(EventSender):
     def _count_files_to_scan(self) -> int:
         files_to_scan = self._get_files_to_scan()
 
-        return max(1, sum(1 for _ in files_to_scan))
+        try:
+            return max(1, len(list(files_to_scan)))
+        except StopIteration as e:
+            reporter.exception("importer", e, "_count_files_to_scan raised a stop iteration.")
+            return 1
 
     def _get_files_to_scan(self) -> List[str]:
         paths_to_scan = self._get_configured_storage_paths()
