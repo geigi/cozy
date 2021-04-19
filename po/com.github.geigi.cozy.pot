@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-18 22:29+0200\n"
+"POT-Creation-Date: 2021-04-19 22:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,23 +109,23 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-#: cozy/ui/book_element.py:37
+#: cozy/ui/book_element.py:36
 msgid "Open book overview"
 msgstr ""
 
-#: cozy/ui/book_element.py:38
+#: cozy/ui/book_element.py:37
 msgid "Currently offline"
 msgstr ""
 
-#: cozy/ui/book_element.py:124
+#: cozy/ui/book_element.py:123
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/ui/book_element.py:127
+#: cozy/ui/book_element.py:126
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/ui/book_element.py:130
+#: cozy/ui/book_element.py:129
 msgid "Remove from library"
 msgstr ""
 
