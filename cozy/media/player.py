@@ -240,6 +240,11 @@ class Player(EventSender):
             self._gst_player.position = 0
 
     def _forward_in_book(self):
+        if not self._book:
+            log.error("Forward in book not possible because no book is loaded.")
+            reporter.error("player", "Forward in book not possible because no book is loaded.")
+            return
+
         current_position = self._gst_player.position
         old_chapter = self._book.current_chapter
         chapter_number = self._book.chapters.index(self._book.current_chapter)
