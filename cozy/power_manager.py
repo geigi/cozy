@@ -22,8 +22,12 @@ class PowerManager:
             if self._inhibit_cookie:
                 log.info("Uninhibited standby.")
                 self._gtk_app.uninhibit(self._inhibit_cookie)
+                self._inhibit_cookie = None
 
         elif event == "play":
+            if self._inhibit_cookie:
+                return
+
             self._inhibit_cookie = self._gtk_app.inhibit(None, Gtk.ApplicationInhibitFlags.SUSPEND,
                                                          "Playback of audiobook")
             log.info("Inhibited standby.")
