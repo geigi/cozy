@@ -198,8 +198,7 @@ class MPRIS(Server):
         self._app_settings.add_listener(self._on_app_setting_changed)
 
     def Raise(self):
-        self.__app.window.setup_window()
-        self.__app.window.present_with_time(Gtk.get_current_event_time())
+        pass
 
     def Quit(self):
         self.__app.quit()
