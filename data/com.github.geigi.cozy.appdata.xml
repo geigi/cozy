@@ -52,7 +52,11 @@
         <release version="0.9.3" timestamp="1618865907">
       <description>
         <ul>
+          <li>Add a rewind button to the titlebar.</li>
+          <li>The rewind and forward duration can now be customized in the settings.</li>
           <li>Fix: Prevent standby during playback.</li>
+          <li>Fix: Possible crash during startup with enabled 30 seconds rewind feature.</li>
+          <li>Fix: Adding a new storage location could lead to an internal error which might show in strange behavior.</li>
           <li>As always, updated translations thanks to all of the translators!</li>
         </ul>
       </description>

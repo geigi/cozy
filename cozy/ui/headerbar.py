@@ -28,6 +28,7 @@ class Headerbar(HeaderBar):
 
     play_button: Gtk.Button = Gtk.Template.Child()
     prev_button: Gtk.Button = Gtk.Template.Child()
+    next_button: Gtk.Button = Gtk.Template.Child()
     volume_button: Gtk.VolumeButton = Gtk.Template.Child()
 
     cover_img: Gtk.Image = Gtk.Template.Child()
@@ -88,6 +89,7 @@ class Headerbar(HeaderBar):
     def _connect_widgets(self):
         self.play_button.connect("clicked", self._play_clicked)
         self.prev_button.connect("clicked", self._rewind_clicked)
+        self.next_button.connect("clicked", self._forward_clicked)
         self.volume_button.connect("value-changed", self._on_volume_button_changed)
         self.seek_bar.connect("position-changed", self._on_seek_bar_position_changed)
         self.cover_img_event_box.connect("button-press-event", self._cover_clicked)
@@ -151,6 +153,7 @@ class Headerbar(HeaderBar):
         sensitive = not self._playback_control_view_model.lock_ui
         self.seek_bar.sensitive = sensitive
         self.prev_button.set_sensitive(sensitive)
+        self.next_button.set_sensitive(sensitive)
         self.play_button.set_sensitive(sensitive)
         self.volume_button.set_sensitive(sensitive)
         self.playback_speed_button.set_sensitive(sensitive)
@@ -183,6 +186,9 @@ class Headerbar(HeaderBar):
 
     def _rewind_clicked(self, _):
         self._playback_control_view_model.rewind()
+
+    def _forward_clicked(self, _):
+        self._playback_control_view_model.forward()
 
     def _cover_clicked(self, _, __):
         self._playback_control_view_model.open_book_detail()

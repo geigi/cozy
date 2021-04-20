@@ -229,13 +229,14 @@ class Player(EventSender):
 
         current_position = self._gst_player.position
         chapter_number = self._book.chapters.index(self._book.current_chapter)
+        rewind_seconds = self._app_settings.rewind_duration
 
-        if current_position / NS_TO_SEC - REWIND_SECONDS > 0:
-            self._gst_player.position = current_position - NS_TO_SEC * REWIND_SECONDS
+        if current_position / NS_TO_SEC - rewind_seconds > 0:
+            self._gst_player.position = current_position - NS_TO_SEC * rewind_seconds
         elif chapter_number > 0:
             previous_chapter = self._book.chapters[chapter_number - 1]
             self._load_chapter(previous_chapter)
-            self._gst_player.position = previous_chapter.end_position + (current_position - NS_TO_SEC * REWIND_SECONDS)
+            self._gst_player.position = previous_chapter.end_position + (current_position - NS_TO_SEC * rewind_seconds)
         else:
             self._gst_player.position = 0
 
@@ -248,14 +249,15 @@ class Player(EventSender):
         current_position = self._gst_player.position
         old_chapter = self._book.current_chapter
         chapter_number = self._book.chapters.index(self._book.current_chapter)
+        forward_seconds = self._app_settings.forward_duration
 
-        if current_position / NS_TO_SEC + REWIND_SECONDS < self._book.current_chapter.length:
-            self._gst_player.position = current_position + NS_TO_SEC * REWIND_SECONDS
+        if current_position / NS_TO_SEC + forward_seconds < self._book.current_chapter.length:
+            self._gst_player.position = current_position + NS_TO_SEC * forward_seconds
         elif chapter_number < len(self._book.chapters) - 1:
             next_chapter = self._book.chapters[chapter_number + 1]
             self._load_chapter(next_chapter)
             self._gst_player.position = next_chapter.start_position + (
-                    NS_TO_SEC * REWIND_SECONDS - (old_chapter.length * NS_TO_SEC - current_position))
+                    NS_TO_SEC * forward_seconds - (old_chapter.length * NS_TO_SEC - current_position))
         else:
             self._gst_player.position = self._book.current_chapter.length * NS_TO_SEC
 

@@ -77,6 +77,16 @@ class Settings(EventSender):
         self.fadeout_duration_adjustment.connect("value-changed", self.__on_fadeout_adjustment_changed)
         self.__on_fadeout_adjustment_changed(self.fadeout_duration_adjustment)
 
+        self.rewind_duration_label = self.builder.get_object("rewind_duration_label")
+        self.rewind_duration_adjustment = self.builder.get_object("rewind_duration_adjustment")
+        self.rewind_duration_adjustment.connect("value-changed", self._on_rewind_adjustment_changed)
+        self._on_rewind_adjustment_changed(self.rewind_duration_adjustment)
+
+        self.forward_duration_label = self.builder.get_object("forward_duration_label")
+        self.forward_duration_adjustment = self.builder.get_object("forward_duration_adjustment")
+        self.forward_duration_adjustment.connect("value-changed", self._on_forward_adjustment_changed)
+        self._on_forward_adjustment_changed(self.forward_duration_adjustment)
+
         self.force_refresh_button = self.builder.get_object("force_refresh_button")
         self.force_refresh_button.connect("clicked", self.__on_force_refresh_clicked)
 
@@ -160,6 +170,9 @@ class Settings(EventSender):
 
         self._glib_settings.bind("sleep-timer-fadeout-duration", self.fadeout_duration_adjustment,
                                  "value", Gio.SettingsBindFlags.DEFAULT)
+
+        self._glib_settings.bind("rewind-duration", self.rewind_duration_adjustment, "value", Gio.SettingsBindFlags.DEFAULT)
+        self._glib_settings.bind("forward-duration", self.forward_duration_adjustment, "value", Gio.SettingsBindFlags.DEFAULT)
 
         self._glib_settings.connect("changed", self.__on_settings_changed)
 
@@ -302,6 +315,12 @@ class Settings(EventSender):
         This refreshes the label belonging to the fadeout duration adjustment.
         """
         self.fadeout_duration_label.set_text(str(int(adjustment.get_value())) + " s")
+
+    def _on_rewind_adjustment_changed(self, adjustment):
+        self.rewind_duration_label.set_text(str(int(adjustment.get_value())) + " s")
+
+    def _on_forward_adjustment_changed(self, adjustment):
+        self.forward_duration_label.set_text(str(int(adjustment.get_value())) + " s")
 
     def __on_fadeout_switch_changed(self, switch, state):
         """

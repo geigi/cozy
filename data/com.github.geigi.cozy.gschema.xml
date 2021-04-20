@@ -86,5 +86,15 @@
       <summary>The version of cozy that did launch last.</summary>
       <description></description>
     </key>
+    <key type="i" name="rewind-duration">
+      <default>15</default>
+      <summary>Duration to rewind.</summary>
+      <description></description>
+    </key>
+    <key type="i" name="forward-duration">
+      <default>30</default>
+      <summary>Duration to forward.</summary>
+      <description></description>
+    </key>
   </schema>
 </schemalist>
