@@ -222,6 +222,11 @@ class Player(EventSender):
         return chapter.file
 
     def _rewind_in_book(self):
+        if not self._book:
+            log.error("Rewind in book not possible because no book is loaded.")
+            reporter.error("player", "Rewind in book not possible because no book is loaded.")
+            return
+
         current_position = self._gst_player.position
         chapter_number = self._book.chapters.index(self._book.current_chapter)
 
