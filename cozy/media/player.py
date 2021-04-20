@@ -260,9 +260,9 @@ class Player(EventSender):
             self._gst_player.position = self._book.current_chapter.length * NS_TO_SEC
 
     def _rewind_feature(self):
-        pass
         if self._app_settings.replay:
             self._rewind_in_book()
+            self._emit_tick()
 
     def _next_chapter(self):
         if not self._book:
