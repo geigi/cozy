@@ -49,6 +49,14 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+        <release version="0.9.3" timestamp="1618865907">
+      <description>
+        <ul>
+          <li>Fix: Prevent standby during playback.</li>
+          <li>As always, updated translations thanks to all of the translators!</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.9.2" timestamp="1618865907">
       <description>
         <p>
