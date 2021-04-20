@@ -404,32 +404,6 @@ class CozyUI(EventSender, metaclass=Singleton):
     def track_changed(self):
         self.block_ui_buttons(False, True)
 
-    def __player_changed(self, event, message):
-        """
-        Listen to and handle all gst player messages that are important for the ui.
-        """
-        if event == "stop":
-            if self.__inhibit_cookie:
-                self.app.uninhibit(self.__inhibit_cookie)
-        elif event == "play":
-            self.__inhibit_cookie = self.app.inhibit(
-                self.window, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook")
-        elif event == "pause":
-            if self.__inhibit_cookie:
-                self.app.uninhibit(self.__inhibit_cookie)
-        elif event == "track-changed":
-            self.track_changed()
-            if self.sort_stack.props.visible_child_name == "recent":
-                self.book_box.invalidate_filter()
-                self.book_box.invalidate_sort()
-        elif event == "resource-not-found":
-            if self.dialog_open:
-                return
-
-            self.dialog_open = True
-            dialog = FileNotFoundDialog(message.file)
-            dialog.show()
-
     def __window_resized(self, window):
         """
         Resize the progress scale to expand to the window size

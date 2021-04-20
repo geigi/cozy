@@ -91,7 +91,7 @@ class Application(Gtk.Application):
 
     def do_activate(self):
         main_window_builder = self.ui.get_builder()
-        self.app_controller = AppController(main_window_builder, self.ui)
+        self.app_controller = AppController(self, main_window_builder, self.ui)
 
         self.ui.activate(self.app_controller.library_view)
 

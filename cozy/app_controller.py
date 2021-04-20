@@ -7,6 +7,7 @@ from cozy.control.offline_cache import OfflineCache
 from cozy.media.files import Files
 from cozy.media.gst_player import GstPlayer
 from cozy.media.player import Player
+from cozy.power_manager import PowerManager
 from cozy.report import reporter
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.singleton import Singleton
@@ -34,7 +35,8 @@ from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel
 
 
 class AppController(metaclass=Singleton):
-    def __init__(self, main_window_builder, main_window):
+    def __init__(self, gtk_app, main_window_builder, main_window):
+        self.gtk_app = gtk_app
         self.main_window: CozyUI = main_window
         self.main_window_builder = main_window_builder
 
@@ -66,9 +68,12 @@ class AppController(metaclass=Singleton):
 
         self.main_window.add_listener(self._on_main_window_event)
 
+        self.power_manager = inject.instance(PowerManager)
+
     def configure_inject(self, binder):
         binder.bind_to_provider(SqliteDatabase, get_db)
         binder.bind("MainWindow", self.main_window)
+        binder.bind("GtkApp", self.gtk_app)
         binder.bind_to_constructor(Gio.Settings, lambda: Gio.Settings("com.github.geigi.cozy"))
         binder.bind_to_constructor(ApplicationSettings, lambda: ApplicationSettings())
         binder.bind_to_constructor(Settings, lambda: Settings())
@@ -87,6 +92,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(PlaybackSpeedViewModel, lambda: PlaybackSpeedViewModel())
         binder.bind_to_constructor(SleepTimerViewModel, lambda: SleepTimerViewModel())
         binder.bind_to_constructor(GstPlayer, lambda: GstPlayer())
+        binder.bind_to_constructor(PowerManager, lambda: PowerManager())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR
