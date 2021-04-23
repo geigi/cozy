@@ -158,7 +158,7 @@ class OfflineCache(EventSender):
         self.thread.start()
 
     def _process_queue(self):
-        log.info("Startet processing queue")
+        log.info("Started processing queue")
         self.filecopy_cancel = Gio.Cancellable()
 
         self._fill_queue_from_db()
