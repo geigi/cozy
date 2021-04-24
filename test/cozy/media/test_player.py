@@ -90,3 +90,53 @@ def test_loading_new_chapter_emits_changed_event(mocker):
     player._load_chapter(book.chapters[1])
 
     spy.assert_has_calls(calls=[call('chapter-changed', book)])
+
+
+def test_emit_tick_does_not_emit_tick_when_nothing_is_loaded(mocker):
+    from cozy.media.player import Player
+
+    mocker.patch("cozy.media.player.Player._load_last_book")
+    player = Player()
+    spy = mocker.spy(player, "emit_event_main_thread")
+    player._emit_tick()
+
+    spy.assert_not_called()
+
+
+def test_emit_tick_does_emit_tick_on_startup_when_last_book_is_loaded(mocker):
+    from cozy.media.player import Player
+
+    mocker.patch("cozy.media.player.Player._rewind_feature")
+    player = Player()
+    spy = mocker.spy(player, "emit_event_main_thread")
+    player._emit_tick()
+
+    spy.assert_has_calls(calls=[call('position', player.loaded_chapter.position)])
+
+
+def test_rewind_in_book_does_not_rewind_if_no_book_is_loaded(mocker):
+    from cozy.media.player import Player
+
+    mocker.patch("cozy.media.player.Player._load_last_book")
+    player = Player()
+
+    player._rewind_in_book()
+
+
+def test_forward_in_book_does_not_forward_if_no_book_is_loaded(mocker):
+    from cozy.media.player import Player
+
+    mocker.patch("cozy.media.player.Player._load_last_book")
+    player = Player()
+
+    player._forward_in_book()
+
+
+def test_load_book_does_not_load_book_if_it_is_none(mocker):
+    from cozy.media.player import Player
+
+    mocker.patch("cozy.media.player.Player._load_last_book")
+    player = Player()
+    player._load_book(None)
+
+    assert player.loaded_book is None

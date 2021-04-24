@@ -331,11 +331,12 @@ class Player(EventSender):
             self.play_status_updater = None
 
     def _emit_tick(self):
-        chapter = self.loaded_chapter
-        if chapter and self.loaded_book:
-            chapter.position = self.position
+        if not self.loaded_chapter or not self.loaded_book:
+            log.info("Not emitting tick because no book/chapter is loaded.")
+            return
 
-        self.emit_event_main_thread("position", chapter.position)
+        self.loaded_chapter.position = self.position
+        self.emit_event_main_thread("position", self.loaded_chapter.position)
 
     def _fadeout_playback(self):
         duration = self._app_settings.sleep_timer_fadeout_duration * 20
