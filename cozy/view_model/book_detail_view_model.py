@@ -168,6 +168,9 @@ class BookDetailViewModel(Observable, EventSender):
             self._notify("remaining_text")
 
     def _on_fs_monitor_event(self, event, _):
+        if not self._book:
+            return
+
         if event == "storage-online":
             self._notify("is_book_available")
         elif event == "storage-offline":
