@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-20 23:40+0200\n"
+"POT-Creation-Date: 2021-04-24 11:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: cozy/control/offline_cache.py:188
+#: cozy/control/offline_cache.py:192
 msgid "Copying"
 msgstr ""
 
@@ -109,23 +109,19 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-#: cozy/ui/book_element.py:36
+#: cozy/ui/book_element.py:35
 msgid "Open book overview"
 msgstr ""
 
-#: cozy/ui/book_element.py:37
-msgid "Currently offline"
-msgstr ""
-
-#: cozy/ui/book_element.py:123
+#: cozy/ui/book_element.py:117
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/ui/book_element.py:126
+#: cozy/ui/book_element.py:120
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/ui/book_element.py:129
+#: cozy/ui/book_element.py:123
 msgid "Remove from library"
 msgstr ""
 
@@ -137,7 +133,7 @@ msgstr ""
 msgid "All files"
 msgstr ""
 
-#: cozy/ui/settings.py:97
+#: cozy/ui/settings.py:99
 msgid "Feedback"
 msgstr ""
 
