@@ -5,7 +5,6 @@ import cozy.ext.inject as inject
 from gi.repository import Gio
 
 from cozy.architecture.event_sender import EventSender
-from cozy.control.db import get_tracks
 from cozy.model.book import Book
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage
