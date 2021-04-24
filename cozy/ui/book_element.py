@@ -6,7 +6,6 @@ from gi.repository import Gtk, Gdk, Pango, GObject
 
 import cozy.tools as tools
 import cozy.ui
-from cozy.control.db import is_external
 from cozy.model.book import Book
 from cozy.ui.album_element import AlbumElement
 from cozy.ui.settings import Settings
@@ -34,7 +33,6 @@ class BookElement(Gtk.FlowBoxChild):
         self.ui = cozy.ui.main_view.CozyUI()
 
         self.ONLINE_TOOLTIP_TEXT = _("Open book overview")
-        self.OFFLINE_TOOLTIP_TEXT = _("Currently offline")
 
         super().__init__()
         self.event_box = Gtk.EventBox()
@@ -67,11 +65,7 @@ class BookElement(Gtk.FlowBoxChild):
         self.art = AlbumElement(
             self.book, 180, self.ui.window.get_scale_factor(), bordered=True, square=False)
 
-        if is_external(self.book.db_object) and not self.book.offline and not self._filesystem_monitor.get_book_online(
-                self.book):
-            self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
-        else:
-            self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
+        self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
 
         # assemble finished element
         self.box.add(self.art)
