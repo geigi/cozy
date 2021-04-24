@@ -175,6 +175,10 @@ class OfflineCache(EventSender):
             if self.thread.stopped():
                 break
 
+            query = OfflineCacheModel.select().where(OfflineCacheModel.id == item.id)
+            if not query.exists():
+                continue
+
             new_item = OfflineCacheModel.get(OfflineCacheModel.id == item.id)
 
             if self.current_book_processing != new_item.track.book.id:
