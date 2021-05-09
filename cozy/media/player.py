@@ -230,7 +230,7 @@ class Player(EventSender):
 
         current_position = self._gst_player.position
         chapter_number = self._book.chapters.index(self._book.current_chapter)
-        rewind_seconds = self._app_settings.rewind_duration
+        rewind_seconds = self._app_settings.rewind_duration * self.playback_speed
 
         if current_position / NS_TO_SEC - rewind_seconds > 0:
             self._gst_player.position = current_position - NS_TO_SEC * rewind_seconds
@@ -250,7 +250,7 @@ class Player(EventSender):
         current_position = self._gst_player.position
         old_chapter = self._book.current_chapter
         chapter_number = self._book.chapters.index(self._book.current_chapter)
-        forward_seconds = self._app_settings.forward_duration
+        forward_seconds = self._app_settings.forward_duration * self.playback_speed
 
         if current_position / NS_TO_SEC + forward_seconds < self._book.current_chapter.length:
             self._gst_player.position = current_position + NS_TO_SEC * forward_seconds
