@@ -77,6 +77,22 @@ def test_loading_new_chapter_loads_chapter(mocker):
     assert player._book.current_chapter == book.current_chapter
 
 
+def test_loading_new_chapter_sets_playback_speed(mocker):
+    from cozy.media.player import Player
+
+    mocker.patch("cozy.media.player.Player._rewind_in_book")
+    library = inject.instance(Library)
+    player = Player()
+
+    book = library.books[0]
+    book.playback_speed = 2.5
+    player._load_chapter(book.current_chapter)
+    print(player.playback_speed)
+
+    assert player.playback_speed == book.playback_speed
+
+
+
 def test_loading_new_chapter_emits_changed_event(mocker):
     from cozy.media.player import Player
 

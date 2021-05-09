@@ -207,6 +207,7 @@ class Player(EventSender):
                 return
 
         self._gst_player.position = chapter.position
+        self._gst_player.playback_speed = self._book.playback_speed
 
         if file_changed or self._book.position != chapter.id:
             self._book.position = chapter.id
