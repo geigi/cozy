@@ -80,14 +80,20 @@ class Settings(EventSender):
         self.__on_fadeout_adjustment_changed(self.fadeout_duration_adjustment)
 
         self.rewind_duration_label = self.builder.get_object("rewind_duration_label")
+        self.rewind_duration_scale = self.builder.get_object("rewind_duration_scale")
         self.rewind_duration_adjustment = self.builder.get_object("rewind_duration_adjustment")
         self.rewind_duration_adjustment.connect("value-changed", self._on_rewind_adjustment_changed)
         self._on_rewind_adjustment_changed(self.rewind_duration_adjustment)
+        for i in [10, 15, 20, 30, 45, 60, 75, 90, 105]:
+            self.rewind_duration_scale.add_mark(i, Gtk.PositionType.RIGHT, None)
 
         self.forward_duration_label = self.builder.get_object("forward_duration_label")
+        self.forward_duration_scale = self.builder.get_object("forward_duration_scale")
         self.forward_duration_adjustment = self.builder.get_object("forward_duration_adjustment")
         self.forward_duration_adjustment.connect("value-changed", self._on_forward_adjustment_changed)
         self._on_forward_adjustment_changed(self.forward_duration_adjustment)
+        for i in [10, 15, 20, 30, 45, 60, 75, 90, 105]:
+            self.forward_duration_scale.add_mark(i, Gtk.PositionType.RIGHT, None)
 
         self.force_refresh_button = self.builder.get_object("force_refresh_button")
         self.force_refresh_button.connect("clicked", self.__on_force_refresh_clicked)
