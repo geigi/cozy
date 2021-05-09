@@ -126,10 +126,17 @@ class ArtworkCache:
 
     def _load_pixbuf_from_cache(self, book, size):
         path = self.get_album_art_path(book, size)
-        if path:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
-        else:
-            pixbuf = None
+
+        try:
+            if path:
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
+            else:
+                pixbuf = None
+        except Exception as e:
+            log.warning("Failed to load pixbuf from path: {}. Deleting file.".format(path))
+            log.debug(e)
+            os.remove(path)
+            return None
 
         return pixbuf
 
