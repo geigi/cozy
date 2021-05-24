@@ -88,3 +88,19 @@ class ApplicationSettings(EventSender):
     @last_launched_version.setter
     def last_launched_version(self, new_value: str):
         self._settings.set_string("last-launched-version", new_value)
+
+    @property
+    def rewind_duration(self) -> int:
+        return self._settings.get_int("rewind-duration")
+
+    @rewind_duration.setter
+    def rewind_duration(self, new_value):
+        self._settings.set_int("rewind-duration", new_value)
+
+    @property
+    def forward_duration(self) -> int:
+        return self._settings.get_int("forward-duration")
+
+    @forward_duration.setter
+    def forward_duration(self, new_value):
+        self._settings.set_int("forward-duration", new_value)

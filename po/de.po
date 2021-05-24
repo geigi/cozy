@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2021
 # Niklas Haulsen <mail@niklashaulsen.de>, 2021
+# Julian Geywitz <github@geigi.de>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-03 17:06+0100\n"
+"POT-Creation-Date: 2021-04-20 23:40+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Niklas Haulsen <mail@niklashaulsen.de>, 2021\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -101,7 +101,7 @@ msgstr[1] "vor {years} Jahren"
 msgid "Audiobooks"
 msgstr "Hörbücher"
 
-#: cozy/ui/album_element.py:67 cozy/ui/widgets/search_results.py:100
+#: cozy/ui/album_element.py:65 cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
 msgstr "Höre dieses Buch"
 
@@ -113,23 +113,23 @@ msgstr "Heruntergeladen"
 msgid "Download"
 msgstr "Herunterladen"
 
-#: cozy/ui/book_element.py:37
+#: cozy/ui/book_element.py:36
 msgid "Open book overview"
 msgstr "Öffne die Buchübersicht"
 
-#: cozy/ui/book_element.py:38
+#: cozy/ui/book_element.py:37
 msgid "Currently offline"
 msgstr "Aktuell offline"
 
-#: cozy/ui/book_element.py:124
+#: cozy/ui/book_element.py:123
 msgid "Mark as read"
 msgstr "Markiere: Abgeschlossen"
 
-#: cozy/ui/book_element.py:127
+#: cozy/ui/book_element.py:126
 msgid "Open in file browser"
 msgstr "Öffne in Dateibrowser"
 
-#: cozy/ui/book_element.py:130
+#: cozy/ui/book_element.py:129
 msgid "Remove from library"
 msgstr "Aus Bibliothek entfernen"
 
@@ -137,11 +137,11 @@ msgstr "Aus Bibliothek entfernen"
 msgid "Disc"
 msgstr "Disc"
 
-#: cozy/ui/file_not_found_dialog.py:69
+#: cozy/ui/file_not_found_dialog.py:56
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: cozy/ui/settings.py:87
+#: cozy/ui/settings.py:97
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -204,7 +204,7 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Dateityp von Dateien, die Cozy nicht importieren konnte"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:43
+#: cozy/view_model/library_view_model.py:42
 #: cozy/view_model/library_view_model.py:137
 msgid "All"
 msgstr "Alle"
@@ -444,139 +444,151 @@ msgstr "Kapitel"
 msgid "Nothing found :("
 msgstr "Nichts gefunden :("
 
-#: data/ui/settings.ui:95 data/ui/settings.ui:366
+#: data/ui/settings.ui:111 data/ui/settings.ui:382
 msgid "General"
 msgstr "Allgemein"
 
-#: data/ui/settings.ui:140
+#: data/ui/settings.ui:156
 msgid "Dark Mode"
 msgstr "Dark Mode"
 
-#: data/ui/settings.ui:216
+#: data/ui/settings.ui:232
 msgid "Titlebar"
 msgstr "Titelleiste"
 
-#: data/ui/settings.ui:261
+#: data/ui/settings.ui:277
 msgid "Display the whole book instead of the current chapter"
 msgstr "Zeige das komplette Buch anstatt des Kapitels"
 
-#: data/ui/settings.ui:324
+#: data/ui/settings.ui:340
 msgid "Appearance"
 msgstr "Erscheinung"
 
-#: data/ui/settings.ui:409
+#: data/ui/settings.ui:425
 msgid "Suspend system on timer"
 msgstr "Schicke System schlafen nach Timer"
 
-#: data/ui/settings.ui:469
+#: data/ui/settings.ui:485
 msgid "Replay 30 seconds"
 msgstr "30 Sekunden Replay"
 
-#: data/ui/settings.ui:529
+#: data/ui/settings.ui:545
 msgid "Automatic media scan"
 msgstr "Automatischer Medienordner Scan"
 
-#: data/ui/settings.ui:588
+#: data/ui/settings.ui:604
 msgid "Tags"
 msgstr "Tags"
 
-#: data/ui/settings.ui:640
+#: data/ui/settings.ui:656
 msgid "Swap author and reader"
 msgstr "Tausche Autor und Leser"
 
-#: data/ui/settings.ui:653
+#: data/ui/settings.ui:669
 msgid "Activate this if author and reader are displayed the wrong way"
 msgstr "Setze diese Einstellung wenn Autor und Leser bei dir vertauscht sind"
 
-#: data/ui/settings.ui:678
+#: data/ui/settings.ui:694
 msgid "switch author and reader assignment"
 msgstr "Tausche Autor und Leser"
 
-#: data/ui/settings.ui:727 data/ui/headerbar.ui:385
+#: data/ui/settings.ui:743
+msgid "Playback"
+msgstr "Wiedergabe"
+
+#: data/ui/settings.ui:789
+msgid "Rewind duration"
+msgstr "Zurück springen Dauer"
+
+#: data/ui/settings.ui:874
+msgid "Forward duration"
+msgstr "Vor springen Dauer"
+
+#: data/ui/settings.ui:956 data/ui/headerbar.ui:415
 msgid "Sleep timer"
 msgstr "Schlafen Timer"
 
-#: data/ui/settings.ui:772
+#: data/ui/settings.ui:1001
 msgid "Fadeout"
 msgstr "Fadeout"
 
-#: data/ui/settings.ui:834
+#: data/ui/settings.ui:1063
 msgid "Fadeout duration"
 msgstr "Fadeout Dauer"
 
-#: data/ui/settings.ui:915
+#: data/ui/settings.ui:1144
 msgid "Behaviour"
 msgstr "Verhalten"
 
-#: data/ui/settings.ui:942
+#: data/ui/settings.ui:1171
 msgid "Artwork"
 msgstr "Artwork"
 
-#: data/ui/settings.ui:994
+#: data/ui/settings.ui:1223
 msgid "Prefer external images over embedded cover"
 msgstr "Bevorzuge externes Cover über eingebettetes Cover"
 
-#: data/ui/settings.ui:1007
+#: data/ui/settings.ui:1236
 msgid "Use images (cover.jpg, *.png, …) when available"
 msgstr "Nutze Cover Bilder (cover.jpg, *.png, …) wenn verfügbar"
 
-#: data/ui/settings.ui:1090
+#: data/ui/settings.ui:1319
 msgid "Audio books location"
 msgstr "Hörbücher Pfad"
 
-#: data/ui/settings.ui:1106
+#: data/ui/settings.ui:1335
 msgid "Storage locations"
 msgstr "Hörbuch Ordner"
 
-#: data/ui/settings.ui:1164
+#: data/ui/settings.ui:1393
 msgid "Add location"
 msgstr "Order hinzufügen"
 
-#: data/ui/settings.ui:1189 data/ui/settings.ui:1385
+#: data/ui/settings.ui:1418 data/ui/settings.ui:1613
 msgid "Remove location"
 msgstr "Ordner entfernen"
 
-#: data/ui/settings.ui:1225
+#: data/ui/settings.ui:1454
 msgid "Toggle this storage location to be internal/external."
 msgstr "Schalte diesen Speicherort auf intern/extern."
 
-#: data/ui/settings.ui:1251
+#: data/ui/settings.ui:1480
 msgid "Set as default storage location for new audiobooks"
 msgstr "Als Standard für neue Hörbücher festlegen"
 
-#: data/ui/settings.ui:1304
+#: data/ui/settings.ui:1532
 msgid "Ignore list"
 msgstr "Ignorierte Dateien"
 
-#: data/ui/settings.ui:1348
+#: data/ui/settings.ui:1576
 msgid "Path"
 msgstr "Pfad"
 
-#: data/ui/settings.ui:1431
+#: data/ui/settings.ui:1659
 msgid "Follow symlinks"
 msgstr "Folge Symlinks"
 
-#: data/ui/settings.ui:1463
+#: data/ui/settings.ui:1691
 msgid "Storage"
 msgstr "Speicher"
 
-#: data/ui/settings.ui:1487
+#: data/ui/settings.ui:1715
 msgid "Database"
 msgstr "Datenbank"
 
-#: data/ui/settings.ui:1539
+#: data/ui/settings.ui:1767
 msgid "Force refresh the database"
 msgstr "Aktualisieren der Datenbank"
 
-#: data/ui/settings.ui:1552
+#: data/ui/settings.ui:1780
 msgid "This will force update the metadata of all imported books"
 msgstr "Führt ein Update aller Metadaten der Datenbank durch"
 
-#: data/ui/settings.ui:1572
+#: data/ui/settings.ui:1800
 msgid "Force refresh"
 msgstr "Aktualisieren"
 
-#: data/ui/settings.ui:1628
+#: data/ui/settings.ui:1856
 msgid "Advanced"
 msgstr "Erweitert"
 
@@ -708,6 +720,40 @@ msgstr ""
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr "Die Unterstützung von Kapiteln folgt in einem späteren Update."
 
+#: data/ui/whats_new_library.ui:17
+msgid "What's new in Cozy"
+msgstr "Was gibts neues bei Cozy"
+
+#: data/ui/whats_new_library.ui:52
+msgid "An important change in library management"
+msgstr "Eine wichtige Änderung in der Bibliotheksverwaltung"
+
+#: data/ui/whats_new_library.ui:77
+msgid ""
+"Previously every file which was imported in your library but couldn't be "
+"found anymore was removed from the library during a scan."
+msgstr ""
+"Bisher wurde jede Datei aus der Bibliothek entfernt, sobald diese nicht mehr"
+" auf der Festplatte gefunden werden konnte."
+
+#: data/ui/whats_new_library.ui:92
+msgid ""
+"Now audiobooks are not removed from your library automatically anymore. This"
+" prevents accidentally loosing the progress of a audiobook when a file can't"
+" be found temporarily."
+msgstr ""
+"Nun werden Dateien nicht mehr automatisch entfernt. Dies verhindert das "
+"Verlieren des Hörfortschritts eines Hörbuches, wenn dieses temporär nicht "
+"gefunden werden kann."
+
+#: data/ui/whats_new_library.ui:107
+msgid ""
+"To remove an audiobook from the library simply right-click on it and choose "
+"the remove from library option."
+msgstr ""
+"Um ein Hörbuch von der Bibliothek zu entfernen klicke mit einem Rechts-Klick"
+" auf das Hörbuch und wähle Entfernen von den Bibliotheksoptionen."
+
 #: data/ui/seek_bar.ui:20
 msgid "Elapsed time"
 msgstr "Vergangene Zeit"
@@ -744,99 +790,111 @@ msgstr "Verbleibende Zeit"
 msgid "Remaining time of current part"
 msgstr "Verbleibende Zeit des aktuellen Kapitels"
 
-#: data/ui/headerbar.ui:118
-msgid "Rewind 30 seconds"
-msgstr "Springe 30 Sekunden zurück"
+#: data/ui/headerbar.ui:123
+msgid "Rewind"
+msgstr "Zurück springen"
 
-#: data/ui/headerbar.ui:126
+#: data/ui/headerbar.ui:131
 msgid "Rewind button"
 msgstr "Zurück springen Knopf"
 
-#: data/ui/headerbar.ui:127
-msgid "Jump back 30 seconds"
-msgstr "Springe 30 Sekunden zurück"
+#: data/ui/headerbar.ui:132
+msgid "Rewind playback"
+msgstr "Zurück springen"
 
-#: data/ui/headerbar.ui:144
+#: data/ui/headerbar.ui:149
 msgid "Start playback"
 msgstr "Starte die Wiedergabe"
 
-#: data/ui/headerbar.ui:152
+#: data/ui/headerbar.ui:157
 msgid "Play/Pause Button"
 msgstr "Play/Pause Knopf"
 
-#: data/ui/headerbar.ui:153
+#: data/ui/headerbar.ui:158
 msgid "Start or pause the playback"
 msgstr "Starte oder pausiere die Wiedergabe"
 
-#: data/ui/headerbar.ui:184
+#: data/ui/headerbar.ui:174
+msgid "Forward"
+msgstr "Vor springen"
+
+#: data/ui/headerbar.ui:182
+msgid "Forward button"
+msgstr "Vor springen Knopf"
+
+#: data/ui/headerbar.ui:183
+msgid "Forward Playback"
+msgstr "Vor springen"
+
+#: data/ui/headerbar.ui:214
 msgid "Warnings"
 msgstr "Warnungen"
 
-#: data/ui/headerbar.ui:229
+#: data/ui/headerbar.ui:259
 msgid "Currently playing"
 msgstr "Wird gerade wiedergegeben"
 
-#: data/ui/headerbar.ui:245
+#: data/ui/headerbar.ui:275
 msgid "Booktitle"
 msgstr "Buchtitel"
 
-#: data/ui/headerbar.ui:246
+#: data/ui/headerbar.ui:276
 msgid "Title of currently playing book"
 msgstr "Titel des aktuellen Buches"
 
-#: data/ui/headerbar.ui:272
+#: data/ui/headerbar.ui:302
 msgid "Part name"
 msgstr "Kapitelname"
 
-#: data/ui/headerbar.ui:273
+#: data/ui/headerbar.ui:303
 msgid "Title of the currently playing part"
 msgstr "Name des aktuell abgespielten Kapitels"
 
-#: data/ui/headerbar.ui:306
+#: data/ui/headerbar.ui:336
 msgid "Working…"
 msgstr "Arbeite…"
 
-#: data/ui/headerbar.ui:310
+#: data/ui/headerbar.ui:340
 msgid "Currently working"
 msgstr "Am arbeiten..."
 
-#: data/ui/headerbar.ui:327
+#: data/ui/headerbar.ui:357
 msgid "Volume control"
 msgstr "Lautstärke"
 
-#: data/ui/headerbar.ui:364
+#: data/ui/headerbar.ui:394
 msgid "Playback speed"
 msgstr "Geschwindigkeit"
 
-#: data/ui/headerbar.ui:395
+#: data/ui/headerbar.ui:425
 msgid "Timer menu button"
 msgstr "Timer Menü-Knopf"
 
-#: data/ui/headerbar.ui:396
+#: data/ui/headerbar.ui:426
 msgid "Open the sleep timer popover"
 msgstr "Öffne das Schlafen Timer Popover"
 
-#: data/ui/headerbar.ui:412
+#: data/ui/headerbar.ui:442
 msgid "Search your library"
 msgstr "Durchsuche deine Bibliothek"
 
-#: data/ui/headerbar.ui:422
+#: data/ui/headerbar.ui:452
 msgid "Search menu button"
 msgstr "Suche Menü-Knopf"
 
-#: data/ui/headerbar.ui:423
+#: data/ui/headerbar.ui:453
 msgid "Open the search popover"
 msgstr "Öffne das Suchen Popover"
 
-#: data/ui/headerbar.ui:438
+#: data/ui/headerbar.ui:468
 msgid "Options"
 msgstr "Optionen"
 
-#: data/ui/headerbar.ui:449
+#: data/ui/headerbar.ui:479
 msgid "Options menu button"
 msgstr "Optionen Menü-Knopf"
 
-#: data/ui/headerbar.ui:450
+#: data/ui/headerbar.ui:480
 msgid "Open the options popover"
 msgstr "Öffne das Optionen Popover"
 

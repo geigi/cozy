@@ -1,10 +1,12 @@
 import logging
+import os
 import time
 from threading import Thread
 from typing import Optional
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
+from cozy.control.offline_cache import OfflineCache
 from cozy.ext import inject
 from cozy.media.gst_player import GstPlayer, GstPlayerState
 from cozy.model.book import Book
@@ -23,6 +25,7 @@ REWIND_SECONDS = 30
 class Player(EventSender):
     _library: Library = inject.attr(Library)
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
+    _offline_cache: OfflineCache = inject.attr(OfflineCache)
 
     _gst_player: GstPlayer = inject.attr(GstPlayer)
 
@@ -190,56 +193,79 @@ class Player(EventSender):
             reporter.error("player", "There is no book loaded but there should be.")
 
         self._library.last_played_book = self._book
+        media_file_path = self._get_playback_path(chapter)
 
-        if self._gst_player.loaded_file_path == self._book.current_chapter.file:
+        if self._gst_player.loaded_file_path == media_file_path:
             log.info("Not loading a new file because the new chapter is within the old file.")
         else:
             log.info("Loading new file for chapter.")
             try:
-                self._gst_player.load_file(chapter.file)
+                self._gst_player.load_file(media_file_path)
                 file_changed = True
             except FileNotFoundError:
                 self._handle_file_not_found()
                 return
 
         self._gst_player.position = chapter.position
+        self._gst_player.playback_speed = self._book.playback_speed
 
         if file_changed or self._book.position != chapter.id:
             self._book.position = chapter.id
             self.emit_event("chapter-changed", self._book)
 
+    def _get_playback_path(self, chapter: Chapter):
+        if self._book.offline and self._book.downloaded:
+            path = self._offline_cache.get_cached_path(chapter)
+
+            if path and os.path.exists(path):
+                return path
+
+        return chapter.file
+
     def _rewind_in_book(self):
+        if not self._book:
+            log.error("Rewind in book not possible because no book is loaded.")
+            reporter.error("player", "Rewind in book not possible because no book is loaded.")
+            return
+
         current_position = self._gst_player.position
         chapter_number = self._book.chapters.index(self._book.current_chapter)
+        rewind_seconds = self._app_settings.rewind_duration * self.playback_speed
 
-        if current_position / NS_TO_SEC - REWIND_SECONDS > 0:
-            self._gst_player.position = current_position - NS_TO_SEC * REWIND_SECONDS
+        if current_position / NS_TO_SEC - rewind_seconds > 0:
+            self._gst_player.position = current_position - NS_TO_SEC * rewind_seconds
         elif chapter_number > 0:
             previous_chapter = self._book.chapters[chapter_number - 1]
             self._load_chapter(previous_chapter)
-            self._gst_player.position = previous_chapter.end_position + (current_position - NS_TO_SEC * REWIND_SECONDS)
+            self._gst_player.position = previous_chapter.end_position + (current_position - NS_TO_SEC * rewind_seconds)
         else:
             self._gst_player.position = 0
 
     def _forward_in_book(self):
+        if not self._book:
+            log.error("Forward in book not possible because no book is loaded.")
+            reporter.error("player", "Forward in book not possible because no book is loaded.")
+            return
+
         current_position = self._gst_player.position
         old_chapter = self._book.current_chapter
         chapter_number = self._book.chapters.index(self._book.current_chapter)
+        forward_seconds = self._app_settings.forward_duration * self.playback_speed
 
-        if current_position / NS_TO_SEC + REWIND_SECONDS < self._book.current_chapter.length:
-            self._gst_player.position = current_position + NS_TO_SEC * REWIND_SECONDS
+        if current_position / NS_TO_SEC + forward_seconds < self._book.current_chapter.length:
+            self._gst_player.position = current_position + NS_TO_SEC * forward_seconds
         elif chapter_number < len(self._book.chapters) - 1:
             next_chapter = self._book.chapters[chapter_number + 1]
             self._load_chapter(next_chapter)
             self._gst_player.position = next_chapter.start_position + (
-                    NS_TO_SEC * REWIND_SECONDS - (old_chapter.length * NS_TO_SEC - current_position))
+                    NS_TO_SEC * forward_seconds - (old_chapter.length * NS_TO_SEC - current_position))
         else:
             self._gst_player.position = self._book.current_chapter.length * NS_TO_SEC
 
     def _rewind_feature(self):
-        pass
         if self._app_settings.replay:
             self._rewind_in_book()
+            self._emit_tick()
 
     def _next_chapter(self):
         if not self._book:
@@ -306,11 +332,12 @@ class Player(EventSender):
             self.play_status_updater = None
 
     def _emit_tick(self):
-        chapter = self.loaded_chapter
-        if chapter and self.loaded_book:
-            chapter.position = self.position
+        if not self.loaded_chapter or not self.loaded_book:
+            log.info("Not emitting tick because no book/chapter is loaded.")
+            return
 
-        self.emit_event_main_thread("position", chapter.position)
+        self.loaded_chapter.position = self.position
+        self.emit_event_main_thread("position", self.loaded_chapter.position)
 
     def _fadeout_playback(self):
         duration = self._app_settings.sleep_timer_fadeout_duration * 20

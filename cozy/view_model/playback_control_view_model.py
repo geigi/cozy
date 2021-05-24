@@ -53,7 +53,10 @@ class PlaybackControlViewModel(Observable, EventSender):
 
     @position.setter
     def position(self, new_value: int):
-        self._player.position = new_value
+        if not self._book:
+            return
+
+        self._player.position = new_value * self._book.playback_speed
 
     @property
     def length(self) -> Optional[float]:
@@ -79,6 +82,9 @@ class PlaybackControlViewModel(Observable, EventSender):
 
     def rewind(self):
         self._player.rewind()
+
+    def forward(self):
+        self._player.forward()
 
     def open_book_detail(self):
         if self.book:

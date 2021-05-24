@@ -57,3 +57,30 @@ def test_setting_last_played_book_to_none_updates_in_settings_object_and_databas
 
     assert settings.last_played_book == None
     assert SettingsModel.get().last_played_book == None
+
+
+def test_fetching_non_existent_last_played_book_returns_none(peewee_database):
+    from cozy.model.settings import Settings
+    from cozy.db.settings import Settings as SettingsModel
+
+    db_object = SettingsModel.get()
+    db_object.last_played_book = 437878782
+    db_object.save(only=db_object.dirty_fields)
+
+    settings = Settings()
+
+    assert settings.last_played_book is None
+
+
+def test_fetching_non_existent_last_played_book_sets_it_to_none(peewee_database):
+    from cozy.model.settings import Settings
+    from cozy.db.settings import Settings as SettingsModel
+
+    db_object = SettingsModel.get()
+    db_object.last_played_book = 437878782
+    db_object.save(only=db_object.dirty_fields)
+
+    settings = Settings()
+    dummy = settings.last_played_book
+
+    assert SettingsModel.get().last_played_book is None

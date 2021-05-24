@@ -240,7 +240,7 @@ class GstPlayer(EventSender):
         self._player.seek(self._playback_speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.ACCURATE,
                           Gst.SeekType.SET, self.position, Gst.SeekType.NONE, 0)
 
-        __playback_speed_timer_running = False
+        self._playback_speed_timer_running = False
 
     def _on_gst_message(self, _, message: Gst.Message):
         t = message.type

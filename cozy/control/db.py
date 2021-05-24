@@ -128,14 +128,6 @@ def remove_tracks_with_path(ui, path):
     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
 
 
-def is_external(book):
-    """
-    Tests whether the given book is saved on external storage.
-    """
-    return any(storage.path in Track.select().join(Book).where(Book.id == book.id).first().file for storage in
-               Storage.select().where(Storage.external == True))
-
-
 def get_db():
     global _db
     return _db

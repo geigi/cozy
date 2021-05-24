@@ -196,7 +196,6 @@ class LibraryViewModel(Observable, EventSender):
             if book:
                 self._notify("current_book_in_playback")
                 self._notify("playing")
-                book.reload()
                 self._notify("books-filter")
         elif event == "pause":
             self._notify("playing")

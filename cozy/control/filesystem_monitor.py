@@ -5,10 +5,10 @@ import cozy.ext.inject as inject
 from gi.repository import Gio
 
 from cozy.architecture.event_sender import EventSender
-from cozy.control.db import get_tracks
 from cozy.model.book import Book
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage
+from cozy.report import reporter
 
 log = logging.getLogger("fs_monitor")
 
@@ -61,11 +61,10 @@ class FilesystemMonitor(EventSender):
         pass
 
     def get_book_online(self, book: Book):
-        result = next((storage.online for storage in self.external_storage if storage.storage.path in book.chapters[0].file),
-                      True)
+        result = next(
+            (storage.online for storage in self.external_storage if storage.storage.path in book.chapters[0].file),
+            True)
         return result
-
-
 
     def is_track_online(self, track):
         """
@@ -86,10 +85,22 @@ class FilesystemMonitor(EventSender):
 
     def is_external(self, directory: str) -> bool:
         mounts: List[Gio.Mount] = self.volume_monitor.get_mounts()
+
         for mount in mounts:
-            if mount.get_root().get_path() in directory:
-                if mount.can_unmount():
-                    return True
+            root = mount.get_root()
+            if not root:
+                log.error("Failed to test for external drive. Mountpoint has no root object.")
+                reporter.error("fs_monitor", "Failed to test for external drive. Mountpoint has no root object.")
+                return False
+
+            path = root.get_path()
+            if not path:
+                log.error("Failed to test for external drive. Root object has no path.")
+                reporter.error("fs_monitor", "Failed to test for external drive. Root object has no path.")
+                return False
+
+            if path in directory and mount.can_unmount():
+                return True
 
         return False
 

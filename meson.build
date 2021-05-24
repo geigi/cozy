@@ -1,4 +1,4 @@
-project('com.github.geigi.cozy', version: '0.8.1')
+project('com.github.geigi.cozy', version: '0.9.5')
 
 python = import('python3')
 i18n = import('i18n')
@@ -88,4 +88,13 @@ configure_file(
   install_dir: python_dir + '/cozy/report'
 )
 
-meson.add_install_script('meson/post_install.py')
+if meson.version().version_compare('>=0.57.0')
+    gnome.post_install(
+      glib_compile_schemas: true,
+      gtk_update_icon_cache: true,
+    )
+else
+    meson.add_install_script('meson/post_install_legacy.py')
+endif
+
+meson.add_install_script('meson/post_install_desktop_database.py')

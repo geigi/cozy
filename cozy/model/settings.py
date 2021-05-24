@@ -1,5 +1,7 @@
 import logging
-from typing import List
+from typing import List, Optional
+
+import peewee
 
 import cozy.ext.inject as inject
 from peewee import SqliteDatabase
@@ -8,6 +10,7 @@ from cozy.db.book import Book
 from cozy.db.settings import Settings as SettingsModel
 from cozy.db.storage import Storage as StorageModel
 from cozy.model.storage import Storage, InvalidPath
+from cozy.report import reporter
 
 log = logging.getLogger("model.storage_location")
 
@@ -24,11 +27,19 @@ class Settings:
         return self._db_object.first_start
 
     @property
-    def last_played_book(self) -> Book:
-        return self._db_object.last_played_book
+    def last_played_book(self) -> Optional[Book]:
+        try:
+            return self._db_object.last_played_book
+        except peewee.DoesNotExist:
+            log.warning("last_played_book references an non existent object. Setting last_played_book to None.")
+            reporter.warning("settings_model",
+                             "last_played_book references an non existent object. Setting last_played_book to None.")
+
+            self.last_played_book = None
+            return None
 
     @last_played_book.setter
-    def last_played_book(self, new_value: Book):
+    def last_played_book(self, new_value):
         if new_value:
             self._db_object.last_played_book = new_value._db_object
         else:

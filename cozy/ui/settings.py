@@ -6,6 +6,7 @@ from cozy.control.db import remove_tracks_with_path
 from cozy.db.storage import Storage
 from cozy.db.storage_blacklist import StorageBlackList
 from cozy.ext import inject
+from cozy.model.library import Library
 from cozy.ui.widgets.ScrollWrapper import ScrollWrapper
 from cozy.ui.widgets.storage_list_box_row import StorageListBoxRow
 from cozy.view_model.settings_view_model import SettingsViewModel
@@ -25,6 +26,7 @@ class Settings(EventSender):
     This class contains all logic for cozys preferences.
     """
     _glib_settings: Gio.Settings = inject.attr(Gio.Settings)
+    _library = inject.attr(Library)
 
     view_model = None
     ui = None
@@ -76,6 +78,22 @@ class Settings(EventSender):
         self.fadeout_duration_adjustment = self.builder.get_object("fadeout_duration_adjustment")
         self.fadeout_duration_adjustment.connect("value-changed", self.__on_fadeout_adjustment_changed)
         self.__on_fadeout_adjustment_changed(self.fadeout_duration_adjustment)
+
+        self.rewind_duration_label = self.builder.get_object("rewind_duration_label")
+        self.rewind_duration_scale = self.builder.get_object("rewind_duration_scale")
+        self.rewind_duration_adjustment = self.builder.get_object("rewind_duration_adjustment")
+        self.rewind_duration_adjustment.connect("value-changed", self._on_rewind_adjustment_changed)
+        self._on_rewind_adjustment_changed(self.rewind_duration_adjustment)
+        for i in [10, 15, 20, 30, 45, 60, 75, 90, 105]:
+            self.rewind_duration_scale.add_mark(i, Gtk.PositionType.RIGHT, None)
+
+        self.forward_duration_label = self.builder.get_object("forward_duration_label")
+        self.forward_duration_scale = self.builder.get_object("forward_duration_scale")
+        self.forward_duration_adjustment = self.builder.get_object("forward_duration_adjustment")
+        self.forward_duration_adjustment.connect("value-changed", self._on_forward_adjustment_changed)
+        self._on_forward_adjustment_changed(self.forward_duration_adjustment)
+        for i in [10, 15, 20, 30, 45, 60, 75, 90, 105]:
+            self.forward_duration_scale.add_mark(i, Gtk.PositionType.RIGHT, None)
 
         self.force_refresh_button = self.builder.get_object("force_refresh_button")
         self.force_refresh_button.connect("clicked", self.__on_force_refresh_clicked)
@@ -161,6 +179,9 @@ class Settings(EventSender):
         self._glib_settings.bind("sleep-timer-fadeout-duration", self.fadeout_duration_adjustment,
                                  "value", Gio.SettingsBindFlags.DEFAULT)
 
+        self._glib_settings.bind("rewind-duration", self.rewind_duration_adjustment, "value", Gio.SettingsBindFlags.DEFAULT)
+        self._glib_settings.bind("forward-duration", self.forward_duration_adjustment, "value", Gio.SettingsBindFlags.DEFAULT)
+
         self._glib_settings.connect("changed", self.__on_settings_changed)
 
     def show(self):
@@ -204,6 +225,7 @@ class Settings(EventSender):
         Storage.select().where(Storage.path == row.path).get().delete_instance()
         self.storage_list_box.remove(row)
         self.emit_event("storage-removed", row.path)
+        self._library.invalidate()
         thread = Thread(target=remove_tracks_with_path, args=(self.ui, row.path), name=("RemoveStorageFromDB"))
         thread.start()
         self.__on_storage_box_changed(None, None)
@@ -302,6 +324,12 @@ class Settings(EventSender):
         This refreshes the label belonging to the fadeout duration adjustment.
         """
         self.fadeout_duration_label.set_text(str(int(adjustment.get_value())) + " s")
+
+    def _on_rewind_adjustment_changed(self, adjustment):
+        self.rewind_duration_label.set_text(str(int(adjustment.get_value())) + " s")
+
+    def _on_forward_adjustment_changed(self, adjustment):
+        self.forward_duration_label.set_text(str(int(adjustment.get_value())) + " s")
 
     def __on_fadeout_switch_changed(self, switch, state):
         """

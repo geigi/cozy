@@ -100,7 +100,7 @@ class BookSearchResult(SearchResult):
         self.set_tooltip_text(_("Play this book"))
         scale = self.get_scale_factor()
 
-        pixbuf = self._artwork_cache.get_cover_pixbuf(book.db_object, scale, BOOK_ICON_SIZE)
+        pixbuf = self._artwork_cache.get_cover_pixbuf(book, scale, BOOK_ICON_SIZE)
         if pixbuf:
             surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
             img = Gtk.Image.new_from_surface(surface)

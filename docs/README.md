@@ -93,6 +93,7 @@ To the contributors on GitHub:
 - meisenzahl
 - naglis
 - oleg-krv
+- paper42
 - phpwutz
 - thibaultamartin
 - umeboshi2

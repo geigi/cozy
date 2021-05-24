@@ -6,7 +6,6 @@ from gi.repository import GdkPixbuf
 
 from cozy.application_settings import ApplicationSettings
 from cozy.control.application_directories import get_cache_dir
-from cozy.control.db import get_tracks
 from cozy.db.artwork_cache import ArtworkCache as ArtworkCacheModel
 from cozy.ext import inject
 from cozy.media.importer import Importer, ScanStatus
@@ -80,7 +79,7 @@ class ArtworkCache:
             gen_uuid = str(query.first().uuid)
         else:
             gen_uuid = str(uuid.uuid4())
-            ArtworkCacheModel.create(book=book, uuid=gen_uuid)
+            ArtworkCacheModel.create(book=book.id, uuid=gen_uuid)
 
         cache_dir = os.path.join(os.path.join(get_cache_dir(), "artwork"), gen_uuid)
         if not os.path.exists(cache_dir):
@@ -127,10 +126,17 @@ class ArtworkCache:
 
     def _load_pixbuf_from_cache(self, book, size):
         path = self.get_album_art_path(book, size)
-        if path:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
-        else:
-            pixbuf = None
+
+        try:
+            if path:
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
+            else:
+                pixbuf = None
+        except Exception as e:
+            log.warning("Failed to load pixbuf from path: {}. Deleting file.".format(path))
+            log.debug(e)
+            os.remove(path)
+            return None
 
         return pixbuf
 
@@ -199,10 +205,11 @@ class ArtworkCache:
         :return: Artwork as pixbuf object.
         """
         pixbuf = None
+        cover_files = []
 
         try:
-            directory = os.path.dirname(os.path.normpath(get_tracks(book)[0].file))
-            cover_files = []
+            directory = os.path.dirname(os.path.normpath(book.chapters[0].file))
+
             cover_files = [f for f in os.listdir(directory)
                            if f.lower().endswith('.png') or f.lower().endswith(".jpg") or f.lower().endswith(".gif")]
         except Exception as e:
