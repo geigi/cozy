@@ -18,7 +18,6 @@ from cozy.db.storage_blacklist import StorageBlackList
 from cozy.db.track import Track
 from cozy.db.track_to_file import TrackToFile
 from cozy.report import reporter
-from cozy.ui.db_migration_failed_view import DBMigrationFailedView
 
 log = logging.getLogger("db_updater")
 
@@ -252,6 +251,7 @@ def update_db():
         except Exception as e:
             log.error(e)
             reporter.exception("db_updator", e)
+            from cozy.ui.db_migration_failed_view import DBMigrationFailedView
             dialog = DBMigrationFailedView()
             dialog.show()
             exit(1)
