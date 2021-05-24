@@ -1,4 +1,5 @@
-from typing import List, Set
+import logging
+from typing import List, Set, Tuple
 
 from cozy.db.book import Book as BookModel
 from cozy.db.file import File
@@ -7,12 +8,26 @@ from cozy.db.track_to_file import TrackToFile
 from cozy.media.media_file import MediaFile
 
 
+log = logging.getLogger("db_importer")
+
+
+class TrackInsertRequest:
+    track_data: object
+    file: File
+    start_at: int
+
+    def __init__(self, track_data: object, file: File, start_at: int):
+        self.track_data = track_data
+        self.file = file
+        self.start_at = start_at
+
+
 class DatabaseImporter:
     def insert_many(self, media_files: Set[MediaFile]):
         files = self._prepare_files_db_objects(media_files)
         File.insert_many(files).execute()
         tracks = self._prepare_track_db_objects(media_files)
-        Track.insert_many(tracks).execute()
+        self._insert_tracks(tracks)
 
     def _prepare_files_db_objects(self, media_files: Set[MediaFile]) -> List[object]:
         files = []
@@ -32,7 +47,7 @@ class DatabaseImporter:
         file.modified = media_file.modified
         file.save(only=file.dirty_fields)
 
-    def _prepare_track_db_objects(self, media_files: Set[MediaFile]) -> Set[object]:
+    def _prepare_track_db_objects(self, media_files: Set[MediaFile]) -> Set[TrackInsertRequest]:
         book_db_objects: Set[BookModel] = set()
 
         for media_file in media_files:
@@ -40,7 +55,12 @@ class DatabaseImporter:
                 continue
 
             book = next((book for book in book_db_objects if book.name == media_file.book_name), None)
-            file = File.select().where(File.path == media_file.path).get()
+            file_query = File.select().where(File.path == media_file.path)
+            if not file_query.exists():
+                log.error("No file object with path present: {}".format(media_file.path))
+                continue
+
+            file = file_query.get()
 
             if not book:
                 book = self._import_or_update_book(media_file)
@@ -51,7 +71,8 @@ class DatabaseImporter:
                 tracks = self._get_track_list_for_db(media_file, book)
 
                 for track in tracks:
-                    yield track
+                    start_at = track.pop("startAt")
+                    yield TrackInsertRequest(track, file, start_at)
             else:
                 self._update_track_db_object(media_file, book)
 
@@ -68,11 +89,12 @@ class DatabaseImporter:
         for chapter in media_file.chapters:
             tracks.append({
                 "name": chapter.name,
-                "number": media_file.track_number,
+                "number": chapter.number,
                 "disk": media_file.disk,
                 "book": book,
-                "length": media_file.length,
-                "position": media_file.chapters[0].position
+                "length": chapter.length,
+                "startAt": chapter.position,
+                "position": 0
             })
 
         return tracks
@@ -85,10 +107,10 @@ class DatabaseImporter:
         for chapter in media_file.chapters:
             Track \
                 .update(name=chapter.name,
-                        number=media_file.track_number,
+                        number=chapter.number,
                         book=book,
                         disk=media_file.disk,
-                        length=media_file.length) \
+                        length=chapter.length) \
                 .where(Track.id << all_track_mappings) \
                 .execute()
 
@@ -126,3 +148,8 @@ class DatabaseImporter:
             return True
         else:
             return False
+
+    def _insert_tracks(self, tracks: Set[TrackInsertRequest]):
+        for track in tracks:
+            track_db = Track.insert(track.track_data).execute()
+            TrackToFile.create(track=track_db, file=track.file, start_at=track.start_at)

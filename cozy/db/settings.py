@@ -3,7 +3,7 @@ from peewee import CharField, BooleanField, ForeignKeyField, IntegerField
 from cozy.db.model_base import ModelBase
 from cozy.db.book import Book
 
-DB_VERSION = 8
+DB_VERSION = 9
 
 
 class Settings(ModelBase):

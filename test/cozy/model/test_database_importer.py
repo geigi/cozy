@@ -20,8 +20,6 @@ def test_prepare_files_db_objects_skips_existing_files():
                            author="New Author",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="test.mp3",
                            modified=1234567,
@@ -41,8 +39,6 @@ def test_update_files_db_objects_updates_modified_field():
                            author="New Author",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="test.mp3",
                            modified=12345678,
@@ -63,8 +59,6 @@ def test_prepare_files_db_objects_returns_object_for_new_file():
                            author="New Author",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="i_m_a_new_file.mp3",
                            modified=1234567,
@@ -94,13 +88,11 @@ def test_update_track_db_object_updates_object():
 
     database_importer = DatabaseImporter()
 
-    chapter = Chapter("New Chapter", 0)
+    chapter = Chapter("New Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="New Book Name",
                            author="New Author",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="test.mp3",
                            modified=1234567,
@@ -127,13 +119,11 @@ def test_create_track_db_object_creates_object():
 
     database_importer = DatabaseImporter()
 
-    chapter = Chapter("New Chapter", 0)
+    chapter = Chapter("New Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="New Book Name",
                            author="New Author",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="New File",
                            modified=1234567,
@@ -148,7 +138,6 @@ def test_create_track_db_object_creates_object():
     assert res_dict["number"] == 999
     assert res_dict["book"] == book
     assert res_dict["length"] == 1234567
-    assert res_dict["modified"] == 1234567
     assert res_dict["position"] == 0
 
 
@@ -160,13 +149,11 @@ def test_update_book_db_object_updates_object():
 
     database_importer = DatabaseImporter()
 
-    chapter = Chapter("New Chapter", 0)
+    chapter = Chapter("New Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="Test Book",
                            author="New Author",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="test.mp3",
                            modified=1234567,
@@ -190,13 +177,11 @@ def test_create_book_db_object_creates_object():
 
     database_importer = DatabaseImporter()
 
-    chapter = Chapter("New Chapter", 0)
+    chapter = Chapter("New Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="New Book",
                            author="New Author",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="test.mp3",
                            modified=1234567,
@@ -222,13 +207,11 @@ def test_prepare_db_objects_updates_existing_track(mocker):
     database_importer = DatabaseImporter()
     spy = mocker.spy(database_importer, "_update_track_db_object")
 
-    chapter = Chapter("New Chapter", 0)
+    chapter = Chapter("New Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="Test Book",
                            author="New Author",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="test.mp3",
                            modified=1234567,
@@ -240,23 +223,45 @@ def test_prepare_db_objects_updates_existing_track(mocker):
     spy.assert_called_once()
 
 
-def test_prepare_db_objects_creates_new_track(mocker):
+def test_prepare_db_objects_skips_if_file_object_not_present(mocker):
     from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
     from cozy.media.chapter import Chapter
 
     database_importer = DatabaseImporter()
-    spy = mocker.spy(database_importer, "_get_track_list_for_db")
 
-    chapter = Chapter("New Chapter", 0)
+    chapter = Chapter("New Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="Test Book",
                            author="New Author",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="New test File",
+                           modified=1234567,
+                           chapters=[chapter])
+
+    res_dict = database_importer._prepare_track_db_objects([media_file])
+
+    assert len(list(res_dict)) == 0
+
+
+def test_prepare_db_objects_creates_new_track(mocker):
+    from cozy.model.database_importer import DatabaseImporter
+    from cozy.media.media_file import MediaFile
+    from cozy.media.chapter import Chapter
+    from cozy.db.file import File
+
+    database_importer = DatabaseImporter()
+    spy = mocker.spy(database_importer, "_get_track_list_for_db")
+
+    File.create(path="New File", modified=1234567)
+    chapter = Chapter("New Chapter", 0, 1234567, 999)
+    media_file = MediaFile(book_name="Test Book",
+                           author="New Author",
+                           reader="New Reader",
+                           disk=999,
+                           cover=b"cover",
+                           path="New File",
                            modified=1234567,
                            chapters=[chapter])
 
@@ -270,17 +275,17 @@ def test_prepare_db_objects_updates_existing_book(mocker):
     from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
     from cozy.media.chapter import Chapter
+    from cozy.db.file import File
 
     database_importer = DatabaseImporter()
     spy = mocker.spy(database_importer, "_update_book_db_object")
 
-    chapter = Chapter("New Chapter", 0)
+    File.create(path="New test File", modified=1234567)
+    chapter = Chapter("New Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="Test Book",
                            author="New Author2",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="New test File",
                            modified=1234567,
@@ -296,17 +301,17 @@ def test_prepare_db_objects_creates_new_book(mocker):
     from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
     from cozy.media.chapter import Chapter
+    from cozy.db.file import File
 
     database_importer = DatabaseImporter()
     spy = mocker.spy(database_importer, "_create_book_db_object")
 
-    chapter = Chapter("New Chapter", 0)
+    File.create(path="New test File", modified=1234567)
+    chapter = Chapter("New Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="Test Book New",
                            author="New Author2",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="New test File",
                            modified=1234567,
@@ -328,13 +333,11 @@ def test_delete_all_tracks_from_db_does_as_it_says():
 
     database_importer = DatabaseImporter()
 
-    chapter = Chapter("Ohne Aussicht auf Freiheit", 0)
+    chapter = Chapter("Ohne Aussicht auf Freiheit", 0, 1234567, 999)
     media_file = MediaFile(book_name="Test Book New",
                            author="New Author2",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="20.000 Meilen unter dem Meer/2-10 Ohne Aussicht auf Freiheit.m4a",
                            modified=1234567,
@@ -359,8 +362,6 @@ def test_delete_all_tracks_from_db_does_nothing_if_no_tracks_are_present():
                            author="New Author2",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="file_not_present",
                            modified=1234567,
@@ -379,8 +380,6 @@ def test_is_chapter_count_in_db_different_returns_true_for_non_existent_file():
                            author="New Author2",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="file_not_present",
                            modified=1234567,
@@ -399,11 +398,43 @@ def test_is_chapter_count_in_db_different_returns_false_for_equal_chapter_count(
                            author="New Author2",
                            reader="New Reader",
                            disk=999,
-                           track_number=999,
-                           length=1234567,
                            cover=b"cover",
                            path="20.000 Meilen unter dem Meer/2-10 Ohne Aussicht auf Freiheit.m4a",
                            modified=1234567,
                            chapters=[None])
 
     assert not database_importer._is_chapter_count_in_db_different(media_file)
+
+
+def test_insert_track_inserts_all_rows_expected():
+    from cozy.model.database_importer import DatabaseImporter, TrackInsertRequest
+    from cozy.db.book import Book
+    from cozy.db.file import File
+    from cozy.db.track_to_file import TrackToFile
+
+    database_importer = DatabaseImporter()
+
+    file = File.create(path="New File", modified=1234567)
+    track_data = {
+        "name": "Test",
+        "number": 2,
+        "disk": 2,
+        "book": Book.select().where(Book.name == "Test Book").get(),
+        "length": 123,
+        "position": 0
+    }
+
+    track = TrackInsertRequest(track_data, file, 1234)
+
+    database_importer._insert_tracks([track])
+    track_to_file_query = TrackToFile.select().join(File).where(TrackToFile.file == file.id)
+    assert track_to_file_query.count() == 1
+
+    track_to_file: TrackToFile = track_to_file_query.get()
+
+    assert track_to_file.track.name == track_data["name"]
+    assert track_to_file.track.number == track_data["number"]
+    assert track_to_file.track.disk == track_data["disk"]
+    assert track_to_file.track.book.id == Book.select().where(Book.name == "Test Book").get().id
+    assert track_to_file.track.length == track_data["length"]
+    assert track_to_file.track.position == track_data["position"]

@@ -34,10 +34,8 @@ class TagReader:
             author=self._get_author(),
             reader=self._get_reader(),
             disk=self._get_disk(),
-            track_number=self._get_track_number(),
             chapters=self._get_chapters(),
             cover=self._get_cover(),
-            length=self._get_length_in_seconds(),
             modified=self._get_modified()
         )
 
@@ -91,7 +89,9 @@ class TagReader:
     def _get_chapters(self):
         chapter = Chapter(
             name=self._get_track_name(),
-            position=0
+            position=0,
+            length=self._get_length_in_seconds(),
+            number=self._get_track_number()
         )
 
         return [chapter]
