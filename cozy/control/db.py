@@ -31,6 +31,8 @@ def init_db():
 
     if Settings.table_exists():
         update_db()
+        _db.stop()
+        _db.start()
     else:
         _db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache, TrackToFile, File])
         _db.stop()

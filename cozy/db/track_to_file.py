@@ -6,6 +6,6 @@ from cozy.db.track import Track
 
 
 class TrackToFile(ModelBase):
-    track = ForeignKeyField(Track)
-    file = ForeignKeyField(File)
+    track = ForeignKeyField(Track, unique=True)
+    file = ForeignKeyField(File, unique=False)
     start_at = IntegerField()

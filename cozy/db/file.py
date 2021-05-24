@@ -4,5 +4,5 @@ from cozy.db.model_base import ModelBase
 
 
 class File(ModelBase):
-    path = CharField()
+    path = CharField(unique=True)
     modified = IntegerField()
