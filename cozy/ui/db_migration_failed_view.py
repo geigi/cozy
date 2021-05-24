@@ -9,7 +9,7 @@ from gi.repository import Gtk
 
 
 @Gtk.Template(resource_path='/com/github/geigi/cozy/db_migration_failed.ui')
-class DeleteBookView(Gtk.Dialog):
+class DBMigrationFailedView(Gtk.Dialog):
     __gtype_name__ = 'DBMigrationFailedDialog'
 
     def __init__(self, **kwargs):

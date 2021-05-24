@@ -17,6 +17,8 @@ from cozy.db.storage import Storage
 from cozy.db.storage_blacklist import StorageBlackList
 from cozy.db.track import Track
 from cozy.db.track_to_file import TrackToFile
+from cozy.report import reporter
+from cozy.ui.db_migration_failed_view import DBMigrationFailedView
 
 log = logging.getLogger("db_updater")
 
@@ -114,7 +116,6 @@ def __update_db_8(db):
 
 def _update_db_9(db):
     log.info("Migrating to DB Version 9...")
-    _backup_db(db)
 
     models = generate_models(db)
 
@@ -245,7 +246,15 @@ def update_db():
         __update_db_8(db)
 
     if version < 9:
-        _update_db_9(db)
+        _backup_db(db)
+        try:
+            _update_db_9(db)
+        except Exception as e:
+            log.error(e)
+            reporter.exception("db_updator", e)
+            dialog = DBMigrationFailedView()
+            dialog.show()
+            exit(1)
 
 
 def _backup_db(db):
