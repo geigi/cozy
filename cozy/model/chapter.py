@@ -62,6 +62,11 @@ class Chapter(ABC, EventSender):
 
     @property
     @abstractmethod
+    def file_id(self) -> int:
+        pass
+
+    @property
+    @abstractmethod
     def length(self) -> float:
         pass
 

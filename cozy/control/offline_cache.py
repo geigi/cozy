@@ -10,9 +10,10 @@ import cozy.ui
 
 from gi.repository import Gio
 
-from cozy.db.track import Track
+from cozy.db.file import File
 from cozy.db.offline_cache import OfflineCache as OfflineCacheModel
 from cozy.db.book import Book as BookDB
+from cozy.db.track_to_file import TrackToFile
 from cozy.ext import inject
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
@@ -42,6 +43,9 @@ class OfflineCache(EventSender):
         from cozy.media.importer import Importer
         self._importer = inject.instance(Importer)
 
+        from cozy.model.library import Library
+        self._library = inject.instance(Library)
+
         self._importer.add_listener(self._on_importer_event)
 
         self.cache_dir = os.path.join(get_cache_dir(), "offline")
@@ -59,10 +63,11 @@ class OfflineCache(EventSender):
         tracks = []
         for chapter in book.chapters:
             file = str(uuid.uuid4())
-            tracks.append((chapter.id, file))
+            tracks.append((chapter.file_id, file))
         chunks = [tracks[x:x + 500] for x in range(0, len(tracks), 500)]
         for chunk in chunks:
-            query = OfflineCacheModel.insert_many(chunk, fields=[OfflineCacheModel.track, OfflineCacheModel.file])
+            query = OfflineCacheModel.insert_many(chunk, fields=[OfflineCacheModel.original_file,
+                                                                 OfflineCacheModel.cached_file])
             self.total_batch_count += len(chunk)
             query.execute()
 
@@ -73,11 +78,11 @@ class OfflineCache(EventSender):
         Remove all tracks of the given book from the cache.
         """
         self._stop_processing()
-        ids = [t.id for t in book.chapters]
-        offline_elements = OfflineCacheModel.select().where(OfflineCacheModel.track << ids)
+        ids = [t.file_id for t in book.chapters]
+        offline_elements = OfflineCacheModel.select().where(OfflineCacheModel.original_file << ids)
 
         for element in offline_elements:
-            file_path = os.path.join(self.cache_dir, element.file)
+            file_path = os.path.join(self.cache_dir, element.cached_file)
             if file_path == self.cache_dir:
                 continue
 
@@ -89,7 +94,7 @@ class OfflineCache(EventSender):
                 if self.current and item.id == self.current.id:
                     self.filecopy_cancel.cancel()
 
-        OfflineCacheModel.delete().where(OfflineCacheModel.track in ids).execute()
+        OfflineCacheModel.delete().where(OfflineCacheModel.original_file in ids).execute()
         self.queue = []
 
         self._start_processing()
@@ -97,7 +102,8 @@ class OfflineCache(EventSender):
     def remove_all_for_storage(self, storage_path):
         """
         """
-        for element in OfflineCacheModel.select().join(Track).where(storage_path in Track.file):
+        for element in OfflineCacheModel.select().join(File).where(
+                storage_path in OfflineCacheModel.original_file.path):
             file_path = os.path.join(self.cache_dir, element.file)
             if file_path == self.cache_dir:
                 continue
@@ -109,14 +115,13 @@ class OfflineCache(EventSender):
             if element.track.book.offline == True:
                 element.track.book.update(offline=False, downloaded=False).execute()
 
-        OfflineCacheModel.delete().where(storage_path in OfflineCacheModel.track.file).execute()
+        OfflineCacheModel.delete().where(storage_path in OfflineCacheModel.original_file.path).execute()
 
     def get_cached_path(self, chapter: Chapter):
-        """
-        """
-        query = OfflineCacheModel.select().where(OfflineCacheModel.track == chapter.id, OfflineCacheModel.copied == True)
+        query = OfflineCacheModel.select().where(OfflineCacheModel.original_file == chapter.file_id,
+                                                 OfflineCacheModel.copied == True)
         if query.count() > 0:
-            return os.path.join(self.cache_dir, query.get().file)
+            return os.path.join(self.cache_dir, query.get().cached_file)
         else:
             return None
 
@@ -126,7 +131,7 @@ class OfflineCache(EventSender):
         """
         if OfflineCacheModel.select().count() > 0:
             OfflineCacheModel.update(copied=False).where(
-                OfflineCacheModel.track.file in paths).execute()
+                OfflineCacheModel.original_file.path in paths).execute()
             self._fill_queue_from_db()
 
     def delete_cache(self):
@@ -165,7 +170,7 @@ class OfflineCache(EventSender):
         self.total_batch_count = len(self.queue)
         self.current_batch_count = 0
         if len(self.queue) > 0:
-            self.current_book_processing = self.queue[0].track.book.id
+            self.current_book_processing = self._get_book_to_file(self.queue[0].original_file).id
             self.emit_event_main_thread("start")
 
         while len(self.queue) > 0:
@@ -181,19 +186,19 @@ class OfflineCache(EventSender):
 
             new_item = OfflineCacheModel.get(OfflineCacheModel.id == item.id)
 
-            if self.current_book_processing != new_item.track.book.id:
-                self.update_book_download_status(
-                    BookDB.get(BookDB.id == self.current_book_processing))
-                self.current_book_processing = new_item.track.book.id
+            book = self._get_book_to_file(new_item.original_file)
+            if self.current_book_processing != book.id:
+                self._update_book_download_status(self.current_book_processing)
+                self.current_book_processing = book.id
 
-            if not new_item.copied and os.path.exists(new_item.track.file):
+            if not new_item.copied and os.path.exists(new_item.original_file.path):
                 log.info("Copying item")
                 self.emit_event_main_thread("message",
-                                            _("Copying") + " " + tools.shorten_string(new_item.track.book.name, 30))
+                                            _("Copying") + " " + tools.shorten_string(book.name, 30))
                 self.current = new_item
 
-                destination = Gio.File.new_for_path(os.path.join(self.cache_dir, new_item.file))
-                source = Gio.File.new_for_path(new_item.track.file)
+                destination = Gio.File.new_for_path(os.path.join(self.cache_dir, new_item.cached_file))
+                source = Gio.File.new_for_path(new_item.original_file.path)
                 flags = Gio.FileCopyFlags.OVERWRITE
                 try:
                     copied = source.copy(destination, flags, self.filecopy_cancel, self.__update_copy_status, None)
@@ -203,7 +208,7 @@ class OfflineCache(EventSender):
                         self.thread.stop()
                         break
                     reporter.exception("offline_cache", e)
-                    log.error("Could not copy file to offline cache: " + new_item.track.file)
+                    log.error("Could not copy file to offline cache: " + new_item.original_file.path)
                     log.error(e)
                     self.queue.remove(item)
                     continue
@@ -215,32 +220,36 @@ class OfflineCache(EventSender):
             self.queue.remove(item)
 
         if self.current_book_processing:
-            self.update_book_download_status(
-                BookDB.get(BookDB.id == self.current_book_processing))
+            self._update_book_download_status(self.current_book_processing)
 
         self.current = None
         self.emit_event_main_thread("finished")
 
-    def update_book_download_status(self, book):
-        """
-        Updates the downloaded status of a book.
-        """
-        downloaded = True
-        tracks = get_tracks(book)
-        offline_tracks = OfflineCacheModel.select().where(OfflineCacheModel.track in tracks)
+    def _get_book_to_file(self, file: File):
+        track_to_file = TrackToFile.select().join(File).where(TrackToFile.file == file.id).get()
+        return track_to_file.track.book
 
-        if offline_tracks.count() < 1:
-            downloaded = False
-        else:
-            for track in offline_tracks:
-                if not track.copied:
-                    downloaded = False
+    def _update_book_download_status(self, book_id):
+        book = next(book for book in self._library.books if book.id == book_id)
+        downloaded = self._is_book_downloaded(book)
 
-        BookDB.update(downloaded=downloaded).where(BookDB.id == book.id).execute()
+        book.downloaded = downloaded
+
         if downloaded:
             self.emit_event("book-offline", book)
         else:
             self.emit_event("book-offline-removed", book)
+
+    def _is_book_downloaded(self, book: Book):
+        file_ids = [chapter.file_id for chapter in book.chapters]
+        offline_files = OfflineCacheModel.select().where(OfflineCacheModel.original_file << file_ids)
+        offline_file_ids = [file.original_file.id for file in offline_files]
+
+        for chapter in book.chapters:
+            if chapter.file_id not in offline_file_ids:
+                return False
+
+        return True
 
     def _is_processing(self):
         """

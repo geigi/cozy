@@ -71,6 +71,10 @@ class Track(Chapter):
         file.save(only=file.dirty_fields)
 
     @property
+    def file_id(self):
+        return self._track_to_file_db_object.file.id
+
+    @property
     def length(self) -> float:
         return self._db_object.length
 
