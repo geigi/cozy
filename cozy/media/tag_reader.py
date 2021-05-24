@@ -1,7 +1,10 @@
 import os
+from typing import List
 from urllib.parse import unquote, urlparse
 
 import gi
+import mutagen
+from mutagen.mp4 import MP4
 
 gi.require_version('Gst', '1.0')
 gi.require_version('GstPbutils', '1.0')
@@ -9,6 +12,8 @@ from gi.repository import GstPbutils, Gst, GLib
 
 from cozy.media.chapter import Chapter
 from cozy.media.media_file import MediaFile
+
+NS_TO_SEC = 10 ** 9
 
 
 class TagReader:
@@ -87,13 +92,18 @@ class TagReader:
         return os.path.splitext(filename)[0]
 
     def _get_chapters(self):
+        if self.uri.lower().endswith("m4b") and self._mutagen_supports_chapters():
+            return self._get_m4b_chapters()
+        else:
+            return self._get_single_chapter()
+
+    def _get_single_chapter(self):
         chapter = Chapter(
             name=self._get_track_name(),
             position=0,
             length=self._get_length_in_seconds(),
             number=self._get_track_number()
         )
-
         return [chapter]
 
     def _get_cover(self):
@@ -128,3 +138,45 @@ class TagReader:
                 values.append(value.strip())
 
         return values
+
+    def _get_m4b_chapters(self) -> List[Chapter]:
+        chapters = []
+        path = unquote(urlparse(self.uri).path)
+        mutagen_mp4 = MP4(path)
+
+        if not mutagen_mp4.chapters or len(mutagen_mp4.chapters) == 0:
+            return self._get_single_chapter()
+
+        index = 0
+
+        for chapter in mutagen_mp4.chapters:
+            if index < len(mutagen_mp4.chapters) - 1:
+                length = mutagen_mp4.chapters[index + 1].start - chapter.start
+            else:
+                length = self._get_length_in_seconds() - chapter.start
+
+            if chapter.title:
+                title = chapter.title
+            else:
+                title = "{} {}".format(_("Chapter"), index + 1)
+
+            chapters.append(Chapter(
+                name=title,
+                position=int(chapter.start * NS_TO_SEC),
+                length=length,
+                number=index + 1
+            ))
+
+            index += 1
+
+        return chapters
+
+    @staticmethod
+    def _mutagen_supports_chapters() -> bool:
+        if mutagen.version[0] > 1:
+            return True
+
+        if mutagen.version[0] == 1 and mutagen.version[1] >= 45:
+            return True
+
+        return False

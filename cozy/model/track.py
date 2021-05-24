@@ -54,11 +54,11 @@ class Track(Chapter):
 
     @property
     def start_position(self) -> int:
-        return 0
+        return self._track_to_file_db_object.start_at
 
     @property
     def end_position(self) -> int:
-        return int(self.length) * NS_TO_SEC
+        return self.start_position + (int(self.length) * NS_TO_SEC)
 
     @property
     def file(self):

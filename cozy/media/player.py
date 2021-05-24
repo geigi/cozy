@@ -72,7 +72,7 @@ class Player(EventSender):
 
     @position.setter
     def position(self, new_value: int):
-        self._gst_player.position = new_value * NS_TO_SEC
+        self._gst_player.position = self.loaded_chapter.start_position + (new_value * NS_TO_SEC)
 
     @property
     def volume(self) -> float:
@@ -206,8 +206,9 @@ class Player(EventSender):
                 self._handle_file_not_found()
                 return
 
-        self._gst_player.position = chapter.position
-        self._gst_player.playback_speed = self._book.playback_speed
+        if file_changed:
+            self._gst_player.position = chapter.position
+            self._gst_player.playback_speed = self._book.playback_speed
 
         if file_changed or self._book.position != chapter.id:
             self._book.position = chapter.id
@@ -229,15 +230,16 @@ class Player(EventSender):
             return
 
         current_position = self._gst_player.position
+        current_position_relative = max(current_position - self.loaded_chapter.start_position, 0)
         chapter_number = self._book.chapters.index(self._book.current_chapter)
         rewind_seconds = self._app_settings.rewind_duration * self.playback_speed
 
-        if current_position / NS_TO_SEC - rewind_seconds > 0:
+        if current_position_relative / NS_TO_SEC - rewind_seconds > 0:
             self._gst_player.position = current_position - NS_TO_SEC * rewind_seconds
         elif chapter_number > 0:
             previous_chapter = self._book.chapters[chapter_number - 1]
             self._load_chapter(previous_chapter)
-            self._gst_player.position = previous_chapter.end_position + (current_position - NS_TO_SEC * rewind_seconds)
+            self._gst_player.position = previous_chapter.end_position + (current_position_relative - NS_TO_SEC * rewind_seconds)
         else:
             self._gst_player.position = 0
 
@@ -248,19 +250,20 @@ class Player(EventSender):
             return
 
         current_position = self._gst_player.position
+        current_position_relative = max(current_position - self.loaded_chapter.start_position, 0)
         old_chapter = self._book.current_chapter
         chapter_number = self._book.chapters.index(self._book.current_chapter)
         forward_seconds = self._app_settings.forward_duration * self.playback_speed
 
-        if current_position / NS_TO_SEC + forward_seconds < self._book.current_chapter.length:
-            self._gst_player.position = current_position + NS_TO_SEC * forward_seconds
+        if current_position_relative / NS_TO_SEC + forward_seconds < self._book.current_chapter.length:
+            self._gst_player.position = current_position + (NS_TO_SEC * forward_seconds)
         elif chapter_number < len(self._book.chapters) - 1:
             next_chapter = self._book.chapters[chapter_number + 1]
             self._load_chapter(next_chapter)
             self._gst_player.position = next_chapter.start_position + (
-                    NS_TO_SEC * forward_seconds - (old_chapter.length * NS_TO_SEC - current_position))
+                    NS_TO_SEC * forward_seconds - (old_chapter.length * NS_TO_SEC - current_position_relative))
         else:
-            self._gst_player.position = self._book.current_chapter.length * NS_TO_SEC
+            self._next_chapter()
 
     def _rewind_feature(self):
         if self._app_settings.replay:
@@ -336,8 +339,12 @@ class Player(EventSender):
             log.info("Not emitting tick because no book/chapter is loaded.")
             return
 
+        if self.position > self.loaded_chapter.end_position:
+            self._next_chapter()
+
         self.loaded_chapter.position = self.position
-        self.emit_event_main_thread("position", self.loaded_chapter.position)
+        position_for_ui = self.position - self.loaded_chapter.start_position
+        self.emit_event_main_thread("position", position_for_ui)
 
     def _fadeout_playback(self):
         duration = self._app_settings.sleep_timer_fadeout_duration * 20
