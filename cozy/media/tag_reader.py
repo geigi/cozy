@@ -93,7 +93,8 @@ class TagReader:
 
     def _get_chapters(self):
         if self.uri.lower().endswith("m4b") and self._mutagen_supports_chapters():
-            return self._get_m4b_chapters()
+            mutagen_tags = self._parse_with_mutagen()
+            return self._get_m4b_chapters(mutagen_tags)
         else:
             return self._get_single_chapter()
 
@@ -139,19 +140,17 @@ class TagReader:
 
         return values
 
-    def _get_m4b_chapters(self) -> List[Chapter]:
+    def _get_m4b_chapters(self, mutagen_tags: MP4) -> List[Chapter]:
         chapters = []
-        path = unquote(urlparse(self.uri).path)
-        mutagen_mp4 = MP4(path)
 
-        if not mutagen_mp4.chapters or len(mutagen_mp4.chapters) == 0:
+        if not mutagen_tags.chapters or len(mutagen_tags.chapters) == 0:
             return self._get_single_chapter()
 
         index = 0
 
-        for chapter in mutagen_mp4.chapters:
-            if index < len(mutagen_mp4.chapters) - 1:
-                length = mutagen_mp4.chapters[index + 1].start - chapter.start
+        for chapter in mutagen_tags.chapters:
+            if index < len(mutagen_tags.chapters) - 1:
+                length = mutagen_tags.chapters[index + 1].start - chapter.start
             else:
                 length = self._get_length_in_seconds() - chapter.start
 
@@ -170,6 +169,12 @@ class TagReader:
             index += 1
 
         return chapters
+
+    def _parse_with_mutagen(self) -> MP4:
+        path = unquote(urlparse(self.uri).path)
+        mutagen_mp4 = MP4(path)
+
+        return mutagen_mp4
 
     @staticmethod
     def _mutagen_supports_chapters() -> bool:
