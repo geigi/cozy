@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-09 20:20+0200\n"
+"POT-Creation-Date: 2021-05-24 20:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,7 +133,7 @@ msgstr ""
 msgid "All files"
 msgstr ""
 
-#: cozy/ui/settings.py:99
+#: cozy/ui/settings.py:105
 msgid "Feedback"
 msgstr ""
 
@@ -658,7 +658,7 @@ msgstr ""
 msgid "More to come in a later update."
 msgstr ""
 
-#: data/ui/whats_new_m4b.ui:52
+#: data/ui/whats_new_m4b.ui:52 data/ui/whats_new_m4b_chapter.ui:52
 msgid "Basic support for m4b audio books."
 msgstr ""
 
@@ -678,8 +678,22 @@ msgstr ""
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr ""
 
-#: data/ui/whats_new_library.ui:17
+#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
 msgid "What's new in Cozy"
+msgstr ""
+
+#: data/ui/whats_new_m4b_chapter.ui:77
+msgid "This version of Cozy features chapter support for m4b audio books!"
+msgstr ""
+
+#: data/ui/whats_new_m4b_chapter.ui:92
+msgid ""
+"If you already have m4b files imported you'll need to start a scan of your "
+"library from the app menu."
+msgstr ""
+
+#: data/ui/whats_new_m4b_chapter.ui:107
+msgid "The chapters will then be detected."
 msgstr ""
 
 #: data/ui/whats_new_library.ui:52

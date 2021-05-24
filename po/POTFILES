@@ -31,6 +31,7 @@ data/ui/titlebar_menu.ui
 data/ui/whats_new.ui
 data/ui/whats_new_importer.ui
 data/ui/whats_new_m4b.ui
+data/ui/whats_new_m4b_chapter.ui
 data/ui/whats_new_library.ui
 data/ui/seek_bar.ui
 data/ui/headerbar.ui
