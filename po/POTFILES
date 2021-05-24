@@ -36,4 +36,5 @@ data/ui/whats_new_library.ui
 data/ui/seek_bar.ui
 data/ui/headerbar.ui
 data/ui/delete_book_dialog.ui
+data/ui/db_migration_failed.ui
 main.py
