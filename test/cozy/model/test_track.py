@@ -121,6 +121,7 @@ def test_setting_modified_updates_in_track_object_and_database(peewee_database):
 
 def test_delete_deletes_track_from_db(peewee_database, mocker):
     from cozy.db.track import Track as TrackModel
+    from cozy.db.track_to_file import TrackToFile
     from cozy.model.track import Track
 
     track = Track(peewee_database, 1)
@@ -128,5 +129,18 @@ def test_delete_deletes_track_from_db(peewee_database, mocker):
     track.delete()
 
     assert TrackModel.select().where(TrackModel.id == 1).count() < 1
+    assert TrackToFile.select().join(TrackModel).where(TrackToFile.track.id == 1).count() < 1
     spy.assert_called_once_with("chapter-deleted", track)
     assert len(track._listeners) < 1
+
+
+def test_delete_does_not_delete_book(peewee_database):
+    from cozy.db.track import Track as TrackModel
+    from cozy.db.book import Book
+    from cozy.model.track import Track
+
+    track = Track(peewee_database, 1)
+    book_id = TrackModel.get(1).book.id
+    track.delete()
+
+    assert Book.get_or_none(book_id) is not None
