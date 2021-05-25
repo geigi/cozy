@@ -10,7 +10,6 @@ from cozy.ext import inject
 from cozy.extensions.set import split_strings_to_set
 from cozy.model.book import Book, BookIsEmpty
 from cozy.model.chapter import Chapter
-from cozy.model.database_importer import DatabaseImporter
 from cozy.model.settings import Settings
 
 log = logging.getLogger("ui")
@@ -19,7 +18,6 @@ log = logging.getLogger("ui")
 class Library(EventSender):
     _db = cache = inject.attr(SqliteDatabase)
     _settings: Settings = inject.attr(Settings)
-    _database_importer: DatabaseImporter = inject.attr(DatabaseImporter)
 
     _books: List[Book] = []
     _chapters: Set[Chapter] = set()

@@ -78,5 +78,13 @@
     "reader": "Test",
     "position": 0,
     "rating": 0
+  },
+  {
+    "id": 11,
+    "name": "This is a book with multiple chapters in a single file",
+    "author": "Test",
+    "reader": "Test",
+    "position": 0,
+    "rating": 0
   }
 ]

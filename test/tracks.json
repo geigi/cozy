@@ -2059,5 +2059,41 @@
     "name": "Eis!",
     "number": "6",
     "position": "0"
+  },
+  {
+    "book_id": "11",
+    "disk": "1",
+    "id": 230,
+    "length": "2578",
+    "name": "Chapter 1",
+    "number": "1",
+    "position": "0"
+  },
+  {
+    "book_id": "11",
+    "disk": "1",
+    "id": 231,
+    "length": "1523",
+    "name": "Chapter 2",
+    "number": "2",
+    "position": "0"
+  },
+  {
+    "book_id": "11",
+    "disk": "1",
+    "id": 232,
+    "length": "2712",
+    "name": "Chapter 3",
+    "number": "3",
+    "position": "0"
+  },
+  {
+    "book_id": "11",
+    "disk": "1",
+    "id": 233,
+    "length": "3237",
+    "name": "Chapter 4",
+    "number": "4",
+    "position": "0"
   }
 ]

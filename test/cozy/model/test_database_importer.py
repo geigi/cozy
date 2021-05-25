@@ -438,3 +438,43 @@ def test_insert_track_inserts_all_rows_expected():
     assert track_to_file.track.book.id == Book.select().where(Book.name == "Test Book").get().id
     assert track_to_file.track.length == track_data["length"]
     assert track_to_file.track.position == track_data["position"]
+
+
+def test_update_book_position_skips_empty_book():
+    from cozy.model.database_importer import DatabaseImporter
+    from cozy.db.book import Book
+
+    database_importer = DatabaseImporter()
+
+    book = Book.get_by_id(10)
+    database_importer._update_book_position(book, 0)
+
+
+def test_update_book_position_sets_position_correctly():
+    from cozy.model.database_importer import DatabaseImporter
+    from cozy.db.book import Book
+    from cozy.db.track import Track
+
+    database_importer = DatabaseImporter()
+
+    book = Book.get_by_id(11)
+    database_importer._update_book_position(book, 4251)
+
+    book = Book.get_by_id(11)
+    assert book.position == 232
+    assert Track.get_by_id(232).position == 4251000000000
+
+
+def test_update_book_position_resets_position_if_it_is_longer_than_the_duration():
+    from cozy.model.database_importer import DatabaseImporter
+    from cozy.db.book import Book
+
+    database_importer = DatabaseImporter()
+
+    book = Book.get_by_id(11)
+    book.position = 1
+    book.save(only=book.dirty_fields)
+    database_importer._update_book_position(book, 42510)
+
+    book = Book.get_by_id(11)
+    assert book.position == 0
