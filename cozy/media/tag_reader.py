@@ -157,7 +157,7 @@ class TagReader:
             if chapter.title:
                 title = chapter.title
             else:
-                title = "{} {}".format(_("Chapter"), index + 1)
+                title = "{} {}".format("Chapter", index + 1)
 
             chapters.append(Chapter(
                 name=title,
