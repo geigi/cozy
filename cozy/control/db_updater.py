@@ -4,7 +4,7 @@ import shutil
 from datetime import datetime
 from typing import List
 
-from peewee import IntegerField, BooleanField, FloatField, ForeignKeyField
+from peewee import IntegerField, BooleanField, FloatField, ForeignKeyField, fn
 from playhouse.migrate import SqliteMigrator, migrate
 from playhouse.reflection import generate_models
 
@@ -203,6 +203,12 @@ def _update_db_9(db):
     migrate(
         migrator.add_not_null("offlinecache", "original_file_id")
     )
+
+    db.stop()
+    db.start()
+
+    log.info("Reset modified on all m4b files")
+    File.update(modified=0).where(fn.Lower(File.path).endswith("m4b")).execute()
 
     Settings.update(version=9).execute()
 
