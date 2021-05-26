@@ -1,13 +1,14 @@
 import logging
 from typing import List, Set
 
-from peewee import SqliteDatabase
+from peewee import fn, SqliteDatabase
 
 from cozy.db.book import Book as BookModel
 from cozy.db.file import File
 from cozy.db.track import Track
 from cozy.db.track_to_file import TrackToFile
 from cozy.ext import inject
+from cozy.extensions.is_same_book import is_same_book
 from cozy.media.media_file import MediaFile
 from cozy.model.book import Book, BookIsEmpty
 
@@ -74,7 +75,7 @@ class DatabaseImporter:
             if not media_file:
                 continue
 
-            book = next((book for book in book_db_objects if book.name == media_file.book_name), None)
+            book = next((book for book in book_db_objects if is_same_book(book.name, media_file.book_name)), None)
             file_query = File.select().where(File.path == media_file.path)
             if not file_query.exists():
                 log.error("No file object with path present: {}".format(media_file.path))
@@ -106,11 +107,14 @@ class DatabaseImporter:
                 self._update_track_db_object(media_file, book)
 
     def _import_or_update_book(self, media_file):
-        if BookModel.select(BookModel.name).where(BookModel.name == media_file.book_name).count() < 1:
+        if BookModel.select(BookModel.name).where(self._matches_db_book(media_file.book_name)).count() < 1:
             book = self._create_book_db_object(media_file)
         else:
             book = self._update_book_db_object(media_file)
         return book
+
+    def _matches_db_book(self, book_name: str) -> bool:
+        return fn.Lower(BookModel.name) == book_name.lower()
 
     def _get_track_list_for_db(self, media_file: MediaFile, book: BookModel):
         tracks = []
@@ -148,9 +152,9 @@ class DatabaseImporter:
                          author=media_file.author,
                          reader=media_file.reader,
                          cover=media_file.cover) \
-            .where(BookModel.name == media_file.book_name) \
+            .where(self._matches_db_book(media_file.book_name)) \
             .execute()
-        return BookModel.select().where(BookModel.name == media_file.book_name).get()
+        return BookModel.select().where(self._matches_db_book(media_file.book_name)).get()
 
     def _create_book_db_object(self, media_file: MediaFile) -> BookModel:
         return BookModel.create(name=media_file.book_name,
