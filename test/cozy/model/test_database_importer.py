@@ -169,6 +169,34 @@ def test_update_book_db_object_updates_object():
     assert book_in_db.cover == b"cover"
 
 
+def test_update_book_db_object_updates_object_regardless_of_book_spelling():
+    from cozy.model.database_importer import DatabaseImporter
+    from cozy.media.media_file import MediaFile
+    from cozy.db.book import Book
+    from cozy.media.chapter import Chapter
+
+    database_importer = DatabaseImporter()
+
+    chapter = Chapter("New Chapter", 0, 1234567, 999)
+    media_file = MediaFile(book_name="TEST BOOK",
+                           author="New Author",
+                           reader="New Reader",
+                           disk=999,
+                           cover=b"cover",
+                           path="test.mp3",
+                           modified=1234567,
+                           chapters=[chapter])
+
+    database_importer._update_book_db_object(media_file)
+
+    book_in_db: Book = Book.select().where(Book.name == "TEST BOOK").get()
+
+    assert book_in_db.name == "TEST BOOK"
+    assert book_in_db.author == "New Author"
+    assert book_in_db.reader == "New Reader"
+    assert book_in_db.cover == b"cover"
+
+
 def test_create_book_db_object_creates_object():
     from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
@@ -283,6 +311,32 @@ def test_prepare_db_objects_updates_existing_book(mocker):
     File.create(path="New test File", modified=1234567)
     chapter = Chapter("New Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="Test Book",
+                           author="New Author2",
+                           reader="New Reader",
+                           disk=999,
+                           cover=b"cover",
+                           path="New test File",
+                           modified=1234567,
+                           chapters=[chapter])
+
+    res_dict = database_importer._prepare_track_db_objects([media_file])
+
+    assert len(list(res_dict)) == 1
+    spy.assert_called_once()
+
+
+def test_prepare_db_objects_updates_existing_book_regardless_of_spelling(mocker):
+    from cozy.model.database_importer import DatabaseImporter
+    from cozy.media.media_file import MediaFile
+    from cozy.media.chapter import Chapter
+    from cozy.db.file import File
+
+    database_importer = DatabaseImporter()
+    spy = mocker.spy(database_importer, "_update_book_db_object")
+
+    File.create(path="New test File", modified=1234567)
+    chapter = Chapter("New Chapter", 0, 1234567, 999)
+    media_file = MediaFile(book_name="TeSt bOOk",
                            author="New Author2",
                            reader="New Reader",
                            disk=999,
