@@ -251,19 +251,22 @@ def update_db():
         __update_db_8(db)
 
     if version < 9:
-        _backup_db(db)
+        backup_dir_name = _backup_db(db)
         try:
             _update_db_9(db)
         except Exception as e:
             log.error(e)
             reporter.exception("db_updator", e)
+            db.stop()
+            _restore_db(backup_dir_name)
+
             from cozy.ui.db_migration_failed_view import DBMigrationFailedView
             dialog = DBMigrationFailedView()
             dialog.show()
             exit(1)
 
 
-def _backup_db(db):
+def _backup_db(db) -> str:
     log.info("Backing up DB...")
     db.stop()
     now = datetime.now()
@@ -285,3 +288,30 @@ def _backup_db(db):
         shutil.copyfile(wal_path, os.path.join(backup_dir, "cozy.db-wal"))
 
     db.start()
+
+    return dt_string
+
+
+def _restore_db(backup_dir_name: str):
+    log.info("Restoring DB...")
+    backup_dir = os.path.join(get_data_dir(), backup_dir_name)
+
+    db_path = os.path.join(get_data_dir(), "cozy.db")
+    shm_path = os.path.join(get_data_dir(), "cozy.db-shm")
+    wal_path = os.path.join(get_data_dir(), "cozy.db-wal")
+
+    db_path_backup = os.path.join(backup_dir, "cozy.db")
+    shm_path_backup = os.path.join(backup_dir, "cozy.db-shm")
+    wal_path_backup = os.path.join(backup_dir, "cozy.db-wal")
+
+    if os.path.exists(db_path_backup):
+        log.info("Copying db file")
+        shutil.copyfile(db_path_backup, db_path)
+
+    if os.path.exists(shm_path_backup):
+        log.info("Copying shm file")
+        shutil.copyfile(shm_path_backup, shm_path)
+
+    if os.path.exists(wal_path_backup):
+        log.info("Copying wal file")
+        shutil.copyfile(wal_path_backup, wal_path)
