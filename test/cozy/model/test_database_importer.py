@@ -335,7 +335,9 @@ def test_prepare_db_objects_updates_existing_book_regardless_of_spelling(mocker)
     spy = mocker.spy(database_importer, "_update_book_db_object")
 
     File.create(path="New test File", modified=1234567)
+    File.create(path="Another test File", modified=1234568)
     chapter = Chapter("New Chapter", 0, 1234567, 999)
+    another_chapter = Chapter("Another Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="TeSt bOOk",
                            author="New Author2",
                            reader="New Reader",
@@ -344,10 +346,18 @@ def test_prepare_db_objects_updates_existing_book_regardless_of_spelling(mocker)
                            path="New test File",
                            modified=1234567,
                            chapters=[chapter])
+    another_media_file = MediaFile(book_name="TEST BOOK",
+                           author="New Author2",
+                           reader="New Reader",
+                           disk=999,
+                           cover=b"cover",
+                           path="Another test File",
+                           modified=1234568,
+                           chapters=[another_chapter])
 
-    res_dict = database_importer._prepare_track_db_objects([media_file])
+    res_dict = database_importer._prepare_track_db_objects([media_file, another_media_file])
 
-    assert len(list(res_dict)) == 1
+    assert len(list(res_dict)) == 2
     spy.assert_called_once()
 
 
