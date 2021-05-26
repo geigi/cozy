@@ -210,6 +210,9 @@ def _update_db_9(db):
     log.info("Reset modified on all m4b files")
     File.update(modified=0).where(fn.Lower(File.path).endswith("m4b")).execute()
 
+    db.stop()
+    db.start()
+
     Settings.update(version=9).execute()
 
 
