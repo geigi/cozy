@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 11:07+0200\n"
+"POT-Creation-Date: 2021-05-26 16:14+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/geigi/teams/78138/es/)\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/control/offline_cache.py:192
+#: cozy/control/offline_cache.py:197
 msgid "Copying"
 msgstr "Copiando"
 
@@ -140,7 +140,7 @@ msgstr "Disco"
 msgid "All files"
 msgstr "Todos los archivos"
 
-#: cozy/ui/settings.py:99
+#: cozy/ui/settings.py:105
 msgid "Feedback"
 msgstr "Comentarios"
 
@@ -696,7 +696,7 @@ msgstr ""
 msgid "More to come in a later update."
 msgstr "Más cosas en una actualización futura"
 
-#: data/ui/whats_new_m4b.ui:52
+#: data/ui/whats_new_m4b.ui:52 data/ui/whats_new_m4b_chapter.ui:52
 msgid "Basic support for m4b audio books."
 msgstr "Soporte básico para libros de audio m4b."
 
@@ -722,9 +722,26 @@ msgstr ""
 "El soporte para los capítulos se presentará en una actualización posterior. "
 "¡Estén atentos!"
 
-#: data/ui/whats_new_library.ui:17
+#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
 msgid "What's new in Cozy"
 msgstr "Novedades en Cozy"
+
+#: data/ui/whats_new_m4b_chapter.ui:77
+msgid "This version of Cozy features chapter support for m4b audio books!"
+msgstr ""
+"¡Esta versión de Cozy incluye soporte de capítulos para audiolibros m4b!"
+
+#: data/ui/whats_new_m4b_chapter.ui:92
+msgid ""
+"If you already have m4b files imported you'll need to start a scan of your "
+"library from the app menu."
+msgstr ""
+"Si ya tiene archivos m4b importados, tendrá que iniciar un análisis de su "
+"biblioteca desde el menú de la aplicación."
+
+#: data/ui/whats_new_m4b_chapter.ui:107
+msgid "The chapters will then be detected."
+msgstr "Entonces se detectarán los capítulos."
 
 #: data/ui/whats_new_library.ui:52
 msgid "An important change in library management"
@@ -913,3 +930,27 @@ msgstr "¿Estás seguro de que quieres eliminar el audiolibro seleccionado?"
 #: data/ui/delete_book_dialog.ui:126
 msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr "El audiolibro será eliminado de tu disco y de la biblioteca de Cozy."
+
+#: data/ui/db_migration_failed.ui:31
+msgid "Close Cozy"
+msgstr "Cerrar Cozy"
+
+#: data/ui/db_migration_failed.ui:47
+msgid "Recieve help on GitHub"
+msgstr "Recibir ayuda en GitHub"
+
+#: data/ui/db_migration_failed.ui:108
+msgid "An error occured while updating the database"
+msgstr "Se ha producido un error al actualizar la base de datos"
+
+#: data/ui/db_migration_failed.ui:129
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able to startup.\n"
+"A backup of the database was created before the update and has been restored now.\n"
+"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
+"You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
+"Durante una actualización de la base de datos se ha producido un error y Cozy no podrá iniciarse.\n"
+"Se creó una copia de seguridad de la base de datos antes de la actualización y se ha restaurado ahora.\n"
+"Hasta que se resuelva este problema, por favor utilice la versión 0.9.5 de Cozy.\n"
+"Puede ayudar a resolver este problema reportando un problema en GitHub."
