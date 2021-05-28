@@ -40,7 +40,6 @@ class LibraryView:
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
         self._toolbar_revealer: Gtk.Revealer = self._builder.get_object("toolbar_revealer")
-        self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._author_box: FilterListBox = self._builder.get_object("author_box")
         self._reader_box: FilterListBox = self._builder.get_object("reader_box")
 
