@@ -56,6 +56,7 @@
         </p>
         <ul>
           <li>A long awaited feature has finally arrived: Chapter support for m4b files.</li>
+          <li>Books with inconsistent spelling are now grouped into a single book (thanks chris-kobrzak!).</li>
           <li>As always, updated translations thanks to all of the translators!</li>
         </ul>
       </description>
