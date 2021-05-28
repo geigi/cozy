@@ -168,7 +168,7 @@ class GstPlayer(EventSender):
         self._player.set_state(Gst.State.PAUSED)
 
     def play(self):
-        if not self._is_player_loaded():
+        if not self._is_player_loaded() or self.state == GstPlayerState.PLAYING:
             return
 
         success = self._player.set_state(Gst.State.PLAYING)
