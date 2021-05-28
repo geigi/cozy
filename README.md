@@ -58,6 +58,7 @@ Some information about the old beta:
 
 You can download it here: <a href="https://github.com/geigi/cozy/releases/download/0.6.7/cozy_macos_0.6.7_beta3.dmg">Cozy 0.6.7 beta3 for macOS</a>
 
+# Development
 ## Requirements
 - `python3`
 - `meson >= 0.40.0` as build system
@@ -83,22 +84,25 @@ You can download it here: <a href="https://github.com/geigi/cozy/releases/downlo
 This dependency is bundled because it is not generally available as a linux package. The licence is respected and included.
 
 ## Build
+
 ```bash
 $ git clone https://github.com/geigi/cozy.git
 $ cd cozy
-$ meson desired_build_directory --prefix=desired_installation_directory
-$ ninja -C desired_build_directory install
+$ meson <build_dir> --prefix=<installation_dir>
+$ ninja -C <build_dir> install
 ```
 
 ## Update `po` files
 ```bash
-$ ninja -C build com.github.geigi.cozy-update-po
-$ ninja -C build extra-update-po
+$ ninja -C <build_dir> com.github.geigi.cozy-update-po
+$ ninja -C <build_dir> extra-update-po
 ```
 
 ## Running a local build
 ```
-XDG_DATA_DIRS=desired_installation_directory/share:/usr/share PYTHONPATH=desired_installation_directory/lib/python3.[your_python3_version]/site-packages app/bin/com.github.geigi.cozy
+XDG_DATA_DIRS=<installation_dir>/share:/usr/share \
+PYTHONPATH=<installation_dir>/lib/python3.[your_python3_version]/site-packages \
+  app/bin/com.github.geigi.cozy
 ```
 
 ## Q&A
