@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-20 23:40+0200\n"
+"POT-Creation-Date: 2021-05-26 16:14+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Julian Geywitz <github@geigi.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/geigi/teams/78138/de/)\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/control/offline_cache.py:188
+#: cozy/control/offline_cache.py:197
 msgid "Copying"
 msgstr "Kopiere"
 
@@ -113,23 +113,19 @@ msgstr "Heruntergeladen"
 msgid "Download"
 msgstr "Herunterladen"
 
-#: cozy/ui/book_element.py:36
+#: cozy/ui/book_element.py:35
 msgid "Open book overview"
 msgstr "Öffne die Buchübersicht"
 
-#: cozy/ui/book_element.py:37
-msgid "Currently offline"
-msgstr "Aktuell offline"
-
-#: cozy/ui/book_element.py:123
+#: cozy/ui/book_element.py:117
 msgid "Mark as read"
 msgstr "Markiere: Abgeschlossen"
 
-#: cozy/ui/book_element.py:126
+#: cozy/ui/book_element.py:120
 msgid "Open in file browser"
 msgstr "Öffne in Dateibrowser"
 
-#: cozy/ui/book_element.py:129
+#: cozy/ui/book_element.py:123
 msgid "Remove from library"
 msgstr "Aus Bibliothek entfernen"
 
@@ -141,7 +137,7 @@ msgstr "Disc"
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: cozy/ui/settings.py:97
+#: cozy/ui/settings.py:105
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -695,7 +691,7 @@ msgstr ""
 msgid "More to come in a later update."
 msgstr "Mehr folgt in einem späteren Update."
 
-#: data/ui/whats_new_m4b.ui:52
+#: data/ui/whats_new_m4b.ui:52 data/ui/whats_new_m4b_chapter.ui:52
 msgid "Basic support for m4b audio books."
 msgstr "Grundlegende Unterstützung für m4b Hörbücher."
 
@@ -720,9 +716,26 @@ msgstr ""
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr "Die Unterstützung von Kapiteln folgt in einem späteren Update."
 
-#: data/ui/whats_new_library.ui:17
+#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
 msgid "What's new in Cozy"
 msgstr "Was gibts neues bei Cozy"
+
+#: data/ui/whats_new_m4b_chapter.ui:77
+msgid "This version of Cozy features chapter support for m4b audio books!"
+msgstr ""
+"Diese Version von Cozy unterstützt Kapitel bei Hörbüchern im m4b Format!"
+
+#: data/ui/whats_new_m4b_chapter.ui:92
+msgid ""
+"If you already have m4b files imported you'll need to start a scan of your "
+"library from the app menu."
+msgstr ""
+"Falls du schon m4b Dateien importiert hast musst du nur noch einen Scan im "
+"App Menü  starten."
+
+#: data/ui/whats_new_m4b_chapter.ui:107
+msgid "The chapters will then be detected."
+msgstr "Die Kapitel werden dann automatisch erkannt."
 
 #: data/ui/whats_new_library.ui:52
 msgid "An important change in library management"
@@ -911,3 +924,27 @@ msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr ""
 "Das Hörbuch wird von deiner Festplatte und von der Bibliothek gelöscht "
 "werden."
+
+#: data/ui/db_migration_failed.ui:31
+msgid "Close Cozy"
+msgstr "Cozy schließen"
+
+#: data/ui/db_migration_failed.ui:47
+msgid "Recieve help on GitHub"
+msgstr "Hilfe auf GitHub bekommen"
+
+#: data/ui/db_migration_failed.ui:108
+msgid "An error occured while updating the database"
+msgstr "Beim Updaten der Datenbank ist ein Fehler aufgetreten"
+
+#: data/ui/db_migration_failed.ui:129
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able to startup.\n"
+"A backup of the database was created before the update and has been restored now.\n"
+"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
+"You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
+"Während des Updates der Datenbank ist ein Fehler aufgetreten und Cozy kann nicht starten.\n"
+"Vor dem Update wurde ein Backup der Datenbank erstellt, welches gerade wieder eingespielt wurde.\n"
+"Bis dieser Fehler behoben wurde nutze bitte die Version 0.9.5 von Cozy.\n"
+"Du kannst bei der Fehlerbehebung helfen indem du diesen Fehler auf GitHub beschreibst."
