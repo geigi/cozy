@@ -39,7 +39,7 @@ class Library(EventSender):
         return readers
 
     @property
-    def books(self):
+    def books(self) -> List[Book]:
         if not self._books:
             self._load_all_books()
 

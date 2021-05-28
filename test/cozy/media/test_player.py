@@ -92,7 +92,6 @@ def test_loading_new_chapter_sets_playback_speed(mocker):
     assert player.playback_speed == book.playback_speed
 
 
-
 def test_loading_new_chapter_emits_changed_event(mocker):
     from cozy.media.player import Player
 
@@ -156,3 +155,26 @@ def test_load_book_does_not_load_book_if_it_is_none(mocker):
     player._load_book(None)
 
     assert player.loaded_book is None
+
+
+def test_play_pause_chapter_does_not_trigger_chapter_or_book_reload_when_book_has_been_played_before(mocker):
+    from cozy.media.player import Player
+
+    mocker.patch("cozy.media.player.Player._load_last_book")
+    player = Player()
+
+    library = inject.instance(Library)
+    book = library.books[0]
+    chapter = book.chapters[0]
+
+    # Start Playback
+    player.play_pause_chapter(book, chapter)
+
+    spy_book = mocker.spy(player, "_load_book")
+    spy_chapter = mocker.spy(player, "_load_chapter")
+
+    # Pause Playback. Spies should not record any book or chapter reload
+    player.play_pause_chapter(book, chapter)
+
+    spy_book.assert_not_called()
+    spy_chapter.assert_not_called()

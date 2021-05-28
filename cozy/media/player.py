@@ -138,6 +138,7 @@ class Player(EventSender):
 
         if self._book and self._book.current_chapter == chapter:
             self.play_pause()
+            return
 
         if self._book != book:
             self._load_book(book)
