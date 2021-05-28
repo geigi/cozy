@@ -57,19 +57,7 @@ class GstPlayer(EventSender):
         if duration:
             new_position_ns = min(new_position_ns, duration)
 
-        counter = 0
-        seeked = False
-        while not seeked and counter < 100:
-            seeked = self._player.seek(self._playback_speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH, Gst.SeekType.SET,
-                                       new_position_ns, Gst.SeekType.NONE, 0)
-
-            if not seeked:
-                counter += 1
-                time.sleep(0.01)
-
-        if not seeked:
-            log.info("Failed to seek, counter expired.")
-            reporter.warning("gst_player", "Failed to seek, counter expired.")
+        threading.Thread(target=self._execute_seek, args=(new_position_ns,)).start()
 
     @property
     def playback_speed(self) -> float:
@@ -235,6 +223,20 @@ class GstPlayer(EventSender):
                 time.sleep(0.01)
 
         return None
+
+    def _execute_seek(self, new_position_ns: int):
+        counter = 0
+        seeked = False
+        while not seeked and counter < 500:
+            seeked = self._player.seek(self._playback_speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH, Gst.SeekType.SET,
+                                       new_position_ns, Gst.SeekType.NONE, 0)
+
+            if not seeked:
+                counter += 1
+                time.sleep(0.01)
+        if not seeked:
+            log.info("Failed to seek, counter expired.")
+            reporter.warning("gst_player", "Failed to seek, counter expired.")
 
     def _on_playback_speed_timer(self):
         self._player.seek(self._playback_speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.ACCURATE,
