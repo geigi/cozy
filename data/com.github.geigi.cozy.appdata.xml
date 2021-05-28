@@ -57,6 +57,8 @@
         <ul>
           <li>A long awaited feature has finally arrived: Chapter support for m4b files.</li>
           <li>Books with inconsistent spelling are now grouped into a single book (thanks chris-kobrzak!).</li>
+          <li>Improved reliability of restoring the previous playback position.</li>
+          <li>Fix: clicking on a currently playing chapter did not pause the chapter as expected.</li>
           <li>As always, updated translations thanks to all of the translators!</li>
         </ul>
       </description>
