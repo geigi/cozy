@@ -57,7 +57,7 @@ class GstPlayer(EventSender):
         if duration:
             new_position_ns = min(new_position_ns, duration)
 
-        threading.Thread(target=self._execute_seek, args=(new_position_ns,)).start()
+        self._execute_seek(new_position_ns)
 
     @property
     def playback_speed(self) -> float:
