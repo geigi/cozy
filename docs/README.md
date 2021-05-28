@@ -82,6 +82,7 @@ To the contributors on GitHub:
 - Fatih20
 - NathanBnm
 - camellan
+- chris-kobrzak
 - elya5
 - foliva
 - grenade
