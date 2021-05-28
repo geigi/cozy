@@ -207,7 +207,7 @@ class Player(EventSender):
                 self._handle_file_not_found()
                 return
 
-        if file_changed:
+        if file_changed or self._should_jump_to_chapter_position(chapter.position):
             self._gst_player.position = chapter.position
             self._gst_player.playback_speed = self._book.playback_speed
 
@@ -361,3 +361,15 @@ class Player(EventSender):
         self.emit_event("fadeout-finished", None)
 
         self._fadeout_thread = None
+
+    def _should_jump_to_chapter_position(self, position: int) -> bool:
+        """
+        Should the player jump to the given position?
+        This allows gapless playback for media files that contain many chapters.
+        """
+
+        difference = abs(self.position - position)
+        if difference < 10 ** 9:
+            return False
+
+        return True

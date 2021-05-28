@@ -1,4 +1,4 @@
-from unittest.mock import MagicMock, call
+from unittest.mock import MagicMock, call, PropertyMock
 
 import pytest
 from peewee import SqliteDatabase
@@ -178,3 +178,42 @@ def test_play_pause_chapter_does_not_trigger_chapter_or_book_reload_when_book_ha
 
     spy_book.assert_not_called()
     spy_chapter.assert_not_called()
+
+
+def test_should_jump_to_chapter_position_returns_true_for_position_zero(mocker):
+    from cozy.media.player import Player
+
+    mocker.patch("cozy.media.player.Player._load_last_book")
+    mock = mocker.patch("cozy.media.player.Player.position", new_callable=PropertyMock)
+    mock.return_value = 0
+    player = Player()
+
+    jump = player._should_jump_to_chapter_position(100000000000)
+
+    assert jump
+
+
+def test_should_jump_to_chapter_position_returns_true_for_lager_position(mocker):
+    from cozy.media.player import Player
+
+    mocker.patch("cozy.media.player.Player._load_last_book")
+    mock = mocker.patch("cozy.media.player.Player.position", new_callable=PropertyMock)
+    mock.return_value = 1000000000000
+    player = Player()
+
+    jump = player._should_jump_to_chapter_position(100000000000)
+
+    assert jump
+
+
+def test_should_jump_to_chapter_position_returns_false_for_less_than_one_second_difference(mocker):
+    from cozy.media.player import Player
+
+    mocker.patch("cozy.media.player.Player._load_last_book")
+    mock = mocker.patch("cozy.media.player.Player.position", new_callable=PropertyMock)
+    mock.return_value = 10 ** 9
+    player = Player()
+
+    jump = player._should_jump_to_chapter_position(1.9 * 10 ** 9)
+
+    assert not jump
