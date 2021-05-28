@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 11:07+0200\n"
+"POT-Creation-Date: 2021-05-26 16:14+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2021\n"
 "Language-Team: Hindi (https://www.transifex.com/geigi/teams/78138/hi/)\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Language: hi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/control/offline_cache.py:192
+#: cozy/control/offline_cache.py:197
 msgid "Copying"
 msgstr "कॉपी करना जारी"
 
@@ -136,7 +136,7 @@ msgstr "डिस्क"
 msgid "All files"
 msgstr "सभी फाइलें"
 
-#: cozy/ui/settings.py:99
+#: cozy/ui/settings.py:105
 msgid "Feedback"
 msgstr "प्रतिक्रिया"
 
@@ -688,7 +688,7 @@ msgstr ""
 msgid "More to come in a later update."
 msgstr "आगामी अपडेट में और भी सम्मिलित होंगे।"
 
-#: data/ui/whats_new_m4b.ui:52
+#: data/ui/whats_new_m4b.ui:52 data/ui/whats_new_m4b_chapter.ui:52
 msgid "Basic support for m4b audio books."
 msgstr "m4b ऑडियो पुस्तकों हेतु सामान्य समर्थन।"
 
@@ -712,9 +712,26 @@ msgstr ""
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr "अध्याय समर्थन भावी अपडेट में सम्मिलित होगा। परियोजना से जुड़े रहें!"
 
-#: data/ui/whats_new_library.ui:17
+#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
 msgid "What's new in Cozy"
 msgstr "Cozy में नया क्या है?"
+
+#: data/ui/whats_new_m4b_chapter.ui:77
+msgid "This version of Cozy features chapter support for m4b audio books!"
+msgstr ""
+"Cozy के इस संस्करण में m4b ऑडियो पुस्तकों हेतु अध्याय समर्थन सम्मिलित है।"
+
+#: data/ui/whats_new_m4b_chapter.ui:92
+msgid ""
+"If you already have m4b files imported you'll need to start a scan of your "
+"library from the app menu."
+msgstr ""
+"यदि आपने पहले से ही m4b फाइलें आयात कर ली हैं, तो अनुप्रयोग मेन्यू से अपने "
+"पुस्तक संग्रह का स्कैन आरंभ करें।"
+
+#: data/ui/whats_new_m4b_chapter.ui:107
+msgid "The chapters will then be detected."
+msgstr "इसके उपरांत अध्यायों की पहचान सफल होगी।"
 
 #: data/ui/whats_new_library.ui:52
 msgid "An important change in library management"
@@ -901,3 +918,27 @@ msgstr "क्या आप निश्चित ही चयनित ऑड�
 #: data/ui/delete_book_dialog.ui:126
 msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr "यह ऑडियो पुस्तक आपकी डिस्क एवं Cozy पुस्तक संग्रह से हटा दी जाएगी।"
+
+#: data/ui/db_migration_failed.ui:31
+msgid "Close Cozy"
+msgstr "Cozy बंद करें"
+
+#: data/ui/db_migration_failed.ui:47
+msgid "Recieve help on GitHub"
+msgstr "GitHub द्वारा सहायता प्राप्त करें"
+
+#: data/ui/db_migration_failed.ui:108
+msgid "An error occured while updating the database"
+msgstr "डेटाबेस अपडेट करते समय त्रुटि हुई"
+
+#: data/ui/db_migration_failed.ui:129
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able to startup.\n"
+"A backup of the database was created before the update and has been restored now.\n"
+"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
+"You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
+"डेटाबेस अपडेट करते समय एक त्रुटि होने के कारण Cozy की आरंभिकरण प्रक्रिया विकृत हो गई है।\n"
+"अपडेट से पूर्व डेटाबेस के बैकअप का सृजन किया गया था व उसे ही अब पुनः स्थापित कर दिया गया है।\n"
+"इस समस्या का समाधान होने तक Cozy का 0.9.5 संस्करण ही उपयोग करें।\n"
+"आप समस्या को GitHub पर रिपोर्ट कर इसके निवारण में सहयोग कर सकते हैं।"
