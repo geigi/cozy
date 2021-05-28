@@ -18,7 +18,10 @@ class Track(Chapter):
 
     @property
     def name(self):
-        return self._db_object.name
+        if self._db_object.name:
+            return self._db_object.name
+
+        return "{} {}".format(_("Chapter"), self.number)
 
     @name.setter
     def name(self, new_name: str):

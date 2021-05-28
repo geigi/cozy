@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-26 16:14+0200\n"
+"POT-Creation-Date: 2021-05-28 20:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -223,6 +223,10 @@ msgstr ""
 
 #: cozy/view_model/headerbar_view_model.py:91
 msgid "Changing audio book location…"
+msgstr ""
+
+#: cozy/model/track.py:24
+msgid "Chapter"
 msgstr ""
 
 #: data/ui/about.ui:16

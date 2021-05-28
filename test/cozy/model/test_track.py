@@ -11,6 +11,14 @@ def test_name_returns_correct_value(peewee_database):
     assert track.name == "Test Track"
 
 
+def test_name_returns_generated_name_when_no_name_is_present(peewee_database):
+    from cozy.model.track import Track
+
+    track = Track(peewee_database, 234)
+
+    assert track.name == "Chapter {}".format(track.number)
+
+
 def test_setting_name_updates_in_track_object_and_database(peewee_database):
     from cozy.db.track import Track as TrackModel
     from cozy.model.track import Track
