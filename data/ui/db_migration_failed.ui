@@ -127,8 +127,9 @@
                     <property name="halign">start</property>
                     <property name="valign">start</property>
                     <property name="label" translatable="yes">During an update of the database an error occurred and Cozy will not be able to startup.
-A backup of the database was created before the update.
-To receive help on how to get Cozy back up and running you can report an issue.</property>
+A backup of the database was created before the update and has been restored now.
+Until this issue is resolved please use version 0.9.5 of Cozy.
+You can help resolve this problem by reporting an issue on GitHub.</property>
                     <property name="wrap">True</property>
                     <property name="max_width_chars">70</property>
                     <property name="xalign">0</property>

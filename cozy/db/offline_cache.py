@@ -1,10 +1,10 @@
 from peewee import ForeignKeyField, BooleanField, CharField
 
 from cozy.db.model_base import ModelBase
-from cozy.db.track import Track
+from cozy.db.file import File
 
 
 class OfflineCache(ModelBase):
-    track = ForeignKeyField(Track, unique=True)
+    original_file = ForeignKeyField(File, unique=True)
     copied = BooleanField(default=False)
-    file = CharField()
+    cached_file = CharField()

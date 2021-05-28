@@ -1,11 +1,28 @@
 from collections import namedtuple
+from typing import List
 
 import pytest
 
 
+class M4BChapter:
+    title: str
+    start: float
+
+    def __init__(self, title: str, start: float):
+        self.title = title
+        self.start = start
+
+
+class M4B:
+    chapters: List[M4BChapter]
+
+    def __init__(self, chapters: List[M4BChapter]):
+        self.chapters = chapters
+
+
 @pytest.fixture(scope="function")
 def discoverer_mocks(mocker):
-    mock_info = mocker.patch("gi.repository.GstPbutils.DiscovererInfo",)
+    mock_info = mocker.patch("gi.repository.GstPbutils.DiscovererInfo", )
     mock_tags = mocker.patch("gi.repository.Gst.TagList", autospec=True)
 
     mock_tags = mock_info.get_tags.return_value
@@ -72,6 +89,7 @@ def test_default_disk_number(discoverer_mocks):
 
     assert tag_reader._get_disk() == 1
 
+
 def test_author_reader_fallback(mocker, discoverer_mocks):
     from cozy.media.tag_reader import TagReader
 
@@ -81,3 +99,39 @@ def test_author_reader_fallback(mocker, discoverer_mocks):
 
     assert tag_reader._get_author() == "Unknown"
     assert tag_reader._get_reader() == "Unknown"
+
+
+def test_get_m4b_chapters(mocker, discoverer_mocks):
+    discoverer_mocks.info.get_duration = lambda: 10 * (10 ** 9)
+
+    from cozy.media.tag_reader import TagReader
+
+    tag_reader = TagReader("file://abc/def/01 a nice file.m4b", discoverer_mocks.info)
+    chapters = tag_reader._get_m4b_chapters(M4B([M4BChapter("test", 0), M4BChapter("testa", 1)]))
+
+    assert len(chapters) == 2
+    assert chapters[0].name == "test"
+    assert chapters[0].position == 0
+    assert chapters[0].length == 1
+    assert chapters[0].number == 1
+    assert chapters[1].name == "testa"
+    assert chapters[1].position == 1 * (10 ** 9)
+    assert chapters[1].length == 9
+    assert chapters[1].number == 2
+
+
+def test_get_m4b_chapters_creates_single_chapter_if_none_present(mocker, discoverer_mocks):
+    discoverer_mocks.info.get_duration = lambda: 10 * (10 ** 9)
+    discoverer_mocks.tags.get_string_index.return_value = True, "a nice file"
+    discoverer_mocks.tags.get_uint_index.return_value = True, 1
+
+    from cozy.media.tag_reader import TagReader
+
+    tag_reader = TagReader("file://abc/def/01 a nice file.m4b", discoverer_mocks.info)
+    chapters = tag_reader._get_m4b_chapters(M4B([]))
+
+    assert len(chapters) == 1
+    assert chapters[0].name == "a nice file"
+    assert chapters[0].position == 0
+    assert chapters[0].length == 10
+    assert chapters[0].number == 1

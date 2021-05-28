@@ -7,6 +7,7 @@ from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.db.book import Book as BookModel
 from cozy.db.track import Track as TrackModel
+from cozy.db.track_to_file import TrackToFile
 from cozy.ext import inject
 from cozy.model.chapter import Chapter
 from cozy.model.settings import Settings
@@ -178,7 +179,8 @@ class Book(Observable, EventSender):
 
         for chapter in self.chapters:
             if chapter.id == self.position:
-                progress += int(chapter.position / 1000000000)
+                relative_position = max(chapter.position - chapter.start_position, 0)
+                progress += int(relative_position / 1000000000)
                 return progress
 
             progress += chapter.length
@@ -190,8 +192,14 @@ class Book(Observable, EventSender):
             self._settings.last_played_book = None
 
         book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
-        ids = list(t.id for t in book_tracks)
-        TrackModel.delete().where(TrackModel.id << ids).execute()
+        track_to_files = TrackToFile.select().join(TrackModel).where(TrackToFile.track << book_tracks)
+
+        for track in track_to_files:
+            track.file.delete_instance(recursive=True)
+
+        for track in book_tracks:
+            track.delete_instance(recursive=True)
+
         self._db_object.delete_instance(recursive=True)
         self.destroy_listeners()
         self._destroy_observers()

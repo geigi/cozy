@@ -1,6 +1,7 @@
 from peewee import SqliteDatabase
 
 from cozy.db.track import Track as TrackModel
+from cozy.db.track_to_file import TrackToFile
 from cozy.model.chapter import Chapter
 
 NS_TO_SEC = 10 ** 9
@@ -13,6 +14,7 @@ class Track(Chapter):
         self.id: int = id
 
         self._db_object: TrackModel = TrackModel.get(self.id)
+        self._track_to_file_db_object: TrackToFile = TrackToFile.get(TrackToFile.track == self.id)
 
     @property
     def name(self):
@@ -52,20 +54,25 @@ class Track(Chapter):
 
     @property
     def start_position(self) -> int:
-        return 0
+        return self._track_to_file_db_object.start_at
 
     @property
     def end_position(self) -> int:
-        return int(self.length) * NS_TO_SEC
+        return self.start_position + (int(self.length) * NS_TO_SEC)
 
     @property
     def file(self):
-        return self._db_object.file
+        return self._track_to_file_db_object.file.path
 
     @file.setter
     def file(self, new_file: str):
-        self._db_object.file = new_file
-        self._db_object.save(only=self._db_object.dirty_fields)
+        file = self._track_to_file_db_object.file
+        file.path = new_file
+        file.save(only=file.dirty_fields)
+
+    @property
+    def file_id(self):
+        return self._track_to_file_db_object.file.id
 
     @property
     def length(self) -> float:
@@ -78,12 +85,13 @@ class Track(Chapter):
 
     @property
     def modified(self):
-        return self._db_object.modified
+        return self._track_to_file_db_object.file.modified
 
     @modified.setter
     def modified(self, new_modified: int):
-        self._db_object.modified = new_modified
-        self._db_object.save(only=self._db_object.dirty_fields)
+        file = self._track_to_file_db_object.file
+        file.modified = new_modified
+        file.save(only=file.dirty_fields)
 
     def delete(self):
         self._db_object.delete_instance(recursive=True)

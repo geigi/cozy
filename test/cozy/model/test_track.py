@@ -80,13 +80,14 @@ def test_file_returns_default_value(peewee_database):
 
 
 def test_setting_file_updates_in_track_object_and_database(peewee_database):
-    from cozy.db.track import Track as TrackModel
+    from cozy.db.track_to_file import TrackToFile
     from cozy.model.track import Track
 
     track = Track(peewee_database, 1)
     track.file = "altered.mp3"
+    file = TrackToFile.get(TrackToFile.track == track.id).file
     assert track.file == "altered.mp3"
-    assert TrackModel.get_by_id(1).file == "altered.mp3"
+    assert file.path == "altered.mp3"
 
 
 def test_length_returns_default_value(peewee_database):
@@ -106,25 +107,21 @@ def test_setting_length_updates_in_track_object_and_database(peewee_database):
     assert TrackModel.get_by_id(1).length == 42.42
 
 
-def test_modified_returns_default_value(peewee_database):
-    from cozy.model.track import Track
-
-    track = Track(peewee_database, 1)
-    assert track.modified == 123456
-
-
 def test_setting_modified_updates_in_track_object_and_database(peewee_database):
-    from cozy.db.track import Track as TrackModel
     from cozy.model.track import Track
+    from cozy.db.track_to_file import TrackToFile
 
     track = Track(peewee_database, 1)
     track.modified = 42
+    track_to_file = TrackToFile.select().where(TrackToFile.track == track._db_object.id).get()
+
     assert track.modified == 42
-    assert TrackModel.get_by_id(1).modified == 42
+    assert track_to_file.file.modified == 42
 
 
 def test_delete_deletes_track_from_db(peewee_database, mocker):
     from cozy.db.track import Track as TrackModel
+    from cozy.db.track_to_file import TrackToFile
     from cozy.model.track import Track
 
     track = Track(peewee_database, 1)
@@ -132,5 +129,18 @@ def test_delete_deletes_track_from_db(peewee_database, mocker):
     track.delete()
 
     assert TrackModel.select().where(TrackModel.id == 1).count() < 1
+    assert TrackToFile.select().join(TrackModel).where(TrackToFile.track.id == 1).count() < 1
     spy.assert_called_once_with("chapter-deleted", track)
     assert len(track._listeners) < 1
+
+
+def test_delete_does_not_delete_book(peewee_database):
+    from cozy.db.track import Track as TrackModel
+    from cozy.db.book import Book
+    from cozy.model.track import Track
+
+    track = Track(peewee_database, 1)
+    book_id = TrackModel.get(1).book.id
+    track.delete()
+
+    assert Book.get_or_none(book_id) is not None

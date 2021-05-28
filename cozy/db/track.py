@@ -10,6 +10,4 @@ class Track(ModelBase):
     disk = IntegerField()
     position = IntegerField()
     book = ForeignKeyField(Book)
-    file = CharField()
     length = FloatField()
-    modified = IntegerField()

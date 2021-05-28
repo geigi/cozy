@@ -7,6 +7,7 @@ from cozy.control.offline_cache import OfflineCache
 from cozy.media.files import Files
 from cozy.media.gst_player import GstPlayer
 from cozy.media.player import Player
+from cozy.model.database_importer import DatabaseImporter
 from cozy.power_manager import PowerManager
 from cozy.report import reporter
 from cozy.application_settings import ApplicationSettings
@@ -81,6 +82,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(OfflineCache, lambda: OfflineCache())
         binder.bind_to_constructor(Player, lambda: Player())
         binder.bind_to_constructor(Library, lambda: Library())
+        binder.bind_to_constructor(DatabaseImporter, lambda: DatabaseImporter())
         binder.bind_to_constructor(LibraryViewModel, lambda: LibraryViewModel())
         binder.bind_to_constructor(SearchViewModel, lambda: SearchViewModel())
         binder.bind_to_constructor(UISettings, lambda: UISettings())

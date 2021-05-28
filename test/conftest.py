@@ -23,6 +23,8 @@ def peewee_database():
     from cozy.db.settings import Settings
     from cozy.db.storage_blacklist import StorageBlackList
     from cozy.db.storage import Storage
+    from cozy.db.file import File
+    from cozy.db.track_to_file import TrackToFile
 
     db_path, models, test_db = prepare_db()
 
@@ -34,9 +36,21 @@ def peewee_database():
     with open(path_of_test_folder + 'tracks.json') as json_file:
         track_data = json.load(json_file)
 
+    with open(path_of_test_folder + 'files.json') as json_file:
+        file_data = json.load(json_file)
+
+    with open(path_of_test_folder + 'track_to_file.json') as json_file:
+        track_to_file_data = json.load(json_file)
+
     Book.insert_many(book_data).execute()
     for chunk in chunks(track_data, 25):
         Track.insert_many(chunk).execute()
+
+    for chunk in chunks(file_data, 25):
+        File.insert_many(chunk).execute()
+
+    for chunk in chunks(track_to_file_data, 25):
+        TrackToFile.insert_many(chunk).execute()
 
     with open(path_of_test_folder + 'storages.json') as json_file:
         storage_data = json.load(json_file)
@@ -91,8 +105,10 @@ def prepare_db():
     from cozy.db.storage import Storage
     from cozy.db.storage_blacklist import StorageBlackList
     from cozy.db.track import Track
+    from cozy.db.file import File
+    from cozy.db.track_to_file import TrackToFile
 
-    models = [Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache]
+    models = [Track, Book, File, TrackToFile, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache]
 
     print("Setup database...")
 
