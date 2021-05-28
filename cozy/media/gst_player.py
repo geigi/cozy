@@ -84,7 +84,7 @@ class GstPlayer(EventSender):
         if not self._is_player_loaded():
             return None
 
-        uri = self._player.get_property("uri")
+        uri = self._player.get_property("current-uri")
         if uri:
             return uri.replace("file://", "")
         else:
