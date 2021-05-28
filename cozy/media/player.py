@@ -213,7 +213,7 @@ class Player(EventSender):
 
         if file_changed or self._book.position != chapter.id:
             self._book.position = chapter.id
-            self.emit_event("chapter-changed", self._book)
+            self.emit_event_main_thread("chapter-changed", self._book)
 
     def _get_playback_path(self, chapter: Chapter):
         if self._book.offline and self._book.downloaded:
@@ -240,7 +240,8 @@ class Player(EventSender):
         elif chapter_number > 0:
             previous_chapter = self._book.chapters[chapter_number - 1]
             self._load_chapter(previous_chapter)
-            self._gst_player.position = previous_chapter.end_position + (current_position_relative - NS_TO_SEC * rewind_seconds)
+            self._gst_player.position = previous_chapter.end_position + (
+                        current_position_relative - NS_TO_SEC * rewind_seconds)
         else:
             self._gst_player.position = 0
 
@@ -296,10 +297,10 @@ class Player(EventSender):
         elif event == "state" and message == GstPlayerState.PLAYING:
             self._book.last_played = int(time.time())
             self._start_tick_thread()
-            self.emit_event("play", self._book)
+            self.emit_event_main_thread("play", self._book)
         elif event == "state" and message == GstPlayerState.PAUSED:
             self._stop_tick_thread()
-            self.emit_event("pause")
+            self.emit_event_main_thread("pause")
         elif event == "state" and message == GstPlayerState.STOPPED:
             self._stop_playback()
 
@@ -313,15 +314,15 @@ class Player(EventSender):
     def _stop_playback(self):
         self._stop_tick_thread()
         self._book = None
-        self.emit_event("pause")
-        self.emit_event("stop")
+        self.emit_event_main_thread("pause")
+        self.emit_event_main_thread("stop")
 
     def _finish_book(self):
         if self._book:
             self._book.position = -1
             self._library.last_played_book = None
 
-        self.emit_event("book-finished", self._book)
+        self.emit_event_main_thread("book-finished", self._book)
 
     def _start_tick_thread(self):
         if self.play_status_updater:
@@ -358,7 +359,7 @@ class Player(EventSender):
         log.info("Fadeout completed.")
         self.play_pause()
         self._gst_player.volume = current_vol
-        self.emit_event("fadeout-finished", None)
+        self.emit_event_main_thread("fadeout-finished", None)
 
         self._fadeout_thread = None
 

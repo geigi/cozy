@@ -56,7 +56,7 @@ def test_loading_new_book_emits_changed_event(mocker):
     mocker.patch("cozy.media.player.Player._rewind_in_book")
     library = inject.instance(Library)
     player = Player()
-    spy = mocker.spy(player, "emit_event")
+    spy = mocker.spy(player, "emit_event_main_thread")
 
     book = library.books[2]
     player._continue_book(book)
@@ -98,7 +98,7 @@ def test_loading_new_chapter_emits_changed_event(mocker):
     mocker.patch("cozy.media.player.Player._rewind_in_book")
     library = inject.instance(Library)
     player = Player()
-    spy = mocker.spy(player, "emit_event")
+    spy = mocker.spy(player, "emit_event_main_thread")
 
     book = library.books[1]
     player._book = book
