@@ -59,6 +59,9 @@ Some information about the old beta:
 You can download it here: <a href="https://github.com/geigi/cozy/releases/download/0.6.7/cozy_macos_0.6.7_beta3.dmg">Cozy 0.6.7 beta3 for macOS</a>
 
 # Development
+
+See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed instructions and developing Cozy on Ubuntu.
+
 ## Requirements
 - `python3`
 - `meson >= 0.40.0` as build system
