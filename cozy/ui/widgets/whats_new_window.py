@@ -49,6 +49,11 @@ class WhatsNewWindow(Gtk.Window):
     def _fill_window(self):
         self.children = []
 
+        from cozy.ui.widgets.whats_new_m4b_chapter import INTRODUCED
+        if version.parse(self.app_settings.last_launched_version) < version.parse(INTRODUCED):
+            from cozy.ui.widgets.whats_new_m4b_chapter import WhatsNewM4BChapter
+            self.children.append(WhatsNewM4BChapter())
+
         from cozy.ui.widgets.whats_new_library import INTRODUCED
         if version.parse(self.app_settings.last_launched_version) < version.parse(INTRODUCED):
             from cozy.ui.widgets.whats_new_library import WhatsNewLibrary

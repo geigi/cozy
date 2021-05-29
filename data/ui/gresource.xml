@@ -18,6 +18,7 @@
     <file preprocess="xml-stripblanks">whats_new.ui</file>
     <file preprocess="xml-stripblanks">whats_new_importer.ui</file>
     <file preprocess="xml-stripblanks">whats_new_m4b.ui</file>
+    <file preprocess="xml-stripblanks">whats_new_m4b_chapter.ui</file>
     <file preprocess="xml-stripblanks">whats_new_library.ui</file>
     <file preprocess="xml-stripblanks">book_detail.ui</file>
     <file preprocess="xml-stripblanks">seek_bar.ui</file>

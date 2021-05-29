@@ -49,7 +49,7 @@
           <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Basic support for m4b audio books.</property>
+            <property name="label" translatable="yes">Chapter support for m4b audio books.</property>
             <property name="wrap">True</property>
             <style>
               <class name="h3"/>
