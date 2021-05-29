@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-26 16:14+0200\n"
+"POT-Creation-Date: 2021-05-28 20:16+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2021\n"
 "Language-Team: Hindi (https://www.transifex.com/geigi/teams/78138/hi/)\n"
@@ -227,6 +227,10 @@ msgstr "नवीन फाइलें कॉपी करना जारी..
 #: cozy/view_model/headerbar_view_model.py:91
 msgid "Changing audio book location…"
 msgstr "ऑडियो पुस्तक स्थान परिवर्तन जारी..."
+
+#: cozy/model/track.py:24
+msgid "Chapter"
+msgstr "अध्याय"
 
 #: data/ui/about.ui:16
 msgid "GitHub"
