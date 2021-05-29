@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-28 20:16+0200\n"
+"POT-Creation-Date: 2021-05-29 12:43+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2021\n"
 "Language-Team: Hindi (https://www.transifex.com/geigi/teams/78138/hi/)\n"
@@ -692,7 +692,7 @@ msgstr ""
 msgid "More to come in a later update."
 msgstr "आगामी अपडेट में और भी सम्मिलित होंगे।"
 
-#: data/ui/whats_new_m4b.ui:52 data/ui/whats_new_m4b_chapter.ui:52
+#: data/ui/whats_new_m4b.ui:52
 msgid "Basic support for m4b audio books."
 msgstr "m4b ऑडियो पुस्तकों हेतु सामान्य समर्थन।"
 
@@ -719,6 +719,10 @@ msgstr "अध्याय समर्थन भावी अपडेट म�
 #: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
 msgid "What's new in Cozy"
 msgstr "Cozy में नया क्या है?"
+
+#: data/ui/whats_new_m4b_chapter.ui:52
+msgid "Chapter support for m4b audio books."
+msgstr "m4b ऑडियो पुस्तकों हेतु अध्याय समर्थन।"
 
 #: data/ui/whats_new_m4b_chapter.ui:77
 msgid "This version of Cozy features chapter support for m4b audio books!"
