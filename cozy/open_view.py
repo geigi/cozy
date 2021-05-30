@@ -6,3 +6,4 @@ class OpenView(Enum):
     READER = auto()
     BOOK = auto()
     LIBRARY = auto()
+    BACK = auto()

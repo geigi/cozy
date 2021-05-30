@@ -27,6 +27,12 @@ class LibraryViewMode(Enum):
     READER = auto()
 
 
+class LibraryPage(Enum):
+    NONE = auto()
+    FILTER = auto()
+    BOOKS = auto()
+
+
 class LibraryViewModel(Observable, EventSender):
     _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
     _fs_monitor: FilesystemMonitor = inject.attr("FilesystemMonitor")
@@ -39,6 +45,7 @@ class LibraryViewModel(Observable, EventSender):
         super(Observable, self).__init__()
 
         self._library_view_mode: LibraryViewMode = LibraryViewMode.CURRENT
+        self._library_page: LibraryPage = LibraryPage.NONE
         self._selected_filter: str = _("All")
 
         self._connect()
@@ -62,6 +69,15 @@ class LibraryViewModel(Observable, EventSender):
     def library_view_mode(self, value):
         self._library_view_mode = value
         self._notify("library_view_mode")
+
+    @property
+    def library_page(self) -> LibraryPage:
+        return self._library_page
+
+    @library_page.setter
+    def library_page(self, value: LibraryPage):
+        self._library_page = value
+        self._notify("library_page")
 
     @property
     def selected_filter(self):
@@ -149,6 +165,12 @@ class LibraryViewModel(Observable, EventSender):
 
     def open_library(self):
         self._notify("library_view_mode")
+
+    def navigate_back(self):
+        if self._library_page == LibraryPage.NONE:
+            self.open_library()
+        elif self._library_page == LibraryPage.BOOKS:
+            self.library_page = LibraryPage.FILTER
 
     def book_files_exist(self, book: Book) -> bool:
         return any(os.path.exists(chapter.file) for chapter in book.chapters)

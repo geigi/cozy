@@ -50,6 +50,8 @@ class Headerbar(HeaderBar):
 
     play_img: Gtk.Image = Gtk.Template.Child()
 
+    back_button: Gtk.Button = Gtk.Template.Child()
+
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
@@ -90,6 +92,7 @@ class Headerbar(HeaderBar):
         self.play_button.connect("clicked", self._play_clicked)
         self.prev_button.connect("clicked", self._rewind_clicked)
         self.next_button.connect("clicked", self._forward_clicked)
+        self.back_button.connect("clicked", self._back_clicked)
         self.volume_button.connect("value-changed", self._on_volume_button_changed)
         self.seek_bar.connect("position-changed", self._on_seek_bar_position_changed)
         self.cover_img_event_box.connect("button-press-event", self._cover_clicked)
@@ -189,6 +192,9 @@ class Headerbar(HeaderBar):
 
     def _forward_clicked(self, _):
         self._playback_control_view_model.forward()
+
+    def _back_clicked(self, _):
+        self._playback_control_view_model.navigate_back()
 
     def _cover_clicked(self, _, __):
         self._playback_control_view_model.open_book_detail()

@@ -1,14 +1,13 @@
 from typing import Optional
 
-from gi.repository import Gtk
+from gi.repository import Gtk, Handy
 from gi.repository.Gtk import Builder
 
 from cozy.ext import inject
-from cozy.model.book import Book
 from cozy.ui.book_element import BookElement
 from cozy.ui.delete_book_view import DeleteBookView
 from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
+from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode, LibraryPage
 
 READER_PAGE = "reader"
 AUTHOR_PAGE = "author"
@@ -43,6 +42,7 @@ class LibraryView:
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._author_box: FilterListBox = self._builder.get_object("author_box")
         self._reader_box: FilterListBox = self._builder.get_object("reader_box")
+        self._library_leaflet: Handy.Leaflet = self._builder.get_object("library_leaflet")
 
     def _connect_ui_elements(self):
         self._filter_stack.connect("notify::visible-child", self._on_sort_stack_changed)
@@ -53,6 +53,7 @@ class LibraryView:
 
     def _connect_view_model(self):
         self._view_model.bind_to("library_view_mode", self._on_library_view_mode_changed)
+        self._view_model.bind_to("library_page", self._on_library_page_changed)
         self._view_model.bind_to("authors", self.populate_author)
         self._view_model.bind_to("readers", self.populate_reader)
         self._view_model.bind_to("books", self.populate_book_box)
@@ -130,16 +131,25 @@ class LibraryView:
 
         self._invalidate_filters()
 
+    def _on_library_page_changed(self):
+        page = self._view_model.library_page
+
+        if page == LibraryPage.FILTER:
+            self._library_leaflet.set_visible_child_name("filter")
+        elif page == LibraryPage.BOOKS:
+            self._library_leaflet.set_visible_child_name("books")
+
     def _invalidate_filters(self):
         self._book_box.invalidate_filter()
         self._book_box.invalidate_sort()
 
-    def _apply_selected_filter(self, sender, row):
+    def _apply_selected_filter(self, _, row):
         if not row:
             return
 
         self._view_model.selected_filter = row.data
         self._invalidate_filters()
+        self._view_model.library_page = LibraryPage.BOOKS
 
     def _select_filter_row(self):
         if self._view_model.library_view_mode == LibraryViewMode.AUTHOR:

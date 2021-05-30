@@ -3,6 +3,11 @@
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <requires lib="libhandy" version="0.0"/>
+  <object class="GtkImage" id="back_img">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">go-previous-symbolic</property>
+  </object>
   <object class="GtkImage" id="next_img">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -43,7 +48,7 @@
               </object>
               <packing>
                 <property name="name">playback</property>
-                <property name="title" translatable="no">page0</property>
+                <property name="title">page0</property>
               </packing>
             </child>
             <child>
@@ -80,7 +85,7 @@
               </object>
               <packing>
                 <property name="name">working</property>
-                <property name="title" translatable="no">page1</property>
+                <property name="title">page1</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -94,7 +99,19 @@
       </object>
       <packing>
         <property name="pack_type">end</property>
+        <property name="position">1</property>
       </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="back_button">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="image">back_img</property>
+        <property name="always_show_image">True</property>
+      </object>
     </child>
     <child>
       <object class="GtkBox" id="mini_player">
@@ -322,6 +339,9 @@
           </packing>
         </child>
       </object>
+      <packing>
+        <property name="position">1</property>
+      </packing>
     </child>
     <child>
       <object class="GtkBox" id="tools_box">
@@ -490,7 +510,7 @@ audio-volume-medium-symbolic</property>
       </object>
       <packing>
         <property name="pack_type">end</property>
-        <property name="position">1</property>
+        <property name="position">2</property>
       </packing>
     </child>
   </template>

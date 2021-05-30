@@ -93,6 +93,9 @@ class PlaybackControlViewModel(Observable, EventSender):
         if self.book:
             self.emit_event(OpenView.BOOK, self.book)
 
+    def navigate_back(self):
+        self.emit_event(OpenView.BACK)
+
     def _on_player_event(self, event, message):
         if event == "play" or event == "pause":
             if self.book:

@@ -91,7 +91,7 @@
                 <property name="can_focus">False</property>
                 <property name="transition_type">crossfade</property>
                 <child>
-                  <object class="GtkBox">
+                  <object class="HdyLeaflet" id="library_leaflet">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
@@ -203,21 +203,7 @@
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkSeparator">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="orientation">vertical</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="name">filter</property>
                       </packing>
                     </child>
                     <child>
@@ -260,9 +246,7 @@
                         </style>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
+                        <property name="name">books</property>
                       </packing>
                     </child>
                   </object>
