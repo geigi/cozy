@@ -2,9 +2,9 @@ import logging
 import uuid
 import os
 
+
 from cozy.architecture.event_sender import EventSender
 from cozy.control.application_directories import get_cache_dir
-from cozy.control.db import get_tracks
 import cozy.tools as tools
 import cozy.ui
 
@@ -12,7 +12,6 @@ from gi.repository import Gio
 
 from cozy.db.file import File
 from cozy.db.offline_cache import OfflineCache as OfflineCacheModel
-from cozy.db.book import Book as BookDB
 from cozy.db.track_to_file import TrackToFile
 from cozy.ext import inject
 from cozy.model.book import Book
@@ -60,11 +59,12 @@ class OfflineCache(EventSender):
         """
         Add all tracks of a book to the offline cache and start copying.
         """
-        tracks = []
-        for chapter in book.chapters:
-            file = str(uuid.uuid4())
-            tracks.append((chapter.file_id, file))
-        chunks = [tracks[x:x + 500] for x in range(0, len(tracks), 500)]
+        files_to_cache = []
+        file_ids = {chapter.file_id for chapter in book.chapters}
+        for file_id in file_ids:
+            cached_file_name = str(uuid.uuid4())
+            files_to_cache.append((file_id, cached_file_name))
+        chunks = [files_to_cache[x:x + 500] for x in range(0, len(files_to_cache), 500)]
         for chunk in chunks:
             query = OfflineCacheModel.insert_many(chunk, fields=[OfflineCacheModel.original_file,
                                                                  OfflineCacheModel.cached_file])
