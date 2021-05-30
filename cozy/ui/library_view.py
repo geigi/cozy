@@ -38,7 +38,7 @@ class LibraryView:
         self._main_stack: Gtk.Stack = self._builder.get_object("main_stack")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
-        self._toolbar_revealer: Gtk.Revealer = self._builder.get_object("toolbar_revealer")
+        #self._toolbar_revealer: Gtk.Revealer = self._builder.get_object("toolbar_revealer")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._author_box: FilterListBox = self._builder.get_object("author_box")
         self._reader_box: FilterListBox = self._builder.get_object("reader_box")
@@ -130,8 +130,8 @@ class LibraryView:
         self._main_stack.props.visible_child_name = main_view_page
         self._filter_stack.set_visible_child_name(visible_child_name)
         self._filter_stack_revealer.set_reveal_child(reveal_filter_box)
-        self._toolbar_revealer.set_reveal_child(True)
-        self._toolbar_revealer.show_all()
+        #self._toolbar_revealer.set_reveal_child(True)
+        #self._toolbar_revealer.show_all()
 
         if active_filter_box:
             self._apply_selected_filter(active_filter_box, active_filter_box.get_selected_row())

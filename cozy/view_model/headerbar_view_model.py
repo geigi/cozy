@@ -7,6 +7,7 @@ from cozy.ext import inject
 from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.model.library import Library
+from cozy.open_view import OpenView
 
 
 class HeaderBarState(Enum):
@@ -103,3 +104,6 @@ class HeaderbarViewModel(Observable, EventSender):
             self._notify("work_message")
         elif event == "finished":
             self._stop_working()
+
+    def navigate_back(self):
+        self.emit_event(OpenView.BACK)

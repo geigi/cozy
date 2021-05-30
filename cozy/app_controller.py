@@ -24,6 +24,7 @@ from cozy.ui.headerbar import Headerbar
 from cozy.ui.info_banner import InfoBanner
 from cozy.ui.library_view import LibraryView
 from cozy.ui.main_view import CozyUI
+from cozy.ui.media_controller import MediaController
 from cozy.ui.search_view import SearchView
 from cozy.ui.widgets.whats_new_window import WhatsNewWindow
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
@@ -52,12 +53,14 @@ class AppController(metaclass=Singleton):
         self.search_view: SearchView = SearchView()
         self.book_detail_view: BookDetailView = BookDetailView(main_window_builder)
         self.headerbar: Headerbar = Headerbar(main_window_builder)
+        self.media_controller: MediaController = MediaController(main_window_builder)
 
         self.library_view_model = inject.instance(LibraryViewModel)
         self.search_view_model = inject.instance(SearchViewModel)
         self.book_detail_view_model = inject.instance(BookDetailViewModel)
         self.playback_control_view_model = inject.instance(PlaybackControlViewModel)
         self.sleep_timer_view_model = inject.instance(SleepTimerViewModel)
+        self.headerbar_view_model = inject.instance(HeaderbarViewModel)
         self.player = inject.instance(Player)
 
         self._connect_popovers()
@@ -67,6 +70,7 @@ class AppController(metaclass=Singleton):
         self.library_view_model.add_listener(self._on_open_view)
         self.library_view_model.add_listener(self._on_library_view_event)
         self.playback_control_view_model.add_listener(self._on_open_view)
+        self.headerbar_view_model.add_listener(self._on_open_view)
 
         self.main_window.add_listener(self._on_main_window_event)
 

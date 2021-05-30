@@ -8,8 +8,8 @@ from cozy.ext import inject
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.report import reporter
-from cozy.ui.disk_element import DiskElement
 from cozy.ui.chapter_element import ChapterElement
+from cozy.ui.disk_element import DiskElement
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
 
 gi.require_version('Gtk', '3.0')
@@ -49,7 +49,6 @@ class BookDetailView(Gtk.EventBox):
     chapter_box: Gtk.Box = Gtk.Template.Child()
     book_overview_scroller: Gtk.ScrolledWindow = Gtk.Template.Child()
 
-
     _view_model: BookDetailViewModel = inject.attr(BookDetailViewModel)
     _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
@@ -59,7 +58,7 @@ class BookDetailView(Gtk.EventBox):
         super().__init__()
 
         self._main_stack: Gtk.Stack = main_window_builder.get_object("main_stack")
-        self._toolbar_revealer: Gtk.Revealer = main_window_builder.get_object("toolbar_revealer")
+        # self._toolbar_revealer: Gtk.Revealer = main_window_builder.get_object("toolbar_revealer")
         self._main_stack.add_named(self, "book_overview")
 
         if Gtk.get_minor_version() > 20:
@@ -120,7 +119,7 @@ class BookDetailView(Gtk.EventBox):
         self._on_book_available_changed()
 
         self._main_stack.set_visible_child_name("book_overview")
-        self._toolbar_revealer.set_reveal_child(False)
+        #self._toolbar_revealer.set_reveal_child(False)
 
     def _on_play_changed(self):
         playing = self._view_model.playing
@@ -242,7 +241,7 @@ class BookDetailView(Gtk.EventBox):
     def _on_mouse_event(self, gesture: Gtk.GestureMultiPress, _, __, ___):
         btn = gesture.get_current_button()
         if btn == 8:
-            self._view_model.open_library()
+            self._view_model.navigate_back()
             return True
 
         return False

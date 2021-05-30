@@ -8,7 +8,7 @@ from cozy.control.db import books, close_db
 from cozy.control.offline_cache import OfflineCache
 from cozy.db.storage import Storage
 
-from gi.repository import Gtk, Gio, Gdk, GLib
+from gi.repository import Gtk, Gio, Gdk, GLib, Handy
 from threading import Thread
 
 from cozy.media.files import Files
@@ -18,6 +18,7 @@ from cozy.open_view import OpenView
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
+from cozy.ui.media_controller_small import MediaControllerSmall
 from cozy.ui.settings import Settings
 from cozy.architecture.singleton import Singleton
 from cozy.model.settings import Settings as SettingsModel
@@ -146,9 +147,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.sort_stack = self.window_builder.get_object("sort_stack")
         self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
 
-        self.category_toolbar = self.window_builder.get_object(
-            "category_toolbar")
-
         self.sort_stack_revealer = self.window_builder.get_object(
             "sort_stack_revealer")
         # This fixes a bug where otherwise expand is
@@ -166,11 +164,6 @@ class CozyUI(EventSender, metaclass=Singleton):
 
         self.auto_scan_switch = self.window_builder.get_object(
             "auto_scan_switch")
-
-        # some visual stuff
-        self.category_toolbar_separator = self.window_builder.get_object("category_toolbar_separator")
-        if tools.is_elementary():
-            self.category_toolbar.set_visible(False)
 
         # get about dialog
         self.about_dialog = self.about_builder.get_object("about_dialog")
@@ -309,8 +302,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         if self.main_stack.props.visible_child_name != "book_overview" and self.main_stack.props.visible_child_name != "nothing_here" and self.main_stack.props.visible_child_name != "no_media":
             self.main_stack.props.visible_child_name = "main"
-        if self.main_stack.props.visible_child_name != "no_media" and self.main_stack.props.visible_child_name != "book_overview":
-            self.category_toolbar.set_visible(True)
         if self._player.loaded_book:
             self.block_ui_buttons(False, True)
         else:
@@ -333,7 +324,6 @@ class CozyUI(EventSender, metaclass=Singleton):
             self.no_media_file_chooser.set_current_folder(path)
             self.main_stack.props.visible_child_name = "no_media"
             self.block_ui_buttons(True)
-            self.category_toolbar.set_visible(False)
 
     def scan(self, _, __):
         thread = Thread(target=self._importer.scan, name="ScanMediaThread")
