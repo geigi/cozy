@@ -275,9 +275,13 @@ class OfflineCache(EventSender):
             self._start_processing()
 
     def __update_copy_status(self, current_num_bytes, total_num_bytes, _):
-        progress = ((self.current_batch_count - 1) / self.total_batch_count) + (
-                (current_num_bytes / total_num_bytes) / self.total_batch_count)
-        self.emit_event_main_thread("progress", progress)
+        total_batch_count = max(self.total_batch_count, 1)
+
+        finished_files_progress = (self.current_batch_count - 1) / total_batch_count
+        current_file_progress = current_num_bytes / max(total_num_bytes, 1)
+
+        progress = finished_files_progress + (current_file_progress / total_batch_count)
+        self.emit_event_main_thread("progress", min(progress, 1))
 
     def __on_settings_changed(self, event, message):
         """
