@@ -162,9 +162,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.no_media_file_chooser.connect(
             "file-set", self.__on_no_media_folder_changed)
 
-        self.auto_scan_switch = self.window_builder.get_object(
-            "auto_scan_switch")
-
         # get about dialog
         self.about_dialog = self.about_builder.get_object("about_dialog")
         self.about_dialog.set_modal(self.window)
