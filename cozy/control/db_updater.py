@@ -216,6 +216,24 @@ def _update_db_9(db):
     Settings.update(version=9).execute()
 
 
+def _update_db_10(db):
+    log.info("Migrating to DB Version 10...")
+
+    models = generate_models(db)
+    migrator: SqliteMigrator = SqliteMigrator(db)
+
+    if "track" in models["offlinecache"]._meta.sorted_field_names:
+        log.info("Drop in OfflineCache: track_id...")
+        migrate(
+            migrator.drop_column("offlinecache", "track_id")
+        )
+
+    db.stop()
+    db.start()
+
+    Settings.update(version=10).execute()
+
+
 def update_db():
     db = get_sqlite_database()
     # First test for version 1
@@ -268,6 +286,21 @@ def update_db():
             dialog.show()
             exit(1)
 
+    if version < 10:
+        backup_dir_name = _backup_db(db)
+        try:
+            _update_db_10(db)
+        except Exception as e:
+            log.error(e)
+            reporter.exception("db_updator", e)
+            db.stop()
+            _restore_db(backup_dir_name)
+
+            from cozy.ui.db_migration_failed_view import DBMigrationFailedView
+            dialog = DBMigrationFailedView()
+            dialog.show()
+            exit(1)
+
 
 def _backup_db(db) -> str:
     log.info("Backing up DB...")
@@ -275,6 +308,8 @@ def _backup_db(db) -> str:
     now = datetime.now()
     dt_string = now.strftime("%Y-%m-%d %H-%M-%S")
     backup_dir = os.path.join(get_data_dir(), dt_string)
+    if os.path.exists(backup_dir):
+        backup_dir += "-1"
     os.makedirs(backup_dir, exist_ok=True)
 
     db_path = os.path.join(get_data_dir(), "cozy.db")
