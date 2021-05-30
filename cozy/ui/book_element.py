@@ -25,8 +25,6 @@ class BookElement(Gtk.FlowBoxChild):
     track_box = None
     current_track_element = None
     context_menu = None
-    _filesystem_monitor = inject.attr("FilesystemMonitor")
-    _settings = inject.attr(Settings)
 
     def __init__(self, book: Book):
         self.book: Book = book
@@ -77,8 +75,6 @@ class BookElement(Gtk.FlowBoxChild):
         self.art.connect("play-pause-clicked", self._on_album_art_press_event)
         self.event_box.connect("button-press-event", self.__on_button_press_event)
         self.connect("key-press-event", self.__on_key_press_event)
-        self._filesystem_monitor.add_listener(self.__on_storage_changed)
-        self._settings.add_listener(self.__on_storage_changed)
 
     def set_playing(self, is_playing):
         if is_playing:
@@ -147,21 +143,6 @@ class BookElement(Gtk.FlowBoxChild):
         track = self.book.chapters[0]
         path = os.path.dirname(track.file)
         subprocess.Popen(['xdg-open', path])
-
-    def __on_storage_changed(self, event, message):
-        if event == "storage-online" or event == "external-storage-removed":
-            if message in self.book.chapters[0].file:
-                self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
-        elif event == "storage-offline":
-            if message in self.book.chapters[0].file and not self.book.offline:
-                self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
-        elif event == "external-storage-added":
-            if not self._filesystem_monitor.get_book_online(self.book):
-                self.box.set_tooltip_text(self.OFFLINE_TOOLTIP_TEXT)
-        if event == "external-storage-removed":
-            first_track = self.book.chapters[0]
-            if first_track and message in first_track.file:
-                self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
 
 
 GObject.type_register(AlbumElement)

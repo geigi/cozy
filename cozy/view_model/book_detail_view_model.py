@@ -204,11 +204,8 @@ class BookDetailViewModel(Observable, EventSender):
             return
 
         if event == "book-offline-removed":
-            # TODO: Remove this when offline cache refactoring is complete
-            self._book.downloaded = False
             self._notify("downloaded")
         elif event == "book-offline":
-            self._book.downloaded = True
             self._notify("downloaded")
 
     def _on_app_setting_changed(self, event, _):
