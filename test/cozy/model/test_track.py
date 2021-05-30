@@ -98,6 +98,34 @@ def test_setting_file_updates_in_track_object_and_database(peewee_database):
     assert file.path == "altered.mp3"
 
 
+def test_setting_file_gets_file_object_if_it_is_already_present_in_database(peewee_database):
+    from cozy.db.track_to_file import TrackToFile
+    from cozy.db.file import File
+    from cozy.model.track import Track
+
+    track = Track(peewee_database, 1)
+    track.file = "file with multiple chapters.m4b"
+    file = TrackToFile.get(TrackToFile.track == track.id).file
+
+    assert track.file == "file with multiple chapters.m4b"
+    assert file.path == "file with multiple chapters.m4b"
+    assert File.select().where(File.id == 0).count() == 0
+
+
+def test_setting_file_gets_file_object_if_it_is_already_present_in_database_but_preserves_old_file_if_still_used(peewee_database):
+    from cozy.db.track_to_file import TrackToFile
+    from cozy.db.file import File
+    from cozy.model.track import Track
+
+    track = Track(peewee_database, 230)
+    track.file = "Changed path"
+    file = TrackToFile.get(TrackToFile.track == track.id).file
+
+    assert track.file == "Changed path"
+    assert file.path == "Changed path"
+    assert File.select().where(File.id == 229).count() == 1
+
+
 def test_length_returns_default_value(peewee_database):
     from cozy.model.track import Track
 

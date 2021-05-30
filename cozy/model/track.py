@@ -1,5 +1,6 @@
 from peewee import SqliteDatabase
 
+from cozy.db.file import File
 from cozy.db.track import Track as TrackModel
 from cozy.db.track_to_file import TrackToFile
 from cozy.model.chapter import Chapter
@@ -69,9 +70,12 @@ class Track(Chapter):
 
     @file.setter
     def file(self, new_file: str):
-        file = self._track_to_file_db_object.file
-        file.path = new_file
-        file.save(only=file.dirty_fields)
+        file_query = File.select().where(File.path == new_file)
+
+        if file_query.count() > 0:
+            self._exchange_file(file_query.get())
+        else:
+            self._create_new_file(new_file)
 
     @property
     def file_id(self):
@@ -100,3 +104,16 @@ class Track(Chapter):
         self._db_object.delete_instance(recursive=True)
         self.emit_event("chapter-deleted", self)
         self.destroy_listeners()
+
+    def _exchange_file(self, file: File):
+        old_file_id = self._track_to_file_db_object.file.id
+        self._track_to_file_db_object.file = file
+        self._track_to_file_db_object.save(only=self._track_to_file_db_object.dirty_fields)
+
+        if TrackToFile.select().join(File).where(TrackToFile.file.id == old_file_id).count() == 0:
+            File.delete().where(File.id == old_file_id).execute()
+
+    def _create_new_file(self, new_file: str):
+        file = self._track_to_file_db_object.file
+        file.path = new_file
+        file.save(only=file.dirty_fields)
