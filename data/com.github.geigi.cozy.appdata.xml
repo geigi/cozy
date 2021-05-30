@@ -49,7 +49,7 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
-    <release version="1.0.0" timestamp="1620584133">
+    <release version="1.0.0" timestamp="1622358236">
       <description>
         <p>
         This release features chapter support for m4b files.
