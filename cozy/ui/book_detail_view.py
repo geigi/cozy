@@ -23,8 +23,6 @@ log = logging.getLogger("BookDetailView")
 class BookDetailView(Gtk.EventBox):
     __gtype_name__ = 'BookDetail'
 
-    back_button: Gtk.Button = Gtk.Template.Child()
-
     play_book_button: Gtk.Button = Gtk.Template.Child()
     play_img: Gtk.Image = Gtk.Template.Child()
 
@@ -85,7 +83,6 @@ class BookDetailView(Gtk.EventBox):
         self._view_model.bind_to("lock_ui", self._on_lock_ui_changed)
 
     def _connect_widgets(self):
-        self.back_button.connect("clicked", self._back_button_clicked)
         self.play_book_button.connect("clicked", self._play_book_clicked)
         self.download_switch.connect("state-set", self._download_switch_changed)
 
@@ -218,9 +215,6 @@ class BookDetailView(Gtk.EventBox):
         else:
             self.cover_image.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
             self.cover_image.props.pixel_size = 250
-
-    def _back_button_clicked(self, _):
-        self._view_model.open_library()
 
     def _download_switch_changed(self, _, state: bool):
         self._view_model.download_book(state)

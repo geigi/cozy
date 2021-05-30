@@ -46,6 +46,7 @@ class LibraryView:
 
     def _connect_ui_elements(self):
         self._filter_stack.connect("notify::visible-child", self._on_sort_stack_changed)
+        self._main_stack.connect("notify::visible-child", self._on_main_stack_changed)
         self._book_box.set_sort_func(self._view_model.display_book_sort)
         self._book_box.set_filter_func(self._view_model.display_book_filter)
         self._author_box.connect("row-selected", self._apply_selected_filter)
@@ -63,7 +64,7 @@ class LibraryView:
         self._view_model.bind_to("current_book_in_playback", self._current_book_in_playback)
         self._view_model.bind_to("playing", self._playing)
 
-    def _on_sort_stack_changed(self, widget, property):
+    def _on_sort_stack_changed(self, widget, _):
         page = widget.props.visible_child_name
 
         view_mode = None
@@ -75,6 +76,12 @@ class LibraryView:
             view_mode = LibraryViewMode.READER
 
         self._view_model.library_view_mode = view_mode
+
+    def _on_main_stack_changed(self, widget, _):
+        page = widget.props.visible_child_name
+
+        if page != MAIN_BOOK_PAGE:
+            self._view_model.library_page = LibraryPage.NONE
 
     def populate_book_box(self):
         self._book_box.remove_all_children()
@@ -162,6 +169,7 @@ class LibraryView:
 
     def _open_book_overview_clicked(self, _, book):
         self._view_model.open_book_detail(book)
+        self._view_model.library_page = LibraryPage.NONE
         return True
 
     def _on_book_removed(self, _, book):

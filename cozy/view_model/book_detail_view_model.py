@@ -146,9 +146,6 @@ class BookDetailViewModel(Observable, EventSender):
         else:
             self._offline_cache.remove(self._book)
 
-    def open_library(self):
-        self.emit_event(OpenView.LIBRARY)
-
     def play_book(self):
         self._player.play_pause_book(self.book)
 
