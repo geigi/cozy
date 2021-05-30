@@ -10,6 +10,7 @@ from cozy.ext import inject
 from cozy.media.importer import Importer
 from cozy.model.settings import Settings
 from cozy.report import reporter
+from cozy.ui.info_banner import InfoBanner
 
 log = logging.getLogger("files")
 
@@ -17,6 +18,7 @@ log = logging.getLogger("files")
 class Files(EventSender):
     _settings = inject.attr(Settings)
     _importer = inject.attr(Importer)
+    _info_bar: InfoBanner = inject.attr(InfoBanner)
 
     _file_count = 0
     _file_progess = 0
@@ -63,7 +65,13 @@ class Files(EventSender):
         except Exception as e:
             if e.code == Gio.IOErrorEnum.CANCELLED:
                 pass
-            reporter.exception("files", e)
+            elif e.code == Gio.IOErrorEnum.READ_ONLY:
+                self._info_bar.show(_("Cannot copy: Audiobook directory is read only"))
+            elif e.code == Gio.IOErrorEnum.NO_SPACE:
+                self._info_bar.show(_("Cannot copy: Disk is full"))
+            else:
+                reporter.exception("files", e)
+
             log.error("Failed to copy file: {}".format(e))
         self._file_progess += 1
 
@@ -72,7 +80,12 @@ class Files(EventSender):
         for dirpath, dirnames, filenames in os.walk(path):
             dirname = os.path.relpath(dirpath, main_source_path)
             destination_dir = os.path.join(destination, dirname)
-            Path(destination_dir).mkdir(parents=True, exist_ok=True)
+            try:
+                Path(destination_dir).mkdir(parents=True, exist_ok=True)
+            except PermissionError as e:
+                log.error(e)
+                self._info_bar.show(_("Cannot Copy: Permission denied of audiobook directory"))
+                return
 
             for file in filenames:
                 source = os.path.join(dirpath, file)

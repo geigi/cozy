@@ -13,6 +13,7 @@ sudo apt update
 sudo apt install \
   gettext \
   git \
+  gir1.2-granite-1.0 \
   gstreamer1.0-libav \
   gstreamer1.0-plugins-bad \
   gstreamer1.0-plugins-good \

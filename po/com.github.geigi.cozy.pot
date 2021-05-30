@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-29 12:43+0200\n"
+"POT-Creation-Date: 2021-05-30 14:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: cozy/control/offline_cache.py:197
+#: cozy/control/offline_cache.py:201
 msgid "Copying"
 msgstr ""
 
@@ -109,19 +109,19 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-#: cozy/ui/book_element.py:35
+#: cozy/ui/book_element.py:33
 msgid "Open book overview"
 msgstr ""
 
-#: cozy/ui/book_element.py:117
+#: cozy/ui/book_element.py:113
 msgid "Mark as read"
 msgstr ""
 
-#: cozy/ui/book_element.py:120
+#: cozy/ui/book_element.py:116
 msgid "Open in file browser"
 msgstr ""
 
-#: cozy/ui/book_element.py:123
+#: cozy/ui/book_element.py:119
 msgid "Remove from library"
 msgstr ""
 
@@ -225,8 +225,20 @@ msgstr ""
 msgid "Changing audio book location…"
 msgstr ""
 
-#: cozy/model/track.py:24
+#: cozy/model/track.py:25
 msgid "Chapter"
+msgstr ""
+
+#: cozy/media/files.py:69
+msgid "Cannot copy: Audiobook directory is read only"
+msgstr ""
+
+#: cozy/media/files.py:71
+msgid "Cannot copy: Disk is full"
+msgstr ""
+
+#: cozy/media/files.py:87
+msgid "Cannot Copy: Permission denied of audiobook directory"
 msgstr ""
 
 #: data/ui/about.ui:16
@@ -315,78 +327,78 @@ msgid ""
 "- The file(s) are corrupt"
 msgstr ""
 
-#: data/ui/main_window.ui:121
+#: data/ui/main_window.ui:125
 msgid "Recent"
 msgstr ""
 
-#: data/ui/main_window.ui:141
+#: data/ui/main_window.ui:145
 msgid "List of authors"
 msgstr ""
 
-#: data/ui/main_window.ui:157 data/ui/main_window.ui:267
+#: data/ui/main_window.ui:161 data/ui/main_window.ui:271
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr ""
 
-#: data/ui/main_window.ui:177
+#: data/ui/main_window.ui:181
 msgid "List of readers"
 msgstr ""
 
-#: data/ui/main_window.ui:193 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:197 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr ""
 
-#: data/ui/main_window.ui:247
+#: data/ui/main_window.ui:251
 msgid "List of books"
 msgstr ""
 
-#: data/ui/main_window.ui:297
+#: data/ui/main_window.ui:301
 msgid "Stay tuned while Cozy is preparing your library…"
 msgstr ""
 
-#: data/ui/main_window.ui:330
+#: data/ui/main_window.ui:334
 msgid ""
 "Start exploring your library by switching to the Author or Reader view above."
 msgstr ""
 
-#: data/ui/main_window.ui:375
+#: data/ui/main_window.ui:379
 msgid "Import your Audiobooks"
 msgstr ""
 
-#: data/ui/main_window.ui:391
+#: data/ui/main_window.ui:395
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 
-#: data/ui/main_window.ui:427 data/ui/main_window.ui:448
+#: data/ui/main_window.ui:431 data/ui/main_window.ui:452
 msgid "Automatically import new audiobooks on startup"
 msgstr ""
 
-#: data/ui/main_window.ui:447
+#: data/ui/main_window.ui:451
 msgid "Auto scan switch"
 msgstr ""
 
-#: data/ui/main_window.ui:491
+#: data/ui/main_window.ui:495
 msgid "Drag & Drop"
 msgstr ""
 
-#: data/ui/main_window.ui:508
+#: data/ui/main_window.ui:512
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr ""
 
-#: data/ui/main_window.ui:531
+#: data/ui/main_window.ui:535
 msgid "Location of your audiobooks"
 msgstr ""
 
-#: data/ui/main_window.ui:552
+#: data/ui/main_window.ui:556
 msgid "Set Audiobooks Directory"
 msgstr ""
 
-#: data/ui/main_window.ui:575
+#: data/ui/main_window.ui:579
 msgid "Load audiobooks from a directory, network drive or an external disk."
 msgstr ""
 
-#: data/ui/main_window.ui:593
+#: data/ui/main_window.ui:597
 msgid "You can add more storage locations later in the settings"
 msgstr ""
 

@@ -21,6 +21,7 @@ from cozy.model.storage_block_list import StorageBlockList
 from cozy.open_view import OpenView
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.headerbar import Headerbar
+from cozy.ui.info_banner import InfoBanner
 from cozy.ui.library_view import LibraryView
 from cozy.ui.main_view import CozyUI
 from cozy.ui.search_view import SearchView
@@ -75,6 +76,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_provider(SqliteDatabase, get_db)
         binder.bind("MainWindow", self.main_window)
         binder.bind("GtkApp", self.gtk_app)
+        binder.bind("MainWindowBuilder", self.main_window_builder)
         binder.bind_to_constructor(Gio.Settings, lambda: Gio.Settings("com.github.geigi.cozy"))
         binder.bind_to_constructor(ApplicationSettings, lambda: ApplicationSettings())
         binder.bind_to_constructor(Settings, lambda: Settings())
@@ -95,6 +97,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(SleepTimerViewModel, lambda: SleepTimerViewModel())
         binder.bind_to_constructor(GstPlayer, lambda: GstPlayer())
         binder.bind_to_constructor(PowerManager, lambda: PowerManager())
+        binder.bind_to_constructor(InfoBanner, lambda: InfoBanner())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR

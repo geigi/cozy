@@ -19,6 +19,7 @@ cozy/ui/widgets/search_results.py
 cozy/view_model/library_view_model.py
 cozy/view_model/headerbar_view_model.py
 cozy/model/track.py
+cozy/media/files.py
 data/ui/about.ui
 data/ui/book_detail.ui
 data/ui/error_reporting.ui
