@@ -346,47 +346,72 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkListBox">
+                                  <object class="GtkFrame">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="selection_mode">none</property>
+                                    <property name="label_xalign">0</property>
+                                    <property name="shadow_type">in</property>
                                     <child>
-                                      <object class="HdyActionRow">
-                                        <property name="width_request">100</property>
-                                        <property name="height_request">80</property>
+                                      <object class="GtkListBox">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="activatable">False</property>
-                                        <property name="selectable">False</property>
-                                        <property name="title" translatable="yes">Drag &amp; Drop</property>
-                                        <property name="icon_name">input-mouse-symbolic</property>
-                                        <property name="subtitle" translatable="yes">Drag your audiobooks into cozy and they will be automatically imported</property>
+                                        <property name="selection_mode">none</property>
                                         <child>
-                                          <placeholder/>
-                                        </child>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="HdyActionRow">
-                                        <property name="width_request">100</property>
-                                        <property name="height_request">80</property>
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="title" translatable="yes">Set Audiobooks Directory</property>
-                                        <property name="icon_name">folder-symbolic</property>
-                                        <property name="subtitle" translatable="yes">Load audiobooks from a directory, network drive or an external disk</property>
-                                        <child>
-                                          <object class="GtkFileChooserButton" id="no_media_file_chooser">
+                                          <object class="HdyActionRow">
+                                            <property name="width_request">100</property>
+                                            <property name="height_request">80</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="halign">center</property>
-                                            <property name="valign">center</property>
-                                            <property name="action">select-folder</property>
-                                            <property name="local_only">False</property>
-                                            <property name="title" translatable="yes"/>
+                                            <property name="activatable">False</property>
+                                            <property name="selectable">False</property>
+                                            <property name="title" translatable="yes">Drag &amp; Drop</property>
+                                            <property name="icon_name">input-mouse-symbolic</property>
+                                            <property name="subtitle" translatable="yes">Drag your audiobooks into cozy and they will be automatically imported</property>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkListBoxRow">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="activatable">False</property>
+                                            <property name="selectable">False</property>
+                                            <child>
+                                              <object class="GtkSeparator">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="HdyActionRow">
+                                            <property name="width_request">100</property>
+                                            <property name="height_request">80</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="title" translatable="yes">Set Audiobooks Directory</property>
+                                            <property name="icon_name">folder-symbolic</property>
+                                            <property name="subtitle" translatable="yes">Load audiobooks from a directory, network drive or an external disk</property>
+                                            <child>
+                                              <object class="GtkFileChooserButton" id="no_media_file_chooser">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <property name="halign">center</property>
+                                                <property name="valign">center</property>
+                                                <property name="action">select-folder</property>
+                                                <property name="local_only">False</property>
+                                                <property name="title" translatable="yes"/>
+                                              </object>
+                                            </child>
                                           </object>
                                         </child>
                                       </object>
+                                    </child>
+                                    <child type="label_item">
+                                      <placeholder/>
                                     </child>
                                   </object>
                                   <packing>
