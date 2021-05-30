@@ -78,8 +78,8 @@ class OfflineCache(EventSender):
         Remove all tracks of the given book from the cache.
         """
         self._stop_processing()
-        ids = [t.file_id for t in book.chapters]
-        offline_elements = OfflineCacheModel.select().where(OfflineCacheModel.original_file << ids)
+        ids = {t.file_id for t in book.chapters}
+        offline_elements = OfflineCacheModel.select().join(File).where(OfflineCacheModel.original_file.id << ids)
 
         for element in offline_elements:
             file_path = os.path.join(self.cache_dir, element.cached_file)
@@ -94,7 +94,11 @@ class OfflineCache(EventSender):
                 if self.current and item.id == self.current.id:
                     self.filecopy_cancel.cancel()
 
-        OfflineCacheModel.delete().where(OfflineCacheModel.original_file in ids).execute()
+        entries_to_delete = OfflineCacheModel.select().join(File).where(OfflineCacheModel.original_file.id << ids)
+        ids_to_delete = [t.id for t in entries_to_delete]
+        OfflineCacheModel.delete().where(OfflineCacheModel.id << ids_to_delete).execute()
+        book.downloaded = False
+        self.emit_event("book-offline-removed", book)
         self.queue = []
 
         self._start_processing()
