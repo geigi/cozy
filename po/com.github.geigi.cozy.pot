@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-30 14:29+0200\n"
+"POT-Creation-Date: 2021-05-30 14:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -237,8 +237,12 @@ msgstr ""
 msgid "Cannot copy: Disk is full"
 msgstr ""
 
-#: cozy/media/files.py:87
-msgid "Cannot Copy: Permission denied of audiobook directory"
+#: cozy/media/files.py:73
+msgid "Cannot copy: Permission denied"
+msgstr ""
+
+#: cozy/media/files.py:89
+msgid "Cannot Copy: Permission denied"
 msgstr ""
 
 #: data/ui/about.ui:16

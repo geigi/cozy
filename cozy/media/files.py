@@ -69,6 +69,8 @@ class Files(EventSender):
                 self._info_bar.show(_("Cannot copy: Audiobook directory is read only"))
             elif e.code == Gio.IOErrorEnum.NO_SPACE:
                 self._info_bar.show(_("Cannot copy: Disk is full"))
+            elif e.code == Gio.IOErrorEnum.PERMISSION_DENIED:
+                self._info_bar.show(_("Cannot copy: Permission denied"))
             else:
                 reporter.exception("files", e)
 
@@ -84,7 +86,7 @@ class Files(EventSender):
                 Path(destination_dir).mkdir(parents=True, exist_ok=True)
             except PermissionError as e:
                 log.error(e)
-                self._info_bar.show(_("Cannot Copy: Permission denied of audiobook directory"))
+                self._info_bar.show(_("Cannot Copy: Permission denied"))
                 return
 
             for file in filenames:
