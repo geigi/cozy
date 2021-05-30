@@ -20,6 +20,7 @@ sudo apt install \
   gstreamer1.0-plugins-ugly \
   libgstreamer1.0-0 \
   libgtk-3-dev \
+  libgranite5 \
   meson \
   pip \
   python-gi-cairo \
