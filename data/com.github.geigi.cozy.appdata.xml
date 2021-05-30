@@ -49,6 +49,18 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="1.0.2" timestamp="1622363623">
+      <description>
+        <p>
+        A small bugfix release which makes Cozy more reliable.
+        </p>
+        <ul>
+          <li>When copying files to the audiobook library goes wrong, the user is now informed with the error</li>
+          <li>Fix: Possible error while displaying offline cache copy progress</li>
+          <li>Fix: When changing the audiobook location or selecting a file in the file not found dialog an unexpected error could occur</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.1" timestamp="1622363623">
       <description>
         <p>
