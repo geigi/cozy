@@ -113,7 +113,12 @@ class Track(Chapter):
         file.save(only=file.dirty_fields)
 
     def delete(self):
+        file_id = self.file_id
         self._db_object.delete_instance(recursive=True)
+
+        if TrackToFile.select().join(File).where(TrackToFile.file.id == file_id).count() == 0:
+            File.delete().where(File.id == file_id).execute()
+
         self.emit_event("chapter-deleted", self)
         self.destroy_listeners()
 
