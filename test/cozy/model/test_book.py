@@ -322,3 +322,31 @@ def test_removing_book_removes_all_traces_in_db(peewee_database):
     assert Track.select().where(Track.id << track_ids).count() == 0
     assert TrackToFile.select().where(TrackToFile.id << track_to_file_ids).count() == 0
     assert File.select().where(File.id << file_ids).count() == 0
+
+
+def test_removing_book_with_missing_file_removes_all_traces_in_db(peewee_database):
+    from cozy.model.book import Book
+    from cozy.db.book import Book as BookDB
+    from cozy.db.track import Track
+    from cozy.db.file import File
+    from cozy.db.track_to_file import TrackToFile
+
+    book = Book(peewee_database, 1)
+    track_ids = [chapter.id for chapter in book.chapters]
+    track_to_file_ids = [track_to_file.id for track_to_file in
+                         TrackToFile.select().join(Track).where(TrackToFile.track.id << track_ids)]
+    file_ids = [track_to_file.file.id for track_to_file in
+                TrackToFile.select().join(Track).where(TrackToFile.track.id << track_ids)]
+
+    assert len(track_ids) > 0
+    assert len(track_to_file_ids) > 0
+    assert len(file_ids) > 0
+
+    File.get_by_id(file_ids[0]).delete_instance()
+
+    book.remove()
+
+    assert BookDB.select().where(BookDB.id == 1).count() == 0
+    assert Track.select().where(Track.id << track_ids).count() == 0
+    assert TrackToFile.select().where(TrackToFile.id << track_to_file_ids).count() == 0
+    assert File.select().where(File.id << file_ids).count() == 0

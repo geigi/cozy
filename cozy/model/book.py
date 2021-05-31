@@ -1,11 +1,12 @@
 from typing import List
 
-from peewee import SqliteDatabase
+from peewee import SqliteDatabase, DoesNotExist
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.db.book import Book as BookModel
+from cozy.db.file import File
 from cozy.db.track import Track as TrackModel
 from cozy.db.track_to_file import TrackToFile
 from cozy.ext import inject
@@ -195,7 +196,10 @@ class Book(Observable, EventSender):
         track_to_files = TrackToFile.select().join(TrackModel).where(TrackToFile.track << book_tracks)
 
         for track in track_to_files:
-            track.file.delete_instance(recursive=True)
+            try:
+                track.file.delete_instance(recursive=True)
+            except DoesNotExist:
+                track.delete_instance()
 
         for track in book_tracks:
             track.delete_instance(recursive=True)
