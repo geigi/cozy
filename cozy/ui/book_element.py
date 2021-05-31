@@ -1,14 +1,12 @@
 import os
 import subprocess
 
-import cozy.ext.inject as inject
 from gi.repository import Gtk, Gdk, Pango, GObject
 
 import cozy.tools as tools
 import cozy.ui
 from cozy.model.book import Book
-from cozy.ui.album_element import AlbumElement
-from cozy.ui.settings import Settings
+from cozy.ui.widgets.album_element import AlbumElement
 
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
@@ -60,8 +58,7 @@ class BookElement(Gtk.FlowBoxChild):
         author_label.props.justify = Gtk.Justification.CENTER
         author_label.get_style_context().add_class("dim-label")
 
-        self.art = AlbumElement(
-            self.book, 180, self.ui.window.get_scale_factor(), bordered=True, square=False)
+        self.art = AlbumElement(self.book)
 
         self.box.set_tooltip_text(self.ONLINE_TOOLTIP_TEXT)
 
@@ -77,12 +74,7 @@ class BookElement(Gtk.FlowBoxChild):
         self.connect("key-press-event", self.__on_key_press_event)
 
     def set_playing(self, is_playing):
-        if is_playing:
-            self.art.play_button.set_from_icon_name(
-                "media-playback-pause-symbolic", self.art.icon_size)
-        else:
-            self.art.play_button.set_from_icon_name(
-                "media-playback-start-symbolic", self.art.icon_size)
+        self.art.set_playing(is_playing)
 
     def _on_album_art_press_event(self, _, __):
         self.emit("play-pause-clicked", self.book)
@@ -145,7 +137,7 @@ class BookElement(Gtk.FlowBoxChild):
         subprocess.Popen(['xdg-open', path])
 
 
-GObject.type_register(AlbumElement)
+GObject.type_register(BookElement)
 GObject.signal_new('play-pause-clicked', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
                    (GObject.TYPE_PYOBJECT,))
 GObject.signal_new('open-book-overview', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,

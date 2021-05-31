@@ -2,71 +2,86 @@
 <!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <requires lib="libhandy" version="0.0"/>
-  <object class="GtkImage" id="image1">
+  <object class="GtkImage" id="button_image">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">media-playback-start-symbolic</property>
     <property name="icon_size">3</property>
+    <style>
+      <class name="album-art-button-image"/>
+    </style>
   </object>
-  <template class="__glade_unnamed_1" parent="HdyClamp">
+  <template class="AlbumElement" parent="GtkBox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
     <child>
-      <object class="GtkBox">
+      <object class="GtkOverlay">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="hexpand">False</property>
+        <property name="vexpand">False</property>
         <child>
-          <object class="GtkOverlay">
+          <object class="GtkFrame">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="hexpand">False</property>
+            <property name="vexpand">False</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">in</property>
             <child>
-              <object class="GtkImage">
-                <property name="width_request">140</property>
-                <property name="height_request">140</property>
+              <object class="GtkImage" id="album_art_image">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="stock">gtk-missing-image</property>
-              </object>
-              <packing>
-                <property name="index">-1</property>
-              </packing>
-            </child>
-            <child type="overlay">
-              <object class="GtkButton">
-                <property name="width_request">40</property>
-                <property name="height_request">40</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="halign">end</property>
-                <property name="valign">end</property>
-                <property name="margin_right">10</property>
-                <property name="margin_bottom">10</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
                 <property name="hexpand">False</property>
                 <property name="vexpand">False</property>
-                <property name="image">image1</property>
-                <style>
-                  <class name="circular"/>
-                </style>
+                <property name="stock">gtk-missing-image</property>
               </object>
+            </child>
+            <child type="label_item">
+              <placeholder/>
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="index">-1</property>
           </packing>
         </child>
-        <child>
-          <placeholder/>
+        <child type="overlay">
+          <object class="GtkButton" id="play_button">
+            <property name="width_request">40</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Play</property>
+            <property name="halign">end</property>
+            <property name="valign">end</property>
+            <property name="margin_right">10</property>
+            <property name="margin_bottom">10</property>
+            <property name="hexpand">False</property>
+            <property name="vexpand">False</property>
+            <property name="image">button_image</property>
+            <style>
+              <class name="circular"/>
+              <class name="album-art-button"/>
+            </style>
+          </object>
+          <packing>
+            <property name="index">1</property>
+          </packing>
         </child>
       </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
     </child>
   </template>
 </interface>
