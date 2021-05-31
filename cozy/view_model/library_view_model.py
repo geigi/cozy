@@ -17,6 +17,7 @@ from cozy.open_view import OpenView
 from cozy.report import reporter
 from cozy.ui.book_element import BookElement
 from cozy.ui.import_failed_dialog import ImportFailedDialog
+from cozy.ui.settings import Settings
 
 log = logging.getLogger("library_view_model")
 
@@ -33,6 +34,7 @@ class LibraryViewModel(Observable, EventSender):
     _model = inject.attr(Library)
     _importer: Importer = inject.attr(Importer)
     _player: Player = inject.attr(Player)
+    _settings: Settings = inject.attr(Settings)
 
     def __init__(self):
         super().__init__()
@@ -49,6 +51,7 @@ class LibraryViewModel(Observable, EventSender):
         self._importer.add_listener(self._on_importer_event)
         self._player.add_listener(self._on_player_event)
         self._model.add_listener(self._on_model_event)
+        self._settings.add_listener(self._on_settings_event)
 
     @property
     def books(self):
@@ -202,6 +205,23 @@ class LibraryViewModel(Observable, EventSender):
         elif event == "stop":
             self._notify("playing")
             self._notify("current_book_in_playback")
+
+    def _on_settings_event(self, event: str, message):
+        if event == "storage-removed":
+            self._on_external_storage_removed(message)
+
+    def _on_external_storage_removed(self, path: str):
+        books = self.books.copy()
+        for book in books:
+            chapters_to_remove = [c for c in book.chapters if c.file.startswith(path)]
+
+            for chapter in chapters_to_remove:
+                chapter.delete()
+
+        self._notify("authors")
+        self._notify("readers")
+        self._notify("books")
+        self._notify("books-filter")
 
     def _on_model_event(self, event: str, message):
         if event == "rebase-finished":

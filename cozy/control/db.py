@@ -18,7 +18,6 @@ from cozy.db.track_to_file import TrackToFile
 from cozy.report import reporter
 
 log = logging.getLogger("db")
-from gi.repository import GLib, Gdk
 
 _db = get_sqlite_database()
 
@@ -34,14 +33,16 @@ def init_db():
         _db.stop()
         _db.start()
     else:
-        _db.create_tables([Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache, TrackToFile, File])
+        _db.create_tables(
+            [Track, Book, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache, TrackToFile, File])
         _db.stop()
         _db.start()
 
     while not _db.table_exists("settings"):
         time.sleep(0.01)
 
-    _db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage, TrackToFile, File], bind_refs=False,
+    _db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage, TrackToFile, File],
+             bind_refs=False,
              bind_backrefs=False)
 
     if (Settings.select().count() == 0):
@@ -112,22 +113,6 @@ def clean_books():
             if Settings.get().last_played_book and Settings.get().last_played_book.id == book.id:
                 Settings.update(last_played_book=None).execute()
             book.delete_instance()
-
-
-def remove_tracks_with_path(ui, path):
-    """
-    Remove all tracks that contain the given path.
-    """
-    if path == "":
-        return
-
-    for track in Track.select():
-        if path in track.file:
-            track.delete_instance()
-
-    clean_books()
-
-    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, ui.refresh_content)
 
 
 def get_db():
