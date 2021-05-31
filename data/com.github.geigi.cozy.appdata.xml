@@ -58,6 +58,9 @@
           <li>When copying files to the audiobook library goes wrong, the user is now informed with the error</li>
           <li>Fix: Possible error while displaying offline cache copy progress</li>
           <li>Fix: When changing the audiobook location or selecting a file in the file not found dialog an unexpected error could occur</li>
+          <li>Fix: Removing a storage dir in settings did not work</li>
+          <li>Fix: Removing a book from the library did sometimes not work</li>
+          <li>As always, updated translations thanks to all of the translators!</li>
         </ul>
       </description>
     </release>
