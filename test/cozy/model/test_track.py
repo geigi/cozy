@@ -1,3 +1,6 @@
+import pytest
+
+
 def test_db_created(peewee_database):
     from cozy.db.track import Track
 
@@ -180,3 +183,15 @@ def test_delete_does_not_delete_book(peewee_database):
     track.delete()
 
     assert Book.get_or_none(book_id) is not None
+
+
+def test_track_to_file_not_present_throws_exception_and_deletes_track_instance(peewee_database):
+    from cozy.db.track_to_file import TrackToFile
+    from cozy.db.track import Track as TrackDB
+    from cozy.model.track import Track, TrackInconsistentData
+
+    TrackToFile.select().join(TrackDB).where(TrackToFile.track.id == 1).get().delete_instance()
+    with pytest.raises(TrackInconsistentData):
+        Track(peewee_database, 1)
+
+    assert not TrackDB.get_or_none(1)

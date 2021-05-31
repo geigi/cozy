@@ -1,3 +1,4 @@
+import logging
 from typing import List
 
 from peewee import SqliteDatabase, DoesNotExist
@@ -6,13 +7,14 @@ from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.db.book import Book as BookModel
-from cozy.db.file import File
 from cozy.db.track import Track as TrackModel
 from cozy.db.track_to_file import TrackToFile
 from cozy.ext import inject
 from cozy.model.chapter import Chapter
 from cozy.model.settings import Settings
-from cozy.model.track import Track
+from cozy.model.track import Track, TrackInconsistentData
+
+log = logging.getLogger("BookModel")
 
 
 class BookIsEmpty(Exception):
@@ -213,7 +215,16 @@ class Book(Observable, EventSender):
             .select(TrackModel.id) \
             .where(TrackModel.book == self._db_object) \
             .order_by(TrackModel.disk, TrackModel.number, TrackModel.name)
-        self._chapters = [Track(self._db, track.id) for track in tracks]
+
+        self._chapters = []
+        for track in tracks:
+            try:
+                track_model = Track(self._db, track.id)
+                self._chapters.append(track_model)
+            except TrackInconsistentData:
+                log.warning("Skipping inconsistent model")
+            except Exception as e:
+                log.error("Could not create chapter object: {}".format(e))
 
         for chapter in self._chapters:
             chapter.add_listener(self._on_chapter_event)
