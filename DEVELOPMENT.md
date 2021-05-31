@@ -24,6 +24,7 @@ sudo apt install \
   libgstreamer1.0-0 \
   libgtk-3-dev \
   libgranite5 \
+  libgranite-dev \
   pip \
   python-gi-cairo \
   python3-gst-1.0 \
