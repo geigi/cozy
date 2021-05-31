@@ -93,7 +93,12 @@ class Importer(EventSender):
 
         pool = Pool()
         while True:
-            job = pool.map_async(import_file, itertools.islice(files_to_scan, CHUNK_SIZE))
+            try:
+                job = pool.map_async(import_file, itertools.islice(files_to_scan, CHUNK_SIZE))
+            except StopIteration as e:
+                log.warning("importer", e, "_execute_import raised a stop iteration.")
+                break
+
             self._wait_for_job_to_complete(job)
             import_result = job.get()
 
