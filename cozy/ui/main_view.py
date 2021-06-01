@@ -16,7 +16,6 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.open_view import OpenView
 from cozy.ui.import_failed_dialog import ImportFailedDialog
-from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.library_view import LibraryView
 from cozy.ui.settings import Settings
 from cozy.architecture.singleton import Singleton
@@ -327,8 +326,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         if books().count() < 1:
             path = ""
-            if Storage.select().count() > 0:
-                path = Storage.select().where(Storage.default == True).get().path
+            if len(self._settings.storage_locations) > 0:
+                path = self._settings.default_location.path
 
             self.no_media_file_chooser.set_current_folder(path)
             self.main_stack.props.visible_child_name = "no_media"
