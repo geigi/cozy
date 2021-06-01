@@ -102,6 +102,60 @@ Your Python path may be different so you might need to amend the `PYTHONPATH` en
 
 Please note, every time you make code changes, you need to execute `ninja -C build install` before you run the application.
 
+## Debug
+
+### Visual Studio Code
+
+Below are sample VSCode configuration files that follow the same assumptions:
+- Python virtual environment has been set up under `venv/`
+- application is built under `build/` and installed under `app/` directories
+- Python version: 3.8
+
+If your set-up is different, you might need to customise the configuration below.
+
+`.vscode/tasks.json`:
+
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "install",
+      "type": "shell",
+      "command": "source ./venv/bin/activate; ninja install -C build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    }
+  ]
+}
+```
+
+`.vscode/launch.json`:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Cozy app",
+      "type": "python",
+      "request": "launch",
+      "preLaunchTask": "install",
+      "program": "app/bin/com.github.geigi.cozy",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "XDG_DATA_DIRS": "app/share:/usr/share",
+        "PYTHONPATH": "app/lib/python3.8/site-packages"
+      }
+    }
+  ]
+}
+```
+
+Please note, the above configuration only allows for debugging of files installed under `app/`, not the actual source files.
+
 ## Test
 
 ```bash
