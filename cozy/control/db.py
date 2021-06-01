@@ -1,8 +1,6 @@
 import logging
-import os
 import time
 
-import cozy.ext.inject as inject
 
 from cozy.control.db_updater import update_db
 from cozy.db.artwork_cache import ArtworkCache
@@ -47,6 +45,8 @@ def init_db():
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
+
+    ensure_default_storage_present()
 
     # TODO: Properly handle errors within the database
     # Remove this later. It prevents empty book objects in the database
@@ -113,6 +113,15 @@ def clean_books():
             if Settings.get().last_played_book and Settings.get().last_played_book.id == book.id:
                 Settings.update(last_played_book=None).execute()
             book.delete_instance()
+
+
+# Note this can currently not be tested until the db files have been refactored.
+def ensure_default_storage_present():
+    query = Storage.select().where(Storage.default)
+    if query.count() < 1:
+        storage = Storage.get()
+        storage.default = True
+        storage.save(only=storage.dirty_fields)
 
 
 def get_db():
