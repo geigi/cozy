@@ -5,13 +5,13 @@ from peewee import SqliteDatabase
 
 
 @pytest.fixture(autouse=True)
-def setup_inject(peewee_database_storage):
-    inject.clear_and_configure(lambda binder: binder.bind(SqliteDatabase, peewee_database_storage))
+def setup_inject(peewee_database):
+    inject.clear_and_configure(lambda binder: binder.bind(SqliteDatabase, peewee_database))
     yield
     inject.clear()
 
 
-def test_storage_locations_contains_every_storage_location_from_db(peewee_database_storage):
+def test_storage_locations_contains_every_storage_location_from_db(peewee_database):
     from cozy.model.settings import Settings
     from cozy.db.storage import Storage
 
@@ -28,7 +28,7 @@ def test_storage_locations_contains_every_storage_location_from_db(peewee_databa
                                                                             storage_locations]
 
 
-def test_external_storage_locations_contain_only_external_storages(peewee_database_storage):
+def test_external_storage_locations_contain_only_external_storages(peewee_database):
     from cozy.model.settings import Settings
     from cozy.db.storage import Storage
 
@@ -39,7 +39,7 @@ def test_external_storage_locations_contain_only_external_storages(peewee_databa
     assert all([storage.external for storage in settings.external_storage_locations])
 
 
-def test_last_played_book_returns_correct_value(peewee_database_storage):
+def test_last_played_book_returns_correct_value(peewee_database):
     from cozy.model.settings import Settings
     from cozy.db.book import Book
 
@@ -48,7 +48,7 @@ def test_last_played_book_returns_correct_value(peewee_database_storage):
     assert settings.last_played_book == Book.get()
 
 
-def test_setting_last_played_book_to_none_updates_in_settings_object_and_database(peewee_database_storage):
+def test_setting_last_played_book_to_none_updates_in_settings_object_and_database(peewee_database):
     from cozy.model.settings import Settings
     from cozy.db.settings import Settings as SettingsModel
 
@@ -59,7 +59,7 @@ def test_setting_last_played_book_to_none_updates_in_settings_object_and_databas
     assert SettingsModel.get().last_played_book == None
 
 
-def test_fetching_non_existent_last_played_book_returns_none(peewee_database_storage):
+def test_fetching_non_existent_last_played_book_returns_none(peewee_database):
     from cozy.model.settings import Settings
     from cozy.db.settings import Settings as SettingsModel
 
@@ -72,7 +72,7 @@ def test_fetching_non_existent_last_played_book_returns_none(peewee_database_sto
     assert settings.last_played_book is None
 
 
-def test_fetching_non_existent_last_played_book_sets_it_to_none(peewee_database_storage):
+def test_fetching_non_existent_last_played_book_sets_it_to_none(peewee_database):
     from cozy.model.settings import Settings
     from cozy.db.settings import Settings as SettingsModel
 
@@ -86,7 +86,7 @@ def test_fetching_non_existent_last_played_book_sets_it_to_none(peewee_database_
     assert SettingsModel.get().last_played_book is None
 
 
-def test_ensure_default_storage_present_adds_default_if_not_present(peewee_database_storage):
+def test_ensure_default_storage_present_adds_default_if_not_present(peewee_database):
     from cozy.model.settings import Settings
     from cozy.db.storage import Storage
 
@@ -99,7 +99,7 @@ def test_ensure_default_storage_present_adds_default_if_not_present(peewee_datab
     assert not Storage.get(2).default
 
 
-def test_ensure_default_storage_present_does_nothing_if_default_is_present(peewee_database_storage):
+def test_ensure_default_storage_present_does_nothing_if_default_is_present(peewee_database):
     from cozy.model.settings import Settings
     from cozy.db.storage import Storage
 
