@@ -72,6 +72,8 @@ class Settings:
         self._storages = []
 
     def _load_all_storage_locations(self):
+        self._storages = []
+
         for storage_db_obj in StorageModel.select(StorageModel.id):
             try:
                 self._storages.append(Storage(self._db, storage_db_obj.id))
