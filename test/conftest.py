@@ -67,7 +67,7 @@ def peewee_database():
     teardown_db(db_path, models, test_db)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def peewee_database_storage():
     from cozy.db.storage import Storage
     from cozy.db.settings import Settings
