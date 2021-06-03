@@ -24,16 +24,19 @@ class Headerbar(HeaderBar):
     spinner: Gtk.Spinner = Gtk.Template.Child()
 
     back_button: Gtk.Button = Gtk.Template.Child()
-    category_toolbar: Handy.ViewSwitcher = Gtk.Template.Child()
+    category_toolbar: Handy.ViewSwitcherTitle = Gtk.Template.Child()
 
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
+        self._library_mobile_view_switcher: Handy.ViewSwitcherBar = main_window_builder.get_object(
+            "library_mobile_view_switcher")
         self._header_container: Gtk.Box = main_window_builder.get_object("header_container")
         self._header_container.add(self)
 
         self._sort_stack: Gtk.Stack = main_window_builder.get_object("sort_stack")
         self.category_toolbar.set_stack(self._sort_stack)
+        self._library_mobile_view_switcher.set_stack(self._sort_stack)
 
         self._headerbar_view_model: HeaderbarViewModel = inject.instance(HeaderbarViewModel)
         self._init_app_menu()
@@ -45,6 +48,7 @@ class Headerbar(HeaderBar):
 
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_clicked)
+        self.category_toolbar.connect("notify::title-visible", self._on_title_visible_changed)
 
     def _init_app_menu(self):
         self.menu_builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/titlebar_menu.ui")
@@ -63,3 +67,12 @@ class Headerbar(HeaderBar):
 
     def _back_clicked(self, _):
         self._headerbar_view_model.navigate_back()
+
+    def _on_title_visible_changed(self, widget, param):
+        visible = widget.get_property(param.name)
+        self._library_mobile_view_switcher.set_reveal(visible)
+
+        if visible:
+            self.set_centering_policy(Handy.CenteringPolicy.STRICT)
+        else:
+            self.set_centering_policy(Handy.CenteringPolicy.LOOSE)

@@ -17,12 +17,10 @@ from cozy.media.player import Player
 from cozy.open_view import OpenView
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.library_view import LibraryView
-from cozy.ui.media_controller_small import MediaControllerSmall
 from cozy.ui.settings import Settings
 from cozy.architecture.singleton import Singleton
 from cozy.model.settings import Settings as SettingsModel
 import cozy.report.reporter as report
-import cozy.tools as tools
 import cozy.control.filesystem_monitor as fs_monitor
 
 import os

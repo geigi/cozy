@@ -54,7 +54,7 @@
                         <property name="transition_type">slide-left</property>
                         <child>
                           <object class="GtkStack" id="sort_stack">
-                            <property name="width_request">280</property>
+                            <property name="width_request">250</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="vexpand">True</property>
@@ -159,7 +159,7 @@
                     </child>
                     <child>
                       <object class="GtkScrolledWindow" id="book_scroller">
-                        <property name="width_request">600</property>
+                        <property name="width_request">250</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="margin_left">10</property>
@@ -234,6 +234,9 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Stay tuned while Cozy is preparing your library…</property>
+                        <property name="wrap">True</property>
+                        <property name="xalign">0</property>
+                        <property name="yalign">0</property>
                         <style>
                           <class name="h2"/>
                         </style>
@@ -268,6 +271,8 @@
                         <property name="vexpand">True</property>
                         <property name="label" translatable="yes">Start exploring your library by switching to the Author or Reader view above.</property>
                         <property name="wrap">True</property>
+                        <property name="xalign">0</property>
+                        <property name="yalign">0</property>
                         <style>
                           <class name="h2"/>
                         </style>
@@ -437,7 +442,7 @@
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -448,7 +453,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -463,6 +468,17 @@
                 <child>
                   <placeholder/>
                 </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="HdyViewSwitcherBar" id="library_mobile_view_switcher">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
