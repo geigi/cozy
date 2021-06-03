@@ -12,6 +12,8 @@
     </style>
   </object>
   <template class="AlbumElement" parent="GtkBox">
+    <property name="width_request">180</property>
+    <property name="height_request">180</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
@@ -25,6 +27,7 @@
         <property name="vexpand">False</property>
         <child>
           <object class="GtkFrame">
+            <property name="width_request">-1</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">center</property>
