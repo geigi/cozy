@@ -62,10 +62,26 @@ def test_track_name_fallback_is_filename(discoverer_mocks):
     assert tag_reader._get_track_name_fallback() == "a nice file"
 
 
+def test_track_name_fallback_is_unescaped_filename(discoverer_mocks):
+    from cozy.media.tag_reader import TagReader
+
+    tag_reader = TagReader("file://abc/def/a%20nice%20file.mp3", discoverer_mocks.info)
+
+    assert tag_reader._get_track_name_fallback() == "a nice file"
+
+
 def test_book_title_fallback_is_parent_directory_name(discoverer_mocks):
     from cozy.media.tag_reader import TagReader
 
     tag_reader = TagReader("file://abc/def hij/a nice file.mp3", discoverer_mocks.info)
+
+    assert tag_reader._get_book_name_fallback() == "def hij"
+
+
+def test_book_title_fallback_is_unescaped_parent_directory_name(discoverer_mocks):
+    from cozy.media.tag_reader import TagReader
+
+    tag_reader = TagReader("file://abc/def%20hij/a%20nice%20file.mp3", discoverer_mocks.info)
 
     assert tag_reader._get_book_name_fallback() == "def hij"
 
