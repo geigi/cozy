@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-30 14:34+0200\n"
+"POT-Creation-Date: 2021-05-31 20:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,7 +133,7 @@ msgstr ""
 msgid "All files"
 msgstr ""
 
-#: cozy/ui/settings.py:105
+#: cozy/ui/settings.py:101
 msgid "Feedback"
 msgstr ""
 
@@ -195,8 +195,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr ""
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:42
-#: cozy/view_model/library_view_model.py:137
+#: cozy/view_model/library_view_model.py:44
+#: cozy/view_model/library_view_model.py:140
 msgid "All"
 msgstr ""
 
@@ -225,7 +225,7 @@ msgstr ""
 msgid "Changing audio book location…"
 msgstr ""
 
-#: cozy/model/track.py:25
+#: cozy/model/track.py:37
 msgid "Chapter"
 msgstr ""
 
@@ -237,12 +237,8 @@ msgstr ""
 msgid "Cannot copy: Disk is full"
 msgstr ""
 
-#: cozy/media/files.py:73
+#: cozy/media/files.py:73 cozy/media/files.py:89
 msgid "Cannot copy: Permission denied"
-msgstr ""
-
-#: cozy/media/files.py:89
-msgid "Cannot Copy: Permission denied"
 msgstr ""
 
 #: data/ui/about.ui:16

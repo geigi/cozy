@@ -86,7 +86,7 @@ class Files(EventSender):
                 Path(destination_dir).mkdir(parents=True, exist_ok=True)
             except PermissionError as e:
                 log.error(e)
-                self._info_bar.show(_("Cannot Copy: Permission denied"))
+                self._info_bar.show(_("Cannot copy: Permission denied"))
                 return
 
             for file in filenames:

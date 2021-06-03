@@ -93,7 +93,12 @@ class Importer(EventSender):
 
         pool = Pool()
         while True:
-            job = pool.map_async(import_file, itertools.islice(files_to_scan, CHUNK_SIZE))
+            try:
+                job = pool.map_async(import_file, itertools.islice(files_to_scan, CHUNK_SIZE))
+            except StopIteration as e:
+                log.warning("importer", e, "_execute_import raised a stop iteration.")
+                break
+
             self._wait_for_job_to_complete(job)
             import_result = job.get()
 
@@ -166,10 +171,15 @@ class Importer(EventSender):
 
         for file in files:
             if file in imported_files:
-                chapter = next(chapter
-                               for chapter
-                               in self._library.chapters
-                               if chapter.file == file)
+                try:
+                    chapter = next(chapter
+                                   for chapter
+                                   in self._library.chapters
+                                   if chapter.file == file)
+                except StopIteration as e:
+                    reporter.exception("importer", e, "_filter_unchanged_files raised a stop iteration.")
+                    yield file
+                    continue
 
                 if int(os.path.getmtime(file)) > chapter.modified:
                     yield file

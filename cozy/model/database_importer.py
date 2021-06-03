@@ -60,7 +60,10 @@ class DatabaseImporter:
                 self._update_files_in_db(query.get(), media_file)
                 continue
 
-            files.append({"path": media_file.path, "modified": media_file.modified})
+            file_already_in_list = any(f["path"] == media_file.path for f in files)
+
+            if not file_already_in_list:
+                files.append({"path": media_file.path, "modified": media_file.modified})
 
         return files
 

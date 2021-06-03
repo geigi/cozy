@@ -1,12 +1,9 @@
-from threading import Thread
 import logging
 import gi
 
-from cozy.control.db import remove_tracks_with_path
 from cozy.db.storage import Storage
 from cozy.db.storage_blacklist import StorageBlackList
 from cozy.ext import inject
-from cozy.model.library import Library
 from cozy.ui.widgets.ScrollWrapper import ScrollWrapper
 from cozy.ui.widgets.storage_list_box_row import StorageListBoxRow
 from cozy.view_model.settings_view_model import SettingsViewModel
@@ -26,7 +23,6 @@ class Settings(EventSender):
     This class contains all logic for cozys preferences.
     """
     _glib_settings: Gio.Settings = inject.attr(Gio.Settings)
-    _library = inject.attr(Library)
 
     view_model = None
     ui = None
@@ -225,9 +221,6 @@ class Settings(EventSender):
         Storage.select().where(Storage.path == row.path).get().delete_instance()
         self.storage_list_box.remove(row)
         self.emit_event("storage-removed", row.path)
-        self._library.invalidate()
-        thread = Thread(target=remove_tracks_with_path, args=(self.ui, row.path), name=("RemoveStorageFromDB"))
-        thread.start()
         self.__on_storage_box_changed(None, None)
 
     def __on_default_storage_clicked(self, widget):

@@ -1,3 +1,6 @@
+import pytest
+
+
 def test_db_created(peewee_database):
     from cozy.db.track import Track
 
@@ -112,7 +115,8 @@ def test_setting_file_gets_file_object_if_it_is_already_present_in_database(peew
     assert File.select().where(File.id == 0).count() == 0
 
 
-def test_setting_file_gets_file_object_if_it_is_already_present_in_database_but_preserves_old_file_if_still_used(peewee_database):
+def test_setting_file_gets_file_object_if_it_is_already_present_in_database_but_preserves_old_file_if_still_used(
+        peewee_database):
     from cozy.db.track_to_file import TrackToFile
     from cozy.db.file import File
     from cozy.model.track import Track
@@ -180,3 +184,37 @@ def test_delete_does_not_delete_book(peewee_database):
     track.delete()
 
     assert Book.get_or_none(book_id) is not None
+
+
+def test_track_to_file_not_present_throws_exception_and_deletes_track_instance(peewee_database):
+    from cozy.db.track_to_file import TrackToFile
+    from cozy.db.track import Track as TrackDB
+    from cozy.model.track import Track, TrackInconsistentData
+
+    TrackToFile.select().join(TrackDB).where(TrackToFile.track.id == 1).get().delete_instance()
+    with pytest.raises(TrackInconsistentData):
+        Track(peewee_database, 1)
+
+    assert not TrackDB.get_or_none(1)
+
+
+def test_delete_removes_file_object_if_not_used_elsewhere(peewee_database):
+    from cozy.db.file import File
+    from cozy.model.track import Track
+
+    track = Track(peewee_database, 1)
+    file_id = track.file_id
+    track.delete()
+
+    assert not File.get_or_none(file_id)
+
+
+def test_delete_keeps_file_object_if_used_elsewhere(peewee_database):
+    from cozy.db.file import File
+    from cozy.model.track import Track
+
+    track = Track(peewee_database, 230)
+    file_id = track.file_id
+    track.delete()
+
+    assert File.get_or_none(file_id)

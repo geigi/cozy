@@ -129,6 +129,5 @@ if __name__ == '__main__':
     # when setting the start method
     from cozy.application import Application
     from cozy.ui.widgets.list_box_extensions import extend_gtk_container
-    from cozy.ui.widgets.list_box_extensions import extend_gtk_container
 
     main()

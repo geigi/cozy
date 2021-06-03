@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-29 12:43+0200\n"
+"POT-Creation-Date: 2021-05-30 14:34+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2021\n"
 "Language-Team: Hindi (https://www.transifex.com/geigi/teams/78138/hi/)\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Language: hi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/control/offline_cache.py:197
+#: cozy/control/offline_cache.py:201
 msgid "Copying"
 msgstr "कॉपी करना जारी"
 
@@ -112,19 +112,19 @@ msgstr "डाउनलोड की गई"
 msgid "Download"
 msgstr "डाउनलोड"
 
-#: cozy/ui/book_element.py:35
+#: cozy/ui/book_element.py:33
 msgid "Open book overview"
 msgstr "पुस्तक अवलोकन खोलें"
 
-#: cozy/ui/book_element.py:117
+#: cozy/ui/book_element.py:113
 msgid "Mark as read"
 msgstr "श्रवण पूर्ण के रूप में चिन्हित करें"
 
-#: cozy/ui/book_element.py:120
+#: cozy/ui/book_element.py:116
 msgid "Open in file browser"
 msgstr "फाइल ब्राउज़र में खोलें"
 
-#: cozy/ui/book_element.py:123
+#: cozy/ui/book_element.py:119
 msgid "Remove from library"
 msgstr "संग्रह से हटाएँ"
 
@@ -228,9 +228,25 @@ msgstr "नवीन फाइलें कॉपी करना जारी..
 msgid "Changing audio book location…"
 msgstr "ऑडियो पुस्तक स्थान परिवर्तन जारी..."
 
-#: cozy/model/track.py:24
+#: cozy/model/track.py:25
 msgid "Chapter"
 msgstr "अध्याय"
+
+#: cozy/media/files.py:69
+msgid "Cannot copy: Audiobook directory is read only"
+msgstr "कॉपी करना विफल : ऑडियो पुस्तक डायरेक्टरी केवल रीड योग्य है"
+
+#: cozy/media/files.py:71
+msgid "Cannot copy: Disk is full"
+msgstr "कॉपी करना विफल : डिस्क पर स्पेस नहीं है"
+
+#: cozy/media/files.py:73
+msgid "Cannot copy: Permission denied"
+msgstr "कॉपी करना विफल : अनुमति अस्वीकृत"
+
+#: cozy/media/files.py:89
+msgid "Cannot Copy: Permission denied"
+msgstr "कॉपी करना विफल : अनुमति अस्वीकृत"
 
 #: data/ui/about.ui:16
 msgid "GitHub"
@@ -330,84 +346,84 @@ msgstr ""
 "- अमान्य ऑडियो फाइल\n"
 "- विकृत फाइल"
 
-#: data/ui/main_window.ui:121
+#: data/ui/main_window.ui:125
 msgid "Recent"
 msgstr "हालिया"
 
-#: data/ui/main_window.ui:141
+#: data/ui/main_window.ui:145
 msgid "List of authors"
 msgstr "लेखक सूची"
 
-#: data/ui/main_window.ui:157 data/ui/main_window.ui:267
+#: data/ui/main_window.ui:161 data/ui/main_window.ui:271
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "लेखक"
 
-#: data/ui/main_window.ui:177
+#: data/ui/main_window.ui:181
 msgid "List of readers"
 msgstr "वाचक सूची"
 
-#: data/ui/main_window.ui:193 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:197 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "वाचक"
 
-#: data/ui/main_window.ui:247
+#: data/ui/main_window.ui:251
 msgid "List of books"
 msgstr "पुस्तक सूची"
 
-#: data/ui/main_window.ui:297
+#: data/ui/main_window.ui:301
 msgid "Stay tuned while Cozy is preparing your library…"
 msgstr ""
 "प्रक्रिया जारी रखें तब तक Cozy द्वारा पुस्तक संग्रह तैयार करना जारी है..."
 
-#: data/ui/main_window.ui:330
+#: data/ui/main_window.ui:334
 msgid ""
 "Start exploring your library by switching to the Author or Reader view "
 "above."
 msgstr "शीर्ष से लेखक या वाचक दृश्य उपयोग कर संग्रह में देखें।"
 
-#: data/ui/main_window.ui:375
+#: data/ui/main_window.ui:379
 msgid "Import your Audiobooks"
 msgstr "आपकी ऑडियो पुस्तकें आयात करें"
 
-#: data/ui/main_window.ui:391
+#: data/ui/main_window.ui:395
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 "Cozy स्वतः ही आपकी ऑडियो पुस्तकों को एक डायरेक्टरी यानि संग्रह में आयात कर "
 "देता है"
 
-#: data/ui/main_window.ui:427 data/ui/main_window.ui:448
+#: data/ui/main_window.ui:431 data/ui/main_window.ui:452
 msgid "Automatically import new audiobooks on startup"
 msgstr "आरंभ होने पर स्वतः ही नवीन ऑडियो पुस्तकें आयात करें"
 
-#: data/ui/main_window.ui:447
+#: data/ui/main_window.ui:451
 msgid "Auto scan switch"
 msgstr "स्वतः स्कैन साधन"
 
-#: data/ui/main_window.ui:491
+#: data/ui/main_window.ui:495
 msgid "Drag & Drop"
 msgstr "माउस द्वारा ड्रैग"
 
-#: data/ui/main_window.ui:508
+#: data/ui/main_window.ui:512
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr ""
 "माउस द्वारा ऑडियो पुस्तकें Cozy में ड्रैग करें और वे स्वयं ही आयात हो जाएँगी"
 
-#: data/ui/main_window.ui:531
+#: data/ui/main_window.ui:535
 msgid "Location of your audiobooks"
 msgstr "आपकी ऑडियो पुस्तकों का स्थान"
 
-#: data/ui/main_window.ui:552
+#: data/ui/main_window.ui:556
 msgid "Set Audiobooks Directory"
 msgstr "ऑडियो पुस्तक हेतु डायरेक्टरी सेट करें"
 
-#: data/ui/main_window.ui:575
+#: data/ui/main_window.ui:579
 msgid "Load audiobooks from a directory, network drive or an external disk."
 msgstr ""
 "डायरेक्टरी, नेटवर्क ड्राइव या बाह्य ड्राइव के लोकल ऑडियो पुस्तकें लोड करें।"
 
-#: data/ui/main_window.ui:593
+#: data/ui/main_window.ui:597
 msgid "You can add more storage locations later in the settings"
 msgstr "सेटिंग्स द्वारा अन्य संचय स्थान जोड़ना भी संभव है"
 

@@ -4,6 +4,8 @@ import time
 from threading import Thread
 from typing import Optional
 
+from gi.repository import GLib, Gst
+
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.control.offline_cache import OfflineCache
@@ -15,6 +17,7 @@ from cozy.model.library import Library
 from cozy.report import reporter
 from cozy.tools import IntervalTimer
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
+from cozy.ui.info_banner import InfoBanner
 
 log = logging.getLogger("mediaplayer")
 
@@ -26,6 +29,7 @@ class Player(EventSender):
     _library: Library = inject.attr(Library)
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
     _offline_cache: OfflineCache = inject.attr(OfflineCache)
+    _info_bar: InfoBanner = inject.attr(InfoBanner)
 
     _gst_player: GstPlayer = inject.attr(GstPlayer)
 
@@ -302,6 +306,15 @@ class Player(EventSender):
             self._stop_tick_thread()
             self.emit_event_main_thread("pause")
         elif event == "state" and message == GstPlayerState.STOPPED:
+            self._stop_playback()
+        elif event == "error":
+            self._handle_gst_error(message)
+
+    def _handle_gst_error(self, error: GLib.Error):
+        if error.code != Gst.ResourceError.BUSY:
+            self._info_bar.show(error.message)
+
+        if error.code == Gst.ResourceError.OPEN_READ or Gst.ResourceError.READ:
             self._stop_playback()
 
     def _handle_file_not_found(self):

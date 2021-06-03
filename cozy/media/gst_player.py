@@ -266,7 +266,7 @@ class GstPlayer(EventSender):
                 reporter.warning("gst_player", "gst: Resource not found. Stopping player.")
                 return
 
-            reporter.error("player", error)
-            log.error(error)
+            reporter.error("player", "{}: {}".format(error.code, error))
+            log.error("{}: {}".format(error.code, error))
             log.debug(debug_msg)
             self.emit_event("error", error)

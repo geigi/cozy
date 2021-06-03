@@ -1,3 +1,5 @@
+import logging
+
 from peewee import SqliteDatabase
 
 from cozy.db.file import File
@@ -7,6 +9,12 @@ from cozy.model.chapter import Chapter
 
 NS_TO_SEC = 10 ** 9
 
+log = logging.getLogger("TrackModel")
+
+
+class TrackInconsistentData(Exception):
+    pass
+
 
 class Track(Chapter):
     def __init__(self, db: SqliteDatabase, id: int):
@@ -15,7 +23,11 @@ class Track(Chapter):
         self.id: int = id
 
         self._db_object: TrackModel = TrackModel.get(self.id)
-        self._track_to_file_db_object: TrackToFile = TrackToFile.get(TrackToFile.track == self.id)
+        self._track_to_file_db_object: TrackToFile = TrackToFile.get_or_none(TrackToFile.track == self.id)
+        if not self._track_to_file_db_object:
+            log.error("Inconsistent DB, TrackToFile object is missing. Deleting this track.")
+            self._db_object.delete_instance(recursive=True, delete_nullable=False)
+            raise TrackInconsistentData
 
     @property
     def name(self):
@@ -101,7 +113,12 @@ class Track(Chapter):
         file.save(only=file.dirty_fields)
 
     def delete(self):
+        file_id = self.file_id
         self._db_object.delete_instance(recursive=True)
+
+        if TrackToFile.select().join(File).where(TrackToFile.file.id == file_id).count() == 0:
+            File.delete().where(File.id == file_id).execute()
+
         self.emit_event("chapter-deleted", self)
         self.destroy_listeners()
 
