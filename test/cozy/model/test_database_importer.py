@@ -30,6 +30,25 @@ def test_prepare_files_db_objects_skips_existing_files():
     assert len(file_objects) == 0
 
 
+def test_prepare_files_db_objects_skips_duplicate_file():
+    from cozy.model.database_importer import DatabaseImporter
+    from cozy.media.media_file import MediaFile
+
+    media_file = MediaFile(book_name="New Book Name",
+                           author="New Author",
+                           reader="New Reader",
+                           disk=999,
+                           cover=b"cover",
+                           path="i_m_a_new_file.mp3",
+                           modified=1234567,
+                           chapters=[None])
+
+    database_importer = DatabaseImporter()
+    file_objects = database_importer._prepare_files_db_objects([media_file, media_file])
+    assert len(file_objects) == 1
+    assert file_objects[0]["path"] == "i_m_a_new_file.mp3"
+
+
 def test_update_files_db_objects_updates_modified_field():
     from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
