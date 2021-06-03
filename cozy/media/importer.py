@@ -179,6 +179,7 @@ class Importer(EventSender):
                 except StopIteration as e:
                     reporter.exception("importer", e, "_filter_unchanged_files raised a stop iteration.")
                     yield file
+                    continue
 
                 if int(os.path.getmtime(file)) > chapter.modified:
                     yield file
