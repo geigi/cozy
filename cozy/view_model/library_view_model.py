@@ -227,6 +227,8 @@ class LibraryViewModel(Observable, EventSender):
         elif event == "stop":
             self._notify("playing")
             self._notify("current_book_in_playback")
+        elif event == "position" or event == "book-finished":
+            self._notify("book-progress")
 
     def _on_settings_event(self, event: str, message):
         if event == "storage-removed":

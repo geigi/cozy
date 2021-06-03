@@ -1,3 +1,4 @@
+import logging
 import os
 import subprocess
 
@@ -10,6 +11,8 @@ from cozy.ui.widgets.album_element import AlbumElement
 
 MAX_BOOK_LENGTH = 60
 MAX_TRACK_LENGTH = 40
+
+log = logging.getLogger("book_element")
 
 
 class BookElement(Gtk.FlowBoxChild):
@@ -72,9 +75,14 @@ class BookElement(Gtk.FlowBoxChild):
         self.art.connect("play-pause-clicked", self._on_album_art_press_event)
         self.event_box.connect("button-press-event", self.__on_button_press_event)
         self.connect("key-press-event", self.__on_key_press_event)
+        self.event_box.connect("enter-notify-event", self._on_cover_enter_notify)
+        self.event_box.connect("leave-notify-event", self._on_cover_leave_notify)
 
     def set_playing(self, is_playing):
         self.art.set_playing(is_playing)
+
+    def update_progress(self):
+        self.art.update_progress()
 
     def _on_album_art_press_event(self, _, __):
         self.emit("play-pause-clicked", self.book)
@@ -135,6 +143,18 @@ class BookElement(Gtk.FlowBoxChild):
         track = self.book.chapters[0]
         path = os.path.dirname(track.file)
         subprocess.Popen(['xdg-open', path])
+
+    def _on_cover_enter_notify(self, widget: Gtk.Widget, __):
+        try:
+            widget.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND2))
+        except:
+            log.error("Broken mouse theme, failed to set cursor.")
+
+        self.art.set_hover(True)
+
+    def _on_cover_leave_notify(self, widget: Gtk.Widget, __):
+        widget.props.window.set_cursor(None)
+        self.art.set_hover(False)
 
 
 GObject.type_register(BookElement)

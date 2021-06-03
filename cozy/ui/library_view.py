@@ -62,6 +62,7 @@ class LibraryView:
         self._view_model.bind_to("selected_filter", self._select_filter_row)
         self._view_model.bind_to("current_book_in_playback", self._current_book_in_playback)
         self._view_model.bind_to("playing", self._playing)
+        self._view_model.bind_to("book-progress", self._on_book_progress_changed)
 
     def _on_sort_stack_changed(self, widget, _):
         page = widget.props.visible_child_name
@@ -199,3 +200,9 @@ class LibraryView:
     def _playing(self):
         if self._connected_book_element:
             self._connected_book_element.set_playing(self._view_model.playing)
+
+    def _on_book_progress_changed(self):
+        if not self._connected_book_element:
+            return
+
+        self._connected_book_element.update_progress()
