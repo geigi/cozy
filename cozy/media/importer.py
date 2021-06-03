@@ -171,10 +171,14 @@ class Importer(EventSender):
 
         for file in files:
             if file in imported_files:
-                chapter = next(chapter
-                               for chapter
-                               in self._library.chapters
-                               if chapter.file == file)
+                try:
+                    chapter = next(chapter
+                                   for chapter
+                                   in self._library.chapters
+                                   if chapter.file == file)
+                except StopIteration as e:
+                    reporter.exception("importer", e, "_filter_unchanged_files raised a stop iteration.")
+                    yield file
 
                 if int(os.path.getmtime(file)) > chapter.modified:
                     yield file
