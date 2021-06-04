@@ -4,6 +4,7 @@ import gi
 from cozy.db.storage import Storage
 from cozy.db.storage_blacklist import StorageBlackList
 from cozy.ext import inject
+from cozy.model.library import Library
 from cozy.ui.widgets.ScrollWrapper import ScrollWrapper
 from cozy.ui.widgets.storage_list_box_row import StorageListBoxRow
 from cozy.view_model.settings_view_model import SettingsViewModel
@@ -32,6 +33,7 @@ class Settings(EventSender):
         super().__init__()
         from cozy.control.artwork_cache import ArtworkCache
         self._artwork_cache: ArtworkCache = inject.instance(ArtworkCache)
+        self._library: Library = inject.instance(Library)
 
         self.view_model = SettingsViewModel()
 
@@ -347,6 +349,7 @@ class Settings(EventSender):
         """
         Start a force refresh of the database.
         """
+        self._library.reset_modified_date_for_all()
         self.ui.scan(None, None)
 
     def _on_settings_stack_changed(self, widget, property):

@@ -6,6 +6,7 @@ from peewee import SqliteDatabase
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.profiler import timing
 from cozy.db.book import Book as BookModel
+from cozy.db.file import File
 from cozy.ext import inject
 from cozy.extensions.set import split_strings_to_set
 from cozy.model.book import Book, BookIsEmpty
@@ -100,6 +101,10 @@ class Library(EventSender):
                 self.emit_event_main_thread("rebase-progress", progress / chapter_count)
 
         self.emit_event_main_thread("rebase-finished")
+
+    @staticmethod
+    def reset_modified_date_for_all():
+        File.update(modified=0).execute()
 
     def _load_all_books(self):
         for book_db_obj in BookModel.select(BookModel.id):
