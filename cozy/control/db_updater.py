@@ -133,11 +133,14 @@ def _update_db_9(db):
         for track in models["track"].select():
             path = track.file
 
+            file = next((f for f in files if f.path == path), None)
+
             if File.select().where(File.path == path).count() > 0:
                 log.info("Path already existing in db: {}".format(path))
                 file = File.select().where(File.path == path).get()
-            else:
+            elif not file:
                 file = File(path=path, modified=track.modified, id=file_id)
+                files.append(file)
                 file_id += 1
 
             if TrackToFile.select().join(Track).where(TrackToFile.track.id == track.id).count() > 0:
@@ -145,8 +148,6 @@ def _update_db_9(db):
                 continue
 
             track_to_file = TrackToFile(track=track, file=file, start_at=0)
-
-            files.append(file)
             track_to_files.append(track_to_file)
 
         log.info("Inserting File and TrackToFile objects...")

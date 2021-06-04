@@ -196,6 +196,7 @@ class Player(EventSender):
         if not self._book:
             log.error("There is no book loaded but there should be.")
             reporter.error("player", "There is no book loaded but there should be.")
+            return
 
         self._library.last_played_book = self._book
         media_file_path = self._get_playback_path(chapter)

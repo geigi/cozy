@@ -54,7 +54,8 @@ class TagReader:
     def _get_book_name_fallback(self):
         path = os.path.normpath(self.uri)
         directory_path = os.path.dirname(path)
-        return os.path.basename(directory_path)
+        directory = os.path.basename(directory_path)
+        return unquote(directory)
 
     def _get_author(self):
         authors = self._get_string_list(Gst.TAG_COMPOSER)
@@ -89,7 +90,8 @@ class TagReader:
 
     def _get_track_name_fallback(self):
         filename = os.path.basename(self.uri)
-        return os.path.splitext(filename)[0]
+        filename_without_extension = os.path.splitext(filename)[0]
+        return unquote(filename_without_extension)
 
     def _get_chapters(self):
         if self.uri.lower().endswith("m4b") and self._mutagen_supports_chapters():

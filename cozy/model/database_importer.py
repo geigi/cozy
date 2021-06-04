@@ -90,24 +90,22 @@ class DatabaseImporter:
                 book = self._import_or_update_book(media_file)
                 book_db_objects.add(book)
 
-            if self._is_chapter_count_in_db_different(media_file):
-                try:
-                    book_model = Book(self._db, book.id)
-                    progress = book_model.progress
-                except BookIsEmpty:
-                    progress = 0
+            try:
+                book_model = Book(self._db, book.id)
+                progress = book_model.progress
+            except BookIsEmpty:
+                progress = 0
 
-                self._delete_tracks_from_db(media_file)
-                tracks = self._get_track_list_for_db(media_file, book)
+            self._delete_tracks_from_db(media_file)
+            tracks = self._get_track_list_for_db(media_file, book)
 
-                for track in tracks:
-                    start_at = track.pop("startAt")
-                    yield TrackInsertRequest(track, file, start_at)
+            for track in tracks:
+                start_at = track.pop("startAt")
+                yield TrackInsertRequest(track, file, start_at)
 
-                if progress > 0:
-                    self._book_update_positions.append(BookUpdatePositionRequest(book.id, progress))
-            else:
-                self._update_track_db_object(media_file, book)
+            update_position_request_present = any(b.book_id == book.id for b in self._book_update_positions)
+            if progress > 0 and not update_position_request_present:
+                self._book_update_positions.append(BookUpdatePositionRequest(book.id, progress))
 
     def _import_or_update_book(self, media_file):
         if BookModel.select(BookModel.name).where(self._matches_db_book(media_file.book_name)).count() < 1:
@@ -134,21 +132,6 @@ class DatabaseImporter:
             })
 
         return tracks
-
-    def _update_track_db_object(self, media_file: MediaFile, book: BookModel):
-        all_track_mappings = [item.track
-                              for item
-                              in TrackToFile.select().join(File).where(TrackToFile.file.path == media_file.path)]
-
-        for chapter in media_file.chapters:
-            Track \
-                .update(name=chapter.name,
-                        number=chapter.number,
-                        book=book,
-                        disk=media_file.disk,
-                        length=chapter.length) \
-                .where(Track.id << all_track_mappings) \
-                .execute()
 
     def _update_book_db_object(self, media_file: MediaFile) -> BookModel:
         BookModel.update(name=media_file.book_name,
@@ -214,11 +197,14 @@ class DatabaseImporter:
             log.error("Could not restore book position because book is empty")
             return
 
+        completed_chapter_length = 0
         for chapter in book_model.chapters:
-            old_position = progress * (10 ** 9)
-            if chapter.end_position > old_position:
-                chapter.position = old_position
+            old_position = progress
+            if completed_chapter_length + chapter.length > old_position:
+                chapter.position = chapter.start_position + ((old_position - completed_chapter_length) * 10 ** 9)
                 book_model.position = chapter.id
                 return
+            else:
+                completed_chapter_length += chapter.length
 
         book_model.position = 0

@@ -96,40 +96,6 @@ def test_prepare_db_objects_skips_none():
     database_importer._prepare_track_db_objects([None, None, None])
 
 
-def test_update_track_db_object_updates_object():
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
-    from cozy.db.book import Book
-    from cozy.media.chapter import Chapter
-    from cozy.db.track import Track
-    from cozy.db.file import File
-    from cozy.db.track_to_file import TrackToFile
-
-    database_importer = DatabaseImporter()
-
-    chapter = Chapter("New Chapter", 0, 1234567, 999)
-    media_file = MediaFile(book_name="New Book Name",
-                           author="New Author",
-                           reader="New Reader",
-                           disk=999,
-                           cover=b"cover",
-                           path="test.mp3",
-                           modified=1234567,
-                           chapters=[chapter])
-
-    book = Book.select().get()
-
-    database_importer._update_track_db_object(media_file, book)
-
-    track_to_file: TrackToFile = TrackToFile.select().join(File).where(TrackToFile.file.path == "test.mp3").get()
-    track: Track = track_to_file.track
-
-    assert track.name == "New Chapter"
-    assert track.disk == 999
-    assert track.number == 999
-    assert track.length == 1234567
-
-
 def test_create_track_db_object_creates_object():
     from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
@@ -246,13 +212,14 @@ def test_create_book_db_object_creates_object():
     assert book_in_db.rating == -1
 
 
-def test_prepare_db_objects_updates_existing_track(mocker):
+def test_prepare_db_objects_recreates_existing_track(mocker):
     from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
     from cozy.media.chapter import Chapter
+    from cozy.db.track_to_file import TrackToFile
+    from cozy.db.file import File
 
     database_importer = DatabaseImporter()
-    spy = mocker.spy(database_importer, "_update_track_db_object")
 
     chapter = Chapter("New Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="Test Book",
@@ -264,10 +231,21 @@ def test_prepare_db_objects_updates_existing_track(mocker):
                            modified=1234567,
                            chapters=[chapter])
 
-    res_dict = database_importer._prepare_track_db_objects([media_file])
+    res = database_importer._prepare_track_db_objects([media_file])
+    res_list = list(res)
+    request = res_list[0]
 
-    assert len(list(res_dict)) == 0
-    spy.assert_called_once()
+    assert TrackToFile.select().join(File).where(File.path == "test.mp3").count() == 0
+
+    assert len(res_list) == 1
+    assert request.file.path == "test.mp3"
+    assert request.start_at == 0
+    assert request.track_data["name"] == "New Chapter"
+    assert request.track_data["number"] == 999
+    assert request.track_data["disk"] == 999
+    assert request.track_data["book"].id == 1
+    assert request.track_data["length"] == 1234567
+    assert request.track_data["position"] == 0
 
 
 def test_prepare_db_objects_skips_if_file_object_not_present(mocker):
@@ -533,7 +511,7 @@ def test_update_book_position_skips_empty_book():
     database_importer._update_book_position(book, 0)
 
 
-def test_update_book_position_sets_position_correctly():
+def test_update_book_position_sets_position_for_multi_chapter_file_correctly():
     from cozy.model.database_importer import DatabaseImporter
     from cozy.db.book import Book
     from cozy.db.track import Track
@@ -546,6 +524,22 @@ def test_update_book_position_sets_position_correctly():
     book = Book.get_by_id(11)
     assert book.position == 232
     assert Track.get_by_id(232).position == 4251000000000
+
+
+def test_update_book_position_sets_position_for_single_chapter_file_correctly():
+    from cozy.model.database_importer import DatabaseImporter
+    from cozy.db.book import Book
+    from cozy.db.track import Track
+
+    database_importer = DatabaseImporter()
+
+    book = Book.get_by_id(2)
+    database_importer._update_book_position(book, 4251)
+
+    book = Book.get_by_id(2)
+    desired_chapter_position = 4251000000000.0 - ((Track.get_by_id(198).length + Track.get_by_id(197).length) * 10 ** 9)
+    assert book.position == 194
+    assert Track.get_by_id(194).position == desired_chapter_position
 
 
 def test_update_book_position_resets_position_if_it_is_longer_than_the_duration():
