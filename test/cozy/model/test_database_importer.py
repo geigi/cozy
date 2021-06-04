@@ -96,40 +96,6 @@ def test_prepare_db_objects_skips_none():
     database_importer._prepare_track_db_objects([None, None, None])
 
 
-def test_update_track_db_object_updates_object():
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
-    from cozy.db.book import Book
-    from cozy.media.chapter import Chapter
-    from cozy.db.track import Track
-    from cozy.db.file import File
-    from cozy.db.track_to_file import TrackToFile
-
-    database_importer = DatabaseImporter()
-
-    chapter = Chapter("New Chapter", 0, 1234567, 999)
-    media_file = MediaFile(book_name="New Book Name",
-                           author="New Author",
-                           reader="New Reader",
-                           disk=999,
-                           cover=b"cover",
-                           path="test.mp3",
-                           modified=1234567,
-                           chapters=[chapter])
-
-    book = Book.select().get()
-
-    database_importer._update_track_db_object(media_file, book)
-
-    track_to_file: TrackToFile = TrackToFile.select().join(File).where(TrackToFile.file.path == "test.mp3").get()
-    track: Track = track_to_file.track
-
-    assert track.name == "New Chapter"
-    assert track.disk == 999
-    assert track.number == 999
-    assert track.length == 1234567
-
-
 def test_create_track_db_object_creates_object():
     from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
