@@ -94,7 +94,7 @@
             <property name="valign">end</property>
             <property name="hexpand">False</property>
             <property name="vexpand">False</property>
-            <property name="transition_type">slide-up</property>
+            <property name="transition_type">crossfade</property>
             <property name="transition_duration">200</property>
             <child>
               <object class="GtkOverlay">
@@ -147,7 +147,6 @@
             </child>
           </object>
           <packing>
-            <property name="pass_through">True</property>
             <property name="index">1</property>
           </packing>
         </child>

@@ -6,6 +6,7 @@ from gi.repository import Gtk, Gdk, Pango, GObject
 
 import cozy.tools as tools
 import cozy.ui
+from cozy.extensions.gtk_widget import set_hand_cursor, reset_cursor
 from cozy.model.book import Book
 from cozy.ui.widgets.album_element import AlbumElement
 
@@ -145,16 +146,13 @@ class BookElement(Gtk.FlowBoxChild):
         subprocess.Popen(['xdg-open', path])
 
     def _on_cover_enter_notify(self, widget: Gtk.Widget, __):
-        try:
-            widget.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND2))
-        except:
-            log.error("Broken mouse theme, failed to set cursor.")
+        set_hand_cursor(widget)
 
         self.art.set_hover(True)
         return True
 
     def _on_cover_leave_notify(self, widget: Gtk.Widget, __):
-        widget.props.window.set_cursor(None)
+        reset_cursor(widget)
         self.art.set_hover(False)
         return True
 

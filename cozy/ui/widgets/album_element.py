@@ -4,6 +4,7 @@ import math
 import cairo
 
 from cozy.control.artwork_cache import ArtworkCache
+from cozy.extensions.gtk_widget import set_hand_cursor, reset_cursor
 from cozy.model.book import Book
 from cozy.ext import inject
 
@@ -44,8 +45,8 @@ class AlbumElement(Gtk.Box):
         self.play_button.connect("clicked", self._on_play_button_press)
         self.progress_drawing_area.connect("draw", self._draw_progress)
         self.album_art_drawing_area.connect("draw", self._draw_album_hover)
-        self.album_art_overlay_revealer.connect("enter-notify-event", self._on_revealer_event)
-        self.play_button_revealer.connect("enter-notify-event", self._on_revealer_event)
+        self.album_art_overlay_revealer.connect("enter-notify-event", self._on_revealer_enter_event)
+        self.play_button_revealer.connect("enter-notify-event", self._on_revealer_enter_event)
 
     def set_playing(self, playing: bool):
         if playing:
@@ -63,7 +64,7 @@ class AlbumElement(Gtk.Box):
 
     def _draw_album_hover(self, area: Gtk.DrawingArea, context: cairo.Context):
         context.rectangle(0, 0, area.get_allocated_width(), area.get_allocated_height())
-        context.set_source_rgba(1, 1, 1, 0.25)
+        context.set_source_rgba(1, 1, 1, 0.15)
         context.fill()
 
     def _draw_progress(self, area: Gtk.DrawingArea, context: cairo.Context):
@@ -91,7 +92,7 @@ class AlbumElement(Gtk.Box):
             # context.set_source_rgb(0.937, 0.925, 0.925)
             # context.set_source_rgb(0.937, 0.925, 0.925)
             # context.set_source_rgb(background_color.red, background_color.green, background_color.blue)
-            context.set_source_rgb(1.0, 0.745, 0.435)
+            context.set_source_rgb(1.0, 0.471, 0)
         context.fill()
 
     def draw_background(self, area: Gtk.DrawingArea, context: cairo.Context, color: Gdk.RGBA):
@@ -111,15 +112,12 @@ class AlbumElement(Gtk.Box):
     def update_progress(self):
         self.progress_drawing_area.queue_draw()
 
-    def _on_revealer_event(self, widget, __):
+    def _on_revealer_enter_event(self, widget, _):
         # Somehow the GTK Revealer steals the mouse events from the parent
         # Maybe this is a bug in GTK but for now we have to handle hover in here as well
         self.set_hover(True)
-
-        try:
-            widget.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND2))
-        except:
-            log.error("Broken mouse theme, failed to set cursor.")
+        set_hand_cursor(widget)
+        return True
 
 
 GObject.type_register(AlbumElement)
