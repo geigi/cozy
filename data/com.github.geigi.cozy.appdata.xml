@@ -56,6 +56,7 @@
         </p>
         <ul>
           <li>When an issue occurs during playback the error message is displayed to the user</li>
+          <li>Fix: Importing media without tags now properly decodes the file name as chapter name (thanks chris-kobrzak!)</li>
           <li>Fix: Ensure that always a default storage location is present</li>
           <li>Fix: During import an error could occur which stopped the import</li>
           <li>Fix: During the database migration an error could occur</li>
