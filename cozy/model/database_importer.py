@@ -103,7 +103,8 @@ class DatabaseImporter:
                 start_at = track.pop("startAt")
                 yield TrackInsertRequest(track, file, start_at)
 
-            if progress > 0:
+            update_position_request_present = any(b.book_id == book.id for b in self._book_update_positions)
+            if progress > 0 and not update_position_request_present:
                 self._book_update_positions.append(BookUpdatePositionRequest(book.id, progress))
 
     def _import_or_update_book(self, media_file):
@@ -196,11 +197,14 @@ class DatabaseImporter:
             log.error("Could not restore book position because book is empty")
             return
 
+        completed_chapter_length = 0
         for chapter in book_model.chapters:
-            old_position = progress * (10 ** 9)
-            if chapter.end_position > old_position:
-                chapter.position = old_position
+            old_position = progress
+            if completed_chapter_length + chapter.length > old_position:
+                chapter.position = chapter.start_position + ((old_position - completed_chapter_length) * 10 ** 9)
                 book_model.position = chapter.id
                 return
+            else:
+                completed_chapter_length += chapter.length
 
         book_model.position = 0

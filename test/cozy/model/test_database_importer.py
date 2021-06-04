@@ -511,7 +511,7 @@ def test_update_book_position_skips_empty_book():
     database_importer._update_book_position(book, 0)
 
 
-def test_update_book_position_sets_position_correctly():
+def test_update_book_position_sets_position_for_multi_chapter_file_correctly():
     from cozy.model.database_importer import DatabaseImporter
     from cozy.db.book import Book
     from cozy.db.track import Track
@@ -524,6 +524,22 @@ def test_update_book_position_sets_position_correctly():
     book = Book.get_by_id(11)
     assert book.position == 232
     assert Track.get_by_id(232).position == 4251000000000
+
+
+def test_update_book_position_sets_position_for_single_chapter_file_correctly():
+    from cozy.model.database_importer import DatabaseImporter
+    from cozy.db.book import Book
+    from cozy.db.track import Track
+
+    database_importer = DatabaseImporter()
+
+    book = Book.get_by_id(2)
+    database_importer._update_book_position(book, 4251)
+
+    book = Book.get_by_id(2)
+    desired_chapter_position = 4251000000000.0 - ((Track.get_by_id(198).length + Track.get_by_id(197).length) * 10 ** 9)
+    assert book.position == 194
+    assert Track.get_by_id(194).position == desired_chapter_position
 
 
 def test_update_book_position_resets_position_if_it_is_longer_than_the_duration():
