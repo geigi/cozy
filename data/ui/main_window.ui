@@ -181,13 +181,19 @@
                                 <property name="hexpand">True</property>
                                 <property name="vexpand">True</property>
                                 <property name="homogeneous">True</property>
-                                <property name="column_spacing">30</property>
-                                <property name="row_spacing">30</property>
+                                <property name="column_spacing">20</property>
+                                <property name="row_spacing">20</property>
+                                <property name="min_children_per_line">1</property>
+                                <property name="max_children_per_line">10</property>
+                                <property name="selection_mode">none</property>
                                 <child internal-child="accessible">
                                   <object class="AtkObject" id="book_box-atkobject">
                                     <property name="AtkObject::accessible-name" translatable="yes">List of books</property>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="book_box"/>
+                                </style>
                               </object>
                             </child>
                           </object>
@@ -438,6 +444,9 @@
                     <property name="position">3</property>
                   </packing>
                 </child>
+                <style>
+                  <class name="main_stack"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">True</property>

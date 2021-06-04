@@ -4,7 +4,7 @@ from gi.repository import Gtk, Handy
 from gi.repository.Gtk import Builder
 
 from cozy.ext import inject
-from cozy.ui.book_element import BookElement
+from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.delete_book_view import DeleteBookView
 from cozy.ui.widgets.filter_list_box import FilterListBox
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode, LibraryPage

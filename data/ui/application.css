@@ -41,3 +41,14 @@
 .unavailable_label {
     color: white;
 }
+
+.book_container {
+    border: 1px solid shade(@theme_bg_color, 0.85);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: @theme_base_color;
+}
+
+.selected {
+    background-color: @theme_selected_bg_color;
+}

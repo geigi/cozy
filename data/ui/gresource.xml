@@ -28,5 +28,6 @@
     <file preprocess="xml-stripblanks">media_controller_small.ui</file>
     <file preprocess="xml-stripblanks">media_controller_big.ui</file>
     <file preprocess="xml-stripblanks">album_element.ui</file>
+    <file preprocess="xml-stripblanks">book_element.ui</file>
   </gresource>
 </gresources>

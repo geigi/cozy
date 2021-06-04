@@ -4,13 +4,13 @@ import math
 import cairo
 
 from cozy.control.artwork_cache import ArtworkCache
-from cozy.extensions.gtk_widget import set_hand_cursor, reset_cursor
+from cozy.extensions.gtk_widget import set_hand_cursor
 from cozy.model.book import Book
 from cozy.ext import inject
 
 from gi.repository import Gtk, GObject, Gdk
 
-ALBUM_ART_SIZE = 180
+ALBUM_ART_SIZE = 200
 PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.LARGE_TOOLBAR
 
 log = logging.getLogger("album_element")
@@ -42,7 +42,8 @@ class AlbumElement(Gtk.Box):
             self.album_art_image.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
             self.album_art_image.props.pixel_size = ALBUM_ART_SIZE
 
-        self.play_button.connect("clicked", self._on_play_button_press)
+        self.play_button.connect("button-release-event", self._on_play_button_press)
+
         self.progress_drawing_area.connect("draw", self._draw_progress)
         self.album_art_drawing_area.connect("draw", self._draw_album_hover)
         self.album_art_overlay_revealer.connect("enter-notify-event", self._on_revealer_enter_event)
@@ -58,7 +59,7 @@ class AlbumElement(Gtk.Box):
         self.album_art_overlay_revealer.set_reveal_child(hover)
         self.play_button_revealer.set_reveal_child(hover)
 
-    def _on_play_button_press(self, _):
+    def _on_play_button_press(self, _, __):
         self.emit("play-pause-clicked", self._book)
         return True
 
