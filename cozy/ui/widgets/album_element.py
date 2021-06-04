@@ -1,3 +1,4 @@
+import logging
 import math
 
 import cairo
@@ -10,6 +11,8 @@ from gi.repository import Gtk, GObject, Gdk
 
 ALBUM_ART_SIZE = 180
 PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.LARGE_TOOLBAR
+
+log = logging.getLogger("album_element")
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/album_element.ui')
@@ -41,6 +44,8 @@ class AlbumElement(Gtk.Box):
         self.play_button.connect("clicked", self._on_play_button_press)
         self.progress_drawing_area.connect("draw", self._draw_progress)
         self.album_art_drawing_area.connect("draw", self._draw_album_hover)
+        self.album_art_overlay_revealer.connect("enter-notify-event", self._on_revealer_event)
+        self.play_button_revealer.connect("enter-notify-event", self._on_revealer_event)
 
     def set_playing(self, playing: bool):
         if playing:
@@ -69,23 +74,23 @@ class AlbumElement(Gtk.Box):
         width = area.get_allocated_width()
         height = area.get_allocated_height()
 
-        #self.draw_background(area, context, background_color)
+        # self.draw_background(area, context, background_color)
 
         context.move_to(width / 2.0, height / 2.0 + 1)
         book_progress = self._book.progress / self._book.duration
         progress_circle_end = book_progress * math.pi * 2.0
         context.arc(width / 2.0, height / 2.0, (min(width, height)) / 2.0, math.pi * -0.5,
                     progress_circle_end - (math.pi * 0.5))
-        #context.set_source_rgb(1.0, 0.745, 0.435)
-        #context.set_source_rgb(0.800, 0.800, 0.800)
-        #context.set_source_rgb(0.953, 0.957, 0.929)
-        #context.set_source_rgb(0.957, 0.957, 0.957)
+        # context.set_source_rgb(1.0, 0.745, 0.435)
+        # context.set_source_rgb(0.800, 0.800, 0.800)
+        # context.set_source_rgb(0.953, 0.957, 0.929)
+        # context.set_source_rgb(0.957, 0.957, 0.957)
         if book_progress == 1.0:
             context.set_source_rgb(0.2, 0.82, 0.478)
         else:
-            #context.set_source_rgb(0.937, 0.925, 0.925)
-            #context.set_source_rgb(0.937, 0.925, 0.925)
-            #context.set_source_rgb(background_color.red, background_color.green, background_color.blue)
+            # context.set_source_rgb(0.937, 0.925, 0.925)
+            # context.set_source_rgb(0.937, 0.925, 0.925)
+            # context.set_source_rgb(background_color.red, background_color.green, background_color.blue)
             context.set_source_rgb(1.0, 0.745, 0.435)
         context.fill()
 
@@ -105,6 +110,17 @@ class AlbumElement(Gtk.Box):
 
     def update_progress(self):
         self.progress_drawing_area.queue_draw()
+
+    def _on_revealer_event(self, widget, __):
+        # Somehow the GTK Revealer steals the mouse events from the parent
+        # Maybe this is a bug in GTK but for now we have to handle hover in here as well
+        self.set_hover(True)
+
+        try:
+            widget.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND2))
+        except:
+            log.error("Broken mouse theme, failed to set cursor.")
+
 
 GObject.type_register(AlbumElement)
 GObject.signal_new('play-pause-clicked', AlbumElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,

@@ -34,7 +34,7 @@ class BookElement(Gtk.FlowBoxChild):
         self.ONLINE_TOOLTIP_TEXT = _("Open book overview")
 
         super().__init__()
-        self.event_box = Gtk.EventBox()
+        self.event_box: Gtk.EventBox = Gtk.EventBox()
         self.add_events(Gdk.EventMask.KEY_PRESS_MASK)
         self.box = Gtk.Box()
         self.box.set_orientation(Gtk.Orientation.VERTICAL)
@@ -151,10 +151,12 @@ class BookElement(Gtk.FlowBoxChild):
             log.error("Broken mouse theme, failed to set cursor.")
 
         self.art.set_hover(True)
+        return True
 
     def _on_cover_leave_notify(self, widget: Gtk.Widget, __):
         widget.props.window.set_cursor(None)
         self.art.set_hover(False)
+        return True
 
 
 GObject.type_register(BookElement)
