@@ -49,7 +49,7 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
-    <release version="1.0.3" timestamp="1622490608">
+    <release version="1.0.3" timestamp="1622826417">
       <description>
         <p>
         A small bugfix release which makes Cozy more reliable.
