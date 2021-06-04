@@ -246,13 +246,14 @@ def test_create_book_db_object_creates_object():
     assert book_in_db.rating == -1
 
 
-def test_prepare_db_objects_updates_existing_track(mocker):
+def test_prepare_db_objects_recreates_existing_track(mocker):
     from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
     from cozy.media.chapter import Chapter
+    from cozy.db.track_to_file import TrackToFile
+    from cozy.db.file import File
 
     database_importer = DatabaseImporter()
-    spy = mocker.spy(database_importer, "_update_track_db_object")
 
     chapter = Chapter("New Chapter", 0, 1234567, 999)
     media_file = MediaFile(book_name="Test Book",
@@ -264,10 +265,21 @@ def test_prepare_db_objects_updates_existing_track(mocker):
                            modified=1234567,
                            chapters=[chapter])
 
-    res_dict = database_importer._prepare_track_db_objects([media_file])
+    res = database_importer._prepare_track_db_objects([media_file])
+    res_list = list(res)
+    request = res_list[0]
 
-    assert len(list(res_dict)) == 0
-    spy.assert_called_once()
+    assert TrackToFile.select().join(File).where(File.path == "test.mp3").count() == 0
+
+    assert len(res_list) == 1
+    assert request.file.path == "test.mp3"
+    assert request.start_at == 0
+    assert request.track_data["name"] == "New Chapter"
+    assert request.track_data["number"] == 999
+    assert request.track_data["disk"] == 999
+    assert request.track_data["book"].id == 1
+    assert request.track_data["length"] == 1234567
+    assert request.track_data["position"] == 0
 
 
 def test_prepare_db_objects_skips_if_file_object_not_present(mocker):
