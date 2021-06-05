@@ -62,3 +62,10 @@
 .chapter_element {
     border-radius: 0.5rem;
 }
+
+.book_play_button {
+    background: rgba(0,0,0,0.5);
+    border: 0;
+    color: white;
+    box-shadow: none;
+}

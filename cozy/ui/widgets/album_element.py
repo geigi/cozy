@@ -11,7 +11,8 @@ from cozy.ext import inject
 from gi.repository import Gtk, GObject, Gdk
 
 ALBUM_ART_SIZE = 200
-PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.LARGE_TOOLBAR
+PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.SMALL_TOOLBAR
+STROKE_WIDTH = 2
 
 log = logging.getLogger("album_element")
 
@@ -69,46 +70,33 @@ class AlbumElement(Gtk.Box):
         context.fill()
 
     def _draw_progress(self, area: Gtk.DrawingArea, context: cairo.Context):
-        style_ctx = Gtk.StyleContext()
-        foreground_color: Gdk.RGBA = style_ctx.get_color(Gtk.StateFlags.NORMAL)
-        background_color: Gdk.RGBA = style_ctx.get_property('background-color', Gtk.StateFlags.NORMAL)
-
         width = area.get_allocated_width()
         height = area.get_allocated_height()
+        button_size = self.play_button.get_allocated_width()
+        self.radius = (button_size + STROKE_WIDTH) / 2.0
 
-        # self.draw_background(area, context, background_color)
+        self.draw_background(area, context)
 
-        context.move_to(width / 2.0, height / 2.0 + 1)
         book_progress = self._book.progress / self._book.duration
+
         progress_circle_end = book_progress * math.pi * 2.0
-        context.arc(width / 2.0, height / 2.0, (min(width, height)) / 2.0, math.pi * -0.5,
+        context.arc(width / 2.0, height / 2.0, self.radius, math.pi * -0.5,
                     progress_circle_end - (math.pi * 0.5))
-        # context.set_source_rgb(1.0, 0.745, 0.435)
-        # context.set_source_rgb(0.800, 0.800, 0.800)
-        # context.set_source_rgb(0.953, 0.957, 0.929)
-        # context.set_source_rgb(0.957, 0.957, 0.957)
         if book_progress == 1.0:
             context.set_source_rgb(0.2, 0.82, 0.478)
         else:
-            # context.set_source_rgb(0.937, 0.925, 0.925)
-            # context.set_source_rgb(0.937, 0.925, 0.925)
-            # context.set_source_rgb(background_color.red, background_color.green, background_color.blue)
-            context.set_source_rgb(1.0, 0.471, 0)
-        context.fill()
+            context.set_source_rgb(0.894, 0.471, 0.208)
+        context.set_line_width(2)
+        context.stroke()
 
-    def draw_background(self, area: Gtk.DrawingArea, context: cairo.Context, color: Gdk.RGBA):
+    def draw_background(self, area: Gtk.DrawingArea, context: cairo.Context):
         width = area.get_allocated_width()
         height = area.get_allocated_height()
 
-        context.move_to(width / 2.0, height / 2.0 + 1)
-        context.arc(width / 2.0, height / 2.0, (min(width, height)) / 2.0, 0, math.pi * 2.0)
-        # context.set_source_rgb(1.0, 0.471, 0.0)
-        # context.set_source_rgb(0.192, 0.192, 0.192)
-        # context.set_source_rgb(0.325, 0.38, 0.384)
-        # context.set_source_rgb(0.227, 0.227, 0.227)
-        # context.set_source_rgb(0.361, 0.341, 0.341)
-        context.set_source_rgb(color.red, color.green, color.blue)
-        context.fill()
+        context.arc(width / 2.0, height / 2.0, self.radius, 0, math.pi * 2.0)
+        context.set_source_rgba(0, 0, 0, 0.5)
+        context.set_line_width(2)
+        context.stroke()
 
     def update_progress(self):
         self.progress_drawing_area.queue_draw()

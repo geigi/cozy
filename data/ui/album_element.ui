@@ -6,7 +6,7 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">media-playback-start-symbolic</property>
-    <property name="icon_size">3</property>
+    <property name="icon_size">2</property>
     <style>
       <class name="album-art-button-image"/>
     </style>
@@ -136,7 +136,7 @@
                     <property name="image">button_image</property>
                     <style>
                       <class name="circular"/>
-                      <class name="album-art-button"/>
+                      <class name="book_play_button"/>
                     </style>
                   </object>
                   <packing>
