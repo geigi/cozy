@@ -16,6 +16,7 @@ class DiskElement(Gtk.Box):
             self.container.set_margin_top(18)
 
         self.container.set_margin_bottom(3)
+        self.container.set_margin_left(5)
         self.container.set_orientation(Gtk.Orientation.HORIZONTAL)
         self.container.get_style_context().add_class("dim-label")
 
