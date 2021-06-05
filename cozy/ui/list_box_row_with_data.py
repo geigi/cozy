@@ -9,7 +9,7 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
     """
     This class represents a listboxitem for an author/reader.
     """
-    MARGIN = 5
+    MARGIN = 10
 
     def __init__(self, data, bold=False):
         super(Gtk.ListBoxRow, self).__init__()

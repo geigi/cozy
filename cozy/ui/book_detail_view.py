@@ -10,6 +10,7 @@ from cozy.model.chapter import Chapter
 from cozy.report import reporter
 from cozy.ui.chapter_element import ChapterElement
 from cozy.ui.disk_element import DiskElement
+from cozy.ui.widgets.album_art import AlbumArt
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
 
 gi.require_version('Gtk', '3.0')
@@ -42,7 +43,7 @@ class BookDetailView(Gtk.EventBox):
     download_image: Gtk.Image = Gtk.Template.Child()
     download_switch: Gtk.Switch = Gtk.Template.Child()
 
-    cover_image: Gtk.Image = Gtk.Template.Child()
+    album_art_container: Gtk.Box = Gtk.Template.Child()
 
     unavailable_box: Gtk.Box = Gtk.Template.Child()
 
@@ -63,6 +64,9 @@ class BookDetailView(Gtk.EventBox):
 
         if Gtk.get_minor_version() > 20:
             self.book_overview_scroller.props.propagate_natural_height = True
+
+        self.art = AlbumArt()
+        self.album_art_container.pack_start(self.art, True, True, 0)
 
         self._connect_view_model()
         self._connect_widgets()
@@ -209,11 +213,10 @@ class BookDetailView(Gtk.EventBox):
     def _set_cover_image(self, book: Book):
         pixbuf = self._artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), 250)
         if pixbuf:
-            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.get_scale_factor(), None)
-            self.cover_image.set_from_surface(surface)
+            self.album_art_container.set_visible(True)
+            self.art.set_art(pixbuf)
         else:
-            self.cover_image.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
-            self.cover_image.props.pixel_size = 250
+            self.album_art_container.set_visible(False)
 
     def _download_switch_changed(self, _, state: bool):
         self._view_model.download_book(state)
