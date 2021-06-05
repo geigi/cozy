@@ -32,11 +32,12 @@ Head over to [Matrix](https://matrix.to/#/#cozy:gnome.org?via=matrix.org&via=gno
 |--------|:---------:|
 | Flatpak | <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a> |
 | openSUSE | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> |
-| Arch Linux | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> |
+| Arch Linux (AUR) | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> |
 | VoidLinux | <a href="https://github.com/void-linux/void-packages/tree/master/srcpkgs/cozy">cozy</a> |
 | Solus | <a href="https://dev.getsol.us/source/cozy/">cozy</a> |
 | MX Linux | <center><a href="https://forum.mxlinux.org/viewtopic.php?p=621071#p621071">Cozy</a> |
 | elementaryOS | Currently out of date. Please use Flatpak for now. |
+| Ubuntu (PPA) | <center><a href="https://launchpad.net/~cozy-team/+archive/ubuntu/cozy">cozy</a> |
 
 
 ## elementaryOS
