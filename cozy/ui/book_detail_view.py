@@ -1,5 +1,6 @@
 import logging
-from typing import Optional
+from threading import Thread
+from typing import Optional, Callable
 
 import gi
 
@@ -14,7 +15,7 @@ from cozy.view_model.book_detail_view_model import BookDetailViewModel
 
 gi.require_version('Gtk', '3.0')
 
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, GLib
 
 log = logging.getLogger("BookDetailView")
 
@@ -67,6 +68,8 @@ class BookDetailView(Gtk.EventBox):
         if Gtk.get_minor_version() > 20:
             self.book_overview_scroller.props.propagate_natural_height = True
 
+        self._chapters_thread: Thread = None
+
         self._connect_view_model()
         self._connect_widgets()
         self._add_mouse_button_accel()
@@ -103,6 +106,19 @@ class BookDetailView(Gtk.EventBox):
             return
 
         book = self._view_model.book
+
+        try:
+            self._chapters_thread.join(timeout=0.2)
+        except Exception as e:
+            pass
+        # This is done on a the UI thread to prevent chapters from the previous book flashing before the new chapters
+        # are ready
+        self._clear_chapter_box()
+
+        self._run_display_chapters_job(book)
+
+        self._main_stack.set_visible_child_name("book_overview")
+
         self._current_selected_chapter = None
 
         self.published_label.set_visible(False)
@@ -111,18 +127,13 @@ class BookDetailView(Gtk.EventBox):
         self.book_label.set_text(book.name)
         self.author_label.set_text(book.author)
         self.last_played_label.set_text(self._view_model.last_played_text)
-        self.total_label.set_text(self._view_model.total_text)
 
         self._set_cover_image(book)
-        self._display_chapters(book)
-        self._on_current_chapter_changed()
+
         self._display_external_section()
-        self._set_book_download_status()
         self._set_progress()
         self._on_play_changed()
-        self._on_book_available_changed()
 
-        self._main_stack.set_visible_child_name("book_overview")
         self._toolbar_revealer.set_reveal_child(False)
 
     def _on_play_changed(self):
@@ -169,19 +180,29 @@ class BookDetailView(Gtk.EventBox):
         lock = self._view_model.lock_ui
         self.download_switch.set_sensitive(not lock)
 
-    def _display_chapters(self, book: Book):
+    def _run_display_chapters_job(self, book):
+        self._chapters_thread: Thread = Thread(target=self._display_chapters, args=[book, self._on_chapters_displayed])
+        self._chapters_thread.start()
+
+    def _display_chapters(self, book: Book, callback: Callable):
         disk_number = -1
         disk_count = self._view_model.disk_count
 
-        self._clear_chapter_box()
-
         for chapter in book.chapters:
             if disk_number != chapter.disk and disk_count > 1:
-                self._add_disk(chapter)
+                Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_disk, chapter)
 
-            self._add_chapter(chapter)
+            Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_chapter, chapter)
 
             disk_number = chapter.disk
+
+        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, callback)
+
+    def _on_chapters_displayed(self):
+        self.total_label.set_text(self._view_model.total_text)
+        self._on_current_chapter_changed()
+        self._set_book_download_status()
+        self._on_book_available_changed()
 
     def _display_external_section(self):
         external = self._view_model.is_book_external
