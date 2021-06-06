@@ -39,7 +39,8 @@ class ChapterElement(Gtk.EventBox):
         self.play_img.set_margin_right(5)
         self.play_img.props.width_request = 16
 
-        no_label.set_text(str(self.chapter.number))
+        if self.chapter.number > 0:
+            no_label.set_text(str(self.chapter.number))
         no_label.props.margin = 4
         no_label.set_margin_right(7)
         no_label.set_margin_left(0)
