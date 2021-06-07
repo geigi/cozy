@@ -175,14 +175,13 @@
                               <object class="GtkFlowBox" id="book_box">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="valign">start</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
                                 <property name="hexpand">True</property>
                                 <property name="vexpand">True</property>
                                 <property name="homogeneous">True</property>
-                                <property name="column_spacing">20</property>
-                                <property name="row_spacing">20</property>
+                                <property name="column_spacing">10</property>
+                                <property name="row_spacing">5</property>
                                 <property name="min_children_per_line">1</property>
                                 <property name="max_children_per_line">10</property>
                                 <property name="selection_mode">none</property>
@@ -327,8 +326,10 @@
                                   <object class="GtkLabel">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
                                     <property name="margin_bottom">10</property>
                                     <property name="label" translatable="yes">Import your Audiobooks</property>
+                                    <property name="xalign">0</property>
                                     <style>
                                       <class name="h1"/>
                                     </style>
@@ -343,11 +344,13 @@
                                   <object class="GtkLabel">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
                                     <property name="margin_bottom">85</property>
                                     <property name="label" translatable="yes">Cozy automatically imports your audiobooks in one directory - your library</property>
                                     <property name="wrap">True</property>
+                                    <property name="xalign">0</property>
                                     <style>
-                                      <class name="h2"/>
+                                      <class name="h4"/>
                                     </style>
                                   </object>
                                   <packing>
@@ -467,11 +470,9 @@
             </child>
             <child>
               <object class="HdySqueezer" id="media_control_squeezer">
-                <property name="height_request">45</property>
+                <property name="height_request">46</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_left">10</property>
-                <property name="margin_right">10</property>
                 <property name="homogeneous">True</property>
                 <property name="transition_type">crossfade</property>
                 <child>
@@ -485,9 +486,19 @@
               </packing>
             </child>
             <child>
-              <object class="HdyViewSwitcherBar" id="library_mobile_view_switcher">
+              <object class="GtkRevealer" id="library_mobile_revealer">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="transition_type">slide-up</property>
+                <property name="transition_duration">200</property>
+                <child>
+                  <object class="HdyViewSwitcher" id="library_mobile_view_switcher">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="policy">narrow</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>

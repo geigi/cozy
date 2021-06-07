@@ -31,6 +31,7 @@ class Headerbar(HeaderBar):
 
         self._library_mobile_view_switcher: Handy.ViewSwitcherBar = main_window_builder.get_object(
             "library_mobile_view_switcher")
+        self._library_mobile_revealer: Gtk.Revealer = main_window_builder.get_object("library_mobile_revealer")
         self._header_container: Gtk.Box = main_window_builder.get_object("header_container")
         self._header_container.add(self)
 
@@ -70,7 +71,7 @@ class Headerbar(HeaderBar):
 
     def _on_title_visible_changed(self, widget, param):
         visible = widget.get_property(param.name)
-        self._library_mobile_view_switcher.set_reveal(visible)
+        self._library_mobile_revealer.set_reveal_child(visible)
 
         if visible:
             self.set_centering_policy(Handy.CenteringPolicy.STRICT)
