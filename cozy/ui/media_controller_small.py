@@ -13,7 +13,7 @@ from gi.repository import Gtk, Gdk
 
 log = logging.getLogger("Headerbar")
 
-COVER_SIZE = 45
+COVER_SIZE = 46
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/media_controller_small.ui')

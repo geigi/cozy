@@ -15,7 +15,7 @@ from gi.repository import Gtk, Gdk
 
 log = logging.getLogger("Headerbar")
 
-COVER_SIZE = 45
+COVER_SIZE = 46
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/media_controller_big.ui')
@@ -107,7 +107,9 @@ class MediaControllerBig(Gtk.Box):
 
         self._set_cover_image(book)
         self.title_label.set_text(book.name)
+        self.title_label.set_tooltip_text(book.name)
         self.subtitle_label.set_text(book.current_chapter.name)
+        self.subtitle_label.set_tooltip_text(book.current_chapter.name)
 
     def _on_play_changed(self):
         playing = self._playback_control_view_model.playing
