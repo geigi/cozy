@@ -11,13 +11,14 @@
         <property name="can_focus">False</property>
         <property name="margin_left">10</property>
         <property name="margin_right">10</property>
-        <property name="margin_top">5</property>
-        <property name="margin_bottom">5</property>
+        <property name="margin_top">7</property>
+        <property name="margin_bottom">7</property>
         <property name="spacing">5</property>
         <child>
           <object class="GtkStack" id="icon_stack">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
             <child>
               <object class="GtkLabel" id="number_label">
                 <property name="visible">True</property>
