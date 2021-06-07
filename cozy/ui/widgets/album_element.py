@@ -4,7 +4,7 @@ import math
 import cairo
 
 from cozy.control.artwork_cache import ArtworkCache
-from cozy.extensions.gtk_widget import set_hand_cursor
+from cozy.extensions.gtk_widget import set_hand_cursor, reset_cursor
 from cozy.model.book import Book
 from cozy.ext import inject
 
@@ -12,7 +12,7 @@ from gi.repository import Gtk, GObject, Gdk
 
 ALBUM_ART_SIZE = 200
 PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.SMALL_TOOLBAR
-STROKE_WIDTH = 2
+STROKE_WIDTH = 3
 
 log = logging.getLogger("album_element")
 
@@ -43,8 +43,10 @@ class AlbumElement(Gtk.Box):
             self.album_art_image.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
             self.album_art_image.props.pixel_size = ALBUM_ART_SIZE
 
+        self.set_size_request(ALBUM_ART_SIZE, ALBUM_ART_SIZE)
         self.play_button.connect("button-release-event", self._on_play_button_press)
 
+        self.progress_drawing_area.connect("realize", lambda w: w.get_window().set_pass_through(True))
         self.progress_drawing_area.connect("draw", self._draw_progress)
         self.album_art_drawing_area.connect("draw", self._draw_album_hover)
         self.album_art_overlay_revealer.connect("enter-notify-event", self._on_revealer_enter_event)
@@ -73,20 +75,17 @@ class AlbumElement(Gtk.Box):
         width = area.get_allocated_width()
         height = area.get_allocated_height()
         button_size = self.play_button.get_allocated_width()
-        self.radius = (button_size + STROKE_WIDTH) / 2.0
-
-        self.draw_background(area, context)
+        self.radius = (button_size - STROKE_WIDTH) / 2.0
 
         book_progress = self._book.progress / self._book.duration
 
         progress_circle_end = book_progress * math.pi * 2.0
-        context.arc(width / 2.0, height / 2.0, self.radius, math.pi * -0.5,
-                    progress_circle_end - (math.pi * 0.5))
+        context.arc(width / 2.0, height / 2.0, self.radius, math.pi * -0.5, progress_circle_end - (math.pi * 0.5))
         if book_progress == 1.0:
             context.set_source_rgb(0.2, 0.82, 0.478)
         else:
             context.set_source_rgb(0.894, 0.471, 0.208)
-        context.set_line_width(2)
+        context.set_line_width(STROKE_WIDTH)
         context.stroke()
 
     def draw_background(self, area: Gtk.DrawingArea, context: cairo.Context):
