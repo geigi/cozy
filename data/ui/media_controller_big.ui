@@ -20,6 +20,7 @@
   <template class="MediaControllerBig" parent="GtkBox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="margin_right">10</property>
     <property name="spacing">20</property>
     <child>
       <object class="GtkBox" id="mini_player">
@@ -29,6 +30,28 @@
         <property name="valign">center</property>
         <property name="hexpand">False</property>
         <property name="spacing">15</property>
+        <child>
+          <object class="GtkEventBox" id="cover_img_event_box">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkImage" id="cover_img">
+                <property name="width_request">46</property>
+                <property name="height_request">46</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">end</property>
+                <property name="stock">gtk-missing-image</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
         <child>
           <object class="GtkBox" id="control_box">
             <property name="visible">True</property>
@@ -127,29 +150,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEventBox" id="cover_img_event_box">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkImage" id="cover_img">
-                <property name="width_request">45</property>
-                <property name="height_request">45</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">end</property>
-                <property name="stock">gtk-missing-image</property>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
@@ -170,8 +171,9 @@
                 <property name="halign">start</property>
                 <property name="valign">center</property>
                 <property name="ellipsize">end</property>
-                <property name="width_chars">10</property>
+                <property name="width_chars">5</property>
                 <property name="single_line_mode">True</property>
+                <property name="max_width_chars">30</property>
                 <property name="xalign">0</property>
                 <child internal-child="accessible">
                   <object class="AtkObject" id="title_label-atkobject">
@@ -198,8 +200,9 @@
                 <property name="halign">start</property>
                 <property name="valign">center</property>
                 <property name="ellipsize">end</property>
-                <property name="width_chars">10</property>
+                <property name="width_chars">5</property>
                 <property name="single_line_mode">True</property>
+                <property name="max_width_chars">30</property>
                 <property name="xalign">0</property>
                 <child internal-child="accessible">
                   <object class="AtkObject" id="subtitle_label-atkobject">

@@ -2,9 +2,25 @@
 <!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkImage" id="next_img">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">object-rotate-right-symbolic</property>
+  </object>
+  <object class="GtkImage" id="play_img">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">media-playback-start-symbolic</property>
+  </object>
+  <object class="GtkImage" id="prev_img">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">object-rotate-left-symbolic</property>
+  </object>
   <template class="MediaControllerSmall" parent="GtkBox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="margin_right">10</property>
     <property name="hexpand">True</property>
     <child>
       <object class="GtkEventBox" id="cover_img_event_box">
@@ -12,12 +28,12 @@
         <property name="can_focus">False</property>
         <child>
           <object class="GtkImage" id="cover_img">
-            <property name="width_request">45</property>
-            <property name="height_request">45</property>
+            <property name="width_request">46</property>
+            <property name="height_request">46</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">start</property>
-            <property name="valign">end</property>
+            <property name="valign">center</property>
             <property name="stock">gtk-missing-image</property>
           </object>
         </child>
@@ -154,19 +170,4 @@
       </packing>
     </child>
   </template>
-  <object class="GtkImage" id="next_img">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">object-rotate-right-symbolic</property>
-  </object>
-  <object class="GtkImage" id="play_img">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">media-playback-start-symbolic</property>
-  </object>
-  <object class="GtkImage" id="prev_img">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">object-rotate-left-symbolic</property>
-  </object>
 </interface>
