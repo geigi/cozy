@@ -43,10 +43,10 @@
 }
 
 .book_container {
-    border: 1px solid shade(@theme_bg_color, 0.85);
     border-radius: 0.5rem;
     padding: 1rem;
     background-color: @theme_base_color;
+    box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.1);
 }
 
 .selected {
