@@ -126,6 +126,7 @@ class BookDetailView(Gtk.EventBox):
         self.published_text.set_visible(False)
         self.total_label.set_visible(False)
         self.total_text.set_visible(False)
+        self.unavailable_box.set_visible(False)
 
         self.book_label.set_text(book.name)
         self.author_label.set_text(book.author)
