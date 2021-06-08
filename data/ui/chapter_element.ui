@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <template class="ChapterElement" parent="GtkEventBox">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
+    <property name="double-buffered">False</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_left">10</property>
-        <property name="margin_right">10</property>
-        <property name="margin_top">7</property>
-        <property name="margin_bottom">7</property>
+        <property name="can-focus">False</property>
+        <property name="double-buffered">False</property>
+        <property name="margin-start">10</property>
+        <property name="margin-end">10</property>
+        <property name="margin-top">7</property>
+        <property name="margin-bottom">7</property>
         <property name="spacing">5</property>
         <child>
           <object class="GtkStack" id="icon_stack">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
+            <property name="double-buffered">False</property>
             <child>
               <object class="GtkLabel" id="number_label">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
+                <property name="double-buffered">False</property>
                 <property name="halign">start</property>
-                <property name="width_chars">4</property>
+                <property name="margin-start">2</property>
+                <property name="width-chars">4</property>
                 <property name="xalign">0</property>
                 <property name="yalign">0</property>
                 <style>
@@ -39,10 +44,10 @@
             <child>
               <object class="GtkImage" id="play_icon">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">center</property>
-                <property name="icon_name">media-playback-start-symbolic</property>
+                <property name="icon-name">media-playback-start-symbolic</property>
               </object>
               <packing>
                 <property name="name">play_icon</property>
@@ -60,10 +65,11 @@
         <child>
           <object class="GtkLabel" id="title_label">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
+            <property name="double-buffered">False</property>
             <property name="hexpand">True</property>
             <property name="ellipsize">end</property>
-            <property name="max_width_chars">50</property>
+            <property name="max-width-chars">50</property>
             <property name="xalign">0</property>
             <property name="yalign">0</property>
             <style>
@@ -79,7 +85,8 @@
         <child>
           <object class="GtkLabel" id="duration_label">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
+            <property name="double-buffered">False</property>
             <property name="halign">end</property>
             <property name="justify">right</property>
             <property name="xalign">0</property>
@@ -88,7 +95,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="pack_type">end</property>
+            <property name="pack-type">end</property>
             <property name="position">2</property>
           </packing>
         </child>
