@@ -1,5 +1,6 @@
 import logging
-from threading import Thread
+import time
+from threading import Event, Thread
 from typing import Optional, Callable
 
 import gi
@@ -69,8 +70,9 @@ class BookDetailView(Gtk.EventBox):
         if Gtk.get_minor_version() > 20:
             self.book_overview_scroller.props.propagate_natural_height = True
 
+        self._chapters_event: Event = Event()
         self._chapters_thread: Thread = None
-        self._chapters_thread_locked: bool = False
+        self._prepare_chapters_job()
 
         self._connect_view_model()
         self._connect_widgets()
@@ -109,12 +111,7 @@ class BookDetailView(Gtk.EventBox):
 
         book = self._view_model.book
 
-        # This is done on a the UI thread to prevent chapters from the previous book flashing before the new chapters
-        # are ready
-        self._clear_chapter_box()
-
         self.chapters_stack.set_visible_child_name("chapters_loader")
-        self._chapters_thread_locked = False
         self._run_display_chapters_job(book)
 
         self._main_stack.set_visible_child_name("book_overview")
@@ -184,6 +181,14 @@ class BookDetailView(Gtk.EventBox):
         self.download_switch.set_sensitive(not lock)
 
     def _run_display_chapters_job(self, book):
+        self._chapters_event.clear()
+        # The job might be running on another thread. Attempt to cancel it first, wait a while and trigger the new one.
+        self._interrupt_chapters_jobs()
+        time.sleep(0.05)
+        # This is done on a the UI thread to prevent chapters from the previous book flashing before the new chapters
+        # are ready
+        self._clear_chapter_box()
+        self._prepare_chapters_job()
         self._chapters_thread: Thread = Thread(target=self._display_chapters, args=[book, self._on_chapters_displayed])
         self._chapters_thread.start()
 
@@ -192,7 +197,7 @@ class BookDetailView(Gtk.EventBox):
         disk_count = self._view_model.disk_count
 
         for chapter in book.chapters:
-            if self._chapters_thread_locked:
+            if self._chapters_job_locked:
                 self._clear_chapter_box()
                 return
 
@@ -202,6 +207,10 @@ class BookDetailView(Gtk.EventBox):
             Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_chapter, chapter)
 
             disk_number = chapter.disk
+
+            # TODO We need a timeout value
+            self._chapters_event.wait()
+            self._chapters_event.clear()
 
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, callback)
 
@@ -228,15 +237,17 @@ class BookDetailView(Gtk.EventBox):
         disc_element = DiskElement(chapter.disk)
         self.chapter_box.add(disc_element)
         disc_element.show_all()
+        self._chapters_event.set()
 
     def _add_chapter(self, chapter: Chapter):
         chapter_element = ChapterElement(chapter)
         chapter_element.connect("play-pause-clicked", self._play_chapter_clicked)
         self.chapter_box.add(chapter_element)
         chapter_element.show_all()
+        self._chapters_event.set()
 
     def _clear_chapter_box(self):
-        self.chapter_box.remove_all_children()
+        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.chapter_box.remove_all_children)
 
     def _set_progress(self):
         self.remaining_label.set_text(self._view_model.remaining_text)
@@ -252,16 +263,20 @@ class BookDetailView(Gtk.EventBox):
             self.cover_image.props.pixel_size = 250
 
     def _back_button_clicked(self, _):
-        self._lock_chapters_job()
+        self._chapters_event.clear()
+        self._interrupt_chapters_jobs()
         self._view_model.open_library()
 
-    def _lock_chapters_job(self):
-        self._chapters_thread_locked = True
+    def _interrupt_chapters_jobs(self):
+        self._chapters_job_locked = True
         # TODO Confirm if this is even needed
         try:
             self._chapters_thread.join(timeout=0.2)
         except Exception as e:
             pass
+
+    def _prepare_chapters_job(self):
+        self._chapters_job_locked: bool = False
 
     def _download_switch_changed(self, _, state: bool):
         self._view_model.download_book(state)
