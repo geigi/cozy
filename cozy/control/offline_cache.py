@@ -108,7 +108,7 @@ class OfflineCache(EventSender):
         """
         for element in OfflineCacheModel.select().join(File).where(
                 storage_path in OfflineCacheModel.original_file.path):
-            file_path = os.path.join(self.cache_dir, element.file)
+            file_path = os.path.join(self.cache_dir, element.cached_file)
             if file_path == self.cache_dir:
                 continue
 
