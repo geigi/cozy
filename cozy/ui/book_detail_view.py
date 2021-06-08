@@ -70,6 +70,7 @@ class BookDetailView(Gtk.EventBox):
             self.book_overview_scroller.props.propagate_natural_height = True
 
         self._chapters_thread: Thread = None
+        self._chapters_thread_locked: bool = False
 
         self._connect_view_model()
         self._connect_widgets()
@@ -108,14 +109,11 @@ class BookDetailView(Gtk.EventBox):
 
         book = self._view_model.book
 
-        try:
-            self._chapters_thread.join(timeout=0.2)
-        except Exception as e:
-            pass
         # This is done on a the UI thread to prevent chapters from the previous book flashing before the new chapters
         # are ready
         self._clear_chapter_box()
 
+        self._chapters_thread_locked = False
         self._run_display_chapters_job(book)
 
         self._main_stack.set_visible_child_name("book_overview")
@@ -193,6 +191,10 @@ class BookDetailView(Gtk.EventBox):
         disk_count = self._view_model.disk_count
 
         for chapter in book.chapters:
+            if self._chapters_thread_locked:
+                self._clear_chapter_box()
+                return
+
             if disk_number != chapter.disk and disk_count > 1:
                 Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_disk, chapter)
 
@@ -248,7 +250,16 @@ class BookDetailView(Gtk.EventBox):
             self.cover_image.props.pixel_size = 250
 
     def _back_button_clicked(self, _):
+        self._lock_chapters_job()
         self._view_model.open_library()
+
+    def _lock_chapters_job(self):
+        self._chapters_thread_locked = True
+        # TODO Confirm if this is even needed
+        try:
+            self._chapters_thread.join(timeout=0.2)
+        except Exception as e:
+            pass
 
     def _download_switch_changed(self, _, state: bool):
         self._view_model.download_book(state)
