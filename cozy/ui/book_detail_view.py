@@ -171,11 +171,12 @@ class BookDetailView(Gtk.EventBox):
 
     def _display_chapters(self, book: Book):
         disk_number = -1
+        disk_count = self._view_model.disk_count
 
         self._clear_chapter_box()
 
         for chapter in book.chapters:
-            if disk_number != chapter.disk and self._view_model.disk_count > 1:
+            if disk_number != chapter.disk and disk_count > 1:
                 self._add_disk(chapter)
 
             self._add_chapter(chapter)
