@@ -212,14 +212,14 @@ class Book(Observable, EventSender):
 
     def _fetch_chapters(self):
         tracks = TrackModel \
-            .select(TrackModel.id) \
+            .select() \
             .where(TrackModel.book == self._db_object) \
             .order_by(TrackModel.disk, TrackModel.number, TrackModel.name)
 
         self._chapters = []
         for track in tracks:
             try:
-                track_model = Track(self._db, track.id)
+                track_model = Track(self._db, track)
                 self._chapters.append(track_model)
             except TrackInconsistentData:
                 log.warning("Skipping inconsistent model")
