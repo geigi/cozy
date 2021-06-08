@@ -50,9 +50,9 @@ class BookDetailView(Gtk.EventBox):
 
     unavailable_box: Gtk.Box = Gtk.Template.Child()
 
+    chapters_stack: Gtk.Stack = Gtk.Template.Child()
     chapter_box: Gtk.Box = Gtk.Template.Child()
     book_overview_scroller: Gtk.ScrolledWindow = Gtk.Template.Child()
-
 
     _view_model: BookDetailViewModel = inject.attr(BookDetailViewModel)
     _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
@@ -113,6 +113,7 @@ class BookDetailView(Gtk.EventBox):
         # are ready
         self._clear_chapter_box()
 
+        self.chapters_stack.set_visible_child_name("chapters_loader")
         self._chapters_thread_locked = False
         self._run_display_chapters_job(book)
 
@@ -211,6 +212,7 @@ class BookDetailView(Gtk.EventBox):
         self._on_current_chapter_changed()
         self._set_book_download_status()
         self._on_book_available_changed()
+        self.chapters_stack.set_visible_child_name("chapters_wrapper")
 
     def _display_external_section(self):
         external = self._view_model.is_book_external
