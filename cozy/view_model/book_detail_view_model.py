@@ -198,7 +198,7 @@ class BookDetailViewModel(Observable, EventSender):
 
     def _on_offline_cache_event(self, event, message):
         try:
-            if message.id != self._book.db_object.id:
+            if message.id != self._book.id:
                 return
         except Exception as e:
             return

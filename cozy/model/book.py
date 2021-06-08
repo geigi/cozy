@@ -26,27 +26,17 @@ class Book(Observable, EventSender):
     _settings: Settings = inject.attr(Settings)
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
-    def __init__(self, db: SqliteDatabase, id: int):
+    def __init__(self, db: SqliteDatabase, book: BookModel):
         super().__init__()
         super(Observable, self).__init__()
 
         self._db: SqliteDatabase = db
-        self.id: int = id
+        self.id: int = book.id
 
-        self._get_db_object()
-
-    def _get_db_object(self):
-        self._db_object: BookModel = BookModel.get(self.id)
+        self._db_object: BookModel = book
 
         if TrackModel.select().where(TrackModel.book == self._db_object).count() < 1:
             raise BookIsEmpty
-
-    # This property is for the transition time only
-    # Because everything is hardwired to the database objects
-    # Step by step, you got this...
-    @property
-    def db_object(self):
-        return self._db_object
 
     @property
     def name(self):
