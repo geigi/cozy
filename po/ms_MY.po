@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-03 17:06+0100\n"
+"POT-Creation-Date: 2021-05-31 20:12+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: abuyop <abuyop@gmail.com>, 2021\n"
 "Language-Team: Malay (Malaysia) (https://www.transifex.com/geigi/teams/78138/ms_MY/)\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Language: ms_MY\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: cozy/control/offline_cache.py:188
+#: cozy/control/offline_cache.py:201
 msgid "Copying"
 msgstr "Menyalin"
 
@@ -95,7 +95,7 @@ msgstr[0] "{years} tahun yang lalu"
 msgid "Audiobooks"
 msgstr "Buku audio"
 
-#: cozy/ui/album_element.py:67 cozy/ui/widgets/search_results.py:100
+#: cozy/ui/album_element.py:65 cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
 msgstr "Baca buku ini"
 
@@ -107,23 +107,19 @@ msgstr "Dimuat Turun"
 msgid "Download"
 msgstr "Muat Turun"
 
-#: cozy/ui/book_element.py:37
+#: cozy/ui/book_element.py:33
 msgid "Open book overview"
 msgstr "Buka gambaran keseluruhan buku"
 
-#: cozy/ui/book_element.py:38
-msgid "Currently offline"
-msgstr "Kini diluar talian"
-
-#: cozy/ui/book_element.py:124
+#: cozy/ui/book_element.py:113
 msgid "Mark as read"
 msgstr "Tanda sebagai dibaca"
 
-#: cozy/ui/book_element.py:127
+#: cozy/ui/book_element.py:116
 msgid "Open in file browser"
 msgstr "Buka dalam pelayar fail"
 
-#: cozy/ui/book_element.py:130
+#: cozy/ui/book_element.py:119
 msgid "Remove from library"
 msgstr "Buang dari pustaka"
 
@@ -131,13 +127,13 @@ msgstr "Buang dari pustaka"
 msgid "Disc"
 msgstr "Cakera"
 
-#: cozy/ui/file_not_found_dialog.py:69
+#: cozy/ui/file_not_found_dialog.py:56
 msgid "All files"
 msgstr "Semua fail"
 
-#: cozy/ui/settings.py:87
+#: cozy/ui/settings.py:101
 msgid "Feedback"
-msgstr "Maklumbalas"
+msgstr "Maklum Balas"
 
 #: cozy/ui/chapter_element.py:23
 msgid "Play this part"
@@ -198,8 +194,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Jenis fail media yang gagal diimport oleh Cozy"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:43
-#: cozy/view_model/library_view_model.py:137
+#: cozy/view_model/library_view_model.py:44
+#: cozy/view_model/library_view_model.py:140
 msgid "All"
 msgstr "Semua"
 
@@ -227,6 +223,22 @@ msgstr "Menyalin fail-fail baharu..."
 #: cozy/view_model/headerbar_view_model.py:91
 msgid "Changing audio book location…"
 msgstr "Mengubah lokasi buku audio..."
+
+#: cozy/model/track.py:37
+msgid "Chapter"
+msgstr "Bab"
+
+#: cozy/media/files.py:69
+msgid "Cannot copy: Audiobook directory is read only"
+msgstr "Tidak dapat salin: Direktori buku audio adalah baca sahaja"
+
+#: cozy/media/files.py:71
+msgid "Cannot copy: Disk is full"
+msgstr "Tidak dapat salin: Cakera penuh"
+
+#: cozy/media/files.py:73 cozy/media/files.py:89
+msgid "Cannot copy: Permission denied"
+msgstr "Tidak dapat salin: Keizinan dinafikan"
 
 #: data/ui/about.ui:16
 msgid "GitHub"
@@ -258,7 +270,7 @@ msgstr "tidak tersedia"
 
 #: data/ui/error_reporting.ui:23
 msgid "User feedback"
-msgstr "Maklumbalas pengguna"
+msgstr "Maklum balas pengguna"
 
 #: data/ui/error_reporting.ui:66
 msgctxt "Error and crash reporting dialog"
@@ -285,7 +297,7 @@ msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
-"Cozy adalah bersumber terbuka dan kod sumber maklumbalas pengguna boleh "
+"Cozy adalah bersumber terbuka dan kod sumber maklum balas pengguna boleh "
 "diperiksa di sini:"
 
 #: data/ui/file_not_found.ui:19 data/ui/delete_book_dialog.ui:31
@@ -322,40 +334,40 @@ msgid ""
 msgstr ""
 "Ia disebabkan oleh:\n"
 "- Format audio tidak disokong\n"
-"- Laluan atau nama fail mengandungi akssara bukan utf-8\n"
+"- Laluan atau nama fail mengandungi aksara bukan utf-8\n"
 "- Fail bukan fail audio yang sah\n"
 "- Fail telah rosak"
 
-#: data/ui/main_window.ui:121
+#: data/ui/main_window.ui:125
 msgid "Recent"
 msgstr "Baru-baru Ini"
 
-#: data/ui/main_window.ui:141
+#: data/ui/main_window.ui:145
 msgid "List of authors"
 msgstr "Senarai pengarang"
 
-#: data/ui/main_window.ui:157 data/ui/main_window.ui:267
+#: data/ui/main_window.ui:161 data/ui/main_window.ui:271
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "Pengarang"
 
-#: data/ui/main_window.ui:177
+#: data/ui/main_window.ui:181
 msgid "List of readers"
 msgstr "Senarai pembaca"
 
-#: data/ui/main_window.ui:193 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:197 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "Pembaca"
 
-#: data/ui/main_window.ui:247
+#: data/ui/main_window.ui:251
 msgid "List of books"
 msgstr "Senarai buku"
 
-#: data/ui/main_window.ui:297
+#: data/ui/main_window.ui:301
 msgid "Stay tuned while Cozy is preparing your library…"
 msgstr "Tunggu sebentar ketika Cozy menyediakan pustaka anda..."
 
-#: data/ui/main_window.ui:330
+#: data/ui/main_window.ui:334
 msgid ""
 "Start exploring your library by switching to the Author or Reader view "
 "above."
@@ -363,48 +375,48 @@ msgstr ""
 "Mula menjelajah pustaka anda dengan bertukar ke paparan Pengarang atau "
 "Pembaca di atas."
 
-#: data/ui/main_window.ui:375
+#: data/ui/main_window.ui:379
 msgid "Import your Audiobooks"
 msgstr "Import Buku Audio anda"
 
-#: data/ui/main_window.ui:391
+#: data/ui/main_window.ui:395
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 "Cozy mengimport secara automatik buku audio anda ke dalam satu direktori - "
 "pustaka anda"
 
-#: data/ui/main_window.ui:427 data/ui/main_window.ui:448
+#: data/ui/main_window.ui:431 data/ui/main_window.ui:452
 msgid "Automatically import new audiobooks on startup"
 msgstr "Import secara automatik buku audio ketika permulaan"
 
-#: data/ui/main_window.ui:447
+#: data/ui/main_window.ui:451
 msgid "Auto scan switch"
 msgstr "Tukaran auto imbas"
 
-#: data/ui/main_window.ui:491
+#: data/ui/main_window.ui:495
 msgid "Drag & Drop"
 msgstr "Seret & Lepas"
 
-#: data/ui/main_window.ui:508
+#: data/ui/main_window.ui:512
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr ""
 "Seret buku audio anda ke dalam cozy dan ia akan diimport secara automatik"
 
-#: data/ui/main_window.ui:531
+#: data/ui/main_window.ui:535
 msgid "Location of your audiobooks"
 msgstr "Lokasi buku audio anda"
 
-#: data/ui/main_window.ui:552
+#: data/ui/main_window.ui:556
 msgid "Set Audiobooks Directory"
 msgstr "Tetapkan Direktori Buku Audio"
 
-#: data/ui/main_window.ui:575
+#: data/ui/main_window.ui:579
 msgid "Load audiobooks from a directory, network drive or an external disk."
 msgstr ""
 "Muat buku audio dari sebuah direktori, pacu rangkaian atau cakera luar."
 
-#: data/ui/main_window.ui:593
+#: data/ui/main_window.ui:597
 msgid "You can add more storage locations later in the settings"
 msgstr "Anda boleh menambah lagi lokasi storan kemudian melalui tetapan"
 
@@ -436,140 +448,152 @@ msgstr "Bahagian"
 msgid "Nothing found :("
 msgstr "Tiada apa-apa ditemui :("
 
-#: data/ui/settings.ui:95 data/ui/settings.ui:366
+#: data/ui/settings.ui:111 data/ui/settings.ui:382
 msgid "General"
 msgstr "Am"
 
-#: data/ui/settings.ui:140
+#: data/ui/settings.ui:156
 msgid "Dark Mode"
 msgstr "Mod Gelap"
 
-#: data/ui/settings.ui:216
+#: data/ui/settings.ui:232
 msgid "Titlebar"
-msgstr "Palangtajuk"
+msgstr "Palang Tajuk"
 
-#: data/ui/settings.ui:261
+#: data/ui/settings.ui:277
 msgid "Display the whole book instead of the current chapter"
 msgstr "Papar keseluruhan buku selain dari bab semasa"
 
-#: data/ui/settings.ui:324
+#: data/ui/settings.ui:340
 msgid "Appearance"
 msgstr "Penampilan"
 
-#: data/ui/settings.ui:409
+#: data/ui/settings.ui:425
 msgid "Suspend system on timer"
 msgstr "Tangguh sistem dengan pemasa"
 
-#: data/ui/settings.ui:469
+#: data/ui/settings.ui:485
 msgid "Replay 30 seconds"
 msgstr "Main semula 30 saat"
 
-#: data/ui/settings.ui:529
+#: data/ui/settings.ui:545
 msgid "Automatic media scan"
 msgstr "Imbas media secara automatik"
 
-#: data/ui/settings.ui:588
+#: data/ui/settings.ui:604
 msgid "Tags"
 msgstr "Tag"
 
-#: data/ui/settings.ui:640
+#: data/ui/settings.ui:656
 msgid "Swap author and reader"
 msgstr "SIlih pengarang dengan pembaca"
 
-#: data/ui/settings.ui:653
+#: data/ui/settings.ui:669
 msgid "Activate this if author and reader are displayed the wrong way"
 msgstr ""
 "Aktifkan ini jika kedudukan pengarang dan pembaca dipapar secara salah"
 
-#: data/ui/settings.ui:678
+#: data/ui/settings.ui:694
 msgid "switch author and reader assignment"
 msgstr "tukar tugasan pengarang dengan pembaca"
 
-#: data/ui/settings.ui:727 data/ui/headerbar.ui:385
+#: data/ui/settings.ui:743
+msgid "Playback"
+msgstr "Main balik"
+
+#: data/ui/settings.ui:789
+msgid "Rewind duration"
+msgstr "Tempoh mandir"
+
+#: data/ui/settings.ui:874
+msgid "Forward duration"
+msgstr "Tempoh maju"
+
+#: data/ui/settings.ui:956 data/ui/headerbar.ui:415
 msgid "Sleep timer"
 msgstr "Pemasa tidur"
 
-#: data/ui/settings.ui:772
+#: data/ui/settings.ui:1001
 msgid "Fadeout"
 msgstr "Resap Lenyap"
 
-#: data/ui/settings.ui:834
+#: data/ui/settings.ui:1063
 msgid "Fadeout duration"
 msgstr "Tempoh resap lenyap"
 
-#: data/ui/settings.ui:915
+#: data/ui/settings.ui:1144
 msgid "Behaviour"
 msgstr "Kelakuan"
 
-#: data/ui/settings.ui:942
+#: data/ui/settings.ui:1171
 msgid "Artwork"
 msgstr "Kerja Seni"
 
-#: data/ui/settings.ui:994
+#: data/ui/settings.ui:1223
 msgid "Prefer external images over embedded cover"
 msgstr "Utamakan imej luar dari kulit terbenam"
 
-#: data/ui/settings.ui:1007
+#: data/ui/settings.ui:1236
 msgid "Use images (cover.jpg, *.png, …) when available"
 msgstr "Guna imej (cover.jpg, *.png, …) bila ada"
 
-#: data/ui/settings.ui:1090
+#: data/ui/settings.ui:1319
 msgid "Audio books location"
 msgstr "Lokasi buku audio"
 
-#: data/ui/settings.ui:1106
+#: data/ui/settings.ui:1335
 msgid "Storage locations"
 msgstr "Lokasi storan"
 
-#: data/ui/settings.ui:1164
+#: data/ui/settings.ui:1393
 msgid "Add location"
 msgstr "Tambah lokasi"
 
-#: data/ui/settings.ui:1189 data/ui/settings.ui:1385
+#: data/ui/settings.ui:1418 data/ui/settings.ui:1613
 msgid "Remove location"
 msgstr "Buang lokasi"
 
-#: data/ui/settings.ui:1225
+#: data/ui/settings.ui:1454
 msgid "Toggle this storage location to be internal/external."
 msgstr "Togol lokasi storan ini ke dalaman/luaran."
 
-#: data/ui/settings.ui:1251
+#: data/ui/settings.ui:1480
 msgid "Set as default storage location for new audiobooks"
 msgstr "Tetapkan sebagai lokasi storan lalai untuk buku audio baharu"
 
-#: data/ui/settings.ui:1304
+#: data/ui/settings.ui:1532
 msgid "Ignore list"
 msgstr "Abai senarai"
 
-#: data/ui/settings.ui:1348
+#: data/ui/settings.ui:1576
 msgid "Path"
 msgstr "Laluan"
 
-#: data/ui/settings.ui:1431
+#: data/ui/settings.ui:1659
 msgid "Follow symlinks"
 msgstr "Ikut pautan simbolik"
 
-#: data/ui/settings.ui:1463
+#: data/ui/settings.ui:1691
 msgid "Storage"
 msgstr "Storan"
 
-#: data/ui/settings.ui:1487
+#: data/ui/settings.ui:1715
 msgid "Database"
 msgstr "Pangkalan Data"
 
-#: data/ui/settings.ui:1539
+#: data/ui/settings.ui:1767
 msgid "Force refresh the database"
 msgstr "Paksa segar semula pangkalan data"
 
-#: data/ui/settings.ui:1552
+#: data/ui/settings.ui:1780
 msgid "This will force update the metadata of all imported books"
-msgstr "Tindakan ini akan memaksa kemaskini data meta bagi semua buku import"
+msgstr "Tindakan ini akan memaksa kemas kini metadata bagi semua buku import"
 
-#: data/ui/settings.ui:1572
+#: data/ui/settings.ui:1800
 msgid "Force refresh"
-msgstr "Paksa segara semula"
+msgstr "Paksa segar semula"
 
-#: data/ui/settings.ui:1628
+#: data/ui/settings.ui:1856
 msgid "Advanced"
 msgstr "Lanjutan"
 
@@ -579,7 +603,7 @@ msgstr "Tempoh pemasa"
 
 #: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
-msgstr "Lungsur tempoh pemasa"
+msgstr "Pelungsur tempoh pemasa"
 
 #: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
@@ -681,7 +705,7 @@ msgstr "Ada banyak lagi dalam kemas kini akan datang."
 
 #: data/ui/whats_new_m4b.ui:52
 msgid "Basic support for m4b audio books."
-msgstr "Sokongan asa untuk buku audio m4b."
+msgstr "Sokongan asas untuk buku audio m4b."
 
 #: data/ui/whats_new_m4b.ui:77
 msgid ""
@@ -702,6 +726,60 @@ msgstr ""
 #: data/ui/whats_new_m4b.ui:107
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr "Sokongan bab akan ada dalam kemas kini akan datang. Harap bersabar!"
+
+#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
+msgid "What's new in Cozy"
+msgstr "Yang terbaharu dalam Cozy"
+
+#: data/ui/whats_new_m4b_chapter.ui:52
+msgid "Chapter support for m4b audio books."
+msgstr "Sokongan bab untuk buku audio m4b."
+
+#: data/ui/whats_new_m4b_chapter.ui:77
+msgid "This version of Cozy features chapter support for m4b audio books!"
+msgstr "Versi Cozy ini memfiturkan sokongan bab untuk buku audio m4b!"
+
+#: data/ui/whats_new_m4b_chapter.ui:92
+msgid ""
+"If you already have m4b files imported you'll need to start a scan of your "
+"library from the app menu."
+msgstr ""
+"Jika anda sudah mengimport fail-fail m4b hanya perlu mula mengimbas pustaka "
+"anda melalui menu apl."
+
+#: data/ui/whats_new_m4b_chapter.ui:107
+msgid "The chapters will then be detected."
+msgstr "Bab kemudiannya akan dikesan."
+
+#: data/ui/whats_new_library.ui:52
+msgid "An important change in library management"
+msgstr "Satu perubahan penting dalam pengurusan pustaka"
+
+#: data/ui/whats_new_library.ui:77
+msgid ""
+"Previously every file which was imported in your library but couldn't be "
+"found anymore was removed from the library during a scan."
+msgstr ""
+"Sebelum ini setiap fail yang diimport ke dalam pustaka anda tetapi gagal "
+"ditemui kerana telah dibuang daripada pustaka ketika pengimbasan berlaku."
+
+#: data/ui/whats_new_library.ui:92
+msgid ""
+"Now audiobooks are not removed from your library automatically anymore. This"
+" prevents accidentally loosing the progress of a audiobook when a file can't"
+" be found temporarily."
+msgstr ""
+"Kini buku audio tidak dibuang daripada pustaka anda secara automatik. "
+"Tindakan ini dapat menghalang kehilangan kemajuan buku audio secara tidak "
+"sengaja ketika sebuah fail tidak ditemui buat sementara."
+
+#: data/ui/whats_new_library.ui:107
+msgid ""
+"To remove an audiobook from the library simply right-click on it and choose "
+"the remove from library option."
+msgstr ""
+"Untuk membuang satu buku audio daripada pustaka hanya klik-kanan pada buku "
+"itu dan klik pilihan buang daripada pustaka."
 
 #: data/ui/seek_bar.ui:20
 msgid "Elapsed time"
@@ -739,99 +817,111 @@ msgstr "Masa berbaki"
 msgid "Remaining time of current part"
 msgstr "Masa berbaki bagi bahagian semasa"
 
-#: data/ui/headerbar.ui:118
-msgid "Rewind 30 seconds"
-msgstr "Mandir 30 saat"
+#: data/ui/headerbar.ui:123
+msgid "Rewind"
+msgstr "Mandir"
 
-#: data/ui/headerbar.ui:126
+#: data/ui/headerbar.ui:131
 msgid "Rewind button"
 msgstr "Butang mandir"
 
-#: data/ui/headerbar.ui:127
-msgid "Jump back 30 seconds"
-msgstr "Lompat balik 30 saat"
+#: data/ui/headerbar.ui:132
+msgid "Rewind playback"
+msgstr "Main balik mandir"
 
-#: data/ui/headerbar.ui:144
+#: data/ui/headerbar.ui:149
 msgid "Start playback"
 msgstr "Mula main balik"
 
-#: data/ui/headerbar.ui:152
+#: data/ui/headerbar.ui:157
 msgid "Play/Pause Button"
 msgstr "Butang Main/Jeda"
 
-#: data/ui/headerbar.ui:153
+#: data/ui/headerbar.ui:158
 msgid "Start or pause the playback"
 msgstr "Mula atau jeda main balik"
 
-#: data/ui/headerbar.ui:184
+#: data/ui/headerbar.ui:174
+msgid "Forward"
+msgstr "Maju"
+
+#: data/ui/headerbar.ui:182
+msgid "Forward button"
+msgstr "Butang maju"
+
+#: data/ui/headerbar.ui:183
+msgid "Forward Playback"
+msgstr "Main balik maju"
+
+#: data/ui/headerbar.ui:214
 msgid "Warnings"
 msgstr "Amaran"
 
-#: data/ui/headerbar.ui:229
+#: data/ui/headerbar.ui:259
 msgid "Currently playing"
 msgstr "Kini dimainkan"
 
-#: data/ui/headerbar.ui:245
+#: data/ui/headerbar.ui:275
 msgid "Booktitle"
 msgstr "Tajuk Buku"
 
-#: data/ui/headerbar.ui:246
+#: data/ui/headerbar.ui:276
 msgid "Title of currently playing book"
 msgstr "Tajuk buku yang sedang dimainkan"
 
-#: data/ui/headerbar.ui:272
+#: data/ui/headerbar.ui:302
 msgid "Part name"
 msgstr "Nama bahagian"
 
-#: data/ui/headerbar.ui:273
+#: data/ui/headerbar.ui:303
 msgid "Title of the currently playing part"
 msgstr "Tajuk bahagian yang sedang dimainkan"
 
-#: data/ui/headerbar.ui:306
+#: data/ui/headerbar.ui:336
 msgid "Working…"
 msgstr "Sedang berusaha..."
 
-#: data/ui/headerbar.ui:310
+#: data/ui/headerbar.ui:340
 msgid "Currently working"
 msgstr "Kini dijalankan"
 
-#: data/ui/headerbar.ui:327
+#: data/ui/headerbar.ui:357
 msgid "Volume control"
 msgstr "Kawalan suara"
 
-#: data/ui/headerbar.ui:364
+#: data/ui/headerbar.ui:394
 msgid "Playback speed"
 msgstr "Kelajuan main balik"
 
-#: data/ui/headerbar.ui:395
+#: data/ui/headerbar.ui:425
 msgid "Timer menu button"
 msgstr "Butang menu pemasa"
 
-#: data/ui/headerbar.ui:396
+#: data/ui/headerbar.ui:426
 msgid "Open the sleep timer popover"
 msgstr "Buka tetingkap timbul pemasa tidur"
 
-#: data/ui/headerbar.ui:412
+#: data/ui/headerbar.ui:442
 msgid "Search your library"
 msgstr "Gelintar pustaka anda"
 
-#: data/ui/headerbar.ui:422
+#: data/ui/headerbar.ui:452
 msgid "Search menu button"
 msgstr "Butang menu gelintar"
 
-#: data/ui/headerbar.ui:423
+#: data/ui/headerbar.ui:453
 msgid "Open the search popover"
 msgstr "Buka tetingkap timbul gelintar"
 
-#: data/ui/headerbar.ui:438
+#: data/ui/headerbar.ui:468
 msgid "Options"
 msgstr "Pilihan"
 
-#: data/ui/headerbar.ui:449
+#: data/ui/headerbar.ui:479
 msgid "Options menu button"
 msgstr "Butang menu pilihan"
 
-#: data/ui/headerbar.ui:450
+#: data/ui/headerbar.ui:480
 msgid "Open the options popover"
 msgstr "Buka tetingkap menu pilihan"
 
@@ -846,3 +936,27 @@ msgstr "Anda pasti mahu memadam buku audio terpilih?"
 #: data/ui/delete_book_dialog.ui:126
 msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr "Buku audio akan dibuang daripada cakera dan pustaka Cozy anda."
+
+#: data/ui/db_migration_failed.ui:31
+msgid "Close Cozy"
+msgstr "Tutup Cozy"
+
+#: data/ui/db_migration_failed.ui:47
+msgid "Recieve help on GitHub"
+msgstr "Mendapatkan bantuan Github"
+
+#: data/ui/db_migration_failed.ui:108
+msgid "An error occured while updating the database"
+msgstr "Satu ralat berlaku ketika mengemas kini pangkalan data"
+
+#: data/ui/db_migration_failed.ui:129
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able to startup.\n"
+"A backup of the database was created before the update and has been restored now.\n"
+"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
+"You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
+"Ketika kemas kini pangkalan data, satu ralat berlaku dan menyebabkan Cozy gagal dimulakan.\n"
+"Satu sandar pangkalan data telah dicipta sebelum kemas kini dan sekarang dipulihkan.\n"
+"Sehingga isu ini diselesaikan, sila guna versi Cozy 0.9.5.\n"
+"Anda boleh membantu kami dengan melaporkan isu di Github."
