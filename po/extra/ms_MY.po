@@ -2,210 +2,873 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the extra package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
-# abuyop <abuyop@gmail.com>, 2019
-#
+# abuyop <abuyop@gmail.com>, 2021
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-27 17:16+0100\n"
+"POT-Creation-Date: 2021-06-04 15:26+0200\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
-"Last-Translator: abuyop <abuyop@gmail.com>, 2019\n"
-"Language-Team: Malay (Malaysia) (https://www.transifex.com/geigi/teams/78138/"
-"ms_MY/)\n"
-"Language: ms_MY\n"
+"Last-Translator: abuyop <abuyop@gmail.com>, 2021\n"
+"Language-Team: Malay (Malaysia) (https://www.transifex.com/geigi/teams/78138/ms_MY/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ms_MY\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: data/com.github.geigi.cozy.desktop.in:3
-#: data/com.github.geigi.cozy.appdata.xml.in:6
+#: data/com.github.geigi.cozy.desktop:3
+#: data/com.github.geigi.cozy.appdata.xml:6
 msgid "Cozy"
 msgstr "Cozy"
 
-#: data/com.github.geigi.cozy.desktop.in:4
+#: data/com.github.geigi.cozy.desktop:4
 msgid "Audio Book Player"
 msgstr "Pemain Buku Audio"
 
-#: data/com.github.geigi.cozy.desktop.in:5
+#: data/com.github.geigi.cozy.desktop:5
 msgid "Play and organize your audio book collection"
 msgstr "Baca dan urus koleksi buku audio anda"
 
-#: data/com.github.geigi.cozy.desktop.in:6
+#: data/com.github.geigi.cozy.desktop:6
 msgid "com.github.geigi.cozy"
 msgstr "com.github.geigi.cozy"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:7
+#: data/com.github.geigi.cozy.appdata.xml:7
 msgid "A modern audio book player"
 msgstr "Sebuah pembaca buku audio yang modern"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:9
-msgid "You like audio books? Then lets get cozy!"
+#: data/com.github.geigi.cozy.appdata.xml:9
+msgid "Do you like audio books? Then lets get cozy!"
 msgstr "Anda suka mendengar buku audio? Jom dapatkan cozy!"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:12
+#: data/com.github.geigi.cozy.appdata.xml:12
 msgid ""
 "Cozy is a modern audio book player. Here are some of the current features:"
 msgstr ""
 "Cozy merupakan sebuah pembaca buku audio yang modern. Senarai di bawah "
 "merupakan beberapa fitur semasa:"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:16
-msgid "Import all your audiobooks into cozy to browse them comfortably"
+#: data/com.github.geigi.cozy.appdata.xml:16
+msgid "Import all your audio books into cozy to browse them comfortably"
 msgstr ""
-"Import semua buku audio anda ke dalam direktori cozy supaya dapat "
-"melayarinya dengan selesa"
+"Import semua buku audio anda ke dalam cozy supaya dapat melayarinya dengan "
+"selesa"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:17
+#: data/com.github.geigi.cozy.appdata.xml:17
 msgid ""
-"Listen to your DRM free mp3, m4a (aac, ALAC, …), flac, ogg and wav audio "
-"books"
+"Listen to your DRM free mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav "
+"audio books"
 msgstr ""
-"Dengar buku audio mp3, m4a (aac, ALAC, …), flac, ogg and wav yang bebas DRM"
+"Dengar buku audio mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav yang bebas"
+" DRM"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:18
+#: data/com.github.geigi.cozy.appdata.xml:18
 msgid "Remembers your playback position"
 msgstr "Ingat kedudukan main balik anda"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:19
+#: data/com.github.geigi.cozy.appdata.xml:19
 msgid "Sleep timer!"
 msgstr "Pemasa tidur!"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:20
+#: data/com.github.geigi.cozy.appdata.xml:20
 msgid "Playback speed control for each book individually"
 msgstr "Kawal kelajuan main balik untuk setiap buku secara individu"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:21
+#: data/com.github.geigi.cozy.appdata.xml:21
 msgid "Search your library"
 msgstr "Gelintar pustaka anda"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:22
+#: data/com.github.geigi.cozy.appdata.xml:22
 msgid "Multiple storage location support"
 msgstr "Sokongan lokasi storan berbilang"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:23
+#: data/com.github.geigi.cozy.appdata.xml:23
 msgid ""
-"Offline Mode! This allows you to keep an audiobook on your internal storage "
-"if you store your audiobooks on an external or network drive. Perfect to "
+"Offline Mode! This allows you to keep an audio book on your internal storage"
+" if you store your audio books on an external or network drive. Perfect to "
 "listen to on the go!"
 msgstr ""
 "Mod luar talian! Ia membolehkan anda menyimpan buku audio anda ke dalam "
 "storan dalaman anda sekiranya anda menyimpan buku audio pada pemacu luar "
 "atau rangkaian. Mudah mendengar ketika berada di luar!"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:24
-msgid "Drag and Drop to import new audiobooks"
+#: data/com.github.geigi.cozy.appdata.xml:24
+msgid "Drag and Drop to import new audio books"
 msgstr "Serert dan Lepas untuk mengimport buku audio baharu"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:25
+#: data/com.github.geigi.cozy.appdata.xml:25
 msgid "Sort your audio books by author, reader and name"
 msgstr "Isih buku audio anda mengikut pengarang, pembaca dan nama"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:45
+#: data/com.github.geigi.cozy.appdata.xml:45
 msgid "Julian Geywitz"
 msgstr "Julian Geywitz"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:55
-msgid "Sleep timer: Automatic system power control"
+#: data/com.github.geigi.cozy.appdata.xml:54
+#: data/com.github.geigi.cozy.appdata.xml:69
+#: data/com.github.geigi.cozy.appdata.xml:112
+#: data/com.github.geigi.cozy.appdata.xml:250
+#: data/com.github.geigi.cozy.appdata.xml:289
+#: data/com.github.geigi.cozy.appdata.xml:304
+#: data/com.github.geigi.cozy.appdata.xml:319
+msgid "A small bugfix release which makes Cozy more reliable."
 msgstr ""
+"Satu keluaran pembaikan pepijat kecil yang menjadikan Cozy lebih diharap."
 
-#: data/com.github.geigi.cozy.appdata.xml.in:56
-#: data/com.github.geigi.cozy.appdata.xml.in:73
-#: data/com.github.geigi.cozy.appdata.xml.in:82
-#: data/com.github.geigi.cozy.appdata.xml.in:94
-#: data/com.github.geigi.cozy.appdata.xml.in:104
-#: data/com.github.geigi.cozy.appdata.xml.in:135
-#: data/com.github.geigi.cozy.appdata.xml.in:154
+#: data/com.github.geigi.cozy.appdata.xml:58
+msgid ""
+"When an issue occurs during playback the error message is displayed to the "
+"user"
+msgstr ""
+"Apabila satu isu berlaku ketika main balik, mesej ralat dipaparkan kepada "
+"pengguna"
+
+#: data/com.github.geigi.cozy.appdata.xml:59
+msgid ""
+"Fix: Importing media without tags now properly decodes the file name as "
+"chapter name (thanks chris-kobrzak!)"
+msgstr ""
+"Baiki: Pengimportan media tanpa tag kini dapat menyahkod nama fail dengan "
+"baik seperti nama bab (terima kasih buat chris-kobrzak!)"
+
+#: data/com.github.geigi.cozy.appdata.xml:60
+msgid "Fix: Ensure that always a default storage location is present"
+msgstr "Baiki: Memastikan sentiasa ada lokasi storan lalai yang hadir"
+
+#: data/com.github.geigi.cozy.appdata.xml:61
+msgid "Fix: During import an error could occur which stopped the import"
+msgstr ""
+"Baiki: Ketika mengimport satu ralat berlaku yang menyebabkan proses "
+"pengimportan terhenti"
+
+#: data/com.github.geigi.cozy.appdata.xml:62
+msgid "Fix: During the database migration an error could occur"
+msgstr "Baiki: Ketika pemindahan pangkalan data, satu ralat berlaku"
+
+#: data/com.github.geigi.cozy.appdata.xml:63
+#: data/com.github.geigi.cozy.appdata.xml:78
+#: data/com.github.geigi.cozy.appdata.xml:92
+#: data/com.github.geigi.cozy.appdata.xml:106
+#: data/com.github.geigi.cozy.appdata.xml:119
+#: data/com.github.geigi.cozy.appdata.xml:133
+#: data/com.github.geigi.cozy.appdata.xml:145
+#: data/com.github.geigi.cozy.appdata.xml:168
+#: data/com.github.geigi.cozy.appdata.xml:190
+#: data/com.github.geigi.cozy.appdata.xml:212
+#: data/com.github.geigi.cozy.appdata.xml:228
+#: data/com.github.geigi.cozy.appdata.xml:244
+#: data/com.github.geigi.cozy.appdata.xml:255
+#: data/com.github.geigi.cozy.appdata.xml:271
+#: data/com.github.geigi.cozy.appdata.xml:283
+#: data/com.github.geigi.cozy.appdata.xml:298
+#: data/com.github.geigi.cozy.appdata.xml:313
+#: data/com.github.geigi.cozy.appdata.xml:327
+#: data/com.github.geigi.cozy.appdata.xml:350
+#: data/com.github.geigi.cozy.appdata.xml:362
+msgid "As always, updated translations thanks to all of the translators!"
+msgstr "Seperti biasa, kemas kini terjemahan terima kasih para penterjemah!"
+
+#: data/com.github.geigi.cozy.appdata.xml:73
+msgid ""
+"When copying files to the audiobook library goes wrong, the user is now "
+"informed with the error"
+msgstr ""
+"Jika proses menyalin fail ke dalam pustaka buku audio bermasalah, kini "
+"pengguna dimaklumkan ralat tersebut"
+
+#: data/com.github.geigi.cozy.appdata.xml:74
+msgid "Fix: Possible error while displaying offline cache copy progress"
+msgstr ""
+"Baiki: Ralat mungkin berlaku ketika memaparkan kemajuan salin cache luar "
+"talian"
+
+#: data/com.github.geigi.cozy.appdata.xml:75
+msgid ""
+"Fix: When changing the audiobook location or selecting a file in the file "
+"not found dialog an unexpected error could occur"
+msgstr ""
+"Baiki: Ketika mengubah lokasi buku audio atau memilih satu fail di dalam "
+"fail tidak ditemui, satu dialog ralat tidak dijangka muncul"
+
+#: data/com.github.geigi.cozy.appdata.xml:76
+msgid "Fix: Removing a storage dir in settings did not work"
+msgstr "Baiki: Membuang satu storan dalam tetapan yang tidak berfungsi"
+
+#: data/com.github.geigi.cozy.appdata.xml:77
+msgid "Fix: Removing a book from the library did sometimes not work"
+msgstr "Baiki: Membuang satu buku dari pustaka kadang kala tidak berlaku"
+
+#: data/com.github.geigi.cozy.appdata.xml:84
+#: data/com.github.geigi.cozy.appdata.xml:98
+msgid "This release features chapter support for m4b files."
+msgstr "Keluaran ini memfiturkan sokongan bab untuk fail m4b."
+
+#: data/com.github.geigi.cozy.appdata.xml:88
+#: data/com.github.geigi.cozy.appdata.xml:102
+msgid ""
+"A long awaited feature has finally arrived: Chapter support for m4b files."
+msgstr ""
+"Satu fitur yang sangat dinantikan telah tiba: Sokongan bab untuk fail m4b."
+
+#: data/com.github.geigi.cozy.appdata.xml:89
+#: data/com.github.geigi.cozy.appdata.xml:103
+msgid ""
+"Books with inconsistent spelling are now grouped into a single book (thanks "
+"chris-kobrzak!)."
+msgstr ""
+"Buku-buku dengan ejaan tidak konsisten kini dikelompok dalam satu buku "
+"(terima kasih chris-kobrzak!)."
+
+#: data/com.github.geigi.cozy.appdata.xml:90
+#: data/com.github.geigi.cozy.appdata.xml:104
+msgid "Improved reliability of restoring the previous playback position."
+msgstr ""
+"Kebolehpercayaan ditambah baik ketika memulihkan kedudukan main balik "
+"terdahulu."
+
+#: data/com.github.geigi.cozy.appdata.xml:91
+#: data/com.github.geigi.cozy.appdata.xml:105
+msgid ""
+"Fix: clicking on a currently playing chapter did not pause the chapter as "
+"expected."
+msgstr ""
+"Baiki: Klik pada bab semasa yang dimainkan tidak dijeda seperti yang "
+"diharapkan."
+
+#: data/com.github.geigi.cozy.appdata.xml:116
+msgid ""
+"Fix: Playback speed sometimes was not set correctly when a chapter changed."
+msgstr ""
+"Baiki: Kelajuan main balik kadang kala tidak ditetapkan dengan baik apabila "
+"satu bab berubah."
+
+#: data/com.github.geigi.cozy.appdata.xml:117
+msgid ""
+"Fix: Changing the playback position with customized playback speed did jump "
+"to a wrong position."
+msgstr ""
+"Baiki: Mengubah kedudukan main balik dengan kelajuan main balik tersuai "
+"melompat ke kedudukan yang salah."
+
+#: data/com.github.geigi.cozy.appdata.xml:118
+msgid "Fix: Startup failed if the artwork cache did contain a broken file."
+msgstr "Baiki: Permulaan gagal jika cache kerja seni ada fail rosak."
+
+#: data/com.github.geigi.cozy.appdata.xml:125
+msgid ""
+"This release fixes rare bugs which could prevent Cozy from starting up "
+"correctly."
+msgstr ""
+"Keluaran ini membaiki pepijat-pepijat jarang berlaku yang menghalang Cozy "
+"dimulakan dengan baik."
+
+#: data/com.github.geigi.cozy.appdata.xml:129
+msgid "Fix: Startup failed if the last played file could not be found."
+msgstr ""
+"Baiki: Permulaan gagal jika fail terakhir yang dimainkan tidak ditemui."
+
+#: data/com.github.geigi.cozy.appdata.xml:130
+msgid "Fix: Startup failed if the last played book does not exist anymore."
+msgstr "Baiki: Permulaan gagal jika buku terakhir dimainkan tidak wujud lagi."
+
+#: data/com.github.geigi.cozy.appdata.xml:131
+msgid "Fix: An error which could occur when removing a storage location."
+msgstr "Baiki: Satu ralat berlaku ketika membuang satu lokasi storan."
+
+#: data/com.github.geigi.cozy.appdata.xml:132
+msgid "Some additional minor fixes."
+msgstr "Beberapa pembaikan kecil tambahan."
+
+#: data/com.github.geigi.cozy.appdata.xml:140
+msgid "Add a rewind button to the titlebar."
+msgstr "Tambah satu butang mandir dalam palang tajuk."
+
+#: data/com.github.geigi.cozy.appdata.xml:141
+msgid "The rewind and forward duration can now be customized in the settings."
+msgstr "Tempoh mandir dan maju kini boleh disuaikan melalui tetapan."
+
+#: data/com.github.geigi.cozy.appdata.xml:142
+msgid "Fix: Prevent standby during playback."
+msgstr "Baiki: Halang bersedia ketika main balik."
+
+#: data/com.github.geigi.cozy.appdata.xml:143
+msgid ""
+"Fix: Possible crash during startup with enabled 30 seconds rewind feature."
+msgstr ""
+"Baiki: Mungkin berlaku kerosakan ketika permulaan dengan fitur mandir 30 "
+"saat dibenarkan."
+
+#: data/com.github.geigi.cozy.appdata.xml:144
+msgid ""
+"Fix: Adding a new storage location could lead to an internal error which "
+"might show in strange behavior."
+msgstr ""
+"Baiki: Penambahan satu lokasi storan baharu boleh menyebabkan ralat dalaman "
+"iaitu Cozy berkelakuan pelik."
+
+#: data/com.github.geigi.cozy.appdata.xml:151
+#: data/com.github.geigi.cozy.appdata.xml:174
+#: data/com.github.geigi.cozy.appdata.xml:196
+msgid ""
+"This version of Cozy features an important change in library management. "
+"Previously every file which was imported in your library but couldn't be "
+"found anymore was removed from the library during a scan. Now audiobooks are"
+" not removed from your library automatically anymore. This prevents "
+"accidentally loosing the progress of a audiobook when a file can't be found "
+"temporarily. To remove an audiobook from the library simply right-click on "
+"it and choose the remove from library option."
+msgstr ""
+"Versi Cozy ini memfiturkan satu perubahan penting dalam pengurusan pustaka. "
+"Sebelum ini, setiap fail yang diimport dalam pustaka anda tetapi hilang akan"
+" dibuang daripada pustaka ketika proses pengimbasan. Kini, buku audio tidak "
+"dibuang daripada pustaka secara automatik lagi. Tindakan ini menghalang "
+"kehilangan kemajuan buku audio jika fail hilang buat sementara. Untuk "
+"membuang buku audio daripada pustaka, hanya klik-kanan pada buku itu dan "
+"klik pilihan buang daripada pustaka."
+
+#: data/com.github.geigi.cozy.appdata.xml:158
+#: data/com.github.geigi.cozy.appdata.xml:181
+#: data/com.github.geigi.cozy.appdata.xml:203
+msgid ""
+"The download option will be enabled for audiobooks on removable or network "
+"drives automatically for each new storage location you add."
+msgstr ""
+"Pilihan muat turun akan dibenarkan untuk buku audio dalam pemacu boleh alih "
+"atau rangkaian secara automatik setiap kali anda menambah lokasi storan "
+"baharu."
+
+#: data/com.github.geigi.cozy.appdata.xml:159
+#: data/com.github.geigi.cozy.appdata.xml:182
+#: data/com.github.geigi.cozy.appdata.xml:204
+msgid ""
+"Unavailable books (books where a file can't be found) can now be opened to "
+"display the book detail view. They will be flagged with a little unavailable"
+" tag"
+msgstr ""
+"Buku tidak tersedia (buku yang mana failnya tidak ditemui) kini boleh dibuka"
+" untuk memaparkan pandangan terperinci buku. Ia akan ditanda dengan satu tag"
+" tidak tersedia"
+
+#: data/com.github.geigi.cozy.appdata.xml:160
+#: data/com.github.geigi.cozy.appdata.xml:183
+#: data/com.github.geigi.cozy.appdata.xml:205
+msgid "Under the hood improvements in the media importer"
+msgstr "Di bawah penambahbaikan  utaam dalam pengimport media"
+
+#: data/com.github.geigi.cozy.appdata.xml:161
+#: data/com.github.geigi.cozy.appdata.xml:184
+#: data/com.github.geigi.cozy.appdata.xml:206
+msgid ""
+"Media playback is rewritten from ground up. It's far more stable than "
+"before."
+msgstr ""
+"Main balik media ditulis semula dari asas. Ia lebih stabil berbanding "
+"sebelum ini."
+
+#: data/com.github.geigi.cozy.appdata.xml:162
+#: data/com.github.geigi.cozy.appdata.xml:185
+#: data/com.github.geigi.cozy.appdata.xml:207
+msgid ""
+"Fix: When a different system language than English is used Cozy created two "
+"folders in the users home directory on the first startup, a translated and a"
+" English one. Now only the translated folder will be created."
+msgstr ""
+"Baiki: Apabila ada sistem bahasa lain selain Bahasa Inggeris digunakan, Cozy"
+" akan mencipta dua folder dalam direktori pengguna ketika permulaan kali "
+"pertama. Iaitu yang diterjemah dan asal Bahasa Inggeris. Sekarang hanya "
+"folder terjemah sahaja akan dicipta."
+
+#: data/com.github.geigi.cozy.appdata.xml:163
+#: data/com.github.geigi.cozy.appdata.xml:186
+#: data/com.github.geigi.cozy.appdata.xml:208
+msgid "Fix: A wrong mouse pointer was displayed with some pointer themes"
+msgstr ""
+"Baiki: Penuding tetikus yang salah dipaparkan dengan beberapa tema penuding."
+
+#: data/com.github.geigi.cozy.appdata.xml:164
+#: data/com.github.geigi.cozy.appdata.xml:187
+#: data/com.github.geigi.cozy.appdata.xml:209
+msgid "Fix: A memory leak in the importer"
+msgstr "Baiki: Ada kebocoran ingatan dalam pengimport"
+
+#: data/com.github.geigi.cozy.appdata.xml:165
+#: data/com.github.geigi.cozy.appdata.xml:188
+#: data/com.github.geigi.cozy.appdata.xml:210
+msgid "Fix: The playback speed of a book was not remembered correctly"
+msgstr "Baiki: Kelajuan main balik sesebuah buku tidak diingati dengan baik"
+
+#: data/com.github.geigi.cozy.appdata.xml:166
+#: data/com.github.geigi.cozy.appdata.xml:189
+#: data/com.github.geigi.cozy.appdata.xml:211
+msgid ""
+"Fix: The desktop integration did not respect the switch author and reader "
+"setting"
+msgstr ""
+"Baiki: Penyepaduan atas meja tidak berdasarkan tetapan perubahan pengarang "
+"dan pembaca"
+
+#: data/com.github.geigi.cozy.appdata.xml:167
+#: data/com.github.geigi.cozy.appdata.xml:270
+msgid "Many other small fixes that make Cozy more reliable"
+msgstr "Banyak pembaikan kecil lain yang menjadikan Cozy lebih diharap"
+
+#: data/com.github.geigi.cozy.appdata.xml:218
+#: data/com.github.geigi.cozy.appdata.xml:234
+msgid ""
+"Surprise! Cozy features a new icon thanks to jimmac! This updates also "
+"features some smaller fixes and a small redesign of the headerbar."
+msgstr ""
+"Kejutan baharu! Cozy memfiturkan satu ikon baru... terima kasih jimmac! "
+"Kemas kini juga memfiturkan beberapa pembaikan dan satu reka bentuk semula "
+"palang pengepala kecil-kecilan."
+
+#: data/com.github.geigi.cozy.appdata.xml:222
+#: data/com.github.geigi.cozy.appdata.xml:238
+msgid "A new icon! Thanks jimmac :)"
+msgstr "Satu ikon serba baharu! Terima kasih jimmac :)"
+
+#: data/com.github.geigi.cozy.appdata.xml:223
+#: data/com.github.geigi.cozy.appdata.xml:239
+msgid "Refined headerbar"
+msgstr "Palang pengepala diperhalusi lagi"
+
+#: data/com.github.geigi.cozy.appdata.xml:224
+#: data/com.github.geigi.cozy.appdata.xml:240
+msgid "A click on the cover image in the headerbar opens the book detail view"
+msgstr ""
+"Satu klik atas imej kulit hadapan dalam palang pengepala akan membuka "
+"pandangan perincian buku"
+
+#: data/com.github.geigi.cozy.appdata.xml:225
+#: data/com.github.geigi.cozy.appdata.xml:241
+msgid ""
+"Book detail view: Pressing the back button on the mouse brings you back to "
+"the library"
+msgstr ""
+"Pandangan perincian buku: Dengan menekan butang kembali tetikus, anda akan "
+"kembali semula ke pustaka"
+
+#: data/com.github.geigi.cozy.appdata.xml:226
+#: data/com.github.geigi.cozy.appdata.xml:242
+msgid "Fix: Aborting the download of a book is now handled more gracefully"
+msgstr ""
+"Baiki: Proses menghenti-paksa buku yang dimuat turun kini dikendali dengan "
+"lebih baik"
+
+#: data/com.github.geigi.cozy.appdata.xml:227
+#: data/com.github.geigi.cozy.appdata.xml:243
+msgid "Fix: Opening a book using the return key now works as expected"
+msgstr ""
+"Baiki: Proses membuka buku melalui kekunci return kini berfungsi seperti "
+"yang diharapkan"
+
+#: data/com.github.geigi.cozy.appdata.xml:254
+msgid "Cozy is now compatible with Python 3.9 (thanks phpwutz!)"
+msgstr "Cozy kini serasi dengan Python 3.9 (terima kasih phpwutz!)"
+
+#: data/com.github.geigi.cozy.appdata.xml:261
+msgid "This release features a lot of bug fixes."
+msgstr "Keluaran ini memfiturkan banyak pembaikan pepijat."
+
+#: data/com.github.geigi.cozy.appdata.xml:265
+msgid ""
+"The rewind and fast forward buttons in the desktop integration now jump 30 "
+"seconds back and forth instead of jumping a whole chapter"
+msgstr ""
+"Butang mandir dan maju pantas dalam penyepaduan atas meja kini melompat 30 "
+"saat ke belakang dan hadapan selain dari melompat terus keseluruhan bab."
+
+#: data/com.github.geigi.cozy.appdata.xml:266
+msgid "Fix: the rewind button in the toolbar is now working again"
+msgstr "Baiki: butang mandir dalam palang alat kini berfungsi kembali"
+
+#: data/com.github.geigi.cozy.appdata.xml:267
+msgid "Fix: automatic rewind, when enabled in settings, is now working again"
+msgstr ""
+"Baiki: butang mandir,bila dibenarkan dalam tetapan, kini berfungsi seperti "
+"biasa"
+
+#: data/com.github.geigi.cozy.appdata.xml:268
+msgid ""
+"Fix: when rewinding at the beginning of a book Cozy did jump to the end of "
+"the book"
+msgstr ""
+"Baiki: Ketika memandir pada permulaan buku, Cozy tiba-tiba melompat terus ke"
+" penghujung buku"
+
+#: data/com.github.geigi.cozy.appdata.xml:269
+msgid ""
+"Fix: pressing escape to leave the book detail view is now working again"
+msgstr ""
+"Baiki: Kekunci escape berfungsi meninggalkan pandangan perincian buku bila "
+"ia ditekan"
+
+#: data/com.github.geigi.cozy.appdata.xml:277
+msgid ""
+"This release features a rewrite of the book detail view to prepare "
+"everything for chapter support with m4b files which will follow in a later "
+"update. If something isn't working as expected let me know!"
+msgstr ""
+"Keluaran ini memfiturkan tulis-semula pandangan perincian buku yang dapat "
+"menyediakan segala sokongan bab untuk fail-fail m4b dalam kemas kini "
+"terkini. Jika ada masih bermasalah dan tidak berfungsi seperti yang "
+"diharapkan sila maklum kami!"
+
+#: data/com.github.geigi.cozy.appdata.xml:281
+msgid ""
+"Fix: If an audiobook directory contained a lot of non audio files, Cozy "
+"could skip all other files on import (thanks foliva!)"
+msgstr ""
+"Baiki: Jika sesebuah direktori buku audio mengandungi banyak fail bukan "
+"audio, Cozy akan melangkau semua fail tidak berkenaan ketika mengimport "
+"(terima kasih foliva!)"
+
+#: data/com.github.geigi.cozy.appdata.xml:282
+msgid ""
+"Fix: When copying files via Drag and Drop sometimes the progress bar "
+"reported an incorrect progress"
+msgstr ""
+"Baiki: Ketika menyalin fail melalui Seret dan Lepas, kadang kala palang "
+"kemajuan melaporkan kemajuan yang salah"
+
+#: data/com.github.geigi.cozy.appdata.xml:293
+#: data/com.github.geigi.cozy.appdata.xml:308
+#: data/com.github.geigi.cozy.appdata.xml:323
+msgid "Increase maximum playback speed to 3.5x"
+msgstr "Tingkatkan kelajuan main balik maksimum sehingga 3.5x"
+
+#: data/com.github.geigi.cozy.appdata.xml:294
+#: data/com.github.geigi.cozy.appdata.xml:309
+#: data/com.github.geigi.cozy.appdata.xml:324
+msgid ""
+"Fix: audio files with uppercase extensions where not detected (thanks to "
+"leuc)"
+msgstr ""
+"Baiki: Fail-fail audio dengan sambungan huruf besar gagal dikesan (terima "
+"kasih leuc)"
+
+#: data/com.github.geigi.cozy.appdata.xml:295
+#: data/com.github.geigi.cozy.appdata.xml:310
+msgid ""
+"Fix: when using drag and drop some files where not copied and imported "
+"correctly"
+msgstr ""
+"Baiki: ketika menggunakan kaedah seret dan lepas, beberapa fail tidak "
+"disalin dan diimport dengan betul"
+
+#: data/com.github.geigi.cozy.appdata.xml:296
+#: data/com.github.geigi.cozy.appdata.xml:311
+#: data/com.github.geigi.cozy.appdata.xml:325
+msgid "Fix: removing a book from the library was sometimes not possible"
+msgstr ""
+"Baiki: membuang sebuah buku daripada pustaka kadang kala adalah mustahil"
+
+#: data/com.github.geigi.cozy.appdata.xml:297
+#: data/com.github.geigi.cozy.appdata.xml:312
+#: data/com.github.geigi.cozy.appdata.xml:326
+msgid ""
+"Fix: sometimes Cozy's database ran into a locking issue, which could lead to"
+" unexpected behaviour of Cozy"
+msgstr ""
+"Baiki: kadang kala pangkalan data Cozy menghadapi masalah penguncian, yang "
+"menyebabkan Cozy berkelakuan tidak dijangka"
+
+#: data/com.github.geigi.cozy.appdata.xml:333
+msgid ""
+"Many of you have been waiting for it: Support for m4b audio books! This "
+"version features basic support for m4b files without chapter support, which "
+"will follow in a later update. Stay tuned!"
+msgstr ""
+"Ramai yang menunggunya: Sokongan untuk buku-buku audio m4b! Versi ini "
+"memfiturkan sokongan asas untuk fail-fail m4b tanpa sokongan bab, yang akan "
+"mendapat kemas kini nanti. Harap bersabar!"
+
+#: data/com.github.geigi.cozy.appdata.xml:337
+msgid "Basic support for m4b audio books (chapters are not supported yet)"
+msgstr "Sokongan asas untuk buku audio m4b (bab tidak disokong buat masa ini)"
+
+#: data/com.github.geigi.cozy.appdata.xml:338
+msgid "Fixed multiple bugs when using drag and drop to import files"
+msgstr ""
+"Baiki banyak pepijat yang muncul ketika menggunakan kaedah seret dan lepas "
+"untuk mengimport fail"
+
+#: data/com.github.geigi.cozy.appdata.xml:344
+#: data/com.github.geigi.cozy.appdata.xml:356
+msgid ""
+"Some of your files where not recognized by Cozy despite being valid audio "
+"files? Not anymore! This version features a completely rewritten importer "
+"which is far more reliable. Enjoy!"
+msgstr ""
+"Sebahagian fail anda tidak dikenal pasti oleh Cozy walaupun ia merupakan "
+"fail audio yang sah? Sekarang tidak berlaku lagi! Versi ini memfiturkan "
+"pengimport sepenuhnya ditulis-semula yang lebih dipercayai. Diharap anda "
+"menyukainya!"
+
+#: data/com.github.geigi.cozy.appdata.xml:348
+#: data/com.github.geigi.cozy.appdata.xml:360
+msgid "A completely rewritten and far more reliable media importer"
+msgstr "Pengimport media yang ditulis-semula sepenuhnya dan lebih dipercayai"
+
+#: data/com.github.geigi.cozy.appdata.xml:349
+#: data/com.github.geigi.cozy.appdata.xml:361
+msgid "Optional error reporting on crashes"
+msgstr "Pelaporan ralat secara pilihan ketika berlaku kerosakan"
+
+#: data/com.github.geigi.cozy.appdata.xml:369
+msgid "Multiple author and readers are now separated in the library view"
+msgstr ""
+"Pengarang dan pembaca berbilang kini diasingkan dalam pandangan pustaka"
+
+#: data/com.github.geigi.cozy.appdata.xml:370
+msgid "Increase maximum playback speed to 3x"
+msgstr "Kelajuan main balik maksimum ditingkatkan sehingga 3x"
+
+#: data/com.github.geigi.cozy.appdata.xml:371
+msgid ""
+"Fix: playback speed was not saved correctly under some circumstances, thanks"
+" to magnickolas"
+msgstr ""
+"Baiki: kelajuan main balik tidak disimpan dengan betul atas beberapa sebab, "
+"terima kasih mangnickolas"
+
+#: data/com.github.geigi.cozy.appdata.xml:372
+msgid "Updated translations thanks to all of the translators!"
+msgstr "Kemas kini terjemahan, terima kasih kepada semua penterjemah!"
+
+#: data/com.github.geigi.cozy.appdata.xml:379
+msgid "Fix: Jump to folder was not working"
+msgstr "Baiki: Lompat ke folder tidak berfungsi"
+
+#: data/com.github.geigi.cozy.appdata.xml:380
+msgid "Fix: Removing a book from the library did not work as expected"
+msgstr ""
+"Baiki: Membuang satu buku daripada pustaka tidak berfungsi seperti yang "
+"diharapkan"
+
+#: data/com.github.geigi.cozy.appdata.xml:381
+msgid "Fix: Error that could occur when opening the book overview"
+msgstr "Baiki: Ralat mungkin berlaku ketika membuka gambaran keseluruhan buku"
+
+#: data/com.github.geigi.cozy.appdata.xml:382
+#: data/com.github.geigi.cozy.appdata.xml:397
+#: data/com.github.geigi.cozy.appdata.xml:409
+#: data/com.github.geigi.cozy.appdata.xml:417
+#: data/com.github.geigi.cozy.appdata.xml:431
+#: data/com.github.geigi.cozy.appdata.xml:439
+#: data/com.github.geigi.cozy.appdata.xml:456
+#: data/com.github.geigi.cozy.appdata.xml:465
+#: data/com.github.geigi.cozy.appdata.xml:477
+#: data/com.github.geigi.cozy.appdata.xml:487
+#: data/com.github.geigi.cozy.appdata.xml:518
+#: data/com.github.geigi.cozy.appdata.xml:537
 msgid "Updated translations"
-msgstr "Terjemahan dikemaskini"
+msgstr "Terjemahan dikemas kini"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:63
-#, fuzzy
+#: data/com.github.geigi.cozy.appdata.xml:389
+msgid "Support for more mp3 files! Let me know if you have problems."
+msgstr ""
+"Lebih sokongan ke atas fail-fail mp3! Beritahu kami jika anda menghadapi "
+"masalah."
+
+#: data/com.github.geigi.cozy.appdata.xml:390
+msgid "Preparations to support chapters within audio files"
+msgstr "Persediaan menyokong bab-bab di dalam fail audio"
+
+#: data/com.github.geigi.cozy.appdata.xml:391
+msgid "The beginning of the biggest cleanup and refactoring under the hood"
+msgstr "Permulaan bagi pembersihan dan pemfaktoran-semula besar-besaran"
+
+#: data/com.github.geigi.cozy.appdata.xml:392
+msgid "Visual improvements in book overview, thanks to elya5"
+msgstr ""
+"Penambahbaikan visual dalam gambaran keseluruhan buku, terima kasih elya5"
+
+#: data/com.github.geigi.cozy.appdata.xml:393
+msgid "Support for smaller screen sizes, thanks again to elya5"
+msgstr ""
+"Sokongan ke atas saiz skrin lebih kecil, terima kasih sekali lagi buat elya5"
+
+#: data/com.github.geigi.cozy.appdata.xml:394
+msgid "Fix: Some book titles where not displayed, thanks to naglis"
+msgstr ""
+"Baiki: Sesetengah tajuk buku tidak dapat dipaparkan, terima kasih naglis"
+
+#: data/com.github.geigi.cozy.appdata.xml:395
+msgid "Fix: Empty books could crash the application"
+msgstr "Baiki: Buku-buku kosong boleh menyebabkan kerosakan aplikasi"
+
+#: data/com.github.geigi.cozy.appdata.xml:396
+msgid "Fix: Author and reader can now be swapped from settings"
+msgstr ""
+"Baiki: Pengarang dan pembaca kini boleh disilih kedudukannya menerusi "
+"tetapan"
+
+#: data/com.github.geigi.cozy.appdata.xml:404
+msgid "Fix: Crash which could occur while changing the titlebar display mode"
+msgstr ""
+"Baiki: Kerosakan mungkin berlaku ketika mengubah mod paparan palang tajuk"
+
+#: data/com.github.geigi.cozy.appdata.xml:405
+msgid "Fix: Better handling of resources that cannot be found"
+msgstr "Baiki: Pengendalian lebih baik ke atas sumber yang tidak ditemui"
+
+#: data/com.github.geigi.cozy.appdata.xml:406
+msgid "Fix: Fira font is now readable on the welcome screen"
+msgstr "Baiki: Fon Fira kini boleh dibaca dalam skrin aluan"
+
+#: data/com.github.geigi.cozy.appdata.xml:407
+msgid "Fix: Multiple bugs regarding the titlebar"
+msgstr "Baiki: Pelbagai pepijat berkaitan palang tajuk"
+
+#: data/com.github.geigi.cozy.appdata.xml:408
+msgid "Fix: File not found dialog was not displayed for external devices"
+msgstr ""
+"Baiki: Dialog fail tidak ditemui tidak dipaparkan terhadap peranti luaran"
+
+#: data/com.github.geigi.cozy.appdata.xml:416
+msgid "Fix: Files with missing tags failed to import"
+msgstr "Baiki: Fail-fail yang tiada tag gagal diimport"
+
+#: data/com.github.geigi.cozy.appdata.xml:424
+msgid ""
+"A warning is displayed in the titlebar if network/external drives are not "
+"connected"
+msgstr ""
+"Satu amaran dipaparkan dalam palang tajuk jika pemacu rangkaian/luar tidak "
+"bersambung"
+
+#: data/com.github.geigi.cozy.appdata.xml:425
+msgid "MPRIS desktop integration is more stable"
+msgstr "Penyepaduan atas meja MPRIS kini lebih stabil"
+
+#: data/com.github.geigi.cozy.appdata.xml:426
+msgid ""
+"Fix: Last book was loaded on startup even when the storage medium was "
+"offline"
+msgstr ""
+"Baiki: Buku terakhir masih dimuatkan ketika permulaan walaupun medium storan"
+" di luar talian"
+
+#: data/com.github.geigi.cozy.appdata.xml:427
+msgid "Fix: Bugs in audiobook location settings window"
+msgstr "Baiki: Pepijat-pepijat dalam tetingkap tetapan lokasi buku audio"
+
+#: data/com.github.geigi.cozy.appdata.xml:428
+msgid "Fix: Bug which sometimes could prevent playback of an audiobook"
+msgstr "Baiki: Pepijat yang kadang kala menghalang main balik buku audio"
+
+#: data/com.github.geigi.cozy.appdata.xml:429
+msgid "Fix: Crash which could occur on startup"
+msgstr "Baiki: Kerosakan yang mungkin berlaku ketika permulaan"
+
+#: data/com.github.geigi.cozy.appdata.xml:430
+msgid ""
+"Fix: Jumping in titlebar while dragging the position slider with long audio "
+"files"
+msgstr ""
+"Baiki: Pelungsur kedudukan melompat ke palang tajuk semasa menyeret fail "
+"audio bersaiz besar atau tempoh yang panjang"
+
+#: data/com.github.geigi.cozy.appdata.xml:438
+msgid "Sleep timer: Automatic system power control"
+msgstr "Pemasa tidur: Kawalan kuasa sistem automatik"
+
+#: data/com.github.geigi.cozy.appdata.xml:446
 msgid "Support for opus files"
-msgstr "Sokongan untuk fail wav"
+msgstr "Menyokong fail opus"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:64
+#: data/com.github.geigi.cozy.appdata.xml:447
 msgid "Better support for ogg cover art"
-msgstr ""
+msgstr "Sokongan lebih baik untuk seni kulit hadapan ogg"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:65
-#, fuzzy
+#: data/com.github.geigi.cozy.appdata.xml:448
 msgid "Swedish translation"
-msgstr "Terjemahan dikemaskini"
+msgstr "Terjemahan bahasa Sweden"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:72
+#: data/com.github.geigi.cozy.appdata.xml:455
 msgid "Fix: some valid media files were not detected"
-msgstr ""
+msgstr "Baiki: beberapa fail media yang sah tidak dikesan"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:74
-#: data/com.github.geigi.cozy.appdata.xml.in:85
+#: data/com.github.geigi.cozy.appdata.xml:457
+#: data/com.github.geigi.cozy.appdata.xml:468
 msgid "Other small fixes"
-msgstr ""
+msgstr "Lain-lain pembaikan kecil"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:81
+#: data/com.github.geigi.cozy.appdata.xml:464
 msgid "Support for python 3.8. Cheers to emmaliddell"
-msgstr ""
+msgstr "Menyokong python 3.8. Terima kasih emmaliddell"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:83
+#: data/com.github.geigi.cozy.appdata.xml:466
 msgid "Fixes in the titlebar"
-msgstr ""
+msgstr "Pembaikan palang tajuk"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:84
+#: data/com.github.geigi.cozy.appdata.xml:467
 msgid "Fix: show navigation bar when searching from book overview"
 msgstr ""
+"Baiki: tunjuk palang pengemudian ketika menggelintar selayang pandang buku"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:92
-#: data/com.github.geigi.cozy.appdata.xml.in:102
+#: data/com.github.geigi.cozy.appdata.xml:475
+#: data/com.github.geigi.cozy.appdata.xml:485
 msgid "Cozy features a new icon! Cheers to Fatih20"
 msgstr "Cozy kini memfiturkan satu ikon baharu! Yay buat Fatih20"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:93
-#: data/com.github.geigi.cozy.appdata.xml.in:103
+#: data/com.github.geigi.cozy.appdata.xml:476
+#: data/com.github.geigi.cozy.appdata.xml:486
 msgid "App information is now translated! Cheers to NathanBnm"
 msgstr "Maklumat Apl kini boleh diterjemah! Yay buat NathanBnm"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:95
-#: data/com.github.geigi.cozy.appdata.xml.in:105
+#: data/com.github.geigi.cozy.appdata.xml:478
+#: data/com.github.geigi.cozy.appdata.xml:488
 msgid "Fix: Sometimes the app name was not correctly displayed"
 msgstr "Baiki: Kadang kala nama apl tidak dipaparkan dengan betul"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:112
-#: data/com.github.geigi.cozy.appdata.xml.in:119
+#: data/com.github.geigi.cozy.appdata.xml:495
+#: data/com.github.geigi.cozy.appdata.xml:502
 msgid ""
 "Fix: Cozy crashed on startup when prefering cover image files over embedded "
 "album art"
 msgstr ""
-"Baiki: Cozy mengalami kerosakan ketika mula sekiranya fail imej muka hadapan "
-"diutamakan berbanding seni album terbenam"
+"Baiki: Cozy mengalami kerosakan ketika mula sekiranya fail imej muka hadapan"
+" diutamakan berbanding seni album terbenam"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:126
-msgid "Fixed startup crash on elemntary OS 5.0 Juno"
+#: data/com.github.geigi.cozy.appdata.xml:509
+msgid "Fixed startup crash on elementary OS 5.0 Juno"
 msgstr "Kerosakan ketika permulaan dibaiki pada elementary OS 5.0 Juno"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:133
-msgid "Support for elemntary OS 5.0 Juno"
+#: data/com.github.geigi.cozy.appdata.xml:516
+msgid "Support for elementary OS 5.0 Juno"
 msgstr "Sokongan untuk elementary OS 5.0 Juno"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:134
-#: data/com.github.geigi.cozy.appdata.xml.in:142
+#: data/com.github.geigi.cozy.appdata.xml:517
+msgid ""
+"Fixed a bug which prevented Cozy from automatically playing the next chapter"
+msgstr ""
+"Baiki pepijat yang menghalang cozy memainkan bab berikutnya secara automatik"
+" "
+
+#: data/com.github.geigi.cozy.appdata.xml:525
 msgid ""
 "Fixed a bug which prevented cozy from automatically playing the next chapter"
 msgstr ""
-"Baiki pepijat yang menghalang cozy memainkan bab berikutnya secara automatik "
+"Baiki pepijat yang menghalang cozy memainkan bab berikutnya secara automatik"
+" "
 
-#: data/com.github.geigi.cozy.appdata.xml.in:149
+#: data/com.github.geigi.cozy.appdata.xml:532
 msgid "Improved artwork image quality"
 msgstr "Kualiti imej kerja seni ditambah baik"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:150
+#: data/com.github.geigi.cozy.appdata.xml:533
 msgid "The book overview now supports multiple disks in audiobooks"
-msgstr "Selayang pandang buku kini menyokong cakera berbilang dalam buku audio"
+msgstr ""
+"Selayang pandang buku kini menyokong cakera berbilang dalam buku audio"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:151
+#: data/com.github.geigi.cozy.appdata.xml:534
 msgid ""
 "The file not found window will only open when the file is on the internal "
 "drive"
@@ -213,15 +876,15 @@ msgstr ""
 "Tetingkap fail tidak ditemui hanya terbuka ketika fail berada dalam pemacu "
 "dalaman"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:152
+#: data/com.github.geigi.cozy.appdata.xml:535
 msgid "Fixed a typo"
 msgstr "Baiki salah eja"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:153
-msgid "Support for elemntary OS 5.0"
+#: data/com.github.geigi.cozy.appdata.xml:536
+msgid "Support for elementary OS 5.0"
 msgstr "Sokongan untuk elementary OS 5.0"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:161
+#: data/com.github.geigi.cozy.appdata.xml:544
 msgid ""
 "Offline Mode! If your audiobooks are on an external or network drive, you "
 "can switch the download button to keep a local cached copy of the book to "
@@ -229,68 +892,69 @@ msgid ""
 "location to external in the settings."
 msgstr ""
 "Mod Luar Talian! Jika buku audio anda berada dalam pemacu luar atau "
-"rangkaian, anda boleh arahkan butang muat turun menyimpan salinan cache buku "
-"supaya mudah mendengarnya ketika di luar. Untuk membenarkan fitur ini, anda "
-"perlu tetapkan lokasi storan ke luaran dalam tetapan."
+"rangkaian, anda boleh arahkan butang muat turun menyimpan salinan cache buku"
+" supaya mudah mendengarnya ketika di luar. Untuk membenarkan fitur ini, anda"
+" perlu tetapkan lokasi storan ke luaran dalam tetapan."
 
-#: data/com.github.geigi.cozy.appdata.xml.in:162
+#: data/com.github.geigi.cozy.appdata.xml:545
 msgid "Detect online/offline storage devices"
 msgstr "Kesan peranti storan dalam/luar talian"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:163
+#: data/com.github.geigi.cozy.appdata.xml:546
 msgid "Option to hide unavailable books"
 msgstr "Pilihan untuk menyembunyikan buku-buku yang tiada"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:164
+#: data/com.github.geigi.cozy.appdata.xml:547
 msgid "Support for wav files"
 msgstr "Sokongan untuk fail wav"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:165
+#: data/com.github.geigi.cozy.appdata.xml:548
 msgid "Support for audio files that have no tags at all"
 msgstr "Sokongan untuk fail audio yang tidak mempunyai tag langsung"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:166
+#: data/com.github.geigi.cozy.appdata.xml:549
 msgid "You can mark books as read using the right click menu"
-msgstr "Anda boleh tanda buku sebagai telah dibaca menggunakan menu klik kanan"
+msgstr ""
+"Anda boleh tanda buku sebagai telah dibaca menggunakan menu klik kanan"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:167
+#: data/com.github.geigi.cozy.appdata.xml:550
 msgid "New setting: Prefer cover image file over embedded covers"
 msgstr ""
 "Tetapan baharu: Utamakan fail imej muka hadapan berbanding kulit terbenam"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:168
+#: data/com.github.geigi.cozy.appdata.xml:551
 msgid "Redesigned Sleep Timer"
 msgstr "Pemasa tidur telah direka semula"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:169
+#: data/com.github.geigi.cozy.appdata.xml:552
 msgid ""
 "More Sleep Timer: You can now stop the playback after the current chapter"
 msgstr ""
-"Lagi Berkenaan Pemasa Tidur: Kini anda boleh hentikan main balik selepas bab "
-"semasa"
+"Lagi Berkenaan Pemasa Tidur: Kini anda boleh hentikan main balik selepas bab"
+" semasa"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:170
+#: data/com.github.geigi.cozy.appdata.xml:553
 msgid "And even more: Fadeout on timer end (in settings)"
 msgstr "Dan lagi: Resap leyap pada hujung pemasa (dalam tetapan)"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:171
+#: data/com.github.geigi.cozy.appdata.xml:554
 msgid "Redesigned hello screen and settings"
 msgstr "Skrin hello dan tetapan telah direka semula"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:172
+#: data/com.github.geigi.cozy.appdata.xml:555
 msgid "Fixed bug where cozy would not start on GTK older than 3.22"
 msgstr ""
 "Pepijat dibaiki ketika cozy gagal dimulakan pada GTK lebih lama dari versi "
 "3.22"
 
-#: data/com.github.geigi.cozy.appdata.xml.in:173
+#: data/com.github.geigi.cozy.appdata.xml:556
 msgid ""
-"If no author field is present, the reader field will be used as author. This "
-"requires a force reimport (settings) on already imported books."
+"If no author field is present, the reader field will be used as author. This"
+" requires a force reimport (settings) on already imported books."
 msgstr ""
 "Jika medan pengarang tiada, medan pembaca akan digunakan sebagai pengarang. "
 "Ia perlu mengimport semula (tetapan) pada buku-buku import."
 
-#: data/com.github.geigi.cozy.appdata.xml.in:174
+#: data/com.github.geigi.cozy.appdata.xml:557
 msgid "Optimizations under the hood"
 msgstr "Pengoptimuman pada aplikasi"
