@@ -109,6 +109,8 @@ class BookDetailView(Gtk.EventBox):
             reporter.warning("BookDetailView", msg)
             return
 
+        self._chapters_event.clear()
+
         book = self._view_model.book
 
         self.chapters_stack.set_visible_child_name("chapters_loader")
