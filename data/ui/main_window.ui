@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.16"/>
   <requires lib="libhandy" version="1.0"/>
@@ -7,63 +7,50 @@
     <property name="lower">0.25</property>
     <property name="upper">2</property>
     <property name="value">1</property>
-    <property name="step_increment">0.050000000000000003</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="step-increment">0.05</property>
+    <property name="page-increment">0.10</property>
   </object>
   <object class="GtkApplicationWindow" id="app_window">
     <property name="name">main_window</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">com.github.geigi.cozy</property>
-    <child type="titlebar">
-      <object class="GtkBox" id="header_container">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <placeholder/>
-        </child>
-        <child type="center">
-          <placeholder/>
-        </child>
-      </object>
-    </child>
+    <property name="can-focus">False</property>
+    <property name="icon-name">com.github.geigi.cozy</property>
     <child>
       <object class="GtkOverlay" id="banner_overlay">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkStack" id="main_stack">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="transition_type">crossfade</property>
+                <property name="can-focus">False</property>
+                <property name="transition-type">crossfade</property>
                 <child>
                   <object class="HdyLeaflet" id="library_leaflet">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <child>
                       <object class="GtkRevealer" id="sort_stack_revealer">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="transition_type">slide-left</property>
+                        <property name="can-focus">False</property>
+                        <property name="transition-type">slide-left</property>
                         <child>
                           <object class="GtkStack" id="sort_stack">
-                            <property name="width_request">250</property>
+                            <property name="width-request">250</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <property name="vexpand">True</property>
-                            <property name="transition_type">crossfade</property>
-                            <property name="interpolate_size">True</property>
+                            <property name="transition-type">crossfade</property>
+                            <property name="interpolate-size">True</property>
                             <child>
                               <object class="GtkBox">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="can-focus">False</property>
                                 <property name="hexpand">True</property>
                                 <property name="vexpand">True</property>
                                 <property name="orientation">vertical</property>
@@ -74,19 +61,19 @@
                               <packing>
                                 <property name="name">recent</property>
                                 <property name="title" translatable="yes">Recent</property>
-                                <property name="icon_name">clock-outline-symbolic</property>
+                                <property name="icon-name">clock-outline-symbolic</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkScrolledWindow" id="sort_author_scroller">
                                 <property name="name">sort_author_scroller</property>
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="shadow_type">in</property>
+                                <property name="can-focus">True</property>
+                                <property name="shadow-type">in</property>
                                 <child>
                                   <object class="GtkViewport" id="sort_author_viewport">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
+                                    <property name="can-focus">False</property>
                                     <child>
                                       <object class="FilterListBox" id="author_box">
                                         <property name="visible">True</property>
@@ -110,19 +97,19 @@
                               <packing>
                                 <property name="name">author</property>
                                 <property name="title" translatable="yes">Author</property>
-                                <property name="icon_name">account-symbolic</property>
+                                <property name="icon-name">account-symbolic</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkScrolledWindow" id="sort_reader_scroller">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="shadow_type">in</property>
+                                <property name="can-focus">True</property>
+                                <property name="shadow-type">in</property>
                                 <child>
                                   <object class="GtkViewport" id="sort_reader_viewport">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
+                                    <property name="can-focus">False</property>
                                     <child>
                                       <object class="FilterListBox" id="reader_box">
                                         <property name="visible">True</property>
@@ -146,7 +133,7 @@
                               <packing>
                                 <property name="name">reader</property>
                                 <property name="title" translatable="yes">Reader</property>
-                                <property name="icon_name">microphone-symbolic</property>
+                                <property name="icon-name">microphone-symbolic</property>
                                 <property name="position">2</property>
                               </packing>
                             </child>
@@ -159,32 +146,32 @@
                     </child>
                     <child>
                       <object class="GtkScrolledWindow" id="book_scroller">
-                        <property name="width_request">250</property>
+                        <property name="width-request">250</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="margin_left">10</property>
-                        <property name="margin_right">10</property>
+                        <property name="can-focus">True</property>
+                        <property name="margin-left">10</property>
+                        <property name="margin-right">10</property>
                         <property name="hexpand">True</property>
-                        <property name="hscrollbar_policy">never</property>
-                        <property name="shadow_type">in</property>
+                        <property name="hscrollbar-policy">never</property>
+                        <property name="shadow-type">in</property>
                         <child>
                           <object class="GtkViewport" id="books_viewport">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <child>
                               <object class="GtkFlowBox" id="book_box">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">10</property>
+                                <property name="can-focus">False</property>
+                                <property name="margin-top">10</property>
+                                <property name="margin-bottom">10</property>
                                 <property name="hexpand">True</property>
                                 <property name="vexpand">True</property>
                                 <property name="homogeneous">True</property>
-                                <property name="column_spacing">10</property>
-                                <property name="row_spacing">5</property>
-                                <property name="min_children_per_line">1</property>
-                                <property name="max_children_per_line">10</property>
-                                <property name="selection_mode">none</property>
+                                <property name="column-spacing">10</property>
+                                <property name="row-spacing">5</property>
+                                <property name="min-children-per-line">1</property>
+                                <property name="max-children-per-line">10</property>
+                                <property name="selection-mode">none</property>
                                 <child internal-child="accessible">
                                   <object class="AtkObject" id="book_box-atkobject">
                                     <property name="AtkObject::accessible-name" translatable="yes">List of books</property>
@@ -214,19 +201,19 @@
                 <child>
                   <object class="GtkBox" id="import_box">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
-                    <property name="margin_left">40</property>
-                    <property name="margin_right">40</property>
+                    <property name="margin-left">40</property>
+                    <property name="margin-right">40</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">20</property>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="pixel_size">120</property>
-                        <property name="icon_name">com.github.geigi.cozy</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixel-size">120</property>
+                        <property name="icon-name">com.github.geigi.cozy</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -237,7 +224,7 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Stay tuned while Cozy is preparing your library…</property>
                         <property name="wrap">True</property>
                         <property name="xalign">0</property>
@@ -262,16 +249,16 @@
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">center</property>
                         <property name="valign">center</property>
-                        <property name="margin_left">20</property>
-                        <property name="margin_right">20</property>
+                        <property name="margin-left">20</property>
+                        <property name="margin-right">20</property>
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="label" translatable="yes">Start exploring your library by switching to the Author or Reader view above.</property>
@@ -298,36 +285,36 @@
                 <child>
                   <object class="GtkScrolledWindow">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">never</property>
-                    <property name="shadow_type">in</property>
+                    <property name="can-focus">True</property>
+                    <property name="hscrollbar-policy">never</property>
+                    <property name="shadow-type">in</property>
                     <child>
                       <object class="GtkViewport">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <child>
                           <object class="HdyClamp">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="maximum_size">700</property>
-                            <property name="tightening_threshold">250</property>
+                            <property name="can-focus">False</property>
+                            <property name="maximum-size">700</property>
+                            <property name="tightening-threshold">250</property>
                             <child>
                               <object class="GtkBox">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="can-focus">False</property>
                                 <property name="halign">center</property>
                                 <property name="valign">center</property>
-                                <property name="margin_left">30</property>
-                                <property name="margin_right">30</property>
-                                <property name="margin_top">40</property>
-                                <property name="margin_bottom">40</property>
+                                <property name="margin-left">30</property>
+                                <property name="margin-right">30</property>
+                                <property name="margin-top">40</property>
+                                <property name="margin-bottom">40</property>
                                 <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkLabel">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
+                                    <property name="can-focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="margin_bottom">10</property>
+                                    <property name="margin-bottom">10</property>
                                     <property name="label" translatable="yes">Import your Audiobooks</property>
                                     <property name="xalign">0</property>
                                     <style>
@@ -343,9 +330,9 @@
                                 <child>
                                   <object class="GtkLabel">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
+                                    <property name="can-focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="margin_bottom">85</property>
+                                    <property name="margin-bottom">85</property>
                                     <property name="label" translatable="yes">Cozy automatically imports your audiobooks in one directory - your library</property>
                                     <property name="wrap">True</property>
                                     <property name="xalign">0</property>
@@ -362,24 +349,24 @@
                                 <child>
                                   <object class="GtkFrame">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label_xalign">0</property>
-                                    <property name="shadow_type">in</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label-xalign">0</property>
+                                    <property name="shadow-type">in</property>
                                     <child>
                                       <object class="GtkListBox">
                                         <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="selection_mode">none</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="selection-mode">none</property>
                                         <child>
                                           <object class="HdyActionRow">
-                                            <property name="width_request">100</property>
-                                            <property name="height_request">80</property>
+                                            <property name="width-request">100</property>
+                                            <property name="height-request">80</property>
                                             <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
+                                            <property name="can-focus">False</property>
                                             <property name="activatable">False</property>
                                             <property name="selectable">False</property>
                                             <property name="title" translatable="yes">Drag &amp; Drop</property>
-                                            <property name="icon_name">input-mouse-symbolic</property>
+                                            <property name="icon-name">input-mouse-symbolic</property>
                                             <property name="subtitle" translatable="yes">Drag your audiobooks into cozy and they will be automatically imported</property>
                                             <child>
                                               <placeholder/>
@@ -389,34 +376,34 @@
                                         <child>
                                           <object class="GtkListBoxRow">
                                             <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
+                                            <property name="can-focus">True</property>
                                             <property name="activatable">False</property>
                                             <property name="selectable">False</property>
                                             <child>
                                               <object class="GtkSeparator">
                                                 <property name="visible">True</property>
-                                                <property name="can_focus">False</property>
+                                                <property name="can-focus">False</property>
                                               </object>
                                             </child>
                                           </object>
                                         </child>
                                         <child>
                                           <object class="HdyActionRow">
-                                            <property name="width_request">100</property>
-                                            <property name="height_request">80</property>
+                                            <property name="width-request">100</property>
+                                            <property name="height-request">80</property>
                                             <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
+                                            <property name="can-focus">False</property>
                                             <property name="title" translatable="yes">Set Audiobooks Directory</property>
-                                            <property name="icon_name">folder-symbolic</property>
+                                            <property name="icon-name">folder-symbolic</property>
                                             <property name="subtitle" translatable="yes">Load audiobooks from a directory, network drive or an external disk</property>
                                             <child>
                                               <object class="GtkFileChooserButton" id="no_media_file_chooser">
                                                 <property name="visible">True</property>
-                                                <property name="can_focus">False</property>
+                                                <property name="can-focus">False</property>
                                                 <property name="halign">center</property>
                                                 <property name="valign">center</property>
                                                 <property name="action">select-folder</property>
-                                                <property name="local_only">False</property>
+                                                <property name="local-only">False</property>
                                                 <property name="title" translatable="yes"/>
                                               </object>
                                             </child>
@@ -460,7 +447,7 @@
             <child>
               <object class="GtkSeparator">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -470,14 +457,17 @@
             </child>
             <child>
               <object class="HdySqueezer" id="media_control_squeezer">
-                <property name="height_request">46</property>
+                <property name="height-request">46</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="homogeneous">True</property>
-                <property name="transition_type">crossfade</property>
+                <property name="transition-type">crossfade</property>
                 <child>
                   <placeholder/>
                 </child>
+                <style>
+                  <class name="player_bar"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -488,13 +478,13 @@
             <child>
               <object class="GtkRevealer" id="library_mobile_revealer">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="transition_type">slide-up</property>
-                <property name="transition_duration">200</property>
+                <property name="can-focus">False</property>
+                <property name="transition-type">slide-up</property>
+                <property name="transition-duration">200</property>
                 <child>
                   <object class="HdyViewSwitcher" id="library_mobile_view_switcher">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="policy">narrow</property>
                   </object>
@@ -511,10 +501,17 @@
             <property name="index">-1</property>
           </packing>
         </child>
-        <child type="overlay">
+      </object>
+    </child>
+    <child type="titlebar">
+      <object class="GtkBox" id="header_container">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <child type="center">
           <placeholder/>
         </child>
-        <child type="overlay">
+        <child>
           <placeholder/>
         </child>
       </object>
@@ -522,31 +519,31 @@
   </object>
   <object class="GtkImage" id="pause_img">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_left">10</property>
-    <property name="margin_right">10</property>
-    <property name="icon_name">media-playback-pause-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="margin-left">10</property>
+    <property name="margin-right">10</property>
+    <property name="icon-name">media-playback-pause-symbolic</property>
   </object>
   <object class="GtkImage" id="pause_img1">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_left">10</property>
-    <property name="margin_right">10</property>
-    <property name="icon_name">media-playback-pause-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="margin-left">10</property>
+    <property name="margin-right">10</property>
+    <property name="icon-name">media-playback-pause-symbolic</property>
     <property name="icon_size">3</property>
   </object>
   <object class="GtkImage" id="play_img">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_left">10</property>
-    <property name="margin_right">10</property>
-    <property name="icon_name">media-playback-start-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="margin-left">10</property>
+    <property name="margin-right">10</property>
+    <property name="icon-name">media-playback-start-symbolic</property>
   </object>
   <object class="GtkImage" id="prev_img">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_left">4</property>
-    <property name="margin_right">4</property>
-    <property name="icon_name">object-rotate-left-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="margin-left">4</property>
+    <property name="margin-right">4</property>
+    <property name="icon-name">object-rotate-left-symbolic</property>
   </object>
 </interface>
