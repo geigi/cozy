@@ -8,6 +8,7 @@ from cozy.model.chapter import Chapter
 class ChapterElement(Gtk.EventBox):
     __gtype_name__ = "ChapterElement"
 
+    icon_event_box: Gtk.EventBox = Gtk.Template.Child()
     icon_stack: Gtk.Stack = Gtk.Template.Child()
     number_label: Gtk.Label = Gtk.Template.Child()
     play_icon: Gtk.Image = Gtk.Template.Child()
@@ -28,6 +29,9 @@ class ChapterElement(Gtk.EventBox):
         self.number_label.set_text(str(self.chapter.number))
         self.title_label.set_text(self.chapter.name)
         self.duration_label.set_text(seconds_to_str(self.chapter.length))
+
+        self.icon_event_box.connect("enter-notify-event", self._on_enter_notify)
+        self.icon_event_box.connect("leave-notify-event", self._on_leave_notify)
 
     def _on_button_press(self, _, event):
         if event.type == Gdk.EventType.BUTTON_PRESS and event.button != 1:
