@@ -201,9 +201,9 @@ class BookDetailView(Gtk.EventBox):
                 return
 
             if disk_number != chapter.disk and disk_count > 1:
-                Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_disk, chapter)
+                Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_disk, book.id, chapter)
 
-            Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_chapter, chapter)
+            Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_chapter, book.id, chapter)
 
             disk_number = chapter.disk
 
@@ -235,13 +235,19 @@ class BookDetailView(Gtk.EventBox):
             self.download_switch.set_active(self._view_model.book.offline)
             self.download_switch.handler_unblock_by_func(self._download_switch_changed)
 
-    def _add_disk(self, chapter: Chapter):
+    def _add_disk(self, book_id: int, chapter: Chapter):
+        if book_id != self._view_model.book.id:
+            return
+
         disc_element = DiskElement(chapter.disk)
         self.chapter_box.add(disc_element)
         disc_element.show_all()
         self._chapters_event.set()
 
-    def _add_chapter(self, chapter: Chapter):
+    def _add_chapter(self, book_id: int, chapter: Chapter):
+        if book_id != self._view_model.book.id:
+            return
+
         chapter_element = ChapterElement(chapter)
         chapter_element.connect("play-pause-clicked", self._play_chapter_clicked)
         self.chapter_box.add(chapter_element)
