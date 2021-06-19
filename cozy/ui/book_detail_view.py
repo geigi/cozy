@@ -132,7 +132,6 @@ class BookDetailView(Gtk.EventBox):
 
         self._display_external_section()
         self._set_progress()
-        self._on_play_changed()
 
         self._toolbar_revealer.set_reveal_child(False)
 
@@ -218,9 +217,12 @@ class BookDetailView(Gtk.EventBox):
         self.total_label.set_text(self._view_model.total_text)
         self.total_label.set_visible(True)
         self.total_text.set_visible(True)
-        self._on_current_chapter_changed()
         self._set_book_download_status()
+
+        self._on_play_changed()
+        self._on_current_chapter_changed()
         self._on_book_available_changed()
+
         self.chapters_stack.set_visible_child_name("chapters_wrapper")
 
     def _display_external_section(self):
