@@ -50,6 +50,8 @@ class BookDetailView(Gtk.EventBox):
     chapter_box: Gtk.Box = Gtk.Template.Child()
     book_overview_scroller: Gtk.ScrolledWindow = Gtk.Template.Child()
 
+    main_flow_box: Gtk.FlowBox = Gtk.Template.Child()
+
     _view_model: BookDetailViewModel = inject.attr(BookDetailViewModel)
     _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
@@ -88,6 +90,7 @@ class BookDetailView(Gtk.EventBox):
     def _connect_widgets(self):
         self.play_book_button.connect("clicked", self._play_book_clicked)
         self.download_switch.connect("state-set", self._download_switch_changed)
+        self.main_flow_box.connect("size-allocate", self._main_flow_box_size_changed)
 
     def _add_mouse_button_accel(self):
         self.gesture = Gtk.GestureMultiPress(widget=self)
@@ -220,6 +223,22 @@ class BookDetailView(Gtk.EventBox):
 
     def _download_switch_changed(self, _, state: bool):
         self._view_model.download_book(state)
+
+    def _main_flow_box_size_changed(self, _, __):
+        if self._is_chapter_box_wrapped():
+            vertical_scroll_policy = Gtk.PolicyType.NEVER
+        else:
+            vertical_scroll_policy = Gtk.PolicyType.ALWAYS
+
+        self.book_overview_scroller.set_policy(Gtk.PolicyType.NEVER, vertical_scroll_policy)
+
+    def _is_chapter_box_wrapped(self):
+        x, _ = self.book_overview_scroller.translate_coordinates(self.main_flow_box, 0, 0)
+
+        if x < 100:
+            return True
+
+        return False
 
     def _set_book_download_status(self):
         if not self._view_model.is_book_external:
