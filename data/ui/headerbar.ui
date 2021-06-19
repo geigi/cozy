@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <requires lib="libhandy" version="1.0"/>
   <object class="GtkImage" id="back_img">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">go-previous-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="icon-name">go-previous-symbolic</property>
   </object>
   <template class="Headerbar" parent="HdyHeaderBar">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="show_close_button">True</property>
+    <property name="can-focus">False</property>
+    <property name="show-close-button">True</property>
     <child type="title">
       <object class="GtkRevealer" id="toolbar_revealer">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="transition_type">slide-up</property>
-        <property name="reveal_child">True</property>
+        <property name="can-focus">False</property>
+        <property name="transition-type">slide-up</property>
+        <property name="reveal-child">True</property>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="valign">center</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="HdyViewSwitcherTitle" id="category_toolbar">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="halign">center</property>
-                <property name="margin_top">1</property>
+                <property name="margin-top">1</property>
                 <property name="policy">wide</property>
                 <property name="title">Cozy</property>
               </object>
@@ -49,50 +49,46 @@
     <child>
       <object class="GtkButton" id="back_button">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">True</property>
         <property name="halign">center</property>
         <property name="valign">center</property>
         <property name="image">back_img</property>
-        <property name="always_show_image">True</property>
+        <property name="always-show-image">True</property>
       </object>
     </child>
     <child>
       <object class="GtkBox" id="tools_box">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="valign">center</property>
         <property name="vexpand">True</property>
         <property name="spacing">3</property>
         <child>
-          <object class="GtkSpinner" id="spinner">
-            <property name="can_focus">False</property>
-            <property name="tooltip_text" translatable="yes">Working…</property>
-            <property name="margin_right">5</property>
-            <child internal-child="accessible">
-              <object class="AtkObject" id="spinner-atkobject">
-                <property name="AtkObject::accessible-name" translatable="yes">Currently working</property>
-              </object>
-            </child>
+          <object class="DzlProgressMenuButton" id="progress_menu_button">
+            <property name="visible">False</property>
+            <property name="can-focus">True</property>
+            <property name="theatric-icon-name">emblem-default-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Display background task progress</property>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="position">4</property>
           </packing>
         </child>
         <child>
           <object class="GtkMenuButton" id="search_button">
             <property name="name">Search toggle button</property>
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Search your library</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Search your library</property>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">edit-find-symbolic</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">edit-find-symbolic</property>
               </object>
             </child>
             <child internal-child="accessible">
@@ -111,14 +107,14 @@
         <child>
           <object class="GtkMenuButton" id="menu_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Options</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Options</property>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">open-menu-symbolic</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">open-menu-symbolic</property>
                 <property name="icon_size">2</property>
               </object>
             </child>
@@ -137,7 +133,7 @@
         </child>
       </object>
       <packing>
-        <property name="pack_type">end</property>
+        <property name="pack-type">end</property>
         <property name="position">2</property>
       </packing>
     </child>

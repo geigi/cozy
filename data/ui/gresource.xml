@@ -30,5 +30,6 @@
     <file preprocess="xml-stripblanks">album_element.ui</file>
     <file preprocess="xml-stripblanks">book_element.ui</file>
     <file preprocess="xml-stripblanks">chapter_element.ui</file>
+    <file preprocess="xml-stripblanks">progress_popover.ui</file>
   </gresource>
 </gresources>
