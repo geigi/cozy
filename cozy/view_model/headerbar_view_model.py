@@ -50,7 +50,7 @@ class HeaderbarViewModel(Observable, EventSender):
 
     @property
     def work_progress(self) -> float:
-        return self._work_progress
+        return min(self._work_progress, 1.0)
 
     @property
     def work_message(self) -> str:

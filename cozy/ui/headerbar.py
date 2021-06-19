@@ -3,11 +3,14 @@ import logging
 import gi
 
 from cozy.ext import inject
+from cozy.ui.widgets.progress_popover import ProgressPopover
 from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarState
 
 gi.require_version('Gtk', '3.0')
+gi.require_version('Dazzle', '1.0')
 from gi.repository import Gtk, Handy
 from gi.repository.Handy import HeaderBar
+from gi.repository.Dazzle import ProgressMenuButton
 
 log = logging.getLogger("Headerbar")
 
@@ -21,7 +24,7 @@ class Headerbar(HeaderBar):
     search_button: Gtk.MenuButton = Gtk.Template.Child()
     menu_button: Gtk.MenuButton = Gtk.Template.Child()
 
-    spinner: Gtk.Spinner = Gtk.Template.Child()
+    progress_menu_button: ProgressMenuButton = Gtk.Template.Child()
 
     back_button: Gtk.Button = Gtk.Template.Child()
     category_toolbar: Handy.ViewSwitcherTitle = Gtk.Template.Child()
@@ -39,6 +42,9 @@ class Headerbar(HeaderBar):
         self.category_toolbar.set_stack(self._sort_stack)
         self._library_mobile_view_switcher.set_stack(self._sort_stack)
 
+        self.progress_popover = ProgressPopover()
+        self.progress_menu_button.set_popover(self.progress_popover)
+
         self._headerbar_view_model: HeaderbarViewModel = inject.instance(HeaderbarViewModel)
         self._init_app_menu()
         self._connect_view_model()
@@ -46,6 +52,8 @@ class Headerbar(HeaderBar):
 
     def _connect_view_model(self):
         self._headerbar_view_model.bind_to("state", self._on_state_changed)
+        self._headerbar_view_model.bind_to("work_progress", self._on_work_progress_changed)
+        self._headerbar_view_model.bind_to("work_message", self._on_work_message_changed)
 
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_clicked)
@@ -58,13 +66,20 @@ class Headerbar(HeaderBar):
 
     def _on_state_changed(self):
         if self._headerbar_view_model.state == HeaderBarState.PLAYING:
-            spinner_visible = False
-            self.spinner.stop()
+            progress_visible = False
+            self.progress_menu_button.set_progress(0)
         else:
-            spinner_visible = True
-            self.spinner.start()
+            progress_visible = True
 
-        self.spinner.set_visible(spinner_visible)
+        self.progress_menu_button.set_visible(progress_visible)
+
+    def _on_work_progress_changed(self):
+        progress = self._headerbar_view_model.work_progress
+        self.progress_menu_button.set_progress(progress)
+        self.progress_popover.set_progress(progress)
+
+    def _on_work_message_changed(self):
+        self.progress_popover.set_message(self._headerbar_view_model.work_message)
 
     def _back_clicked(self, _):
         self._headerbar_view_model.navigate_back()
