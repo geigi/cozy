@@ -44,7 +44,6 @@ class MediaControllerBig(Gtk.Box):
         super().__init__()
 
         self.sleep_timer: SleepTimer = SleepTimer(self.timer_image)
-        self.volume_button.get_style_context().remove_class("flat")
         self.playback_speed_button.set_popover(PlaybackSpeedPopover())
         self.timer_button.set_popover(self.sleep_timer)
 
@@ -116,6 +115,7 @@ class MediaControllerBig(Gtk.Box):
 
         play_button_img = "media-playback-pause-symbolic" if playing else "media-playback-start-symbolic"
         self.play_img.set_from_icon_name(play_button_img, Gtk.IconSize.BUTTON)
+        self.play_img.set_pixel_size(20)
 
     def _on_position_changed(self):
         position = self._playback_control_view_model.position

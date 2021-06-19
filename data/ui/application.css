@@ -69,3 +69,23 @@
     color: white;
     box-shadow: none;
 }
+
+.filter-list-box-row {
+    border-radius: 0.5rem;
+}
+
+.play_button {
+    background: #E95C00;
+    color: white;
+    box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.2);
+}
+
+.play_button:disabled {
+  background-color: transparent;
+  color: @insensitive_fg_color;
+  box-shadow: none;
+}
+
+.player_bar {
+    background: shade(@theme_bg_color, 0.95) 0%;
+}

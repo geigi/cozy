@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <!-- interface-css-provider-path application.css -->
   <object class="GtkImage" id="next_img">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">object-rotate-right-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="pixel-size">14</property>
+    <property name="icon-name">object-rotate-right-symbolic</property>
   </object>
   <object class="GtkImage" id="play_img">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">media-playback-start-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="pixel-size">20</property>
+    <property name="icon-name">media-playback-start-symbolic</property>
   </object>
   <object class="GtkImage" id="prev_img">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">object-rotate-left-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="pixel-size">14</property>
+    <property name="icon-name">object-rotate-left-symbolic</property>
   </object>
   <template class="MediaControllerSmall" parent="GtkBox">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_right">10</property>
+    <property name="can-focus">False</property>
+    <property name="margin-end">10</property>
     <property name="hexpand">True</property>
     <child>
       <object class="GtkEventBox" id="cover_img_event_box">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <child>
           <object class="GtkImage" id="cover_img">
-            <property name="width_request">46</property>
-            <property name="height_request">46</property>
+            <property name="width-request">46</property>
+            <property name="height-request">46</property>
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="halign">start</property>
             <property name="valign">center</property>
             <property name="stock">gtk-missing-image</property>
@@ -47,21 +51,24 @@
     <child>
       <object class="GtkBox" id="control_box">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="halign">center</property>
         <property name="valign">center</property>
         <property name="spacing">3</property>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
+            <property name="spacing">4</property>
             <child>
               <object class="GtkButton" id="prev_button">
+                <property name="width-request">36</property>
+                <property name="height-request">36</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Rewind</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Rewind</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="hexpand">True</property>
@@ -72,6 +79,10 @@
                     <property name="AtkObject::accessible-description" translatable="yes">Rewind playback</property>
                   </object>
                 </child>
+                <style>
+                  <class name="flat"/>
+                  <class name="circular"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -81,12 +92,13 @@
             </child>
             <child>
               <object class="GtkButton" id="play_button">
-                <property name="width_request">42</property>
+                <property name="width-request">36</property>
+                <property name="height-request">36</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Start playback</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Start playback</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="hexpand">True</property>
@@ -97,6 +109,11 @@
                     <property name="AtkObject::accessible-description" translatable="yes">Start or pause the playback</property>
                   </object>
                 </child>
+                <style>
+                  <class name="flat"/>
+                  <class name="play_button"/>
+                  <class name="circular"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -106,11 +123,13 @@
             </child>
             <child>
               <object class="GtkButton" id="next_button">
+                <property name="width-request">36</property>
+                <property name="height-request">36</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Forward</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Forward</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="hexpand">True</property>
@@ -121,6 +140,10 @@
                     <property name="AtkObject::accessible-description" translatable="yes">Forward Playback</property>
                   </object>
                 </child>
+                <style>
+                  <class name="flat"/>
+                  <class name="circular"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -128,9 +151,6 @@
                 <property name="position">2</property>
               </packing>
             </child>
-            <style>
-              <class name="linked"/>
-            </style>
           </object>
           <packing>
             <property name="expand">True</property>
@@ -147,25 +167,31 @@
     </child>
     <child>
       <object class="GtkMenuButton" id="playback_speed_button">
+        <property name="width-request">36</property>
+        <property name="height-request">36</property>
         <property name="visible">True</property>
         <property name="sensitive">False</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="tooltip_text" translatable="yes">Playback speed</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">True</property>
+        <property name="tooltip-text" translatable="yes">Playback speed</property>
         <property name="halign">end</property>
         <property name="valign">center</property>
         <child>
           <object class="GtkImage" id="playback_speed_img">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="icon_name">speedometer-symbolic</property>
+            <property name="can-focus">False</property>
+            <property name="icon-name">speedometer-symbolic</property>
           </object>
         </child>
+        <style>
+          <class name="flat"/>
+          <class name="circular"/>
+        </style>
       </object>
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="pack_type">end</property>
+        <property name="pack-type">end</property>
         <property name="position">2</property>
       </packing>
     </child>

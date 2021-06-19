@@ -88,7 +88,8 @@ class MediaControllerSmall(Gtk.Box):
         playing = self._playback_control_view_model.playing
 
         play_button_img = "media-playback-pause-symbolic" if playing else "media-playback-start-symbolic"
-        self.play_img.set_from_icon_name(play_button_img, Gtk.IconSize.BUTTON)
+        self.play_img.set_from_icon_name(play_button_img, Gtk.IconSize.LARGE_TOOLBAR)
+        self.play_img.set_pixel_size(20)
 
     def _on_lock_ui_changed(self):
         sensitive = not self._playback_control_view_model.lock_ui
