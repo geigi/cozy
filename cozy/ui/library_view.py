@@ -30,6 +30,8 @@ class LibraryView:
         self._connect_view_model()
 
         self.populate_book_box()
+        self.populate_author()
+        self.populate_reader()
 
         self._on_library_view_mode_changed()
 
@@ -93,6 +95,8 @@ class LibraryView:
             book_element.connect("book-removed", self._on_book_removed)
             book_element.show_all()
             self._book_box.add(book_element)
+
+        self._book_box.show_all()
 
     def populate_author(self):
         self._author_box.populate(self._view_model.authors)

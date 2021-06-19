@@ -343,7 +343,7 @@ class Settings(EventSender):
         if self.ui.is_initialized:
             self._glib_settings.set_boolean("prefer-external-cover", state)
             self._artwork_cache.delete_artwork_cache()
-            self.ui.refresh_content()
+            self.emit_event_main_thread("prefer-external-cover-changed")
 
     def __on_force_refresh_clicked(self, widget):
         """

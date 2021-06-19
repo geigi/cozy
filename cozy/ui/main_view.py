@@ -64,7 +64,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self._library_view = library_view
 
         self.auto_import()
-        self.refresh_content()
         self.check_for_tracks()
 
         self.is_initialized = True
@@ -329,23 +328,6 @@ class CozyUI(EventSender, metaclass=Singleton):
 
     def back(self, action, parameter):
         self.emit_event("open_view", OpenView.LIBRARY)
-
-    def refresh_content(self):
-        """
-        Refresh all content.
-        """
-        # First clear the boxes
-        childs = self.book_box.get_children()
-        for element in childs:
-            self.book_box.remove(element)
-
-        self._library_view.populate_author()
-        self._library_view.populate_reader()
-        self._library_view.populate_book_box()
-
-        self.book_box.show_all()
-
-        return False
 
     def display_failed_imports(self, files):
         """
