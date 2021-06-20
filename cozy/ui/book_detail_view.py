@@ -195,14 +195,14 @@ class BookDetailView(Gtk.EventBox):
 
     def _display_chapters(self, book: Book, callback: Callable):
         disk_number = -1
-        disk_count = self._view_model.disk_count
+        multiple_disks = self._view_model.disk_count > 1
 
         for chapter in book.chapters:
             if self._chapters_job_locked:
                 self._clear_chapter_box()
                 return
 
-            if disk_number != chapter.disk and disk_count > 1:
+            if multiple_disks and disk_number != chapter.disk:
                 Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_disk, book.id, chapter)
 
             Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_chapter, book.id, chapter)
