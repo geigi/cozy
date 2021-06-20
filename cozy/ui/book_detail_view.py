@@ -188,18 +188,19 @@ class BookDetailView(Gtk.EventBox):
         time.sleep(0.05)
         # This is done on a the UI thread to prevent chapters from the previous book flashing before the new chapters
         # are ready
-        self._clear_chapter_box()
+        self._schedule_chapters_clearing()
         self._prepare_chapters_job()
-        self._chapters_thread: Thread = Thread(target=self._display_chapters, args=[book, self._on_chapters_displayed])
+        self._chapters_thread: Thread = Thread(target=self._schedule_chapters_rendering,
+                                               args=[book, self._on_chapters_displayed])
         self._chapters_thread.start()
 
-    def _display_chapters(self, book: Book, callback: Callable):
+    def _schedule_chapters_rendering(self, book: Book, callback: Callable):
         disk_number = -1
         multiple_disks = self._view_model.disk_count > 1
 
         for chapter in book.chapters:
             if self._chapters_job_locked:
-                self._clear_chapter_box()
+                self._schedule_chapters_clearing()
                 return
 
             if multiple_disks and disk_number != chapter.disk:
@@ -256,7 +257,7 @@ class BookDetailView(Gtk.EventBox):
         chapter_element.show_all()
         self._chapters_event.set()
 
-    def _clear_chapter_box(self):
+    def _schedule_chapters_clearing(self):
         Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.chapter_box.remove_all_children)
 
     def _set_progress(self):
