@@ -279,10 +279,10 @@ class BookDetailView(Gtk.EventBox):
 
     def _interrupt_chapters_jobs(self):
         self._chapters_job_locked = True
-        # TODO Confirm if this is even needed
+
         try:
             self._chapters_thread.join(timeout=0.2)
-        except Exception as e:
+        except AttributeError as e:
             pass
 
     def _prepare_chapters_job(self):
