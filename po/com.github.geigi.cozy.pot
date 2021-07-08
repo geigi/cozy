@@ -652,7 +652,7 @@ msgid "Continue"
 msgstr ""
 
 #: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
-msgid "What's new  in Cozy"
+msgid "What's new in Cozy"
 msgstr ""
 
 #: data/ui/whats_new_importer.ui:52
