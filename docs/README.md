@@ -80,6 +80,7 @@ flatpak --user override --filesystem=/media com.github.geigi.cozy
 
 ## A big thanks
 To the contributors on GitHub:
+- alyssais
 - AsavarTzeth
 - Fatih20
 - NathanBnm
