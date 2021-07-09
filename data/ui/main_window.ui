@@ -261,7 +261,7 @@
                         <property name="margin-right">20</property>
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
-                        <property name="label" translatable="yes">Start exploring your library by switching to the Author or Reader view above.</property>
+                        <property name="label" translatable="yes">Start exploring your library by switching to the Author or Reader view.</property>
                         <property name="wrap">True</property>
                         <property name="xalign">0</property>
                         <property name="yalign">0</property>
