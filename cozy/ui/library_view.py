@@ -134,8 +134,6 @@ class LibraryView:
         self._main_stack.props.visible_child_name = main_view_page
         self._filter_stack.set_visible_child_name(visible_child_name)
         self._filter_stack_revealer.set_reveal_child(reveal_filter_box)
-        #self._toolbar_revealer.set_reveal_child(True)
-        #self._toolbar_revealer.show_all()
 
         if active_filter_box:
             self._apply_selected_filter(active_filter_box, active_filter_box.get_selected_row())

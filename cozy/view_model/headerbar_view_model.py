@@ -8,6 +8,7 @@ from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.model.library import Library
 from cozy.open_view import OpenView
+from cozy.view import View
 
 
 class HeaderBarState(Enum):
@@ -29,6 +30,7 @@ class HeaderbarViewModel(Observable, EventSender):
         self._state: HeaderBarState = HeaderBarState.PLAYING
         self._work_progress: float = 0.0
         self._work_message: str = ""
+        self._view: View = View.EMPTY_STATE
 
         self._importer.add_listener(self._on_importer_event)
         self._files.add_listener(self._on_files_event)
@@ -55,6 +57,24 @@ class HeaderbarViewModel(Observable, EventSender):
     @property
     def work_message(self) -> str:
         return self._work_message
+
+    @property
+    def can_navigate_back(self) -> bool:
+        return self._view == View.BOOK_DETAIL or \
+               self._view == View.LIBRARY_BOOKS
+
+    @property
+    def show_library_filter(self) -> bool:
+        return self._view == View.LIBRARY or \
+               self._view == View.LIBRARY_BOOKS or \
+               self._view == View.LIBRARY_FILTER or \
+               self._view == View.BOOK_DETAIL or \
+               self._view == View.NO_MEDIA
+
+    def set_view(self, value: View):
+        self._view = value
+        self._notify("can_navigate_back")
+        self._notify("show_library_filter")
 
     def _start_working(self, message: str):
         self._work_progress = 0.0

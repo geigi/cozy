@@ -19,6 +19,7 @@ from cozy.model.library import Library
 from cozy.model.settings import Settings
 from cozy.model.storage_block_list import StorageBlockList
 from cozy.open_view import OpenView
+from cozy.ui.app_view import AppView
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.headerbar import Headerbar
 from cozy.ui.info_banner import InfoBanner
@@ -27,6 +28,7 @@ from cozy.ui.main_view import CozyUI
 from cozy.ui.media_controller import MediaController
 from cozy.ui.search_view import SearchView
 from cozy.ui.widgets.whats_new_window import WhatsNewWindow
+from cozy.view_model.app_view_model import AppViewModel
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
 from cozy.view_model.headerbar_view_model import HeaderbarViewModel
 from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
@@ -50,12 +52,14 @@ class AppController(metaclass=Singleton):
         self.whats_new_window: WhatsNewWindow = WhatsNewWindow()
 
         self.library_view: LibraryView = LibraryView(main_window_builder)
+        self.app_view: AppView = AppView(main_window_builder)
         self.search_view: SearchView = SearchView()
         self.book_detail_view: BookDetailView = BookDetailView(main_window_builder)
         self.headerbar: Headerbar = Headerbar(main_window_builder)
         self.media_controller: MediaController = MediaController(main_window_builder)
 
         self.library_view_model = inject.instance(LibraryViewModel)
+        self.app_view_model = inject.instance(AppViewModel)
         self.search_view_model = inject.instance(SearchViewModel)
         self.book_detail_view_model = inject.instance(BookDetailViewModel)
         self.playback_control_view_model = inject.instance(PlaybackControlViewModel)
@@ -71,6 +75,7 @@ class AppController(metaclass=Singleton):
         self.library_view_model.add_listener(self._on_library_view_event)
         self.playback_control_view_model.add_listener(self._on_open_view)
         self.headerbar_view_model.add_listener(self._on_open_view)
+        self.app_view_model.add_listener(self._on_app_view_event)
 
         self.main_window.add_listener(self._on_main_window_event)
 
@@ -102,6 +107,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(GstPlayer, lambda: GstPlayer())
         binder.bind_to_constructor(PowerManager, lambda: PowerManager())
         binder.bind_to_constructor(InfoBanner, lambda: InfoBanner())
+        binder.bind_to_constructor(AppViewModel, lambda: AppViewModel())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR
@@ -118,7 +124,7 @@ class AppController(metaclass=Singleton):
         self.library_view_model.open_library()
 
     def navigate_back(self):
-        self.library_view_model.navigate_back()
+        self.app_view_model.navigate_back()
 
     def _connect_popovers(self):
         self.headerbar.search_button.set_popover(self.search_view.popover)
@@ -135,9 +141,13 @@ class AppController(metaclass=Singleton):
         elif event == OpenView.BACK:
             self.navigate_back()
 
-    def _on_library_view_event(self, event: str, data):
+    def _on_library_view_event(self, event: str, _):
         if event == "work-done":
             self.main_window.switch_to_playing()
+
+    def _on_app_view_event(self, event: str, data):
+        if event == "view":
+            self.headerbar_view_model.set_view(data)
 
     def _on_main_window_event(self, event: str, data):
         if event == "working":

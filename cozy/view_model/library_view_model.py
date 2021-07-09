@@ -171,12 +171,6 @@ class LibraryViewModel(Observable, EventSender):
     def open_library(self):
         self._notify("library_view_mode")
 
-    def navigate_back(self):
-        if self._library_page == LibraryPage.NONE:
-            self.open_library()
-        elif self._library_page == LibraryPage.BOOKS:
-            self.library_page = LibraryPage.FILTER
-
     def book_files_exist(self, book: Book) -> bool:
         return any(os.path.exists(chapter.file) for chapter in book.chapters)
 

@@ -235,10 +235,7 @@ class BookDetailView(Gtk.EventBox):
     def _is_chapter_box_wrapped(self):
         x, _ = self.book_overview_scroller.translate_coordinates(self.main_flow_box, 0, 0)
 
-        if x < 100:
-            return True
-
-        return False
+        return x < 100
 
     def _set_book_download_status(self):
         if not self._view_model.is_book_external:
