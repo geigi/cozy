@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 20:12+0200\n"
+"POT-Creation-Date: 2021-07-22 22:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,11 +101,11 @@ msgstr ""
 msgid "Play this book"
 msgstr ""
 
-#: cozy/ui/book_detail_view.py:234
+#: cozy/ui/book_detail_view.py:302
 msgid "Downloaded"
 msgstr ""
 
-#: cozy/ui/book_detail_view.py:237 data/ui/book_detail.ui:156
+#: cozy/ui/book_detail_view.py:305 data/ui/book_detail.ui:156
 msgid "Download"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "All files"
 msgstr ""
 
-#: cozy/ui/settings.py:101
+#: cozy/ui/settings.py:103
 msgid "Feedback"
 msgstr ""
 
@@ -225,7 +225,7 @@ msgstr ""
 msgid "Changing audio book location…"
 msgstr ""
 
-#: cozy/model/track.py:37
+#: cozy/model/track.py:38
 msgid "Chapter"
 msgstr ""
 
@@ -245,28 +245,40 @@ msgstr ""
 msgid "GitHub"
 msgstr ""
 
-#: data/ui/book_detail.ui:204
+#: data/ui/book_detail.ui:205
 msgid "Remaining"
 msgstr ""
 
-#: data/ui/book_detail.ui:259
+#: data/ui/book_detail.ui:260
 msgid "Total"
 msgstr ""
 
-#: data/ui/book_detail.ui:275
+#: data/ui/book_detail.ui:276
 msgid "Last played"
 msgstr ""
 
-#: data/ui/book_detail.ui:291
+#: data/ui/book_detail.ui:292
 msgid "Published"
 msgstr ""
 
-#: data/ui/book_detail.ui:325
+#: data/ui/book_detail.ui:338
 msgid "Some or all files of this book cannot be found."
 msgstr ""
 
-#: data/ui/book_detail.ui:348
+#: data/ui/book_detail.ui:361
 msgid "unavailable"
+msgstr ""
+
+#: data/ui/book_detail.ui:472
+msgid "Loading chapters, please wait..."
+msgstr ""
+
+#: data/ui/book_detail.ui:484
+msgid "page1"
+msgstr ""
+
+#: data/ui/book_detail.ui:527
+msgid "page0"
 msgstr ""
 
 #: data/ui/error_reporting.ui:23
@@ -652,6 +664,7 @@ msgid "Continue"
 msgstr ""
 
 #: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
+#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
 msgid "What's new in Cozy"
 msgstr ""
 
@@ -692,10 +705,6 @@ msgstr ""
 
 #: data/ui/whats_new_m4b.ui:107
 msgid "Chapter support will follow in a later update. Stay tuned!"
-msgstr ""
-
-#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
-msgid "What's new in Cozy"
 msgstr ""
 
 #: data/ui/whats_new_m4b_chapter.ui:52
