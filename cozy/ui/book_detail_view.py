@@ -222,8 +222,8 @@ class BookDetailView(Gtk.EventBox):
         self.total_text.set_visible(True)
         self._set_book_download_status()
 
-        self._on_play_changed()
         self._on_current_chapter_changed()
+        self._on_play_changed()
         self._on_book_available_changed()
 
         self.chapters_stack.set_visible_child_name("chapters_wrapper")
