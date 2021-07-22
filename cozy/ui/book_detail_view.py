@@ -90,6 +90,7 @@ class BookDetailView(Gtk.EventBox):
         self._view_model.bind_to("total_text", self._on_times_changed)
         self._view_model.bind_to("playback_speed", self._on_times_changed)
         self._view_model.bind_to("lock_ui", self._on_lock_ui_changed)
+        self._view_model.bind_to("open", self._on_open)
 
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_button_clicked)
@@ -116,8 +117,6 @@ class BookDetailView(Gtk.EventBox):
         self.chapters_stack.set_visible_child_name("chapters_loader")
         self._run_display_chapters_job(book)
 
-        self._main_stack.set_visible_child_name("book_overview")
-
         self._current_selected_chapter = None
 
         self.published_label.set_visible(False)
@@ -135,6 +134,8 @@ class BookDetailView(Gtk.EventBox):
         self._display_external_section()
         self._set_progress()
 
+    def _open_book_overview(self):
+        self._main_stack.set_visible_child_name("book_overview")
         self._toolbar_revealer.set_reveal_child(False)
 
     def _on_play_changed(self):
@@ -319,3 +320,6 @@ class BookDetailView(Gtk.EventBox):
             return True
 
         return False
+
+    def _on_open(self):
+        self._open_book_overview()

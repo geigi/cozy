@@ -152,6 +152,9 @@ class BookDetailViewModel(Observable, EventSender):
     def open_library(self):
         self.emit_event(OpenView.LIBRARY)
 
+    def open_book_detail_view(self):
+        self._notify("open")
+
     def play_book(self):
         self._player.play_pause_book(self.book)
 
