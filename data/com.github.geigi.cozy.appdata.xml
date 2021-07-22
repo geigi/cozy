@@ -49,6 +49,21 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="1.0.4" timestamp="1626983662">
+      <description>
+        <p>
+        Performance improvements for the book detail view and some bugfixes.
+        </p>
+        <ul>
+          <li>Chapters in the book detail view will now be loaded lazily (thanks chris-kobrzak!)</li>
+          <li>Books with a single chapter don't display a chapter number anymore (thanks chris-kobrzak!)</li>
+          <li>Fix: Locals in What's new in Cozy screen (thanks alyssais!)</li>
+          <li>Fix: Catch an error that could occur when a book stops</li>
+          <li>Small performance improvements</li>
+          <li>As always, updated translations thanks to all of the translators!</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.3" timestamp="1622826417">
       <description>
         <p>
