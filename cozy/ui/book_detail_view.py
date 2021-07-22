@@ -148,7 +148,7 @@ class BookDetailView(Gtk.EventBox):
         else:
             log.error("_current_selected_chapter is null. Skipping...")
             reporter.error("book_detail_view",
-                           "_current_selected_chapter was NULL. No ply/pause chapter icon was changed")
+                           "_current_selected_chapter was NULL. No play/pause chapter icon was changed")
 
     def _on_book_available_changed(self):
         info_visibility = not self._view_model.is_book_available
