@@ -57,6 +57,9 @@ class BookDetailViewModel(Observable, EventSender):
 
     @book.setter
     def book(self, value: Book):
+        if self._book == value:
+            return
+
         if self._book:
             self._book.remove_bind("current_chapter", self._on_book_current_chapter_changed)
             self._book.remove_bind("last_played", self._on_book_last_played_changed)
