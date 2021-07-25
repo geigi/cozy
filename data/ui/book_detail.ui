@@ -481,7 +481,7 @@
                   </object>
                   <packing>
                     <property name="name">chapters_loader</property>
-                    <property name="title" translatable="yes">page1</property>
+                    <property name="title" translatable="no">chapters</property>
                   </packing>
                 </child>
                 <child>
