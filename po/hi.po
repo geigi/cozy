@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-30 14:34+0200\n"
+"POT-Creation-Date: 2021-07-22 22:01+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2021\n"
 "Language-Team: Hindi (https://www.transifex.com/geigi/teams/78138/hi/)\n"
@@ -104,11 +104,11 @@ msgstr "ऑडियो पुस्तकें"
 msgid "Play this book"
 msgstr "यह पुस्तक आरंभ करें"
 
-#: cozy/ui/book_detail_view.py:234
+#: cozy/ui/book_detail_view.py:302
 msgid "Downloaded"
 msgstr "डाउनलोड की गई"
 
-#: cozy/ui/book_detail_view.py:237 data/ui/book_detail.ui:156
+#: cozy/ui/book_detail_view.py:305 data/ui/book_detail.ui:156
 msgid "Download"
 msgstr "डाउनलोड"
 
@@ -136,7 +136,7 @@ msgstr "डिस्क"
 msgid "All files"
 msgstr "सभी फाइलें"
 
-#: cozy/ui/settings.py:105
+#: cozy/ui/settings.py:103
 msgid "Feedback"
 msgstr "प्रतिक्रिया"
 
@@ -198,8 +198,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "मीडिया फाइल प्रकार जिनका Cozy द्वारा आयात विफल रहा"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:42
-#: cozy/view_model/library_view_model.py:137
+#: cozy/view_model/library_view_model.py:44
+#: cozy/view_model/library_view_model.py:140
 msgid "All"
 msgstr "सभी"
 
@@ -228,7 +228,7 @@ msgstr "नवीन फाइलें कॉपी करना जारी..
 msgid "Changing audio book location…"
 msgstr "ऑडियो पुस्तक स्थान परिवर्तन जारी..."
 
-#: cozy/model/track.py:25
+#: cozy/model/track.py:38
 msgid "Chapter"
 msgstr "अध्याय"
 
@@ -240,41 +240,49 @@ msgstr "कॉपी करना विफल : ऑडियो पुस्त
 msgid "Cannot copy: Disk is full"
 msgstr "कॉपी करना विफल : डिस्क पर स्पेस नहीं है"
 
-#: cozy/media/files.py:73
+#: cozy/media/files.py:73 cozy/media/files.py:89
 msgid "Cannot copy: Permission denied"
-msgstr "कॉपी करना विफल : अनुमति अस्वीकृत"
-
-#: cozy/media/files.py:89
-msgid "Cannot Copy: Permission denied"
 msgstr "कॉपी करना विफल : अनुमति अस्वीकृत"
 
 #: data/ui/about.ui:16
 msgid "GitHub"
 msgstr "GitHub"
 
-#: data/ui/book_detail.ui:204
+#: data/ui/book_detail.ui:205
 msgid "Remaining"
 msgstr "शेष"
 
-#: data/ui/book_detail.ui:259
+#: data/ui/book_detail.ui:260
 msgid "Total"
 msgstr "कुल"
 
-#: data/ui/book_detail.ui:275
+#: data/ui/book_detail.ui:276
 msgid "Last played"
 msgstr "अंतिम बार प्रयुक्त"
 
-#: data/ui/book_detail.ui:291
+#: data/ui/book_detail.ui:292
 msgid "Published"
 msgstr "प्रकाशित"
 
-#: data/ui/book_detail.ui:325
+#: data/ui/book_detail.ui:338
 msgid "Some or all files of this book cannot be found."
 msgstr "पुस्तक की कुछ या सभी फाइलें प्राप्त करना विफल।"
 
-#: data/ui/book_detail.ui:348
+#: data/ui/book_detail.ui:361
 msgid "unavailable"
 msgstr "अनुपलब्ध"
+
+#: data/ui/book_detail.ui:472
+msgid "Loading chapters, please wait..."
+msgstr "अध्याय लोड करना जारी, कृपया प्रतीक्षा करें..."
+
+#: data/ui/book_detail.ui:484
+msgid "page1"
+msgstr "पृष्ठ 1"
+
+#: data/ui/book_detail.ui:527
+msgid "page0"
+msgstr "पृष्ठ 0"
 
 #: data/ui/error_reporting.ui:23
 msgid "User feedback"
@@ -682,7 +690,8 @@ msgid "Continue"
 msgstr "जारी रखें"
 
 #: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
-msgid "What's new  in Cozy"
+#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
+msgid "What's new in Cozy"
 msgstr "Cozy में नया क्या है?"
 
 #: data/ui/whats_new_importer.ui:52
@@ -731,10 +740,6 @@ msgstr ""
 #: data/ui/whats_new_m4b.ui:107
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr "अध्याय समर्थन भावी अपडेट में सम्मिलित होगा। परियोजना से जुड़े रहें!"
-
-#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
-msgid "What's new in Cozy"
-msgstr "Cozy में नया क्या है?"
 
 #: data/ui/whats_new_m4b_chapter.ui:52
 msgid "Chapter support for m4b audio books."
