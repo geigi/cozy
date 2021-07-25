@@ -609,5 +609,6 @@
     <value key="x-appcenter-color-primary">#FB6542</value>
     <value key="x-appcenter-color-primary-text">#FFFFFF</value>
     <value key="x-appcenter-suggested-price">2</value>
+    <value key="x-appcenter-stripe">pk_live_XJocNlICBfLqHpdZXN0LxlyV00xrhZTbDe</value>
   </custom>
 </component>
