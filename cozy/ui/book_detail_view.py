@@ -275,8 +275,6 @@ class BookDetailView(Gtk.EventBox):
             self.cover_image.props.pixel_size = 250
 
     def _back_button_clicked(self, _):
-        self._chapters_event.clear()
-        self._interrupt_chapters_jobs()
         self._view_model.open_library()
 
     def _interrupt_chapters_jobs(self):
