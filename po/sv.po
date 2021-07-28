@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-03 17:06+0100\n"
+"POT-Creation-Date: 2021-07-25 13:55+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Åke Engelbrektson, 2021\n"
 "Language-Team: Swedish (https://www.transifex.com/geigi/teams/78138/sv/)\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cozy/control/offline_cache.py:188
+#: cozy/control/offline_cache.py:201
 msgid "Copying"
 msgstr "Kopierar"
 
@@ -101,35 +101,31 @@ msgstr[1] "{years} år sedan"
 msgid "Audiobooks"
 msgstr "Ljudböcker"
 
-#: cozy/ui/album_element.py:67 cozy/ui/widgets/search_results.py:100
+#: cozy/ui/album_element.py:65 cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
 msgstr "Spela upp denna bok"
 
-#: cozy/ui/book_detail_view.py:234
+#: cozy/ui/book_detail_view.py:302
 msgid "Downloaded"
 msgstr "Nerladdat"
 
-#: cozy/ui/book_detail_view.py:237 data/ui/book_detail.ui:156
+#: cozy/ui/book_detail_view.py:305 data/ui/book_detail.ui:156
 msgid "Download"
 msgstr "Ladda ner"
 
-#: cozy/ui/book_element.py:37
+#: cozy/ui/book_element.py:33
 msgid "Open book overview"
 msgstr "Öppna boköversikt"
 
-#: cozy/ui/book_element.py:38
-msgid "Currently offline"
-msgstr "Offline just nu"
-
-#: cozy/ui/book_element.py:124
+#: cozy/ui/book_element.py:113
 msgid "Mark as read"
 msgstr "Markera som läst"
 
-#: cozy/ui/book_element.py:127
+#: cozy/ui/book_element.py:116
 msgid "Open in file browser"
 msgstr "Öppna i filhanterare"
 
-#: cozy/ui/book_element.py:130
+#: cozy/ui/book_element.py:119
 msgid "Remove from library"
 msgstr "Ta bort från biblioteket"
 
@@ -137,11 +133,11 @@ msgstr "Ta bort från biblioteket"
 msgid "Disc"
 msgstr "Skiva"
 
-#: cozy/ui/file_not_found_dialog.py:69
+#: cozy/ui/file_not_found_dialog.py:56
 msgid "All files"
 msgstr "Alla filer"
 
-#: cozy/ui/settings.py:87
+#: cozy/ui/settings.py:103
 msgid "Feedback"
 msgstr "Återkoppling"
 
@@ -204,8 +200,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Typ av mediefil som Cozy inte kunde importera"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:43
-#: cozy/view_model/library_view_model.py:137
+#: cozy/view_model/library_view_model.py:44
+#: cozy/view_model/library_view_model.py:140
 msgid "All"
 msgstr "Alla"
 
@@ -234,33 +230,57 @@ msgstr "Kopierar nya filer..."
 msgid "Changing audio book location…"
 msgstr "Ändrar ljudboksplats…"
 
+#: cozy/model/track.py:38
+msgid "Chapter"
+msgstr "Kapitel"
+
+#: cozy/media/files.py:69
+msgid "Cannot copy: Audiobook directory is read only"
+msgstr "Kan inte kopiera: Ljudboksmappen är skrivskyddad."
+
+#: cozy/media/files.py:71
+msgid "Cannot copy: Disk is full"
+msgstr "Kan inte kopiera: Disken är full."
+
+#: cozy/media/files.py:73 cozy/media/files.py:89
+msgid "Cannot copy: Permission denied"
+msgstr "Kan inte kopiera: Behörighet saknas."
+
 #: data/ui/about.ui:16
 msgid "GitHub"
 msgstr "GitHub"
 
-#: data/ui/book_detail.ui:204
+#: data/ui/book_detail.ui:205
 msgid "Remaining"
 msgstr "Återstår"
 
-#: data/ui/book_detail.ui:259
+#: data/ui/book_detail.ui:260
 msgid "Total"
 msgstr "Sammanlagt"
 
-#: data/ui/book_detail.ui:275
+#: data/ui/book_detail.ui:276
 msgid "Last played"
 msgstr "Senast spelad"
 
-#: data/ui/book_detail.ui:291
+#: data/ui/book_detail.ui:292
 msgid "Published"
 msgstr "Publicerad"
 
-#: data/ui/book_detail.ui:325
+#: data/ui/book_detail.ui:338
 msgid "Some or all files of this book cannot be found."
 msgstr "Vissa eller alla filer kan inte hittas till den här boken."
 
-#: data/ui/book_detail.ui:348
+#: data/ui/book_detail.ui:361
 msgid "unavailable"
 msgstr "ej tillgänglig"
+
+#: data/ui/book_detail.ui:472
+msgid "Loading chapters, please wait..."
+msgstr "Läser in kapitel, vänta..."
+
+#: data/ui/book_detail.ui:527
+msgid "page0"
+msgstr "sida0"
 
 #: data/ui/error_reporting.ui:23
 msgid "User feedback"
@@ -330,36 +350,36 @@ msgstr ""
 "- Filen/Filerna är inte giltiga ljudfiler\n"
 "- Filen/Filerna är skadade"
 
-#: data/ui/main_window.ui:121
+#: data/ui/main_window.ui:125
 msgid "Recent"
 msgstr "Tidigare"
 
-#: data/ui/main_window.ui:141
+#: data/ui/main_window.ui:145
 msgid "List of authors"
 msgstr "Lista över författare"
 
-#: data/ui/main_window.ui:157 data/ui/main_window.ui:267
+#: data/ui/main_window.ui:161 data/ui/main_window.ui:271
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "Författare"
 
-#: data/ui/main_window.ui:177
+#: data/ui/main_window.ui:181
 msgid "List of readers"
 msgstr "Lista över uppläsare"
 
-#: data/ui/main_window.ui:193 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:197 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "Uppläsare"
 
-#: data/ui/main_window.ui:247
+#: data/ui/main_window.ui:251
 msgid "List of books"
 msgstr "Lista över böcker"
 
-#: data/ui/main_window.ui:297
+#: data/ui/main_window.ui:301
 msgid "Stay tuned while Cozy is preparing your library…"
 msgstr "Häng kvar medan Cosy förbereder ditt bibliotek..."
 
-#: data/ui/main_window.ui:330
+#: data/ui/main_window.ui:334
 msgid ""
 "Start exploring your library by switching to the Author or Reader view "
 "above."
@@ -367,45 +387,45 @@ msgstr ""
 "Börja utforska ditt bibliotek genom att växla till Författare eller "
 "Uppläsare ovan."
 
-#: data/ui/main_window.ui:375
+#: data/ui/main_window.ui:379
 msgid "Import your Audiobooks"
 msgstr "Importera dina ljudböcker"
 
-#: data/ui/main_window.ui:391
+#: data/ui/main_window.ui:395
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 "Cosy importerar dina ljudböcker automatiskt i en mapp - ditt bibliotek"
 
-#: data/ui/main_window.ui:427 data/ui/main_window.ui:448
+#: data/ui/main_window.ui:431 data/ui/main_window.ui:452
 msgid "Automatically import new audiobooks on startup"
 msgstr "Importera nya ljudböcker automatiskt vid programstart"
 
-#: data/ui/main_window.ui:447
+#: data/ui/main_window.ui:451
 msgid "Auto scan switch"
 msgstr "Automatisk skanning av/på"
 
-#: data/ui/main_window.ui:491
+#: data/ui/main_window.ui:495
 msgid "Drag & Drop"
 msgstr "Dra & släpp"
 
-#: data/ui/main_window.ui:508
+#: data/ui/main_window.ui:512
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr "Dra och släpp dina ljudböcker i Cozy så importeras de automatiskt"
 
-#: data/ui/main_window.ui:531
+#: data/ui/main_window.ui:535
 msgid "Location of your audiobooks"
 msgstr "Plats för dina ljudböcker"
 
-#: data/ui/main_window.ui:552
+#: data/ui/main_window.ui:556
 msgid "Set Audiobooks Directory"
 msgstr "Ange ljudboksmapp"
 
-#: data/ui/main_window.ui:575
+#: data/ui/main_window.ui:579
 msgid "Load audiobooks from a directory, network drive or an external disk."
 msgstr "Läs in ljudböcker från en mapp, nätverksdisk eller en extern disk."
 
-#: data/ui/main_window.ui:593
+#: data/ui/main_window.ui:597
 msgid "You can add more storage locations later in the settings"
 msgstr "Du kan lägga till fler lagringsplatser senare, i inställningarna."
 
@@ -437,139 +457,151 @@ msgstr "Del"
 msgid "Nothing found :("
 msgstr "Inget hittades :("
 
-#: data/ui/settings.ui:95 data/ui/settings.ui:366
+#: data/ui/settings.ui:111 data/ui/settings.ui:382
 msgid "General"
 msgstr "Allmänt"
 
-#: data/ui/settings.ui:140
+#: data/ui/settings.ui:156
 msgid "Dark Mode"
 msgstr "Mörk läge"
 
-#: data/ui/settings.ui:216
+#: data/ui/settings.ui:232
 msgid "Titlebar"
 msgstr "Titelfält"
 
-#: data/ui/settings.ui:261
+#: data/ui/settings.ui:277
 msgid "Display the whole book instead of the current chapter"
 msgstr "Visa hela boken istället för aktuellt kapitel"
 
-#: data/ui/settings.ui:324
+#: data/ui/settings.ui:340
 msgid "Appearance"
 msgstr "Utseende"
 
-#: data/ui/settings.ui:409
+#: data/ui/settings.ui:425
 msgid "Suspend system on timer"
 msgstr "Försätt systemet i vänteläge via tiduret"
 
-#: data/ui/settings.ui:469
+#: data/ui/settings.ui:485
 msgid "Replay 30 seconds"
 msgstr "Repetera 30 sekunder"
 
-#: data/ui/settings.ui:529
+#: data/ui/settings.ui:545
 msgid "Automatic media scan"
 msgstr "Automatisk mediaskanner"
 
-#: data/ui/settings.ui:588
+#: data/ui/settings.ui:604
 msgid "Tags"
 msgstr "Taggar"
 
-#: data/ui/settings.ui:640
+#: data/ui/settings.ui:656
 msgid "Swap author and reader"
 msgstr "Växla författare och uppläsare"
 
-#: data/ui/settings.ui:653
+#: data/ui/settings.ui:669
 msgid "Activate this if author and reader are displayed the wrong way"
 msgstr "Aktivera detta om författare och uppläsare visas fel"
 
-#: data/ui/settings.ui:678
+#: data/ui/settings.ui:694
 msgid "switch author and reader assignment"
 msgstr "växla författar- och läsartilldelning"
 
-#: data/ui/settings.ui:727 data/ui/headerbar.ui:385
+#: data/ui/settings.ui:743
+msgid "Playback"
+msgstr "Uppspelning"
+
+#: data/ui/settings.ui:789
+msgid "Rewind duration"
+msgstr "Varaktighet för bakåtspolning"
+
+#: data/ui/settings.ui:874
+msgid "Forward duration"
+msgstr "Varaktighet för framspolning"
+
+#: data/ui/settings.ui:956 data/ui/headerbar.ui:415
 msgid "Sleep timer"
 msgstr "Insomningsur"
 
-#: data/ui/settings.ui:772
+#: data/ui/settings.ui:1001
 msgid "Fadeout"
 msgstr "Tona ut"
 
-#: data/ui/settings.ui:834
+#: data/ui/settings.ui:1063
 msgid "Fadeout duration"
 msgstr "Uttoningens varaktighet"
 
-#: data/ui/settings.ui:915
+#: data/ui/settings.ui:1144
 msgid "Behaviour"
 msgstr "Beteende"
 
-#: data/ui/settings.ui:942
+#: data/ui/settings.ui:1171
 msgid "Artwork"
 msgstr "Omslag"
 
-#: data/ui/settings.ui:994
+#: data/ui/settings.ui:1223
 msgid "Prefer external images over embedded cover"
 msgstr "Föredra externa bilder framför inbäddade"
 
-#: data/ui/settings.ui:1007
+#: data/ui/settings.ui:1236
 msgid "Use images (cover.jpg, *.png, …) when available"
 msgstr "Använd bilder (cover.jpg, *.png, …) om tillgängligt"
 
-#: data/ui/settings.ui:1090
+#: data/ui/settings.ui:1319
 msgid "Audio books location"
 msgstr "Ljudboksplats"
 
-#: data/ui/settings.ui:1106
+#: data/ui/settings.ui:1335
 msgid "Storage locations"
 msgstr "Lagringsplats"
 
-#: data/ui/settings.ui:1164
+#: data/ui/settings.ui:1393
 msgid "Add location"
 msgstr "Lägg till plats"
 
-#: data/ui/settings.ui:1189 data/ui/settings.ui:1385
+#: data/ui/settings.ui:1418 data/ui/settings.ui:1613
 msgid "Remove location"
 msgstr "Ta bort platsen"
 
-#: data/ui/settings.ui:1225
+#: data/ui/settings.ui:1454
 msgid "Toggle this storage location to be internal/external."
 msgstr "Växla mellan intern och extern lagringsplats"
 
-#: data/ui/settings.ui:1251
+#: data/ui/settings.ui:1480
 msgid "Set as default storage location for new audiobooks"
 msgstr "Ange som standardlagringsplats för nya ljudböcker"
 
-#: data/ui/settings.ui:1304
+#: data/ui/settings.ui:1532
 msgid "Ignore list"
 msgstr "Ignorera lista"
 
-#: data/ui/settings.ui:1348
+#: data/ui/settings.ui:1576
 msgid "Path"
 msgstr "Sökväg"
 
-#: data/ui/settings.ui:1431
+#: data/ui/settings.ui:1659
 msgid "Follow symlinks"
 msgstr "Följ symboliska länkar"
 
-#: data/ui/settings.ui:1463
+#: data/ui/settings.ui:1691
 msgid "Storage"
 msgstr "Lagring"
 
-#: data/ui/settings.ui:1487
+#: data/ui/settings.ui:1715
 msgid "Database"
 msgstr "Databas"
 
-#: data/ui/settings.ui:1539
+#: data/ui/settings.ui:1767
 msgid "Force refresh the database"
 msgstr "Uppdatera databasen"
 
-#: data/ui/settings.ui:1552
+#: data/ui/settings.ui:1780
 msgid "This will force update the metadata of all imported books"
 msgstr "Detta uppdaterar metadata för alla importerade ljudböcker"
 
-#: data/ui/settings.ui:1572
+#: data/ui/settings.ui:1800
 msgid "Force refresh"
 msgstr "Uppdatera"
 
-#: data/ui/settings.ui:1628
+#: data/ui/settings.ui:1856
 msgid "Advanced"
 msgstr "Avancerat"
 
@@ -652,8 +684,9 @@ msgid "Continue"
 msgstr "Fortsätt"
 
 #: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
-msgid "What's new  in Cozy"
-msgstr "Vad är nytt i Cozy"
+#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
+msgid "What's new in Cozy"
+msgstr ""
 
 #: data/ui/whats_new_importer.ui:52
 msgid "A completely rewritten and far more reliable media importer."
@@ -702,6 +735,49 @@ msgstr ""
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr "Kapitelstöd kommer i en senare uppdatering. Håll dig uppdaterad!"
 
+#: data/ui/whats_new_m4b_chapter.ui:52
+msgid "Chapter support for m4b audio books."
+msgstr ""
+
+#: data/ui/whats_new_m4b_chapter.ui:77
+msgid "This version of Cozy features chapter support for m4b audio books!"
+msgstr ""
+
+#: data/ui/whats_new_m4b_chapter.ui:92
+msgid ""
+"If you already have m4b files imported you'll need to start a scan of your "
+"library from the app menu."
+msgstr ""
+
+#: data/ui/whats_new_m4b_chapter.ui:107
+msgid "The chapters will then be detected."
+msgstr ""
+
+#: data/ui/whats_new_library.ui:52
+msgid "An important change in library management"
+msgstr ""
+
+#: data/ui/whats_new_library.ui:77
+msgid ""
+"Previously every file which was imported in your library but couldn't be "
+"found anymore was removed from the library during a scan."
+msgstr ""
+
+#: data/ui/whats_new_library.ui:92
+msgid ""
+"Now audiobooks are not removed from your library automatically anymore. This"
+" prevents accidentally loosing the progress of a audiobook when a file can't"
+" be found temporarily."
+msgstr ""
+
+#: data/ui/whats_new_library.ui:107
+msgid ""
+"To remove an audiobook from the library simply right-click on it and choose "
+"the remove from library option."
+msgstr ""
+"För att ta bort en ljudbok från biblioteket skall du högerklicka på den och "
+"välja Ta bort från biblioteksalternativen."
+
 #: data/ui/seek_bar.ui:20
 msgid "Elapsed time"
 msgstr "Förfluten tid"
@@ -738,99 +814,111 @@ msgstr "Återstående tid"
 msgid "Remaining time of current part"
 msgstr "Återstående tid för aktuell del"
 
-#: data/ui/headerbar.ui:118
-msgid "Rewind 30 seconds"
-msgstr "Spola tillbaka 30 sekunder"
+#: data/ui/headerbar.ui:123
+msgid "Rewind"
+msgstr "Spola tillbaka"
 
-#: data/ui/headerbar.ui:126
+#: data/ui/headerbar.ui:131
 msgid "Rewind button"
 msgstr "Spola tillbaka"
 
-#: data/ui/headerbar.ui:127
-msgid "Jump back 30 seconds"
-msgstr "Hoppa bakåt 30 sekunder"
+#: data/ui/headerbar.ui:132
+msgid "Rewind playback"
+msgstr "Spola tillbaka uppspelning"
 
-#: data/ui/headerbar.ui:144
+#: data/ui/headerbar.ui:149
 msgid "Start playback"
 msgstr "Starta uppspelning"
 
-#: data/ui/headerbar.ui:152
+#: data/ui/headerbar.ui:157
 msgid "Play/Pause Button"
 msgstr "Spela upp/Pausa"
 
-#: data/ui/headerbar.ui:153
+#: data/ui/headerbar.ui:158
 msgid "Start or pause the playback"
 msgstr "Starta eller pausa uppspelning"
 
-#: data/ui/headerbar.ui:184
+#: data/ui/headerbar.ui:174
+msgid "Forward"
+msgstr "Spola fram"
+
+#: data/ui/headerbar.ui:182
+msgid "Forward button"
+msgstr "Framåt"
+
+#: data/ui/headerbar.ui:183
+msgid "Forward Playback"
+msgstr "Spola fram uppspelning"
+
+#: data/ui/headerbar.ui:214
 msgid "Warnings"
 msgstr "Varningar"
 
-#: data/ui/headerbar.ui:229
+#: data/ui/headerbar.ui:259
 msgid "Currently playing"
 msgstr "Nu spelas"
 
-#: data/ui/headerbar.ui:245
+#: data/ui/headerbar.ui:275
 msgid "Booktitle"
 msgstr "Boktitel"
 
-#: data/ui/headerbar.ui:246
+#: data/ui/headerbar.ui:276
 msgid "Title of currently playing book"
 msgstr "Titel på aktuell ljudbok"
 
-#: data/ui/headerbar.ui:272
+#: data/ui/headerbar.ui:302
 msgid "Part name"
 msgstr "Delnamn"
 
-#: data/ui/headerbar.ui:273
+#: data/ui/headerbar.ui:303
 msgid "Title of the currently playing part"
 msgstr "Titel på aktuell ljudboksdel"
 
-#: data/ui/headerbar.ui:306
+#: data/ui/headerbar.ui:336
 msgid "Working…"
 msgstr "Arbetar…"
 
-#: data/ui/headerbar.ui:310
+#: data/ui/headerbar.ui:340
 msgid "Currently working"
 msgstr "Arbetar för närvarande"
 
-#: data/ui/headerbar.ui:327
+#: data/ui/headerbar.ui:357
 msgid "Volume control"
 msgstr "Volymkontroll"
 
-#: data/ui/headerbar.ui:364
+#: data/ui/headerbar.ui:394
 msgid "Playback speed"
 msgstr "Uppspelningshastighet"
 
-#: data/ui/headerbar.ui:395
+#: data/ui/headerbar.ui:425
 msgid "Timer menu button"
 msgstr "Tidmeny"
 
-#: data/ui/headerbar.ui:396
+#: data/ui/headerbar.ui:426
 msgid "Open the sleep timer popover"
 msgstr "Öppna insomningsfönstret"
 
-#: data/ui/headerbar.ui:412
+#: data/ui/headerbar.ui:442
 msgid "Search your library"
 msgstr "Sök i ditt bibliotek"
 
-#: data/ui/headerbar.ui:422
+#: data/ui/headerbar.ui:452
 msgid "Search menu button"
 msgstr "Sökmeny"
 
-#: data/ui/headerbar.ui:423
+#: data/ui/headerbar.ui:453
 msgid "Open the search popover"
 msgstr "Öppna sökfönstret"
 
-#: data/ui/headerbar.ui:438
+#: data/ui/headerbar.ui:468
 msgid "Options"
 msgstr "Alternativ"
 
-#: data/ui/headerbar.ui:449
+#: data/ui/headerbar.ui:479
 msgid "Options menu button"
 msgstr "Alternativmeny"
 
-#: data/ui/headerbar.ui:450
+#: data/ui/headerbar.ui:480
 msgid "Open the options popover"
 msgstr "Öppna inställningsfönstret"
 
@@ -847,3 +935,27 @@ msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr ""
 "Denna ljudbok kommer att tas bort från din hårddisk och från Cozys "
 "bibliotek."
+
+#: data/ui/db_migration_failed.ui:31
+msgid "Close Cozy"
+msgstr "Stäng Cozy"
+
+#: data/ui/db_migration_failed.ui:47
+msgid "Recieve help on GitHub"
+msgstr "Få hjälp på GitHub"
+
+#: data/ui/db_migration_failed.ui:108
+msgid "An error occured while updating the database"
+msgstr "Ett fel inträffade vid uppdatering av databasen"
+
+#: data/ui/db_migration_failed.ui:129
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able to startup.\n"
+"A backup of the database was created before the update and has been restored now.\n"
+"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
+"You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
+"Under en uppdatering av databasen uppstod ett fel och Cozy kommer inte att kunna starta.\n"
+"En säkerhetskopia av databasen skapades före uppdateringen och har nu återställts.\n"
+"Använd version 0.9.5 av Cozy, tills detta problem har lösts.\n"
+"Du kan hjälpa till att lösa problemet genom att rapportera det på GitHub."
