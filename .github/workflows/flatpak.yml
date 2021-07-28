@@ -17,3 +17,4 @@ jobs:
       with:
         bundle: Cozy.flatpak
         manifest-path: com.github.geigi.cozy.json
+        cache-key: "flatpak-builder-${{ github.sha }}"
