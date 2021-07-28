@@ -1,0 +1,943 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.geigi.cozy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Georgios Cojonis <northenore@gmail.com>, 2020
+# Dhmhtrhs Kapatakias <panagiotopoulosbill4@gmail.com>, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.geigi.cozy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-25 13:55+0200\n"
+"PO-Revision-Date: 2019-09-08 09:31+0000\n"
+"Last-Translator: Dhmhtrhs Kapatakias <panagiotopoulosbill4@gmail.com>, 2021\n"
+"Language-Team: Greek (https://www.transifex.com/geigi/teams/78138/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cozy/control/offline_cache.py:201
+msgid "Copying"
+msgstr "Γίνεται αντιγραφή"
+
+#: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
+msgid "min"
+msgstr ""
+
+#: cozy/ui/widgets/sleep_timer.py:65
+msgid "Off"
+msgstr "Απενεργοποιημένο"
+
+#: cozy/tools.py:92 cozy/tools.py:96
+#, python-brace-format
+msgid "{hours} hour"
+msgid_plural "{hours} hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cozy/tools.py:94 cozy/tools.py:98
+#, python-brace-format
+msgid "{minutes} minute"
+msgid_plural "{minutes} minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cozy/tools.py:100
+#, python-brace-format
+msgid "{seconds} second"
+msgid_plural "{seconds} seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cozy/tools.py:102
+msgid "finished"
+msgstr "ολοκληρώθηκε"
+
+#: cozy/tools.py:126
+msgid "never"
+msgstr "ποτέ"
+
+#: cozy/tools.py:128
+msgid "today"
+msgstr "σήμερα"
+
+#: cozy/tools.py:130
+msgid "yesterday"
+msgstr "χθές"
+
+#: cozy/tools.py:132
+#, python-format
+msgid "%s days ago"
+msgstr "πριν από %s μέρες"
+
+#: cozy/tools.py:134
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cozy/tools.py:136
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cozy/tools.py:138
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cozy/application.py:101
+msgid "Audiobooks"
+msgstr "Ηχητικά βιβλία "
+
+#: cozy/ui/album_element.py:65 cozy/ui/widgets/search_results.py:100
+msgid "Play this book"
+msgstr "Αναπαραγωγή  βιβλίου  "
+
+#: cozy/ui/book_detail_view.py:302
+msgid "Downloaded"
+msgstr "Κατεβασμένο"
+
+#: cozy/ui/book_detail_view.py:305 data/ui/book_detail.ui:156
+msgid "Download"
+msgstr "Κατέβασμα"
+
+#: cozy/ui/book_element.py:33
+msgid "Open book overview"
+msgstr "Άνοιγμα επισκόπησης βιβλίου "
+
+#: cozy/ui/book_element.py:113
+msgid "Mark as read"
+msgstr "Μαρκάρισμα ως διαβασμένο"
+
+#: cozy/ui/book_element.py:116
+msgid "Open in file browser"
+msgstr "Άνοιγμα αρχείου στον περιηγητή"
+
+#: cozy/ui/book_element.py:119
+msgid "Remove from library"
+msgstr "Αφαίρεση από τη βιβλιοθήκη"
+
+#: cozy/ui/disk_element.py:26
+msgid "Disc"
+msgstr ""
+
+#: cozy/ui/file_not_found_dialog.py:56
+msgid "All files"
+msgstr "Όλα τα αρχεία"
+
+#: cozy/ui/settings.py:103
+msgid "Feedback"
+msgstr ""
+
+#: cozy/ui/chapter_element.py:23
+msgid "Play this part"
+msgstr "Αναπαραγωγή αυτού του μέρους"
+
+#: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
+#, python-brace-format
+msgid "{storage} is offline."
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:12
+msgid "Disabled"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:13
+msgid "Basic error reporting"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:14
+msgid "Detailed error reporting"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:173
+msgid "Detailed error reporting with import errors"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:19
+msgid "No error or crash reporting."
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:192
+msgid "The following information will be sent in case of an error or crash:"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:25
+msgid "Which type of error occurred"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:26
+msgid "Line of code where an error occurred"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:27
+msgid "Cozy's version"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:28
+msgid "Linux distribution"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:29
+msgid "Desktop environment"
+msgstr ""
+
+#: cozy/ui/widgets/error_reporting.py:30
+msgid "Media type of files that Cozy couldn't import"
+msgstr ""
+
+#: cozy/ui/widgets/filter_list_box.py:20
+#: cozy/view_model/library_view_model.py:44
+#: cozy/view_model/library_view_model.py:140
+msgid "All"
+msgstr "Όλα"
+
+#: cozy/ui/widgets/filter_list_box.py:21
+msgid "Display all books"
+msgstr "Προβολή όλων των βιβλίων"
+
+#: cozy/ui/widgets/search_results.py:73
+msgid "Jump to author "
+msgstr "Μετάβαση στο δημιουργό"
+
+#: cozy/ui/widgets/search_results.py:76
+msgid "Jump to reader "
+msgstr "Μετάβαση στον αναγνώστη"
+
+#: cozy/view_model/headerbar_view_model.py:75
+msgid "Importing Audiobooks"
+msgstr "Εισάγονται ηχητικά βιβλία"
+
+#: cozy/view_model/headerbar_view_model.py:84
+#: cozy/view_model/headerbar_view_model.py:100
+msgid "Copying new files…"
+msgstr ""
+
+#: cozy/view_model/headerbar_view_model.py:91
+msgid "Changing audio book location…"
+msgstr "Γίνεται αλλαγή της τοποθεσίας του audiobook..."
+
+#: cozy/model/track.py:38
+msgid "Chapter"
+msgstr ""
+
+#: cozy/media/files.py:69
+msgid "Cannot copy: Audiobook directory is read only"
+msgstr ""
+
+#: cozy/media/files.py:71
+msgid "Cannot copy: Disk is full"
+msgstr ""
+
+#: cozy/media/files.py:73 cozy/media/files.py:89
+msgid "Cannot copy: Permission denied"
+msgstr ""
+
+#: data/ui/about.ui:16
+msgid "GitHub"
+msgstr "GitHub"
+
+#: data/ui/book_detail.ui:205
+msgid "Remaining"
+msgstr "Απομένουν"
+
+#: data/ui/book_detail.ui:260
+msgid "Total"
+msgstr "Σύνολο"
+
+#: data/ui/book_detail.ui:276
+msgid "Last played"
+msgstr "Πιο πρόσφατη αναπαραγωγή"
+
+#: data/ui/book_detail.ui:292
+msgid "Published"
+msgstr "Εκδόθηκε "
+
+#: data/ui/book_detail.ui:338
+msgid "Some or all files of this book cannot be found."
+msgstr ""
+
+#: data/ui/book_detail.ui:361
+msgid "unavailable"
+msgstr ""
+
+#: data/ui/book_detail.ui:472
+msgid "Loading chapters, please wait..."
+msgstr ""
+
+#: data/ui/book_detail.ui:527
+msgid "page0"
+msgstr ""
+
+#: data/ui/error_reporting.ui:23
+msgid "User feedback"
+msgstr ""
+
+#: data/ui/error_reporting.ui:66
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"You can help improve Cozy by contributing information in case of errors and "
+"crashes. "
+msgstr ""
+
+#: data/ui/error_reporting.ui:80
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Contributing this information is optional and completely anonymous. We will "
+"never collect personal data, files you import or any information that could "
+"identify you."
+msgstr ""
+
+#: data/ui/error_reporting.ui:95
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Cozy is opensource and the user feedback source code can be inspected here: "
+msgstr ""
+
+#: data/ui/file_not_found.ui:19 data/ui/delete_book_dialog.ui:31
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: data/ui/file_not_found.ui:32
+msgid "Locate"
+msgstr "Εύρεση"
+
+#: data/ui/file_not_found.ui:86
+msgid "File not found"
+msgstr "Το αρχείο δε βρέθηκε "
+
+#: data/ui/file_not_found.ui:119
+msgid "This file could not be found. Do you want to locate it manually?"
+msgstr "Αυτό το αρχείο δε βρέθηκε. Θέλετε να το εντοπίσετε ο ίδιος;"
+
+#: data/ui/import_failed.ui:27
+msgid "Ok"
+msgstr "Εντάξει"
+
+#: data/ui/import_failed.ui:81
+msgid "Some files could not be imported"
+msgstr "Κάποια αρχεία δε φορτώθηκαν"
+
+#: data/ui/import_failed.ui:134
+msgid ""
+"This can have multiple reasons:\n"
+"- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
+"- The file(s) are no valid audio files\n"
+"- The file(s) are corrupt"
+msgstr ""
+"Μπορεί να υπάρχουν πολλαπλοί λόγοι για Αυτό:\n"
+"- O τύπος ηχητικού αρχείου μπορεί να μην υποστηρίζεται \n"
+"- Το μονοπάτι ή το όνομα του αρχείου μπορεί να περιέχει χαρακτήρες που να μην περιλαμβάνονται στην utf-8 κωδικοποίησή.\n"
+"- Το αρχείο/τα αρχεία μπορεί να μην είναι έγκυρα ηχητικά αρχεία\n"
+"- Το αρχείο/τα αρχεία μπορεί να έχουν υποστεί βλάβη "
+
+#: data/ui/main_window.ui:125
+msgid "Recent"
+msgstr "Πρόσφατα"
+
+#: data/ui/main_window.ui:145
+msgid "List of authors"
+msgstr "Λίστα δημιουργών"
+
+#: data/ui/main_window.ui:161 data/ui/main_window.ui:271
+#: data/ui/search_popover.ui:107
+msgid "Author"
+msgstr "Δημιουργός"
+
+#: data/ui/main_window.ui:181
+msgid "List of readers"
+msgstr "Λίστα αναγνωστών"
+
+#: data/ui/main_window.ui:197 data/ui/search_popover.ui:201
+msgid "Reader"
+msgstr "Αναγνώστης"
+
+#: data/ui/main_window.ui:251
+msgid "List of books"
+msgstr "Λίστα βιβλίων"
+
+#: data/ui/main_window.ui:301
+msgid "Stay tuned while Cozy is preparing your library…"
+msgstr ""
+
+#: data/ui/main_window.ui:334
+msgid ""
+"Start exploring your library by switching to the Author or Reader view "
+"above."
+msgstr ""
+
+#: data/ui/main_window.ui:379
+msgid "Import your Audiobooks"
+msgstr "Εισάγετε τα ηχητικά σας βιβλία "
+
+#: data/ui/main_window.ui:395
+msgid ""
+"Cozy automatically imports your audiobooks in one directory - your library"
+msgstr "Το Cozy αυτομάτως εισάγει τα ηχητικά σας βιβλία στη βιβλιοθήκη σας "
+
+#: data/ui/main_window.ui:431 data/ui/main_window.ui:452
+msgid "Automatically import new audiobooks on startup"
+msgstr "Αυτόματη εισαγωγή νέων ηχητικών βιβλίων με την έναρξη"
+
+#: data/ui/main_window.ui:451
+msgid "Auto scan switch"
+msgstr "Μοχλός αυτόματης σάρωσης"
+
+#: data/ui/main_window.ui:495
+msgid "Drag & Drop"
+msgstr ""
+
+#: data/ui/main_window.ui:512
+msgid "Drag your audiobooks into cozy and they will be automatically imported"
+msgstr "Σύρτε τα βιβλία σας μέσα στο cozy και θα εισαχθούν αυτόματα"
+
+#: data/ui/main_window.ui:535
+msgid "Location of your audiobooks"
+msgstr "Τοποθεσία των ηχητικών βιβλίων σας "
+
+#: data/ui/main_window.ui:556
+msgid "Set Audiobooks Directory"
+msgstr "Επιλογή τοποθεσίας με ηχητικά βιβλία "
+
+#: data/ui/main_window.ui:579
+msgid "Load audiobooks from a directory, network drive or an external disk."
+msgstr ""
+"Φορτώστε ηχητικά βιβλία από κάποιο αρχείο, από το διαδίκτυο ή από εξωτερικό "
+"δίσκο  "
+
+#: data/ui/main_window.ui:597
+msgid "You can add more storage locations later in the settings"
+msgstr ""
+"Θα έχετε τη δυνατότητά να προσθέσετε και άλλες θέσεις αποθήκευσής αργότερα "
+"από τις ρυθμίσεις"
+
+#: data/ui/search_popover.ui:24
+msgid "Search"
+msgstr "Εύρεση "
+
+#: data/ui/search_popover.ui:36
+msgid "Search box"
+msgstr "Κουτί εύρεσης "
+
+#: data/ui/search_popover.ui:37
+msgid "Search your audiobook library"
+msgstr "Ψάξτε στη βιβλιοθήκη των ηχητικών σας βιβλίων "
+
+#: data/ui/search_popover.ui:67
+msgid "Which book are you looking for?"
+msgstr "Για ποιο βιβλίο ψάχνετε;"
+
+#: data/ui/search_popover.ui:154
+msgid "Book"
+msgstr "Βιβλίο"
+
+#: data/ui/search_popover.ui:248
+msgid "Part"
+msgstr ""
+
+#: data/ui/search_popover.ui:295
+msgid "Nothing found :("
+msgstr "Δε βρέθηκε αποτέλεσμα :("
+
+#: data/ui/settings.ui:111 data/ui/settings.ui:382
+msgid "General"
+msgstr "Γενικά"
+
+#: data/ui/settings.ui:156
+msgid "Dark Mode"
+msgstr "Σκοτεινή λειτουργία"
+
+#: data/ui/settings.ui:232
+msgid "Titlebar"
+msgstr ""
+
+#: data/ui/settings.ui:277
+msgid "Display the whole book instead of the current chapter"
+msgstr ""
+
+#: data/ui/settings.ui:340
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+#: data/ui/settings.ui:425
+msgid "Suspend system on timer"
+msgstr ""
+
+#: data/ui/settings.ui:485
+msgid "Replay 30 seconds"
+msgstr ""
+
+#: data/ui/settings.ui:545
+msgid "Automatic media scan"
+msgstr "Αυτόματη σάρωση πολυμέσων"
+
+#: data/ui/settings.ui:604
+msgid "Tags"
+msgstr "Ετικέτες"
+
+#: data/ui/settings.ui:656
+msgid "Swap author and reader"
+msgstr "Εναλλαγή δημιουργού και αναγνώστη"
+
+#: data/ui/settings.ui:669
+msgid "Activate this if author and reader are displayed the wrong way"
+msgstr ""
+"Ενεργοποιήστε αυτό αν ο δημιουργός και ο αναγνώστης εμφανίζονται με λάθος "
+"τρόπο"
+
+#: data/ui/settings.ui:694
+msgid "switch author and reader assignment"
+msgstr "εναλλαγή ανάθεσης δημιουργού και αναγνώστη"
+
+#: data/ui/settings.ui:743
+msgid "Playback"
+msgstr ""
+
+#: data/ui/settings.ui:789
+msgid "Rewind duration"
+msgstr ""
+
+#: data/ui/settings.ui:874
+msgid "Forward duration"
+msgstr ""
+
+#: data/ui/settings.ui:956 data/ui/headerbar.ui:415
+msgid "Sleep timer"
+msgstr "Χρονοδιακόπτης ύπνου"
+
+#: data/ui/settings.ui:1001
+msgid "Fadeout"
+msgstr "Σταδιακό ξεθώριασμα ήχου"
+
+#: data/ui/settings.ui:1063
+msgid "Fadeout duration"
+msgstr "Διάρκεια σταδιακού ξεθωριάσματος ήχου"
+
+#: data/ui/settings.ui:1144
+msgid "Behaviour"
+msgstr "Συμπεριφορά"
+
+#: data/ui/settings.ui:1171
+msgid "Artwork"
+msgstr ""
+
+#: data/ui/settings.ui:1223
+msgid "Prefer external images over embedded cover"
+msgstr ""
+
+#: data/ui/settings.ui:1236
+msgid "Use images (cover.jpg, *.png, …) when available"
+msgstr "Χρήση εικόνων (cover.jpg, *.png …) όταν είναι διαθέσιμες"
+
+#: data/ui/settings.ui:1319
+msgid "Audio books location"
+msgstr "Τοποθεσία βιβλίων ήχου"
+
+#: data/ui/settings.ui:1335
+msgid "Storage locations"
+msgstr "Τοποθεσίες αποθήκευσης"
+
+#: data/ui/settings.ui:1393
+msgid "Add location"
+msgstr "Προσθήκη τοποθεσίας"
+
+#: data/ui/settings.ui:1418 data/ui/settings.ui:1613
+msgid "Remove location"
+msgstr "Αφαίρεση τοποθεσίας"
+
+#: data/ui/settings.ui:1454
+msgid "Toggle this storage location to be internal/external."
+msgstr "Αλλαγή αυτής της τοποθεσίας αποθήκευσης σε εσωτερική/εξωτερική"
+
+#: data/ui/settings.ui:1480
+msgid "Set as default storage location for new audiobooks"
+msgstr "Ορισμός ως προεπιλεγμένη τοποθεσία αποθήκευσης για νέα βιβλία"
+
+#: data/ui/settings.ui:1532
+msgid "Ignore list"
+msgstr ""
+
+#: data/ui/settings.ui:1576
+msgid "Path"
+msgstr ""
+
+#: data/ui/settings.ui:1659
+msgid "Follow symlinks"
+msgstr ""
+
+#: data/ui/settings.ui:1691
+msgid "Storage"
+msgstr "Αποθηκευτικός χώρος"
+
+#: data/ui/settings.ui:1715
+msgid "Database"
+msgstr "Βάση Δεδομένων"
+
+#: data/ui/settings.ui:1767
+msgid "Force refresh the database"
+msgstr "Εξαναγκασμένη ανανέωση βάσης δεδομένων"
+
+#: data/ui/settings.ui:1780
+msgid "This will force update the metadata of all imported books"
+msgstr ""
+"Αυτή η ενέργεια θα ανανεώσει τα μεταδεδομένα όλων των εισαγμένων βιβλίων"
+
+#: data/ui/settings.ui:1800
+msgid "Force refresh"
+msgstr "Εξαναγκασμένη ανανέωση"
+
+#: data/ui/settings.ui:1856
+msgid "Advanced"
+msgstr "Για προχωρημένους"
+
+#: data/ui/timer_popover.ui:37
+msgid "Timer duration"
+msgstr "Διάρκεια χρονοδιακόπτη"
+
+#: data/ui/timer_popover.ui:49
+msgid "Timer duration slider"
+msgstr "Slider διάρκειας χρονοδιακόπτη"
+
+#: data/ui/timer_popover.ui:50
+msgid "Set the sleep timer duration in minutes"
+msgstr "Επιλογή διάρκειας χρονοδιακόπτη ύπνου σε λεπτά"
+
+#: data/ui/timer_popover.ui:116
+msgid "Stop after current chapter"
+msgstr "Διακοπή μετά από τρέχον κεφάλαιο"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr "Ενεργοποίηση ελέγχου ενέργειας συστήματος"
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+"Είδος ενέργειας όταν ο χρονοδιακόπτης τελειώσει.\n"
+"η \"απενεργοποίηση\" θα προσπαθήσει να κλείσει το σύστημά σας\n"
+"η \"αναστολή\" θα προσπαθήσει να αναστείλει το σύστημά σας."
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+"Είδος ενέργειας συστήματος\n"
+"που θα συμβεί"
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr "αναστολή"
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr "απενεργοποίηση"
+
+#: data/ui/titlebar_menu.ui:7
+msgid "_Scan Library"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:13
+msgid "_Hide unavailable books"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr ""
+
+#: data/ui/titlebar_menu.ui:33
+msgid "_Quit"
+msgstr ""
+
+#: data/ui/whats_new.ui:8
+msgid "Whats new?"
+msgstr ""
+
+#: data/ui/whats_new.ui:21
+msgid "Continue"
+msgstr ""
+
+#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
+#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
+msgid "What's new in Cozy"
+msgstr ""
+
+#: data/ui/whats_new_importer.ui:52
+msgid "A completely rewritten and far more reliable media importer."
+msgstr ""
+
+#: data/ui/whats_new_importer.ui:77
+msgid ""
+"Did you experience audio files that couldn't be imported? Drag & Drop those "
+"files onto Cozy or use the application menu in the titlebar to rescan your "
+"audiobook directories!"
+msgstr ""
+
+#: data/ui/whats_new_importer.ui:92
+msgid "Supported media files currently are mp3, m4a, flac, ogg, opus and wav."
+msgstr ""
+
+#: data/ui/whats_new_importer.ui:107
+msgid "More to come in a later update."
+msgstr ""
+
+#: data/ui/whats_new_m4b.ui:52
+msgid "Basic support for m4b audio books."
+msgstr ""
+
+#: data/ui/whats_new_m4b.ui:77
+msgid ""
+"Many of you have been waiting for it: Support for m4b audio books! This "
+"version features basic support for m4b files without chapter support."
+msgstr ""
+
+#: data/ui/whats_new_m4b.ui:92
+msgid ""
+"Drag & Drop your m4b files onto Cozy or use the application menu in the "
+"titlebar to rescan your audiobook directories."
+msgstr ""
+
+#: data/ui/whats_new_m4b.ui:107
+msgid "Chapter support will follow in a later update. Stay tuned!"
+msgstr ""
+
+#: data/ui/whats_new_m4b_chapter.ui:52
+msgid "Chapter support for m4b audio books."
+msgstr ""
+
+#: data/ui/whats_new_m4b_chapter.ui:77
+msgid "This version of Cozy features chapter support for m4b audio books!"
+msgstr ""
+
+#: data/ui/whats_new_m4b_chapter.ui:92
+msgid ""
+"If you already have m4b files imported you'll need to start a scan of your "
+"library from the app menu."
+msgstr ""
+
+#: data/ui/whats_new_m4b_chapter.ui:107
+msgid "The chapters will then be detected."
+msgstr ""
+
+#: data/ui/whats_new_library.ui:52
+msgid "An important change in library management"
+msgstr ""
+
+#: data/ui/whats_new_library.ui:77
+msgid ""
+"Previously every file which was imported in your library but couldn't be "
+"found anymore was removed from the library during a scan."
+msgstr ""
+
+#: data/ui/whats_new_library.ui:92
+msgid ""
+"Now audiobooks are not removed from your library automatically anymore. This"
+" prevents accidentally loosing the progress of a audiobook when a file can't"
+" be found temporarily."
+msgstr ""
+
+#: data/ui/whats_new_library.ui:107
+msgid ""
+"To remove an audiobook from the library simply right-click on it and choose "
+"the remove from library option."
+msgstr ""
+
+#: data/ui/seek_bar.ui:20
+msgid "Elapsed time"
+msgstr "Παρελθών χρόνος"
+
+#: data/ui/seek_bar.ui:28
+msgid "Time elapsed"
+msgstr "Παρελθών χρόνος"
+
+#: data/ui/seek_bar.ui:29
+msgid "Elapsed time of current part"
+msgstr "Παρελθών χρόνος τρέχοντος μέρους"
+
+#: data/ui/seek_bar.ui:45
+msgid "Jump to position in current chapter"
+msgstr "Μετάβαση σε θέση στο τρέχον κεφάλαιο"
+
+#: data/ui/seek_bar.ui:56
+msgid "Position slider"
+msgstr "Ρυθμιστής θέσεως  "
+
+#: data/ui/seek_bar.ui:57
+msgid "Position of the current part in seconds"
+msgstr "Θέση τρέχοντος μέρους σε δευτερόλεπτα"
+
+#: data/ui/seek_bar.ui:76
+msgid "Remaining time"
+msgstr "Εναπομένων χρόνος"
+
+#: data/ui/seek_bar.ui:83
+msgid "Time remaining"
+msgstr "Εναπομένων χρόνος"
+
+#: data/ui/seek_bar.ui:84
+msgid "Remaining time of current part"
+msgstr "Εναπομένων χρόνος τρέχοντος μέρους"
+
+#: data/ui/headerbar.ui:123
+msgid "Rewind"
+msgstr ""
+
+#: data/ui/headerbar.ui:131
+msgid "Rewind button"
+msgstr "Κουμπί επαναφοράς"
+
+#: data/ui/headerbar.ui:132
+msgid "Rewind playback"
+msgstr ""
+
+#: data/ui/headerbar.ui:149
+msgid "Start playback"
+msgstr "Έναρξη αναπαραγωγής "
+
+#: data/ui/headerbar.ui:157
+msgid "Play/Pause Button"
+msgstr "Κουμπί Έναρξης/Παύσης "
+
+#: data/ui/headerbar.ui:158
+msgid "Start or pause the playback"
+msgstr "Έναρξη ή παύση της αναπαραγωγής "
+
+#: data/ui/headerbar.ui:174
+msgid "Forward"
+msgstr ""
+
+#: data/ui/headerbar.ui:182
+msgid "Forward button"
+msgstr ""
+
+#: data/ui/headerbar.ui:183
+msgid "Forward Playback"
+msgstr ""
+
+#: data/ui/headerbar.ui:214
+msgid "Warnings"
+msgstr "Προειδοποίησες "
+
+#: data/ui/headerbar.ui:259
+msgid "Currently playing"
+msgstr "Τρέχων αναπαραγωγή "
+
+#: data/ui/headerbar.ui:275
+msgid "Booktitle"
+msgstr "Τίτλος βιβλίου"
+
+#: data/ui/headerbar.ui:276
+msgid "Title of currently playing book"
+msgstr "Τίτλος αναπαραγόμενου βιβλίου"
+
+#: data/ui/headerbar.ui:302
+msgid "Part name"
+msgstr "Όνομα μέρους"
+
+#: data/ui/headerbar.ui:303
+msgid "Title of the currently playing part"
+msgstr "Τίτλος του τρέχοντος μέρους"
+
+#: data/ui/headerbar.ui:336
+msgid "Working…"
+msgstr "Σε επεξεργασία…"
+
+#: data/ui/headerbar.ui:340
+msgid "Currently working"
+msgstr "Υπό επεξεργασία…"
+
+#: data/ui/headerbar.ui:357
+msgid "Volume control"
+msgstr "Ρυθμιστής εντάσεως "
+
+#: data/ui/headerbar.ui:394
+msgid "Playback speed"
+msgstr "Ταχύτητα αναπαραγωγής"
+
+#: data/ui/headerbar.ui:425
+msgid "Timer menu button"
+msgstr "Κουμπί μενού χρονοδιακόπτη"
+
+#: data/ui/headerbar.ui:426
+msgid "Open the sleep timer popover"
+msgstr ""
+
+#: data/ui/headerbar.ui:442
+msgid "Search your library"
+msgstr "Αναζήτηση στη βιβλιοθήκη σας"
+
+#: data/ui/headerbar.ui:452
+msgid "Search menu button"
+msgstr "Κουμπί μενού αναζήτησης"
+
+#: data/ui/headerbar.ui:453
+msgid "Open the search popover"
+msgstr ""
+
+#: data/ui/headerbar.ui:468
+msgid "Options"
+msgstr "Επιλογές"
+
+#: data/ui/headerbar.ui:479
+msgid "Options menu button"
+msgstr "Κουμπί μενού επιλογών"
+
+#: data/ui/headerbar.ui:480
+msgid "Open the options popover"
+msgstr ""
+
+#: data/ui/delete_book_dialog.ui:45
+msgid "Delete Audiobook"
+msgstr ""
+
+#: data/ui/delete_book_dialog.ui:105
+msgid "Are you sure you want to delete the selected audiobook?"
+msgstr ""
+
+#: data/ui/delete_book_dialog.ui:126
+msgid "The audiobook will be removed from your disk and from Cozy's library."
+msgstr ""
+
+#: data/ui/db_migration_failed.ui:31
+msgid "Close Cozy"
+msgstr ""
+
+#: data/ui/db_migration_failed.ui:47
+msgid "Recieve help on GitHub"
+msgstr ""
+
+#: data/ui/db_migration_failed.ui:108
+msgid "An error occured while updating the database"
+msgstr ""
+
+#: data/ui/db_migration_failed.ui:129
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able to startup.\n"
+"A backup of the database was created before the update and has been restored now.\n"
+"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
+"You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
