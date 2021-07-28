@@ -5,8 +5,8 @@
 # 
 # Translators:
 # luigi bozzo <looeegee@gmail.com>, 2020
-# albanobattistella <albano_battistella@hotmail.com>, 2021
 # Julian Geywitz <github@geigi.de>, 2021
+# albanobattistella <albano_battistella@hotmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-25 13:55+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Julian Geywitz <github@geigi.de>, 2021\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>, 2021\n"
 "Language-Team: Italian (https://www.transifex.com/geigi/teams/78138/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,8 +53,8 @@ msgstr[1] "{minuti} minuti"
 #, python-brace-format
 msgid "{seconds} second"
 msgid_plural "{seconds} seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{secondi} secondi"
+msgstr[1] "{seconds} seconds"
 
 #: cozy/tools.py:102
 msgid "finished"
@@ -276,7 +276,7 @@ msgstr "non disponibile"
 
 #: data/ui/book_detail.ui:472
 msgid "Loading chapters, please wait..."
-msgstr ""
+msgstr "Caricamento capitoli, attendere prego..."
 
 #: data/ui/book_detail.ui:527
 msgid "page0"
