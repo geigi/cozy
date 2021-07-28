@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2020
 # abuyop <abuyop@gmail.com>, 2021
+# Julian Geywitz <github@geigi.de>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 20:12+0200\n"
+"POT-Creation-Date: 2021-07-25 13:55+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: abuyop <abuyop@gmail.com>, 2021\n"
+"Last-Translator: Julian Geywitz <github@geigi.de>, 2021\n"
 "Language-Team: Malay (Malaysia) (https://www.transifex.com/geigi/teams/78138/ms_MY/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,11 +99,11 @@ msgstr "Buku audio"
 msgid "Play this book"
 msgstr "Baca buku ini"
 
-#: cozy/ui/book_detail_view.py:234
+#: cozy/ui/book_detail_view.py:302
 msgid "Downloaded"
 msgstr "Dimuat Turun"
 
-#: cozy/ui/book_detail_view.py:237 data/ui/book_detail.ui:156
+#: cozy/ui/book_detail_view.py:305 data/ui/book_detail.ui:156
 msgid "Download"
 msgstr "Muat Turun"
 
@@ -131,7 +131,7 @@ msgstr "Cakera"
 msgid "All files"
 msgstr "Semua fail"
 
-#: cozy/ui/settings.py:101
+#: cozy/ui/settings.py:103
 msgid "Feedback"
 msgstr "Maklum Balas"
 
@@ -142,7 +142,7 @@ msgstr "Baca bahagian ini"
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
 msgid "{storage} is offline."
-msgstr "{storage} diluar talian."
+msgstr "{storage} di luar talian."
 
 #: cozy/ui/widgets/error_reporting.py:12
 msgid "Disabled"
@@ -224,7 +224,7 @@ msgstr "Menyalin fail-fail baharu..."
 msgid "Changing audio book location…"
 msgstr "Mengubah lokasi buku audio..."
 
-#: cozy/model/track.py:37
+#: cozy/model/track.py:38
 msgid "Chapter"
 msgstr "Bab"
 
@@ -244,29 +244,37 @@ msgstr "Tidak dapat salin: Keizinan dinafikan"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: data/ui/book_detail.ui:204
+#: data/ui/book_detail.ui:205
 msgid "Remaining"
 msgstr "Berbaki"
 
-#: data/ui/book_detail.ui:259
+#: data/ui/book_detail.ui:260
 msgid "Total"
 msgstr "Jumlah"
 
-#: data/ui/book_detail.ui:275
+#: data/ui/book_detail.ui:276
 msgid "Last played"
 msgstr "Terakhir dimainkan"
 
-#: data/ui/book_detail.ui:291
+#: data/ui/book_detail.ui:292
 msgid "Published"
 msgstr "Diterbitkan"
 
-#: data/ui/book_detail.ui:325
+#: data/ui/book_detail.ui:338
 msgid "Some or all files of this book cannot be found."
 msgstr "Beberapa atau semua fail bagi buku ini tidak ditemui."
 
-#: data/ui/book_detail.ui:348
+#: data/ui/book_detail.ui:361
 msgid "unavailable"
 msgstr "tidak tersedia"
+
+#: data/ui/book_detail.ui:472
+msgid "Loading chapters, please wait..."
+msgstr ""
+
+#: data/ui/book_detail.ui:527
+msgid "page0"
+msgstr "muka0"
 
 #: data/ui/error_reporting.ui:23
 msgid "User feedback"
@@ -289,8 +297,8 @@ msgid ""
 "identify you."
 msgstr ""
 "Penyumbangan maklumat ini adalah pilihan dan sepenuhnya awanama. Kami tidak "
-"sesekali mengutip data  peribadi, fail atau apa jua maklumat yang anda "
-"import yang boleh mengenal pasti diri anda."
+"sesekali mengutip data  peribadi, fail atau apa jua maklumat yang diimport "
+"yang boleh menyebabkan identiti diri anda terdedah."
 
 #: data/ui/error_reporting.ui:95
 msgctxt "Error and crash reporting dialog"
@@ -298,7 +306,7 @@ msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
 "Cozy adalah bersumber terbuka dan kod sumber maklum balas pengguna boleh "
-"diperiksa di sini:"
+"perolehi di sini:"
 
 #: data/ui/file_not_found.ui:19 data/ui/delete_book_dialog.ui:31
 msgid "Cancel"
@@ -392,7 +400,7 @@ msgstr "Import secara automatik buku audio ketika permulaan"
 
 #: data/ui/main_window.ui:451
 msgid "Auto scan switch"
-msgstr "Tukaran auto imbas"
+msgstr "Peralihan auto imbas"
 
 #: data/ui/main_window.ui:495
 msgid "Drag & Drop"
@@ -531,7 +539,7 @@ msgstr "Kerja Seni"
 
 #: data/ui/settings.ui:1223
 msgid "Prefer external images over embedded cover"
-msgstr "Utamakan imej luar dari kulit terbenam"
+msgstr "Utamakan imej luar berbanding kulit terbenam"
 
 #: data/ui/settings.ui:1236
 msgid "Use images (cover.jpg, *.png, …) when available"
@@ -555,7 +563,7 @@ msgstr "Buang lokasi"
 
 #: data/ui/settings.ui:1454
 msgid "Toggle this storage location to be internal/external."
-msgstr "Togol lokasi storan ini ke dalaman/luaran."
+msgstr "Togol lokasi storan ini sama ada dalaman/luaran."
 
 #: data/ui/settings.ui:1480
 msgid "Set as default storage location for new audiobooks"
@@ -676,7 +684,8 @@ msgid "Continue"
 msgstr "Teruskan"
 
 #: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
-msgid "What's new  in Cozy"
+#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
+msgid "What's new in Cozy"
 msgstr "Yang terbaharu dalam Cozy"
 
 #: data/ui/whats_new_importer.ui:52
@@ -726,10 +735,6 @@ msgstr ""
 #: data/ui/whats_new_m4b.ui:107
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr "Sokongan bab akan ada dalam kemas kini akan datang. Harap bersabar!"
-
-#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
-msgid "What's new in Cozy"
-msgstr "Yang terbaharu dalam Cozy"
 
 #: data/ui/whats_new_m4b_chapter.ui:52
 msgid "Chapter support for m4b audio books."
@@ -799,7 +804,7 @@ msgstr "Lompat ke kedudukan dalam bab semasa"
 
 #: data/ui/seek_bar.ui:56
 msgid "Position slider"
-msgstr "Lungsur kedudukan"
+msgstr "Pelungsur kedudukan"
 
 #: data/ui/seek_bar.ui:57
 msgid "Position of the current part in seconds"
@@ -957,6 +962,6 @@ msgid ""
 "You can help resolve this problem by reporting an issue on GitHub."
 msgstr ""
 "Ketika kemas kini pangkalan data, satu ralat berlaku dan menyebabkan Cozy gagal dimulakan.\n"
-"Satu sandar pangkalan data telah dicipta sebelum kemas kini dan sekarang dipulihkan.\n"
+"Ada satu sandar pangkalan data telah dicipta sebelum kemas kini ini dan sekarang dipulihkan menggunakannya.\n"
 "Sehingga isu ini diselesaikan, sila guna versi Cozy 0.9.5.\n"
-"Anda boleh membantu kami dengan melaporkan isu di Github."
+"Anda boleh membantu kami dengan melaporkan isu ini di Github."
