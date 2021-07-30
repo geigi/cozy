@@ -49,8 +49,8 @@ class LibraryView:
         self._main_stack.connect("notify::visible-child", self._on_main_stack_changed)
         self._book_box.set_sort_func(self._view_model.display_book_sort)
         self._book_box.set_filter_func(self._view_model.display_book_filter)
-        self._author_box.connect("row-selected", self._apply_selected_filter)
-        self._reader_box.connect("row-selected", self._apply_selected_filter)
+        self._author_box.connect("row-activated", self._apply_selected_filter)
+        self._reader_box.connect("row-activated", self._apply_selected_filter)
 
     def _connect_view_model(self):
         self._view_model.bind_to("library_view_mode", self._on_library_view_mode_changed)
