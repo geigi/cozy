@@ -181,8 +181,14 @@ class Importer(EventSender):
                     yield file
                     continue
 
-                if int(os.path.getmtime(file)) > chapter.modified:
-                    yield file
+                try:
+                    mtime = os.path.getmtime(file)
+                    if mtime > chapter.modified:
+                        yield file
+                except Exception as e:
+                    log.debug(e)
+                    log.info("Could not get modified timestamp for file {}".format(file))
+                    continue
 
                 continue
 
