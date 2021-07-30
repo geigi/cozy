@@ -166,6 +166,17 @@
       ]
     },
     {
+      "name": "libdazzle",
+      "buildsystem": "meson",
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://gitlab.gnome.org/GNOME/libdazzle.git",
+          "tag": "3.40.0"
+        }
+      ]
+    },
+    {
       "name": "cozy",
       "buildsystem": "meson",
       "sources": [
