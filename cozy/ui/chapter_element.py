@@ -25,7 +25,6 @@ class ChapterElement(Gtk.EventBox):
         self.connect("leave-notify-event", self._on_leave_notify)
         self.connect("button-press-event", self._on_button_press)
         self.set_tooltip_text(_("Play this part"))
-        self.props.width_request = 400
 
         # This box contains all content
         self.box = Gtk.Box()
