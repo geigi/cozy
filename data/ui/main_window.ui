@@ -34,110 +34,109 @@
                     <property name="can-focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
+                    <property name="mode-transition-duration">200</property>
+                    <property name="can-swipe-back">True</property>
+                    <property name="can-swipe-forward">True</property>
                     <child>
-                      <object class="GtkRevealer" id="sort_stack_revealer">
+                      <object class="GtkStack" id="sort_stack">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="transition-type">slide-left</property>
+                        <property name="vexpand">True</property>
+                        <property name="hhomogeneous">False</property>
+                        <property name="transition-type">crossfade</property>
+                        <property name="interpolate-size">True</property>
                         <child>
-                          <object class="GtkStack" id="sort_stack">
-                            <property name="width-request">250</property>
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="vexpand">True</property>
-                            <property name="transition-type">crossfade</property>
-                            <property name="interpolate-size">True</property>
+                            <property name="halign">start</property>
+                            <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="hexpand">True</property>
-                                <property name="vexpand">True</property>
-                                <property name="orientation">vertical</property>
-                                <child>
-                                  <placeholder/>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="name">recent</property>
-                                <property name="title" translatable="yes">Recent</property>
-                                <property name="icon-name">clock-outline-symbolic</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScrolledWindow" id="sort_author_scroller">
-                                <property name="name">sort_author_scroller</property>
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <property name="shadow-type">in</property>
-                                <child>
-                                  <object class="GtkViewport" id="sort_author_viewport">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">False</property>
-                                    <child>
-                                      <object class="FilterListBox" id="author_box">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <child internal-child="accessible">
-                                          <object class="AtkObject" id="author_box-atkobject">
-                                            <property name="AtkObject::accessible-name" translatable="yes">List of authors</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="sidebar"/>
-                                        </style>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="no_frame"/>
-                                </style>
-                              </object>
-                              <packing>
-                                <property name="name">author</property>
-                                <property name="title" translatable="yes">Author</property>
-                                <property name="icon-name">account-symbolic</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScrolledWindow" id="sort_reader_scroller">
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <property name="shadow-type">in</property>
-                                <child>
-                                  <object class="GtkViewport" id="sort_reader_viewport">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">False</property>
-                                    <child>
-                                      <object class="FilterListBox" id="reader_box">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <child internal-child="accessible">
-                                          <object class="AtkObject" id="reader_box-atkobject">
-                                            <property name="AtkObject::accessible-name" translatable="yes">List of readers</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="sidebar"/>
-                                        </style>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="no_frame"/>
-                                </style>
-                              </object>
-                              <packing>
-                                <property name="name">reader</property>
-                                <property name="title" translatable="yes">Reader</property>
-                                <property name="icon-name">microphone-symbolic</property>
-                                <property name="position">2</property>
-                              </packing>
+                              <placeholder/>
                             </child>
                           </object>
+                          <packing>
+                            <property name="name">recent</property>
+                            <property name="title" translatable="yes">Recent</property>
+                            <property name="icon-name">clock-outline-symbolic</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkScrolledWindow" id="sort_author_scroller">
+                            <property name="name">sort_author_scroller</property>
+                            <property name="width-request">250</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="hscrollbar-policy">never</property>
+                            <property name="shadow-type">in</property>
+                            <child>
+                              <object class="GtkViewport" id="sort_author_viewport">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <child>
+                                  <object class="FilterListBox" id="author_box">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="author_box-atkobject">
+                                        <property name="AtkObject::accessible-name" translatable="yes">List of authors</property>
+                                      </object>
+                                    </child>
+                                    <style>
+                                      <class name="sidebar"/>
+                                    </style>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="no_frame"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="name">author</property>
+                            <property name="title" translatable="yes">Author</property>
+                            <property name="icon-name">account-symbolic</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkScrolledWindow" id="sort_reader_scroller">
+                            <property name="width-request">250</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="hscrollbar-policy">never</property>
+                            <property name="shadow-type">in</property>
+                            <child>
+                              <object class="GtkViewport" id="sort_reader_viewport">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <child>
+                                  <object class="FilterListBox" id="reader_box">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="reader_box-atkobject">
+                                        <property name="AtkObject::accessible-name" translatable="yes">List of readers</property>
+                                      </object>
+                                    </child>
+                                    <style>
+                                      <class name="sidebar"/>
+                                    </style>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="no_frame"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="name">reader</property>
+                            <property name="title" translatable="yes">Reader</property>
+                            <property name="icon-name">microphone-symbolic</property>
+                            <property name="position">2</property>
+                          </packing>
                         </child>
                       </object>
                       <packing>
