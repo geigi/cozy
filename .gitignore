@@ -2,6 +2,7 @@
 .idea/
 _build/
 .buildconfig
+.flatpak-builder
 build/
 app/
 bin/
