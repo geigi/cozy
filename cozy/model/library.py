@@ -107,9 +107,9 @@ class Library(EventSender):
         File.update(modified=0).execute()
 
     def _load_all_books(self):
-        for book_db_obj in BookModel.select(BookModel.id):
+        for book_db_obj in BookModel.select():
             try:
-                book = Book(self._db, book_db_obj.id)
+                book = Book(self._db, book_db_obj)
                 book.add_listener(self._on_book_event)
                 self._books.append(book)
             except BookIsEmpty:

@@ -2,6 +2,8 @@
 
 Cozy is a modern audiobook player for Linux. 
 
+Head over to [Matrix](https://matrix.to/#/#cozy:gnome.org?via=matrix.org&via=gnome.org) to join the conversation.
+
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot1.png)
 
 ## Here are some of the current features:
@@ -78,6 +80,7 @@ flatpak --user override --filesystem=/media com.github.geigi.cozy
 
 ## A big thanks
 To the contributors on GitHub:
+- alyssais
 - AsavarTzeth
 - Fatih20
 - NathanBnm

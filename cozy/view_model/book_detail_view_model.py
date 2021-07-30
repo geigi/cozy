@@ -57,6 +57,9 @@ class BookDetailViewModel(Observable, EventSender):
 
     @book.setter
     def book(self, value: Book):
+        if self._book == value:
+            return
+
         if self._book:
             self._book.remove_bind("current_chapter", self._on_book_current_chapter_changed)
             self._book.remove_bind("last_played", self._on_book_last_played_changed)
@@ -146,6 +149,9 @@ class BookDetailViewModel(Observable, EventSender):
         else:
             self._offline_cache.remove(self._book)
 
+    def open_library(self):
+        self.emit_event(OpenView.LIBRARY)
+
     def play_book(self):
         self._player.play_pause_book(self.book)
 
@@ -195,7 +201,7 @@ class BookDetailViewModel(Observable, EventSender):
 
     def _on_offline_cache_event(self, event, message):
         try:
-            if message.id != self._book.db_object.id:
+            if message.id != self._book.id:
                 return
         except Exception as e:
             return

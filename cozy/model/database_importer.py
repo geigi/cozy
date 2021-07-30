@@ -91,7 +91,7 @@ class DatabaseImporter:
                 book_db_objects.add(book)
 
             try:
-                book_model = Book(self._db, book.id)
+                book_model = Book(self._db, book)
                 progress = book_model.progress
             except BookIsEmpty:
                 progress = 0
@@ -192,7 +192,7 @@ class DatabaseImporter:
 
     def _update_book_position(self, book: BookModel, progress: int):
         try:
-            book_model = Book(self._db, book.id)
+            book_model = Book(self._db, book)
         except BookIsEmpty:
             log.error("Could not restore book position because book is empty")
             return

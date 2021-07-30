@@ -1,6 +1,6 @@
 import logging
 
-from peewee import SqliteDatabase
+from peewee import SqliteDatabase, DoesNotExist
 
 from cozy.db.file import File
 from cozy.db.track import Track as TrackModel
@@ -17,14 +17,15 @@ class TrackInconsistentData(Exception):
 
 
 class Track(Chapter):
-    def __init__(self, db: SqliteDatabase, id: int):
+    def __init__(self, db: SqliteDatabase, track: TrackModel):
         super().__init__()
         self._db: SqliteDatabase = db
-        self.id: int = id
+        self.id: int = track.id
 
-        self._db_object: TrackModel = TrackModel.get(self.id)
-        self._track_to_file_db_object: TrackToFile = TrackToFile.get_or_none(TrackToFile.track == self.id)
-        if not self._track_to_file_db_object:
+        self._db_object: TrackModel = track
+        try:
+            self._track_to_file_db_object: TrackToFile = track.track_to_file.get()
+        except DoesNotExist:
             log.error("Inconsistent DB, TrackToFile object is missing. Deleting this track.")
             self._db_object.delete_instance(recursive=True, delete_nullable=False)
             raise TrackInconsistentData

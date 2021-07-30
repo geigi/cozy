@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2019
+# Julian Geywitz <github@geigi.de>, 2021
 # Heimen Stoffels <vistausss@fastmail.com>, 2021
 # 
 #, fuzzy
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-30 14:34+0200\n"
+"POT-Creation-Date: 2021-07-25 13:55+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
@@ -105,11 +105,11 @@ msgstr "Luisterboeken"
 msgid "Play this book"
 msgstr "Boek beluisteren"
 
-#: cozy/ui/book_detail_view.py:234
+#: cozy/ui/book_detail_view.py:302
 msgid "Downloaded"
 msgstr "Gedownload"
 
-#: cozy/ui/book_detail_view.py:237 data/ui/book_detail.ui:156
+#: cozy/ui/book_detail_view.py:305 data/ui/book_detail.ui:156
 msgid "Download"
 msgstr "Downloaden"
 
@@ -137,7 +137,7 @@ msgstr "Schijf"
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: cozy/ui/settings.py:105
+#: cozy/ui/settings.py:103
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -200,8 +200,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "De soorten bestanden die Cozy niet kon importeren"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:42
-#: cozy/view_model/library_view_model.py:137
+#: cozy/view_model/library_view_model.py:44
+#: cozy/view_model/library_view_model.py:140
 msgid "All"
 msgstr "Alles"
 
@@ -230,7 +230,7 @@ msgstr "Bezig met kopiëren van nieuwe bestanden…"
 msgid "Changing audio book location…"
 msgstr "Bezig met wijzigen van luisterboeklocatie…"
 
-#: cozy/model/track.py:25
+#: cozy/model/track.py:38
 msgid "Chapter"
 msgstr "Hoofdstuk"
 
@@ -242,41 +242,45 @@ msgstr "Het kopiëren is mislukt: de luisterboekmap is alleen-lezen"
 msgid "Cannot copy: Disk is full"
 msgstr "Het kopiëren is mislukt: geen vrije ruimte meer op de schijf"
 
-#: cozy/media/files.py:73
+#: cozy/media/files.py:73 cozy/media/files.py:89
 msgid "Cannot copy: Permission denied"
-msgstr "Het kopiëren is mislukt: de toegang is geweigerd"
-
-#: cozy/media/files.py:89
-msgid "Cannot Copy: Permission denied"
 msgstr "Het kopiëren is mislukt: de toegang is geweigerd"
 
 #: data/ui/about.ui:16
 msgid "GitHub"
 msgstr "GitHub"
 
-#: data/ui/book_detail.ui:204
+#: data/ui/book_detail.ui:205
 msgid "Remaining"
 msgstr "Resterend"
 
-#: data/ui/book_detail.ui:259
+#: data/ui/book_detail.ui:260
 msgid "Total"
 msgstr "Totaal"
 
-#: data/ui/book_detail.ui:275
+#: data/ui/book_detail.ui:276
 msgid "Last played"
 msgstr "Laatst beluisterd"
 
-#: data/ui/book_detail.ui:291
+#: data/ui/book_detail.ui:292
 msgid "Published"
 msgstr "Gepubliceerd"
 
-#: data/ui/book_detail.ui:325
+#: data/ui/book_detail.ui:338
 msgid "Some or all files of this book cannot be found."
 msgstr "Het boek, of enkele bestanden daarvan, is niet aangetroffen."
 
-#: data/ui/book_detail.ui:348
+#: data/ui/book_detail.ui:361
 msgid "unavailable"
 msgstr "niet beschikbaar"
+
+#: data/ui/book_detail.ui:472
+msgid "Loading chapters, please wait..."
+msgstr "Bezig met laden van hoofdstukken…"
+
+#: data/ui/book_detail.ui:527
+msgid "page0"
+msgstr "pagina0"
 
 #: data/ui/error_reporting.ui:23
 msgid "User feedback"
@@ -682,7 +686,8 @@ msgid "Continue"
 msgstr "Doorgaan"
 
 #: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
-msgid "What's new  in Cozy"
+#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
+msgid "What's new in Cozy"
 msgstr "Wijzigingslog"
 
 #: data/ui/whats_new_importer.ui:52
@@ -735,10 +740,6 @@ msgstr ""
 #: data/ui/whats_new_m4b.ui:107
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr "Hoofdstukondersteuning volgt binnenkort. Nog even geduld!"
-
-#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
-msgid "What's new in Cozy"
-msgstr "Wijzigingslog"
 
 #: data/ui/whats_new_m4b_chapter.ui:52
 msgid "Chapter support for m4b audio books."

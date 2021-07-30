@@ -14,7 +14,7 @@
       <object class="GtkLabel">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">What's new  in Cozy</property>
+        <property name="label" translatable="yes">What's new in Cozy</property>
         <style>
           <class name="h1"/>
         </style>

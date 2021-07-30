@@ -25,6 +25,31 @@ class ChapterElement(Gtk.EventBox):
         self.connect("leave-notify-event", self._on_leave_notify)
         self.connect("button-press-event", self._on_button_press)
         self.set_tooltip_text(_("Play this part"))
+        self.props.width_request = 400
+
+        # This box contains all content
+        self.box = Gtk.Box()
+        self.box.set_orientation(Gtk.Orientation.HORIZONTAL)
+        self.box.set_spacing(3)
+        self.box.set_halign(Gtk.Align.FILL)
+        self.box.set_valign(Gtk.Align.CENTER)
+
+        # These are the widgets that contain data
+        self.play_img = Gtk.Image()
+        no_label = Gtk.Label()
+        title_label = Gtk.Label()
+        dur_label = Gtk.Label()
+
+        self.play_img.set_margin_right(5)
+        self.play_img.props.width_request = 16
+
+        if self.chapter.number > 0:
+            no_label.set_text(str(self.chapter.number))
+        no_label.props.margin = 4
+        no_label.set_margin_right(7)
+        no_label.set_margin_left(0)
+        no_label.set_size_request(30, -1)
+        no_label.set_xalign(1)
 
         self.number_label.set_text(str(self.chapter.number))
         self.title_label.set_text(self.chapter.name)

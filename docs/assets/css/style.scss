@@ -13,7 +13,7 @@ $body-link-color: #f28143 !default;
 $code-bg-color: #111111 !default;
 $code-text-color: #eeeeee !default;
 
-@import "{{ site.theme }}";
+@import "jekyll-theme-cayman";
 
 .outer {
     display: inline-block;

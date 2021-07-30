@@ -11,6 +11,7 @@
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot1.png)
 
 Cozy is a modern audiobook player for Linux.
+Head over to [Matrix](https://matrix.to/#/#cozy:gnome.org?via=matrix.org&via=gnome.org) to join the conversation.
 
 ## Here are some of the current features:
 - **Import** your audiobooks into Cozy to browse them comfortably
@@ -31,11 +32,12 @@ Cozy is a modern audiobook player for Linux.
 |--------|:---------:|
 | Flatpak | <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a> |
 | openSUSE | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> |
-| Arch Linux | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> |
+| Arch Linux (AUR) | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> |
 | VoidLinux | <a href="https://github.com/void-linux/void-packages/tree/master/srcpkgs/cozy">cozy</a> |
 | Solus | <a href="https://dev.getsol.us/source/cozy/">cozy</a> |
 | MX Linux | <center><a href="https://forum.mxlinux.org/viewtopic.php?p=621071#p621071">Cozy</a> |
 | elementaryOS | Currently out of date. Please use Flatpak for now. |
+| Ubuntu (PPA) | <center><a href="https://launchpad.net/~cozy-team/+archive/ubuntu/cozy">cozy</a> |
 
 
 ## elementaryOS
@@ -137,6 +139,7 @@ flatpak --user override --filesystem=/media com.github.geigi.cozy
 
 ## A big thanks
 To the contributors on GitHub:
+- alyssais
 - AsavarTzeth
 - Fatih20
 - NathanBnm
