@@ -33,7 +33,6 @@ class BookDetailView(Gtk.EventBox):
     author_label: Gtk.Label = Gtk.Template.Child()
     last_played_label: Gtk.Label = Gtk.Template.Child()
     total_label: Gtk.Label = Gtk.Template.Child()
-    total_text: Gtk.Label = Gtk.Template.Child()
 
     remaining_label: Gtk.Label = Gtk.Template.Child()
     book_progress_bar: Gtk.ProgressBar = Gtk.Template.Child()
@@ -126,7 +125,6 @@ class BookDetailView(Gtk.EventBox):
         self.published_label.set_visible(False)
         self.published_text.set_visible(False)
         self.total_label.set_visible(False)
-        self.total_text.set_visible(False)
         self.unavailable_box.set_visible(False)
 
         self.book_label.set_text(book.name)
