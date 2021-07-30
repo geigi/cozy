@@ -4,7 +4,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# luigi bozzo <looeegee@gmail.com>, 2020
 # albanobattistella <albano_battistella@hotmail.com>, 2021
 # Julian Geywitz <github@geigi.de>, 2021
 # 
@@ -39,22 +38,22 @@ msgstr "Off"
 #, python-brace-format
 msgid "{hours} hour"
 msgid_plural "{hours} hours"
-msgstr[0] "(ore) ore"
+msgstr[0] "{hours} ore"
 msgstr[1] "{hours} ore"
 
 #: cozy/tools.py:94 cozy/tools.py:98
 #, python-brace-format
 msgid "{minutes} minute"
 msgid_plural "{minutes} minutes"
-msgstr[0] "{minuti} minuti"
-msgstr[1] "{minuti} minuti"
+msgstr[0] "{minutes} minuti"
+msgstr[1] "{minutes} minuti"
 
 #: cozy/tools.py:100
 #, python-brace-format
 msgid "{seconds} second"
 msgid_plural "{seconds} seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{seconds} secondi"
+msgstr[1] "{seconds} secondi"
 
 #: cozy/tools.py:102
 msgid "finished"
@@ -276,7 +275,7 @@ msgstr "non disponibile"
 
 #: data/ui/book_detail.ui:472
 msgid "Loading chapters, please wait..."
-msgstr ""
+msgstr "Caricamento capitoli, attendere prego..."
 
 #: data/ui/book_detail.ui:527
 msgid "page0"
