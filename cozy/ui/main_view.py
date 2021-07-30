@@ -143,16 +143,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.sort_stack = self.window_builder.get_object("sort_stack")
         self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
 
-        self.sort_stack_revealer = self.window_builder.get_object(
-            "sort_stack_revealer")
-        # This fixes a bug where otherwise expand is
-        # somehow set to true internally
-        # but is still showing false in the inspector
-        self.sort_stack_revealer.props.expand = True
-        self.sort_stack_revealer.props.expand = False
-
-        self.sort_stack_switcher = self.window_builder.get_object(
-            "sort_stack_switcher")
         self.no_media_file_chooser = self.window_builder.get_object(
             "no_media_file_chooser")
         self.no_media_file_chooser.connect(

@@ -40,7 +40,6 @@ class LibraryView:
         self._main_stack: Gtk.Stack = self._builder.get_object("main_stack")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
-        #self._toolbar_revealer: Gtk.Revealer = self._builder.get_object("toolbar_revealer")
         self._author_box: FilterListBox = self._builder.get_object("author_box")
         self._reader_box: FilterListBox = self._builder.get_object("reader_box")
         self._library_leaflet: Handy.Leaflet = self._builder.get_object("library_leaflet")
@@ -133,7 +132,6 @@ class LibraryView:
         # https://stackoverflow.com/questions/22178524/gtk-named-stack-childs/22182843#22182843
         self._main_stack.props.visible_child_name = main_view_page
         self._filter_stack.set_visible_child_name(visible_child_name)
-        self._filter_stack_revealer.set_reveal_child(reveal_filter_box)
 
         if active_filter_box:
             self._apply_selected_filter(active_filter_box, active_filter_box.get_selected_row())
