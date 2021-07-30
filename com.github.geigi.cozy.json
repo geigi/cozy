@@ -146,7 +146,7 @@
         {
           "type": "git",
           "url": "https://gitlab.gnome.org/GNOME/libhandy",
-          "tag": "1.0.3"
+          "tag": "1.2.3"
         }
       ]
     },
@@ -160,8 +160,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/elementary/granite/archive/5.5.0.tar.gz",
-          "sha256": "0c376520c7d462fca05213a14970ee1075fea4a78062a33b47529e2647cd5557"
+          "url": "https://github.com/elementary/granite/archive/6.1.0.tar.gz",
+          "sha256": "0b69ffdec1d0b61704d65bb82f8415b61f733b21eef3c7c6844f30b50791e6e9"
         }
       ]
     },
