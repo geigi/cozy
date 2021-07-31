@@ -56,6 +56,96 @@
           </packing>
         </child>
         <child>
+          <object class="GtkBox" id="title_box">
+            <property name="name">s</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="tooltip-text" translatable="yes">Currently playing</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">2</property>
+            <child>
+              <object class="GtkLabel" id="title_label">
+                <property name="name">title_book</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="ellipsize">end</property>
+                <property name="width-chars">15</property>
+                <property name="single-line-mode">True</property>
+                <property name="max-width-chars">20</property>
+                <property name="xalign">0</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="title_label-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Booktitle</property>
+                    <property name="AtkObject::accessible-description" translatable="yes">Title of currently playing book</property>
+                  </object>
+                </child>
+                <style>
+                  <class name="title"/>
+                  <class name="no_padding"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="subtitle_label">
+                <property name="name">title_track</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="ellipsize">end</property>
+                <property name="width-chars">15</property>
+                <property name="single-line-mode">True</property>
+                <property name="max-width-chars">20</property>
+                <property name="xalign">0</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="subtitle_label-atkobject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Part name</property>
+                    <property name="AtkObject::accessible-description" translatable="yes">Title of the currently playing part</property>
+                  </object>
+                </child>
+                <style>
+                  <class name="subtitle"/>
+                  <class name="no_padding"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="orientation">vertical</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkBox" id="control_box">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -172,84 +262,6 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox" id="title_box">
-            <property name="name">s</property>
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="tooltip-text" translatable="yes">Currently playing</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="orientation">vertical</property>
-            <property name="spacing">2</property>
-            <child>
-              <object class="GtkLabel" id="title_label">
-                <property name="name">title_book</property>
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">center</property>
-                <property name="ellipsize">end</property>
-                <property name="width-chars">5</property>
-                <property name="single-line-mode">True</property>
-                <property name="max-width-chars">30</property>
-                <property name="xalign">0</property>
-                <attributes>
-                  <attribute name="weight" value="bold"/>
-                </attributes>
-                <child internal-child="accessible">
-                  <object class="AtkObject" id="title_label-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Booktitle</property>
-                    <property name="AtkObject::accessible-description" translatable="yes">Title of currently playing book</property>
-                  </object>
-                </child>
-                <style>
-                  <class name="title"/>
-                  <class name="no_padding"/>
-                </style>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="subtitle_label">
-                <property name="name">title_track</property>
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">center</property>
-                <property name="ellipsize">end</property>
-                <property name="width-chars">5</property>
-                <property name="single-line-mode">True</property>
-                <property name="max-width-chars">30</property>
-                <property name="xalign">0</property>
-                <child internal-child="accessible">
-                  <object class="AtkObject" id="subtitle_label-atkobject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Part name</property>
-                    <property name="AtkObject::accessible-description" translatable="yes">Title of the currently playing part</property>
-                  </object>
-                </child>
-                <style>
-                  <class name="subtitle"/>
-                  <class name="no_padding"/>
-                </style>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
             <property name="position">3</property>
           </packing>
         </child>
@@ -277,6 +289,7 @@
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="valign">center</property>
+        <property name="margin-start">20</property>
         <property name="spacing">3</property>
         <child>
           <object class="GtkVolumeButton" id="volume_button">
