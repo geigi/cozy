@@ -49,8 +49,15 @@ class LibraryView:
         self._main_stack.connect("notify::visible-child", self._on_main_stack_changed)
         self._book_box.set_sort_func(self._view_model.display_book_sort)
         self._book_box.set_filter_func(self._view_model.display_book_filter)
-        self._author_box.connect("row-activated", self._apply_selected_filter)
-        self._reader_box.connect("row-activated", self._apply_selected_filter)
+
+        # We need to connect to row-activated because it will be emitted when the user clicks on a row
+        # which is already activated. This is important for the mobile view
+        # row-selected is needed because when setting the row using select_row (e.g. when searching), the row-activated
+        # signal doesn't emit.
+        self._author_box.connect("row-activated", self._on_filter_row_activated)
+        self._reader_box.connect("row-activated", self._on_filter_row_activated)
+        self._author_box.connect("row-selected", self._on_filter_row_activated)
+        self._reader_box.connect("row-selected", self._on_filter_row_activated)
 
     def _connect_view_model(self):
         self._view_model.bind_to("library_view_mode", self._on_library_view_mode_changed)
@@ -134,7 +141,7 @@ class LibraryView:
         self._filter_stack.set_visible_child_name(visible_child_name)
 
         if active_filter_box:
-            self._apply_selected_filter(active_filter_box, active_filter_box.get_selected_row())
+            self._apply_selected_filter(active_filter_box.get_selected_row())
 
         self._invalidate_filters()
 
@@ -150,13 +157,18 @@ class LibraryView:
         self._book_box.invalidate_filter()
         self._book_box.invalidate_sort()
 
-    def _apply_selected_filter(self, _, row):
+    def _apply_selected_filter(self, row):
         if not row:
             return
 
         self._view_model.selected_filter = row.data
         self._invalidate_filters()
+
+    def _on_filter_row_activated(self, _, row):
+        self._apply_selected_filter(row)
         self._view_model.library_page = LibraryPage.BOOKS
+
+        return True
 
     def _select_filter_row(self):
         if self._view_model.library_view_mode == LibraryViewMode.AUTHOR:
