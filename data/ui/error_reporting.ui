@@ -19,13 +19,41 @@
     <property name="orientation">vertical</property>
     <property name="spacing">10</property>
     <child>
-      <object class="GtkLabel">
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="label" translatable="yes">User feedback</property>
-        <style>
-          <class name="h1"/>
-        </style>
+        <property name="halign">center</property>
+        <property name="spacing">15</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">User feedback</property>
+            <style>
+              <class name="h3"/>
+              <class name="bold"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="pixel-size">32</property>
+            <property name="icon-name">book-alert-symbolic</property>
+            <property name="icon_size">3</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
       </object>
       <packing>
         <property name="expand">False</property>
@@ -51,87 +79,63 @@
                 <property name="can-focus">False</property>
                 <property name="margin-start">10</property>
                 <property name="margin-end">10</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">10</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="margin-top">40</property>
-                    <property name="spacing">20</property>
+                    <property name="valign">center</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">10</property>
                     <child>
-                      <object class="GtkImage">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixel-size">64</property>
-                        <property name="icon-name">message-flash-symbolic</property>
+                        <property name="halign">start</property>
+                        <property name="valign">start</property>
+                        <property name="label" translatable="yes" context="Error and crash reporting dialog">You can help improve Cozy by contributing information in case of errors and crashes. </property>
+                        <property name="justify">fill</property>
+                        <property name="wrap">True</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="fill">True</property>
+                        <property name="fill">False</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">10</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="halign">start</property>
-                            <property name="valign">start</property>
-                            <property name="label" translatable="yes" context="Error and crash reporting dialog">You can help improve Cozy by contributing information in case of errors and crashes. </property>
-                            <property name="justify">fill</property>
-                            <property name="wrap">True</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="Error and crash reporting dialog">Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.</property>
-                            <property name="justify">fill</property>
-                            <property name="wrap">True</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="halign">start</property>
-                            <property name="label" translatable="yes" context="Error and crash reporting dialog">Cozy is opensource and the user feedback source code can be inspected here: </property>
-                            <property name="justify">fill</property>
-                            <property name="wrap">True</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
+                        <property name="label" translatable="yes" context="Error and crash reporting dialog">Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.</property>
+                        <property name="justify">fill</property>
+                        <property name="wrap">True</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="fill">True</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes" context="Error and crash reporting dialog">Cozy is opensource and the user feedback source code can be inspected here: </property>
+                        <property name="justify">fill</property>
+                        <property name="wrap">True</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
@@ -169,6 +173,8 @@
               <object class="GtkSeparator">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="margin-start">5</property>
+                <property name="margin-end">5</property>
               </object>
             </child>
           </object>
@@ -177,18 +183,16 @@
           <object class="GtkListBoxRow">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-top">15</property>
-            <property name="margin-bottom">15</property>
             <property name="activatable">False</property>
             <property name="selectable">False</property>
             <child>
               <object class="GtkScale" id="verbose_scale">
-                <property name="width-request">400</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="halign">start</property>
-                <property name="margin-start">94</property>
-                <property name="margin-end">10</property>
+                <property name="margin-start">20</property>
+                <property name="margin-end">20</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
                 <property name="adjustment">verbose_adjustment</property>
                 <property name="restrict-to-fill-level">False</property>
                 <property name="fill-level">0</property>
@@ -208,6 +212,8 @@
               <object class="GtkSeparator">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="margin-start">5</property>
+                <property name="margin-end">5</property>
               </object>
             </child>
           </object>
@@ -225,8 +231,10 @@
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">center</property>
-                <property name="margin-start">94</property>
+                <property name="margin-start">10</property>
                 <property name="margin-end">10</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">10</property>
                 <child>
@@ -287,7 +295,7 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="position">1</property>
+        <property name="position">2</property>
       </packing>
     </child>
   </template>
