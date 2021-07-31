@@ -56,6 +56,7 @@ class Headerbar(HeaderBar):
         self._headerbar_view_model.bind_to("work_message", self._on_work_message_changed)
         self._headerbar_view_model.bind_to("can_navigate_back", self._on_can_navigate_back_changed)
         self._headerbar_view_model.bind_to("show_library_filter", self._on_show_library_filter_changed)
+        self._headerbar_view_model.bind_to("lock_ui", self._on_lock_ui_changed)
 
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_clicked)
@@ -95,3 +96,6 @@ class Headerbar(HeaderBar):
     def _on_title_visible_changed(self, widget, param):
         visible = widget.get_property(param.name)
         self._library_mobile_revealer.set_reveal_child(visible)
+
+    def _on_lock_ui_changed(self):
+        self.search_button.set_sensitive(not self._headerbar_view_model.lock_ui)
