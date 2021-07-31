@@ -49,26 +49,34 @@ class WhatsNewWindow(Gtk.Window):
     def _fill_window(self):
         self.children = []
 
+        last_launched_version = version.parse(self.app_settings.last_launched_version)
+
+        if type(last_launched_version) is version.LegacyVersion:
+            self._fill_welcome()
+        else:
+            self._fill_whats_new(last_launched_version)
+
+    def _fill_welcome(self):
+        from cozy.ui.widgets.welcome import Welcome
+        from cozy.ui.widgets.error_reporting import ErrorReporting
+        self.children.append(Welcome())
+        self.children.append(ErrorReporting())
+
+    def _fill_whats_new(self, last_launched_version: version.Version):
         from cozy.ui.widgets.whats_new_m4b_chapter import INTRODUCED
-        if version.parse(self.app_settings.last_launched_version) < version.parse(INTRODUCED):
+        if last_launched_version < version.parse(INTRODUCED):
             from cozy.ui.widgets.whats_new_m4b_chapter import WhatsNewM4BChapter
             self.children.append(WhatsNewM4BChapter())
 
         from cozy.ui.widgets.whats_new_library import INTRODUCED
-        if version.parse(self.app_settings.last_launched_version) < version.parse(INTRODUCED):
+        if last_launched_version < version.parse(INTRODUCED):
             from cozy.ui.widgets.whats_new_library import WhatsNewLibrary
             self.children.append(WhatsNewLibrary())
 
         from cozy.ui.widgets.whats_new_m4b import INTRODUCED
-        if version.parse(self.app_settings.last_launched_version) < version.parse(INTRODUCED):
+        if last_launched_version < version.parse(INTRODUCED):
             from cozy.ui.widgets.whats_new_m4b import WhatsNewM4B
             self.children.append(WhatsNewM4B())
-
-        if not self.app_settings.last_launched_version:
-            from cozy.ui.widgets.whats_new_importer import WhatsNewImporter
-            from cozy.ui.widgets.error_reporting import ErrorReporting
-            self.children.append(WhatsNewImporter())
-            self.children.append(ErrorReporting())
 
     def __on_continue_clicked(self, widget):
         if len(self.children) == self.page + 1:
