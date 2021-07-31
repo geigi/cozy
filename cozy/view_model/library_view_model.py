@@ -74,6 +74,7 @@ class LibraryViewModel(Observable, EventSender):
     def library_view_mode(self, value):
         self._library_view_mode = value
         self._notify("library_view_mode")
+        self.emit_event(OpenView.LIBRARY, None)
 
     @property
     def library_page(self) -> LibraryPage:

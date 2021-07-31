@@ -28,6 +28,7 @@ from cozy.ui.main_view import CozyUI
 from cozy.ui.media_controller import MediaController
 from cozy.ui.search_view import SearchView
 from cozy.ui.widgets.whats_new_window import WhatsNewWindow
+from cozy.view import View
 from cozy.view_model.app_view_model import AppViewModel
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
 from cozy.view_model.headerbar_view_model import HeaderbarViewModel
@@ -123,6 +124,7 @@ class AppController(metaclass=Singleton):
 
     def open_library(self):
         self.library_view_model.open_library()
+        self.app_view_model.view = View.LIBRARY_FILTER
 
     def navigate_back(self):
         self.app_view_model.navigate_back()
