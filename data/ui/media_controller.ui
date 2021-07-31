@@ -16,12 +16,12 @@
   <object class="GtkImage" id="play_img">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="icon_name">media-playback-start-symbolic</property>
+    <property name="icon_name">play-symbolic</property>
   </object>
   <object class="GtkImage" id="play_img1">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="icon_name">media-playback-start-symbolic</property>
+    <property name="icon_name">play-symbolic</property>
   </object>
   <object class="GtkImage" id="prev_img">
     <property name="visible">True</property>

@@ -47,7 +47,7 @@
                     <property name="can-focus">False</property>
                     <property name="halign">start</property>
                     <property name="valign">center</property>
-                    <property name="icon-name">media-playback-start-symbolic</property>
+                    <property name="icon-name">play-symbolic</property>
                   </object>
                   <packing>
                     <property name="name">play_icon</property>

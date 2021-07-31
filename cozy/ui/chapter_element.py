@@ -87,9 +87,9 @@ class ChapterElement(Gtk.EventBox):
 
     def set_playing(self, playing):
         if playing:
-            self.play_icon.set_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+            self.play_icon.set_from_icon_name("pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
         else:
-            self.play_icon.set_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+            self.play_icon.set_from_icon_name("play-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
 
 
 GObject.type_register(ChapterElement)

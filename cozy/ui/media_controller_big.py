@@ -113,9 +113,10 @@ class MediaControllerBig(Gtk.Box):
     def _on_play_changed(self):
         playing = self._playback_control_view_model.playing
 
-        play_button_img = "media-playback-pause-symbolic" if playing else "media-playback-start-symbolic"
-        self.play_img.set_from_icon_name(play_button_img, Gtk.IconSize.BUTTON)
-        self.play_img.set_pixel_size(20)
+        play_button_img = "pause-symbolic" if playing else "play-symbolic"
+        icon_size = 16 if playing else 20
+        self.play_img.set_from_icon_name(play_button_img, Gtk.IconSize.LARGE_TOOLBAR)
+        self.play_img.set_pixel_size(icon_size)
 
     def _on_position_changed(self):
         position = self._playback_control_view_model.position

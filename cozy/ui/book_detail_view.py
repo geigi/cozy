@@ -144,8 +144,8 @@ class BookDetailView(Gtk.EventBox):
     def _on_play_changed(self):
         playing = self._view_model.playing
 
-        play_button_img = "media-playback-pause-symbolic" if playing else "media-playback-start-symbolic"
-        self.play_img.set_from_icon_name(play_button_img, Gtk.IconSize.LARGE_TOOLBAR)
+        play_button_img = "pause-symbolic" if playing else "play-symbolic"
+        self.play_img.set_from_icon_name(play_button_img, Gtk.IconSize.DND)
 
         if self._current_selected_chapter:
             self._current_selected_chapter.set_playing(playing)
