@@ -32,5 +32,4 @@ class ImportFailedDialog():
         """
         Close this dialog and destroy it.
         """
-        self.parent.dialog_open = False
         self.dialog.destroy()

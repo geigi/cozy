@@ -35,11 +35,9 @@ class CozyUI(EventSender, metaclass=Singleton):
     CozyUI is the main ui class.
     """
     # Is currently an dialog open?
-    dialog_open = False
     is_initialized = False
     __inhibit_cookie = None
     fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
-    offline_cache = inject.attr(OfflineCache)
     settings = inject.attr(Settings)
     application_settings = inject.attr(ApplicationSettings)
     _importer: Importer = inject.attr(Importer)
@@ -56,8 +54,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self._library_view: LibraryView = None
 
     def activate(self, library_view: LibraryView):
-        self.first_play = True
-
         self.__init_actions()
         self.__init_components()
 
@@ -140,7 +136,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.window.title = "Cozy"
 
         self.book_box = self.window_builder.get_object("book_box")
-        self.sort_stack = self.window_builder.get_object("sort_stack")
         self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
 
         self.no_media_file_chooser = self.window_builder.get_object(
@@ -319,13 +314,6 @@ class CozyUI(EventSender, metaclass=Singleton):
     def back(self, action, parameter):
         self.emit_event("open_view", OpenView.LIBRARY)
 
-    def display_failed_imports(self, files):
-        """
-        Displays a dialog with a list of files that could not be imported.
-        """
-        dialog = ImportFailedDialog(files)
-        dialog.show()
-
     def __on_hide_offline(self, action, value):
         """
         Show/Hide offline books action handler.
@@ -356,19 +344,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.scan(None, None)
         self.settings._init_storage()
         self.fs_monitor.init_offline_mode()
-
-    def track_changed(self):
-        self.block_ui_buttons(False, True)
-
-    def __window_resized(self, window):
-        """
-        Resize the progress scale to expand to the window size
-        for older gtk versions.
-        """
-        width, height = self.window.get_size()
-        value = width - 850
-        if value < 80:
-            value = 80
 
     def __about_close_clicked(self, widget):
         self.about_dialog.hide()
