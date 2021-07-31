@@ -84,7 +84,7 @@ class AlbumElement(Gtk.Box):
         if book_progress == 1.0:
             context.set_source_rgb(0.2, 0.82, 0.478)
         else:
-            context.set_source_rgb(0.894, 0.471, 0.208)
+            context.set_source_rgb(1.0, 1.0, 1.0)
         context.set_line_width(STROKE_WIDTH)
         context.stroke()
 
@@ -93,7 +93,7 @@ class AlbumElement(Gtk.Box):
         height = area.get_allocated_height()
 
         context.arc(width / 2.0, height / 2.0, self.radius, 0, math.pi * 2.0)
-        context.set_source_rgba(0, 0, 0, 0.5)
+        context.set_source_rgba(0, 0, 0, 1.0)
         context.set_line_width(2)
         context.stroke()
 

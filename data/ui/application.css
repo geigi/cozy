@@ -46,7 +46,7 @@
     border-radius: 0.5rem;
     padding: 1rem;
     background-color: @theme_base_color;
-    box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.1);
+    box-shadow: 0 0.5em 0.5em rgba(0, 0, 0, 0.1);
 }
 
 .selected {
@@ -55,7 +55,7 @@
 }
 
 .book_detail_art {
-    box-shadow: 0 0.5em 0.5em rgba(0,0,0,0.2);
+    box-shadow: 0 0.5em 0.5em rgba(0, 0, 0, 0.2);
     border-radius: 0.5rem;
 }
 
@@ -64,10 +64,17 @@
 }
 
 .book_play_button {
-    background: rgba(0,0,0,0.5);
+    background: rgba(50, 50, 50, 1.0);
     border: 0;
     color: white;
     box-shadow: none;
+    transition: none;
+}
+
+.book_play_button:hover, .book_play_button:active, .play_button:hover, .play_button:active {
+    border: none;
+    box-shadow: none;
+    -gtk-icon-shadow: none;
 }
 
 .filter-list-box-row {
@@ -75,15 +82,21 @@
 }
 
 .play_button {
-    background: #E95C00;
-    color: white;
-    box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.2);
+    background: @theme_fg_color;
+    color: @theme_bg_color;
+    transition: none;
 }
 
+/*.play_button {*/
+/*    background: @theme_selected_bg_color;*/
+/*    color: @theme_selected_fg_color;*/
+/*    transition: none;*/
+/*}*/
+
 .play_button:disabled {
-  background-color: transparent;
-  color: @insensitive_fg_color;
-  box-shadow: none;
+    background-color: transparent;
+    color: @insensitive_fg_color;
+    box-shadow: none;
 }
 
 .player_bar {
