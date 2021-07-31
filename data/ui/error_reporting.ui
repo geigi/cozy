@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <!-- interface-css-provider-path application_default.css -->
@@ -7,19 +7,21 @@
     <property name="lower">1</property>
     <property name="upper">5</property>
     <property name="value">3</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">1</property>
-    <property name="page_size">1</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">1</property>
+    <property name="page-size">1</property>
   </object>
   <template class="ErrorReporting" parent="GtkBox">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
+    <property name="margin-start">20</property>
+    <property name="margin-end">20</property>
     <property name="orientation">vertical</property>
     <property name="spacing">10</property>
     <child>
       <object class="GtkLabel">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="label" translatable="yes">User feedback</property>
         <style>
           <class name="h1"/>
@@ -32,199 +34,254 @@
       </packing>
     </child>
     <child>
-      <object class="GtkBox">
+      <object class="GtkListBox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_top">40</property>
-        <property name="spacing">20</property>
+        <property name="can-focus">False</property>
+        <property name="selection-mode">none</property>
+        <property name="activate-on-single-click">False</property>
         <child>
-          <object class="GtkImage">
+          <object class="GtkListBoxRow">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="pixel_size">64</property>
-            <property name="icon_name">message-flash-symbolic</property>
+            <property name="can-focus">False</property>
+            <property name="activatable">False</property>
+            <property name="selectable">False</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-start">10</property>
+                <property name="margin-end">10</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">10</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-top">40</property>
+                    <property name="spacing">20</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixel-size">64</property>
+                        <property name="icon-name">message-flash-symbolic</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="valign">center</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">10</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="label" translatable="yes" context="Error and crash reporting dialog">You can help improve Cozy by contributing information in case of errors and crashes. </property>
+                            <property name="justify">fill</property>
+                            <property name="wrap">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes" context="Error and crash reporting dialog">Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.</property>
+                            <property name="justify">fill</property>
+                            <property name="wrap">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes" context="Error and crash reporting dialog">Cozy is opensource and the user feedback source code can be inspected here: </property>
+                            <property name="justify">fill</property>
+                            <property name="wrap">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label">&lt;a href="https://github.com/geigi/cozy/tree/master/cozy/report"&gt;Sourcecode on GitHub&lt;/a&gt;</property>
+                    <property name="use-markup">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
         </child>
         <child>
-          <object class="GtkBox">
+          <object class="GtkListBoxRow">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="valign">center</property>
-            <property name="orientation">vertical</property>
-            <property name="spacing">10</property>
+            <property name="can-focus">False</property>
+            <property name="activatable">False</property>
+            <property name="selectable">False</property>
             <child>
-              <object class="GtkLabel">
+              <object class="GtkSeparator">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">start</property>
-                <property name="label" translatable="yes" context="Error and crash reporting dialog">You can help improve Cozy by contributing information in case of errors and crashes. </property>
-                <property name="justify">fill</property>
-                <property name="wrap">True</property>
+                <property name="can-focus">False</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes" context="Error and crash reporting dialog">Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.</property>
-                <property name="justify">fill</property>
-                <property name="wrap">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="label" translatable="yes" context="Error and crash reporting dialog">Cozy is opensource and the user feedback source code can be inspected here: </property>
-                <property name="justify">fill</property>
-                <property name="wrap">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">2</property>
-              </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
+        </child>
+        <child>
+          <object class="GtkListBoxRow">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-top">15</property>
+            <property name="margin-bottom">15</property>
+            <property name="activatable">False</property>
+            <property name="selectable">False</property>
+            <child>
+              <object class="GtkScale" id="verbose_scale">
+                <property name="width-request">400</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="halign">center</property>
+                <property name="margin-start">10</property>
+                <property name="margin-end">10</property>
+                <property name="adjustment">verbose_adjustment</property>
+                <property name="restrict-to-fill-level">False</property>
+                <property name="fill-level">0</property>
+                <property name="round-digits">0</property>
+                <property name="draw-value">False</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkListBoxRow">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="activatable">False</property>
+            <property name="selectable">False</property>
+            <child>
+              <object class="GtkSeparator">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkListBoxRow">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="activatable">False</property>
+            <property name="selectable">False</property>
+            <child>
+              <object class="GtkBox">
+                <property name="width-request">450</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="margin-start">10</property>
+                <property name="margin-end">10</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">10</property>
+                <child>
+                  <object class="GtkLabel" id="level_label">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="label" translatable="yes">Detailed error reporting with import errors</property>
+                    <property name="justify">fill</property>
+                    <style>
+                      <class name="h4"/>
+                      <class name="slightly-bold"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="description_label">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="label" translatable="yes">The following information will be sent in case of an error or crash:</property>
+                    <property name="justify">fill</property>
+                    <property name="wrap">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="details_label">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="justify">fill</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+          </object>
         </child>
       </object>
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="position">2</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkLabel">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label">&lt;a href="https://github.com/geigi/cozy/tree/master/cozy/report"&gt;Sourcecode on GitHub&lt;/a&gt;</property>
-        <property name="use_markup">True</property>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">3</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="halign">center</property>
-        <property name="valign">end</property>
-        <property name="margin_top">40</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">20</property>
-        <child>
-          <object class="GtkScale" id="verbose_scale">
-            <property name="width_request">400</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="halign">center</property>
-            <property name="adjustment">verbose_adjustment</property>
-            <property name="restrict_to_fill_level">False</property>
-            <property name="fill_level">0</property>
-            <property name="round_digits">0</property>
-            <property name="draw_value">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="width_request">450</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="orientation">vertical</property>
-            <property name="spacing">10</property>
-            <child>
-              <object class="GtkLabel" id="level_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="label" translatable="yes">Detailed error reporting with import errors</property>
-                <property name="justify">fill</property>
-                <style>
-                  <class name="h4"/>
-                  <class name="slightly-bold"/>
-                </style>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="description_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">start</property>
-                <property name="label" translatable="yes">The following information will be sent in case of an error or crash:</property>
-                <property name="justify">fill</property>
-                <property name="wrap">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="details_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">start</property>
-                <property name="justify">fill</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">4</property>
+        <property name="position">1</property>
       </packing>
     </child>
   </template>
