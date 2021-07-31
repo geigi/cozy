@@ -88,6 +88,7 @@
                             <property name="label" translatable="yes" context="Error and crash reporting dialog">You can help improve Cozy by contributing information in case of errors and crashes. </property>
                             <property name="justify">fill</property>
                             <property name="wrap">True</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -102,6 +103,7 @@
                             <property name="label" translatable="yes" context="Error and crash reporting dialog">Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.</property>
                             <property name="justify">fill</property>
                             <property name="wrap">True</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -117,6 +119,7 @@
                             <property name="label" translatable="yes" context="Error and crash reporting dialog">Cozy is opensource and the user feedback source code can be inspected here: </property>
                             <property name="justify">fill</property>
                             <property name="wrap">True</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -144,6 +147,7 @@
                     <property name="can-focus">False</property>
                     <property name="label">&lt;a href="https://github.com/geigi/cozy/tree/master/cozy/report"&gt;Sourcecode on GitHub&lt;/a&gt;</property>
                     <property name="use-markup">True</property>
+                    <property name="track-visited-links">False</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -182,8 +186,8 @@
                 <property name="width-request">400</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="halign">center</property>
-                <property name="margin-start">10</property>
+                <property name="halign">start</property>
+                <property name="margin-start">94</property>
                 <property name="margin-end">10</property>
                 <property name="adjustment">verbose_adjustment</property>
                 <property name="restrict-to-fill-level">False</property>
@@ -219,9 +223,9 @@
                 <property name="width-request">450</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="halign">center</property>
+                <property name="halign">start</property>
                 <property name="valign">center</property>
-                <property name="margin-start">10</property>
+                <property name="margin-start">94</property>
                 <property name="margin-end">10</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">10</property>
@@ -232,9 +236,10 @@
                     <property name="halign">start</property>
                     <property name="label" translatable="yes">Detailed error reporting with import errors</property>
                     <property name="justify">fill</property>
+                    <property name="wrap">True</property>
+                    <property name="xalign">0</property>
                     <style>
-                      <class name="h4"/>
-                      <class name="slightly-bold"/>
+                      <class name="semi-bold"/>
                     </style>
                   </object>
                   <packing>
@@ -252,6 +257,7 @@
                     <property name="label" translatable="yes">The following information will be sent in case of an error or crash:</property>
                     <property name="justify">fill</property>
                     <property name="wrap">True</property>
+                    <property name="xalign">0</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
