@@ -95,8 +95,3 @@ class Headerbar(HeaderBar):
     def _on_title_visible_changed(self, widget, param):
         visible = widget.get_property(param.name)
         self._library_mobile_revealer.set_reveal_child(visible)
-
-        if visible:
-            self.set_centering_policy(Handy.CenteringPolicy.STRICT)
-        else:
-            self.set_centering_policy(Handy.CenteringPolicy.LOOSE)
