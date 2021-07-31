@@ -31,6 +31,7 @@ class GstPlayer(EventSender):
         self._bus_signal_id: Optional[int] = None
         self._playback_speed: float = 1.0
         self._playback_speed_timer_running: bool = False
+        self._volume: float = 1.0
 
         Gst.init(None)
 
@@ -114,12 +115,14 @@ class GstPlayer(EventSender):
 
     @volume.setter
     def volume(self, new_value: float):
+        self._volume = max(0.0, min(1.0, new_value))
+
         if not self._is_player_loaded():
-            log.error("Could not set volume because player is not loaded.")
+            log.warning("Could not set volume because player is not loaded.")
             return
 
-        volume = max(0.0, min(1.0, new_value))
-        self._player.set_property("volume", volume)
+        self._player.set_property("volume", self._volume)
+        self._player.set_property("mute", False)
 
     def init(self):
         if self._player:
@@ -166,6 +169,8 @@ class GstPlayer(EventSender):
 
         self._player.set_property("uri", "file://" + path)
         self._player.set_state(Gst.State.PAUSED)
+        self._player.set_property("volume", self._volume)
+        self._player.set_property("mute", False)
 
     def play(self):
         if not self._is_player_loaded() or self.state == GstPlayerState.PLAYING:

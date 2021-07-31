@@ -45,6 +45,7 @@ class Player(EventSender):
         self._fadeout_thread: Optional[Thread] = None
 
         self._gst_player.init()
+        self.volume = self._app_settings.volume
 
         self._load_last_book()
 
