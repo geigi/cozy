@@ -38,7 +38,7 @@
                   </object>
                   <packing>
                     <property name="name">number</property>
-                    <property name="title" translatable="yes">page0</property>
+                    <property name="title" translatable="no">page0</property>
                   </packing>
                 </child>
                 <child>
@@ -51,7 +51,7 @@
                   </object>
                   <packing>
                     <property name="name">play_icon</property>
-                    <property name="title" translatable="yes">page0</property>
+                    <property name="title" translatable="no">page0</property>
                     <property name="position">1</property>
                   </packing>
                 </child>

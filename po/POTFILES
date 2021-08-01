@@ -1,5 +1,4 @@
 cozy/application.py
-cozy/control/db.py
 cozy/control/mpris.py
 cozy/control/offline_cache.py
 cozy/media/files.py
@@ -18,9 +17,11 @@ cozy/ui/widgets/error_reporting.py
 cozy/ui/widgets/filter_list_box.py
 cozy/ui/widgets/search_results.py
 cozy/ui/widgets/sleep_timer.py
+cozy/ui/widgets/storage_list_box_row.py
 cozy/view_model/headerbar_view_model.py
 cozy/view_model/library_view_model.py
 data/ui/about.ui
+data/ui/album_element.ui
 data/ui/book_detail.ui
 data/ui/book_element.ui
 data/ui/chapter_element.ui
