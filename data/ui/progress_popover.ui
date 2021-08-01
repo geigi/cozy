@@ -39,7 +39,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="fraction">0.5</property>
-                <property name="text" translatable="yes">dfsg</property>
+                <property name="text" translatable="no">dfsg</property>
               </object>
               <packing>
                 <property name="expand">False</property>

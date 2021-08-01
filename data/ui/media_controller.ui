@@ -180,7 +180,7 @@
                     <property name="name">title_book</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Harry Potter und der Stein der Weisen</property>
+                    <property name="label" translatable="no">Harry Potter und der Stein der Weisen</property>
                     <property name="ellipsize">end</property>
                     <property name="width_chars">20</property>
                     <property name="single_line_mode">True</property>
@@ -207,7 +207,7 @@
                     <property name="name">title_track</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Kapitel 01</property>
+                    <property name="label" translatable="no">Kapitel 01</property>
                     <property name="ellipsize">end</property>
                     <property name="width_chars">20</property>
                     <property name="single_line_mode">True</property>
