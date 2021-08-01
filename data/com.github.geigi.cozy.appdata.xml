@@ -49,6 +49,23 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="1.1.0" timestamp="1627489551">
+      <description>
+        <p>
+        This release features a redesigned library with responsiveness in mind.
+        </p>
+        <ul>
+          <li>Redesigned library</li>
+          <li>Redesigned start screen</li>
+          <li>Redesigned book detail screen</li>
+          <li>Responsive design for the main window</li>
+          <li>Introducing a welcome screen for new installations</li>
+          <li>Fix: a rare bug where Cozy's volume was muted at first start</li>
+          <li>Fix: long book names or author names will be truncated properly</li>
+          <li>As always, updated translations thanks to all of the translators!</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.4" timestamp="1627489551">
       <description>
         <p>
