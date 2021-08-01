@@ -7,7 +7,6 @@ from cozy.view import View
 LIBRARY = "main"
 EMPTY_STATE = "no_media"
 PREPARING_LIBRARY = "import"
-NO_MEDIA = "nothing_here"
 BOOK_DETAIL = "book_overview"
 
 LIBRARY_FILTER = "filter"
@@ -63,8 +62,6 @@ class AppView:
             self._view_model.view = View.EMPTY_STATE
         elif page == PREPARING_LIBRARY:
             self._view_model.view = View.PREPARING_LIBRARY
-        elif page == NO_MEDIA:
-            self._view_model.view = View.NO_MEDIA
         elif page == BOOK_DETAIL:
             self._view_model.view = View.BOOK_DETAIL
         elif page == LIBRARY:

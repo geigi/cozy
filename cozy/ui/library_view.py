@@ -13,8 +13,10 @@ READER_PAGE = "reader"
 AUTHOR_PAGE = "author"
 RECENT_PAGE = "recent"
 MAIN_BOOK_PAGE = "main"
-MAIN_NO_RECENT_PAGE = "nothing_here"
 NO_MEDIA_PAGE = "no_media"
+
+NO_RECENT_PAGE = "no_recent"
+BOOKS_PAGE = "books"
 
 
 class LibraryView:
@@ -43,6 +45,7 @@ class LibraryView:
         self._author_box: FilterListBox = self._builder.get_object("author_box")
         self._reader_box: FilterListBox = self._builder.get_object("reader_box")
         self._library_leaflet: Handy.Leaflet = self._builder.get_object("library_leaflet")
+        self._book_stack: Gtk.Stack = self._builder.get_object("book_stack")
 
     def _connect_ui_elements(self):
         self._filter_stack.connect("notify::visible-child", self._on_sort_stack_changed)
@@ -112,33 +115,30 @@ class LibraryView:
 
     def _on_library_view_mode_changed(self):
         visible_child_name = None
-        reveal_filter_box = True
         active_filter_box: Gtk.ListBox = None
 
         view_mode = self._view_model.library_view_mode
         main_view_page = MAIN_BOOK_PAGE
+        books_view_page = BOOKS_PAGE
 
         if len(self._view_model.books) < 1:
             main_view_page = NO_MEDIA_PAGE
             visible_child_name = RECENT_PAGE
-            reveal_filter_box = False
         elif view_mode == LibraryViewMode.CURRENT:
             visible_child_name = RECENT_PAGE
-            reveal_filter_box = False
             if not self._view_model.is_any_book_in_progress:
-                main_view_page = MAIN_NO_RECENT_PAGE
+                books_view_page = NO_RECENT_PAGE
         elif view_mode == LibraryViewMode.AUTHOR:
             visible_child_name = AUTHOR_PAGE
-            reveal_filter_box = True
             active_filter_box = self._author_box
         elif view_mode == LibraryViewMode.READER:
             visible_child_name = READER_PAGE
-            reveal_filter_box = True
             active_filter_box = self._reader_box
 
         # https://stackoverflow.com/questions/22178524/gtk-named-stack-childs/22182843#22182843
         self._main_stack.props.visible_child_name = main_view_page
         self._filter_stack.set_visible_child_name(visible_child_name)
+        self._book_stack.set_visible_child_name(books_view_page)
 
         if active_filter_box:
             self._apply_selected_filter(active_filter_box.get_selected_row())

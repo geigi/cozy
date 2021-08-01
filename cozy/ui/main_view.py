@@ -278,7 +278,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         Switch the UI state back to playing.
         This enables all UI functionality for the user.
         """
-        if self.main_stack.props.visible_child_name != "book_overview" and self.main_stack.props.visible_child_name != "nothing_here" and self.main_stack.props.visible_child_name != "no_media":
+        if self.main_stack.props.visible_child_name != "book_overview" and self.main_stack.props.visible_child_name != "no_media":
             self.main_stack.props.visible_child_name = "main"
         if self._player.loaded_book:
             self.block_ui_buttons(False, True)

@@ -26,7 +26,6 @@ class HeaderbarViewModel(Observable, EventSender):
         super().__init__()
         super(Observable, self).__init__()
 
-        self._lock_ui: bool = False
         self._state: HeaderBarState = HeaderBarState.PLAYING
         self._work_progress: float = 0.0
         self._work_message: str = ""
@@ -39,12 +38,7 @@ class HeaderbarViewModel(Observable, EventSender):
 
     @property
     def lock_ui(self) -> bool:
-        return self._lock_ui
-
-    @lock_ui.setter
-    def lock_ui(self, new_value: bool):
-        self._lock_ui = new_value
-        self._notify("lock_ui")
+        return self._view == View.NO_MEDIA or self._view == View.EMPTY_STATE or self._view == View.PREPARING_LIBRARY
 
     @property
     def state(self) -> HeaderBarState:
@@ -75,6 +69,7 @@ class HeaderbarViewModel(Observable, EventSender):
         self._view = value
         self._notify("can_navigate_back")
         self._notify("show_library_filter")
+        self._notify("lock_ui")
 
     def _start_working(self, message: str):
         self._work_progress = 0.0
