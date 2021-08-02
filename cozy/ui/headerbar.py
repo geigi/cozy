@@ -36,7 +36,7 @@ class Headerbar(HeaderBar):
             "library_mobile_view_switcher")
         self._library_mobile_revealer: Gtk.Revealer = main_window_builder.get_object("library_mobile_revealer")
         self._header_container: Gtk.Box = main_window_builder.get_object("header_container")
-        self._header_container.add(self)
+        self._header_container.pack_start(self, False, True, 0)
 
         self._sort_stack: Gtk.Stack = main_window_builder.get_object("sort_stack")
         self.category_toolbar.set_stack(self._sort_stack)

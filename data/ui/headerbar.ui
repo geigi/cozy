@@ -11,6 +11,7 @@
   <template class="Headerbar" parent="HdyHeaderBar">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
+    <property name="vexpand">False</property>
     <property name="show-close-button">True</property>
     <child type="title">
       <object class="GtkRevealer" id="toolbar_revealer">
