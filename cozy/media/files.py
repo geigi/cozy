@@ -110,7 +110,7 @@ class Files(EventSender):
         if self._file_count == 0:
             progress = 1.0
         else:
-            progress = ((self._file_progess - 1) / self._file_count) + (
+            progress = (self._file_progess / self._file_count) + (
                     (current_num_bytes / total_num_bytes) / self._file_count)
         self.emit_event_main_thread("copy-progress", progress)
 
