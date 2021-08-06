@@ -65,10 +65,11 @@
 
 .book_play_button {
     background: rgba(50, 50, 50, 1.0);
-    border: 0;
+    border: none;
     color: white;
     box-shadow: none;
     transition: none;
+    -gtk-icon-shadow: none;
 }
 
 .book_play_button:hover, .book_play_button:active, .play_button:hover, .play_button:active {
