@@ -19,4 +19,4 @@ def test_update_copy_status_emits_1_for_zero_byte_files(mocker):
     files._file_progess = 1
     files._update_copy_status(0, 0, None)
 
-    spy.assert_called_once_with("copy-progress", 0.0)
+    spy.assert_called_once_with("copy-progress", 1.0)
