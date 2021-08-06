@@ -19,7 +19,7 @@ gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk
 
-URL = 'https://cozy.geigi.dev:3100/api/prom/push'
+URL = 'https://errors.cozy.sh:3100/api/prom/push'
 ENABLE = '@INSTALLED@'
 
 LOG_LEVEL_MAP = {
