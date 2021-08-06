@@ -1,31 +1,25 @@
+import logging
+import os
 import webbrowser
-
-import cozy.ext.inject as inject
-from cozy.application_settings import ApplicationSettings
-from cozy.architecture.event_sender import EventSender
-
-from cozy.control.db import books, close_db
-from cozy.control.offline_cache import OfflineCache
-from cozy.db.storage import Storage
-
-from gi.repository import Gtk, Gio, Gdk, GLib, Handy
 from threading import Thread
 
+from gi.repository import Gtk, Gio, Gdk, GLib
+
+import cozy.control.filesystem_monitor as fs_monitor
+import cozy.ext.inject as inject
+import cozy.report.reporter as report
+from cozy.application_settings import ApplicationSettings
+from cozy.architecture.event_sender import EventSender
+from cozy.architecture.singleton import Singleton
+from cozy.control.db import books, close_db
+from cozy.db.storage import Storage
 from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
+from cozy.model.settings import Settings as SettingsModel
 from cozy.open_view import OpenView
-from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.library_view import LibraryView
 from cozy.ui.settings import Settings
-from cozy.architecture.singleton import Singleton
-from cozy.model.settings import Settings as SettingsModel
-import cozy.report.reporter as report
-import cozy.control.filesystem_monitor as fs_monitor
-
-import os
-
-import logging
 
 log = logging.getLogger("ui")
 
@@ -141,7 +135,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.no_media_file_chooser = self.window_builder.get_object(
             "no_media_file_chooser")
         self.no_media_file_chooser.connect(
-            "file-set", self.__on_no_media_folder_changed)
+            "clicked", self._open_audiobook_dir_selector)
 
         # get about dialog
         self.about_dialog = self.about_builder.get_object("about_dialog")
@@ -213,7 +207,6 @@ class CozyUI(EventSender, metaclass=Singleton):
             self.block_ui_buttons(True)
 
         self._importer.add_listener(self._on_importer_event)
-
 
     def get_object(self, name):
         return self.window_builder.get_object(name)
@@ -295,13 +288,32 @@ class CozyUI(EventSender, metaclass=Singleton):
         If there aren't display a welcome screen.
         """
         if books().count() < 1:
-            path = ""
-            if len(self._settings.storage_locations) > 0:
-                path = self._settings.default_location.path
-
-            self.no_media_file_chooser.set_current_folder(path)
-            self.main_stack.props.visible_child_name = "no_media"
             self.block_ui_buttons(True)
+
+    def _open_audiobook_dir_selector(self, __):
+        path = ""
+        if len(self._settings.storage_locations) > 0:
+            path = self._settings.default_location.path
+
+        location_chooser: Gtk.FileChooserDialog = Gtk.FileChooserDialog(title=_("Set Audiobooks Directory"),
+                                                                        parent=self.window,
+                                                                        action=Gtk.FileChooserAction.SELECT_FOLDER)
+        location_chooser.add_buttons(
+            Gtk.STOCK_CANCEL,
+            Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OPEN,
+            Gtk.ResponseType.OK,
+        )
+        location_chooser.set_select_multiple(False)
+        location_chooser.set_current_folder(path)
+        location_chooser.set_local_only(False)
+        response = location_chooser.run()
+
+        if response == Gtk.ResponseType.OK:
+            audiobook_path = location_chooser.get_filename()
+            self._set_audiobook_path(audiobook_path)
+
+        location_chooser.destroy()
 
     def scan(self, _, __):
         thread = Thread(target=self._importer.scan, name="ScanMediaThread")
@@ -330,15 +342,10 @@ class CozyUI(EventSender, metaclass=Singleton):
             thread = Thread(target=self._files.copy, args=[selection], name="DragDropImportThread")
             thread.start()
 
-    def __on_no_media_folder_changed(self, sender):
-        """
-        Get's called when the user changes the audiobook location from
-        the no media screen. Now we want to do a first scan instead of a rebase.
-        """
-        location = self.no_media_file_chooser.get_file().get_path()
-        external = self.fs_monitor.is_external(location)
+    def _set_audiobook_path(self, path):
+        external = self.fs_monitor.is_external(path)
         Storage.delete().where(Storage.path != "").execute()
-        Storage.create(path=location, default=True, external=external)
+        Storage.create(path=path, default=True, external=external)
         self._settings.invalidate()
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, None)

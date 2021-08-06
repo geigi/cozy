@@ -408,7 +408,6 @@
                                             </child>
                                             <child>
                                               <object class="HdyActionRow">
-                                                <property name="width-request">100</property>
                                                 <property name="height-request">80</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
@@ -416,14 +415,13 @@
                                                 <property name="icon-name">folder-symbolic</property>
                                                 <property name="subtitle" translatable="yes">Load audiobooks from a directory, network drive or an external disk</property>
                                                 <child>
-                                                  <object class="GtkFileChooserButton" id="no_media_file_chooser">
+                                                  <object class="GtkButton" id="no_media_file_chooser">
+                                                    <property name="label" translatable="yes">Select</property>
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="halign">center</property>
+                                                    <property name="receives-default">False</property>
+                                                    <property name="halign">end</property>
                                                     <property name="valign">center</property>
-                                                    <property name="action">select-folder</property>
-                                                    <property name="local-only">False</property>
-                                                    <property name="title" translatable="yes"/>
                                                   </object>
                                                 </child>
                                               </object>
