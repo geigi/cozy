@@ -17,7 +17,8 @@ class AlbumArt(Gtk.DrawingArea):
 
     def set_art(self, art: GdkPixbuf):
         self.art = art
-        self.set_size_request(art.get_width(), art.get_height())
+        scale = self.get_scale_factor()
+        self.set_size_request(art.get_width() / scale, art.get_height() / scale)
         self.queue_draw()
 
     def _draw_rounded_path(self, context: cairo.Context):
@@ -37,7 +38,8 @@ class AlbumArt(Gtk.DrawingArea):
         self._draw_rounded_path(context)
 
         if self.art:
-            Gdk.cairo_set_source_pixbuf(context, self.art, 0, 0)
+            surface = Gdk.cairo_surface_create_from_pixbuf(self.art, self.get_scale_factor(), None)
+            context.set_source_surface(surface, 0, 0)
             context.clip()
 
         context.paint()

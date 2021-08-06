@@ -38,7 +38,8 @@ class AlbumElement(Gtk.Box):
         pixbuf = self.artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), ALBUM_ART_SIZE)
 
         if pixbuf:
-            self.album_art_image.set_from_pixbuf(pixbuf)
+            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.get_scale_factor(), None)
+            self.album_art_image.set_from_surface(surface)
         else:
             self.album_art_image.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
             self.album_art_image.props.pixel_size = ALBUM_ART_SIZE
