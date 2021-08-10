@@ -163,8 +163,6 @@
                               <object class="GtkScrolledWindow" id="book_scroller">
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
-                                <property name="margin-left">10</property>
-                                <property name="margin-right">10</property>
                                 <property name="hexpand">True</property>
                                 <property name="hscrollbar-policy">never</property>
                                 <property name="shadow-type">in</property>
