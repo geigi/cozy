@@ -9,11 +9,11 @@ from cozy.ui.main_view import CozyUI
 from cozy.version import __version__ as CozyVersion
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, Handy
 
 
 @Gtk.Template(resource_path='/com/github/geigi/cozy/whats_new.ui')
-class WhatsNewWindow(Gtk.Window):
+class WhatsNewWindow(Handy.Window):
     __gtype_name__ = 'WhatsNew'
 
     content_stack: Gtk.Stack = Gtk.Template.Child()
@@ -42,7 +42,9 @@ class WhatsNewWindow(Gtk.Window):
 
         for widget in self.children:
             self.content_stack.add(widget)
+            widget.set_visible(False)
 
+        self.children[0].set_visible(True)
         self.continue_button.connect("clicked", self.__on_continue_clicked)
         self.show()
 
@@ -83,8 +85,10 @@ class WhatsNewWindow(Gtk.Window):
             self.end()
             return
 
+        self.children[self.page].set_visible(False)
         self.page += 1
         self.content_stack.set_visible_child(self.children[self.page])
+        self.children[self.page].set_visible(True)
 
     def end(self):
         self.app_settings.last_launched_version = CozyVersion

@@ -14,8 +14,6 @@
   <template class="ErrorReporting" parent="GtkBox">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="margin-start">20</property>
-    <property name="margin-end">20</property>
     <property name="orientation">vertical</property>
     <property name="spacing">10</property>
     <child>
@@ -29,6 +27,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="label" translatable="yes">User feedback</property>
+            <property name="wrap">True</property>
             <style>
               <class name="h3"/>
               <class name="bold"/>
@@ -97,7 +96,6 @@
                         <property name="halign">start</property>
                         <property name="valign">start</property>
                         <property name="label" translatable="yes" context="Error and crash reporting dialog">You can help improve Cozy by contributing information in case of errors and crashes. </property>
-                        <property name="justify">fill</property>
                         <property name="wrap">True</property>
                         <property name="xalign">0</property>
                       </object>
@@ -112,7 +110,6 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="label" translatable="yes" context="Error and crash reporting dialog">Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.</property>
-                        <property name="justify">fill</property>
                         <property name="wrap">True</property>
                         <property name="xalign">0</property>
                       </object>
@@ -128,7 +125,6 @@
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
                         <property name="label" translatable="yes" context="Error and crash reporting dialog">Cozy is opensource and the user feedback source code can be inspected here: </property>
-                        <property name="justify">fill</property>
                         <property name="wrap">True</property>
                         <property name="xalign">0</property>
                       </object>
@@ -226,7 +222,6 @@
             <property name="selectable">False</property>
             <child>
               <object class="GtkBox">
-                <property name="width-request">450</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
@@ -243,7 +238,6 @@
                     <property name="can-focus">False</property>
                     <property name="halign">start</property>
                     <property name="label" translatable="yes">Detailed error reporting with import errors</property>
-                    <property name="justify">fill</property>
                     <property name="wrap">True</property>
                     <property name="xalign">0</property>
                     <style>
@@ -263,7 +257,6 @@
                     <property name="halign">start</property>
                     <property name="valign">start</property>
                     <property name="label" translatable="yes">The following information will be sent in case of an error or crash:</property>
-                    <property name="justify">fill</property>
                     <property name="wrap">True</property>
                     <property name="xalign">0</property>
                   </object>
@@ -279,7 +272,7 @@
                     <property name="can-focus">False</property>
                     <property name="halign">start</property>
                     <property name="valign">start</property>
-                    <property name="justify">fill</property>
+                    <property name="wrap">True</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>

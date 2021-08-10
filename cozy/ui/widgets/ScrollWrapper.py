@@ -14,5 +14,7 @@ class ScrollWrapper(Gtk.ScrolledWindow):
 
         self.add(self.viewport)
         self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        self.set_margin_start(20)
+        self.set_margin_end(20)
 
         self.viewport.add(child)
