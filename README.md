@@ -141,6 +141,7 @@ flatpak --user override --filesystem=/media com.github.geigi.cozy
 ## A big thanks
 To the contributors on GitHub:
 - alyssais
+- apandada1
 - AsavarTzeth
 - Fatih20
 - NathanBnm
