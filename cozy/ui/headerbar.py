@@ -95,7 +95,8 @@ class Headerbar(HeaderBar):
 
     def _on_title_visible_changed(self, widget, param):
         visible = widget.get_property(param.name)
-        self._library_mobile_revealer.set_reveal_child(visible)
+        reveal_child = visible and self._headerbar_view_model.show_library_filter
+        self._library_mobile_revealer.set_reveal_child(reveal_child)
 
     def _on_lock_ui_changed(self):
         self.search_button.set_sensitive(not self._headerbar_view_model.lock_ui)
