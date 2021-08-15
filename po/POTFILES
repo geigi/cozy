@@ -6,7 +6,6 @@ cozy/media/importer.py
 cozy/model/track.py
 cozy/tools.py
 cozy/ui/book_detail_view.py
-cozy/ui/book_element.py
 cozy/ui/chapter_element.py
 cozy/ui/disk_element.py
 cozy/ui/file_not_found_dialog.py
