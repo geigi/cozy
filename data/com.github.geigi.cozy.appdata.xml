@@ -49,6 +49,21 @@
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="1.1.1" timestamp="1628322225">
+      <description>
+        <p>
+        A small bugfix release which makes Cozy more reliable.
+        </p>
+        <ul>
+          <li>Display an error banner if an error occurs while importing new files</li>
+          <li>Fix: multiple small UI issues</li>
+          <li>Fix: the welcome screen now works properly on a mobile device</li>
+          <li>Fix: don't display the mobile library switcher when no files are imported</li>
+          <li>Fix: in the book detail view the pause icon for a chapter remained even when the next chapter already started playing</li>
+          <li>As always, updated translations thanks to all of the translators!</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.0" timestamp="1628322225">
       <description>
         <p>
