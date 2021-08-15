@@ -2,6 +2,7 @@ cozy/application.py
 cozy/control/mpris.py
 cozy/control/offline_cache.py
 cozy/media/files.py
+cozy/media/importer.py
 cozy/model/track.py
 cozy/tools.py
 cozy/ui/book_detail_view.py

@@ -2,6 +2,7 @@ import itertools
 import logging
 import os
 import time
+import traceback
 from enum import Enum, auto
 from multiprocessing.pool import Pool as Pool
 from typing import List, Set
@@ -17,6 +18,7 @@ from cozy.model.database_importer import DatabaseImporter
 from cozy.model.library import Library
 from cozy.model.settings import Settings
 from cozy.report import reporter
+from cozy.ui.info_banner import InfoBanner
 
 log = logging.getLogger("importer")
 
@@ -54,6 +56,7 @@ class Importer(EventSender):
     _settings = inject.attr(Settings)
     _library = inject.attr(Library)
     _database_importer = inject.attr(DatabaseImporter)
+    _info_bar: InfoBanner = inject.attr(InfoBanner)
 
     def __init__(self):
         super().__init__()
@@ -109,7 +112,14 @@ class Importer(EventSender):
             self._progress += CHUNK_SIZE
 
             if len(media_files) != 0:
-                self._database_importer.insert_many(media_files)
+                try:
+                    self._database_importer.insert_many(media_files)
+                except Exception as e:
+                    log.error("Error while inserting new tracks to the database")
+                    reporter.exception("importer", e)
+                    log.error(traceback.format_exc())
+                    self._info_bar.show("{}: {}".format(_("Error while importing new files"), str(e.__class__)))
+
             if self._progress >= self._files_count:
                 break
         pool.close()
