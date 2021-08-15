@@ -56,6 +56,7 @@
         </p>
         <ul>
           <li>Display an error banner if an error occurs while importing new files</li>
+          <li>The audiobook directory selector in the empty state has been replaced by a button to allow a narrow window even with long directory names</li>
           <li>Fix: multiple small UI issues</li>
           <li>Fix: the welcome screen now works properly on a mobile device</li>
           <li>Fix: don't display the mobile library switcher when no files are imported</li>
