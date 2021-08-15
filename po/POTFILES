@@ -20,6 +20,8 @@ cozy/ui/widgets/sleep_timer.py
 cozy/ui/widgets/storage_list_box_row.py
 cozy/view_model/headerbar_view_model.py
 cozy/view_model/library_view_model.py
+data/com.github.geigi.cozy.appdata.xml
+data/com.github.geigi.cozy.desktop
 data/ui/about.ui
 data/ui/album_element.ui
 data/ui/book_detail.ui
