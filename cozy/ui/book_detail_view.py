@@ -161,6 +161,7 @@ class BookDetailView(Gtk.EventBox):
     def _on_current_chapter_changed(self):
         if self._current_selected_chapter:
             self._current_selected_chapter.deselect()
+            self._current_selected_chapter.set_playing(False)
 
         current_chapter = self._view_model.current_chapter
 
