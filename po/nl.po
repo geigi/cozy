@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-15 12:32+0200\n"
+"POT-Creation-Date: 2021-08-16 18:22+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
@@ -305,8 +305,8 @@ msgid "Close Cozy"
 msgstr "Cozy sluiten"
 
 #: data/ui/db_migration_failed.ui:47
-msgid "Recieve help on GitHub"
-msgstr "Om hulp vragen op GitHub"
+msgid "Receive help on GitHub"
+msgstr "Vraag om hulp op Github"
 
 #: data/ui/db_migration_failed.ui:108
 msgid "An error occured while updating the database"
