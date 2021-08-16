@@ -7,16 +7,16 @@
 # Piotr Górski <sojuz151@gmail.com>, 2021
 # Sebosun <sebos@protonmail.com>, 2021
 # Julian Geywitz <github@geigi.de>, 2021
-# translantonator 2000 <scieszka.marcin@pm.me>, 2021
+# Marcin Ścieszka <scieszka.marcin@pm.me>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-15 12:32+0200\n"
+"POT-Creation-Date: 2021-08-16 18:22+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: translantonator 2000 <scieszka.marcin@pm.me>, 2021\n"
+"Last-Translator: Marcin Ścieszka <scieszka.marcin@pm.me>, 2021\n"
 "Language-Team: Polish (https://www.transifex.com/geigi/teams/78138/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +35,7 @@ msgstr "Kopiowanie"
 #: cozy/media/files.py:69
 msgid "Cannot copy: Audiobook directory is read only"
 msgstr ""
-"Nie można skopiować: Katalog audiobooków jest ustawione tylko do odczytu"
+"Nie można skopiować: Katalog audiobooków jest ustawiony tylko do odczytu"
 
 #: cozy/media/files.py:71
 msgid "Cannot copy: Disk is full"
@@ -319,8 +319,8 @@ msgid "Close Cozy"
 msgstr "Zamknij Cozy"
 
 #: data/ui/db_migration_failed.ui:47
-msgid "Recieve help on GitHub"
-msgstr "Otrzymaj pomoc na GitHubie"
+msgid "Receive help on GitHub"
+msgstr "Uzyskaj pomoc na stronie GitHub"
 
 #: data/ui/db_migration_failed.ui:108
 msgid "An error occured while updating the database"
