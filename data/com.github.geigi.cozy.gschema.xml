@@ -96,5 +96,20 @@
       <summary>Duration to forward.</summary>
       <description></description>
     </key>
+    <key type="i" name="window-width">
+      <default>1100</default>
+      <summary>Width of the main window</summary>
+      <description></description>
+    </key>
+    <key type="i" name="window-height">
+      <default>700</default>
+      <summary>Height of the main window</summary>
+      <description></description>
+    </key>
+    <key type="b" name="window-maximize">
+      <default>false</default>
+      <summary>Maximize state of the main window</summary>
+      <description></description>
+    </key>
   </schema>
 </schemalist>

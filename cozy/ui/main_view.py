@@ -48,6 +48,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         self._library_view: LibraryView = None
 
     def activate(self, library_view: LibraryView):
+        self.__init_window()
         self.__init_actions()
         self.__init_components()
 
@@ -61,8 +62,6 @@ class CozyUI(EventSender, metaclass=Singleton):
     def startup(self):
         self.__init_resources()
         self.__init_css()
-
-        self.__init_window()
 
     def __init_resources(self):
         """
@@ -81,6 +80,8 @@ class CozyUI(EventSender, metaclass=Singleton):
 
         self.about_builder = Gtk.Builder.new_from_resource(
             "/com/github/geigi/cozy/about.ui")
+
+        self.window: Gtk.Window = self.window_builder.get_object("app_window")
 
     def __init_css(self):
         """
@@ -118,13 +119,13 @@ class CozyUI(EventSender, metaclass=Singleton):
         Initialize everything we can't do from glade like events and other stuff.
         """
         log.info("Initialize main window")
-        self.window: Gtk.Window = self.window_builder.get_object("app_window")
-        self.window.set_default_size(1100, 700)
+        self._restore_window_size()
         self.window.set_application(self.app)
         self.window.show_all()
         self.window.present()
         self.window.connect("delete-event", self.on_close)
         self.window.connect("drag_data_received", self.__on_drag_data_received)
+        self.window.connect("size-allocate", self._on_window_size_allocate)
         self.window.drag_dest_set(Gtk.DestDefaults.MOTION | Gtk.DestDefaults.HIGHLIGHT | Gtk.DestDefaults.DROP,
                                   [Gtk.TargetEntry.new("text/uri-list", 0, 80)], Gdk.DragAction.COPY)
         self.window.title = "Cozy"
@@ -378,3 +379,18 @@ class CozyUI(EventSender, metaclass=Singleton):
     def _on_importer_event(self, event: str, message):
         if event == "scan" and message == ScanStatus.SUCCESS:
             self.check_for_tracks()
+
+    def _restore_window_size(self):
+        width = self.application_settings.window_width
+        height = self.application_settings.window_height
+        self.window.set_default_size(width, height)
+        if self.application_settings.window_maximize:
+            self.window.maximize()
+        else:
+            self.window.unmaximize()
+
+    def _on_window_size_allocate(self, _, __):
+        width, height = self.window.get_size()
+        self.application_settings.window_width = width
+        self.application_settings.window_height = height
+        self.application_settings.window_maximize = self.window.is_maximized()

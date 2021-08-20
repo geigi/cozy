@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkAdjustment" id="seek_bar_adjustment">
     <property name="upper">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">15</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">15</property>
   </object>
   <template class="SeekBar" parent="GtkBox">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="valign">center</property>
     <property name="hexpand">True</property>
     <property name="spacing">5</property>
     <child>
       <object class="GtkLabel" id="current_label">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="tooltip_text" translatable="yes">Elapsed time</property>
+        <property name="can-focus">False</property>
+        <property name="tooltip-text" translatable="yes">Elapsed time</property>
         <property name="halign">end</property>
         <property name="valign">center</property>
         <property name="label">&lt;span font_features='tnum'&gt;--:--&lt;/span&gt;</property>
-        <property name="use_markup">True</property>
-        <property name="single_line_mode">True</property>
+        <property name="use-markup">True</property>
+        <property name="single-line-mode">True</property>
         <child internal-child="accessible">
           <object class="AtkObject" id="current_label-atkobject">
             <property name="AtkObject::accessible-name" translatable="yes">Time elapsed</property>
@@ -38,19 +38,19 @@
     </child>
     <child>
       <object class="GtkScale" id="progress_scale">
-        <property name="width_request">150</property>
+        <property name="width-request">150</property>
         <property name="visible">True</property>
         <property name="sensitive">False</property>
-        <property name="can_focus">True</property>
-        <property name="tooltip_text" translatable="yes">Jump to position in current chapter</property>
+        <property name="can-focus">True</property>
+        <property name="tooltip-text" translatable="yes">Jump to position in current chapter</property>
         <property name="valign">center</property>
         <property name="hexpand">True</property>
         <property name="adjustment">seek_bar_adjustment</property>
-        <property name="lower_stepper_sensitivity">on</property>
-        <property name="upper_stepper_sensitivity">on</property>
-        <property name="restrict_to_fill_level">False</property>
-        <property name="fill_level">0</property>
-        <property name="draw_value">False</property>
+        <property name="lower-stepper-sensitivity">on</property>
+        <property name="upper-stepper-sensitivity">on</property>
+        <property name="restrict-to-fill-level">False</property>
+        <property name="fill-level">0</property>
+        <property name="draw-value">False</property>
         <child internal-child="accessible">
           <object class="AtkObject" id="progress_scale-atkobject">
             <property name="AtkObject::accessible-name" translatable="yes">Position slider</property>
@@ -67,17 +67,17 @@
     <child>
       <object class="GtkEventBox" id="remaining_event_box">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="valign">center</property>
         <child>
           <object class="GtkLabel" id="remaining_label">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="tooltip_text" translatable="yes">Remaining time</property>
+            <property name="can-focus">False</property>
+            <property name="tooltip-text" translatable="yes">Remaining time</property>
             <property name="halign">start</property>
             <property name="label">&lt;span font_features='tnum'&gt;--:--&lt;/span&gt;</property>
-            <property name="use_markup">True</property>
-            <property name="single_line_mode">True</property>
+            <property name="use-markup">True</property>
+            <property name="single-line-mode">True</property>
             <child internal-child="accessible">
               <object class="AtkObject" id="remaining_label-atkobject">
                 <property name="AtkObject::accessible-name" translatable="yes">Time remaining</property>
