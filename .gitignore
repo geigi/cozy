@@ -4,6 +4,7 @@ _build/
 .buildconfig
 .flatpak-builder
 build/
+build-fp/
 app/
 bin/
 cozy/__pycache__
