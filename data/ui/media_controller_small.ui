@@ -38,7 +38,6 @@
             <property name="can-focus">False</property>
             <property name="halign">start</property>
             <property name="valign">center</property>
-            <property name="stock">gtk-missing-image</property>
           </object>
         </child>
       </object>
