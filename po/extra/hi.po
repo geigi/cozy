@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-01 12:27+0200\n"
+"POT-Creation-Date: 2021-08-15 12:32+0200\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
 "Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2021\n"
 "Language-Team: Hindi (https://www.transifex.com/geigi/teams/78138/hi/)\n"
@@ -102,55 +102,98 @@ msgid "Julian Geywitz"
 msgstr "जूलियन गेविट्ज़"
 
 #: data/com.github.geigi.cozy.appdata.xml:54
+#: data/com.github.geigi.cozy.appdata.xml:102
+#: data/com.github.geigi.cozy.appdata.xml:117
+msgid "A small bugfix release which makes Cozy more reliable."
+msgstr "Cozy की विश्वसनीयता उन्नत करने हेतु लघु सुधार युक्त संस्करण।"
+
+#: data/com.github.geigi.cozy.appdata.xml:58
+msgid "Display an error banner if an error occurs while importing new files"
+msgstr ""
+"नवीन फाइलें आयात करते समय त्रुटि होने पर एक त्रुटि सूचक प्रदर्शित होगा"
+
+#: data/com.github.geigi.cozy.appdata.xml:59
+msgid ""
+"The audiobook directory selector in the empty state has been replaced by a "
+"button to allow a narrow window even with long directory names"
+msgstr ""
+"अप्रयुक्त होने पर अब ऑडियो पुस्तक चयन साधन के स्थान पर एक बटन प्रदर्शित होगा"
+" जिससे लंबे नामों वाली डायरेक्टरी हेतु संगत एक संकीर्ण विंडो उपस्थित होगी"
+
+#: data/com.github.geigi.cozy.appdata.xml:60
+msgid "Fix: multiple small UI issues"
+msgstr "सुधार : अनेकों लघु उपयोक्ता अंतरफलक संबंधी समस्याएँ"
+
+#: data/com.github.geigi.cozy.appdata.xml:61
+msgid "Fix: the welcome screen now works properly on a mobile device"
+msgstr "सुधार : मोबाइल उपकरण पर स्वागत स्क्रीन अब उचित रूप से प्रदर्शित होगी"
+
+#: data/com.github.geigi.cozy.appdata.xml:62
+msgid ""
+"Fix: don't display the mobile library switcher when no files are imported"
+msgstr ""
+"सुधार : फाइल आयात न होने की स्थिति में मोबाइल पुस्तक संग्रह परिवर्तन साधन "
+"प्रदर्शित नहीं होगा"
+
+#: data/com.github.geigi.cozy.appdata.xml:63
+msgid ""
+"Fix: in the book detail view the pause icon for a chapter remained even when"
+" the next chapter already started playing"
+msgstr ""
+"सुधार : पुस्तक विवरण दृश्य में अगले अध्याय का वाचन आरंभ होने पर भी अध्याय "
+"वचन रोकने का आइकन उपस्थित होने की समस्या का निवारण"
+
+#: data/com.github.geigi.cozy.appdata.xml:64
+#: data/com.github.geigi.cozy.appdata.xml:81
+#: data/com.github.geigi.cozy.appdata.xml:96
+#: data/com.github.geigi.cozy.appdata.xml:111
+#: data/com.github.geigi.cozy.appdata.xml:126
+#: data/com.github.geigi.cozy.appdata.xml:140
+#: data/com.github.geigi.cozy.appdata.xml:154
+msgid "As always, updated translations thanks to all of the translators!"
+msgstr "हमेशा की भाँति अनुवाद अपडेट हेतु सभी अनुवादकों को धन्यवाद!"
+
+#: data/com.github.geigi.cozy.appdata.xml:70
 msgid ""
 "This release features a redesigned library with responsiveness in mind."
 msgstr ""
 "कार्यक्षमता वर्धन के उद्देश्य से पुनर्रचित पुस्तक संग्रह युक्त संस्करण।"
 
-#: data/com.github.geigi.cozy.appdata.xml:58
+#: data/com.github.geigi.cozy.appdata.xml:74
 msgid "Redesigned library"
 msgstr "पुनर्रचित पुस्तक संग्रह"
 
-#: data/com.github.geigi.cozy.appdata.xml:59
+#: data/com.github.geigi.cozy.appdata.xml:75
 msgid "Redesigned start screen"
 msgstr "पुनर्रचित आरंभ स्क्रीन"
 
-#: data/com.github.geigi.cozy.appdata.xml:60
+#: data/com.github.geigi.cozy.appdata.xml:76
 msgid "Redesigned book detail screen"
 msgstr "पुनर्रचित पुस्तक विवरण स्क्रीन"
 
-#: data/com.github.geigi.cozy.appdata.xml:61
+#: data/com.github.geigi.cozy.appdata.xml:77
 msgid "Responsive design for the main window"
 msgstr "मुख्य विंडो का उन्नत प्रारूप"
 
-#: data/com.github.geigi.cozy.appdata.xml:62
+#: data/com.github.geigi.cozy.appdata.xml:78
 msgid "Introducing a welcome screen for new installations"
 msgstr "अब नवीन इंस्टॉलों हेतु एक स्वागत स्क्रीन सम्मिलित है"
 
-#: data/com.github.geigi.cozy.appdata.xml:63
+#: data/com.github.geigi.cozy.appdata.xml:79
 msgid "Fix: a rare bug where Cozy's volume was muted at first start"
 msgstr "सुधार : आरंभ पर Cozy की ध्वनि बंद होने की समस्या का निवारण"
 
-#: data/com.github.geigi.cozy.appdata.xml:64
+#: data/com.github.geigi.cozy.appdata.xml:80
 msgid "Fix: long book names or author names will be truncated properly"
 msgstr ""
 "सुधार : बड़े नाम वाली पुस्तक या लेखक के नाम अब उचित रूप से प्रदर्शित होंगें"
 
-#: data/com.github.geigi.cozy.appdata.xml:65
-#: data/com.github.geigi.cozy.appdata.xml:80
-#: data/com.github.geigi.cozy.appdata.xml:95
-#: data/com.github.geigi.cozy.appdata.xml:110
-#: data/com.github.geigi.cozy.appdata.xml:124
-#: data/com.github.geigi.cozy.appdata.xml:138
-msgid "As always, updated translations thanks to all of the translators!"
-msgstr "हमेशा की भाँति अनुवाद अपडेट हेतु सभी अनुवादकों को धन्यवाद!"
-
-#: data/com.github.geigi.cozy.appdata.xml:71
+#: data/com.github.geigi.cozy.appdata.xml:87
 msgid "Performance improvements for the book detail view and some bugfixes."
 msgstr ""
 "पुस्तक विवरण दृश्य हेतु कार्यक्षमता संबंधी लघु सुधार व कुछ सामान्य सुधार।"
 
-#: data/com.github.geigi.cozy.appdata.xml:75
+#: data/com.github.geigi.cozy.appdata.xml:91
 msgid ""
 "Chapters in the book detail view will now be loaded lazily (thanks chris-"
 "kobrzak!)"
@@ -158,7 +201,7 @@ msgstr ""
 "पुस्तक विवरण दृश्य में अध्याय अब मंद गति से लोड होंगें (धन्यवाद chris-"
 "kobrzak!)"
 
-#: data/com.github.geigi.cozy.appdata.xml:76
+#: data/com.github.geigi.cozy.appdata.xml:92
 msgid ""
 "Books with a single chapter don't display a chapter number anymore (thanks "
 "chris-kobrzak!)"
@@ -166,34 +209,29 @@ msgstr ""
 "केवल एक अध्याय युक्त पुस्तकों हेतु अध्याय संख्या प्रदर्शित नहीं होगी "
 "(धन्यवाद chris-kobrzak!)"
 
-#: data/com.github.geigi.cozy.appdata.xml:77
+#: data/com.github.geigi.cozy.appdata.xml:93
 msgid "Fix: Locals in What's new in Cozy screen (thanks alyssais!)"
 msgstr ""
 "सुधार : स्क्रीन पर प्रदर्शित नवीन विशेषताओं की सामग्री हेतु उचित वर्तनी "
 "(धन्यवाद alyssais!)"
 
-#: data/com.github.geigi.cozy.appdata.xml:78
+#: data/com.github.geigi.cozy.appdata.xml:94
 msgid "Fix: Catch an error that could occur when a book stops"
 msgstr ""
 "सुधार : अब पुस्तक वाचन रूकने पर होने वाली त्रुटि की पहचान करना संभव है"
 
-#: data/com.github.geigi.cozy.appdata.xml:79
+#: data/com.github.geigi.cozy.appdata.xml:95
 msgid "Small performance improvements"
 msgstr "कार्यक्षमता संबंधी लघु सुधार"
 
-#: data/com.github.geigi.cozy.appdata.xml:86
-#: data/com.github.geigi.cozy.appdata.xml:101
-msgid "A small bugfix release which makes Cozy more reliable."
-msgstr "Cozy की विश्वसनीयता उन्नत करने हेतु लघु सुधार युक्त संस्करण।"
-
-#: data/com.github.geigi.cozy.appdata.xml:90
+#: data/com.github.geigi.cozy.appdata.xml:106
 msgid ""
 "When an issue occurs during playback the error message is displayed to the "
 "user"
 msgstr ""
 "परिचालन के दौरान त्रुटि होने पर उपयोक्ता हेतु त्रुटि संदेश प्रदर्शित होगा"
 
-#: data/com.github.geigi.cozy.appdata.xml:91
+#: data/com.github.geigi.cozy.appdata.xml:107
 msgid ""
 "Fix: Importing media without tags now properly decodes the file name as "
 "chapter name (thanks chris-kobrzak!)"
@@ -201,21 +239,21 @@ msgstr ""
 "सुधार : उपनाम रहित मीडिया आयात होने पर फाइल नाम का अध्याय नाम के रूप में "
 "उचित रूप से विसंकेतन होगा (धन्यवाद chris-kobrzak!)"
 
-#: data/com.github.geigi.cozy.appdata.xml:92
+#: data/com.github.geigi.cozy.appdata.xml:108
 msgid "Fix: Ensure that always a default storage location is present"
 msgstr "सुधार : डिफ़ॉल्ट संचय स्थान की स्थायी उपस्थिति की सुनिश्चितता"
 
-#: data/com.github.geigi.cozy.appdata.xml:93
+#: data/com.github.geigi.cozy.appdata.xml:109
 msgid "Fix: During import an error could occur which stopped the import"
 msgstr ""
 "सुधार : आयात प्रक्रिया को बाधित कर सकने वाली त्रुटि की समस्या का निवारण"
 
-#: data/com.github.geigi.cozy.appdata.xml:94
+#: data/com.github.geigi.cozy.appdata.xml:110
 msgid "Fix: During the database migration an error could occur"
 msgstr ""
 "सुधार : डेटाबेस अंतरण प्रक्रिया हेतु संभावित त्रुटि की समस्या का निवारण"
 
-#: data/com.github.geigi.cozy.appdata.xml:105
+#: data/com.github.geigi.cozy.appdata.xml:121
 msgid ""
 "When copying files to the audiobook library goes wrong, the user is now "
 "informed with the error"
@@ -223,12 +261,12 @@ msgstr ""
 "ऑडियो पुस्तक संग्रह में फाइलें कॉपी करना विफल होने पर अब उपयोक्ता हेतु एक "
 "त्रुटि संदेश प्रदर्शित होगा"
 
-#: data/com.github.geigi.cozy.appdata.xml:106
+#: data/com.github.geigi.cozy.appdata.xml:122
 msgid "Fix: Possible error while displaying offline cache copy progress"
 msgstr ""
 "सुधार : ऑफलाइन कैश कॉपी की प्रगति प्रदर्शन के समय संभावित त्रुटि का निवारण"
 
-#: data/com.github.geigi.cozy.appdata.xml:107
+#: data/com.github.geigi.cozy.appdata.xml:123
 msgid ""
 "Fix: When changing the audiobook location or selecting a file in the file "
 "not found dialog an unexpected error could occur"
@@ -236,31 +274,31 @@ msgstr ""
 "सुधार : फाइल प्राप्ति विफल की विंडो में ऑडियो पुस्तक स्थान परिवर्तन या फाइल "
 "चयन के दौरान अनपेक्षित त्रुटि का निवारण"
 
-#: data/com.github.geigi.cozy.appdata.xml:108
+#: data/com.github.geigi.cozy.appdata.xml:124
 msgid "Fix: Removing a storage dir in settings did not work"
 msgstr ""
 "सुधार : सेटिंग्स से संचय डायरेक्टरी हटाने की प्रक्रिया अब उचित रूप से कार्य "
 "करती है"
 
-#: data/com.github.geigi.cozy.appdata.xml:109
+#: data/com.github.geigi.cozy.appdata.xml:125
 msgid "Fix: Removing a book from the library did sometimes not work"
 msgstr ""
 "सुधार : संग्रह से पुस्तक हटाने की प्रक्रिया अब उचित रूप से कार्य करती है"
 
-#: data/com.github.geigi.cozy.appdata.xml:116
-#: data/com.github.geigi.cozy.appdata.xml:130
+#: data/com.github.geigi.cozy.appdata.xml:132
+#: data/com.github.geigi.cozy.appdata.xml:146
 msgid "This release features chapter support for m4b files."
 msgstr "इस संस्करण में m4b फाइलों हेतु अध्याय समर्थन सम्मिलित है।"
 
-#: data/com.github.geigi.cozy.appdata.xml:120
-#: data/com.github.geigi.cozy.appdata.xml:134
+#: data/com.github.geigi.cozy.appdata.xml:136
+#: data/com.github.geigi.cozy.appdata.xml:150
 msgid ""
 "A long awaited feature has finally arrived: Chapter support for m4b files."
 msgstr ""
 "अंततः एक बहुप्रतीक्षित सुविधा अब उपलब्ध है : m4b फाइलों हेतु अध्याय समर्थन।"
 
-#: data/com.github.geigi.cozy.appdata.xml:121
-#: data/com.github.geigi.cozy.appdata.xml:135
+#: data/com.github.geigi.cozy.appdata.xml:137
+#: data/com.github.geigi.cozy.appdata.xml:151
 msgid ""
 "Books with inconsistent spelling are now grouped into a single book (thanks "
 "chris-kobrzak!)."
@@ -268,13 +306,13 @@ msgstr ""
 "असंगत वर्तनी वाली पुस्तकों अब एक ही पुस्तक में वर्गीकृत होंगी (धन्यवाद "
 "chris-kobrzak!)।"
 
-#: data/com.github.geigi.cozy.appdata.xml:122
-#: data/com.github.geigi.cozy.appdata.xml:136
+#: data/com.github.geigi.cozy.appdata.xml:138
+#: data/com.github.geigi.cozy.appdata.xml:152
 msgid "Improved reliability of restoring the previous playback position."
 msgstr "पूर्व वाचक स्थिति की पुनः स्थापना हेतु विश्वसनीयता सुधार।"
 
-#: data/com.github.geigi.cozy.appdata.xml:123
-#: data/com.github.geigi.cozy.appdata.xml:137
+#: data/com.github.geigi.cozy.appdata.xml:139
+#: data/com.github.geigi.cozy.appdata.xml:153
 msgid ""
 "Fix: clicking on a currently playing chapter did not pause the chapter as "
 "expected."
