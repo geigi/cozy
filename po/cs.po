@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-25 13:55+0200\n"
+"POT-Creation-Date: 2021-08-16 18:22+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Pavel Zahradnik <pavel.zahradnik@centrum.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/geigi/teams/78138/cs/)\n"
@@ -21,17 +21,33 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
+#: cozy/application.py:101
+msgid "Audiobooks"
+msgstr "Audioknihy"
+
 #: cozy/control/offline_cache.py:201
 msgid "Copying"
 msgstr "Kopírování"
 
-#: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
-msgid "min"
-msgstr "min"
+#: cozy/media/files.py:69
+msgid "Cannot copy: Audiobook directory is read only"
+msgstr "Nelze kopírovat: Adresář s audioknihami je určen pouze pro čtení"
 
-#: cozy/ui/widgets/sleep_timer.py:65
-msgid "Off"
-msgstr "Vypnuto"
+#: cozy/media/files.py:71
+msgid "Cannot copy: Disk is full"
+msgstr "Nelze kopírovat: Disk je plný"
+
+#: cozy/media/files.py:73 cozy/media/files.py:89
+msgid "Cannot copy: Permission denied"
+msgstr "Nelze kopírovat: Oprávnění odepřeno"
+
+#: cozy/media/importer.py:121
+msgid "Error while importing new files"
+msgstr "Chyba během importování nových souborů"
+
+#: cozy/model/track.py:38
+msgid "Chapter"
+msgstr "Kapitola"
 
 #: cozy/tools.py:92 cozy/tools.py:96
 #, python-brace-format
@@ -108,39 +124,19 @@ msgstr[1] "před {years} roky"
 msgstr[2] "před {years} roky"
 msgstr[3] "před {years} roky"
 
-#: cozy/application.py:101
-msgid "Audiobooks"
-msgstr "Audioknihy"
-
-#: cozy/ui/album_element.py:65 cozy/ui/widgets/search_results.py:100
-msgid "Play this book"
-msgstr "Přehrát tuto knihu"
-
-#: cozy/ui/book_detail_view.py:302
+#: cozy/ui/book_detail_view.py:313
 msgid "Downloaded"
 msgstr "Stažené"
 
-#: cozy/ui/book_detail_view.py:305 data/ui/book_detail.ui:156
+#: cozy/ui/book_detail_view.py:316 data/ui/book_detail.ui:152
 msgid "Download"
 msgstr "Stáhnout"
 
-#: cozy/ui/book_element.py:33
-msgid "Open book overview"
-msgstr "Přehled otevřených knih"
+#: cozy/ui/chapter_element.py:27
+msgid "Play this part"
+msgstr "Přehrát tuto část"
 
-#: cozy/ui/book_element.py:113
-msgid "Mark as read"
-msgstr "Označit jako poslechnuté"
-
-#: cozy/ui/book_element.py:116
-msgid "Open in file browser"
-msgstr "Otevřít v prohlížeči souborů"
-
-#: cozy/ui/book_element.py:119
-msgid "Remove from library"
-msgstr "Odstranit z knihovny"
-
-#: cozy/ui/disk_element.py:26
+#: cozy/ui/disk_element.py:27
 msgid "Disc"
 msgstr "Disk"
 
@@ -148,18 +144,30 @@ msgstr "Disk"
 msgid "All files"
 msgstr "Všechny soubory"
 
+#: cozy/ui/main_view.py:298 data/ui/main_window.ui:412
+msgid "Set Audiobooks Directory"
+msgstr "Nastavení adresáře audioknih"
+
 #: cozy/ui/settings.py:103
 msgid "Feedback"
 msgstr "Zpětná vazba"
-
-#: cozy/ui/chapter_element.py:23
-msgid "Play this part"
-msgstr "Přehrát tuto část"
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
 msgid "{storage} is offline."
 msgstr "{storage} je odpojen."
+
+#: cozy/ui/widgets/book_element.py:52
+msgid "Mark as read"
+msgstr "Označit jako poslechnuté"
+
+#: cozy/ui/widgets/book_element.py:55
+msgid "Open in file browser"
+msgstr "Otevřít v prohlížeči souborů"
+
+#: cozy/ui/widgets/book_element.py:58
+msgid "Remove from library"
+msgstr "Odstranit z knihovny"
 
 #: cozy/ui/widgets/error_reporting.py:12
 msgid "Disabled"
@@ -173,7 +181,7 @@ msgstr "Základní hlášení chyb"
 msgid "Detailed error reporting"
 msgstr "Podrobné hlášení chyb"
 
-#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:173
+#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:240
 msgid "Detailed error reporting with import errors"
 msgstr "Podrobné hlášení chyb, včetně chyb importu "
 
@@ -181,7 +189,7 @@ msgstr "Podrobné hlášení chyb, včetně chyb importu "
 msgid "No error or crash reporting."
 msgstr "Žádné hlášení chyb nebo selhání."
 
-#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:192
+#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:259
 msgid "The following information will be sent in case of an error or crash:"
 msgstr "V případě chyby nebo selhání budou odeslány následující informace:"
 
@@ -210,8 +218,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Typ souborů médií, které se aplikaci Cozy nepodařilo importovat"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:44
-#: cozy/view_model/library_view_model.py:140
+#: cozy/view_model/library_view_model.py:53
+#: cozy/view_model/library_view_model.py:159
 msgid "All"
 msgstr "Vše"
 
@@ -227,76 +235,126 @@ msgstr "Přejít na autora"
 msgid "Jump to reader "
 msgstr "Přejít na čtenáře"
 
-#: cozy/view_model/headerbar_view_model.py:75
+#: cozy/ui/widgets/search_results.py:100
+msgid "Play this book"
+msgstr "Přehrát tuto knihu"
+
+#: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
+msgid "min"
+msgstr "min"
+
+#: cozy/ui/widgets/sleep_timer.py:65
+msgid "Off"
+msgstr "Vypnuto"
+
+#: cozy/ui/widgets/storage_list_box_row.py:100
+#: cozy/ui/widgets/storage_list_box_row.py:145
+msgid "External drive"
+msgstr "Externí disk"
+
+#: cozy/ui/widgets/storage_list_box_row.py:103
+#: cozy/ui/widgets/storage_list_box_row.py:148
+msgid "Internal drive"
+msgstr "Interní disk"
+
+#: cozy/view_model/headerbar_view_model.py:91
 msgid "Importing Audiobooks"
 msgstr "Import audioknih"
 
-#: cozy/view_model/headerbar_view_model.py:84
 #: cozy/view_model/headerbar_view_model.py:100
+#: cozy/view_model/headerbar_view_model.py:116
 msgid "Copying new files…"
 msgstr "Kopírování nových souborů…"
 
-#: cozy/view_model/headerbar_view_model.py:91
+#: cozy/view_model/headerbar_view_model.py:107
 msgid "Changing audio book location…"
 msgstr "Změna umístění audioknih…"
-
-#: cozy/model/track.py:38
-msgid "Chapter"
-msgstr "Kapitola"
-
-#: cozy/media/files.py:69
-msgid "Cannot copy: Audiobook directory is read only"
-msgstr "Nelze kopírovat: Adresář s audioknihami je určen pouze pro čtení"
-
-#: cozy/media/files.py:71
-msgid "Cannot copy: Disk is full"
-msgstr "Nelze kopírovat: Disk je plný"
-
-#: cozy/media/files.py:73 cozy/media/files.py:89
-msgid "Cannot copy: Permission denied"
-msgstr "Nelze kopírovat: Oprávnění odepřeno"
 
 #: data/ui/about.ui:16
 msgid "GitHub"
 msgstr "GitHub"
 
-#: data/ui/book_detail.ui:205
+#: data/ui/album_element.ui:104
+msgid "Play"
+msgstr "Přehrát"
+
+#: data/ui/book_detail.ui:219
 msgid "Remaining"
 msgstr "Zbývá"
 
-#: data/ui/book_detail.ui:260
+#: data/ui/book_detail.ui:274
 msgid "Total"
 msgstr "Celkem"
 
-#: data/ui/book_detail.ui:276
+#: data/ui/book_detail.ui:290
 msgid "Last played"
 msgstr "Naposledy hrané"
 
-#: data/ui/book_detail.ui:292
+#: data/ui/book_detail.ui:306
 msgid "Published"
 msgstr "Zveřejněno"
 
-#: data/ui/book_detail.ui:338
+#: data/ui/book_detail.ui:341
 msgid "Some or all files of this book cannot be found."
 msgstr "Některé nebo všechny soubory této knihy nelze nalézt."
 
-#: data/ui/book_detail.ui:361
+#: data/ui/book_detail.ui:364
 msgid "unavailable"
 msgstr "nedostupné"
 
-#: data/ui/book_detail.ui:472
+#: data/ui/book_detail.ui:533
 msgid "Loading chapters, please wait..."
 msgstr "Načítání kapitol, prosím vyčkejte..."
 
-#: data/ui/book_detail.ui:527
-msgid "page0"
-msgstr "strana0"
+#: data/ui/book_element.ui:36
+msgid "Open book overview"
+msgstr "Přehled otevřených knih"
 
-#: data/ui/error_reporting.ui:23
+#: data/ui/db_migration_failed.ui:31
+msgid "Close Cozy"
+msgstr "Zavřít aplikaci Cozy"
+
+#: data/ui/db_migration_failed.ui:47
+msgid "Receive help on GitHub"
+msgstr "Získat pomoc na GitHubu"
+
+#: data/ui/db_migration_failed.ui:108
+msgid "An error occured while updating the database"
+msgstr "Při aktualizaci databáze došlo k chybě."
+
+#: data/ui/db_migration_failed.ui:129
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able to startup.\n"
+"A backup of the database was created before the update and has been restored now.\n"
+"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
+"You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
+"Během aktualizace databáze došlo k chybě a aplikaci Cozy nelze spustit.\n"
+"Před aktualizací byla vytvořena záloha databáze, která byla nyní obnovena.\n"
+"Dokud nebude tento problém vyřešen, používejte prosím verzi 0.9.5 aplikace Cozy.\n"
+"Tento problém můžete pomoci vyřešit jeho nahlášením na GitHubu."
+
+#: data/ui/delete_book_dialog.ui:31 data/ui/file_not_found.ui:19
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: data/ui/delete_book_dialog.ui:45
+msgid "Delete Audiobook"
+msgstr "Smazat audioknihu"
+
+#: data/ui/delete_book_dialog.ui:105
+msgid "Are you sure you want to delete the selected audiobook?"
+msgstr "Opravdu chcete smazat vybranou audioknihu?"
+
+#: data/ui/delete_book_dialog.ui:126
+msgid "The audiobook will be removed from your disk and from Cozy's library."
+msgstr "Audiokniha bude odstraněna z vašeho disku a z knihovny aplikace Cozy."
+
+#: data/ui/error_reporting.ui:29
 msgid "User feedback"
 msgstr "Zpětná vazba od uživatelů"
 
-#: data/ui/error_reporting.ui:66
+#: data/ui/error_reporting.ui:98
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "You can help improve Cozy by contributing information in case of errors and "
@@ -305,7 +363,7 @@ msgstr ""
 "Můžete přispět ke zlepšení aplikace Cozy tím, že poskytnete informace v "
 "případě chyb a selhání. "
 
-#: data/ui/error_reporting.ui:80
+#: data/ui/error_reporting.ui:112
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Contributing this information is optional and completely anonymous. We will "
@@ -316,17 +374,13 @@ msgstr ""
 " shromažďovat osobní údaje, soubory, které importujete, ani žádné informace,"
 " které by vás mohly identifikovat."
 
-#: data/ui/error_reporting.ui:95
+#: data/ui/error_reporting.ui:127
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
 "Cozy je opensource a zdrojový kód se zpětnou vazbou od uživatelů si můžete "
 "prohlédnout zde:"
-
-#: data/ui/file_not_found.ui:19 data/ui/delete_book_dialog.ui:31
-msgid "Cancel"
-msgstr "Zrušit"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
@@ -339,6 +393,34 @@ msgstr "Soubor nenalezen"
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
 msgstr "Tento soubor se nepodařilo najít. Chcete jej vyhledat ručně?"
+
+#: data/ui/headerbar.ui:56
+msgid "Display background task progress"
+msgstr "Zobrazit průběh úlohy na pozadí"
+
+#: data/ui/headerbar.ui:70
+msgid "Search your library"
+msgstr "Prohledat knihovnu"
+
+#: data/ui/headerbar.ui:80
+msgid "Search menu button"
+msgstr "Tlačítko nabídky Hledání"
+
+#: data/ui/headerbar.ui:81
+msgid "Open the search popover"
+msgstr "Otevřít vyskakovací okno hledání"
+
+#: data/ui/headerbar.ui:96
+msgid "Options"
+msgstr "Možnosti"
+
+#: data/ui/headerbar.ui:107
+msgid "Options menu button"
+msgstr "Tlačítko nabídky Možnosti"
+
+#: data/ui/headerbar.ui:108
+msgid "Open the options popover"
+msgstr "Otevřít vyskakovací okno pro možnosti"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
@@ -362,86 +444,195 @@ msgstr ""
 "- Soubor(y) nejsou platné zvukové soubory.\n"
 "- Soubor(y) jsou poškozené"
 
-#: data/ui/main_window.ui:125
+#: data/ui/main_window.ui:68
 msgid "Recent"
 msgstr "Nedávné"
 
-#: data/ui/main_window.ui:145
+#: data/ui/main_window.ui:90
 msgid "List of authors"
 msgstr "Seznam autorů"
 
-#: data/ui/main_window.ui:161 data/ui/main_window.ui:271
+#: data/ui/main_window.ui:106 data/ui/main_window.ui:250
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "Autor"
 
-#: data/ui/main_window.ui:181
+#: data/ui/main_window.ui:128
 msgid "List of readers"
 msgstr "Seznam čtenářů"
 
-#: data/ui/main_window.ui:197 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:144 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "Čtenář"
 
-#: data/ui/main_window.ui:251
+#: data/ui/main_window.ui:189
 msgid "List of books"
 msgstr "Seznam knih"
 
-#: data/ui/main_window.ui:301
+#: data/ui/main_window.ui:222
+msgid ""
+"Start exploring your library by switching to the Author or Reader view."
+msgstr ""
+"Začněte prozkoumávat svoji knihovnu přepnutím na zobrazení podle autora nebo"
+" čtenáře."
+
+#: data/ui/main_window.ui:280
 msgid "Stay tuned while Cozy is preparing your library…"
 msgstr "Zůstaňte naladěni, zatímco Cozy připravuje vaši knihovnu..."
 
 #: data/ui/main_window.ui:334
-msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
-msgstr ""
-"Začněte prozkoumávat svou knihovnu přepnutím do zobrazení Autor nebo Čtenář "
-"nahoře."
-
-#: data/ui/main_window.ui:379
 msgid "Import your Audiobooks"
 msgstr "Import audioknih"
 
-#: data/ui/main_window.ui:395
+#: data/ui/main_window.ui:353
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 "Cozy automaticky importuje vaše audioknihy do jednoho adresáře - vaší "
 "knihovny."
 
-#: data/ui/main_window.ui:431 data/ui/main_window.ui:452
-msgid "Automatically import new audiobooks on startup"
-msgstr "Automatický import nových audioknih při spuštění"
-
-#: data/ui/main_window.ui:451
-msgid "Auto scan switch"
-msgstr "Přepínač automatického prohledávání"
-
-#: data/ui/main_window.ui:495
+#: data/ui/main_window.ui:385
 msgid "Drag & Drop"
 msgstr "Přetahování"
 
-#: data/ui/main_window.ui:512
+#: data/ui/main_window.ui:387
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr "Přetáhněte audioknihy do Cozy a budou automaticky importovány "
 
-#: data/ui/main_window.ui:535
-msgid "Location of your audiobooks"
-msgstr "Umístění vašich audioknih"
+#: data/ui/main_window.ui:414
+msgid "Load audiobooks from a directory, network drive or an external disk"
+msgstr "Nahrát audioknihy z adresáře, síťového disku nebo externího disku"
 
-#: data/ui/main_window.ui:556
-msgid "Set Audiobooks Directory"
-msgstr "Nastavení adresáře audioknih"
+#: data/ui/main_window.ui:417
+msgid "Select"
+msgstr "Vybrat"
 
-#: data/ui/main_window.ui:579
-msgid "Load audiobooks from a directory, network drive or an external disk."
-msgstr ""
-"Audioknihy můžete načítat z adresáře, síťové jednotky nebo externího disku."
+#: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
+#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:71
+msgid "Rewind"
+msgstr "Posun zpět"
 
-#: data/ui/main_window.ui:597
-msgid "You can add more storage locations later in the settings"
-msgstr "Další místa uložení můžete přidat později v nastavení."
+#: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
+#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:78
+msgid "Rewind button"
+msgstr "Tlačítko pro posun zpět"
+
+#: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
+#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:79
+msgid "Rewind playback"
+msgstr "Přehrávání zpět"
+
+#: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
+#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:101
+msgid "Start playback"
+msgstr "Spustit přehrávání"
+
+#: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
+#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:108
+msgid "Play/Pause Button"
+msgstr "Tlačítko přehrávání/zastavení"
+
+#: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
+#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:109
+msgid "Start or pause the playback"
+msgstr "Spustit nebo zastavit přehrávání"
+
+#: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
+#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:132
+msgid "Forward"
+msgstr "Posun vpřed"
+
+#: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
+#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:139
+msgid "Forward button"
+msgstr "Tlačítko pro posun vpřed"
+
+#: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
+#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:140
+msgid "Forward Playback"
+msgstr "Přehrávání vpřed"
+
+#: data/ui/media_controller.ui:175 data/ui/media_controller_big.ui:76
+msgid "Currently playing"
+msgstr "Momentálně hraje"
+
+#: data/ui/media_controller.ui:190 data/ui/media_controller_big.ui:97
+msgid "Booktitle"
+msgstr "Název knihy"
+
+#: data/ui/media_controller.ui:191 data/ui/media_controller_big.ui:98
+msgid "Title of currently playing book"
+msgstr "Název právě přehrávané knihy"
+
+#: data/ui/media_controller.ui:217 data/ui/media_controller_big.ui:126
+msgid "Part name"
+msgstr "Název části"
+
+#: data/ui/media_controller.ui:218 data/ui/media_controller_big.ui:127
+msgid "Title of the currently playing part"
+msgstr "Název právě přehrávané části"
+
+#: data/ui/media_controller.ui:256 data/ui/seek_bar.ui:20
+msgid "Elapsed time"
+msgstr "Uplynulý čas"
+
+#: data/ui/media_controller.ui:264 data/ui/seek_bar.ui:28
+msgid "Time elapsed"
+msgstr "Uplynulý čas"
+
+#: data/ui/media_controller.ui:265 data/ui/seek_bar.ui:29
+msgid "Elapsed time of current part"
+msgstr "Uplynulý čas aktuální části"
+
+#: data/ui/media_controller.ui:281 data/ui/seek_bar.ui:45
+msgid "Jump to position in current chapter"
+msgstr "Přejít na pozici v aktuální kapitole"
+
+#: data/ui/media_controller.ui:290 data/ui/seek_bar.ui:56
+msgid "Position slider"
+msgstr "Posuvník polohy"
+
+#: data/ui/media_controller.ui:291 data/ui/seek_bar.ui:57
+msgid "Position of the current part in seconds"
+msgstr "Poloha aktuální části v sekundách"
+
+#: data/ui/media_controller.ui:310 data/ui/seek_bar.ui:76
+msgid "Remaining time"
+msgstr "Zbývající čas"
+
+#: data/ui/media_controller.ui:317 data/ui/seek_bar.ui:83
+msgid "Time remaining"
+msgstr "Zbývající čas"
+
+#: data/ui/media_controller.ui:318 data/ui/seek_bar.ui:84
+msgid "Remaining time of current part"
+msgstr "Zbývající čas aktuální části"
+
+#: data/ui/media_controller.ui:350 data/ui/media_controller_big.ui:324
+msgid "Volume control"
+msgstr "Ovládání hlasitosti"
+
+#: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
+#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:176
+msgid "Playback speed"
+msgstr "Rychlost přehrávání"
+
+#: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
+#: data/ui/settings.ui:956
+msgid "Sleep timer"
+msgstr "Časovač spánku"
+
+#: data/ui/media_controller.ui:418 data/ui/media_controller_big.ui:404
+msgid "Timer menu button"
+msgstr "Tlačítko nabídky Časovač"
+
+#: data/ui/media_controller.ui:419 data/ui/media_controller_big.ui:405
+msgid "Open the sleep timer popover"
+msgstr "Otevřít vyskakovací okno časovače"
+
+#: data/ui/media_controller_big.ui:53
+msgid "Open book"
+msgstr "Otevřít knihu"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -530,10 +721,6 @@ msgstr "Délka posunu zpět"
 #: data/ui/settings.ui:874
 msgid "Forward duration"
 msgstr "Délka posunu před"
-
-#: data/ui/settings.ui:956 data/ui/headerbar.ui:415
-msgid "Sleep timer"
-msgstr "Časovač spánku"
 
 #: data/ui/settings.ui:1001
 msgid "Fadeout"
@@ -689,16 +876,24 @@ msgstr "O _aplikaci Cozy"
 msgid "_Quit"
 msgstr "_Ukončit"
 
-#: data/ui/whats_new.ui:8
+#: data/ui/welcome.ui:29
+msgid "Welcome!"
+msgstr "Vítejte!"
+
+#: data/ui/welcome.ui:46
+msgid "Add your audiobooks and let's get cozy."
+msgstr "Přidejte své audioknihy a pojďte se uvelebit."
+
+#: data/ui/whats_new.ui:9
 msgid "Whats new?"
 msgstr "Co je nového?"
 
-#: data/ui/whats_new.ui:21
+#: data/ui/whats_new.ui:27
 msgid "Continue"
 msgstr "Pokračovat"
 
-#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
-#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
+#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_library.ui:17
+#: data/ui/whats_new_m4b.ui:17 data/ui/whats_new_m4b_chapter.ui:17
 msgid "What's new in Cozy"
 msgstr "Co je nového v aplikaci Cozy"
 
@@ -725,6 +920,36 @@ msgstr ""
 #: data/ui/whats_new_importer.ui:107
 msgid "More to come in a later update."
 msgstr "Těšte se na další novinky v pozdější aktualizaci."
+
+#: data/ui/whats_new_library.ui:52
+msgid "An important change in library management"
+msgstr "Důležitá změna ve spravování knihovny"
+
+#: data/ui/whats_new_library.ui:77
+msgid ""
+"Previously every file which was imported in your library but couldn't be "
+"found anymore was removed from the library during a scan."
+msgstr ""
+"Dříve byl každý soubor, který byl importován do knihovny, ale už jej nebylo "
+"možné nalézt, během prohledávání z knihovny odstraněn."
+
+#: data/ui/whats_new_library.ui:92
+msgid ""
+"Now audiobooks are not removed from your library automatically anymore. This"
+" prevents accidentally loosing the progress of a audiobook when a file can't"
+" be found temporarily."
+msgstr ""
+"Nyní se audioknihy z vaší knihovny už automaticky neodstraňují. Tím se "
+"zabrání náhodné ztrátě rozposlouchaných audioknih, když je soubor dočasně "
+"nedostupný."
+
+#: data/ui/whats_new_library.ui:107
+msgid ""
+"To remove an audiobook from the library simply right-click on it and choose "
+"the remove from library option."
+msgstr ""
+"Chcete-li audioknihu z knihovny odebrat, klikněte na ni pravým tlačítkem "
+"myši a vyberte možnost odebrat z knihovny."
 
 #: data/ui/whats_new_m4b.ui:52
 msgid "Basic support for m4b audio books."
@@ -771,213 +996,3 @@ msgstr ""
 #: data/ui/whats_new_m4b_chapter.ui:107
 msgid "The chapters will then be detected."
 msgstr "Poté budou kapitoly detekovány."
-
-#: data/ui/whats_new_library.ui:52
-msgid "An important change in library management"
-msgstr "Důležitá změna ve spravování knihovny"
-
-#: data/ui/whats_new_library.ui:77
-msgid ""
-"Previously every file which was imported in your library but couldn't be "
-"found anymore was removed from the library during a scan."
-msgstr ""
-"Dříve byl každý soubor, který byl importován do knihovny, ale už jej nebylo "
-"možné nalézt, během prohledávání z knihovny odstraněn."
-
-#: data/ui/whats_new_library.ui:92
-msgid ""
-"Now audiobooks are not removed from your library automatically anymore. This"
-" prevents accidentally loosing the progress of a audiobook when a file can't"
-" be found temporarily."
-msgstr ""
-"Nyní se audioknihy z vaší knihovny už automaticky neodstraňují. Tím se "
-"zabrání náhodné ztrátě rozposlouchaných audioknih, když je soubor dočasně "
-"nedostupný."
-
-#: data/ui/whats_new_library.ui:107
-msgid ""
-"To remove an audiobook from the library simply right-click on it and choose "
-"the remove from library option."
-msgstr ""
-"Chcete-li audioknihu z knihovny odebrat, klikněte na ni pravým tlačítkem "
-"myši a vyberte možnost odebrat z knihovny."
-
-#: data/ui/seek_bar.ui:20
-msgid "Elapsed time"
-msgstr "Uplynulý čas"
-
-#: data/ui/seek_bar.ui:28
-msgid "Time elapsed"
-msgstr "Uplynulý čas"
-
-#: data/ui/seek_bar.ui:29
-msgid "Elapsed time of current part"
-msgstr "Uplynulý čas aktuální části"
-
-#: data/ui/seek_bar.ui:45
-msgid "Jump to position in current chapter"
-msgstr "Přejít na pozici v aktuální kapitole"
-
-#: data/ui/seek_bar.ui:56
-msgid "Position slider"
-msgstr "Posuvník polohy"
-
-#: data/ui/seek_bar.ui:57
-msgid "Position of the current part in seconds"
-msgstr "Poloha aktuální části v sekundách"
-
-#: data/ui/seek_bar.ui:76
-msgid "Remaining time"
-msgstr "Zbývající čas"
-
-#: data/ui/seek_bar.ui:83
-msgid "Time remaining"
-msgstr "Zbývající čas"
-
-#: data/ui/seek_bar.ui:84
-msgid "Remaining time of current part"
-msgstr "Zbývající čas aktuální části"
-
-#: data/ui/headerbar.ui:123
-msgid "Rewind"
-msgstr "Posun zpět"
-
-#: data/ui/headerbar.ui:131
-msgid "Rewind button"
-msgstr "Tlačítko pro posun zpět"
-
-#: data/ui/headerbar.ui:132
-msgid "Rewind playback"
-msgstr "Přehrávání zpět"
-
-#: data/ui/headerbar.ui:149
-msgid "Start playback"
-msgstr "Spustit přehrávání"
-
-#: data/ui/headerbar.ui:157
-msgid "Play/Pause Button"
-msgstr "Tlačítko přehrávání/zastavení"
-
-#: data/ui/headerbar.ui:158
-msgid "Start or pause the playback"
-msgstr "Spustit nebo zastavit přehrávání"
-
-#: data/ui/headerbar.ui:174
-msgid "Forward"
-msgstr "Posun vpřed"
-
-#: data/ui/headerbar.ui:182
-msgid "Forward button"
-msgstr "Tlačítko pro posun vpřed"
-
-#: data/ui/headerbar.ui:183
-msgid "Forward Playback"
-msgstr "Přehrávání vpřed"
-
-#: data/ui/headerbar.ui:214
-msgid "Warnings"
-msgstr "Varování"
-
-#: data/ui/headerbar.ui:259
-msgid "Currently playing"
-msgstr "Momentálně hraje"
-
-#: data/ui/headerbar.ui:275
-msgid "Booktitle"
-msgstr "Název knihy"
-
-#: data/ui/headerbar.ui:276
-msgid "Title of currently playing book"
-msgstr "Název právě přehrávané knihy"
-
-#: data/ui/headerbar.ui:302
-msgid "Part name"
-msgstr "Název části"
-
-#: data/ui/headerbar.ui:303
-msgid "Title of the currently playing part"
-msgstr "Název právě přehrávané části"
-
-#: data/ui/headerbar.ui:336
-msgid "Working…"
-msgstr "Pracuji…"
-
-#: data/ui/headerbar.ui:340
-msgid "Currently working"
-msgstr "Probíhá"
-
-#: data/ui/headerbar.ui:357
-msgid "Volume control"
-msgstr "Ovládání hlasitosti"
-
-#: data/ui/headerbar.ui:394
-msgid "Playback speed"
-msgstr "Rychlost přehrávání"
-
-#: data/ui/headerbar.ui:425
-msgid "Timer menu button"
-msgstr "Tlačítko nabídky Časovač"
-
-#: data/ui/headerbar.ui:426
-msgid "Open the sleep timer popover"
-msgstr "Otevřít vyskakovací okno časovače"
-
-#: data/ui/headerbar.ui:442
-msgid "Search your library"
-msgstr "Prohledat knihovnu"
-
-#: data/ui/headerbar.ui:452
-msgid "Search menu button"
-msgstr "Tlačítko nabídky Hledání"
-
-#: data/ui/headerbar.ui:453
-msgid "Open the search popover"
-msgstr "Otevřít vyskakovací okno hledání"
-
-#: data/ui/headerbar.ui:468
-msgid "Options"
-msgstr "Možnosti"
-
-#: data/ui/headerbar.ui:479
-msgid "Options menu button"
-msgstr "Tlačítko nabídky Možnosti"
-
-#: data/ui/headerbar.ui:480
-msgid "Open the options popover"
-msgstr "Otevřít vyskakovací okno pro možnosti"
-
-#: data/ui/delete_book_dialog.ui:45
-msgid "Delete Audiobook"
-msgstr "Smazat audioknihu"
-
-#: data/ui/delete_book_dialog.ui:105
-msgid "Are you sure you want to delete the selected audiobook?"
-msgstr "Opravdu chcete smazat vybranou audioknihu?"
-
-#: data/ui/delete_book_dialog.ui:126
-msgid "The audiobook will be removed from your disk and from Cozy's library."
-msgstr "Audiokniha bude odstraněna z vašeho disku a z knihovny aplikace Cozy."
-
-#: data/ui/db_migration_failed.ui:31
-msgid "Close Cozy"
-msgstr "Zavřít aplikaci Cozy"
-
-#: data/ui/db_migration_failed.ui:47
-msgid "Recieve help on GitHub"
-msgstr "Získání nápovědy na GitHubu"
-
-#: data/ui/db_migration_failed.ui:108
-msgid "An error occured while updating the database"
-msgstr "Při aktualizaci databáze došlo k chybě."
-
-#: data/ui/db_migration_failed.ui:129
-msgid ""
-"During an update of the database an error occurred and Cozy will not be able to startup.\n"
-"A backup of the database was created before the update and has been restored now.\n"
-"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
-"You can help resolve this problem by reporting an issue on GitHub."
-msgstr ""
-"Během aktualizace databáze došlo k chybě a aplikaci Cozy nelze spustit.\n"
-"Před aktualizací byla vytvořena záloha databáze, která byla nyní obnovena.\n"
-"Dokud nebude tento problém vyřešen, používejte prosím verzi 0.9.5 aplikace Cozy.\n"
-"Tento problém můžete pomoci vyřešit jeho nahlášením na GitHubu."
