@@ -1,5 +1,5 @@
 import os
-from typing import List
+from typing import List, Optional
 from urllib.parse import unquote, urlparse
 
 import gi
@@ -62,8 +62,19 @@ class TagReader:
 
         if len(authors) > 0 and authors[0]:
             return "; ".join(authors)
-        else:
-            return "Unknown"
+        return self._get_author_fallback() or "Unkown"
+
+    def _get_author_fallback(self) -> Optional[str]:
+        # Heuristic:
+        #   If the book's name matches it's directory name, we assume the
+        #   parent directory is named after the author.
+        if self._get_book_name() != self._get_book_name_fallback():
+            return None
+        path = os.path.normpath(self.uri)
+        book_directory_path = os.path.dirname(path)
+        author_directory_path = os.path.dirname(book_directory_path)
+        author_directory = os.path.basename(author_directory_path)
+        return unquote(author_directory)
 
     def _get_reader(self):
         readers = self._get_string_list(Gst.TAG_ARTIST)
