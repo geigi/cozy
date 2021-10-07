@@ -48,6 +48,10 @@
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
+  <custom>
+    <value key="Purism::form_factor">workstation</value>
+    <value key="Purism::form_factor">mobile</value>
+  </custom>
   <releases>
     <release version="1.1.2" timestamp="1629458444">
       <description>
