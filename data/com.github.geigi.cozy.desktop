@@ -9,3 +9,6 @@ Type=Application
 Categories=GNOME;GTK;AudioVideo;Player;Audio;
 StartupNotify=true
 MimeType=x-content/audio-player;
+
+# Translators: Do NOT translate or transliterate this text (these are enum types)!
+X-Purism-FormFactor=Workstation;Mobile;
