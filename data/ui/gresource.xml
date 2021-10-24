@@ -19,6 +19,7 @@
     <file preprocess="xml-stripblanks">media_controller_big.ui</file>
     <file preprocess="xml-stripblanks">media_controller_small.ui</file>
     <file preprocess="xml-stripblanks">playback_speed_popover.ui</file>
+    <file preprocess="xml-stripblanks">preferences.ui</file>
     <file preprocess="xml-stripblanks">progress_popover.ui</file>
     <file preprocess="xml-stripblanks">search_popover.ui</file>
     <file preprocess="xml-stripblanks">seek_bar.ui</file>

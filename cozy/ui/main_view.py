@@ -19,6 +19,7 @@ from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
 from cozy.open_view import OpenView
 from cozy.ui.library_view import LibraryView
+from cozy.ui.preferences_view import PreferencesView
 from cozy.ui.settings import Settings
 
 log = logging.getLogger("ui")
@@ -157,6 +158,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         except Exception as e:
             log.info("Not connecting about close button.")
 
+        self._preferences: PreferencesView = PreferencesView()
+
     def __init_actions(self):
         """
         Init all app actions.
@@ -236,6 +239,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         Show preferences window.
         """
         self.settings.show()
+        self._preferences.show()
 
     def hide_window(self, widget, data=None):
         """
