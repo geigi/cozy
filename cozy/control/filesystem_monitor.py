@@ -61,10 +61,13 @@ class FilesystemMonitor(EventSender):
         pass
 
     def get_book_online(self, book: Book):
-        result = next(
-            (storage.online for storage in self.external_storage if storage.storage.path in book.chapters[0].file),
-            True)
-        return result
+        try:
+            result = next(
+                (storage.online for storage in self.external_storage if storage.storage.path in book.chapters[0].file),
+                True)
+            return result
+        except IndexError:
+            return True
 
     def is_track_online(self, track):
         """
