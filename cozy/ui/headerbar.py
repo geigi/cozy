@@ -89,13 +89,17 @@ class Headerbar(HeaderBar):
 
     def _on_show_library_filter_changed(self):
         self.category_toolbar.set_visible(self._headerbar_view_model.show_library_filter)
+        self._reveal_mobile_library_filter(self.category_toolbar.get_title_visible())
 
     def _back_clicked(self, _):
         self._headerbar_view_model.navigate_back()
 
     def _on_title_visible_changed(self, widget, param):
         visible = widget.get_property(param.name)
-        reveal_child = visible and self._headerbar_view_model.show_library_filter
+        self._reveal_mobile_library_filter(visible)
+
+    def _reveal_mobile_library_filter(self, reveal: bool):
+        reveal_child = reveal and self._headerbar_view_model.show_library_filter
         self._library_mobile_revealer.set_reveal_child(reveal_child)
 
     def _on_lock_ui_changed(self):

@@ -104,3 +104,27 @@ class ApplicationSettings(EventSender):
     @forward_duration.setter
     def forward_duration(self, new_value):
         self._settings.set_int("forward-duration", new_value)
+
+    @property
+    def window_width(self) -> int:
+        return self._settings.get_int("window-width")
+
+    @window_width.setter
+    def window_width(self, new_value: int):
+        self._settings.set_int("window-width", new_value)
+
+    @property
+    def window_height(self) -> int:
+        return self._settings.get_int("window-height")
+
+    @window_height.setter
+    def window_height(self, new_value: int):
+        self._settings.set_int("window-height", new_value)
+
+    @property
+    def window_maximize(self) -> bool:
+        return self._settings.get_boolean("window-maximize")
+
+    @window_maximize.setter
+    def window_maximize(self, new_value: bool):
+        self._settings.set_boolean("window-maximize", new_value)

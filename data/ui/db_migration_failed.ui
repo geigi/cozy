@@ -44,7 +44,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button2">
-                <property name="label" translatable="yes">Recieve help on GitHub</property>
+                <property name="label" translatable="yes">Receive help on GitHub</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

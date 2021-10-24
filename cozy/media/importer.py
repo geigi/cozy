@@ -187,7 +187,8 @@ class Importer(EventSender):
                                    in self._library.chapters
                                    if chapter.file == file)
                 except StopIteration as e:
-                    reporter.exception("importer", e, "_filter_unchanged_files raised a stop iteration.")
+                    log.warning("_filter_unchanged_files raised a stop iteration.")
+                    log.debug(e)
                     yield file
                     continue
 

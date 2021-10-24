@@ -4,7 +4,7 @@
   <metadata_license>CC0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <name>Cozy</name>
-  <summary>A modern audio book player</summary>
+  <summary>Listen to audio books</summary>
   <description>
       <p>
       Do you like audio books? Then lets get cozy!
@@ -48,14 +48,35 @@
   <url type="help">https://github.com/geigi/cozy/issues</url>
   <url type="donation">https://www.patreon.com/geigi</url>
   <update_contact>cozy@geigi.de</update_contact>
+  <custom>
+    <value key="Purism::form_factor">workstation</value>
+    <value key="Purism::form_factor">mobile</value>
+  </custom>
   <releases>
-    <release version="1.1.1" timestamp="1628322225">
+    <release version="1.1.2" timestamp="1629458444">
       <description>
         <p>
         A small bugfix release which makes Cozy more reliable.
         </p>
         <ul>
           <li>Display an error banner if an error occurs while importing new files</li>
+          <li>The audiobook directory selector in the empty state has been replaced by a button to allow a narrow window even with long directory names</li>
+          <li>Fix: multiple small UI issues</li>
+          <li>Fix: the welcome screen now works properly on a mobile device</li>
+          <li>Fix: don't display the mobile library switcher when no files are imported</li>
+          <li>Fix: in the book detail view the pause icon for a chapter remained even when the next chapter already started playing</li>
+          <li>As always, updated translations thanks to all of the translators!</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.1.1" timestamp="1629456144">
+      <description>
+        <p>
+        A small bugfix release which makes Cozy more reliable.
+        </p>
+        <ul>
+          <li>Display an error banner if an error occurs while importing new files</li>
+          <li>The audiobook directory selector in the empty state has been replaced by a button to allow a narrow window even with long directory names</li>
           <li>Fix: multiple small UI issues</li>
           <li>Fix: the welcome screen now works properly on a mobile device</li>
           <li>Fix: don't display the mobile library switcher when no files are imported</li>

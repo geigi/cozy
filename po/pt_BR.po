@@ -7,15 +7,16 @@
 # Cleiton Floss <cleitonfloss@gmail.com>, 2021
 # Gustavo Costa <xfgusta@gmail.com>, 2021
 # Julian Geywitz <github@geigi.de>, 2021
+# Rafael Fontenelle <rffontenelle@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-25 13:55+0200\n"
+"POT-Creation-Date: 2021-08-15 12:32+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Julian Geywitz <github@geigi.de>, 2021\n"
+"Last-Translator: Rafael Fontenelle <rffontenelle@gmail.com>, 2021\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/geigi/teams/78138/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,17 +24,33 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: cozy/application.py:101
+msgid "Audiobooks"
+msgstr "Audiolivros"
+
 #: cozy/control/offline_cache.py:201
 msgid "Copying"
 msgstr "Copiando"
 
-#: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
-msgid "min"
-msgstr "min"
+#: cozy/media/files.py:69
+msgid "Cannot copy: Audiobook directory is read only"
+msgstr "Não foi possível copiar: O diretório de audiolivros é somente leitura"
 
-#: cozy/ui/widgets/sleep_timer.py:65
-msgid "Off"
-msgstr "Desativado"
+#: cozy/media/files.py:71
+msgid "Cannot copy: Disk is full"
+msgstr "Não foi possível copiar: O disco está cheio"
+
+#: cozy/media/files.py:73 cozy/media/files.py:89
+msgid "Cannot copy: Permission denied"
+msgstr "Não foi possível copiar: Permissão negada"
+
+#: cozy/media/importer.py:121
+msgid "Error while importing new files"
+msgstr "Erro ao importar novos arquivos"
+
+#: cozy/model/track.py:38
+msgid "Chapter"
+msgstr "Capítulo"
 
 #: cozy/tools.py:92 cozy/tools.py:96
 #, python-brace-format
@@ -98,39 +115,19 @@ msgid_plural "{years} years ago"
 msgstr[0] "{years} ano atrás"
 msgstr[1] "{years} anos atrás"
 
-#: cozy/application.py:101
-msgid "Audiobooks"
-msgstr "Audiolivros"
-
-#: cozy/ui/album_element.py:65 cozy/ui/widgets/search_results.py:100
-msgid "Play this book"
-msgstr "Reproduzir este livro"
-
-#: cozy/ui/book_detail_view.py:302
+#: cozy/ui/book_detail_view.py:313
 msgid "Downloaded"
 msgstr "Baixado"
 
-#: cozy/ui/book_detail_view.py:305 data/ui/book_detail.ui:156
+#: cozy/ui/book_detail_view.py:316 data/ui/book_detail.ui:152
 msgid "Download"
 msgstr "Baixar"
 
-#: cozy/ui/book_element.py:33
-msgid "Open book overview"
-msgstr "Visão geral do livro"
+#: cozy/ui/chapter_element.py:27
+msgid "Play this part"
+msgstr "Reproduzir este trecho"
 
-#: cozy/ui/book_element.py:113
-msgid "Mark as read"
-msgstr "Marcar como lido"
-
-#: cozy/ui/book_element.py:116
-msgid "Open in file browser"
-msgstr "Abrir no navegador de arquivos"
-
-#: cozy/ui/book_element.py:119
-msgid "Remove from library"
-msgstr "Remover da biblioteca"
-
-#: cozy/ui/disk_element.py:26
+#: cozy/ui/disk_element.py:27
 msgid "Disc"
 msgstr "Disco"
 
@@ -138,22 +135,34 @@ msgstr "Disco"
 msgid "All files"
 msgstr "Todos os arquivos"
 
+#: cozy/ui/main_view.py:298 data/ui/main_window.ui:412
+msgid "Set Audiobooks Directory"
+msgstr "Definir diretório dos audiolivros"
+
 #: cozy/ui/settings.py:103
 msgid "Feedback"
-msgstr ""
-
-#: cozy/ui/chapter_element.py:23
-msgid "Play this part"
-msgstr "Reproduzir este trecho"
+msgstr "Feedback"
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
 msgid "{storage} is offline."
-msgstr ""
+msgstr "{storage} está desconectado."
+
+#: cozy/ui/widgets/book_element.py:52
+msgid "Mark as read"
+msgstr "Marcar como lido"
+
+#: cozy/ui/widgets/book_element.py:55
+msgid "Open in file browser"
+msgstr "Abrir no navegador de arquivos"
+
+#: cozy/ui/widgets/book_element.py:58
+msgid "Remove from library"
+msgstr "Remover da biblioteca"
 
 #: cozy/ui/widgets/error_reporting.py:12
 msgid "Disabled"
-msgstr ""
+msgstr "Desabilitado"
 
 #: cozy/ui/widgets/error_reporting.py:13
 msgid "Basic error reporting"
@@ -163,15 +172,15 @@ msgstr "Relatório básico de erros"
 msgid "Detailed error reporting"
 msgstr "Relatório detalhado de erros"
 
-#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:173
+#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:240
 msgid "Detailed error reporting with import errors"
-msgstr ""
+msgstr "Relatório de erro detalhado com erros de importação"
 
 #: cozy/ui/widgets/error_reporting.py:19
 msgid "No error or crash reporting."
 msgstr "Nenhum relatório de erro ou falha."
 
-#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:192
+#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:259
 msgid "The following information will be sent in case of an error or crash:"
 msgstr ""
 "As seguintes informações serão enviadas em caso de erro ou travamento:"
@@ -198,11 +207,11 @@ msgstr "Ambiente de desktop"
 
 #: cozy/ui/widgets/error_reporting.py:30
 msgid "Media type of files that Cozy couldn't import"
-msgstr "Tipo de mídia de arquivos que o Cosy não conseguiu importar"
+msgstr "Tipo de mídia de arquivos que o Cozy não conseguiu importar"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:44
-#: cozy/view_model/library_view_model.py:140
+#: cozy/view_model/library_view_model.py:53
+#: cozy/view_model/library_view_model.py:159
 msgid "All"
 msgstr "Todos"
 
@@ -218,76 +227,126 @@ msgstr "Ir para o autor"
 msgid "Jump to reader "
 msgstr "Ir para o narrador"
 
-#: cozy/view_model/headerbar_view_model.py:75
-msgid "Importing Audiobooks"
-msgstr "Importar Audiolivro"
+#: cozy/ui/widgets/search_results.py:100
+msgid "Play this book"
+msgstr "Reproduzir este livro"
 
-#: cozy/view_model/headerbar_view_model.py:84
+#: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
+msgid "min"
+msgstr "min"
+
+#: cozy/ui/widgets/sleep_timer.py:65
+msgid "Off"
+msgstr "Desativado"
+
+#: cozy/ui/widgets/storage_list_box_row.py:100
+#: cozy/ui/widgets/storage_list_box_row.py:145
+msgid "External drive"
+msgstr "Dispositivo externo"
+
+#: cozy/ui/widgets/storage_list_box_row.py:103
+#: cozy/ui/widgets/storage_list_box_row.py:148
+msgid "Internal drive"
+msgstr "Dispositivo interno"
+
+#: cozy/view_model/headerbar_view_model.py:91
+msgid "Importing Audiobooks"
+msgstr "Importar audiolivros"
+
 #: cozy/view_model/headerbar_view_model.py:100
+#: cozy/view_model/headerbar_view_model.py:116
 msgid "Copying new files…"
 msgstr "Copiando novos arquivos…"
 
-#: cozy/view_model/headerbar_view_model.py:91
+#: cozy/view_model/headerbar_view_model.py:107
 msgid "Changing audio book location…"
 msgstr "Alterando localização do audiolivro…"
-
-#: cozy/model/track.py:38
-msgid "Chapter"
-msgstr ""
-
-#: cozy/media/files.py:69
-msgid "Cannot copy: Audiobook directory is read only"
-msgstr ""
-
-#: cozy/media/files.py:71
-msgid "Cannot copy: Disk is full"
-msgstr ""
-
-#: cozy/media/files.py:73 cozy/media/files.py:89
-msgid "Cannot copy: Permission denied"
-msgstr ""
 
 #: data/ui/about.ui:16
 msgid "GitHub"
 msgstr "GitHub"
 
-#: data/ui/book_detail.ui:205
+#: data/ui/album_element.ui:104
+msgid "Play"
+msgstr "Reproduzir"
+
+#: data/ui/book_detail.ui:219
 msgid "Remaining"
 msgstr "Restante"
 
-#: data/ui/book_detail.ui:260
+#: data/ui/book_detail.ui:274
 msgid "Total"
 msgstr "Total"
 
-#: data/ui/book_detail.ui:276
+#: data/ui/book_detail.ui:290
 msgid "Last played"
 msgstr "Última reprodução"
 
-#: data/ui/book_detail.ui:292
+#: data/ui/book_detail.ui:306
 msgid "Published"
 msgstr "Publicadas"
 
-#: data/ui/book_detail.ui:338
+#: data/ui/book_detail.ui:341
 msgid "Some or all files of this book cannot be found."
 msgstr "Alguns ou todos os arquivos deste livro não podem ser encontrados."
 
-#: data/ui/book_detail.ui:361
+#: data/ui/book_detail.ui:364
 msgid "unavailable"
 msgstr "indisponível"
 
-#: data/ui/book_detail.ui:472
+#: data/ui/book_detail.ui:533
 msgid "Loading chapters, please wait..."
+msgstr "Carregando capítulos, por favor aguarde..."
+
+#: data/ui/book_element.ui:36
+msgid "Open book overview"
+msgstr "Visão geral do livro"
+
+#: data/ui/db_migration_failed.ui:31
+msgid "Close Cozy"
+msgstr "Fechar Cozy"
+
+#: data/ui/db_migration_failed.ui:47
+msgid "Recieve help on GitHub"
+msgstr "Receba ajuda no GitHub"
+
+#: data/ui/db_migration_failed.ui:108
+msgid "An error occured while updating the database"
+msgstr "Ocorreu um erro ao atualizar o banco de dados"
+
+#: data/ui/db_migration_failed.ui:129
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able to startup.\n"
+"A backup of the database was created before the update and has been restored now.\n"
+"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
+"You can help resolve this problem by reporting an issue on GitHub."
 msgstr ""
+"Durante uma atualização do banco de dados, ocorreu um erro e o Cozy não será capaz de inicializar.\n"
+"Um backup do banco de dados foi criado antes da atualização e foi restaurado agora.\n"
+"Até que esse problema seja resolvido, use a versão 0.9.5 do Cozy.\n"
+"Você pode ajudar a resolver esse problema relatando-o no GitHub."
 
-#: data/ui/book_detail.ui:527
-msgid "page0"
-msgstr "página0"
+#: data/ui/delete_book_dialog.ui:31 data/ui/file_not_found.ui:19
+msgid "Cancel"
+msgstr "Cancelar"
 
-#: data/ui/error_reporting.ui:23
+#: data/ui/delete_book_dialog.ui:45
+msgid "Delete Audiobook"
+msgstr "Excluir audiolivro"
+
+#: data/ui/delete_book_dialog.ui:105
+msgid "Are you sure you want to delete the selected audiobook?"
+msgstr "Tem certeza de que deseja excluir o audiolivro selecionado?"
+
+#: data/ui/delete_book_dialog.ui:126
+msgid "The audiobook will be removed from your disk and from Cozy's library."
+msgstr "O audiolivro será removido do seu disco e da biblioteca do Cozy."
+
+#: data/ui/error_reporting.ui:29
 msgid "User feedback"
-msgstr ""
+msgstr "Feedback do usuário"
 
-#: data/ui/error_reporting.ui:66
+#: data/ui/error_reporting.ui:98
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "You can help improve Cozy by contributing information in case of errors and "
@@ -296,23 +355,24 @@ msgstr ""
 "Você pode ajudar a melhorar o Cozy, contribuindo com informações em caso de "
 "erros e falhas."
 
-#: data/ui/error_reporting.ui:80
+#: data/ui/error_reporting.ui:112
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Contributing this information is optional and completely anonymous. We will "
 "never collect personal data, files you import or any information that could "
 "identify you."
 msgstr ""
+"Contribuir com essas informações é opcional e totalmente anônimo. Nunca "
+"coletaremos dados pessoais, arquivos importados ou qualquer informação que "
+"possa identificá-lo."
 
-#: data/ui/error_reporting.ui:95
+#: data/ui/error_reporting.ui:127
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
-
-#: data/ui/file_not_found.ui:19 data/ui/delete_book_dialog.ui:31
-msgid "Cancel"
-msgstr "Cancelar"
+"Cozy é um código aberto e o código-fonte do feedback do usuário pode ser "
+"inspecionado aqui:"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
@@ -326,6 +386,34 @@ msgstr "Arquivo não encontrado"
 msgid "This file could not be found. Do you want to locate it manually?"
 msgstr ""
 "Este arquivo não pôde ser encontrado. Você quer localizá-lo manualmente?"
+
+#: data/ui/headerbar.ui:56
+msgid "Display background task progress"
+msgstr "Exibir o progresso de tarefa em plano de fundo"
+
+#: data/ui/headerbar.ui:70
+msgid "Search your library"
+msgstr "Buscar na sua biblioteca"
+
+#: data/ui/headerbar.ui:80
+msgid "Search menu button"
+msgstr "Botão de menu da busca"
+
+#: data/ui/headerbar.ui:81
+msgid "Open the search popover"
+msgstr "Abrir o popover da busca"
+
+#: data/ui/headerbar.ui:96
+msgid "Options"
+msgstr "Opções"
+
+#: data/ui/headerbar.ui:107
+msgid "Options menu button"
+msgstr "Botão de menu das opções"
+
+#: data/ui/headerbar.ui:108
+msgid "Open the options popover"
+msgstr "Abrir o popover das opções"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
@@ -349,89 +437,197 @@ msgstr ""
 "- O(s) arquivo(s) não é/são válido(s)\n"
 "- O(s) arquivo(s) está/estão corrompido(s)"
 
-#: data/ui/main_window.ui:125
+#: data/ui/main_window.ui:68
 msgid "Recent"
 msgstr "Recente"
 
-#: data/ui/main_window.ui:145
+#: data/ui/main_window.ui:90
 msgid "List of authors"
 msgstr "Lista de autores"
 
-#: data/ui/main_window.ui:161 data/ui/main_window.ui:271
+#: data/ui/main_window.ui:106 data/ui/main_window.ui:250
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "Autor"
 
-#: data/ui/main_window.ui:181
+#: data/ui/main_window.ui:128
 msgid "List of readers"
-msgstr "Lista de Narradores"
+msgstr "Lista de narradores"
 
-#: data/ui/main_window.ui:197 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:144 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "Narrador"
 
-#: data/ui/main_window.ui:251
+#: data/ui/main_window.ui:189
 msgid "List of books"
 msgstr "Lista de livros"
 
-#: data/ui/main_window.ui:301
+#: data/ui/main_window.ui:222
+msgid ""
+"Start exploring your library by switching to the Author or Reader view."
+msgstr ""
+"Comece a explorar sua biblioteca mudando para a visualização Autor ou "
+"Narrador."
+
+#: data/ui/main_window.ui:280
 msgid "Stay tuned while Cozy is preparing your library…"
-msgstr "Fique ligado enquanto Cosy prepara sua biblioteca..."
+msgstr "Fique ligado enquanto Cozy prepara sua biblioteca..."
 
 #: data/ui/main_window.ui:334
-msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
-msgstr ""
-"Começar explorando sua biblioteca alternando entre Autor ou Narrador, acima"
-
-#: data/ui/main_window.ui:379
 msgid "Import your Audiobooks"
-msgstr "Importar seus Audiolivros"
+msgstr "Importe seus audiolivros"
 
-#: data/ui/main_window.ui:395
+#: data/ui/main_window.ui:353
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
 "Cozy automaticamente importa seus audiolivros em um diretório - sua "
 "biblioteca"
 
-#: data/ui/main_window.ui:431 data/ui/main_window.ui:452
-msgid "Automatically import new audiobooks on startup"
-msgstr "Automaticamente importe novos audiolivros ao iniciar o programa"
-
-#: data/ui/main_window.ui:451
-msgid "Auto scan switch"
-msgstr "Alternar escaneamento automático"
-
-#: data/ui/main_window.ui:495
+#: data/ui/main_window.ui:385
 msgid "Drag & Drop"
-msgstr "Arrastar & Soltar"
+msgstr "Arrastar & soltar"
 
-#: data/ui/main_window.ui:512
+#: data/ui/main_window.ui:387
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr ""
-"Arrastes seus audiolivros para o Cozy e eles serão automaticamente "
-"importados"
+"Arraste seus audiolivros para o Cozy e eles serão importados automaticamente"
 
-#: data/ui/main_window.ui:535
-msgid "Location of your audiobooks"
-msgstr "Local dos seus audiolivros"
-
-#: data/ui/main_window.ui:556
-msgid "Set Audiobooks Directory"
-msgstr "Definir diretório dos audiolivros"
-
-#: data/ui/main_window.ui:579
-msgid "Load audiobooks from a directory, network drive or an external disk."
+#: data/ui/main_window.ui:414
+msgid "Load audiobooks from a directory, network drive or an external disk"
 msgstr ""
-"Carregue audiolivros de um diretório, unidade de rede ou disco externo."
+"Carregue audiolivros de um diretório, unidade de rede ou disco externo"
 
-#: data/ui/main_window.ui:597
-msgid "You can add more storage locations later in the settings"
-msgstr ""
-"Você pode adicionar mais locais de armazenamento posteriormente nas "
-"configurações"
+#: data/ui/main_window.ui:417
+msgid "Select"
+msgstr "Selecionar"
+
+#: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
+#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:71
+msgid "Rewind"
+msgstr "Retroceder"
+
+#: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
+#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:78
+msgid "Rewind button"
+msgstr "Botão de retroceder"
+
+#: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
+#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:79
+msgid "Rewind playback"
+msgstr "Retroceder reprodução"
+
+#: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
+#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:101
+msgid "Start playback"
+msgstr "Iniciar reprodução"
+
+#: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
+#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:108
+msgid "Play/Pause Button"
+msgstr "Botão de reproduzir/pausa"
+
+#: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
+#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:109
+msgid "Start or pause the playback"
+msgstr "Iniciar ou pausar a reprodução"
+
+#: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
+#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:132
+msgid "Forward"
+msgstr "Avançar"
+
+#: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
+#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:139
+msgid "Forward button"
+msgstr "Botão de avançar"
+
+#: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
+#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:140
+msgid "Forward Playback"
+msgstr "Avançar reprodução"
+
+#: data/ui/media_controller.ui:175 data/ui/media_controller_big.ui:76
+msgid "Currently playing"
+msgstr "Atualmente reproduzindo"
+
+#: data/ui/media_controller.ui:190 data/ui/media_controller_big.ui:97
+msgid "Booktitle"
+msgstr "Título do livro"
+
+#: data/ui/media_controller.ui:191 data/ui/media_controller_big.ui:98
+msgid "Title of currently playing book"
+msgstr "Título do livro atualmente em reprodução"
+
+#: data/ui/media_controller.ui:217 data/ui/media_controller_big.ui:126
+msgid "Part name"
+msgstr "Nome do trecho"
+
+#: data/ui/media_controller.ui:218 data/ui/media_controller_big.ui:127
+msgid "Title of the currently playing part"
+msgstr "Título do trecho atualmente em reprodução"
+
+#: data/ui/media_controller.ui:256 data/ui/seek_bar.ui:20
+msgid "Elapsed time"
+msgstr "Tempo passado"
+
+#: data/ui/media_controller.ui:264 data/ui/seek_bar.ui:28
+msgid "Time elapsed"
+msgstr "Tempo passado"
+
+#: data/ui/media_controller.ui:265 data/ui/seek_bar.ui:29
+msgid "Elapsed time of current part"
+msgstr "Tempo passado do trecho atual"
+
+#: data/ui/media_controller.ui:281 data/ui/seek_bar.ui:45
+msgid "Jump to position in current chapter"
+msgstr "Pular para a posição no capítulo atual"
+
+#: data/ui/media_controller.ui:290 data/ui/seek_bar.ui:56
+msgid "Position slider"
+msgstr "Deslize de posição"
+
+#: data/ui/media_controller.ui:291 data/ui/seek_bar.ui:57
+msgid "Position of the current part in seconds"
+msgstr "Posição do trecho atual em segundos"
+
+#: data/ui/media_controller.ui:310 data/ui/seek_bar.ui:76
+msgid "Remaining time"
+msgstr "Tempo restante"
+
+#: data/ui/media_controller.ui:317 data/ui/seek_bar.ui:83
+msgid "Time remaining"
+msgstr "Tempo restante"
+
+#: data/ui/media_controller.ui:318 data/ui/seek_bar.ui:84
+msgid "Remaining time of current part"
+msgstr "Tempo restante do trecho atual"
+
+#: data/ui/media_controller.ui:350 data/ui/media_controller_big.ui:324
+msgid "Volume control"
+msgstr "Controle de volume"
+
+#: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
+#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:176
+msgid "Playback speed"
+msgstr "Velocidade da reprodução"
+
+#: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
+#: data/ui/settings.ui:956
+msgid "Sleep timer"
+msgstr "Temporizador"
+
+#: data/ui/media_controller.ui:418 data/ui/media_controller_big.ui:404
+msgid "Timer menu button"
+msgstr "Botão de menu do temporizador"
+
+#: data/ui/media_controller.ui:419 data/ui/media_controller_big.ui:405
+msgid "Open the sleep timer popover"
+msgstr "Abrir o popover do temporizador"
+
+#: data/ui/media_controller_big.ui:53
+msgid "Open book"
+msgstr "Abrir livro"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -495,35 +691,31 @@ msgstr "Escaneamento automático de mídia"
 
 #: data/ui/settings.ui:604
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 #: data/ui/settings.ui:656
 msgid "Swap author and reader"
-msgstr ""
+msgstr "Trocar autor e narrador"
 
 #: data/ui/settings.ui:669
 msgid "Activate this if author and reader are displayed the wrong way"
-msgstr ""
+msgstr "Ative isso se autor e narrador são exibidos da forma errada"
 
 #: data/ui/settings.ui:694
 msgid "switch author and reader assignment"
-msgstr ""
+msgstr "troca de atribuição de autor e narrador"
 
 #: data/ui/settings.ui:743
 msgid "Playback"
-msgstr ""
+msgstr "Reprodução"
 
 #: data/ui/settings.ui:789
 msgid "Rewind duration"
-msgstr ""
+msgstr "Retroceder duração"
 
 #: data/ui/settings.ui:874
 msgid "Forward duration"
-msgstr ""
-
-#: data/ui/settings.ui:956 data/ui/headerbar.ui:415
-msgid "Sleep timer"
-msgstr "Temporizador"
+msgstr "Avançar duração"
 
 #: data/ui/settings.ui:1001
 msgid "Fadeout"
@@ -575,7 +767,7 @@ msgstr "Definir como local de armazenamento padrão para novos audiolivros"
 
 #: data/ui/settings.ui:1532
 msgid "Ignore list"
-msgstr ""
+msgstr "Ignorar lista"
 
 #: data/ui/settings.ui:1576
 msgid "Path"
@@ -628,7 +820,7 @@ msgstr "Parar depois do capítulo atual"
 
 #: data/ui/timer_popover.ui:164
 msgid "Enable system power control"
-msgstr ""
+msgstr "Habilitar controle de energia do sistema"
 
 #: data/ui/timer_popover.ui:201
 msgid ""
@@ -636,12 +828,17 @@ msgid ""
 "\"shutdown\" will attempt to turn your system off (also known as power off)\n"
 "\"suspend\" will attempt to suspend your system (also known as sleep)."
 msgstr ""
+"Tipo de ação quando o cronômetro termina.\n"
+"\"shutdown\" tentará desligar o seu sistema (também conhecido como power off)\n"
+"\"suspend\" tentará suspender seu sistema (também conhecido como hibernação)."
 
 #: data/ui/timer_popover.ui:205
 msgid ""
 "System power action\n"
 "to perform"
 msgstr ""
+"Ação de energia do\n"
+"sistema para executar"
 
 #: data/ui/timer_popover.ui:221
 msgid "suspend"
@@ -653,7 +850,7 @@ msgstr "desligar"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Library"
-msgstr ""
+msgstr "E_scanear biblioteca"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
@@ -675,18 +872,26 @@ msgstr "S_obre"
 msgid "_Quit"
 msgstr "_Sair"
 
-#: data/ui/whats_new.ui:8
+#: data/ui/welcome.ui:29
+msgid "Welcome!"
+msgstr "Seja bem-vindo!"
+
+#: data/ui/welcome.ui:46
+msgid "Add your audiobooks and let's get cozy."
+msgstr "Adicione seus audiolivros e aconchegue-se."
+
+#: data/ui/whats_new.ui:9
 msgid "Whats new?"
 msgstr "O que há de novo?"
 
-#: data/ui/whats_new.ui:21
+#: data/ui/whats_new.ui:27
 msgid "Continue"
 msgstr "Continuar"
 
-#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
-#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
+#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_library.ui:17
+#: data/ui/whats_new_m4b.ui:17 data/ui/whats_new_m4b_chapter.ui:17
 msgid "What's new in Cozy"
-msgstr ""
+msgstr "O que há de novo no Cozy"
 
 #: data/ui/whats_new_importer.ui:52
 msgid "A completely rewritten and far more reliable media importer."
@@ -698,6 +903,10 @@ msgid ""
 "files onto Cozy or use the application menu in the titlebar to rescan your "
 "audiobook directories!"
 msgstr ""
+"Você passou pela situação de ter arquivos de áudio que não puderam ser "
+"importados? Arraste e solte esses arquivos no Cozy ou use o menu de "
+"aplicativos na barra de título para verificar novamente os diretórios de "
+"seus audiolivros!"
 
 #: data/ui/whats_new_importer.ui:92
 msgid "Supported media files currently are mp3, m4a, flac, ogg, opus and wav."
@@ -707,7 +916,38 @@ msgstr ""
 
 #: data/ui/whats_new_importer.ui:107
 msgid "More to come in a later update."
+msgstr "Mais para vir em uma atualização futura."
+
+#: data/ui/whats_new_library.ui:52
+msgid "An important change in library management"
+msgstr "Uma alteração importante no gerenciador de biblioteca."
+
+#: data/ui/whats_new_library.ui:77
+msgid ""
+"Previously every file which was imported in your library but couldn't be "
+"found anymore was removed from the library during a scan."
 msgstr ""
+"Anteriormente, todos os arquivos que tinham sido importados para sua "
+"biblioteca, mas que não foram encontrados mais posteriormente, eram "
+"removidos da biblioteca durante uma varredura."
+
+#: data/ui/whats_new_library.ui:92
+msgid ""
+"Now audiobooks are not removed from your library automatically anymore. This"
+" prevents accidentally loosing the progress of a audiobook when a file can't"
+" be found temporarily."
+msgstr ""
+"Agora os audiolivros não são mais removidos automaticamente da sua "
+"biblioteca. Isso evita a perda acidental do andamento de um audiolivro "
+"quando um arquivo não pode ser encontrado temporariamente."
+
+#: data/ui/whats_new_library.ui:107
+msgid ""
+"To remove an audiobook from the library simply right-click on it and choose "
+"the remove from library option."
+msgstr ""
+"Para remover um audiolivro da biblioteca, basta clicar com o botão direito "
+"sobre ele e escolher a opção de  remover da biblioteca."
 
 #: data/ui/whats_new_m4b.ui:52
 msgid "Basic support for m4b audio books."
@@ -737,217 +977,20 @@ msgstr ""
 
 #: data/ui/whats_new_m4b_chapter.ui:52
 msgid "Chapter support for m4b audio books."
-msgstr ""
+msgstr "Suporte de capítulo de audiolivros m4b."
 
 #: data/ui/whats_new_m4b_chapter.ui:77
 msgid "This version of Cozy features chapter support for m4b audio books!"
-msgstr ""
+msgstr "Esta versão do Cozy oferece suporte a capítulos para audiolivros m4b!"
 
 #: data/ui/whats_new_m4b_chapter.ui:92
 msgid ""
 "If you already have m4b files imported you'll need to start a scan of your "
 "library from the app menu."
 msgstr ""
+"Se você já tem arquivos m4b importados, você precisará iniciar uma varredura"
+" de sua biblioteca a partir do menu do aplicativo."
 
 #: data/ui/whats_new_m4b_chapter.ui:107
 msgid "The chapters will then be detected."
-msgstr ""
-
-#: data/ui/whats_new_library.ui:52
-msgid "An important change in library management"
-msgstr ""
-
-#: data/ui/whats_new_library.ui:77
-msgid ""
-"Previously every file which was imported in your library but couldn't be "
-"found anymore was removed from the library during a scan."
-msgstr ""
-
-#: data/ui/whats_new_library.ui:92
-msgid ""
-"Now audiobooks are not removed from your library automatically anymore. This"
-" prevents accidentally loosing the progress of a audiobook when a file can't"
-" be found temporarily."
-msgstr ""
-
-#: data/ui/whats_new_library.ui:107
-msgid ""
-"To remove an audiobook from the library simply right-click on it and choose "
-"the remove from library option."
-msgstr ""
-
-#: data/ui/seek_bar.ui:20
-msgid "Elapsed time"
-msgstr "Tempo passado"
-
-#: data/ui/seek_bar.ui:28
-msgid "Time elapsed"
-msgstr "Tempo passado"
-
-#: data/ui/seek_bar.ui:29
-msgid "Elapsed time of current part"
-msgstr "Tempo passado do trecho atual"
-
-#: data/ui/seek_bar.ui:45
-msgid "Jump to position in current chapter"
-msgstr "Pular para a posição no capítulo atual"
-
-#: data/ui/seek_bar.ui:56
-msgid "Position slider"
-msgstr "Deslize de posição"
-
-#: data/ui/seek_bar.ui:57
-msgid "Position of the current part in seconds"
-msgstr "Posição do trecho atual em segundos"
-
-#: data/ui/seek_bar.ui:76
-msgid "Remaining time"
-msgstr "Tempo restante"
-
-#: data/ui/seek_bar.ui:83
-msgid "Time remaining"
-msgstr "Tempo restante"
-
-#: data/ui/seek_bar.ui:84
-msgid "Remaining time of current part"
-msgstr "Tempo restante do trecho atual"
-
-#: data/ui/headerbar.ui:123
-msgid "Rewind"
-msgstr ""
-
-#: data/ui/headerbar.ui:131
-msgid "Rewind button"
-msgstr "Botão de retroceder"
-
-#: data/ui/headerbar.ui:132
-msgid "Rewind playback"
-msgstr ""
-
-#: data/ui/headerbar.ui:149
-msgid "Start playback"
-msgstr "Iniciar reprodução"
-
-#: data/ui/headerbar.ui:157
-msgid "Play/Pause Button"
-msgstr "Botão de Reproduzir/Pausa"
-
-#: data/ui/headerbar.ui:158
-msgid "Start or pause the playback"
-msgstr "Iniciar ou pausar a reprodução"
-
-#: data/ui/headerbar.ui:174
-msgid "Forward"
-msgstr ""
-
-#: data/ui/headerbar.ui:182
-msgid "Forward button"
-msgstr ""
-
-#: data/ui/headerbar.ui:183
-msgid "Forward Playback"
-msgstr ""
-
-#: data/ui/headerbar.ui:214
-msgid "Warnings"
-msgstr "Avisos"
-
-#: data/ui/headerbar.ui:259
-msgid "Currently playing"
-msgstr "Atualmente reproduzindo"
-
-#: data/ui/headerbar.ui:275
-msgid "Booktitle"
-msgstr "Título do livro"
-
-#: data/ui/headerbar.ui:276
-msgid "Title of currently playing book"
-msgstr "Título do livro atualmente em reprodução"
-
-#: data/ui/headerbar.ui:302
-msgid "Part name"
-msgstr "Nome do trecho"
-
-#: data/ui/headerbar.ui:303
-msgid "Title of the currently playing part"
-msgstr "Título do trecho atualmente em reprodução"
-
-#: data/ui/headerbar.ui:336
-msgid "Working…"
-msgstr "Trabalhando…"
-
-#: data/ui/headerbar.ui:340
-msgid "Currently working"
-msgstr "Atualmente trabalhando"
-
-#: data/ui/headerbar.ui:357
-msgid "Volume control"
-msgstr "Controle de volume"
-
-#: data/ui/headerbar.ui:394
-msgid "Playback speed"
-msgstr "Velocidade da reprodução"
-
-#: data/ui/headerbar.ui:425
-msgid "Timer menu button"
-msgstr "Botão de menu do temporizador"
-
-#: data/ui/headerbar.ui:426
-msgid "Open the sleep timer popover"
-msgstr "Abrir o popover do temporizador"
-
-#: data/ui/headerbar.ui:442
-msgid "Search your library"
-msgstr "Buscar na sua biblioteca"
-
-#: data/ui/headerbar.ui:452
-msgid "Search menu button"
-msgstr "Botão de menu da busca"
-
-#: data/ui/headerbar.ui:453
-msgid "Open the search popover"
-msgstr "Abrir o popover da busca"
-
-#: data/ui/headerbar.ui:468
-msgid "Options"
-msgstr "Opções"
-
-#: data/ui/headerbar.ui:479
-msgid "Options menu button"
-msgstr "Botão de menu das opções"
-
-#: data/ui/headerbar.ui:480
-msgid "Open the options popover"
-msgstr "Abrir o popover das opções"
-
-#: data/ui/delete_book_dialog.ui:45
-msgid "Delete Audiobook"
-msgstr "Deletar audiolivro"
-
-#: data/ui/delete_book_dialog.ui:105
-msgid "Are you sure you want to delete the selected audiobook?"
-msgstr "Tem certeza de que deseja excluir o audiolivro selecionado?"
-
-#: data/ui/delete_book_dialog.ui:126
-msgid "The audiobook will be removed from your disk and from Cozy's library."
-msgstr "O audiolivro será removido do seu disco e da biblioteca do Cosy."
-
-#: data/ui/db_migration_failed.ui:31
-msgid "Close Cozy"
-msgstr ""
-
-#: data/ui/db_migration_failed.ui:47
-msgid "Recieve help on GitHub"
-msgstr ""
-
-#: data/ui/db_migration_failed.ui:108
-msgid "An error occured while updating the database"
-msgstr ""
-
-#: data/ui/db_migration_failed.ui:129
-msgid ""
-"During an update of the database an error occurred and Cozy will not be able to startup.\n"
-"A backup of the database was created before the update and has been restored now.\n"
-"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
-"You can help resolve this problem by reporting an issue on GitHub."
-msgstr ""
+msgstr "Os capítulos serão então detectados."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-15 09:17+0200\n"
+"POT-Creation-Date: 2021-08-16 18:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,6 +127,10 @@ msgstr ""
 
 #: cozy/ui/file_not_found_dialog.py:56
 msgid "All files"
+msgstr ""
+
+#: cozy/ui/main_view.py:298 data/ui/main_window.ui:412
+msgid "Set Audiobooks Directory"
 msgstr ""
 
 #: cozy/ui/settings.py:103
@@ -296,7 +300,7 @@ msgid "Close Cozy"
 msgstr ""
 
 #: data/ui/db_migration_failed.ui:47
-msgid "Recieve help on GitHub"
+msgid "Receive help on GitHub"
 msgstr ""
 
 #: data/ui/db_migration_failed.ui:108
@@ -461,12 +465,12 @@ msgstr ""
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr ""
 
-#: data/ui/main_window.ui:413
-msgid "Set Audiobooks Directory"
+#: data/ui/main_window.ui:414
+msgid "Load audiobooks from a directory, network drive or an external disk"
 msgstr ""
 
-#: data/ui/main_window.ui:415
-msgid "Load audiobooks from a directory, network drive or an external disk"
+#: data/ui/main_window.ui:417
+msgid "Select"
 msgstr ""
 
 #: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482

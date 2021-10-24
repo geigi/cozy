@@ -124,4 +124,3 @@ class Application(Gtk.Application):
     @staticmethod
     def init_custom_widgets():
         FilterListBox()
-        SeekBar()

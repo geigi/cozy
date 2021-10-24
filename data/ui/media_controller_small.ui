@@ -38,7 +38,6 @@
             <property name="can-focus">False</property>
             <property name="halign">start</property>
             <property name="valign">center</property>
-            <property name="stock">gtk-missing-image</property>
           </object>
         </child>
       </object>
@@ -180,7 +179,7 @@
           <object class="GtkImage" id="playback_speed_img">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="icon-name">speedometer-symbolic</property>
+            <property name="icon-name">playback-speed-symbolic</property>
           </object>
         </child>
         <style>

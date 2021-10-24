@@ -22,7 +22,7 @@ COVER_SIZE = 46
 class MediaControllerBig(Gtk.Box):
     __gtype_name__ = "MediaControllerBig"
 
-    seek_bar: SeekBar = Gtk.Template.Child()
+    seek_bar_container: Gtk.Box = Gtk.Template.Child()
 
     play_button: Gtk.Button = Gtk.Template.Child()
     prev_button: Gtk.Button = Gtk.Template.Child()
@@ -42,6 +42,9 @@ class MediaControllerBig(Gtk.Box):
 
     def __init__(self):
         super().__init__()
+
+        self.seek_bar = SeekBar()
+        self.seek_bar_container.add(self.seek_bar)
 
         self.sleep_timer: SleepTimer = SleepTimer(self.timer_image)
         self.playback_speed_button.set_popover(PlaybackSpeedPopover())

@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: ghcr.io/elementary/flatpak-platform/runtime:6
+      image: bilelmoussaoui/flatpak-github-actions:gnome-40
       options: --privileged
 
     steps:
     - uses: actions/checkout@v2
 
-    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
       with:
         bundle: Cozy.flatpak
         manifest-path: com.github.geigi.cozy.json

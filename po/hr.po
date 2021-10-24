@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-25 13:55+0200\n"
+"POT-Creation-Date: 2021-08-16 18:22+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: milotype <mail@milotype.de>, 2021\n"
 "Language-Team: Croatian (https://www.transifex.com/geigi/teams/78138/hr/)\n"
@@ -21,17 +21,33 @@ msgstr ""
 "Language: hr\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
+#: cozy/application.py:101
+msgid "Audiobooks"
+msgstr "Audio knjige"
+
 #: cozy/control/offline_cache.py:201
 msgid "Copying"
 msgstr "Kopiranje"
 
-#: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
-msgid "min"
-msgstr "min"
+#: cozy/media/files.py:69
+msgid "Cannot copy: Audiobook directory is read only"
+msgstr "Nije moguće kopirati: mapa s audio knjigama dozvoljava samo čitanje"
 
-#: cozy/ui/widgets/sleep_timer.py:65
-msgid "Off"
-msgstr "Isključeno"
+#: cozy/media/files.py:71
+msgid "Cannot copy: Disk is full"
+msgstr "Nije moguće kopirati: disk je pun"
+
+#: cozy/media/files.py:73 cozy/media/files.py:89
+msgid "Cannot copy: Permission denied"
+msgstr "Nije moguće kopirati: dozvola je odbijena"
+
+#: cozy/media/importer.py:121
+msgid "Error while importing new files"
+msgstr "Greška tijekom uvoza novih datoteka"
+
+#: cozy/model/track.py:38
+msgid "Chapter"
+msgstr "Poglavlje"
 
 #: cozy/tools.py:92 cozy/tools.py:96
 #, python-brace-format
@@ -102,39 +118,19 @@ msgstr[0] "prije {years} godine"
 msgstr[1] "prije {years} godine"
 msgstr[2] "prije {years} godina"
 
-#: cozy/application.py:101
-msgid "Audiobooks"
-msgstr "Audio knjige"
-
-#: cozy/ui/album_element.py:65 cozy/ui/widgets/search_results.py:100
-msgid "Play this book"
-msgstr "Pokreni ovu knjigu"
-
-#: cozy/ui/book_detail_view.py:302
+#: cozy/ui/book_detail_view.py:313
 msgid "Downloaded"
 msgstr "Preuzeto"
 
-#: cozy/ui/book_detail_view.py:305 data/ui/book_detail.ui:156
+#: cozy/ui/book_detail_view.py:316 data/ui/book_detail.ui:152
 msgid "Download"
 msgstr "Preuzmi"
 
-#: cozy/ui/book_element.py:33
-msgid "Open book overview"
-msgstr "Otvori pregled knjiga"
+#: cozy/ui/chapter_element.py:27
+msgid "Play this part"
+msgstr "Pokreni ovaj dio"
 
-#: cozy/ui/book_element.py:113
-msgid "Mark as read"
-msgstr "Označi kao pročitano"
-
-#: cozy/ui/book_element.py:116
-msgid "Open in file browser"
-msgstr "Otvori u pregledniku datoteka"
-
-#: cozy/ui/book_element.py:119
-msgid "Remove from library"
-msgstr "Ukloni iz zbirke"
-
-#: cozy/ui/disk_element.py:26
+#: cozy/ui/disk_element.py:27
 msgid "Disc"
 msgstr "Disk"
 
@@ -142,18 +138,30 @@ msgstr "Disk"
 msgid "All files"
 msgstr "Sve datoteke"
 
+#: cozy/ui/main_view.py:298 data/ui/main_window.ui:412
+msgid "Set Audiobooks Directory"
+msgstr "Postavi mapu audio knjiga"
+
 #: cozy/ui/settings.py:103
 msgid "Feedback"
 msgstr "Povratne informacije"
-
-#: cozy/ui/chapter_element.py:23
-msgid "Play this part"
-msgstr "Pokreni ovaj dio"
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
 msgid "{storage} is offline."
 msgstr "{storage} je odspojeno."
+
+#: cozy/ui/widgets/book_element.py:52
+msgid "Mark as read"
+msgstr "Označi kao pročitano"
+
+#: cozy/ui/widgets/book_element.py:55
+msgid "Open in file browser"
+msgstr "Otvori u pregledniku datoteka"
+
+#: cozy/ui/widgets/book_element.py:58
+msgid "Remove from library"
+msgstr "Ukloni iz zbirke"
 
 #: cozy/ui/widgets/error_reporting.py:12
 msgid "Disabled"
@@ -167,7 +175,7 @@ msgstr "Osnovno izvještavanje o greškama"
 msgid "Detailed error reporting"
 msgstr "Detaljno izvještavanje o greškama"
 
-#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:173
+#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:240
 msgid "Detailed error reporting with import errors"
 msgstr "Detaljno izvještavanje o greškama s greškama uvoza"
 
@@ -175,7 +183,7 @@ msgstr "Detaljno izvještavanje o greškama s greškama uvoza"
 msgid "No error or crash reporting."
 msgstr "Bez izvještavanja o greškama ili rušenju."
 
-#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:192
+#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:259
 msgid "The following information will be sent in case of an error or crash:"
 msgstr "U slučaju greške ili rušenja poslat će se sljedeći podaci:"
 
@@ -204,8 +212,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Vrsta medijskih datoteka koje Cozy nije mogao uvesti"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:44
-#: cozy/view_model/library_view_model.py:140
+#: cozy/view_model/library_view_model.py:53
+#: cozy/view_model/library_view_model.py:159
 msgid "All"
 msgstr "Sve"
 
@@ -221,83 +229,133 @@ msgstr "Skoči na autora "
 msgid "Jump to reader "
 msgstr "Skoči na čitača "
 
-#: cozy/view_model/headerbar_view_model.py:75
+#: cozy/ui/widgets/search_results.py:100
+msgid "Play this book"
+msgstr "Pokreni ovu knjigu"
+
+#: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
+msgid "min"
+msgstr "min"
+
+#: cozy/ui/widgets/sleep_timer.py:65
+msgid "Off"
+msgstr "Isključeno"
+
+#: cozy/ui/widgets/storage_list_box_row.py:100
+#: cozy/ui/widgets/storage_list_box_row.py:145
+msgid "External drive"
+msgstr "Eksterna memorija"
+
+#: cozy/ui/widgets/storage_list_box_row.py:103
+#: cozy/ui/widgets/storage_list_box_row.py:148
+msgid "Internal drive"
+msgstr "Interna memorija"
+
+#: cozy/view_model/headerbar_view_model.py:91
 msgid "Importing Audiobooks"
 msgstr "Uvoz audio knjiga"
 
-#: cozy/view_model/headerbar_view_model.py:84
 #: cozy/view_model/headerbar_view_model.py:100
+#: cozy/view_model/headerbar_view_model.py:116
 msgid "Copying new files…"
 msgstr "Kopiranje novih datoteka …"
 
-#: cozy/view_model/headerbar_view_model.py:91
+#: cozy/view_model/headerbar_view_model.py:107
 msgid "Changing audio book location…"
 msgstr "Mijenjanje mjesta audio knjiga …"
-
-#: cozy/model/track.py:38
-msgid "Chapter"
-msgstr ""
-
-#: cozy/media/files.py:69
-msgid "Cannot copy: Audiobook directory is read only"
-msgstr ""
-
-#: cozy/media/files.py:71
-msgid "Cannot copy: Disk is full"
-msgstr ""
-
-#: cozy/media/files.py:73 cozy/media/files.py:89
-msgid "Cannot copy: Permission denied"
-msgstr ""
 
 #: data/ui/about.ui:16
 msgid "GitHub"
 msgstr "GitHub"
 
-#: data/ui/book_detail.ui:205
+#: data/ui/album_element.ui:104
+msgid "Play"
+msgstr "Pokreni"
+
+#: data/ui/book_detail.ui:219
 msgid "Remaining"
 msgstr "Preostalo"
 
-#: data/ui/book_detail.ui:260
+#: data/ui/book_detail.ui:274
 msgid "Total"
 msgstr "Ukupno"
 
-#: data/ui/book_detail.ui:276
+#: data/ui/book_detail.ui:290
 msgid "Last played"
 msgstr "Zadnja reprodukcija"
 
-#: data/ui/book_detail.ui:292
+#: data/ui/book_detail.ui:306
 msgid "Published"
 msgstr "Izdano"
 
-#: data/ui/book_detail.ui:338
+#: data/ui/book_detail.ui:341
 msgid "Some or all files of this book cannot be found."
 msgstr "Neke datoteke ili nijedna datoteka ove knjige se ne mogu pronaći."
 
-#: data/ui/book_detail.ui:361
+#: data/ui/book_detail.ui:364
 msgid "unavailable"
 msgstr "nedostupno"
 
-#: data/ui/book_detail.ui:472
+#: data/ui/book_detail.ui:533
 msgid "Loading chapters, please wait..."
-msgstr ""
+msgstr "Učitavaju se poglavlja. Pričekaj …"
 
-#: data/ui/book_detail.ui:527
-msgid "page0"
-msgstr ""
+#: data/ui/book_element.ui:36
+msgid "Open book overview"
+msgstr "Otvori pregled knjiga"
 
-#: data/ui/error_reporting.ui:23
+#: data/ui/db_migration_failed.ui:31
+msgid "Close Cozy"
+msgstr "Zatvori Cozy"
+
+#: data/ui/db_migration_failed.ui:47
+msgid "Receive help on GitHub"
+msgstr "Dobij pomoć na GitHubu"
+
+#: data/ui/db_migration_failed.ui:108
+msgid "An error occured while updating the database"
+msgstr "Dogodila se greška tijekom aktualiziranja baze podataka"
+
+#: data/ui/db_migration_failed.ui:129
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able to startup.\n"
+"A backup of the database was created before the update and has been restored now.\n"
+"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
+"You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
+"Tijekom aktualiziranja baze podataka došlo je do greške i Cozy se neće moći pokrenuti.\n"
+"Sigurnosna kopija baze podataka stvorena je prije aktualiziranja i sada je obnovljena.\n"
+"Dok se ovaj problem ne riješi, koristi Cozy verziju 0.9.5.\n"
+"Ako možeš, pomogni riješiti ovaj problem na GitHubu."
+
+#: data/ui/delete_book_dialog.ui:31 data/ui/file_not_found.ui:19
+msgid "Cancel"
+msgstr "Odustani"
+
+#: data/ui/delete_book_dialog.ui:45
+msgid "Delete Audiobook"
+msgstr "Izbriši audio knjigu"
+
+#: data/ui/delete_book_dialog.ui:105
+msgid "Are you sure you want to delete the selected audiobook?"
+msgstr "Stvarno želiš izbrisati odabrane audio knjige?"
+
+#: data/ui/delete_book_dialog.ui:126
+msgid "The audiobook will be removed from your disk and from Cozy's library."
+msgstr "Audio knjiga će se ukloniti s diska i iz Cozy zbirke."
+
+#: data/ui/error_reporting.ui:29
 msgid "User feedback"
 msgstr "Povratne informacije korisnika"
 
-#: data/ui/error_reporting.ui:66
+#: data/ui/error_reporting.ui:98
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "You can help improve Cozy by contributing information in case of errors and "
 "crashes. "
 msgstr "Pomogni poboljšati Cozy prijavljivanjem grešaka i rušenja. "
 
-#: data/ui/error_reporting.ui:80
+#: data/ui/error_reporting.ui:112
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Contributing this information is optional and completely anonymous. We will "
@@ -308,17 +366,13 @@ msgstr ""
 "prikupljati osobne podatke, uvezene datoteke niti bilo koje podatke koji bi "
 "mogli identificirati korisnika."
 
-#: data/ui/error_reporting.ui:95
+#: data/ui/error_reporting.ui:127
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
 "Cosy je program otvorenog koda, a izvorni kod povratnih informacija "
 "korisnika mogu se pregledati ovdje: "
-
-#: data/ui/file_not_found.ui:19 data/ui/delete_book_dialog.ui:31
-msgid "Cancel"
-msgstr "Odustani"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
@@ -331,6 +385,34 @@ msgstr "Datoteka nije pronađena"
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
 msgstr "Nije bilo moguće pronaći ovu datoteku. Želiš li je ručno pronaći?"
+
+#: data/ui/headerbar.ui:56
+msgid "Display background task progress"
+msgstr "Prikaži napredak zadataka koji se odvijaju u pozadini"
+
+#: data/ui/headerbar.ui:70
+msgid "Search your library"
+msgstr "Pretraži tvoju zbirku"
+
+#: data/ui/headerbar.ui:80
+msgid "Search menu button"
+msgstr "Gumb za pretragu"
+
+#: data/ui/headerbar.ui:81
+msgid "Open the search popover"
+msgstr "Otvori skočni prozor pretrage"
+
+#: data/ui/headerbar.ui:96
+msgid "Options"
+msgstr "Opcije"
+
+#: data/ui/headerbar.ui:107
+msgid "Options menu button"
+msgstr "Gumb za opcije"
+
+#: data/ui/headerbar.ui:108
+msgid "Open the options popover"
+msgstr "Otvori skočni prozor opcija"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
@@ -354,81 +436,192 @@ msgstr ""
 "- datoteke nisu ispravne audio datoteke\n"
 "- datoteke su oštećene"
 
-#: data/ui/main_window.ui:125
+#: data/ui/main_window.ui:68
 msgid "Recent"
 msgstr "Nedavni"
 
-#: data/ui/main_window.ui:145
+#: data/ui/main_window.ui:90
 msgid "List of authors"
 msgstr "Popis autora"
 
-#: data/ui/main_window.ui:161 data/ui/main_window.ui:271
+#: data/ui/main_window.ui:106 data/ui/main_window.ui:250
 #: data/ui/search_popover.ui:107
 msgid "Author"
 msgstr "Autor"
 
-#: data/ui/main_window.ui:181
+#: data/ui/main_window.ui:128
 msgid "List of readers"
 msgstr "Popis čitača"
 
-#: data/ui/main_window.ui:197 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:144 data/ui/search_popover.ui:201
 msgid "Reader"
 msgstr "Čitač"
 
-#: data/ui/main_window.ui:251
+#: data/ui/main_window.ui:189
 msgid "List of books"
 msgstr "Popis knjiga"
 
-#: data/ui/main_window.ui:301
+#: data/ui/main_window.ui:222
+msgid ""
+"Start exploring your library by switching to the Author or Reader view."
+msgstr ""
+"Počni istraživati svoju zbirku prebacivanjem na prikaz autora ili čitača."
+
+#: data/ui/main_window.ui:280
 msgid "Stay tuned while Cozy is preparing your library…"
 msgstr "Pričekaj dok Cozy priprema tvoju zbirku …"
 
 #: data/ui/main_window.ui:334
-msgid ""
-"Start exploring your library by switching to the Author or Reader view "
-"above."
-msgstr "Počni istraživati tvoju zbirku prelaskom na prikaz Autor ili Čitač."
-
-#: data/ui/main_window.ui:379
 msgid "Import your Audiobooks"
 msgstr "Uvoz audio knjiga"
 
-#: data/ui/main_window.ui:395
+#: data/ui/main_window.ui:353
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr "Cozy automatski uvozi tvoje audio knjige u jednu mapu – tvoja zbirka"
 
-#: data/ui/main_window.ui:431 data/ui/main_window.ui:452
-msgid "Automatically import new audiobooks on startup"
-msgstr "Uvezi nove audio knjige automatski tijekom pokretanja programa"
-
-#: data/ui/main_window.ui:451
-msgid "Auto scan switch"
-msgstr "Skopka za automatsko pretraživanje"
-
-#: data/ui/main_window.ui:495
+#: data/ui/main_window.ui:385
 msgid "Drag & Drop"
 msgstr "Povuci-i-ispusti"
 
-#: data/ui/main_window.ui:512
+#: data/ui/main_window.ui:387
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr "Povuci audio knjige u Cozy i one će se automatski uvesti"
 
-#: data/ui/main_window.ui:535
-msgid "Location of your audiobooks"
-msgstr "Mjesto tvojih audio knjiga"
+#: data/ui/main_window.ui:414
+msgid "Load audiobooks from a directory, network drive or an external disk"
+msgstr "Učitaj audio knjige iz mape, mrežne memorije ili eksternog diska"
 
-#: data/ui/main_window.ui:556
-msgid "Set Audiobooks Directory"
-msgstr "Postavi mapu audio knjiga"
+#: data/ui/main_window.ui:417
+msgid "Select"
+msgstr "Odaberi"
 
-#: data/ui/main_window.ui:579
-msgid "Load audiobooks from a directory, network drive or an external disk."
-msgstr "Učitaj audio knjige iz mape, mrežnog pogona ili vanjskog diska."
+#: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
+#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:71
+msgid "Rewind"
+msgstr "Natrag"
 
-#: data/ui/main_window.ui:597
-msgid "You can add more storage locations later in the settings"
-msgstr "Dodatna mjesta za spremanje knjiga možeš dodati kasnije u postavkama"
+#: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
+#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:78
+msgid "Rewind button"
+msgstr "Gumb za natrag"
+
+#: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
+#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:79
+msgid "Rewind playback"
+msgstr "Skoči natrag"
+
+#: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
+#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:101
+msgid "Start playback"
+msgstr "Pokreni reprodukciju"
+
+#: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
+#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:108
+msgid "Play/Pause Button"
+msgstr "Gumb za Pokreni/Zaustavi"
+
+#: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
+#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:109
+msgid "Start or pause the playback"
+msgstr "Pokreni ili zaustavi reprodukciju"
+
+#: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
+#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:132
+msgid "Forward"
+msgstr "Naprijed"
+
+#: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
+#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:139
+msgid "Forward button"
+msgstr "Gumb za naprijed"
+
+#: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
+#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:140
+msgid "Forward Playback"
+msgstr "Skoči naprijed"
+
+#: data/ui/media_controller.ui:175 data/ui/media_controller_big.ui:76
+msgid "Currently playing"
+msgstr "Trenutačno se reproducira"
+
+#: data/ui/media_controller.ui:190 data/ui/media_controller_big.ui:97
+msgid "Booktitle"
+msgstr "Naslov knjige"
+
+#: data/ui/media_controller.ui:191 data/ui/media_controller_big.ui:98
+msgid "Title of currently playing book"
+msgstr "Naslov trenutačno reproducirane knjige"
+
+#: data/ui/media_controller.ui:217 data/ui/media_controller_big.ui:126
+msgid "Part name"
+msgstr "Naslov dijela"
+
+#: data/ui/media_controller.ui:218 data/ui/media_controller_big.ui:127
+msgid "Title of the currently playing part"
+msgstr "Naslov trenutačno reproduciranog dijela"
+
+#: data/ui/media_controller.ui:256 data/ui/seek_bar.ui:20
+msgid "Elapsed time"
+msgstr "Proteklo vrijeme"
+
+#: data/ui/media_controller.ui:264 data/ui/seek_bar.ui:28
+msgid "Time elapsed"
+msgstr "Proteklo vrijeme"
+
+#: data/ui/media_controller.ui:265 data/ui/seek_bar.ui:29
+msgid "Elapsed time of current part"
+msgstr "Proteklo vrijeme trenutačnog dijela"
+
+#: data/ui/media_controller.ui:281 data/ui/seek_bar.ui:45
+msgid "Jump to position in current chapter"
+msgstr "Skoči na mjesto trenutačnog poglavlja"
+
+#: data/ui/media_controller.ui:290 data/ui/seek_bar.ui:56
+msgid "Position slider"
+msgstr "Klizač položaja"
+
+#: data/ui/media_controller.ui:291 data/ui/seek_bar.ui:57
+msgid "Position of the current part in seconds"
+msgstr "Mjesto trenutačnog dijela u sekundama"
+
+#: data/ui/media_controller.ui:310 data/ui/seek_bar.ui:76
+msgid "Remaining time"
+msgstr "Preostalo vrijeme"
+
+#: data/ui/media_controller.ui:317 data/ui/seek_bar.ui:83
+msgid "Time remaining"
+msgstr "Preostalo vrijeme"
+
+#: data/ui/media_controller.ui:318 data/ui/seek_bar.ui:84
+msgid "Remaining time of current part"
+msgstr "Preostalo vrijeme trenutačnog dijela"
+
+#: data/ui/media_controller.ui:350 data/ui/media_controller_big.ui:324
+msgid "Volume control"
+msgstr "Upravljanje glasnoćom"
+
+#: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
+#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:176
+msgid "Playback speed"
+msgstr "Brzina reprodukcije"
+
+#: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
+#: data/ui/settings.ui:956
+msgid "Sleep timer"
+msgstr "Odbrojavanje do mirovanja"
+
+#: data/ui/media_controller.ui:418 data/ui/media_controller_big.ui:404
+msgid "Timer menu button"
+msgstr "Gumb za odbrojavanje"
+
+#: data/ui/media_controller.ui:419 data/ui/media_controller_big.ui:405
+msgid "Open the sleep timer popover"
+msgstr "Otvori skočni prozor odbrojavanja"
+
+#: data/ui/media_controller_big.ui:53
+msgid "Open book"
+msgstr "Otvori knjigu"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -508,19 +701,15 @@ msgstr "zamijeni autora i čitača"
 
 #: data/ui/settings.ui:743
 msgid "Playback"
-msgstr ""
+msgstr "Reprodukcija"
 
 #: data/ui/settings.ui:789
 msgid "Rewind duration"
-msgstr ""
+msgstr "Interval skoka natrag"
 
 #: data/ui/settings.ui:874
 msgid "Forward duration"
-msgstr ""
-
-#: data/ui/settings.ui:956 data/ui/headerbar.ui:415
-msgid "Sleep timer"
-msgstr "Odbrojavanje do mirovanja"
+msgstr "Interval skoka naprijed"
 
 #: data/ui/settings.ui:1001
 msgid "Fadeout"
@@ -674,18 +863,26 @@ msgstr "_Informacije"
 msgid "_Quit"
 msgstr "_Zatvori program"
 
-#: data/ui/whats_new.ui:8
+#: data/ui/welcome.ui:29
+msgid "Welcome!"
+msgstr "Pozdrav!"
+
+#: data/ui/welcome.ui:46
+msgid "Add your audiobooks and let's get cozy."
+msgstr "Dodaj svoje audio knjige i raskomoti se."
+
+#: data/ui/whats_new.ui:9
 msgid "Whats new?"
 msgstr "Što je novo?"
 
-#: data/ui/whats_new.ui:21
+#: data/ui/whats_new.ui:27
 msgid "Continue"
 msgstr "Nastavi"
 
-#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_m4b.ui:17
-#: data/ui/whats_new_m4b_chapter.ui:17 data/ui/whats_new_library.ui:17
+#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_library.ui:17
+#: data/ui/whats_new_m4b.ui:17 data/ui/whats_new_m4b_chapter.ui:17
 msgid "What's new in Cozy"
-msgstr ""
+msgstr "Cozy novosti"
 
 #: data/ui/whats_new_importer.ui:52
 msgid "A completely rewritten and far more reliable media importer."
@@ -709,6 +906,36 @@ msgstr ""
 #: data/ui/whats_new_importer.ui:107
 msgid "More to come in a later update."
 msgstr "Više u kasnijem izdanju."
+
+#: data/ui/whats_new_library.ui:52
+msgid "An important change in library management"
+msgstr "Važna promjena u upravljanju zbirkama"
+
+#: data/ui/whats_new_library.ui:77
+msgid ""
+"Previously every file which was imported in your library but couldn't be "
+"found anymore was removed from the library during a scan."
+msgstr ""
+"U prethodnim verzijama se je svaka uvezena datoteka koja se više nije mogla "
+"pronaći, uklonila iz zbirke tijekom pretraživanja."
+
+#: data/ui/whats_new_library.ui:92
+msgid ""
+"Now audiobooks are not removed from your library automatically anymore. This"
+" prevents accidentally loosing the progress of a audiobook when a file can't"
+" be found temporarily."
+msgstr ""
+"Audio knjige se sada više ne uklanjaju automatski iz zbirke. Time se "
+"sprečava slučajno gubljenje napretka audio knjige kad se datoteka privremeno"
+" ne može pronaći."
+
+#: data/ui/whats_new_library.ui:107
+msgid ""
+"To remove an audiobook from the library simply right-click on it and choose "
+"the remove from library option."
+msgstr ""
+"Za uklanjanje audio knjige iz zbirke, pritisni knjigu desnom tipkom miša i "
+"odaberi opciju „Ukloni iz zbirke”."
 
 #: data/ui/whats_new_m4b.ui:52
 msgid "Basic support for m4b audio books."
@@ -737,217 +964,21 @@ msgstr "Podrška za poglavlja uslijedit će u kasnijem izdanju. Ostani u toku!"
 
 #: data/ui/whats_new_m4b_chapter.ui:52
 msgid "Chapter support for m4b audio books."
-msgstr ""
+msgstr "Podrška za audio knjige u m4b formatu."
 
 #: data/ui/whats_new_m4b_chapter.ui:77
 msgid "This version of Cozy features chapter support for m4b audio books!"
 msgstr ""
+"Ova Cozy verzija uvodi podršku za poglavlja za audio knjige u m4b formatu!"
 
 #: data/ui/whats_new_m4b_chapter.ui:92
 msgid ""
 "If you already have m4b files imported you'll need to start a scan of your "
 "library from the app menu."
 msgstr ""
+"Ako već imaš m4b datoteke, pokreni pretraživanje zbirke u izborniku "
+"programa."
 
 #: data/ui/whats_new_m4b_chapter.ui:107
 msgid "The chapters will then be detected."
-msgstr ""
-
-#: data/ui/whats_new_library.ui:52
-msgid "An important change in library management"
-msgstr ""
-
-#: data/ui/whats_new_library.ui:77
-msgid ""
-"Previously every file which was imported in your library but couldn't be "
-"found anymore was removed from the library during a scan."
-msgstr ""
-
-#: data/ui/whats_new_library.ui:92
-msgid ""
-"Now audiobooks are not removed from your library automatically anymore. This"
-" prevents accidentally loosing the progress of a audiobook when a file can't"
-" be found temporarily."
-msgstr ""
-
-#: data/ui/whats_new_library.ui:107
-msgid ""
-"To remove an audiobook from the library simply right-click on it and choose "
-"the remove from library option."
-msgstr ""
-
-#: data/ui/seek_bar.ui:20
-msgid "Elapsed time"
-msgstr "Proteklo vrijeme"
-
-#: data/ui/seek_bar.ui:28
-msgid "Time elapsed"
-msgstr "Proteklo vrijeme"
-
-#: data/ui/seek_bar.ui:29
-msgid "Elapsed time of current part"
-msgstr "Proteklo vrijeme trenutačnog dijela"
-
-#: data/ui/seek_bar.ui:45
-msgid "Jump to position in current chapter"
-msgstr "Skoči na mjesto trenutačnog poglavlja"
-
-#: data/ui/seek_bar.ui:56
-msgid "Position slider"
-msgstr "Klizač položaja"
-
-#: data/ui/seek_bar.ui:57
-msgid "Position of the current part in seconds"
-msgstr "Mjesto trenutačnog dijela u sekundama"
-
-#: data/ui/seek_bar.ui:76
-msgid "Remaining time"
-msgstr "Preostalo vrijeme"
-
-#: data/ui/seek_bar.ui:83
-msgid "Time remaining"
-msgstr "Preostalo vrijeme"
-
-#: data/ui/seek_bar.ui:84
-msgid "Remaining time of current part"
-msgstr "Preostalo vrijeme trenutačnog dijela"
-
-#: data/ui/headerbar.ui:123
-msgid "Rewind"
-msgstr ""
-
-#: data/ui/headerbar.ui:131
-msgid "Rewind button"
-msgstr "Gumb za prematanje natrag"
-
-#: data/ui/headerbar.ui:132
-msgid "Rewind playback"
-msgstr ""
-
-#: data/ui/headerbar.ui:149
-msgid "Start playback"
-msgstr "Pokreni reprodukciju"
-
-#: data/ui/headerbar.ui:157
-msgid "Play/Pause Button"
-msgstr "Gumb za Pokreni/Zaustavi"
-
-#: data/ui/headerbar.ui:158
-msgid "Start or pause the playback"
-msgstr "Pokreni ili zaustavi reprodukciju"
-
-#: data/ui/headerbar.ui:174
-msgid "Forward"
-msgstr ""
-
-#: data/ui/headerbar.ui:182
-msgid "Forward button"
-msgstr ""
-
-#: data/ui/headerbar.ui:183
-msgid "Forward Playback"
-msgstr ""
-
-#: data/ui/headerbar.ui:214
-msgid "Warnings"
-msgstr "Upozorenja"
-
-#: data/ui/headerbar.ui:259
-msgid "Currently playing"
-msgstr "Trenutačno se reproducira"
-
-#: data/ui/headerbar.ui:275
-msgid "Booktitle"
-msgstr "Naslov knjige"
-
-#: data/ui/headerbar.ui:276
-msgid "Title of currently playing book"
-msgstr "Naslov trenutačno reproducirane knjige"
-
-#: data/ui/headerbar.ui:302
-msgid "Part name"
-msgstr "Naslov dijela"
-
-#: data/ui/headerbar.ui:303
-msgid "Title of the currently playing part"
-msgstr "Naslov trenutačno reproduciranog dijela"
-
-#: data/ui/headerbar.ui:336
-msgid "Working…"
-msgstr "Rad u tijeku …"
-
-#: data/ui/headerbar.ui:340
-msgid "Currently working"
-msgstr "Trenutačno radi"
-
-#: data/ui/headerbar.ui:357
-msgid "Volume control"
-msgstr "Upravljanje glasnoćom"
-
-#: data/ui/headerbar.ui:394
-msgid "Playback speed"
-msgstr "Brzina reprodukcije"
-
-#: data/ui/headerbar.ui:425
-msgid "Timer menu button"
-msgstr "Gumb za odbrojavanje"
-
-#: data/ui/headerbar.ui:426
-msgid "Open the sleep timer popover"
-msgstr "Otvori skočni prozor odbrojavanja"
-
-#: data/ui/headerbar.ui:442
-msgid "Search your library"
-msgstr "Pretraži tvoju zbirku"
-
-#: data/ui/headerbar.ui:452
-msgid "Search menu button"
-msgstr "Gumb za pretragu"
-
-#: data/ui/headerbar.ui:453
-msgid "Open the search popover"
-msgstr "Otvori skočni prozor pretrage"
-
-#: data/ui/headerbar.ui:468
-msgid "Options"
-msgstr "Opcije"
-
-#: data/ui/headerbar.ui:479
-msgid "Options menu button"
-msgstr "Gumb za opcije"
-
-#: data/ui/headerbar.ui:480
-msgid "Open the options popover"
-msgstr "Otvori skočni prozor opcija"
-
-#: data/ui/delete_book_dialog.ui:45
-msgid "Delete Audiobook"
-msgstr "Izbriši audio knjigu"
-
-#: data/ui/delete_book_dialog.ui:105
-msgid "Are you sure you want to delete the selected audiobook?"
-msgstr "Stvarno želiš izbrisati odabrane audio knjige?"
-
-#: data/ui/delete_book_dialog.ui:126
-msgid "The audiobook will be removed from your disk and from Cozy's library."
-msgstr "Audio knjiga će se ukloniti s diska i iz Cozy zbirke."
-
-#: data/ui/db_migration_failed.ui:31
-msgid "Close Cozy"
-msgstr ""
-
-#: data/ui/db_migration_failed.ui:47
-msgid "Recieve help on GitHub"
-msgstr ""
-
-#: data/ui/db_migration_failed.ui:108
-msgid "An error occured while updating the database"
-msgstr ""
-
-#: data/ui/db_migration_failed.ui:129
-msgid ""
-"During an update of the database an error occurred and Cozy will not be able to startup.\n"
-"A backup of the database was created before the update and has been restored now.\n"
-"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
-"You can help resolve this problem by reporting an issue on GitHub."
-msgstr ""
+msgstr "Poglavlja će se onda otkriti."

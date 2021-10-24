@@ -4,8 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2019
-# Oi Suomi On! <oisuomion@protonmail.com>, 2021
+# 8397d83d97a763a1ecf9aac2657f04e5_82fe388 <03d40bf3df601a10fffa673cbcf3ff48_350333>, 2019
+# Cleiton Floss <cleitonfloss@gmail.com>, 2020
+# Rafael Fontenelle <rffontenelle@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -14,13 +15,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-15 12:32+0200\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
-"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2021\n"
-"Language-Team: Finnish (https://www.transifex.com/geigi/teams/78138/fi/)\n"
+"Last-Translator: Rafael Fontenelle <rffontenelle@gmail.com>, 2021\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/geigi/teams/78138/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: data/com.github.geigi.cozy.desktop:3
 #: data/com.github.geigi.cozy.appdata.xml:6
@@ -29,58 +30,58 @@ msgstr "Cozy"
 
 #: data/com.github.geigi.cozy.desktop:4
 msgid "Audio Book Player"
-msgstr "Äänikirjojen toisto-ohjelma"
+msgstr "Reprodutor de audiolivros"
 
 #: data/com.github.geigi.cozy.desktop:5
 msgid "Play and organize your audio book collection"
-msgstr "Toista ja järjestele äänikirjakokoelmasi"
+msgstr "Reproduza e organize sua coleção de audiolivros"
 
 #: data/com.github.geigi.cozy.appdata.xml:7
 msgid "A modern audio book player"
-msgstr "Nykyaikainen äänikirjojen toisto-ohjelma"
+msgstr "Um reprodutor de audiolivros moderno"
 
 #: data/com.github.geigi.cozy.appdata.xml:9
 msgid "Do you like audio books? Then lets get cozy!"
-msgstr "Pidätkö äänikirjoista? Ota Cozy haltuun!"
+msgstr "Você gosta de audiolivros? Então aconchegue-se com o Cozy!"
 
 #: data/com.github.geigi.cozy.appdata.xml:12
 msgid ""
 "Cozy is a modern audio book player. Here are some of the current features:"
 msgstr ""
-"Cozy on nykyaikainen äänikirjojen toisto-ohjelma. Tässä joitakin "
-"tämänhetkisiä toimintoja:"
+"Cozy é um reprodutor de audiolivros. Aqui estão alguns recursos disponíveis:"
 
 #: data/com.github.geigi.cozy.appdata.xml:16
 msgid "Import all your audio books into cozy to browse them comfortably"
-msgstr "Tuo kaikki äänikirjasi Cozyyn selataksesi niitä mukavasti"
+msgstr ""
+"Importe todos os seus audiolivros para o Cozy para navegar confortavelmente"
 
 #: data/com.github.geigi.cozy.appdata.xml:17
 msgid ""
 "Listen to your DRM free mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav "
 "audio books"
 msgstr ""
-"Kuuntele DRM-vapaita mp3, m4b (aac, ALAC, ...), flac, ogg ja wav-"
-"tiedostomuotoisia äänikirjojasi"
+"Ouça seus audiolivros livres de DRM em mp3, m4b, m4a (aac, ALAC, ...), flac,"
+" ogg e wav"
 
 #: data/com.github.geigi.cozy.appdata.xml:18
 msgid "Remembers your playback position"
-msgstr "Ohjelma muistaa kohdan johon toisto on jäänyt"
+msgstr "Lembra da última posição de reprodução"
 
 #: data/com.github.geigi.cozy.appdata.xml:19
 msgid "Sleep timer!"
-msgstr "Uniajastin!"
+msgstr "Temporizador"
 
 #: data/com.github.geigi.cozy.appdata.xml:20
 msgid "Playback speed control for each book individually"
-msgstr "Toiston nopeudenhallinta jokaiselle kirjalle yksilöllisesti"
+msgstr "Controle da velocidade de reprodução para cada livro individualmente"
 
 #: data/com.github.geigi.cozy.appdata.xml:21
 msgid "Search your library"
-msgstr "Etsi kirjastostasi"
+msgstr "Buscar na sua biblioteca"
 
 #: data/com.github.geigi.cozy.appdata.xml:22
 msgid "Multiple storage location support"
-msgstr "Monitallennussijaintituki"
+msgstr "Suporte a vários locais de armazenamento"
 
 #: data/com.github.geigi.cozy.appdata.xml:23
 msgid ""
@@ -88,17 +89,17 @@ msgid ""
 " if you store your audio books on an external or network drive. Perfect to "
 "listen to on the go!"
 msgstr ""
-"Yhteydetön tila! Tämä mahdollistaa äänikirjojesi säilyttämisen sisäisessä "
-"tallennustilassa mikäli varastoit äänikirjoja ulkoiseen verkkoasemaan. Sopii"
-" hyvin liikkuvaan kuunteluun! "
+"Modo desconectado! Isso permite que você mantenha um audiolivro em seu "
+"armazenamento interno se você armazenar seus audiolivros em uma unidade "
+"externa ou de rede. Perfeito para ouvir em qualquer lugar!"
 
 #: data/com.github.geigi.cozy.appdata.xml:24
 msgid "Drag and Drop to import new audio books"
-msgstr "Raahaa ja pudota tuodaksesi kirjastoon uusia äänikirjoja"
+msgstr "Arraste e solve para importar novos audiolivros"
 
 #: data/com.github.geigi.cozy.appdata.xml:25
 msgid "Sort your audio books by author, reader and name"
-msgstr "Lajittele äänikirjasi tekijän, lukijan ja nimen mukaan"
+msgstr "Ordene seus audiolivros por autor, narrador e nome"
 
 #: data/com.github.geigi.cozy.appdata.xml:45
 msgid "Julian Geywitz"
@@ -109,45 +110,48 @@ msgstr "Julian Geywitz"
 #: data/com.github.geigi.cozy.appdata.xml:117
 msgid "A small bugfix release which makes Cozy more reliable."
 msgstr ""
-"Pienikokoinen virheenkorjauksiin perustuva julkaisu joka tekee Cozysta "
-"entistäkin luotettavamman."
+"Uma pequena versão de correção de bug que torna o Cozy mais confiável."
 
 #: data/com.github.geigi.cozy.appdata.xml:58
 msgid "Display an error banner if an error occurs while importing new files"
 msgstr ""
-"Tuo näytölle virheilmoitus mikäli ilmenee virhe uusia tiedostoja tuotaessa"
+"Exibe um banner de erro se ocorrer um erro durante a importação de novos "
+"arquivos"
 
 #: data/com.github.geigi.cozy.appdata.xml:59
 msgid ""
 "The audiobook directory selector in the empty state has been replaced by a "
 "button to allow a narrow window even with long directory names"
 msgstr ""
-"Äänikirjahakemiston valitsija joka ilmenee tyhjässä tilassa on korvattu "
-"painikkeella mahdollistaen kapean ikkunoinnin jopa pitkien hakemistonimien "
-"suhteen"
+"O seletor de diretório de audiolivros no estado vazio foi substituído por um"
+" botão para permitir uma janela estreita, mesmo com nomes de diretório "
+"longos"
 
 #: data/com.github.geigi.cozy.appdata.xml:60
 msgid "Fix: multiple small UI issues"
-msgstr "Korjaus: useita pieniä käyttöliittymän ongelmia"
+msgstr "Correção: vários pequenos problemas de interface do usuário"
 
 #: data/com.github.geigi.cozy.appdata.xml:61
 msgid "Fix: the welcome screen now works properly on a mobile device"
-msgstr "Korjaus: tervetuloruutu toimii nyt kunnollisesti mobiililaitteessa"
+msgstr ""
+"Correção: a tela de boas-vindas agora funciona corretamente em um "
+"dispositivo móvel"
 
 #: data/com.github.geigi.cozy.appdata.xml:62
 msgid ""
 "Fix: don't display the mobile library switcher when no files are imported"
 msgstr ""
-"Korjaus: älä näytä mobiilin kirjastonvaihtajaa kun yhtäkään tiedostoa ei "
-"tuoda"
+"Correção: não exibir o alternador de biblioteca móvel quando nenhum arquivo "
+"for importado"
 
 #: data/com.github.geigi.cozy.appdata.xml:63
 msgid ""
 "Fix: in the book detail view the pause icon for a chapter remained even when"
 " the next chapter already started playing"
 msgstr ""
-"Korjaus: kirjan yksityiskohtaisessa lisätietonäkymässä taukokuvake säilyi "
-"edelleen vaikkakin uusi luku oli jo toistossa"
+"Correção: na visualização de detalhes do livro o ícone de pausa para um "
+"capítulo permanecia mesmo quando o próximo capítulo já começou a ser "
+"reproduzido"
 
 #: data/com.github.geigi.cozy.appdata.xml:64
 #: data/com.github.geigi.cozy.appdata.xml:81
@@ -157,160 +161,158 @@ msgstr ""
 #: data/com.github.geigi.cozy.appdata.xml:140
 #: data/com.github.geigi.cozy.appdata.xml:154
 msgid "As always, updated translations thanks to all of the translators!"
-msgstr ""
-"Kuten aina, päivitetyt kielikäännökset ovat täällä; kiitokset kaikille "
-"suomentajille!"
+msgstr "Como sempre, traduções atualizadas graças a todos os tradutores!"
 
 #: data/com.github.geigi.cozy.appdata.xml:70
 msgid ""
 "This release features a redesigned library with responsiveness in mind."
 msgstr ""
-"Tämä julkaisu sisältää uudelleensuunnitellun kirjaston jossa on otettu "
-"huomioon, että ohjelma vastaa nopeammin toimintoja käynnistellessä."
+"Esta versão apresenta uma biblioteca redesenhada com capacidade de resposta "
+"em mente."
 
 #: data/com.github.geigi.cozy.appdata.xml:74
 msgid "Redesigned library"
-msgstr "Kirjasto on suunniteltu uusiksi"
+msgstr "Biblioteca redesenhada"
 
 #: data/com.github.geigi.cozy.appdata.xml:75
 msgid "Redesigned start screen"
-msgstr "Aloitusruutu suunniteltu uusiksi"
+msgstr "Tela inicial redesenhada"
 
 #: data/com.github.geigi.cozy.appdata.xml:76
 msgid "Redesigned book detail screen"
-msgstr "Kirjan yksityiskohtainen lisätietonäkymä suunniteltu uusiksi"
+msgstr "Tela de detalhes do livro redesenhada"
 
 #: data/com.github.geigi.cozy.appdata.xml:77
 msgid "Responsive design for the main window"
-msgstr "Pääikkuna vastaa nyt käskyihin ja napsautuksiisi nopeammin"
+msgstr "Design responsivo para a janela principal"
 
 #: data/com.github.geigi.cozy.appdata.xml:78
 msgid "Introducing a welcome screen for new installations"
-msgstr "Uusille asennuksille on tehty nyt tervetuliaisikkuna"
+msgstr "Apresentando uma tela de boas-vindas para novas instalações"
 
 #: data/com.github.geigi.cozy.appdata.xml:79
 msgid "Fix: a rare bug where Cozy's volume was muted at first start"
 msgstr ""
-"Korjaus: harvinainen virhe jossa Cozyn äänentaso oli vaiennettuna "
-"ensikäynnistyksellä"
+"Correção: um bug raro em que o volume do Cozy era silenciado na primeira "
+"inicialização"
 
 #: data/com.github.geigi.cozy.appdata.xml:80
 msgid "Fix: long book names or author names will be truncated properly"
 msgstr ""
-"Korjaus: pitkät kirjannimet taikka tekijänimet saadaan nyt typistettyä "
-"kelvollisesti"
+"Correção: nomes longos de livros ou nomes de autores serão truncados "
+"corretamente"
 
 #: data/com.github.geigi.cozy.appdata.xml:87
 msgid "Performance improvements for the book detail view and some bugfixes."
 msgstr ""
-"Suorituskyvyn parannuksia kirjan tietonäkymään sekä joitakin "
-"virheenkorjauksia. "
+"Melhorias de desempenho para a visualização de detalhes do livro e algumas "
+"correções de bugs."
 
 #: data/com.github.geigi.cozy.appdata.xml:91
 msgid ""
 "Chapters in the book detail view will now be loaded lazily (thanks chris-"
 "kobrzak!)"
 msgstr ""
-"Luvut kirjan yksityskohtaisessa tietonäkymässä lataantuvat nyt rivakammin "
-"(kiitos chris-kobrzakille!)"
+"Os capítulos na visualização de detalhes do livro serão carregados "
+"lentamente (obrigado, chris-kobrzak!)"
 
 #: data/com.github.geigi.cozy.appdata.xml:92
 msgid ""
 "Books with a single chapter don't display a chapter number anymore (thanks "
 "chris-kobrzak!)"
 msgstr ""
-"Kirjat jotka sisältävät vain yhden ainoan luvun, eivät tuo esille enää "
-"lukunäkymää (kiitokset chris-kobrzakille!)"
+"Livros com um único capítulo não exibem mais o número de um capítulo "
+"(obrigado, chris-kobrzak!)"
 
 #: data/com.github.geigi.cozy.appdata.xml:93
 msgid "Fix: Locals in What's new in Cozy screen (thanks alyssais!)"
-msgstr "Korjaus: Paikalliset -osio Mitä uutta -näkymässä (kiitos alyssais!)"
+msgstr ""
+"Correção: Locais na tela \"O que há de novo no Cozy\" (obrigado, alyssais!)"
 
 #: data/com.github.geigi.cozy.appdata.xml:94
 msgid "Fix: Catch an error that could occur when a book stops"
-msgstr ""
-"Korjaus: virheenkoppaus joka saattaa ilmetä kun kirjan toisto pysäytetään"
+msgstr "Correção: Detectar um erro que pode ocorrer quando um livro para"
 
 #: data/com.github.geigi.cozy.appdata.xml:95
 msgid "Small performance improvements"
-msgstr "Pieniä parannuksia suorituskykyyn"
+msgstr "Pequenas melhorias de desempenho"
 
 #: data/com.github.geigi.cozy.appdata.xml:106
 msgid ""
 "When an issue occurs during playback the error message is displayed to the "
 "user"
 msgstr ""
-"Kun ilmenee virhe kirjaa toistettaessa, tuodaan käyttäjälle nyt näytille "
-"siihen liittyvä virheilmoitus "
+"Quando ocorre um problema durante a reprodução, a mensagem de erro é exibida"
+" para o usuário"
 
 #: data/com.github.geigi.cozy.appdata.xml:107
 msgid ""
 "Fix: Importing media without tags now properly decodes the file name as "
 "chapter name (thanks chris-kobrzak!)"
 msgstr ""
-"Korjaus: tuotaessa kirjastoon materiaalia jossa ei ole tunnisteita, "
-"käytetäänkin nyt hyväksi itse tiedostonimeä ja luodaan siitä nimi luvulle "
-"(kiitokset chris-kobrzakille!)"
+"Correção: importar mídia sem tags agora decodifica corretamente o nome do "
+"arquivo como nome do capítulo (obrigado, chris-kobrzak!)"
 
 #: data/com.github.geigi.cozy.appdata.xml:108
 msgid "Fix: Ensure that always a default storage location is present"
-msgstr "Korjaus: varmistus, että vakiollinen säilytystilakohde on läsnä"
+msgstr ""
+"Correção: Garante que sempre um local de armazenamento padrão esteja "
+"presente"
 
 #: data/com.github.geigi.cozy.appdata.xml:109
 msgid "Fix: During import an error could occur which stopped the import"
 msgstr ""
-"Korjaus: ei enää virhettä joka joskus ilmeni aineistoa tuotaessa ja joka "
-"lopetti toiminnon  "
+"Correção: Durante a importação, poderia ocorrer um erro que interrompe a "
+"importação"
 
 #: data/com.github.geigi.cozy.appdata.xml:110
 msgid "Fix: During the database migration an error could occur"
-msgstr "Korjaus: tietokantasiirtymän aikana ilmeni ajoittainen virhe"
+msgstr ""
+"Correção: Durante a migração do banco de dados, poderia ocorrer um erro"
 
 #: data/com.github.geigi.cozy.appdata.xml:121
 msgid ""
 "When copying files to the audiobook library goes wrong, the user is now "
 "informed with the error"
 msgstr ""
-"Mikäli tiedostojen jäljentäminen äänikirjastoon meni mönkään, käyttäjää "
-"tiedotetaan siitä nyt"
+"Quando a cópia de arquivos para a biblioteca de audiolivro dá errado, o "
+"usuário agora é informado com o erro"
 
 #: data/com.github.geigi.cozy.appdata.xml:122
 msgid "Fix: Possible error while displaying offline cache copy progress"
 msgstr ""
-"Korjaus: mahdollinen virhe näytettäessä välimuistin verkkoyhteydetöntä "
-"jäljennösedistymistä"
+"Correção: Possível erro ao exibir o progresso da cópia de cache offline"
 
 #: data/com.github.geigi.cozy.appdata.xml:123
 msgid ""
 "Fix: When changing the audiobook location or selecting a file in the file "
 "not found dialog an unexpected error could occur"
 msgstr ""
-"Korjaus: muutettaessa äänikirjan sijaintia tai valitessa tiedostoa, saattoi "
-"joskus ilmetä \"tiedostoa ei löydy\" -herja, johtaen odottamattomaan "
-"virheeseen"
+"Correção: Ao alterar o local do audiolivro ou selecionar um arquivo na caixa"
+" de diálogo de arquivo não encontrado, um erro inesperado poderia ocorrer"
 
 #: data/com.github.geigi.cozy.appdata.xml:124
 msgid "Fix: Removing a storage dir in settings did not work"
 msgstr ""
-"Korjaus: poistettaessa tallennustilahakemistoa asetuksista ei toiminut. Nyt "
-"toimii"
+"Correção: A remoção de um diretório de armazenamento nas configurações não "
+"funcionava"
 
 #: data/com.github.geigi.cozy.appdata.xml:125
 msgid "Fix: Removing a book from the library did sometimes not work"
-msgstr "Korjaus: kirjan poistaminen kirjastosta ei aina onnistunut."
+msgstr "Correção: A remoção de um livro da biblioteca às vezes não funcionava"
 
 #: data/com.github.geigi.cozy.appdata.xml:132
 #: data/com.github.geigi.cozy.appdata.xml:146
 msgid "This release features chapter support for m4b files."
-msgstr "Tämä julkaisu sisältää tuen eri luvuille m4b-tiedostojen suhteen."
+msgstr "Esta versão apresenta suporte de capítulo para arquivos m4b."
 
 #: data/com.github.geigi.cozy.appdata.xml:136
 #: data/com.github.geigi.cozy.appdata.xml:150
 msgid ""
 "A long awaited feature has finally arrived: Chapter support for m4b files."
 msgstr ""
-"Pitkään odotettu ominaisuus on viimenkin saapunut: lukujen tuki m4b-"
-"tiedostojen kanssa."
+"Um recurso muito aguardado finalmente chegou: Suporte de capítulo para "
+"arquivos m4b."
 
 #: data/com.github.geigi.cozy.appdata.xml:137
 #: data/com.github.geigi.cozy.appdata.xml:151
@@ -318,15 +320,13 @@ msgid ""
 "Books with inconsistent spelling are now grouped into a single book (thanks "
 "chris-kobrzak!)."
 msgstr ""
-"Kirjat joissa on epäjohdonmukaista kielioppia ovat nyt ryhmitetyt yhdeksi "
-"kirjaksi (kiitokset chris-kobrzakille!)"
+"Livros com grafia inconsistente agora são agrupados em um único livro "
+"(obrigado, chris-kobrzak!)."
 
 #: data/com.github.geigi.cozy.appdata.xml:138
 #: data/com.github.geigi.cozy.appdata.xml:152
 msgid "Improved reliability of restoring the previous playback position."
-msgstr ""
-"Parannusta kirjankuuntelun jatkamiseksi edellisen toiston tiimoilta jäädystä"
-" toistokohdasta."
+msgstr "Maior confiabilidade para restaurar a posição de reprodução anterior."
 
 #: data/com.github.geigi.cozy.appdata.xml:139
 #: data/com.github.geigi.cozy.appdata.xml:153
@@ -334,5 +334,5 @@ msgid ""
 "Fix: clicking on a currently playing chapter did not pause the chapter as "
 "expected."
 msgstr ""
-"Korjaus: napsauttaessa sillä hetkellä toistossa olevan luvun päällä ei "
-"aiemmin tauottanut toistoa kuten tarkoitus."
+"Correção: clicar em um capítulo atualmente em reprodução não pausou o "
+"capítulo como esperado."
