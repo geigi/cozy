@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: ghcr.io/elementary/flatpak-platform/runtime:6
+      image: bilelmoussaoui/flatpak-github-actions:gnome-40
       options: --privileged
 
     steps:
