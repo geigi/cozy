@@ -179,7 +179,7 @@
           <object class="GtkImage" id="playback_speed_img">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="icon-name">speedometer-symbolic</property>
+            <property name="icon-name">playback-speed-symbolic</property>
           </object>
         </child>
         <style>
