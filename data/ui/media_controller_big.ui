@@ -294,9 +294,9 @@
       </packing>
     </child>
     <child>
-      <object class="SeekBar" id="seek_bar">
+      <object class="GtkBox" id="seek_bar_container">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="hexpand">True</property>
       </object>
       <packing>
