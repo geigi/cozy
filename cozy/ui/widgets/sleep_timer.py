@@ -46,6 +46,7 @@ class SleepTimer(Gtk.Popover):
     def _connect_view_model(self):
         self._view_model.bind_to("stop_after_chapter", self._on_stop_after_chapter_changed)
         self._view_model.bind_to("remaining_seconds", self._on_remaining_seconds_changed)
+        self._view_model.bind_to("timer_enabled", self._on_timer_enabled_changed)
 
     def _init_timer_scale(self):
         for i in range(0, 121, 30):
@@ -93,3 +94,11 @@ class SleepTimer(Gtk.Popover):
 
     def _on_stop_after_chapter_changed(self):
         self.chapter_switch.set_active(self._view_model.stop_after_chapter)
+
+    def _on_timer_enabled_changed(self):
+        if self._view_model.timer_enabled:
+            icon = "bed-symbolic"
+        else:
+            icon = "no-bed-symbolic"
+
+        self._timer_image.set_from_icon_name(icon, Gtk.IconSize.BUTTON)
