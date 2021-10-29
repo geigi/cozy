@@ -18,6 +18,8 @@ class ArtworkCache:
     def __init__(self):
         _importer = inject.instance(Importer)
         _importer.add_listener(self._on_importer_event)
+        _app_settings = inject.instance(ApplicationSettings)
+        _app_settings.add_listener(self._on_app_setting_changed)
 
     def get_cover_pixbuf(self, book, scale, size=0):
         pixbuf = None
@@ -234,3 +236,7 @@ class ArtworkCache:
                 if pixbuf:
                     break
         return pixbuf
+
+    def _on_app_setting_changed(self, event: str, data):
+        if event == "prefer-external-cover":
+            self.delete_artwork_cache()

@@ -187,7 +187,7 @@
               </object>
             </child>
             <child>
-              <object class="HdyActionRow">
+              <object class="HdyActionRow" id="sleep_timer_fadeout_row">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="title">Fadeout duration</property>

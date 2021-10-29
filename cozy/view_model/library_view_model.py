@@ -199,6 +199,8 @@ class LibraryViewModel(Observable, EventSender):
             self._notify("readers")
             self._notify("books")
             self._notify("books-filter")
+        elif event == "prefer-external-cover":
+            self._notify("books")
 
     def _on_importer_event(self, event, message):
         if event == "scan" and message == ScanStatus.SUCCESS:
@@ -230,8 +232,6 @@ class LibraryViewModel(Observable, EventSender):
     def _on_settings_event(self, event: str, message):
         if event == "storage-removed":
             self._on_external_storage_removed(message)
-        elif event == "prefer-external-cover-changed":
-            self._notify("books")
 
     def _on_external_storage_removed(self, path: str):
         books = self.books.copy()
