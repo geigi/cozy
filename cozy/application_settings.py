@@ -57,6 +57,10 @@ class ApplicationSettings(EventSender):
     def prefer_external_cover(self) -> bool:
         return self._settings.get_boolean("prefer-external-cover")
 
+    @prefer_external_cover.setter
+    def prefer_external_cover(self, new_value: bool):
+        self._settings.set_boolean("prefer-external-cover", new_value)
+
     @property
     def sleep_timer_fadeout(self) -> bool:
         return self._settings.get_boolean("sleep-timer-fadeout")
@@ -104,6 +108,14 @@ class ApplicationSettings(EventSender):
     @forward_duration.setter
     def forward_duration(self, new_value):
         self._settings.set_int("forward-duration", new_value)
+
+    @property
+    def dark_mode(self) -> bool:
+        return self._settings.get_boolean("dark-mode")
+
+    @dark_mode.setter
+    def dark_mode(self, new_value: bool):
+        self._settings.set_boolean("dark_mode", new_value)
 
     @property
     def window_width(self) -> int:
