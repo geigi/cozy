@@ -1,15 +1,12 @@
 import logging
 from threading import Thread
 
-from gi.repository import Gtk
-
-import cozy.ui
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.db.storage import Storage
-from cozy.model.settings import Settings
 from cozy.ext import inject
 from cozy.model.library import Library
-from cozy.model.storage_block_list import StorageBlockList
+from cozy.model.settings import Settings
+from gi.repository import Gtk
 
 log = logging.getLogger("settings")
 
@@ -18,29 +15,21 @@ class StorageListBoxRow(Gtk.ListBoxRow):
     """
     This class represents a listboxitem for a storage location.
     """
-    _library: Library = inject.attr(Library)
-    _block_list: StorageBlockList = inject.attr(StorageBlockList)
-    _settings: Settings = inject.attr(Settings)
-    _filesystem_monitor = inject.attr(FilesystemMonitor)
-
-    def __init__(self, parent, db_id, path, external, default=False):
+    def __init__(self, path: str, external: bool, default=False):
         super(Gtk.ListBoxRow, self).__init__()
-        self.ui = cozy.ui.main_view.CozyUI()
-        self.db_id = db_id
         self.path = path
         self.default = default
         self.external = external
-        self.parent = parent
 
         box = Gtk.Box()
         box.set_orientation(Gtk.Orientation.HORIZONTAL)
         box.set_spacing(3)
         box.set_halign(Gtk.Align.FILL)
         box.set_valign(Gtk.Align.CENTER)
-        box.set_margin_left(4)
-        box.set_margin_right(4)
-        box.set_margin_top(5)
-        box.set_margin_bottom(5)
+        box.set_margin_left(5)
+        box.set_margin_right(6)
+        box.set_margin_top(10)
+        box.set_margin_bottom(10)
 
         self.default_image = Gtk.Image()
         self.default_image.set_from_icon_name("emblem-default-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
@@ -53,9 +42,10 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         self.location_chooser.set_action(Gtk.FileChooserAction.SELECT_FOLDER)
         if path != "":
             self.location_chooser.set_current_folder(path)
-        self.location_chooser.set_halign(Gtk.Align.START)
+        self.location_chooser.set_halign(Gtk.Align.FILL)
         self.location_chooser.props.hexpand = True
         self.location_chooser.connect("file-set", self.__on_folder_changed)
+        self.location_chooser.set_margin_right(6)
 
         box.add(self.type_image)
         box.add(self.location_chooser)
@@ -71,7 +61,6 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         """
         self.default = default
         self.default_image.set_visible(default)
-        Storage.update(default=default).where(Storage.id == self.db_id).execute()
 
     def get_default(self):
         """
@@ -101,8 +90,6 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         else:
             self.type_image.set_from_icon_name("drive-harddisk-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
             self.type_image.set_tooltip_text(_("Internal drive"))
-
-        Storage.update(external=external).where(Storage.id == self.db_id).execute()
 
     def __on_folder_changed(self, widget):
         """

@@ -260,6 +260,7 @@
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkFrame">
+                        <property name="height-request">250</property>
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="label-xalign">0</property>
@@ -307,7 +308,7 @@
                             <property name="can-focus">False</property>
                             <property name="tooltip-text" translatable="yes">Add location</property>
                             <child>
-                              <object class="GtkButton" id="add_location_button">
+                              <object class="GtkButton" id="add_storage_button">
                                 <property name="width-request">24</property>
                                 <property name="height-request">24</property>
                                 <property name="visible">True</property>
@@ -333,7 +334,7 @@
                             <property name="can-focus">False</property>
                             <property name="tooltip-text" translatable="yes">Remove location</property>
                             <child>
-                              <object class="GtkButton" id="remove_location_button">
+                              <object class="GtkButton" id="remove_storage_button">
                                 <property name="width-request">24</property>
                                 <property name="height-request">24</property>
                                 <property name="visible">True</property>
@@ -371,7 +372,7 @@
                             <property name="tooltip-text" translatable="yes">Toggle this storage location to be internal/external.</property>
                             <property name="halign">end</property>
                             <child>
-                              <object class="GtkToggleButton" id="external_button">
+                              <object class="GtkToggleButton" id="external_storage_toggle_button">
                                 <property name="label" translatable="yes">External drive</property>
                                 <property name="width-request">24</property>
                                 <property name="height-request">24</property>
@@ -399,7 +400,7 @@
                             <property name="tooltip-text" translatable="yes">Set as default storage location for new audiobooks</property>
                             <property name="halign">end</property>
                             <child>
-                              <object class="GtkButton" id="default_location_button">
+                              <object class="GtkButton" id="default_storage_toggle_button">
                                 <property name="label" translatable="yes">Set as default</property>
                                 <property name="width-request">24</property>
                                 <property name="height-request">24</property>

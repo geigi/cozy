@@ -45,20 +45,7 @@ class Settings(EventSender):
         self.window.set_modal(self.ui.window)
         self.window.connect("delete-event", self.ui.hide_window)
 
-        self.add_storage_button = self.builder.get_object("add_location_button")
-        self.add_storage_button.connect("clicked", self.__on_add_storage_clicked)
-        self.remove_storage_button = self.builder.get_object("remove_location_button")
-        self.remove_storage_button.connect("clicked", self.__on_remove_storage_clicked)
-        self.external_button = self.builder.get_object("external_button")
-        self.external_button_handle_id = self.external_button.connect("clicked", self.__on_external_clicked)
-        self.default_storage_button = self.builder.get_object("default_location_button")
-        self.default_storage_button.connect("clicked", self.__on_default_storage_clicked)
-        self.storage_list_box = self.builder.get_object("storage_list_box")
-        self.storage_list_box.connect("row-activated", self.__on_storage_box_changed)
-
-        self._init_storage()
         self.__init_bindings()
-        self.__on_storage_box_changed(None, None)
 
     def _init_storage(self):
         """
@@ -132,77 +119,6 @@ class Settings(EventSender):
         if row and row.get_default() != True:
             self.remove_storage_button.set_sensitive(sensitive)
             self.default_storage_button.set_sensitive(sensitive)
-
-    def __on_add_storage_clicked(self, widget):
-        """
-        Add a new storage selector to the ui.
-        """
-        db_obj = Storage.create(path="")
-        self.storage_list_box.add(StorageListBoxRow(self, db_obj.id, "", False, False))
-
-    def __on_remove_storage_clicked(self, widget):
-        """
-        Remove a storage selector from the ui and database.
-        """
-        row = self.storage_list_box.get_selected_row()
-        Storage.select().where(Storage.path == row.path).get().delete_instance()
-        self.storage_list_box.remove(row)
-        self.emit_event("storage-removed", row.path)
-        self.__on_storage_box_changed(None, None)
-
-    def __on_default_storage_clicked(self, widget):
-        """
-        Select a location as default storage.
-        """
-        for row in self.storage_list_box.get_children():
-            row.set_default(False)
-
-        self.storage_list_box.get_selected_row().set_default(True)
-
-        self.__on_storage_box_changed(None, None)
-
-    def __on_storage_box_changed(self, widget, row):
-        """
-        Disable/enable toolbar buttons
-        """
-        row = self.storage_list_box.get_selected_row()
-        if row is None:
-            sensitive = False
-            default_sensitive = False
-        else:
-            sensitive = True
-            if row.get_default():
-                default_sensitive = False
-            else:
-                default_sensitive = True
-            self.external_button.handler_block(self.external_button_handle_id)
-            self.external_button.set_active(row.external)
-            self.external_button.handler_unblock(self.external_button_handle_id)
-
-        self.remove_storage_button.set_sensitive(default_sensitive)
-        self.external_button.set_sensitive(sensitive)
-        self.default_storage_button.set_sensitive(default_sensitive)
-
-        for child in self.storage_list_box.get_children():
-            if row and child.db_id == row.db_id:
-                child.set_selected(True)
-            else:
-                child.set_selected(False)
-
-    def __on_external_clicked(self, widget):
-        """
-        The external/internal button was clicked.
-        The new setting will be written to the cozy.
-        """
-        external = self.external_button.get_active()
-
-        row = self.storage_list_box.get_selected_row()
-        row.set_external(external)
-
-        if external:
-            self.emit_event("external-storage-added", row.path)
-        else:
-            self.emit_event("external-storage-removed", row.path)
 
 
 class BlacklistColumn(Gtk.TreeViewColumn):

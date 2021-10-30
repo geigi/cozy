@@ -16,6 +16,12 @@ class Storage:
 
         self._get_db_object()
 
+    @staticmethod
+    def new():
+        db_obj = StorageModel.create(path="")
+        return Storage(db_obj.id)
+
+
     def _get_db_object(self):
         self._db_object: StorageModel = StorageModel.get(self.id)
 
