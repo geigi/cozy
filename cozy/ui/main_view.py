@@ -238,7 +238,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         Show preferences window.
         """
-        self.settings.show()
         self._preferences.show()
 
     def hide_window(self, widget, data=None):
