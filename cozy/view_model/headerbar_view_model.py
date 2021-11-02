@@ -88,7 +88,7 @@ class HeaderbarViewModel(Observable, EventSender):
             self._work_progress = message
             self._notify("work_progress")
         elif event == "scan" and message == ScanStatus.STARTED:
-            self._start_working(_("Importing Audiobooks"))
+            self._start_working(_("Refreshing audio book collection"))
         elif event == "scan" and message == ScanStatus.SUCCESS:
             self._stop_working()
 
