@@ -39,6 +39,7 @@ Head over to [Matrix](https://matrix.to/#/#cozy:gnome.org?via=matrix.org&via=gno
 | elementaryOS | Currently out of date. Please use Flatpak for now. |
 | Ubuntu (PPA) | <center><a href="https://launchpad.net/~cozy-team/+archive/ubuntu/cozy">cozy</a> |
 | OpenBSD | <center><a href="https://cvsweb.openbsd.org/ports/audio/cozy/">cozy</a> |
+| Nix | <center><a href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/audio/cozy/default.nix">cozy</a> |
 
 
 ## elementaryOS
