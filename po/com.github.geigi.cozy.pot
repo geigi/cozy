@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-29 16:50+0200\n"
+"POT-Creation-Date: 2021-12-23 09:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -243,7 +243,7 @@ msgid "Internal drive"
 msgstr ""
 
 #: cozy/view_model/headerbar_view_model.py:91
-msgid "Importing Audiobooks"
+msgid "Refreshing audio book collection"
 msgstr ""
 
 #: cozy/view_model/headerbar_view_model.py:100
