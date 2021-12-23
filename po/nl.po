@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 18:22+0200\n"
+"POT-Creation-Date: 2021-12-23 09:57+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
@@ -133,7 +133,7 @@ msgstr "Schijf"
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: cozy/ui/main_view.py:298 data/ui/main_window.ui:412
+#: cozy/ui/main_view.py:299 data/ui/main_window.ui:412
 msgid "Set Audiobooks Directory"
 msgstr "Luisterboekmap instellen"
 
@@ -248,8 +248,8 @@ msgid "Internal drive"
 msgstr "Interne schijf"
 
 #: cozy/view_model/headerbar_view_model.py:91
-msgid "Importing Audiobooks"
-msgstr "Bezig met importeren van luisterboeken…"
+msgid "Refreshing audio book collection"
+msgstr "Bezig met herladen van verzameling…"
 
 #: cozy/view_model/headerbar_view_model.py:100
 #: cozy/view_model/headerbar_view_model.py:116
@@ -496,47 +496,47 @@ msgid "Select"
 msgstr "Kiezen"
 
 #: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
-#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:71
+#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:70
 msgid "Rewind"
 msgstr "Terugspoelen"
 
 #: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
-#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:78
+#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:77
 msgid "Rewind button"
 msgstr "Terugspoelknop"
 
 #: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
-#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:79
+#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:78
 msgid "Rewind playback"
 msgstr "Terugspoelen"
 
 #: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
-#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:101
+#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:100
 msgid "Start playback"
 msgstr "Beluisteren"
 
 #: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
-#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:108
+#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:107
 msgid "Play/Pause Button"
 msgstr "Beluister-/Pauzeerknop"
 
 #: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
-#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:109
+#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:108
 msgid "Start or pause the playback"
 msgstr "Start of pauzeer het beluisteren"
 
 #: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
-#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:132
+#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:131
 msgid "Forward"
 msgstr "Vooruitspoelen"
 
 #: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
-#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:139
+#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:138
 msgid "Forward button"
 msgstr "Vooruitspoelknop"
 
 #: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
-#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:140
+#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:139
 msgid "Forward Playback"
 msgstr "Vooruitspoelen"
 
@@ -601,7 +601,7 @@ msgid "Volume control"
 msgstr "Volumeregeling"
 
 #: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
-#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:176
+#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:175
 msgid "Playback speed"
 msgstr "Voorleessnelheid"
 
@@ -871,7 +871,7 @@ msgstr "Welkom!"
 
 #: data/ui/welcome.ui:46
 msgid "Add your audiobooks and let's get cozy."
-msgstr "Voeg audioboeken toe en leun achterover."
+msgstr "Voeg luisterboeken toe en leun achterover."
 
 #: data/ui/whats_new.ui:9
 msgid "Whats new?"
@@ -972,7 +972,7 @@ msgstr "Hoofdstukondersteuning in m4b-luisterboeken."
 
 #: data/ui/whats_new_m4b_chapter.ui:77
 msgid "This version of Cozy features chapter support for m4b audio books!"
-msgstr "Deze versie van Cozy ondersteunt hoofdstukken in m4b-audioboeken!"
+msgstr "Deze versie van Cozy ondersteunt hoofdstukken in m4b-luisterboeken!"
 
 #: data/ui/whats_new_m4b_chapter.ui:92
 msgid ""
