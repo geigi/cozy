@@ -60,6 +60,7 @@
         </p>
         <ul>
           <li>Fresh playback speed and sleep timer icons (thanks jimmac)</li>
+          <li>Refreshing the library now uses a more descriptive text (thanks jubalh)</li>
           <li>Multiple small bug fixes</li>
           <li>As always, updated translations thanks to all of the translators!</li>
         </ul>
