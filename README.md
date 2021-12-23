@@ -154,6 +154,7 @@ To the contributors on GitHub:
 - grenade
 - jimmac
 - jnbr
+- jubalh
 - kaphula
 - leuc
 - magnickolas
@@ -162,6 +163,7 @@ To the contributors on GitHub:
 - oleg-krv
 - paper42
 - phpwutz
+- rapenne-s
 - thibaultamartin
 - umeboshi2
 - worldofpeace
