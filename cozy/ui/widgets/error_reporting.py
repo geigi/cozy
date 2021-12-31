@@ -50,6 +50,11 @@ class ErrorReporting(Gtk.Box):
         self.__init_scale()
         self.__connect()
 
+        self.app_settings.add_listener(self._on_app_setting_changed)
+
+        self._load_report_level()
+
+    def _load_report_level(self):
         level = self.app_settings.report_level
         self.verbose_adjustment.set_value(level + 1)
         self._adjustment_changed(self.verbose_adjustment)
@@ -82,3 +87,7 @@ class ErrorReporting(Gtk.Box):
             for line in LEVEL_DETAILS[i]:
                 details += "• {}\n".format(line)
         self.details_label.set_text(details)
+
+    def _on_app_setting_changed(self, event, _):
+        if event == "report-level":
+            self._load_report_level()
