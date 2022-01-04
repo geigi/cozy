@@ -3,6 +3,7 @@ import os
 import time
 from threading import Thread
 from typing import Optional
+from cozy.media.importer import Importer, ScanStatus
 
 from gi.repository import GLib, Gst
 
@@ -30,6 +31,7 @@ class Player(EventSender):
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
     _offline_cache: OfflineCache = inject.attr(OfflineCache)
     _info_bar: InfoBanner = inject.attr(InfoBanner)
+    _importer: Importer = inject.attr(Importer)
 
     _gst_player: GstPlayer = inject.attr(GstPlayer)
 
@@ -39,6 +41,7 @@ class Player(EventSender):
         self._book: Optional[Book] = None
         self._play_next_chapter: bool = True
 
+        self._importer.add_listener(self._on_importer_event)
         self._gst_player.add_listener(self._on_gst_player_event)
 
         self.play_status_updater: IntervalTimer = IntervalTimer(1, self._emit_tick)
@@ -294,6 +297,16 @@ class Player(EventSender):
             chapter = self._book.chapters[index_current_chapter + 1]
             chapter.position = chapter.start_position
             self.play_pause_chapter(self._book, chapter)
+
+    def _on_importer_event(self, event: str, message):
+        if event == "scan" and message == ScanStatus.SUCCESS:
+            log.info("Reloading current book")
+            last_book = self._library.last_played_book
+            if last_book:
+                self._continue_book(last_book)
+                # we need to tell everybody the new book object
+                # it represents the same book but after a scan the old objects do get destroyed
+                self.emit_event_main_thread("chapter-changed", self._book)
 
     def _on_gst_player_event(self, event: str, message):
         if event == "file-finished":
