@@ -338,6 +338,7 @@
                                 <property name="width-request">24</property>
                                 <property name="height-request">24</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">False</property>
                                 <property name="image">remove_image</property>
@@ -377,6 +378,7 @@
                                 <property name="width-request">24</property>
                                 <property name="height-request">24</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">False</property>
                                 <property name="image">external_image</property>
@@ -400,11 +402,12 @@
                             <property name="tooltip-text" translatable="yes">Set as default storage location for new audiobooks</property>
                             <property name="halign">end</property>
                             <child>
-                              <object class="GtkButton" id="default_storage_toggle_button">
+                              <object class="GtkButton" id="default_storage_button">
                                 <property name="label" translatable="yes">Set as default</property>
                                 <property name="width-request">24</property>
                                 <property name="height-request">24</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">False</property>
                                 <property name="image">default_image</property>

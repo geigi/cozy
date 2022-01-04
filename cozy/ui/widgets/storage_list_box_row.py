@@ -2,11 +2,11 @@ import logging
 from threading import Thread
 
 from cozy.control.filesystem_monitor import FilesystemMonitor
-from cozy.db.storage import Storage
+from cozy.model.storage import Storage
 from cozy.ext import inject
 from cozy.model.library import Library
 from cozy.model.settings import Settings
-from gi.repository import Gtk
+from gi.repository import Gtk, GObject
 
 log = logging.getLogger("settings")
 
@@ -15,12 +15,10 @@ class StorageListBoxRow(Gtk.ListBoxRow):
     """
     This class represents a listboxitem for a storage location.
     """
-    def __init__(self, path: str, external: bool, default=False):
-        super(Gtk.ListBoxRow, self).__init__()
-        self.path = path
-        self.default = default
-        self.external = external
+    def __init__(self, model: Storage):
+        self._model = model
 
+        super(Gtk.ListBoxRow, self).__init__()
         box = Gtk.Box()
         box.set_orientation(Gtk.Orientation.HORIZONTAL)
         box.set_spacing(3)
@@ -35,13 +33,13 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         self.default_image.set_from_icon_name("emblem-default-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
         self.default_image.set_margin_right(5)
 
-        self.type_image = self.__get_type_image()
-
+        self.type_image = Gtk.Image()
+        self._set_drive_icon()
         self.location_chooser = Gtk.FileChooserButton()
         self.location_chooser.set_local_only(False)
         self.location_chooser.set_action(Gtk.FileChooserAction.SELECT_FOLDER)
-        if path != "":
-            self.location_chooser.set_current_folder(path)
+        if self._model.path != "":
+            self.location_chooser.set_current_folder(self._model.path)
         self.location_chooser.set_halign(Gtk.Align.FILL)
         self.location_chooser.props.hexpand = True
         self.location_chooser.connect("file-set", self.__on_folder_changed)
@@ -52,88 +50,33 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         box.add(self.default_image)
         self.add(box)
         self.show_all()
-        self.default_image.set_visible(default)
+        self._set_default_icon()
 
-    def set_default(self, default):
-        """
-        Set this storage location as the default
-        :param default: Boolean
-        """
-        self.default = default
-        self.default_image.set_visible(default)
+    @property
+    def model(self) -> Storage:
+        return self._model
 
-    def get_default(self):
-        """
-        Is this storage location the default one?
-        """
-        return self.default
-
-    def set_selected(self, selected):
-        """
-        Set UI colors for the default img.
-        :param selected: Boolean
-        """
-        if selected:
-            self.default_image.get_style_context().add_class("selected")
-        else:
-            self.default_image.get_style_context().remove_class("selected")
-
-    def set_external(self, external):
-        """
-        Set this entry as external/internal storage.
-        This method also writes the setting to the cozy.
-        """
-        self.external = external
-        if external:
-            self.type_image.set_from_icon_name("network-server-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
-            self.type_image.set_tooltip_text(_("External drive"))
-        else:
-            self.type_image.set_from_icon_name("drive-harddisk-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
-            self.type_image.set_tooltip_text(_("Internal drive"))
+    def refresh(self):
+        self._set_drive_icon()
+        self._set_default_icon()
 
     def __on_folder_changed(self, widget):
-        """
-        Update the location in the database.
-        Start an import scan or a rebase operation.
-        """
         new_path = self.location_chooser.get_file().get_path()
-        # First test if the new location is already in the database
-        if Storage.select().where(Storage.path == new_path).count() > 0:
-            return
+        self.emit("location-changed", new_path)
 
-        # If not, add it to the database
-        old_path = Storage.select().where(Storage.id == self.db_id).get().path
-        self.path = new_path
-        is_external = self._filesystem_monitor.is_external(new_path)
-        Storage.update(path=new_path, external=is_external).where(Storage.id == self.db_id).execute()
-        self._settings.invalidate()
-        self.set_external(is_external)
-
-        # Run a reimport or rebase
-        if old_path == "":
-            self.parent.emit_event("storage-added", self.path)
-            log.info("New audiobook location added. Starting import scan.")
-            self.ui.scan(None, None)
-        else:
-            self.parent.emit_event("storage-changed", self.path)
-            log.info("Audio book location changed, rebasing the location in cozy.")
-            self._block_list.rebase_path(old_path, new_path)
-            thread = Thread(target=self._library.rebase_path, args=(old_path, new_path), name="RebaseStorageLocationThread")
-            thread.start()
-
-    def __get_type_image(self):
-        """
-        Returns the matching drive icon for this storage location.
-        :return: External or internal drive gtk image.
-        """
-        type_image = Gtk.Image()
-        if self.external:
+    def _set_drive_icon(self):
+        if self._model.external:
             icon_name = "network-server-symbolic"
-            type_image.set_tooltip_text(_("External drive"))
+            self.type_image.set_tooltip_text(_("External drive"))
         else:
             icon_name = "drive-harddisk-symbolic"
-            type_image.set_tooltip_text(_("Internal drive"))
-        type_image.set_from_icon_name(icon_name, Gtk.IconSize.LARGE_TOOLBAR)
-        type_image.set_margin_right(5)
+            self.type_image.set_tooltip_text(_("Internal drive"))
+        
+        self.type_image.set_from_icon_name(icon_name, Gtk.IconSize.LARGE_TOOLBAR)
+        self.type_image.set_margin_right(5)
 
-        return type_image
+    def _set_default_icon(self):
+        self.default_image.set_visible(self._model.default)
+
+GObject.signal_new('location-changed', StorageListBoxRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
+                   (GObject.TYPE_PYOBJECT,))
