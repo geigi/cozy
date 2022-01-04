@@ -15,11 +15,12 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library
+from cozy.model.storage import Storage
 from cozy.open_view import OpenView
 from cozy.report import reporter
 from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.import_failed_dialog import ImportFailedDialog
-from cozy.ui.settings import Settings
+from cozy.view_model.settings_view_model import SettingsViewModel
 
 log = logging.getLogger("library_view_model")
 
@@ -42,7 +43,7 @@ class LibraryViewModel(Observable, EventSender):
     _model = inject.attr(Library)
     _importer: Importer = inject.attr(Importer)
     _player: Player = inject.attr(Player)
-    _settings: Settings = inject.attr(Settings)
+    _settings: SettingsViewModel = inject.attr(SettingsViewModel)
 
     def __init__(self):
         super().__init__()
@@ -233,10 +234,10 @@ class LibraryViewModel(Observable, EventSender):
         if event == "storage-removed":
             self._on_external_storage_removed(message)
 
-    def _on_external_storage_removed(self, path: str):
+    def _on_external_storage_removed(self, storage: Storage):
         books = self.books.copy()
         for book in books:
-            chapters_to_remove = [c for c in book.chapters if c.file.startswith(path)]
+            chapters_to_remove = [c for c in book.chapters if c.file.startswith(str(storage.path))]
 
             for chapter in chapters_to_remove:
                 chapter.delete()

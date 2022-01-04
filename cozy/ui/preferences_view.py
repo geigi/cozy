@@ -33,7 +33,7 @@ class PreferencesView(Handy.PreferencesWindow):
     add_storage_button: Gtk.Button = Gtk.Template.Child()
     remove_storage_button: Gtk.Button = Gtk.Template.Child()
     external_storage_toggle_button: Gtk.ToggleButton = Gtk.Template.Child()
-    default_storage_toggle_button: Gtk.ToggleButton = Gtk.Template.Child()
+    default_storage_button: Gtk.ToggleButton = Gtk.Template.Child()
 
     user_feedback_preference_group: Handy.PreferencesGroup = Gtk.Template.Child()
 
@@ -49,10 +49,18 @@ class PreferencesView(Handy.PreferencesWindow):
         self.sleep_timer_fadeout_switch.connect("state-set", self._on_sleep_fadeout_switch_changed)
         self._on_sleep_fadeout_switch_changed(None, self.sleep_timer_fadeout_switch.get_active())
 
+        self.storage_list_box.connect("row-selected", self._on_storage_box_changed)
+
+        self.add_storage_button.connect("clicked", self._on_add_storage_clicked)
+        self.remove_storage_button.connect("clicked", self._on_remove_storage_clicked)
+        self.external_button_handle_id = self.external_storage_toggle_button.connect("clicked", self._on_external_clicked)
+        self.default_storage_button.connect("clicked", self._on_default_storage_clicked)
+
         self._init_storage_box()
 
     def _bind_view_model(self):
         self._view_model.bind_to("storage_locations", self._init_storage_box)
+        self._view_model.bind_to("storage_attributes", self._refresh_storage_rows)
 
     def _bind_settings(self):
         self._glib_settings.bind("dark-mode", self.dark_mode_switch, "active",
@@ -83,58 +91,50 @@ class PreferencesView(Handy.PreferencesWindow):
         self.storage_list_box.remove_all_children()
 
         for storage in self._view_model.storage_locations:
-            self.storage_list_box.add(StorageListBoxRow(storage.path, storage.external, storage.default))
+            row = StorageListBoxRow(storage)
+            row.connect("location-changed", self._on_storage_location_changed)
+            self.storage_list_box.add(row)
 
-    def _on_add_storage_clicked(self, widget):
+    def _on_add_storage_clicked(self, _):
         self._view_model.add_storage_location()
 
-    def _on_remove_storage_clicked(self, widget):
+    def _on_remove_storage_clicked(self, _):
         row = self.storage_list_box.get_selected_row()
-        Storage.select().where(Storage.path == row.path).get().delete_instance()
-        self.storage_list_box.remove(row)
-        self.emit_event("storage-removed", row.path)
-        self.__on_storage_box_changed(None, None)
+        self._view_model.remove_storage_location(row.model)
 
-    def _on_default_storage_clicked(self, widget):
-        for row in self.storage_list_box.get_children():
-            row.set_default(False)
+    def _on_default_storage_clicked(self, _):
+        row = self.storage_list_box.get_selected_row()
+        self._view_model.set_default_storage(row.model)
+        self._on_storage_box_changed(None, row)
 
-        self.storage_list_box.get_selected_row().set_default(True)
-
-        self.__on_storage_box_changed(None, None)
-
-    def _on_storage_box_changed(self, widget, row):
+    def _on_storage_box_changed(self, _, row):
         row = self.storage_list_box.get_selected_row()
         if row is None:
             sensitive = False
             default_sensitive = False
         else:
             sensitive = True
-            if row.get_default():
+            if row.model.default or not row.model.path:
                 default_sensitive = False
             else:
                 default_sensitive = True
-            self.external_button.handler_block(self.external_button_handle_id)
-            self.external_button.set_active(row.external)
-            self.external_button.handler_unblock(self.external_button_handle_id)
+            
+            self.external_storage_toggle_button.handler_block(self.external_button_handle_id)
+            self.external_storage_toggle_button.set_active(row.model.external)
+            self.external_storage_toggle_button.handler_unblock(self.external_button_handle_id)
 
         self.remove_storage_button.set_sensitive(default_sensitive)
-        self.external_button.set_sensitive(sensitive)
+        self.external_storage_toggle_button.set_sensitive(sensitive)
         self.default_storage_button.set_sensitive(default_sensitive)
 
-        for child in self.storage_list_box.get_children():
-            if row and child.db_id == row.db_id:
-                child.set_selected(True)
-            else:
-                child.set_selected(False)
-
-    def _on_external_clicked(self, widget):
-        external = self.external_button.get_active()
-
+    def _on_external_clicked(self, _):
+        external = self.external_storage_toggle_button.get_active()
         row = self.storage_list_box.get_selected_row()
-        row.set_external(external)
+        self._view_model.set_storage_external(row.model, external)        
 
-        if external:
-            self.emit_event("external-storage-added", row.path)
-        else:
-            self.emit_event("external-storage-removed", row.path)
+    def _on_storage_location_changed(self, widget, new_location):
+        self._view_model.change_storage_location(widget.model, new_location)
+
+    def _refresh_storage_rows(self):
+        for row in self.storage_list_box.get_children():
+            row.refresh()

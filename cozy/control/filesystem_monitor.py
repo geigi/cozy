@@ -38,9 +38,9 @@ class FilesystemMonitor(EventSender):
 
         self.init_offline_mode()
 
-        from cozy.ui.settings import Settings as UISettings
-        self._ui_settings = inject.instance(UISettings)
-        self._ui_settings.add_listener(self.__on_settings_changed)
+        from cozy.view_model.settings_view_model import SettingsViewModel
+        self._settings_view_model = inject.instance(SettingsViewModel)
+        self._settings_view_model.add_listener(self.__on_settings_changed)
 
     def init_offline_mode(self):
         external_storage = []
@@ -155,4 +155,4 @@ class FilesystemMonitor(EventSender):
                 event == "storage-added" and message != ""):
             self.init_offline_mode()
         elif event == "storage-removed" or event == "external-storage-removed":
-            self.external_storage = [item for item in self.external_storage if item.storage.path not in message]
+            self.external_storage = [item for item in self.external_storage if item.storage.path not in message.path]

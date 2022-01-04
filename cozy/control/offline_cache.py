@@ -17,6 +17,7 @@ from cozy.ext import inject
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.report import reporter
+from cozy.view_model.settings_view_model import SettingsViewModel
 
 log = logging.getLogger("offline_cache")
 
@@ -53,7 +54,7 @@ class OfflineCache(EventSender):
 
         self._start_processing()
 
-        inject.instance(cozy.ui.settings.Settings).add_listener(self.__on_settings_changed)
+        inject.instance(SettingsViewModel).add_listener(self.__on_settings_changed)
 
     def add(self, book: Book):
         """
@@ -103,11 +104,9 @@ class OfflineCache(EventSender):
 
         self._start_processing()
 
-    def remove_all_for_storage(self, storage_path):
-        """
-        """
+    def remove_all_for_storage(self, storage):
         for element in OfflineCacheModel.select().join(File).where(
-                storage_path in OfflineCacheModel.original_file.path):
+                storage.path in OfflineCacheModel.original_file.path):
             file_path = os.path.join(self.cache_dir, element.cached_file)
             if file_path == self.cache_dir:
                 continue
@@ -119,7 +118,7 @@ class OfflineCache(EventSender):
             if element.track.book.offline == True:
                 element.track.book.update(offline=False, downloaded=False).execute()
 
-        OfflineCacheModel.delete().where(storage_path in OfflineCacheModel.original_file.path).execute()
+        OfflineCacheModel.delete().where(storage.path in OfflineCacheModel.original_file.path).execute()
 
     def get_cached_path(self, chapter: Chapter):
         query = OfflineCacheModel.select().where(OfflineCacheModel.original_file == chapter.file_id,
@@ -284,8 +283,5 @@ class OfflineCache(EventSender):
         self.emit_event_main_thread("progress", min(progress, 1))
 
     def __on_settings_changed(self, event, message):
-        """
-        This method reacts to storage settings changes.
-        """
         if event == "storage-removed" or event == "external-storage-removed":
             self.remove_all_for_storage(message)

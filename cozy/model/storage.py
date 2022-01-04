@@ -17,10 +17,9 @@ class Storage:
         self._get_db_object()
 
     @staticmethod
-    def new():
+    def new(db: SqliteDatabase):
         db_obj = StorageModel.create(path="")
-        return Storage(db_obj.id)
-
+        return Storage(db, db_obj.id)
 
     def _get_db_object(self):
         self._db_object: StorageModel = StorageModel.get(self.id)
@@ -67,3 +66,6 @@ class Storage:
     def external(self, new_external: bool):
         self._db_object.external = new_external
         self._db_object.save(only=self._db_object.dirty_fields)
+
+    def delete(self):
+        self._db_object.delete_instance(recursive=True, delete_nullable=False)
