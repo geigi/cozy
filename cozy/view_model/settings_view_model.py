@@ -6,6 +6,7 @@ from peewee import SqliteDatabase
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
+from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.model.library import Library
 from cozy.model.storage import Storage
 from cozy.ext import inject
@@ -24,10 +25,13 @@ class SettingsViewModel(Observable, EventSender):
     _model: Settings = inject.attr(Settings)
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
     _db = inject.attr(SqliteDatabase)
+    _fs_monitor = inject.attr(FilesystemMonitor)
 
     def __init__(self):
         super().__init__()
         super(Observable, self).__init__()
+
+        self._lock_ui: bool = False
 
         self._gtk_settings = Gtk.Settings.get_default()
 
@@ -39,6 +43,15 @@ class SettingsViewModel(Observable, EventSender):
     @property
     def storage_locations(self) -> List[Storage]:
         return self._model.storage_locations
+    
+    @property
+    def lock_ui(self) -> bool:
+        return self._lock_ui
+    
+    @lock_ui.setter
+    def lock_ui(self, new_value: bool):
+        self._lock_ui = new_value
+        self._notify("lock_ui")
 
     def add_storage_location(self):
         Storage.new(self._db)
@@ -80,6 +93,7 @@ class SettingsViewModel(Observable, EventSender):
     def change_storage_location(self, model: Storage, new_path: str):
         old_path = model.path
         model.path = new_path
+        model.external = self._fs_monitor.is_external(new_path)
 
         if old_path == "":
             self.emit_event("storage-added", model)
@@ -91,6 +105,18 @@ class SettingsViewModel(Observable, EventSender):
             log.info("Audio book location changed, rebasing the location in Cozy.")
             thread = Thread(target=self._library.rebase_path, args=(old_path, new_path), name="RebaseStorageLocationThread")
             thread.start()
+        
+        self._notify("storage_attributes")
+
+    def add_first_storage_location(self, path: str):
+        storage = self._model.storage_locations[0]
+
+        storage.path = path
+        storage.default = True
+        storage.external = self._fs_monitor.is_external(path)
+
+        self._model.invalidate()
+        self._notify("storage_locations")
 
     def _set_dark_mode(self):
         prefer_dark_mode = self._app_settings.dark_mode

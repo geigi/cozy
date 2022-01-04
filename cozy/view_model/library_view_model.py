@@ -249,6 +249,8 @@ class LibraryViewModel(Observable, EventSender):
         self._notify("readers")
         self._notify("books")
         self._notify("books-filter")
+        self._notify("current_book_in_playback")
+        self._notify("playing")
 
     def _on_model_event(self, event: str, message):
         if event == "rebase-finished":

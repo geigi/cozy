@@ -17,10 +17,10 @@ from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
+from cozy.view_model.settings_view_model import SettingsViewModel
 from cozy.open_view import OpenView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_view import PreferencesView
-from cozy.ui.settings import Settings
 
 log = logging.getLogger("ui")
 
@@ -33,12 +33,12 @@ class CozyUI(EventSender, metaclass=Singleton):
     is_initialized = False
     __inhibit_cookie = None
     fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
-    settings = inject.attr(Settings)
     application_settings = inject.attr(ApplicationSettings)
     _importer: Importer = inject.attr(Importer)
     _settings: SettingsModel = inject.attr(SettingsModel)
     _files: Files = inject.attr(Files)
     _player: Player = inject.attr(Player)
+    _settings_view_model: SettingsViewModel = inject.attr(SettingsViewModel)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -266,7 +266,6 @@ class CozyUI(EventSender, metaclass=Singleton):
             if scan:
                 self.scan_action.set_enabled(sensitive)
                 self.hide_offline_action.set_enabled(sensitive)
-                self.settings.block_ui_elements(block)
         except:
             pass
 
@@ -347,13 +346,9 @@ class CozyUI(EventSender, metaclass=Singleton):
             thread.start()
 
     def _set_audiobook_path(self, path):
-        external = self.fs_monitor.is_external(path)
-        Storage.delete().where(Storage.path != "").execute()
-        Storage.create(path=path, default=True, external=external)
-        self._settings.invalidate()
+        self._settings_view_model.add_first_storage_location(path)
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, None)
-        self.settings._init_storage()
         self.fs_monitor.init_offline_mode()
 
     def __about_close_clicked(self, widget):

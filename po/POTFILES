@@ -9,8 +9,8 @@ cozy/ui/book_detail_view.py
 cozy/ui/chapter_element.py
 cozy/ui/disk_element.py
 cozy/ui/file_not_found_dialog.py
+cozy/ui/preferences_view.py
 cozy/ui/main_view.py
-cozy/ui/settings.py
 cozy/ui/warnings.py
 cozy/ui/widgets/book_element.py
 cozy/ui/widgets/error_reporting.py
@@ -36,10 +36,10 @@ data/ui/media_controller.ui
 data/ui/media_controller_big.ui
 data/ui/media_controller_small.ui
 data/ui/playback_speed_popover.ui
+data/ui/preferences.ui
 data/ui/progress_popover.ui
 data/ui/search_popover.ui
 data/ui/seek_bar.ui
-data/ui/settings.ui
 data/ui/timer_popover.ui
 data/ui/titlebar_menu.ui
 data/ui/warning_popover.ui

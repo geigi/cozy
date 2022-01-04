@@ -17,7 +17,6 @@ from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.model.book import Book
 from cozy.model.library import Library
 from cozy.model.settings import Settings
-from cozy.model.storage_block_list import StorageBlockList
 from cozy.open_view import OpenView
 from cozy.ui.app_view import AppView
 from cozy.ui.book_detail_view import BookDetailView
@@ -37,7 +36,6 @@ from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.search_view_model import SearchViewModel
 from cozy.view_model.settings_view_model import SettingsViewModel
-from cozy.ui.settings import Settings as UISettings
 from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel
 
 
@@ -67,6 +65,7 @@ class AppController(metaclass=Singleton):
         self.playback_control_view_model = inject.instance(PlaybackControlViewModel)
         self.sleep_timer_view_model = inject.instance(SleepTimerViewModel)
         self.headerbar_view_model = inject.instance(HeaderbarViewModel)
+        self.settings_view_model = inject.instance(SettingsViewModel)
         self.player = inject.instance(Player)
 
         self._connect_popovers()
@@ -98,8 +97,6 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(DatabaseImporter, lambda: DatabaseImporter())
         binder.bind_to_constructor(LibraryViewModel, lambda: LibraryViewModel())
         binder.bind_to_constructor(SearchViewModel, lambda: SearchViewModel())
-        binder.bind_to_constructor(UISettings, lambda: UISettings())
-        binder.bind_to_constructor(StorageBlockList, lambda: StorageBlockList())
         binder.bind_to_constructor(Files, lambda: Files())
         binder.bind_to_constructor(BookDetailViewModel, lambda: BookDetailViewModel())
         binder.bind_to_constructor(PlaybackControlViewModel, lambda: PlaybackControlViewModel())
@@ -157,6 +154,7 @@ class AppController(metaclass=Singleton):
     def _on_main_window_event(self, event: str, data):
         if event == "working":
             self.book_detail_view_model.lock_ui = data
+            self.settings_view_model.lock_ui = data
         if event == "open_view":
             self._on_open_view(data, None)
 
