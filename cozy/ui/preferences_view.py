@@ -114,18 +114,22 @@ class PreferencesView(Handy.PreferencesWindow):
         if row is None:
             sensitive = False
             default_sensitive = False
+            remove_sensitive = False
         else:
             sensitive = True
             if row.model.default or not row.model.path:
-                default_sensitive = False
+                default_sensitive = remove_sensitive = False
             else:
                 default_sensitive = True
+
+            if not row.model.path:
+                remove_sensitive = True
             
             self.external_storage_toggle_button.handler_block(self.external_button_handle_id)
             self.external_storage_toggle_button.set_active(row.model.external)
             self.external_storage_toggle_button.handler_unblock(self.external_button_handle_id)
 
-        self.remove_storage_button.set_sensitive(default_sensitive)
+        self.remove_storage_button.set_sensitive(remove_sensitive)
         self.external_storage_toggle_button.set_sensitive(sensitive)
         self.default_storage_button.set_sensitive(default_sensitive)
 
