@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2021
-# Heimen Stoffels <vistausss@fastmail.com>, 2021
+# Heimen Stoffels <vistausss@fastmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-23 09:57+0100\n"
+"POT-Creation-Date: 2022-01-04 16:30+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>, 2021\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>, 2022\n"
 "Language-Team: Dutch (https://www.transifex.com/geigi/teams/78138/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Audiobooks"
 msgstr "Luisterboeken"
 
-#: cozy/control/offline_cache.py:201
+#: cozy/control/offline_cache.py:200
 msgid "Copying"
 msgstr "Bezig met kopiëren…"
 
@@ -133,13 +133,9 @@ msgstr "Schijf"
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: cozy/ui/main_view.py:299 data/ui/main_window.ui:412
+#: cozy/ui/main_view.py:301 data/ui/main_window.ui:412
 msgid "Set Audiobooks Directory"
 msgstr "Luisterboekmap instellen"
-
-#: cozy/ui/settings.py:103
-msgid "Feedback"
-msgstr "Feedback"
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
@@ -208,8 +204,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "De soorten bestanden die Cozy niet kon importeren"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:53
-#: cozy/view_model/library_view_model.py:159
+#: cozy/view_model/library_view_model.py:54
+#: cozy/view_model/library_view_model.py:160
 msgid "All"
 msgstr "Alles"
 
@@ -237,13 +233,11 @@ msgstr "min."
 msgid "Off"
 msgstr "Uit"
 
-#: cozy/ui/widgets/storage_list_box_row.py:100
-#: cozy/ui/widgets/storage_list_box_row.py:145
+#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:377
 msgid "External drive"
 msgstr "Externe schijf"
 
-#: cozy/ui/widgets/storage_list_box_row.py:103
-#: cozy/ui/widgets/storage_list_box_row.py:148
+#: cozy/ui/widgets/storage_list_box_row.py:73
 msgid "Internal drive"
 msgstr "Interne schijf"
 
@@ -341,7 +335,7 @@ msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr ""
 "Het luisterboek wordt zowel uit je bibliotheek als van je schijf verwijderd."
 
-#: data/ui/error_reporting.ui:29
+#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:455
 msgid "User feedback"
 msgstr "Gebruikersfeedback"
 
@@ -606,7 +600,6 @@ msgid "Playback speed"
 msgstr "Voorleessnelheid"
 
 #: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
-#: data/ui/settings.ui:956
 msgid "Sleep timer"
 msgstr "Tijdklok"
 
@@ -621,6 +614,78 @@ msgstr "Open het tijdklokpaneel"
 #: data/ui/media_controller_big.ui:53
 msgid "Open book"
 msgstr "Boek openen"
+
+#: data/ui/preferences.ui:55
+msgid "General"
+msgstr "Algemeen"
+
+#: data/ui/preferences.ui:60
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+#: data/ui/preferences.ui:83
+msgid "Tags"
+msgstr "Labels"
+
+#: data/ui/preferences.ui:90
+msgid "Activate if author and reader are displayed the wrong way"
+msgstr "Schakel in als de auteur en voorlezer in de verkeerde volgorde staan"
+
+#: data/ui/preferences.ui:107
+msgid "Playback"
+msgstr "Beluisteren"
+
+#: data/ui/preferences.ui:114
+msgid "Rewind 30 seconds of the current book when starting Cozy"
+msgstr "Spoel 30 seconden terug na het starten van Cozy"
+
+#: data/ui/preferences.ui:172
+msgid "Sleep Timer"
+msgstr "Tijdklok"
+
+#: data/ui/preferences.ui:218
+msgid "Storage"
+msgstr "Opslag"
+
+#: data/ui/preferences.ui:223
+msgid "Artwork"
+msgstr "Omslag"
+
+#: data/ui/preferences.ui:230
+msgid "Always use images (cover.jpg, *.png, …) when available"
+msgstr "Gebruik afbeeldingen (cover.jpg, *.png, …) indien beschikbaar"
+
+#: data/ui/preferences.ui:247
+msgid "Storage locations"
+msgstr "Opslaglocaties"
+
+#: data/ui/preferences.ui:309
+msgid "Add location"
+msgstr "Locatie toevoegen"
+
+#: data/ui/preferences.ui:335
+msgid "Remove location"
+msgstr "Locatie verwijderen"
+
+#: data/ui/preferences.ui:373
+msgid "Toggle this storage location to be internal/external."
+msgstr "Opslaglocatie instellen als intern of extern"
+
+#: data/ui/preferences.ui:402
+msgid "Set as default storage location for new audiobooks"
+msgstr "Instellen als standaard opslaglocatie voor nieuwe luisterboeken"
+
+#: data/ui/preferences.ui:406
+msgid "Set as default"
+msgstr "Instellen als standaard"
+
+#: data/ui/preferences.ui:450
+msgid "Feedback"
+msgstr "Feedback"
+
+#: data/ui/preferences.ui:460
+msgid "User Feedback"
+msgstr "Gebruikersfeedback"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -649,151 +714,6 @@ msgstr "Deel"
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
 msgstr "Niks gevonden :("
-
-#: data/ui/settings.ui:111 data/ui/settings.ui:382
-msgid "General"
-msgstr "Algemeen"
-
-#: data/ui/settings.ui:156
-msgid "Dark Mode"
-msgstr "Donker thema gebruiken"
-
-#: data/ui/settings.ui:232
-msgid "Titlebar"
-msgstr "Titelbalk"
-
-#: data/ui/settings.ui:277
-msgid "Display the whole book instead of the current chapter"
-msgstr "Gehele boek tonen in plaats van huidige hoofdstuk"
-
-#: data/ui/settings.ui:340
-msgid "Appearance"
-msgstr "Uiterlijk"
-
-#: data/ui/settings.ui:425
-msgid "Suspend system on timer"
-msgstr "Systeem in pauzestand zetten na verstrijken van tijdklok"
-
-#: data/ui/settings.ui:485
-msgid "Replay 30 seconds"
-msgstr "30 seconden herhalen"
-
-#: data/ui/settings.ui:545
-msgid "Automatic media scan"
-msgstr "Automatisch zoeken naar media"
-
-#: data/ui/settings.ui:604
-msgid "Tags"
-msgstr "Labels"
-
-#: data/ui/settings.ui:656
-msgid "Swap author and reader"
-msgstr "Auteur en voorlezer omwisselen"
-
-#: data/ui/settings.ui:669
-msgid "Activate this if author and reader are displayed the wrong way"
-msgstr "Schakel in als de auteur en voorlezer in de verkeerde volgorde staan"
-
-#: data/ui/settings.ui:694
-msgid "switch author and reader assignment"
-msgstr "auteur- en voorlezertoewijzing omwisselen"
-
-#: data/ui/settings.ui:743
-msgid "Playback"
-msgstr "Beluisteren"
-
-#: data/ui/settings.ui:789
-msgid "Rewind duration"
-msgstr "Terugspoelduur"
-
-#: data/ui/settings.ui:874
-msgid "Forward duration"
-msgstr "Vooruitspoelduur"
-
-#: data/ui/settings.ui:1001
-msgid "Fadeout"
-msgstr "Vervagen"
-
-#: data/ui/settings.ui:1063
-msgid "Fadeout duration"
-msgstr "Vervaagduur"
-
-#: data/ui/settings.ui:1144
-msgid "Behaviour"
-msgstr "Gedrag"
-
-#: data/ui/settings.ui:1171
-msgid "Artwork"
-msgstr "Omslag"
-
-#: data/ui/settings.ui:1223
-msgid "Prefer external images over embedded cover"
-msgstr "Externe afbeeldingen gebruiken in plaats van boekomslag"
-
-#: data/ui/settings.ui:1236
-msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr "Gebruik afbeeldingen (cover.jpg, *.png, …) indien beschikbaar"
-
-#: data/ui/settings.ui:1319
-msgid "Audio books location"
-msgstr "Luisterboeklocatie"
-
-#: data/ui/settings.ui:1335
-msgid "Storage locations"
-msgstr "Opslaglocaties"
-
-#: data/ui/settings.ui:1393
-msgid "Add location"
-msgstr "Locatie toevoegen"
-
-#: data/ui/settings.ui:1418 data/ui/settings.ui:1613
-msgid "Remove location"
-msgstr "Locatie verwijderen"
-
-#: data/ui/settings.ui:1454
-msgid "Toggle this storage location to be internal/external."
-msgstr "Opslaglocatie instellen als intern of extern"
-
-#: data/ui/settings.ui:1480
-msgid "Set as default storage location for new audiobooks"
-msgstr "Instellen als standaard opslaglocatie voor nieuwe luisterboeken"
-
-#: data/ui/settings.ui:1532
-msgid "Ignore list"
-msgstr "Negeerlijst"
-
-#: data/ui/settings.ui:1576
-msgid "Path"
-msgstr "Pad"
-
-#: data/ui/settings.ui:1659
-msgid "Follow symlinks"
-msgstr "Snelkoppelingen volgen"
-
-#: data/ui/settings.ui:1691
-msgid "Storage"
-msgstr "Opslag"
-
-#: data/ui/settings.ui:1715
-msgid "Database"
-msgstr "Databank"
-
-#: data/ui/settings.ui:1767
-msgid "Force refresh the database"
-msgstr "Databank geforceerd vernieuwen"
-
-#: data/ui/settings.ui:1780
-msgid "This will force update the metadata of all imported books"
-msgstr ""
-"Hiermee werk je de metagegevens van alle geïmporteerde boeken gedwongen bij."
-
-#: data/ui/settings.ui:1800
-msgid "Force refresh"
-msgstr "Geforceerd vernieuwen"
-
-#: data/ui/settings.ui:1856
-msgid "Advanced"
-msgstr "Geavanceerd"
 
 #: data/ui/timer_popover.ui:37
 msgid "Timer duration"
