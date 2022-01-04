@@ -46,6 +46,8 @@ class PreferencesView(Handy.PreferencesWindow):
         self._bind_settings()
         self._bind_view_model()
 
+        self.connect("delete-event", self._hide_window)
+
         self.sleep_timer_fadeout_switch.connect("state-set", self._on_sleep_fadeout_switch_changed)
         self._on_sleep_fadeout_switch_changed(None, self.sleep_timer_fadeout_switch.get_active())
 
@@ -138,3 +140,19 @@ class PreferencesView(Handy.PreferencesWindow):
     def _refresh_storage_rows(self):
         for row in self.storage_list_box.get_children():
             row.refresh()
+        
+        self._on_storage_box_changed(None, self.storage_list_box.get_selected_row())
+    
+    def _on_lock_ui_changed(self):
+        sensitive = not self._view_model.lock_ui
+
+        self.storage_list_box.set_sensitive(sensitive)
+        self.add_storage_button.set_sensitive(sensitive)
+        self.remove_storage_button.set_sensitive(sensitive)
+        self.external_storage_toggle_button.set_sensitive(sensitive)
+        self.default_storage_button.set_sensitive(sensitive)
+        self._on_storage_box_changed(None, self.storage_list_box.get_selected_row())
+    
+    def _hide_window(self, _, __):
+        self.hide()
+        return True
