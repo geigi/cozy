@@ -224,6 +224,9 @@ class LibraryViewModel(Observable, EventSender):
                 self._notify("books-filter")
         elif event == "pause":
             self._notify("playing")
+        elif event == "chapter-changed":
+            self._notify("current_book_in_playback")
+            self._notify("playing")
         elif event == "stop":
             self._notify("playing")
             self._notify("current_book_in_playback")
