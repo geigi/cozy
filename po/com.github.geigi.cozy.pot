@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 18:22+0200\n"
+"POT-Creation-Date: 2021-12-23 09:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -129,7 +129,7 @@ msgstr ""
 msgid "All files"
 msgstr ""
 
-#: cozy/ui/main_view.py:298 data/ui/main_window.ui:412
+#: cozy/ui/main_view.py:299 data/ui/main_window.ui:412
 msgid "Set Audiobooks Directory"
 msgstr ""
 
@@ -243,7 +243,7 @@ msgid "Internal drive"
 msgstr ""
 
 #: cozy/view_model/headerbar_view_model.py:91
-msgid "Importing Audiobooks"
+msgid "Refreshing audio book collection"
 msgstr ""
 
 #: cozy/view_model/headerbar_view_model.py:100
@@ -474,47 +474,47 @@ msgid "Select"
 msgstr ""
 
 #: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
-#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:71
+#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:70
 msgid "Rewind"
 msgstr ""
 
 #: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
-#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:78
+#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:77
 msgid "Rewind button"
 msgstr ""
 
 #: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
-#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:79
+#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:78
 msgid "Rewind playback"
 msgstr ""
 
 #: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
-#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:101
+#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:100
 msgid "Start playback"
 msgstr ""
 
 #: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
-#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:108
+#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:107
 msgid "Play/Pause Button"
 msgstr ""
 
 #: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
-#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:109
+#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:108
 msgid "Start or pause the playback"
 msgstr ""
 
 #: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
-#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:132
+#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:131
 msgid "Forward"
 msgstr ""
 
 #: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
-#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:139
+#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:138
 msgid "Forward button"
 msgstr ""
 
 #: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
-#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:140
+#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:139
 msgid "Forward Playback"
 msgstr ""
 
@@ -579,7 +579,7 @@ msgid "Volume control"
 msgstr ""
 
 #: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
-#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:176
+#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:175
 msgid "Playback speed"
 msgstr ""
 

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 18:22+0200\n"
+"POT-Creation-Date: 2021-12-23 09:57+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>, 2021\n"
 "Language-Team: Italian (https://www.transifex.com/geigi/teams/78138/it/)\n"
@@ -133,7 +133,7 @@ msgstr "DIsc"
 msgid "All files"
 msgstr "Tutti i file"
 
-#: cozy/ui/main_view.py:298 data/ui/main_window.ui:412
+#: cozy/ui/main_view.py:299 data/ui/main_window.ui:412
 msgid "Set Audiobooks Directory"
 msgstr "Imposta la cartella degli audiolibri"
 
@@ -247,8 +247,8 @@ msgid "Internal drive"
 msgstr "Disco interno"
 
 #: cozy/view_model/headerbar_view_model.py:91
-msgid "Importing Audiobooks"
-msgstr "Importando audiolibri"
+msgid "Refreshing audio book collection"
+msgstr "Aggiorna raccolta di audiolibri "
 
 #: cozy/view_model/headerbar_view_model.py:100
 #: cozy/view_model/headerbar_view_model.py:116
@@ -498,47 +498,47 @@ msgid "Select"
 msgstr "Seleziona"
 
 #: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
-#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:71
+#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:70
 msgid "Rewind"
 msgstr "Riavvolgi"
 
 #: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
-#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:78
+#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:77
 msgid "Rewind button"
 msgstr "Pulsante Riavvolgi"
 
 #: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
-#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:79
+#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:78
 msgid "Rewind playback"
 msgstr "Riavvolgi la riproduzione"
 
 #: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
-#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:101
+#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:100
 msgid "Start playback"
 msgstr "Inizia a riprodurre"
 
 #: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
-#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:108
+#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:107
 msgid "Play/Pause Button"
 msgstr "Pulsante Play/Pausa"
 
 #: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
-#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:109
+#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:108
 msgid "Start or pause the playback"
 msgstr "Inizia o metti in pausa la riproduzione"
 
 #: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
-#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:132
+#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:131
 msgid "Forward"
 msgstr "Avanti"
 
 #: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
-#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:139
+#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:138
 msgid "Forward button"
 msgstr "Pulsante Avanti"
 
 #: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
-#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:140
+#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:139
 msgid "Forward Playback"
 msgstr "Riproduzione in Avanti"
 
@@ -603,7 +603,7 @@ msgid "Volume control"
 msgstr "Controlla il volume"
 
 #: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
-#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:176
+#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:175
 msgid "Playback speed"
 msgstr "Velocità di riproduzione"
 

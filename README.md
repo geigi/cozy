@@ -38,6 +38,8 @@ Head over to [Matrix](https://matrix.to/#/#cozy:gnome.org?via=matrix.org&via=gno
 | MX Linux | <center><a href="https://forum.mxlinux.org/viewtopic.php?p=621071#p621071">Cozy</a> |
 | elementaryOS | Currently out of date. Please use Flatpak for now. |
 | Ubuntu (PPA) | <center><a href="https://launchpad.net/~cozy-team/+archive/ubuntu/cozy">cozy</a> |
+| OpenBSD | <center><a href="https://cvsweb.openbsd.org/ports/audio/cozy/">cozy</a> |
+| Nix | <center><a href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/audio/cozy/default.nix">cozy</a> |
 
 
 ## elementaryOS
@@ -152,6 +154,7 @@ To the contributors on GitHub:
 - grenade
 - jimmac
 - jnbr
+- jubalh
 - kaphula
 - leuc
 - magnickolas
@@ -160,6 +163,7 @@ To the contributors on GitHub:
 - oleg-krv
 - paper42
 - phpwutz
+- rapenne-s
 - thibaultamartin
 - umeboshi2
 - worldofpeace

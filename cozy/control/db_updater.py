@@ -147,7 +147,7 @@ def _update_db_9(db):
                 log.info("TrackToFile already existing in db: {}".format(path))
                 continue
 
-            track_to_file = TrackToFile(track=track, file=file, start_at=0)
+            track_to_file = TrackToFile(track=track.id, file=file, start_at=0)
             track_to_files.append(track_to_file)
 
         log.info("Inserting File and TrackToFile objects...")
