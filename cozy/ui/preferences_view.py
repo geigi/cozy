@@ -117,6 +117,7 @@ class PreferencesView(Handy.PreferencesWindow):
             remove_sensitive = False
         else:
             sensitive = True
+            remove_sensitive = True
             if row.model.default or not row.model.path:
                 default_sensitive = remove_sensitive = False
             else:
