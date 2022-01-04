@@ -181,9 +181,12 @@ The translators:
 - Floflr
 - Foxyriot
 - HansCz
+- IngrownMink4
 - IvoIliev
 - Jagadeeshvarma
+- Kwentin
 - MageJohn
+- NHiX
 - Nimmerliefde
 - Oi_Suomi_On
 - Okton
@@ -199,7 +202,6 @@ The translators:
 - aKodi
 - abcmen
 - abuyop
-- akodi
 - albanobattistella
 - amadeussss
 - andreapillai
@@ -209,9 +211,10 @@ The translators:
 - baschdl78
 - camellan
 - cavinsmith
+- cho2
 - chris109b
 - cjfloss
-- cleitonjfloss
+- ckaotik
 - corentinbettiol
 - dtgoitia
 - dzerus3
@@ -220,6 +223,7 @@ The translators:
 - eson
 - fishcake13
 - fountain
+- fran.dieguez
 - georgelemental
 - giuscasula
 - goran.p1123581321
@@ -234,8 +238,10 @@ The translators:
 - libreajans
 - linuxmasterclub
 - magnickolas
+- makaleks
 - mannycalavera42
 - mardojai
+- markluethje
 - milotype
 - mvainola
 - n1k7as
@@ -245,6 +251,8 @@ The translators:
 - oleg_krv
 - ooverloord
 - oscfdezdz
+- pavelz
+- rafaelff1
 - ragouel
 - saarikko
 - sobeitnow0
@@ -253,9 +261,11 @@ The translators:
 - tclokie
 - test21
 - thibaultmartin
+- translatornator
 - tsitokhtsev
 - twardowskidev
 - txelu
+- useruseruser1233211
 - vanhoxx
 - vlabo
 - xfgusta
