@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-04 14:35+0100\n"
+"POT-Creation-Date: 2022-01-04 16:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -614,11 +614,7 @@ msgid "Playback"
 msgstr ""
 
 #: data/ui/preferences.ui:114
-msgid "Replay 30 seconds of the current book when starting Cozy"
-msgstr ""
-
-#: data/ui/preferences.ui:156 data/ui/preferences.ui:200
-msgid "15"
+msgid "Rewind 30 seconds of the current book when starting Cozy"
 msgstr ""
 
 #: data/ui/preferences.ui:172
@@ -663,6 +659,10 @@ msgstr ""
 
 #: data/ui/preferences.ui:450
 msgid "Feedback"
+msgstr ""
+
+#: data/ui/preferences.ui:460
+msgid "User Feedback"
 msgstr ""
 
 #: data/ui/search_popover.ui:24
