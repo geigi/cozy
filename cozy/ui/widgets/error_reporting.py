@@ -38,6 +38,7 @@ class ErrorReporting(Gtk.Box):
     level_label: Gtk.Label = Gtk.Template.Child()
     description_label: Gtk.Label = Gtk.Template.Child()
     details_label: Gtk.Label = Gtk.Template.Child()
+    header_box: Gtk.Box = Gtk.Template.Child()
 
     verbose_adjustment: Gtk.Adjustment = Gtk.Template.Child()
     verbose_scale: Gtk.Scale = Gtk.Template.Child()
@@ -53,6 +54,8 @@ class ErrorReporting(Gtk.Box):
 
         self.app_settings.add_listener(self._on_app_setting_changed)
 
+    def show_header(self, show: bool):
+        self.header_box.set_visible(show)
 
     def _load_report_level(self):
         level = self.app_settings.report_level

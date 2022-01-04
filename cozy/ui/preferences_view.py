@@ -28,20 +28,20 @@ class PreferencesView(Handy.PreferencesWindow):
     forward_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
     fadeout_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
 
-    storage_locations_preference_group: Handy.PreferencesGroup = Gtk.Template.Child()
     storage_list_box: Gtk.ListBox = Gtk.Template.Child()
     add_storage_button: Gtk.Button = Gtk.Template.Child()
     remove_storage_button: Gtk.Button = Gtk.Template.Child()
     external_storage_toggle_button: Gtk.ToggleButton = Gtk.Template.Child()
     default_storage_button: Gtk.ToggleButton = Gtk.Template.Child()
 
-    user_feedback_preference_group: Handy.PreferencesGroup = Gtk.Template.Child()
+    user_feedback_preference_row: Handy.PreferencesRow = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         error_reporting = ErrorReporting()
-        self.user_feedback_preference_group.add(error_reporting)
+        error_reporting.show_header(False)
+        self.user_feedback_preference_row.add(error_reporting)
 
         self._bind_settings()
         self._bind_view_model()
