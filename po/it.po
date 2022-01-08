@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2021
-# albanobattistella <albano_battistella@hotmail.com>, 2021
+# albanobattistella <albano_battistella@hotmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-23 09:57+0100\n"
+"POT-Creation-Date: 2022-01-04 16:30+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>, 2021\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/geigi/teams/78138/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Audiobooks"
 msgstr "Audiolibri"
 
-#: cozy/control/offline_cache.py:201
+#: cozy/control/offline_cache.py:200
 msgid "Copying"
 msgstr "Copia in corso"
 
@@ -133,13 +133,9 @@ msgstr "DIsc"
 msgid "All files"
 msgstr "Tutti i file"
 
-#: cozy/ui/main_view.py:299 data/ui/main_window.ui:412
+#: cozy/ui/main_view.py:301 data/ui/main_window.ui:412
 msgid "Set Audiobooks Directory"
 msgstr "Imposta la cartella degli audiolibri"
-
-#: cozy/ui/settings.py:103
-msgid "Feedback"
-msgstr "Feedback"
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
@@ -207,8 +203,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Tipo di file multimediale che Cozy non ha potuto importare"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:53
-#: cozy/view_model/library_view_model.py:159
+#: cozy/view_model/library_view_model.py:54
+#: cozy/view_model/library_view_model.py:160
 msgid "All"
 msgstr "Tutti"
 
@@ -236,13 +232,11 @@ msgstr "min"
 msgid "Off"
 msgstr "Off"
 
-#: cozy/ui/widgets/storage_list_box_row.py:100
-#: cozy/ui/widgets/storage_list_box_row.py:145
+#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:377
 msgid "External drive"
 msgstr "Disco esterno"
 
-#: cozy/ui/widgets/storage_list_box_row.py:103
-#: cozy/ui/widgets/storage_list_box_row.py:148
+#: cozy/ui/widgets/storage_list_box_row.py:73
 msgid "Internal drive"
 msgstr "Disco interno"
 
@@ -339,7 +333,7 @@ msgstr "Sei sicuro di voler eliminare l'audiolibro selezionato?"
 msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr "L'audiolibro verrà rimosso dal tuo disco e dalla libreria di Cozy."
 
-#: data/ui/error_reporting.ui:29
+#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:455
 msgid "User feedback"
 msgstr "Feedback degli utenti"
 
@@ -608,7 +602,6 @@ msgid "Playback speed"
 msgstr "Velocità di riproduzione"
 
 #: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
-#: data/ui/settings.ui:956
 msgid "Sleep timer"
 msgstr "Timer"
 
@@ -623,6 +616,79 @@ msgstr "Apri la finestra del timer"
 #: data/ui/media_controller_big.ui:53
 msgid "Open book"
 msgstr "Apri libro"
+
+#: data/ui/preferences.ui:55
+msgid "General"
+msgstr "Generali"
+
+#: data/ui/preferences.ui:60
+msgid "Appearance"
+msgstr "Aspetto"
+
+#: data/ui/preferences.ui:83
+msgid "Tags"
+msgstr "tag"
+
+#: data/ui/preferences.ui:90
+msgid "Activate if author and reader are displayed the wrong way"
+msgstr "Attiva se autore e lettore vengono visualizzati nel modo sbagliato"
+
+#: data/ui/preferences.ui:107
+msgid "Playback"
+msgstr "Riproduzione"
+
+#: data/ui/preferences.ui:114
+msgid "Rewind 30 seconds of the current book when starting Cozy"
+msgstr "Riavvolgi 30 secondi del libro corrente all'avvio di Cozy"
+
+#: data/ui/preferences.ui:172
+msgid "Sleep Timer"
+msgstr "Timer di spegnimento"
+
+#: data/ui/preferences.ui:218
+msgid "Storage"
+msgstr "Archiviazione"
+
+#: data/ui/preferences.ui:223
+msgid "Artwork"
+msgstr "Copertina"
+
+#: data/ui/preferences.ui:230
+msgid "Always use images (cover.jpg, *.png, …) when available"
+msgstr "Usa sempre le immagini (cover.jpg, *.png, …) quando disponibili"
+
+#: data/ui/preferences.ui:247
+msgid "Storage locations"
+msgstr "Posizioni di archiviazione"
+
+#: data/ui/preferences.ui:309
+msgid "Add location"
+msgstr "Aggiungi una posizione"
+
+#: data/ui/preferences.ui:335
+msgid "Remove location"
+msgstr "Rimuovi una posizione"
+
+#: data/ui/preferences.ui:373
+msgid "Toggle this storage location to be internal/external."
+msgstr "Cambia questa posizione di archiviazione come interna o esterna"
+
+#: data/ui/preferences.ui:402
+msgid "Set as default storage location for new audiobooks"
+msgstr ""
+"Imposta come posizione di archiviazione predefinita per i nuovi audiolibri"
+
+#: data/ui/preferences.ui:406
+msgid "Set as default"
+msgstr "Imposta come predefinito"
+
+#: data/ui/preferences.ui:450
+msgid "Feedback"
+msgstr "Feedback"
+
+#: data/ui/preferences.ui:460
+msgid "User Feedback"
+msgstr "Feedback dell'utente"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -651,154 +717,6 @@ msgstr "Traccia"
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
 msgstr "Non trovato :("
-
-#: data/ui/settings.ui:111 data/ui/settings.ui:382
-msgid "General"
-msgstr "Generali"
-
-#: data/ui/settings.ui:156
-msgid "Dark Mode"
-msgstr "Modalità scura"
-
-#: data/ui/settings.ui:232
-msgid "Titlebar"
-msgstr "Barra del titolo"
-
-#: data/ui/settings.ui:277
-msgid "Display the whole book instead of the current chapter"
-msgstr "Mostra l'intero libro invece che il capitolo corrente"
-
-#: data/ui/settings.ui:340
-msgid "Appearance"
-msgstr "Aspetto"
-
-#: data/ui/settings.ui:425
-msgid "Suspend system on timer"
-msgstr "Sospendi il sistema con il timer"
-
-#: data/ui/settings.ui:485
-msgid "Replay 30 seconds"
-msgstr "Riproduci 30 secondi"
-
-#: data/ui/settings.ui:545
-msgid "Automatic media scan"
-msgstr "Scansiona automaticamente"
-
-#: data/ui/settings.ui:604
-msgid "Tags"
-msgstr "tag"
-
-#: data/ui/settings.ui:656
-msgid "Swap author and reader"
-msgstr "Cambia autore e lettore"
-
-#: data/ui/settings.ui:669
-msgid "Activate this if author and reader are displayed the wrong way"
-msgstr ""
-"Attivare questa opzione se autore e lettore vengono visualizzati nel modo "
-"sbagliato"
-
-#: data/ui/settings.ui:694
-msgid "switch author and reader assignment"
-msgstr "cambia assegnazione autore e lettore"
-
-#: data/ui/settings.ui:743
-msgid "Playback"
-msgstr "Riproduzione"
-
-#: data/ui/settings.ui:789
-msgid "Rewind duration"
-msgstr "Durata riavvolgimento"
-
-#: data/ui/settings.ui:874
-msgid "Forward duration"
-msgstr "Durata in avanti"
-
-#: data/ui/settings.ui:1001
-msgid "Fadeout"
-msgstr "Dissolvenza"
-
-#: data/ui/settings.ui:1063
-msgid "Fadeout duration"
-msgstr "Durata della dissolvenza"
-
-#: data/ui/settings.ui:1144
-msgid "Behaviour"
-msgstr "Comportamento"
-
-#: data/ui/settings.ui:1171
-msgid "Artwork"
-msgstr "Copertina"
-
-#: data/ui/settings.ui:1223
-msgid "Prefer external images over embedded cover"
-msgstr "Preferisci immagini esterne alla copertina incorporata"
-
-#: data/ui/settings.ui:1236
-msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr "Usa le immagini (cover.jpg, *.png, …) quando disponibili"
-
-#: data/ui/settings.ui:1319
-msgid "Audio books location"
-msgstr "Posizione degli audiolibri"
-
-#: data/ui/settings.ui:1335
-msgid "Storage locations"
-msgstr "Posizioni di archiviazione"
-
-#: data/ui/settings.ui:1393
-msgid "Add location"
-msgstr "Aggiungi una posizione"
-
-#: data/ui/settings.ui:1418 data/ui/settings.ui:1613
-msgid "Remove location"
-msgstr "Rimuovi una posizione"
-
-#: data/ui/settings.ui:1454
-msgid "Toggle this storage location to be internal/external."
-msgstr "Cambia questa posizione di archiviazione come interna o esterna"
-
-#: data/ui/settings.ui:1480
-msgid "Set as default storage location for new audiobooks"
-msgstr ""
-"Imposta come posizione di archiviazione predefinita per i nuovi audiolibri"
-
-#: data/ui/settings.ui:1532
-msgid "Ignore list"
-msgstr "Ignora lista"
-
-#: data/ui/settings.ui:1576
-msgid "Path"
-msgstr "Percorso"
-
-#: data/ui/settings.ui:1659
-msgid "Follow symlinks"
-msgstr "Segui i collegamenti simbolici"
-
-#: data/ui/settings.ui:1691
-msgid "Storage"
-msgstr "Archiviazione"
-
-#: data/ui/settings.ui:1715
-msgid "Database"
-msgstr "Database"
-
-#: data/ui/settings.ui:1767
-msgid "Force refresh the database"
-msgstr "Forza l'aggiornamento del database"
-
-#: data/ui/settings.ui:1780
-msgid "This will force update the metadata of all imported books"
-msgstr ""
-"Questo forzerà l'aggiornamento dei metadati di tutti i libri importati"
-
-#: data/ui/settings.ui:1800
-msgid "Force refresh"
-msgstr "Forza l'aggiornamento"
-
-#: data/ui/settings.ui:1856
-msgid "Advanced"
-msgstr "Avanzate"
 
 #: data/ui/timer_popover.ui:37
 msgid "Timer duration"
