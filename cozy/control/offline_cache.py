@@ -115,9 +115,6 @@ class OfflineCache(EventSender):
             if file.query_exists():
                 file.delete()
 
-            if element.track.book.offline == True:
-                element.track.book.update(offline=False, downloaded=False).execute()
-
         OfflineCacheModel.delete().where(storage.path in OfflineCacheModel.original_file.path).execute()
 
     def get_cached_path(self, chapter: Chapter):
