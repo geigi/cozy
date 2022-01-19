@@ -8,16 +8,16 @@
 # elgosz <elgosh@gmail.com>, 2020
 # Adolfo Jayme-Barrientos, 2020
 # Jose Luis Tirado <joseluis.tirado@gmail.com>, 2021
-# Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2021
+# Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 18:22+0200\n"
+"POT-Creation-Date: 2022-01-04 16:30+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2021\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/geigi/teams/78138/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Audiobooks"
 msgstr "Audiolibros"
 
-#: cozy/control/offline_cache.py:201
+#: cozy/control/offline_cache.py:200
 msgid "Copying"
 msgstr "Copiando"
 
@@ -136,13 +136,9 @@ msgstr "Disco"
 msgid "All files"
 msgstr "Todos los archivos"
 
-#: cozy/ui/main_view.py:298 data/ui/main_window.ui:412
+#: cozy/ui/main_view.py:301 data/ui/main_window.ui:412
 msgid "Set Audiobooks Directory"
 msgstr "Establecer carpeta de audiolibros"
-
-#: cozy/ui/settings.py:103
-msgid "Feedback"
-msgstr "Comentarios"
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
@@ -210,8 +206,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Tipos de archivos de medios que Cozy no pudo importar"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:53
-#: cozy/view_model/library_view_model.py:159
+#: cozy/view_model/library_view_model.py:54
+#: cozy/view_model/library_view_model.py:160
 msgid "All"
 msgstr "Todos"
 
@@ -239,19 +235,17 @@ msgstr "min"
 msgid "Off"
 msgstr "Apagado"
 
-#: cozy/ui/widgets/storage_list_box_row.py:100
-#: cozy/ui/widgets/storage_list_box_row.py:145
+#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:377
 msgid "External drive"
 msgstr "Disco externo"
 
-#: cozy/ui/widgets/storage_list_box_row.py:103
-#: cozy/ui/widgets/storage_list_box_row.py:148
+#: cozy/ui/widgets/storage_list_box_row.py:73
 msgid "Internal drive"
 msgstr "Disco interno"
 
 #: cozy/view_model/headerbar_view_model.py:91
-msgid "Importing Audiobooks"
-msgstr "Importando audiolibros"
+msgid "Refreshing audio book collection"
+msgstr "Refrescando la colección de audiolibros"
 
 #: cozy/view_model/headerbar_view_model.py:100
 #: cozy/view_model/headerbar_view_model.py:116
@@ -342,7 +336,7 @@ msgstr "¿Estás seguro de que quieres eliminar el audiolibro seleccionado?"
 msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr "El audiolibro será eliminado de tu disco y de la biblioteca de Cozy."
 
-#: data/ui/error_reporting.ui:29
+#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:455
 msgid "User feedback"
 msgstr "Comentarios de usuario"
 
@@ -498,47 +492,47 @@ msgid "Select"
 msgstr "Seleccionar"
 
 #: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
-#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:71
+#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:70
 msgid "Rewind"
 msgstr "Retroceder"
 
 #: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
-#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:78
+#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:77
 msgid "Rewind button"
 msgstr "Retroceder"
 
 #: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
-#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:79
+#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:78
 msgid "Rewind playback"
 msgstr "Retroceder la reproducción"
 
 #: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
-#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:101
+#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:100
 msgid "Start playback"
 msgstr "Reproducir"
 
 #: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
-#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:108
+#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:107
 msgid "Play/Pause Button"
 msgstr "Botón de reproducción/pausa"
 
 #: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
-#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:109
+#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:108
 msgid "Start or pause the playback"
 msgstr "Iniciar o pausar la reproducción"
 
 #: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
-#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:132
+#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:131
 msgid "Forward"
 msgstr "Avanzar"
 
 #: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
-#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:139
+#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:138
 msgid "Forward button"
 msgstr "Botón de avance"
 
 #: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
-#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:140
+#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:139
 msgid "Forward Playback"
 msgstr "Botón de retroceso"
 
@@ -603,12 +597,11 @@ msgid "Volume control"
 msgstr "Control de volumen"
 
 #: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
-#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:176
+#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:175
 msgid "Playback speed"
 msgstr "Velocidad de reproducción"
 
 #: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
-#: data/ui/settings.ui:956
 msgid "Sleep timer"
 msgstr "Temporizador de apagado"
 
@@ -623,6 +616,80 @@ msgstr "Abrir el cuadro del temporizador"
 #: data/ui/media_controller_big.ui:53
 msgid "Open book"
 msgstr "Abrir libro"
+
+#: data/ui/preferences.ui:55
+msgid "General"
+msgstr "General"
+
+#: data/ui/preferences.ui:60
+msgid "Appearance"
+msgstr "Apariencia"
+
+#: data/ui/preferences.ui:83
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: data/ui/preferences.ui:90
+msgid "Activate if author and reader are displayed the wrong way"
+msgstr "Activar si el autor y el lector se muestran de forma incorrecta"
+
+#: data/ui/preferences.ui:107
+msgid "Playback"
+msgstr "Reproducción"
+
+#: data/ui/preferences.ui:114
+msgid "Rewind 30 seconds of the current book when starting Cozy"
+msgstr "Rebobinar 30 segundos del libro actual al iniciar Cozy"
+
+#: data/ui/preferences.ui:172
+msgid "Sleep Timer"
+msgstr "Temporizador para dormir"
+
+#: data/ui/preferences.ui:218
+msgid "Storage"
+msgstr "Almacenamiento"
+
+#: data/ui/preferences.ui:223
+msgid "Artwork"
+msgstr "Material gráfico"
+
+#: data/ui/preferences.ui:230
+msgid "Always use images (cover.jpg, *.png, …) when available"
+msgstr "Use siempre imágenes (cover.jpg, *.png, …) cuando estén disponibles"
+
+#: data/ui/preferences.ui:247
+msgid "Storage locations"
+msgstr "Ubicaciones de almacenamiento"
+
+#: data/ui/preferences.ui:309
+msgid "Add location"
+msgstr "Añadir ubicación"
+
+#: data/ui/preferences.ui:335
+msgid "Remove location"
+msgstr "Eliminar ubicación"
+
+#: data/ui/preferences.ui:373
+msgid "Toggle this storage location to be internal/external."
+msgstr "Alternar esta ubicación de almacenamiento entre interna y externa."
+
+#: data/ui/preferences.ui:402
+msgid "Set as default storage location for new audiobooks"
+msgstr ""
+"Establecer como ubicación de almacenamiento predeterminada para nuevos "
+"audiolibros"
+
+#: data/ui/preferences.ui:406
+msgid "Set as default"
+msgstr "Establecer como predeterminado"
+
+#: data/ui/preferences.ui:450
+msgid "Feedback"
+msgstr "Comentarios"
+
+#: data/ui/preferences.ui:460
+msgid "User Feedback"
+msgstr "Comentarios de usuario"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -651,154 +718,6 @@ msgstr "Sección"
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
 msgstr "No se ha encontrado nada :("
-
-#: data/ui/settings.ui:111 data/ui/settings.ui:382
-msgid "General"
-msgstr "General"
-
-#: data/ui/settings.ui:156
-msgid "Dark Mode"
-msgstr "Modo oscuro"
-
-#: data/ui/settings.ui:232
-msgid "Titlebar"
-msgstr "Barra de título"
-
-#: data/ui/settings.ui:277
-msgid "Display the whole book instead of the current chapter"
-msgstr "Mostrar el libro completo en lugar del capítulo actual"
-
-#: data/ui/settings.ui:340
-msgid "Appearance"
-msgstr "Apariencia"
-
-#: data/ui/settings.ui:425
-msgid "Suspend system on timer"
-msgstr "Suspender el sistema al finalizar el temporizador"
-
-#: data/ui/settings.ui:485
-msgid "Replay 30 seconds"
-msgstr "Volver a reproducir los últimos 30 segundos"
-
-#: data/ui/settings.ui:545
-msgid "Automatic media scan"
-msgstr "Exploración automática de archivos"
-
-#: data/ui/settings.ui:604
-msgid "Tags"
-msgstr "Etiquetas"
-
-#: data/ui/settings.ui:656
-msgid "Swap author and reader"
-msgstr "Intercambiar autor y lector"
-
-#: data/ui/settings.ui:669
-msgid "Activate this if author and reader are displayed the wrong way"
-msgstr "Activa aquí si un autor y lector no se muestran adecuadamente"
-
-#: data/ui/settings.ui:694
-msgid "switch author and reader assignment"
-msgstr "intercambiar asignación de autor y lector"
-
-#: data/ui/settings.ui:743
-msgid "Playback"
-msgstr "Reproducción"
-
-#: data/ui/settings.ui:789
-msgid "Rewind duration"
-msgstr "Duración del retroceso"
-
-#: data/ui/settings.ui:874
-msgid "Forward duration"
-msgstr "Duración del avance"
-
-#: data/ui/settings.ui:1001
-msgid "Fadeout"
-msgstr "Desvanecimiento"
-
-#: data/ui/settings.ui:1063
-msgid "Fadeout duration"
-msgstr "Duración del desvanecimiento"
-
-#: data/ui/settings.ui:1144
-msgid "Behaviour"
-msgstr "Comportamiento"
-
-#: data/ui/settings.ui:1171
-msgid "Artwork"
-msgstr "Material gráfico"
-
-#: data/ui/settings.ui:1223
-msgid "Prefer external images over embedded cover"
-msgstr "Preferir imágenes externas a la cubierta incluida."
-
-#: data/ui/settings.ui:1236
-msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr "Usar imágenes (cover.jpg, *.png, ...) cuando estén disponibles"
-
-#: data/ui/settings.ui:1319
-msgid "Audio books location"
-msgstr "Ubicación de los audiolibros"
-
-#: data/ui/settings.ui:1335
-msgid "Storage locations"
-msgstr "Ubicaciones de almacenamiento"
-
-#: data/ui/settings.ui:1393
-msgid "Add location"
-msgstr "Añadir ubicación"
-
-#: data/ui/settings.ui:1418 data/ui/settings.ui:1613
-msgid "Remove location"
-msgstr "Eliminar ubicación"
-
-#: data/ui/settings.ui:1454
-msgid "Toggle this storage location to be internal/external."
-msgstr "Alternar esta ubicación de almacenamiento entre interna y externa."
-
-#: data/ui/settings.ui:1480
-msgid "Set as default storage location for new audiobooks"
-msgstr ""
-"Establecer como ubicación de almacenamiento predeterminada para nuevos "
-"audiolibros"
-
-#: data/ui/settings.ui:1532
-msgid "Ignore list"
-msgstr "Ignorar lista"
-
-#: data/ui/settings.ui:1576
-msgid "Path"
-msgstr "Ruta"
-
-#: data/ui/settings.ui:1659
-msgid "Follow symlinks"
-msgstr "Seguir enlaces simbólicos"
-
-#: data/ui/settings.ui:1691
-msgid "Storage"
-msgstr "Almacenamiento"
-
-#: data/ui/settings.ui:1715
-msgid "Database"
-msgstr "Base de datos"
-
-#: data/ui/settings.ui:1767
-msgid "Force refresh the database"
-msgstr "Forzar el refresco de la base de datos"
-
-#: data/ui/settings.ui:1780
-msgid "This will force update the metadata of all imported books"
-msgstr ""
-"Esto forzará la actualización de los metadatos de todos los libros "
-"importados"
-
-#: data/ui/settings.ui:1800
-msgid "Force refresh"
-msgstr "Forzar actualización"
-
-#: data/ui/settings.ui:1856
-msgid "Advanced"
-msgstr "Avanzado"
 
 #: data/ui/timer_popover.ui:37
 msgid "Timer duration"
