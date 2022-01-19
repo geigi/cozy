@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Pavel Zahradnik <pavel.zahradnik@centrum.cz>, 2021
+# Pavel Patz, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 18:22+0200\n"
+"POT-Creation-Date: 2022-01-04 16:30+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Pavel Zahradnik <pavel.zahradnik@centrum.cz>, 2021\n"
+"Last-Translator: Pavel Patz, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/geigi/teams/78138/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +26,7 @@ msgstr ""
 msgid "Audiobooks"
 msgstr "Audioknihy"
 
-#: cozy/control/offline_cache.py:201
+#: cozy/control/offline_cache.py:200
 msgid "Copying"
 msgstr "Kopírování"
 
@@ -144,13 +145,9 @@ msgstr "Disk"
 msgid "All files"
 msgstr "Všechny soubory"
 
-#: cozy/ui/main_view.py:298 data/ui/main_window.ui:412
+#: cozy/ui/main_view.py:301 data/ui/main_window.ui:412
 msgid "Set Audiobooks Directory"
 msgstr "Nastavení adresáře audioknih"
-
-#: cozy/ui/settings.py:103
-msgid "Feedback"
-msgstr "Zpětná vazba"
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
@@ -218,8 +215,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Typ souborů médií, které se aplikaci Cozy nepodařilo importovat"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:53
-#: cozy/view_model/library_view_model.py:159
+#: cozy/view_model/library_view_model.py:54
+#: cozy/view_model/library_view_model.py:160
 msgid "All"
 msgstr "Vše"
 
@@ -247,19 +244,17 @@ msgstr "min"
 msgid "Off"
 msgstr "Vypnuto"
 
-#: cozy/ui/widgets/storage_list_box_row.py:100
-#: cozy/ui/widgets/storage_list_box_row.py:145
+#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:377
 msgid "External drive"
 msgstr "Externí disk"
 
-#: cozy/ui/widgets/storage_list_box_row.py:103
-#: cozy/ui/widgets/storage_list_box_row.py:148
+#: cozy/ui/widgets/storage_list_box_row.py:73
 msgid "Internal drive"
 msgstr "Interní disk"
 
 #: cozy/view_model/headerbar_view_model.py:91
-msgid "Importing Audiobooks"
-msgstr "Import audioknih"
+msgid "Refreshing audio book collection"
+msgstr "Aktualizace sbírky audioknih"
 
 #: cozy/view_model/headerbar_view_model.py:100
 #: cozy/view_model/headerbar_view_model.py:116
@@ -350,7 +345,7 @@ msgstr "Opravdu chcete smazat vybranou audioknihu?"
 msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr "Audiokniha bude odstraněna z vašeho disku a z knihovny aplikace Cozy."
 
-#: data/ui/error_reporting.ui:29
+#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:455
 msgid "User feedback"
 msgstr "Zpětná vazba od uživatelů"
 
@@ -508,47 +503,47 @@ msgid "Select"
 msgstr "Vybrat"
 
 #: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
-#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:71
+#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:70
 msgid "Rewind"
 msgstr "Posun zpět"
 
 #: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
-#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:78
+#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:77
 msgid "Rewind button"
 msgstr "Tlačítko pro posun zpět"
 
 #: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
-#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:79
+#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:78
 msgid "Rewind playback"
 msgstr "Přehrávání zpět"
 
 #: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
-#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:101
+#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:100
 msgid "Start playback"
 msgstr "Spustit přehrávání"
 
 #: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
-#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:108
+#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:107
 msgid "Play/Pause Button"
 msgstr "Tlačítko přehrávání/zastavení"
 
 #: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
-#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:109
+#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:108
 msgid "Start or pause the playback"
 msgstr "Spustit nebo zastavit přehrávání"
 
 #: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
-#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:132
+#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:131
 msgid "Forward"
 msgstr "Posun vpřed"
 
 #: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
-#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:139
+#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:138
 msgid "Forward button"
 msgstr "Tlačítko pro posun vpřed"
 
 #: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
-#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:140
+#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:139
 msgid "Forward Playback"
 msgstr "Přehrávání vpřed"
 
@@ -613,12 +608,11 @@ msgid "Volume control"
 msgstr "Ovládání hlasitosti"
 
 #: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
-#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:176
+#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:175
 msgid "Playback speed"
 msgstr "Rychlost přehrávání"
 
 #: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
-#: data/ui/settings.ui:956
 msgid "Sleep timer"
 msgstr "Časovač spánku"
 
@@ -633,6 +627,79 @@ msgstr "Otevřít vyskakovací okno časovače"
 #: data/ui/media_controller_big.ui:53
 msgid "Open book"
 msgstr "Otevřít knihu"
+
+#: data/ui/preferences.ui:55
+msgid "General"
+msgstr "Obecné"
+
+#: data/ui/preferences.ui:60
+msgid "Appearance"
+msgstr "Vzhled"
+
+#: data/ui/preferences.ui:83
+msgid "Tags"
+msgstr "Štítky"
+
+#: data/ui/preferences.ui:90
+msgid "Activate if author and reader are displayed the wrong way"
+msgstr "Zapněte, pokud jsou autor a čtenář zobrazeni obráceně"
+
+#: data/ui/preferences.ui:107
+msgid "Playback"
+msgstr "Přehrávání"
+
+#: data/ui/preferences.ui:114
+msgid "Rewind 30 seconds of the current book when starting Cozy"
+msgstr "Po startu Cozy se vrátit v současné knize o 30 sekund nazpět"
+
+#: data/ui/preferences.ui:172
+msgid "Sleep Timer"
+msgstr "Četba na dobrou noc"
+
+#: data/ui/preferences.ui:218
+msgid "Storage"
+msgstr "Úložiště"
+
+#: data/ui/preferences.ui:223
+msgid "Artwork"
+msgstr "Obrázek"
+
+#: data/ui/preferences.ui:230
+msgid "Always use images (cover.jpg, *.png, …) when available"
+msgstr ""
+"Vždy použít soubory obrázků (cover.jpg, *.png...), pokud jsou dostupné"
+
+#: data/ui/preferences.ui:247
+msgid "Storage locations"
+msgstr "Místa uložení"
+
+#: data/ui/preferences.ui:309
+msgid "Add location"
+msgstr "Přidat umístění"
+
+#: data/ui/preferences.ui:335
+msgid "Remove location"
+msgstr "Odstranit umístění"
+
+#: data/ui/preferences.ui:373
+msgid "Toggle this storage location to be internal/external."
+msgstr "Přepnout toto místo uložení na interní/externí."
+
+#: data/ui/preferences.ui:402
+msgid "Set as default storage location for new audiobooks"
+msgstr "Nastavit jako výchozí místo uložení pro nové audioknihy"
+
+#: data/ui/preferences.ui:406
+msgid "Set as default"
+msgstr "Nastavit jako výchozí"
+
+#: data/ui/preferences.ui:450
+msgid "Feedback"
+msgstr "Zpětná vazba"
+
+#: data/ui/preferences.ui:460
+msgid "User Feedback"
+msgstr "Uživatelská zpětná vazba"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -661,150 +728,6 @@ msgstr "Část"
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
 msgstr "Nic nenalezeno :("
-
-#: data/ui/settings.ui:111 data/ui/settings.ui:382
-msgid "General"
-msgstr "Obecné"
-
-#: data/ui/settings.ui:156
-msgid "Dark Mode"
-msgstr "Tmavý režim"
-
-#: data/ui/settings.ui:232
-msgid "Titlebar"
-msgstr "Záhlaví"
-
-#: data/ui/settings.ui:277
-msgid "Display the whole book instead of the current chapter"
-msgstr "Zobrazení celé knihy místo aktuální kapitoly"
-
-#: data/ui/settings.ui:340
-msgid "Appearance"
-msgstr "Vzhled"
-
-#: data/ui/settings.ui:425
-msgid "Suspend system on timer"
-msgstr "Uspat systém po uplynutí časovače"
-
-#: data/ui/settings.ui:485
-msgid "Replay 30 seconds"
-msgstr "Znovu přehrát 30 sekund"
-
-#: data/ui/settings.ui:545
-msgid "Automatic media scan"
-msgstr "Automatické prohledávání médií"
-
-#: data/ui/settings.ui:604
-msgid "Tags"
-msgstr "Štítky"
-
-#: data/ui/settings.ui:656
-msgid "Swap author and reader"
-msgstr "Prohodit autora a čtenáře"
-
-#: data/ui/settings.ui:669
-msgid "Activate this if author and reader are displayed the wrong way"
-msgstr "Aktivujte tuto funkci, pokud se autor a čtenář zobrazují špatně."
-
-#: data/ui/settings.ui:694
-msgid "switch author and reader assignment"
-msgstr "prohodit přiřazení autora a čtenáře"
-
-#: data/ui/settings.ui:743
-msgid "Playback"
-msgstr "Přehrávání"
-
-#: data/ui/settings.ui:789
-msgid "Rewind duration"
-msgstr "Délka posunu zpět"
-
-#: data/ui/settings.ui:874
-msgid "Forward duration"
-msgstr "Délka posunu před"
-
-#: data/ui/settings.ui:1001
-msgid "Fadeout"
-msgstr "Postupně zeslabovat"
-
-#: data/ui/settings.ui:1063
-msgid "Fadeout duration"
-msgstr "Délka postupného zeslabování"
-
-#: data/ui/settings.ui:1144
-msgid "Behaviour"
-msgstr "Chování"
-
-#: data/ui/settings.ui:1171
-msgid "Artwork"
-msgstr "Obrázek"
-
-#: data/ui/settings.ui:1223
-msgid "Prefer external images over embedded cover"
-msgstr "Upřednostnit externí obrázky před vloženými obálkami"
-
-#: data/ui/settings.ui:1236
-msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr "Použít obrázky (cover.jpg, *.png, …), když jsou dostupné"
-
-#: data/ui/settings.ui:1319
-msgid "Audio books location"
-msgstr "Umístění audioknih"
-
-#: data/ui/settings.ui:1335
-msgid "Storage locations"
-msgstr "Místa uložení"
-
-#: data/ui/settings.ui:1393
-msgid "Add location"
-msgstr "Přidat umístění"
-
-#: data/ui/settings.ui:1418 data/ui/settings.ui:1613
-msgid "Remove location"
-msgstr "Odstranit umístění"
-
-#: data/ui/settings.ui:1454
-msgid "Toggle this storage location to be internal/external."
-msgstr "Přepnout toto místo uložení na interní/externí."
-
-#: data/ui/settings.ui:1480
-msgid "Set as default storage location for new audiobooks"
-msgstr "Nastavit jako výchozí místo uložení pro nové audioknihy"
-
-#: data/ui/settings.ui:1532
-msgid "Ignore list"
-msgstr "Seznam ignorovaných položek"
-
-#: data/ui/settings.ui:1576
-msgid "Path"
-msgstr "Cesta"
-
-#: data/ui/settings.ui:1659
-msgid "Follow symlinks"
-msgstr "Sledovat symlinky"
-
-#: data/ui/settings.ui:1691
-msgid "Storage"
-msgstr "Úložiště"
-
-#: data/ui/settings.ui:1715
-msgid "Database"
-msgstr "Databáze"
-
-#: data/ui/settings.ui:1767
-msgid "Force refresh the database"
-msgstr "Vynutit obnovení databáze"
-
-#: data/ui/settings.ui:1780
-msgid "This will force update the metadata of all imported books"
-msgstr "Tímto se vynutí aktualizace metadat všech importovaných knih."
-
-#: data/ui/settings.ui:1800
-msgid "Force refresh"
-msgstr "Vynutit obnovení"
-
-#: data/ui/settings.ui:1856
-msgid "Advanced"
-msgstr "Rozšířené"
 
 #: data/ui/timer_popover.ui:37
 msgid "Timer duration"
