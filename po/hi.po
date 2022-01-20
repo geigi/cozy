@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Panwar108 <caspian7pena@gmail.com>, 2021
+# Panwar108 <caspian7pena@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 18:22+0200\n"
+"POT-Creation-Date: 2022-01-04 16:30+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2021\n"
+"Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2022\n"
 "Language-Team: Hindi (https://www.transifex.com/geigi/teams/78138/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Audiobooks"
 msgstr "ऑडियो पुस्तकें"
 
-#: cozy/control/offline_cache.py:201
+#: cozy/control/offline_cache.py:200
 msgid "Copying"
 msgstr "कॉपी करना जारी"
 
@@ -132,13 +132,9 @@ msgstr "डिस्क"
 msgid "All files"
 msgstr "सभी फाइलें"
 
-#: cozy/ui/main_view.py:298 data/ui/main_window.ui:412
+#: cozy/ui/main_view.py:301 data/ui/main_window.ui:412
 msgid "Set Audiobooks Directory"
 msgstr "ऑडियो पुस्तक हेतु डायरेक्टरी सेट करें"
-
-#: cozy/ui/settings.py:103
-msgid "Feedback"
-msgstr "प्रतिक्रिया"
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
@@ -206,8 +202,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "मीडिया फाइल प्रकार जिनका Cozy द्वारा आयात विफल रहा"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:53
-#: cozy/view_model/library_view_model.py:159
+#: cozy/view_model/library_view_model.py:54
+#: cozy/view_model/library_view_model.py:160
 msgid "All"
 msgstr "सभी"
 
@@ -235,19 +231,17 @@ msgstr "मिनट"
 msgid "Off"
 msgstr "बंद"
 
-#: cozy/ui/widgets/storage_list_box_row.py:100
-#: cozy/ui/widgets/storage_list_box_row.py:145
+#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:377
 msgid "External drive"
 msgstr "बाह्य ड्राइव"
 
-#: cozy/ui/widgets/storage_list_box_row.py:103
-#: cozy/ui/widgets/storage_list_box_row.py:148
+#: cozy/ui/widgets/storage_list_box_row.py:73
 msgid "Internal drive"
 msgstr "आतंरिक ड्राइव"
 
 #: cozy/view_model/headerbar_view_model.py:91
-msgid "Importing Audiobooks"
-msgstr "ऑडियो पुस्तक आयात जारी"
+msgid "Refreshing audio book collection"
+msgstr "ऑडियो पुस्तक संग्रह रिफ्रेश करना जारी"
 
 #: cozy/view_model/headerbar_view_model.py:100
 #: cozy/view_model/headerbar_view_model.py:116
@@ -338,7 +332,7 @@ msgstr "क्या आप निश्चित ही चयनित ऑड�
 msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr "यह ऑडियो पुस्तक आपकी डिस्क एवं Cozy पुस्तक संग्रह से हटा दी जाएगी।"
 
-#: data/ui/error_reporting.ui:29
+#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:455
 msgid "User feedback"
 msgstr "उपयोक्ता प्रतिक्रिया"
 
@@ -497,47 +491,47 @@ msgid "Select"
 msgstr "चुनें"
 
 #: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
-#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:71
+#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:70
 msgid "Rewind"
 msgstr "पुनः आरंभ"
 
 #: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
-#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:78
+#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:77
 msgid "Rewind button"
 msgstr "पुनः आरंभ बटन"
 
 #: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
-#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:79
+#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:78
 msgid "Rewind playback"
 msgstr "वाचक पुनः आरंभ करें"
 
 #: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
-#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:101
+#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:100
 msgid "Start playback"
 msgstr "वाचक आरंभ करें"
 
 #: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
-#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:108
+#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:107
 msgid "Play/Pause Button"
 msgstr "आरंभ/रोकने हेतु बटन"
 
 #: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
-#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:109
+#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:108
 msgid "Start or pause the playback"
 msgstr "वाचक आरंभ करें व रोकें"
 
 #: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
-#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:132
+#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:131
 msgid "Forward"
 msgstr "आगे"
 
 #: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
-#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:139
+#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:138
 msgid "Forward button"
 msgstr "आगे करने हेतु बटन"
 
 #: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
-#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:140
+#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:139
 msgid "Forward Playback"
 msgstr "वाचक आगे करें"
 
@@ -602,12 +596,11 @@ msgid "Volume control"
 msgstr "ध्वनि नियंत्रण"
 
 #: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
-#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:176
+#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:175
 msgid "Playback speed"
 msgstr "वाचक गति"
 
 #: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
-#: data/ui/settings.ui:956
 msgid "Sleep timer"
 msgstr "निद्रा टाइमर"
 
@@ -622,6 +615,78 @@ msgstr "निद्रा टाइमर साधन खोलें"
 #: data/ui/media_controller_big.ui:53
 msgid "Open book"
 msgstr "पुस्तक खोलें"
+
+#: data/ui/preferences.ui:55
+msgid "General"
+msgstr "सामान्य"
+
+#: data/ui/preferences.ui:60
+msgid "Appearance"
+msgstr "स्वरूप"
+
+#: data/ui/preferences.ui:83
+msgid "Tags"
+msgstr "उपनाम"
+
+#: data/ui/preferences.ui:90
+msgid "Activate if author and reader are displayed the wrong way"
+msgstr "लेखक व वाचक के अनुचित नाम प्रदर्शित होने पर इसे सक्रिय करें"
+
+#: data/ui/preferences.ui:107
+msgid "Playback"
+msgstr "वाचन"
+
+#: data/ui/preferences.ui:114
+msgid "Rewind 30 seconds of the current book when starting Cozy"
+msgstr "Cozy आरंभ होने पर वर्तमान पुस्तक को 30 सेकंड पूर्व से पुनः आरंभ करें"
+
+#: data/ui/preferences.ui:172
+msgid "Sleep Timer"
+msgstr "निद्रा टाइमर"
+
+#: data/ui/preferences.ui:218
+msgid "Storage"
+msgstr "संचय"
+
+#: data/ui/preferences.ui:223
+msgid "Artwork"
+msgstr "पुस्तक कवर"
+
+#: data/ui/preferences.ui:230
+msgid "Always use images (cover.jpg, *.png, …) when available"
+msgstr "उपलब्ध होने पर सदैव चित्र (cover.jpg, *.png, ...) उपयोग करें"
+
+#: data/ui/preferences.ui:247
+msgid "Storage locations"
+msgstr "संचय स्थान"
+
+#: data/ui/preferences.ui:309
+msgid "Add location"
+msgstr "स्थान जोड़ें"
+
+#: data/ui/preferences.ui:335
+msgid "Remove location"
+msgstr "स्थान हटाएँ"
+
+#: data/ui/preferences.ui:373
+msgid "Toggle this storage location to be internal/external."
+msgstr "यह संचय स्थान बाह्य/आंतरिक सेट करें।"
+
+#: data/ui/preferences.ui:402
+msgid "Set as default storage location for new audiobooks"
+msgstr "नवीन ऑडियो पुस्तकों हेतु डिफ़ॉल्ट संचय स्थान के रूप में सेट करें"
+
+#: data/ui/preferences.ui:406
+msgid "Set as default"
+msgstr "डिफ़ॉल्ट के रूप में सेट करें"
+
+#: data/ui/preferences.ui:450
+msgid "Feedback"
+msgstr "प्रतिक्रिया"
+
+#: data/ui/preferences.ui:460
+msgid "User Feedback"
+msgstr "उपयोक्ता प्रतिक्रिया"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -650,150 +715,6 @@ msgstr "खंड"
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
 msgstr "कोई परिणाम नहीं :("
-
-#: data/ui/settings.ui:111 data/ui/settings.ui:382
-msgid "General"
-msgstr "सामान्य"
-
-#: data/ui/settings.ui:156
-msgid "Dark Mode"
-msgstr "डार्क मोड"
-
-#: data/ui/settings.ui:232
-msgid "Titlebar"
-msgstr "शीर्षक पट्टी"
-
-#: data/ui/settings.ui:277
-msgid "Display the whole book instead of the current chapter"
-msgstr "वर्तमान अध्याय के स्थान पर पूर्ण पुस्तक प्रदर्शित करें"
-
-#: data/ui/settings.ui:340
-msgid "Appearance"
-msgstr "स्वरूप"
-
-#: data/ui/settings.ui:425
-msgid "Suspend system on timer"
-msgstr "टाइमर अवधि पूर्ण होने पर सिस्टम सुप्त करें"
-
-#: data/ui/settings.ui:485
-msgid "Replay 30 seconds"
-msgstr "पिछले 30 सेकंड पुनः चलाएँ"
-
-#: data/ui/settings.ui:545
-msgid "Automatic media scan"
-msgstr "स्वतः मीडिया स्कैन"
-
-#: data/ui/settings.ui:604
-msgid "Tags"
-msgstr "उपनाम"
-
-#: data/ui/settings.ui:656
-msgid "Swap author and reader"
-msgstr "लेखक व वाचक को एक-दूसरे से बदलें"
-
-#: data/ui/settings.ui:669
-msgid "Activate this if author and reader are displayed the wrong way"
-msgstr "लेखक व वाचक के अनुचित नाम प्रदर्शित होने पर इसे सक्रिय करें"
-
-#: data/ui/settings.ui:694
-msgid "switch author and reader assignment"
-msgstr "लेखक व वाचक को आपस में बदलें"
-
-#: data/ui/settings.ui:743
-msgid "Playback"
-msgstr "वाचन"
-
-#: data/ui/settings.ui:789
-msgid "Rewind duration"
-msgstr "पुनः आरंभ हेतु अवधि"
-
-#: data/ui/settings.ui:874
-msgid "Forward duration"
-msgstr "आगे करने हेतु अवधि"
-
-#: data/ui/settings.ui:1001
-msgid "Fadeout"
-msgstr "मंद अदृश्य"
-
-#: data/ui/settings.ui:1063
-msgid "Fadeout duration"
-msgstr "मंद अदृश्य अवधि"
-
-#: data/ui/settings.ui:1144
-msgid "Behaviour"
-msgstr "व्यवहार"
-
-#: data/ui/settings.ui:1171
-msgid "Artwork"
-msgstr "पुस्तक कवर"
-
-#: data/ui/settings.ui:1223
-msgid "Prefer external images over embedded cover"
-msgstr "संलग्न कवर के स्थान पर बाह्य कवर उपयोग करें"
-
-#: data/ui/settings.ui:1236
-msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr "उपलब्ध होने पर चित्र (cover.jpg, *.png, ...) उपयोग करें"
-
-#: data/ui/settings.ui:1319
-msgid "Audio books location"
-msgstr "ऑडियो पुस्तक फोल्डर स्थान"
-
-#: data/ui/settings.ui:1335
-msgid "Storage locations"
-msgstr "संचय स्थान"
-
-#: data/ui/settings.ui:1393
-msgid "Add location"
-msgstr "स्थान जोड़ें"
-
-#: data/ui/settings.ui:1418 data/ui/settings.ui:1613
-msgid "Remove location"
-msgstr "स्थान हटाएँ"
-
-#: data/ui/settings.ui:1454
-msgid "Toggle this storage location to be internal/external."
-msgstr "यह संचय स्थान बाह्य/आंतरिक सेट करें।"
-
-#: data/ui/settings.ui:1480
-msgid "Set as default storage location for new audiobooks"
-msgstr "नवीन ऑडियो पुस्तकों हेतु डिफ़ॉल्ट संचय स्थान के रूप में सेट करें"
-
-#: data/ui/settings.ui:1532
-msgid "Ignore list"
-msgstr "अपवर्जन सूची"
-
-#: data/ui/settings.ui:1576
-msgid "Path"
-msgstr "फोल्डर पथ"
-
-#: data/ui/settings.ui:1659
-msgid "Follow symlinks"
-msgstr "Symlinks उपयोग करें "
-
-#: data/ui/settings.ui:1691
-msgid "Storage"
-msgstr "संचय"
-
-#: data/ui/settings.ui:1715
-msgid "Database"
-msgstr "डेटाबेस"
-
-#: data/ui/settings.ui:1767
-msgid "Force refresh the database"
-msgstr "डेटाबेस रिफ्रेश हेतु बाध्य करें"
-
-#: data/ui/settings.ui:1780
-msgid "This will force update the metadata of all imported books"
-msgstr "इससे आयात की गई सभी ऑडियो पुस्तकों का मेटाडेटा अपडेट होगा"
-
-#: data/ui/settings.ui:1800
-msgid "Force refresh"
-msgstr "रिफ्रेश हेतु बाध्य करें"
-
-#: data/ui/settings.ui:1856
-msgid "Advanced"
-msgstr "विस्तृत"
 
 #: data/ui/timer_popover.ui:37
 msgid "Timer duration"
