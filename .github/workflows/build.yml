@@ -6,41 +6,25 @@ jobs:
   test:
 
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        python-version: [3.6, 3.7, 3.8]
 
+    container:
+      image: ghcr.io/geigi/cozy-ci:main
+    
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install cozy dependencies
-      run: |
-        sudo apt update
-        sudo apt install libgirepository1.0-dev python3-gst-1.0 libgtk-3-0 libgtk-3-bin libgtk-3-common libgtk-3-dev libgranite5 gir1.2-granite-1.0 libgranite-dev
-        wget https://launchpad.net/ubuntu/+archive/primary/+files/libhandy-1-0_1.0.0-2_amd64.deb
-        wget https://launchpad.net/ubuntu/+archive/primary/+files/gir1.2-handy-1_1.0.0-2_amd64.deb
-        wget https://launchpad.net/ubuntu/+archive/primary/+files/libhandy-1-dev_1.0.0-2_amd64.deb
-        sudo apt install ./libhandy-1-0_1.0.0-2_amd64.deb ./gir1.2-handy-1_1.0.0-2_amd64.deb ./libhandy-1-dev_1.0.0-2_amd64.deb
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+
     - name: Lint with flake8
       run: |
-        pip install flake8
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --builtins="_"
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --builtins="_"
+      
     - name: Test with pytest
       run: |
-        pip install pytest pytest-mock
         pytest
+    
     - name: Install Cozy
       run: |
-        # meson dependencies
-        sudo apt install libxml2-utils appstream-util desktop-file-utils gettext
-        pip install meson ninja
         meson --prefix=/usr ./build
-        sudo env "PATH=$PATH" ninja -C build install
+        ninja -C build install
