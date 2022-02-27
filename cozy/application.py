@@ -86,8 +86,11 @@ class Application(Gtk.Application):
         init_db()
         Gtk.Application.do_startup(self)
         Handy.init()
-        manager = Handy.StyleManager.get_default()
-        manager.set_color_scheme(Handy.ColorScheme.PREFER_LIGHT)
+        try:
+            manager = Handy.StyleManager.get_default()
+            manager.set_color_scheme(Handy.ColorScheme.PREFER_LIGHT)
+        except:
+            log.info("Not setting libhandy style manager, version is too old.")
         log.info("libhandy version: {}".format(Handy._version))
         self.ui.startup()
 
