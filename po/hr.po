@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# milotype <mail@milotype.de>, 2021
+# Milo Ivir <mail@milotype.de>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 18:22+0200\n"
+"POT-Creation-Date: 2022-01-04 16:30+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: milotype <mail@milotype.de>, 2021\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>, 2022\n"
 "Language-Team: Croatian (https://www.transifex.com/geigi/teams/78138/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Audiobooks"
 msgstr "Audio knjige"
 
-#: cozy/control/offline_cache.py:201
+#: cozy/control/offline_cache.py:200
 msgid "Copying"
 msgstr "Kopiranje"
 
@@ -138,13 +138,9 @@ msgstr "Disk"
 msgid "All files"
 msgstr "Sve datoteke"
 
-#: cozy/ui/main_view.py:298 data/ui/main_window.ui:412
+#: cozy/ui/main_view.py:301 data/ui/main_window.ui:412
 msgid "Set Audiobooks Directory"
 msgstr "Postavi mapu audio knjiga"
-
-#: cozy/ui/settings.py:103
-msgid "Feedback"
-msgstr "Povratne informacije"
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
@@ -212,8 +208,8 @@ msgid "Media type of files that Cozy couldn't import"
 msgstr "Vrsta medijskih datoteka koje Cozy nije mogao uvesti"
 
 #: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:53
-#: cozy/view_model/library_view_model.py:159
+#: cozy/view_model/library_view_model.py:54
+#: cozy/view_model/library_view_model.py:160
 msgid "All"
 msgstr "Sve"
 
@@ -241,19 +237,17 @@ msgstr "min"
 msgid "Off"
 msgstr "Isključeno"
 
-#: cozy/ui/widgets/storage_list_box_row.py:100
-#: cozy/ui/widgets/storage_list_box_row.py:145
+#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:377
 msgid "External drive"
 msgstr "Eksterna memorija"
 
-#: cozy/ui/widgets/storage_list_box_row.py:103
-#: cozy/ui/widgets/storage_list_box_row.py:148
+#: cozy/ui/widgets/storage_list_box_row.py:73
 msgid "Internal drive"
 msgstr "Interna memorija"
 
 #: cozy/view_model/headerbar_view_model.py:91
-msgid "Importing Audiobooks"
-msgstr "Uvoz audio knjiga"
+msgid "Refreshing audio book collection"
+msgstr "Aktulaiziranje zbirke audio knjiga"
 
 #: cozy/view_model/headerbar_view_model.py:100
 #: cozy/view_model/headerbar_view_model.py:116
@@ -344,7 +338,7 @@ msgstr "Stvarno želiš izbrisati odabrane audio knjige?"
 msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr "Audio knjiga će se ukloniti s diska i iz Cozy zbirke."
 
-#: data/ui/error_reporting.ui:29
+#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:455
 msgid "User feedback"
 msgstr "Povratne informacije korisnika"
 
@@ -473,12 +467,12 @@ msgstr "Pričekaj dok Cozy priprema tvoju zbirku …"
 
 #: data/ui/main_window.ui:334
 msgid "Import your Audiobooks"
-msgstr "Uvoz audio knjiga"
+msgstr "Uvezi svoje audio knjige"
 
 #: data/ui/main_window.ui:353
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
-msgstr "Cozy automatski uvozi tvoje audio knjige u jednu mapu – tvoja zbirka"
+msgstr "Cozy automatski uvozi tvoje audio knjige u jednu mapu – tvoju zbirku"
 
 #: data/ui/main_window.ui:385
 msgid "Drag & Drop"
@@ -497,47 +491,47 @@ msgid "Select"
 msgstr "Odaberi"
 
 #: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
-#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:71
+#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:70
 msgid "Rewind"
 msgstr "Natrag"
 
 #: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
-#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:78
+#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:77
 msgid "Rewind button"
 msgstr "Gumb za natrag"
 
 #: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
-#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:79
+#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:78
 msgid "Rewind playback"
 msgstr "Skoči natrag"
 
 #: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
-#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:101
+#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:100
 msgid "Start playback"
 msgstr "Pokreni reprodukciju"
 
 #: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
-#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:108
+#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:107
 msgid "Play/Pause Button"
 msgstr "Gumb za Pokreni/Zaustavi"
 
 #: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
-#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:109
+#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:108
 msgid "Start or pause the playback"
 msgstr "Pokreni ili zaustavi reprodukciju"
 
 #: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
-#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:132
+#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:131
 msgid "Forward"
 msgstr "Naprijed"
 
 #: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
-#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:139
+#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:138
 msgid "Forward button"
 msgstr "Gumb za naprijed"
 
 #: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
-#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:140
+#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:139
 msgid "Forward Playback"
 msgstr "Skoči naprijed"
 
@@ -602,12 +596,11 @@ msgid "Volume control"
 msgstr "Upravljanje glasnoćom"
 
 #: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
-#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:176
+#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:175
 msgid "Playback speed"
 msgstr "Brzina reprodukcije"
 
 #: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
-#: data/ui/settings.ui:956
 msgid "Sleep timer"
 msgstr "Odbrojavanje do mirovanja"
 
@@ -622,6 +615,78 @@ msgstr "Otvori skočni prozor odbrojavanja"
 #: data/ui/media_controller_big.ui:53
 msgid "Open book"
 msgstr "Otvori knjigu"
+
+#: data/ui/preferences.ui:55
+msgid "General"
+msgstr "Opće"
+
+#: data/ui/preferences.ui:60
+msgid "Appearance"
+msgstr "Izgled"
+
+#: data/ui/preferences.ui:83
+msgid "Tags"
+msgstr "Oznake"
+
+#: data/ui/preferences.ui:90
+msgid "Activate if author and reader are displayed the wrong way"
+msgstr "Aktiviraj ako su autor i čitatelj prikazani na pogrešan način"
+
+#: data/ui/preferences.ui:107
+msgid "Playback"
+msgstr "Reprodukcija"
+
+#: data/ui/preferences.ui:114
+msgid "Rewind 30 seconds of the current book when starting Cozy"
+msgstr "Premotaj trenutačnu knjigu 30 sekundi unatrag kad pokreneš Cozy"
+
+#: data/ui/preferences.ui:172
+msgid "Sleep Timer"
+msgstr "Odbrojavanje mirovanja"
+
+#: data/ui/preferences.ui:218
+msgid "Storage"
+msgstr "Spremište"
+
+#: data/ui/preferences.ui:223
+msgid "Artwork"
+msgstr "Ilustracija"
+
+#: data/ui/preferences.ui:230
+msgid "Always use images (cover.jpg, *.png, …) when available"
+msgstr "Uvijek koristi slike (cover.jpg, *.png, …) kad su dostupne"
+
+#: data/ui/preferences.ui:247
+msgid "Storage locations"
+msgstr "Mjesta spremišta"
+
+#: data/ui/preferences.ui:309
+msgid "Add location"
+msgstr "Dodaj mjesto"
+
+#: data/ui/preferences.ui:335
+msgid "Remove location"
+msgstr "Ukloni mjesto"
+
+#: data/ui/preferences.ui:373
+msgid "Toggle this storage location to be internal/external."
+msgstr "Promijeni ovo mjesto spremišta na interno/vanjsko."
+
+#: data/ui/preferences.ui:402
+msgid "Set as default storage location for new audiobooks"
+msgstr "Postavi kao standardno mjesto spremišta za nove audio knjige"
+
+#: data/ui/preferences.ui:406
+msgid "Set as default"
+msgstr "Postavi kao standard"
+
+#: data/ui/preferences.ui:450
+msgid "Feedback"
+msgstr "Povratne informacije"
+
+#: data/ui/preferences.ui:460
+msgid "User Feedback"
+msgstr "Korisniöke povratne informacije"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
@@ -651,161 +716,17 @@ msgstr "Dio"
 msgid "Nothing found :("
 msgstr "Ništa nije pronađeno :("
 
-#: data/ui/settings.ui:111 data/ui/settings.ui:382
-msgid "General"
-msgstr "Opće"
-
-#: data/ui/settings.ui:156
-msgid "Dark Mode"
-msgstr "Tamna tema"
-
-#: data/ui/settings.ui:232
-msgid "Titlebar"
-msgstr "Traka naslova"
-
-#: data/ui/settings.ui:277
-msgid "Display the whole book instead of the current chapter"
-msgstr "Prikaži cijelu knjigu umjesto trenutačnog poglavlja"
-
-#: data/ui/settings.ui:340
-msgid "Appearance"
-msgstr "Izgled"
-
-#: data/ui/settings.ui:425
-msgid "Suspend system on timer"
-msgstr "Postavi sustav u stanje mirovanja nakon odbrojavanja"
-
-#: data/ui/settings.ui:485
-msgid "Replay 30 seconds"
-msgstr "Ponovi zadnjih 30 sekundi"
-
-#: data/ui/settings.ui:545
-msgid "Automatic media scan"
-msgstr "Automatsko pretraživanje medija"
-
-#: data/ui/settings.ui:604
-msgid "Tags"
-msgstr "Oznake"
-
-#: data/ui/settings.ui:656
-msgid "Swap author and reader"
-msgstr "Zamijeni autora i čitača"
-
-#: data/ui/settings.ui:669
-msgid "Activate this if author and reader are displayed the wrong way"
-msgstr "Aktiviraj ovo, ako se autor i čitač prikazuju na pogrešan način"
-
-#: data/ui/settings.ui:694
-msgid "switch author and reader assignment"
-msgstr "zamijeni autora i čitača"
-
-#: data/ui/settings.ui:743
-msgid "Playback"
-msgstr "Reprodukcija"
-
-#: data/ui/settings.ui:789
-msgid "Rewind duration"
-msgstr "Interval skoka natrag"
-
-#: data/ui/settings.ui:874
-msgid "Forward duration"
-msgstr "Interval skoka naprijed"
-
-#: data/ui/settings.ui:1001
-msgid "Fadeout"
-msgstr "Prijelaz"
-
-#: data/ui/settings.ui:1063
-msgid "Fadeout duration"
-msgstr "Trajanje prijelaza"
-
-#: data/ui/settings.ui:1144
-msgid "Behaviour"
-msgstr "Ponašanje"
-
-#: data/ui/settings.ui:1171
-msgid "Artwork"
-msgstr "Ilustracija"
-
-#: data/ui/settings.ui:1223
-msgid "Prefer external images over embedded cover"
-msgstr "Koristi vanjske slike umjesto ugrađenih korica"
-
-#: data/ui/settings.ui:1236
-msgid "Use images (cover.jpg, *.png, …) when available"
-msgstr "Koristi slike (korice.jpg, *.png, …) kad su dostupne"
-
-#: data/ui/settings.ui:1319
-msgid "Audio books location"
-msgstr "Mjesto audio knjiga"
-
-#: data/ui/settings.ui:1335
-msgid "Storage locations"
-msgstr "Mjesta spremišta"
-
-#: data/ui/settings.ui:1393
-msgid "Add location"
-msgstr "Dodaj mjesto"
-
-#: data/ui/settings.ui:1418 data/ui/settings.ui:1613
-msgid "Remove location"
-msgstr "Ukloni mjesto"
-
-#: data/ui/settings.ui:1454
-msgid "Toggle this storage location to be internal/external."
-msgstr "Promijeni ovo mjesto spremišta na interno/vanjsko."
-
-#: data/ui/settings.ui:1480
-msgid "Set as default storage location for new audiobooks"
-msgstr "Postavi kao standardno mjesto spremišta za nove audio knjige"
-
-#: data/ui/settings.ui:1532
-msgid "Ignore list"
-msgstr "Zanemari popis"
-
-#: data/ui/settings.ui:1576
-msgid "Path"
-msgstr "Putanja"
-
-#: data/ui/settings.ui:1659
-msgid "Follow symlinks"
-msgstr "Prati povezice"
-
-#: data/ui/settings.ui:1691
-msgid "Storage"
-msgstr "Spremište"
-
-#: data/ui/settings.ui:1715
-msgid "Database"
-msgstr "Baza podataka"
-
-#: data/ui/settings.ui:1767
-msgid "Force refresh the database"
-msgstr "Prisilno aktualiziraj bazu podataka"
-
-#: data/ui/settings.ui:1780
-msgid "This will force update the metadata of all imported books"
-msgstr "Ovime se prisilno aktualiziraju metapodaci svih uvezenih knjiga"
-
-#: data/ui/settings.ui:1800
-msgid "Force refresh"
-msgstr "Prisilno aktualiziraj"
-
-#: data/ui/settings.ui:1856
-msgid "Advanced"
-msgstr "Napredno"
-
 #: data/ui/timer_popover.ui:37
 msgid "Timer duration"
 msgstr "Vrijeme odbrojavanja"
 
 #: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
-msgstr "Klizač za vrijeme odbrojavanja"
+msgstr "Regler za vrijeme odbrojavanja"
 
 #: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
-msgstr "Postavi vrijeme odbrojavanja do mirovanja u minutama"
+msgstr "Postavi vrijeme odbrojavanja u minutama"
 
 #: data/ui/timer_popover.ui:116
 msgid "Stop after current chapter"
