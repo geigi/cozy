@@ -272,6 +272,7 @@ The translators:
 - vlabo
 - xfgusta
 - yalexaner
+- bittin
 
 
 To nedrichards for the Flatpak.
