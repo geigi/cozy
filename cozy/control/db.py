@@ -21,6 +21,20 @@ log = logging.getLogger("db")
 _db = get_sqlite_database()
 
 
+def collate_natural(s1, s2):
+    if s1 == s2:
+        return 0
+
+    convert = lambda text: int(text) if text.isdigit() else text.lower()
+    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
+    list = sorted([s1, s2], key=alphanum_key)
+
+    if list.index(s1) == 0:
+        return -1
+    else:
+        return 1
+
+
 def init_db():
     _connect_db(_db)
 
@@ -44,13 +58,7 @@ def init_db():
              bind_refs=False,
              bind_backrefs=False)
 
-    @_db.collation('natural')
-    def collate_natural(s1, s2):
-        convert = lambda text: int(text) if text.isdigit() else text.lower()
-        alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
-        list = sorted([s1, s2], key=alphanum_key)
-        return cmp(list[0], list[1])
-
+    _db.register_collation(collate_natural)
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)

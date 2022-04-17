@@ -1,12 +1,13 @@
 import logging
 from typing import List
 
-from peewee import SqliteDatabase, DoesNotExist
+from peewee import SqliteDatabase, DoesNotExist, SQL, NodeList
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.profiler import timing
 from cozy.architecture.observable import Observable
+from cozy.control.db import collate_natural
 from cozy.db.book import Book as BookModel
 from cozy.db.track import Track as TrackModel
 from cozy.db.track_to_file import TrackToFile
@@ -206,7 +207,7 @@ class Book(Observable, EventSender):
         tracks = TrackModel \
             .select() \
             .where(TrackModel.book == self._db_object) \
-            .order_by(TrackModel.disk, TrackModel.number, TrackModel.name.asc(collation="natural"))
+            .order_by(TrackModel.disk, TrackModel.number, collate_natural.collation(TrackModel.name))
 
         self._chapters = []
         for track in tracks:
