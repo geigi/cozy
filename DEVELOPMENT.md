@@ -15,7 +15,6 @@ sudo apt install \
   cmake \
   gettext \
   git \
-  gir1.2-granite-1.0 \
   gstreamer1.0-libav \
   gstreamer1.0-plugins-bad \
   gstreamer1.0-plugins-good \
@@ -23,8 +22,6 @@ sudo apt install \
   libgirepository1.0-dev \
   libgstreamer1.0-0 \
   libgtk-3-dev \
-  libgranite5 \
-  libgranite-dev \
   pip \
   python-gi-cairo \
   python3-gst-1.0 \

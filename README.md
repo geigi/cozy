@@ -72,7 +72,6 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed instructions and developing Co
 - `meson >= 0.40.0` as build system
 - `gtk3 >= 3.22`
 - `libhandy >= 1.0.0`
-- `granite >= 5.3.0`
 - `libdazzle >= 3.34.0`
 - `peewee >= 3.9.6` as object relation mapper
 - `mutagen` for meta tag management

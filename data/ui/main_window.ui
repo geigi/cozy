@@ -516,6 +516,26 @@
                 <property name="index">-1</property>
               </packing>
             </child>
+            <child type="overlay">
+              <object class="GtkInfoBar" id="error_info_bar">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">start</property>
+                <property name="message-type">error</property>
+                <property name="show-close-button">True</property>
+                <property name="revealed">False</property>
+                <child internal-child="content_area">
+                  <object class="GtkBox">
+                    <property name="can-focus">False</property>
+                    <child>
+                    <object class="GtkLabel" id="error_message_label">
+                    </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
