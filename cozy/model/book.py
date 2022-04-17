@@ -5,6 +5,7 @@ from peewee import SqliteDatabase, DoesNotExist
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
+from cozy.architecture.profiler import timing
 from cozy.architecture.observable import Observable
 from cozy.db.book import Book as BookModel
 from cozy.db.track import Track as TrackModel
@@ -200,11 +201,12 @@ class Book(Observable, EventSender):
         self.destroy_listeners()
         self._destroy_observers()
 
+    @timing
     def _fetch_chapters(self):
         tracks = TrackModel \
             .select() \
             .where(TrackModel.book == self._db_object) \
-            .order_by(TrackModel.disk, TrackModel.number, TrackModel.name)
+            .order_by(TrackModel.disk, TrackModel.number, TrackModel.name.asc(collation="natural"))
 
         self._chapters = []
         for track in tracks:

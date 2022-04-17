@@ -1,5 +1,6 @@
 import logging
 import time
+import re
 
 
 from cozy.control.db_updater import update_db
@@ -42,6 +43,14 @@ def init_db():
     _db.bind([Book, Track, Settings, ArtworkCache, StorageBlackList, OfflineCache, Storage, TrackToFile, File],
              bind_refs=False,
              bind_backrefs=False)
+
+    @_db.collation('natural')
+    def collate_natural(s1, s2):
+        convert = lambda text: int(text) if text.isdigit() else text.lower()
+        alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
+        list = sorted([s1, s2], key=alphanum_key)
+        return cmp(list[0], list[1])
+
 
     if (Settings.select().count() == 0):
         Settings.create(path="", last_played_book=None)
