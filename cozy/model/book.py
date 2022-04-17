@@ -1,11 +1,10 @@
 import logging
 from typing import List
 
-from peewee import SqliteDatabase, DoesNotExist, SQL, NodeList
+from peewee import SqliteDatabase, DoesNotExist
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
-from cozy.architecture.profiler import timing
 from cozy.architecture.observable import Observable
 from cozy.control.db import collate_natural
 from cozy.db.book import Book as BookModel
@@ -202,7 +201,6 @@ class Book(Observable, EventSender):
         self.destroy_listeners()
         self._destroy_observers()
 
-    @timing
     def _fetch_chapters(self):
         tracks = TrackModel \
             .select() \
