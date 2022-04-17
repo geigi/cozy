@@ -107,6 +107,7 @@ def prepare_db():
     from cozy.db.track import Track
     from cozy.db.file import File
     from cozy.db.track_to_file import TrackToFile
+    from cozy.db.collation import collate_natural
 
     models = [Track, Book, File, TrackToFile, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache]
 
@@ -117,5 +118,6 @@ def prepare_db():
     test_db.bind(models, bind_refs=False, bind_backrefs=False)
     test_db.connect()
     test_db.create_tables(models)
+    test_db.register_collation(collate_natural)
 
     return db_path, models, test_db

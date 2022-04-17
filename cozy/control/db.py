@@ -1,11 +1,11 @@
 import logging
 import time
-import re
 
 
 from cozy.control.db_updater import update_db
 from cozy.db.artwork_cache import ArtworkCache
 from cozy.db.book import Book
+from cozy.db.collation import collate_natural
 from cozy.db.file import File
 from cozy.db.model_base import get_sqlite_database
 from cozy.db.offline_cache import OfflineCache
@@ -19,20 +19,6 @@ from cozy.report import reporter
 log = logging.getLogger("db")
 
 _db = get_sqlite_database()
-
-
-def collate_natural(s1, s2):
-    if s1 == s2:
-        return 0
-
-    convert = lambda text: int(text) if text.isdigit() else text.lower()
-    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
-    list = sorted([s1, s2], key=alphanum_key)
-
-    if list.index(s1) == 0:
-        return -1
-    else:
-        return 1
 
 
 def init_db():
