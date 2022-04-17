@@ -75,8 +75,8 @@ class Application(Gtk.Application):
         setup_thread_excepthook()
 
         import gettext
-        locale.bindtextdomain('com.github.geigi.cozy', localedir)
-        locale.textdomain('com.github.geigi.cozy')
+        gettext.bindtextdomain('com.github.geigi.cozy', localedir)
+        gettext.textdomain('com.github.geigi.cozy')
         gettext.install('com.github.geigi.cozy', localedir)
 
     def do_startup(self):
