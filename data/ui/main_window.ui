@@ -420,25 +420,4 @@
       </object>
     </child>
   </object>
-  <object class="GtkImage" id="pause_img">
-    <property name="margin-start">10</property>
-    <property name="margin-end">10</property>
-    <property name="icon-name">play-pause-symbolic</property>
-  </object>
-  <object class="GtkImage" id="pause_img1">
-    <property name="margin-start">10</property>
-    <property name="margin-end">10</property>
-    <property name="icon-name">pause-symbolic</property>
-    <property name="icon_size">3</property>
-  </object>
-  <object class="GtkImage" id="play_img">
-    <property name="margin-start">10</property>
-    <property name="margin-end">10</property>
-    <property name="icon-name">play-symbolic</property>
-  </object>
-  <object class="GtkImage" id="prev_img">
-    <property name="margin-start">4</property>
-    <property name="margin-end">4</property>
-    <property name="icon-name">object-rotate-left-symbolic</property>
-  </object>
 </interface>

@@ -4,13 +4,12 @@ import math
 import cairo
 
 from cozy.control.artwork_cache import ArtworkCache
-from cozy.extensions.gtk_widget import set_hand_cursor, reset_cursor
 from cozy.model.book import Book
 from cozy.ext import inject
 
 from gi.repository import Gtk, GObject, Gdk
 
-ALBUM_ART_SIZE = 200
+ALBUM_ART_SIZE = 300
 PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.NORMAL
 STROKE_WIDTH = 3
 
@@ -24,7 +23,7 @@ class AlbumElement(Gtk.Box):
     artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
     button_image: Gtk.Image = Gtk.Template.Child()
-    album_art_image: Gtk.Image = Gtk.Template.Child()
+    album_art_image: Gtk.Picture = Gtk.Template.Child()
     play_button: Gtk.Button = Gtk.Template.Child()
     progress_drawing_area: Gtk.DrawingArea = Gtk.Template.Child()
     album_art_drawing_area: Gtk.DrawingArea = Gtk.Template.Child()
@@ -38,10 +37,11 @@ class AlbumElement(Gtk.Box):
         pixbuf = self.artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), ALBUM_ART_SIZE)
 
         if pixbuf:
-            self.album_art_image.set_from_pixbuf(pixbuf)
-        else:
-            self.album_art_image.set_from_icon_name("book-open-variant-symbolic")
-            self.album_art_image.props.pixel_size = ALBUM_ART_SIZE
+            self.album_art_image.set_pixbuf(pixbuf)
+        #else:
+            # TODO: fix placeholder
+            #self.album_art_image.set_from_icon_name("book-open-variant-symbolic")
+            #self.album_art_image.props.pixel_size = ALBUM_ART_SIZE
 
         self.set_size_request(ALBUM_ART_SIZE, ALBUM_ART_SIZE)
 
@@ -49,17 +49,10 @@ class AlbumElement(Gtk.Box):
         self._play_button_click.connect("released", self._on_play_button_press)
         self.play_button.add_controller(self._play_button_click)
 
-        self.progress_drawing_area.connect("realize", lambda w: w.get_window().set_pass_through(True))
+        #TODO: Ho
+        #self.progress_drawing_area.connect("realize", lambda w: w.get_window().set_pass_through(True))
         self.progress_drawing_area.set_draw_func(self._draw_progress)
         self.album_art_drawing_area.set_draw_func(self._draw_album_hover)
-
-        self._album_art_overlay_revealer_motion = Gtk.EventControllerMotion()
-        self._album_art_overlay_revealer_motion.connect("enter", self._on_revealer_enter_event)
-        self.album_art_overlay_revealer.add_controller(self._album_art_overlay_revealer_motion)
-
-        self._play_button_revealer_motion = Gtk.EventControllerMotion()
-        self._play_button_revealer_motion.connect("enter", self._on_revealer_enter_event)
-        self.play_button_revealer.add_controller(self._play_button_revealer_motion)
 
     def set_playing(self, playing: bool):
         if playing:
@@ -75,12 +68,12 @@ class AlbumElement(Gtk.Box):
         self.emit("play-pause-clicked", self._book)
         return True
 
-    def _draw_album_hover(self, area: Gtk.DrawingArea, context: cairo.Context):
+    def _draw_album_hover(self, area: Gtk.DrawingArea, context: cairo.Context, *_):
         context.rectangle(0, 0, area.get_allocated_width(), area.get_allocated_height())
         context.set_source_rgba(1, 1, 1, 0.15)
         context.fill()
 
-    def _draw_progress(self, area: Gtk.DrawingArea, context: cairo.Context):
+    def _draw_progress(self, area: Gtk.DrawingArea, context: cairo.Context, *_):
         width = area.get_allocated_width()
         height = area.get_allocated_height()
         button_size = self.play_button.get_allocated_width()
@@ -108,13 +101,6 @@ class AlbumElement(Gtk.Box):
 
     def update_progress(self):
         self.progress_drawing_area.queue_draw()
-
-    def _on_revealer_enter_event(self, widget, _, __):
-        # Somehow the GTK Revealer steals the mouse events from the parent
-        # Maybe this is a bug in GTK but for now we have to handle hover in here as well
-        self.set_hover(True)
-        set_hand_cursor(widget)
-        return True
 
 
 GObject.type_register(AlbumElement)

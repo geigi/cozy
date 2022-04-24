@@ -30,7 +30,6 @@
           <object class="GtkImage">
             <property name="pixel-size">32</property>
             <property name="icon-name">book-alert-symbolic</property>
-            <property name="icon_size">3</property>
           </object>
         </child>
       </object>
@@ -88,7 +87,6 @@
                   <object class="GtkLabel">
                     <property name="label">&lt;a href=&quot;https://github.com/geigi/cozy/tree/master/cozy/report&quot;&gt;Sourcecode on GitHub&lt;/a&gt;</property>
                     <property name="use-markup">1</property>
-                    <property name="track-visited-links">False</property>
                   </object>
                 </child>
               </object>

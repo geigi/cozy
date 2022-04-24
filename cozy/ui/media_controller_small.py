@@ -57,16 +57,12 @@ class MediaControllerSmall(Gtk.Box):
         self._cover_img_gesture.connect("pressed", self._cover_clicked)
         self.cover_img.add_controller(self._cover_img_gesture)
 
-        self._cover_img_motion = Gtk.EventControllerMotion()
-        self._cover_img_motion.connect("enter", self._on_cover_enter_notify)
-        self._cover_img_motion.connect("leave", self._on_cover_leave_notify)
-        self.cover_img.add_controller(self._cover_img_motion)
+        self.cover_img.set_cursor(Gdk.Cursor.new_from_name("pointer"))
 
     def _set_cover_image(self, book: Book):
         pixbuf = self._artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), COVER_SIZE)
         if pixbuf:
-            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.get_scale_factor(), None)
-            self.cover_img.set_from_surface(surface)
+            self.cover_img.set_from_pixbuf(pixbuf)
         else:
             self.cover_img.set_from_icon_name("book-open-variant-symbolic")
             self.cover_img.props.pixel_size = COVER_SIZE
@@ -115,12 +111,3 @@ class MediaControllerSmall(Gtk.Box):
 
     def _cover_clicked(self, _, __):
         self._playback_control_view_model.open_book_detail()
-
-    def _on_cover_enter_notify(self, widget: Gtk.Widget, __):
-        try:
-            widget.props.window.set_cursor(Gdk.Cursor(Gdk.CursorType.HAND2))
-        except:
-            log.error("Broken mouse theme, failed to set cursor.")
-
-    def _on_cover_leave_notify(self, widget: Gtk.Widget, __):
-        widget.props.window.set_cursor(None)

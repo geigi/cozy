@@ -5,16 +5,14 @@
   <template class="Headerbar" parent="GtkBox">
     <child>
       <object class="AdwHeaderBar" id="headerbar">
-        <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="vexpand">False</property>
+        <property name="hexpand">True</property>
         <child type="title">
           <object class="GtkRevealer" id="toolbar_revealer">
             <property name="transition-type">slide-up</property>
             <property name="reveal-child">1</property>
             <child>
               <object class="AdwViewSwitcherTitle" id="category_toolbar">
-                <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="halign">center</property>
                 <property name="title">Cozy</property>
@@ -24,10 +22,7 @@
         </child>
         <child>
           <object class="GtkButton" id="back_button">
-            <property name="focusable">1</property>
-            <property name="receives-default">1</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
+            <property name="visible">False</property>
             <child>
               <object class="GtkImage">
                 <property name="icon-name">go-previous-symbolic</property>
@@ -35,10 +30,11 @@
             </child>
           </object>
         </child>
-        <child>
+        <child type="end">
           <object class="GtkBox" id="tools_box">
             <property name="valign">center</property>
-            <property name="vexpand">1</property>
+            <property name="hexpand">True</property>
+            <property name="halign">end</property>
             <property name="spacing">6</property>
             <child>
               <object class="GtkMenuButton" id="progress_menu_button">
@@ -50,8 +46,6 @@
             <child>
               <object class="GtkMenuButton" id="search_button">
                 <property name="name">Search toggle button</property>
-                <property name="focusable">1</property>
-                <property name="receives-default">1</property>
                 <property name="tooltip-text" translatable="1">Search your library</property>
                 <child>
                   <object class="GtkImage">
@@ -65,13 +59,10 @@
             </child>
             <child>
               <object class="GtkMenuButton" id="menu_button">
-                <property name="focusable">1</property>
-                <property name="receives-default">1</property>
                 <property name="tooltip-text" translatable="1">Options</property>
                 <child>
                   <object class="GtkImage">
                     <property name="icon-name">open-menu-symbolic</property>
-                    <property name="icon_size">large</property>
                   </object>
                 </child>
                 <accessibility>

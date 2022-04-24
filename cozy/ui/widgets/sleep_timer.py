@@ -101,4 +101,4 @@ class SleepTimer(Gtk.Popover):
         else:
             icon = "no-bed-symbolic"
 
-        self._timer_image.set_from_icon_name(icon, Gtk.IconSize.BUTTON)
+        self._timer_image.set_from_icon_name(icon)

@@ -39,14 +39,14 @@ class ChapterElement(Gtk.Box):
         title_label = Gtk.Label()
         dur_label = Gtk.Label()
 
-        self.play_img.set_margin_right(5)
+        self.play_img.set_margin_end(5)
         self.play_img.props.width_request = 16
 
         if self.chapter.number > 0:
             no_label.set_text(str(self.chapter.number))
         no_label.props.margin = 4
-        no_label.set_margin_right(7)
-        no_label.set_margin_left(0)
+        no_label.set_margin_end(7)
+        no_label.set_margin_start(0)
         no_label.set_size_request(30, -1)
         no_label.set_xalign(1)
 
@@ -87,9 +87,9 @@ class ChapterElement(Gtk.Box):
 
     def set_playing(self, playing):
         if playing:
-            self.play_icon.set_from_icon_name("pause-symbolic", Gtk.IconSize.NORMAL)
+            self.play_icon.set_from_icon_name("pause-symbolic")
         else:
-            self.play_icon.set_from_icon_name("play-symbolic", Gtk.IconSize.NORMAL)
+            self.play_icon.set_from_icon_name("play-symbolic")
 
 
 GObject.type_register(ChapterElement)

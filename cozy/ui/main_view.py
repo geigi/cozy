@@ -3,7 +3,7 @@ import os
 import webbrowser
 from threading import Thread
 
-from gi.repository import Gtk, Gio, Gdk, GLib
+from gi.repository import Gtk, Gio, Gdk, GLib, GObject
 
 import cozy.control.filesystem_monitor as fs_monitor
 import cozy.ext.inject as inject
@@ -122,10 +122,13 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.window.set_application(self.app)
         self.window.present()
         self.window.connect("close-request", self.on_close)
-        self.window.connect("drag_data_received", self.__on_drag_data_received)
-        self.window.connect("size-allocate", self._on_window_size_allocate)
-        self.window.drag_dest_set(Gtk.DestDefaults.MOTION | Gtk.DestDefaults.HIGHLIGHT | Gtk.DestDefaults.DROP,
-                                  [Gtk.TargetEntry.new("text/uri-list", 0, 80)], Gdk.DragAction.COPY)
+
+        self._drop_target = Gtk.DropTarget()
+        self._drop_target.connect("drop", self.__on_drag_data_received)
+        self.window.add_controller(self._drop_target)
+
+        self.window.connect("notify::default-width", self._on_window_size_allocate)
+        self.window.connect("notify::default-height", self._on_window_size_allocate)
         self.window.title = "Cozy"
 
         self.book_box = self.window_builder.get_object("book_box")
@@ -139,11 +142,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         # get about dialog
         self.about_dialog = self.about_builder.get_object("about_dialog")
         self.about_dialog.set_modal(self.window)
-        self.about_dialog.connect("delete-event", self.hide_window)
+        self.about_dialog.connect("close-request", self.hide_window)
         self.about_dialog.set_version(self.version)
-
-        # shortcuts
-        self.accel = Gtk.AccelGroup()
 
         try:
             about_close_button = self.about_builder.get_object(
@@ -161,8 +161,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         Init all app actions.
         """
-        self.accel = Gtk.AccelGroup()
-
         help_action = Gio.SimpleAction.new("help", None)
         help_action.connect("activate", self.help)
         self.app.add_action(help_action)
@@ -279,7 +277,6 @@ class CozyUI(EventSender, metaclass=Singleton):
             # we want to only block the player controls
             self.block_ui_buttons(False, True)
             self.block_ui_buttons(True, False)
-        self.window.props.window.set_cursor(None)
         self.emit_event_main_thread("working", False)
 
     def check_for_tracks(self):
@@ -333,14 +330,11 @@ class CozyUI(EventSender, metaclass=Singleton):
         action.set_state(value)
         self.application_settings.hide_offline = value.get_boolean()
 
-    def __on_drag_data_received(self, widget, context, x, y, selection, target_type, timestamp):
-        """
-        We want to import the files that are dragged onto the window.
-        inspired by https://stackoverflow.com/questions/24094186/drag-and-drop-file-example-in-pygobject
-        """
-        if target_type == 80:
-            thread = Thread(target=self._files.copy, args=[selection], name="DragDropImportThread")
-            thread.start()
+    def __on_drag_data_received(self, widget, value, *_):
+        print(value)
+        # if target_type == 80:
+        #     thread = Thread(target=self._files.copy, args=[selection], name="DragDropImportThread")
+        #     thread.start()
 
     def _set_audiobook_path(self, path):
         self._settings_view_model.add_first_storage_location(path)
@@ -384,8 +378,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         else:
             self.window.unmaximize()
 
-    def _on_window_size_allocate(self, _, __):
-        width, height = self.window.get_size()
+    def _on_window_size_allocate(self, *_):
+        width, height = self.window.get_default_size()
         self.application_settings.window_width = width
         self.application_settings.window_height = height
         self.application_settings.window_maximize = self.window.is_maximized()

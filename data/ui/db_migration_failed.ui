@@ -9,7 +9,6 @@
     <property name="window_position">center-on-parent</property>
     <property name="default_width">200</property>
     <property name="destroy_with_parent">1</property>
-    <property name="type_hint">dialog</property>
     <property name="urgency_hint">True</property>
     <property name="deletable">0</property>
     <child type="titlebar">
@@ -32,7 +31,6 @@
               <object class="GtkImage">
                 <property name="pixel_size">64</property>
                 <property name="icon_name">dialog-warning</property>
-                <property name="icon_size">6</property>
               </object>
             </child>
             <child>

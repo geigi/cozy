@@ -3,39 +3,30 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="libadwaita" version="1.0"/>
   <template class="BookElement" parent="GtkFlowBoxChild">
-    <property name="halign">center</property>
     <property name="valign">start</property>
-    <property name="hexpand">0</property>
-    <property name="vexpand">0</property>
+    <property name="halign">start</property>
     <child>
       <object class="AdwClamp">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="halign">center</property>
-        <property name="valign">start</property>
-        <property name="maximum-size">300</property>
-        <property name="tightening-threshold">250</property>
+        <property name="maximum-size">270</property>
+        <property name="tightening-threshold">200</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkBox" id="event_box">
+          <object class="AdwClamp">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="halign">center</property>
-            <property name="valign">start</property>
-            <property name="hexpand">False</property>
-            <property name="vexpand">False</property>
+            <property name="maximum-size">200</property>
+            <property name="tightening-threshold">100</property>
+            <property name="orientation">horizontal</property>
             <child>
               <object class="GtkBox" id="container_box">
-                <property name="width-request">200</property>
                 <property name="focusable">1</property>
                 <property name="tooltip-text" translatable="1">Open book overview</property>
-                <property name="halign">start</property>
-                <property name="valign">start</property>
                 <property name="margin-start">10</property>
                 <property name="margin-end">10</property>
                 <property name="margin-top">10</property>
                 <property name="margin-bottom">10</property>
-                <property name="hexpand">0</property>
-                <property name="vexpand">0</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">1</property>
                 <child>

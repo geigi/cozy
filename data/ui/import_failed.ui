@@ -6,7 +6,6 @@
     </property>
   </object>
   <object class="GtkDialog" id="dialog">
-    <property name="type_hint">dialog</property>
     <child internal-child="content_area">
       <object class="GtkBox">
         <property name="visible">0</property>
@@ -24,7 +23,6 @@
                 <property name="margin-start">5</property>
                 <property name="margin-end">10</property>
                 <property name="icon_name">dialog-warning</property>
-                <property name="icon_size">6</property>
               </object>
             </child>
             <child>
@@ -89,25 +87,16 @@
         </child>
       </object>
     </child>
-    <child>
-      <placeholder/>
-    </child>
     <child internal-child="action_area">
       <object class="GtkBox">
         <property name="valign">center</property>
         <property name="can_focus">False</property>
-        <property name="layout_style">end</property>
         <child>
           <object class="GtkButton" id="ok_button">
             <property name="label" translatable="1">Ok</property>
             <property name="focusable">1</property>
             <property name="receives_default">1</property>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
     </child>

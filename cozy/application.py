@@ -1,6 +1,7 @@
 import locale
 import logging
 import os
+import platform
 import sys
 import threading
 from pathlib import Path
@@ -106,8 +107,10 @@ class Application(Gtk.Application):
             os.makedirs(path, exist_ok=True)
 
         self.add_window(self.ui.window)
-        mpris = MPRIS(self)
-        mpris._on_current_changed()
+
+        if platform.system().lower() == "linux":
+            mpris = MPRIS(self)
+            mpris._on_current_changed()
 
     def handle_exception(self, exc_type, exc_value, exc_traceback):
         print("handle exception")

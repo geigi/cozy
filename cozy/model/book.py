@@ -202,7 +202,6 @@ class Book(Observable, EventSender):
         self.destroy_listeners()
         self._destroy_observers()
 
-    @timing
     def _fetch_chapters(self):
         tracks = TrackModel \
             .select() \

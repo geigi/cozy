@@ -16,14 +16,14 @@ class DiskElement(Gtk.Box):
             self.container.set_margin_top(18)
 
         self.container.set_margin_bottom(3)
-        self.container.set_margin_left(5)
+        self.container.set_margin_start(5)
         self.container.set_orientation(Gtk.Orientation.HORIZONTAL)
         self.container.get_style_context().add_class("dim-label")
 
-        image = Gtk.Image.new_from_icon_name("media-optical-cd-audio-symbolic", Gtk.IconSize.NORMAL)
+        image = Gtk.Image.new_from_icon_name("media-optical-cd-audio-symbolic")
         self.container.add(image)
         label = Gtk.Label()
-        label.set_margin_left(5)
+        label.set_margin_start(5)
         text = _("Disc") + " " + str(disc_number)
         label.set_markup("<b>" + text + "</b>")
         self.container.add(label)

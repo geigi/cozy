@@ -70,7 +70,6 @@
                                           <object class="GtkImage" id="play_img">
                                             <property name="focusable">1</property>
                                             <property name="icon-name">play-symbolic</property>
-                                            <property name="icon_size">5</property>
                                           </object>
                                         </child>
                                       </object>
@@ -90,7 +89,6 @@
                                         <child>
                                           <object class="GtkImage" id="download_image">
                                             <property name="icon-name">download-symbolic</property>
-                                            <property name="icon_size">3</property>
                                           </object>
                                         </child>
                                         <child>

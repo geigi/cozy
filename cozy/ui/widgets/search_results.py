@@ -78,7 +78,7 @@ class ArtistSearchResult(SearchResult):
         title_label.props.margin = 4
         title_label.props.hexpand = True
         title_label.props.hexpand_set = True
-        title_label.set_margin_right(5)
+        title_label.set_margin_end(5)
         title_label.props.width_request = 100
         title_label.props.xalign = 0.0
         title_label.set_line_wrap(True)
@@ -104,7 +104,7 @@ class BookSearchResult(SearchResult):
             surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
             img = Gtk.Image.new_from_surface(surface)
         else:
-            img = Gtk.Image.new_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.MENU)
+            img = Gtk.Image.new_from_icon_name("book-open-variant-symbolic")
             img.props.pixel_size = BOOK_ICON_SIZE
         img.set_size_request(BOOK_ICON_SIZE, BOOK_ICON_SIZE)
 
@@ -114,7 +114,7 @@ class BookSearchResult(SearchResult):
         title_label.props.margin = 4
         title_label.props.hexpand = True
         title_label.props.hexpand_set = True
-        title_label.set_margin_right(5)
+        title_label.set_margin_end(5)
         title_label.props.width_request = 100
         title_label.props.xalign = 0.0
         title_label.set_line_wrap(True)

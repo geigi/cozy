@@ -3,7 +3,6 @@ import subprocess
 
 from gi.repository import Gtk, GObject, Gdk
 
-from cozy.extensions.gtk_widget import set_hand_cursor, reset_cursor
 from cozy.model.book import Book
 from cozy.ui.widgets.album_element import AlbumElement
 
@@ -17,7 +16,6 @@ class BookElement(Gtk.FlowBoxChild):
     name_label: Gtk.Label = Gtk.Template.Child()
     author_label: Gtk.Label = Gtk.Template.Child()
     container_box: Gtk.Box = Gtk.Template.Child()
-    event_box: Gtk.Box = Gtk.Template.Child()
 
     def __init__(self, book: Book):
         self.book: Book = book
@@ -33,27 +31,29 @@ class BookElement(Gtk.FlowBoxChild):
         self.pressed = False
 
         self.container_box.prepend(self.art)
+        self.set_cursor(Gdk.Cursor.new_from_name("pointer"))
 
         self.art.connect("play-pause-clicked", self._on_album_art_press_event)
 
-        self._event_box_primary_gesture = Gtk.GestureClick()
-        self._event_box_primary_gesture.set_button(Gdk.BUTTON_PRIMARY)
-        self._event_box_primary_gesture.connect("pressed", self._select_item)
-        self._event_box_primary_gesture.connect("released", self._open_book_overview)
-        self.event_box.add_controller(self._event_box_primary_gesture)
+        self._container_box_primary_gesture = Gtk.GestureClick()
+        self._container_box_primary_gesture.set_button(Gdk.BUTTON_PRIMARY)
+        self._container_box_primary_gesture.connect("pressed", self._select_item)
+        self._container_box_primary_gesture.connect("released", self._open_book_overview)
+        self.container_box.add_controller(self._container_box_primary_gesture)
 
-        self._event_box_context_gesture = Gtk.GestureClick()
-        self._event_box_context_gesture.set_button(Gdk.BUTTON_SECONDARY)
-        self._event_box_context_gesture.connect("released", self._show_context_menu)
-        self.event_box.add_controller(self._event_box_context_gesture)
+        self._container_box_context_gesture = Gtk.GestureClick()
+        self._container_box_context_gesture.set_button(Gdk.BUTTON_SECONDARY)
+        self._container_box_context_gesture.connect("released", self._show_context_menu)
+        self.container_box.add_controller(self._container_box_context_gesture)
 
-        self._event_box_key = Gtk.EventControllerKey()
-        self._event_box_key.connect("key-pressed", self._on_key_press_event)
-        self.event_box.add_controller(self._event_box_key)
+        self._container_box_key = Gtk.EventControllerKey()
+        self._container_box_key.connect("key-pressed", self._on_key_press_event)
+        self.container_box.add_controller(self._container_box_key)
 
-        self._event_box_motion = Gtk.EventControllerMotion()
-        self._event_box_motion.connect("enter", self._on_cover_enter_notify)
-        self._event_box_motion.connect("leave", self._on_cover_leave_notify)
+        self._container_box_motion = Gtk.EventControllerMotion()
+        self._container_box_motion.connect("enter", self._on_cover_enter_notify)
+        self._container_box_motion.connect("leave", self._on_cover_leave_notify)
+        self.container_box.add_controller(self._container_box_motion)
 
     def set_playing(self, is_playing):
         self.art.set_playing(is_playing)
@@ -122,14 +122,11 @@ class BookElement(Gtk.FlowBoxChild):
             self.emit("open-book-overview", self.book)
             return True
 
-    def _on_cover_enter_notify(self, widget: Gtk.Widget, __):
-        set_hand_cursor(widget)
-
+    def _on_cover_enter_notify(self, widget: Gtk.Widget, *_):
         self.art.set_hover(True)
         return True
 
-    def _on_cover_leave_notify(self, widget: Gtk.Widget, __):
-        reset_cursor(widget)
+    def _on_cover_leave_notify(self, widget: Gtk.Widget, *_):
         self.art.set_hover(False)
         return True
 

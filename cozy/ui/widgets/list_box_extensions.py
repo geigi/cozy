@@ -11,7 +11,6 @@ def remove_all_children(self):
     while child:
         next = child.get_next_sibling()
         self.remove(child)
-        child.destory()
         child = next
 
     self.set_visible(True)

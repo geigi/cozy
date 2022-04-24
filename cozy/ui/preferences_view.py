@@ -41,12 +41,12 @@ class PreferencesView(Adw.PreferencesWindow):
 
         error_reporting = ErrorReporting()
         error_reporting.show_header(False)
-        self.user_feedback_preference_row.add(error_reporting)
+        self.user_feedback_preference_row.set_child(error_reporting)
 
         self._bind_settings()
         self._bind_view_model()
 
-        self.connect("delete-event", self._hide_window)
+        self.connect("close-request", self._hide_window)
 
         self.sleep_timer_fadeout_switch.connect("state-set", self._on_sleep_fadeout_switch_changed)
         self._on_sleep_fadeout_switch_changed(None, self.sleep_timer_fadeout_switch.get_active())
@@ -95,7 +95,7 @@ class PreferencesView(Adw.PreferencesWindow):
         for storage in self._view_model.storage_locations:
             row = StorageListBoxRow(storage)
             row.connect("location-changed", self._on_storage_location_changed)
-            self.storage_list_box.add(row)
+            self.storage_list_box.append(row)
 
     def _on_add_storage_clicked(self, _):
         self._view_model.add_storage_location()
@@ -143,8 +143,7 @@ class PreferencesView(Adw.PreferencesWindow):
         self._view_model.change_storage_location(widget.model, new_location)
 
     def _refresh_storage_rows(self):
-        for row in self.storage_list_box.get_children():
-            row.refresh()
+        self._init_storage_box()
         
         self._on_storage_box_changed(None, self.storage_list_box.get_selected_row())
     
@@ -158,6 +157,6 @@ class PreferencesView(Adw.PreferencesWindow):
         self.default_storage_button.set_sensitive(sensitive)
         self._on_storage_box_changed(None, self.storage_list_box.get_selected_row())
     
-    def _hide_window(self, _, __):
+    def _hide_window(self, *_):
         self.hide()
         return True

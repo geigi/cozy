@@ -9,7 +9,6 @@
         <property name="vexpand">1</property>
         <property name="pixel-size">200</property>
         <property name="icon-name">com.github.geigi.cozy</property>
-        <property name="icon_size">6</property>
       </object>
     </child>
     <child>

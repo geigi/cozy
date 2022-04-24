@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <requires lib="libadwaita" version="0.0"/>
-  <object class="GtkImage" id="add_image">
-    <property name="icon-name">list-add-symbolic</property>
-  </object>
-  <object class="GtkImage" id="default_image">
-    <property name="icon-name">checkmark-symbolic</property>
-  </object>
-  <object class="GtkImage" id="external_image">
-    <property name="icon-name">network-server-symbolic</property>
-  </object>
+  <requires lib="libadwaita" version="1.0"/>
   <object class="GtkAdjustment" id="fadeout_duration_adjustment">
     <property name="upper">121</property>
     <property name="step-increment">5</property>
@@ -22,9 +13,6 @@
     <property name="step-increment">5</property>
     <property name="page-increment">10</property>
   </object>
-  <object class="GtkImage" id="remove_image">
-    <property name="icon-name">list-remove-symbolic</property>
-  </object>
   <object class="GtkAdjustment" id="rewind_duration_adjustment">
     <property name="lower">5</property>
     <property name="upper">121</property>
@@ -34,10 +22,7 @@
   </object>
   <template class="PreferencesWindow" parent="AdwPreferencesWindow">
     <property name="can-focus">False</property>
-    <property name="type">popup</property>
-    <property name="window-position">center-on-parent</property>
     <property name="destroy-with-parent">True</property>
-    <property name="gravity">center</property>
     <child>
       <object class="AdwPreferencesPage">
         <property name="visible">True</property>
@@ -76,7 +61,8 @@
                 <property name="can-focus">False</property>
                 <property name="title">Swap author and reader</property>
                 <property name="activatable-widget">swap_author_reader_switch</property>
-                <property name="subtitle" translatable="1">Activate if author and reader are displayed the wrong way</property>
+                <property name="subtitle" translatable="1">Activate if author and reader are displayed the wrong way
+                </property>
                 <child>
                   <object class="GtkSwitch" id="swap_author_reader_switch">
                     <property name="halign">center</property>
@@ -98,7 +84,8 @@
                 <property name="can-focus">False</property>
                 <property name="title">Replay</property>
                 <property name="activatable-widget">replay_switch</property>
-                <property name="subtitle" translatable="1">Rewind 30 seconds of the current book when starting Cozy</property>
+                <property name="subtitle" translatable="1">Rewind 30 seconds of the current book when starting Cozy
+                </property>
                 <child>
                   <object class="GtkSwitch" id="replay_switch">
                     <property name="halign">center</property>
@@ -117,7 +104,6 @@
                     <property name="focusable">1</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
-                    <property name="input-purpose">digits</property>
                     <property name="adjustment">rewind_duration_adjustment</property>
                     <property name="snap-to-ticks">1</property>
                     <property name="numeric">1</property>
@@ -137,7 +123,6 @@
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="text">15</property>
-                    <property name="input-purpose">digits</property>
                     <property name="adjustment">forward_duration_adjustment</property>
                     <property name="snap-to-ticks">1</property>
                     <property name="numeric">1</property>
@@ -178,7 +163,6 @@
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="text">15</property>
-                    <property name="input-purpose">digits</property>
                     <property name="adjustment">fadeout_duration_adjustment</property>
                     <property name="snap-to-ticks">1</property>
                     <property name="numeric">1</property>
@@ -207,7 +191,8 @@
                 <property name="can-focus">False</property>
                 <property name="title">Prefer external images over embedded cover</property>
                 <property name="activatable-widget">artwork_prefer_external_switch</property>
-                <property name="subtitle" translatable="1">Always use images (cover.jpg, *.png, …) when available</property>
+                <property name="subtitle" translatable="1">Always use images (cover.jpg, *.png, …) when available
+                </property>
                 <child>
                   <object class="GtkSwitch" id="artwork_prefer_external_switch">
                     <property name="halign">center</property>
@@ -240,12 +225,10 @@
                     <child>
                       <object class="GtkFrame">
                         <property name="height-request">250</property>
-                        <property name="shadow-type">none</property>
                         <property name="child">
                           <object class="GtkScrolledWindow">
                             <property name="focusable">1</property>
                             <property name="hscrollbar-policy">never</property>
-                            <property name="shadow-type">in</property>
                             <property name="child">
                               <object class="GtkViewport">
                                 <property name="child">
@@ -268,97 +251,78 @@
                         <property name="height-request">24</property>
                         <property name="can-focus">0</property>
                         <child>
-                          <object class="GtkToolItem">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
+                          <object class="GtkButton" id="add_storage_button">
+                            <property name="width-request">24</property>
+                            <property name="height-request">24</property>
                             <property name="tooltip-text" translatable="1">Add location</property>
                             <child>
-                              <object class="GtkButton" id="add_storage_button">
-                                <property name="width-request">24</property>
-                                <property name="height-request">24</property>
-                                <property name="focusable">1</property>
-                                <property name="image">add_image</property>
-                                <property name="relief">none</property>
-                                <property name="always-show-image">True</property>
-                                <style>
-                                  <class name="flat"/>
-                                </style>
+                              <object class="GtkImage" id="add_image">
+                                <property name="icon-name">list-add-symbolic</property>
                               </object>
                             </child>
+                            <style>
+                              <class name="flat"/>
+                            </style>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkToolItem">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
+                          <object class="GtkButton" id="remove_storage_button">
+                            <property name="width-request">24</property>
+                            <property name="height-request">24</property>
+                            <property name="sensitive">0</property>
                             <property name="tooltip-text" translatable="1">Remove location</property>
                             <child>
-                              <object class="GtkButton" id="remove_storage_button">
-                                <property name="width-request">24</property>
-                                <property name="height-request">24</property>
-                                <property name="sensitive">0</property>
-                                <property name="focusable">1</property>
-                                <property name="image">remove_image</property>
-                                <property name="relief">none</property>
-                                <property name="always-show-image">True</property>
-                                <style>
-                                  <class name="flat"/>
-                                </style>
+                              <object class="GtkImage" id="remove_image">
+                                <property name="icon-name">list-remove-symbolic</property>
                               </object>
                             </child>
+                            <style>
+                              <class name="flat"/>
+                            </style>
                           </object>
                         </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="orientation">vertical</property>
                             <property name="can-focus">0</property>
-                            <property name="draw">False</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkToolItem">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="tooltip-text" translatable="1">Toggle this storage location to be internal/external.</property>
-                            <property name="halign">end</property>
+                          <object class="GtkToggleButton" id="external_storage_toggle_button">
+                            <property name="label" translatable="1">External drive</property>
+                            <property name="width-request">24</property>
+                            <property name="height-request">24</property>
+                            <property name="sensitive">0</property>
+                            <property name="tooltip-text" translatable="1">Toggle this storage location to be
+                              internal/external.
+                            </property>
                             <child>
-                              <object class="GtkToggleButton" id="external_storage_toggle_button">
-                                <property name="label" translatable="1">External drive</property>
-                                <property name="width-request">24</property>
-                                <property name="height-request">24</property>
-                                <property name="sensitive">0</property>
-                                <property name="focusable">1</property>
-                                <property name="image">external_image</property>
-                                <property name="relief">none</property>
-                                <property name="always-show-image">True</property>
-                                <style>
-                                  <class name="flat"/>
-                                </style>
+                              <object class="GtkImage" id="external_image">
+                                <property name="icon-name">network-server-symbolic</property>
                               </object>
                             </child>
+                            <style>
+                              <class name="flat"/>
+                            </style>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkToolItem">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="tooltip-text" translatable="1">Set as default storage location for new audiobooks</property>
-                            <property name="halign">end</property>
+                          <object class="GtkButton" id="default_storage_button">
+                            <property name="label" translatable="1">Set as default</property>
+                            <property name="width-request">24</property>
+                            <property name="height-request">24</property>
+                            <property name="sensitive">0</property>
+                            <property name="tooltip-text" translatable="1">Set as default storage location for new
+                              audiobooks
+                            </property>
                             <child>
-                              <object class="GtkButton" id="default_storage_button">
-                                <property name="label" translatable="1">Set as default</property>
-                                <property name="width-request">24</property>
-                                <property name="height-request">24</property>
-                                <property name="sensitive">0</property>
-                                <property name="focusable">1</property>
-                                <property name="image">default_image</property>
-                                <property name="relief">none</property>
-                                <property name="always-show-image">True</property>
-                                <style>
-                                  <class name="flat"/>
-                                </style>
+                              <object class="GtkImage" id="default_image">
+                                <property name="icon-name">checkmark-symbolic</property>
                               </object>
                             </child>
+                            <style>
+                              <class name="flat"/>
+                            </style>
                           </object>
                         </child>
                         <style>

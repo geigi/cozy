@@ -99,10 +99,11 @@ class BookDetailView(Gtk.Box):
         #self.main_flow_box.connect("size-allocate", self._main_flow_box_size_changed)
 
     def _add_mouse_button_accel(self):
-        self.gesture = Gtk.GestureClick(widget=self)
+        self.gesture = Gtk.GestureClick()
         self.gesture.set_button(0)
         self.gesture.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
         self.gesture.connect('pressed', self._on_mouse_event)
+        self.add_controller(self.gesture)
 
     def _on_book_changed(self):
         if not self._view_model.book:
@@ -143,7 +144,7 @@ class BookDetailView(Gtk.Box):
         playing = self._view_model.playing
 
         play_button_img = "pause-symbolic" if playing else "play-symbolic"
-        self.play_img.set_from_icon_name(play_button_img, Gtk.IconSize.DND)
+        self.play_img.set_from_icon_name(play_button_img)
 
         if self._current_selected_chapter:
             self._current_selected_chapter.set_playing(playing)
@@ -311,7 +312,7 @@ class BookDetailView(Gtk.Box):
             icon_name = "download-symbolic"
             text = _("Download")
 
-        self.download_image.set_from_icon_name(icon_name, Gtk.IconSize.LARGE_TOOLBAR)
+        self.download_image.set_from_icon_name(icon_name)
         self.download_label.set_text(text)
 
     def _play_chapter_clicked(self, _, chapter: Chapter):
