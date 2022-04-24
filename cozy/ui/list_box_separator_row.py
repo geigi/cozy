@@ -9,6 +9,6 @@ class ListBoxSeparatorRow(Gtk.ListBoxRow):
     def __init__(self):
         super().__init__()
         separator = Gtk.Separator()
-        self.add(separator)
+        self.set_child(separator)
         self.set_sensitive(False)
         self.props.selectable = False

@@ -3,15 +3,19 @@ from gi.repository import Gtk
 
 def remove_all_children(self):
     """
-    Removes all widgets from a gtk container.
+    Removes all widgets from a gtk widget.
     """
     self.set_visible(False)
-    childs = self.get_children()
-    for element in childs:
-        self.remove(element)
-        element.destroy()
+
+    child = self.get_first_child()
+    while child:
+        next = child.get_next_sibling()
+        self.remove(child)
+        child.destory()
+        child = next
+
     self.set_visible(True)
 
 
 def extend_gtk_container():
-    Gtk.Container.remove_all_children = remove_all_children
+    Gtk.Widget.remove_all_children = remove_all_children

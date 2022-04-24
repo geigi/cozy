@@ -1,6 +1,7 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
-	<menu id="titlebar_menu">
+  <requires lib="gtk" version="4.0"/>
+  <menu id="titlebar_menu">
     <section>
       <item>
         <attribute name="action">app.scan</attribute>

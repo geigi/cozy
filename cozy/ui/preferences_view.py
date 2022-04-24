@@ -1,17 +1,17 @@
 from gi.repository import Gtk
 from cozy.view_model.settings_view_model import SettingsViewModel
 import gi
-from gi.repository import Handy, Gio
+from gi.repository import Adw, Gio
 
 from cozy.ext import inject
 from cozy.ui.widgets.error_reporting import ErrorReporting
 from cozy.ui.widgets.storage_list_box_row import StorageListBoxRow
 
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/preferences.ui')
-class PreferencesView(Handy.PreferencesWindow):
+class PreferencesView(Adw.PreferencesWindow):
     __gtype_name__ = "PreferencesWindow"
 
     _glib_settings: Gio.Settings = inject.attr(Gio.Settings)
@@ -21,7 +21,7 @@ class PreferencesView(Handy.PreferencesWindow):
     swap_author_reader_switch: Gtk.Switch = Gtk.Template.Child()
     replay_switch: Gtk.Switch = Gtk.Template.Child()
     sleep_timer_fadeout_switch: Gtk.Switch = Gtk.Template.Child()
-    sleep_timer_fadeout_row: Handy.ActionRow = Gtk.Template.Child()
+    sleep_timer_fadeout_row: Adw.ActionRow = Gtk.Template.Child()
     artwork_prefer_external_switch: Gtk.Switch = Gtk.Template.Child()
 
     rewind_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
@@ -34,7 +34,7 @@ class PreferencesView(Handy.PreferencesWindow):
     external_storage_toggle_button: Gtk.ToggleButton = Gtk.Template.Child()
     default_storage_button: Gtk.ToggleButton = Gtk.Template.Child()
 
-    user_feedback_preference_row: Handy.PreferencesRow = Gtk.Template.Child()
+    user_feedback_preference_row: Adw.PreferencesRow = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

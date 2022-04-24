@@ -28,5 +28,5 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
         label.set_margin_start(7)
         label.set_max_width_chars(30)
         label.set_ellipsize(Pango.EllipsizeMode.END)
-        self.add(label)
+        self.set_child(label)
         self.set_tooltip_text(data)

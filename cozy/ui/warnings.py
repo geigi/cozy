@@ -5,7 +5,7 @@ import cozy.ext.inject as inject
 
 from cozy.control.filesystem_monitor import FilesystemMonitor
 
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
 

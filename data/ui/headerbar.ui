@@ -1,125 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
-  <requires lib="libhandy" version="1.0"/>
-  <object class="GtkImage" id="back_img">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="icon-name">go-previous-symbolic</property>
-  </object>
-  <template class="Headerbar" parent="HdyHeaderBar">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="vexpand">False</property>
-    <property name="show-close-button">True</property>
-    <child type="title">
-      <object class="GtkRevealer" id="toolbar_revealer">
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <template class="Headerbar" parent="GtkBox">
+    <child>
+      <object class="AdwHeaderBar" id="headerbar">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="transition-type">slide-up</property>
-        <property name="reveal-child">True</property>
+        <property name="vexpand">False</property>
+        <child type="title">
+          <object class="GtkRevealer" id="toolbar_revealer">
+            <property name="transition-type">slide-up</property>
+            <property name="reveal-child">1</property>
+            <child>
+              <object class="AdwViewSwitcherTitle" id="category_toolbar">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">center</property>
+                <property name="title">Cozy</property>
+              </object>
+            </child>
+          </object>
+        </child>
         <child>
-          <object class="HdyViewSwitcherTitle" id="category_toolbar">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
+          <object class="GtkButton" id="back_button">
+            <property name="focusable">1</property>
+            <property name="receives-default">1</property>
             <property name="halign">center</property>
-            <property name="policy">wide</property>
-            <property name="title">Cozy</property>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="back_button">
-        <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="receives-default">True</property>
-        <property name="halign">center</property>
-        <property name="valign">center</property>
-        <property name="image">back_img</property>
-        <property name="always-show-image">True</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox" id="tools_box">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="valign">center</property>
-        <property name="vexpand">True</property>
-        <property name="spacing">6</property>
-        <child>
-          <object class="DzlProgressMenuButton" id="progress_menu_button">
-            <property name="visible">False</property>
-            <property name="can-focus">True</property>
-            <property name="theatric-icon-name">emblem-default-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Display background task progress</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">4</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkMenuButton" id="search_button">
-            <property name="name">Search toggle button</property>
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="tooltip-text" translatable="yes">Search your library</property>
+            <property name="valign">center</property>
             <child>
               <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="icon-name">edit-find-symbolic</property>
-              </object>
-            </child>
-            <child internal-child="accessible">
-              <object class="AtkObject" id="search_button-atkobject">
-                <property name="AtkObject::accessible-name" translatable="yes">Search menu button</property>
-                <property name="AtkObject::accessible-description" translatable="yes">Open the search popover</property>
+                <property name="icon-name">go-previous-symbolic</property>
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">4</property>
-          </packing>
         </child>
         <child>
-          <object class="GtkMenuButton" id="menu_button">
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="tooltip-text" translatable="yes">Options</property>
+          <object class="GtkBox" id="tools_box">
+            <property name="valign">center</property>
+            <property name="vexpand">1</property>
+            <property name="spacing">6</property>
             <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="icon-name">open-menu-symbolic</property>
-                <property name="icon_size">2</property>
+              <object class="GtkMenuButton" id="progress_menu_button">
+                <property name="visible">False</property>
+                <property name="can-focus">True</property>
+                <property name="tooltip-text" translatable="1">Display background task progress</property>
               </object>
             </child>
-            <child internal-child="accessible">
-              <object class="AtkObject" id="menu_button-atkobject">
-                <property name="AtkObject::accessible-name" translatable="yes">Options menu button</property>
-                <property name="AtkObject::accessible-description" translatable="yes">Open the options popover</property>
+            <child>
+              <object class="GtkMenuButton" id="search_button">
+                <property name="name">Search toggle button</property>
+                <property name="focusable">1</property>
+                <property name="receives-default">1</property>
+                <property name="tooltip-text" translatable="1">Search your library</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="icon-name">edit-find-symbolic</property>
+                  </object>
+                </child>
+                <accessibility>
+                  <property name="label" translatable="1">Open the search popover</property>
+                </accessibility>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuButton" id="menu_button">
+                <property name="focusable">1</property>
+                <property name="receives-default">1</property>
+                <property name="tooltip-text" translatable="1">Options</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="icon_size">large</property>
+                  </object>
+                </child>
+                <accessibility>
+                  <property name="label" translatable="1">Open the options popover</property>
+                </accessibility>
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">5</property>
-          </packing>
         </child>
       </object>
-      <packing>
-        <property name="pack-type">end</property>
-        <property name="position">2</property>
-      </packing>
     </child>
   </template>
 </interface>

@@ -1,4 +1,4 @@
-from gi.repository import Gtk, Handy
+from gi.repository import Gtk, Adw
 
 from cozy.ext import inject
 from cozy.view_model.app_view_model import AppViewModel
@@ -27,7 +27,7 @@ class AppView:
 
     def _get_ui_elements(self):
         self._main_stack: Gtk.Stack = self._builder.get_object("main_stack")
-        self._library_leaflet: Handy.Leaflet = self._builder.get_object("library_leaflet")
+        self._library_leaflet: Adw.Leaflet = self._builder.get_object("library_leaflet")
 
     def _connect_ui_elements(self):
         self._main_stack.connect("notify::visible-child", self._update_view_model_view)

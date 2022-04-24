@@ -3,7 +3,7 @@ import gi
 from cozy.ext import inject
 from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel, SystemPowerControl
 
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
 
@@ -21,8 +21,8 @@ class SleepTimer(Gtk.Popover):
 
     power_control_switch: Gtk.Switch = Gtk.Template.Child()
     power_control_options: Gtk.Box = Gtk.Template.Child()
-    system_shutdown_radiob: Gtk.RadioButton = Gtk.Template.Child()
-    system_suspend_radiob: Gtk.RadioButton = Gtk.Template.Child()
+    system_shutdown_radiob: Gtk.CheckButton = Gtk.Template.Child()
+    system_suspend_radiob: Gtk.CheckButton = Gtk.Template.Child()
 
     def __init__(self, timer_image: Gtk.Image):
         super().__init__()

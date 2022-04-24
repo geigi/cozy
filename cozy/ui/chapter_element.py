@@ -5,10 +5,10 @@ from cozy.model.chapter import Chapter
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/chapter_element.ui')
-class ChapterElement(Gtk.EventBox):
+class ChapterElement(Gtk.Box):
     __gtype_name__ = "ChapterElement"
 
-    icon_event_box: Gtk.EventBox = Gtk.Template.Child()
+    icon_event_box: Gtk.Box = Gtk.Template.Child()
     icon_stack: Gtk.Stack = Gtk.Template.Child()
     number_label: Gtk.Label = Gtk.Template.Child()
     play_icon: Gtk.Image = Gtk.Template.Child()
@@ -87,9 +87,9 @@ class ChapterElement(Gtk.EventBox):
 
     def set_playing(self, playing):
         if playing:
-            self.play_icon.set_from_icon_name("pause-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+            self.play_icon.set_from_icon_name("pause-symbolic", Gtk.IconSize.NORMAL)
         else:
-            self.play_icon.set_from_icon_name("play-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+            self.play_icon.set_from_icon_name("play-symbolic", Gtk.IconSize.NORMAL)
 
 
 GObject.type_register(ChapterElement)

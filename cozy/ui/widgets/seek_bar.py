@@ -3,7 +3,7 @@ from gi.repository import GObject, Gdk
 
 from cozy.control.string_representation import seconds_to_str
 
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
 
@@ -14,17 +14,22 @@ class SeekBar(Gtk.Box):
     progress_scale: Gtk.Scale = Gtk.Template.Child()
     current_label: Gtk.Label = Gtk.Template.Child()
     remaining_label: Gtk.Label = Gtk.Template.Child()
-    remaining_event_box: Gtk.EventBox = Gtk.Template.Child()
+    remaining_event_box: Gtk.Box = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         self._progress_scale_pressed = False
 
-        self.progress_scale.connect("value-changed", self._on_progress_scale_changed)
-        self.progress_scale.connect("button-release-event", self._on_progress_scale_clicked)
-        self.progress_scale.connect("button-press-event", self._on_progress_scale_press)
-        self.progress_scale.connect("key-press-event", self._on_progress_key_pressed)
+        self._progress_scale_gesture = Gtk.GestureClick()
+        self._progress_scale_gesture.connect("pressed", self._on_progress_scale_press)
+        self._progress_scale_gesture.connect("released", self._on_progress_scale_release)
+        self.progress_scale.add_controller(self._progress_scale_gesture)
+
+        self._progress_scale_key = Gtk.EventControllerKey()
+        self._progress_scale_key.connect("key-pressed", self._on_progress_scale_press)
+        self._progress_scale_key.connect("key-released", self._on_progress_scale_release)
+        self.progress_scale.add_controller(self._progress_scale_key)
 
     @property
     def position(self) -> float:
@@ -72,7 +77,7 @@ class SeekBar(Gtk.Box):
         self.current_label.set_markup("<span font_features='tnum'>" + current_text + "</span>")
         self.remaining_label.set_markup("<span font_features='tnum'>-" + remaining_text + "</span>")
 
-    def _on_progress_scale_clicked(self, _, __):
+    def _on_progress_scale_release(self, _, __):
         self._progress_scale_pressed = False
         value = self.progress_scale.get_value()
         self.emit("position-changed", value)

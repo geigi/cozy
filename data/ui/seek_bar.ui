@@ -1,97 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkAdjustment" id="seek_bar_adjustment">
     <property name="upper">100</property>
     <property name="step-increment">1</property>
     <property name="page-increment">15</property>
   </object>
   <template class="SeekBar" parent="GtkBox">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
     <property name="valign">center</property>
-    <property name="hexpand">True</property>
+    <property name="hexpand">1</property>
     <property name="spacing">5</property>
     <child>
       <object class="GtkLabel" id="current_label">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="tooltip-text" translatable="yes">Elapsed time</property>
+        <property name="tooltip-text" translatable="1">Elapsed time</property>
         <property name="halign">end</property>
         <property name="valign">center</property>
-        <property name="label">&lt;span font_features='tnum'&gt;--:--&lt;/span&gt;</property>
-        <property name="use-markup">True</property>
-        <property name="single-line-mode">True</property>
-        <child internal-child="accessible">
-          <object class="AtkObject" id="current_label-atkobject">
-            <property name="AtkObject::accessible-name" translatable="yes">Time elapsed</property>
-            <property name="AtkObject::accessible-description" translatable="yes">Elapsed time of current part</property>
-          </object>
-        </child>
+        <property name="label">&lt;span font_features=&apos;tnum&apos;&gt;--:--&lt;/span&gt;</property>
+        <property name="use-markup">1</property>
+        <property name="single-line-mode">1</property>
+        <accessibility>
+          <property name="label" translatable="1">Elapsed time of current part</property>
+        </accessibility>
       </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">1</property>
-      </packing>
     </child>
     <child>
       <object class="GtkScale" id="progress_scale">
         <property name="width-request">150</property>
-        <property name="visible">True</property>
-        <property name="sensitive">False</property>
-        <property name="can-focus">True</property>
-        <property name="tooltip-text" translatable="yes">Jump to position in current chapter</property>
+        <property name="sensitive">0</property>
+        <property name="focusable">1</property>
+        <property name="tooltip-text" translatable="1">Jump to position in current chapter</property>
         <property name="valign">center</property>
-        <property name="hexpand">True</property>
+        <property name="hexpand">1</property>
         <property name="adjustment">seek_bar_adjustment</property>
-        <property name="lower-stepper-sensitivity">on</property>
-        <property name="upper-stepper-sensitivity">on</property>
-        <property name="restrict-to-fill-level">False</property>
+        <property name="restrict-to-fill-level">0</property>
         <property name="fill-level">0</property>
-        <property name="draw-value">False</property>
-        <child internal-child="accessible">
-          <object class="AtkObject" id="progress_scale-atkobject">
-            <property name="AtkObject::accessible-name" translatable="yes">Position slider</property>
-            <property name="AtkObject::accessible-description" translatable="yes">Position of the current part in seconds</property>
-          </object>
-        </child>
+        <accessibility>
+          <property name="label" translatable="1">Position of the current part in seconds</property>
+        </accessibility>
       </object>
-      <packing>
-        <property name="expand">True</property>
-        <property name="fill">True</property>
-        <property name="position">2</property>
-      </packing>
     </child>
     <child>
-      <object class="GtkEventBox" id="remaining_event_box">
+      <object class="GtkBox" id="remaining_event_box">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="valign">center</property>
         <child>
           <object class="GtkLabel" id="remaining_label">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="tooltip-text" translatable="yes">Remaining time</property>
+            <property name="tooltip-text" translatable="1">Remaining time</property>
             <property name="halign">start</property>
-            <property name="label">&lt;span font_features='tnum'&gt;--:--&lt;/span&gt;</property>
-            <property name="use-markup">True</property>
-            <property name="single-line-mode">True</property>
-            <child internal-child="accessible">
-              <object class="AtkObject" id="remaining_label-atkobject">
-                <property name="AtkObject::accessible-name" translatable="yes">Time remaining</property>
-                <property name="AtkObject::accessible-description" translatable="yes">Remaining time of current part</property>
-              </object>
-            </child>
+            <property name="label">&lt;span font_features=&apos;tnum&apos;&gt;--:--&lt;/span&gt;</property>
+            <property name="use-markup">1</property>
+            <property name="single-line-mode">1</property>
+            <accessibility>
+              <property name="label" translatable="1">Remaining time of current part</property>
+            </accessibility>
           </object>
         </child>
       </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">3</property>
-      </packing>
     </child>
   </template>
 </interface>

@@ -5,7 +5,7 @@ import gi
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
 
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
 LEVELS = [

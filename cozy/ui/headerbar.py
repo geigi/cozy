@@ -6,11 +6,9 @@ from cozy.ext import inject
 from cozy.ui.widgets.progress_popover import ProgressPopover
 from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarState
 
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 gi.require_version('Dazzle', '1.0')
-from gi.repository import Gtk, Handy
-from gi.repository.Handy import HeaderBar
-from gi.repository.Dazzle import ProgressMenuButton
+from gi.repository import Gtk, Adw
 
 log = logging.getLogger("Headerbar")
 
@@ -18,25 +16,27 @@ COVER_SIZE = 45
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/headerbar.ui')
-class Headerbar(HeaderBar):
+class Headerbar(Gtk.Box):
     __gtype_name__ = "Headerbar"
+
+    headerbar: Adw.HeaderBar = Gtk.Template.Child()
 
     search_button: Gtk.MenuButton = Gtk.Template.Child()
     menu_button: Gtk.MenuButton = Gtk.Template.Child()
 
-    progress_menu_button: ProgressMenuButton = Gtk.Template.Child()
+    progress_menu_button: Gtk.MenuButton = Gtk.Template.Child()
 
     back_button: Gtk.Button = Gtk.Template.Child()
-    category_toolbar: Handy.ViewSwitcherTitle = Gtk.Template.Child()
+    category_toolbar: Adw.ViewSwitcherTitle = Gtk.Template.Child()
 
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
-        self._library_mobile_view_switcher: Handy.ViewSwitcherBar = main_window_builder.get_object(
+        self._library_mobile_view_switcher: Adw.ViewSwitcherBar = main_window_builder.get_object(
             "library_mobile_view_switcher")
         self._library_mobile_revealer: Gtk.Revealer = main_window_builder.get_object("library_mobile_revealer")
         self._header_container: Gtk.Box = main_window_builder.get_object("header_container")
-        self._header_container.pack_start(self, False, True, 0)
+        self._header_container.prepend(self)
 
         self._sort_stack: Gtk.Stack = main_window_builder.get_object("sort_stack")
         self.category_toolbar.set_stack(self._sort_stack)
@@ -70,15 +70,16 @@ class Headerbar(HeaderBar):
     def _on_state_changed(self):
         if self._headerbar_view_model.state == HeaderBarState.PLAYING:
             progress_visible = False
-            self.progress_menu_button.set_progress(0)
+            #TODO Replace progress menu button
+            #self.progress_menu_button.set_progress(0)
         else:
             progress_visible = True
 
-        self.progress_menu_button.set_visible(progress_visible)
+        #self.progress_menu_button.set_visible(progress_visible)
 
     def _on_work_progress_changed(self):
         progress = self._headerbar_view_model.work_progress
-        self.progress_menu_button.set_progress(progress)
+        #self.progress_menu_button.set_progress(progress)
         self.progress_popover.set_progress(progress)
 
     def _on_work_message_changed(self):

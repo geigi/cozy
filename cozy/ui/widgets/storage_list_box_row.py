@@ -49,7 +49,6 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         box.add(self.location_chooser)
         box.add(self.default_image)
         self.add(box)
-        self.show_all()
         self._set_default_icon()
 
     @property

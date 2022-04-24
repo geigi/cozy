@@ -20,7 +20,7 @@ class DiskElement(Gtk.Box):
         self.container.set_orientation(Gtk.Orientation.HORIZONTAL)
         self.container.get_style_context().add_class("dim-label")
 
-        image = Gtk.Image.new_from_icon_name("media-optical-cd-audio-symbolic", Gtk.IconSize.SMALL_TOOLBAR)
+        image = Gtk.Image.new_from_icon_name("media-optical-cd-audio-symbolic", Gtk.IconSize.NORMAL)
         self.container.add(image)
         label = Gtk.Label()
         label.set_margin_left(5)

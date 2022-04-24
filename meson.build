@@ -13,7 +13,7 @@ else
 endif
 
 dependency('glib-2.0')
-dependency('libhandy-1', version: '>= 1.0.0')
+dependency('libadwaita-1', version: '>= 1.0.0')
 
 # from https://github.com/AsavarTzeth/pulseeffects/blob/master/meson.build
 # Support Debian non-standard python paths

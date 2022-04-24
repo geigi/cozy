@@ -1,132 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
+  <requires lib="gtk" version="4.0"/>
   <template class="WhatsNewImporter" parent="GtkBox">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_left">20</property>
-    <property name="margin_right">20</property>
-    <property name="vexpand">True</property>
+    <property name="margin-start">20</property>
+    <property name="margin-end">20</property>
+    <property name="vexpand">1</property>
     <property name="orientation">vertical</property>
     <property name="spacing">10</property>
     <child>
       <object class="GtkLabel">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">What's new in Cozy</property>
+        <property name="label" translatable="1">What&apos;s new in Cozy</property>
         <style>
           <class name="h1"/>
         </style>
       </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
     </child>
     <child>
       <object class="GtkImage">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="vexpand">1</property>
         <property name="margin_top">20</property>
         <property name="pixel_size">160</property>
         <property name="icon_name">com.github.geigi.cozy</property>
       </object>
-      <packing>
-        <property name="expand">True</property>
-        <property name="fill">True</property>
-        <property name="position">1</property>
-      </packing>
     </child>
     <child>
       <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="vexpand">1</property>
         <property name="orientation">vertical</property>
         <property name="spacing">10</property>
         <child>
           <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">A completely rewritten and far more reliable media importer.</property>
-            <property name="wrap">True</property>
+            <property name="label" translatable="1">A completely rewritten and far more reliable media importer.</property>
+            <property name="wrap">1</property>
             <style>
               <class name="h3"/>
             </style>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="valign">center</property>
             <property name="margin_top">20</property>
             <property name="orientation">vertical</property>
             <property name="spacing">10</property>
             <child>
               <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">Did you experience audio files that couldn't be imported? Drag &amp; Drop those files onto Cozy or use the application menu in the titlebar to rescan your audiobook directories!</property>
+                <property name="label" translatable="1">Did you experience audio files that couldn&apos;t be imported? Drag &amp; Drop those files onto Cozy or use the application menu in the titlebar to rescan your audiobook directories!</property>
                 <property name="justify">fill</property>
-                <property name="wrap">True</property>
+                <property name="wrap">1</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">Supported media files currently are mp3, m4a, flac, ogg, opus and wav.</property>
+                <property name="label" translatable="1">Supported media files currently are mp3, m4a, flac, ogg, opus and wav.</property>
                 <property name="justify">fill</property>
-                <property name="wrap">True</property>
+                <property name="wrap">1</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">More to come in a later update.</property>
+                <property name="label" translatable="1">More to come in a later update.</property>
                 <property name="justify">fill</property>
-                <property name="wrap">True</property>
+                <property name="wrap">1</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
-      <packing>
-        <property name="expand">True</property>
-        <property name="fill">True</property>
-        <property name="position">5</property>
-      </packing>
     </child>
   </template>
 </interface>

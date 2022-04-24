@@ -32,14 +32,28 @@ class BookElement(Gtk.FlowBoxChild):
         self.context_menu = None
         self.pressed = False
 
-        self.container_box.pack_start(self.art, False, True, 0)
+        self.container_box.prepend(self.art)
 
         self.art.connect("play-pause-clicked", self._on_album_art_press_event)
-        self.event_box.connect("button-press-event", self._on_button_press_event)
-        self.event_box.connect("button-release-event", self._on_button_release_event)
-        self.event_box.connect("key-press-event", self._on_key_press_event)
-        self.event_box.connect("enter-notify-event", self._on_cover_enter_notify)
-        self.event_box.connect("leave-notify-event", self._on_cover_leave_notify)
+
+        self._event_box_primary_gesture = Gtk.GestureClick()
+        self._event_box_primary_gesture.set_button(Gdk.BUTTON_PRIMARY)
+        self._event_box_primary_gesture.connect("pressed", self._select_item)
+        self._event_box_primary_gesture.connect("released", self._open_book_overview)
+        self.event_box.add_controller(self._event_box_primary_gesture)
+
+        self._event_box_context_gesture = Gtk.GestureClick()
+        self._event_box_context_gesture.set_button(Gdk.BUTTON_SECONDARY)
+        self._event_box_context_gesture.connect("released", self._show_context_menu)
+        self.event_box.add_controller(self._event_box_context_gesture)
+
+        self._event_box_key = Gtk.EventControllerKey()
+        self._event_box_key.connect("key-pressed", self._on_key_press_event)
+        self.event_box.add_controller(self._event_box_key)
+
+        self._event_box_motion = Gtk.EventControllerMotion()
+        self._event_box_motion.connect("enter", self._on_cover_enter_notify)
+        self._event_box_motion.connect("leave", self._on_cover_leave_notify)
 
     def set_playing(self, is_playing):
         self.art.set_playing(is_playing)
@@ -63,7 +77,6 @@ class BookElement(Gtk.FlowBoxChild):
         menu.append(Gtk.SeparatorMenuItem())
         menu.append(rm_item)
         menu.attach_to_widget(self)
-        menu.show_all()
         return menu
 
     def _remove_book(self, _, __):
@@ -83,32 +96,29 @@ class BookElement(Gtk.FlowBoxChild):
         path = os.path.dirname(track.file)
         subprocess.Popen(['xdg-open', path])
 
-    def _on_button_press_event(self, _, event):
-        if event.type == Gdk.EventType.BUTTON_PRESS and event.button == 3:
-            if self.context_menu is None:
-                self.context_menu = self._create_context_menu()
-            self.context_menu.popup(
-                None, None, None, None, event.button, event.time)
-            return True
-        elif event.type == Gdk.EventType.BUTTON_PRESS and event.button == 1:
-            if super().get_sensitive():
-                self.pressed = True
-                self.container_box.get_style_context().add_class("selected")
-        elif event.type == Gdk.EventType.KEY_PRESS and event.keyval == Gdk.KEY_Return:
-            if super().get_sensitive():
-                self.emit("open-book-overview", self.book)
-                return True
+    def _show_context_menu(self, gesture: Gtk.Gesture, *_):
+        gesture.set_state(Gtk.EventSequenceState.CLAIMED)
 
-    def _on_button_release_event(self, _, event):
-        if event.type == Gdk.EventType.BUTTON_RELEASE and event.button == 1 and self.pressed:
-            self.pressed = False
-            self.container_box.get_style_context().remove_class("selected")
-            if super().get_sensitive():
-                self.emit("open-book-overview", self.book)
-                return True
+        if self.context_menu is None:
+            self.context_menu = self._create_context_menu()
+        self.context_menu.popup()
 
-    def _on_key_press_event(self, _, key):
-        if key.keyval == Gdk.KEY_Return and super().get_sensitive():
+    def _select_item(self, gesture: Gtk.Gesture, *_):
+        if super().get_sensitive():
+            gesture.set_state(Gtk.EventSequenceState.CLAIMED)
+            self.pressed = True
+            self.container_box.get_style_context().add_class("selected")
+
+    def _open_book_overview(self, gesture, *_):
+        gesture.set_state(Gtk.EventSequenceState.CLAIMED)
+
+        self.pressed = False
+        self.container_box.get_style_context().remove_class("selected")
+        if super().get_sensitive():
+            self.emit("open-book-overview", self.book)
+
+    def _on_key_press_event(self, keyval, *_):
+        if keyval == Gdk.KEY_Return and super().get_sensitive():
             self.emit("open-book-overview", self.book)
             return True
 

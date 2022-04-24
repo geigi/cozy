@@ -34,3 +34,5 @@ venv/
 *.log
 *.prof
 *.pyc
+
+.DS_Store

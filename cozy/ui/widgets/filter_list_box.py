@@ -1,7 +1,7 @@
 from typing import List
 
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
 from cozy.ui.list_box_row_with_data import ListBoxRowWithData
@@ -19,15 +19,13 @@ class FilterListBox(Gtk.ListBox):
 
         all_row = ListBoxRowWithData(_("All"), False)
         all_row.set_tooltip_text(_("Display all books"))
-        self.add(all_row)
-        self.add(ListBoxSeparatorRow())
+        self.append(all_row)
+        self.append(ListBoxSeparatorRow())
         self.select_row(all_row)
 
         for element in elements:
             row = ListBoxRowWithData(element, False)
-            self.add(row)
-
-        self.show_all()
+            self.append(row)
 
     def select_row_with_content(self, row_content: str):
         for row in self.get_children():

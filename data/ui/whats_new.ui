@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
-  <requires lib="libhandy" version="1.0"/>
-  <template class="WhatsNew" parent="HdyWindow">
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <template class="WhatsNew" parent="AdwWindow">
     <property name="can-focus">False</property>
     <property name="type">popup</property>
-    <property name="title" translatable="yes">Whats new?</property>
+    <property name="title" translatable="1">Whats new?</property>
     <property name="window-position">center-on-parent</property>
     <property name="default-width">650</property>
     <property name="default-height">400</property>
@@ -15,19 +14,16 @@
     <property name="deletable">False</property>
     <child>
       <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="HdyHeaderBar">
+          <object class="AdwHeaderBar">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <child>
               <object class="GtkButton" id="continue_button">
-                <property name="label" translatable="yes">Continue</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
+                <property name="label" translatable="1">Continue</property>
+                <property name="focusable">1</property>
+                <property name="receives-default">1</property>
                 <style>
                   <class name="suggested-action"/>
                 </style>
@@ -37,28 +33,18 @@
               </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkScrolledWindow">
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
+            <property name="focusable">1</property>
+            <property name="hexpand">1</property>
+            <property name="vexpand">1</property>
             <property name="hscrollbar-policy">never</property>
             <property name="shadow-type">in</property>
-            <child>
+            <property name="child">
               <object class="GtkViewport">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <child>
+                <property name="child">
                   <object class="GtkStack" id="content_stack">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
                     <property name="margin-start">20</property>
                     <property name="margin-end">20</property>
                     <property name="margin-top">10</property>
@@ -68,15 +54,10 @@
                       <placeholder/>
                     </child>
                   </object>
-                </child>
+                </property>
               </object>
-            </child>
+            </property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
     </child>

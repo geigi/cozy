@@ -1,6 +1,6 @@
 from typing import Optional
 
-from gi.repository import Gtk, Handy
+from gi.repository import Gtk, Adw
 from gi.repository.Gtk import Builder
 
 from cozy.ext import inject
@@ -44,7 +44,7 @@ class LibraryView:
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
         self._author_box: FilterListBox = self._builder.get_object("author_box")
         self._reader_box: FilterListBox = self._builder.get_object("reader_box")
-        self._library_leaflet: Handy.Leaflet = self._builder.get_object("library_leaflet")
+        self._library_leaflet: Adw.Leaflet = self._builder.get_object("library_leaflet")
         self._book_stack: Gtk.Stack = self._builder.get_object("book_stack")
 
     def _connect_ui_elements(self):
@@ -102,10 +102,7 @@ class LibraryView:
             book_element.connect("play-pause-clicked", self._play_book_clicked)
             book_element.connect("open-book-overview", self._open_book_overview_clicked)
             book_element.connect("book-removed", self._on_book_removed)
-            book_element.show_all()
-            self._book_box.add(book_element)
-
-        self._book_box.show_all()
+            self._book_box.append(book_element)
 
     def populate_author(self):
         self._author_box.populate(self._view_model.authors)

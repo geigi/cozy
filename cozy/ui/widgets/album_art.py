@@ -13,7 +13,7 @@ class AlbumArt(Gtk.DrawingArea):
         self.art = None
 
         self.set_visible(True)
-        self.connect("draw", self._on_draw)
+        self.set_draw_func(self._on_draw)
 
     def set_art(self, art: GdkPixbuf):
         self.art = art

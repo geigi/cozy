@@ -11,7 +11,7 @@ from cozy.ext import inject
 from gi.repository import Gtk, GObject, Gdk
 
 ALBUM_ART_SIZE = 200
-PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.SMALL_TOOLBAR
+PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.NORMAL
 STROKE_WIDTH = 3
 
 log = logging.getLogger("album_element")
@@ -38,20 +38,28 @@ class AlbumElement(Gtk.Box):
         pixbuf = self.artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), ALBUM_ART_SIZE)
 
         if pixbuf:
-            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.get_scale_factor(), None)
-            self.album_art_image.set_from_surface(surface)
+            self.album_art_image.set_from_pixbuf(pixbuf)
         else:
-            self.album_art_image.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
+            self.album_art_image.set_from_icon_name("book-open-variant-symbolic")
             self.album_art_image.props.pixel_size = ALBUM_ART_SIZE
 
         self.set_size_request(ALBUM_ART_SIZE, ALBUM_ART_SIZE)
-        self.play_button.connect("button-release-event", self._on_play_button_press)
+
+        self._play_button_click = Gtk.GestureClick()
+        self._play_button_click.connect("released", self._on_play_button_press)
+        self.play_button.add_controller(self._play_button_click)
 
         self.progress_drawing_area.connect("realize", lambda w: w.get_window().set_pass_through(True))
-        self.progress_drawing_area.connect("draw", self._draw_progress)
-        self.album_art_drawing_area.connect("draw", self._draw_album_hover)
-        self.album_art_overlay_revealer.connect("enter-notify-event", self._on_revealer_enter_event)
-        self.play_button_revealer.connect("enter-notify-event", self._on_revealer_enter_event)
+        self.progress_drawing_area.set_draw_func(self._draw_progress)
+        self.album_art_drawing_area.set_draw_func(self._draw_album_hover)
+
+        self._album_art_overlay_revealer_motion = Gtk.EventControllerMotion()
+        self._album_art_overlay_revealer_motion.connect("enter", self._on_revealer_enter_event)
+        self.album_art_overlay_revealer.add_controller(self._album_art_overlay_revealer_motion)
+
+        self._play_button_revealer_motion = Gtk.EventControllerMotion()
+        self._play_button_revealer_motion.connect("enter", self._on_revealer_enter_event)
+        self.play_button_revealer.add_controller(self._play_button_revealer_motion)
 
     def set_playing(self, playing: bool):
         if playing:
@@ -101,7 +109,7 @@ class AlbumElement(Gtk.Box):
     def update_progress(self):
         self.progress_drawing_area.queue_draw()
 
-    def _on_revealer_enter_event(self, widget, _):
+    def _on_revealer_enter_event(self, widget, _, __):
         # Somehow the GTK Revealer steals the mouse events from the parent
         # Maybe this is a bug in GTK but for now we have to handle hover in here as well
         self.set_hover(True)

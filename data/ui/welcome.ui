@@ -1,57 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
+  <requires lib="gtk" version="4.0"/>
   <template class="Welcome" parent="GtkBox">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
     <property name="orientation">vertical</property>
     <property name="spacing">10</property>
     <child>
       <object class="GtkImage">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="vexpand">True</property>
+        <property name="vexpand">1</property>
         <property name="pixel-size">200</property>
         <property name="icon-name">com.github.geigi.cozy</property>
         <property name="icon_size">6</property>
       </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="label" translatable="yes">Welcome!</property>
+        <property name="label" translatable="1">Welcome!</property>
         <property name="yalign">1</property>
         <style>
           <class name="h1"/>
         </style>
       </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">1</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="vexpand">True</property>
-        <property name="label" translatable="yes">Add your audiobooks and let's get cozy.</property>
-        <property name="wrap">True</property>
+        <property name="vexpand">1</property>
+        <property name="label" translatable="1">Add your audiobooks and let&apos;s get cozy.</property>
+        <property name="wrap">1</property>
         <property name="yalign">0</property>
       </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">2</property>
-      </packing>
     </child>
   </template>
 </interface>

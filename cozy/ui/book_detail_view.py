@@ -15,15 +15,13 @@ from cozy.ui.disk_element import DiskElement
 from cozy.ui.widgets.album_art import AlbumArt
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
 
-gi.require_version('Gtk', '3.0')
-
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk, GLib
 
 log = logging.getLogger("BookDetailView")
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/book_detail.ui')
-class BookDetailView(Gtk.EventBox):
+class BookDetailView(Gtk.Box):
     __gtype_name__ = 'BookDetail'
 
     play_book_button: Gtk.Button = Gtk.Template.Child()
@@ -67,11 +65,10 @@ class BookDetailView(Gtk.EventBox):
         # self._toolbar_revealer: Gtk.Revealer = main_window_builder.get_object("toolbar_revealer")
         self._main_stack.add_named(self, "book_overview")
 
-        if Gtk.get_minor_version() > 20:
-            self.book_overview_scroller.props.propagate_natural_height = True
+        self.book_overview_scroller.props.propagate_natural_height = True
 
         self.art = AlbumArt()
-        self.album_art_container.pack_start(self.art, True, True, 0)
+        self.album_art_container.prepend(self.art)
 
         self._chapters_event: Event = Event()
         self._chapters_thread: Thread = None
@@ -98,10 +95,11 @@ class BookDetailView(Gtk.EventBox):
     def _connect_widgets(self):
         self.play_book_button.connect("clicked", self._play_book_clicked)
         self.download_switch.connect("state-set", self._download_switch_changed)
-        self.main_flow_box.connect("size-allocate", self._main_flow_box_size_changed)
+        # TODO: Use property notification for GtkWindow:default-width and GtkWindow:default-height
+        #self.main_flow_box.connect("size-allocate", self._main_flow_box_size_changed)
 
     def _add_mouse_button_accel(self):
-        self.gesture = Gtk.GestureMultiPress(widget=self)
+        self.gesture = Gtk.GestureClick(widget=self)
         self.gesture.set_button(0)
         self.gesture.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
         self.gesture.connect('pressed', self._on_mouse_event)
@@ -209,9 +207,9 @@ class BookDetailView(Gtk.EventBox):
                 return
 
             if multiple_disks and disk_number != chapter.disk:
-                Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_disk, book.id, chapter)
+                GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, self._add_disk, book.id, chapter)
 
-            Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._add_chapter, book.id, chapter)
+            GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, self._add_chapter, book.id, chapter)
 
             disk_number = chapter.disk
 
@@ -219,7 +217,7 @@ class BookDetailView(Gtk.EventBox):
             self._chapters_event.wait()
             self._chapters_event.clear()
 
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, callback)
+        GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, callback)
 
     def _on_chapters_displayed(self):
         self.total_label.set_text(self._view_model.total_text)
@@ -249,7 +247,6 @@ class BookDetailView(Gtk.EventBox):
 
         disc_element = DiskElement(chapter.disk)
         self.chapter_box.add(disc_element)
-        disc_element.show_all()
         self._chapters_event.set()
 
     def _add_chapter(self, book_id: int, chapter: Chapter):
@@ -259,11 +256,10 @@ class BookDetailView(Gtk.EventBox):
         chapter_element = ChapterElement(chapter)
         chapter_element.connect("play-pause-clicked", self._play_chapter_clicked)
         self.chapter_box.add(chapter_element)
-        chapter_element.show_all()
         self._chapters_event.set()
 
     def _schedule_chapters_clearing(self):
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.chapter_box.remove_all_children)
+        GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, self.chapter_box.remove_all_children)
 
     def _set_progress(self):
         self.remaining_label.set_text(self._view_model.remaining_text)
@@ -324,7 +320,7 @@ class BookDetailView(Gtk.EventBox):
     def _play_book_clicked(self, _):
         self._view_model.play_book()
 
-    def _on_mouse_event(self, gesture: Gtk.GestureMultiPress, _, __, ___):
+    def _on_mouse_event(self, gesture: Gtk.GestureClick, _, __, ___):
         btn = gesture.get_current_button()
         if btn == 8:
             self._view_model.navigate_back()

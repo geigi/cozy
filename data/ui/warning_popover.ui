@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkPopover" id="warning_popover">
-    <property name="can_focus">False</property>
-    <child>
+    <property name="child">
       <object class="GtkBox" id="warning_container">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_left">10</property>
-        <property name="margin_right">10</property>
+        <property name="margin-start">10</property>
+        <property name="margin-end">10</property>
         <property name="margin_top">10</property>
         <property name="margin_bottom">10</property>
         <property name="orientation">vertical</property>
@@ -18,6 +14,6 @@
           <placeholder/>
         </child>
       </object>
-    </child>
+    </property>
   </object>
 </interface>

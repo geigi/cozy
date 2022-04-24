@@ -8,7 +8,7 @@ MAX_BOOK_LENGTH = 80
 BOOK_ICON_SIZE = 40
 
 
-class SearchResult(Gtk.EventBox):
+class SearchResult(Gtk.Box):
     """
     This class is the base class for all search result GUI object.
     It features a GTK box that is highlighted when hovered.
@@ -38,7 +38,7 @@ class SearchResult(Gtk.EventBox):
     def _on_enter_notify(self, widget, event):
         """
         On enter notify add css hover class
-        :param widget: as Gtk.EventBox
+        :param widget: as Gtk.Box
         :param event: as Gdk.Event
         """
         self.box.get_style_context().add_class("box_hover")
@@ -46,7 +46,7 @@ class SearchResult(Gtk.EventBox):
     def _on_leave_notify(self, widget, event):
         """
         On leave notify remove css hover class
-        :param widget: as Gtk.EventBox (can be None)
+        :param widget: as Gtk.Box (can be None)
         :param event: as Gdk.Event (can be None)
         """
         self.box.get_style_context().remove_class("box_hover")
@@ -85,7 +85,6 @@ class ArtistSearchResult(SearchResult):
 
         self.box.add(title_label)
         self.add(self.box)
-        self.show_all()
 
 
 class BookSearchResult(SearchResult):
@@ -123,4 +122,3 @@ class BookSearchResult(SearchResult):
         self.box.add(img)
         self.box.add(title_label)
         self.add(self.box)
-        self.show_all()

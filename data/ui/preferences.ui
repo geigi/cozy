@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
 <interface>
-  <requires lib="gtk+" version="3.24"/>
-  <requires lib="libhandy" version="0.0"/>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="0.0"/>
   <object class="GtkImage" id="add_image">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
     <property name="icon-name">list-add-symbolic</property>
   </object>
   <object class="GtkImage" id="default_image">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
     <property name="icon-name">checkmark-symbolic</property>
   </object>
   <object class="GtkImage" id="external_image">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
     <property name="icon-name">network-server-symbolic</property>
   </object>
   <object class="GtkAdjustment" id="fadeout_duration_adjustment">
@@ -30,8 +23,6 @@
     <property name="page-increment">10</property>
   </object>
   <object class="GtkImage" id="remove_image">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
     <property name="icon-name">list-remove-symbolic</property>
   </object>
   <object class="GtkAdjustment" id="rewind_duration_adjustment">
@@ -41,33 +32,31 @@
     <property name="step-increment">5</property>
     <property name="page-increment">10</property>
   </object>
-  <template class="PreferencesWindow" parent="HdyPreferencesWindow">
+  <template class="PreferencesWindow" parent="AdwPreferencesWindow">
     <property name="can-focus">False</property>
     <property name="type">popup</property>
     <property name="window-position">center-on-parent</property>
     <property name="destroy-with-parent">True</property>
     <property name="gravity">center</property>
     <child>
-      <object class="HdyPreferencesPage">
+      <object class="AdwPreferencesPage">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="icon-name">settings-symbolic</property>
-        <property name="title" translatable="yes">General</property>
+        <property name="title" translatable="1">General</property>
         <child>
-          <object class="HdyPreferencesGroup">
+          <object class="AdwPreferencesGroup">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="title" translatable="yes">Appearance</property>
+            <property name="title" translatable="1">Appearance</property>
             <child>
-              <object class="HdyActionRow">
+              <object class="AdwActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="title">Dark Mode</property>
                 <property name="activatable-widget">dark_mode_switch</property>
                 <child>
                   <object class="GtkSwitch" id="dark_mode_switch">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                   </object>
@@ -77,21 +66,19 @@
           </object>
         </child>
         <child>
-          <object class="HdyPreferencesGroup">
+          <object class="AdwPreferencesGroup">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="title" translatable="yes">Tags</property>
+            <property name="title" translatable="1">Tags</property>
             <child>
-              <object class="HdyActionRow">
+              <object class="AdwActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="title">Swap author and reader</property>
                 <property name="activatable-widget">swap_author_reader_switch</property>
-                <property name="subtitle" translatable="yes">Activate if author and reader are displayed the wrong way</property>
+                <property name="subtitle" translatable="1">Activate if author and reader are displayed the wrong way</property>
                 <child>
                   <object class="GtkSwitch" id="swap_author_reader_switch">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                   </object>
@@ -101,21 +88,19 @@
           </object>
         </child>
         <child>
-          <object class="HdyPreferencesGroup">
+          <object class="AdwPreferencesGroup">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="title" translatable="yes">Playback</property>
+            <property name="title" translatable="1">Playback</property>
             <child>
-              <object class="HdyActionRow">
+              <object class="AdwActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="title">Replay</property>
                 <property name="activatable-widget">replay_switch</property>
-                <property name="subtitle" translatable="yes">Rewind 30 seconds of the current book when starting Cozy</property>
+                <property name="subtitle" translatable="1">Rewind 30 seconds of the current book when starting Cozy</property>
                 <child>
                   <object class="GtkSwitch" id="replay_switch">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                   </object>
@@ -123,41 +108,39 @@
               </object>
             </child>
             <child>
-              <object class="HdyActionRow">
+              <object class="AdwActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="title">Rewind Duration</property>
                 <child>
                   <object class="GtkSpinButton" id="rewind_duration_spin_button">
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
+                    <property name="focusable">1</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="input-purpose">digits</property>
                     <property name="adjustment">rewind_duration_adjustment</property>
-                    <property name="snap-to-ticks">True</property>
-                    <property name="numeric">True</property>
+                    <property name="snap-to-ticks">1</property>
+                    <property name="numeric">1</property>
                     <property name="value">15</property>
                   </object>
                 </child>
               </object>
             </child>
             <child>
-              <object class="HdyActionRow">
+              <object class="AdwActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="title">Forward Duration</property>
                 <child>
                   <object class="GtkSpinButton" id="forward_duration_spin_button">
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
+                    <property name="focusable">1</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="text">15</property>
                     <property name="input-purpose">digits</property>
                     <property name="adjustment">forward_duration_adjustment</property>
-                    <property name="snap-to-ticks">True</property>
-                    <property name="numeric">True</property>
+                    <property name="snap-to-ticks">1</property>
+                    <property name="numeric">1</property>
                     <property name="value">15</property>
                   </object>
                 </child>
@@ -166,20 +149,18 @@
           </object>
         </child>
         <child>
-          <object class="HdyPreferencesGroup">
+          <object class="AdwPreferencesGroup">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="title" translatable="yes">Sleep Timer</property>
+            <property name="title" translatable="1">Sleep Timer</property>
             <child>
-              <object class="HdyActionRow">
+              <object class="AdwActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="title">Fadeout</property>
                 <property name="activatable-widget">sleep_timer_fadeout_switch</property>
                 <child>
                   <object class="GtkSwitch" id="sleep_timer_fadeout_switch">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                   </object>
@@ -187,21 +168,20 @@
               </object>
             </child>
             <child>
-              <object class="HdyActionRow" id="sleep_timer_fadeout_row">
+              <object class="AdwActionRow" id="sleep_timer_fadeout_row">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="title">Fadeout duration</property>
                 <child>
                   <object class="GtkSpinButton" id="fadeout_duration_spin_button">
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
+                    <property name="focusable">1</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="text">15</property>
                     <property name="input-purpose">digits</property>
                     <property name="adjustment">fadeout_duration_adjustment</property>
-                    <property name="snap-to-ticks">True</property>
-                    <property name="numeric">True</property>
+                    <property name="snap-to-ticks">1</property>
+                    <property name="numeric">1</property>
                   </object>
                 </child>
               </object>
@@ -211,27 +191,25 @@
       </object>
     </child>
     <child>
-      <object class="HdyPreferencesPage">
+      <object class="AdwPreferencesPage">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="icon-name">harddisk-symbolic</property>
-        <property name="title" translatable="yes">Storage</property>
+        <property name="title" translatable="1">Storage</property>
         <child>
-          <object class="HdyPreferencesGroup">
+          <object class="AdwPreferencesGroup">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="title" translatable="yes">Artwork</property>
+            <property name="title" translatable="1">Artwork</property>
             <child>
-              <object class="HdyActionRow">
+              <object class="AdwActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="title">Prefer external images over embedded cover</property>
                 <property name="activatable-widget">artwork_prefer_external_switch</property>
-                <property name="subtitle" translatable="yes">Always use images (cover.jpg, *.png, …) when available</property>
+                <property name="subtitle" translatable="1">Always use images (cover.jpg, *.png, …) when available</property>
                 <child>
                   <object class="GtkSwitch" id="artwork_prefer_external_switch">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                   </object>
@@ -241,82 +219,64 @@
           </object>
         </child>
         <child>
-          <object class="HdyPreferencesGroup" id="storage_locations_preference_group">
+          <object class="AdwPreferencesGroup" id="storage_locations_preference_group">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="title" translatable="yes">Storage locations</property>
+            <property name="title" translatable="1">Storage locations</property>
             <child>
-              <object class="HdyPreferencesRow">
+              <object class="AdwPreferencesRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="selectable">False</property>
-                <property name="title" translatable="yes">Storage locations</property>
+                <property name="title" translatable="1">Storage locations</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
                     <property name="margin-start">13</property>
                     <property name="margin-end">13</property>
                     <property name="margin-top">13</property>
                     <property name="margin-bottom">13</property>
-                    <property name="hexpand">True</property>
+                    <property name="hexpand">1</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkFrame">
                         <property name="height-request">250</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="label-xalign">0</property>
                         <property name="shadow-type">none</property>
-                        <child>
+                        <property name="child">
                           <object class="GtkScrolledWindow">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
+                            <property name="focusable">1</property>
                             <property name="hscrollbar-policy">never</property>
                             <property name="shadow-type">in</property>
-                            <child>
+                            <property name="child">
                               <object class="GtkViewport">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <child>
+                                <property name="child">
                                   <object class="GtkListBox" id="storage_list_box">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">False</property>
-                                    <property name="vexpand">True</property>
+                                    <property name="vexpand">1</property>
                                   </object>
-                                </child>
+                                </property>
                               </object>
-                            </child>
+                            </property>
                           </object>
-                        </child>
+                        </property>
                         <child type="label_item">
                           <placeholder/>
                         </child>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
-                      <object class="GtkToolbar">
+                      <object class="GtkBox">
+                        <property name="css-classes">toolbar</property>
                         <property name="height-request">24</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="toolbar-style">icons</property>
+                        <property name="can-focus">0</property>
                         <child>
                           <object class="GtkToolItem">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="tooltip-text" translatable="yes">Add location</property>
+                            <property name="tooltip-text" translatable="1">Add location</property>
                             <child>
                               <object class="GtkButton" id="add_storage_button">
                                 <property name="width-request">24</property>
                                 <property name="height-request">24</property>
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <property name="receives-default">False</property>
+                                <property name="focusable">1</property>
                                 <property name="image">add_image</property>
                                 <property name="relief">none</property>
                                 <property name="always-show-image">True</property>
@@ -326,24 +286,18 @@
                               </object>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="homogeneous">False</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkToolItem">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="tooltip-text" translatable="yes">Remove location</property>
+                            <property name="tooltip-text" translatable="1">Remove location</property>
                             <child>
                               <object class="GtkButton" id="remove_storage_button">
                                 <property name="width-request">24</property>
                                 <property name="height-request">24</property>
-                                <property name="visible">True</property>
-                                <property name="sensitive">False</property>
-                                <property name="can-focus">True</property>
-                                <property name="receives-default">False</property>
+                                <property name="sensitive">0</property>
+                                <property name="focusable">1</property>
                                 <property name="image">remove_image</property>
                                 <property name="relief">none</property>
                                 <property name="always-show-image">True</property>
@@ -353,37 +307,27 @@
                               </object>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="homogeneous">False</property>
-                          </packing>
                         </child>
                         <child>
-                          <object class="GtkSeparatorToolItem">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
+                          <object class="GtkSeparator">
+                            <property name="orientation">vertical</property>
+                            <property name="can-focus">0</property>
                             <property name="draw">False</property>
                           </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="homogeneous">False</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkToolItem">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="tooltip-text" translatable="yes">Toggle this storage location to be internal/external.</property>
+                            <property name="tooltip-text" translatable="1">Toggle this storage location to be internal/external.</property>
                             <property name="halign">end</property>
                             <child>
                               <object class="GtkToggleButton" id="external_storage_toggle_button">
-                                <property name="label" translatable="yes">External drive</property>
+                                <property name="label" translatable="1">External drive</property>
                                 <property name="width-request">24</property>
                                 <property name="height-request">24</property>
-                                <property name="visible">True</property>
-                                <property name="sensitive">False</property>
-                                <property name="can-focus">True</property>
-                                <property name="receives-default">False</property>
+                                <property name="sensitive">0</property>
+                                <property name="focusable">1</property>
                                 <property name="image">external_image</property>
                                 <property name="relief">none</property>
                                 <property name="always-show-image">True</property>
@@ -393,26 +337,20 @@
                               </object>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="homogeneous">False</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkToolItem">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="tooltip-text" translatable="yes">Set as default storage location for new audiobooks</property>
+                            <property name="tooltip-text" translatable="1">Set as default storage location for new audiobooks</property>
                             <property name="halign">end</property>
                             <child>
                               <object class="GtkButton" id="default_storage_button">
-                                <property name="label" translatable="yes">Set as default</property>
+                                <property name="label" translatable="1">Set as default</property>
                                 <property name="width-request">24</property>
                                 <property name="height-request">24</property>
-                                <property name="visible">True</property>
-                                <property name="sensitive">False</property>
-                                <property name="can-focus">True</property>
-                                <property name="receives-default">False</property>
+                                <property name="sensitive">0</property>
+                                <property name="focusable">1</property>
                                 <property name="image">default_image</property>
                                 <property name="relief">none</property>
                                 <property name="always-show-image">True</property>
@@ -422,20 +360,11 @@
                               </object>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="homogeneous">False</property>
-                          </packing>
                         </child>
                         <style>
                           <class name="inline-toolbar"/>
                         </style>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
@@ -446,21 +375,21 @@
       </object>
     </child>
     <child>
-      <object class="HdyPreferencesPage">
+      <object class="AdwPreferencesPage">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="icon-name">papyrus-vertical-symbolic</property>
-        <property name="title" translatable="yes">Feedback</property>
+        <property name="title" translatable="1">Feedback</property>
         <child>
-          <object class="HdyPreferencesGroup" id="user_feedback_preference_group">
+          <object class="AdwPreferencesGroup" id="user_feedback_preference_group">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="title" translatable="yes">User feedback</property>
+            <property name="title" translatable="1">User feedback</property>
             <child>
-              <object class="HdyPreferencesRow" id="user_feedback_preference_row">
+              <object class="AdwPreferencesRow" id="user_feedback_preference_row">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="title" translatable="yes">User Feedback</property>
+                <property name="title" translatable="1">User Feedback</property>
                 <child>
                   <placeholder/>
                 </child>

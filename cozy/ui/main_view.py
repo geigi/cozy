@@ -106,13 +106,11 @@ class CozyUI(EventSender, metaclass=Singleton):
         cssProvider.load_from_file(cssProviderFile)
 
         # add the bordered css class to the default screen for the borders around album art
-        screen = Gdk.Screen.get_default()
-        styleContext = Gtk.StyleContext()
-        styleContext.add_provider_for_screen(
-            screen, main_cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
-        styleContext.add_provider_for_screen(
-            screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
-        styleContext.add_class("bordered")
+        display = Gdk.Display.get_default()
+        Gtk.StyleContext.add_provider_for_display(
+            display, main_cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        Gtk.StyleContext.add_provider_for_display(
+            display, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
     def __init_window(self):
         """
@@ -122,9 +120,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         log.info("Initialize main window")
         self._restore_window_size()
         self.window.set_application(self.app)
-        self.window.show_all()
         self.window.present()
-        self.window.connect("delete-event", self.on_close)
+        self.window.connect("close-request", self.on_close)
         self.window.connect("drag_data_received", self.__on_drag_data_received)
         self.window.connect("size-allocate", self._on_window_size_allocate)
         self.window.drag_dest_set(Gtk.DestDefaults.MOTION | Gtk.DestDefaults.HIGHLIGHT | Gtk.DestDefaults.DROP,

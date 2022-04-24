@@ -47,7 +47,7 @@ class Observable:
             reporter.exception("observable", e)
 
     def _notify_main_thread(self, prop: str):
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self._notify, (prop))
+        GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, self._notify, (prop))
 
     def _destroy_observers(self):
         self._observers = {}

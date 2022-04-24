@@ -2,7 +2,7 @@ from typing import List, Callable
 
 import gi
 
-gi.require_version('Gdk', '3.0')
+gi.require_version('Gdk', '4.0')
 
 from gi.repository import Gdk, GLib
 
@@ -22,7 +22,7 @@ class EventSender:
             function(event, message)
 
     def emit_event_main_thread(self, event: str, message=None):
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.emit_event, (event, message))
+        GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, self.emit_event, (event, message))
 
     def add_listener(self, function: Callable[[str, object], None]):
         self._listeners.append(function)

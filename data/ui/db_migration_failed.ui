@@ -1,112 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
+  <requires lib="gtk" version="4.0"/>
   <template class="DBMigrationFailedDialog" parent="GtkDialog">
-    <property name="can_focus">False</property>
     <property name="type">popup</property>
     <property name="title"> </property>
-    <property name="resizable">False</property>
-    <property name="modal">True</property>
+    <property name="resizable">0</property>
+    <property name="modal">1</property>
     <property name="window_position">center-on-parent</property>
     <property name="default_width">200</property>
-    <property name="destroy_with_parent">True</property>
+    <property name="destroy_with_parent">1</property>
     <property name="type_hint">dialog</property>
     <property name="urgency_hint">True</property>
-    <property name="deletable">False</property>
+    <property name="deletable">0</property>
     <child type="titlebar">
       <placeholder/>
     </child>
-    <child internal-child="vbox">
+    <child internal-child="content_area">
       <object class="GtkBox">
-        <property name="can_focus">False</property>
+        <property name="visible">0</property>
         <property name="orientation">vertical</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="can_focus">False</property>
-            <property name="margin_right">10</property>
-            <property name="margin_bottom">10</property>
-            <child>
-              <object class="GtkButton" id="button1">
-                <property name="label" translatable="yes">Close Cozy</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">False</property>
-                <style>
-                  <class name="destructive-action"/>
-                </style>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="button2">
-                <property name="label" translatable="yes">Receive help on GitHub</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="margin_right">20</property>
-                <style>
-                  <class name="suggested-action"/>
-                </style>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="margin_left">10</property>
-            <property name="margin_right">20</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">20</property>
             <property name="margin_top">10</property>
             <property name="margin_bottom">20</property>
             <property name="spacing">20</property>
             <child>
               <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="pixel_size">64</property>
                 <property name="icon_name">dialog-warning</property>
                 <property name="icon_size">6</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
             <child>
               <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">20</property>
                 <child>
                   <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="halign">start</property>
-                    <property name="valign">start</property>
-                    <property name="label" translatable="yes">An error occured while updating the database</property>
-                    <property name="wrap">True</property>
+                    <property name="valign">center</property>
+                    <property name="label" translatable="1">An error occured while updating the database</property>
+                    <property name="wrap">1</property>
                     <property name="max_width_chars">45</property>
                     <property name="xalign">0</property>
                     <style>
@@ -114,45 +54,23 @@
                       <class name="bold"/>
                     </style>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="halign">start</property>
-                    <property name="valign">start</property>
-                    <property name="label" translatable="yes">During an update of the database an error occurred and Cozy will not be able to startup.
+                    <property name="valign">center</property>
+                    <property name="label" translatable="1">During an update of the database an error occurred and Cozy will not be able to startup.
 A backup of the database was created before the update and has been restored now.
 Until this issue is resolved please use version 0.9.5 of Cozy.
 You can help resolve this problem by reporting an issue on GitHub.</property>
-                    <property name="wrap">True</property>
+                    <property name="wrap">1</property>
                     <property name="max_width_chars">70</property>
                     <property name="xalign">0</property>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">1</property>
-                  </packing>
                 </child>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
     </child>
@@ -160,5 +78,43 @@ You can help resolve this problem by reporting an issue on GitHub.</property>
       <action-widget response="-7">button1</action-widget>
       <action-widget response="-5">button2</action-widget>
     </action-widgets>
+    <child internal-child="action_area">
+      <object class="GtkBox">
+        <property name="valign">center</property>
+        <property name="can_focus">False</property>
+        <property name="margin_right">10</property>
+        <property name="margin_bottom">10</property>
+        <child>
+          <object class="GtkButton" id="button1">
+            <property name="label" translatable="1">Close Cozy</property>
+            <property name="focusable">1</property>
+            <style>
+              <class name="destructive-action"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button2">
+            <property name="label" translatable="1">Receive help on GitHub</property>
+            <property name="focusable">1</property>
+            <property name="receives_default">1</property>
+            <property name="margin-end">20</property>
+            <style>
+              <class name="suggested-action"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
   </template>
 </interface>

@@ -8,12 +8,12 @@ from cozy.ext import inject
 from cozy.ui.main_view import CozyUI
 from cozy.version import __version__ as CozyVersion
 
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Handy
+gi.require_version('Gtk', '4.0')
+from gi.repository import Gtk, Adw
 
 
 @Gtk.Template(resource_path='/com/github/geigi/cozy/whats_new.ui')
-class WhatsNewWindow(Handy.Window):
+class WhatsNewWindow(Adw.Window):
     __gtype_name__ = 'WhatsNew'
 
     content_stack: Gtk.Stack = Gtk.Template.Child()

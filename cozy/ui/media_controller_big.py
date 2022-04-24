@@ -10,7 +10,7 @@ from cozy.ui.widgets.seek_bar import SeekBar
 from cozy.ui.widgets.sleep_timer import SleepTimer
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gdk
 
 log = logging.getLogger("Headerbar")
@@ -30,7 +30,6 @@ class MediaControllerBig(Gtk.Box):
     volume_button: Gtk.VolumeButton = Gtk.Template.Child()
 
     cover_img: Gtk.Image = Gtk.Template.Child()
-    cover_img_event_box: Gtk.EventBox = Gtk.Template.Child()
     title_label: Gtk.Label = Gtk.Template.Child()
     subtitle_label: Gtk.Label = Gtk.Template.Child()
 
@@ -44,7 +43,7 @@ class MediaControllerBig(Gtk.Box):
         super().__init__()
 
         self.seek_bar = SeekBar()
-        self.seek_bar_container.add(self.seek_bar)
+        self.seek_bar_container.append(self.seek_bar)
 
         self.sleep_timer: SleepTimer = SleepTimer(self.timer_image)
         self.playback_speed_button.set_popover(PlaybackSpeedPopover())
@@ -75,9 +74,15 @@ class MediaControllerBig(Gtk.Box):
         self.next_button.connect("clicked", self._forward_clicked)
         self.volume_button.connect("value-changed", self._on_volume_button_changed)
         self.seek_bar.connect("position-changed", self._on_seek_bar_position_changed)
-        self.cover_img_event_box.connect("button-press-event", self._cover_clicked)
-        self.cover_img_event_box.connect("enter-notify-event", self._on_cover_enter_notify)
-        self.cover_img_event_box.connect("leave-notify-event", self._on_cover_leave_notify)
+
+        self._cover_img_gesture = Gtk.GestureClick()
+        self._cover_img_gesture.connect("pressed", self._cover_clicked)
+        self.cover_img.add_controller(self._cover_img_gesture)
+
+        self._cover_img_motion = Gtk.EventControllerMotion()
+        self._cover_img_motion.connect("enter", self._on_cover_enter_notify)
+        self._cover_img_motion.connect("leave", self._on_cover_leave_notify)
+        self.cover_img.add_controller(self._cover_img_motion)
 
     def _set_cover_image(self, book: Book):
         pixbuf = self._artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), COVER_SIZE)
@@ -85,7 +90,7 @@ class MediaControllerBig(Gtk.Box):
             surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.get_scale_factor(), None)
             self.cover_img.set_from_surface(surface)
         else:
-            self.cover_img.set_from_icon_name("book-open-variant-symbolic", Gtk.IconSize.DIALOG)
+            self.cover_img.set_from_icon_name("book-open-variant-symbolic")
             self.cover_img.props.pixel_size = COVER_SIZE
 
     def _on_book_changed(self):

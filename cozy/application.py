@@ -14,9 +14,9 @@ from cozy.db.storage import Storage
 from cozy.ui.widgets.filter_list_box import FilterListBox
 from cozy.ui.widgets.seek_bar import SeekBar
 
-gi.require_version('Handy', '1')
+gi.require_version('Adw', '1')
 
-from gi.repository import Gtk, GLib, Handy
+from gi.repository import Gtk, GLib, Adw
 
 from cozy.app_controller import AppController
 from cozy.control.db import init_db
@@ -85,13 +85,10 @@ class Application(Gtk.Application):
         self.ui = CozyUI(self.pkgdatadir, self, __version__)
         init_db()
         Gtk.Application.do_startup(self)
-        Handy.init()
-        try:
-            manager = Handy.StyleManager.get_default()
-            manager.set_color_scheme(Handy.ColorScheme.PREFER_LIGHT)
-        except:
-            log.info("Not setting libhandy style manager, version is too old.")
-        log.info("libhandy version: {}".format(Handy._version))
+        Adw.init()
+        manager = Adw.StyleManager.get_default()
+        manager.set_color_scheme(Adw.ColorScheme.PREFER_LIGHT)
+        log.info("libadwaita version: {}".format(Adw._version))
         self.ui.startup()
 
     def do_activate(self):

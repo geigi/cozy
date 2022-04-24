@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
 <interface>
-  <requires lib="gtk+" version="3.16"/>
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkAdjustment" id="speed_value">
     <property name="lower">0.5</property>
     <property name="upper">3.5</property>
@@ -11,47 +10,29 @@
   </object>
   <template class="PlaybackSpeedPopover" parent="GtkPopover">
     <property name="width_request">300</property>
-    <property name="can_focus">False</property>
-    <child>
+    <property name="child">
       <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <child>
           <object class="GtkScale" id="playback_speed_scale">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">10</property>
+            <property name="hexpand">1</property>
+            <property name="focusable">1</property>
+            <property name="margin-start">5</property>
+            <property name="margin-end">10</property>
             <property name="margin_top">10</property>
             <property name="margin_bottom">10</property>
             <property name="adjustment">speed_value</property>
-            <property name="lower_stepper_sensitivity">on</property>
-            <property name="upper_stepper_sensitivity">on</property>
             <property name="fill_level">5</property>
             <property name="round_digits">1</property>
-            <property name="draw_value">False</property>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkLabel" id="playback_speed_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_right">10</property>
-            <property name="label">&lt;span font_features='tnum'&gt;1.0 x&lt;/span&gt;</property>
-            <property name="use_markup">True</property>
+            <property name="margin-end">10</property>
+            <property name="label">&lt;span font_features=&apos;tnum&apos;&gt;1.0 x&lt;/span&gt;</property>
+            <property name="use_markup">1</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
-    </child>
+    </property>
   </template>
 </interface>
