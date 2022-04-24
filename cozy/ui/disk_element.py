@@ -21,10 +21,10 @@ class DiskElement(Gtk.Box):
         self.container.get_style_context().add_class("dim-label")
 
         image = Gtk.Image.new_from_icon_name("media-optical-cd-audio-symbolic")
-        self.container.add(image)
+        self.container.append(image)
         label = Gtk.Label()
         label.set_margin_start(5)
         text = _("Disc") + " " + str(disc_number)
         label.set_markup("<b>" + text + "</b>")
-        self.container.add(label)
-        self.add(self.container)
+        self.container.append(label)
+        self.append(self.container)

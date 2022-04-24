@@ -247,7 +247,7 @@ class BookDetailView(Gtk.Box):
             return
 
         disc_element = DiskElement(chapter.disk)
-        self.chapter_box.add(disc_element)
+        self.chapter_box.append(disc_element)
         self._chapters_event.set()
 
     def _add_chapter(self, book_id: int, chapter: Chapter):
@@ -256,7 +256,7 @@ class BookDetailView(Gtk.Box):
 
         chapter_element = ChapterElement(chapter)
         chapter_element.connect("play-pause-clicked", self._play_chapter_clicked)
-        self.chapter_box.add(chapter_element)
+        self.chapter_box.append(chapter_element)
         self._chapters_event.set()
 
     def _schedule_chapters_clearing(self):

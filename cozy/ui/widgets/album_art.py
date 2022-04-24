@@ -31,7 +31,7 @@ class AlbumArt(Gtk.DrawingArea):
         context.arc(RADIUS, RADIUS, RADIUS, 180 * degrees, 270 * degrees)
         context.close_path()
 
-    def _on_draw(self, area: Gtk.DrawingArea, context: cairo.Context):
+    def _on_draw(self, area: Gtk.DrawingArea, context: cairo.Context, *_):
         self.height = area.get_allocated_height()
         self.width = area.get_allocated_width()
 
