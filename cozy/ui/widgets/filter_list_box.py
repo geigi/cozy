@@ -28,10 +28,12 @@ class FilterListBox(Gtk.ListBox):
             self.append(row)
 
     def select_row_with_content(self, row_content: str):
-        for row in self.get_children():
-            if not isinstance(row, ListBoxRowWithData):
-                continue
+        child = self.get_first_child()
+        while child:
+            next = child.get_next_sibling()
 
-            if row.data == row_content:
-                self.select_row(row)
+            if isinstance(child, ListBoxRowWithData) and child.data == row_content:
+                self.select_row(child)
                 break
+
+            child = next

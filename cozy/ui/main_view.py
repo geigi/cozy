@@ -89,28 +89,12 @@ class CozyUI(EventSender, metaclass=Singleton):
         Initialize the main css files and providers.
         Add css classes to the default screen style context.
         """
-        main_cssProviderFile = Gio.File.new_for_uri(
-            "resource:///com/github/geigi/cozy/application.css")
+        main_cssProviderFile = Gio.File.new_for_uri("resource:///com/github/geigi/cozy/application.css")
         main_cssProvider = Gtk.CssProvider()
         main_cssProvider.load_from_file(main_cssProviderFile)
 
-        if Gtk.get_minor_version() > 18:
-            log.debug("Fanciest design possible")
-            cssProviderFile = Gio.File.new_for_uri(
-                "resource:///com/github/geigi/cozy/application_default.css")
-        else:
-            log.debug("Using legacy css file")
-            cssProviderFile = Gio.File.new_for_uri(
-                "resource:///com/github/geigi/cozy/application_legacy.css")
-        cssProvider = Gtk.CssProvider()
-        cssProvider.load_from_file(cssProviderFile)
-
-        # add the bordered css class to the default screen for the borders around album art
         display = Gdk.Display.get_default()
-        Gtk.StyleContext.add_provider_for_display(
-            display, main_cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-        Gtk.StyleContext.add_provider_for_display(
-            display, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        Gtk.StyleContext.add_provider_for_display(display, main_cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
     def __init_window(self):
         """

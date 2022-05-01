@@ -57,23 +57,43 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">False</property>
-                                    <property name="margin-top">20</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="GtkButton" id="play_book_button">
-                                        <property name="focusable">1</property>
-                                        <property name="receives-default">1</property>
-                                        <child>
-                                          <object class="GtkImage" id="play_img">
-                                            <property name="focusable">1</property>
-                                            <property name="icon-name">play-symbolic</property>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
+                                  <object class="GtkLabel" id="book_label">
+                                    <property name="halign">start</property>
+                                    <property name="valign">end</property>
+                                    <property name="label">Book name</property>
+                                    <property name="wrap">1</property>
+                                    <property name="wrap-mode">word-char</property>
+                                    <property name="ellipsize">end</property>
+                                    <property name="max-width-chars">25</property>
+                                    <property name="lines">4</property>
+                                    <property name="xalign">0</property>
+                                    <attributes>
+                                      <attribute name="weight" value="bold"></attribute>
+                                    </attributes>
+                                    <style>
+                                      <class name="h2"/>
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="author_label">
+                                    <property name="halign">start</property>
+                                    <property name="valign">start</property>
+                                    <property name="margin-bottom">15</property>
+                                    <property name="label">Book author</property>
+                                    <property name="wrap">1</property>
+                                    <property name="wrap-mode">word-char</property>
+                                    <property name="ellipsize">end</property>
+                                    <property name="max-width-chars">30</property>
+                                    <property name="lines">2</property>
+                                    <property name="xalign">0</property>
+                                    <attributes>
+                                      <attribute name="weight" value="bold"></attribute>
+                                    </attributes>
+                                    <style>
+                                      <class name="dim-label"/>
+                                      <class name="h3"/>
+                                    </style>
                                   </object>
                                 </child>
                                 <child>
@@ -227,7 +247,9 @@
                                 </child>
                                 <child>
                                   <object class="GtkBox" id="unavailable_box">
-                                    <property name="tooltip-text" translatable="1">Some or all files of this book cannot be found.</property>
+                                    <property name="tooltip-text" translatable="1">Some or all files of this book cannot
+                                      be found.
+                                    </property>
                                     <property name="halign">center</property>
                                     <property name="margin-bottom">20</property>
                                     <property name="spacing">4</property>
@@ -253,43 +275,23 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel" id="author_label">
-                                    <property name="halign">start</property>
-                                    <property name="valign">start</property>
-                                    <property name="margin-bottom">15</property>
-                                    <property name="label">Book author</property>
-                                    <property name="wrap">1</property>
-                                    <property name="wrap-mode">word-char</property>
-                                    <property name="ellipsize">end</property>
-                                    <property name="max-width-chars">30</property>
-                                    <property name="lines">2</property>
-                                    <property name="xalign">0</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"></attribute>
-                                    </attributes>
-                                    <style>
-                                      <class name="dim-label"/>
-                                      <class name="h3"/>
-                                    </style>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="book_label">
-                                    <property name="halign">start</property>
-                                    <property name="valign">end</property>
-                                    <property name="label">Book name</property>
-                                    <property name="wrap">1</property>
-                                    <property name="wrap-mode">word-char</property>
-                                    <property name="ellipsize">end</property>
-                                    <property name="max-width-chars">25</property>
-                                    <property name="lines">4</property>
-                                    <property name="xalign">0</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"></attribute>
-                                    </attributes>
-                                    <style>
-                                      <class name="h2"/>
-                                    </style>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="margin-top">20</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkButton" id="play_book_button">
+                                        <property name="focusable">1</property>
+                                        <property name="receives-default">1</property>
+                                        <child>
+                                          <object class="GtkImage" id="play_img">
+                                            <property name="focusable">1</property>
+                                            <property name="icon-name">play-symbolic</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -369,7 +371,8 @@
                                         <child>
                                           <object class="GtkLabel" id="chapters_loading_text">
                                             <property name="halign">center</property>
-                                            <property name="label" translatable="1">Loading chapters, please wait...</property>
+                                            <property name="label" translatable="1">Loading chapters, please wait...
+                                            </property>
                                           </object>
                                         </child>
                                       </object>
