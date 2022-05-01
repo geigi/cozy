@@ -45,12 +45,13 @@
                             <child>
                               <object class="GtkBox">
                                 <property name="orientation">vertical</property>
-                                <property name="spacing">5</property>
+                                <property name="spacing">15</property>
                                 <child>
-                                  <object class="GtkBox" id="album_art_container">
+                                  <object class="AdwClamp" id="album_art_container">
                                     <property name="halign">center</property>
                                     <property name="margin-bottom">25</property>
                                     <property name="orientation">vertical</property>
+                                    <property name="maximum-size">250</property>
                                     <style>
                                       <class name="book_detail_art"/>
                                     </style>
@@ -71,7 +72,7 @@
                                       <attribute name="weight" value="bold"></attribute>
                                     </attributes>
                                     <style>
-                                      <class name="h2"/>
+                                      <class name="title-2"/>
                                     </style>
                                   </object>
                                 </child>
@@ -92,7 +93,7 @@
                                     </attributes>
                                     <style>
                                       <class name="dim-label"/>
-                                      <class name="h3"/>
+                                      <class name="title-3"/>
                                     </style>
                                   </object>
                                 </child>
@@ -251,7 +252,6 @@
                                       be found.
                                     </property>
                                     <property name="halign">center</property>
-                                    <property name="margin-bottom">20</property>
                                     <property name="spacing">4</property>
                                     <child>
                                       <object class="GtkImage">
@@ -284,12 +284,17 @@
                                       <object class="GtkButton" id="play_book_button">
                                         <property name="focusable">1</property>
                                         <property name="receives-default">1</property>
+                                        <property name="halign">center</property>
                                         <child>
                                           <object class="GtkImage" id="play_img">
                                             <property name="focusable">1</property>
                                             <property name="icon-name">play-symbolic</property>
                                           </object>
                                         </child>
+                                        <style>
+                                          <class name="suggested-action"></class>
+                                          <class name="pill"></class>
+                                        </style>
                                       </object>
                                     </child>
                                   </object>

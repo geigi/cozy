@@ -16,7 +16,7 @@
         <property name="label" translatable="1">Welcome!</property>
         <property name="yalign">1</property>
         <style>
-          <class name="h1"/>
+          <class name="title-1"/>
         </style>
       </object>
     </child>

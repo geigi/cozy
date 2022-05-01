@@ -42,89 +42,99 @@
                             <property name="can-navigate-back">True</property>
                             <property name="can-navigate-forward">True</property>
                             <child>
-                              <object class="AdwViewStack" id="sort_stack">
-                                <property name="vexpand">1</property>
-                                <property name="hhomogeneous">0</property>
+                              <object class="GtkBox">
+                                <property name="orientation">horizontal</property>
                                 <child>
-                                  <object class="AdwViewStackPage">
-                                    <property name="name">recent</property>
-                                    <property name="title" translatable="1">Recent</property>
-                                    <property name="icon-name">clock-outline-symbolic</property>
-                                    <property name="child">
-                                      <object class="GtkBox">
-                                        <property name="halign">start</property>
-                                        <property name="orientation">vertical</property>
+                                  <object class="AdwViewStack" id="sort_stack">
+                                    <property name="vexpand">1</property>
+                                    <property name="hhomogeneous">0</property>
+                                    <child>
+                                      <object class="AdwViewStackPage">
+                                        <property name="name">recent</property>
+                                        <property name="title" translatable="1">Recent</property>
+                                        <property name="icon-name">clock-outline-symbolic</property>
+                                        <property name="child">
+                                          <object class="GtkBox">
+                                            <property name="halign">start</property>
+                                            <property name="orientation">vertical</property>
+                                          </object>
+                                        </property>
                                       </object>
-                                    </property>
+                                    </child>
+                                    <child>
+                                      <object class="AdwViewStackPage">
+                                        <property name="name">author</property>
+                                        <property name="title" translatable="1">Author</property>
+                                        <property name="icon-name">account-symbolic</property>
+                                        <property name="child">
+                                          <object class="GtkScrolledWindow" id="sort_author_scroller">
+                                            <property name="name">sort_author_scroller</property>
+                                            <property name="width-request">220</property>
+                                            <property name="focusable">1</property>
+                                            <property name="hscrollbar-policy">never</property>
+                                            <property name="has-frame">1</property>
+                                            <property name="child">
+                                              <object class="GtkViewport" id="sort_author_viewport">
+                                                <child>
+                                                  <object class="FilterListBox" id="author_box">
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">False</property>
+                                                    <accessibility>
+                                                      <property name="label" translatable="1">List of authors</property>
+                                                    </accessibility>
+                                                    <style>
+                                                      <class name="navigation-sidebar"/>
+                                                    </style>
+                                                  </object>
+                                                </child>
+                                              </object>
+                                            </property>
+                                            <style>
+                                              <class name="no_frame"/>
+                                            </style>
+                                          </object>
+                                        </property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="AdwViewStackPage">
+                                        <property name="name">reader</property>
+                                        <property name="title" translatable="1">Reader</property>
+                                        <property name="icon-name">microphone-symbolic</property>
+                                        <property name="child">
+                                          <object class="GtkScrolledWindow" id="sort_reader_scroller">
+                                            <property name="width-request">220</property>
+                                            <property name="focusable">1</property>
+                                            <property name="hscrollbar-policy">never</property>
+                                            <property name="has-frame">1</property>
+                                            <property name="child">
+                                              <object class="GtkViewport" id="sort_reader_viewport">
+                                                <child>
+                                                  <object class="FilterListBox" id="reader_box">
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">False</property>
+                                                    <accessibility>
+                                                      <property name="label" translatable="1">List of readers</property>
+                                                    </accessibility>
+                                                    <style>
+                                                      <class name="navigation-sidebar"/>
+                                                    </style>
+                                                  </object>
+                                                </child>
+                                              </object>
+                                            </property>
+                                            <style>
+                                              <class name="no_frame"/>
+                                            </style>
+                                          </object>
+                                        </property>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="AdwViewStackPage">
-                                    <property name="name">author</property>
-                                    <property name="title" translatable="1">Author</property>
-                                    <property name="icon-name">account-symbolic</property>
-                                    <property name="child">
-                                      <object class="GtkScrolledWindow" id="sort_author_scroller">
-                                        <property name="name">sort_author_scroller</property>
-                                        <property name="width-request">220</property>
-                                        <property name="focusable">1</property>
-                                        <property name="hscrollbar-policy">never</property>
-                                        <property name="has-frame">1</property>
-                                        <property name="child">
-                                          <object class="GtkViewport" id="sort_author_viewport">
-                                            <child>
-                                              <object class="FilterListBox" id="author_box">
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">False</property>
-                                                <accessibility>
-                                                  <property name="label" translatable="1">List of authors</property>
-                                                </accessibility>
-                                                <style>
-                                                  <class name="sidebar"/>
-                                                </style>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </property>
-                                        <style>
-                                          <class name="no_frame"/>
-                                        </style>
-                                      </object>
-                                    </property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="AdwViewStackPage">
-                                    <property name="name">reader</property>
-                                    <property name="title" translatable="1">Reader</property>
-                                    <property name="icon-name">microphone-symbolic</property>
-                                    <property name="child">
-                                      <object class="GtkScrolledWindow" id="sort_reader_scroller">
-                                        <property name="width-request">220</property>
-                                        <property name="focusable">1</property>
-                                        <property name="hscrollbar-policy">never</property>
-                                        <property name="has-frame">1</property>
-                                        <property name="child">
-                                          <object class="GtkViewport" id="sort_reader_viewport">
-                                            <child>
-                                              <object class="FilterListBox" id="reader_box">
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">False</property>
-                                                <accessibility>
-                                                  <property name="label" translatable="1">List of readers</property>
-                                                </accessibility>
-                                                <style>
-                                                  <class name="sidebar"/>
-                                                </style>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </property>
-                                        <style>
-                                          <class name="no_frame"/>
-                                        </style>
-                                      </object>
-                                    </property>
+                                  <object class="GtkSeparator">
+                                    <property name="orientation">vertical</property>
                                   </object>
                                 </child>
                               </object>
@@ -146,6 +156,8 @@
                                         <property name="has-frame">1</property>
                                         <property name="child">
                                           <object class="GtkViewport" id="books_viewport">
+                                            <property name="vscroll-policy">natural</property>
+                                            <property name="hscroll-policy">minimal</property>
                                             <property name="child">
                                               <object class="GtkFlowBox" id="book_box">
                                                 <property name="margin-top">10</property>
@@ -189,7 +201,9 @@
                                             <property name="margin-end">15</property>
                                             <property name="hexpand">1</property>
                                             <property name="vexpand">1</property>
-                                            <property name="label" translatable="1">Start exploring your library by switching to the Author or Reader view.</property>
+                                            <property name="label" translatable="1">Start exploring your library by
+                                              switching to the Author or Reader view.
+                                            </property>
                                             <property name="wrap">1</property>
                                             <property name="xalign">0</property>
                                             <property name="yalign">0</property>
@@ -229,7 +243,9 @@
                             <child>
                               <object class="GtkLabel">
                                 <property name="vexpand">1</property>
-                                <property name="label" translatable="1">Stay tuned while Cozy is preparing your library…</property>
+                                <property name="label" translatable="1">Stay tuned while Cozy is preparing your
+                                  library…
+                                </property>
                                 <property name="wrap">1</property>
                                 <property name="xalign">0</property>
                                 <property name="yalign">0</property>
@@ -276,7 +292,7 @@
                                             <property name="wrap">1</property>
                                             <property name="xalign">0</property>
                                             <style>
-                                              <class name="h1"/>
+                                              <class name="title-1"/>
                                             </style>
                                           </object>
                                         </child>
@@ -284,11 +300,13 @@
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
                                             <property name="margin-bottom">85</property>
-                                            <property name="label" translatable="1">Cozy automatically imports your audiobooks in one directory - your library</property>
+                                            <property name="label" translatable="1">Cozy automatically imports your
+                                              audiobooks in one directory - your library
+                                            </property>
                                             <property name="wrap">1</property>
                                             <property name="xalign">0</property>
                                             <style>
-                                              <class name="h4"/>
+                                              <class name="title-4"/>
                                             </style>
                                           </object>
                                         </child>
@@ -307,7 +325,9 @@
                                                     <property name="selectable">False</property>
                                                     <property name="title" translatable="1">Drag &amp; Drop</property>
                                                     <property name="icon-name">input-mouse-symbolic</property>
-                                                    <property name="subtitle" translatable="1">Drag your audiobooks into cozy and they will be automatically imported</property>
+                                                    <property name="subtitle" translatable="1">Drag your audiobooks into
+                                                      cozy and they will be automatically imported
+                                                    </property>
                                                     <child>
                                                       <placeholder/>
                                                     </child>
@@ -328,9 +348,12 @@
                                                     <property name="height-request">80</property>
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="title" translatable="1">Set Audiobooks Directory</property>
+                                                    <property name="title" translatable="1">Set Audiobooks Directory
+                                                    </property>
                                                     <property name="icon-name">folder-symbolic</property>
-                                                    <property name="subtitle" translatable="1">Load audiobooks from a directory, network drive or an external disk</property>
+                                                    <property name="subtitle" translatable="1">Load audiobooks from a
+                                                      directory, network drive or an external disk
+                                                    </property>
                                                     <child>
                                                       <object class="GtkButton" id="no_media_file_chooser">
                                                         <property name="label" translatable="1">Select</property>

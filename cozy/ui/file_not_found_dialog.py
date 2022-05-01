@@ -37,16 +37,9 @@ class FileNotFoundDialog():
         self.dialog.destroy()
 
     def locate(self, __):
-        directory, filename = os.path.split(self.missing_chapter.file)
-        dialog = Gtk.FileChooserDialog("Please locate the file " + filename, self.parent.window,
-                                       Gtk.FileChooserAction.OPEN,
-                                       (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                                        Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+        dialog = Gtk.FileChooserNative()
+        dialog.set_transient_for(self.dialog)
 
-        filter = Gtk.FileFilter()
-        filter.add_pattern(filename)
-        filter.set_name(filename)
-        dialog.add_filter(filter)
         path, file_extension = os.path.splitext(self.missing_chapter.file)
         filter = Gtk.FileFilter()
         filter.add_pattern("*" + file_extension)
@@ -56,9 +49,8 @@ class FileNotFoundDialog():
         filter.add_pattern("*")
         filter.set_name(_("All files"))
         dialog.add_filter(filter)
-        dialog.set_local_only(False)
 
-        response = dialog.run()
+        response = dialog.show()
         if response == Gtk.ResponseType.OK:
             new_location = dialog.get_filename()
             self.missing_chapter.file = new_location

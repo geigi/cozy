@@ -21,23 +21,16 @@
     <property name="page-increment">10</property>
   </object>
   <template class="PreferencesWindow" parent="AdwPreferencesWindow">
-    <property name="can-focus">False</property>
     <property name="destroy-with-parent">True</property>
     <child>
       <object class="AdwPreferencesPage">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
         <property name="icon-name">settings-symbolic</property>
         <property name="title" translatable="1">General</property>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
             <property name="title" translatable="1">Appearance</property>
             <child>
               <object class="AdwActionRow">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
                 <property name="title">Dark Mode</property>
                 <property name="activatable-widget">dark_mode_switch</property>
                 <child>
@@ -52,13 +45,9 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
             <property name="title" translatable="1">Tags</property>
             <child>
               <object class="AdwActionRow">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
                 <property name="title">Swap author and reader</property>
                 <property name="activatable-widget">swap_author_reader_switch</property>
                 <property name="subtitle" translatable="1">Activate if author and reader are displayed the wrong way
@@ -75,13 +64,9 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
             <property name="title" translatable="1">Playback</property>
             <child>
               <object class="AdwActionRow">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
                 <property name="title">Replay</property>
                 <property name="activatable-widget">replay_switch</property>
                 <property name="subtitle" translatable="1">Rewind 30 seconds of the current book when starting Cozy
@@ -96,8 +81,6 @@
             </child>
             <child>
               <object class="AdwActionRow">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
                 <property name="title">Rewind Duration</property>
                 <child>
                   <object class="GtkSpinButton" id="rewind_duration_spin_button">
@@ -114,8 +97,6 @@
             </child>
             <child>
               <object class="AdwActionRow">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
                 <property name="title">Forward Duration</property>
                 <child>
                   <object class="GtkSpinButton" id="forward_duration_spin_button">
@@ -135,13 +116,9 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
             <property name="title" translatable="1">Sleep Timer</property>
             <child>
               <object class="AdwActionRow">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
                 <property name="title">Fadeout</property>
                 <property name="activatable-widget">sleep_timer_fadeout_switch</property>
                 <child>
@@ -154,8 +131,6 @@
             </child>
             <child>
               <object class="AdwActionRow" id="sleep_timer_fadeout_row">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
                 <property name="title">Fadeout duration</property>
                 <child>
                   <object class="GtkSpinButton" id="fadeout_duration_spin_button">
@@ -176,19 +151,13 @@
     </child>
     <child>
       <object class="AdwPreferencesPage">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
         <property name="icon-name">harddisk-symbolic</property>
         <property name="title" translatable="1">Storage</property>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
             <property name="title" translatable="1">Artwork</property>
             <child>
               <object class="AdwActionRow">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
                 <property name="title">Prefer external images over embedded cover</property>
                 <property name="activatable-widget">artwork_prefer_external_switch</property>
                 <property name="subtitle" translatable="1">Always use images (cover.jpg, *.png, …) when available
@@ -205,14 +174,9 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup" id="storage_locations_preference_group">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
             <property name="title" translatable="1">Storage locations</property>
             <child>
               <object class="AdwPreferencesRow">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="selectable">False</property>
                 <property name="title" translatable="1">Storage locations</property>
                 <child>
                   <object class="GtkBox">
@@ -285,6 +249,10 @@
                           <object class="GtkSeparator">
                             <property name="orientation">vertical</property>
                             <property name="can-focus">0</property>
+                            <property name="hexpand">True</property>
+                            <style>
+                              <class name="spacer"/>
+                            </style>
                           </object>
                         </child>
                         <child>
@@ -340,19 +308,13 @@
     </child>
     <child>
       <object class="AdwPreferencesPage">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
         <property name="icon-name">papyrus-vertical-symbolic</property>
         <property name="title" translatable="1">Feedback</property>
         <child>
           <object class="AdwPreferencesGroup" id="user_feedback_preference_group">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
             <property name="title" translatable="1">User feedback</property>
             <child>
               <object class="AdwPreferencesRow" id="user_feedback_preference_row">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
                 <property name="title" translatable="1">User Feedback</property>
                 <child>
                   <placeholder/>

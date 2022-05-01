@@ -3,70 +3,55 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="libadwaita" version="1.0"/>
   <template class="BookElement" parent="GtkFlowBoxChild">
-    <property name="valign">start</property>
-    <property name="halign">start</property>
+    <property name="height-request">150</property>
+    <property name="width-request">150</property>
     <child>
-      <object class="AdwClamp">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="maximum-size">270</property>
-        <property name="tightening-threshold">200</property>
+      <object class="GtkBox" id="container_box">
+        <property name="focusable">1</property>
+        <property name="tooltip-text" translatable="1">Open book overview</property>
+        <property name="margin-start">10</property>
+        <property name="margin-end">10</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">10</property>
         <property name="orientation">vertical</property>
+        <property name="spacing">1</property>
+        <property name="valign">start</property>
         <child>
-          <object class="AdwClamp">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="maximum-size">200</property>
-            <property name="tightening-threshold">100</property>
-            <property name="orientation">horizontal</property>
-            <child>
-              <object class="GtkBox" id="container_box">
-                <property name="focusable">1</property>
-                <property name="tooltip-text" translatable="1">Open book overview</property>
-                <property name="margin-start">10</property>
-                <property name="margin-end">10</property>
-                <property name="margin-top">10</property>
-                <property name="margin-bottom">10</property>
-                <property name="orientation">vertical</property>
-                <property name="spacing">1</property>
-                <child>
-                  <object class="GtkLabel" id="name_label">
-                    <property name="valign">end</property>
-                    <property name="margin-top">15</property>
-                    <property name="hexpand">0</property>
-                    <property name="vexpand">0</property>
-                    <property name="wrap">1</property>
-                    <property name="ellipsize">end</property>
-                    <property name="max-width-chars">20</property>
-                    <property name="xalign">0</property>
-                    <property name="yalign">0</property>
-                    <style>
-                      <class name="bold"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="author_label">
-                    <property name="valign">end</property>
-                    <property name="hexpand">0</property>
-                    <property name="vexpand">0</property>
-                    <property name="wrap">1</property>
-                    <property name="ellipsize">end</property>
-                    <property name="max-width-chars">30</property>
-                    <property name="xalign">0</property>
-                    <property name="yalign">0</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                </child>
-                <style>
-                  <class name="book_container"/>
-                </style>
-              </object>
-            </child>
+          <object class="GtkLabel" id="name_label">
+            <property name="halign">start</property>
+            <property name="valign">end</property>
+            <property name="margin-top">15</property>
+            <property name="hexpand">0</property>
+            <property name="vexpand">0</property>
+            <property name="wrap">1</property>
+            <property name="ellipsize">end</property>
+            <property name="max-width-chars">20</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <style>
+              <class name="bold"/>
+            </style>
           </object>
         </child>
+        <child>
+          <object class="GtkLabel" id="author_label">
+            <property name="halign">start</property>
+            <property name="valign">end</property>
+            <property name="hexpand">0</property>
+            <property name="vexpand">0</property>
+            <property name="wrap">1</property>
+            <property name="ellipsize">end</property>
+            <property name="max-width-chars">30</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+          </object>
+        </child>
+        <style>
+          <class name="book_container"/>
+        </style>
       </object>
     </child>
   </template>

@@ -2,9 +2,25 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <object class="GtkDialog" id="dialog">
+    <property name="use-header-bar">1</property>
+    <property name="title" translatable="1">File not found</property>
+    <child type="action">
+      <object class="GtkButton" id="cancel_button">
+      <property name="label" translatable="1">Cancel</property>
+      </object>
+    </child>
+    <child type="action">
+      <object class="GtkButton" id="locate_button">
+        <property name="label" translatable="1">Locate</property>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="cancel">cancel_button</action-widget>
+      <action-widget response="ok" default="true">locate_button</action-widget>
+    </action-widgets>
     <child internal-child="content_area">
       <object class="GtkBox">
-        <property name="visible">0</property>
+        <property name="visible">1</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
@@ -25,17 +41,6 @@
                 <property name="hexpand">1</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="margin_top">5</property>
-                    <property name="hexpand">1</property>
-                    <property name="vexpand">1</property>
-                    <property name="label" translatable="1">File not found</property>
-                    <style>
-                      <class name="h3"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
                   <object class="GtkLabel" id="file_label">
                     <property name="halign">center</property>
                     <property name="label" translatable="0">&lt;tt&gt;/home/ju/path/to/the/borken/file/that/is/maybe/very/very/long.mp3&lt;/tt&gt;</property>
@@ -48,34 +53,13 @@
                   <object class="GtkLabel">
                     <property name="halign">center</property>
                     <property name="vexpand">1</property>
-                    <property name="label" translatable="1">This file could not be found. Do you want to locate it manually?</property>
+                    <property name="label" translatable="1">This file could not be found. Do you want to locate it
+                      manually?
+                    </property>
                   </object>
                 </child>
               </object>
             </child>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-    <child internal-child="action_area">
-      <object class="GtkBox">
-        <property name="valign">center</property>
-        <property name="can_focus">False</property>
-        <child>
-          <object class="GtkButton" id="cancel_button">
-            <property name="label" translatable="1">Cancel</property>
-            <property name="focusable">1</property>
-            <property name="receives_default">1</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="locate_button">
-            <property name="label" translatable="1">Locate</property>
-            <property name="focusable">1</property>
-            <property name="receives_default">1</property>
           </object>
         </child>
       </object>

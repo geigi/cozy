@@ -9,7 +9,7 @@ from cozy.ext import inject
 
 from gi.repository import Gtk, GObject, Gdk
 
-ALBUM_ART_SIZE = 300
+ALBUM_ART_SIZE = 200
 PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.NORMAL
 STROKE_WIDTH = 3
 
@@ -23,7 +23,7 @@ class AlbumElement(Gtk.Box):
     artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
     button_image: Gtk.Image = Gtk.Template.Child()
-    album_art_image: Gtk.Picture = Gtk.Template.Child()
+    album_art_image: Gtk.Image = Gtk.Template.Child()
     play_button: Gtk.Button = Gtk.Template.Child()
     progress_drawing_area: Gtk.DrawingArea = Gtk.Template.Child()
     album_art_drawing_area: Gtk.DrawingArea = Gtk.Template.Child()
@@ -34,16 +34,15 @@ class AlbumElement(Gtk.Box):
         super().__init__()
 
         self._book: Book = book
-        pixbuf = self.artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), ALBUM_ART_SIZE)
+        pixbuf = self.artwork_cache.get_cover_pixbuf(book, 1, ALBUM_ART_SIZE)
 
         if pixbuf:
-            self.album_art_image.set_pixbuf(pixbuf)
+            self.album_art_image.set_from_pixbuf(pixbuf)
+            self.album_art_image.set_size_request(ALBUM_ART_SIZE, ALBUM_ART_SIZE)
         #else:
             # TODO: fix placeholder
             #self.album_art_image.set_from_icon_name("book-open-variant-symbolic")
             #self.album_art_image.props.pixel_size = ALBUM_ART_SIZE
-
-        self.set_size_request(ALBUM_ART_SIZE, ALBUM_ART_SIZE)
 
         self._play_button_click = Gtk.GestureClick()
         self._play_button_click.connect("released", self._on_play_button_press)

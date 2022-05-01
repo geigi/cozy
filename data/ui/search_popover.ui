@@ -43,7 +43,7 @@
                       <attribute name="weight" value="bold"></attribute>
                     </attributes>
                     <style>
-                      <class name="h4"/>
+                      <class name="title-4"/>
                     </style>
                   </object>
                 </property>
@@ -195,7 +195,7 @@
                       <attribute name="weight" value="bold"></attribute>
                     </attributes>
                     <style>
-                      <class name="h4"/>
+                      <class name="title-4"/>
                     </style>
                   </object>
                 </property>

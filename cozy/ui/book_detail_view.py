@@ -15,9 +15,12 @@ from cozy.ui.disk_element import DiskElement
 from cozy.ui.widgets.album_art import AlbumArt
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
 
-from gi.repository import Gtk, GLib
+from gi.repository import Gtk, GLib, Adw
 
 log = logging.getLogger("BookDetailView")
+
+
+ALBUM_ART_SIZE = 250
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/book_detail.ui')
@@ -43,7 +46,7 @@ class BookDetailView(Gtk.Box):
     download_image: Gtk.Image = Gtk.Template.Child()
     download_switch: Gtk.Switch = Gtk.Template.Child()
 
-    album_art_container: Gtk.Box = Gtk.Template.Child()
+    album_art_container: Adw.Clamp = Gtk.Template.Child()
 
     unavailable_box: Gtk.Box = Gtk.Template.Child()
 
@@ -67,8 +70,9 @@ class BookDetailView(Gtk.Box):
 
         self.book_overview_scroller.props.propagate_natural_height = True
 
-        self.art = AlbumArt()
-        self.album_art_container.prepend(self.art)
+        self.art = Gtk.Picture()
+        self.art.set_valign(Gtk.Align.END)
+        self.album_art_container.set_child(self.art)
 
         self._chapters_event: Event = Event()
         self._chapters_thread: Thread = None
@@ -267,10 +271,11 @@ class BookDetailView(Gtk.Box):
         self.book_progress_bar.set_fraction(self._view_model.progress_percent)
 
     def _set_cover_image(self, book: Book):
-        pixbuf = self._artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), 250)
+        pixbuf = self._artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), ALBUM_ART_SIZE)
         if pixbuf:
             self.album_art_container.set_visible(True)
-            self.art.set_art(pixbuf)
+            self.art.set_pixbuf(pixbuf)
+            self.art.set_overflow(True)
         else:
             self.album_art_container.set_visible(False)
 

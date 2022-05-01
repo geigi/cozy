@@ -11,7 +11,7 @@
       <object class="GtkLabel">
         <property name="label" translatable="1">What&apos;s new in Cozy</property>
         <style>
-          <class name="h1"/>
+          <class name="title-1"/>
         </style>
       </object>
     </child>
@@ -33,7 +33,7 @@
             <property name="label" translatable="1">A completely rewritten and far more reliable media importer.</property>
             <property name="wrap">1</property>
             <style>
-              <class name="h3"/>
+              <class name="title-3"/>
             </style>
           </object>
         </child>

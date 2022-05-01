@@ -39,7 +39,7 @@
                     <property name="vexpand">1</property>
                     <property name="label" translatable="1">Some files could not be imported</property>
                     <style>
-                      <class name="h3"/>
+                      <class name="title-3"/>
                     </style>
                   </object>
                 </child>

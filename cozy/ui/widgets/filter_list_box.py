@@ -17,10 +17,9 @@ class FilterListBox(Gtk.ListBox):
     def populate(self, elements: List[str]):
         self.remove_all_children()
 
-        all_row = ListBoxRowWithData(_("All"), False)
+        all_row = ListBoxRowWithData(_("All"), True)
         all_row.set_tooltip_text(_("Display all books"))
         self.append(all_row)
-        self.append(ListBoxSeparatorRow())
         self.select_row(all_row)
 
         for element in elements:

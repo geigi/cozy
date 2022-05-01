@@ -21,7 +21,7 @@
             <property name="label" translatable="1">User feedback</property>
             <property name="wrap">1</property>
             <style>
-              <class name="h3"/>
+              <class name="title-3"/>
               <class name="bold"/>
             </style>
           </object>
