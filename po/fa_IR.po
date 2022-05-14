@@ -1,0 +1,905 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.geigi.cozy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# TheBlue Quasar, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.geigi.cozy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-04 16:30+0100\n"
+"PO-Revision-Date: 2019-09-08 09:31+0000\n"
+"Last-Translator: TheBlue Quasar, 2022\n"
+"Language-Team: Persian (Iran) (https://www.transifex.com/geigi/teams/78138/fa_IR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fa_IR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: cozy/application.py:101
+msgid "Audiobooks"
+msgstr "کتاب​های صوتی"
+
+#: cozy/control/offline_cache.py:200
+msgid "Copying"
+msgstr "در​حال رونوشت"
+
+#: cozy/media/files.py:69
+msgid "Cannot copy: Audiobook directory is read only"
+msgstr "رونوشت ممکن نیست: مسیر کتاب صوتی صرفاً قابل‌خواندن است"
+
+#: cozy/media/files.py:71
+msgid "Cannot copy: Disk is full"
+msgstr "رونوشت ممکن نیست: دیسک پر است"
+
+#: cozy/media/files.py:73 cozy/media/files.py:89
+msgid "Cannot copy: Permission denied"
+msgstr "رونوشت ممکن نیست: دسترسی رد شد"
+
+#: cozy/media/importer.py:121
+msgid "Error while importing new files"
+msgstr "خطا طی وارد کردن پرونده​های جدید"
+
+#: cozy/model/track.py:38
+msgid "Chapter"
+msgstr "فصل"
+
+#: cozy/tools.py:92 cozy/tools.py:96
+#, python-brace-format
+msgid "{hours} hour"
+msgid_plural "{hours} hours"
+msgstr[0] "{hours} ساعت"
+msgstr[1] "{hours} ساعت"
+
+#: cozy/tools.py:94 cozy/tools.py:98
+#, python-brace-format
+msgid "{minutes} minute"
+msgid_plural "{minutes} minutes"
+msgstr[0] "دقیقه"
+msgstr[1] "{minutes} دقیقه"
+
+#: cozy/tools.py:100
+#, python-brace-format
+msgid "{seconds} second"
+msgid_plural "{seconds} seconds"
+msgstr[0] "{seconds} ثانیه"
+msgstr[1] "{seconds} ثانیه"
+
+#: cozy/tools.py:102
+msgid "finished"
+msgstr "پایان​یافته"
+
+#: cozy/tools.py:126
+msgid "never"
+msgstr "هرگز"
+
+#: cozy/tools.py:128
+msgid "today"
+msgstr "امروز"
+
+#: cozy/tools.py:130
+msgid "yesterday"
+msgstr "دیروز"
+
+#: cozy/tools.py:132
+#, python-format
+msgid "%s days ago"
+msgstr "%sروز پیش"
+
+#: cozy/tools.py:134
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] "{weeks} هفته پیش"
+msgstr[1] "{weeks}"
+
+#: cozy/tools.py:136
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] "{months} ماه پیش"
+msgstr[1] "{months}"
+
+#: cozy/tools.py:138
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] "{years} سال پیش"
+msgstr[1] "{years} "
+
+#: cozy/ui/book_detail_view.py:313
+msgid "Downloaded"
+msgstr "دانلود‌شده"
+
+#: cozy/ui/book_detail_view.py:316 data/ui/book_detail.ui:152
+msgid "Download"
+msgstr "دانلود"
+
+#: cozy/ui/chapter_element.py:27
+msgid "Play this part"
+msgstr "این قسمت را پخش کن"
+
+#: cozy/ui/disk_element.py:27
+msgid "Disc"
+msgstr "دیسک"
+
+#: cozy/ui/file_not_found_dialog.py:56
+msgid "All files"
+msgstr "تمامی پرونده​ها"
+
+#: cozy/ui/main_view.py:301 data/ui/main_window.ui:412
+msgid "Set Audiobooks Directory"
+msgstr "تنظیم مسیر کتاب​های صوتی"
+
+#: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
+#, python-brace-format
+msgid "{storage} is offline."
+msgstr "{storage} آفلاین است."
+
+#: cozy/ui/widgets/book_element.py:52
+msgid "Mark as read"
+msgstr "تعیین به عنوان خوانده​شده"
+
+#: cozy/ui/widgets/book_element.py:55
+msgid "Open in file browser"
+msgstr "باز کردن در مرورگر پرونده​ها"
+
+#: cozy/ui/widgets/book_element.py:58
+msgid "Remove from library"
+msgstr "حذف از کتابخانه"
+
+#: cozy/ui/widgets/error_reporting.py:12
+msgid "Disabled"
+msgstr "غیرفعال​شده"
+
+#: cozy/ui/widgets/error_reporting.py:13
+msgid "Basic error reporting"
+msgstr "گزارش خطای اصلی"
+
+#: cozy/ui/widgets/error_reporting.py:14
+msgid "Detailed error reporting"
+msgstr "گزارش خطای مفصّل"
+
+#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:240
+msgid "Detailed error reporting with import errors"
+msgstr "گزارش خطای مفصل به​همراه خطاهای وارد​کردن "
+
+#: cozy/ui/widgets/error_reporting.py:19
+msgid "No error or crash reporting."
+msgstr "بدون هیچ گزارش خطا یا از​کار​افتادن"
+
+#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:259
+msgid "The following information will be sent in case of an error or crash:"
+msgstr "اطلاعات ذیل در صورت وقوع خطا یا از​کار​افتادن ارسال خواهد شد:"
+
+#: cozy/ui/widgets/error_reporting.py:25
+msgid "Which type of error occurred"
+msgstr "کدام خطا رخ داده"
+
+#: cozy/ui/widgets/error_reporting.py:26
+msgid "Line of code where an error occurred"
+msgstr "سطری از کد که در آن خطا رخ داده"
+
+#: cozy/ui/widgets/error_reporting.py:27
+msgid "Cozy's version"
+msgstr "نسخه Cozy"
+
+#: cozy/ui/widgets/error_reporting.py:28
+msgid "Linux distribution"
+msgstr "توزیع لینوکس"
+
+#: cozy/ui/widgets/error_reporting.py:29
+msgid "Desktop environment"
+msgstr "محیط میزکار"
+
+#: cozy/ui/widgets/error_reporting.py:30
+msgid "Media type of files that Cozy couldn't import"
+msgstr "نوع رسانه​ای که Cozy نتوانسته وارد کند"
+
+#: cozy/ui/widgets/filter_list_box.py:20
+#: cozy/view_model/library_view_model.py:54
+#: cozy/view_model/library_view_model.py:160
+msgid "All"
+msgstr "همه"
+
+#: cozy/ui/widgets/filter_list_box.py:21
+msgid "Display all books"
+msgstr "نمایش همه کتاب​ها"
+
+#: cozy/ui/widgets/search_results.py:73
+msgid "Jump to author "
+msgstr "پرش به نویسنده"
+
+#: cozy/ui/widgets/search_results.py:76
+msgid "Jump to reader "
+msgstr "پرش به گوینده"
+
+#: cozy/ui/widgets/search_results.py:100
+msgid "Play this book"
+msgstr "این کتاب را پخش کن"
+
+#: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
+msgid "min"
+msgstr "دقیقه"
+
+#: cozy/ui/widgets/sleep_timer.py:65
+msgid "Off"
+msgstr "خاموش"
+
+#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:377
+msgid "External drive"
+msgstr "درایو خارجی"
+
+#: cozy/ui/widgets/storage_list_box_row.py:73
+msgid "Internal drive"
+msgstr "درایو داخلی"
+
+#: cozy/view_model/headerbar_view_model.py:91
+msgid "Refreshing audio book collection"
+msgstr "در حال تازه​سازی مجموعه کتاب​های صوتی"
+
+#: cozy/view_model/headerbar_view_model.py:100
+#: cozy/view_model/headerbar_view_model.py:116
+msgid "Copying new files…"
+msgstr "در حال رونوشت پرونده​های جدید..."
+
+#: cozy/view_model/headerbar_view_model.py:107
+msgid "Changing audio book location…"
+msgstr "در حال تغییر مکان کتاب صوتی..."
+
+#: data/ui/about.ui:16
+msgid "GitHub"
+msgstr "گیت​هاب"
+
+#: data/ui/album_element.ui:104
+msgid "Play"
+msgstr "پخش کردن"
+
+#: data/ui/book_detail.ui:219
+msgid "Remaining"
+msgstr "باقی​مانده"
+
+#: data/ui/book_detail.ui:274
+msgid "Total"
+msgstr "کل"
+
+#: data/ui/book_detail.ui:290
+msgid "Last played"
+msgstr "آخرین پخش​شده"
+
+#: data/ui/book_detail.ui:306
+msgid "Published"
+msgstr "منتشرشده"
+
+#: data/ui/book_detail.ui:341
+msgid "Some or all files of this book cannot be found."
+msgstr "برخی یا تمام پرونده​های این کتاب قابل یافتن نیست."
+
+#: data/ui/book_detail.ui:364
+msgid "unavailable"
+msgstr "غیر​قابل​دسترس"
+
+#: data/ui/book_detail.ui:533
+msgid "Loading chapters, please wait..."
+msgstr "در حال بارگیری فصل‌ها‌، لطفا منتظر بمانید..."
+
+#: data/ui/book_element.ui:36
+msgid "Open book overview"
+msgstr "بازکردن نمای کلی کتاب"
+
+#: data/ui/db_migration_failed.ui:31
+msgid "Close Cozy"
+msgstr "بستن ‌Cozy"
+
+#: data/ui/db_migration_failed.ui:47
+msgid "Receive help on GitHub"
+msgstr "دریافت کمک در گیت‌هاب"
+
+#: data/ui/db_migration_failed.ui:108
+msgid "An error occured while updating the database"
+msgstr "خطایی طی بروزرسانی پایگاه‌داده رخ داد"
+
+#: data/ui/db_migration_failed.ui:129
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able to startup.\n"
+"A backup of the database was created before the update and has been restored now.\n"
+"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
+"You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
+"طی یک بروزرسانی پایگاه‌داده خطایی رخ داد و Cozy قادر به راه‌اندازی نخواهد بود.\n"
+"یک پشتیبان از پایگاه‌داده پیش از بروزرسانی ایجاد شده‌بود و اکنون بازیابی شده‌است.\n"
+"تا زمانی که این مسئله حل شود لطفا از نسخه 0.9.5 Cozy استفاده کنید.\n"
+"شما می‌توانید به حل این مشکل با گزارش یک مسئله در گیت‌هاب کمک کنید."
+
+#: data/ui/delete_book_dialog.ui:31 data/ui/file_not_found.ui:19
+msgid "Cancel"
+msgstr "لغو"
+
+#: data/ui/delete_book_dialog.ui:45
+msgid "Delete Audiobook"
+msgstr "حذف کتاب‌صوتی"
+
+#: data/ui/delete_book_dialog.ui:105
+msgid "Are you sure you want to delete the selected audiobook?"
+msgstr "آیا مطمئن هستید می‌خواهید کتاب‌صوتی انتخاب‌شده را حذف کنید؟"
+
+#: data/ui/delete_book_dialog.ui:126
+msgid "The audiobook will be removed from your disk and from Cozy's library."
+msgstr "این کتاب‌صوتی از دیسک شما و از کتابخانه Cozy حذف خواهد شد."
+
+#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:455
+msgid "User feedback"
+msgstr "بازخورد کاربر"
+
+#: data/ui/error_reporting.ui:98
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"You can help improve Cozy by contributing information in case of errors and "
+"crashes. "
+msgstr ""
+"شما می‌توانید به Cozy با دادن اطلاعات در زمینه‌ی خطاها و ازکارافتادن‌ها کمک "
+"کنید."
+
+#: data/ui/error_reporting.ui:112
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Contributing this information is optional and completely anonymous. We will "
+"never collect personal data, files you import or any information that could "
+"identify you."
+msgstr ""
+"دادن این اطلاعات اختیاری و کاملا ناشناس است. ما هرگز اطلاعات شخصی، "
+"پرونده‌هایی که وارد می‌کنید یا هر اطلاعاتی را که قادر به شناسایی شما باشد "
+"جمع‌آوری نمی‌کنیم."
+
+#: data/ui/error_reporting.ui:127
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Cozy is opensource and the user feedback source code can be inspected here: "
+msgstr ""
+"Cozy منبع-باز است و کد منبع بازخورد کاربر از این‌جا قابل بررسی می‌باشد:"
+
+#: data/ui/file_not_found.ui:32
+msgid "Locate"
+msgstr "یافتن مکان"
+
+#: data/ui/file_not_found.ui:86
+msgid "File not found"
+msgstr "پرونده پیدا نشد"
+
+#: data/ui/file_not_found.ui:119
+msgid "This file could not be found. Do you want to locate it manually?"
+msgstr ""
+"این پرونده قابل بافتن نبود. آیا می‌خواهید به‌صورت دستی مکان آن را بیابید؟"
+
+#: data/ui/headerbar.ui:56
+msgid "Display background task progress"
+msgstr "نشان‌دادن پیشرفت کار پس‌زمینه"
+
+#: data/ui/headerbar.ui:70
+msgid "Search your library"
+msgstr "در کتابخانه‌تان جستجو کنید"
+
+#: data/ui/headerbar.ui:80
+msgid "Search menu button"
+msgstr "دکمه‌ی منوی جستجو"
+
+#: data/ui/headerbar.ui:81
+msgid "Open the search popover"
+msgstr "پنجره‌ی بازشوی جستجو را باز کن"
+
+#: data/ui/headerbar.ui:96
+msgid "Options"
+msgstr "گزینه‌ها"
+
+#: data/ui/headerbar.ui:107
+msgid "Options menu button"
+msgstr "دکمه‌ی منوی گزینه‌ها"
+
+#: data/ui/headerbar.ui:108
+msgid "Open the options popover"
+msgstr "پنجره‌ی بازشوی گزینه‌ها را باز کن"
+
+#: data/ui/import_failed.ui:27
+msgid "Ok"
+msgstr "باشه"
+
+#: data/ui/import_failed.ui:81
+msgid "Some files could not be imported"
+msgstr "وارد کردن برخی پرونده‌ها ممکن نشد."
+
+#: data/ui/import_failed.ui:134
+msgid ""
+"This can have multiple reasons:\n"
+"- The audio format is not supported\n"
+"- The path or filename contains non utf-8 characters\n"
+"- The file(s) are no valid audio files\n"
+"- The file(s) are corrupt"
+msgstr ""
+"این می‌تواند دلایل متعددی داشته باشد:\n"
+"- فرمت صوتی پشتیبانی‌شده نیست\n"
+"- مسیر یا نام پرونده حروف غیر utf-8 دارد\n"
+"- پرونده‌(ها) پرونده‌های معتبر صوتی نیستند\n"
+"- پرونده(ها) خرابند"
+
+#: data/ui/main_window.ui:68
+msgid "Recent"
+msgstr "اخیر"
+
+#: data/ui/main_window.ui:90
+msgid "List of authors"
+msgstr "لیست نویسندگان"
+
+#: data/ui/main_window.ui:106 data/ui/main_window.ui:250
+#: data/ui/search_popover.ui:107
+msgid "Author"
+msgstr "نویسنده"
+
+#: data/ui/main_window.ui:128
+msgid "List of readers"
+msgstr "لیست گوینده‌ها"
+
+#: data/ui/main_window.ui:144 data/ui/search_popover.ui:201
+msgid "Reader"
+msgstr "گوینده"
+
+#: data/ui/main_window.ui:189
+msgid "List of books"
+msgstr "لیست کتاب‌ها"
+
+#: data/ui/main_window.ui:222
+msgid ""
+"Start exploring your library by switching to the Author or Reader view."
+msgstr "با رفتن به نمای نویسنده یا گوینده گشتن در کتابخانه‌تان را آغاز کنید."
+
+#: data/ui/main_window.ui:280
+msgid "Stay tuned while Cozy is preparing your library…"
+msgstr "در زمانی که Cozy کتابخانه‌تان را آماده می‌کند، همراه‌مان باشید..."
+
+#: data/ui/main_window.ui:334
+msgid "Import your Audiobooks"
+msgstr "کتاب‌های صوتی‌تان را وارد کنید"
+
+#: data/ui/main_window.ui:353
+msgid ""
+"Cozy automatically imports your audiobooks in one directory - your library"
+msgstr ""
+"Cozy به‌طور خودکار کتاب‌های صوتی‌تان را در یک مسیر - کتابخانه‌تان - وارد "
+"می‌کند."
+
+#: data/ui/main_window.ui:385
+msgid "Drag & Drop"
+msgstr "بکشید و بیاندازید"
+
+#: data/ui/main_window.ui:387
+msgid "Drag your audiobooks into cozy and they will be automatically imported"
+msgstr ""
+"کتاب‌های صوتی‌تان را داخل Cozy بکشید و آن‌ها به‌طور خودکار وارد می‌شوند"
+
+#: data/ui/main_window.ui:414
+msgid "Load audiobooks from a directory, network drive or an external disk"
+msgstr "کتاب‌های صوتی را از یک مسیر، درایو شبکه یا یک دیسک خارجی بارگیری کنید"
+
+#: data/ui/main_window.ui:417
+msgid "Select"
+msgstr "انتخاب"
+
+#: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
+#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:70
+msgid "Rewind"
+msgstr "واگرد"
+
+#: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
+#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:77
+msgid "Rewind button"
+msgstr "دکمه واگرد"
+
+#: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
+#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:78
+msgid "Rewind playback"
+msgstr "واگرد پخش"
+
+#: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
+#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:100
+msgid "Start playback"
+msgstr "شروع پخش"
+
+#: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
+#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:107
+msgid "Play/Pause Button"
+msgstr "دکمه پخش/توقف"
+
+#: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
+#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:108
+msgid "Start or pause the playback"
+msgstr "شروع یا توقف پخش"
+
+#: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
+#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:131
+msgid "Forward"
+msgstr "جلو"
+
+#: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
+#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:138
+msgid "Forward button"
+msgstr "دکمه جلو"
+
+#: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
+#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:139
+msgid "Forward Playback"
+msgstr "جلوبردن پخش"
+
+#: data/ui/media_controller.ui:175 data/ui/media_controller_big.ui:76
+msgid "Currently playing"
+msgstr "در حال پخش"
+
+#: data/ui/media_controller.ui:190 data/ui/media_controller_big.ui:97
+msgid "Booktitle"
+msgstr "عنوان کتاب"
+
+#: data/ui/media_controller.ui:191 data/ui/media_controller_big.ui:98
+msgid "Title of currently playing book"
+msgstr "عنوان کتاب درحال پخش"
+
+#: data/ui/media_controller.ui:217 data/ui/media_controller_big.ui:126
+msgid "Part name"
+msgstr "نام بخش"
+
+#: data/ui/media_controller.ui:218 data/ui/media_controller_big.ui:127
+msgid "Title of the currently playing part"
+msgstr "عنوان بخش در حال پخش"
+
+#: data/ui/media_controller.ui:256 data/ui/seek_bar.ui:20
+msgid "Elapsed time"
+msgstr "زمان سپری‌شده"
+
+#: data/ui/media_controller.ui:264 data/ui/seek_bar.ui:28
+msgid "Time elapsed"
+msgstr "زمانی که سپری شده"
+
+#: data/ui/media_controller.ui:265 data/ui/seek_bar.ui:29
+msgid "Elapsed time of current part"
+msgstr "زمان سپری‌شده بخش فعلی"
+
+#: data/ui/media_controller.ui:281 data/ui/seek_bar.ui:45
+msgid "Jump to position in current chapter"
+msgstr "پرش به موقعیت در فصل فعلی"
+
+#: data/ui/media_controller.ui:290 data/ui/seek_bar.ui:56
+msgid "Position slider"
+msgstr "نوار موقعیت"
+
+#: data/ui/media_controller.ui:291 data/ui/seek_bar.ui:57
+msgid "Position of the current part in seconds"
+msgstr "موقعیت بخش فعلی به ثانیه"
+
+#: data/ui/media_controller.ui:310 data/ui/seek_bar.ui:76
+msgid "Remaining time"
+msgstr "زمان باقی‌مانده"
+
+#: data/ui/media_controller.ui:317 data/ui/seek_bar.ui:83
+msgid "Time remaining"
+msgstr "زمانی که باقی مانده"
+
+#: data/ui/media_controller.ui:318 data/ui/seek_bar.ui:84
+msgid "Remaining time of current part"
+msgstr "زمان باقی‌مانده بخش فعلی"
+
+#: data/ui/media_controller.ui:350 data/ui/media_controller_big.ui:324
+msgid "Volume control"
+msgstr "کنترل میزان صدا"
+
+#: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
+#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:175
+msgid "Playback speed"
+msgstr "سرعت پخش"
+
+#: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
+msgid "Sleep timer"
+msgstr "زمان‌سنج خواب"
+
+#: data/ui/media_controller.ui:418 data/ui/media_controller_big.ui:404
+msgid "Timer menu button"
+msgstr "دکمه منوی زمان‌سنج"
+
+#: data/ui/media_controller.ui:419 data/ui/media_controller_big.ui:405
+msgid "Open the sleep timer popover"
+msgstr "پنجره‌ی بازشوی زمان‌سنج خواب را باز کن"
+
+#: data/ui/media_controller_big.ui:53
+msgid "Open book"
+msgstr "باز کردن کتاب"
+
+#: data/ui/preferences.ui:55
+msgid "General"
+msgstr "عمومی"
+
+#: data/ui/preferences.ui:60
+msgid "Appearance"
+msgstr "ظاهر"
+
+#: data/ui/preferences.ui:83
+msgid "Tags"
+msgstr "برچسب‌ها"
+
+#: data/ui/preferences.ui:90
+msgid "Activate if author and reader are displayed the wrong way"
+msgstr "اگر نویسنده و گوینده اشتباه نمایش داده می‌شوند فعال کنید"
+
+#: data/ui/preferences.ui:107
+msgid "Playback"
+msgstr "پخش"
+
+#: data/ui/preferences.ui:114
+msgid "Rewind 30 seconds of the current book when starting Cozy"
+msgstr "واگرد 30 ثانیه از کتاب فعلی در هنگام شروع‌ Cozy"
+
+#: data/ui/preferences.ui:172
+msgid "Sleep Timer"
+msgstr "زمان‌سنج خواب"
+
+#: data/ui/preferences.ui:218
+msgid "Storage"
+msgstr "فضای ذخیره‌سازی"
+
+#: data/ui/preferences.ui:223
+msgid "Artwork"
+msgstr "اثر هنری"
+
+#: data/ui/preferences.ui:230
+msgid "Always use images (cover.jpg, *.png, …) when available"
+msgstr ""
+"همیشه از تصاویر (cover.jpg, *.png و ...) زمانی که قابل‌دسترس است استفاده کن"
+
+#: data/ui/preferences.ui:247
+msgid "Storage locations"
+msgstr "مکان‌های ذخیره‌سازی"
+
+#: data/ui/preferences.ui:309
+msgid "Add location"
+msgstr "افزودن مکان"
+
+#: data/ui/preferences.ui:335
+msgid "Remove location"
+msgstr "حذف مکان"
+
+#: data/ui/preferences.ui:373
+msgid "Toggle this storage location to be internal/external."
+msgstr "تنظیم این مکان ذخیره‌سازی به عنوان داخلی/خارجی."
+
+#: data/ui/preferences.ui:402
+msgid "Set as default storage location for new audiobooks"
+msgstr "تعیین به عنوان فضای ذخیره‌سازی پیش‌فرض برای کتاب‌های صوتی جدید"
+
+#: data/ui/preferences.ui:406
+msgid "Set as default"
+msgstr "تعیین به عنوان پیش‌فرض"
+
+#: data/ui/preferences.ui:450
+msgid "Feedback"
+msgstr "بازخورد"
+
+#: data/ui/preferences.ui:460
+msgid "User Feedback"
+msgstr "بازخورد کاربر"
+
+#: data/ui/search_popover.ui:24
+msgid "Search"
+msgstr "جستجو"
+
+#: data/ui/search_popover.ui:36
+msgid "Search box"
+msgstr "جعبه جستجو"
+
+#: data/ui/search_popover.ui:37
+msgid "Search your audiobook library"
+msgstr "جستجو در کتابخانه کتاب‌صوتی‌تان"
+
+#: data/ui/search_popover.ui:67
+msgid "Which book are you looking for?"
+msgstr "به دنبال چه کتابی هستید؟"
+
+#: data/ui/search_popover.ui:154
+msgid "Book"
+msgstr "کتاب"
+
+#: data/ui/search_popover.ui:248
+msgid "Part"
+msgstr "بخش"
+
+#: data/ui/search_popover.ui:295
+msgid "Nothing found :("
+msgstr "هیچ چیزی یافت نشد :("
+
+#: data/ui/timer_popover.ui:37
+msgid "Timer duration"
+msgstr "مدت زمان‌سنج"
+
+#: data/ui/timer_popover.ui:49
+msgid "Timer duration slider"
+msgstr "نوار مدت زمان‌سنج"
+
+#: data/ui/timer_popover.ui:50
+msgid "Set the sleep timer duration in minutes"
+msgstr "تنطیم زمان‌سنج خواب به دقیقه"
+
+#: data/ui/timer_popover.ui:116
+msgid "Stop after current chapter"
+msgstr "پس از این فصل توقف کن"
+
+#: data/ui/timer_popover.ui:164
+msgid "Enable system power control"
+msgstr "فعال‌کردن کنترل نیروی سیستم"
+
+#: data/ui/timer_popover.ui:201
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+"نوع عمل پس از این که زمان‌سنج پایان می‌یابد.\n"
+"«خاموش‌کردن» تلاش خواهد کرد سیستم‌ شما را خاموش کند‌ (به آن بستن هم گفته می‌شود)\n"
+"«تعلیق» تلاش خواهد کرد سیستم شما را به تعلیق درآورد (به آن به‌خواب‌رفتن هم گفته می‌شود)."
+
+#: data/ui/timer_popover.ui:205
+msgid ""
+"System power action\n"
+"to perform"
+msgstr ""
+"عمل نیروی سیستم\n"
+"مورد انجام"
+
+#: data/ui/timer_popover.ui:221
+msgid "suspend"
+msgstr "تعلیق‌کردن"
+
+#: data/ui/timer_popover.ui:237
+msgid "shutdown"
+msgstr "خاموش‌کردن"
+
+#: data/ui/titlebar_menu.ui:7
+msgid "_Scan Library"
+msgstr "ـپویش کتابخانه"
+
+#: data/ui/titlebar_menu.ui:13
+msgid "_Hide unavailable books"
+msgstr "ـمخفی‌کردن کتاب‌های غیرقابل‌دسترس"
+
+#: data/ui/titlebar_menu.ui:19
+msgid "_Preferences"
+msgstr "ـتنظیمات"
+
+#: data/ui/titlebar_menu.ui:25
+msgid "_Help"
+msgstr "ـکمک"
+
+#: data/ui/titlebar_menu.ui:29
+msgid "_About"
+msgstr "ـدرباره"
+
+#: data/ui/titlebar_menu.ui:33
+msgid "_Quit"
+msgstr "ـترک‌کردن"
+
+#: data/ui/welcome.ui:29
+msgid "Welcome!"
+msgstr "خوش آمدید!"
+
+#: data/ui/welcome.ui:46
+msgid "Add your audiobooks and let's get cozy."
+msgstr "کتاب‌های صوتی خود را بیافزایید و بیایید به جای دنجی برویم."
+
+#: data/ui/whats_new.ui:9
+msgid "Whats new?"
+msgstr "چه چیزی جدید است؟"
+
+#: data/ui/whats_new.ui:27
+msgid "Continue"
+msgstr "ادامه"
+
+#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_library.ui:17
+#: data/ui/whats_new_m4b.ui:17 data/ui/whats_new_m4b_chapter.ui:17
+msgid "What's new in Cozy"
+msgstr "چه چیزی در Cozy جدید است؟"
+
+#: data/ui/whats_new_importer.ui:52
+msgid "A completely rewritten and far more reliable media importer."
+msgstr "واردکننده‌ی رسانه‌ای کاملا بازنویسی‌شده و بسیار قابل‌اتکا تر"
+
+#: data/ui/whats_new_importer.ui:77
+msgid ""
+"Did you experience audio files that couldn't be imported? Drag & Drop those "
+"files onto Cozy or use the application menu in the titlebar to rescan your "
+"audiobook directories!"
+msgstr ""
+"آيا این تجربه را داشته‌اید که پرونده‌های صوتی قابل واردکردن نبودند؟ آن "
+"پرونده‌ها را بکشید و داخل Cozy بیاندازید یا از منوی نرم‌افزار در نوارعنوان "
+"برای اسکن مجدد مسیرهای کتاب‌های صوتی‌تان استفاده کنید!"
+
+#: data/ui/whats_new_importer.ui:92
+msgid "Supported media files currently are mp3, m4a, flac, ogg, opus and wav."
+msgstr ""
+"پرونده‌های رسانه پشتیبانی‌شده در حال حاضر mp3، m4a، flac،ogg، opus و wav "
+"هستند."
+
+#: data/ui/whats_new_importer.ui:107
+msgid "More to come in a later update."
+msgstr "امکانات بیشتری در یک بروزرسانی بعدی در راه است."
+
+#: data/ui/whats_new_library.ui:52
+msgid "An important change in library management"
+msgstr "تغییری مهم در مدیریت کتابخانه"
+
+#: data/ui/whats_new_library.ui:77
+msgid ""
+"Previously every file which was imported in your library but couldn't be "
+"found anymore was removed from the library during a scan."
+msgstr ""
+"قبلا هر پرونده‌ای که به کتابخانه‌تان وارد شده بود اما قابل یافتن نبود در طی "
+"اسکن از کتابخانه حذف می‌شد."
+
+#: data/ui/whats_new_library.ui:92
+msgid ""
+"Now audiobooks are not removed from your library automatically anymore. This"
+" prevents accidentally loosing the progress of a audiobook when a file can't"
+" be found temporarily."
+msgstr ""
+"اکنون کتاب‌های صوتی به صورت خودکار از کتابخانه‌تان حذف نمی‌شوند. این از "
+"ازدست رفتن پیشرفت یک کتاب صوتی زمانی که یک پرونده موقتاً قابل یافتن نیست "
+"جلوگیری می‌کند."
+
+#: data/ui/whats_new_library.ui:107
+msgid ""
+"To remove an audiobook from the library simply right-click on it and choose "
+"the remove from library option."
+msgstr ""
+"برای خذف یک کتاب صوتی از کتابخانه صرفا روی آن راست-کلیک کنید و گزینه خذف از "
+"کتابخانه را انتخاب نمایید."
+
+#: data/ui/whats_new_m4b.ui:52
+msgid "Basic support for m4b audio books."
+msgstr "پشتیبانی ابتدایی برای کتاب‌های صوتی m4b"
+
+#: data/ui/whats_new_m4b.ui:77
+msgid ""
+"Many of you have been waiting for it: Support for m4b audio books! This "
+"version features basic support for m4b files without chapter support."
+msgstr ""
+"بسیاری از شما متنظر آن بودید: پشتیبانی از کتاب‌های صوتی m4b! این نسخه شامل "
+"پشتیبانی ابتدایی برای پرونده‌های m4b بدون پشتیبانی فصل می‌باشد."
+
+#: data/ui/whats_new_m4b.ui:92
+msgid ""
+"Drag & Drop your m4b files onto Cozy or use the application menu in the "
+"titlebar to rescan your audiobook directories."
+msgstr ""
+"پرونده‌های m4b تان را بکشید و داخل Cozy بیاندازید یا از منوی نرم‌افزار در "
+"نوار عنوان  برای اسکن مجدد مسیرهای کتاب صوتی‌تان استفاده کنید."
+
+#: data/ui/whats_new_m4b.ui:107
+msgid "Chapter support will follow in a later update. Stay tuned!"
+msgstr "پشتیبانی از فصل در یک بروزرسانی بعدی خواهد آمد. همراه‌مان باشید!"
+
+#: data/ui/whats_new_m4b_chapter.ui:52
+msgid "Chapter support for m4b audio books."
+msgstr "پشتیبانی فصل برای کتاب‌های صوتی m4b."
+
+#: data/ui/whats_new_m4b_chapter.ui:77
+msgid "This version of Cozy features chapter support for m4b audio books!"
+msgstr "این نسخه از Cozy شامل پشتیبانی فصل برای کتاب‌های صوتی m4b می‌باشد."
+
+#: data/ui/whats_new_m4b_chapter.ui:92
+msgid ""
+"If you already have m4b files imported you'll need to start a scan of your "
+"library from the app menu."
+msgstr ""
+"اگر از قبل پرونده‌های m4b را وارد کرده‌اید لازم است اسکن کتابخانه‌تان را از "
+"منوی نرم‌افزار آغاز کنید."
+
+#: data/ui/whats_new_m4b_chapter.ui:107
+msgid "The chapters will then be detected."
+msgstr "سپس فصل‌ها شناسایی خواهند شد."
