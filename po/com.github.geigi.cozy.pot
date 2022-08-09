@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-04 16:30+0100\n"
+"POT-Creation-Date: 2022-08-09 20:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: cozy/application.py:101
+#: cozy/application.py:106
 msgid "Audiobooks"
 msgstr ""
 
-#: cozy/control/offline_cache.py:200
+#: cozy/control/offline_cache.py:197
 msgid "Copying"
 msgstr ""
 
@@ -228,7 +228,7 @@ msgstr ""
 msgid "Off"
 msgstr ""
 
-#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:377
+#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:380
 msgid "External drive"
 msgstr ""
 
@@ -327,7 +327,7 @@ msgstr ""
 msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr ""
 
-#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:455
+#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:458
 msgid "User feedback"
 msgstr ""
 
@@ -633,35 +633,35 @@ msgstr ""
 msgid "Always use images (cover.jpg, *.png, …) when available"
 msgstr ""
 
-#: data/ui/preferences.ui:247
+#: data/ui/preferences.ui:247 data/ui/preferences.ui:253
 msgid "Storage locations"
 msgstr ""
 
-#: data/ui/preferences.ui:309
+#: data/ui/preferences.ui:312
 msgid "Add location"
 msgstr ""
 
-#: data/ui/preferences.ui:335
+#: data/ui/preferences.ui:338
 msgid "Remove location"
 msgstr ""
 
-#: data/ui/preferences.ui:373
+#: data/ui/preferences.ui:376
 msgid "Toggle this storage location to be internal/external."
 msgstr ""
 
-#: data/ui/preferences.ui:402
+#: data/ui/preferences.ui:405
 msgid "Set as default storage location for new audiobooks"
 msgstr ""
 
-#: data/ui/preferences.ui:406
+#: data/ui/preferences.ui:409
 msgid "Set as default"
 msgstr ""
 
-#: data/ui/preferences.ui:450
+#: data/ui/preferences.ui:453
 msgid "Feedback"
 msgstr ""
 
-#: data/ui/preferences.ui:460
+#: data/ui/preferences.ui:463
 msgid "User Feedback"
 msgstr ""
 
