@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-09 20:32+0200\n"
+"POT-Creation-Date: 2022-08-09 20:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,7 +96,7 @@ msgid "Support for GTK style manager (thanks A6GibKm)"
 msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml:60
-msgid "Use natural sorting for book titles"
+msgid "Use natural sorting for chapter titles"
 msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml:61
