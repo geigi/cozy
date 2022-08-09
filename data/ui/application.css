@@ -83,21 +83,8 @@
 }
 
 .play_button {
-    background: @theme_fg_color;
+    background-color: @theme_fg_color;
     color: @theme_bg_color;
-    transition: none;
-}
-
-/*.play_button {*/
-/*    background: @theme_selected_bg_color;*/
-/*    color: @theme_selected_fg_color;*/
-/*    transition: none;*/
-/*}*/
-
-.play_button:disabled {
-    background-color: transparent;
-    color: @insensitive_fg_color;
-    box-shadow: none;
 }
 
 .player_bar {

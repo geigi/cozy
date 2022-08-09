@@ -145,7 +145,7 @@
                       <property name="label" translatable="1">Start or pause the playback</property>
                     </accessibility>
                     <style>
-                      <class name="flat"/>
+                      <class name="opaque"/>
                       <class name="play_button"/>
                       <class name="circular"/>
                     </style>
