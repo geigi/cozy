@@ -30,6 +30,7 @@ data/ui/delete_book_dialog.ui
 data/ui/error_reporting.ui
 data/ui/file_not_found.ui
 data/ui/headerbar.ui
+data/ui/help_overlay.ui
 data/ui/import_failed.ui
 data/ui/main_window.ui
 data/ui/media_controller.ui
