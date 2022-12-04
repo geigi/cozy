@@ -169,6 +169,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         help_action = Gio.SimpleAction.new("help", None)
         help_action.connect("activate", self.help)
         self.app.add_action(help_action)
+        self.app.set_accels_for_action("app.help", ["F1"])
 
         about_action = Gio.SimpleAction.new("about", None)
         about_action.connect("activate", self.about)
