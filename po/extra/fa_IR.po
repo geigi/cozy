@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# TheBlue Quasar, 2022
+# TheBlueQuasar, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-04 16:20+0100\n"
+"POT-Creation-Date: 2022-08-09 20:38+0200\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
-"Last-Translator: TheBlue Quasar, 2022\n"
+"Last-Translator: TheBlueQuasar, 2022\n"
 "Language-Team: Persian (Iran) (https://www.transifex.com/geigi/teams/78138/fa_IR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -101,7 +101,19 @@ msgstr "کتاب‌های صوتی‌تان را براساس نویسنده، �
 msgid "Julian Geywitz"
 msgstr "Julian Geywitz"
 
-#: data/com.github.geigi.cozy.appdata.xml:58
+#: data/com.github.geigi.cozy.appdata.xml:59
+msgid "Support for GTK style manager (thanks A6GibKm)"
+msgstr "پشتیبانی برای مدیر استایل GTK (ممنون از A6GibKm)"
+
+#: data/com.github.geigi.cozy.appdata.xml:60
+msgid "Use natural sorting for chapter titles"
+msgstr "استفاده از مرتب‌کردن طبیعی برای عنوان‌های فصل‌ها"
+
+#: data/com.github.geigi.cozy.appdata.xml:61
+msgid "As always, updated translations thanks to all the translators!"
+msgstr "مثل همیشه، ترجمه‌ها به لطف تمامی مترجمان به‌روز شدند!"
+
+#: data/com.github.geigi.cozy.appdata.xml:67
 msgid ""
 "This release features a redesigned preference window. All settings can now "
 "be searched. Good news for mobile users too: the redesign should work a lot "
@@ -111,21 +123,21 @@ msgstr ""
 "جستجواند. خبر خوشی هم برای کاربران تلفن همراه: بازطراحی باید بسیار بهتر روی "
 "دستگاه‌های همراه کار کند."
 
-#: data/com.github.geigi.cozy.appdata.xml:62
+#: data/com.github.geigi.cozy.appdata.xml:71
 msgid "Redesigned preference window"
 msgstr "پنجره‌ی تنظیمات بازطراحی‌شده"
 
-#: data/com.github.geigi.cozy.appdata.xml:63
+#: data/com.github.geigi.cozy.appdata.xml:72
 msgid "Preferences can now be searched"
 msgstr "تنظیمات اکنون قابل جستجواند"
 
-#: data/com.github.geigi.cozy.appdata.xml:64
+#: data/com.github.geigi.cozy.appdata.xml:73
 msgid ""
 "Fix: position slider did not update the time correctly after an import scan"
 msgstr ""
 "درست‌کردن: نوار موقعیت زمان را بعد از پویش واردکردن به‌درستی به‌روز نمی‌کرد"
 
-#: data/com.github.geigi.cozy.appdata.xml:65
+#: data/com.github.geigi.cozy.appdata.xml:74
 msgid ""
 "Fix: after an import scan the library did not display the currently playing "
 "book correctly"
@@ -133,76 +145,77 @@ msgstr ""
 "درست‌کردن: بعد از پویش واردکردن کتابخانه به‌درستی کتاب در‌حال‌پخش را نمایش "
 "نمی‌داد"
 
-#: data/com.github.geigi.cozy.appdata.xml:66
-#: data/com.github.geigi.cozy.appdata.xml:79
-#: data/com.github.geigi.cozy.appdata.xml:95
-#: data/com.github.geigi.cozy.appdata.xml:111
-#: data/com.github.geigi.cozy.appdata.xml:128
-#: data/com.github.geigi.cozy.appdata.xml:143
-#: data/com.github.geigi.cozy.appdata.xml:158
-#: data/com.github.geigi.cozy.appdata.xml:173
-#: data/com.github.geigi.cozy.appdata.xml:187
-#: data/com.github.geigi.cozy.appdata.xml:201
+#: data/com.github.geigi.cozy.appdata.xml:75
+#: data/com.github.geigi.cozy.appdata.xml:88
+msgid "Multiple small bug fixes"
+msgstr "چندین رفع‌اشکال کوچک"
+
+#: data/com.github.geigi.cozy.appdata.xml:76
+#: data/com.github.geigi.cozy.appdata.xml:89
+#: data/com.github.geigi.cozy.appdata.xml:105
+#: data/com.github.geigi.cozy.appdata.xml:121
+#: data/com.github.geigi.cozy.appdata.xml:138
+#: data/com.github.geigi.cozy.appdata.xml:153
+#: data/com.github.geigi.cozy.appdata.xml:168
+#: data/com.github.geigi.cozy.appdata.xml:183
+#: data/com.github.geigi.cozy.appdata.xml:197
+#: data/com.github.geigi.cozy.appdata.xml:211
 msgid "As always, updated translations thanks to all of the translators!"
 msgstr "مثل همیشه، ترجمه‌های بروزشده به لطف همه‌ی مترجمان!"
 
-#: data/com.github.geigi.cozy.appdata.xml:72
-#: data/com.github.geigi.cozy.appdata.xml:85
-#: data/com.github.geigi.cozy.appdata.xml:101
-#: data/com.github.geigi.cozy.appdata.xml:149
-#: data/com.github.geigi.cozy.appdata.xml:164
+#: data/com.github.geigi.cozy.appdata.xml:82
+#: data/com.github.geigi.cozy.appdata.xml:95
+#: data/com.github.geigi.cozy.appdata.xml:111
+#: data/com.github.geigi.cozy.appdata.xml:159
+#: data/com.github.geigi.cozy.appdata.xml:174
 msgid "A small bugfix release which makes Cozy more reliable."
 msgstr "یک انتشار کوچک رفع‌اشکال که Cozy را قابل‌اتکا تر می‌سازد."
 
-#: data/com.github.geigi.cozy.appdata.xml:76
+#: data/com.github.geigi.cozy.appdata.xml:86
 msgid "Fresh playback speed and sleep timer icons (thanks jimmac)"
 msgstr "آیکون سرعت پخش و زمان‌سنج خواب تازه (ممنون از jimmac)"
 
-#: data/com.github.geigi.cozy.appdata.xml:77
+#: data/com.github.geigi.cozy.appdata.xml:87
 msgid ""
 "Refreshing the library now uses a more descriptive text (thanks jubalh)"
 msgstr ""
 "تازه‌سازی کتابخانه اکنون از متن روشن‌تری استفاده می‌کند (ممنون از jubalh)"
 
-#: data/com.github.geigi.cozy.appdata.xml:78
-msgid "Multiple small bug fixes"
-msgstr "چندین رفع‌اشکال کوچک"
-
-#: data/com.github.geigi.cozy.appdata.xml:89
-#: data/com.github.geigi.cozy.appdata.xml:105
+#: data/com.github.geigi.cozy.appdata.xml:99
+#: data/com.github.geigi.cozy.appdata.xml:115
 msgid "Display an error banner if an error occurs while importing new files"
 msgstr "نمایش برنوشته خطا اگر خطایی طی وارد کردن پرونده‌های جدید رخ دهد"
 
-#: data/com.github.geigi.cozy.appdata.xml:90
-#: data/com.github.geigi.cozy.appdata.xml:106
+#: data/com.github.geigi.cozy.appdata.xml:100
+#: data/com.github.geigi.cozy.appdata.xml:116
 msgid ""
 "The audiobook directory selector in the empty state has been replaced by a "
 "button to allow a narrow window even with long directory names"
 msgstr ""
-"انتخاب‌گر مسیر کتاب صوتی در وضعیت خالی با یک دکمه جایگزین شده‌است تا حتی با "
-"نام‌های مسیر طولانی اجازه دهد پنجره باریک بماند"
+"انتخاب‌گر پوشه کتاب صوتی در وضعیت خالی با یک دکمه جایگزین شده‌است تا حتی با "
+"نام‌های پوشه‌های طولانی اجازه دهد پنجره باریک بماند"
 
-#: data/com.github.geigi.cozy.appdata.xml:91
-#: data/com.github.geigi.cozy.appdata.xml:107
+#: data/com.github.geigi.cozy.appdata.xml:101
+#: data/com.github.geigi.cozy.appdata.xml:117
 msgid "Fix: multiple small UI issues"
 msgstr "درست‌کردن: چندین مسئله کوچک رابط کاریری"
 
-#: data/com.github.geigi.cozy.appdata.xml:92
-#: data/com.github.geigi.cozy.appdata.xml:108
+#: data/com.github.geigi.cozy.appdata.xml:102
+#: data/com.github.geigi.cozy.appdata.xml:118
 msgid "Fix: the welcome screen now works properly on a mobile device"
 msgstr ""
 "درست‌کردن: صفحه خوش‌آمدگویی اکنون به‌درستی روی دستگاه همراه کار می‌کند"
 
-#: data/com.github.geigi.cozy.appdata.xml:93
-#: data/com.github.geigi.cozy.appdata.xml:109
+#: data/com.github.geigi.cozy.appdata.xml:103
+#: data/com.github.geigi.cozy.appdata.xml:119
 msgid ""
 "Fix: don't display the mobile library switcher when no files are imported"
 msgstr ""
 "درست‌کردن: عدم نمایش تعویض‌کننده کتابخانه همراه زمانی که هیچ پرونده‌ای وارد "
 "نشده‌است"
 
-#: data/com.github.geigi.cozy.appdata.xml:94
-#: data/com.github.geigi.cozy.appdata.xml:110
+#: data/com.github.geigi.cozy.appdata.xml:104
+#: data/com.github.geigi.cozy.appdata.xml:120
 msgid ""
 "Fix: in the book detail view the pause icon for a chapter remained even when"
 " the next chapter already started playing"
@@ -210,44 +223,44 @@ msgstr ""
 "درست‌کردن: در نمای جزئیات کتاب آیکون توقف برای یک فصل حتی زمانی که فصل بعد "
 "شروع به پخش کرده‌بود باقی می‌مانْد"
 
-#: data/com.github.geigi.cozy.appdata.xml:117
+#: data/com.github.geigi.cozy.appdata.xml:127
 msgid ""
 "This release features a redesigned library with responsiveness in mind."
 msgstr "این انتشار شامل کتابخانه‌ای بازطراحی‌شده بر مبنای پاسخ‌دهی است."
 
-#: data/com.github.geigi.cozy.appdata.xml:121
+#: data/com.github.geigi.cozy.appdata.xml:131
 msgid "Redesigned library"
 msgstr "کتابخانه‌ی بازطراحی‌شده"
 
-#: data/com.github.geigi.cozy.appdata.xml:122
+#: data/com.github.geigi.cozy.appdata.xml:132
 msgid "Redesigned start screen"
 msgstr "صفحه‌ی شروع بازطراحی‌شده"
 
-#: data/com.github.geigi.cozy.appdata.xml:123
+#: data/com.github.geigi.cozy.appdata.xml:133
 msgid "Redesigned book detail screen"
 msgstr "صفحه جزئیات کتاب بازطراحی‌شده"
 
-#: data/com.github.geigi.cozy.appdata.xml:124
+#: data/com.github.geigi.cozy.appdata.xml:134
 msgid "Responsive design for the main window"
 msgstr "طراحی پاسخ‌گو برای پنجره‌ی اصلی"
 
-#: data/com.github.geigi.cozy.appdata.xml:125
+#: data/com.github.geigi.cozy.appdata.xml:135
 msgid "Introducing a welcome screen for new installations"
 msgstr "معرفی صفحه‌ی خوش‌آمدگویی برای نصب‌های جدید"
 
-#: data/com.github.geigi.cozy.appdata.xml:126
+#: data/com.github.geigi.cozy.appdata.xml:136
 msgid "Fix: a rare bug where Cozy's volume was muted at first start"
 msgstr "درست‌کردن: اشکالی نادر که در آن صدای Cozy در اولین شروع قطع می‌شد"
 
-#: data/com.github.geigi.cozy.appdata.xml:127
+#: data/com.github.geigi.cozy.appdata.xml:137
 msgid "Fix: long book names or author names will be truncated properly"
 msgstr "درست‌کردن: نام‌های طولانی کتاب یا نویسنده به‌درستی کوتاه خواهند شد"
 
-#: data/com.github.geigi.cozy.appdata.xml:134
+#: data/com.github.geigi.cozy.appdata.xml:144
 msgid "Performance improvements for the book detail view and some bugfixes."
 msgstr "بهبود عملکرد در نمای جزئیات کتاب و برخی رفع‌اشکال‌ها"
 
-#: data/com.github.geigi.cozy.appdata.xml:138
+#: data/com.github.geigi.cozy.appdata.xml:148
 msgid ""
 "Chapters in the book detail view will now be loaded lazily (thanks chris-"
 "kobrzak!)"
@@ -255,7 +268,7 @@ msgstr ""
 "فصل‌ها در نمای جزئیات کتاب اکنون به‌کندی بارگذاری می‌شوند (ممنون از chris-"
 "kobrzak!)"
 
-#: data/com.github.geigi.cozy.appdata.xml:139
+#: data/com.github.geigi.cozy.appdata.xml:149
 msgid ""
 "Books with a single chapter don't display a chapter number anymore (thanks "
 "chris-kobrzak!)"
@@ -263,27 +276,27 @@ msgstr ""
 "کتاب‌های با یک فصل دیگر شماره‌ی فصل را نمایش نمی‌دهند (ممنون از chris-"
 "kobrzak!)"
 
-#: data/com.github.geigi.cozy.appdata.xml:140
+#: data/com.github.geigi.cozy.appdata.xml:150
 msgid "Fix: Locals in What's new in Cozy screen (thanks alyssais!)"
 msgstr ""
 "درست‌کردن: زبان‌های محلی در صفحه‌ی چه‌چیزی جدید استِ Cozy (ممنون از "
 "alyssais!)"
 
-#: data/com.github.geigi.cozy.appdata.xml:141
+#: data/com.github.geigi.cozy.appdata.xml:151
 msgid "Fix: Catch an error that could occur when a book stops"
 msgstr "درست‌کردن: گرفتن ایرادی که ممکن بود زمان توقف یک کتاب رخ دهد"
 
-#: data/com.github.geigi.cozy.appdata.xml:142
+#: data/com.github.geigi.cozy.appdata.xml:152
 msgid "Small performance improvements"
 msgstr "بهبودهای عملکرد جزئی"
 
-#: data/com.github.geigi.cozy.appdata.xml:153
+#: data/com.github.geigi.cozy.appdata.xml:163
 msgid ""
 "When an issue occurs during playback the error message is displayed to the "
 "user"
 msgstr "زمانی که مسئله‌ای طی پخش رخ‌دهد پیام خطا به کاربر نشان داده‌ می‌شود"
 
-#: data/com.github.geigi.cozy.appdata.xml:154
+#: data/com.github.geigi.cozy.appdata.xml:164
 msgid ""
 "Fix: Importing media without tags now properly decodes the file name as "
 "chapter name (thanks chris-kobrzak!)"
@@ -291,21 +304,21 @@ msgstr ""
 "درست‌کردن: واردکردن رسانه بدون برچسب اکنون به‌درستی نام پرونده را به‌عنوان "
 "نام فصل تعبیر می‌کند (ممنون از chris-kobrzak!)"
 
-#: data/com.github.geigi.cozy.appdata.xml:155
+#: data/com.github.geigi.cozy.appdata.xml:165
 msgid "Fix: Ensure that always a default storage location is present"
 msgstr ""
 "درست‌کردن: اطمینان از این‌که همواره یک محل ذخیره‌سازی پیش‌فرض موجود است"
 
-#: data/com.github.geigi.cozy.appdata.xml:156
+#: data/com.github.geigi.cozy.appdata.xml:166
 msgid "Fix: During import an error could occur which stopped the import"
 msgstr ""
 "درست‌کردن: طی واردکردن ممکن بود خطایی رخ دهد که واردکردن را متوقف می‌کرد"
 
-#: data/com.github.geigi.cozy.appdata.xml:157
+#: data/com.github.geigi.cozy.appdata.xml:167
 msgid "Fix: During the database migration an error could occur"
 msgstr "درست‌کردن: طی جابه‌جایی پایگاه‌داده ممکن بود خطایی رخ دهد"
 
-#: data/com.github.geigi.cozy.appdata.xml:168
+#: data/com.github.geigi.cozy.appdata.xml:178
 msgid ""
 "When copying files to the audiobook library goes wrong, the user is now "
 "informed with the error"
@@ -313,11 +326,11 @@ msgstr ""
 "زمانی که رونوشت پرونده‌ها به کتابخانه کتاب‌های صوتی به مشکل می‌خورد٬ خطا به "
 "کاربر اطلاع داده می‌شود"
 
-#: data/com.github.geigi.cozy.appdata.xml:169
+#: data/com.github.geigi.cozy.appdata.xml:179
 msgid "Fix: Possible error while displaying offline cache copy progress"
 msgstr "درست‌کردن: خطای محتمل طی نمایش پیشرفت رونوشت حافظه‌ی نهان"
 
-#: data/com.github.geigi.cozy.appdata.xml:170
+#: data/com.github.geigi.cozy.appdata.xml:180
 msgid ""
 "Fix: When changing the audiobook location or selecting a file in the file "
 "not found dialog an unexpected error could occur"
@@ -325,29 +338,29 @@ msgstr ""
 "درست‌کردن: در زمان تغییر موقعیت کتاب صوتی یا انتخاب پرونده در کارد پرونده "
 "یافت نشد یک خطای غیرمنتظره می‌توانست رخ دهد"
 
-#: data/com.github.geigi.cozy.appdata.xml:171
+#: data/com.github.geigi.cozy.appdata.xml:181
 msgid "Fix: Removing a storage dir in settings did not work"
 msgstr "درست‌کردن: حذف یک مسیر ذخیره‌سازی در تنظیمات کار نمی‌کرد"
 
-#: data/com.github.geigi.cozy.appdata.xml:172
+#: data/com.github.geigi.cozy.appdata.xml:182
 msgid "Fix: Removing a book from the library did sometimes not work"
 msgstr "درست‌کردن: حذف یک کتاب از کتابخانه گاه کار نمی‌کرد"
 
-#: data/com.github.geigi.cozy.appdata.xml:179
-#: data/com.github.geigi.cozy.appdata.xml:193
+#: data/com.github.geigi.cozy.appdata.xml:189
+#: data/com.github.geigi.cozy.appdata.xml:203
 msgid "This release features chapter support for m4b files."
 msgstr "این انتشار شامل پشتیبانی از فصل برای پرونده‌های m4b است."
 
-#: data/com.github.geigi.cozy.appdata.xml:183
-#: data/com.github.geigi.cozy.appdata.xml:197
+#: data/com.github.geigi.cozy.appdata.xml:193
+#: data/com.github.geigi.cozy.appdata.xml:207
 msgid ""
 "A long awaited feature has finally arrived: Chapter support for m4b files."
 msgstr ""
 "امکانی که مدت‌ها موردانتظار بوده رسیده‌است: پشتیبانی فصل برای پرونده‌های "
 "m4b."
 
-#: data/com.github.geigi.cozy.appdata.xml:184
-#: data/com.github.geigi.cozy.appdata.xml:198
+#: data/com.github.geigi.cozy.appdata.xml:194
+#: data/com.github.geigi.cozy.appdata.xml:208
 msgid ""
 "Books with inconsistent spelling are now grouped into a single book (thanks "
 "chris-kobrzak!)."
@@ -355,13 +368,13 @@ msgstr ""
 "کتاب‌ها با املای ناهمخوان اکنون در یک کتاب واحد گروه‌بندی می‌شوند (ممنون از "
 "chris-kobrzak!)."
 
-#: data/com.github.geigi.cozy.appdata.xml:185
-#: data/com.github.geigi.cozy.appdata.xml:199
+#: data/com.github.geigi.cozy.appdata.xml:195
+#: data/com.github.geigi.cozy.appdata.xml:209
 msgid "Improved reliability of restoring the previous playback position."
-msgstr "بهبود اطمینان‌پذیری بازیابی موقعیت پخش قبلی"
+msgstr "بهبود اطمینان‌پذیری بازیابی موقعیت پخش قبلی."
 
-#: data/com.github.geigi.cozy.appdata.xml:186
-#: data/com.github.geigi.cozy.appdata.xml:200
+#: data/com.github.geigi.cozy.appdata.xml:196
+#: data/com.github.geigi.cozy.appdata.xml:210
 msgid ""
 "Fix: clicking on a currently playing chapter did not pause the chapter as "
 "expected."
