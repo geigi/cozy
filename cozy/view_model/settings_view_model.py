@@ -13,11 +13,10 @@ from cozy.ext import inject
 from cozy.media.importer import Importer
 from cozy.model.settings import Settings
 from cozy.report import reporter
-from gi.repository import Gtk
-
-
+from gi.repository import Gtk, Gio
 
 log = logging.getLogger("settings_view_model")
+
 
 class SettingsViewModel(Observable, EventSender):
     _library: Library = inject.attr(Library)
@@ -38,7 +37,10 @@ class SettingsViewModel(Observable, EventSender):
         self._app_settings.add_listener(self._on_app_setting_changed)
 
         if self._model.first_start:
+            log.debug("First start detected. Performing extra setup")
             self._importer.scan()
+            self._set_system_preferred_color_scheme()
+
 
     @property
     def storage_locations(self) -> List[Storage]:
@@ -124,4 +126,21 @@ class SettingsViewModel(Observable, EventSender):
 
     def _on_app_setting_changed(self, event: str, data):
         if event == "dark-mode":
+            self._set_dark_mode()
+
+    def _set_system_preferred_color_scheme(self):
+        """
+        Checks org.gnome.desktop.interface schema for the key color-scheme.
+        This setting is either default, prefer-dark or prefer-light, based on what the user set in the settings.
+
+        We then set our dark mode to match. To prevent the switch being off, when the user's system is in dark mode.
+        """
+        desktop_interface_schema: Gio.SettingsSchema = Gio.SettingsSchemaSource.get_default().lookup("org.gnome.desktop.interface", True)
+        desktop_settings: Gio.Settings = Gio.Settings.new_full(desktop_interface_schema)
+        preferred_color_scheme = desktop_settings.get_string("color-scheme")
+        log.debug("Preferred color scheme: {}".format(preferred_color_scheme))
+
+        if "dark" in preferred_color_scheme:
+            log.debug("User prefers dark mode, enabling dark mode in settings")
+            self._app_settings.dark_mode = True
             self._set_dark_mode()
