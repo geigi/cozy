@@ -51,9 +51,11 @@ class WhatsNewWindow(Handy.Window):
     def _fill_window(self):
         self.children = []
 
-        last_launched_version = version.parse(self.app_settings.last_launched_version)
+        last_launched_version = self.app_settings.last_launched_version
 
-        if type(last_launched_version) is version.LegacyVersion:
+        if last_launched_version == 'None' or last_launched_version is None:
+            self._fill_welcome()
+        elif type(version.parse(last_launched_version)) is version.LegacyVersion:
             self._fill_welcome()
         else:
             self._fill_whats_new(last_launched_version)
