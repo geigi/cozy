@@ -249,7 +249,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         widget.hide()
 
-        # we handeled the close event so the window must not get destroyed.
+        # we handled the close event so the window must not get destroyed.
         return True
 
     def play_pause(self, action, parameter):
@@ -257,7 +257,7 @@ class CozyUI(EventSender, metaclass=Singleton):
 
     def block_ui_buttons(self, block, scan=False):
         """
-        Makes the buttons to interact with the player insensetive.
+        Makes the buttons to interact with the player insensitive.
         :param block: Boolean
         """
         sensitive = not block
