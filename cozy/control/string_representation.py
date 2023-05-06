@@ -1,6 +1,6 @@
 def seconds_to_str(seconds, max_length=None, include_seconds=True):
     """
-    Converts seconds to a string with the following apperance:
+    Converts seconds to a string with the following appearance:
     hh:mm:ss
 
     :param seconds: The seconds as float
