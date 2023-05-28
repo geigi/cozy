@@ -228,7 +228,12 @@ class MPRIS(Server):
         self._player.position = position * 10**3
 
     def Seek(self, offset):
-        self._player.position = self._player.position + offset * 10**3
+        # convert milliseconds to seconds
+        offset_sec=offset / 10**6
+        if offset_sec > 0:
+            self._player.forward(offset_sec)
+        elif offset_sec < 0:
+            self._player.rewind(-offset_sec)
 
     def Seeked(self, position):
         self.__bus.emit_signal(

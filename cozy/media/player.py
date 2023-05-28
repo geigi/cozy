@@ -156,17 +156,17 @@ class Player(EventSender):
 
         book.position = chapter.id
 
-    def rewind(self):
+    def rewind(self, duration=None):
         state = self._gst_player.state
         if state != GstPlayerState.STOPPED:
-            self._rewind_in_book()
+            self._rewind_in_book(duration)
         if state == GstPlayerState.PLAYING:
             self._gst_player.play()
 
-    def forward(self):
+    def forward(self, duration=None):
         state = self._gst_player.state
         if state != GstPlayerState.STOPPED:
-            self._forward_in_book()
+            self._forward_in_book(duration)
         if state == GstPlayerState.PLAYING:
             self._gst_player.play()
 
@@ -233,16 +233,19 @@ class Player(EventSender):
 
         return chapter.file
 
-    def _rewind_in_book(self):
+    def _rewind_in_book(self, rewind_duration=None):
         if not self._book:
             log.error("Rewind in book not possible because no book is loaded.")
             reporter.error("player", "Rewind in book not possible because no book is loaded.")
             return
 
+        if rewind_duration == None:
+            rewind_duration = self._app_settings.rewind_duration
+
         current_position = self._gst_player.position
         current_position_relative = max(current_position - self.loaded_chapter.start_position, 0)
         chapter_number = self._book.chapters.index(self._book.current_chapter)
-        rewind_seconds = self._app_settings.rewind_duration * self.playback_speed
+        rewind_seconds = rewind_duration * self.playback_speed
 
         if current_position_relative / NS_TO_SEC - rewind_seconds > 0:
             self._gst_player.position = current_position - NS_TO_SEC * rewind_seconds
@@ -254,17 +257,20 @@ class Player(EventSender):
         else:
             self._gst_player.position = 0
 
-    def _forward_in_book(self):
+    def _forward_in_book(self, forward_duration=None):
         if not self._book:
             log.error("Forward in book not possible because no book is loaded.")
             reporter.error("player", "Forward in book not possible because no book is loaded.")
             return
 
+        if forward_duration == None:
+            forward_duration = self._app_settings.forward_duration
+
         current_position = self._gst_player.position
         current_position_relative = max(current_position - self.loaded_chapter.start_position, 0)
         old_chapter = self._book.current_chapter
         chapter_number = self._book.chapters.index(self._book.current_chapter)
-        forward_seconds = self._app_settings.forward_duration * self.playback_speed
+        forward_seconds = forward_duration * self.playback_speed
 
         if current_position_relative / NS_TO_SEC + forward_seconds < self._book.current_chapter.length:
             self._gst_player.position = current_position + (NS_TO_SEC * forward_seconds)
