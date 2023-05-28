@@ -53,11 +53,7 @@ class WhatsNewWindow(Adw.Window):
         except version.InvalidVersion:
             self._fill_welcome()
         else:
-            if type(last_launched_version) is version.LegacyVersion:
-                self._fill_welcome()
-            else:
-                self._fill_whats_new(last_launched_version)
-
+            self._fill_whats_new(last_launched_version)
 
     def _fill_welcome(self):
         from cozy.ui.widgets.welcome import Welcome
