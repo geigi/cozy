@@ -31,6 +31,10 @@ from cozy.report import reporter
 log = logging.getLogger("offline_cache")
 
 
+class UnsupportedProperty(Exception):
+    pass
+
+
 class Server:
     def __init__(self, con, path):
         method_outargs = {}
@@ -84,13 +88,15 @@ class Server:
                 invocation.return_value(variant)
             else:
                 invocation.return_value(None)
+        except UnsupportedProperty:
+            invocation.return_dbus_error("{}.Error.NotSupported".format(interface_name), "Unsupported property")
         except Exception as e:
             log.error(e)
             reporter.exception("mpris", e)
             reporter.error("mpris", "MPRIS method call failed with method name: {}".format(method_name))
             if out_args:
                 reporter.error("mpris", "MPRIS method call failed with out_args: {}".format(out_args))
-            invocation.return_value(None)
+            invocation.return_dbus_error("{}.Error.Failed".format(interface_name), "Internal exception occurred")
 
 
 class MPRIS(Server):
@@ -270,7 +276,7 @@ class MPRIS(Server):
              return GLib.Variant("d", self._player.volume)
         else:
             reporter.warning("mpris", "MPRIS required an unknown information: {}".format(property_name))
-            return None
+            raise UnsupportedProperty
 
     def GetAll(self, interface):
         ret = {}
