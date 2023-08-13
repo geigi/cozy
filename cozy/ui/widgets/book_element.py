@@ -38,7 +38,7 @@ class BookElement(Gtk.FlowBoxChild):
 
         self._container_box_primary_gesture = Gtk.GestureClick()
         self._container_box_primary_gesture.set_button(Gdk.BUTTON_PRIMARY)
-        self._container_box_primary_gesture.connect("pressed", self._select_item)
+        #self._container_box_primary_gesture.connect("pressed", self._select_item)
         self._container_box_primary_gesture.connect("released", self._open_book_overview)
         self.container_box.add_controller(self._container_box_primary_gesture)
 
