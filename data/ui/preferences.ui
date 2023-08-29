@@ -62,7 +62,7 @@
               <object class="HdyActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="title">Dark Mode</property>
+                <property name="title" translatable="yes">Dark Mode</property>
                 <property name="activatable-widget">dark_mode_switch</property>
                 <child>
                   <object class="GtkSwitch" id="dark_mode_switch">
@@ -85,7 +85,7 @@
               <object class="HdyActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="title">Swap author and reader</property>
+                <property name="title" translatable="yes">Swap author and reader</property>
                 <property name="activatable-widget">swap_author_reader_switch</property>
                 <property name="subtitle" translatable="yes">Activate if author and reader are displayed the wrong way</property>
                 <child>
@@ -109,7 +109,7 @@
               <object class="HdyActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="title">Replay</property>
+                <property name="title" translatable="yes">Replay</property>
                 <property name="activatable-widget">replay_switch</property>
                 <property name="subtitle" translatable="yes">Rewind 30 seconds of the current book when starting Cozy</property>
                 <child>
@@ -126,7 +126,7 @@
               <object class="HdyActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="title">Rewind Duration</property>
+                <property name="title" translatable="yes">Rewind Duration</property>
                 <child>
                   <object class="GtkSpinButton" id="rewind_duration_spin_button">
                     <property name="visible">True</property>
@@ -146,7 +146,7 @@
               <object class="HdyActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="title">Forward Duration</property>
+                <property name="title" translatable="yes">Forward Duration</property>
                 <child>
                   <object class="GtkSpinButton" id="forward_duration_spin_button">
                     <property name="visible">True</property>
@@ -174,7 +174,7 @@
               <object class="HdyActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="title">Fadeout</property>
+                <property name="title" translatable="yes">Fadeout</property>
                 <property name="activatable-widget">sleep_timer_fadeout_switch</property>
                 <child>
                   <object class="GtkSwitch" id="sleep_timer_fadeout_switch">
@@ -190,7 +190,7 @@
               <object class="HdyActionRow" id="sleep_timer_fadeout_row">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="title">Fadeout duration</property>
+                <property name="title" translatable="yes">Fadeout duration</property>
                 <child>
                   <object class="GtkSpinButton" id="fadeout_duration_spin_button">
                     <property name="visible">True</property>
@@ -225,7 +225,7 @@
               <object class="HdyActionRow">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="title">Prefer external images over embedded cover</property>
+                <property name="title" translatable="yes">Prefer external images over embedded cover</property>
                 <property name="activatable-widget">artwork_prefer_external_switch</property>
                 <property name="subtitle" translatable="yes">Always use images (cover.jpg, *.png, …) when available</property>
                 <child>
