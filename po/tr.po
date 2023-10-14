@@ -8,29 +8,29 @@
 # abc Def <hdogan1974@gmail.com>, 2020
 # Bün Colak <bunyamincolak@gmail.com>, 2020
 # Oğuzhan KIRLI <oguzhankirli2004@gmail.com>, 2021
-# Sabri Ünal <libreajans@gmail.com>, 2021
 # Veysel Erden, 2022
+# Sabri Ünal <libreajans@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-04 16:30+0100\n"
+"POT-Creation-Date: 2022-08-09 20:31+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Veysel Erden, 2022\n"
-"Language-Team: Turkish (https://www.transifex.com/geigi/teams/78138/tr/)\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>, 2023\n"
+"Language-Team: Turkish (https://app.transifex.com/geigi/teams/78138/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: cozy/application.py:101
+#: cozy/application.py:106
 msgid "Audiobooks"
 msgstr "Sesli Kitaplar"
 
-#: cozy/control/offline_cache.py:200
+#: cozy/control/offline_cache.py:197
 msgid "Copying"
 msgstr "Kopyalanıyor"
 
@@ -144,7 +144,7 @@ msgstr "Sesli Kitaplar Dizinini Ayarla"
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
 msgid "{storage} is offline."
-msgstr "{depolama} çevrimdışıdır."
+msgstr "{storage} çevrimdışı."
 
 #: cozy/ui/widgets/book_element.py:52
 msgid "Mark as read"
@@ -192,7 +192,7 @@ msgstr "Hata meydana gelen yerdeki bir satır kod"
 
 #: cozy/ui/widgets/error_reporting.py:27
 msgid "Cozy's version"
-msgstr "Cozy'nin sürümü"
+msgstr "Cozy sürümü"
 
 #: cozy/ui/widgets/error_reporting.py:28
 msgid "Linux distribution"
@@ -204,7 +204,7 @@ msgstr "Masaüstü ortamı"
 
 #: cozy/ui/widgets/error_reporting.py:30
 msgid "Media type of files that Cozy couldn't import"
-msgstr "Cozy'nin içe aktaramadığı medya tipi dosyalar"
+msgstr "Cozy'nin içe aktaramadığı ortam türü dosyaları"
 
 #: cozy/ui/widgets/filter_list_box.py:20
 #: cozy/view_model/library_view_model.py:54
@@ -236,7 +236,7 @@ msgstr "dk"
 msgid "Off"
 msgstr "Kapat"
 
-#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:377
+#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:380
 msgid "External drive"
 msgstr "Harici sürücü"
 
@@ -275,7 +275,7 @@ msgstr "Toplam"
 
 #: data/ui/book_detail.ui:290
 msgid "Last played"
-msgstr "Son Oynatılan"
+msgstr "Son oynatılan"
 
 #: data/ui/book_detail.ui:306
 msgid "Published"
@@ -307,7 +307,7 @@ msgstr "GitHub'ta yardım al"
 
 #: data/ui/db_migration_failed.ui:108
 msgid "An error occured while updating the database"
-msgstr "Veritabanı güncellenirken bir hata meydana geldi"
+msgstr "Veritabanı güncellenirken bir hata oluştu"
 
 #: data/ui/db_migration_failed.ui:129
 msgid ""
@@ -323,11 +323,11 @@ msgstr ""
 
 #: data/ui/delete_book_dialog.ui:31 data/ui/file_not_found.ui:19
 msgid "Cancel"
-msgstr "İptal Et"
+msgstr "İptal"
 
 #: data/ui/delete_book_dialog.ui:45
 msgid "Delete Audiobook"
-msgstr "Sesli kitabı sil"
+msgstr "Sesli Kitabı Sil"
 
 #: data/ui/delete_book_dialog.ui:105
 msgid "Are you sure you want to delete the selected audiobook?"
@@ -337,7 +337,7 @@ msgstr "Seçili sesli kitabı silmek istediğine emin misin?"
 msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr "Bu sesli kitap sabit diskinden ve Cozy kütüphanesinden kaldırılacak."
 
-#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:455
+#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:458
 msgid "User feedback"
 msgstr "Kullanıcı geri bildirimi"
 
@@ -663,35 +663,35 @@ msgstr "Kapak Resmi"
 msgid "Always use images (cover.jpg, *.png, …) when available"
 msgstr "Her zaman var olan resimleri kullanın (kapak.jpg, *.png, …)"
 
-#: data/ui/preferences.ui:247
+#: data/ui/preferences.ui:247 data/ui/preferences.ui:253
 msgid "Storage locations"
 msgstr "Depolama konumu"
 
-#: data/ui/preferences.ui:309
+#: data/ui/preferences.ui:312
 msgid "Add location"
 msgstr "Konum ekle"
 
-#: data/ui/preferences.ui:335
+#: data/ui/preferences.ui:338
 msgid "Remove location"
 msgstr "Konumu kaldır"
 
-#: data/ui/preferences.ui:373
+#: data/ui/preferences.ui:376
 msgid "Toggle this storage location to be internal/external."
 msgstr "Bu depolama konumunu dahili/harici olarak değiştir."
 
-#: data/ui/preferences.ui:402
+#: data/ui/preferences.ui:405
 msgid "Set as default storage location for new audiobooks"
 msgstr "Yeni sesli kitaplar için öntanımlı depolama konumu olarak ayarla"
 
-#: data/ui/preferences.ui:406
+#: data/ui/preferences.ui:409
 msgid "Set as default"
 msgstr "Varsayılan olarak ayarla"
 
-#: data/ui/preferences.ui:450
+#: data/ui/preferences.ui:453
 msgid "Feedback"
 msgstr "Geri Bildirim"
 
-#: data/ui/preferences.ui:460
+#: data/ui/preferences.ui:463
 msgid "User Feedback"
 msgstr "Kullanıcı Geribildirimi"
 
@@ -758,8 +758,8 @@ msgid ""
 "System power action\n"
 "to perform"
 msgstr ""
-"Sistem güç eylemi\n"
-"gerçekleştirmek"
+"Gerçekleştirilecek sistem\n"
+"güç eylemi"
 
 #: data/ui/timer_popover.ui:221
 msgid "suspend"
