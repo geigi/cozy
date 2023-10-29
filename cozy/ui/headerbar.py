@@ -44,6 +44,9 @@ class Headerbar(Adw.Bin):
 
         self.progress_popover = ProgressPopover()
         self.progress_menu_button.set_popover(self.progress_popover)
+        self.progress_spinner = Gtk.Spinner() #TODO: build a wedge progress bar to use here
+        self.progress_spinner.stop()
+        self.progress_menu_button.set_child(self.progress_spinner)
 
         self._headerbar_view_model: HeaderbarViewModel = inject.instance(HeaderbarViewModel)
         self._init_app_menu()
@@ -78,16 +81,18 @@ class Headerbar(Adw.Bin):
     def _on_state_changed(self):
         if self._headerbar_view_model.state == HeaderBarState.PLAYING:
             progress_visible = False
-            #TODO Replace progress menu button
-            #self.progress_menu_button.set_progress(0)
+            self.progress_popover.set_progress(0)
         else:
             progress_visible = True
 
-        #self.progress_menu_button.set_visible(progress_visible)
+        self.progress_menu_button.set_visible(progress_visible)
+        if progress_visible:
+            self.progress_spinner.start()
+        else:
+            self.progress_spinner.stop()
 
     def _on_work_progress_changed(self):
         progress = self._headerbar_view_model.work_progress
-        #self.progress_menu_button.set_progress(progress)
         self.progress_popover.set_progress(progress)
 
     def _on_work_message_changed(self):
