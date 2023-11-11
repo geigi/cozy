@@ -28,6 +28,8 @@
   <provides>
     <binary>com.github.geigi.cozy</binary>
   </provides>
+  <launchable type="desktop-id">com.github.geigi.cozy.desktop</launchable>
+  <translation type="gettext">com.github.geigi.cozy</translation>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot1.png</image>
@@ -45,13 +47,11 @@
   <developer_name translatable="no">Julian Geywitz</developer_name>
   <url type="homepage">https://cozy.sh</url>
   <url type="bugtracker">https://github.com/geigi/cozy/issues</url>
-  <url type="help">https://github.com/geigi/cozy/issues</url>
+  <url type="help">https://matrix.to/#/#cozy:gnome.org?via=matrix.org&amp;via=gnome.org</url>
   <url type="donation">https://www.patreon.com/geigi</url>
+  <url type="vcs-browser">https://github.com/geigi/cozy/</url>
+  <url type="translate">https://www.transifex.com/geigi/cozy/</url>
   <update_contact>cozy@geigi.de</update_contact>
-  <custom>
-    <value key="Purism::form_factor">workstation</value>
-    <value key="Purism::form_factor">mobile</value>
-  </custom>
   <releases>
     <release version="1.2.1" timestamp="1661086733">
       <description translatable="no">
