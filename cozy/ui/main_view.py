@@ -211,7 +211,25 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         Show about window.
         """
-        self.about_dialog.show()
+        self.about_dialog.add_acknowledgement_section(
+            _("Patreon Supporters"),
+            ["Fred Warren", "Gabriel", "Hu Mann", "Josiah", "Oleksii Kriukov"]
+        )
+        self.about_dialog.add_acknowledgement_section(
+            _("m4b chapter support in mutagen"),
+            ("mweinelt",),
+        )
+        self.about_dialog.add_acknowledgement_section(
+            _("Open Source Projects"),
+            ("Lollypop music player https://gitlab.gnome.org/World/lollypop",),
+        )
+        self.about_dialog.add_legal_section(
+            "python-inject",
+            "© 2010 Ivan Korobkov",
+            Gtk.License.APACHE_2_0
+        )
+
+        self.about_dialog.present()
 
     def show_prefs(self, action, parameter):
         """

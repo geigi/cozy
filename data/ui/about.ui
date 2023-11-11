@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <object class="GtkAboutDialog" id="about_dialog">
-    <property name="destroy_with_parent">1</property>
-    <property name="program_name">Cozy</property>
-    <property name="version">0.0.1</property>
-    <property name="copyright">Bundled dependencies:
-python-inject by ivankorobkov - Apache-2.0 Licence</property>
-    <property name="comments">Thanks all supporters: https://www.patreon.com/geigi
-Help translate Cozy: https://transifex.com/geigi/cozy</property>
+  <object class="AdwAboutWindow" id="about_dialog">
+    <property name="application_name">Cozy</property>
+    <property name="application_icon">com.github.geigi.cozy</property>
+    <property name="license_type">gpl-3-0</property>
+    <property name="issue_url">https://github.com/geigi/cozy/issues/new</property>
     <property name="website">https://github.com/geigi/cozy</property>
-    <property name="website_label" translatable="1">GitHub</property>
-    <property name="authors">geigi
-
-Contributions on GitHub:
+    <property name="developer_name">geigi</property>
+    <property name="developers">geigi
 A6GibKm
 alyssais
 apandada1
@@ -39,21 +34,8 @@ phpwutz
 rapenne-s
 thibaultamartin
 umeboshi2
-worldofpeace
-
-Thanks to mweinelt for implementing m4b chapter support in mutagen!
-
-And a thanks to all patreon supporters:
-Fred Warren
-Gabriel
-Hu Mann
-Josiah
-Oleksii Kriukov
-
-And to other open source projects:
-https://github.com/gnumdk/lollypop</property>
+worldofpeace</property>
     <property name="translator_credits">Ainte
-Ainte
 AndreBarata
 Andrey389
 Asyx
@@ -153,19 +135,6 @@ useruseruser1233211
 vanhoxx
 vlabo
 xfgusta
-yalexaner
-</property>
-    <property name="logo_icon_name">com.github.geigi.cozy</property>
-    <property name="license_type">gpl-3-0</property>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
-    <child>
-      <object class="GtkBox">
-        <property name="visible">0</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-      </object>
-    </child>
+yalexaner</property>
   </object>
 </interface>
