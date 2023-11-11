@@ -11,7 +11,7 @@ _The below instructions have been tested on Ubuntu 20.04_
 ```bash
 sudo apt update
 sudo apt install \
-  appstream-util \
+  appstreamcli \
   cmake \
   gettext \
   git \
