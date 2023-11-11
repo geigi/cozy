@@ -41,7 +41,7 @@ class WhatsNewWindow(Adw.Window):
         self.set_default_size(800, 550)
 
         for widget in self.children:
-            self.content_stack.add(widget)
+            self.content_stack.add_child(widget)
             widget.set_visible(False)
 
         self.children[0].set_visible(True)

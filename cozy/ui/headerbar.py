@@ -16,7 +16,7 @@ COVER_SIZE = 45
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/headerbar.ui')
-class Headerbar(Gtk.Box):
+class Headerbar(Adw.Bin):
     __gtype_name__ = "Headerbar"
 
     headerbar: Adw.HeaderBar = Gtk.Template.Child()
@@ -34,9 +34,8 @@ class Headerbar(Gtk.Box):
 
         self._library_mobile_view_switcher: Adw.ViewSwitcherBar = main_window_builder.get_object(
             "library_mobile_view_switcher")
-        self._library_mobile_revealer: Gtk.Revealer = main_window_builder.get_object("library_mobile_revealer")
-        self._header_container: Gtk.Box = main_window_builder.get_object("header_container")
-        self._header_container.prepend(self)
+        self._header_container: Adw.ToolbarView = main_window_builder.get_object("header_container")
+        self._header_container.add_top_bar(self)
 
         self._sort_stack: Gtk.Stack = main_window_builder.get_object("sort_stack")
         self.category_toolbar.set_stack(self._sort_stack)
@@ -60,7 +59,7 @@ class Headerbar(Gtk.Box):
 
     def _connect_widgets(self):
         self.back_button.connect("clicked", self._back_clicked)
-        self.category_toolbar.connect("notify::title-visible", self._on_title_visible_changed)
+        #self.category_toolbar.connect("notify::title-visible", self._on_title_visible_changed)
 
     def _init_app_menu(self):
         self.menu_builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/titlebar_menu.ui")
@@ -90,7 +89,7 @@ class Headerbar(Gtk.Box):
 
     def _on_show_library_filter_changed(self):
         self.category_toolbar.set_visible(self._headerbar_view_model.show_library_filter)
-        self._reveal_mobile_library_filter(self.category_toolbar.get_title_visible())
+        #self._reveal_mobile_library_filter(self.category_toolbar.get_title_visible())
 
     def _back_clicked(self, _):
         self._headerbar_view_model.navigate_back()
@@ -100,8 +99,8 @@ class Headerbar(Gtk.Box):
         self._reveal_mobile_library_filter(visible)
 
     def _reveal_mobile_library_filter(self, reveal: bool):
-        reveal_child = reveal and self._headerbar_view_model.show_library_filter
-        self._library_mobile_revealer.set_reveal_child(reveal_child)
+        reveal_bar = reveal and self._headerbar_view_model.show_library_filter
+        self._library_mobile_view_switcher.set_reveal(reveal_bar)
 
     def _on_lock_ui_changed(self):
         self.search_button.set_sensitive(not self._headerbar_view_model.lock_ui)

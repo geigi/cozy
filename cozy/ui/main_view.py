@@ -376,3 +376,4 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.application_settings.window_width = width
         self.application_settings.window_height = height
         self.application_settings.window_maximize = self.window.is_maximized()
+
