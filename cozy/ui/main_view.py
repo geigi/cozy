@@ -145,9 +145,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         Init all app actions.
         """
-        help_action = Gio.SimpleAction.new("help", None)
-        help_action.connect("activate", self.help)
-        self.app.add_action(help_action)
 
         about_action = Gio.SimpleAction.new("about", None)
         about_action.connect("activate", self.about)
@@ -193,12 +190,6 @@ class CozyUI(EventSender, metaclass=Singleton):
 
     def get_object(self, name):
         return self.window_builder.get_object(name)
-
-    def help(self, action, parameter):
-        """
-        Show app help.
-        """
-        webbrowser.open("https://github.com/geigi/cozy/issues", new=2)
 
     def quit(self, action, parameter):
         """
