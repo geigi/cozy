@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <requires lib="libadwaita" version="1.0"/>
   <template class="WhatsNew" parent="AdwWindow">
-    <property name="can-focus">False</property>
-    <property name="type">popup</property>
     <property name="title" translatable="1">Whats new?</property>
-    <property name="window-position">center-on-parent</property>
     <property name="default-width">650</property>
     <property name="default-height">400</property>
-    <property name="destroy-with-parent">True</property>
-    <property name="type-hint">dialog</property>
-    <property name="deletable">False</property>
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
@@ -28,9 +21,6 @@
                   <class name="suggested-action"/>
                 </style>
               </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
             </child>
           </object>
         </child>
@@ -40,7 +30,6 @@
             <property name="hexpand">1</property>
             <property name="vexpand">1</property>
             <property name="hscrollbar-policy">never</property>
-            <property name="shadow-type">in</property>
             <property name="child">
               <object class="GtkViewport">
                 <property name="child">
