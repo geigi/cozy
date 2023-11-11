@@ -1,7 +1,7 @@
 {
   "app-id": "com.github.geigi.cozy",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "41",
+  "runtime-version": "45",
   "sdk": "org.gnome.Sdk",
   "command": "com.github.geigi.cozy",
   "finish-args": [
