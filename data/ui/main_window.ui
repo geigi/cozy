@@ -133,7 +133,7 @@
                                             <property name="child">
                                               <object class="GtkViewport" id="books_viewport">
                                                 <property name="vscroll-policy">natural</property>
-                                                <property name="hscroll-policy">minimal</property>
+                                                <property name="hscroll-policy">minimum</property>
                                                 <property name="child">
                                                   <object class="GtkFlowBox" id="book_box">
                                                     <property name="margin-top">10</property>
