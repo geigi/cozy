@@ -3,12 +3,12 @@
   <requires lib="gtk" version="4.0"/>
   <object class="AdwApplicationWindow" id="app_window">
     <property name="name">main_window</property>
-    <property name="can-focus">false</property>
     <property name="icon-name">com.github.geigi.cozy</property>
     <property name="content">
       <object class="GtkStack" id="main_stack">
         <child>
           <object class="GtkStackPage">
+            <property name="name">main</property>
             <property name="child">
               <object class="AdwToolbarView">
                 <property name="bottom-bar-style">raised</property>
@@ -243,7 +243,6 @@
         <child>
           <object class="GtkStackPage">
             <property name="name">import</property>
-            <property name="title">page1</property>
             <property name="child">
               <object class="GtkBox" id="import_box">
                 <property name="halign">center</property>
@@ -279,7 +278,6 @@
         <child>
           <object class="GtkStackPage">
             <property name="name">no_media</property>
-            <property name="title">page0</property>
             <property name="child">
               <object class="GtkScrolledWindow">
                 <property name="focusable">true</property>
