@@ -21,9 +21,11 @@ class SeekBar(Gtk.Box):
 
         self._progress_scale_pressed = False
 
+        self.progress_scale.connect("value-changed", self._on_progress_scale_changed)
+
         self._progress_scale_gesture = Gtk.GestureClick()
         self._progress_scale_gesture.connect("pressed", self._on_progress_scale_press)
-        self._progress_scale_gesture.connect("released", self._on_progress_scale_release)
+        self._progress_scale_gesture.connect("end", self._on_progress_scale_release)
         self.progress_scale.add_controller(self._progress_scale_gesture)
 
         self._progress_scale_key = Gtk.EventControllerKey()
@@ -77,7 +79,7 @@ class SeekBar(Gtk.Box):
         self.current_label.set_markup("<span font_features='tnum'>" + current_text + "</span>")
         self.remaining_label.set_markup("<span font_features='tnum'>-" + remaining_text + "</span>")
 
-    def _on_progress_scale_release(self, _, __):
+    def _on_progress_scale_release(self, *_):
         self._progress_scale_pressed = False
         value = self.progress_scale.get_value()
         self.emit("position-changed", value)
@@ -91,9 +93,8 @@ class SeekBar(Gtk.Box):
             self.position = min(self.position + 30, max_value)
             self.emit("position-changed", self.position)
 
-    def _on_progress_scale_press(self, _, __):
+    def _on_progress_scale_press(self, *_):
         self._progress_scale_pressed = True
-
         return False
 
 
