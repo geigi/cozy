@@ -1,146 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <requires lib="libadwaita" version="1.0"/>
   <object class="GtkAdjustment" id="fadeout_duration_adjustment">
-    <property name="upper">121</property>
+    <property name="upper">120</property>
+    <property name="value">15</property>
     <property name="step-increment">5</property>
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="forward_duration_adjustment">
     <property name="lower">5</property>
-    <property name="upper">121</property>
+    <property name="upper">120</property>
     <property name="step-increment">5</property>
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="rewind_duration_adjustment">
     <property name="lower">5</property>
-    <property name="upper">121</property>
+    <property name="upper">120</property>
     <property name="value">15</property>
     <property name="step-increment">5</property>
     <property name="page-increment">10</property>
   </object>
   <template class="PreferencesWindow" parent="AdwPreferencesWindow">
-    <property name="destroy-with-parent">True</property>
     <child>
       <object class="AdwPreferencesPage">
         <property name="icon-name">settings-symbolic</property>
-        <property name="title" translatable="1">General</property>
+        <property name="title" translatable="true">General</property>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="1">Appearance</property>
+            <property name="title" translatable="true">Appearance</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="dark_mode_switch">
                 <property name="title">Dark Mode</property>
-                <property name="activatable-widget">dark_mode_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="dark_mode_switch">
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="1">Tags</property>
+            <property name="title" translatable="true">Tags</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="swap_author_reader_switch">
                 <property name="title">Swap author and reader</property>
-                <property name="activatable-widget">swap_author_reader_switch</property>
-                <property name="subtitle" translatable="1">Activate if author and reader are displayed the wrong way</property>
-                <child>
-                  <object class="GtkSwitch" id="swap_author_reader_switch">
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
+                <property name="subtitle" translatable="true">Activate if author and reader are displayed the wrong way</property>
               </object>
             </child>
           </object>
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="1">Playback</property>
+            <property name="title" translatable="true">Playback</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow"  id="replay_switch">
                 <property name="title">Replay</property>
-                <property name="activatable-widget">replay_switch</property>
-                <property name="subtitle" translatable="1">Rewind 30 seconds of the current book when starting Cozy</property>
-                <child>
-                  <object class="GtkSwitch" id="replay_switch">
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
+                <property name="subtitle" translatable="true">Rewind 30 seconds of the current book when starting Cozy</property>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSpinRow" id="rewind_duration_spin_button">
                 <property name="title">Rewind Duration</property>
-                <child>
-                  <object class="GtkSpinButton" id="rewind_duration_spin_button">
-                    <property name="focusable">1</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="adjustment">rewind_duration_adjustment</property>
-                    <property name="snap-to-ticks">1</property>
-                    <property name="numeric">1</property>
-                    <property name="value">15</property>
-                  </object>
-                </child>
+                <property name="focusable">true</property>
+                <property name="adjustment">rewind_duration_adjustment</property>
+                <property name="snap-to-ticks">true</property>
+                <property name="numeric">true</property>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSpinRow" id="forward_duration_spin_button">
                 <property name="title">Forward Duration</property>
-                <child>
-                  <object class="GtkSpinButton" id="forward_duration_spin_button">
-                    <property name="focusable">1</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="text">15</property>
-                    <property name="adjustment">forward_duration_adjustment</property>
-                    <property name="snap-to-ticks">1</property>
-                    <property name="numeric">1</property>
-                    <property name="value">15</property>
-                  </object>
-                </child>
+                <property name="focusable">true</property>
+                <property name="adjustment">forward_duration_adjustment</property>
+                <property name="snap-to-ticks">true</property>
+                <property name="numeric">true</property>
               </object>
             </child>
           </object>
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="1">Sleep Timer</property>
+            <property name="title" translatable="true">Sleep Timer</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="sleep_timer_fadeout_switch">
                 <property name="title">Fadeout</property>
-                <property name="activatable-widget">sleep_timer_fadeout_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="sleep_timer_fadeout_switch">
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow" id="sleep_timer_fadeout_row">
+              <object class="AdwSpinRow" id="fadeout_duration_spin_button">
                 <property name="title">Fadeout duration</property>
-                <child>
-                  <object class="GtkSpinButton" id="fadeout_duration_spin_button">
-                    <property name="focusable">1</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="text">15</property>
-                    <property name="adjustment">fadeout_duration_adjustment</property>
-                    <property name="snap-to-ticks">1</property>
-                    <property name="numeric">1</property>
-                  </object>
-                </child>
+                <property name="focusable">true</property>
+                <property name="adjustment">fadeout_duration_adjustment</property>
+                <property name="snap-to-ticks">true</property>
+                <property name="numeric">true</property>
               </object>
             </child>
           </object>
@@ -150,45 +99,38 @@
     <child>
       <object class="AdwPreferencesPage">
         <property name="icon-name">harddisk-symbolic</property>
-        <property name="title" translatable="1">Storage</property>
+        <property name="title" translatable="true">Storage</property>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="1">Artwork</property>
+            <property name="title" translatable="true">Artwork</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="artwork_prefer_external_switch">
                 <property name="title">Prefer external images over embedded cover</property>
-                <property name="activatable-widget">artwork_prefer_external_switch</property>
-                <property name="subtitle" translatable="1">Always use images (cover.jpg, *.png, …) when available</property>
-                <child>
-                  <object class="GtkSwitch" id="artwork_prefer_external_switch">
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
+                <property name="subtitle" translatable="true">Always use images (cover.jpg, *.png, …) when available</property>
               </object>
             </child>
           </object>
         </child>
         <child>
           <object class="AdwPreferencesGroup" id="storage_locations_preference_group">
-            <property name="title" translatable="1">Storage locations</property>
+            <property name="title" translatable="true">Storage locations</property>
             <child>
               <object class="AdwPreferencesRow">
-                <property name="title" translatable="1">Storage locations</property>
+                <property name="title" translatable="true">Storage locations</property>
                 <child>
                   <object class="GtkBox">
                     <property name="margin-start">13</property>
                     <property name="margin-end">13</property>
                     <property name="margin-top">13</property>
                     <property name="margin-bottom">13</property>
-                    <property name="hexpand">1</property>
+                    <property name="hexpand">true</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkFrame">
                         <property name="height-request">250</property>
                         <property name="child">
                           <object class="GtkScrolledWindow">
-                            <property name="focusable">1</property>
+                            <property name="focusable">true</property>
                             <property name="hscrollbar-policy">never</property>
                             <property name="child">
                               <object class="GtkViewport">
@@ -210,12 +152,12 @@
                       <object class="GtkBox">
                         <property name="css-classes">toolbar</property>
                         <property name="height-request">24</property>
-                        <property name="can-focus">0</property>
+                        <property name="can-focus">false</property>
                         <child>
                           <object class="GtkButton" id="add_storage_button">
                             <property name="width-request">24</property>
                             <property name="height-request">24</property>
-                            <property name="tooltip-text" translatable="1">Add location</property>
+                            <property name="tooltip-text" translatable="true">Add location</property>
                             <child>
                               <object class="GtkImage" id="add_image">
                                 <property name="icon-name">list-add-symbolic</property>
@@ -230,8 +172,8 @@
                           <object class="GtkButton" id="remove_storage_button">
                             <property name="width-request">24</property>
                             <property name="height-request">24</property>
-                            <property name="sensitive">0</property>
-                            <property name="tooltip-text" translatable="1">Remove location</property>
+                            <property name="sensitive">false</property>
+                            <property name="tooltip-text" translatable="true">Remove location</property>
                             <child>
                               <object class="GtkImage" id="remove_image">
                                 <property name="icon-name">list-remove-symbolic</property>
@@ -245,7 +187,7 @@
                         <child>
                           <object class="GtkSeparator">
                             <property name="orientation">vertical</property>
-                            <property name="can-focus">0</property>
+                            <property name="can-focus">false</property>
                             <property name="hexpand">True</property>
                             <style>
                               <class name="spacer"/>
@@ -257,8 +199,8 @@
                             <property name="label" translatable="1">External drive</property>
                             <property name="width-request">24</property>
                             <property name="height-request">24</property>
-                            <property name="sensitive">0</property>
-                            <property name="tooltip-text" translatable="1">Toggle this storage location to be internal/external.</property>
+                            <property name="sensitive">false</property>
+                            <property name="tooltip-text" translatable="true">Toggle this storage location to be internal/external.</property>
                             <child>
                               <object class="GtkImage" id="external_image">
                                 <property name="icon-name">network-server-symbolic</property>
@@ -274,8 +216,8 @@
                             <property name="label" translatable="1">Set as default</property>
                             <property name="width-request">24</property>
                             <property name="height-request">24</property>
-                            <property name="sensitive">0</property>
-                            <property name="tooltip-text" translatable="1">Set as default storage location for new audiobooks</property>
+                            <property name="sensitive">false</property>
+                            <property name="tooltip-text" translatable="true">Set as default storage location for new audiobooks</property>
                             <child>
                               <object class="GtkImage" id="default_image">
                                 <property name="icon-name">checkmark-symbolic</property>
@@ -302,21 +244,14 @@
     <child>
       <object class="AdwPreferencesPage">
         <property name="icon-name">papyrus-vertical-symbolic</property>
-        <property name="title" translatable="1">Feedback</property>
+        <property name="title" translatable="true">Feedback</property>
         <child>
           <object class="AdwPreferencesGroup" id="user_feedback_preference_group">
-            <property name="title" translatable="1">User feedback</property>
-            <child>
-              <object class="AdwPreferencesRow" id="user_feedback_preference_row">
-                <property name="title" translatable="1">User Feedback</property>
-                <child>
-                  <placeholder/>
-                </child>
-              </object>
-            </child>
+            <property name="title" translatable="true">User feedback</property>
           </object>
         </child>
       </object>
     </child>
   </template>
 </interface>
+

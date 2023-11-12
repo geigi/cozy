@@ -13,7 +13,7 @@ from cozy.ext import inject
 from cozy.media.importer import Importer
 from cozy.model.settings import Settings
 from cozy.report import reporter
-from gi.repository import Gtk
+from gi.repository import Gtk, Adw
 
 
 
@@ -34,6 +34,7 @@ class SettingsViewModel(Observable, EventSender):
         self._lock_ui: bool = False
 
         self._gtk_settings = Gtk.Settings.get_default()
+        self.style_manager = Adw.StyleManager.get_default()
 
         self._app_settings.add_listener(self._on_app_setting_changed)
 
@@ -119,8 +120,10 @@ class SettingsViewModel(Observable, EventSender):
         self._notify("storage_locations")
 
     def _set_dark_mode(self):
-        prefer_dark_mode = self._app_settings.dark_mode
-        self._gtk_settings.set_property("gtk-application-prefer-dark-theme", prefer_dark_mode)
+        if self._app_settings.dark_mode:
+            self.style_manager.set_color_scheme(Adw.ColorScheme.PREFER_DARK)
+        else:
+            self.style_manager.set_color_scheme(Adw.ColorScheme.PREFER_LIGHT)
 
     def _on_app_setting_changed(self, event: str, data):
         if event == "dark-mode":

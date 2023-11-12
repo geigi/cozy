@@ -12,6 +12,9 @@
   <template class="ErrorReporting" parent="GtkBox">
     <property name="orientation">vertical</property>
     <property name="spacing">10</property>
+    <style>
+      <class name="card"/>
+    </style>
     <child>
       <object class="GtkBox" id="header_box">
         <property name="halign">center</property>
@@ -22,7 +25,6 @@
             <property name="wrap">1</property>
             <style>
               <class name="title-3"/>
-              <class name="bold"/>
             </style>
           </object>
         </child>
@@ -38,6 +40,9 @@
       <object class="GtkListBox">
         <property name="selection-mode">none</property>
         <property name="activate-on-single-click">0</property>
+        <style>
+          <class name="transparent_bg"/>
+        </style>
         <child>
           <object class="GtkListBoxRow">
             <property name="activatable">0</property>
@@ -157,7 +162,7 @@
                     <property name="wrap">1</property>
                     <property name="xalign">0</property>
                     <style>
-                      <class name="semi-bold"/>
+                      <class name="heading"/>
                     </style>
                   </object>
                 </child>

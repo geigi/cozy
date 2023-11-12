@@ -20,8 +20,8 @@ class PreferencesView(Adw.PreferencesWindow):
     dark_mode_switch: Gtk.Switch = Gtk.Template.Child()
     swap_author_reader_switch: Gtk.Switch = Gtk.Template.Child()
     replay_switch: Gtk.Switch = Gtk.Template.Child()
-    sleep_timer_fadeout_switch: Gtk.Switch = Gtk.Template.Child()
-    sleep_timer_fadeout_row: Adw.ActionRow = Gtk.Template.Child()
+    sleep_timer_fadeout_switch: Adw.SwitchRow = Gtk.Template.Child()
+    fadeout_duration_spin_button: Adw.SpinRow = Gtk.Template.Child()
     artwork_prefer_external_switch: Gtk.Switch = Gtk.Template.Child()
 
     rewind_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
@@ -34,22 +34,22 @@ class PreferencesView(Adw.PreferencesWindow):
     external_storage_toggle_button: Gtk.ToggleButton = Gtk.Template.Child()
     default_storage_button: Gtk.ToggleButton = Gtk.Template.Child()
 
-    user_feedback_preference_row: Adw.PreferencesRow = Gtk.Template.Child()
+    user_feedback_preference_group: Adw.PreferencesRow = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         error_reporting = ErrorReporting()
         error_reporting.show_header(False)
-        self.user_feedback_preference_row.set_child(error_reporting)
+        self.user_feedback_preference_group.add(error_reporting)
 
         self._bind_settings()
         self._bind_view_model()
 
         self.connect("close-request", self._hide_window)
 
-        self.sleep_timer_fadeout_switch.connect("state-set", self._on_sleep_fadeout_switch_changed)
-        self._on_sleep_fadeout_switch_changed(None, self.sleep_timer_fadeout_switch.get_active())
+        self.sleep_timer_fadeout_switch.connect("notify::active", self._on_sleep_fadeout_switch_changed)
+        self.fadeout_duration_spin_button.set_sensitive(self.sleep_timer_fadeout_switch.props.active)
 
         self.storage_list_box.connect("row-selected", self._on_storage_box_changed)
 
@@ -86,8 +86,9 @@ class PreferencesView(Adw.PreferencesWindow):
         self._glib_settings.bind("prefer-external-cover", self.artwork_prefer_external_switch, "active",
                                  Gio.SettingsBindFlags.DEFAULT)
 
-    def _on_sleep_fadeout_switch_changed(self, _, state: bool):
-        self.sleep_timer_fadeout_row.set_sensitive(state)
+    def _on_sleep_fadeout_switch_changed(self, widget, param):
+        state = widget.get_property(param.name)
+        self.fadeout_duration_spin_button.set_sensitive(state)
 
     def _init_storage_box(self):
         self.storage_list_box.remove_all_children()

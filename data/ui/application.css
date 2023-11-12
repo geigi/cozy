@@ -107,3 +107,7 @@
 .book_detail_cover {
     border-radius: 5px;
 }
+
+.transparent_bg {
+    background: transparent;
+}
