@@ -52,7 +52,6 @@
                     <property name="margin_bottom">10</property>
                     <property name="hexpand">1</property>
                     <property name="vexpand">1</property>
-                    <property name="shadow_type">in</property>
                     <property name="child">
                       <object class="GtkViewport">
                         <property name="vexpand">1</property>

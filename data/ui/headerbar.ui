@@ -5,7 +5,9 @@
     <child>
       <object class="AdwHeaderBar" id="headerbar">
         <child type="title">
-          <object class="AdwViewSwitcher" id="category_toolbar"></object>
+          <object class="AdwViewSwitcher" id="category_toolbar">
+            <property name="policy">wide</property>
+          </object>
         </child>
         <child type="start">
           <object class="GtkToggleButton" id="show_sidebar_button">

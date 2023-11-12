@@ -198,7 +198,6 @@
           <object class="GtkVolumeButton" id="volume_button">
             <property name="tooltip-text" translatable="1">Volume control</property>
             <style>
-              <class name="circular"/>
               <class name="flat"/>
             </style>
           </object>
@@ -218,7 +217,6 @@
             </child>
             <style>
               <class name="flat"/>
-              <class name="circular"/>
             </style>
           </object>
         </child>
@@ -240,7 +238,6 @@
             </accessibility>
             <style>
               <class name="flat"/>
-              <class name="circular"/>
             </style>
           </object>
         </child>

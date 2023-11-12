@@ -80,13 +80,10 @@ class LibraryView:
 
         view_mode = None
         if page == RECENT_PAGE:
-            self._split_view.props.show_sidebar = False
             view_mode = LibraryViewMode.CURRENT
         elif page == AUTHOR_PAGE:
-            self._split_view.props.show_sidebar = True
             view_mode = LibraryViewMode.AUTHOR
         elif page == READER_PAGE:
-            self._split_view.props.show_sidebar = True
             view_mode = LibraryViewMode.READER
 
         self._view_model.library_view_mode = view_mode
