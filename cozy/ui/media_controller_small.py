@@ -111,3 +111,4 @@ class MediaControllerSmall(Gtk.Box):
 
     def _cover_clicked(self, _, __):
         self._playback_control_view_model.open_book_detail()
+

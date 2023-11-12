@@ -87,3 +87,4 @@ class StorageListBoxRow(Gtk.ListBoxRow):
 
 GObject.signal_new('location-changed', StorageListBoxRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
                    (GObject.TYPE_PYOBJECT,))
+

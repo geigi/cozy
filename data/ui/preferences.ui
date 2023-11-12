@@ -50,8 +50,7 @@
               <object class="AdwActionRow">
                 <property name="title">Swap author and reader</property>
                 <property name="activatable-widget">swap_author_reader_switch</property>
-                <property name="subtitle" translatable="1">Activate if author and reader are displayed the wrong way
-                </property>
+                <property name="subtitle" translatable="1">Activate if author and reader are displayed the wrong way</property>
                 <child>
                   <object class="GtkSwitch" id="swap_author_reader_switch">
                     <property name="halign">center</property>
@@ -69,8 +68,7 @@
               <object class="AdwActionRow">
                 <property name="title">Replay</property>
                 <property name="activatable-widget">replay_switch</property>
-                <property name="subtitle" translatable="1">Rewind 30 seconds of the current book when starting Cozy
-                </property>
+                <property name="subtitle" translatable="1">Rewind 30 seconds of the current book when starting Cozy</property>
                 <child>
                   <object class="GtkSwitch" id="replay_switch">
                     <property name="halign">center</property>
@@ -160,8 +158,7 @@
               <object class="AdwActionRow">
                 <property name="title">Prefer external images over embedded cover</property>
                 <property name="activatable-widget">artwork_prefer_external_switch</property>
-                <property name="subtitle" translatable="1">Always use images (cover.jpg, *.png, …) when available
-                </property>
+                <property name="subtitle" translatable="1">Always use images (cover.jpg, *.png, …) when available</property>
                 <child>
                   <object class="GtkSwitch" id="artwork_prefer_external_switch">
                     <property name="halign">center</property>
@@ -261,9 +258,7 @@
                             <property name="width-request">24</property>
                             <property name="height-request">24</property>
                             <property name="sensitive">0</property>
-                            <property name="tooltip-text" translatable="1">Toggle this storage location to be
-                              internal/external.
-                            </property>
+                            <property name="tooltip-text" translatable="1">Toggle this storage location to be internal/external.</property>
                             <child>
                               <object class="GtkImage" id="external_image">
                                 <property name="icon-name">network-server-symbolic</property>
@@ -280,9 +275,7 @@
                             <property name="width-request">24</property>
                             <property name="height-request">24</property>
                             <property name="sensitive">0</property>
-                            <property name="tooltip-text" translatable="1">Set as default storage location for new
-                              audiobooks
-                            </property>
+                            <property name="tooltip-text" translatable="1">Set as default storage location for new audiobooks</property>
                             <child>
                               <object class="GtkImage" id="default_image">
                                 <property name="icon-name">checkmark-symbolic</property>

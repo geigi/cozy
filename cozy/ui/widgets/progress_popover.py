@@ -19,3 +19,4 @@ class ProgressPopover(Gtk.Popover):
 
     def set_progress(self, progress: float):
         self.progress_bar.set_fraction(progress)
+

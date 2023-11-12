@@ -93,3 +93,4 @@ class ErrorReporting(Gtk.Box):
     def _on_app_setting_changed(self, event, _):
         if event == "report-level":
             self._load_report_level()
+

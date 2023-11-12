@@ -102,3 +102,4 @@ class SleepTimer(Gtk.Popover):
             icon = "no-bed-symbolic"
 
         self._timer_image.set_from_icon_name(icon)
+

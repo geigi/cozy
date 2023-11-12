@@ -33,3 +33,4 @@ class ImportFailedDialog():
         Close this dialog and destroy it.
         """
         self.dialog.destroy()
+

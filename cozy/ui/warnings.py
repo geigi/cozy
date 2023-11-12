@@ -52,3 +52,4 @@ class Warnings():
             self.button.set_visible(True)
         else:
             self.button.set_visible(False)
+
