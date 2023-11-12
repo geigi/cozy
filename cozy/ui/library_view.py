@@ -44,7 +44,6 @@ class LibraryView:
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
         self._author_box: FilterListBox = self._builder.get_object("author_box")
         self._reader_box: FilterListBox = self._builder.get_object("reader_box")
-        self._library_leaflet: Adw.Leaflet = self._builder.get_object("library_leaflet")
         self._book_stack: Gtk.Stack = self._builder.get_object("book_stack")
 
     def _connect_ui_elements(self):
@@ -146,9 +145,11 @@ class LibraryView:
         page = self._view_model.library_page
 
         if page == LibraryPage.FILTER:
-            self._library_leaflet.set_visible_child_name("filter")
+            #self._library_leaflet.set_visible_child_name("filter")
+            print("filter")
         elif page == LibraryPage.BOOKS:
-            self._library_leaflet.set_visible_child_name("books")
+            #self._library_leaflet.set_visible_child_name("books")
+            print("books")
 
     def _invalidate_filters(self):
         self._book_box.invalidate_filter()

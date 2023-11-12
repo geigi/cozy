@@ -64,9 +64,13 @@ class BookDetailView(Gtk.Box):
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
-        self._main_stack: Gtk.Stack = main_window_builder.get_object("main_stack")
+        #self._main_stack: Gtk.Stack = main_window_builder.get_object("main_stack")
         # self._toolbar_revealer: Gtk.Revealer = main_window_builder.get_object("toolbar_revealer")
-        self._main_stack.add_named(self, "book_overview")
+        #self._main_stack.add_named(self, "book_overview")
+
+        self._navigation_view: Adw.NavigationView = main_window_builder.get_object("navigation_view")
+        self._book_details_container: Adw.ToolbarView = main_window_builder.get_object("book_details_container")
+        self._book_details_container.set_content(self)
 
         self.book_overview_scroller.props.propagate_natural_height = True
 
@@ -141,7 +145,8 @@ class BookDetailView(Gtk.Box):
         self._set_progress()
 
     def _open_book_overview(self):
-        self._main_stack.set_visible_child_name("book_overview")
+        #self._main_stack.set_visible_child_name("book_overview")
+        self._navigation_view.push_by_tag("book_overview")
         #self._toolbar_revealer.set_reveal_child(False)
 
     def _on_play_changed(self):
@@ -336,3 +341,4 @@ class BookDetailView(Gtk.Box):
 
     def _on_open(self):
         self._open_book_overview()
+

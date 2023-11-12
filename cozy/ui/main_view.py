@@ -117,6 +117,7 @@ class CozyUI(EventSender, metaclass=Singleton):
 
         self.book_box = self.window_builder.get_object("book_box")
         self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
+        self.navigation_view: Adw.NavigationView = self.window_builder.get_object("navigation_view")
 
         self.no_media_file_chooser = self.window_builder.get_object(
             "no_media_file_chooser")
@@ -262,8 +263,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         Switch the UI state back to playing.
         This enables all UI functionality for the user.
         """
-        if self.main_stack.props.visible_child_name != "book_overview" and self.main_stack.props.visible_child_name != "no_media":
-            self.main_stack.props.visible_child_name = "main"
+        if self.navigation_view.props.visible_page != "book_overview" and self.main_stack.props.visible_child_name != "no_media":
+            self.navigation_view.pop_to_page("main")
         if self._player.loaded_book:
             self.block_ui_buttons(False, True)
         else:

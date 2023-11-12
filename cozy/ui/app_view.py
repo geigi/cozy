@@ -27,12 +27,12 @@ class AppView:
 
     def _get_ui_elements(self):
         self._main_stack: Gtk.Stack = self._builder.get_object("main_stack")
-        self._library_leaflet: Adw.Leaflet = self._builder.get_object("library_leaflet")
+        self._navigation_view: Adw.Leaflet = self._builder.get_object("navigation_view")
 
     def _connect_ui_elements(self):
         self._main_stack.connect("notify::visible-child", self._update_view_model_view)
-        self._library_leaflet.connect("notify::folded", self._update_view_model_view)
-        self._library_leaflet.connect("notify::visible-child", self._update_view_model_view)
+        #self._library_leaflet.connect("notify::folded", self._update_view_model_view)
+        #self._library_leaflet.connect("notify::visible-child", self._update_view_model_view)
 
     def _connect_view_model(self):
         self._view_model.bind_to("view", self._on_view_changed)
@@ -45,18 +45,21 @@ class AppView:
         elif view == View.PREPARING_LIBRARY:
             self._main_stack.set_visible_child_name(PREPARING_LIBRARY)
         elif view == View.LIBRARY:
-            self._main_stack.set_visible_child_name(LIBRARY)
+            #self._main_stack.set_visible_child_name(LIBRARY)
+            ...
         elif view == View.LIBRARY_FILTER:
-            self._main_stack.set_visible_child_name(LIBRARY)
-            self._library_leaflet.set_visible_child_name(LIBRARY_FILTER)
+            #self._main_stack.set_visible_child_name(LIBRARY)
+            #self._library_leaflet.set_visible_child_name(LIBRARY_FILTER)
+            ...
         elif view == View.LIBRARY_BOOKS:
-            self._main_stack.set_visible_child_name(LIBRARY)
-            self._library_leaflet.set_visible_child_name(LIBRARY_BOOKS)
+            #self._main_stack.set_visible_child_name(LIBRARY)
+            #self._library_leaflet.set_visible_child_name(LIBRARY_BOOKS)
+            ...
 
     def _update_view_model_view(self, _, __):
         page = self._main_stack.props.visible_child_name
-        library_folded = self._library_leaflet.props.folded
-        library_page = self._library_leaflet.props.visible_child_name
+        #library_folded = self._library_leaflet.props.folded
+        #library_page = self._library_leaflet.props.visible_child_name
 
         if page == EMPTY_STATE:
             self._view_model.view = View.EMPTY_STATE
@@ -65,6 +68,7 @@ class AppView:
         elif page == BOOK_DETAIL:
             self._view_model.view = View.BOOK_DETAIL
         elif page == LIBRARY:
+            return
             if library_folded and library_page == LIBRARY_FILTER:
                 self._view_model.view = View.LIBRARY_FILTER
             elif library_folded and library_page == LIBRARY_BOOKS:
