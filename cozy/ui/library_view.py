@@ -136,7 +136,7 @@ class LibraryView:
             active_filter_box = self._reader_box
 
         # https://stackoverflow.com/questions/22178524/gtk-named-stack-childs/22182843#22182843
-        #self._main_stack.props.visible_child_name = main_view_page
+        self._main_stack.props.visible_child_name = main_view_page
         self._filter_stack.set_visible_child_name(visible_child_name)
         self._book_stack.set_visible_child_name(books_view_page)
 
