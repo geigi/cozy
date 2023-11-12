@@ -47,6 +47,10 @@ class BookElement(Gtk.FlowBoxChild):
         self._container_box_context_gesture.connect("released", self._show_context_menu)
         self.container_box.add_controller(self._container_box_context_gesture)
 
+        self._container_box_context_gesture_long = Gtk.GestureLongPress()
+        self._container_box_context_gesture_long.connect("pressed", self._show_context_menu)
+        self.container_box.add_controller(self._container_box_context_gesture_long)
+
         self._container_box_key = Gtk.EventControllerKey()
         self._container_box_key.connect("key-pressed", self._on_key_press_event)
         self.container_box.add_controller(self._container_box_key)
