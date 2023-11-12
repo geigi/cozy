@@ -22,8 +22,10 @@ class BookElement(Gtk.FlowBoxChild):
 
         super().__init__()
 
-        self.name_label.set_text("book")
-        self.author_label.set_text("author")
+        self.name_label.set_text(book.name)
+        self.name_label.set_tooltip_text(book.name)
+        self.author_label.set_text(book.author)
+        self.author_label.set_tooltip_text(book.author)
         self.art: AlbumElement = AlbumElement(self.book)
         self.context_menu = None
         self.pressed = False

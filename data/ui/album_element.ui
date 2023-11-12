@@ -47,15 +47,7 @@
                     <property name="tooltip-text" translatable="1">Play</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
-                    <child>
-                      <object class="GtkImage" id="button_image">
-                        <property name="icon-name">play-symbolic</property>
-                        <property name="icon_size">large</property>
-                        <style>
-                          <class name="album-art-button-image"/>
-                        </style>
-                      </object>
-                    </child>
+                    <property name="icon-name">play-symbolic</property>
                     <style>
                       <class name="circular"/>
                       <class name="book_play_button"/>

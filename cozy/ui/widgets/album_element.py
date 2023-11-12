@@ -22,7 +22,6 @@ class AlbumElement(Gtk.Box):
 
     artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
-    button_image: Gtk.Image = Gtk.Template.Child()
     album_art_image: Gtk.Image = Gtk.Template.Child()
     play_button: Gtk.Button = Gtk.Template.Child()
     progress_drawing_area: Gtk.DrawingArea = Gtk.Template.Child()
@@ -39,10 +38,10 @@ class AlbumElement(Gtk.Box):
         if pixbuf:
             self.album_art_image.set_from_pixbuf(pixbuf)
             self.album_art_image.set_size_request(ALBUM_ART_SIZE, ALBUM_ART_SIZE)
-        #else:
+        else:
             # TODO: fix placeholder
-            #self.album_art_image.set_from_icon_name("book-open-variant-symbolic")
-            #self.album_art_image.props.pixel_size = ALBUM_ART_SIZE
+            self.album_art_image.set_from_icon_name("book-open-variant-symbolic")
+            self.album_art_image.props.pixel_size = ALBUM_ART_SIZE
 
         self._play_button_click = Gtk.GestureClick()
         self._play_button_click.connect("released", self._on_play_button_press)
@@ -51,13 +50,13 @@ class AlbumElement(Gtk.Box):
         #TODO: Ho
         #self.progress_drawing_area.connect("realize", lambda w: w.get_window().set_pass_through(True))
         self.progress_drawing_area.set_draw_func(self._draw_progress)
-        self.album_art_drawing_area.set_draw_func(self._draw_album_hover)
+        #self.album_art_drawing_area.set_draw_func(self._draw_album_hover)
 
     def set_playing(self, playing: bool):
         if playing:
-            self.button_image.set_from_icon_name("pause-symbolic", PLAY_BUTTON_ICON_SIZE)
+            self.play_button.set_icon_name("pause-symbolic")
         else:
-            self.button_image.set_from_icon_name("play-symbolic", PLAY_BUTTON_ICON_SIZE)
+            self.play_button.set_icon_name("play-symbolic")
 
     def set_hover(self, hover: bool):
         self.album_art_overlay_revealer.set_reveal_child(hover)
