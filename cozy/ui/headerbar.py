@@ -20,12 +20,12 @@ class Headerbar(Adw.Bin):
 
     headerbar: Adw.HeaderBar = Gtk.Template.Child()
 
+    show_sidebar_button: Gtk.ToggleButton = Gtk.Template.Child()
     search_button: Gtk.MenuButton = Gtk.Template.Child()
     menu_button: Gtk.MenuButton = Gtk.Template.Child()
 
     progress_menu_button: Gtk.MenuButton = Gtk.Template.Child()
 
-    back_button: Gtk.Button = Gtk.Template.Child()
     category_toolbar: Adw.ViewSwitcherTitle = Gtk.Template.Child()
 
     def __init__(self, main_window_builder: Gtk.Builder):
@@ -35,6 +35,8 @@ class Headerbar(Adw.Bin):
             "library_mobile_view_switcher")
         self._header_container: Adw.ToolbarView = main_window_builder.get_object("header_container")
         self._header_container.add_top_bar(self)
+
+        self._split_view: Adw.OverlaySplitView = main_window_builder.get_object("split_view")
 
         self._sort_stack: Gtk.Stack = main_window_builder.get_object("sort_stack")
         self.category_toolbar.set_stack(self._sort_stack)
@@ -57,13 +59,21 @@ class Headerbar(Adw.Bin):
         self._headerbar_view_model.bind_to("lock_ui", self._on_lock_ui_changed)
 
     def _connect_widgets(self):
-        self.back_button.connect("clicked", self._back_clicked)
-        #self.category_toolbar.connect("notify::title-visible", self._on_title_visible_changed)
+        self._split_view.connect("notify::show-sidebar", self._on_sidebar_toggle)
+        self.show_sidebar_button.connect("notify::active", self._on_sidebar_toggle)
 
     def _init_app_menu(self):
         self.menu_builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/titlebar_menu.ui")
         menu = self.menu_builder.get_object("titlebar_menu")
         self.menu_button.set_menu_model(menu)
+
+    def _on_sidebar_toggle(self, widget, param):
+        show_sidebar = widget.get_property(param.name)
+
+        if widget is self.show_sidebar_button:
+            self._split_view.props.show_sidebar = show_sidebar
+        elif widget is self._split_view:
+            self.show_sidebar_button.props.active = show_sidebar
 
     def _on_state_changed(self):
         if self._headerbar_view_model.state == HeaderBarState.PLAYING:
@@ -84,7 +94,7 @@ class Headerbar(Adw.Bin):
         self.progress_popover.set_message(self._headerbar_view_model.work_message)
 
     def _on_can_navigate_back_changed(self):
-        self.back_button.set_visible(self._headerbar_view_model.can_navigate_back)
+        pass
 
     def _on_show_library_filter_changed(self):
         self.category_toolbar.set_visible(self._headerbar_view_model.show_library_filter)

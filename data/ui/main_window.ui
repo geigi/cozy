@@ -4,6 +4,15 @@
   <object class="AdwApplicationWindow" id="app_window">
     <property name="name">main_window</property>
     <property name="icon-name">com.github.geigi.cozy</property>
+    <property name="width-request">360</property>
+    <property name="height-request">294</property>
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 400sp</condition>
+        <setter object="split_view" property="collapsed">true</setter>
+        <setter object="library_mobile_view_switcher" property="reveal">true</setter>
+      </object>
+    </child>
     <property name="content">
       <object class="GtkStack" id="main_stack">
         <child>
@@ -22,7 +31,8 @@
                           <object class="AdwToolbarView" id="header_container">
                             <property name="top-bar-style">raised</property>
                             <property name="content">
-                              <object class="AdwOverlaySplitView">
+                              <object class="AdwOverlaySplitView" id="split_view">
+                                <property name="show-sidebar">false</property>
                                 <property name="sidebar">
                                   <object class="AdwViewStack" id="sort_stack">
                                     <property name="vexpand">true</property>

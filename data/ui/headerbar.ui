@@ -8,9 +8,9 @@
           <object class="AdwViewSwitcher" id="category_toolbar"></object>
         </child>
         <child type="start">
-          <object class="GtkButton" id="back_button">
-            <property name="visible">False</property>
-            <property name="icon-name">go-previous-symbolic</property>
+          <object class="GtkToggleButton" id="show_sidebar_button">
+            <property name="icon-name">sidebar-show-symbolic</property>
+            <property name="tooltip-text" translatable="true">Toggle Filter Sidebar</property>
           </object>
         </child>
         <child type="end">

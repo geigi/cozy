@@ -40,6 +40,7 @@ class LibraryView:
     def _get_ui_elements(self):
         self._filter_stack: Gtk.Stack = self._builder.get_object("sort_stack")
         self._main_stack: Gtk.Stack = self._builder.get_object("main_stack")
+        self._split_view: Adw.OverlaySplitView = self._builder.get_object("split_view")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
         self._author_box: FilterListBox = self._builder.get_object("author_box")
@@ -79,10 +80,13 @@ class LibraryView:
 
         view_mode = None
         if page == RECENT_PAGE:
+            self._split_view.props.show_sidebar = False
             view_mode = LibraryViewMode.CURRENT
         elif page == AUTHOR_PAGE:
+            self._split_view.props.show_sidebar = True
             view_mode = LibraryViewMode.AUTHOR
         elif page == READER_PAGE:
+            self._split_view.props.show_sidebar = True
             view_mode = LibraryViewMode.READER
 
         self._view_model.library_view_mode = view_mode
