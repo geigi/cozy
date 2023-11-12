@@ -286,25 +286,14 @@ class CozyUI(EventSender, metaclass=Singleton):
         if len(self._settings.storage_locations) > 0:
             path = self._settings.default_location.path
 
-        location_chooser: Gtk.FileChooserDialog = Gtk.FileChooserDialog(title=_("Set Audiobooks Directory"),
-                                                                        parent=self.window,
-                                                                        action=Gtk.FileChooserAction.SELECT_FOLDER)
-        location_chooser.add_buttons(
-            Gtk.STOCK_CANCEL,
-            Gtk.ResponseType.CANCEL,
-            Gtk.STOCK_OPEN,
-            Gtk.ResponseType.OK,
-        )
-        location_chooser.set_select_multiple(False)
-        location_chooser.set_current_folder(path)
-        location_chooser.set_local_only(False)
-        response = location_chooser.run()
+        location_chooser = Gtk.FileDialog(title=_("Set Audiobooks Directory"))
+        location_chooser.select_folder(self.window, None, self._location_chooser_open_callback)
 
-        if response == Gtk.ResponseType.OK:
-            audiobook_path = location_chooser.get_filename()
-            self._set_audiobook_path(audiobook_path)
-
-        location_chooser.destroy()
+    def _location_chooser_open_callback(self, dialog, result):
+        # TODO: handle error
+        file = dialog.select_folder_finish(result)
+        if file is not None:
+            self._set_audiobook_path(file.get_path())
 
     def scan(self, _, __):
         thread = Thread(target=self._importer.scan, name="ScanMediaThread")
