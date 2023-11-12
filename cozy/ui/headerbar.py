@@ -7,7 +7,6 @@ from cozy.ui.widgets.progress_popover import ProgressPopover
 from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarState
 
 gi.require_version('Gtk', '4.0')
-gi.require_version('Dazzle', '1.0')
 from gi.repository import Gtk, Adw
 
 log = logging.getLogger("Headerbar")
