@@ -184,13 +184,15 @@ class LibraryView:
         return True
 
     def _on_book_removed(self, _, book):
-        delete_from_library = True
-        delete_files = False
-
         if self._view_model.book_files_exist(book):
-            dialog = DeleteBookView()
-            delete_from_library = delete_files = dialog.get_delete_book()
-            dialog.destroy()
+            dialog = DeleteBookView(self._on_book_removed_clicked, book)
+
+    def _on_book_removed_clicked(self, _, response, book):
+        if response != "delete":
+            return
+
+        delete_from_library = True
+        delete_files = True  # TODO: maybe an option to not delete the files
 
         if delete_files:
             self._view_model.delete_book_files(book)

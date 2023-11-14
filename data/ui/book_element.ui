@@ -56,4 +56,22 @@
       </object>
     </child>
   </template>
+  <menu id="book_context_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="true">Mark as read</attribute>
+        <attribute name="action">book.mark-as-read</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="true">Open in file browser</attribute>
+        <attribute name="action">book.jump-to-folder</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="true">Remove from library</attribute>
+        <attribute name="action">book.remove-book</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>

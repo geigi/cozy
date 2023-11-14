@@ -1,112 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="DeleteBookDialog" parent="GtkDialog">
-    <property name="type">popup</property>
-    <property name="title" translatable="0"> </property>
-    <property name="resizable">0</property>
-    <property name="modal">1</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="default_width">200</property>
-    <property name="destroy_with_parent">1</property>
-    <property name="urgency_hint">True</property>
-    <property name="deletable">0</property>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
-    <child internal-child="content_area">
-      <object class="GtkBox">
-        <property name="visible">0</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkBox">
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="margin-start">10</property>
-            <property name="margin-end">20</property>
-            <property name="margin_top">10</property>
-            <property name="margin_bottom">20</property>
-            <property name="spacing">20</property>
-            <child>
-              <object class="GtkImage">
-                <property name="pixel_size">64</property>
-                <property name="icon_name">dialog-warning</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkBox">
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="orientation">vertical</property>
-                <property name="spacing">20</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="halign">start</property>
-                    <property name="valign">center</property>
-                    <property name="label" translatable="1">Are you sure you want to delete the selected audiobook?</property>
-                    <property name="wrap">1</property>
-                    <property name="max_width_chars">45</property>
-                    <property name="xalign">0</property>
-                    <style>
-                      <class name="title-3"/>
-                      <class name="bold"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="halign">start</property>
-                    <property name="valign">center</property>
-                    <property name="label" translatable="1">The audiobook will be removed from your disk and from Cozy&apos;s library.</property>
-                    <property name="wrap">1</property>
-                    <property name="max_width_chars">70</property>
-                    <property name="xalign">0</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
-    <action-widgets>
-      <action-widget response="-6">button2</action-widget>
-      <action-widget response="-10">button1</action-widget>
-    </action-widgets>
-    <child internal-child="action_area">
-      <object class="GtkBox">
-        <property name="valign">center</property>
-        <property name="can_focus">False</property>
-        <property name="margin_right">10</property>
-        <property name="margin_bottom">10</property>
-        <child>
-          <object class="GtkButton" id="button2">
-            <property name="label" translatable="1">Cancel</property>
-            <property name="focusable">1</property>
-            <property name="receives_default">1</property>
-            <property name="margin-end">20</property>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="button1">
-            <property name="label" translatable="1">Delete Audiobook</property>
-            <property name="focusable">1</property>
-            <style>
-              <class name="destructive-action"/>
-            </style>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
+  <template class="DeleteBookDialog" parent="AdwMessageDialog">
+    <property name="heading" translatable="yes">Delete audiobook?</property>
+    <property name="body" translatable="yes">The audiobook will be removed from your disk and from Cozy&apos;s library.</property>
+    <property name="default-response">cancel</property>
+    <property name="close-response">cancel</property>
   </template>
 </interface>
+
