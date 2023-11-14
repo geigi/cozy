@@ -161,7 +161,7 @@ class SearchView:
                     return
 
                 book_result = BookSearchResult(book, self.view_model.jump_to_book)
-                self.book_box.add(book_result)
+                self.book_box.append(book_result)
 
     def __on_author_search_finished(self, authors):
         if len(authors) > 0:
@@ -174,7 +174,7 @@ class SearchView:
                     return
 
                 author_result = ArtistSearchResult(self.view_model.jump_to_author, author, True)
-                self.author_box.add(author_result)
+                self.author_box.append(author_result)
 
     def __on_reader_search_finished(self, readers):
         if len(readers) > 0:
@@ -187,6 +187,6 @@ class SearchView:
                     return
 
                 reader_result = ArtistSearchResult(self.view_model.jump_to_reader, reader, False)
-                self.reader_box.add(reader_result)
+                self.reader_box.append(reader_result)
 
         self.popover.set_size_request(-1, -1)

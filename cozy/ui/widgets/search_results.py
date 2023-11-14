@@ -20,10 +20,14 @@ class SearchResult(Gtk.Box):
         self.on_click = on_click
         self.on_click_data = on_click_data
 
-        self.connect("enter-notify-event", self._on_enter_notify)
-        self.connect("leave-notify-event", self._on_leave_notify)
-        if on_click:
-            self.connect("button-press-event", self.__on_clicked)
+        self._motion_event = Gtk.EventControllerMotion()
+        self._motion_event.connect("enter", self._on_enter_notify)
+        self._motion_event.connect("leave", self._on_leave_notify)
+        self.add_controller(self._motion_event)
+
+        self._primary_gesture = Gtk.GestureClick(button=Gdk.BUTTON_PRIMARY)
+        self._primary_gesture.connect("pressed", self.__on_clicked)
+        self.add_controller(self._primary_gesture)
 
         self.props.margin_top = 2
         self.props.margin_bottom = 2
@@ -35,7 +39,7 @@ class SearchResult(Gtk.Box):
         self.box.set_halign(Gtk.Align.FILL)
         self.box.set_valign(Gtk.Align.CENTER)
 
-    def _on_enter_notify(self, widget, event):
+    def _on_enter_notify(self, widget, event, *_):
         """
         On enter notify add css hover class
         :param widget: as Gtk.Box
@@ -43,15 +47,14 @@ class SearchResult(Gtk.Box):
         """
         self.box.get_style_context().add_class("box_hover")
 
-    def _on_leave_notify(self, widget, event):
+    def _on_leave_notify(self, widget):
         """
         On leave notify remove css hover class
         :param widget: as Gtk.Box (can be None)
-        :param event: as Gdk.Event (can be None)
         """
         self.box.get_style_context().remove_class("box_hover")
 
-    def __on_clicked(self, widget, event):
+    def __on_clicked(self, widget, event, *_):
         self.on_click(self.on_click_data)
 
 
@@ -75,16 +78,18 @@ class ArtistSearchResult(SearchResult):
             title_label.set_text(tools.shorten_string(artist, MAX_BOOK_LENGTH))
             self.set_tooltip_text(_("Jump to reader ") + artist)
         title_label.set_halign(Gtk.Align.START)
-        title_label.props.margin = 4
+        title_label.props.margin_top = 4
+        title_label.props.margin_bottom = 4
+        title_label.props.margin_start = 4
+        title_label.props.margin_end = 5
         title_label.props.hexpand = True
         title_label.props.hexpand_set = True
-        title_label.set_margin_end(5)
         title_label.props.width_request = 100
         title_label.props.xalign = 0.0
-        title_label.set_line_wrap(True)
+        title_label.props.wrap = True
 
-        self.box.add(title_label)
-        self.add(self.box)
+        self.box.append(title_label)
+        self.append(self.box)
 
 
 class BookSearchResult(SearchResult):
@@ -111,14 +116,16 @@ class BookSearchResult(SearchResult):
         title_label = Gtk.Label()
         title_label.set_text(tools.shorten_string(book.name, MAX_BOOK_LENGTH))
         title_label.set_halign(Gtk.Align.START)
-        title_label.props.margin = 4
+        title_label.props.margin_top = 4
+        title_label.props.margin_bottom = 4
+        title_label.props.margin_start = 4
+        title_label.props.margin_end = 5
         title_label.props.hexpand = True
         title_label.props.hexpand_set = True
-        title_label.set_margin_end(5)
         title_label.props.width_request = 100
         title_label.props.xalign = 0.0
-        title_label.set_line_wrap(True)
+        title_label.props.wrap = True
 
-        self.box.add(img)
-        self.box.add(title_label)
-        self.add(self.box)
+        self.box.append(img)
+        self.box.append(title_label)
+        self.append(self.box)
