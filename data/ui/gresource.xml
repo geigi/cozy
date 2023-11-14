@@ -8,7 +8,6 @@
     <file preprocess="xml-stripblanks">book_element.ui</file>
     <file preprocess="xml-stripblanks">chapter_element.ui</file>
     <file preprocess="xml-stripblanks">db_migration_failed.ui</file>
-    <file preprocess="xml-stripblanks">delete_book_dialog.ui</file>
     <file preprocess="xml-stripblanks">error_reporting.ui</file>
     <file preprocess="xml-stripblanks">file_not_found.ui</file>
     <file preprocess="xml-stripblanks">headerbar.ui</file>
