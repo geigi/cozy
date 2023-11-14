@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <requires lib="libadwaita" version="1.0"/>
   <template class="BookElement" parent="GtkFlowBoxChild">
     <property name="height-request">150</property>
     <property name="width-request">150</property>

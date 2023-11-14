@@ -41,11 +41,6 @@ class BookElement(Gtk.FlowBoxChild):
         self._container_box_primary_gesture.connect("released", self._open_book_overview)
         self.container_box.add_controller(self._container_box_primary_gesture)
 
-        self._container_box_context_gesture = Gtk.GestureClick()
-        self._container_box_context_gesture.set_button(Gdk.BUTTON_SECONDARY)
-        self._container_box_context_gesture.connect("released", self._show_context_menu)
-        self.container_box.add_controller(self._container_box_context_gesture)
-
         self._container_box_key = Gtk.EventControllerKey()
         self._container_box_key.connect("key-pressed", self._on_key_press_event)
         self.container_box.add_controller(self._container_box_key)
@@ -60,24 +55,6 @@ class BookElement(Gtk.FlowBoxChild):
 
     def update_progress(self):
         self.art.update_progress()
-
-    def _create_context_menu(self):
-        menu = Gtk.Menu()
-        read_item = Gtk.MenuItem(label=_("Mark as read"))
-        read_item.connect("button-press-event", self._mark_as_read)
-
-        jump_item = Gtk.MenuItem(label=_("Open in file browser"))
-        jump_item.connect("button-press-event", self._jump_to_folder)
-
-        rm_item = Gtk.MenuItem(label=_("Remove from library"))
-        rm_item.connect("button-press-event", self._remove_book)
-
-        menu.append(read_item)
-        menu.append(jump_item)
-        menu.append(Gtk.SeparatorMenuItem())
-        menu.append(rm_item)
-        menu.attach_to_widget(self)
-        return menu
 
     def _remove_book(self, _, __):
         if self.context_menu:
@@ -95,13 +72,6 @@ class BookElement(Gtk.FlowBoxChild):
         track = self.book.chapters[0]
         path = os.path.dirname(track.file)
         subprocess.Popen(['xdg-open', path])
-
-    def _show_context_menu(self, gesture: Gtk.Gesture, *_):
-        gesture.set_state(Gtk.EventSequenceState.CLAIMED)
-
-        if self.context_menu is None:
-            self.context_menu = self._create_context_menu()
-        self.context_menu.popup()
 
     def _select_item(self, gesture: Gtk.Gesture, *_):
         if super().get_sensitive():
