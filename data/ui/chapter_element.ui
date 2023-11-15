@@ -2,8 +2,8 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <template class="ChapterElement" parent="GtkBox">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
+    <property name="can-focus">false</property>
+    <property name="tooltip-text" translatable="true">Play this part</property>
     <child>
       <object class="GtkBox">
         <property name="margin-start">10</property>
@@ -16,7 +16,6 @@
             <child>
               <object class="GtkStackPage">
                 <property name="name">number</property>
-                <property name="title" translatable="0">page0</property>
                 <property name="child">
                   <object class="GtkLabel" id="number_label">
                     <property name="halign">start</property>
@@ -34,7 +33,6 @@
             <child>
               <object class="GtkStackPage">
                 <property name="name">play_icon</property>
-                <property name="title" translatable="0">page0</property>
                 <property name="child">
                   <object class="GtkImage" id="play_icon">
                     <property name="halign">start</property>
@@ -48,7 +46,7 @@
         </child>
         <child>
           <object class="GtkLabel" id="title_label">
-            <property name="hexpand">1</property>
+            <property name="hexpand">true</property>
             <property name="ellipsize">end</property>
             <property name="max-width-chars">50</property>
             <property name="xalign">0</property>

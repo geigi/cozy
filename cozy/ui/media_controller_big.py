@@ -145,19 +145,16 @@ class MediaControllerBig(Gtk.Box):
     def _on_volume_changed(self):
         self.volume_button.set_value(self._playback_control_view_model.volume)
 
-    def _play_clicked(self, _):
+    def _play_clicked(self, *_):
         self._playback_control_view_model.play_pause()
 
-    def _rewind_clicked(self, _):
+    def _rewind_clicked(self, *_):
         self._playback_control_view_model.rewind()
 
-    def _forward_clicked(self, _):
+    def _forward_clicked(self, *_):
         self._playback_control_view_model.forward()
 
-    def _back_clicked(self, _):
-        self._playback_control_view_model.navigate_back()
-
-    def _cover_clicked(self, _, __):
+    def _cover_clicked(self, *_):
         self._playback_control_view_model.open_book_detail()
 
     def _on_volume_button_changed(self, _, volume):

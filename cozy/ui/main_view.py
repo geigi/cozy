@@ -130,16 +130,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.about_dialog.connect("close-request", self.hide_window)
         self.about_dialog.set_version(self.version)
 
-        try:
-            about_close_button = self.about_builder.get_object(
-                "button_box").get_children()[2]
-
-            if about_close_button:
-                about_close_button.connect(
-                    "clicked", self.__about_close_clicked)
-        except Exception as e:
-            log.info("Not connecting about close button.")
-
         self._preferences: PreferencesView = PreferencesView()
 
     def __init_actions(self):

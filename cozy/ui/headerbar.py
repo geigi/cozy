@@ -100,9 +100,6 @@ class Headerbar(Adw.Bin):
         self.category_toolbar.set_visible(self._headerbar_view_model.show_library_filter)
         #self._reveal_mobile_library_filter(self.category_toolbar.get_title_visible())
 
-    def _back_clicked(self, _):
-        self._headerbar_view_model.navigate_back()
-
     def _on_title_visible_changed(self, widget, param):
         visible = widget.get_property(param.name)
         self._reveal_mobile_library_filter(visible)
