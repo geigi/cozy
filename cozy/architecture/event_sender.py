@@ -1,10 +1,7 @@
 from typing import List, Callable
 
 import gi
-
-gi.require_version('Gdk', '4.0')
-
-from gi.repository import Gdk, GLib
+from gi.repository import GLib
 
 
 class EventSender:
@@ -14,9 +11,8 @@ class EventSender:
         self._listeners = []
 
     def emit_event(self, event, message=None):
-        if type(event) is tuple and not message:
-            message = event[1]
-            event = event[0]
+        if isinstance(event, tuple) and message is None:
+            event, message = event
 
         for function in self._listeners:
             function(event, message)

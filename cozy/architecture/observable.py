@@ -1,6 +1,6 @@
 from typing import Callable
 
-from gi.repository import Gdk, GLib
+from gi.repository import GLib
 
 from cozy.report import reporter
 import logging
