@@ -87,8 +87,6 @@ class Application(Gtk.Application):
         init_db()
         Gtk.Application.do_startup(self)
         Adw.init()
-        manager = Adw.StyleManager.get_default()
-        manager.set_color_scheme(Adw.ColorScheme.PREFER_LIGHT)
         log.info("libadwaita version: {}".format(Adw._version))
         self.ui.startup()
 

@@ -115,7 +115,7 @@ class ApplicationSettings(EventSender):
 
     @dark_mode.setter
     def dark_mode(self, new_value: bool):
-        self._settings.set_boolean("dark_mode", new_value)
+        self._settings.set_boolean("dark-mode", new_value)
 
     @property
     def window_width(self) -> int:

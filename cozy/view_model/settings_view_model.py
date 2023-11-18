@@ -35,6 +35,7 @@ class SettingsViewModel(Observable, EventSender):
 
         self._gtk_settings = Gtk.Settings.get_default()
         self.style_manager = Adw.StyleManager.get_default()
+        self._set_dark_mode()
 
         self._app_settings.add_listener(self._on_app_setting_changed)
 
