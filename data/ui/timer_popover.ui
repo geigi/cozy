@@ -26,18 +26,18 @@
             <child>
               <object class="GtkScale" id="timer_scale">
                 <property name="width_request">205</property>
-                <property name="focusable">1</property>
-                <property name="tooltip_text" translatable="1">Timer duration</property>
+                <property name="focusable">true</property>
+                <property name="tooltip_text" translatable="true">Timer duration</property>
                 <property name="halign">start</property>
                 <property name="margin-end">10</property>
                 <property name="adjustment">timer_value</property>
-                <property name="restrict_to_fill_level">0</property>
-                <property name="fill_level">120</property>
-                <property name="round_digits">5</property>
+                <property name="restrict-to-fill-level">true</property>
+                <property name="fill-level">120</property>
+                <property name="round-digits">5</property>
                 <property name="digits">0</property>
-                <property name="value_pos">right</property>
+                <property name="value-pos">right</property>
                 <accessibility>
-                    <property name="label" translatable="1">Set the sleep timer duration in minutes</property>
+                    <property name="label" translatable="true">Set the sleep timer duration in minutes</property>
                 </accessibility>
                 <layout>
                   <property name="column">0</property>
@@ -50,7 +50,7 @@
                 <property name="halign">end</property>
                 <property name="valign">center</property>
                 <property name="margin-start">6</property>
-                <property name="label" translatable="1">min</property>
+                <property name="label" translatable="true">min</property>
                 <layout>
                   <property name="column">2</property>
                   <property name="row">0</property>
@@ -80,15 +80,15 @@
           <object class="GtkBox">
             <child>
               <object class="GtkLabel">
-                <property name="hexpand">1</property>
+                <property name="hexpand">true</property>
                 <property name="halign">start</property>
                 <property name="margin-end">10</property>
-                <property name="label" translatable="1">Stop after current chapter</property>
+                <property name="label" translatable="true">Stop after current chapter</property>
               </object>
             </child>
             <child>
               <object class="GtkSwitch" id="chapter_switch">
-                <property name="focusable">1</property>
+                <property name="focusable">true</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
               </object>
@@ -102,14 +102,14 @@
           <object class="GtkBox">
             <child>
               <object class="GtkLabel">
-                <property name="hexpand">1</property>
+                <property name="hexpand">true</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="1">Enable system power control</property>
+                <property name="label" translatable="true">Enable system power control</property>
               </object>
             </child>
             <child>
               <object class="GtkSwitch" id="power_control_switch">
-                <property name="focusable">1</property>
+                <property name="focusable">true</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
               </object>
@@ -118,16 +118,15 @@
         </child>
         <child>
           <object class="GtkBox" id="power_control_options">
-            <property name="sensitive">0</property>
+            <property name="sensitive">false</property>
             <child>
               <object class="GtkLabel">
-                <property name="hexpand">1</property>
-                <property name="tooltip_markup" translatable="1">Type of the action when the timer finishes.
+                <property name="hexpand">true</property>
+                <property name="tooltip_markup" translatable="true">Type of the action when the timer finishes.
 &quot;shutdown&quot; will attempt to turn your system off (also known as power off)
 &quot;suspend&quot; will attempt to suspend your system (also known as sleep).</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="1">System power action
-to perform</property>
+                <property name="label" translatable="true">System power action to perform</property>
               </object>
             </child>
             <child>
@@ -135,13 +134,13 @@ to perform</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkCheckButton" id="system_suspend_radiob">
-                    <property name="label" translatable="1">suspend</property>
-                    <property name="active">1</property>
+                    <property name="label" translatable="true">suspend</property>
+                    <property name="active">true</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="system_shutdown_radiob">
-                    <property name="label" translatable="1">shutdown</property>
+                    <property name="label" translatable="true">shutdown</property>
                     <property name="group">system_suspend_radiob</property>
                   </object>
                 </child>

@@ -8,51 +8,51 @@
   </object>
   <template class="SeekBar" parent="GtkBox">
     <property name="valign">center</property>
-    <property name="hexpand">1</property>
+    <property name="hexpand">true</property>
     <property name="spacing">5</property>
     <child>
       <object class="GtkLabel" id="current_label">
-        <property name="tooltip-text" translatable="1">Elapsed time</property>
+        <property name="tooltip-text" translatable="true">Elapsed time</property>
         <property name="halign">end</property>
         <property name="valign">center</property>
         <property name="label">&lt;span font_features=&apos;tnum&apos;&gt;--:--&lt;/span&gt;</property>
-        <property name="use-markup">1</property>
-        <property name="single-line-mode">1</property>
+        <property name="use-markup">true</property>
+        <property name="single-line-mode">true</property>
         <accessibility>
-          <property name="label" translatable="1">Elapsed time of current part</property>
+          <property name="label" translatable="true">Elapsed time of current part</property>
         </accessibility>
       </object>
     </child>
     <child>
       <object class="GtkScale" id="progress_scale">
         <property name="width-request">150</property>
-        <property name="sensitive">0</property>
-        <property name="focusable">1</property>
-        <property name="tooltip-text" translatable="1">Jump to position in current chapter</property>
+        <property name="sensitive">false</property>
+        <property name="focusable">true</property>
+        <property name="tooltip-text" translatable="true">Jump to position in current chapter</property>
         <property name="valign">center</property>
-        <property name="hexpand">1</property>
+        <property name="hexpand">true</property>
         <property name="adjustment">seek_bar_adjustment</property>
-        <property name="restrict-to-fill-level">0</property>
+        <property name="restrict-to-fill-level">false</property>
         <property name="fill-level">0</property>
         <accessibility>
-          <property name="label" translatable="1">Position of the current part in seconds</property>
+          <property name="label" translatable="true">Position of the current part in seconds</property>
         </accessibility>
       </object>
     </child>
     <child>
       <object class="GtkBox" id="remaining_event_box">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
+        <property name="visible">true</property>
+        <property name="can-focus">false</property>
         <property name="valign">center</property>
         <child>
           <object class="GtkLabel" id="remaining_label">
-            <property name="tooltip-text" translatable="1">Remaining time</property>
+            <property name="tooltip-text" translatable="true">Remaining time</property>
             <property name="halign">start</property>
             <property name="label">&lt;span font_features=&apos;tnum&apos;&gt;--:--&lt;/span&gt;</property>
-            <property name="use-markup">1</property>
-            <property name="single-line-mode">1</property>
+            <property name="use-markup">true</property>
+            <property name="single-line-mode">true</property>
             <accessibility>
-              <property name="label" translatable="1">Remaining time of current part</property>
+              <property name="label" translatable="true">Remaining time of current part</property>
             </accessibility>
           </object>
         </child>
