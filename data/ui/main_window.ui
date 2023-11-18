@@ -204,15 +204,8 @@
                   <object class="GtkBox">
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="AdwSqueezer" id="media_control_squeezer">
+                      <object class="GtkBox" id="media_control_box">
                         <property name="height-request">46</property>
-                        <property name="visible">true</property>
-                        <property name="can-focus">false</property>
-                        <property name="homogeneous">true</property>
-                        <property name="transition-type">crossfade</property>
-                        <child>
-                          <placeholder/>
-                        </child>
                         <style>
                           <class name="player_bar"/>
                         </style>

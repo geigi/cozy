@@ -12,8 +12,7 @@
     <file preprocess="xml-stripblanks">headerbar.ui</file>
     <file preprocess="xml-stripblanks">import_failed.ui</file>
     <file preprocess="xml-stripblanks">main_window.ui</file>
-    <file preprocess="xml-stripblanks">media_controller_big.ui</file>
-    <file preprocess="xml-stripblanks">media_controller_small.ui</file>
+    <file preprocess="xml-stripblanks">media_controller.ui</file>
     <file preprocess="xml-stripblanks">playback_speed_popover.ui</file>
     <file preprocess="xml-stripblanks">preferences.ui</file>
     <file preprocess="xml-stripblanks">progress_popover.ui</file>

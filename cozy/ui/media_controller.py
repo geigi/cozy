@@ -2,21 +2,164 @@ import logging
 
 import gi
 
-from cozy.ui.media_controller_big import MediaControllerBig
-from cozy.ui.media_controller_small import MediaControllerSmall
+from cozy.control.artwork_cache import ArtworkCache
+from cozy.db.book import Book
+from cozy.ext import inject
+from cozy.ui.widgets.playback_speed_popover import PlaybackSpeedPopover
+from cozy.ui.widgets.seek_bar import SeekBar
+from cozy.ui.widgets.sleep_timer import SleepTimer
+from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 
-gi.require_version('Gtk', '4.0')
-from gi.repository import Gtk, Adw
+from gi.repository import Adw, Gtk, Gdk
 
 log = logging.getLogger("MediaController")
 
+COVER_SIZE = 46
 
-class MediaController:
+
+@Gtk.Template.from_resource('/com/github/geigi/cozy/media_controller.ui')
+class MediaController(Adw.BreakpointBin):
+    __gtype_name__ = "MediaController"
+
+    seek_bar_container: Gtk.Box = Gtk.Template.Child()
+
+    play_button: Gtk.Button = Gtk.Template.Child()
+    prev_button: Gtk.Button = Gtk.Template.Child()
+    next_button: Gtk.Button = Gtk.Template.Child()
+    volume_button: Gtk.VolumeButton = Gtk.Template.Child()
+
+    cover_img: Gtk.Image = Gtk.Template.Child()
+    title_label: Gtk.Label = Gtk.Template.Child()
+    subtitle_label: Gtk.Label = Gtk.Template.Child()
+
+    playback_speed_button: Gtk.MenuButton = Gtk.Template.Child()
+    timer_button: Gtk.MenuButton = Gtk.Template.Child()
+
+    timer_image: Gtk.Image = Gtk.Template.Child()
+
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
-        self._media_control_squeezer: Adw.Squeezer = main_window_builder.get_object("media_control_squeezer")
-        self._media_controller_small: MediaControllerSmall = MediaControllerSmall()
-        self._media_controller_big: MediaControllerBig = MediaControllerBig()
-        self._media_control_squeezer.add(self._media_controller_big)
-        self._media_control_squeezer.add(self._media_controller_small)
+        self._media_control_box: Gtk.Box = main_window_builder.get_object("media_control_box")
+        self._media_control_box.append(self)
+
+        self.seek_bar = SeekBar()
+        self.seek_bar_container.append(self.seek_bar)
+
+        self.sleep_timer: SleepTimer = SleepTimer(self.timer_image)
+        self.playback_speed_button.set_popover(PlaybackSpeedPopover())
+        self.timer_button.set_popover(self.sleep_timer)
+
+        self._playback_control_view_model: PlaybackControlViewModel = inject.instance(PlaybackControlViewModel)
+        self._artwork_cache: ArtworkCache = inject.instance(ArtworkCache)
+        self._connect_view_model()
+        self._connect_widgets()
+
+        self._on_book_changed()
+        self._on_lock_ui_changed()
+        self._on_length_changed()
+        self._on_position_changed()
+        self._on_volume_changed()
+
+    def _connect_view_model(self):
+        self._playback_control_view_model.bind_to("book", self._on_book_changed)
+        self._playback_control_view_model.bind_to("playing", self._on_play_changed)
+        self._playback_control_view_model.bind_to("length", self._on_length_changed)
+        self._playback_control_view_model.bind_to("position", self._on_position_changed)
+        self._playback_control_view_model.bind_to("lock_ui", self._on_lock_ui_changed)
+        self._playback_control_view_model.bind_to("volume", self._on_volume_changed)
+
+    def _connect_widgets(self):
+        self.play_button.connect("clicked", self._play_clicked)
+        self.prev_button.connect("clicked", self._rewind_clicked)
+        self.next_button.connect("clicked", self._forward_clicked)
+        self.volume_button.connect("value-changed", self._on_volume_button_changed)
+        self.seek_bar.connect("position-changed", self._on_seek_bar_position_changed)
+
+        self._cover_img_gesture = Gtk.GestureClick()
+        self._cover_img_gesture.connect("pressed", self._cover_clicked)
+        self.cover_img.add_controller(self._cover_img_gesture)
+
+        self.cover_img.set_cursor(Gdk.Cursor.new_from_name("pointer"))
+
+    def _set_cover_image(self, book: Book):
+        pixbuf = self._artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), COVER_SIZE)
+        if pixbuf:
+            self.cover_img.set_from_pixbuf(pixbuf)
+        else:
+            self.cover_img.set_from_icon_name("book-open-variant-symbolic")
+            self.cover_img.props.pixel_size = COVER_SIZE
+
+    def _on_book_changed(self):
+        book = self._playback_control_view_model.book
+        if book:
+            visibility = True
+            self._set_book()
+        else:
+            visibility = False
+
+        self._show_media_information(visibility)
+
+    def _show_media_information(self, visibility):
+        self.title_label.set_visible(visibility)
+        self.subtitle_label.set_visible(visibility)
+        self.cover_img.set_visible(visibility)
+        self.seek_bar.visible = visibility
+
+    def _set_book(self):
+        book = self._playback_control_view_model.book
+
+        self._set_cover_image(book)
+        self.title_label.set_text(book.name)
+        self.title_label.set_tooltip_text(book.name)
+        self.subtitle_label.set_text(book.current_chapter.name)
+        self.subtitle_label.set_tooltip_text(book.current_chapter.name)
+
+    def _on_play_changed(self):
+        if self._playback_control_view_model.playing:
+            play_button_img = "pause-symbolic"
+        else:
+            play_button_img = "play-symbolic"
+
+        self.play_button.set_icon_name(play_button_img)
+
+    def _on_position_changed(self):
+        position = self._playback_control_view_model.position
+        if position is not None:
+            self.seek_bar.position = position
+
+    def _on_length_changed(self):
+        length = self._playback_control_view_model.length
+        if length:
+            self.seek_bar.length = length
+
+    def _on_lock_ui_changed(self):
+        sensitive = not self._playback_control_view_model.lock_ui
+        self.seek_bar.sensitive = sensitive
+        self.prev_button.set_sensitive(sensitive)
+        self.next_button.set_sensitive(sensitive)
+        self.play_button.set_sensitive(sensitive)
+        self.volume_button.set_sensitive(sensitive)
+        self.playback_speed_button.set_sensitive(sensitive)
+        self.timer_button.set_sensitive(sensitive)
+
+    def _on_volume_changed(self):
+        self.volume_button.set_value(self._playback_control_view_model.volume)
+
+    def _play_clicked(self, *_):
+        self._playback_control_view_model.play_pause()
+
+    def _rewind_clicked(self, *_):
+        self._playback_control_view_model.rewind()
+
+    def _forward_clicked(self, *_):
+        self._playback_control_view_model.forward()
+
+    def _cover_clicked(self, *_):
+        self._playback_control_view_model.open_book_detail()
+
+    def _on_volume_button_changed(self, _, volume):
+        self._playback_control_view_model.volume = volume
+
+    def _on_seek_bar_position_changed(self, _, position):
+        self._playback_control_view_model.position = position
