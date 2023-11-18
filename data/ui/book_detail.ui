@@ -366,8 +366,7 @@
                                         <child>
                                           <object class="GtkLabel" id="chapters_loading_text">
                                             <property name="halign">center</property>
-                                            <property name="label" translatable="true">Loading chapters, please wait...
-                                            </property>
+                                            <property name="label" translatable="true">Loading chapters, please wait...</property>
                                           </object>
                                         </child>
                                       </object>

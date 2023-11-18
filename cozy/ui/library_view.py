@@ -40,6 +40,7 @@ class LibraryView:
     def _get_ui_elements(self):
         self._filter_stack: Gtk.Stack = self._builder.get_object("sort_stack")
         self._main_stack: Gtk.Stack = self._builder.get_object("main_stack")
+        self._navigation_view: Adw.NavigationView = self._builder.get_object("navigation_view")
         self._split_view: Adw.OverlaySplitView = self._builder.get_object("split_view")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
@@ -49,7 +50,6 @@ class LibraryView:
 
     def _connect_ui_elements(self):
         self._filter_stack.connect("notify::visible-child", self._on_sort_stack_changed)
-        self._main_stack.connect("notify::visible-child", self._on_main_stack_changed)
         self._book_box.set_sort_func(self._view_model.display_book_sort)
         self._book_box.set_filter_func(self._view_model.display_book_filter)
 
@@ -64,7 +64,6 @@ class LibraryView:
 
     def _connect_view_model(self):
         self._view_model.bind_to("library_view_mode", self._on_library_view_mode_changed)
-        self._view_model.bind_to("library_page", self._on_library_page_changed)
         self._view_model.bind_to("authors", self.populate_author)
         self._view_model.bind_to("readers", self.populate_reader)
         self._view_model.bind_to("books", self.populate_book_box)
@@ -87,12 +86,6 @@ class LibraryView:
             view_mode = LibraryViewMode.READER
 
         self._view_model.library_view_mode = view_mode
-
-    def _on_main_stack_changed(self, widget, _):
-        page = widget.props.visible_child_name
-
-        if page != MAIN_BOOK_PAGE:
-            self._view_model.library_page = LibraryPage.NONE
 
     def populate_book_box(self):
         self._book_box.remove_all_children()
@@ -136,21 +129,12 @@ class LibraryView:
         self._main_stack.props.visible_child_name = main_view_page
         self._filter_stack.set_visible_child_name(visible_child_name)
         self._book_stack.set_visible_child_name(books_view_page)
+        self._navigation_view.pop_to_tag("main")
 
         if active_filter_box:
             self._apply_selected_filter(active_filter_box.get_selected_row())
 
         self._invalidate_filters()
-
-    def _on_library_page_changed(self):
-        page = self._view_model.library_page
-
-        if page == LibraryPage.FILTER:
-            #self._library_leaflet.set_visible_child_name("filter")
-            print("filter")
-        elif page == LibraryPage.BOOKS:
-            #self._library_leaflet.set_visible_child_name("books")
-            print("books")
 
     def _invalidate_filters(self):
         self._book_box.invalidate_filter()
@@ -165,7 +149,6 @@ class LibraryView:
 
     def _on_filter_row_activated(self, _, row):
         self._apply_selected_filter(row)
-        self._view_model.library_page = LibraryPage.BOOKS
 
         return True
 
@@ -180,7 +163,7 @@ class LibraryView:
 
     def _open_book_overview_clicked(self, _, book):
         self._view_model.open_book_detail(book)
-        self._view_model.library_page = LibraryPage.NONE
+
         return True
 
     def _on_book_removed(self, _, book):
