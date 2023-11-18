@@ -44,7 +44,7 @@ class Headerbar(Adw.Bin):
 
         self.progress_popover = ProgressPopover()
         self.progress_menu_button.set_popover(self.progress_popover)
-        self.progress_spinner = Gtk.Spinner() #TODO: build a wedge progress bar to use here
+        self.progress_spinner = Gtk.Spinner()  # TODO: build a wedge progress bar to use here
         self.progress_spinner.stop()
         self.progress_menu_button.set_child(self.progress_spinner)
 

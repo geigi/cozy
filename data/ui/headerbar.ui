@@ -39,6 +39,9 @@
             <property name="visible">False</property>
             <property name="can-focus">True</property>
             <property name="tooltip-text" translatable="true">Display background task progress</property>
+            <style>
+              <class name="flat"/>
+            </style>
           </object>
         </child>
       </object>
