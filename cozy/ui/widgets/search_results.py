@@ -106,11 +106,11 @@ class BookSearchResult(SearchResult):
 
         pixbuf = self._artwork_cache.get_cover_pixbuf(book, scale, BOOK_ICON_SIZE)
         if pixbuf:
-            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, scale, None)
-            img = Gtk.Image.new_from_surface(surface)
+            img = Gtk.Image.new_from_pixbuf(pixbuf)
         else:
             img = Gtk.Image.new_from_icon_name("book-open-variant-symbolic")
             img.props.pixel_size = BOOK_ICON_SIZE
+
         img.set_size_request(BOOK_ICON_SIZE, BOOK_ICON_SIZE)
 
         title_label = Gtk.Label()
