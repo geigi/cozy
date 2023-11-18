@@ -7,12 +7,12 @@ from cozy.ext import inject
 from cozy.ui.widgets.error_reporting import ErrorReporting
 from cozy.ui.widgets.storage_list_box_row import StorageListBoxRow
 
-gi.require_version('Gtk', '4.0')
-
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/preferences.ui')
 class PreferencesView(Adw.PreferencesWindow):
     __gtype_name__ = "PreferencesWindow"
+
+    main_window = inject.attr("MainWindow")
 
     _glib_settings: Gio.Settings = inject.attr(Gio.Settings)
     _view_model: SettingsViewModel = inject.attr(SettingsViewModel)
@@ -57,6 +57,8 @@ class PreferencesView(Adw.PreferencesWindow):
         self.remove_storage_button.connect("clicked", self._on_remove_storage_clicked)
         self.external_button_handle_id = self.external_storage_toggle_button.connect("clicked", self._on_external_clicked)
         self.default_storage_button.connect("clicked", self._on_default_storage_clicked)
+
+        self.set_transient_for(self.main_window.window)
 
         self._init_storage_box()
 

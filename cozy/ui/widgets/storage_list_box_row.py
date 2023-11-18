@@ -6,7 +6,7 @@ from cozy.model.storage import Storage
 from cozy.ext import inject
 from cozy.model.library import Library
 from cozy.model.settings import Settings
-from gi.repository import Gtk, GObject, Gio
+from gi.repository import Gtk, GObject, Gio, GLib
 
 log = logging.getLogger("settings")
 
@@ -15,6 +15,9 @@ class StorageListBoxRow(Gtk.ListBoxRow):
     """
     This class represents a listboxitem for a storage location.
     """
+
+    main_window = inject.attr("MainWindow")
+
     def __init__(self, model: Storage):
         self._model = model
 
@@ -24,10 +27,10 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         box.set_spacing(3)
         box.set_halign(Gtk.Align.FILL)
         box.set_valign(Gtk.Align.CENTER)
-        box.set_margin_start(5)
+        box.set_margin_start(6)
         box.set_margin_end(6)
-        box.set_margin_top(10)
-        box.set_margin_bottom(10)
+        box.set_margin_top(12)
+        box.set_margin_bottom(12)
 
         self.default_image = Gtk.Image()
         self.default_image.set_from_icon_name("emblem-default-symbolic")
@@ -57,8 +60,7 @@ class StorageListBoxRow(Gtk.ListBoxRow):
         self._set_drive_icon()
         self._set_default_icon()
 
-    def __on_folder_changed(self, chooser: Gtk.FileChooserNative, *_):
-        new_path = chooser.get_file().get_path()
+    def __on_folder_changed(self, new_path):
         self.emit("location-changed", new_path)
 
     def _set_drive_icon(self):
@@ -75,15 +77,23 @@ class StorageListBoxRow(Gtk.ListBoxRow):
     def _set_default_icon(self):
         self.default_image.set_visible(self._model.default)
 
-    def _on_location_chooser_clicked(self, *_):
-        file_chooser = Gtk.FileChooserNative()
-        file_chooser.set_action(Gtk.FileChooserAction.SELECT_FOLDER)
-        if self._model.path != "":
-            file = Gio.File.new_for_path(self._model.path)
-            file_chooser.set_current_folder(file)
+    def _on_location_chooser_clicked(self, *junk):
+        location_chooser = Gtk.FileDialog(title=_("Set Audiobooks Directory"))
 
-        file_chooser.connect("response", self.__on_folder_changed)
-        file_chooser.show()
+        if self._model.path != "":
+            folder = Gio.File.new_for_path(self._model.path)
+            location_chooser.set_initial_folder(folder)
+
+        location_chooser.select_folder(self.main_window.window, None, self._location_chooser_open_callback)
+
+    def _location_chooser_open_callback(self, dialog, result):
+        try:
+            file = dialog.select_folder_finish(result)
+        except GLib.GError:
+            pass
+        else:
+            if file is not None:
+                self.__on_folder_changed(file.get_path())
 
 GObject.signal_new('location-changed', StorageListBoxRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
                    (GObject.TYPE_PYOBJECT,))

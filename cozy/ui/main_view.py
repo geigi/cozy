@@ -281,10 +281,13 @@ class CozyUI(EventSender, metaclass=Singleton):
         location_chooser.select_folder(self.window, None, self._location_chooser_open_callback)
 
     def _location_chooser_open_callback(self, dialog, result):
-        # TODO: handle error
-        file = dialog.select_folder_finish(result)
-        if file is not None:
-            self._set_audiobook_path(file.get_path())
+        try:
+            file = dialog.select_folder_finish(result)
+        except GLib.GError:
+            pass
+        else:
+            if file is not None:
+                self._set_audiobook_path(file.get_path())
 
     def scan(self, _, __):
         thread = Thread(target=self._importer.scan, name="ScanMediaThread")
