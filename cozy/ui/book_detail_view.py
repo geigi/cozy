@@ -145,8 +145,10 @@ class BookDetailView(Gtk.Box):
         self._set_progress()
 
     def _open_book_overview(self):
-        #self._main_stack.set_visible_child_name("book_overview")
-        self._navigation_view.push_by_tag("book_overview")
+        if self._navigation_view.props.visible_page.props.tag == "book_overview":
+            self._navigation_view.pop_to_tag("book_overview")
+        else:
+            self._navigation_view.push_by_tag("book_overview")
         #self._toolbar_revealer.set_reveal_child(False)
 
     def _on_play_changed(self):
