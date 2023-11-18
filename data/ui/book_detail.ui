@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <requires lib="libadwaita" version="1.0"/>
   <template class="BookDetail" parent="GtkBox">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
+    <property name="can-focus">false</property>
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkScrolledWindow">
-            <property name="focusable">1</property>
+            <property name="focusable">true</property>
             <property name="valign">center</property>
-            <property name="vexpand">1</property>
+            <property name="vexpand">true</property>
             <property name="hscrollbar-policy">never</property>
-            <property name="propagate-natural-width">1</property>
-            <property name="propagate-natural-height">1</property>
+            <property name="propagate-natural-width">true</property>
+            <property name="propagate-natural-height">true</property>
             <property name="child">
               <object class="GtkViewport">
                 <property name="child">
                   <object class="GtkFlowBox" id="main_flow_box">
                     <property name="valign">center</property>
-                    <property name="margin-start">10</property>
-                    <property name="margin-end">10</property>
-                    <property name="margin-top">20</property>
-                    <property name="margin-bottom">20</property>
-                    <property name="hexpand">1</property>
-                    <property name="vexpand">1</property>
-                    <property name="column-spacing">10</property>
-                    <property name="row-spacing">10</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="hexpand">true</property>
+                    <property name="vexpand">true</property>
+                    <property name="column-spacing">12</property>
+                    <property name="row-spacing">12</property>
                     <property name="min-children-per-line">1</property>
                     <property name="max-children-per-line">2</property>
                     <property name="selection-mode">none</property>
@@ -38,8 +36,7 @@
                         <property name="valign">center</property>
                         <child>
                           <object class="AdwClamp">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
+                            <property name="can-focus">false</property>
                             <property name="maximum-size">250</property>
                             <property name="tightening-threshold">250</property>
                             <child>
@@ -62,7 +59,7 @@
                                     <property name="halign">start</property>
                                     <property name="valign">end</property>
                                     <property name="label">Book name</property>
-                                    <property name="wrap">1</property>
+                                    <property name="wrap">true</property>
                                     <property name="wrap-mode">word-char</property>
                                     <property name="ellipsize">end</property>
                                     <property name="max-width-chars">25</property>
@@ -82,7 +79,7 @@
                                     <property name="valign">start</property>
                                     <property name="margin-bottom">15</property>
                                     <property name="label">Book author</property>
-                                    <property name="wrap">1</property>
+                                    <property name="wrap">true</property>
                                     <property name="wrap-mode">word-char</property>
                                     <property name="ellipsize">end</property>
                                     <property name="max-width-chars">30</property>
@@ -116,14 +113,14 @@
                                           <object class="GtkLabel" id="download_label">
                                             <property name="margin-start">5</property>
                                             <property name="margin-end">4</property>
-                                            <property name="label" translatable="1">Download</property>
+                                            <property name="label" translatable="true">Download</property>
                                           </object>
                                         </child>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkSwitch" id="download_switch">
-                                        <property name="focusable">1</property>
+                                        <property name="focusable">true</property>
                                         <property name="halign">start</property>
                                         <property name="valign">center</property>
                                       </object>
@@ -135,20 +132,20 @@
                                     <property name="width-request">250</property>
                                     <property name="halign">center</property>
                                     <property name="valign">start</property>
-                                    <property name="show-text">1</property>
+                                    <property name="show-text">true</property>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkGrid">
                                     <property name="margin-bottom">20</property>
-                                    <property name="hexpand">1</property>
+                                    <property name="hexpand">true</property>
                                     <property name="row-spacing">4</property>
                                     <property name="column-spacing">20</property>
                                     <child>
                                       <object class="GtkLabel" id="remaining_text">
                                         <property name="halign">start</property>
-                                        <property name="hexpand">0</property>
-                                        <property name="label" translatable="1">Remaining</property>
+                                        <property name="hexpand">true</property>
+                                        <property name="label" translatable="true">Remaining</property>
                                         <style>
                                           <class name="dim-label"/>
                                         </style>
@@ -160,7 +157,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="remaining_label">
-                                        <property name="hexpand">1</property>
+                                        <property name="hexpand">true</property>
                                         <property name="label">label</property>
                                         <property name="xalign">0</property>
                                         <layout>
@@ -171,7 +168,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="total_label">
-                                        <property name="hexpand">1</property>
+                                        <property name="hexpand">true</property>
                                         <property name="label">label</property>
                                         <property name="xalign">0</property>
                                         <layout>
@@ -182,7 +179,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="last_played_label">
-                                        <property name="hexpand">1</property>
+                                        <property name="hexpand">true</property>
                                         <property name="label">label</property>
                                         <property name="xalign">0</property>
                                         <layout>
@@ -194,8 +191,7 @@
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="hexpand">0</property>
-                                        <property name="label" translatable="1">Total</property>
+                                        <property name="label" translatable="true">Total</property>
                                         <style>
                                           <class name="dim-label"/>
                                         </style>
@@ -208,8 +204,7 @@
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="hexpand">0</property>
-                                        <property name="label" translatable="1">Last played</property>
+                                        <property name="label" translatable="true">Last played</property>
                                         <style>
                                           <class name="dim-label"/>
                                         </style>
@@ -222,8 +217,7 @@
                                     <child>
                                       <object class="GtkLabel" id="published_text">
                                         <property name="halign">start</property>
-                                        <property name="hexpand">0</property>
-                                        <property name="label" translatable="1">Published</property>
+                                        <property name="label" translatable="true">Published</property>
                                         <style>
                                           <class name="dim-label"/>
                                         </style>
@@ -235,7 +229,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="published_label">
-                                        <property name="hexpand">1</property>
+                                        <property name="hexpand">true</property>
                                         <property name="label">label</property>
                                         <property name="xalign">0</property>
                                         <layout>
@@ -248,9 +242,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkBox" id="unavailable_box">
-                                    <property name="tooltip-text" translatable="1">Some or all files of this book cannot
-                                      be found.
-                                    </property>
+                                    <property name="tooltip-text" translatable="true">Some or all files of this book cannot be found.</property>
                                     <property name="halign">center</property>
                                     <property name="spacing">4</property>
                                     <child>
@@ -263,7 +255,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel">
-                                        <property name="label" translatable="1">unavailable</property>
+                                        <property name="label" translatable="true">unavailable</property>
                                         <style>
                                           <class name="unavailable_label"/>
                                         </style>
@@ -276,24 +268,23 @@
                                 </child>
                                 <child>
                                   <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">False</property>
+                                    <property name="can-focus">false</property>
                                     <property name="margin-top">20</property>
                                     <property name="orientation">vertical</property>
                                     <child>
                                       <object class="GtkButton" id="play_book_button">
-                                        <property name="focusable">1</property>
-                                        <property name="receives-default">1</property>
+                                        <property name="focusable">true</property>
+                                        <property name="receives-default">true</property>
                                         <property name="halign">center</property>
                                         <child>
                                           <object class="GtkImage" id="play_img">
-                                            <property name="focusable">1</property>
+                                            <property name="focusable">true</property>
                                             <property name="icon-name">play-symbolic</property>
                                           </object>
                                         </child>
                                         <style>
-                                          <class name="suggested-action"></class>
-                                          <class name="pill"></class>
+                                          <class name="suggested-action"/>
+                                          <class name="pill"/>
                                         </style>
                                       </object>
                                     </child>
@@ -307,12 +298,11 @@
                     </child>
                     <child>
                       <object class="GtkFlowBoxChild">
-                        <property name="hexpand">1</property>
-                        <property name="vexpand">1</property>
+                        <property name="hexpand">true</property>
+                        <property name="vexpand">true</property>
                         <child>
                           <object class="AdwClamp">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
+                            <property name="can-focus">false</property>
                             <property name="maximum-size">500</property>
                             <property name="tightening-threshold">350</property>
                             <child>
@@ -323,13 +313,13 @@
                                     <property name="title" translatable="0">page0</property>
                                     <property name="child">
                                       <object class="GtkScrolledWindow" id="book_overview_scroller">
-                                        <property name="focusable">1</property>
-                                        <property name="hexpand">1</property>
-                                        <property name="vexpand">1</property>
+                                        <property name="focusable">true</property>
+                                        <property name="hexpand">true</property>
+                                        <property name="vexpand">true</property>
                                         <property name="hscrollbar-policy">never</property>
                                         <property name="vscrollbar-policy">never</property>
-                                        <property name="propagate-natural-width">1</property>
-                                        <property name="propagate-natural-height">1</property>
+                                        <property name="propagate-natural-width">true</property>
+                                        <property name="propagate-natural-height">true</property>
                                         <property name="child">
                                           <object class="GtkViewport" id="track_list_container">
                                             <property name="child">
@@ -370,13 +360,13 @@
                                         <child>
                                           <object class="GtkSpinner">
                                             <property name="halign">center</property>
-                                            <property name="hexpand">1</property>
+                                            <property name="hexpand">true</property>
                                           </object>
                                         </child>
                                         <child>
                                           <object class="GtkLabel" id="chapters_loading_text">
                                             <property name="halign">center</property>
-                                            <property name="label" translatable="1">Loading chapters, please wait...
+                                            <property name="label" translatable="true">Loading chapters, please wait...
                                             </property>
                                           </object>
                                         </child>
@@ -400,3 +390,4 @@
     </child>
   </template>
 </interface>
+

@@ -9,7 +9,7 @@
     <property name="height-request">294</property>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 400sp</condition>
+        <condition>max-width: 500sp</condition>
         <setter object="library_mobile_view_switcher" property="reveal">true</setter>
       </object>
     </child>
@@ -136,13 +136,15 @@
                                                 <property name="hscroll-policy">minimum</property>
                                                 <property name="child">
                                                   <object class="GtkFlowBox" id="book_box">
-                                                    <property name="margin-top">10</property>
-                                                    <property name="margin-bottom">10</property>
+                                                    <property name="margin-top">6</property>
+                                                    <property name="margin-bottom">6</property>
+                                                    <property name="margin-start">6</property>
+                                                    <property name="margin-end">6</property>
                                                     <property name="hexpand">true</property>
                                                     <property name="vexpand">true</property>
                                                     <property name="homogeneous">true</property>
-                                                    <property name="column-spacing">10</property>
-                                                    <property name="row-spacing">5</property>
+                                                    <property name="column-spacing">6</property>
+                                                    <property name="row-spacing">3</property>
                                                     <property name="min-children-per-line">1</property>
                                                     <property name="max-children-per-line">10</property>
                                                     <property name="selection-mode">none</property>
