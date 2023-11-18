@@ -161,8 +161,9 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.app.add_action(self.play_pause_action)
         self.app.set_accels_for_action("app.play_pause", ["space"])
 
+        # NavigationView.pop-on-escape doesn't work in some cases, so this is a hack
         back_action = Gio.SimpleAction.new("back", None)
-        back_action.connect("activate", self.back)
+        back_action.connect("activate", lambda *_: self.navigation_view.pop())
         self.app.add_action(back_action)
         self.app.set_accels_for_action("app.back", ["Escape"])
 
@@ -292,9 +293,6 @@ class CozyUI(EventSender, metaclass=Singleton):
     def auto_import(self):
         if self.application_settings.autoscan:
             self.scan(None, None)
-
-    def back(self, action, parameter):
-        self.emit_event("open_view", OpenView.LIBRARY)
 
     def __on_hide_offline(self, action, value):
         """

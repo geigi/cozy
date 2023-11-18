@@ -125,9 +125,6 @@ class AppController(metaclass=Singleton):
         self.library_view_model.open_library()
         self.app_view_model.view = View.LIBRARY_FILTER
 
-    def navigate_back(self):
-        self.app_view_model.navigate_back()
-
     def _connect_popovers(self):
         self.headerbar.search_button.set_popover(self.search_view.popover)
 
@@ -140,8 +137,6 @@ class AppController(metaclass=Singleton):
             self.open_book(data)
         elif event == OpenView.LIBRARY:
             self.open_library()
-        elif event == OpenView.BACK:
-            self.navigate_back()
 
     def _on_library_view_event(self, event: str, _):
         if event == "work-done":

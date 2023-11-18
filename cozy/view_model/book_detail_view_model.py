@@ -217,6 +217,3 @@ class BookDetailViewModel(Observable, EventSender):
     def _on_app_setting_changed(self, event, _):
         if event == "swap-author-reader":
             self._notify("book")
-
-    def navigate_back(self):
-        self.emit_event(OpenView.BACK)
