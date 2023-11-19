@@ -42,11 +42,10 @@ class SearchView:
 
         self.entry.connect("search-changed", self.__on_search_changed)
 
-        if Gtk.get_minor_version() > 20:
-            self.scroller.set_max_content_width(400)
-            self.scroller.set_max_content_height(600)
-            self.scroller.set_propagate_natural_height(True)
-            self.scroller.set_propagate_natural_width(True)
+        self.scroller.set_max_content_width(400)
+        self.scroller.set_max_content_height(600)
+        self.scroller.set_propagate_natural_height(True)
+        self.scroller.set_propagate_natural_width(True)
 
         self.search_thread = Thread(target=self.search, name="SearchThread")
         self.search_thread_stop = threading.Event()
@@ -100,12 +99,6 @@ class SearchView:
             main_context.invoke_full(
                 GLib.PRIORITY_DEFAULT, self.stack.set_visible_child_name, "nothing")
 
-    def close(self, object=None):
-        if Gtk.get_minor_version() < 22:
-            self.popover.hide()
-        else:
-            self.popover.popdown()
-
     def __on_search_changed(self, sender):
         self.search_thread_stop.set()
 
@@ -148,7 +141,7 @@ class SearchView:
 
     def _on_search_open_changed(self):
         if self.view_model.search_open == False:
-            self.close()
+            self.popover.popdown()
 
     def __on_book_search_finished(self, books):
         if len(books) > 0:

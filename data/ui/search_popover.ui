@@ -60,8 +60,8 @@
                     <property name="margin_top">5</property>
                     <property name="vexpand">1</property>
                     <property name="window_placement">bottom-left</property>
-                    <property name="min_content_width">400</property>
-                    <property name="min_content_height">300</property>
+                    <property name="min_content_width">300</property>
+                    <property name="min_content_height">200</property>
                     <property name="child">
                       <object class="GtkViewport">
                         <property name="child">
