@@ -58,6 +58,12 @@ class Headerbar(Adw.Bin):
         self.split_view.connect("notify::show-sidebar", self._on_sidebar_toggle)
         self.show_sidebar_button.connect("notify::active", self._on_sidebar_toggle)
         self.mobile_view_switcher.connect("notify::reveal", self._on_mobile_view)
+        self.sort_stack.connect("notify::visible-child", self._on_sort_stack_changed)
+
+    def _on_sort_stack_changed(self, widget, _):
+        page = widget.props.visible_child_name
+
+        self.show_sidebar_button.set_visible(page != "recent")
 
     def _on_mobile_view(self, widget, param):
         on_mobile = widget.get_property(param.name)

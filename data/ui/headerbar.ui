@@ -11,6 +11,7 @@
         </child>
         <child type="start">
           <object class="GtkToggleButton" id="show_sidebar_button">
+            <property name="visible">false</property>
             <property name="icon-name">sidebar-show-symbolic</property>
             <property name="tooltip-text" translatable="true">Toggle Filter Sidebar</property>
           </object>
