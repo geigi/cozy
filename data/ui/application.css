@@ -52,8 +52,7 @@
 }
 
 .book_detail_art {
-    box-shadow: 0 0.5em 0.6em rgba(0, 0, 0, 0.25);
-    border-radius: 0.5rem;
+  border-radius: 12px;
 }
 
 .chapter_element {
@@ -89,7 +88,7 @@
 }
 
 .bold {
-  font-weight: bold;
+  font-weight: 900;
 }
 
 .semi-bold {
@@ -104,10 +103,7 @@
   font-family: monospace;
 }
 
-.book_detail_cover {
-    border-radius: 5px;
-}
-
 .transparent_bg {
     background: transparent;
 }
+

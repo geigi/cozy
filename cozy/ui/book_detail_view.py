@@ -12,15 +12,14 @@ from cozy.model.chapter import Chapter
 from cozy.report import reporter
 from cozy.ui.chapter_element import ChapterElement
 from cozy.ui.disk_element import DiskElement
-from cozy.ui.widgets.album_art import AlbumArt
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
 
-from gi.repository import Gtk, GLib, Adw
+from gi.repository import Adw, GLib, Gtk
 
 log = logging.getLogger("BookDetailView")
 
 
-ALBUM_ART_SIZE = 250
+ALBUM_ART_SIZE = 256
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/book_detail.ui')
@@ -46,7 +45,8 @@ class BookDetailView(Gtk.Box):
     download_image: Gtk.Image = Gtk.Template.Child()
     download_switch: Gtk.Switch = Gtk.Template.Child()
 
-    album_art_container: Adw.Clamp = Gtk.Template.Child()
+    album_art: Gtk.Picture = Gtk.Template.Child()
+    album_art_container: Gtk.Box = Gtk.Template.Child()
 
     unavailable_box: Gtk.Box = Gtk.Template.Child()
 
@@ -64,19 +64,11 @@ class BookDetailView(Gtk.Box):
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
-        #self._main_stack: Gtk.Stack = main_window_builder.get_object("main_stack")
-        # self._toolbar_revealer: Gtk.Revealer = main_window_builder.get_object("toolbar_revealer")
-        #self._main_stack.add_named(self, "book_overview")
-
         self._navigation_view: Adw.NavigationView = main_window_builder.get_object("navigation_view")
         self._book_details_container: Adw.ToolbarView = main_window_builder.get_object("book_details_container")
         self._book_details_container.set_content(self)
 
         self.book_overview_scroller.props.propagate_natural_height = True
-
-        self.art = Gtk.Picture()
-        self.art.set_valign(Gtk.Align.END)
-        self.album_art_container.set_child(self.art)
 
         self._chapters_event: Event = Event()
         self._chapters_thread: Thread = None
@@ -272,8 +264,8 @@ class BookDetailView(Gtk.Box):
         pixbuf = self._artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), ALBUM_ART_SIZE)
         if pixbuf:
             self.album_art_container.set_visible(True)
-            self.art.set_pixbuf(pixbuf)
-            self.art.set_overflow(True)
+            self.album_art.set_pixbuf(pixbuf)
+            self.album_art.set_overflow(True)
         else:
             self.album_art_container.set_visible(False)
 
