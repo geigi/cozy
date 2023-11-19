@@ -25,7 +25,7 @@
                   <object class="AdwNavigationView" id="navigation_view">
                     <child>
                       <object class="AdwNavigationPage">
-                        <property name="title">Books</property>
+                        <property name="title" translatable="true">Library</property>
                         <property name="tag">main</property>
                         <child>
                           <object class="AdwToolbarView" id="header_container">
@@ -192,11 +192,7 @@
                         <property name="title">Book title</property>
                         <property name="tag">book_overview</property>
                         <property name="child">
-                          <object class="AdwToolbarView" id="book_details_container">
-                            <child type="top">
-                              <object class="AdwHeaderBar"></object>
-                            </child>
-                          </object>
+                          <object class="AdwToolbarView" id="book_details_container"/>
                         </property>
                       </object>
                     </child>

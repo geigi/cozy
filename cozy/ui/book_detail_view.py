@@ -68,6 +68,11 @@ class BookDetailView(Gtk.Box):
         self._book_details_container: Adw.ToolbarView = main_window_builder.get_object("book_details_container")
         self._book_details_container.set_content(self)
 
+        headerbar = Adw.HeaderBar()
+        self.header_title = Adw.WindowTitle()
+        headerbar.set_title_widget(self.header_title)
+        self._book_details_container.add_top_bar(headerbar)
+
         self.book_overview_scroller.props.propagate_natural_height = True
 
         self._chapters_event: Event = Event()
@@ -121,6 +126,9 @@ class BookDetailView(Gtk.Box):
 
         self.book_label.set_text(book.name)
         self.author_label.set_text(book.author)
+        self.header_title.set_title(book.name)
+        self.header_title.set_subtitle(book.author)
+
         self.last_played_label.set_text(self._view_model.last_played_text)
 
         self._set_cover_image(book)
