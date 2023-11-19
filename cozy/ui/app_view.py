@@ -47,7 +47,7 @@ class AppView:
         page = self._main_stack.props.visible_child_name
 
         if page == LIBRARY:
-            if self._navigation_view.props.visible_page == BOOK_DETAIL:
+            if self._navigation_view.props.visible_page.props.tag == BOOK_DETAIL:
                 self._view_model.view = View.BOOK_DETAIL
             else:
                 self._view_model.view = View.LIBRARY
