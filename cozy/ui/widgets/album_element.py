@@ -39,7 +39,6 @@ class AlbumElement(Gtk.Box):
             self.album_art_image.set_from_pixbuf(pixbuf)
             self.album_art_image.set_size_request(ALBUM_ART_SIZE, ALBUM_ART_SIZE)
         else:
-            # TODO: fix placeholder
             self.album_art_image.set_from_icon_name("book-open-variant-symbolic")
             self.album_art_image.props.pixel_size = ALBUM_ART_SIZE
 
