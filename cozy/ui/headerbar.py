@@ -49,7 +49,6 @@ class Headerbar(Adw.Bin):
         self.progress_menu_button.set_child(self.progress_spinner)
 
         self._headerbar_view_model: HeaderbarViewModel = inject.instance(HeaderbarViewModel)
-        self._init_app_menu()
         self._connect_view_model()
         self._connect_widgets()
 
@@ -64,11 +63,6 @@ class Headerbar(Adw.Bin):
     def _connect_widgets(self):
         self._split_view.connect("notify::show-sidebar", self._on_sidebar_toggle)
         self.show_sidebar_button.connect("notify::active", self._on_sidebar_toggle)
-
-    def _init_app_menu(self):
-        self.menu_builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/titlebar_menu.ui")
-        menu = self.menu_builder.get_object("titlebar_menu")
-        self.menu_button.set_menu_model(menu)
 
     def _on_sidebar_toggle(self, widget, param):
         show_sidebar = widget.get_property(param.name)

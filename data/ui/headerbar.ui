@@ -18,6 +18,7 @@
         <child type="end">
           <object class="GtkMenuButton" id="menu_button">
             <property name="tooltip-text" translatable="true">Options</property>
+            <property name="menu-model">primary_menu</property>
             <property name="icon-name">open-menu-symbolic</property>
             <accessibility>
               <property name="label" translatable="true">Open the options popover</property>
@@ -47,5 +48,35 @@
       </object>
     </child>
   </template>
+    <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="action">app.scan</attribute>
+        <attribute name="label" translatable="yes">_Scan Library</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="action">app.hide_offline</attribute>
+        <attribute name="label" translatable="yes">_Hide unavailable books</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="action">app.prefs</attribute>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.about</attribute>
+        <attribute name="label" translatable="yes">_About</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="action">app.quit</attribute>
+        <attribute name="label" translatable="yes">_Quit</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>
 
