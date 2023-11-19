@@ -53,11 +53,6 @@ class HeaderbarViewModel(Observable, EventSender):
         return self._work_message
 
     @property
-    def can_navigate_back(self) -> bool:
-        return self._view == View.BOOK_DETAIL or \
-               self._view == View.LIBRARY_BOOKS
-
-    @property
     def show_library_filter(self) -> bool:
         return self._view == View.LIBRARY or \
                self._view == View.LIBRARY_BOOKS or \
@@ -67,7 +62,6 @@ class HeaderbarViewModel(Observable, EventSender):
 
     def set_view(self, value: View):
         self._view = value
-        self._notify("can_navigate_back")
         self._notify("show_library_filter")
         self._notify("lock_ui")
 

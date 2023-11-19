@@ -56,7 +56,6 @@ class Headerbar(Adw.Bin):
         self._headerbar_view_model.bind_to("state", self._on_state_changed)
         self._headerbar_view_model.bind_to("work_progress", self._on_work_progress_changed)
         self._headerbar_view_model.bind_to("work_message", self._on_work_message_changed)
-        self._headerbar_view_model.bind_to("can_navigate_back", self._on_can_navigate_back_changed)
         self._headerbar_view_model.bind_to("show_library_filter", self._on_show_library_filter_changed)
         self._headerbar_view_model.bind_to("lock_ui", self._on_lock_ui_changed)
 
@@ -91,9 +90,6 @@ class Headerbar(Adw.Bin):
 
     def _on_work_message_changed(self):
         self.progress_popover.set_message(self._headerbar_view_model.work_message)
-
-    def _on_can_navigate_back_changed(self):
-        pass
 
     def _on_show_library_filter_changed(self):
         self.category_toolbar.set_visible(self._headerbar_view_model.show_library_filter)
