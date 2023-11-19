@@ -6,8 +6,7 @@ from cozy.ext import inject
 from cozy.ui.widgets.progress_popover import ProgressPopover
 from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarState
 
-gi.require_version('Gtk', '4.0')
-from gi.repository import Gtk, Adw
+from gi.repository import Adw, Gtk
 
 log = logging.getLogger("Headerbar")
 
@@ -25,28 +24,25 @@ class Headerbar(Adw.Bin):
     menu_button: Gtk.MenuButton = Gtk.Template.Child()
 
     progress_menu_button: Gtk.MenuButton = Gtk.Template.Child()
+    progress_spinner: Gtk.Spinner = Gtk.Template.Child()
 
-    category_toolbar: Adw.ViewSwitcherTitle = Gtk.Template.Child()
+    view_switcher: Adw.ViewSwitcher = Gtk.Template.Child()
 
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
-        self._library_mobile_view_switcher: Adw.ViewSwitcherBar = main_window_builder.get_object(
-            "library_mobile_view_switcher")
-        self._header_container: Adw.ToolbarView = main_window_builder.get_object("header_container")
-        self._header_container.add_top_bar(self)
+        self.header_container: Adw.ToolbarView = main_window_builder.get_object("header_container")
+        self.header_container.add_top_bar(self)
 
-        self._split_view: Adw.OverlaySplitView = main_window_builder.get_object("split_view")
+        self.mobile_view_switcher: Adw.ViewSwitcherBar = main_window_builder.get_object("mobile_view_switcher")
+        self.split_view: Adw.OverlaySplitView = main_window_builder.get_object("split_view")
 
-        self._sort_stack: Gtk.Stack = main_window_builder.get_object("sort_stack")
-        self.category_toolbar.set_stack(self._sort_stack)
-        self._library_mobile_view_switcher.set_stack(self._sort_stack)
+        self.sort_stack: Adw.ViewStack = main_window_builder.get_object("sort_stack")
+        self.view_switcher.set_stack(self.sort_stack)
+        self.mobile_view_switcher.set_stack(self.sort_stack)
 
         self.progress_popover = ProgressPopover()
         self.progress_menu_button.set_popover(self.progress_popover)
-        self.progress_spinner = Gtk.Spinner()  # TODO: build a wedge progress bar to use here
-        self.progress_spinner.stop()
-        self.progress_menu_button.set_child(self.progress_spinner)
 
         self._headerbar_view_model: HeaderbarViewModel = inject.instance(HeaderbarViewModel)
         self._connect_view_model()
@@ -56,52 +52,34 @@ class Headerbar(Adw.Bin):
         self._headerbar_view_model.bind_to("state", self._on_state_changed)
         self._headerbar_view_model.bind_to("work_progress", self._on_work_progress_changed)
         self._headerbar_view_model.bind_to("work_message", self._on_work_message_changed)
-        self._headerbar_view_model.bind_to("show_library_filter", self._on_show_library_filter_changed)
         self._headerbar_view_model.bind_to("lock_ui", self._on_lock_ui_changed)
 
     def _connect_widgets(self):
-        self._split_view.connect("notify::show-sidebar", self._on_sidebar_toggle)
+        self.split_view.connect("notify::show-sidebar", self._on_sidebar_toggle)
         self.show_sidebar_button.connect("notify::active", self._on_sidebar_toggle)
 
     def _on_sidebar_toggle(self, widget, param):
         show_sidebar = widget.get_property(param.name)
 
         if widget is self.show_sidebar_button:
-            self._split_view.props.show_sidebar = show_sidebar
-        elif widget is self._split_view:
-            self.show_sidebar_button.props.active = show_sidebar
+            self.split_view.set_show_sidebar(show_sidebar)
+        elif widget is self.split_view:
+            self.show_sidebar_button.set_active(show_sidebar)
 
     def _on_state_changed(self):
         if self._headerbar_view_model.state == HeaderBarState.PLAYING:
-            progress_visible = False
+            self.progress_menu_button.set_visible(False)
             self.progress_popover.set_progress(0)
-        else:
-            progress_visible = True
-
-        self.progress_menu_button.set_visible(progress_visible)
-        if progress_visible:
-            self.progress_spinner.start()
-        else:
             self.progress_spinner.stop()
+        else:
+            self.progress_menu_button.set_visible(True)
+            self.progress_spinner.start()
 
     def _on_work_progress_changed(self):
-        progress = self._headerbar_view_model.work_progress
-        self.progress_popover.set_progress(progress)
+        self.progress_popover.set_progress(self._headerbar_view_model.work_progress)
 
     def _on_work_message_changed(self):
         self.progress_popover.set_message(self._headerbar_view_model.work_message)
-
-    def _on_show_library_filter_changed(self):
-        self.category_toolbar.set_visible(self._headerbar_view_model.show_library_filter)
-        #self._reveal_mobile_library_filter(self.category_toolbar.get_title_visible())
-
-    def _on_title_visible_changed(self, widget, param):
-        visible = widget.get_property(param.name)
-        self._reveal_mobile_library_filter(visible)
-
-    def _reveal_mobile_library_filter(self, reveal: bool):
-        reveal_bar = reveal and self._headerbar_view_model.show_library_filter
-        self._library_mobile_view_switcher.set_reveal(reveal_bar)
 
     def _on_lock_ui_changed(self):
         self.search_button.set_sensitive(not self._headerbar_view_model.lock_ui)

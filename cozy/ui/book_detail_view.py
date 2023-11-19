@@ -84,7 +84,6 @@ class BookDetailView(Gtk.Box):
 
         self._connect_view_model()
         self._connect_widgets()
-        self._add_mouse_button_accel()
 
     def _connect_view_model(self):
         self._view_model.bind_to("book", self._on_book_changed)
@@ -105,13 +104,6 @@ class BookDetailView(Gtk.Box):
         self.download_switch.connect("state-set", self._download_switch_changed)
         # TODO: Use property notification for GtkWindow:default-width and GtkWindow:default-height
         #self.main_flow_box.connect("size-allocate", self._main_flow_box_size_changed)
-
-    def _add_mouse_button_accel(self):
-        self.gesture = Gtk.GestureClick()
-        self.gesture.set_button(0)
-        self.gesture.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
-        self.gesture.connect('pressed', self._on_mouse_event)
-        self.add_controller(self.gesture)
 
     def _on_book_changed(self):
         if not self._view_model.book:
@@ -331,12 +323,4 @@ class BookDetailView(Gtk.Box):
 
     def _play_book_clicked(self, _):
         self._view_model.play_book()
-
-    def _on_mouse_event(self, gesture: Gtk.GestureClick, _, __, ___):
-        btn = gesture.get_current_button()
-        if btn == 8:
-            self._view_model.navigate_back()
-            return True
-
-        return False
 

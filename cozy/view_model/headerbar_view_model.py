@@ -52,17 +52,8 @@ class HeaderbarViewModel(Observable, EventSender):
     def work_message(self) -> str:
         return self._work_message
 
-    @property
-    def show_library_filter(self) -> bool:
-        return self._view == View.LIBRARY or \
-               self._view == View.LIBRARY_BOOKS or \
-               self._view == View.LIBRARY_FILTER or \
-               self._view == View.BOOK_DETAIL or \
-               self._view == View.NO_MEDIA
-
     def set_view(self, value: View):
         self._view = value
-        self._notify("show_library_filter")
         self._notify("lock_ui")
 
     def _start_working(self, message: str):
@@ -114,5 +105,3 @@ class HeaderbarViewModel(Observable, EventSender):
         elif event == "finished":
             self._stop_working()
 
-    def navigate_back(self):
-        self.emit_event(OpenView.BACK)

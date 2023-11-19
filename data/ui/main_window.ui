@@ -10,7 +10,7 @@
     <child>
       <object class="AdwBreakpoint">
         <condition>max-width: 500sp</condition>
-        <setter object="library_mobile_view_switcher" property="reveal">true</setter>
+        <setter object="mobile_view_switcher" property="reveal">true</setter>
       </object>
     </child>
     <property name="content">
@@ -214,7 +214,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="AdwViewSwitcherBar" id="library_mobile_view_switcher">
+                      <object class="AdwViewSwitcherBar" id="mobile_view_switcher">
                         <property name="reveal">false</property>
                         <property name="can-focus">false</property>
                         <property name="hexpand">true</property>

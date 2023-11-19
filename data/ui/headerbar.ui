@@ -5,7 +5,7 @@
     <child>
       <object class="AdwHeaderBar" id="headerbar">
         <child type="title">
-          <object class="AdwViewSwitcher" id="category_toolbar">
+          <object class="AdwViewSwitcher" id="view_switcher">
             <property name="policy">wide</property>
           </object>
         </child>
@@ -40,6 +40,9 @@
             <property name="visible">False</property>
             <property name="can-focus">True</property>
             <property name="tooltip-text" translatable="true">Display background task progress</property>
+            <child>
+              <object class="GtkSpinner" id="progress_spinner"></object>
+            </child>
             <style>
               <class name="flat"/>
             </style>
