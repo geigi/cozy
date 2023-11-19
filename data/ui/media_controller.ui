@@ -4,7 +4,7 @@
   <template class="MediaController" parent="AdwBreakpointBin">
     <property name="hexpand">true</property>
     <property name="width-request">350</property>
-    <property name="height-request">48</property>
+    <property name="height-request">52</property>
     <child>
       <object class="AdwBreakpoint">
         <condition>max-width: 750px</condition>
@@ -35,9 +35,10 @@
             <child>
               <object class="GtkBox" id="book_info_box">
                 <property name="spacing">12</property>
+                <property name="height-request">0</property>
                 <child>
                   <object class="GtkImage" id="cover_img">
-                    <property name="pixel-size">48</property>
+                    <property name="pixel-size">52</property>
                     <property name="icon-name">end</property>
                   </object>
                 </child>
@@ -123,13 +124,20 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="play_button">
+                    <property name="width-request">42</property>
+                    <property name="height-request">42</property>
                     <property name="sensitive">false</property>
                     <property name="focusable">true</property>
                     <property name="receives-default">true</property>
                     <property name="tooltip-text" translatable="true">Start playback</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
-                    <property name="icon-name">play-symbolic</property>
+                    <child>
+                      <object class="GtkImage" id="play_icon">
+                        <property name="icon-name">play-symbolic</property>
+                        <property name="pixel-size">20</property>
+                      </object>
+                    </child>
                     <accessibility>
                       <property name="label" translatable="true">Start or pause the playback</property>
                     </accessibility>

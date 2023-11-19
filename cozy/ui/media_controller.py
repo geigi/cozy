@@ -36,6 +36,7 @@ class MediaController(Adw.BreakpointBin):
     timer_button: Gtk.MenuButton = Gtk.Template.Child()
 
     timer_image: Gtk.Image = Gtk.Template.Child()
+    play_icon: Gtk.Stack = Gtk.Template.Child()
 
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
@@ -117,11 +118,11 @@ class MediaController(Adw.BreakpointBin):
 
     def _on_play_changed(self):
         if self._playback_control_view_model.playing:
-            play_button_img = "pause-symbolic"
+            self.play_icon.set_from_icon_name("pause-symbolic")
+            self.play_icon.set_pixel_size(16)
         else:
-            play_button_img = "play-symbolic"
-
-        self.play_button.set_icon_name(play_button_img)
+            self.play_icon.set_from_icon_name("play-symbolic")
+            self.play_icon.set_pixel_size(20)
 
     def _on_position_changed(self):
         position = self._playback_control_view_model.position
