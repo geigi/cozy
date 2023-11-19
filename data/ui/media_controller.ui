@@ -47,7 +47,7 @@
                     <property name="tooltip-text" translatable="true">Currently playing</property>
                     <property name="valign">center</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">3</property>
+                    <property name="spacing">2</property>
                     <child>
                       <object class="GtkLabel" id="title_label">
                         <property name="halign">start</property>
@@ -64,8 +64,7 @@
                           <property name="label" translatable="true">Title of currently playing book</property>
                         </accessibility>
                         <style>
-                          <class name="title"/>
-                          <class name="no_padding"/>
+                          <class name="heading"/>
                         </style>
                       </object>
                     </child>
@@ -81,10 +80,6 @@
                         <accessibility>
                           <property name="label" translatable="true">Title of the currently playing part</property>
                         </accessibility>
-                        <style>
-                          <class name="subtitle"/>
-                          <class name="no_padding"/>
-                        </style>
                       </object>
                     </child>
                   </object>
