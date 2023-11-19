@@ -1,3 +1,4 @@
+import functools
 from typing import Optional
 
 from gi.repository import Gtk, Adw
@@ -168,9 +169,9 @@ class LibraryView:
 
     def _on_book_removed(self, _, book):
         if self._view_model.book_files_exist(book):
-            dialog = DeleteBookView(self._on_book_removed_clicked, book)
+            DeleteBookView(functools.partial(self._on_book_removed_clicked, book)).present()
 
-    def _on_book_removed_clicked(self, _, response, book):
+    def _on_book_removed_clicked(self, book, _, response):
         if response != "delete":
             return
 

@@ -283,7 +283,7 @@ def update_db():
             _restore_db(backup_dir_name)
 
             from cozy.ui.db_migration_failed_view import DBMigrationFailedView
-            dialog = DBMigrationFailedView()
+            DBMigrationFailedView().present()
             exit(1)
 
     if version < 10:
@@ -297,7 +297,7 @@ def update_db():
             _restore_db(backup_dir_name)
 
             from cozy.ui.db_migration_failed_view import DBMigrationFailedView
-            dialog = DBMigrationFailedView()
+            DBMigrationFailedView().present()
             exit(1)
 
 

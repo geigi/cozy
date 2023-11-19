@@ -24,7 +24,6 @@ class DBMigrationFailedView(Adw.MessageDialog):
         self.set_response_appearance("help", Adw.ResponseAppearance.SUGGESTED)
 
         self.connect("response", self.get_help)
-        self.present()
 
     def get_help(self, *_, response):
         if response == "help":
