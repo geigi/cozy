@@ -57,6 +57,12 @@ class Headerbar(Adw.Bin):
     def _connect_widgets(self):
         self.split_view.connect("notify::show-sidebar", self._on_sidebar_toggle)
         self.show_sidebar_button.connect("notify::active", self._on_sidebar_toggle)
+        self.mobile_view_switcher.connect("notify::reveal", self._on_mobile_view)
+
+    def _on_mobile_view(self, widget, param):
+        on_mobile = widget.get_property(param.name)
+
+        self.view_switcher.set_visible(not on_mobile)
 
     def _on_sidebar_toggle(self, widget, param):
         show_sidebar = widget.get_property(param.name)

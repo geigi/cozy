@@ -16,7 +16,7 @@
     </child>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 500px</condition>
+        <condition>max-width: 550px</condition>
         <setter object="title_box" property="visible">false</setter>
         <setter object="seek_bar_container" property="visible">false</setter>
         <setter object="volume_button" property="visible">false</setter>

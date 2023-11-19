@@ -9,7 +9,7 @@
     <property name="height-request">294</property>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 500sp</condition>
+        <condition>max-width: 550sp</condition>
         <setter object="mobile_view_switcher" property="reveal">true</setter>
       </object>
     </child>
