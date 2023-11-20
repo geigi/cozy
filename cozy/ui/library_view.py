@@ -169,9 +169,9 @@ class LibraryView:
 
     def _on_book_removed(self, _, book):
         if self._view_model.book_files_exist(book):
-            DeleteBookView(functools.partial(self._on_book_removed_clicked, book)).present()
+            DeleteBookView(self._on_book_removed_clicked, book).present()
 
-    def _on_book_removed_clicked(self, book, _, response):
+    def _on_book_removed_clicked(self, _, response, book):
         if response != "delete":
             return
 
