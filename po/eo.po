@@ -4,11 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Cleiton Floss <cleitonfloss@gmail.com>, 2021
-# Gustavo Costa <xfgusta@gmail.com>, 2021
-# Julian Geywitz <github@geigi.de>, 2021
-# Rafael Fontenelle <rffontenelle@gmail.com>, 2021
-# Marcio Led, 2022
+# Alex Mauer <hawke@hawkesnest.net>, 2022
 # 
 #, fuzzy
 msgid ""
@@ -17,222 +13,215 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-09 20:31+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Marcio Led, 2022\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/geigi/teams/78138/pt_BR/)\n"
+"Last-Translator: Alex Mauer <hawke@hawkesnest.net>, 2022\n"
+"Language-Team: Esperanto (https://www.transifex.com/geigi/teams/78138/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Language: eo\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cozy/application.py:106
 msgid "Audiobooks"
-msgstr "Audiolivros"
+msgstr "Sonlibroj"
 
 #: cozy/control/offline_cache.py:197
 msgid "Copying"
-msgstr "Copiando"
+msgstr "Kopiante"
 
 #: cozy/media/files.py:69
 msgid "Cannot copy: Audiobook directory is read only"
-msgstr "Não foi possível copiar: O diretório de audiolivros é somente leitura"
+msgstr "Ne povas kopii: Sonlibra dosierujo estas nurlega."
 
 #: cozy/media/files.py:71
 msgid "Cannot copy: Disk is full"
-msgstr "Não foi possível copiar: O disco está cheio"
+msgstr "Ne povas kopii: Disko estas plena"
 
 #: cozy/media/files.py:73 cozy/media/files.py:89
 msgid "Cannot copy: Permission denied"
-msgstr "Não foi possível copiar: Permissão negada"
+msgstr "Ne povas kopii: Mankas permeso"
 
 #: cozy/media/importer.py:121
 msgid "Error while importing new files"
-msgstr "Erro ao importar novos arquivos"
+msgstr "Eraro dum importo de novaj dosieroj"
 
 #: cozy/model/track.py:38
 msgid "Chapter"
-msgstr "Capítulo"
+msgstr "Ĉapitro"
 
 #: cozy/tools.py:92 cozy/tools.py:96
 #, python-brace-format
 msgid "{hours} hour"
 msgid_plural "{hours} hours"
-msgstr[0] "{hours} hora"
-msgstr[1] "{hours} horas"
-msgstr[2] "{hours} horas"
+msgstr[0] "{hours} horo"
+msgstr[1] "{hours} horoj"
 
 #: cozy/tools.py:94 cozy/tools.py:98
 #, python-brace-format
 msgid "{minutes} minute"
 msgid_plural "{minutes} minutes"
 msgstr[0] "{minutes} minuto"
-msgstr[1] "{minutes} minutos"
-msgstr[2] "{minutes} minutos"
+msgstr[1] "{minutes} minutoj"
 
 #: cozy/tools.py:100
 #, python-brace-format
 msgid "{seconds} second"
 msgid_plural "{seconds} seconds"
-msgstr[0] "{seconds} segundo"
-msgstr[1] "{seconds} segundos"
-msgstr[2] "{seconds} segundos"
+msgstr[0] "{seconds} sekundo"
+msgstr[1] "{seconds} sekundoj"
 
 #: cozy/tools.py:102
 msgid "finished"
-msgstr "finalizado"
+msgstr "finita"
 
 #: cozy/tools.py:126
 msgid "never"
-msgstr "nunca"
+msgstr "neniam"
 
 #: cozy/tools.py:128
 msgid "today"
-msgstr "hoje"
+msgstr "hodiaŭ"
 
 #: cozy/tools.py:130
 msgid "yesterday"
-msgstr "ontem"
+msgstr "hieraŭ"
 
 #: cozy/tools.py:132
 #, python-format
 msgid "%s days ago"
-msgstr "%s dias atrás"
+msgstr "1 %s tagoj antaŭ"
 
 #: cozy/tools.py:134
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
-msgstr[0] "{weeks} semana atrás"
-msgstr[1] "{weeks} semanas atrás"
-msgstr[2] "{weeks} semanas atrás"
+msgstr[0] "{weeks} semajno antaŭ"
+msgstr[1] "{weeks} semajnoj antaŭ"
 
 #: cozy/tools.py:136
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
-msgstr[0] "{months} mês atrás"
-msgstr[1] "{months} meses atrás"
-msgstr[2] "{months} meses atrás"
+msgstr[0] "{months} monato antaŭ"
+msgstr[1] "{months} monatoj antaŭ"
 
 #: cozy/tools.py:138
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
-msgstr[0] "{years} ano atrás"
-msgstr[1] "{years} anos atrás"
-msgstr[2] "{years} anos atrás"
+msgstr[0] "{years} jaro antaŭ"
+msgstr[1] "{years} jaroj antaŭ"
 
 #: cozy/ui/book_detail_view.py:313
 msgid "Downloaded"
-msgstr "Baixado"
+msgstr "Elŝutita"
 
 #: cozy/ui/book_detail_view.py:316 data/ui/book_detail.ui:152
 msgid "Download"
-msgstr "Baixar"
+msgstr "Elŝuti"
 
 #: cozy/ui/chapter_element.py:27
 msgid "Play this part"
-msgstr "Reproduzir este trecho"
+msgstr "Ludigu ĉi tiun parton"
 
 #: cozy/ui/disk_element.py:27
 msgid "Disc"
-msgstr "Disco"
+msgstr "Disko"
 
 #: cozy/ui/file_not_found_dialog.py:56
 msgid "All files"
-msgstr "Todos os arquivos"
+msgstr "Ĉiuj dosieroj"
 
 #: cozy/ui/main_view.py:301 data/ui/main_window.ui:412
 msgid "Set Audiobooks Directory"
-msgstr "Definir diretório dos audiolivros"
+msgstr "Agordu Dosierujon por Sonlibroj"
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
 msgid "{storage} is offline."
-msgstr "{storage} está desconectado."
+msgstr "{storage} estas nekonektita"
 
 #: cozy/ui/widgets/book_element.py:52
 msgid "Mark as read"
-msgstr "Marcar como lido"
+msgstr "Marku kiel legita"
 
 #: cozy/ui/widgets/book_element.py:55
 msgid "Open in file browser"
-msgstr "Abrir no navegador de arquivos"
+msgstr "Malfermu en dosieresplorilo"
 
 #: cozy/ui/widgets/book_element.py:58
 msgid "Remove from library"
-msgstr "Remover da biblioteca"
+msgstr "Forigu el biblioteko"
 
 #: cozy/ui/widgets/error_reporting.py:12
 msgid "Disabled"
-msgstr "Desabilitado"
+msgstr "Malŝaltita"
 
 #: cozy/ui/widgets/error_reporting.py:13
 msgid "Basic error reporting"
-msgstr "Relatório básico de erros"
+msgstr "Baza raportaĵo de eraroj"
 
 #: cozy/ui/widgets/error_reporting.py:14
 msgid "Detailed error reporting"
-msgstr "Relatório detalhado de erros"
+msgstr "detala raportaĵo de eraroj"
 
 #: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:240
 msgid "Detailed error reporting with import errors"
-msgstr "Relatório de erro detalhado com erros de importação"
+msgstr "Detala raportaĵo de eraro kun importaĵo eraroj"
 
 #: cozy/ui/widgets/error_reporting.py:19
 msgid "No error or crash reporting."
-msgstr "Nenhum relatório de erro ou falha."
+msgstr "Nenio raportaĝo de eraroj kaj paneoj"
 
 #: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:259
 msgid "The following information will be sent in case of an error or crash:"
-msgstr ""
-"As seguintes informações serão enviadas em caso de erro ou travamento:"
+msgstr "La sekva informo estas sendota por la okazo de eraro aŭ paneo:"
 
 #: cozy/ui/widgets/error_reporting.py:25
 msgid "Which type of error occurred"
-msgstr "Que tipo de erro ocorreu"
+msgstr "Kiun tipon de eraro okazis"
 
 #: cozy/ui/widgets/error_reporting.py:26
 msgid "Line of code where an error occurred"
-msgstr "Linha de código onde ocorreu um erro"
+msgstr "Vico de kodo kie eraro okazis"
 
 #: cozy/ui/widgets/error_reporting.py:27
 msgid "Cozy's version"
-msgstr "Versão do Cozy"
+msgstr "Versio de Kozi"
 
 #: cozy/ui/widgets/error_reporting.py:28
 msgid "Linux distribution"
-msgstr "Distribuição Linux"
+msgstr "Linuksa distribuo"
 
 #: cozy/ui/widgets/error_reporting.py:29
 msgid "Desktop environment"
-msgstr "Ambiente de desktop"
+msgstr "Labortabla ĉirkaŭaĵo"
 
 #: cozy/ui/widgets/error_reporting.py:30
 msgid "Media type of files that Cozy couldn't import"
-msgstr "Tipo de mídia de arquivos que o Cozy não conseguiu importar"
+msgstr "Mediuma tipo de dosieron ke Cozy no povis importi"
 
 #: cozy/ui/widgets/filter_list_box.py:20
 #: cozy/view_model/library_view_model.py:54
 #: cozy/view_model/library_view_model.py:160
 msgid "All"
-msgstr "Todos"
+msgstr "Ĉiuj"
 
 #: cozy/ui/widgets/filter_list_box.py:21
 msgid "Display all books"
-msgstr "Exibir todos os livros"
+msgstr "Montru ĉiujn librojn"
 
 #: cozy/ui/widgets/search_results.py:73
 msgid "Jump to author "
-msgstr "Ir para o autor"
+msgstr "Saltu al verkisto"
 
 #: cozy/ui/widgets/search_results.py:76
 msgid "Jump to reader "
-msgstr "Ir para o narrador"
+msgstr "Saltu al rakontisto"
 
 #: cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
-msgstr "Reproduzir este livro"
+msgstr "Ludigu ĉi tuin libron"
 
 #: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
 msgid "min"
@@ -240,28 +229,28 @@ msgstr "min"
 
 #: cozy/ui/widgets/sleep_timer.py:65
 msgid "Off"
-msgstr "Desativado"
+msgstr "malŝalta"
 
 #: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:380
 msgid "External drive"
-msgstr "Dispositivo externo"
+msgstr "ekstera disko"
 
 #: cozy/ui/widgets/storage_list_box_row.py:73
 msgid "Internal drive"
-msgstr "Dispositivo interno"
+msgstr "Interna disko"
 
 #: cozy/view_model/headerbar_view_model.py:91
 msgid "Refreshing audio book collection"
-msgstr "Atualizando coleção de audiolivros"
+msgstr "Aktualigante sonlibraron"
 
 #: cozy/view_model/headerbar_view_model.py:100
 #: cozy/view_model/headerbar_view_model.py:116
 msgid "Copying new files…"
-msgstr "Copiando novos arquivos…"
+msgstr "Kopiante novajn dosierojn"
 
 #: cozy/view_model/headerbar_view_model.py:107
 msgid "Changing audio book location…"
-msgstr "Alterando localização do audiolivro…"
+msgstr "Ŝanĝante sonlibran lokon…"
 
 #: data/ui/about.ui:16
 msgid "GitHub"
@@ -269,51 +258,51 @@ msgstr "GitHub"
 
 #: data/ui/album_element.ui:104
 msgid "Play"
-msgstr "Reproduzir"
+msgstr "Ludigu"
 
 #: data/ui/book_detail.ui:219
 msgid "Remaining"
-msgstr "Restante"
+msgstr "Restanta"
 
 #: data/ui/book_detail.ui:274
 msgid "Total"
-msgstr "Total"
+msgstr "Tuto"
 
 #: data/ui/book_detail.ui:290
 msgid "Last played"
-msgstr "Última reprodução"
+msgstr "Laste ludado"
 
 #: data/ui/book_detail.ui:306
 msgid "Published"
-msgstr "Publicadas"
+msgstr "Eldonita"
 
 #: data/ui/book_detail.ui:341
 msgid "Some or all files of this book cannot be found."
-msgstr "Alguns ou todos os arquivos deste livro não podem ser encontrados."
+msgstr "Kelkaj aŭ ĉiuj dosierojn de ĉi tiu libro ne troveblas"
 
 #: data/ui/book_detail.ui:364
 msgid "unavailable"
-msgstr "indisponível"
+msgstr "malhavebla"
 
 #: data/ui/book_detail.ui:533
 msgid "Loading chapters, please wait..."
-msgstr "Carregando capítulos, por favor aguarde..."
+msgstr "Ŝarĝante ĉapitrojn, bonvolu atendi…"
 
 #: data/ui/book_element.ui:36
 msgid "Open book overview"
-msgstr "Visão geral do livro"
+msgstr "Malfermu libran resumo"
 
 #: data/ui/db_migration_failed.ui:31
 msgid "Close Cozy"
-msgstr "Fechar Cozy"
+msgstr "Fermu Cozy"
 
 #: data/ui/db_migration_failed.ui:47
 msgid "Receive help on GitHub"
-msgstr "Conseguir ajuda no Github"
+msgstr "Ricevi helpon sur GitHub"
 
 #: data/ui/db_migration_failed.ui:108
 msgid "An error occured while updating the database"
-msgstr "Ocorreu um erro ao atualizar o banco de dados"
+msgstr "Eraro okazis atkualigante la datenaro"
 
 #: data/ui/db_migration_failed.ui:129
 msgid ""
@@ -322,30 +311,30 @@ msgid ""
 "Until this issue is resolved please use version 0.9.5 of Cozy.\n"
 "You can help resolve this problem by reporting an issue on GitHub."
 msgstr ""
-"Durante uma atualização do banco de dados, ocorreu um erro e o Cozy não será capaz de inicializar.\n"
-"Um backup do banco de dados foi criado antes da atualização e foi restaurado agora.\n"
-"Até que esse problema seja resolvido, use a versão 0.9.5 do Cozy.\n"
-"Você pode ajudar a resolver esse problema relatando-o no GitHub."
+"Dum akulaligo de datenaro, eraro okazis kaj Cozy ne povos starti.\n"
+"Sekurkopio de la dataro estis kreita antaŭ la aktualigo kaj nun estas refarita.\n"
+"Ĝis ĉi tiu problemo estas ĝustita, bonvolu uzi versio 0.9.5 de Cozy.\n"
+"Vi povas helpi ĝustigi ĉi tiun problemon per reparti problemon sur GitHub."
 
 #: data/ui/delete_book_dialog.ui:31 data/ui/file_not_found.ui:19
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Nuligu"
 
 #: data/ui/delete_book_dialog.ui:45
 msgid "Delete Audiobook"
-msgstr "Excluir audiolivro"
+msgstr "Forigi Sonlibron"
 
 #: data/ui/delete_book_dialog.ui:105
 msgid "Are you sure you want to delete the selected audiobook?"
-msgstr "Tem certeza de que deseja excluir o audiolivro selecionado?"
+msgstr "Ĉu vi certas ke vi volas forigi la elektitan sonlibron?"
 
 #: data/ui/delete_book_dialog.ui:126
 msgid "The audiobook will be removed from your disk and from Cozy's library."
-msgstr "O audiolivro será removido do seu disco e da biblioteca do Cozy."
+msgstr "La sonlibro estos forigita el via disko kaj el la biblioteko de Cozy"
 
 #: data/ui/error_reporting.ui:29 data/ui/preferences.ui:458
 msgid "User feedback"
-msgstr "Feedback do usuário"
+msgstr "Uzanta rimarko"
 
 #: data/ui/error_reporting.ui:98
 msgctxt "Error and crash reporting dialog"
@@ -353,8 +342,8 @@ msgid ""
 "You can help improve Cozy by contributing information in case of errors and "
 "crashes. "
 msgstr ""
-"Você pode ajudar a melhorar o Cozy, contribuindo com informações em caso de "
-"erros e falhas."
+"Vi povas helpi plibonigi Cozy per kontribui informo okaze de eraroj kaj "
+"paneoj"
 
 #: data/ui/error_reporting.ui:112
 msgctxt "Error and crash reporting dialog"
@@ -363,66 +352,64 @@ msgid ""
 "never collect personal data, files you import or any information that could "
 "identify you."
 msgstr ""
-"Contribuir com essas informações é opcional e totalmente anônimo. Nunca "
-"coletaremos dados pessoais, arquivos importados ou qualquer informação que "
-"possa identificá-lo."
+"Kontribui ĉi tiun informo estas laŭvola kaj tute senrekona. Ni neniam "
+"kolektos personan dataon, doseriojn ke vi importas, nek ia informo ke povus "
+"identigi vin."
 
 #: data/ui/error_reporting.ui:127
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
-"Cozy é um código aberto e o código-fonte do feedback do usuário pode ser "
-"inspecionado aqui:"
+"Cozy estas malfermitakoda kaj la uzanta rimarko estas ekzamenebla ĉi tie"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
-msgstr "Localizar"
+msgstr "Trovu"
 
 #: data/ui/file_not_found.ui:86
 msgid "File not found"
-msgstr "Arquivo não encontrado"
+msgstr "Dosiero ne trovita"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr ""
-"Este arquivo não pôde ser encontrado. Você quer localizá-lo manualmente?"
+msgstr "Ĉi tiun doserio ne estas trovigebla. Ĉu vi volas loki ĝin permane?"
 
 #: data/ui/headerbar.ui:56
 msgid "Display background task progress"
-msgstr "Exibir o progresso de tarefa em plano de fundo"
+msgstr "Montri progreson de fontasko"
 
 #: data/ui/headerbar.ui:70
 msgid "Search your library"
-msgstr "Buscar na sua biblioteca"
+msgstr "Serĉi vian bibliotekon"
 
 #: data/ui/headerbar.ui:80
 msgid "Search menu button"
-msgstr "Botão de menu da busca"
+msgstr "Serĉi menuan butonon"
 
 #: data/ui/headerbar.ui:81
 msgid "Open the search popover"
-msgstr "Abrir o popover da busca"
+msgstr "Malfermu ŝprucserĉilon"
 
 #: data/ui/headerbar.ui:96
 msgid "Options"
-msgstr "Opções"
+msgstr "Opcioj"
 
 #: data/ui/headerbar.ui:107
 msgid "Options menu button"
-msgstr "Botão de menu das opções"
+msgstr "Opcioj menuo butonon"
 
 #: data/ui/headerbar.ui:108
 msgid "Open the options popover"
-msgstr "Abrir o popover das opções"
+msgstr "Malfermu agordoj ŝprucfenestron"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
-msgstr "Ok"
+msgstr "Okej"
 
 #: data/ui/import_failed.ui:81
 msgid "Some files could not be imported"
-msgstr "Alguns arquivos não puderam ser importados"
+msgstr "Kelkaj dosieroj no estas importebla"
 
 #: data/ui/import_failed.ui:134
 msgid ""
@@ -432,322 +419,318 @@ msgid ""
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
-"Isso pode ser devido a várias razões:\n"
-"- O formato do áudio não é suportado\n"
-"- O caminho do arquivo contém caracteres fora do padrão UTF-8\n"
-"- O(s) arquivo(s) não é/são válido(s)\n"
-"- O(s) arquivo(s) está/estão corrompido(s)"
+"Ĉi tiu povas havi plurajn kaŭzoj:\n"
+"- La aŭdio formo ne estas subtenita.\n"
+"- La vojprefikso aŭ dosiernomo enhavas ne-utf8 signojn\n"
+"- La dosiero(j) estas eksvalidaj aŭdiaj doserioj\n"
+"- La dosiero(j) estas koruptaj"
 
 #: data/ui/main_window.ui:68
 msgid "Recent"
-msgstr "Recente"
+msgstr "Freŝa"
 
 #: data/ui/main_window.ui:90
 msgid "List of authors"
-msgstr "Lista de autores"
+msgstr "Listo de verkistoj"
 
 #: data/ui/main_window.ui:106 data/ui/main_window.ui:250
 #: data/ui/search_popover.ui:107
 msgid "Author"
-msgstr "Autor"
+msgstr "Verkisto"
 
 #: data/ui/main_window.ui:128
 msgid "List of readers"
-msgstr "Lista de narradores"
+msgstr "Listo de rakontistoj"
 
 #: data/ui/main_window.ui:144 data/ui/search_popover.ui:201
 msgid "Reader"
-msgstr "Narrador"
+msgstr "Rakontisto"
 
 #: data/ui/main_window.ui:189
 msgid "List of books"
-msgstr "Lista de livros"
+msgstr "Listo de libroj"
 
 #: data/ui/main_window.ui:222
 msgid ""
 "Start exploring your library by switching to the Author or Reader view."
 msgstr ""
-"Comece a explorar sua biblioteca mudando para a visualização Autor ou "
-"Narrador."
+"Komenci esplori vian bibliotekon per elekti la Verkisto aŭ Rakontisto vidon"
 
 #: data/ui/main_window.ui:280
 msgid "Stay tuned while Cozy is preparing your library…"
-msgstr "Fique ligado enquanto Cozy prepara sua biblioteca..."
+msgstr "Bonvolu atendi dum Cozy pretigas vian bibliotekon"
 
 #: data/ui/main_window.ui:334
 msgid "Import your Audiobooks"
-msgstr "Importe seus audiolivros"
+msgstr "Importi viajn Sonlibrojn"
 
 #: data/ui/main_window.ui:353
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy automaticamente importa seus audiolivros em um diretório - sua "
-"biblioteca"
+"Cozy aŭtomate importas viajn sonlibrojn en unu doseriujo - via biblioteko"
 
 #: data/ui/main_window.ui:385
 msgid "Drag & Drop"
-msgstr "Arrastar & soltar"
+msgstr "Ŝovmeti"
 
 #: data/ui/main_window.ui:387
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr ""
-"Arraste seus audiolivros para o Cozy e eles serão importados automaticamente"
+msgstr "Ŝovi vian sonlibrojn en Cozy, kaj ili automate importiĝas"
 
 #: data/ui/main_window.ui:414
 msgid "Load audiobooks from a directory, network drive or an external disk"
-msgstr ""
-"Carregue audiolivros de um diretório, unidade de rede ou disco externo"
+msgstr "Ŝarĝi sonlibrojn el dosierujo, retdisko, aŭ ekstera disko"
 
 #: data/ui/main_window.ui:417
 msgid "Select"
-msgstr "Selecionar"
+msgstr "Elektu"
 
 #: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
 #: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:70
 msgid "Rewind"
-msgstr "Retroceder"
+msgstr "Rekurigu"
 
 #: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
 #: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:77
 msgid "Rewind button"
-msgstr "Botão de retroceder"
+msgstr "Rekuriga klavo"
 
 #: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
 #: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:78
 msgid "Rewind playback"
-msgstr "Retroceder reprodução"
+msgstr "Rekurigu reproduktado"
 
 #: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
 #: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:100
 msgid "Start playback"
-msgstr "Iniciar reprodução"
+msgstr "Ekreproduktu"
 
 #: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
 #: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:107
 msgid "Play/Pause Button"
-msgstr "Botão de reproduzir/pausa"
+msgstr "Ludiga/Paŭziga Klavo"
 
 #: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
 #: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:108
 msgid "Start or pause the playback"
-msgstr "Iniciar ou pausar a reprodução"
+msgstr "Eku aŭ paŭzu la reproduktado"
 
 #: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
 #: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:131
 msgid "Forward"
-msgstr "Avançar"
+msgstr "Antaŭen"
 
 #: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
 #: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:138
 msgid "Forward button"
-msgstr "Botão de avançar"
+msgstr "Antaŭen klavo"
 
 #: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
 #: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:139
 msgid "Forward Playback"
-msgstr "Avançar reprodução"
+msgstr "Antaŭa Reproduktado"
 
 #: data/ui/media_controller.ui:175 data/ui/media_controller_big.ui:76
 msgid "Currently playing"
-msgstr "Atualmente reproduzindo"
+msgstr "Aktuale ludanta"
 
 #: data/ui/media_controller.ui:190 data/ui/media_controller_big.ui:97
 msgid "Booktitle"
-msgstr "Título do livro"
+msgstr "Libra-titolo"
 
 #: data/ui/media_controller.ui:191 data/ui/media_controller_big.ui:98
 msgid "Title of currently playing book"
-msgstr "Título do livro atualmente em reprodução"
+msgstr "Titolo de aktuale ludanta libro"
 
 #: data/ui/media_controller.ui:217 data/ui/media_controller_big.ui:126
 msgid "Part name"
-msgstr "Nome do trecho"
+msgstr "Partnomo"
 
 #: data/ui/media_controller.ui:218 data/ui/media_controller_big.ui:127
 msgid "Title of the currently playing part"
-msgstr "Título do trecho atualmente em reprodução"
+msgstr "Titolo de la aktuale ludanta parto"
 
 #: data/ui/media_controller.ui:256 data/ui/seek_bar.ui:20
 msgid "Elapsed time"
-msgstr "Tempo passado"
+msgstr "Pasinta tempo"
 
 #: data/ui/media_controller.ui:264 data/ui/seek_bar.ui:28
 msgid "Time elapsed"
-msgstr "Tempo passado"
+msgstr "Tempo pasinta"
 
 #: data/ui/media_controller.ui:265 data/ui/seek_bar.ui:29
 msgid "Elapsed time of current part"
-msgstr "Tempo passado do trecho atual"
+msgstr "Pasinta tempo de aktuala parto"
 
 #: data/ui/media_controller.ui:281 data/ui/seek_bar.ui:45
 msgid "Jump to position in current chapter"
-msgstr "Pular para a posição no capítulo atual"
+msgstr "Saltu al loko en aktuala ĉapitro"
 
 #: data/ui/media_controller.ui:290 data/ui/seek_bar.ui:56
 msgid "Position slider"
-msgstr "Deslize de posição"
+msgstr "Loko ŝovilo"
 
 #: data/ui/media_controller.ui:291 data/ui/seek_bar.ui:57
 msgid "Position of the current part in seconds"
-msgstr "Posição do trecho atual em segundos"
+msgstr "Loko de la aktuala parto en sekundoj"
 
 #: data/ui/media_controller.ui:310 data/ui/seek_bar.ui:76
 msgid "Remaining time"
-msgstr "Tempo restante"
+msgstr "Restanta tempo"
 
 #: data/ui/media_controller.ui:317 data/ui/seek_bar.ui:83
 msgid "Time remaining"
-msgstr "Tempo restante"
+msgstr "Tempo restanta"
 
 #: data/ui/media_controller.ui:318 data/ui/seek_bar.ui:84
 msgid "Remaining time of current part"
-msgstr "Tempo restante do trecho atual"
+msgstr "Restanta tempo de aktuala parto"
 
 #: data/ui/media_controller.ui:350 data/ui/media_controller_big.ui:324
 msgid "Volume control"
-msgstr "Controle de volume"
+msgstr "laŭtoregilo"
 
 #: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
 #: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:175
 msgid "Playback speed"
-msgstr "Velocidade da reprodução"
+msgstr "Rapideco de reproduktado"
 
 #: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
 msgid "Sleep timer"
-msgstr "Temporizador"
+msgstr "Dormtempigilo"
 
 #: data/ui/media_controller.ui:418 data/ui/media_controller_big.ui:404
 msgid "Timer menu button"
-msgstr "Botão de menu do temporizador"
+msgstr "Tempigila menuo klavo"
 
 #: data/ui/media_controller.ui:419 data/ui/media_controller_big.ui:405
 msgid "Open the sleep timer popover"
-msgstr "Abrir o popover do temporizador"
+msgstr "Malfermu dormtempigilan ŝprucfenestron"
 
 #: data/ui/media_controller_big.ui:53
 msgid "Open book"
-msgstr "Abrir livro"
+msgstr "Malfermu libron"
 
 #: data/ui/preferences.ui:55
 msgid "General"
-msgstr "Geral"
+msgstr "Ĝenerala"
 
 #: data/ui/preferences.ui:60
 msgid "Appearance"
-msgstr "Aparência"
+msgstr "Aspekto"
 
 #: data/ui/preferences.ui:83
 msgid "Tags"
-msgstr "Etiquetas"
+msgstr "Etikedoj"
 
 #: data/ui/preferences.ui:90
 msgid "Activate if author and reader are displayed the wrong way"
-msgstr "Ative caso autor e narrador aparecem de maneira errada"
+msgstr "Aktivigi se verkisto kaj rakontisto estas malĝuste montrita"
 
 #: data/ui/preferences.ui:107
 msgid "Playback"
-msgstr "Reprodução"
+msgstr "Reproduktado"
 
 #: data/ui/preferences.ui:114
 msgid "Rewind 30 seconds of the current book when starting Cozy"
-msgstr "Voltar 30 segundos do livro atual ao iniciar o Cozy"
+msgstr "Rekurigu 30 sekundojn de la aktuala libro dum startado de Cozy"
 
 #: data/ui/preferences.ui:172
 msgid "Sleep Timer"
-msgstr "Soneca"
+msgstr "Dormtempigilo"
 
 #: data/ui/preferences.ui:218
 msgid "Storage"
-msgstr "Armazenamento"
+msgstr "Memoro"
 
 #: data/ui/preferences.ui:223
 msgid "Artwork"
-msgstr "Arte da capa"
+msgstr "Artaĵo"
 
 #: data/ui/preferences.ui:230
 msgid "Always use images (cover.jpg, *.png, …) when available"
-msgstr "Sempre usar imagens (capa.jpg, *.png, ...) quando disponíveis"
+msgstr "Ĉiam uzi bildoj (cover.jpg, *.png, …) kam disponebla"
 
 #: data/ui/preferences.ui:247 data/ui/preferences.ui:253
 msgid "Storage locations"
-msgstr "Locais de armazenamento"
+msgstr "Memora lokoj"
 
 #: data/ui/preferences.ui:312
 msgid "Add location"
-msgstr "Adicionar um local"
+msgstr "Aldoni loko"
 
 #: data/ui/preferences.ui:338
 msgid "Remove location"
-msgstr "Remover um local"
+msgstr "Forigi lokon"
 
 #: data/ui/preferences.ui:376
 msgid "Toggle this storage location to be internal/external."
-msgstr "Alternar este local de armazenamento para ser interno/externo."
+msgstr "Baskuli ĉi tiun memora loko laŭ interna/ekstera"
 
 #: data/ui/preferences.ui:405
 msgid "Set as default storage location for new audiobooks"
-msgstr "Definir como local de armazenamento padrão para novos audiolivros"
+msgstr "Agordi kiel defaŭlta loko por novaj sonlibroj"
 
 #: data/ui/preferences.ui:409
 msgid "Set as default"
-msgstr "Definir como padrão"
+msgstr "Agordi kiel defaŭlto"
 
 #: data/ui/preferences.ui:453
 msgid "Feedback"
-msgstr "Feedback"
+msgstr "Remarkoj"
 
 #: data/ui/preferences.ui:463
 msgid "User Feedback"
-msgstr "Feedback do usuário"
+msgstr "Uzanta remarkoj"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
-msgstr "Busca"
+msgstr "Serĉi"
 
 #: data/ui/search_popover.ui:36
 msgid "Search box"
-msgstr "Caixa de busca"
+msgstr "Serĉa tajpulo"
 
 #: data/ui/search_popover.ui:37
 msgid "Search your audiobook library"
-msgstr "Buscar na sua biblioteca de audiolivros"
+msgstr "Serĉi vian sonlibran bibliotekon"
 
 #: data/ui/search_popover.ui:67
 msgid "Which book are you looking for?"
-msgstr "Qual livro você está procurando?"
+msgstr "Kiun libron ve serĉas?"
 
 #: data/ui/search_popover.ui:154
 msgid "Book"
-msgstr "Livro"
+msgstr "Libro"
 
 #: data/ui/search_popover.ui:248
 msgid "Part"
-msgstr "Trecho"
+msgstr "Parto"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
-msgstr "Nada encontrado :("
+msgstr "Neniu trovita :("
 
 #: data/ui/timer_popover.ui:37
 msgid "Timer duration"
-msgstr "Duração do temporizador"
+msgstr "Daŭro de tempigilo"
 
 #: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
-msgstr "Deslize do temporizador"
+msgstr "Tempigila daŭro ŝovilo"
 
 #: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
-msgstr "Definir a duração do temporizador em minutos"
+msgstr "Agordu dormtempigilo daŭro laŭ minutoj"
 
 #: data/ui/timer_popover.ui:116
 msgid "Stop after current chapter"
-msgstr "Parar depois do capítulo atual"
+msgstr "Haltu post kiam aktuala ĉapitro"
 
 #: data/ui/timer_popover.ui:164
 msgid "Enable system power control"
-msgstr "Habilitar controle de energia do sistema"
+msgstr "Ŝalti sistema elektroregilo"
 
 #: data/ui/timer_popover.ui:201
 msgid ""
@@ -755,74 +738,74 @@ msgid ""
 "\"shutdown\" will attempt to turn your system off (also known as power off)\n"
 "\"suspend\" will attempt to suspend your system (also known as sleep)."
 msgstr ""
-"Tipo de ação quando o temporizador termina.\n"
-"\"shutdown\" tentará desligar o seu sistema (também conhecido como power off)\n"
-"\"suspend\" tentará suspender seu sistema (também conhecido como hibernação)."
+"Tip de ago kiam la tempigilo finas.\n"
+"“Malŝalti” provos malŝalti vian sistemon\n"
+"“Halteti” provos halteti vian sistemon."
 
 #: data/ui/timer_popover.ui:205
 msgid ""
 "System power action\n"
 "to perform"
 msgstr ""
-"Ação de energia do\n"
-"sistema para executar"
+"Sistema elektra ago\n"
+"fari"
 
 #: data/ui/timer_popover.ui:221
 msgid "suspend"
-msgstr "suspender"
+msgstr "halteti"
 
 #: data/ui/timer_popover.ui:237
 msgid "shutdown"
-msgstr "desligar"
+msgstr "malŝalti"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Library"
-msgstr "_Procurar na biblioteca"
+msgstr "_Skani Bibliotekon"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
-msgstr "_Ocultar livros indisponíveis"
+msgstr "_Kaŝi malhaveblajn librojn"
 
 #: data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
-msgstr "_Preferências"
+msgstr "_Agordoj"
 
 #: data/ui/titlebar_menu.ui:25
 msgid "_Help"
-msgstr "_Ajuda"
+msgstr "_Helpo"
 
 #: data/ui/titlebar_menu.ui:29
 msgid "_About"
-msgstr "S_obre"
+msgstr "_Pri"
 
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
-msgstr "_Sair"
+msgstr "Ĉesi"
 
 #: data/ui/welcome.ui:29
 msgid "Welcome!"
-msgstr "Seja bem-vindo!"
+msgstr "Bonvenu!"
 
 #: data/ui/welcome.ui:46
 msgid "Add your audiobooks and let's get cozy."
-msgstr "Adicione seus audiolivros e aconchegue-se com o Cozy."
+msgstr "Aldonu viajn sonlibrojn kaj ni komfortiĝu."
 
 #: data/ui/whats_new.ui:9
 msgid "Whats new?"
-msgstr "O que há de novo?"
+msgstr "Kio estas nova?"
 
 #: data/ui/whats_new.ui:27
 msgid "Continue"
-msgstr "Continuar"
+msgstr "Daŭri"
 
 #: data/ui/whats_new_importer.ui:17 data/ui/whats_new_library.ui:17
 #: data/ui/whats_new_m4b.ui:17 data/ui/whats_new_m4b_chapter.ui:17
 msgid "What's new in Cozy"
-msgstr "O que há de novo no Cozy"
+msgstr "Kio estas nova en Cozy"
 
 #: data/ui/whats_new_importer.ui:52
 msgid "A completely rewritten and far more reliable media importer."
-msgstr "Um importador de mídia totalmente reescrito e muito mais confiável."
+msgstr "Tute reskribita kaj multe pli fidinda importilo por medioj"
 
 #: data/ui/whats_new_importer.ui:77
 msgid ""
@@ -830,33 +813,30 @@ msgid ""
 "files onto Cozy or use the application menu in the titlebar to rescan your "
 "audiobook directories!"
 msgstr ""
-"Você passou pela situação de ter arquivos de áudio que não puderam ser "
-"importados? Arraste e solte esses arquivos no Cozy ou use o menu de "
-"aplicativos na barra de título para varrer novamente os diretórios de seus "
-"audiolivros!"
+"Ĉi vi spertis sondosierojn kiu ne estis importeblaj?  Ŝovmetu tiujn "
+"dosierojn sur Cozy aŭ uzu la aplikaĵa menuo en la titola breto por reskani "
+"viajn sonlibrajn dosierujojn!"
 
 #: data/ui/whats_new_importer.ui:92
 msgid "Supported media files currently are mp3, m4a, flac, ogg, opus and wav."
 msgstr ""
-"Os arquivos de mídia suportados atualmente são mp3, m4a, flac, ogg, opus e "
-"wav."
+"Subtenita aŭdvidea dosieroj aktuale estas mp3, m4a, flac, ogg, opus and wav."
 
 #: data/ui/whats_new_importer.ui:107
 msgid "More to come in a later update."
-msgstr "Mais para vir em uma atualização futura."
+msgstr "Pli venonta en malantaŭa ĝisdatigo."
 
 #: data/ui/whats_new_library.ui:52
 msgid "An important change in library management"
-msgstr "Uma alteração importante no gerenciador de biblioteca."
+msgstr "Grava ŝanĝo en biblioteka agordado"
 
 #: data/ui/whats_new_library.ui:77
 msgid ""
 "Previously every file which was imported in your library but couldn't be "
 "found anymore was removed from the library during a scan."
 msgstr ""
-"Anteriormente, todos os arquivos que tinham sido importados para sua "
-"biblioteca, mas que não foram encontrados mais posteriormente, eram "
-"removidos da biblioteca durante uma varredura."
+"Antaŭe ĉiu doserio kiu estis importita en via biblioteko sed ne plu "
+"trovigeblis estus forigita el biblioteka dum skanon."
 
 #: data/ui/whats_new_library.ui:92
 msgid ""
@@ -864,59 +844,58 @@ msgid ""
 " prevents accidentally loosing the progress of a audiobook when a file can't"
 " be found temporarily."
 msgstr ""
-"Agora os audiolivros não são mais removidos automaticamente da sua "
-"biblioteca. Isso evita a perda acidental do andamento de um audiolivro "
-"quando um arquivo não pode ser encontrado temporariamente."
+"Nun, sonlibroj ne plu estas forigita el via biblioteka aŭtomate. Ĉi tiu "
+"malhelpas sentintencan perdadon de la progreson de sonlibro kiam dosiero no "
+"troviĝeblas dummomente."
 
 #: data/ui/whats_new_library.ui:107
 msgid ""
 "To remove an audiobook from the library simply right-click on it and choose "
 "the remove from library option."
 msgstr ""
-"Para remover um audiolivro da biblioteca, basta clicar com o botão direito "
-"sobre ele e escolher a opção de  remover da biblioteca."
+"Por forigi sonlibron el la biblioteko, simple klaki dekstre ĝin kaj elekti "
+"la “Forigi el biblioteko” opcio."
 
 #: data/ui/whats_new_m4b.ui:52
 msgid "Basic support for m4b audio books."
-msgstr "Suporte básico para audiolivros m4b."
+msgstr "Baza subteno por m4b sonlibroj"
 
 #: data/ui/whats_new_m4b.ui:77
 msgid ""
 "Many of you have been waiting for it: Support for m4b audio books! This "
 "version features basic support for m4b files without chapter support."
 msgstr ""
-"Muitos de vocês estavam esperando por isso: suporte para audiolivros m4b! "
-"Esta versão oferece suporte básico para arquivos m4b sem suporte a capítulo."
+"Multe da vi atendas ĝin: Subteno por m4b sonlibroj! Ĉi tiu versio prezentas "
+"baza subteno por m4b dosieroj sen ĉapitra subteno."
 
 #: data/ui/whats_new_m4b.ui:92
 msgid ""
 "Drag & Drop your m4b files onto Cozy or use the application menu in the "
 "titlebar to rescan your audiobook directories."
 msgstr ""
-"Arraste e solte seus arquivos m4b no Cozy ou use o menu do aplicativo na "
-"barra de título para varrer novamente os diretórios de seus audiolivros."
+"Ŝovmetu viajn m4b dosierojn en Cozy aŭ uzu la aplikaĵan menuon en la titola "
+"breto por reskani viajn sonlibrajn dosierujojn."
 
 #: data/ui/whats_new_m4b.ui:107
 msgid "Chapter support will follow in a later update. Stay tuned!"
-msgstr ""
-"O suporte do capítulo virá em uma atualização posterior. Fique atento!"
+msgstr "Ĉapitra subteno sekvas en malantaŭa ĝisdatigo. Restu atenta!"
 
 #: data/ui/whats_new_m4b_chapter.ui:52
 msgid "Chapter support for m4b audio books."
-msgstr "Suporte de capítulo de audiolivros m4b."
+msgstr "Ĉapitra subteno por m4b sonlibroj"
 
 #: data/ui/whats_new_m4b_chapter.ui:77
 msgid "This version of Cozy features chapter support for m4b audio books!"
-msgstr "Esta versão do Cozy oferece suporte a capítulos para audiolivros m4b!"
+msgstr "Ĉi tiu versio de Cozy prezentas ĉapitran subtenon por m4b sonlibroj!"
 
 #: data/ui/whats_new_m4b_chapter.ui:92
 msgid ""
 "If you already have m4b files imported you'll need to start a scan of your "
 "library from the app menu."
 msgstr ""
-"Se você já tem arquivos m4b importados, você precisará iniciar uma varredura"
-" de sua biblioteca a partir do menu do aplicativo."
+"Se vi jam havas m4b dosierojn importitajn, vi devas starti skanon de via "
+"biblioteko el la aplikaĵo menuo."
 
 #: data/ui/whats_new_m4b_chapter.ui:107
 msgid "The chapters will then be detected."
-msgstr "Os capítulos serão então detectados."
+msgstr "La ĉapitroj tiam estos eltrovita."
