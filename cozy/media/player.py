@@ -334,7 +334,7 @@ class Player(EventSender):
 
     def _handle_file_not_found(self):
         if self.loaded_chapter:
-            FileNotFoundDialog(self.loaded_chapter).show()
+            FileNotFoundDialog(self.loaded_chapter).present()
             self._stop_playback()
         else:
             log.warning("No chapter loaded, cannot display file not found dialog.")
