@@ -18,7 +18,6 @@ class BookElement(Gtk.FlowBoxChild):
         super().__init__()
 
         self.book = book
-        self.context_menu = None
         self.pressed = False
 
         self.name_label.set_text(book.name)
@@ -85,9 +84,6 @@ class BookElement(Gtk.FlowBoxChild):
         return menu
 
     def _remove_book(self, *_):
-        if self.context_menu:
-            self.context_menu.popdown()
-
         self.emit("book-removed", self.book)
 
     def _mark_as_read(self, *_):
@@ -106,9 +102,7 @@ class BookElement(Gtk.FlowBoxChild):
     def _show_context_menu(self, gesture: Gtk.Gesture, *_):
         gesture.set_state(Gtk.EventSequenceState.CLAIMED)
 
-        if self.context_menu is None:
-            self.context_menu = self._create_context_menu()
-        self.context_menu.popup()
+        self._create_context_menu().popup()
 
     def _select_item(self, gesture: Gtk.Gesture, *_):
         if super().get_sensitive():
