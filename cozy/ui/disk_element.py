@@ -8,7 +8,7 @@ class DiskElement(Gtk.Box):
 
     def __init__(self, disc_number):
         super().__init__()
-        self.get_style_context().add_class("dim-label")
+        self.add_css_class("dim-label")
 
         if disc_number > 1:
             self.set_margin_top(18)

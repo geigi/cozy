@@ -108,13 +108,13 @@ class BookElement(Gtk.FlowBoxChild):
         if super().get_sensitive():
             gesture.set_state(Gtk.EventSequenceState.CLAIMED)
             self.pressed = True
-            self.container_box.get_style_context().add_class("selected")
+            self.container_box.add_css_class("selected")
 
     def _open_book_overview(self, gesture, *_):
         gesture.set_state(Gtk.EventSequenceState.CLAIMED)
 
         self.pressed = False
-        self.container_box.get_style_context().remove_class("selected")
+        self.container_box.remove_css_class("selected")
         if super().get_sensitive():
             self.emit("open-book-overview", self.book)
 

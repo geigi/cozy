@@ -45,14 +45,14 @@ class SearchResult(Gtk.Box):
         :param widget: as Gtk.Box
         :param event: as Gdk.Event
         """
-        self.box.get_style_context().add_class("box_hover")
+        self.box.add_css_class("box_hover")
 
     def _on_leave_notify(self, widget):
         """
         On leave notify remove css hover class
         :param widget: as Gtk.Box (can be None)
         """
-        self.box.get_style_context().remove_class("box_hover")
+        self.box.remove_css_class("box_hover")
 
     def __on_clicked(self, widget, event, *_):
         self.on_click(self.on_click_data)

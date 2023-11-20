@@ -13,7 +13,7 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
 
         self.set_margin_bottom(3)
 
-        self.get_style_context().add_class("filter-list-box-row")
+        self.add_css_class("filter-list-box-row")
 
         label = Gtk.Label.new(data)
         if bold:

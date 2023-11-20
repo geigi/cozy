@@ -37,15 +37,15 @@ class ChapterElement(Gtk.Box):
         self.emit("play-pause-clicked", self.chapter)
 
     def _on_enter_notify(self, *_):
-        self.get_style_context().add_class("box_hover")
-        self.play_icon.get_style_context().add_class("box_hover")
+        self.add_css_class("box_hover")
+        self.play_icon.add_css_class("box_hover")
 
         if not self.selected:
             self.icon_stack.set_visible_child_name("play_icon")
 
     def _on_leave_notify(self, *_):
-        self.get_style_context().remove_class("box_hover")
-        self.play_icon.get_style_context().remove_class("box_hover")
+        self.remove_css_class("box_hover")
+        self.play_icon.remove_css_class("box_hover")
 
         if not self.selected:
             self.icon_stack.set_visible_child_name("number")
