@@ -49,7 +49,7 @@ def setup_thread_excepthook():
         def run_with_except_hook(*args2, **kwargs2):
             try:
                 run_original(*args2, **kwargs2)
-            except Exception:  # noqa: B110
+            except Exception:
                 sys.excepthook(*sys.exc_info())
 
         self.run = run_with_except_hook
@@ -114,7 +114,7 @@ class Application(Gtk.Application):
         print("handle exception")
         try:
             reporter.exception("uncaught", exc_value, "\n".join(format_exception(exc_type, exc_value, exc_traceback)))
-        except Exception:  # noqa: B110
+        except Exception:  # noqa
             pass
 
         self.old_except_hook(exc_type, exc_value, exc_traceback)
