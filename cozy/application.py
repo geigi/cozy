@@ -114,7 +114,7 @@ class Application(Gtk.Application):
         print("handle exception")
         try:
             reporter.exception("uncaught", exc_value, "\n".join(format_exception(exc_type, exc_value, exc_traceback)))
-        except:
+        except Exception:
             pass
 
         self.old_except_hook(exc_type, exc_value, exc_traceback)
