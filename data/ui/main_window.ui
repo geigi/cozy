@@ -42,7 +42,9 @@
                                         <property name="title" translatable="true">Recent</property>
                                         <property name="icon-name">clock-outline-symbolic</property>
                                         <property name="child">
-                                          <object class="GtkLabel"><property name="label">Empty</property></object>
+                                          <object class="GtkLabel">
+                                            <property name="label">Empty</property>
+                                          </object>
                                         </property>
                                       </object>
                                     </child>
@@ -61,8 +63,6 @@
                                               <object class="GtkViewport" id="sort_author_viewport">
                                                 <child>
                                                   <object class="FilterListBox" id="author_box">
-                                                    <property name="visible">true</property>
-                                                    <property name="can-focus">false</property>
                                                     <accessibility>
                                                       <property name="label" translatable="true">List of authors</property>
                                                     </accessibility>
@@ -94,8 +94,6 @@
                                               <object class="GtkViewport" id="sort_reader_viewport">
                                                 <child>
                                                   <object class="FilterListBox" id="reader_box">
-                                                    <property name="visible">True</property>
-                                                    <property name="can_focus">False</property>
                                                     <accessibility>
                                                       <property name="label" translatable="true">List of readers</property>
                                                     </accessibility>
@@ -212,7 +210,6 @@
                     <child>
                       <object class="AdwViewSwitcherBar" id="mobile_view_switcher">
                         <property name="reveal">false</property>
-                        <property name="can-focus">false</property>
                         <property name="hexpand">true</property>
                       </object>
                     </child>

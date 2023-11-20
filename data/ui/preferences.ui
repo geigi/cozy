@@ -150,9 +150,10 @@
                     </child>
                     <child>
                       <object class="GtkBox">
-                        <property name="css-classes">toolbar</property>
                         <property name="height-request">24</property>
-                        <property name="can-focus">false</property>
+                        <style>
+                          <class name="toolbar"/>
+                        </style>
                         <child>
                           <object class="GtkButton" id="add_storage_button">
                             <property name="width-request">24</property>
@@ -187,7 +188,6 @@
                         <child>
                           <object class="GtkSeparator">
                             <property name="orientation">vertical</property>
-                            <property name="can-focus">false</property>
                             <property name="hexpand">True</property>
                             <style>
                               <class name="spacer"/>

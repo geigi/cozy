@@ -2,7 +2,6 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <template class="BookDetail" parent="GtkBox">
-    <property name="can-focus">false</property>
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
@@ -34,9 +33,8 @@
                       <object class="GtkFlowBoxChild">
                         <property name="halign">center</property>
                         <property name="valign">start</property>
-                        <child>
+                        <property name="child">
                           <object class="AdwClamp">
-                            <property name="can-focus">false</property>
                             <property name="maximum-size">250</property>
                             <property name="tightening-threshold">250</property>
                             <child>
@@ -271,7 +269,6 @@
                                 </child>
                                 <child>
                                   <object class="GtkBox">
-                                    <property name="can-focus">false</property>
                                     <property name="margin-top">20</property>
                                     <property name="orientation">vertical</property>
                                     <child>
@@ -296,16 +293,15 @@
                               </object>
                             </child>
                           </object>
-                        </child>
+                        </property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkFlowBoxChild">
                         <property name="hexpand">true</property>
                         <property name="vexpand">true</property>
-                        <child>
+                        <property name="child">
                           <object class="AdwClamp">
-                            <property name="can-focus">false</property>
                             <property name="maximum-size">500</property>
                             <property name="tightening-threshold">350</property>
                             <child>
@@ -379,7 +375,7 @@
                               </object>
                             </child>
                           </object>
-                        </child>
+                        </property>
                       </object>
                     </child>
                   </object>

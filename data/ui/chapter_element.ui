@@ -2,7 +2,6 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <template class="ChapterElement" parent="GtkBox">
-    <property name="can-focus">false</property>
     <property name="tooltip-text" translatable="true">Play this part</property>
     <child>
       <object class="GtkBox">

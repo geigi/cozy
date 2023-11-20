@@ -4,7 +4,7 @@
   <template class="BookElement" parent="GtkFlowBoxChild">
     <property name="height-request">150</property>
     <property name="width-request">150</property>
-    <child>
+    <property name="child">
       <object class="GtkBox" id="container_box">
         <property name="focusable">true</property>
         <property name="tooltip-text" translatable="true">Open book overview</property>
@@ -54,7 +54,7 @@
           <class name="book_card"/>
         </style>
       </object>
-    </child>
+    </property>
   </template>
   <menu id="book_context_menu">
     <section>

@@ -41,8 +41,6 @@
     </child>
     <child>
       <object class="GtkBox" id="remaining_event_box">
-        <property name="visible">true</property>
-        <property name="can-focus">false</property>
         <property name="valign">center</property>
         <child>
           <object class="GtkLabel" id="remaining_label">

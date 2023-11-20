@@ -10,8 +10,6 @@
         <property name="orientation">vertical</property>
         <child>
           <object class="AdwHeaderBar">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
             <child>
               <object class="GtkButton" id="continue_button">
                 <property name="label" translatable="1">Continue</property>

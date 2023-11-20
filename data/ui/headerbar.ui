@@ -38,11 +38,11 @@
         </child>
         <child type="end">
           <object class="GtkMenuButton" id="progress_menu_button">
-            <property name="visible">False</property>
-            <property name="can-focus">True</property>
+            <property name="visible">false</property>
+            <property name="can-focus">true</property>
             <property name="tooltip-text" translatable="true">Display background task progress</property>
             <child>
-              <object class="GtkSpinner" id="progress_spinner"></object>
+              <object class="GtkSpinner" id="progress_spinner"/>
             </child>
             <style>
               <class name="flat"/>
@@ -52,7 +52,7 @@
       </object>
     </child>
   </template>
-    <menu id="primary_menu">
+  <menu id="primary_menu">
     <section>
       <item>
         <attribute name="action">app.scan</attribute>
