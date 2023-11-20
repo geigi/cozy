@@ -35,8 +35,7 @@ class ArtworkCache:
 
             if not pixbuf:
                 return None
-
-            if size > 0:
+            elif size > 0:
                 # Resize and cache artwork if size is greater than 0
                 pixbuf = self._create_artwork_cache(book, pixbuf, size)
 

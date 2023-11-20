@@ -246,7 +246,7 @@ class CozyUI(EventSender, metaclass=Singleton):
             if scan:
                 self.scan_action.set_enabled(sensitive)
                 self.hide_offline_action.set_enabled(sensitive)
-        except Exception:  # noqa
+        except GLib.GError:
             pass
 
     def switch_to_playing(self):

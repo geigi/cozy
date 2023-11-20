@@ -114,15 +114,14 @@ class Application(Gtk.Application):
         print("handle exception")
         try:
             reporter.exception("uncaught", exc_value, "\n".join(format_exception(exc_type, exc_value, exc_traceback)))
-        except Exception:  # noqa
-            pass
+        except Exception:
+            None
 
         self.old_except_hook(exc_type, exc_value, exc_traceback)
 
     def quit(self):
         self.app_controller.quit()
         super(Application, self).quit()
-
 
     @staticmethod
     def init_custom_widgets():
