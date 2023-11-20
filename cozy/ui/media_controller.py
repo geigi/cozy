@@ -26,7 +26,7 @@ class MediaController(Adw.BreakpointBin):
     play_button: Gtk.Button = Gtk.Template.Child()
     prev_button: Gtk.Button = Gtk.Template.Child()
     next_button: Gtk.Button = Gtk.Template.Child()
-    volume_button: Gtk.VolumeButton = Gtk.Template.Child()
+    volume_button: Gtk.ScaleButton = Gtk.Template.Child()
 
     cover_img: Gtk.Image = Gtk.Template.Child()
     title_label: Gtk.Label = Gtk.Template.Child()
