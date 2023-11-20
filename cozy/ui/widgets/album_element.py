@@ -33,10 +33,10 @@ class AlbumElement(Gtk.Box):
         super().__init__()
 
         self._book: Book = book
-        pixbuf = self.artwork_cache.get_cover_pixbuf(book, 1, ALBUM_ART_SIZE)
+        paintable = self.artwork_cache.get_cover_paintable(book, 1, ALBUM_ART_SIZE)
 
-        if pixbuf:
-            self.album_art_image.set_from_pixbuf(pixbuf)
+        if paintable:
+            self.album_art_image.set_from_paintable(paintable)
             self.album_art_image.set_size_request(ALBUM_ART_SIZE, ALBUM_ART_SIZE)
         else:
             self.album_art_image.set_from_icon_name("book-open-variant-symbolic")

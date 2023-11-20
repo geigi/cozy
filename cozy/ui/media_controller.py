@@ -84,9 +84,9 @@ class MediaController(Adw.BreakpointBin):
         self.cover_img.set_cursor(Gdk.Cursor.new_from_name("pointer"))
 
     def _set_cover_image(self, book: Book):
-        pixbuf = self._artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), COVER_SIZE)
-        if pixbuf:
-            self.cover_img.set_from_pixbuf(pixbuf)
+        paintable = self._artwork_cache.get_cover_paintable(book, self.get_scale_factor(), COVER_SIZE)
+        if paintable:
+            self.cover_img.set_from_paintable(paintable)
         else:
             self.cover_img.set_from_icon_name("book-open-variant-symbolic")
             self.cover_img.props.pixel_size = COVER_SIZE

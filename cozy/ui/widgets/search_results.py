@@ -104,9 +104,9 @@ class BookSearchResult(SearchResult):
         self.set_tooltip_text(_("Play this book"))
         scale = self.get_scale_factor()
 
-        pixbuf = self._artwork_cache.get_cover_pixbuf(book, scale, BOOK_ICON_SIZE)
-        if pixbuf:
-            img = Gtk.Image.new_from_pixbuf(pixbuf)
+        paintable = self._artwork_cache.get_cover_paintable(book, scale, BOOK_ICON_SIZE)
+        if paintable:
+            img = Gtk.Image.new_from_paintable(paintable)
         else:
             img = Gtk.Image.new_from_icon_name("book-open-variant-symbolic")
             img.props.pixel_size = BOOK_ICON_SIZE

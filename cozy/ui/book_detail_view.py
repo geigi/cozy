@@ -269,10 +269,10 @@ class BookDetailView(Gtk.Box):
         self.book_progress_bar.set_fraction(self._view_model.progress_percent)
 
     def _set_cover_image(self, book: Book):
-        pixbuf = self._artwork_cache.get_cover_pixbuf(book, self.get_scale_factor(), ALBUM_ART_SIZE)
-        if pixbuf:
+        paintable = self._artwork_cache.get_cover_paintable(book, self.get_scale_factor(), ALBUM_ART_SIZE)
+        if paintable:
             self.album_art_container.set_visible(True)
-            self.album_art.set_pixbuf(pixbuf)
+            self.album_art.set_paintable(paintable)
             self.album_art.set_overflow(True)
         else:
             self.album_art_container.set_visible(False)
