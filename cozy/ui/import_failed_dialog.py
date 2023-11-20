@@ -1,36 +1,59 @@
-from gi.repository import Gtk
+from gettext import gettext as _
 
-import cozy.ui
+from gi.repository import Adw, Gtk
+
+from cozy.ext import inject
 
 
-class ImportFailedDialog():
+HEADER = _("This can have multiple reasons:")
+POSSIBILITIES = "\n     • ".join((  # yes, it is a hack, because \t would be too wide
+    "",
+    _("The audio format is not supported"),
+    _("The path or filename contains non utf-8 characters"),
+    _("The file(s) are no valid audio files"),
+    _("The file(s) are corrupt"),
+))
+
+message = HEADER + POSSIBILITIES
+
+
+class ImportFailedDialog(Adw.MessageDialog):
     """
     Dialog that displays failed files on import.
     """
+    main_window = inject.attr("MainWindow")
 
-    def __init__(self, files):
-        self.parent = cozy.ui.main_view.CozyUI()
-        self.builder = Gtk.Builder.new_from_resource(
-            "/com/github/geigi/cozy/import_failed.ui")
-        self.dialog = self.builder.get_object("dialog")
-        self.dialog.set_modal(self.parent.window)
-        self.text = self.builder.get_object("files_buffer")
+    def __init__(self, files: list[str]):
+        super().__init__(
+            heading=_("Some files could not be imported"),
+            default_response="cancel",
+            close_response="cancel",
+            transient_for=self.main_window.window,
+            modal=True,
+        )
 
-        files_string = "\n".join(files)
-        self.text.set_text(files_string.encode("utf-8", "replace").decode("utf-8"))
+        self.add_response("cancel", _("Ok"))
 
-        locate_button = self.builder.get_object("ok_button")
-        locate_button.connect("clicked", self.ok)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=18)
+        body_label = Gtk.Label(label=message)
 
-    def show(self):
-        """
-        show this dialog
-        """
-        self.dialog.show()
+        text_buffer = Gtk.TextBuffer(
+            text="\n".join(files).encode("utf-8", errors="replace").decode("utf-8")
+        )
+        text_view = Gtk.TextView(
+            buffer=text_buffer,
+            editable=False,
+            cursor_visible=False,
+            css_classes=["card", "failed-import-card", "monospace"]
+        )
 
-    def ok(self, button):
-        """
-        Close this dialog and destroy it.
-        """
-        self.dialog.destroy()
+        scroller = Gtk.ScrolledWindow(
+            max_content_height=200,
+            propagate_natural_height=True,
+            child=text_view
+        )
+
+        box.append(body_label)
+        box.append(scroller)
+        self.set_extra_child(box)
 

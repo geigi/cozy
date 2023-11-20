@@ -107,3 +107,10 @@
     background: transparent;
 }
 
+.failed-import-card {
+  /*
+    6px vertical padding is not ideal, because the text scrolls into
+    an invisible barrier, but it's nicer when no scrolling is happening
+  */
+  padding: 6px 12px;
+}

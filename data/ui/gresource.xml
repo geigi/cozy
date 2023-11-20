@@ -9,7 +9,6 @@
     <file preprocess="xml-stripblanks">chapter_element.ui</file>
     <file preprocess="xml-stripblanks">error_reporting.ui</file>
     <file preprocess="xml-stripblanks">headerbar.ui</file>
-    <file preprocess="xml-stripblanks">import_failed.ui</file>
     <file preprocess="xml-stripblanks">main_window.ui</file>
     <file preprocess="xml-stripblanks">media_controller.ui</file>
     <file preprocess="xml-stripblanks">playback_speed_popover.ui</file>

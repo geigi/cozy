@@ -201,8 +201,7 @@ class LibraryViewModel(Observable, EventSender):
             self._notify("books-filter")
             self._notify("library_view_mode")
         if event == "import-failed":
-            dialog = ImportFailedDialog(message)
-            dialog.show()
+            ImportFailedDialog(message).show()
 
     def _on_player_event(self, event, message):
         if event == "play":
