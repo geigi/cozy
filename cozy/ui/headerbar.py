@@ -65,10 +65,11 @@ class Headerbar(Adw.Bin):
 
         self.show_sidebar_button.set_visible(page != "recent")
 
-    def _on_mobile_view(self, widget, param):
-        on_mobile = widget.get_property(param.name)
-
-        self.view_switcher.set_visible(not on_mobile)
+    def _on_mobile_view(self, widget, _):
+        if widget.props.reveal:
+            self.headerbar.set_title_widget(Adw.WindowTitle(title="Cozy"))
+        else:
+            self.headerbar.set_title_widget(self.view_switcher)
 
     def _on_sidebar_toggle(self, widget, param):
         show_sidebar = widget.get_property(param.name)
