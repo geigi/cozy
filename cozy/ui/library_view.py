@@ -188,14 +188,14 @@ class LibraryView:
         if self._connected_book_element:
             self._connected_book_element.set_playing(False)
 
+        self._connected_book_element = None
+
         index = 0
-        while True:
-            book_element = self._book_box.get_child_at_index(index)
+        while book_element := self._book_box.get_child_at_index(index):
             if book_element.book == self._view_model.current_book_in_playback:
                 self._connected_book_element = book_element
-                return
+                break
             index += 1
-        self._connected_book_element = None
 
     def _playing(self):
         if self._connected_book_element:
