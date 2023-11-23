@@ -42,9 +42,7 @@ class AlbumElement(Gtk.Box):
             self.album_art_image.set_from_icon_name("book-open-variant-symbolic")
             self.album_art_image.props.pixel_size = ALBUM_ART_SIZE
 
-        self._play_button_click = Gtk.GestureClick()
-        self._play_button_click.connect("released", self._on_play_button_press)
-        self.play_button.add_controller(self._play_button_click)
+        self.play_button.connect("clicked", self._on_play_button_press)
 
         #TODO: Ho
         #self.progress_drawing_area.connect("realize", lambda w: w.get_window().set_pass_through(True))
@@ -61,7 +59,7 @@ class AlbumElement(Gtk.Box):
         self.album_art_overlay_revealer.set_reveal_child(hover)
         self.play_button_revealer.set_reveal_child(hover)
 
-    def _on_play_button_press(self, _, __):
+    def _on_play_button_press(self, _):
         self.emit("play-pause-clicked", self._book)
         return True
 
