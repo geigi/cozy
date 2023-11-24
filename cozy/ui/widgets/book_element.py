@@ -77,9 +77,8 @@ class BookElement(Gtk.FlowBoxChild):
         menu = Gtk.PopoverMenu(
             menu_model=menu_model,
             has_arrow=False,
-            position=Gtk.PositionType.RIGHT
         )
-        menu.set_parent(self.container_box)
+        menu.set_parent(self.art)
 
         return menu
 
