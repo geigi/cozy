@@ -27,7 +27,6 @@ class BookDetailView(Gtk.Box):
     __gtype_name__ = 'BookDetail'
 
     play_book_button: Gtk.Button = Gtk.Template.Child()
-    play_img: Gtk.Image = Gtk.Template.Child()
 
     book_label: Gtk.Label = Gtk.Template.Child()
     author_label: Gtk.Label = Gtk.Template.Child()
@@ -145,8 +144,10 @@ class BookDetailView(Gtk.Box):
     def _on_play_changed(self):
         playing = self._view_model.playing
 
-        play_button_img = "pause-symbolic" if playing else "play-symbolic"
-        self.play_img.set_from_icon_name(play_button_img)
+        if playing:
+            self.play_book_button.set_icon_name("media-playback-pause-symbolic")
+        else:
+            self.play_book_button.set_icon_name("media-playback-start-symbolic")
 
         if self._current_selected_chapter:
             self._current_selected_chapter.set_playing(playing)

@@ -36,7 +36,7 @@
                   <object class="GtkImage" id="play_icon">
                     <property name="halign">start</property>
                     <property name="valign">center</property>
-                    <property name="icon-name">play-symbolic</property>
+                    <property name="icon-name">media-playback-start-symbolic</property>
                   </object>
                 </property>
               </object>

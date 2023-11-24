@@ -60,9 +60,9 @@ class ChapterElement(Gtk.Box):
 
     def set_playing(self, playing):
         if playing:
-            self.play_icon.set_from_icon_name("pause-symbolic")
+            self.play_icon.set_from_icon_name("media-playback-pause-symbolic")
         else:
-            self.play_icon.set_from_icon_name("play-symbolic")
+            self.play_icon.set_from_icon_name("media-playback-start-symbolic")
 
 
 GObject.type_register(ChapterElement)

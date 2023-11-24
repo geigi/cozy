@@ -51,9 +51,9 @@ class AlbumElement(Gtk.Box):
 
     def set_playing(self, playing: bool):
         if playing:
-            self.play_button.set_icon_name("pause-symbolic")
+            self.play_button.set_icon_name("media-playback-pause-symbolic")
         else:
-            self.play_button.set_icon_name("play-symbolic")
+            self.play_button.set_icon_name("media-playback-start-symbolic")
 
     def set_hover(self, hover: bool):
         self.album_art_overlay_revealer.set_reveal_child(hover)

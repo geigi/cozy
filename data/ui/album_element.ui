@@ -47,7 +47,7 @@
                     <property name="tooltip-text" translatable="1">Play</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
-                    <property name="icon-name">play-symbolic</property>
+                    <property name="icon-name">media-playback-start-symbolic</property>
                     <style>
                       <class name="circular"/>
                       <class name="book_play_button"/>
