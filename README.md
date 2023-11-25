@@ -70,9 +70,8 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed instructions and developing Co
 ## Requirements
 - `python3`
 - `meson >= 0.40.0` as build system
-- `gtk3 >= 3.22`
-- `libhandy >= 1.0.0`
-- `libdazzle >= 3.34.0`
+- `gtk4 >= 4.10`
+- `libadwaita >= 1.4.0`
 - `peewee >= 3.9.6` as object relation mapper
 - `mutagen` for meta tag management
 - `distro`
@@ -165,6 +164,7 @@ To the contributors on GitHub:
 - paper42
 - phpwutz
 - rapenne-s
+- rdbende
 - thibaultamartin
 - umeboshi2
 - worldofpeace
@@ -277,9 +277,9 @@ The translators:
 To nedrichards for the Flatpak.
 
 ## Help me translate cozy!
-Cozy is on <a href="https://www.transifex.com/geigi/cozy/"> Transifex</a>, where anyone can contribute and translate. Can't find your language in the list? Let me know!
+Cozy is on <a href="https://www.transifex.com/geigi/cozy/">Transifex</a>, where anyone can contribute and translate. Can't find your language in the list? Let me know!
 
-If you like this project, consider supporting me on <a href="https://www.patreon.com/bePatron?u=8147127"> Patreon</a> :)
+If you like this project, consider supporting me on <a href="https://www.patreon.com/bePatron?u=8147127">Patreon</a> :)
 
 ----
 [![Maintainability](https://api.codeclimate.com/v1/badges/fde8cbdff23033adaca2/maintainability)](https://codeclimate.com/github/geigi/cozy/maintainability)
