@@ -21,22 +21,13 @@ sudo apt install \
   gstreamer1.0-plugins-ugly \
   libgirepository1.0-dev \
   libgstreamer1.0-0 \
-  libgtk-3-dev \
+  libgtk-4-dev \
+  libadwaita-1-dev
   pip \
   python-gi-cairo \
   python3-gst-1.0 \
   python3-venv
-
-sudo add-apt-repository ppa:apandada1/libhandy-1
-sudo apt update
-sudo apt install libhandy-1-0 libhandy-1-dev
 ```
-
-In case of issues with the `libhandy` installation, please refer to our [GitHub build script](.github/workflows/build.yml) on an alternative source of the library packages.
-
-### UI development
-
-[Glade](https://glade.gnome.org/) is the GUI tool we have been using for generating and managing application [windows and widgets](data/ui/).
 
 ## Source code
 
@@ -75,7 +66,7 @@ pip install \
 Let's assume you wish to build the application under the `build/` directory and install the binaries under `app/`:
 
 ```bash
-meson --prefix=$(pwd)/app ./build
+meson setup --prefix=$(pwd)/app ./build
 
 ninja -C build install
 ```

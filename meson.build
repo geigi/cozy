@@ -1,11 +1,11 @@
-project('com.github.geigi.cozy', version: '1.2.1')
+project('com.github.geigi.cozy', version: '1.2.1', meson_version: '>= 0.59.0')
 
-python = import('python3')
+python = import('python')
 i18n = import('i18n')
 gnome = import('gnome')
 
 message('Looking for dependencies')
-python_bin = python.find_python()
+python_bin = python.find_installation('python3')
 if not python_bin.found()
     error('No valid python3 binary found')
 else
@@ -13,16 +13,22 @@ else
 endif
 
 dependency('glib-2.0')
-dependency('libadwaita-1', version: '>= 1.0.0')
+dependency('libadwaita-1', version: '>= 1.4.0')
 
 # from https://github.com/AsavarTzeth/pulseeffects/blob/master/meson.build
 # Support Debian non-standard python paths
-# Fallback to Meson python3 module if command fails
+# Fallback to Meson python module if command fails
 message('Getting python install path')
 py3_purelib = ''
-r = run_command(python_bin.path(), '-c', 'from distutils.sysconfig import get_python_lib; print(get_python_lib(prefix=""))')
+r = run_command(
+  python_bin.full_path(),
+  '-c',
+  'from distutils.sysconfig import get_python_lib; print(get_python_lib(prefix=""))',
+  check: false,
+)
+
 if r.returncode() != 0
-  py3_purelib = python.sysconfig_path('purelib')
+  py3_purelib = python_bin.get_path('purelib')
   if not py3_purelib.endswith('site-packages')
     error('Cannot find python install path')
   endif
@@ -37,7 +43,7 @@ python3_required_modules = ['distro', 'peewee', 'mutagen', 'gi']
 foreach p : python3_required_modules
   # Source: https://docs.python.org/3/library/importlib.html#checking-if-a-module-can-be-imported
   script = 'import importlib.util; import sys; exit(1) if importlib.util.find_spec(\''+ p +'\') is None else exit(0)'
-  if run_command(python_bin, '-c', script).returncode() != 0
+  if run_command(python_bin, '-c', script, check: false).returncode() != 0
     error('Required Python3 module \'' + p + '\' not found')
   endif
 endforeach
@@ -50,10 +56,10 @@ conf.set('PACKAGE_URL', 'https://github.com/geigi/cozy')
 conf.set('DATA_DIR', DATA_DIR)
 conf.set('LOCALE_DIR', join_paths(get_option('prefix'), get_option('datadir'), 'locale'))
 conf.set('PYTHON_DIR', python_dir)
-conf.set('PYTHON_EXEC_DIR', join_paths(get_option('prefix'), python.sysconfig_path('stdlib')))
+conf.set('PYTHON_EXEC_DIR', join_paths(get_option('prefix'), python_bin.get_path('stdlib')))
 conf.set('libexecdir', LIBEXEC_DIR)
 conf.set('VERSION', meson.project_version())
-conf.set('PYTHON', python_bin.path())
+conf.set('PYTHON', python_bin.full_path())
 conf.set('INSTALLED', 'true')
 
 subdir('data')
@@ -88,13 +94,8 @@ configure_file(
   install_dir: python_dir + '/cozy/report'
 )
 
-if meson.version().version_compare('>=0.57.0')
-    gnome.post_install(
-      glib_compile_schemas: true,
-      gtk_update_icon_cache: true,
-    )
-else
-    meson.add_install_script('meson/post_install_legacy.py')
-endif
-
-meson.add_install_script('meson/post_install_desktop_database.py')
+gnome.post_install(
+     glib_compile_schemas: true,
+    gtk_update_icon_cache: true,
+  update_desktop_database: true,
+)
