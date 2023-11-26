@@ -114,3 +114,13 @@
   */
   padding: 6px 12px;
 }
+
+.drag-overlay-status-page {
+  background-color: alpha(@accent_bg_color, 0.65);
+  color: @accent_fg_color;
+}
+
+.blurred {
+  filter: blur(6px);
+}
+

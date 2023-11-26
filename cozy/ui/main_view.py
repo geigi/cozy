@@ -108,7 +108,11 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.window.connect("close-request", self.on_close)
 
         self._drop_target = Gtk.DropTarget()
-        self._drop_target.connect("drop", self.__on_drag_data_received)
+        self._drop_target.set_gtypes([Gdk.FileList])
+        self._drop_target.set_actions(Gdk.DragAction.COPY)
+        self._drop_target.connect("enter", self._on_drag_enter)
+        self._drop_target.connect("leave", self._on_drag_leave)
+        self._drop_target.connect("drop", self._on_drag_data_received)
         self.window.add_controller(self._drop_target)
 
         self.window.connect("notify::default-width", self._on_window_size_allocate)
@@ -118,6 +122,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.book_box = self.window_builder.get_object("book_box")
         self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
         self.navigation_view: Adw.NavigationView = self.window_builder.get_object("navigation_view")
+        self.drop_revealer: Gtk.Revealer = self.window_builder.get_object("drop_revealer")
 
         self.no_media_file_chooser = self.window_builder.get_object(
             "no_media_file_chooser")
@@ -304,11 +309,20 @@ class CozyUI(EventSender, metaclass=Singleton):
         action.set_state(value)
         self.application_settings.hide_offline = value.get_boolean()
 
-    def __on_drag_data_received(self, widget, value, *_):
-        print(value)
-        # if target_type == 80:
-        #     thread = Thread(target=self._files.copy, args=[selection], name="DragDropImportThread")
-        #     thread.start()
+    def _on_drag_enter(self, *_):
+        self.drop_revealer.set_reveal_child(True)
+        self.main_stack.add_css_class("blurred")
+        return True
+
+    def _on_drag_leave(self, *_):
+        self.drop_revealer.set_reveal_child(False)
+        self.main_stack.remove_css_class("blurred")
+        return True
+
+    def _on_drag_data_received(self, widget, value, *_):
+        thread = Thread(target=self._files.copy, args=[value.get_files()], name="DnDImportThread")
+        thread.start()
+        return True
 
     def _set_audiobook_path(self, path):
         self._settings_view_model.add_first_storage_location(path)

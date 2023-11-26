@@ -29,23 +29,21 @@ class Files(EventSender):
     def copy(self, selection):
         log.info("Start of copying files")
         self.emit_event_main_thread("start-copy", None)
-        uris = selection.get_uris()
+
+        paths = [f.get_path() for f in selection]
         storage_location = self._settings.default_location.path
 
         self._file_count = 0
         self._file_progess = 0
 
-        self._count_all_files(uris)
-        self._copy_all(uris, storage_location)
+        self._count_all_files(paths)
+        self._copy_all(paths, storage_location)
 
         log.info("Copying of files finished")
         self._importer.scan()
 
     def _copy_all(self, sources, destination: str):
-        for uri in sources:
-            parsed_path = urllib.parse.urlparse(uri)
-            path = urllib.parse.unquote(parsed_path.path)
-
+        for path in sources:
             if os.path.isdir(path):
                 self._copy_directory(path, destination)
             else:
@@ -94,10 +92,8 @@ class Files(EventSender):
                 file_copy_destination = os.path.join(destination, dirname, file)
                 self._copy_file(source, file_copy_destination)
 
-    def _count_all_files(self, uris):
-        for uri in uris:
-            parsed_path = urllib.parse.urlparse(uri)
-            path = urllib.parse.unquote(parsed_path.path)
+    def _count_all_files(self, paths: list[str]) -> None:
+        for path in paths:
             if os.path.isdir(path):
                 self._file_count += self._count_files_in_folder(path)
             else:
