@@ -18,7 +18,7 @@ from cozy.model.library import Library
 from cozy.report import reporter
 from cozy.tools import IntervalTimer
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
-from cozy.ui.info_banner import InfoBanner
+from cozy.ui.toaster import ToastNotifier
 
 log = logging.getLogger("mediaplayer")
 
@@ -30,7 +30,7 @@ class Player(EventSender):
     _library: Library = inject.attr(Library)
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
     _offline_cache: OfflineCache = inject.attr(OfflineCache)
-    _info_bar: InfoBanner = inject.attr(InfoBanner)
+    _toast: ToastNotifier = inject.attr(ToastNotifier)
     _importer: Importer = inject.attr(Importer)
 
     _gst_player: GstPlayer = inject.attr(GstPlayer)
@@ -327,7 +327,7 @@ class Player(EventSender):
 
     def _handle_gst_error(self, error: GLib.Error):
         if error.code != Gst.ResourceError.BUSY:
-            self._info_bar.show(error.message)
+            self._toast.show(error.message)
 
         if error.code == Gst.ResourceError.OPEN_READ or Gst.ResourceError.READ:
             self._stop_playback()

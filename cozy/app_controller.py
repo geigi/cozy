@@ -21,7 +21,7 @@ from cozy.open_view import OpenView
 from cozy.ui.app_view import AppView
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.headerbar import Headerbar
-from cozy.ui.info_banner import InfoBanner
+from cozy.ui.toaster import ToastNotifier
 from cozy.ui.library_view import LibraryView
 from cozy.ui.main_view import CozyUI
 from cozy.ui.media_controller import MediaController
@@ -105,7 +105,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(SleepTimerViewModel, lambda: SleepTimerViewModel())
         binder.bind_to_constructor(GstPlayer, lambda: GstPlayer())
         binder.bind_to_constructor(PowerManager, lambda: PowerManager())
-        binder.bind_to_constructor(InfoBanner, lambda: InfoBanner())
+        binder.bind_to_constructor(ToastNotifier, lambda: ToastNotifier())
         binder.bind_to_constructor(AppViewModel, lambda: AppViewModel())
         binder.bind_to_constructor(SettingsViewModel, lambda: SettingsViewModel())
 

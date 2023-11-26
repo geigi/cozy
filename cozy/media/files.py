@@ -10,7 +10,7 @@ from cozy.ext import inject
 from cozy.media.importer import Importer
 from cozy.model.settings import Settings
 from cozy.report import reporter
-from cozy.ui.info_banner import InfoBanner
+from cozy.ui.toaster import ToastNotifier
 
 log = logging.getLogger("files")
 
@@ -18,7 +18,7 @@ log = logging.getLogger("files")
 class Files(EventSender):
     _settings = inject.attr(Settings)
     _importer = inject.attr(Importer)
-    _info_bar: InfoBanner = inject.attr(InfoBanner)
+    _toast: ToastNotifier = inject.attr(ToastNotifier)
 
     _file_count = 0
     _file_progess = 0
@@ -64,11 +64,11 @@ class Files(EventSender):
             if e.code == Gio.IOErrorEnum.CANCELLED:
                 pass
             elif e.code == Gio.IOErrorEnum.READ_ONLY:
-                self._info_bar.show(_("Cannot copy: Audiobook directory is read only"))
+                self._toast.show(_("Cannot copy: Audiobook directory is read only"))
             elif e.code == Gio.IOErrorEnum.NO_SPACE:
-                self._info_bar.show(_("Cannot copy: Disk is full"))
+                self._toast.show(_("Cannot copy: Disk is full"))
             elif e.code == Gio.IOErrorEnum.PERMISSION_DENIED:
-                self._info_bar.show(_("Cannot copy: Permission denied"))
+                self._toast.show(_("Cannot copy: Permission denied"))
             else:
                 reporter.exception("files", e)
 
@@ -84,7 +84,7 @@ class Files(EventSender):
                 Path(destination_dir).mkdir(parents=True, exist_ok=True)
             except PermissionError as e:
                 log.error(e)
-                self._info_bar.show(_("Cannot copy: Permission denied"))
+                self._toast.show(_("Cannot copy: Permission denied"))
                 return
 
             for file in filenames:
