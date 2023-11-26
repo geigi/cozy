@@ -285,6 +285,7 @@ class Player(EventSender):
         if not self._book:
             log.error("Cannot play next chapter because no book reference is stored.")
             reporter.error("player", "Cannot play next chapter because no book reference is stored.")
+            return
 
         index_current_chapter = self._book.chapters.index(self._book.current_chapter)
 

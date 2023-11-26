@@ -48,9 +48,10 @@ class FilesystemMonitor(EventSender):
         # go through all audiobook locations and test if they can be found in the mounts list
 
         for storage in self._settings.external_storage_locations:
-            online = False
-            if any(mount.get_root().get_path() in storage.path for mount in mounts):
-                online = True
+            online = any(
+                mount.get_root().get_path() and mount.get_root().get_path() in storage.path
+                for mount in mounts
+            )
             self.external_storage.append(ExternalStorage(storage=storage, online=online))
 
     def close(self):
@@ -62,18 +63,14 @@ class FilesystemMonitor(EventSender):
 
     def get_book_online(self, book: Book):
         try:
-            result = next(
+            return next(
                 (storage.online for storage in self.external_storage if storage.storage.path in book.chapters[0].file),
                 True)
-            return result
         except IndexError:
             return True
 
     def is_track_online(self, track):
-        """
-        """
-        result = next((storage.online for storage in self.external_storage if storage.storage.path in track.file), True)
-        return (result)
+        return next((storage.online for storage in self.external_storage if storage.storage.path in track.file), True)
 
     def get_offline_storages(self):
         return [i.storage.path for i in self.external_storage if not i.online]
