@@ -61,7 +61,6 @@ class AlbumElement(Gtk.Box):
 
     def _on_play_button_press(self, _):
         self.emit("play-pause-clicked", self._book)
-        return True
 
     def _draw_album_hover(self, area: Gtk.DrawingArea, context: cairo.Context, *_):
         context.rectangle(0, 0, area.get_allocated_width(), area.get_allocated_height())
