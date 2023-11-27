@@ -221,7 +221,6 @@
                             <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkBox" id="media_control_box">
-                                <property name="height-request">46</property>
                                 <style>
                                   <class name="player_bar"/>
                                 </style>
