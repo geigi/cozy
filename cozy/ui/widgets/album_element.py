@@ -44,7 +44,7 @@ class AlbumElement(Gtk.Box):
 
         self.play_button.connect("clicked", self._on_play_button_press)
 
-        #TODO: Ho
+        # TODO: Just use CSS
         #self.progress_drawing_area.connect("realize", lambda w: w.get_window().set_pass_through(True))
         self.progress_drawing_area.set_draw_func(self._draw_progress)
         #self.album_art_drawing_area.set_draw_func(self._draw_album_hover)
