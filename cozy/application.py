@@ -1,3 +1,4 @@
+import gettext
 import locale
 import logging
 import os
@@ -74,9 +75,8 @@ class Application(Gtk.Application):
         sys.excepthook = self.handle_exception
         setup_thread_excepthook()
 
-        import gettext
-        gettext.bindtextdomain('com.github.geigi.cozy', localedir)
-        gettext.textdomain('com.github.geigi.cozy')
+        locale.bindtextdomain('com.github.geigi.cozy', localedir)
+        locale.textdomain('com.github.geigi.cozy')
         gettext.install('com.github.geigi.cozy', localedir)
 
     def do_startup(self):
