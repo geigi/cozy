@@ -63,7 +63,7 @@ sudo dnf install\
 ```
 
 
-### Obtain the source code
+### Source code
 
 ```console
 git clone https://github.com/geigi/cozy.git
@@ -71,7 +71,7 @@ cd cozy
 ```
 
 
-### Set up Python
+### Python packages
 
 > [!TIP]
 > It is generally a good idea to set up a virtual environment for Python projects. It creates an isolated environment where packages can be installed without creating conflicts with other packages installed system-wide.
