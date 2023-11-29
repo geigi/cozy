@@ -15,8 +15,6 @@ from cozy.db.storage import Storage
 from cozy.ui.widgets.filter_list_box import FilterListBox
 from cozy.ui.widgets.seek_bar import SeekBar
 
-gi.require_version('Adw', '1')
-
 from gi.repository import Gtk, GLib, Adw
 
 from cozy.app_controller import AppController
@@ -57,7 +55,7 @@ def setup_thread_excepthook():
     threading.Thread.__init__ = init
 
 
-class Application(Gtk.Application):
+class Application(Adw.Application):
     ui: CozyUI
     app_controller: AppController
 
@@ -65,7 +63,7 @@ class Application(Gtk.Application):
         self.localedir = localedir
         self.pkgdatadir = pkgdatadir
 
-        Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
+        super().__init__(application_id='com.github.geigi.cozy')
         self.init_custom_widgets()
 
         GLib.setenv("PULSE_PROP_media.role", "music", True)
@@ -82,12 +80,12 @@ class Application(Gtk.Application):
 
     def do_startup(self):
         log.info(distro.linux_distribution(full_distribution_name=False))
-        log.info("Starting up cozy " + __version__)
+        log.info(f"Starting up cozy {__version__}")
+        log.info(f"libadwaita version: {Adw._version}")
+
         self.ui = CozyUI(self.pkgdatadir, self, __version__)
+        Adw.Application.do_startup(self)
         init_db()
-        Gtk.Application.do_startup(self)
-        Adw.init()
-        log.info("libadwaita version: {}".format(Adw._version))
         self.ui.startup()
 
     def do_activate(self):

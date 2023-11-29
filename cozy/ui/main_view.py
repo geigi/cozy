@@ -62,7 +62,6 @@ class CozyUI(EventSender, metaclass=Singleton):
 
     def startup(self):
         self.__init_resources()
-        self.__init_css()
 
     def __init_resources(self):
         """
@@ -83,18 +82,6 @@ class CozyUI(EventSender, metaclass=Singleton):
             "/com/github/geigi/cozy/about.ui")
 
         self.window: Gtk.Window = self.window_builder.get_object("app_window")
-
-    def __init_css(self):
-        """
-        Initialize the main css files and providers.
-        Add css classes to the default screen style context.
-        """
-        main_cssProviderFile = Gio.File.new_for_uri("resource:///com/github/geigi/cozy/application.css")
-        main_cssProvider = Gtk.CssProvider()
-        main_cssProvider.load_from_file(main_cssProviderFile)
-
-        display = Gdk.Display.get_default()
-        Gtk.StyleContext.add_provider_for_display(display, main_cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
     def __init_window(self):
         """

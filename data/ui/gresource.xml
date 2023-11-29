@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/github/geigi/cozy">
-    <file>application.css</file>
+    <file>style.css</file>
     <file preprocess="xml-stripblanks">about.ui</file>
     <file preprocess="xml-stripblanks">album_element.ui</file>
     <file preprocess="xml-stripblanks">book_detail.ui</file>
