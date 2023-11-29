@@ -85,14 +85,17 @@ class CozyUI(EventSender, metaclass=Singleton):
 
     def __init_window(self):
         """
-        Add fields for all ui objects we need to access from code.
-        Initialize everything we can't do from glade like events and other stuff.
+        Add fields for all UI objects we need to access from code.
+        Initialize everything we can't do from the UI files like events and other stuff.
         """
-        log.info("Initialize main window")
+        log.info("Initializing main window")
         self._restore_window_size()
+        self.window.set_title("Cozy")
         self.window.set_application(self.app)
-        self.window.present()
+
         self.window.connect("close-request", self.on_close)
+        self.window.connect("notify::default-width", self._on_window_size_allocate)
+        self.window.connect("notify::default-height", self._on_window_size_allocate)
 
         self._drop_target = Gtk.DropTarget()
         self._drop_target.set_gtypes([Gdk.FileList])
@@ -102,27 +105,21 @@ class CozyUI(EventSender, metaclass=Singleton):
         self._drop_target.connect("drop", self._on_drag_data_received)
         self.window.add_controller(self._drop_target)
 
-        self.window.connect("notify::default-width", self._on_window_size_allocate)
-        self.window.connect("notify::default-height", self._on_window_size_allocate)
-        self.window.title = "Cozy"
-
-        self.book_box = self.window_builder.get_object("book_box")
         self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
         self.navigation_view: Adw.NavigationView = self.window_builder.get_object("navigation_view")
         self.drop_revealer: Gtk.Revealer = self.window_builder.get_object("drop_revealer")
 
-        self.no_media_file_chooser = self.window_builder.get_object(
-            "no_media_file_chooser")
-        self.no_media_file_chooser.connect(
-            "clicked", self._open_audiobook_dir_selector)
+        self.no_media_file_chooser = self.window_builder.get_object("no_media_file_chooser")
+        self.no_media_file_chooser.connect("clicked", self._open_audiobook_dir_selector)
 
-        # get about dialog
         self.about_dialog = self.about_builder.get_object("about_dialog")
         self.about_dialog.set_modal(self.window)
         self.about_dialog.connect("close-request", self.hide_window)
         self.about_dialog.set_version(self.version)
 
-        self._preferences: PreferencesView = PreferencesView()
+        self._preferences = PreferencesView()
+
+        self.window.present()
 
     def __init_actions(self):
         """
