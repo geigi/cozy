@@ -279,7 +279,7 @@ To nedrichards for the Flatpak.
 ## Help me translate cozy!
 Cozy is on <a href="https://www.transifex.com/geigi/cozy/">Transifex</a>, where anyone can contribute and translate. Can't find your language in the list? Let me know!
 
-If you like this project, consider supporting me on <a href="https://www.patreon.com/bePatron?u=8147127">Patreon</a> :)
+If you like this project, consider supporting me on <a href="https://www.patreon.com/geigi">Patreon</a> :)
 
 ----
 [![Maintainability](https://api.codeclimate.com/v1/badges/fde8cbdff23033adaca2/maintainability)](https://codeclimate.com/github/geigi/cozy/maintainability)
