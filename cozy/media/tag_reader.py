@@ -2,12 +2,9 @@ import os
 from typing import List
 from urllib.parse import unquote, urlparse
 
-import gi
 import mutagen
 from mutagen.mp4 import MP4
 
-gi.require_version('Gst', '1.0')
-gi.require_version('GstPbutils', '1.0')
 from gi.repository import GstPbutils, Gst, GLib
 
 from cozy.media.chapter import Chapter

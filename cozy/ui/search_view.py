@@ -4,11 +4,8 @@ from threading import Thread
 from cozy.ext import inject
 from cozy.ui.widgets.search_results import BookSearchResult, ArtistSearchResult
 
-import gi
-
 from cozy.view_model.search_view_model import SearchViewModel
 
-gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, GLib
 
 

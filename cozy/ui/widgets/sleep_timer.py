@@ -1,9 +1,6 @@
-import gi
-
 from cozy.ext import inject
 from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel, SystemPowerControl
 
-gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
 

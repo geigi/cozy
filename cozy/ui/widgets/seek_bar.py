@@ -1,10 +1,6 @@
-import gi
-from gi.repository import GObject, Gdk
+from gi.repository import Gdk, GObject, Gtk
 
 from cozy.control.string_representation import seconds_to_str
-
-gi.require_version('Gtk', '4.0')
-from gi.repository import Gtk
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/seek_bar.ui')

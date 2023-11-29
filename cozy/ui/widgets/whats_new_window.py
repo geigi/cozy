@@ -1,14 +1,11 @@
 from typing import List
 from packaging import version
 
-import gi
-
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
 from cozy.ui.main_view import CozyUI
 from cozy.version import __version__ as CozyVersion
 
-gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Adw
 
 
