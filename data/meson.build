@@ -2,6 +2,15 @@ subdir('img')
 subdir('ui')
 subdir('icons')
 
+gnome.compile_resources(
+  meson.project_name() + '.appdata',
+  'gresource.xml',
+  gresource_bundle: true,
+  install_dir: DATA_DIR,
+  install: true,
+)
+
+
 install_data(
     meson.project_name() + '.gschema.xml',
     install_dir: join_paths(get_option('datadir'), 'glib-2.0', 'schemas')
