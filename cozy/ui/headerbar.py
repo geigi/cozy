@@ -6,7 +6,7 @@ from cozy.ext import inject
 from cozy.ui.widgets.progress_popover import ProgressPopover
 from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarState
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, Gtk, GObject
 
 log = logging.getLogger("Headerbar")
 
@@ -14,10 +14,13 @@ COVER_SIZE = 45
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/headerbar.ui')
-class Headerbar(Adw.Bin):
+class Headerbar(Gtk.Box):
     __gtype_name__ = "Headerbar"
 
     headerbar: Adw.HeaderBar = Gtk.Template.Child()
+
+    search_bar: Gtk.SearchBar = Gtk.Template.Child()
+    search_entry: Gtk.SearchEntry = Gtk.Template.Child()
 
     show_sidebar_button: Gtk.ToggleButton = Gtk.Template.Child()
     search_button: Gtk.MenuButton = Gtk.Template.Child()
@@ -44,6 +47,9 @@ class Headerbar(Adw.Bin):
         self.progress_popover = ProgressPopover()
         self.progress_menu_button.set_popover(self.progress_popover)
 
+        self.search_bar.connect_entry(self.search_entry)
+        self.search_bar.set_key_capture_widget(self.header_container)
+
         self._headerbar_view_model: HeaderbarViewModel = inject.instance(HeaderbarViewModel)
         self._connect_view_model()
         self._connect_widgets()
@@ -64,6 +70,7 @@ class Headerbar(Adw.Bin):
         page = widget.props.visible_child_name
 
         self.show_sidebar_button.set_visible(page != "recent")
+        self.search_button.set_active(False)
 
     def _on_mobile_view(self, widget, _):
         if widget.props.reveal:

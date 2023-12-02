@@ -1,13 +1,16 @@
-import cozy.ext.inject as inject
+from typing import Callable
 
-from cozy.extensions.set import split_strings_to_set
-from cozy.open_view import OpenView
+from gi.repository import GLib
+
+import cozy.ext.inject as inject
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.extensions.set import split_strings_to_set
 from cozy.model.book import Book
 from cozy.model.library import Library
+from cozy.open_view import OpenView
 
 
 class SearchViewModel(Observable, EventSender):
@@ -31,13 +34,10 @@ class SearchViewModel(Observable, EventSender):
         show_offline_books = not self._application_settings.hide_offline
 
         authors = {
-            book.author
-            for book
-            in self._model.books
-            if is_book_online(book) or show_offline_books
+            book.author for book in self._model.books if is_book_online(book) or show_offline_books
         }
 
-        return sorted(split_strings_to_set(authors))
+        return split_strings_to_set(authors)
 
     @property
     def readers(self):
@@ -45,31 +45,57 @@ class SearchViewModel(Observable, EventSender):
         show_offline_books = not self._application_settings.hide_offline
 
         readers = {
-            book.reader
-            for book
-            in self._model.books
-            if is_book_online(book) or show_offline_books
+            book.reader for book in self._model.books if is_book_online(book) or show_offline_books
         }
 
-        return sorted(split_strings_to_set(readers))
+        return split_strings_to_set(readers)
 
-    @property
-    def search_open(self):
-        return self._search_open
+    def search(self, search_query: str, callback: Callable[[], None], thread_event):
+        search_query = search_query.lower()
 
-    @search_open.setter
-    def search_open(self, value):
-        self._search_open = value
-        self._notify("search_open")
+        # We need the main context to call methods in the main thread after the search is finished
+        main_context = GLib.MainContext.default()
+
+        books = {
+            book
+            for book in self.books
+            if search_query in book.name.lower()
+            or search_query in book.author.lower()
+            or search_query in book.reader.lower()
+        }
+
+        if thread_event.is_set():
+            return
+
+        authors = {author for author in self.authors if search_query in author.lower()}
+
+        if thread_event.is_set():
+            return
+
+        readers = {reader for reader in self.readers if search_query in reader.lower()}
+
+        if thread_event.is_set():
+            return
+
+        main_context.invoke_full(
+            GLib.PRIORITY_DEFAULT,
+            callback,
+            sorted(books, key=lambda book: book.name.lower()),
+            sorted(authors),
+            sorted(readers),
+        )
+
+    def close(self):
+        self._notify("close")
 
     def jump_to_book(self, book: Book):
         self.emit_event(OpenView.BOOK, book)
-        self.search_open = False
+        self.close()
 
     def jump_to_author(self, author: str):
         self.emit_event(OpenView.AUTHOR, author)
-        self.search_open = False
+        self.close()
 
     def jump_to_reader(self, reader: str):
         self.emit_event(OpenView.READER, reader)
-        self.search_open = False
+        self.close()

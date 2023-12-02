@@ -124,3 +124,6 @@
   filter: blur(6px);
 }
 
+.round-6 {
+  border-radius: 6px;
+}
