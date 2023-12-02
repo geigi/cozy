@@ -75,8 +75,14 @@ class Application(Gtk.Application):
         sys.excepthook = self.handle_exception
         setup_thread_excepthook()
 
+        # We need to call `locale.*textdomain` to get the strings in UI files translated
         locale.bindtextdomain('com.github.geigi.cozy', localedir)
         locale.textdomain('com.github.geigi.cozy')
+
+        # But also `gettext.*textdomain`, to make `_("foo")` in Python work as well
+        gettext.bindtextdomain('com.github.geigi.cozy', localedir)
+        gettext.textdomain('com.github.geigi.cozy')
+
         gettext.install('com.github.geigi.cozy', localedir)
 
     def do_startup(self):
