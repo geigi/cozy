@@ -60,7 +60,7 @@
                                               <object class="AdwViewStackPage">
                                                 <property name="name">recent</property>
                                                 <property name="title" translatable="true">Recent</property>
-                                                <property name="icon-name">clock-outline-symbolic</property>
+                                                <property name="icon-name">recent-symbolic</property>
                                                 <property name="child">
                                                   <object class="GtkLabel">
                                                     <property name="label">Empty</property>
@@ -72,7 +72,7 @@
                                               <object class="AdwViewStackPage">
                                                 <property name="name">author</property>
                                                 <property name="title" translatable="true">Author</property>
-                                                <property name="icon-name">account-symbolic</property>
+                                                <property name="icon-name">person-symbolic</property>
                                                 <property name="child">
                                                   <object class="GtkScrolledWindow" id="sort_author_scroller">
                                                     <property name="name">sort_author_scroller</property>
@@ -104,7 +104,7 @@
                                               <object class="AdwViewStackPage">
                                                 <property name="name">reader</property>
                                                 <property name="title" translatable="true">Reader</property>
-                                                <property name="icon-name">microphone-symbolic</property>
+                                                <property name="icon-name">microphone2-symbolic</property>
                                                 <property name="child">
                                                   <object class="GtkScrolledWindow" id="sort_reader_scroller">
                                                     <property name="focusable">true</property>
