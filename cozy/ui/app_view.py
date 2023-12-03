@@ -24,7 +24,7 @@ class AppView:
 
     def _get_ui_elements(self):
         self._main_stack: Gtk.Stack = self._builder.get_object("main_stack")
-        self._navigation_view: Adw.Leaflet = self._builder.get_object("navigation_view")
+        self._navigation_view: Adw.NavigationView = self._builder.get_object("navigation_view")
 
     def _connect_ui_elements(self):
         self._main_stack.connect("notify::visible-child", self._update_view_model_view)

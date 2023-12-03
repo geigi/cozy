@@ -1,3 +1,4 @@
+import gettext
 import locale
 import logging
 import os
@@ -14,8 +15,6 @@ import gi
 from cozy.db.storage import Storage
 from cozy.ui.widgets.filter_list_box import FilterListBox
 from cozy.ui.widgets.seek_bar import SeekBar
-
-gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, GLib, Adw
 
@@ -57,7 +56,7 @@ def setup_thread_excepthook():
     threading.Thread.__init__ = init
 
 
-class Application(Gtk.Application):
+class Application(Adw.Application):
     ui: CozyUI
     app_controller: AppController
 
@@ -65,7 +64,7 @@ class Application(Gtk.Application):
         self.localedir = localedir
         self.pkgdatadir = pkgdatadir
 
-        Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
+        super().__init__(application_id='com.github.geigi.cozy')
         self.init_custom_widgets()
 
         GLib.setenv("PULSE_PROP_media.role", "music", True)
@@ -75,19 +74,24 @@ class Application(Gtk.Application):
         sys.excepthook = self.handle_exception
         setup_thread_excepthook()
 
-        import gettext
+        # We need to call `locale.*textdomain` to get the strings in UI files translated
+        locale.bindtextdomain('com.github.geigi.cozy', localedir)
+        locale.textdomain('com.github.geigi.cozy')
+
+        # But also `gettext.*textdomain`, to make `_("foo")` in Python work as well
         gettext.bindtextdomain('com.github.geigi.cozy', localedir)
         gettext.textdomain('com.github.geigi.cozy')
+
         gettext.install('com.github.geigi.cozy', localedir)
 
     def do_startup(self):
         log.info(distro.linux_distribution(full_distribution_name=False))
-        log.info("Starting up cozy " + __version__)
+        log.info(f"Starting up cozy {__version__}")
+        log.info(f"libadwaita version: {Adw._version}")
+
         self.ui = CozyUI(self.pkgdatadir, self, __version__)
+        Adw.Application.do_startup(self)
         init_db()
-        Gtk.Application.do_startup(self)
-        Adw.init()
-        log.info("libadwaita version: {}".format(Adw._version))
         self.ui.startup()
 
     def do_activate(self):

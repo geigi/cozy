@@ -3,8 +3,6 @@ from gi.repository import Gtk, GObject, Gdk, Gio
 from cozy.model.book import Book
 from cozy.ui.widgets.album_element import AlbumElement
 
-MAX_LABEL_LENGTH = 60
-
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/book_element.ui')
 class BookElement(Gtk.FlowBoxChild):
@@ -43,6 +41,9 @@ class BookElement(Gtk.FlowBoxChild):
         secondary_button_gesture.connect("released", self._show_context_menu)
         self.container_box.add_controller(secondary_button_gesture)
 
+        # FIXME: When clicking on an album's play button in the recents view,
+        # it jumps to the first position, and GtkGestureLongPress thinks it's
+        # a long press gesture, although it's just an unfinished long press
         long_press_gesture = Gtk.GestureLongPress()
         long_press_gesture.connect("pressed", self._show_context_menu)
         self.container_box.add_controller(long_press_gesture)
@@ -74,10 +75,7 @@ class BookElement(Gtk.FlowBoxChild):
         self.install_action("book_element.remove_book", None, self._remove_book)
         menu_model.append(_("Remove from library"), "book_element.remove_book")
 
-        menu = Gtk.PopoverMenu(
-            menu_model=menu_model,
-            has_arrow=False,
-        )
+        menu = Gtk.PopoverMenu(menu_model=menu_model, has_arrow=False)
         menu.set_parent(self.art)
 
         return menu
@@ -120,17 +118,14 @@ class BookElement(Gtk.FlowBoxChild):
     def _on_key_press_event(self, keyval, *_):
         if keyval == Gdk.KEY_Return and super().get_sensitive():
             self.emit("open-book-overview", self.book)
-            return True
 
-    def _on_cover_enter_notify(self, widget: Gtk.Widget, *_):
+    def _on_cover_enter_notify(self, *_):
         self.art.set_hover(True)
-        return True
 
-    def _on_cover_leave_notify(self, widget: Gtk.Widget, *_):
+    def _on_cover_leave_notify(self, *_):
         self.art.set_hover(False)
-        return True
 
-    def _on_album_art_press_event(self, _, __):
+    def _on_album_art_press_event(self, *_):
         self.emit("play-pause-clicked", self.book)
 
 

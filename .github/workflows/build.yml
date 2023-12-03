@@ -23,8 +23,3 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
-    
-    - name: Install Cozy
-      run: |
-        meson --prefix=/usr ./build
-        ninja -C build install

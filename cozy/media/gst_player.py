@@ -5,12 +5,9 @@ import time
 from enum import Enum, auto
 from typing import Optional
 
-import gi
-
 from cozy.architecture.event_sender import EventSender
 from cozy.report import reporter
 
-gi.require_version('Gst', '1.0')
 from gi.repository import Gst
 
 log = logging.getLogger("gst_player")

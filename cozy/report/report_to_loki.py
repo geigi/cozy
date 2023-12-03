@@ -13,10 +13,6 @@ from cozy.version import __version__ as CozyVersion
 from peewee import __version__ as PeeweeVersion
 from mutagen import version_string as MutagenVersion
 
-import gi
-
-gi.require_version('Gtk', '4.0')
-
 from gi.repository import Gtk
 
 URL = 'https://errors.cozy.sh:3100/api/prom/push'

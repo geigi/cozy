@@ -98,8 +98,6 @@ class BookDetailView(Gtk.Box):
     def _connect_widgets(self):
         self.play_book_button.connect("clicked", self._play_book_clicked)
         self.download_switch.connect("state-set", self._download_switch_changed)
-        # TODO: Use property notification for GtkWindow:default-width and GtkWindow:default-height
-        #self.main_flow_box.connect("size-allocate", self._main_flow_box_size_changed)
 
     def _on_book_changed(self):
         if not self._view_model.book:
@@ -291,19 +289,6 @@ class BookDetailView(Gtk.Box):
 
     def _download_switch_changed(self, _, state: bool):
         self._view_model.download_book(state)
-
-    def _main_flow_box_size_changed(self, _, __):
-        if self._is_chapter_box_wrapped():
-            vertical_scroll_policy = Gtk.PolicyType.NEVER
-        else:
-            vertical_scroll_policy = Gtk.PolicyType.ALWAYS
-
-        self.book_overview_scroller.set_policy(Gtk.PolicyType.NEVER, vertical_scroll_policy)
-
-    def _is_chapter_box_wrapped(self):
-        x, _ = self.book_overview_scroller.translate_coordinates(self.main_flow_box, 0, 0)
-
-        return x < 100
 
     def _set_book_download_status(self):
         if not self._view_model.is_book_external:

@@ -3,7 +3,7 @@ import os
 import webbrowser
 from threading import Thread
 
-from gi.repository import Gtk, Gio, Gdk, GLib, GObject
+from gi.repository import Adw, Gtk, Gio, Gdk, GLib, GObject
 
 import cozy.control.filesystem_monitor as fs_monitor
 import cozy.ext.inject as inject
@@ -62,7 +62,6 @@ class CozyUI(EventSender, metaclass=Singleton):
 
     def startup(self):
         self.__init_resources()
-        self.__init_css()
 
     def __init_resources(self):
         """
@@ -84,53 +83,43 @@ class CozyUI(EventSender, metaclass=Singleton):
 
         self.window: Gtk.Window = self.window_builder.get_object("app_window")
 
-    def __init_css(self):
-        """
-        Initialize the main css files and providers.
-        Add css classes to the default screen style context.
-        """
-        main_cssProviderFile = Gio.File.new_for_uri("resource:///com/github/geigi/cozy/application.css")
-        main_cssProvider = Gtk.CssProvider()
-        main_cssProvider.load_from_file(main_cssProviderFile)
-
-        display = Gdk.Display.get_default()
-        Gtk.StyleContext.add_provider_for_display(display, main_cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-
     def __init_window(self):
         """
-        Add fields for all ui objects we need to access from code.
-        Initialize everything we can't do from glade like events and other stuff.
+        Add fields for all UI objects we need to access from code.
+        Initialize everything we can't do from the UI files like events and other stuff.
         """
-        log.info("Initialize main window")
+        log.info("Initializing main window")
         self._restore_window_size()
+        self.window.set_title("Cozy")
         self.window.set_application(self.app)
-        self.window.present()
+
         self.window.connect("close-request", self.on_close)
-
-        self._drop_target = Gtk.DropTarget()
-        self._drop_target.connect("drop", self.__on_drag_data_received)
-        self.window.add_controller(self._drop_target)
-
         self.window.connect("notify::default-width", self._on_window_size_allocate)
         self.window.connect("notify::default-height", self._on_window_size_allocate)
-        self.window.title = "Cozy"
 
-        self.book_box = self.window_builder.get_object("book_box")
+        self._drop_target = Gtk.DropTarget()
+        self._drop_target.set_gtypes([Gdk.FileList])
+        self._drop_target.set_actions(Gdk.DragAction.COPY)
+        self._drop_target.connect("enter", self._on_drag_enter)
+        self._drop_target.connect("leave", self._on_drag_leave)
+        self._drop_target.connect("drop", self._on_drag_data_received)
+        self.window.add_controller(self._drop_target)
+
         self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
         self.navigation_view: Adw.NavigationView = self.window_builder.get_object("navigation_view")
+        self.drop_revealer: Gtk.Revealer = self.window_builder.get_object("drop_revealer")
 
-        self.no_media_file_chooser = self.window_builder.get_object(
-            "no_media_file_chooser")
-        self.no_media_file_chooser.connect(
-            "clicked", self._open_audiobook_dir_selector)
+        self.no_media_file_chooser = self.window_builder.get_object("no_media_file_chooser")
+        self.no_media_file_chooser.connect("clicked", self._open_audiobook_dir_selector)
 
-        # get about dialog
         self.about_dialog = self.about_builder.get_object("about_dialog")
         self.about_dialog.set_modal(self.window)
         self.about_dialog.connect("close-request", self.hide_window)
         self.about_dialog.set_version(self.version)
 
-        self._preferences: PreferencesView = PreferencesView()
+        self._preferences = PreferencesView()
+
+        self.window.present()
 
     def __init_actions(self):
         """
@@ -304,11 +293,20 @@ class CozyUI(EventSender, metaclass=Singleton):
         action.set_state(value)
         self.application_settings.hide_offline = value.get_boolean()
 
-    def __on_drag_data_received(self, widget, value, *_):
-        print(value)
-        # if target_type == 80:
-        #     thread = Thread(target=self._files.copy, args=[selection], name="DragDropImportThread")
-        #     thread.start()
+    def _on_drag_enter(self, *_):
+        self.drop_revealer.set_reveal_child(True)
+        self.main_stack.add_css_class("blurred")
+        return True
+
+    def _on_drag_leave(self, *_):
+        self.drop_revealer.set_reveal_child(False)
+        self.main_stack.remove_css_class("blurred")
+        return True
+
+    def _on_drag_data_received(self, widget, value, *_):
+        thread = Thread(target=self._files.copy, args=[value.get_files()], name="DnDImportThread")
+        thread.start()
+        return True
 
     def _set_audiobook_path(self, path):
         self._settings_view_model.add_first_storage_location(path)

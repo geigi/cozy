@@ -40,8 +40,8 @@ class MediaController(Adw.BreakpointBin):
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
-        self._media_control_box: Gtk.Box = main_window_builder.get_object("media_control_box")
-        self._media_control_box.append(self)
+        media_control_box: Gtk.Box = main_window_builder.get_object("media_control_box")
+        media_control_box.append(self)
 
         self.seek_bar = SeekBar()
         self.seek_bar_container.append(self.seek_bar)
@@ -90,30 +90,24 @@ class MediaController(Adw.BreakpointBin):
             self.cover_img.set_from_icon_name("book-open-variant-symbolic")
             self.cover_img.props.pixel_size = COVER_SIZE
 
-    def _on_book_changed(self):
+    def _on_book_changed(self) -> None:
         book = self._playback_control_view_model.book
-        if book:
-            visibility = True
-            self._set_book()
-        else:
-            visibility = False
+        self._set_book(book)
+        self._show_media_information(bool(book))
 
-        self._show_media_information(visibility)
-
-    def _show_media_information(self, visibility):
+    def _show_media_information(self, visibility: bool) -> None:
         self.title_label.set_visible(visibility)
         self.subtitle_label.set_visible(visibility)
         self.cover_img.set_visible(visibility)
         self.seek_bar.visible = visibility
 
-    def _set_book(self):
-        book = self._playback_control_view_model.book
-
-        self._set_cover_image(book)
-        self.title_label.set_text(book.name)
-        self.title_label.set_tooltip_text(book.name)
-        self.subtitle_label.set_text(book.current_chapter.name)
-        self.subtitle_label.set_tooltip_text(book.current_chapter.name)
+    def _set_book(self, book: Book) -> None:
+        if book is not None:
+            self._set_cover_image(book)
+            self.title_label.set_text(book.name)
+            self.title_label.set_tooltip_text(book.name)
+            self.subtitle_label.set_text(book.current_chapter.name)
+            self.subtitle_label.set_tooltip_text(book.current_chapter.name)
 
     def _on_play_changed(self):
         if self._playback_control_view_model.playing:

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/github/geigi/cozy">
-    <file>application.css</file>
+    <file>style.css</file>
     <file preprocess="xml-stripblanks">about.ui</file>
     <file preprocess="xml-stripblanks">album_element.ui</file>
     <file preprocess="xml-stripblanks">book_detail.ui</file>
@@ -17,7 +17,6 @@
     <file preprocess="xml-stripblanks">search_popover.ui</file>
     <file preprocess="xml-stripblanks">seek_bar.ui</file>
     <file preprocess="xml-stripblanks">timer_popover.ui</file>
-    <file preprocess="xml-stripblanks">warning_popover.ui</file>
     <file preprocess="xml-stripblanks">welcome.ui</file>
     <file preprocess="xml-stripblanks">whats_new.ui</file>
     <file preprocess="xml-stripblanks">whats_new_importer.ui</file>

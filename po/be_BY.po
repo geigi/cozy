@@ -4,12 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2019
-# abc Def <hdogan1974@gmail.com>, 2020
-# Bün Colak <bunyamincolak@gmail.com>, 2020
-# Oğuzhan KIRLI <oguzhankirli2004@gmail.com>, 2021
-# Veysel Erden, 2022
-# Sabri Ünal <libreajans@gmail.com>, 2023
+# Yahor Haurylenka, 2023
 # 
 #, fuzzy
 msgid ""
@@ -18,296 +13,309 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-09 20:31+0200\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>, 2023\n"
-"Language-Team: Turkish (https://app.transifex.com/geigi/teams/78138/tr/)\n"
+"Last-Translator: Yahor Haurylenka, 2023\n"
+"Language-Team: Belarusian (Belarus) (https://app.transifex.com/geigi/teams/78138/be_BY/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: be_BY\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: cozy/application.py:106
 msgid "Audiobooks"
-msgstr "Sesli Kitaplar"
+msgstr "Аўдыякнігі"
 
 #: cozy/control/offline_cache.py:197
 msgid "Copying"
-msgstr "Kopyalanıyor"
+msgstr "Капіяванне"
 
 #: cozy/media/files.py:69
 msgid "Cannot copy: Audiobook directory is read only"
-msgstr "Kopyalanamadı: Sesli kitap dizini salt okunur"
+msgstr ""
+"Не ўдалося скапіяваць: каталог з аўдыякнігамі даступны толькі для чытання"
 
 #: cozy/media/files.py:71
 msgid "Cannot copy: Disk is full"
-msgstr "Kopyalanamadı: Disk dolu"
+msgstr "Не ўдалося скапіяваць: дыск запоўнены"
 
 #: cozy/media/files.py:73 cozy/media/files.py:89
 msgid "Cannot copy: Permission denied"
-msgstr "Kopyalanamadı: Yeterli izin yok"
+msgstr "Не ўдалося скапіяваць: бракуе правоў"
 
 #: cozy/media/importer.py:121
 msgid "Error while importing new files"
-msgstr "Yeni dosyaları içe aktarırken hata"
+msgstr "Памылка пры імпартаванні новых файлаў"
 
 #: cozy/model/track.py:38
 msgid "Chapter"
-msgstr "Bölüm"
+msgstr "Раздзел"
 
 #: cozy/tools.py:92 cozy/tools.py:96
 #, python-brace-format
 msgid "{hours} hour"
 msgid_plural "{hours} hours"
-msgstr[0] "{hours} saat"
-msgstr[1] "{hours} saat"
+msgstr[0] "{hours} гадзіна"
+msgstr[1] "{hours} гадзін"
+msgstr[2] "{hours} гадзін"
+msgstr[3] "{hours} гадзін"
 
 #: cozy/tools.py:94 cozy/tools.py:98
 #, python-brace-format
 msgid "{minutes} minute"
 msgid_plural "{minutes} minutes"
-msgstr[0] "{minutes} dakika"
-msgstr[1] "{minutes} dakika"
+msgstr[0] "{hours} хвіліна"
+msgstr[1] "{hours} хвілін"
+msgstr[2] "{hours} хвілін"
+msgstr[3] "{hours} хвілін"
 
 #: cozy/tools.py:100
 #, python-brace-format
 msgid "{seconds} second"
 msgid_plural "{seconds} seconds"
-msgstr[0] "{seconds} saniye"
-msgstr[1] "{seconds} saniye"
+msgstr[0] "{seconds} секунда"
+msgstr[1] "{seconds} секунд"
+msgstr[2] "{seconds} секунд"
+msgstr[3] "{seconds} секунд"
 
 #: cozy/tools.py:102
 msgid "finished"
-msgstr "bitti"
+msgstr "скончана"
 
 #: cozy/tools.py:126
 msgid "never"
-msgstr "hiçbir zaman"
+msgstr "ніколі"
 
 #: cozy/tools.py:128
 msgid "today"
-msgstr "bugün"
+msgstr "сёння"
 
 #: cozy/tools.py:130
 msgid "yesterday"
-msgstr "dün"
+msgstr "учора"
 
 #: cozy/tools.py:132
 #, python-format
 msgid "%s days ago"
-msgstr "%s gün önce"
+msgstr "%s дзён таму"
 
 #: cozy/tools.py:134
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
-msgstr[0] "{weeks} hafta önce"
-msgstr[1] "{weeks} hafta önce"
+msgstr[0] "{weeks} тыдзень таму"
+msgstr[1] "{weeks} тыдняў таму"
+msgstr[2] "{weeks} тыдняў таму"
+msgstr[3] "{weeks} тыдняў таму"
 
 #: cozy/tools.py:136
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
-msgstr[0] "{months} ay önce"
-msgstr[1] "{months} ay önce"
+msgstr[0] "{months} месяц таму"
+msgstr[1] "{months} месяцаў таму"
+msgstr[2] "{months} месяцаў таму"
+msgstr[3] "{months} месяцаў таму"
 
 #: cozy/tools.py:138
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
-msgstr[0] "{years} yıl önce"
-msgstr[1] "{years} yıl önce"
+msgstr[0] "{years} год таму"
+msgstr[1] "{years} гадоў таму"
+msgstr[2] "{years} гадоў таму"
+msgstr[3] "{years} гадоў таму"
 
 #: cozy/ui/book_detail_view.py:313
 msgid "Downloaded"
-msgstr "İndirildi"
+msgstr "Спампавана"
 
 #: cozy/ui/book_detail_view.py:316 data/ui/book_detail.ui:152
 msgid "Download"
-msgstr "İndir"
+msgstr "Спампаваць"
 
 #: cozy/ui/chapter_element.py:27
 msgid "Play this part"
-msgstr "Bu bölümü oynat"
+msgstr "Слухаць гэтую частку"
 
 #: cozy/ui/disk_element.py:27
 msgid "Disc"
-msgstr "Disk"
+msgstr "Дыск"
 
 #: cozy/ui/file_not_found_dialog.py:56
 msgid "All files"
-msgstr "Tüm dosyalar"
+msgstr "Усе файлы"
 
 #: cozy/ui/main_view.py:301 data/ui/main_window.ui:412
 msgid "Set Audiobooks Directory"
-msgstr "Sesli Kitaplar Dizinini Ayarla"
+msgstr "Задаць каталог аўдыякніг"
 
 #: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
 #, python-brace-format
 msgid "{storage} is offline."
-msgstr "{storage} çevrimdışı."
+msgstr "{storage} па-за сеткай."
 
 #: cozy/ui/widgets/book_element.py:52
 msgid "Mark as read"
-msgstr "Okundu olarak işaretle"
+msgstr "Пазначыць як прачытанае"
 
 #: cozy/ui/widgets/book_element.py:55
 msgid "Open in file browser"
-msgstr "Dosya yöneticisinde aç"
+msgstr "Адкрыць у файлавым менеджары"
 
 #: cozy/ui/widgets/book_element.py:58
 msgid "Remove from library"
-msgstr "Kütüphaneden kaldır"
+msgstr "Выдаліць з бібліятэкі"
 
 #: cozy/ui/widgets/error_reporting.py:12
 msgid "Disabled"
-msgstr "Engelli"
+msgstr "Адключана"
 
 #: cozy/ui/widgets/error_reporting.py:13
 msgid "Basic error reporting"
-msgstr "Temel Hata Raporlama"
+msgstr "Справаздача аб асноўных памылках"
 
 #: cozy/ui/widgets/error_reporting.py:14
 msgid "Detailed error reporting"
-msgstr "Detaylı hata raporlama"
+msgstr "Падрабязная справаздача аб памылках"
 
 #: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:240
 msgid "Detailed error reporting with import errors"
-msgstr "İçe aktarma hataları ile detaylı hata raporlama"
+msgstr "Падрабязная справаздача аб памылках уключая памылкі імпарту"
 
 #: cozy/ui/widgets/error_reporting.py:19
 msgid "No error or crash reporting."
-msgstr "Hata veya çökme raporu yok."
+msgstr "Не рабіць справаздачы аб памылках і збоях."
 
 #: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:259
 msgid "The following information will be sent in case of an error or crash:"
-msgstr "Hata ve çökme durumunda ilgili bilgi gönderilecek:"
+msgstr "У выпадку памылкі або збою будзе адпраўлена наступная інфармацыя:"
 
 #: cozy/ui/widgets/error_reporting.py:25
 msgid "Which type of error occurred"
-msgstr "Hangi tip hata meydana geldi"
+msgstr "Памылка якога тыпу адбылася"
 
 #: cozy/ui/widgets/error_reporting.py:26
 msgid "Line of code where an error occurred"
-msgstr "Hata meydana gelen yerdeki bir satır kod"
+msgstr "Радок кода, дзе адбылася памылка"
 
 #: cozy/ui/widgets/error_reporting.py:27
 msgid "Cozy's version"
-msgstr "Cozy sürümü"
+msgstr "Версія Cozy"
 
 #: cozy/ui/widgets/error_reporting.py:28
 msgid "Linux distribution"
-msgstr "Linux dağıtımı"
+msgstr "Дыстрыбутыў Linux"
 
 #: cozy/ui/widgets/error_reporting.py:29
 msgid "Desktop environment"
-msgstr "Masaüstü ortamı"
+msgstr "Асяроддзе працоўнага стала"
 
 #: cozy/ui/widgets/error_reporting.py:30
 msgid "Media type of files that Cozy couldn't import"
-msgstr "Cozy'nin içe aktaramadığı ortam türü dosyaları"
+msgstr "Тып медыяфайлаў, якія Cozy не змог імпартаваць"
 
 #: cozy/ui/widgets/filter_list_box.py:20
 #: cozy/view_model/library_view_model.py:54
 #: cozy/view_model/library_view_model.py:160
 msgid "All"
-msgstr "Tümü"
+msgstr "Усе"
 
 #: cozy/ui/widgets/filter_list_box.py:21
 msgid "Display all books"
-msgstr "Tüm kitapları göster"
+msgstr "Паказаць усе кнігі"
 
 #: cozy/ui/widgets/search_results.py:73
 msgid "Jump to author "
-msgstr "Yazara geç"
+msgstr "Перайсці да аўтара"
 
 #: cozy/ui/widgets/search_results.py:76
 msgid "Jump to reader "
-msgstr "Seslendirene geç"
+msgstr "Перайсці да чытальніка"
 
 #: cozy/ui/widgets/search_results.py:100
 msgid "Play this book"
-msgstr "Bu kitabı oynat"
+msgstr "Слухаць гэтую кнігу"
 
 #: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
 msgid "min"
-msgstr "dk"
+msgstr "мін"
 
 #: cozy/ui/widgets/sleep_timer.py:65
 msgid "Off"
-msgstr "Kapat"
+msgstr "выкл."
 
 #: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:380
 msgid "External drive"
-msgstr "Harici sürücü"
+msgstr "Знешні дыск"
 
 #: cozy/ui/widgets/storage_list_box_row.py:73
 msgid "Internal drive"
-msgstr "Dahili sürücü"
+msgstr "Унутраны дыск"
 
 #: cozy/view_model/headerbar_view_model.py:91
 msgid "Refreshing audio book collection"
-msgstr "Sesli kitap koleksiyonu yenileniyor"
+msgstr "Абнаўленне калекцыі аўдыякніг"
 
 #: cozy/view_model/headerbar_view_model.py:100
 #: cozy/view_model/headerbar_view_model.py:116
 msgid "Copying new files…"
-msgstr "Yeni dosyalar kopyalanıyor..."
+msgstr "Капіяванне новых файлаў…"
 
 #: cozy/view_model/headerbar_view_model.py:107
 msgid "Changing audio book location…"
-msgstr "Sesli kitap konumu değiştiriliyor…"
+msgstr "Змена размяшчэння аўдыякнігі…"
 
 #: data/ui/about.ui:16
 msgid "GitHub"
-msgstr "Github"
+msgstr "GitHub"
 
 #: data/ui/album_element.ui:104
 msgid "Play"
-msgstr "Oynat"
+msgstr "Іграць"
 
 #: data/ui/book_detail.ui:219
 msgid "Remaining"
-msgstr "Kalan"
+msgstr "Засталося"
 
 #: data/ui/book_detail.ui:274
 msgid "Total"
-msgstr "Toplam"
+msgstr "Усяго"
 
 #: data/ui/book_detail.ui:290
 msgid "Last played"
-msgstr "Son oynatılan"
+msgstr "Апошні раз прайгравалася"
 
 #: data/ui/book_detail.ui:306
 msgid "Published"
-msgstr "Yayınlayan"
+msgstr "Апублікавана"
 
 #: data/ui/book_detail.ui:341
 msgid "Some or all files of this book cannot be found."
-msgstr "Bu kitabın tüm ya da bazı sayfaları bulunamadı."
+msgstr "Немагчыма знайсці некаторыя або ўсе файлы гэтай кнігі."
 
 #: data/ui/book_detail.ui:364
 msgid "unavailable"
-msgstr "erişilemez"
+msgstr "недаступна"
 
 #: data/ui/book_detail.ui:533
 msgid "Loading chapters, please wait..."
-msgstr "Bölümler yükleniyor, lütfen bekleyin..."
+msgstr "Загрузка раздзелаў, калі ласка, пачакайце..."
 
 #: data/ui/book_element.ui:36
 msgid "Open book overview"
-msgstr "Kitap önizlemesini aç"
+msgstr "Адкрыць агляд кнігі"
 
 #: data/ui/db_migration_failed.ui:31
 msgid "Close Cozy"
-msgstr "Cozy'yi Kapat"
+msgstr "Закрыць Cozy"
 
 #: data/ui/db_migration_failed.ui:47
 msgid "Receive help on GitHub"
-msgstr "GitHub'ta yardım al"
+msgstr "Атрымаць дапамогу на GitHub"
 
 #: data/ui/db_migration_failed.ui:108
 msgid "An error occured while updating the database"
-msgstr "Veritabanı güncellenirken bir hata oluştu"
+msgstr "Пры абнаўленні базы даных адбылася памылка"
 
 #: data/ui/db_migration_failed.ui:129
 msgid ""
@@ -316,30 +324,30 @@ msgid ""
 "Until this issue is resolved please use version 0.9.5 of Cozy.\n"
 "You can help resolve this problem by reporting an issue on GitHub."
 msgstr ""
-"Veritabanı güncellenirken bir hata meydana geldi ve Cozy başlatılamıyor.\n"
-"Veritabanının bir yedeği güncelleme işleminden önce alındı ve şimdi geri yüklendi.\n"
-"Bu sorun düzeltilene kadar lütfen Cozy'nin 0.9.5 sürümünü kullanın.\n"
-"Bu problemin düzelmesine GitHub'ta bir hata kaydı açarak yardımcı olabilirsiniz."
+"Падчас абнаўлення базы дадзеных адбылася памылка, і Cozy не зможа запусціцца.\n"
+"Рэзервовая копія базы дадзеных была створана перад абнаўленнем і цяпер адноўлена.\n"
+"Пакуль гэтая праблема не будзе вырашана, выкарыстоўвайце версію Cozy 0.9.5.\n"
+"Вы можаце дапамагчы вырашыць гэту праблему, паведаміўшы аб праблеме на GitHub."
 
 #: data/ui/delete_book_dialog.ui:31 data/ui/file_not_found.ui:19
 msgid "Cancel"
-msgstr "İptal"
+msgstr "Скасаваць"
 
 #: data/ui/delete_book_dialog.ui:45
 msgid "Delete Audiobook"
-msgstr "Sesli Kitabı Sil"
+msgstr "Выдаліць аўдыякнігу"
 
 #: data/ui/delete_book_dialog.ui:105
 msgid "Are you sure you want to delete the selected audiobook?"
-msgstr "Seçili sesli kitabı silmek istediğine emin misin?"
+msgstr "Вы ўпэўнены, што хочаце выдаліць выбраную аўдыякнігу?"
 
 #: data/ui/delete_book_dialog.ui:126
 msgid "The audiobook will be removed from your disk and from Cozy's library."
-msgstr "Bu sesli kitap sabit diskinden ve Cozy kütüphanesinden kaldırılacak."
+msgstr "Аўдыякніга будзе выдалена з вашага дыска і з бібліятэкі Cozy."
 
 #: data/ui/error_reporting.ui:29 data/ui/preferences.ui:458
 msgid "User feedback"
-msgstr "Kullanıcı geri bildirimi"
+msgstr "Водгукі карыстальнікаў"
 
 #: data/ui/error_reporting.ui:98
 msgctxt "Error and crash reporting dialog"
@@ -347,8 +355,8 @@ msgid ""
 "You can help improve Cozy by contributing information in case of errors and "
 "crashes. "
 msgstr ""
-"Hatalar ve çökmeler durumunda bilgi sağlayarak Cozy'nin geliştirilmesine "
-"yardımcı olabilirsiniz. "
+"Вы можаце дапамагчы палепшыць Cozy, дасылаючы інфармацыю ў выпадку памылак і"
+" збояў."
 
 #: data/ui/error_reporting.ui:112
 msgctxt "Error and crash reporting dialog"
@@ -357,65 +365,65 @@ msgid ""
 "never collect personal data, files you import or any information that could "
 "identify you."
 msgstr ""
-"Bu bilgilere katkıda bulunmak isteğe bağlıdır ve tamamen anonimdir. Kişisel "
-"verileri, içe aktardığınız dosyaları veya sizi tanımlayabilecek herhangi bir"
-" bilgiyi asla toplamayacağız. "
+"Прадастаўленне гэтай інфармацыі неабавязкова і цалкам ананімна. Мы ніколі не"
+" будзем збіраць асабістыя даныя, файлы, якія вы імпартуеце, або любую "
+"інфармацыю, якая можа вас ідэнтыфікаваць."
 
 #: data/ui/error_reporting.ui:127
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
-"Cozy açık kaynaklıdır ve kullanıcı geri bildirim kaynak kodu buradan "
-"incelenebilir: "
+"Cozy з'яўляецца праграмай з адкрытым зыходным кодам, а водгукі "
+"карыстальнікаў можна знайсці тут:"
 
 #: data/ui/file_not_found.ui:32
 msgid "Locate"
-msgstr "Yer belirle"
+msgstr "Размяшчэнне"
 
 #: data/ui/file_not_found.ui:86
 msgid "File not found"
-msgstr "Dosya bulunamadı"
+msgstr "Файл не знойдзены"
 
 #: data/ui/file_not_found.ui:119
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "Dosya bulunamadı. Yerini belirlemek ister misiniz?"
+msgstr "Гэты файл не знойдзены. Вы хочаце знайсці яго ўручную?"
 
 #: data/ui/headerbar.ui:56
 msgid "Display background task progress"
-msgstr "Arkaplanda işlemin ilerleyişini göster"
+msgstr "Адлюстраванне прагрэсу задачы ў фонавым рэжыме"
 
 #: data/ui/headerbar.ui:70
 msgid "Search your library"
-msgstr "Kütüphanede ara"
+msgstr "Пошук у вашай бібліятэцы"
 
 #: data/ui/headerbar.ui:80
 msgid "Search menu button"
-msgstr "Arama menü düğmesi"
+msgstr "Кнопка меню пошуку"
 
 #: data/ui/headerbar.ui:81
 msgid "Open the search popover"
-msgstr "Arama açılır kutusunu aç"
+msgstr "Адкрыць акно пошуку"
 
 #: data/ui/headerbar.ui:96
 msgid "Options"
-msgstr "Seçenekler"
+msgstr "Параметры"
 
 #: data/ui/headerbar.ui:107
 msgid "Options menu button"
-msgstr "Seçenekler menü düğmesi"
+msgstr "Кнопка меню параметраў"
 
 #: data/ui/headerbar.ui:108
 msgid "Open the options popover"
-msgstr "Seçenekler açılır kutusunu aç"
+msgstr "Адкрыць акно параметраў"
 
 #: data/ui/import_failed.ui:27
 msgid "Ok"
-msgstr "Tamam"
+msgstr "Так"
 
 #: data/ui/import_failed.ui:81
 msgid "Some files could not be imported"
-msgstr "Bazı dosyalar içe aktarılamadı"
+msgstr "Не ўдалося імпартаваць некаторыя файлы"
 
 #: data/ui/import_failed.ui:134
 msgid ""
@@ -425,323 +433,321 @@ msgid ""
 "- The file(s) are no valid audio files\n"
 "- The file(s) are corrupt"
 msgstr ""
-"Bunun birden çok nedeni olabilir:\n"
-"- Ses biçimi desteklenmiyor\n"
-"- Yol veya dosya adı utf-8 olmayan karakterler içeriyor\n"
-"- Dosya(lar) geçerli bir ses dosyası değildir\n"
-"- Dosya(lar) bozuk\n"
-" "
+"Гэта можа быць па некалькіх прычынах:\n"
+"- Аўдыяфармат не падтрымліваецца\n"
+"- Шлях або імя файла змяшчае сімвалы, адрозныя ад UTF-8\n"
+"- Файл(ы) не з'яўляюцца сапраўднымі аўдыяфайламі\n"
+"- Файл(ы) пашкоджаны"
 
 #: data/ui/main_window.ui:68
 msgid "Recent"
-msgstr "Son kullanılan"
+msgstr "Апошнія"
 
 #: data/ui/main_window.ui:90
 msgid "List of authors"
-msgstr "Yazar listesi"
+msgstr "Спіс аўтараў"
 
 #: data/ui/main_window.ui:106 data/ui/main_window.ui:250
 #: data/ui/search_popover.ui:107
 msgid "Author"
-msgstr "Yazar"
+msgstr "Аўтар"
 
 #: data/ui/main_window.ui:128
 msgid "List of readers"
-msgstr "Seslendiren listesi"
+msgstr "Спіс дыктараў"
 
 #: data/ui/main_window.ui:144 data/ui/search_popover.ui:201
 msgid "Reader"
-msgstr "Seslendiren"
+msgstr "Дыктар"
 
 #: data/ui/main_window.ui:189
 msgid "List of books"
-msgstr "Kitap listesi"
+msgstr "Спіс кніг"
 
 #: data/ui/main_window.ui:222
 msgid ""
 "Start exploring your library by switching to the Author or Reader view."
 msgstr ""
-"Yazar veya Okuyucu görünümüne geçerek kütüphanenizi keşfetmeye başlayın."
+"Пачніце вывучаць сваю бібліятэку, пераключыўшыся на прагляд \"Аўтар\" або "
+"\"Дыктар\"."
 
 #: data/ui/main_window.ui:280
 msgid "Stay tuned while Cozy is preparing your library…"
-msgstr "Cosy kitaplığınızı hazırlarken hazır beklemeye edin… "
+msgstr "Пачакайце, пакуль Cozy рыхтуе бібліятэку…"
 
 #: data/ui/main_window.ui:334
 msgid "Import your Audiobooks"
-msgstr "Sesli Kitapları içe aktar"
+msgstr "Імпарт вашых аўдыякніг"
 
 #: data/ui/main_window.ui:353
 msgid ""
 "Cozy automatically imports your audiobooks in one directory - your library"
 msgstr ""
-"Cozy sesli kitaplarınızı kendiliğinden bir klasöre - kütüphanesine içe "
-"aktarır"
+"Cozy аўтаматычна імпартуе вашыя аўдыякнігі ў адзін каталог - вашую "
+"бібліятэку"
 
 #: data/ui/main_window.ui:385
 msgid "Drag & Drop"
-msgstr "Sürükle & Bırak"
+msgstr "Перацягнуць"
 
 #: data/ui/main_window.ui:387
 msgid "Drag your audiobooks into cozy and they will be automatically imported"
 msgstr ""
-"Sesli kitaplarınızı Cozy'ye sürükleyin, kendiliğinden içe aktarılacaktır"
+"Перацягніце свае аўдыякнігі ў cozy, і яны будуць імпартаваны аўтаматычна"
 
 #: data/ui/main_window.ui:414
 msgid "Load audiobooks from a directory, network drive or an external disk"
-msgstr ""
-"Sesli kitaplarınızı bir dizinden, ağdaki bir sürücüden veya harici diskten "
-"yükleyin"
+msgstr "Загружайце аўдыякнігі з каталога, сеткавага дыска або знешняга дыска"
 
 #: data/ui/main_window.ui:417
 msgid "Select"
-msgstr "Seç"
+msgstr "Выбраць"
 
 #: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
 #: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:70
 msgid "Rewind"
-msgstr "Geri"
+msgstr "Пераматаць"
 
 #: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
 #: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:77
 msgid "Rewind button"
-msgstr "Geri sarma düğmesi"
+msgstr "Кнопка перамоткі"
 
 #: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
 #: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:78
 msgid "Rewind playback"
-msgstr "Geriye Sar"
+msgstr "Зваротнае прайграванне"
 
 #: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
 #: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:100
 msgid "Start playback"
-msgstr "Oynatmayı başlat"
+msgstr "Пачаць прайграванне"
 
 #: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
 #: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:107
 msgid "Play/Pause Button"
-msgstr "Oynat/Durdur Düğmesi"
+msgstr "Кнопка прайгр./паўзы"
 
 #: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
 #: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:108
 msgid "Start or pause the playback"
-msgstr "Oynatmayı başlat veya durdur"
+msgstr "Запуск ці прыпыненне прайгравання"
 
 #: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
 #: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:131
 msgid "Forward"
-msgstr "İleri"
+msgstr "Наперад"
 
 #: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
 #: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:138
 msgid "Forward button"
-msgstr "İleri tuşu"
+msgstr "Кнопка \"Наперад\""
 
 #: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
 #: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:139
 msgid "Forward Playback"
-msgstr "İleriye Sar"
+msgstr "Прайграванне наперад"
 
 #: data/ui/media_controller.ui:175 data/ui/media_controller_big.ui:76
 msgid "Currently playing"
-msgstr "Şu anda oynatılan"
+msgstr "Цяпер прайграваецца"
 
 #: data/ui/media_controller.ui:190 data/ui/media_controller_big.ui:97
 msgid "Booktitle"
-msgstr "Kitap başlığı"
+msgstr "Назва кнігі"
 
 #: data/ui/media_controller.ui:191 data/ui/media_controller_big.ui:98
 msgid "Title of currently playing book"
-msgstr "Şu anda oynatılan kitabın başlığı"
+msgstr "Назва кнігі, якая зараз прайграваецца"
 
 #: data/ui/media_controller.ui:217 data/ui/media_controller_big.ui:126
 msgid "Part name"
-msgstr "Bölüm adı"
+msgstr "Назва часткі"
 
 #: data/ui/media_controller.ui:218 data/ui/media_controller_big.ui:127
 msgid "Title of the currently playing part"
-msgstr "Şuan oynatılan bölümün başlığı"
+msgstr "Назва бягучай часткі"
 
 #: data/ui/media_controller.ui:256 data/ui/seek_bar.ui:20
 msgid "Elapsed time"
-msgstr "Geçen zaman"
+msgstr "Пройдзены час"
 
 #: data/ui/media_controller.ui:264 data/ui/seek_bar.ui:28
 msgid "Time elapsed"
-msgstr "Zaman geçti"
+msgstr "Прайшло часу"
 
 #: data/ui/media_controller.ui:265 data/ui/seek_bar.ui:29
 msgid "Elapsed time of current part"
-msgstr "Geçerli bölümün geçen süresi"
+msgstr "Мінулы час бягучай часткі"
 
 #: data/ui/media_controller.ui:281 data/ui/seek_bar.ui:45
 msgid "Jump to position in current chapter"
-msgstr "Geçerli bölümdeki konuma atla"
+msgstr "Перайсці на пазіцыю ў бягучым раздзеле"
 
 #: data/ui/media_controller.ui:290 data/ui/seek_bar.ui:56
 msgid "Position slider"
-msgstr "Konum kaydırıcı"
+msgstr "Паўзунок пазіцыі"
 
 #: data/ui/media_controller.ui:291 data/ui/seek_bar.ui:57
 msgid "Position of the current part in seconds"
-msgstr "Geçerli bölümün saniye cinsinden konumu"
+msgstr "Пазіцыя бягучай часткі ў секундах"
 
 #: data/ui/media_controller.ui:310 data/ui/seek_bar.ui:76
 msgid "Remaining time"
-msgstr "Kalan süre"
+msgstr "Застаўшыйся час"
 
 #: data/ui/media_controller.ui:317 data/ui/seek_bar.ui:83
 msgid "Time remaining"
-msgstr "Süre kaldı"
+msgstr "Засталося часу"
 
 #: data/ui/media_controller.ui:318 data/ui/seek_bar.ui:84
 msgid "Remaining time of current part"
-msgstr "Geçerli bölümün kalan süresi"
+msgstr "Засталося часу бягучай часткі"
 
 #: data/ui/media_controller.ui:350 data/ui/media_controller_big.ui:324
 msgid "Volume control"
-msgstr "Ses denetimi"
+msgstr "Рэгулятар гучнасці"
 
 #: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
 #: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:175
 msgid "Playback speed"
-msgstr "Oynatma hızı"
+msgstr "Хуткасць прайгравання"
 
 #: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
 msgid "Sleep timer"
-msgstr "Uyku zamanlayıcı"
+msgstr "Таймер сну"
 
 #: data/ui/media_controller.ui:418 data/ui/media_controller_big.ui:404
 msgid "Timer menu button"
-msgstr "Zamanlayıcı menü düğmesi"
+msgstr "Кнопка меню таймера"
 
 #: data/ui/media_controller.ui:419 data/ui/media_controller_big.ui:405
 msgid "Open the sleep timer popover"
-msgstr "Uyku zamanlayıcı açılır kutusunu aç"
+msgstr "Адкрыць акно таймера сну"
 
 #: data/ui/media_controller_big.ui:53
 msgid "Open book"
-msgstr "Kitap aç"
+msgstr "Адкрыць кнігу"
 
 #: data/ui/preferences.ui:55
 msgid "General"
-msgstr "Genel"
+msgstr "Агульныя"
 
 #: data/ui/preferences.ui:60
 msgid "Appearance"
-msgstr "Görünüm"
+msgstr "Знешні выгляд"
 
 #: data/ui/preferences.ui:83
 msgid "Tags"
-msgstr "Etiketler"
+msgstr "Цэтлікі"
 
 #: data/ui/preferences.ui:90
 msgid "Activate if author and reader are displayed the wrong way"
-msgstr "Yazar ve okuyucu yanlış şekilde görüntüleniyorsa aktif edin"
+msgstr "Уключыце, калі аўтар і дыктар адлюстроўваюцца няправільна"
 
 #: data/ui/preferences.ui:107
 msgid "Playback"
-msgstr "Kayıttan Yürütme"
+msgstr "Прайграванне"
 
 #: data/ui/preferences.ui:114
 msgid "Rewind 30 seconds of the current book when starting Cozy"
-msgstr "Cozy'yi başlattığınızda geçerli kitabı 30 saniye geri sar"
+msgstr "Пераматаць бягучую кнігу на 30 секунд назад пры запуску Cozy"
 
 #: data/ui/preferences.ui:172
 msgid "Sleep Timer"
-msgstr "Uyku Zamanlayıcısı"
+msgstr "Таймер сну"
 
 #: data/ui/preferences.ui:218
 msgid "Storage"
-msgstr "Depo"
+msgstr "Сховішча"
 
 #: data/ui/preferences.ui:223
 msgid "Artwork"
-msgstr "Kapak Resmi"
+msgstr "Твор"
 
 #: data/ui/preferences.ui:230
 msgid "Always use images (cover.jpg, *.png, …) when available"
-msgstr "Her zaman var olan resimleri kullanın (kapak.jpg, *.png, …)"
+msgstr "Заўсёды выкарыстоўваць відарысы (cover.jpg, *.png, …), калі яны ёсць"
 
 #: data/ui/preferences.ui:247 data/ui/preferences.ui:253
 msgid "Storage locations"
-msgstr "Depolama konumu"
+msgstr "Размяшчэнні сховішча"
 
 #: data/ui/preferences.ui:312
 msgid "Add location"
-msgstr "Konum ekle"
+msgstr "Дадаць размяшчэнне"
 
 #: data/ui/preferences.ui:338
 msgid "Remove location"
-msgstr "Konumu kaldır"
+msgstr "Выдаліць размяшчэнне"
 
 #: data/ui/preferences.ui:376
 msgid "Toggle this storage location to be internal/external."
-msgstr "Bu depolama konumunu dahili/harici olarak değiştir."
+msgstr "Пераключыць размяшчэнне сховішча на ўнутранае/знешняе."
 
 #: data/ui/preferences.ui:405
 msgid "Set as default storage location for new audiobooks"
-msgstr "Yeni sesli kitaplar için öntanımlı depolama konumu olarak ayarla"
+msgstr "Задаць у якасці перадвызначанага сховішча для новых аўдыякніг"
 
 #: data/ui/preferences.ui:409
 msgid "Set as default"
-msgstr "Varsayılan olarak ayarla"
+msgstr "Перадвызначаць"
 
 #: data/ui/preferences.ui:453
 msgid "Feedback"
-msgstr "Geri Bildirim"
+msgstr "Зваротная сувязь"
 
 #: data/ui/preferences.ui:463
 msgid "User Feedback"
-msgstr "Kullanıcı Geribildirimi"
+msgstr "Водгукі карыстальнікаў"
 
 #: data/ui/search_popover.ui:24
 msgid "Search"
-msgstr "Arama"
+msgstr "Пошук"
 
 #: data/ui/search_popover.ui:36
 msgid "Search box"
-msgstr "Arama kutusu"
+msgstr "Пошукавы радок"
 
 #: data/ui/search_popover.ui:37
 msgid "Search your audiobook library"
-msgstr "Sesli kitap kütüphanende ara"
+msgstr "Пошук у вашай бібліятэцы аўдыякніг"
 
 #: data/ui/search_popover.ui:67
 msgid "Which book are you looking for?"
-msgstr "Hangi kitabı arıyorsunuz?"
+msgstr "Якую кнігу вы шукаеце?"
 
 #: data/ui/search_popover.ui:154
 msgid "Book"
-msgstr "Kitap"
+msgstr "Кніга"
 
 #: data/ui/search_popover.ui:248
 msgid "Part"
-msgstr "Bölüm"
+msgstr "Частка"
 
 #: data/ui/search_popover.ui:295
 msgid "Nothing found :("
-msgstr "Hiçbir şey bulunamadı :("
+msgstr "Нічога не знойдзена :("
 
 #: data/ui/timer_popover.ui:37
 msgid "Timer duration"
-msgstr "Zamanlayıcı süresi"
+msgstr "Працягласць таймера"
 
 #: data/ui/timer_popover.ui:49
 msgid "Timer duration slider"
-msgstr "Uyku zamanlayıcı kaydırıcı"
+msgstr "Паўзунок працягласці таймера"
 
 #: data/ui/timer_popover.ui:50
 msgid "Set the sleep timer duration in minutes"
-msgstr "Uyku zamanlayıcı süresini dakika olarak belirle"
+msgstr "Задаць працягласць таймера сну ў хвілінах"
 
 #: data/ui/timer_popover.ui:116
 msgid "Stop after current chapter"
-msgstr "Geçerli bölümden sonra dur"
+msgstr "Спыніць пасля бягучага раздзела"
 
 #: data/ui/timer_popover.ui:164
 msgid "Enable system power control"
-msgstr "Sistem güç kontrolünü etkinleştir"
+msgstr "Уключыць кантроль сілкавання сістэмы"
 
 #: data/ui/timer_popover.ui:201
 msgid ""
@@ -749,75 +755,74 @@ msgid ""
 "\"shutdown\" will attempt to turn your system off (also known as power off)\n"
 "\"suspend\" will attempt to suspend your system (also known as sleep)."
 msgstr ""
-"Zamanlayıcı bittiğinde yapılacak eylemin türü.\n"
-"\"shutdown\" sisteminizi kapatmayı deneyecektir (güç kapatma olarak da bilinir)\n"
-"\"suspend\" sisteminizi askıya almaya çalışır (uyku olarak da bilinir)."
+"Тып дзеяння па заканчэнні таймера.\n"
+"\"shutdown\" паспрабуе выключыць вашу сістэму (таксама вядомае як выключэнне)\n"
+"\"suspend\" паспрабуе прыпыніць вашу сістэму (таксама вядомы як сон)."
 
 #: data/ui/timer_popover.ui:205
 msgid ""
 "System power action\n"
 "to perform"
 msgstr ""
-"Gerçekleştirilecek sistem\n"
-"güç eylemi"
+"Выканаць дзеянне\n"
+"па кіраванні сілкаваннем"
 
 #: data/ui/timer_popover.ui:221
 msgid "suspend"
-msgstr "askıya al"
+msgstr "спячы рэжым"
 
 #: data/ui/timer_popover.ui:237
 msgid "shutdown"
-msgstr "kapat"
+msgstr "выключэнне"
 
 #: data/ui/titlebar_menu.ui:7
 msgid "_Scan Library"
-msgstr "_Kütüphaneyi Tara"
+msgstr "_Сканаваць бібліятэку"
 
 #: data/ui/titlebar_menu.ui:13
 msgid "_Hide unavailable books"
-msgstr "_Kullanılabilir olmayan kitapları gizle"
+msgstr "_Схаваць недаступныя кнігі"
 
 #: data/ui/titlebar_menu.ui:19
 msgid "_Preferences"
-msgstr "_Tercihler"
+msgstr "_Параметры"
 
 #: data/ui/titlebar_menu.ui:25
 msgid "_Help"
-msgstr "_Yardım"
+msgstr "_Даведка"
 
 #: data/ui/titlebar_menu.ui:29
 msgid "_About"
-msgstr "_Hakkında"
+msgstr "_Аб праграме"
 
 #: data/ui/titlebar_menu.ui:33
 msgid "_Quit"
-msgstr "_Çık"
+msgstr "_Выйсці"
 
 #: data/ui/welcome.ui:29
 msgid "Welcome!"
-msgstr "Hoşgeldiniz!"
+msgstr "Сардэчна запрашаем!"
 
 #: data/ui/welcome.ui:46
 msgid "Add your audiobooks and let's get cozy."
-msgstr "Sesli kitaplarınızı ekleyin ve Cozy'yi keşfedin."
+msgstr "Дадайце свае аўдыякніжкі і размяшчайцеся ўтульней."
 
 #: data/ui/whats_new.ui:9
 msgid "Whats new?"
-msgstr "Neler yeni?"
+msgstr "Што новага?"
 
 #: data/ui/whats_new.ui:27
 msgid "Continue"
-msgstr "Devam et"
+msgstr "Працягнуць"
 
 #: data/ui/whats_new_importer.ui:17 data/ui/whats_new_library.ui:17
 #: data/ui/whats_new_m4b.ui:17 data/ui/whats_new_m4b_chapter.ui:17
 msgid "What's new in Cozy"
-msgstr "Cozy'deki yenilikler"
+msgstr "Што новага ў Cozy"
 
 #: data/ui/whats_new_importer.ui:52
 msgid "A completely rewritten and far more reliable media importer."
-msgstr ""
-"Tamamen yeniden yazılmış ve çok daha güvenilir bir medya içe aktarıcısı. "
+msgstr "Цалкам перапісаны і значна больш надзейны медыя-імпарцёр."
 
 #: data/ui/whats_new_importer.ui:77
 msgid ""
@@ -825,29 +830,31 @@ msgid ""
 "files onto Cozy or use the application menu in the titlebar to rescan your "
 "audiobook directories!"
 msgstr ""
-"İçe aktarılamayan ses dosyalarıyla karşılaştınız mı? Bu dosyaları Cosy "
-"üzerine sürükleyip bırakın veya sesli kitap dizinlerinizi yeniden taramak "
-"için başlık çubuğundaki uygulama menüsünü kullanın!"
+"У вас не атрымалася імпартаваць аўдыяфайлы? Перацягніце гэтыя файлы ў Cozy "
+"або выкарыстоўвайце меню праграмы ў радку загалоўка, каб паўторна "
+"прасканаваць свае каталогі аўдыякніг!"
 
 #: data/ui/whats_new_importer.ui:92
 msgid "Supported media files currently are mp3, m4a, flac, ogg, opus and wav."
-msgstr "Desteklenen medya dosyaları şimdilik mp3, m4a, flac, ogg, opus ve wav"
+msgstr ""
+"На дадзены момант падтрымліваюцца мультымедыйныя файлы mp3, m4a, flac, ogg, "
+"opus і wav."
 
 #: data/ui/whats_new_importer.ui:107
 msgid "More to come in a later update."
-msgstr "Daha fazlası sonraki güncellemede gelecek."
+msgstr "Больш падрабязна будзе ў наступным абнаўленні."
 
 #: data/ui/whats_new_library.ui:52
 msgid "An important change in library management"
-msgstr "Kütüphane yönetiminde önemli bir değişiklik"
+msgstr "Важныя змены ў кіраванні бібліятэкай"
 
 #: data/ui/whats_new_library.ui:77
 msgid ""
 "Previously every file which was imported in your library but couldn't be "
 "found anymore was removed from the library during a scan."
 msgstr ""
-"Önceleri kütüphanenize eklenip de artık bulunamayan dosyalar, tarama "
-"sırasında otomatik olarak kütüphanenizden kaldırılıyordu."
+"Раней кожны файл, які быў імпартаваны ў вашу бібліятэку, але больш не быў "
+"знойдзены, выдаляўся з бібліятэкі падчас сканавання."
 
 #: data/ui/whats_new_library.ui:92
 msgid ""
@@ -855,61 +862,59 @@ msgid ""
 " prevents accidentally loosing the progress of a audiobook when a file can't"
 " be found temporarily."
 msgstr ""
-"Artık sesli kitaplarınız kütüphanenizden otomatik olarak kaldırılmayacak. Bu"
-" bir dosya geçici olarak bulunamadığında kitaptaki ilerleminizi "
-"kaybetmeminizi sağlayacak."
+"Цяпер аўдыякнігі больш не выдаляюцца з вашай бібліятэкі аўтаматычна. Гэта "
+"прадухіляе выпадковую страту прагрэсу аўдыякнігі, калі файл часова немагчыма"
+" знайсці."
 
 #: data/ui/whats_new_library.ui:107
 msgid ""
 "To remove an audiobook from the library simply right-click on it and choose "
 "the remove from library option."
 msgstr ""
-"Bir sesli kitap kütüphaneden kaldırmak için basitçe sağ tıklayın ve "
-"kütüphaneden kaldır seçeneğini seçin."
+"Каб выдаліць аўдыякнігу з бібліятэкі, проста націсніце на яе правай кнопкай "
+"мышы і абярыце опцыю «Выдаліць з бібліятэкі»."
 
 #: data/ui/whats_new_m4b.ui:52
 msgid "Basic support for m4b audio books."
-msgstr "m4b sesli kitapları için temel destek."
+msgstr "Базавая падтрымка аўдыякніг m4b."
 
 #: data/ui/whats_new_m4b.ui:77
 msgid ""
 "Many of you have been waiting for it: Support for m4b audio books! This "
 "version features basic support for m4b files without chapter support."
 msgstr ""
-"Birçoğunuz bunu bekliyordunuz: m4b sesli kitap desteği! Bu sürüm, bölüm "
-"desteği olmadan m4b dosyaları için temel destek sunar."
+"Многія з вас гэтага чакалі: падтрымка аўдыякніг m4b! У гэтай версіі ёсць "
+"базавая падтрымка файлаў m4b без падтрымкі раздзелаў."
 
 #: data/ui/whats_new_m4b.ui:92
 msgid ""
 "Drag & Drop your m4b files onto Cozy or use the application menu in the "
 "titlebar to rescan your audiobook directories."
 msgstr ""
-"M4b dosyalarınızı Cosy üzerine sürükleyip bırakın veya sesli kitap "
-"dizinlerinizi yeniden taramak için başlık çubuğundaki uygulama menüsünü "
-"kullanın. "
+"Перацягніце файлы m4b у Cozy або выкарыстоўвайце меню праграмы ў радку "
+"загалоўка, каб паўторна прасканаваць каталогі аўдыякніг."
 
 #: data/ui/whats_new_m4b.ui:107
 msgid "Chapter support will follow in a later update. Stay tuned!"
 msgstr ""
-"Bölüm desteği daha sonraki bir güncellemede takip edilecektir. Beklemede "
-"kalın! "
+"Падтрымка раздзелаў будзе ў наступным абнаўленні. Сачыце за абнаўленнямі!"
 
 #: data/ui/whats_new_m4b_chapter.ui:52
 msgid "Chapter support for m4b audio books."
-msgstr "m4b sesli kitapları için bölüm desteği."
+msgstr "Падтрымка раздзелаў для аўдыякніг m4b."
 
 #: data/ui/whats_new_m4b_chapter.ui:77
 msgid "This version of Cozy features chapter support for m4b audio books!"
-msgstr "Cozy'nin bu sürümü m4b sesli kitapları için bölüm desteği içeriyor!"
+msgstr "У гэтай версіі Cozy ёсць падтрымка раздзелаў для аўдыякніг m4b!"
 
 #: data/ui/whats_new_m4b_chapter.ui:92
 msgid ""
 "If you already have m4b files imported you'll need to start a scan of your "
 "library from the app menu."
 msgstr ""
-"Eğer hali hazırda m4b dosyalarınızı içe aktarmış iseniz uygulama menüsünden "
-"kütüphanenizde bir tarama işlemi başlatmanız gerekiyor."
+"Калі ў вас ужо ёсць імпартаваныя файлы m4b, вам трэба будзе пачаць "
+"сканаванне вашай бібліятэкі з меню праграмы."
 
 #: data/ui/whats_new_m4b_chapter.ui:107
 msgid "The chapters will then be detected."
-msgstr "Bölümler bu işlemin ardından algılanacak."
+msgstr "Пасля гэтага раздзелы будуць выяўлены."
