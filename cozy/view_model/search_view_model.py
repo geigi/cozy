@@ -50,7 +50,7 @@ class SearchViewModel(Observable, EventSender):
 
         return split_strings_to_set(readers)
 
-    def search(self, search_query: str, callback: Callable[[], None], thread_event):
+    def search(self, search_query: str, callback: Callable[[list[Book], list[str], list[str]], None], thread_event):
         search_query = search_query.lower()
 
         # We need the main context to call methods in the main thread after the search is finished

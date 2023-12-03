@@ -118,10 +118,10 @@ class SearchView(Adw.Bin):
         if not results:
             return
 
-        box.set_visible(True)
-
         for result in results:
             if self.search_thread_stop.is_set():
                 return
 
             listbox.append(row_type(result, callback))
+
+        box.set_visible(True)
