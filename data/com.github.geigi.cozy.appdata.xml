@@ -53,6 +53,13 @@
   <url type="translate">https://www.transifex.com/geigi/cozy/</url>
   <update_contact>cozy@geigi.de</update_contact>
   <releases>
+    <release version="1.3.0" timestamp="1701613884">
+      <description translatable="no">
+        <ul>
+          <li>Update to GTK 4 and libadwaita (thank you rdbende and grahamvh!)</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.2.1" timestamp="1661086733">
       <description translatable="no">
         <ul>
