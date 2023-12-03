@@ -24,7 +24,7 @@ _The below instructions have been tested on Ubuntu 20.04 and Fedora 39_
 ```console
 sudo apt update
 sudo apt install \
-  appstream-util \
+  appstreamcli \
   cmake \
   gettext \
   git \
