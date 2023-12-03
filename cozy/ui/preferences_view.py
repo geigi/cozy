@@ -1,11 +1,9 @@
-from gi.repository import Gtk
-from cozy.view_model.settings_view_model import SettingsViewModel
-import gi
-from gi.repository import Adw, Gio
+from gi.repository import Adw, Gio, Gtk
 
 from cozy.ext import inject
 from cozy.ui.widgets.error_reporting import ErrorReporting
 from cozy.ui.widgets.storage_list_box_row import StorageListBoxRow
+from cozy.view_model.settings_view_model import SettingsViewModel
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/preferences.ui')
@@ -45,8 +43,6 @@ class PreferencesView(Adw.PreferencesWindow):
 
         self._bind_settings()
         self._bind_view_model()
-
-        self.connect("close-request", self._hide_window)
 
         self.sleep_timer_fadeout_switch.connect("notify::active", self._on_sleep_fadeout_switch_changed)
         self.fadeout_duration_spin_button.set_sensitive(self.sleep_timer_fadeout_switch.props.active)
@@ -159,7 +155,4 @@ class PreferencesView(Adw.PreferencesWindow):
         self.external_storage_toggle_button.set_sensitive(sensitive)
         self.default_storage_button.set_sensitive(sensitive)
         self._on_storage_box_changed(None, self.storage_list_box.get_selected_row())
-    
-    def _hide_window(self, *_):
-        self.hide()
-        return True
+
