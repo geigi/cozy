@@ -11,7 +11,7 @@ jobs:
       image: ghcr.io/geigi/cozy-ci:main
     
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Lint with flake8
       run: |
@@ -23,8 +23,3 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
-    
-    - name: Install Cozy
-      run: |
-        meson --prefix=/usr ./build
-        ninja -C build install

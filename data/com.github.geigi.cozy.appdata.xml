@@ -28,6 +28,8 @@
   <provides>
     <binary>com.github.geigi.cozy</binary>
   </provides>
+  <launchable type="desktop-id">com.github.geigi.cozy.desktop</launchable>
+  <translation type="gettext">com.github.geigi.cozy</translation>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot1.png</image>
@@ -42,19 +44,24 @@
       <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot4.png</image>
     </screenshot>
   </screenshots>
-  <developer_name>Julian Geywitz</developer_name>
+  <developer_name translatable="no">Julian Geywitz</developer_name>
   <url type="homepage">https://cozy.sh</url>
   <url type="bugtracker">https://github.com/geigi/cozy/issues</url>
-  <url type="help">https://github.com/geigi/cozy/issues</url>
+  <url type="help">https://matrix.to/#/#cozy:gnome.org?via=matrix.org&amp;via=gnome.org</url>
   <url type="donation">https://www.patreon.com/geigi</url>
+  <url type="vcs-browser">https://github.com/geigi/cozy/</url>
+  <url type="translate">https://www.transifex.com/geigi/cozy/</url>
   <update_contact>cozy@geigi.de</update_contact>
-  <custom>
-    <value key="Purism::form_factor">workstation</value>
-    <value key="Purism::form_factor">mobile</value>
-  </custom>
   <releases>
+    <release version="1.3.0" timestamp="1701613884">
+      <description translatable="no">
+        <ul>
+          <li>Update to GTK 4 and libadwaita (thank you rdbende and grahamvh!)</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.2.1" timestamp="1661086733">
-      <description>
+      <description translatable="no">
         <ul>
           <li>Support for GTK style manager (thanks A6GibKm)</li>
           <li>Use natural sorting for chapter titles</li>
@@ -63,7 +70,7 @@
       </description>
     </release>
     <release version="1.2.0" timestamp="1641661352">
-      <description>
+      <description translatable="no">
         <p>
         This release features a redesigned preference window. All settings can now be searched. Good news for mobile users too: the redesign should work a lot better on mobile devices now.
         </p>
@@ -78,7 +85,7 @@
       </description>
     </release>
     <release version="1.1.3" timestamp="1640949259">
-      <description>
+      <description translatable="no">
         <p>
         A small bugfix release which makes Cozy more reliable.
         </p>
@@ -91,7 +98,7 @@
       </description>
     </release>
     <release version="1.1.2" timestamp="1629458444">
-      <description>
+      <description translatable="no">
         <p>
         A small bugfix release which makes Cozy more reliable.
         </p>
@@ -107,7 +114,7 @@
       </description>
     </release>
     <release version="1.1.1" timestamp="1629456144">
-      <description>
+      <description translatable="no">
         <p>
         A small bugfix release which makes Cozy more reliable.
         </p>
@@ -123,7 +130,7 @@
       </description>
     </release>
     <release version="1.1.0" timestamp="1628322225">
-      <description>
+      <description translatable="no">
         <p>
         This release features a redesigned library with responsiveness in mind.
         </p>
@@ -140,7 +147,7 @@
       </description>
     </release>
     <release version="1.0.4" timestamp="1627489551">
-      <description>
+      <description translatable="no">
         <p>
         Performance improvements for the book detail view and some bugfixes.
         </p>
@@ -155,7 +162,7 @@
       </description>
     </release>
     <release version="1.0.3" timestamp="1622826417">
-      <description>
+      <description translatable="no">
         <p>
         A small bugfix release which makes Cozy more reliable.
         </p>
@@ -170,7 +177,7 @@
       </description>
     </release>
     <release version="1.0.2" timestamp="1622490608">
-      <description>
+      <description translatable="no">
         <p>
         A small bugfix release which makes Cozy more reliable.
         </p>
@@ -185,7 +192,7 @@
       </description>
     </release>
     <release version="1.0.1" timestamp="1622363623">
-      <description>
+      <description translatable="no">
         <p>
         This release features chapter support for m4b files.
         </p>
@@ -199,7 +206,7 @@
       </description>
     </release>
     <release version="1.0.0" timestamp="1622358236">
-      <description>
+      <description translatable="no">
         <p>
         This release features chapter support for m4b files.
         </p>

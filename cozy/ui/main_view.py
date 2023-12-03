@@ -3,7 +3,7 @@ import os
 import webbrowser
 from threading import Thread
 
-from gi.repository import Gtk, Gio, Gdk, GLib, GObject
+from gi.repository import Adw, Gtk, Gio, Gdk, GLib, GObject
 
 import cozy.control.filesystem_monitor as fs_monitor
 import cozy.ext.inject as inject
