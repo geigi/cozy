@@ -283,8 +283,7 @@ def update_db():
             _restore_db(backup_dir_name)
 
             from cozy.ui.db_migration_failed_view import DBMigrationFailedView
-            dialog = DBMigrationFailedView()
-            dialog.show()
+            DBMigrationFailedView().present()
             exit(1)
 
     if version < 10:
@@ -298,8 +297,7 @@ def update_db():
             _restore_db(backup_dir_name)
 
             from cozy.ui.db_migration_failed_view import DBMigrationFailedView
-            dialog = DBMigrationFailedView()
-            dialog.show()
+            DBMigrationFailedView().present()
             exit(1)
 
 
@@ -354,3 +352,4 @@ def _restore_db(backup_dir_name: str):
     if os.path.exists(wal_path_backup):
         log.info("Copying wal file")
         shutil.copyfile(wal_path_backup, wal_path)
+

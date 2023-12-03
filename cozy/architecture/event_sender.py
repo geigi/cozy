@@ -1,10 +1,7 @@
 from typing import List, Callable
 
 import gi
-
-gi.require_version('Gdk', '3.0')
-
-from gi.repository import Gdk, GLib
+from gi.repository import GLib
 
 
 class EventSender:
@@ -14,15 +11,14 @@ class EventSender:
         self._listeners = []
 
     def emit_event(self, event, message=None):
-        if type(event) is tuple and not message:
-            message = event[1]
-            event = event[0]
+        if isinstance(event, tuple) and message is None:
+            event, message = event
 
         for function in self._listeners:
             function(event, message)
 
     def emit_event_main_thread(self, event: str, message=None):
-        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.emit_event, (event, message))
+        GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, self.emit_event, (event, message))
 
     def add_listener(self, function: Callable[[str, object], None]):
         self._listeners.append(function)

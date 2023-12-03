@@ -1,6 +1,3 @@
-import gi
-
-gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 
@@ -19,3 +16,4 @@ class ProgressPopover(Gtk.Popover):
 
     def set_progress(self, progress: float):
         self.progress_bar.set_fraction(progress)
+

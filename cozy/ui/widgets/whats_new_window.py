@@ -1,19 +1,16 @@
 from typing import List
 from packaging import version
 
-import gi
-
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
 from cozy.ui.main_view import CozyUI
 from cozy.version import __version__ as CozyVersion
 
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Handy
+from gi.repository import Gtk, Adw
 
 
 @Gtk.Template(resource_path='/com/github/geigi/cozy/whats_new.ui')
-class WhatsNewWindow(Handy.Window):
+class WhatsNewWindow(Adw.Window):
     __gtype_name__ = 'WhatsNew'
 
     content_stack: Gtk.Stack = Gtk.Template.Child()
@@ -41,7 +38,7 @@ class WhatsNewWindow(Handy.Window):
         self.set_default_size(800, 550)
 
         for widget in self.children:
-            self.content_stack.add(widget)
+            self.content_stack.add_child(widget)
             widget.set_visible(False)
 
         self.children[0].set_visible(True)

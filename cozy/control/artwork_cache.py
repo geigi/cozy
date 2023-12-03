@@ -2,7 +2,7 @@ import os
 import uuid
 import logging
 
-from gi.repository import GdkPixbuf
+from gi.repository import Gdk, GdkPixbuf
 
 from cozy.application_settings import ApplicationSettings
 from cozy.control.application_directories import get_cache_dir
@@ -21,31 +21,25 @@ class ArtworkCache:
         _app_settings = inject.instance(ApplicationSettings)
         _app_settings.add_listener(self._on_app_setting_changed)
 
-    def get_cover_pixbuf(self, book, scale, size=0):
+    def get_cover_paintable(self, book, scale, size=0) -> Gdk.Texture | None:
         pixbuf = None
         size *= scale
 
         if size > 0:
-            # first try the cache
+            # First try the cache
             pixbuf = self._load_pixbuf_from_cache(book, size)
 
-        if pixbuf:
-            return pixbuf
-        else:
-            # then try the db or file
+        if not pixbuf:
+            # Then try the db or file
             pixbuf = self._load_cover_pixbuf(book)
 
-        if pixbuf:
-            # return original size if it is not greater than 0
-            if not size > 0:
-                return pixbuf
+            if not pixbuf:
+                return None
+            elif size > 0:
+                # Resize and cache artwork if size is greater than 0
+                pixbuf = self._create_artwork_cache(book, pixbuf, size)
 
-            # create cached version
-            pixbuf = self._create_artwork_cache(book, pixbuf, size)
-        else:
-            pixbuf = None
-
-        return pixbuf
+        return Gdk.Texture.new_for_pixbuf(pixbuf)
 
     def delete_artwork_cache(self):
         """
@@ -240,3 +234,4 @@ class ArtworkCache:
     def _on_app_setting_changed(self, event: str, data):
         if event == "prefer-external-cover":
             self.delete_artwork_cache()
+

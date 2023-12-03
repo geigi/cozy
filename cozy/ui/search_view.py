@@ -4,11 +4,8 @@ from threading import Thread
 from cozy.ext import inject
 from cozy.ui.widgets.search_results import BookSearchResult, ArtistSearchResult
 
-import gi
-
 from cozy.view_model.search_view_model import SearchViewModel
 
-gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib
 
 
@@ -42,11 +39,10 @@ class SearchView:
 
         self.entry.connect("search-changed", self.__on_search_changed)
 
-        if Gtk.get_minor_version() > 20:
-            self.scroller.set_max_content_width(400)
-            self.scroller.set_max_content_height(600)
-            self.scroller.set_propagate_natural_height(True)
-            self.scroller.set_propagate_natural_width(True)
+        self.scroller.set_max_content_width(400)
+        self.scroller.set_max_content_height(600)
+        self.scroller.set_propagate_natural_height(True)
+        self.scroller.set_propagate_natural_width(True)
 
         self.search_thread = Thread(target=self.search, name="SearchThread")
         self.search_thread_stop = threading.Event()
@@ -100,12 +96,6 @@ class SearchView:
             main_context.invoke_full(
                 GLib.PRIORITY_DEFAULT, self.stack.set_visible_child_name, "nothing")
 
-    def close(self, object=None):
-        if Gtk.get_minor_version() < 22:
-            self.popover.hide()
-        else:
-            self.popover.popdown()
-
     def __on_search_changed(self, sender):
         self.search_thread_stop.set()
 
@@ -148,7 +138,7 @@ class SearchView:
 
     def _on_search_open_changed(self):
         if self.view_model.search_open == False:
-            self.close()
+            self.popover.popdown()
 
     def __on_book_search_finished(self, books):
         if len(books) > 0:
@@ -161,7 +151,7 @@ class SearchView:
                     return
 
                 book_result = BookSearchResult(book, self.view_model.jump_to_book)
-                self.book_box.add(book_result)
+                self.book_box.append(book_result)
 
     def __on_author_search_finished(self, authors):
         if len(authors) > 0:
@@ -174,7 +164,7 @@ class SearchView:
                     return
 
                 author_result = ArtistSearchResult(self.view_model.jump_to_author, author, True)
-                self.author_box.add(author_result)
+                self.author_box.append(author_result)
 
     def __on_reader_search_finished(self, readers):
         if len(readers) > 0:
@@ -187,6 +177,6 @@ class SearchView:
                     return
 
                 reader_result = ArtistSearchResult(self.view_model.jump_to_reader, reader, False)
-                self.reader_box.add(reader_result)
+                self.reader_box.append(reader_result)
 
         self.popover.set_size_request(-1, -1)

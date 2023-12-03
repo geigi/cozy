@@ -1,7 +1,7 @@
 {
   "app-id": "com.github.geigi.cozy",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "42",
+  "runtime-version": "45",
   "sdk": "org.gnome.Sdk",
   "command": "com.github.geigi.cozy",
   "finish-args": [
@@ -127,37 +127,6 @@
           "type": "file",
           "url": "https://files.pythonhosted.org/packages/e9/06/d3d367b7af6305b16f0d28ae2aaeb86154fa91f144f036c2d5002a5a202b/certifi-2022.6.15-py3-none-any.whl",
           "sha256": "fe86415d55e84719d75f8b69414f6438ac3547d2078ab91b67e779ef69378412"
-        }
-      ]
-    },
-    {
-      "name": "libhandy",
-      "buildsystem": "meson",
-      "config-opts": [
-        "-Dprofiling=false",
-        "-Dintrospection=enabled",
-        "-Dgtk_doc=false",
-        "-Dtests=false",
-        "-Dexamples=false",
-        "-Dvapi=false",
-        "-Dglade_catalog=disabled"
-      ],
-      "sources": [
-        {
-          "type": "git",
-          "url": "https://gitlab.gnome.org/GNOME/libhandy",
-          "tag": "1.7.90"
-        }
-      ]
-    },
-    {
-      "name": "libdazzle",
-      "buildsystem": "meson",
-      "sources": [
-        {
-          "type": "git",
-          "url": "https://gitlab.gnome.org/GNOME/libdazzle.git",
-          "tag": "3.44.0"
         }
       ]
     },

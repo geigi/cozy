@@ -21,7 +21,7 @@ from cozy.open_view import OpenView
 from cozy.ui.app_view import AppView
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.headerbar import Headerbar
-from cozy.ui.info_banner import InfoBanner
+from cozy.ui.toaster import ToastNotifier
 from cozy.ui.library_view import LibraryView
 from cozy.ui.main_view import CozyUI
 from cozy.ui.media_controller import MediaController
@@ -105,7 +105,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(SleepTimerViewModel, lambda: SleepTimerViewModel())
         binder.bind_to_constructor(GstPlayer, lambda: GstPlayer())
         binder.bind_to_constructor(PowerManager, lambda: PowerManager())
-        binder.bind_to_constructor(InfoBanner, lambda: InfoBanner())
+        binder.bind_to_constructor(ToastNotifier, lambda: ToastNotifier())
         binder.bind_to_constructor(AppViewModel, lambda: AppViewModel())
         binder.bind_to_constructor(SettingsViewModel, lambda: SettingsViewModel())
 
@@ -125,9 +125,6 @@ class AppController(metaclass=Singleton):
         self.library_view_model.open_library()
         self.app_view_model.view = View.LIBRARY_FILTER
 
-    def navigate_back(self):
-        self.app_view_model.navigate_back()
-
     def _connect_popovers(self):
         self.headerbar.search_button.set_popover(self.search_view.popover)
 
@@ -140,8 +137,6 @@ class AppController(metaclass=Singleton):
             self.open_book(data)
         elif event == OpenView.LIBRARY:
             self.open_library()
-        elif event == OpenView.BACK:
-            self.navigate_back()
 
     def _on_library_view_event(self, event: str, _):
         if event == "work-done":

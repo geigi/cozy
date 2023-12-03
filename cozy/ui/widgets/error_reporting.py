@@ -5,7 +5,6 @@ import gi
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
 
-gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 LEVELS = [
@@ -60,6 +59,7 @@ class ErrorReporting(Gtk.Box):
     def _load_report_level(self):
         level = self.app_settings.report_level
         self.verbose_adjustment.set_value(level + 1)
+        self._update_ui_texts(level)
 
     def __init_scale(self):
         for i in range(1, 5):
@@ -93,3 +93,4 @@ class ErrorReporting(Gtk.Box):
     def _on_app_setting_changed(self, event, _):
         if event == "report-level":
             self._load_report_level()
+

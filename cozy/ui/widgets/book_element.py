@@ -1,13 +1,7 @@
-import os
-import subprocess
+from gi.repository import Gtk, GObject, Gdk, Gio
 
-from gi.repository import Gtk, GObject, Gdk
-
-from cozy.extensions.gtk_widget import set_hand_cursor, reset_cursor
 from cozy.model.book import Book
 from cozy.ui.widgets.album_element import AlbumElement
-
-MAX_LABEL_LENGTH = 60
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/book_element.ui')
@@ -17,29 +11,51 @@ class BookElement(Gtk.FlowBoxChild):
     name_label: Gtk.Label = Gtk.Template.Child()
     author_label: Gtk.Label = Gtk.Template.Child()
     container_box: Gtk.Box = Gtk.Template.Child()
-    event_box: Gtk.Box = Gtk.Template.Child()
 
     def __init__(self, book: Book):
-        self.book: Book = book
-
         super().__init__()
+
+        self.book = book
+        self.pressed = False
 
         self.name_label.set_text(book.name)
         self.name_label.set_tooltip_text(book.name)
         self.author_label.set_text(book.author)
         self.author_label.set_tooltip_text(book.author)
-        self.art: AlbumElement = AlbumElement(self.book)
-        self.context_menu = None
-        self.pressed = False
 
-        self.container_box.pack_start(self.art, False, True, 0)
-
+        self.art = AlbumElement(self.book)
         self.art.connect("play-pause-clicked", self._on_album_art_press_event)
-        self.event_box.connect("button-press-event", self._on_button_press_event)
-        self.event_box.connect("button-release-event", self._on_button_release_event)
-        self.event_box.connect("key-press-event", self._on_key_press_event)
-        self.event_box.connect("enter-notify-event", self._on_cover_enter_notify)
-        self.event_box.connect("leave-notify-event", self._on_cover_leave_notify)
+
+        self.container_box.prepend(self.art)
+        self.set_cursor(Gdk.Cursor.new_from_name("pointer"))
+
+        self._add_event_controllers()
+
+    def _add_event_controllers(self):
+        primary_button_gesture = Gtk.GestureClick(button=Gdk.BUTTON_PRIMARY)
+        # primary_button_gesture.connect("pressed", self._select_item)
+        primary_button_gesture.connect("released", self._open_book_overview)
+        self.container_box.add_controller(primary_button_gesture)
+
+        secondary_button_gesture = Gtk.GestureClick(button=Gdk.BUTTON_SECONDARY)
+        secondary_button_gesture.connect("released", self._show_context_menu)
+        self.container_box.add_controller(secondary_button_gesture)
+
+        # FIXME: When clicking on an album's play button in the recents view,
+        # it jumps to the first position, and GtkGestureLongPress thinks it's
+        # a long press gesture, although it's just an unfinished long press
+        long_press_gesture = Gtk.GestureLongPress()
+        long_press_gesture.connect("pressed", self._show_context_menu)
+        self.container_box.add_controller(long_press_gesture)
+
+        key_event_controller = Gtk.EventControllerKey()
+        key_event_controller.connect("key-pressed", self._on_key_press_event)
+        self.container_box.add_controller(key_event_controller)
+
+        motion_event_controller = Gtk.EventControllerMotion()
+        motion_event_controller.connect("enter", self._on_cover_enter_notify)
+        motion_event_controller.connect("leave", self._on_cover_leave_notify)
+        self.container_box.add_controller(motion_event_controller)
 
     def set_playing(self, is_playing):
         self.art.set_playing(is_playing)
@@ -48,82 +64,68 @@ class BookElement(Gtk.FlowBoxChild):
         self.art.update_progress()
 
     def _create_context_menu(self):
-        menu = Gtk.Menu()
-        read_item = Gtk.MenuItem(label=_("Mark as read"))
-        read_item.connect("button-press-event", self._mark_as_read)
+        menu_model = Gio.Menu()
 
-        jump_item = Gtk.MenuItem(label=_("Open in file browser"))
-        jump_item.connect("button-press-event", self._jump_to_folder)
+        self.install_action("book_element.mark_as_read", None, self._mark_as_read)
+        menu_model.append(_("Mark as read"), "book_element.mark_as_read")
 
-        rm_item = Gtk.MenuItem(label=_("Remove from library"))
-        rm_item.connect("button-press-event", self._remove_book)
+        self.install_action("book_element.jump_to_folder", None, self._jump_to_folder)
+        menu_model.append(_("Open in file browser"), "book_element.jump_to_folder")
 
-        menu.append(read_item)
-        menu.append(jump_item)
-        menu.append(Gtk.SeparatorMenuItem())
-        menu.append(rm_item)
-        menu.attach_to_widget(self)
-        menu.show_all()
+        self.install_action("book_element.remove_book", None, self._remove_book)
+        menu_model.append(_("Remove from library"), "book_element.remove_book")
+
+        menu = Gtk.PopoverMenu(menu_model=menu_model, has_arrow=False)
+        menu.set_parent(self.art)
+
         return menu
 
-    def _remove_book(self, _, __):
-        if self.context_menu:
-            self.context_menu.popdown()
-
+    def _remove_book(self, *_):
         self.emit("book-removed", self.book)
 
-    def _mark_as_read(self, _, __):
+    def _mark_as_read(self, *_):
         self.book.position = -1
 
-    def _jump_to_folder(self, _, __):
+    def _jump_to_folder(self, *_):
         """
         Opens the folder containing this books files in the default file explorer.
         """
         track = self.book.chapters[0]
-        path = os.path.dirname(track.file)
-        subprocess.Popen(['xdg-open', path])
 
-    def _on_button_press_event(self, _, event):
-        if event.type == Gdk.EventType.BUTTON_PRESS and event.button == 3:
-            if self.context_menu is None:
-                self.context_menu = self._create_context_menu()
-            self.context_menu.popup(
-                None, None, None, None, event.button, event.time)
-            return True
-        elif event.type == Gdk.EventType.BUTTON_PRESS and event.button == 1:
-            if super().get_sensitive():
-                self.pressed = True
-                self.container_box.get_style_context().add_class("selected")
-        elif event.type == Gdk.EventType.KEY_PRESS and event.keyval == Gdk.KEY_Return:
-            if super().get_sensitive():
-                self.emit("open-book-overview", self.book)
-                return True
+        file_launcher = Gtk.FileLauncher(file=Gio.File.new_for_path(track.file))
+        dummy_callback = lambda d, r: d.open_containing_folder_finish(r)
+        file_launcher.open_containing_folder(None, None, dummy_callback)
 
-    def _on_button_release_event(self, _, event):
-        if event.type == Gdk.EventType.BUTTON_RELEASE and event.button == 1 and self.pressed:
-            self.pressed = False
-            self.container_box.get_style_context().remove_class("selected")
-            if super().get_sensitive():
-                self.emit("open-book-overview", self.book)
-                return True
+    def _show_context_menu(self, gesture: Gtk.Gesture, *_):
+        gesture.set_state(Gtk.EventSequenceState.CLAIMED)
 
-    def _on_key_press_event(self, _, key):
-        if key.keyval == Gdk.KEY_Return and super().get_sensitive():
+        self._create_context_menu().popup()
+
+    def _select_item(self, gesture: Gtk.Gesture, *_):
+        if super().get_sensitive():
+            gesture.set_state(Gtk.EventSequenceState.CLAIMED)
+            self.pressed = True
+            self.container_box.add_css_class("selected")
+
+    def _open_book_overview(self, gesture, *_):
+        gesture.set_state(Gtk.EventSequenceState.CLAIMED)
+
+        self.pressed = False
+        self.container_box.remove_css_class("selected")
+        if super().get_sensitive():
             self.emit("open-book-overview", self.book)
-            return True
 
-    def _on_cover_enter_notify(self, widget: Gtk.Widget, __):
-        set_hand_cursor(widget)
+    def _on_key_press_event(self, keyval, *_):
+        if keyval == Gdk.KEY_Return and super().get_sensitive():
+            self.emit("open-book-overview", self.book)
 
+    def _on_cover_enter_notify(self, *_):
         self.art.set_hover(True)
-        return True
 
-    def _on_cover_leave_notify(self, widget: Gtk.Widget, __):
-        reset_cursor(widget)
+    def _on_cover_leave_notify(self, *_):
         self.art.set_hover(False)
-        return True
 
-    def _on_album_art_press_event(self, _, __):
+    def _on_album_art_press_event(self, *_):
         self.emit("play-pause-clicked", self.book)
 
 
@@ -134,3 +136,4 @@ GObject.signal_new('open-book-overview', BookElement, GObject.SIGNAL_RUN_LAST, G
                    (GObject.TYPE_PYOBJECT,))
 GObject.signal_new('book-removed', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
                    (GObject.TYPE_PYOBJECT,))
+

@@ -3,13 +3,9 @@ import pathlib
 
 from cozy.architecture.event_sender import EventSender
 
-import gi
-
 from cozy.media.media_file import MediaFile
 from cozy.media.tag_reader import TagReader
 
-gi.require_version('Gst', '1.0')
-gi.require_version('GstPbutils', '1.0')
 from gi.repository import Gst, GstPbutils
 
 log = logging.getLogger("media_detector")

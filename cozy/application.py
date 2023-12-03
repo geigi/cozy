@@ -2,6 +2,7 @@ import gettext
 import locale
 import logging
 import os
+import platform
 import sys
 import threading
 from pathlib import Path
@@ -15,9 +16,7 @@ from cozy.db.storage import Storage
 from cozy.ui.widgets.filter_list_box import FilterListBox
 from cozy.ui.widgets.seek_bar import SeekBar
 
-gi.require_version('Handy', '1')
-
-from gi.repository import Gtk, GLib, Handy
+from gi.repository import Gtk, GLib, Adw
 
 from cozy.app_controller import AppController
 from cozy.control.db import init_db
@@ -57,7 +56,7 @@ def setup_thread_excepthook():
     threading.Thread.__init__ = init
 
 
-class Application(Gtk.Application):
+class Application(Adw.Application):
     ui: CozyUI
     app_controller: AppController
 
@@ -65,7 +64,7 @@ class Application(Gtk.Application):
         self.localedir = localedir
         self.pkgdatadir = pkgdatadir
 
-        Gtk.Application.__init__(self, application_id='com.github.geigi.cozy')
+        super().__init__(application_id='com.github.geigi.cozy')
         self.init_custom_widgets()
 
         GLib.setenv("PULSE_PROP_media.role", "music", True)
@@ -87,17 +86,12 @@ class Application(Gtk.Application):
 
     def do_startup(self):
         log.info(distro.linux_distribution(full_distribution_name=False))
-        log.info("Starting up cozy " + __version__)
+        log.info(f"Starting up cozy {__version__}")
+        log.info(f"libadwaita version: {Adw._version}")
+
         self.ui = CozyUI(self.pkgdatadir, self, __version__)
+        Adw.Application.do_startup(self)
         init_db()
-        Gtk.Application.do_startup(self)
-        Handy.init()
-        try:
-            manager = Handy.StyleManager.get_default()
-            manager.set_color_scheme(Handy.ColorScheme.PREFER_LIGHT)
-        except:
-            log.info("Not setting libhandy style manager, version is too old.")
-        log.info("libhandy version: {}".format(Handy._version))
         self.ui.startup()
 
     def do_activate(self):
@@ -115,22 +109,23 @@ class Application(Gtk.Application):
             os.makedirs(path, exist_ok=True)
 
         self.add_window(self.ui.window)
-        mpris = MPRIS(self)
-        mpris._on_current_changed()
+
+        if platform.system().lower() == "linux":
+            mpris = MPRIS(self)
+            mpris._on_current_changed()
 
     def handle_exception(self, exc_type, exc_value, exc_traceback):
         print("handle exception")
         try:
             reporter.exception("uncaught", exc_value, "\n".join(format_exception(exc_type, exc_value, exc_traceback)))
-        except:
-            pass
+        except Exception:
+            None
 
         self.old_except_hook(exc_type, exc_value, exc_traceback)
 
     def quit(self):
         self.app_controller.quit()
         super(Application, self).quit()
-
 
     @staticmethod
     def init_custom_widgets():
