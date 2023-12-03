@@ -4,8 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Julian Geywitz <github@geigi.de>, 2022
-# Fran Diéguez <fran.dieguez@mabishu.com>, 2023
+# Yahor Haurylenka, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,13 +13,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-09 20:38+0200\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
-"Last-Translator: Fran Diéguez <fran.dieguez@mabishu.com>, 2023\n"
-"Language-Team: Galician (https://app.transifex.com/geigi/teams/78138/gl/)\n"
+"Last-Translator: Yahor Haurylenka, 2023\n"
+"Language-Team: Belarusian (Belarus) (https://app.transifex.com/geigi/teams/78138/be_BY/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: gl\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: be_BY\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: data/com.github.geigi.cozy.desktop:3
 #: data/com.github.geigi.cozy.appdata.xml:6
@@ -29,57 +28,55 @@ msgstr "Cozy"
 
 #: data/com.github.geigi.cozy.desktop:4
 msgid "Audio Book Player"
-msgstr "Reprodutor de audiolibros"
+msgstr "Прайгравальнік аўдыякніг"
 
 #: data/com.github.geigi.cozy.desktop:5
 msgid "Play and organize your audio book collection"
-msgstr "Reproduza e organice a súa colección de audiolibros"
+msgstr "Прайграйце і ўпарадкуйце сваю калекцыю аўдыякніг"
 
 #: data/com.github.geigi.cozy.appdata.xml:7
 msgid "Listen to audio books"
-msgstr "Escoitar audiolibros"
+msgstr "Слухайце аўдыякнігі"
 
 #: data/com.github.geigi.cozy.appdata.xml:9
 msgid "Do you like audio books? Then lets get cozy!"
-msgstr "Gústanlle os audiolibros? Entón instale Cozy!"
+msgstr "Вы любіце аўдыякнігі? Тады давайце зробім утульна!"
 
 #: data/com.github.geigi.cozy.appdata.xml:12
 msgid "Cozy is a audio book player. Here are some of the features:"
-msgstr ""
-"Cozy é un reprodutor de audiolibros. Conta coas seguintes características:"
+msgstr "Cozy - прайгравальнік аўдыякніг. Вось некаторыя з функцый:"
 
 #: data/com.github.geigi.cozy.appdata.xml:16
 msgid "Import all your audio books into Cozy to browse them comfortably"
-msgstr "Importe todos os audiolibros en Cozy para exploralos cómodamente"
+msgstr "Імпартуйце ўсе свае аўдыякнігі ў Cozy, каб зручна іх праглядаць"
 
 #: data/com.github.geigi.cozy.appdata.xml:17
 msgid ""
 "Listen to your DRM free mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav "
 "audio books"
 msgstr ""
-"Escoitar os seus audiolibros sen DRM en mp3, m4a (aac, ALAC, ..:), flac, ogg"
-" e wav."
+"Слухайце свае аўдыякнігі без DRM у фармаце mp3, m4b, m4a (aac, ALAC, ...), "
+"flac, ogg і wav"
 
 #: data/com.github.geigi.cozy.appdata.xml:18
 msgid "Remembers your playback position"
-msgstr "Recorde a posición de reprodución."
+msgstr "Запамінае вашу пазіцыю прайгравання"
 
 #: data/com.github.geigi.cozy.appdata.xml:19
 msgid "Sleep timer"
-msgstr "Temporizador para durmir"
+msgstr "Таймер сну"
 
 #: data/com.github.geigi.cozy.appdata.xml:20
 msgid "Playback speed control for each book individually"
-msgstr ""
-"Control da velocidade de reprodución para cada libro de forma individual."
+msgstr "Рэгуляванне хуткасці прайгравання для кожнай кнігі асобна"
 
 #: data/com.github.geigi.cozy.appdata.xml:21
 msgid "Search your library"
-msgstr "Buscar na biblioteca"
+msgstr "Пошук у вашай бібліятэцы"
 
 #: data/com.github.geigi.cozy.appdata.xml:22
 msgid "Multiple storage location support"
-msgstr "Admite varias localizacións de almacenamento."
+msgstr "Падтрымка некалькіх размяшчэнняў сховішчаў"
 
 #: data/com.github.geigi.cozy.appdata.xml:23
 msgid ""
@@ -87,17 +84,17 @@ msgid ""
 " if you store your audio books on an external or network drive. Perfect to "
 "listen to on the go!"
 msgstr ""
-"Modo fóra de liña! Permítelle manter un audiolibro no almacenamiento interno"
-" se os almacena en unidades externas ou de rede. Perfecto para escoitar en "
-"calquera parte!"
+"Аўтаномны рэжым! Гэта дазваляе захоўваць аўдыякнігі ва ўнутраным сховішчы, "
+"калі вы захоўваеце свае аўдыякнігі на знешнім або сеткавым дыску. Ідэальна "
+"для праслухоўвання ў дарозе!"
 
 #: data/com.github.geigi.cozy.appdata.xml:24
 msgid "Drag and Drop to import new audio books"
-msgstr "Arrastre e solte para importar novos audiolibros."
+msgstr "Каб імпартаваць новыя аўдыякнігі, проста перацягніце іх"
 
 #: data/com.github.geigi.cozy.appdata.xml:25
 msgid "Sort your audio books by author, reader and name"
-msgstr "Ordenar os libros por autor, lector ou nome."
+msgstr "Сартуйце свае аўдыёкнігі па аўтару, дыктару і назве"
 
 #: data/com.github.geigi.cozy.appdata.xml:45
 msgid "Julian Geywitz"
@@ -105,16 +102,15 @@ msgstr "Julian Geywitz"
 
 #: data/com.github.geigi.cozy.appdata.xml:59
 msgid "Support for GTK style manager (thanks A6GibKm)"
-msgstr "Compatibilidade para o xestor de estilos de GTK (grazas A6GibKm)"
+msgstr "Падтрымка мэнэджэра стыляў GTK (дзякуй A6GibKm)"
 
 #: data/com.github.geigi.cozy.appdata.xml:60
 msgid "Use natural sorting for chapter titles"
-msgstr "Usar a ordenación natural para os títulos dos capítulos"
+msgstr "Выкарыстоўвайце натуральнае сартаванне для назваў раздзелаў"
 
 #: data/com.github.geigi.cozy.appdata.xml:61
 msgid "As always, updated translations thanks to all the translators!"
-msgstr ""
-"Como sempre, actualizacións das traducións grazas a todos os tradutores!"
+msgstr "Як заўсёды, абноўленыя пераклады, дзякуй усім перакладчыкам!"
 
 #: data/com.github.geigi.cozy.appdata.xml:67
 msgid ""
@@ -122,37 +118,37 @@ msgid ""
 "be searched. Good news for mobile users too: the redesign should work a lot "
 "better on mobile devices now."
 msgstr ""
-"Esta publicación conta con unha xanela de preferencias redeseñada. Agora "
-"pode buscar en todas as preferencias. Boas novas para os usuarios de móbil: "
-"o redeseño debería funcionar moito mellor en dispositivos móbiles."
+"У гэтым выпуску ёсць перапрацаванае акно параметраў. Цяпер можна шукаць усе "
+"параметры. Добрыя навіны і для карыстальнікаў мабільных прылад: рэдызайн "
+"павінен працаваць нашмат лепш на мабільных прыладах."
 
 #: data/com.github.geigi.cozy.appdata.xml:71
 msgid "Redesigned preference window"
-msgstr "Xanela de preferencias redeseñada"
+msgstr "Зменены дызайн акна параметраў"
 
 #: data/com.github.geigi.cozy.appdata.xml:72
 msgid "Preferences can now be searched"
-msgstr "Agora as preferencias poden buscarse"
+msgstr "Цяпер можна шукаць параметры"
 
 #: data/com.github.geigi.cozy.appdata.xml:73
 msgid ""
 "Fix: position slider did not update the time correctly after an import scan"
 msgstr ""
-"Arranxo: a posición do desprazador non se actualiza correctamente despois "
-"dunha análise de importado"
+"Выпраўленне: паўзунок пазіцыі няправільна абнаўляў час пасля сканавання "
+"імпарту"
 
 #: data/com.github.geigi.cozy.appdata.xml:74
 msgid ""
 "Fix: after an import scan the library did not display the currently playing "
 "book correctly"
 msgstr ""
-"Arranxo: despois dunha análise de importado a biblioteca non mostra o libro "
-"reproducíndose actualmente de forma correcta"
+"Выпраўленне: пасля сканавання імпарту бібліятэка няправільна адлюстроўвала "
+"кнігу, якая зараз прайграваецца"
 
 #: data/com.github.geigi.cozy.appdata.xml:75
 #: data/com.github.geigi.cozy.appdata.xml:88
 msgid "Multiple small bug fixes"
-msgstr "Varios arranxos de erros pequenos"
+msgstr "Шматлікія дробныя выпраўленні памылак"
 
 #: data/com.github.geigi.cozy.appdata.xml:76
 #: data/com.github.geigi.cozy.appdata.xml:89
@@ -165,7 +161,7 @@ msgstr "Varios arranxos de erros pequenos"
 #: data/com.github.geigi.cozy.appdata.xml:197
 #: data/com.github.geigi.cozy.appdata.xml:211
 msgid "As always, updated translations thanks to all of the translators!"
-msgstr "Como sempre, traducións actualizadas grazas a todos os tradutores!"
+msgstr "Як заўсёды, абноўленыя пераклады, дзякуй усім перакладчыкам!"
 
 #: data/com.github.geigi.cozy.appdata.xml:82
 #: data/com.github.geigi.cozy.appdata.xml:95
@@ -173,27 +169,26 @@ msgstr "Como sempre, traducións actualizadas grazas a todos os tradutores!"
 #: data/com.github.geigi.cozy.appdata.xml:159
 #: data/com.github.geigi.cozy.appdata.xml:174
 msgid "A small bugfix release which makes Cozy more reliable."
-msgstr "Unha pequena corrección de erros que fai que Cozy sexa máis fiábel."
+msgstr ""
+"Невялікі выпуск з выпраўленнем памылак, які робіць Cozy больш надзейным."
 
 #: data/com.github.geigi.cozy.appdata.xml:86
 msgid "Fresh playback speed and sleep timer icons (thanks jimmac)"
-msgstr ""
-"Iconas novas para a velocidade de reprodución e temporizador de apagado "
-"(grazas jimmac)"
+msgstr "Новыя значкі хуткасці прайгравання і таймера сну (дзякуй jimmac)"
 
 #: data/com.github.geigi.cozy.appdata.xml:87
 msgid ""
 "Refreshing the library now uses a more descriptive text (thanks jubalh)"
 msgstr ""
-"Ao actualizar a biblioteca agora úsanse textos máis descriptivos (grazas "
+"Абнаўленне бібліятэкі цяпер выкарыстоўвае больш апісальны тэкст (дзякуй "
 "jubalh)"
 
 #: data/com.github.geigi.cozy.appdata.xml:99
 #: data/com.github.geigi.cozy.appdata.xml:115
 msgid "Display an error banner if an error occurs while importing new files"
 msgstr ""
-"Mostrar unha mensaxe de erro se se produce un erro ao importar ficheiros "
-"novos"
+"Праграма адлюстроўвае банэр з памылкай, калі ўзнікае памылка пры імпарце "
+"новых файлаў"
 
 #: data/com.github.geigi.cozy.appdata.xml:100
 #: data/com.github.geigi.cozy.appdata.xml:116
@@ -201,29 +196,28 @@ msgid ""
 "The audiobook directory selector in the empty state has been replaced by a "
 "button to allow a narrow window even with long directory names"
 msgstr ""
-"O selector de cartafol de audiolibros no estado baleiro foi reemprazado por "
-"un botón para permitir unha xanela máis estreita incluso con nomes de "
-"cartafol largos"
+"Выбар каталога аўдыякніг у пустым стане быў заменены кнопкай, каб дазволіць "
+"вузкае акно нават з доўгімі назвамі каталогаў"
 
 #: data/com.github.geigi.cozy.appdata.xml:101
 #: data/com.github.geigi.cozy.appdata.xml:117
 msgid "Fix: multiple small UI issues"
-msgstr "Arranxo: varios problemas de IU pequenos"
+msgstr "Выпраўленне: некалькі невялікіх праблем з карыстальніцкім інтэрфейсам"
 
 #: data/com.github.geigi.cozy.appdata.xml:102
 #: data/com.github.geigi.cozy.appdata.xml:118
 msgid "Fix: the welcome screen now works properly on a mobile device"
 msgstr ""
-"Arranxo: a pantalla de benvida agora funciona correctamente en dispositivos "
-"móbiles"
+"Выпраўленне: экран прывітання цяпер працуе належным чынам на мабільнай "
+"прыладзе"
 
 #: data/com.github.geigi.cozy.appdata.xml:103
 #: data/com.github.geigi.cozy.appdata.xml:119
 msgid ""
 "Fix: don't display the mobile library switcher when no files are imported"
 msgstr ""
-"Arranxo: non mostrar o trocador de biblioteca móbil cando non hai ficheiros "
-"importados"
+"Выпраўленне: не адлюстроўваўся пераключальнік мабільнай бібліятэкі, калі "
+"файлы не імпартуюцца"
 
 #: data/com.github.geigi.cozy.appdata.xml:104
 #: data/com.github.geigi.cozy.appdata.xml:120
@@ -231,163 +225,154 @@ msgid ""
 "Fix: in the book detail view the pause icon for a chapter remained even when"
 " the next chapter already started playing"
 msgstr ""
-"Arranxo: na vista de detalle a icona de pausar un capítulo seguía incluso "
-"cando o seguinte capítulo xa comezou a reproducirse"
+"Выпраўленне: у дэталёвым праглядзе кнігі значок паўзы для раздзела "
+"заставаўся нават тады, калі наступны раздзел ужо пачынаўся"
 
 #: data/com.github.geigi.cozy.appdata.xml:127
 msgid ""
 "This release features a redesigned library with responsiveness in mind."
 msgstr ""
-"Esta versión conta con un redeseño da biblioteca enfocada na capacidade de "
-"resposta."
+"У гэтым выпуску ёсць перапрацаваная бібліятэка з улікам хуткасці рэагавання."
 
 #: data/com.github.geigi.cozy.appdata.xml:131
 msgid "Redesigned library"
-msgstr "Biblioteca redeseñada"
+msgstr "Рэдызайн бібліятэкі"
 
 #: data/com.github.geigi.cozy.appdata.xml:132
 msgid "Redesigned start screen"
-msgstr "Pantalla de inicio redeseñada"
+msgstr "Перапрацаваны стартавы экран"
 
 #: data/com.github.geigi.cozy.appdata.xml:133
 msgid "Redesigned book detail screen"
-msgstr "Pantalla de detalles do libro redeseñada"
+msgstr "Перапрацаваны экран дэталяў кнігі"
 
 #: data/com.github.geigi.cozy.appdata.xml:134
 msgid "Responsive design for the main window"
-msgstr "Deseño reactivo para a xanela principal"
+msgstr "Адаптыўны дызайн для галоўнага акна"
 
 #: data/com.github.geigi.cozy.appdata.xml:135
 msgid "Introducing a welcome screen for new installations"
-msgstr "Introdución de unha pantalla de benvida para as novas instalacións"
+msgstr "Прадстаўляем экран прывітання для новых усталёвак"
 
 #: data/com.github.geigi.cozy.appdata.xml:136
 msgid "Fix: a rare bug where Cozy's volume was muted at first start"
 msgstr ""
-"Corrección: un erro raro polo que o volume de Cozy se silenciaba no primeiro"
-" inicio"
+"Выпраўленне: рэдкая памылка, з-за якой гук Cozy адключаўся пры першым "
+"запуску"
 
 #: data/com.github.geigi.cozy.appdata.xml:137
 msgid "Fix: long book names or author names will be truncated properly"
 msgstr ""
-"Corrección: los nombres largos de libros o autores se truncarán "
-"correctamente"
+"Выпраўленне: доўгія назвы кніг або імёны аўтараў будуць правільна абрэзаны"
 
 #: data/com.github.geigi.cozy.appdata.xml:144
 msgid "Performance improvements for the book detail view and some bugfixes."
 msgstr ""
-"Melloras no rendemento da vista detallada do libro e algunhas correccións de"
-" erros."
+"Паляпшэнні прадукцыйнасці дэталёвага прагляду кнігі і некаторыя выпраўленні "
+"памылак."
 
 #: data/com.github.geigi.cozy.appdata.xml:148
 msgid ""
 "Chapters in the book detail view will now be loaded lazily (thanks chris-"
 "kobrzak!)"
 msgstr ""
-"Os capítulos da vista detallada do libro cargaranse agora de forma gradual "
-"(¡grazas chris-kobrzak!)"
+"Раздзелы ў праглядзе дэталяў кнігі цяпер будуць загружацца ляніва (дзякуй "
+"chris-kobrzak!)"
 
 #: data/com.github.geigi.cozy.appdata.xml:149
 msgid ""
 "Books with a single chapter don't display a chapter number anymore (thanks "
 "chris-kobrzak!)"
 msgstr ""
-"Os libros con un só capítulo xa non mostran un número de capítulo (¡grazas "
-"chris-kobrzak!)"
+"Кнігі з аднаго раздзелу больш не паказваюць нумар раздзелу (дзякуй chris-"
+"kobrzak!)"
 
 #: data/com.github.geigi.cozy.appdata.xml:150
 msgid "Fix: Locals in What's new in Cozy screen (thanks alyssais!)"
 msgstr ""
-"Corrección: Locais na pantalla de Novidades en Cozy (¡grazas alyssais!)"
+"Выпраўленне: лакалізацыя на экране \"Што новага ў Cozy\" (дзякуй, alyssais!)"
 
 #: data/com.github.geigi.cozy.appdata.xml:151
 msgid "Fix: Catch an error that could occur when a book stops"
 msgstr ""
-"Corrección: Corríxese un erro que podía producirse cando se detía un libro"
+"Выпраўленне: выяўленая памылка, якая магла ўзнікнуць, калі кніга спыняецца"
 
 #: data/com.github.geigi.cozy.appdata.xml:152
 msgid "Small performance improvements"
-msgstr "Pequenas melloras de rendemento"
+msgstr "Невялікія паляпшэнні прадукцыйнасці"
 
 #: data/com.github.geigi.cozy.appdata.xml:163
 msgid ""
 "When an issue occurs during playback the error message is displayed to the "
 "user"
 msgstr ""
-"Cando se produce un problema durante a reproducción, a mensaje de erro "
-"móstrase ao usuario"
+"Калі падчас прайгравання ўзнікае праблема, карыстальніку адлюстроўваецца "
+"паведамленне пра памылку"
 
 #: data/com.github.geigi.cozy.appdata.xml:164
 msgid ""
 "Fix: Importing media without tags now properly decodes the file name as "
 "chapter name (thanks chris-kobrzak!)"
 msgstr ""
-"Corrección: A importación de medios sen etiquetas agora decodifica "
-"correctamente o nome do ficheiro como nome do capítulo (¡grazas chris-"
-"kobrzak!)"
+"Выпраўленне: імпарт мультымедыя без цэтлікаў цяпер належным чынам дэкадуе "
+"назву файла як назву главы (дзякуй chris-kobrzak!)"
 
 #: data/com.github.geigi.cozy.appdata.xml:165
 msgid "Fix: Ensure that always a default storage location is present"
 msgstr ""
-"Corrección: Garantizar que sempre haxa unha ruta de almacenamento por "
-"defecto"
+"Выпраўленне: пераканайцеся, што заўсёды прысутнічае перадвызначанане "
+"сховішча"
 
 #: data/com.github.geigi.cozy.appdata.xml:166
 msgid "Fix: During import an error could occur which stopped the import"
 msgstr ""
-"Corrección: Durante a importación podía producirse un erro que detiña a "
-"importación"
+"Выпраўленне: падчас імпарту магла адбыцца памылка, якая спыніла імпарт"
 
 #: data/com.github.geigi.cozy.appdata.xml:167
 msgid "Fix: During the database migration an error could occur"
-msgstr ""
-"Corrección: Durante a migración da base de datos podía producirse un erro"
+msgstr "Выпраўленне: падчас міграцыі базы даных магла адбыцца памылка"
 
 #: data/com.github.geigi.cozy.appdata.xml:178
 msgid ""
 "When copying files to the audiobook library goes wrong, the user is now "
 "informed with the error"
 msgstr ""
-"Ao copiar ficheiros á biblioteca de audiolibros non funciona, infórmase ao "
-"usuario co erro"
+"Калі пры капіяванні файлаў у бібліятэку аўдыякніг адбываецца збой, "
+"карыстальнік атрымлівае паведамленне пра памылку"
 
 #: data/com.github.geigi.cozy.appdata.xml:179
 msgid "Fix: Possible error while displaying offline cache copy progress"
 msgstr ""
-"Corrección: Posíbel erro ao mostrar o progreso da copia da caché sen "
-"conexión"
+"Выпраўленне: магчымая памылка падчас адлюстравання ходу аўтаномнага "
+"капіравання кэша"
 
 #: data/com.github.geigi.cozy.appdata.xml:180
 msgid ""
 "Fix: When changing the audiobook location or selecting a file in the file "
 "not found dialog an unexpected error could occur"
 msgstr ""
-"Corrección: Ao cambiar a ruta do audiolibro ou ao seleccionar un ficheiro no"
-" cadro de diálogo de ficheiro non atopado podía producirse un erro non "
-"esperado"
+"Выпраўленне: пры змене размяшчэння аўдыякнігі або выбары файла ў дыялогавым "
+"акне \"Файл не знойдзены\" магла адбыцца нечаканая памылка"
 
 #: data/com.github.geigi.cozy.appdata.xml:181
 msgid "Fix: Removing a storage dir in settings did not work"
-msgstr ""
-"Corrección: A eliminación dun cartafol de almacenamento na configuración non"
-" funcionaba"
+msgstr "Выпраўленне: выдаленне каталога размяшчэння ў наладах не працавала"
 
 #: data/com.github.geigi.cozy.appdata.xml:182
 msgid "Fix: Removing a book from the library did sometimes not work"
-msgstr "Corrección: Eliminar un libro da biblioteca a veces non funcionaba"
+msgstr "Выпраўленне: выдаленне кнігі з бібліятэкі часам не спрацоўвала"
 
 #: data/com.github.geigi.cozy.appdata.xml:189
 #: data/com.github.geigi.cozy.appdata.xml:203
 msgid "This release features chapter support for m4b files."
-msgstr "Esta versión inclúe compatibilidade de capítulos para ficheiros m4b."
+msgstr "У гэтым выпуску ёсць падтрымка раздзелаў для файлаў m4b."
 
 #: data/com.github.geigi.cozy.appdata.xml:193
 #: data/com.github.geigi.cozy.appdata.xml:207
 msgid ""
 "A long awaited feature has finally arrived: Chapter support for m4b files."
 msgstr ""
-"Por fin chegou unha función moi agardada: Soporte de capítulos para archivos"
-" m4b."
+"Нарэшце з'явілася доўгачаканая функцыя: падтрымка раздзелаў для файлаў m4b."
 
 #: data/com.github.geigi.cozy.appdata.xml:194
 #: data/com.github.geigi.cozy.appdata.xml:208
@@ -395,14 +380,13 @@ msgid ""
 "Books with inconsistent spelling are now grouped into a single book (thanks "
 "chris-kobrzak!)."
 msgstr ""
-"Os libros con ortografía inconsistente agrúpanse agora nun só libro (grazas "
-"chris-kobrzak!)."
+"Кнігі з неадпаведным правапісам цяпер згрупаваны ў адну кнігу (дзякуй chris-"
+"kobrzak!)."
 
 #: data/com.github.geigi.cozy.appdata.xml:195
 #: data/com.github.geigi.cozy.appdata.xml:209
 msgid "Improved reliability of restoring the previous playback position."
-msgstr ""
-"Mellora da fiabilidade da restauración da anterior posición de reproducción."
+msgstr "Палепшана надзейнасць аднаўлення папярэдняй пазіцыі прайгравання."
 
 #: data/com.github.geigi.cozy.appdata.xml:196
 #: data/com.github.geigi.cozy.appdata.xml:210
@@ -410,5 +394,5 @@ msgid ""
 "Fix: clicking on a currently playing chapter did not pause the chapter as "
 "expected."
 msgstr ""
-"Corrección: ao facer clic nun capítulo que se estaba reproducindo non se "
-"pausaba o capítulo como se esperaba."
+"Выпраўленне: націск на раздзел, які зараз прайграваецца, не прыпыняла "
+"раздзел, як чакалася."
