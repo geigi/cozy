@@ -81,24 +81,18 @@ class SearchView(Adw.Bin):
         if any((books, authors, readers)):
             self.stack.set_visible_child(self.search_scroller)
             self._populate_listbox(
-                books,
-                self.book_result_list,
-                self.book_result_box,
-                BookRow,
-                self.view_model.jump_to_book,
+                books, self.book_result_list, self.book_result_box, self.view_model.jump_to_book
             )
             self._populate_listbox(
                 authors,
                 self.author_result_list,
                 self.author_result_box,
-                ArtistResultRow,
                 self.view_model.jump_to_author,
             )
             self._populate_listbox(
                 readers,
                 self.reader_result_list,
                 self.reader_result_box,
-                ArtistResultRow,
                 self.view_model.jump_to_reader,
             )
         else:
@@ -109,7 +103,6 @@ class SearchView(Adw.Bin):
         results: Sequence[str | Book],
         listbox: Gtk.ListBox,
         box: Adw.PreferencesGroup,
-        row_type: type[BookRow | ArtistResultRow],
         callback: Callable[[str | Book], None],
     ) -> None:
         box.set_visible(False)
@@ -117,6 +110,11 @@ class SearchView(Adw.Bin):
 
         if not results:
             return
+
+        if isinstance(results[0], Book):
+            row_type = BookRow
+        else:
+            row_type = ArtistResultRow
 
         for result in results:
             if self.search_thread_stop.is_set():
