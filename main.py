@@ -19,11 +19,14 @@
 
 import argparse
 import code
+import gettext
+import locale
 import logging
 import os
 import signal
 import sys
 import traceback
+
 import gi
 
 gi.require_version('Gtk', '4.0')
@@ -32,16 +35,25 @@ gi.require_version('Adw', '1')
 gi.require_version('Gst', '1.0')
 gi.require_version('GstPbutils', '1.0')
 
+from gi.repository import Gio, GLib
+
 pkgdatadir = '@DATA_DIR@'
 localedir = '@LOCALE_DIR@'
 
-from gi.repository import Gio
+# We need to call `locale.*textdomain` to get the strings in UI files translated
+locale.bindtextdomain('com.github.geigi.cozy', localedir)
+locale.textdomain('com.github.geigi.cozy')
 
-# gresource must be registered  before importing any Gtk.Template annotated classes
+# But also `gettext.*textdomain`, to make `_("foo")` in Python work as well
+gettext.bindtextdomain('com.github.geigi.cozy', localedir)
+gettext.textdomain('com.github.geigi.cozy')
+
+gettext.install('com.github.geigi.cozy', localedir)
+
+
+# gresource must be registered before importing any Gtk.Template annotated classes
 resource = Gio.Resource.load(os.path.join(pkgdatadir, 'com.github.geigi.cozy.ui.gresource'))
 resource._register()
-
-from gi.repository import GLib
 
 old_except_hook = None
 
@@ -93,7 +105,7 @@ def main():
 
     listen()
 
-    application = Application(localedir, pkgdatadir)
+    application = Application(pkgdatadir)
 
     try:
         # Handle the debug option seperatly without the Glib stuff

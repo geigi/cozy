@@ -1,5 +1,3 @@
-import gettext
-import locale
 import logging
 import os
 import platform
@@ -9,23 +7,17 @@ from pathlib import Path
 from traceback import format_exception
 
 import distro
-
-import gi
-
-from cozy.db.storage import Storage
-from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.ui.widgets.seek_bar import SeekBar
-
-from gi.repository import Gtk, GLib, Adw
+from gi.repository import Adw, GLib
 
 from cozy.app_controller import AppController
 from cozy.control.db import init_db
 from cozy.control.mpris import MPRIS
 from cozy.db.settings import Settings
+from cozy.db.storage import Storage
 from cozy.report import reporter
 from cozy.ui.main_view import CozyUI
+from cozy.ui.widgets.filter_list_box import FilterListBox
 from cozy.version import __version__
-
 
 log = logging.getLogger("application")
 
@@ -60,8 +52,7 @@ class Application(Adw.Application):
     ui: CozyUI
     app_controller: AppController
 
-    def __init__(self, localedir: str, pkgdatadir: str):
-        self.localedir = localedir
+    def __init__(self, pkgdatadir: str):
         self.pkgdatadir = pkgdatadir
 
         super().__init__(application_id='com.github.geigi.cozy')
@@ -73,16 +64,6 @@ class Application(Adw.Application):
         self.old_except_hook = sys.excepthook
         sys.excepthook = self.handle_exception
         setup_thread_excepthook()
-
-        # We need to call `locale.*textdomain` to get the strings in UI files translated
-        locale.bindtextdomain('com.github.geigi.cozy', localedir)
-        locale.textdomain('com.github.geigi.cozy')
-
-        # But also `gettext.*textdomain`, to make `_("foo")` in Python work as well
-        gettext.bindtextdomain('com.github.geigi.cozy', localedir)
-        gettext.textdomain('com.github.geigi.cozy')
-
-        gettext.install('com.github.geigi.cozy', localedir)
 
     def do_startup(self):
         log.info(distro.linux_distribution(full_distribution_name=False))
