@@ -35,7 +35,7 @@ sudo apt install \
   libgirepository1.0-dev \
   libgstreamer1.0-0 \
   libgtk-4-dev \
-  libadwaita-1-dev
+  libadwaita-1-dev \
   pip \
   python-gi-cairo \
   python3-gst-1.0 \
@@ -46,20 +46,20 @@ sudo apt install \
 ### Requirements (Fedora)
 
 ```console
-sudo dnf install\
-  appstream\
-  cmake\
-  gettext\
-  gstreamer1-libav\
-  gstreamer1-plugins-ugly\
-  gstreamer1-plugins-bad\
-  gstreamer1-plugins-good\
+sudo dnf install \
+  appstream \
+  cmake \
+  gettext \
+  gstreamer1-libav \
+  gstreamer1-plugins-ugly \
+  gstreamer1-plugins-bad \
+  gstreamer1-plugins-good \
   gstreamer1-devel\
-  gtk4-devel\
-  libadwaita-devel\
-  pipenv\
-  python3-cairo-devel\
-  python3-gstreamer1\
+  gtk4-devel \
+  libadwaita-devel \
+  pipenv \
+  python3-cairo-devel \
+  python3-gstreamer1
 ```
 
 
