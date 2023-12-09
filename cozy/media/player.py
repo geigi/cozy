@@ -175,8 +175,7 @@ class Player(EventSender):
 
     def destroy(self):
         self._gst_player.dispose()
-
-        self._stop_tick_thread()
+        self._stop_playback()
 
         if self._fadeout_thread:
             self._fadeout_thread.stop()
