@@ -18,15 +18,9 @@ class SearchViewModel(Observable, EventSender):
     _model: Library = inject.attr(Library)
     _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
-    _search_open: bool = False
-
     def __init__(self):
         super().__init__()
         super(Observable, self).__init__()
-
-    @property
-    def books(self):
-        return self._model.books
 
     @property
     def authors(self):
@@ -50,34 +44,23 @@ class SearchViewModel(Observable, EventSender):
 
         return split_strings_to_set(readers)
 
-    def search(self, search_query: str, callback: Callable[[list[Book], list[str], list[str]], None], thread_event):
+    def search(
+        self, search_query: str, callback: Callable[[list[Book], list[str], list[str]], None]
+    ) -> None:
         search_query = search_query.lower()
-
-        # We need the main context to call methods in the main thread after the search is finished
-        main_context = GLib.MainContext.default()
 
         books = {
             book
-            for book in self.books
+            for book in self._model.books
             if search_query in book.name.lower()
             or search_query in book.author.lower()
             or search_query in book.reader.lower()
         }
 
-        if thread_event.is_set():
-            return
-
         authors = {author for author in self.authors if search_query in author.lower()}
-
-        if thread_event.is_set():
-            return
-
         readers = {reader for reader in self.readers if search_query in reader.lower()}
 
-        if thread_event.is_set():
-            return
-
-        main_context.invoke_full(
+        GLib.MainContext.default().invoke_full(
             GLib.PRIORITY_DEFAULT,
             callback,
             sorted(books, key=lambda book: book.name.lower()),

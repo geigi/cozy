@@ -10,8 +10,6 @@ from gi.repository import Adw, Gtk, GObject
 
 log = logging.getLogger("Headerbar")
 
-COVER_SIZE = 45
-
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/headerbar.ui')
 class Headerbar(Gtk.Box):
