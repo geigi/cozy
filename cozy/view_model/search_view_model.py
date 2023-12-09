@@ -68,17 +68,17 @@ class SearchViewModel(Observable, EventSender):
             sorted(readers),
         )
 
-    def close(self):
+    def close(self) -> None:
         self._notify("close")
 
-    def jump_to_book(self, book: Book):
+    def jump_to_book(self, book: Book) -> None:
         self.emit_event(OpenView.BOOK, book)
         self.close()
 
-    def jump_to_author(self, author: str):
+    def jump_to_author(self, author: str) -> None:
         self.emit_event(OpenView.AUTHOR, author)
         self.close()
 
-    def jump_to_reader(self, reader: str):
+    def jump_to_reader(self, reader: str) -> None:
         self.emit_event(OpenView.READER, reader)
         self.close()
