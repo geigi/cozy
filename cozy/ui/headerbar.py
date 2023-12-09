@@ -1,17 +1,15 @@
 import logging
 
-import gi
+from gi.repository import Adw, Gtk
 
 from cozy.ext import inject
 from cozy.ui.widgets.progress_popover import ProgressPopover
-from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarState
-
-from gi.repository import Adw, Gtk, GObject
+from cozy.view_model.headerbar_view_model import HeaderBarState, HeaderbarViewModel
 
 log = logging.getLogger("Headerbar")
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/headerbar.ui')
+@Gtk.Template.from_resource("/com/github/geigi/cozy/headerbar.ui")
 class Headerbar(Gtk.Box):
     __gtype_name__ = "Headerbar"
 
@@ -35,7 +33,9 @@ class Headerbar(Gtk.Box):
         self.header_container: Adw.ToolbarView = main_window_builder.get_object("header_container")
         self.header_container.add_top_bar(self)
 
-        self.mobile_view_switcher: Adw.ViewSwitcherBar = main_window_builder.get_object("mobile_view_switcher")
+        self.mobile_view_switcher: Adw.ViewSwitcherBar = main_window_builder.get_object(
+            "mobile_view_switcher"
+        )
         self.split_view: Adw.OverlaySplitView = main_window_builder.get_object("split_view")
 
         self.sort_stack: Adw.ViewStack = main_window_builder.get_object("sort_stack")

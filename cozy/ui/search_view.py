@@ -5,10 +5,10 @@ from gi.repository import Adw, Gtk
 
 from cozy.ext import inject
 from cozy.model.book import Book
+from cozy.ui.headerbar import Headerbar
 from cozy.ui.widgets.book_row import BookRow
 from cozy.ui.widgets.search_results import ArtistResultRow
 from cozy.view_model.search_view_model import SearchViewModel
-from cozy.ui.headerbar import Headerbar
 
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/search_page.ui")
