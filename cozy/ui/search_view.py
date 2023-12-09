@@ -64,39 +64,34 @@ class SearchView(Adw.Bin):
         self.search_thread_stop.set()
 
         search_query = self.entry.get_text()
-        if search_query:
-            if self.search_thread.is_alive():
-                self.search_thread.join(timeout=0.2)
-
-            self.search_thread_stop.clear()
-            self.search_thread = threading.Thread(
-                target=self.view_model.search,
-                args=(search_query, self._display_results, self.search_thread_stop),
-            )
-            self.search_thread.start()
-        else:
+        if not search_query:
             self.stack.set_visible_child(self.start_searching_page)
+            return
+
+        if self.search_thread.is_alive():
+            self.search_thread.join(timeout=0.2)
+
+        self.search_thread_stop.clear()
+        self.search_thread = threading.Thread(
+            target=self.view_model.search, args=(search_query, self._display_results)
+        )
+        self.search_thread.start()
 
     def _display_results(self, books: list[Book], authors: list[str], readers: list[str]) -> None:
-        if any((books, authors, readers)):
-            self.stack.set_visible_child(self.search_scroller)
-            self._populate_listbox(
-                books, self.book_result_list, self.book_result_box, self.view_model.jump_to_book
-            )
-            self._populate_listbox(
-                authors,
-                self.author_result_list,
-                self.author_result_box,
-                self.view_model.jump_to_author,
-            )
-            self._populate_listbox(
-                readers,
-                self.reader_result_list,
-                self.reader_result_box,
-                self.view_model.jump_to_reader,
-            )
-        else:
+        if not any((books, authors, readers)):
             self.stack.set_visible_child(self.nothing_found_page)
+            return
+
+        self.stack.set_visible_child(self.search_scroller)
+        self._populate_listbox(
+            books, self.book_result_list, self.book_result_box, self.view_model.jump_to_book
+        )
+        self._populate_listbox(
+            authors, self.author_result_list, self.author_result_box, self.view_model.jump_to_author
+        )
+        self._populate_listbox(
+            readers, self.reader_result_list, self.reader_result_box, self.view_model.jump_to_reader
+        )
 
     def _populate_listbox(
         self,
