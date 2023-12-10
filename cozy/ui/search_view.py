@@ -29,6 +29,7 @@ class SearchView(Adw.Bin):
     reader_result_list: Gtk.ListBox = Gtk.Template.Child()
 
     view_model = inject.attr(SearchViewModel)
+    main_view = inject.attr("MainWindow")
 
     search_thread: threading.Thread
     search_thread_stop: threading.Event
@@ -57,8 +58,10 @@ class SearchView(Adw.Bin):
     def on_state_changed(self, widget: Gtk.Widget, param) -> None:
         if widget.get_property(param.name):
             self.library_stack.set_visible_child(self)
+            self.main_view.play_pause_action.set_enabled(False)
         else:
             self.close()
+            self.main_view.play_pause_action.set_enabled(True)
 
     def _on_search_changed(self, _) -> None:
         self.search_thread_stop.set()
