@@ -50,10 +50,11 @@ class SearchView(Adw.Bin):
         self.search_thread_stop = threading.Event()
 
         self.view_model.bind_to("close", self.close)
-        self.main_window.create_action("search", self.open, ["<primary>f"])
+        self.main_view.create_action("search", self.open, ["<primary>f"])
 
-    def open(self) -> None:
+    def open(self, *_) -> None:
         self.library_stack.set_visible_child(self)
+        self.search_bar.set_search_mode(True)
         self.main_view.play_pause_action.set_enabled(False)
 
     def close(self) -> None:

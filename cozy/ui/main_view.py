@@ -1,9 +1,9 @@
 import logging
 import os
-import webbrowser
 from threading import Thread
+from typing import Callable
 
-from gi.repository import Adw, Gtk, Gio, Gdk, GLib, GObject
+from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
 import cozy.control.filesystem_monitor as fs_monitor
 import cozy.ext.inject as inject
@@ -12,15 +12,13 @@ from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.singleton import Singleton
 from cozy.control.db import books, close_db
-from cozy.db.storage import Storage
 from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
-from cozy.view_model.settings_view_model import SettingsViewModel
-from cozy.open_view import OpenView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_view import PreferencesView
+from cozy.view_model.settings_view_model import SettingsViewModel
 
 log = logging.getLogger("ui")
 
