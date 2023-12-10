@@ -50,18 +50,22 @@ class SearchView(Adw.Bin):
         self.search_thread_stop = threading.Event()
 
         self.view_model.bind_to("close", self.close)
+        self.main_window.create_action("search", self.open, ["<primary>f"])
+
+    def open(self) -> None:
+        self.library_stack.set_visible_child(self)
+        self.main_view.play_pause_action.set_enabled(False)
 
     def close(self) -> None:
         self.library_stack.set_visible_child(self.split_view)
         self.search_bar.set_search_mode(False)
+        self.main_view.play_pause_action.set_enabled(True)
 
     def on_state_changed(self, widget: Gtk.Widget, param) -> None:
         if widget.get_property(param.name):
-            self.library_stack.set_visible_child(self)
-            self.main_view.play_pause_action.set_enabled(False)
+            self.open()
         else:
             self.close()
-            self.main_view.play_pause_action.set_enabled(True)
 
     def _on_search_changed(self, _) -> None:
         self.search_thread_stop.set()

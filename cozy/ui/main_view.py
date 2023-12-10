@@ -130,38 +130,32 @@ class CozyUI(EventSender, metaclass=Singleton):
         about_action.connect("activate", self.about)
         self.app.add_action(about_action)
 
-        quit_action = Gio.SimpleAction.new("quit", None)
-        quit_action.connect("activate", self.quit)
-        self.app.add_action(quit_action)
-        self.app.set_accels_for_action(
-            "app.quit", ["<Control>q", "<Control>w"])
+        self.create_action("about", self.about)
+        self.create_action("quit", self.quit, ["<Control>q", "<Control>w"])
+        self.create_action("prefs", self.show_prefs, ["<Control>comma"])
+        self.create_action("scan", self.scan)
+        self.play_pause_action = self.create_action("play_pause", self.play_pause, ["space"])
 
-        pref_action = Gio.SimpleAction.new("prefs", None)
-        pref_action.connect("activate", self.show_prefs)
-        self.app.add_action(pref_action)
-        self.app.set_accels_for_action("app.prefs", ["<Control>comma"])
-
-        self.scan_action = Gio.SimpleAction.new("scan", None)
-        self.scan_action.connect("activate", self.scan)
-        self.app.add_action(self.scan_action)
-
-        self.play_pause_action = Gio.SimpleAction.new("play_pause", None)
-        self.play_pause_action.connect("activate", self.play_pause)
-        self.app.add_action(self.play_pause_action)
-        self.app.set_accels_for_action("app.play_pause", ["space"])
-
-        # NavigationView.pop-on-escape doesn't work in some cases, so this is a hack
-        back_action = Gio.SimpleAction.new("back", None)
-        back_action.connect("activate", lambda *_: self.navigation_view.pop())
-        self.app.add_action(back_action)
-        self.app.set_accels_for_action("app.back", ["Escape"])
-
-        self.hide_offline_action = Gio.SimpleAction.new_stateful("hide_offline",
-                                                                 None,
-                                                                 GLib.Variant.new_boolean(
-                                                                     self.application_settings.hide_offline))
+        self.hide_offline_action = Gio.SimpleAction.new_stateful(
+            "hide_offline", None, GLib.Variant.new_boolean(self.application_settings.hide_offline)
+        )
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
+
+    def create_action(
+        self,
+        name: str,
+        callback: Callable[[Gio.SimpleAction, None], None],
+        shortcuts: list[str] | None = None,
+    ) -> Gio.SimpleAction:
+        action = Gio.SimpleAction.new(name, None)
+        action.connect("activate", callback)
+        self.app.add_action(action)
+
+        if shortcuts:
+            self.app.set_accels_for_action(f"app.{name}", shortcuts)
+
+        return action
 
     def __init_components(self):
         if not self._player.loaded_book:
