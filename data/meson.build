@@ -1,4 +1,3 @@
-subdir('img')
 subdir('ui')
 subdir('icons')
 
