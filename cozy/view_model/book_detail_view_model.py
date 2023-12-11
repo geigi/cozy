@@ -1,5 +1,3 @@
-from typing import Optional
-
 from cozy import tools
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
@@ -29,7 +27,7 @@ class BookDetailViewModel(Observable, EventSender):
 
         self._play = False
         self._current_chapter = None
-        self._book: Book = None
+        self._book: Book | None = None
         self._lock_ui: bool = False
 
         self._player.add_listener(self._on_player_event)
@@ -45,14 +43,14 @@ class BookDetailViewModel(Observable, EventSender):
         return self._player.playing
 
     @property
-    def current_chapter(self) -> Optional[Chapter]:
+    def current_chapter(self) -> Chapter | None:
         if not self.book:
             return None
 
         return self.book.current_chapter
 
     @property
-    def book(self) -> Optional[Book]:
+    def book(self) -> Book | None:
         return self._book
 
     @book.setter
@@ -77,21 +75,21 @@ class BookDetailViewModel(Observable, EventSender):
         self._notify("book")
 
     @property
-    def last_played_text(self) -> Optional[str]:
+    def last_played_text(self) -> str | None:
         if not self._book:
             return None
 
         return tools.past_date_to_human_readable(self._book.last_played)
 
     @property
-    def total_text(self) -> Optional[str]:
+    def total_text(self) -> str | None:
         if not self._book:
             return None
 
         return tools.seconds_to_human_readable(self._book.duration / self._book.playback_speed)
 
     @property
-    def remaining_text(self) -> Optional[str]:
+    def remaining_text(self) -> str | None:
         if not self._book:
             return None
 
@@ -99,7 +97,7 @@ class BookDetailViewModel(Observable, EventSender):
         return tools.seconds_to_human_readable(remaining / self._book.playback_speed)
 
     @property
-    def progress_percent(self) -> Optional[float]:
+    def progress_percent(self) -> float | None:
         if not self._book:
             return None
         elif self._book.duration < 1:
