@@ -67,9 +67,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         Initialize all resources like gresource and glade windows.
         """
-        resource = Gio.resource_load(
-            os.path.join(self.pkgdir, 'com.github.geigi.cozy.ui.gresource'))
-        Gio.Resource._register(resource)
 
         self.window_builder = Gtk.Builder.new_from_resource(
             "/com/github/geigi/cozy/main_window.ui")
