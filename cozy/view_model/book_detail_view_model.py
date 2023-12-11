@@ -95,15 +95,14 @@ class BookDetailViewModel(Observable, EventSender):
         if not self._book:
             return None
 
-        remaining = self._book.duration / self._book.playback_speed - self._book.progress / self._book.playback_speed
-        return tools.seconds_to_human_readable(remaining)
+        remaining = self._book.duration - self._book.progress
+        return tools.seconds_to_human_readable(remaining / self._book.playback_speed)
 
     @property
     def progress_percent(self) -> Optional[float]:
         if not self._book:
             return None
-
-        if self._book.duration < 1:
+        elif self._book.duration < 1:
             return 1.0
 
         return self._book.progress / self._book.duration
@@ -113,9 +112,7 @@ class BookDetailViewModel(Observable, EventSender):
         if not self._book:
             return 0
 
-        return len({chapter.disk
-                    for chapter
-                    in self._book.chapters})
+        return len({chapter.disk for chapter in self._book.chapters})
 
     @property
     def is_book_available(self) -> bool:
@@ -127,10 +124,10 @@ class BookDetailViewModel(Observable, EventSender):
     @property
     def is_book_external(self) -> bool:
         first_chapter_path = self._book.chapters[0].file
-        return any(storage.path
-                   in first_chapter_path
-                   for storage
-                   in self._settings.external_storage_locations)
+        for storage in self._settings.external_storage_locations:
+            if storage.path in first_chapter_path:
+                return True
+        return False
 
     @property
     def lock_ui(self) -> bool:
@@ -167,9 +164,9 @@ class BookDetailViewModel(Observable, EventSender):
         if not self.book:
             return
 
-        if event == "play" or event == "pause":
+        if event in {"play", "pause"}:
             self._notify("playing")
-        elif event == "position" or event == "book-finished":
+        elif event in {"position", "book-finished"}:
             self._notify("progress_percent")
             self._notify("remaining_text")
 
@@ -177,9 +174,7 @@ class BookDetailViewModel(Observable, EventSender):
         if not self._book:
             return
 
-        if event == "storage-online":
-            self._notify("is_book_available")
-        elif event == "storage-offline":
+        if event in {"storage-online", "storage-offline"}:
             self._notify("is_book_available")
 
     def _on_book_current_chapter_changed(self):
@@ -203,15 +198,10 @@ class BookDetailViewModel(Observable, EventSender):
         self._notify("total_text")
 
     def _on_offline_cache_event(self, event, message):
-        try:
-            if message.id != self._book.id:
-                return
-        except Exception as e:
+        if not self._book or self._book.id != message.id:
             return
 
-        if event == "book-offline-removed":
-            self._notify("downloaded")
-        elif event == "book-offline":
+        if event in {"book-offline-removed", "book-offline"}:
             self._notify("downloaded")
 
     def _on_app_setting_changed(self, event, _):
