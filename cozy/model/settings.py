@@ -48,11 +48,10 @@ class Settings:
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
-    def default_location(self):
-        return next(location
-                    for location
-                    in self.storage_locations
-                    if location.default)
+    def default_location(self) -> bool:
+        for location in self.storage_locations:
+            if location.default:
+                return True
 
     @property
     def storage_locations(self):
@@ -78,14 +77,12 @@ class Settings:
             try:
                 self._storages.append(Storage(self._db, storage_db_obj.id))
             except InvalidPath:
-                log.error("Invalid path found in database, skipping: {}".format(storage_db_obj.path))
+                log.error(f"Invalid path found in database, skipping: {storage_db_obj.path}")
 
         self._ensure_default_storage_present()
 
     def _ensure_default_storage_present(self):
-        default_storage_present = any(storage.default
-                                      for storage
-                                      in self._storages)
+        default_storage_present = any(storage.default for storage in self._storages)
 
-        if not default_storage_present and len(self._storages) > 0:
+        if not default_storage_present and self._storages:
             self._storages[0].default = True
