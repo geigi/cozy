@@ -1,14 +1,13 @@
 import functools
 from typing import Optional
 
-from gi.repository import Gtk, Adw
-from gi.repository.Gtk import Builder
+from gi.repository import Adw, Gtk
 
 from cozy.ext import inject
 from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.delete_book_view import DeleteBookView
 from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode, LibraryPage
+from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
 
 READER_PAGE = "reader"
 AUTHOR_PAGE = "author"
@@ -23,7 +22,7 @@ BOOKS_PAGE = "books"
 class LibraryView:
     _view_model: LibraryViewModel = inject.attr(LibraryViewModel)
 
-    def __init__(self, builder: Builder):
+    def __init__(self, builder: Gtk.Builder):
         self._builder = builder
         self._connected_book_element: Optional[BookElement] = None
 

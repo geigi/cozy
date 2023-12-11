@@ -3,8 +3,6 @@ import os
 from enum import Enum, auto
 from typing import Optional
 
-from gi.repository import Gtk
-
 import cozy.ext.inject as inject
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
@@ -29,12 +27,6 @@ class LibraryViewMode(Enum):
     CURRENT = auto()
     AUTHOR = auto()
     READER = auto()
-
-
-class LibraryPage(Enum):
-    NONE = auto()
-    FILTER = auto()
-    BOOKS = auto()
 
 
 class LibraryViewModel(Observable, EventSender):
