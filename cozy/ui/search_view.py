@@ -94,7 +94,7 @@ class SearchView:
         main_context.invoke_full(
             GLib.PRIORITY_DEFAULT, self.__on_reader_search_finished, readers)
 
-        if len(readers) < 1 and len(authors) < 1 and len(books) < 1:
+        if not any((readers, authors, books)):
             main_context.invoke_full(
                 GLib.PRIORITY_DEFAULT, self.stack.set_visible_child_name, "nothing")
 
