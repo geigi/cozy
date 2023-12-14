@@ -1,9 +1,11 @@
 import time
 import logging
+import functools
 
 log = logging.getLogger("timing")
 
 def timing(f):
+    @functools.wraps(f)
     def wrap(*args):
         time1 = time.time()
         ret = f(*args)
