@@ -52,17 +52,19 @@ class SearchView:
     def _connect_view_model(self):
         self.view_model.bind_to("search_open", self._on_search_open_changed)
 
-    def search(self, user_search: str):
+    def search(self, query: str):
         # we need the main context to call methods in the main thread after the search is finished
         main_context = GLib.MainContext.default()
+
+        query_lower = query.lower()
 
         books = list({
             book
             for book
             in self.view_model.books
-            if user_search.lower() in book.name.lower()
-               or user_search.lower() in book.author.lower()
-               or user_search.lower() in book.reader.lower()
+            if query_lower in book.name.lower()
+               or query_lower in book.author.lower()
+               or query_lower in book.reader.lower()
         })
         books = sorted(books, key=lambda book: book.name.lower())
         if self.search_thread_stop.is_set():
@@ -74,7 +76,7 @@ class SearchView:
             author
             for author
             in self.view_model.authors
-            if user_search.lower() in author.lower()
+            if query_lower in author.lower()
         })
         if self.search_thread_stop.is_set():
             return
@@ -85,7 +87,7 @@ class SearchView:
             reader
             for reader
             in self.view_model.readers
-            if user_search.lower() in reader.lower()
+            if query_lower in reader.lower()
         })
         if self.search_thread_stop.is_set():
             return
