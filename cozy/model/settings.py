@@ -51,6 +51,7 @@ class Settings:
         for location in self.storage_locations:
             if location.default:
                 return True
+        return False
 
     @property
     def storage_locations(self) -> list[Storage]:
