@@ -244,7 +244,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         This enables all UI functionality for the user.
         """
         if self.navigation_view.props.visible_page != "book_overview" and self.main_stack.props.visible_child_name != "no_media":
-            self.navigation_view.pop_to_page("main")
+            self.navigation_view.pop_to_tag("main")
         if self._player.loaded_book:
             self.block_ui_buttons(False, True)
         else:
