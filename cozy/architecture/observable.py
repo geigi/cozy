@@ -33,7 +33,7 @@ class Observable:
             if callback in self._observers[prop]:
                 self._observers[prop].remove(callback)
             else:
-                log.info("Callback not found in prop's {} observers. Skipping remove bind...".format(prop))
+                log.info("Callback not found in prop's %s observers. Skipping remove bind...", prop)
         else:
             log.info("Prop not found in observers. Skipping remove bind...")
 

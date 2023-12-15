@@ -52,7 +52,7 @@ class Files(EventSender):
                 self._copy_file(path, file_copy_destination)
 
     def _copy_file(self, source_path: str, dest_path: str):
-        log.info("Copy file {} to {}".format(source_path, dest_path))
+        log.info("Copy file %s to %s", source_path, dest_path)
 
         source = Gio.File.new_for_path(source_path)
         destination = Gio.File.new_for_path(dest_path)
@@ -72,7 +72,7 @@ class Files(EventSender):
             else:
                 reporter.exception("files", e)
 
-            log.error("Failed to copy file: {}".format(e))
+            log.error("Failed to copy file: %s", e)
         self._file_progess += 1
 
     def _copy_directory(self, path, destination):

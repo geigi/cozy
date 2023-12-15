@@ -94,12 +94,13 @@ class GstPlayer(EventSender):
             return GstPlayerState.STOPPED
 
         _, state, __ = self._player.get_state(Gst.CLOCK_TIME_NONE)
+        print(type(state))
         if state == Gst.State.PLAYING:
             return GstPlayerState.PLAYING
         elif state == Gst.State.PAUSED:
             return GstPlayerState.PAUSED
         else:
-            log.debug("GST player state was not playing or paused but {}.".format(state))
+            log.debug("GST player state was not playing or paused but %s", state)
             return GstPlayerState.STOPPED
 
     @property
@@ -268,7 +269,7 @@ class GstPlayer(EventSender):
                 reporter.warning("gst_player", "gst: Resource not found. Stopping player.")
                 return
 
-            reporter.error("player", "{}: {}".format(error.code, error))
-            log.error("{}: {}".format(error.code, error))
+            reporter.error("player", f"{error.code}: {error}")
+            log.error(f"{error.code}: {error}")
             log.debug(debug_msg)
             self.emit_event("error", error)
