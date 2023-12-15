@@ -198,7 +198,7 @@ class Importer(EventSender):
                         yield file
                 except Exception as e:
                     log.debug(e)
-                    log.info("Could not get modified timestamp for file {}".format(file))
+                    log.info("Could not get modified timestamp for file %s", file)
                     continue
 
                 continue
