@@ -94,7 +94,6 @@ class GstPlayer(EventSender):
             return GstPlayerState.STOPPED
 
         _, state, __ = self._player.get_state(Gst.CLOCK_TIME_NONE)
-        print(type(state))
         if state == Gst.State.PLAYING:
             return GstPlayerState.PLAYING
         elif state == Gst.State.PAUSED:
