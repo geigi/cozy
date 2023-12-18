@@ -17,7 +17,7 @@ from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
-from cozy.view_model.settings_view_model import SettingsViewModel
+from cozy.view_model.storages_view_model import StoragesViewModel
 from cozy.open_view import OpenView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_view import PreferencesView
@@ -38,7 +38,7 @@ class CozyUI(EventSender, metaclass=Singleton):
     _settings: SettingsModel = inject.attr(SettingsModel)
     _files: Files = inject.attr(Files)
     _player: Player = inject.attr(Player)
-    _settings_view_model: SettingsViewModel = inject.attr(SettingsViewModel)
+    _storages_view_model: StoragesViewModel = inject.attr(StoragesViewModel)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -309,7 +309,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         return True
 
     def _set_audiobook_path(self, path):
-        self._settings_view_model.add_first_storage_location(path)
+        self._storages_view_model.add_first_storage_location(path)
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, None)
         self.fs_monitor.init_offline_mode()

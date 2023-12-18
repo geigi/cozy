@@ -16,7 +16,7 @@ log = logging.getLogger("model.storage_location")
 
 
 class Settings:
-    _storages: List[Storage] = []
+    _storages: list[Storage] = []
     _db = cache = inject.attr(SqliteDatabase)
 
     def __init__(self):
@@ -49,10 +49,7 @@ class Settings:
 
     @property
     def default_location(self):
-        return next(location
-                    for location
-                    in self.storage_locations
-                    if location.default)
+        return next(location for location in self.storage_locations if location.default)
 
     @property
     def storage_locations(self):
@@ -69,11 +66,9 @@ class Settings:
         return [storage for storage in self._storages if storage.external]
 
     def invalidate(self):
-        self._storages = []
+        self._storages.clear()
 
     def _load_all_storage_locations(self):
-        self._storages = []
-
         for storage_db_obj in StorageModel.select(StorageModel.id):
             try:
                 self._storages.append(Storage(self._db, storage_db_obj.id))
@@ -83,9 +78,5 @@ class Settings:
         self._ensure_default_storage_present()
 
     def _ensure_default_storage_present(self):
-        default_storage_present = any(storage.default
-                                      for storage
-                                      in self._storages)
-
-        if not default_storage_present and len(self._storages) > 0:
+        if self._storages and not any(storage.default for storage in self._storages):
             self._storages[0].default = True

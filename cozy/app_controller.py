@@ -37,6 +37,7 @@ from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.search_view_model import SearchViewModel
 from cozy.view_model.settings_view_model import SettingsViewModel
 from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel
+from cozy.view_model.storages_view_model import StoragesViewModel
 
 
 class AppController(metaclass=Singleton):
@@ -108,6 +109,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(ToastNotifier, lambda: ToastNotifier())
         binder.bind_to_constructor(AppViewModel, lambda: AppViewModel())
         binder.bind_to_constructor(SettingsViewModel, lambda: SettingsViewModel())
+        binder.bind_to_constructor(StoragesViewModel, lambda: StoragesViewModel())
 
     def open_author(self, author: str):
         self.library_view_model.library_view_mode = LibraryViewMode.AUTHOR

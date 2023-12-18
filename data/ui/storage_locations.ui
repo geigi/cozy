@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="StorageLocations" parent="AdwPreferencesGroup">
+    <property name="title" translatable="true">Storage locations</property>
+    <child>
+      <object class="GtkListBox" id="storage_locations_list">
+        <property name="margin-bottom">18</property>
+        <style>
+          <class name="boxed-list"/>
+        </style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkListBox">
+        <child>
+          <object class="AdwActionRow" id="new_storage_button">
+            <property name="selectable">false</property>
+            <property name="activatable">true</property>
+            <property name="child">
+              <object class="GtkImage">
+                <property name="icon-name">list-add-symbolic</property>
+                <property name="margin-top">18</property>
+                <property name="margin-bottom">18</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <style>
+          <class name="boxed-list"/>
+        </style>
+      </object>
+    </child>
+  </template>
+  <menu id="storage_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="true">External drive</attribute>
+        <attribute name="action">storage.mark-external</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="true">Set as default</attribute>
+        <attribute name="action">storage.make-default</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="true">Remove</attribute>
+        <attribute name="action">storage.remove</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>
+
