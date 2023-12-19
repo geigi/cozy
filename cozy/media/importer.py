@@ -204,6 +204,3 @@ class Importer(EventSender):
                 continue
 
             yield file
-
-    def _get_file_count_in_dir(self, dir):
-        len([name for name in os.listdir(dir) if os.path.isfile(name)])
