@@ -24,7 +24,6 @@ class PreferencesView(Adw.PreferencesWindow):
     swap_author_reader_switch: Adw.SwitchRow = Gtk.Template.Child()
     replay_switch: Adw.SwitchRow = Gtk.Template.Child()
     sleep_timer_fadeout_switch: Adw.SwitchRow = Gtk.Template.Child()
-    fadeout_duration_spin_button: Adw.SpinRow = Gtk.Template.Child()
     artwork_prefer_external_switch: Adw.SwitchRow = Gtk.Template.Child()
 
     rewind_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
@@ -60,7 +59,7 @@ class PreferencesView(Adw.PreferencesWindow):
         self._glib_settings.bind("forward-duration", self.forward_duration_adjustment, "value",
                                  Gio.SettingsBindFlags.DEFAULT)
 
-        self._glib_settings.bind("sleep-timer-fadeout", self.sleep_timer_fadeout_switch, "active",
+        self._glib_settings.bind("sleep-timer-fadeout", self.sleep_timer_fadeout_switch, "enable-expansion",
                                  Gio.SettingsBindFlags.DEFAULT)
 
         self._glib_settings.bind("sleep-timer-fadeout-duration", self.fadeout_duration_adjustment,

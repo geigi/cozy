@@ -79,17 +79,19 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="true">Sleep Timer</property>
             <child>
-              <object class="AdwSwitchRow" id="sleep_timer_fadeout_switch">
+              <object class="AdwExpanderRow" id="sleep_timer_fadeout_switch">
                 <property name="title">Fadeout</property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwSpinRow" id="fadeout_duration_spin_button">
-                <property name="title">Fadeout duration</property>
-                <property name="focusable">true</property>
-                <property name="adjustment">fadeout_duration_adjustment</property>
-                <property name="snap-to-ticks">true</property>
-                <property name="numeric">true</property>
+                <property name="expanded">true</property>
+                <property name="show-enable-switch">true</property>
+                <child>
+                  <object class="AdwSpinRow">
+                    <property name="title">Fadeout duration</property>
+                    <property name="focusable">true</property>
+                    <property name="adjustment">fadeout_duration_adjustment</property>
+                    <property name="snap-to-ticks">true</property>
+                    <property name="numeric">true</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
