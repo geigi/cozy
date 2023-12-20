@@ -18,19 +18,18 @@ class PreferencesView(Adw.PreferencesWindow):
     _view_model: SettingsViewModel = inject.attr(SettingsViewModel)
 
     storages_page: Adw.PreferencesPage = Gtk.Template.Child()
+    user_feedback_preference_group: Adw.PreferencesGroup = Gtk.Template.Child()
 
-    dark_mode_switch: Gtk.Switch = Gtk.Template.Child()
-    swap_author_reader_switch: Gtk.Switch = Gtk.Template.Child()
-    replay_switch: Gtk.Switch = Gtk.Template.Child()
+    dark_mode_switch: Adw.SwitchRow = Gtk.Template.Child()
+    swap_author_reader_switch: Adw.SwitchRow = Gtk.Template.Child()
+    replay_switch: Adw.SwitchRow = Gtk.Template.Child()
     sleep_timer_fadeout_switch: Adw.SwitchRow = Gtk.Template.Child()
     fadeout_duration_spin_button: Adw.SpinRow = Gtk.Template.Child()
-    artwork_prefer_external_switch: Gtk.Switch = Gtk.Template.Child()
+    artwork_prefer_external_switch: Adw.SwitchRow = Gtk.Template.Child()
 
     rewind_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
     forward_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
     fadeout_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
-
-    user_feedback_preference_group: Adw.PreferencesRow = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(transient_for=self.main_window.window, **kwargs)
@@ -39,15 +38,14 @@ class PreferencesView(Adw.PreferencesWindow):
         error_reporting.show_header(False)
         self.user_feedback_preference_group.add(error_reporting)
 
-        storage_locations = StorageLocations()
-        self.storages_page.add(storage_locations)
+        self.storage_locations_view = StorageLocations()
+        self.storages_page.add(self.storage_locations_view)
 
         self._bind_settings()
 
-        self.connect("close-request", self._hide_window)
+        self._view_model.bind_to("lock_ui", self._on_lock_ui_changed)
 
-        self.sleep_timer_fadeout_switch.connect("notify::active", self._on_sleep_fadeout_switch_changed)
-        self.fadeout_duration_spin_button.set_sensitive(self.sleep_timer_fadeout_switch.props.active)
+        self.connect("close-request", self._hide_window)
 
     def _bind_settings(self):
         self._glib_settings.bind("dark-mode", self.dark_mode_switch, "active",
@@ -71,19 +69,10 @@ class PreferencesView(Adw.PreferencesWindow):
         self._glib_settings.bind("prefer-external-cover", self.artwork_prefer_external_switch, "active",
                                  Gio.SettingsBindFlags.DEFAULT)
 
-    def _on_sleep_fadeout_switch_changed(self, widget, param):
-        state = widget.get_property(param.name)
-        self.fadeout_duration_spin_button.set_sensitive(state)
-    
     def _on_lock_ui_changed(self):
         sensitive = not self._view_model.lock_ui
 
-        self.storage_locations_list.set_sensitive(sensitive)
-        self.add_storage_button.set_sensitive(sensitive)
-        self.remove_storage_button.set_sensitive(sensitive)
-        self.external_storage_toggle_button.set_sensitive(sensitive)
-        self.default_storage_button.set_sensitive(sensitive)
-        self._on_storage_box_changed(None, self.storage_locations_list.get_selected_row())
+        self.storage_locations_view.set_sensitive(sensitive)
     
     def _hide_window(self, *_):
         self.hide()
