@@ -35,25 +35,28 @@ class StoragesViewModel(Observable, EventSender):
     def _scan_new_storage(self, model: Storage):
         self.emit_event("storage-added", model)
         log.info("New audiobook location added. Starting import scan.")
-        thread = Thread(target=self._importer.scan, name="ImportThread")
-        thread.start()
+        Thread(target=self._importer.scan, name="ImportThread").start()
 
     def _rebase_storage_location(self, model: Storage, old_path: str):
         self.emit_event("storage-changed", model)
         log.info("Audio book location changed, rebasing the location in Cozy.")
-        thread = Thread(target=self._library.rebase_path, args=(old_path, model.path), name="RebaseStorageLocationThread")
-        thread.start()
+        Thread(
+            target=self._library.rebase_path,
+            args=(old_path, model.path),
+            name="RebaseStorageLocationThread"
+        ).start()
 
     def add_storage_location(self, path: str) -> None:
         model = Storage.new(self._db, path)
+        model.external = self._fs_monitor.is_external(path)
 
         self._model.invalidate()
-        self._scan_new_storage(model)
         self._notify("storage_locations")
+
+        self._scan_new_storage(model)
 
     def add_first_storage_location(self, path: str):
         storage = self.storages[0]
-
         storage.path = path
         storage.default = True
         storage.external = self._fs_monitor.is_external(path)
