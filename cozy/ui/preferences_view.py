@@ -1,14 +1,14 @@
-from gi.repository import Gtk
-from cozy.view_model.settings_view_model import SettingsViewModel
-from gi.repository import Adw, Gio
-from typing import Callable
+from typing import Any
+
+from gi.repository import Adw, Gio, Gtk
 
 from cozy.ext import inject
 from cozy.ui.widgets.error_reporting import ErrorReporting
 from cozy.ui.widgets.storages import StorageLocations
+from cozy.view_model.settings_view_model import SettingsViewModel
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/preferences.ui')
+@Gtk.Template.from_resource("/com/github/geigi/cozy/preferences.ui")
 class PreferencesView(Adw.PreferencesWindow):
     __gtype_name__ = "PreferencesWindow"
 
@@ -30,7 +30,7 @@ class PreferencesView(Adw.PreferencesWindow):
     forward_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
     fadeout_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(transient_for=self.main_window.window, **kwargs)
 
         error_reporting = ErrorReporting()
@@ -46,33 +46,62 @@ class PreferencesView(Adw.PreferencesWindow):
 
         self.connect("close-request", self._hide_window)
 
-    def _bind_settings(self):
-        self._glib_settings.bind("dark-mode", self.dark_mode_switch, "active",
-                                 Gio.SettingsBindFlags.DEFAULT)
+    def _bind_settings(self) -> None:
+        self._glib_settings.bind(
+            "dark-mode", self.dark_mode_switch, "active", Gio.SettingsBindFlags.DEFAULT
+        )
 
-        self._glib_settings.bind("swap-author-reader", self.swap_author_reader_switch, "active",
-                                 Gio.SettingsBindFlags.DEFAULT)
+        self._glib_settings.bind(
+            "swap-author-reader",
+            self.swap_author_reader_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
 
-        self._glib_settings.bind("replay", self.replay_switch, "active", Gio.SettingsBindFlags.DEFAULT)
-        self._glib_settings.bind("rewind-duration", self.rewind_duration_adjustment, "value",
-                                 Gio.SettingsBindFlags.DEFAULT)
-        self._glib_settings.bind("forward-duration", self.forward_duration_adjustment, "value",
-                                 Gio.SettingsBindFlags.DEFAULT)
+        self._glib_settings.bind(
+            "replay", self.replay_switch, "active", Gio.SettingsBindFlags.DEFAULT
+        )
+        self._glib_settings.bind(
+            "rewind-duration",
+            self.rewind_duration_adjustment,
+            "value",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+        self._glib_settings.bind(
+            "forward-duration",
+            self.forward_duration_adjustment,
+            "value",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
 
-        self._glib_settings.bind("sleep-timer-fadeout", self.sleep_timer_fadeout_switch, "enable-expansion",
-                                 Gio.SettingsBindFlags.DEFAULT)
+        self._glib_settings.bind(
+            "sleep-timer-fadeout",
+            self.sleep_timer_fadeout_switch,
+            "enable-expansion",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
 
-        self._glib_settings.bind("sleep-timer-fadeout-duration", self.fadeout_duration_adjustment,
-                                 "value", Gio.SettingsBindFlags.DEFAULT)
+        self._glib_settings.bind(
+            "sleep-timer-fadeout-duration",
+            self.fadeout_duration_adjustment,
+            "value",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
 
-        self._glib_settings.bind("prefer-external-cover", self.artwork_prefer_external_switch, "active",
-                                 Gio.SettingsBindFlags.DEFAULT)
+        self._glib_settings.bind(
+            "prefer-external-cover",
+            self.artwork_prefer_external_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
 
-    def _on_lock_ui_changed(self):
+        self.storage_locations_view.set_sensitive(False)
+
+    def _on_lock_ui_changed(self) -> None:
         sensitive = not self._view_model.lock_ui
 
         self.storage_locations_view.set_sensitive(sensitive)
-    
+
     def _hide_window(self, *_):
         self.hide()
         return True

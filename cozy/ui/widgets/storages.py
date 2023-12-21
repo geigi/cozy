@@ -1,13 +1,10 @@
 import logging
-from threading import Thread
 from typing import Callable
 
-from cozy.control.filesystem_monitor import FilesystemMonitor
-from cozy.model.storage import Storage
+from gi.repository import Adw, Gio, GLib, GObject, Gtk
+
 from cozy.ext import inject
-from cozy.model.library import Library
-from cozy.model.settings import Settings
-from gi.repository import Gtk, GObject, Gio, GLib, Adw
+from cozy.model.storage import Storage
 from cozy.view_model.storages_view_model import StoragesViewModel
 
 log = logging.getLogger("settings")
@@ -29,7 +26,9 @@ def ask_storage_location(callback: Callable[[str], None], *junk):
             if file is not None:
                 callback(file.get_path())
 
-    location_chooser.select_folder(inject.instance("MainWindow").window, None, finish_callback)
+    location_chooser.select_folder(
+        inject.instance("MainWindow").window, None, finish_callback
+    )
 
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/storage_row.ui")
@@ -56,16 +55,16 @@ class StorageRow(Adw.ActionRow):
     def model(self) -> Storage:
         return self._model
 
-    def ask_for_new_location(self, *_):
+    def ask_for_new_location(self, *_) -> None:
         ask_storage_location(self._on_folder_changed)
 
-    def _on_folder_changed(self, new_path):
+    def _on_folder_changed(self, new_path: str) -> None:
         self.emit("location-changed", new_path)
 
-    def _on_menu_opened(self, *_):
+    def _on_menu_opened(self, *_) -> None:
         self.emit("menu-opened")
 
-    def _set_drive_icon(self):
+    def _set_drive_icon(self) -> None:
         if self._model.external:
             self.icon.set_from_icon_name("network-server-symbolic")
             self.icon.set_tooltip_text(_("External drive"))
@@ -73,13 +72,20 @@ class StorageRow(Adw.ActionRow):
             self.icon.set_from_icon_name("folder-open-symbolic")
             self.icon.set_tooltip_text(_("Internal drive"))
 
-    def _set_default_icon(self):
+    def _set_default_icon(self) -> None:
         self.default_icon.set_visible(self._model.default)
 
 
-GObject.signal_new('location-changed', StorageRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
-                   (GObject.TYPE_PYOBJECT,))
-GObject.signal_new('menu-opened', StorageRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ())
+GObject.signal_new(
+    "location-changed",
+    StorageRow,
+    GObject.SIGNAL_RUN_LAST,
+    GObject.TYPE_PYOBJECT,
+    (GObject.TYPE_PYOBJECT,),
+)
+GObject.signal_new(
+    "menu-opened", StorageRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ()
+)
 
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/storage_locations.ui")
@@ -104,7 +110,7 @@ class StorageLocations(Adw.PreferencesGroup):
 
         self._reload_storage_list()
 
-    def _create_actions(self):
+    def _create_actions(self) -> None:
         self.action_group = Gio.SimpleActionGroup.new()
         self.insert_action_group("storage", self.action_group)
 
@@ -126,7 +132,7 @@ class StorageLocations(Adw.PreferencesGroup):
         self.make_default_action.connect("activate", self._set_default_storage_location)
         self.action_group.add_action(self.make_default_action)
 
-    def _reload_storage_list(self):
+    def _reload_storage_list(self) -> None:
         self.storage_locations_list.remove_all()
 
         for storage in self._view_model.storages:
@@ -135,27 +141,36 @@ class StorageLocations(Adw.PreferencesGroup):
             row.connect("menu-opened", self._on_storage_menu_opened)
             self.storage_locations_list.append(row)
 
-    def _remove_storage_location(self, *_):
+    def _remove_storage_location(self, *_) -> None:
         self._view_model.remove(self._view_model.selected_storage)
 
-    def _set_default_storage_location(self, *_):
+    def _set_default_storage_location(self, *_) -> None:
         self._view_model.set_default(self._view_model.selected_storage)
 
-    def _mark_storage_location_external(self, action, value):
+    def _mark_storage_location_external(
+        self, action: Gio.SimpleAction, value: GObject.ParamSpec
+    ) -> None:
         value = action.get_property(value.name)
         self._view_model.set_external(self._view_model.selected_storage, value)
 
-    def _on_new_storage_clicked(self, *junk):
+    def _on_new_storage_clicked(self, *junk) -> None:
         ask_storage_location(self._view_model.add_storage_location)
 
-    def _on_storage_location_changed(self, widget, new_location):
+    def _on_storage_location_changed(
+        self, widget: StorageRow, new_location: str
+    ) -> None:
         self._view_model.change_storage_location(widget.model, new_location)
 
-    def _on_storage_menu_opened(self, widget: StorageRow):
+    def _on_storage_menu_opened(self, widget: StorageRow) -> None:
         with self.set_external_action.handler_block(self.set_external_signal_handler):
-            self.set_external_action.props.state = GLib.Variant.new_boolean(widget.model.external)
+            self.set_external_action.props.state = GLib.Variant.new_boolean(
+                widget.model.external
+            )
 
-        self.remove_action.props.enabled = not widget.model.default and len(self._view_model.storages) > 1
-        self.make_default_action.props.enabled = widget.model is not self._view_model.default
+        self.remove_action.props.enabled = (
+            not widget.model.default and len(self._view_model.storages) > 1
+        )
+        self.make_default_action.props.enabled = (
+            widget.model is not self._view_model.default
+        )
         self._view_model.selected_storage = widget.model
-        

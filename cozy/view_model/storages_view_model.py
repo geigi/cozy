@@ -2,21 +2,19 @@ import logging
 from threading import Thread
 
 from peewee import SqliteDatabase
+
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
-from cozy.model.library import Library
-from cozy.model.storage import Storage
 from cozy.ext import inject
 from cozy.media.importer import Importer
+from cozy.model.library import Library
 from cozy.model.settings import Settings
-from cozy.report import reporter
-from gi.repository import Gtk, Adw
-
-
+from cozy.model.storage import Storage
 
 log = logging.getLogger("storages_view_model")
+
 
 class StoragesViewModel(Observable, EventSender):
     _library: Library = inject.attr(Library)
@@ -26,24 +24,24 @@ class StoragesViewModel(Observable, EventSender):
     _db = inject.attr(SqliteDatabase)
     _fs_monitor = inject.attr(FilesystemMonitor)
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         super(Observable, self).__init__()
 
         self._selected_storage = None
 
-    def _scan_new_storage(self, model: Storage):
+    def _scan_new_storage(self, model: Storage) -> None:
         self.emit_event("storage-added", model)
         log.info("New audiobook location added. Starting import scan.")
         Thread(target=self._importer.scan, name="ImportThread").start()
 
-    def _rebase_storage_location(self, model: Storage, old_path: str):
+    def _rebase_storage_location(self, model: Storage, old_path: str) -> None:
         self.emit_event("storage-changed", model)
         log.info("Audio book location changed, rebasing the location in Cozy.")
         Thread(
             target=self._library.rebase_path,
             args=(old_path, model.path),
-            name="RebaseStorageLocationThread"
+            name="RebaseStorageLocationThread",
         ).start()
 
     def add_storage_location(self, path: str) -> None:
@@ -55,7 +53,7 @@ class StoragesViewModel(Observable, EventSender):
 
         self._scan_new_storage(model)
 
-    def add_first_storage_location(self, path: str):
+    def add_first_storage_location(self, path: str) -> None:
         storage = self.storages[0]
         storage.path = path
         storage.default = True
@@ -100,7 +98,7 @@ class StoragesViewModel(Observable, EventSender):
 
         self._notify("storage_locations")
 
-    def set_default(self, model: Storage):
+    def set_default(self, model: Storage) -> None:
         if model.default:
             return
 
@@ -111,7 +109,7 @@ class StoragesViewModel(Observable, EventSender):
 
         self._notify("storage_attributes")
 
-    def set_external(self, model: Storage, external: bool):
+    def set_external(self, model: Storage, external: bool) -> None:
         model.external = external
 
         if external:
