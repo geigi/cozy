@@ -117,7 +117,7 @@ class StorageLocations(Adw.PreferencesGroup):
             None,
             GLib.Variant.new_boolean(False),
         )
-        self.set_external_signal_handler = self.set_external_action.connect(
+        self._set_external_signal_handler = self.set_external_action.connect(
             "notify::state", self._mark_storage_location_external
         )
         self.action_group.add_action(self.set_external_action)
@@ -169,7 +169,7 @@ class StorageLocations(Adw.PreferencesGroup):
         self._view_model.change_storage_location(widget.model, new_location)
 
     def _on_storage_menu_opened(self, widget: StorageRow) -> None:
-        with self.set_external_action.handler_block(self.set_external_signal_handler):
+        with self.set_external_action.handler_block(self._set_external_signal_handler):
             self.set_external_action.props.state = GLib.Variant.new_boolean(
                 widget.model.external
             )
