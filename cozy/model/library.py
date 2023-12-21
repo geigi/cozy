@@ -93,10 +93,8 @@ class Library(EventSender):
         self.emit_event_main_thread("rebase-started")
 
         chapter_count = len(self.chapters)
-        progress = 0
-        for chapter in self.chapters:
+        for progress, chapter in enumerate(self.chapters, 1):
             if chapter.file.startswith(old_path):
-                progress += 1
                 chapter.file = chapter.file.replace(old_path, new_path)
                 self.emit_event_main_thread("rebase-progress", progress / chapter_count)
 

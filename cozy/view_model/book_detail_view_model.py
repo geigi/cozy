@@ -196,7 +196,7 @@ class BookDetailViewModel(Observable, EventSender):
         self._notify("total_text")
 
     def _on_offline_cache_event(self, event, message):
-        if not self._book or self._book.id != message.id:
+        if not (message and self._book) or self._book.id != message.id:
             return
 
         if event in {"book-offline-removed", "book-offline"}:
