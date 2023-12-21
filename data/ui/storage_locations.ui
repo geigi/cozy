@@ -11,26 +11,6 @@
         </style>
       </object>
     </child>
-    <child>
-      <object class="GtkListBox">
-        <child>
-          <object class="AdwActionRow" id="new_storage_button">
-            <property name="selectable">false</property>
-            <property name="activatable">true</property>
-            <property name="child">
-              <object class="GtkImage">
-                <property name="icon-name">list-add-symbolic</property>
-                <property name="margin-top">18</property>
-                <property name="margin-bottom">18</property>
-              </object>
-            </property>
-          </object>
-        </child>
-        <style>
-          <class name="boxed-list"/>
-        </style>
-      </object>
-    </child>
   </template>
   <menu id="storage_menu">
     <section>

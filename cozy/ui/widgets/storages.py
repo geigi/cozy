@@ -95,18 +95,16 @@ class StorageLocations(Adw.PreferencesGroup):
     _view_model: StoragesViewModel = inject.attr(StoragesViewModel)
 
     storage_locations_list: Gtk.ListBox = Gtk.Template.Child()
-    new_storage_button: Adw.ActionRow = Gtk.Template.Child()
     storage_menu: Gio.Menu = Gtk.Template.Child()
 
     def __init__(self) -> None:
         super().__init__()
 
-        self.new_storage_button.connect("activated", self._on_new_storage_clicked)
-
         self._view_model.bind_to("storage_locations", self._reload_storage_list)
         self._view_model.bind_to("storage_attributes", self._reload_storage_list)
 
         self._create_actions()
+        self.new_storage_button = self._create_new_storage_button()
 
         self._reload_storage_list()
 
@@ -132,6 +130,13 @@ class StorageLocations(Adw.PreferencesGroup):
         self.make_default_action.connect("activate", self._set_default_storage_location)
         self.action_group.add_action(self.make_default_action)
 
+    def _create_new_storage_button(self) -> Adw.ActionRow:
+        icon = Gtk.Image(icon_name="list-add-symbolic", margin_top=18, margin_bottom=18)
+        row = Adw.ActionRow(selectable=False, activatable=True)
+        row.connect("activated", self._on_new_storage_clicked)
+        row.set_child(icon)
+        return row
+
     def _reload_storage_list(self) -> None:
         self.storage_locations_list.remove_all()
 
@@ -140,6 +145,8 @@ class StorageLocations(Adw.PreferencesGroup):
             row.connect("location-changed", self._on_storage_location_changed)
             row.connect("menu-opened", self._on_storage_menu_opened)
             self.storage_locations_list.append(row)
+
+        self.storage_locations_list.append(self.new_storage_button)
 
     def _remove_storage_location(self, *_) -> None:
         self._view_model.remove(self._view_model.selected_storage)
