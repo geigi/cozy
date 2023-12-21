@@ -249,9 +249,9 @@ class CozyUI(EventSender, metaclass=Singleton):
             self.block_ui_buttons(False, True)
         else:
             # we want to only block the player controls
+            # TODO: rework. this is messy
             self.block_ui_buttons(False, True)
             self.block_ui_buttons(True, False)
-        self.emit_event_main_thread("working", False)
 
     def check_for_tracks(self):
         """

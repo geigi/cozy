@@ -76,7 +76,7 @@ class AppController(metaclass=Singleton):
         self.library_view_model.add_listener(self._on_open_view)
         self.library_view_model.add_listener(self._on_library_view_event)
         self.playback_control_view_model.add_listener(self._on_open_view)
-        self.headerbar_view_model.add_listener(self._on_open_view)
+        self.headerbar_view_model.add_listener(self._on_working_event)
         self.app_view_model.add_listener(self._on_app_view_event)
 
         self.main_window.add_listener(self._on_main_window_event)
@@ -148,10 +148,12 @@ class AppController(metaclass=Singleton):
         if event == "view":
             self.headerbar_view_model.set_view(data)
 
-    def _on_main_window_event(self, event: str, data):
+    def _on_working_event(self, event: str, data) -> None:
         if event == "working":
             self.book_detail_view_model.lock_ui = data
             self.settings_view_model.lock_ui = data
+
+    def _on_main_window_event(self, event: str, data):
         if event == "open_view":
             self._on_open_view(data, None)
 
