@@ -95,8 +95,6 @@ class PreferencesView(Adw.PreferencesWindow):
             Gio.SettingsBindFlags.DEFAULT,
         )
 
-        self.storage_locations_view.set_sensitive(False)
-
     def _on_lock_ui_changed(self) -> None:
         sensitive = not self._view_model.lock_ui
 
