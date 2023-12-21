@@ -69,6 +69,8 @@ class Settings:
         self._storages.clear()
 
     def _load_all_storage_locations(self):
+        self.invalidate()
+
         for storage_db_obj in StorageModel.select(StorageModel.id):
             try:
                 self._storages.append(Storage(self._db, storage_db_obj.id))
