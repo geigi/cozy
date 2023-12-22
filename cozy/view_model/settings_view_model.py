@@ -33,12 +33,6 @@ class SettingsViewModel(Observable, EventSender):
 
         self._lock_ui: bool = False
 
-        self._gtk_settings = Gtk.Settings.get_default()
-        self.style_manager = Adw.StyleManager.get_default()
-        self._set_dark_mode()
-
-        self._app_settings.add_listener(self._on_app_setting_changed)
-
         if self._model.first_start:
             self._importer.scan()
 
@@ -119,13 +113,3 @@ class SettingsViewModel(Observable, EventSender):
 
         self._model.invalidate()
         self._notify("storage_locations")
-
-    def _set_dark_mode(self):
-        if self._app_settings.dark_mode:
-            self.style_manager.set_color_scheme(Adw.ColorScheme.PREFER_DARK)
-        else:
-            self.style_manager.set_color_scheme(Adw.ColorScheme.PREFER_LIGHT)
-
-    def _on_app_setting_changed(self, event: str, data):
-        if event == "dark-mode":
-            self._set_dark_mode()

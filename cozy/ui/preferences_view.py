@@ -17,7 +17,6 @@ class PreferencesView(Adw.PreferencesWindow):
     _glib_settings: Gio.Settings = inject.attr(Gio.Settings)
     _view_model: SettingsViewModel = inject.attr(SettingsViewModel)
 
-    dark_mode_switch: Gtk.Switch = Gtk.Template.Child()
     swap_author_reader_switch: Gtk.Switch = Gtk.Template.Child()
     replay_switch: Gtk.Switch = Gtk.Template.Child()
     sleep_timer_fadeout_switch: Adw.SwitchRow = Gtk.Template.Child()
@@ -67,9 +66,6 @@ class PreferencesView(Adw.PreferencesWindow):
         self._view_model.bind_to("storage_attributes", self._refresh_storage_rows)
 
     def _bind_settings(self):
-        self._glib_settings.bind("dark-mode", self.dark_mode_switch, "active",
-                                 Gio.SettingsBindFlags.DEFAULT)
-
         self._glib_settings.bind("swap-author-reader", self.swap_author_reader_switch, "active",
                                  Gio.SettingsBindFlags.DEFAULT)
 
