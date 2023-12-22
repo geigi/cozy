@@ -1,4 +1,3 @@
-import logging
 from typing import Callable
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
@@ -6,8 +5,6 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 from cozy.ext import inject
 from cozy.model.storage import Storage
 from cozy.view_model.storages_view_model import StoragesViewModel
-
-log = logging.getLogger("settings")
 
 
 def ask_storage_location(callback: Callable[[str], None], *junk, initial_folder: str | None = None):
@@ -26,9 +23,7 @@ def ask_storage_location(callback: Callable[[str], None], *junk, initial_folder:
             if file is not None:
                 callback(file.get_path())
 
-    location_chooser.select_folder(
-        inject.instance("MainWindow").window, None, finish_callback
-    )
+    location_chooser.select_folder(inject.instance("MainWindow").window, None, finish_callback)
 
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/storage_row.ui")
@@ -83,9 +78,7 @@ GObject.signal_new(
     GObject.TYPE_PYOBJECT,
     (GObject.TYPE_PYOBJECT,),
 )
-GObject.signal_new(
-    "menu-opened", StorageRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ()
-)
+GObject.signal_new("menu-opened", StorageRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ())
 
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/storage_locations.ui")
@@ -113,9 +106,7 @@ class StorageLocations(Adw.PreferencesGroup):
         self.insert_action_group("storage", self.action_group)
 
         self.set_external_action = Gio.SimpleAction.new_stateful(
-            "mark-external",
-            None,
-            GLib.Variant.new_boolean(False),
+            "mark-external", None, GLib.Variant.new_boolean(False)
         )
         self._set_external_signal_handler = self.set_external_action.connect(
             "notify::state", self._mark_storage_location_external
@@ -163,21 +154,15 @@ class StorageLocations(Adw.PreferencesGroup):
     def _on_new_storage_clicked(self, *junk) -> None:
         ask_storage_location(self._view_model.add_storage_location)
 
-    def _on_storage_location_changed(
-        self, widget: StorageRow, new_location: str
-    ) -> None:
+    def _on_storage_location_changed(self, widget: StorageRow, new_location: str) -> None:
         self._view_model.change_storage_location(widget.model, new_location)
 
     def _on_storage_menu_opened(self, widget: StorageRow) -> None:
         with self.set_external_action.handler_block(self._set_external_signal_handler):
-            self.set_external_action.props.state = GLib.Variant.new_boolean(
-                widget.model.external
-            )
+            self.set_external_action.props.state = GLib.Variant.new_boolean(widget.model.external)
 
         self.remove_action.props.enabled = (
             not widget.model.default and len(self._view_model.storages) > 1
         )
-        self.make_default_action.props.enabled = (
-            widget.model is not self._view_model.default
-        )
+        self.make_default_action.props.enabled = widget.model is not self._view_model.default
         self._view_model.selected_storage = widget.model

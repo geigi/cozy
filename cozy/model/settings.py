@@ -31,9 +31,13 @@ class Settings:
         try:
             return self._db_object.last_played_book
         except peewee.DoesNotExist:
-            log.warning("last_played_book references an non existent object. Setting last_played_book to None.")
-            reporter.warning("settings_model",
-                             "last_played_book references an non existent object. Setting last_played_book to None.")
+            log.warning(
+                "last_played_book references an non existent object. Setting last_played_book to None."
+            )
+            reporter.warning(
+                "settings_model",
+                "last_played_book references an non existent object. Setting last_played_book to None.",
+            )
 
             self.last_played_book = None
             return None
@@ -75,7 +79,9 @@ class Settings:
             try:
                 self._storages.append(Storage(self._db, storage_db_obj.id))
             except InvalidPath:
-                log.error("Invalid path found in database, skipping: {}".format(storage_db_obj.path))
+                log.error(
+                    "Invalid path found in database, skipping: {}".format(storage_db_obj.path)
+                )
 
         self._ensure_default_storage_present()
 
