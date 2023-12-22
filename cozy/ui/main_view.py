@@ -17,10 +17,11 @@ from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
-from cozy.view_model.settings_view_model import SettingsViewModel
+from cozy.view_model.storages_view_model import StoragesViewModel
 from cozy.open_view import OpenView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_view import PreferencesView
+from cozy.ui.widgets.first_import_button import FirstImportButton
 
 log = logging.getLogger("ui")
 
@@ -38,7 +39,7 @@ class CozyUI(EventSender, metaclass=Singleton):
     _settings: SettingsModel = inject.attr(SettingsModel)
     _files: Files = inject.attr(Files)
     _player: Player = inject.attr(Player)
-    _settings_view_model: SettingsViewModel = inject.attr(SettingsViewModel)
+    _storages_view_model: StoragesViewModel = inject.attr(StoragesViewModel)
 
     def __init__(self, pkgdatadir, app, version):
         super().__init__()
@@ -109,9 +110,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.navigation_view: Adw.NavigationView = self.window_builder.get_object("navigation_view")
         self.drop_revealer: Gtk.Revealer = self.window_builder.get_object("drop_revealer")
 
-        self.no_media_file_chooser = self.window_builder.get_object("no_media_file_chooser")
-        self.no_media_file_chooser.connect("clicked", self._open_audiobook_dir_selector)
-
         self.about_dialog = self.about_builder.get_object("about_dialog")
         self.about_dialog.set_modal(self.window)
         self.about_dialog.connect("close-request", self.hide_window)
@@ -164,6 +162,10 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.app.add_action(self.hide_offline_action)
 
     def __init_components(self):
+        path = self._settings.default_location.path if self._settings.storage_locations else None
+        import_button = FirstImportButton(self._set_audiobook_path, path)
+        self.get_object("welcome_status_page").set_child(import_button)
+
         if not self._player.loaded_book:
             self.block_ui_buttons(True)
 
@@ -243,15 +245,15 @@ class CozyUI(EventSender, metaclass=Singleton):
         Switch the UI state back to playing.
         This enables all UI functionality for the user.
         """
-        if self.navigation_view.props.visible_page != "book_overview" and self.main_stack.props.visible_child_name != "no_media":
+        if self.navigation_view.props.visible_page != "book_overview" and self.main_stack.props.visible_child_name != "welcome":
             self.navigation_view.pop_to_page("main")
         if self._player.loaded_book:
             self.block_ui_buttons(False, True)
         else:
             # we want to only block the player controls
+            # TODO: rework. this is messy
             self.block_ui_buttons(False, True)
             self.block_ui_buttons(True, False)
-        self.emit_event_main_thread("working", False)
 
     def check_for_tracks(self):
         """
@@ -260,23 +262,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         if books().count() < 1:
             self.block_ui_buttons(True)
-
-    def _open_audiobook_dir_selector(self, __):
-        path = ""
-        if len(self._settings.storage_locations) > 0:
-            path = self._settings.default_location.path
-
-        location_chooser = Gtk.FileDialog(title=_("Set Audiobooks Directory"))
-        location_chooser.select_folder(self.window, None, self._location_chooser_open_callback)
-
-    def _location_chooser_open_callback(self, dialog, result):
-        try:
-            file = dialog.select_folder_finish(result)
-        except GLib.GError:
-            pass
-        else:
-            if file is not None:
-                self._set_audiobook_path(file.get_path())
 
     def scan(self, _, __):
         thread = Thread(target=self._importer.scan, name="ScanMediaThread")
@@ -309,8 +294,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         return True
 
     def _set_audiobook_path(self, path):
-        self._settings_view_model.add_first_storage_location(path)
-        self.main_stack.props.visible_child_name = "import"
+        self._storages_view_model.add_first_storage_location(path)
         self.scan(None, None)
         self.fs_monitor.init_offline_mode()
 

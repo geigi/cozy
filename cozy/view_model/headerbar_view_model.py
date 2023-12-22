@@ -63,10 +63,12 @@ class HeaderbarViewModel(Observable, EventSender):
         self._notify("work_message")
         self._notify("work_progress")
         self._notify("state")
+        self.emit_event_main_thread("working", True)
 
     def _stop_working(self):
         self._state = HeaderBarState.PLAYING
         self._notify("state")
+        self.emit_event_main_thread("working", False)
 
     def _on_importer_event(self, event: str, message):
         if event == "scan-progress" and isinstance(message, float):

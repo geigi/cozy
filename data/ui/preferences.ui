@@ -79,17 +79,19 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="true">Sleep Timer</property>
             <child>
-              <object class="AdwSwitchRow" id="sleep_timer_fadeout_switch">
+              <object class="AdwExpanderRow" id="sleep_timer_fadeout_switch">
                 <property name="title">Fadeout</property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwSpinRow" id="fadeout_duration_spin_button">
-                <property name="title">Fadeout duration</property>
-                <property name="focusable">true</property>
-                <property name="adjustment">fadeout_duration_adjustment</property>
-                <property name="snap-to-ticks">true</property>
-                <property name="numeric">true</property>
+                <property name="expanded">true</property>
+                <property name="show-enable-switch">true</property>
+                <child>
+                  <object class="AdwSpinRow">
+                    <property name="title">Fadeout duration</property>
+                    <property name="focusable">true</property>
+                    <property name="adjustment">fadeout_duration_adjustment</property>
+                    <property name="snap-to-ticks">true</property>
+                    <property name="numeric">true</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
@@ -97,7 +99,7 @@
       </object>
     </child>
     <child>
-      <object class="AdwPreferencesPage">
+      <object class="AdwPreferencesPage" id="storages_page">
         <property name="icon-name">harddisk-symbolic</property>
         <property name="title" translatable="true">Storage</property>
         <child>
@@ -107,134 +109,6 @@
               <object class="AdwSwitchRow" id="artwork_prefer_external_switch">
                 <property name="title">Prefer external images over embedded cover</property>
                 <property name="subtitle" translatable="true">Always use images (cover.jpg, *.png, …) when available</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup" id="storage_locations_preference_group">
-            <property name="title" translatable="true">Storage locations</property>
-            <child>
-              <object class="AdwPreferencesRow">
-                <property name="title" translatable="true">Storage locations</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="margin-start">13</property>
-                    <property name="margin-end">13</property>
-                    <property name="margin-top">13</property>
-                    <property name="margin-bottom">13</property>
-                    <property name="hexpand">true</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkFrame">
-                        <property name="height-request">250</property>
-                        <property name="child">
-                          <object class="GtkScrolledWindow">
-                            <property name="focusable">true</property>
-                            <property name="hscrollbar-policy">never</property>
-                            <property name="child">
-                              <object class="GtkViewport">
-                                <property name="child">
-                                  <object class="GtkListBox" id="storage_list_box">
-                                    <property name="vexpand">1</property>
-                                  </object>
-                                </property>
-                              </object>
-                            </property>
-                          </object>
-                        </property>
-                        <child type="label_item">
-                          <placeholder/>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="height-request">24</property>
-                        <style>
-                          <class name="toolbar"/>
-                        </style>
-                        <child>
-                          <object class="GtkButton" id="add_storage_button">
-                            <property name="width-request">24</property>
-                            <property name="height-request">24</property>
-                            <property name="tooltip-text" translatable="true">Add location</property>
-                            <child>
-                              <object class="GtkImage" id="add_image">
-                                <property name="icon-name">list-add-symbolic</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="flat"/>
-                            </style>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="remove_storage_button">
-                            <property name="width-request">24</property>
-                            <property name="height-request">24</property>
-                            <property name="sensitive">false</property>
-                            <property name="tooltip-text" translatable="true">Remove location</property>
-                            <child>
-                              <object class="GtkImage" id="remove_image">
-                                <property name="icon-name">list-remove-symbolic</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="flat"/>
-                            </style>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkSeparator">
-                            <property name="orientation">vertical</property>
-                            <property name="hexpand">True</property>
-                            <style>
-                              <class name="spacer"/>
-                            </style>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkToggleButton" id="external_storage_toggle_button">
-                            <property name="label" translatable="1">External drive</property>
-                            <property name="width-request">24</property>
-                            <property name="height-request">24</property>
-                            <property name="sensitive">false</property>
-                            <property name="tooltip-text" translatable="true">Toggle this storage location to be internal/external.</property>
-                            <child>
-                              <object class="GtkImage" id="external_image">
-                                <property name="icon-name">network-server-symbolic</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="flat"/>
-                            </style>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="default_storage_button">
-                            <property name="label" translatable="1">Set as default</property>
-                            <property name="width-request">24</property>
-                            <property name="height-request">24</property>
-                            <property name="sensitive">false</property>
-                            <property name="tooltip-text" translatable="true">Set as default storage location for new audiobooks</property>
-                            <child>
-                              <object class="GtkImage" id="default_image">
-                                <property name="icon-name">checkmark-symbolic</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="flat"/>
-                            </style>
-                          </object>
-                        </child>
-                        <style>
-                          <class name="inline-toolbar"/>
-                        </style>
-                      </object>
-                    </child>
-                  </object>
-                </child>
               </object>
             </child>
           </object>

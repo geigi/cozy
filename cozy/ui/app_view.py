@@ -5,7 +5,7 @@ from cozy.view_model.app_view_model import AppViewModel
 from cozy.view import View
 
 LIBRARY = "main"
-EMPTY_STATE = "no_media"
+EMPTY_STATE = "welcome"
 PREPARING_LIBRARY = "import"
 BOOK_DETAIL = "book_overview"
 
