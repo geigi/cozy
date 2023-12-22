@@ -7,7 +7,7 @@ from cozy.model.storage import Storage
 from cozy.view_model.storages_view_model import StoragesViewModel
 
 
-def ask_storage_location(callback: Callable[[str], None], *junk, initial_folder: str | None = None):
+def ask_storage_location(callback: Callable[[str], None], initial_folder: str | None = None):
     location_chooser = Gtk.FileDialog(title=_("Set Audiobooks Directory"))
 
     if initial_folder:
@@ -151,7 +151,7 @@ class StorageLocations(Adw.PreferencesGroup):
         value = action.get_property(value.name)
         self._view_model.set_external(self._view_model.selected_storage, value)
 
-    def _on_new_storage_clicked(self, *junk) -> None:
+    def _on_new_storage_clicked(self, *_) -> None:
         ask_storage_location(self._view_model.add_storage_location)
 
     def _on_storage_location_changed(self, widget: StorageRow, new_location: str) -> None:
