@@ -56,8 +56,8 @@ class StoragesViewModel(Observable, EventSender):
     def add_first_storage_location(self, path: str) -> None:
         storage = self.storages[0]
         storage.path = path
-        storage.default = True
         storage.external = self._fs_monitor.is_external(path)
+        assert storage.default
 
         self._model.invalidate()
         self._notify("storage_locations")
