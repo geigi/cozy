@@ -261,7 +261,7 @@
                 </child>
                 <child>
                   <object class="GtkStackPage">
-                    <property name="name">no_media</property>
+                    <property name="name">welcome</property>
                     <property name="child">
                       <object class="AdwToolbarView">
                         <child type="top">
@@ -270,24 +270,10 @@
                           </object>
                         </child>
                         <property name="content">
-                          <object class="AdwStatusPage">
-                           <property name="icon-name">com.github.geigi.cozy</property>
-                           <property name="title">Let's get cozy</property>
-                           <property name="description">Select a folder, or drag audiobooks here to import them</property>
-                           <property name="child">
-                              <object class="GtkBox">
-                                <property name="halign">center</property>
-                                <child>
-                                  <object class="GtkButton" id="no_media_file_chooser">
-                                    <property name="label" translatable="true">Select folder</property>
-                                    <style>
-                                      <class name="suggested-action"/>
-                                      <class name="pill"/>
-                                    </style>
-                                  </object>
-                                </child>
-                              </object>
-                           </property>
+                          <object class="AdwStatusPage" id="welcome_status_page">
+                            <property name="icon-name">com.github.geigi.cozy</property>
+                            <property name="title">Let's get cozy</property>
+                            <property name="description">Select a folder, or drag audiobooks here to add them to your library</property>
                           </object>
                         </property>
                       </object>

@@ -8,6 +8,7 @@
     <file preprocess="xml-stripblanks">book_element.ui</file>
     <file preprocess="xml-stripblanks">chapter_element.ui</file>
     <file preprocess="xml-stripblanks">error_reporting.ui</file>
+    <file preprocess="xml-stripblanks">first_import_button.ui</file>
     <file preprocess="xml-stripblanks">headerbar.ui</file>
     <file preprocess="xml-stripblanks">main_window.ui</file>
     <file preprocess="xml-stripblanks">media_controller.ui</file>
@@ -19,11 +20,5 @@
     <file preprocess="xml-stripblanks">storage_locations.ui</file>
     <file preprocess="xml-stripblanks">storage_row.ui</file>
     <file preprocess="xml-stripblanks">timer_popover.ui</file>
-    <file preprocess="xml-stripblanks">welcome.ui</file>
-    <file preprocess="xml-stripblanks">whats_new.ui</file>
-    <file preprocess="xml-stripblanks">whats_new_importer.ui</file>
-    <file preprocess="xml-stripblanks">whats_new_library.ui</file>
-    <file preprocess="xml-stripblanks">whats_new_m4b.ui</file>
-    <file preprocess="xml-stripblanks">whats_new_m4b_chapter.ui</file>
   </gresource>
 </gresources>
