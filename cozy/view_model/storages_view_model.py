@@ -37,7 +37,7 @@ class StoragesViewModel(Observable, EventSender):
 
     def _rebase_storage_location(self, model: Storage, old_path: str) -> None:
         self.emit_event("storage-changed", model)
-        log.info("Audio book location changed, rebasing the location in Cozy.")
+        log.info("Audiobook location changed, rebasing the location in Cozy.")
         Thread(
             target=self._library.rebase_path,
             args=(old_path, model.path),
