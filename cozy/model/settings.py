@@ -83,8 +83,8 @@ class Settings:
                     "Invalid path found in database, skipping: {}".format(storage_db_obj.path)
                 )
 
-        self._ensure_default_storage_present()
+        self._ensure_default_storage_is_present()
 
-    def _ensure_default_storage_present(self):
+    def _ensure_default_storage_is_present(self):
         if self._storages and not any(storage.default for storage in self._storages):
             self._storages[0].default = True
