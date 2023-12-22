@@ -59,7 +59,6 @@ class Settings:
         if not self._storages:
             self._load_all_storage_locations()
 
-        assert self._storages
         return self._storages
 
     @property
