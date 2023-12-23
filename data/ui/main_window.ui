@@ -220,11 +220,7 @@
                           <object class="GtkBox">
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkBox" id="media_control_box">
-                                <style>
-                                  <class name="player_bar"/>
-                                </style>
-                              </object>
+                              <object class="GtkRevealer" id="media_control_box"/>
                             </child>
                             <child>
                               <object class="AdwViewSwitcherBar" id="mobile_view_switcher">
