@@ -163,8 +163,8 @@ class CozyUI(EventSender, metaclass=Singleton):
 
     def __init_components(self):
         path = self._settings.default_location.path if self._settings.storage_locations else None
-        import_button = FirstImportButton(self._set_audiobook_path, path)
-        self.get_object("welcome_status_page").set_child(import_button)
+        self.import_button = FirstImportButton(self._set_audiobook_path, path)
+        self.get_object("welcome_status_page").set_child(self.import_button)
 
         if not self._player.loaded_book:
             self.block_ui_buttons(True)
@@ -293,7 +293,11 @@ class CozyUI(EventSender, metaclass=Singleton):
         thread.start()
         return True
 
-    def _set_audiobook_path(self, path):
+    def _set_audiobook_path(self, path: str | None) -> None:
+        if path is None:
+            return
+
+        self.import_button.disable()
         self._storages_view_model.add_first_storage_location(path)
         self.scan(None, None)
         self.fs_monitor.init_offline_mode()
