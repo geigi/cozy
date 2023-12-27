@@ -50,7 +50,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.3.0" timestamp="1701613884">
+    <release version="1.3.0" date="2023-12-03">
       <description translatable="no">
         <ul>
           <li>Update the UI to GTK4 and libadwaita. This allows Cozy to take advantage of the new stylesheet, automatic dark mode and utilize the latest and greatest UI elements throughout the application. Many thanks to Benedek Dévényi and grahamvh!</li>
@@ -62,7 +62,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.2.1" timestamp="1661086733">
+    <release version="1.2.1" date="2022-08-21">
       <description translatable="no">
         <ul>
           <li>Support for GTK style manager (thanks A6GibKm)</li>
@@ -71,7 +71,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.2.0" timestamp="1641661352">
+    <release version="1.2.0" date="2022-01-08">
       <description translatable="no">
         <p>
         This release features a redesigned preference window. All settings can now be searched. Good news for mobile users too: the redesign should work a lot better on mobile devices now.
@@ -86,7 +86,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.1.3" timestamp="1640949259">
+    <release version="1.1.3" date="2021-12-31">
       <description translatable="no">
         <p>
         A small bugfix release which makes Cozy more reliable.
@@ -99,7 +99,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.1.2" timestamp="1629458444">
+    <release version="1.1.2" date="2021-08-20">
       <description translatable="no">
         <p>
         A small bugfix release which makes Cozy more reliable.
@@ -115,7 +115,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.1.1" timestamp="1629456144">
+    <release version="1.1.1" date="2021-08-20">
       <description translatable="no">
         <p>
         A small bugfix release which makes Cozy more reliable.
@@ -131,7 +131,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.1.0" timestamp="1628322225">
+    <release version="1.1.0" date="2021-08-07">
       <description translatable="no">
         <p>
         This release features a redesigned library with responsiveness in mind.
@@ -148,7 +148,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.0.4" timestamp="1627489551">
+    <release version="1.0.4" date="2021-07-28">
       <description translatable="no">
         <p>
         Performance improvements for the book detail view and some bugfixes.
@@ -163,7 +163,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.0.3" timestamp="1622826417">
+    <release version="1.0.3" date="2021-06-04">
       <description translatable="no">
         <p>
         A small bugfix release which makes Cozy more reliable.
@@ -178,7 +178,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.0.2" timestamp="1622490608">
+    <release version="1.0.2" date="2021-05-31">
       <description translatable="no">
         <p>
         A small bugfix release which makes Cozy more reliable.
@@ -193,7 +193,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.0.1" timestamp="1622363623">
+    <release version="1.0.1" date="2021-05-30">
       <description translatable="no">
         <p>
         This release features chapter support for m4b files.
@@ -207,7 +207,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.0.0" timestamp="1622358236">
+    <release version="1.0.0" date="2021-05-30">
       <description translatable="no">
         <p>
         This release features chapter support for m4b files.
