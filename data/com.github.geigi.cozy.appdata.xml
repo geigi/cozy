@@ -37,16 +37,16 @@
   <content_rating type="oars-1.1" />
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot1.png</image>
+      <image xml:lang="en">https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot2.png</image>
+      <image xml:lang="en">https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot2.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot3.png</image>
+      <image xml:lang="en">https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot3.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot4.png</image>
+      <image xml:lang="en">https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot4.png</image>
     </screenshot>
   </screenshots>
   <releases>
