@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>@APP_ID@</id>
-  <launchable type="desktop-id">@APP_ID@.desktop</launchable>
-  <translation type="gettext">@APP_ID@</translation>
+  <id>com.github.geigi.cozy</id>
+  <launchable type="desktop-id">com.github.geigi.cozy.desktop</launchable>
+  <translation type="gettext">com.github.geigi.cozy</translation>
   <provides>
-    <binary>@APP_ID@</binary>
+    <binary>com.github.geigi.cozy</binary>
   </provides>
   <name translatable="no">Cozy</name>
   <developer_name translatable="no">Julian Geywitz</developer_name>
