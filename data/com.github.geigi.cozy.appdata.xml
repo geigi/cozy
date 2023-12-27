@@ -228,7 +228,7 @@
     <control>touch</control>
   </supports>
   <recommends>
-    <display_length compare="gt">280</display_length>
+    <display_length compare="gt">360</display_length>
   </recommends>
   <custom>
     <value key="x-appcenter-color-primary">#FB6542</value>
