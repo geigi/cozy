@@ -44,7 +44,11 @@
       <image>https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot4.png</image>
     </screenshot>
   </screenshots>
+  <!-- developer_name tag deprecated with Appstream 1.0 -->
   <developer_name translatable="no">Julian Geywitz</developer_name>
+  <developer id="github.com">
+      <name translatable="no">Julian Geywitz</name>
+  </developer>
   <url type="homepage">https://cozy.sh</url>
   <url type="bugtracker">https://github.com/geigi/cozy/issues</url>
   <url type="help">https://matrix.to/#/#cozy:gnome.org?via=matrix.org&amp;via=gnome.org</url>
