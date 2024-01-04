@@ -50,7 +50,6 @@
                                 <child>
                                   <object class="AdwToolbarView" id="header_container">
                                     <property name="content">
-
                                       <object class="GtkStack" id="library_stack">
                                         <property name="transition-type">crossfade</property>
                                         <child>
