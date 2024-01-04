@@ -1,42 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<interface>
-  <requires lib="gtk" version="4.0"/>
-  <object class="AdwAboutWindow" id="about_dialog">
-    <property name="application_name">Cozy</property>
-    <property name="application_icon">com.github.geigi.cozy</property>
-    <property name="license_type">gpl-3-0</property>
-    <property name="issue_url">https://github.com/geigi/cozy/issues/new</property>
-    <property name="website">https://github.com/geigi/cozy</property>
-    <property name="developer_name">geigi</property>
-    <property name="developers">geigi
-A6GibKm
-alyssais
-apandada1
-AsavarTzeth
-Fatih20
-NathanBnm
-camellan
-chris-kobrzak
-elya5
-foliva
-grenade
-jimmac
-jnbr
-jubalh
-kaphula
-leuc
-magnickolas
-meisenzahl
-naglis
-oleg-krv
-paper42
-phpwutz
-rapenne-s
-rdbende
-thibaultamartin
-umeboshi2
-worldofpeace</property>
-    <property name="translator_credits">Ainte
+# Code
+- Julian Geywitz
+- Benedek Dévényi
+- A6GibKm
+- alyssais
+- apandada1
+- AsavarTzeth
+- Fatih20
+- NathanBnm
+- camellan
+- chris-kobrzak
+- elya5
+- foliva
+- grenade
+- jnbr
+- jubalh
+- kaphula
+- leuc
+- magnickolas
+- meisenzahl
+- naglis
+- oleg-krv
+- paper42
+- phpwutz
+- rapenne-s
+- thibaultamartin
+- umeboshi2
+- worldofpeace
+
+# Design
+- Julian Geywitz
+- Tobias Bernard
+- Benedek Dévényi
+
+# Icon
+- Jakub Steiner
+
+# Translators
+```
+Ainte
 AndreBarata
 Andrey389
 Asyx
@@ -136,6 +137,5 @@ useruseruser1233211
 vanhoxx
 vlabo
 xfgusta
-yalexaner</property>
-  </object>
-</interface>
+yalexaner
+```

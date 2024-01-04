@@ -22,6 +22,7 @@ from cozy.ui.toaster import ToastNotifier
 
 log = logging.getLogger("mediaplayer")
 
+US_TO_SEC = 10 ** 6
 NS_TO_SEC = 10 ** 9
 REWIND_SECONDS = 30
 
@@ -80,7 +81,9 @@ class Player(EventSender):
 
     @position.setter
     def position(self, new_value: int):
-        self._gst_player.position = self.loaded_chapter.start_position + (new_value * NS_TO_SEC)
+        # FIXME: setter expects seconds, but getter returns nanoseconds
+        if self.loaded_chapter is not None:
+            self._gst_player.position = max(self.loaded_chapter.start_position + (new_value * NS_TO_SEC), 0)
 
     @property
     def volume(self) -> float:
@@ -172,8 +175,7 @@ class Player(EventSender):
 
     def destroy(self):
         self._gst_player.dispose()
-
-        self._stop_tick_thread()
+        self._stop_playback()
 
         if self._fadeout_thread:
             self._fadeout_thread.stop()

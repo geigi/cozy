@@ -1,5 +1,6 @@
 import logging
 import os
+from collections import defaultdict
 from threading import Thread
 from typing import Callable
 
@@ -73,11 +74,12 @@ class CozyUI(EventSender, metaclass=Singleton):
             os.path.join(self.pkgdir, 'com.github.geigi.cozy.img.gresource'))
         Gio.Resource._register(resource)
 
+        self.appdata_resource = Gio.resource_load(
+            os.path.join(self.pkgdir, 'com.github.geigi.cozy.appdata.gresource'))
+        Gio.Resource._register(self.appdata_resource)
+
         self.window_builder = Gtk.Builder.new_from_resource(
             "/com/github/geigi/cozy/main_window.ui")
-
-        self.about_builder = Gtk.Builder.new_from_resource(
-            "/com/github/geigi/cozy/about.ui")
 
         self.window: Gtk.Window = self.window_builder.get_object("app_window")
 
@@ -110,13 +112,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.no_media_file_chooser = self.window_builder.get_object("no_media_file_chooser")
         self.no_media_file_chooser.connect("clicked", self._open_audiobook_dir_selector)
 
-        self.about_dialog = self.about_builder.get_object("about_dialog")
-        self.about_dialog.set_modal(self.window)
-        self.about_dialog.connect("close-request", self.hide_window)
-        self.about_dialog.set_version(self.version)
-
-        self._preferences = PreferencesView()
-
         self.window.present()
 
     def __init_actions(self):
@@ -127,6 +122,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         about_action = Gio.SimpleAction.new("about", None)
         about_action.connect("activate", self.about)
         self.app.add_action(about_action)
+        self.app.set_accels_for_action("app.about", ["F1"])
 
         self.create_action("about", self.about)
         self.create_action("quit", self.quit, ["<primary>q", "<primary>w"])
@@ -171,49 +167,62 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.on_close(None)
         self.app.quit()
 
-    def about(self, action, parameter):
+    def _get_contributors(self):
+        authors_file = self.appdata_resource.lookup_data("/com/github/geigi/cozy/authors", Gio.ResourceLookupFlags.NONE)
+
+        current_section = ""
+        result = defaultdict(list)
+        for line in authors_file.get_data().decode().splitlines():
+            if line.startswith("#"):
+                current_section = line[1:].strip().lower()
+            elif line.startswith("-"):
+                result[current_section].append(line[1:].strip())
+
+        return result
+
+    def about(self, *junk):
         """
         Show about window.
         """
-        self.about_dialog.add_acknowledgement_section(
+        about = Adw.AboutWindow.new_from_appdata(
+            "/com/github/geigi/cozy/com.github.geigi.cozy.appdata.xml",
+            release_notes_version=self.version,
+        )
+
+        contributors = self._get_contributors()
+        about.set_developers(sorted(contributors["code"]))
+        about.set_designers(sorted(contributors["design"]))
+        about.set_artists(sorted(contributors["icon"]))
+
+        about.set_license_type(Gtk.License.GPL_3_0)
+
+        about.add_acknowledgement_section(
             _("Patreon Supporters"),
             ["Fred Warren", "Gabriel", "Hu Mann", "Josiah", "Oleksii Kriukov"]
         )
-        self.about_dialog.add_acknowledgement_section(
+        about.add_acknowledgement_section(
             _("m4b chapter support in mutagen"),
             ("mweinelt",),
         )
-        self.about_dialog.add_acknowledgement_section(
+        about.add_acknowledgement_section(
             _("Open Source Projects"),
             ("Lollypop music player https://gitlab.gnome.org/World/lollypop",),
         )
-        self.about_dialog.add_legal_section(
-            "python-inject",
-            "© 2010 Ivan Korobkov",
-            Gtk.License.APACHE_2_0
-        )
 
-        self.about_dialog.present()
+        # Translators: Replace "translator-credits" with your names, one name per line
+        about.set_translator_credits(_("translator-credits"))
+        about.add_legal_section("python-inject", "© 2010 Ivan Korobkov", Gtk.License.APACHE_2_0)
 
-    def show_prefs(self, action, parameter):
+        about.set_transient_for(self.window)
+        about.present()
+
+    def show_prefs(self, *_):
         """
         Show preferences window.
         """
-        self._preferences.show()
+        PreferencesView().present()
 
-    def hide_window(self, widget, data=None):
-        """
-        Hide a given window. This is used for the about and settings dialog
-        as they will never be closed only hidden.
-
-        param widget: The widget that will be hidden.
-        """
-        widget.hide()
-
-        # we handeled the close event so the window must not get destroyed.
-        return True
-
-    def play_pause(self, action, parameter):
+    def play_pause(self, *_):
         self._player.play_pause()
 
     def block_ui_buttons(self, block, scan=False):
@@ -305,9 +314,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.main_stack.props.visible_child_name = "import"
         self.scan(None, None)
         self.fs_monitor.init_offline_mode()
-
-    def __about_close_clicked(self, widget):
-        self.about_dialog.hide()
 
     def on_close(self, widget, data=None):
         """
