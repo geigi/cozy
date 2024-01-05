@@ -10,7 +10,7 @@ class ArtistResultRow(Adw.ActionRow):
             selectable=False,
             activatable=True,
             use_markup=False,
-            tooltip_text=_("Jump to") + f" {name}",
+            tooltip_text=_("Jump to {artist_name}").format(artist_name=name),
         )
 
         self.connect("activated", lambda *_: on_click(name))
