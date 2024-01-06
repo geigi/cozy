@@ -32,7 +32,6 @@ class SearchView(Adw.Bin):
     main_view = inject.attr("MainWindow")
 
     search_thread: threading.Thread
-    search_thread_stop: threading.Event
 
     def __init__(self, main_window_builder: Gtk.Builder, headerbar: Headerbar) -> None:
         super().__init__()
@@ -47,7 +46,6 @@ class SearchView(Adw.Bin):
         self.entry.connect("search-changed", self._on_search_changed)
 
         self.search_thread = threading.Thread(target=self.view_model.search)
-        self.search_thread_stop = threading.Event()
 
         self.view_model.bind_to("close", self.close)
         self.main_view.create_action("search", self.open, ["<primary>f"])
@@ -69,17 +67,14 @@ class SearchView(Adw.Bin):
             self.close()
 
     def _on_search_changed(self, _) -> None:
-        self.search_thread_stop.set()
-
         search_query = self.entry.get_text()
         if not search_query:
             self.stack.set_visible_child(self.start_searching_page)
             return
 
         if self.search_thread.is_alive():
-            self.search_thread.join(timeout=0.2)
+            self.search_thread.join(timeout=0.1)
 
-        self.search_thread_stop.clear()
         self.search_thread = threading.Thread(
             target=self.view_model.search, args=(search_query, self._display_results)
         )
@@ -120,9 +115,6 @@ class SearchView(Adw.Bin):
             row_type = ArtistResultRow
 
         for result in results:
-            if self.search_thread_stop.is_set():
-                return
-
             listbox.append(row_type(result, callback))
 
         box.set_visible(True)
