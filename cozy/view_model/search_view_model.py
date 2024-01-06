@@ -22,13 +22,13 @@ class SearchViewModel(Observable, EventSender):
         super().__init__()
         super(Observable, self).__init__()
 
-    def _get_available_books(self) -> set[Book]:
+    def _get_available_books(self) -> list[Book]:
         is_book_online = self._fs_monitor.get_book_online
-        show_offline_books = not self._application_settings.hide_offline
 
-        return {
-            book for book in self._model.books if is_book_online(book) or show_offline_books
-        }
+        if self._application_settings.hide_offline:
+            return [book for book in self._model.books if is_book_online(book)]
+        else:
+            return self._model.books
 
     def search(
         self, search_query: str, callback: Callable[[list[Book], list[str], list[str]], None]
