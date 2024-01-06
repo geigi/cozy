@@ -156,7 +156,7 @@ class LibraryViewModel(Observable, EventSender):
 
     def book_files_exist(self, book: Book) -> bool:
         for chapter in book.chapters:
-            if os.path.exists(chapter.file):
+            if os.path.isfile(chapter.file):
                 return True
         return False
 
