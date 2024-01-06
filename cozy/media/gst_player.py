@@ -269,6 +269,6 @@ class GstPlayer(EventSender):
                 return
 
             reporter.error("player", f"{error.code}: {error}")
-            log.error(f"{error.code}: {error}")
+            log.error("%s: %s", error.code, error)
             log.debug(debug_msg)
             self.emit_event("error", error)

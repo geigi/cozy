@@ -77,7 +77,7 @@ class Settings:
             try:
                 self._storages.append(Storage(self._db, storage_db_obj.id))
             except InvalidPath:
-                log.error(f"Invalid path found in database, skipping: {storage_db_obj.path}")
+                log.error("Invalid path found in database, skipping: %s", storage_db_obj.path)
 
         self._ensure_default_storage_present()
 
