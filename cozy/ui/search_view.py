@@ -46,7 +46,7 @@ class SearchView(Adw.Bin):
         self.entry = headerbar.search_entry
         self.entry.connect("search-changed", self._on_search_changed)
 
-        self.search_thread = threading.Thread(target=self.view_model.search, name="SearchThread")
+        self.search_thread = threading.Thread(target=self.view_model.search)
         self.search_thread_stop = threading.Event()
 
         self.view_model.bind_to("close", self.close)
