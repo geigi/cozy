@@ -15,8 +15,8 @@ class ArtistResultRow(Adw.ActionRow):
 
         self.connect("activated", lambda *_: on_click(name))
 
-        icon = Gtk.Image.new_from_icon_name("account-symbolic")
-        icon.set_pixel_size(36)
+        icon = Gtk.Image.new_from_icon_name("person-symbolic")
+        icon.set_pixel_size(24)
         icon.set_margin_top(6)
         icon.set_margin_bottom(6)
 
