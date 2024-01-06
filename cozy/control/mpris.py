@@ -409,4 +409,3 @@ class MPRIS(Server):
     def _on_status_changed(self, status: str) -> None:
         properties = {"PlaybackStatus": GLib.Variant("s", status)}
         self.properties_changed(self.MEDIA_PLAYER2_PLAYER_INTERFACE, properties, [])
-
