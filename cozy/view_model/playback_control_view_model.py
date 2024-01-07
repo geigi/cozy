@@ -75,7 +75,7 @@ class PlaybackControlViewModel(Observable, EventSender):
             return
 
         length = self._player.loaded_book.current_chapter.length
-        self._player.position = new_value / 100 * length * self._book.playback_speed
+        self._player.position = new_value / 100 * length
 
     @property
     def lock_ui(self) -> bool:
