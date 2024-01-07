@@ -30,13 +30,7 @@ class PlaybackControlViewModel(Observable, EventSender):
 
     @book.setter
     def book(self, value: Optional[Book]):
-        if self._book:
-            self._book.remove_bind("playback_speed", self._on_playback_speed_changed)
-
         self._book = value
-        if value:
-            self._book.bind_to("playback_speed", self._on_playback_speed_changed)
-
         self._notify("lock_ui")
 
     @property
