@@ -75,11 +75,9 @@ class SeekBar(Gtk.Box):
 
     def _on_progress_key_pressed(self, _, event, *__):
         if event in {Gdk.KEY_Up, Gdk.KEY_Left}:
-            self.position = max(self.position - 30, 0)
+            self.emit("rewind")
         elif event in {Gdk.KEY_Down, Gdk.KEY_Right}:
-            self.position = min(self.position + 30, 100)
-
-        self.emit("position-changed", self.position)
+            self.emit("forward")
 
     def _on_progress_scale_press(self, *_):
         self._progress_scale_pressed = True
@@ -88,3 +86,6 @@ class SeekBar(Gtk.Box):
 
 GObject.signal_new('position-changed', SeekBar, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
                    (GObject.TYPE_PYOBJECT,))
+
+GObject.signal_new('rewind', SeekBar, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ())
+GObject.signal_new('forward', SeekBar, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ())

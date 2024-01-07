@@ -24,7 +24,6 @@ log = logging.getLogger("mediaplayer")
 
 US_TO_SEC = 10 ** 6
 NS_TO_SEC = 10 ** 9
-REWIND_SECONDS = 30
 
 
 class Player(EventSender):
