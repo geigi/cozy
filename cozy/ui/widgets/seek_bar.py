@@ -12,11 +12,12 @@ class SeekBar(Gtk.Box):
     remaining_label: Gtk.Label = Gtk.Template.Child()
     remaining_event_box: Gtk.Box = Gtk.Template.Child()
 
+    length: float
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.length = 0
-
+        self.length: float = 0.0
         self._progress_scale_pressed = False
 
         self.progress_scale.connect("value-changed", self._on_progress_scale_changed)

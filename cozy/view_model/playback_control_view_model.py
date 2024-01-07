@@ -1,5 +1,3 @@
-from typing import Optional
-
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.ext import inject
@@ -17,7 +15,7 @@ class PlaybackControlViewModel(Observable, EventSender):
         super().__init__()
         super(Observable, self).__init__()
 
-        self._book: Optional[Book] = None
+        self._book: Book | None = None
 
         self._player.add_listener(self._on_player_event)
 
@@ -25,11 +23,11 @@ class PlaybackControlViewModel(Observable, EventSender):
             self.book = self._player.loaded_book
 
     @property
-    def book(self) -> Optional[Book]:
+    def book(self) -> Book | None:
         return self._book
 
     @book.setter
-    def book(self, value: Optional[Book]):
+    def book(self, value: Book | None):
         self._book = value
         self._notify("lock_ui")
 
@@ -41,7 +39,7 @@ class PlaybackControlViewModel(Observable, EventSender):
         return self._player.playing
 
     @property
-    def position(self) -> Optional[float]:
+    def position(self) -> float | None:
         if not self._book:
             return None
 
@@ -56,7 +54,7 @@ class PlaybackControlViewModel(Observable, EventSender):
         self._player.position = new_value * self._book.playback_speed
 
     @property
-    def length(self) -> Optional[float]:
+    def length(self) -> float | None:
         if not self._player.loaded_book or not self._book:
             return None
 
