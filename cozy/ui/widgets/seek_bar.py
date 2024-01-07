@@ -59,10 +59,10 @@ class SeekBar(Gtk.Box):
         self.remaining_event_box.set_visible(value)
 
     def _on_progress_scale_changed(self, _):
-        position = int(self.progress_scale.get_value())
         total = self.length
+        position = int(total * self.progress_scale.get_value() / 100)
+        remaining_secs = int(total - position)
 
-        remaining_secs: int = int(total - position)
         current_text = seconds_to_str(position, total)
         remaining_text = seconds_to_str(remaining_secs, total)
         self.current_label.set_markup("<span font_features='tnum'>" + current_text + "</span>")
