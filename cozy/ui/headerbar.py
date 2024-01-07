@@ -6,7 +6,7 @@ from cozy.ext import inject
 from cozy.ui.widgets.progress_popover import ProgressPopover
 from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarState
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, Gtk, GObject
 
 log = logging.getLogger("Headerbar")
 
@@ -48,6 +48,8 @@ class Headerbar(Adw.Bin):
         self._connect_view_model()
         self._connect_widgets()
 
+        self._set_show_sidebar_button_visible()
+
     def _connect_view_model(self):
         self._headerbar_view_model.bind_to("state", self._on_state_changed)
         self._headerbar_view_model.bind_to("work_progress", self._on_work_progress_changed)
@@ -58,18 +60,38 @@ class Headerbar(Adw.Bin):
         self.split_view.connect("notify::show-sidebar", self._on_sidebar_toggle)
         self.show_sidebar_button.connect("notify::active", self._on_sidebar_toggle)
         self.mobile_view_switcher.connect("notify::reveal", self._on_mobile_view)
-        self.sort_stack.connect("notify::visible-child", self._on_sort_stack_changed)
+        self.sort_stack.connect("notify::visible-child", self._set_show_sidebar_button_visible)
 
-    def _on_sort_stack_changed(self, widget, _):
-        page = widget.props.visible_child_name
+        self.mobile_view_switcher.bind_property(
+            "reveal", self.split_view, "collapsed", GObject.BindingFlags.SYNC_CREATE
+        )
 
-        self.show_sidebar_button.set_visible(page != "recent")
+    def _on_mobile(self) -> bool:
+        return self.mobile_view_switcher.props.reveal
+
+    def _set_show_sidebar_button_visible(self, *_):
+        page = self.sort_stack.props.visible_child_name
+
+        if not self._on_mobile():
+            self.show_sidebar_button.set_visible(False)
+            self.split_view.set_collapsed(False)
+            self.split_view.set_show_sidebar(page != "recent")
+            return
+
+        if self.mobile_view_switcher.props.reveal:
+            self.show_sidebar_button.set_visible(page != "recent")
+        else:
+            self.show_sidebar_button.set_visible(False)
 
     def _on_mobile_view(self, widget, _):
+        page = self.sort_stack.props.visible_child_name
+
         if widget.props.reveal:
             self.headerbar.set_title_widget(Adw.WindowTitle(title="Cozy"))
         else:
             self.headerbar.set_title_widget(self.view_switcher)
+
+        self._set_show_sidebar_button_visible()
 
     def _on_sidebar_toggle(self, widget, param):
         show_sidebar = widget.get_property(param.name)
