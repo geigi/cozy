@@ -116,7 +116,7 @@ class MediaController(Adw.BreakpointBin):
             self.play_button.set_icon_name("media-playback-start-symbolic")
 
     def _on_position_changed(self):
-        position = self._playback_control_view_model.position
+        position = self._playback_control_view_model.relative_position
         if position is not None:
             self.seek_bar.position = position
 
@@ -154,4 +154,4 @@ class MediaController(Adw.BreakpointBin):
         self._playback_control_view_model.volume = volume
 
     def _on_seek_bar_position_changed(self, _, position):
-        self._playback_control_view_model.position = position
+        self._playback_control_view_model.relative_position = position

@@ -15,6 +15,8 @@ class SeekBar(Gtk.Box):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self.length = 0
+
         self._progress_scale_pressed = False
 
         self.progress_scale.connect("value-changed", self._on_progress_scale_changed)
@@ -25,8 +27,7 @@ class SeekBar(Gtk.Box):
         self.progress_scale.add_controller(self._progress_scale_gesture)
 
         self._progress_scale_key = Gtk.EventControllerKey()
-        self._progress_scale_key.connect("key-pressed", self._on_progress_scale_press)
-        self._progress_scale_key.connect("key-released", self._on_progress_scale_release)
+        self._progress_scale_key.connect("key-pressed", self._on_progress_key_pressed)
         self.progress_scale.add_controller(self._progress_scale_key)
 
     @property
@@ -37,15 +38,6 @@ class SeekBar(Gtk.Box):
     def position(self, new_value: float):
         if not self._progress_scale_pressed:
             self.progress_scale.set_value(new_value)
-
-    @property
-    def length(self) -> float:
-        return self.progress_scale.get_adjustment().get_upper()
-
-    @length.setter
-    def length(self, new_value: float):
-        self.progress_scale.set_range(0, new_value)
-        self._on_progress_scale_changed(None)
 
     @property
     def sensitive(self) -> bool:
@@ -67,7 +59,7 @@ class SeekBar(Gtk.Box):
 
     def _on_progress_scale_changed(self, _):
         position = int(self.progress_scale.get_value())
-        total = self.progress_scale.get_adjustment().get_upper()
+        total = self.length
 
         remaining_secs: int = int(total - position)
         current_text = seconds_to_str(position, total)
@@ -80,14 +72,13 @@ class SeekBar(Gtk.Box):
         value = self.progress_scale.get_value()
         self.emit("position-changed", value)
 
-    def _on_progress_key_pressed(self, _, event):
-        if event.keyval == Gdk.KEY_Up or event.keyval == Gdk.KEY_Left:
+    def _on_progress_key_pressed(self, _, event, *__):
+        if event in {Gdk.KEY_Up, Gdk.KEY_Left}:
             self.position = max(self.position - 30, 0)
-            self.emit("position-changed", self.position)
-        elif event.keyval == Gdk.KEY_Down or event.keyval == Gdk.KEY_Right:
-            max_value = self.progress_scale.get_adjustment().get_upper()
-            self.position = min(self.position + 30, max_value)
-            self.emit("position-changed", self.position)
+        elif event in {Gdk.KEY_Down, Gdk.KEY_Right}:
+            self.position = min(self.position + 30, 100)
+
+        self.emit("position-changed", self.position)
 
     def _on_progress_scale_press(self, *_):
         self._progress_scale_pressed = True

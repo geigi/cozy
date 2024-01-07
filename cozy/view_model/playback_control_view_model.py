@@ -69,6 +69,23 @@ class PlaybackControlViewModel(Observable, EventSender):
         return self._player.loaded_book.current_chapter.length / self._book.playback_speed
 
     @property
+    def relative_position(self) -> float | None:
+        if not self._player.loaded_book or not self._book:
+            return None
+
+        position = self._book.current_chapter.position - self._book.current_chapter.start_position
+        length = self._player.loaded_book.current_chapter.length
+        return position / NS_TO_SEC / length * 100
+
+    @relative_position.setter
+    def relative_position(self, new_value: float) -> None:
+        if not self._book:
+            return
+
+        length = self._player.loaded_book.current_chapter.length
+        self._player.position = new_value / 100 * length * self._book.playback_speed
+
+    @property
     def lock_ui(self) -> bool:
         return not self._book
 
