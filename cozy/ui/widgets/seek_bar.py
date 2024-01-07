@@ -35,8 +35,7 @@ class SeekBar(Gtk.Box):
         click_gesture.connect("released", self._on_progress_scale_release)
 
         keyboard_controller = Gtk.EventControllerKey()
-        keyboard_controller.connect("key-pressed", self._on_progress_scale_press)
-        keyboard_controller.connect("key-released", self._on_progress_scale_release)
+        keyboard_controller.connect("key-pressed", self._on_progress_key_pressed)
         self.progress_scale.add_controller(keyboard_controller)
 
     @property
