@@ -1,9 +1,9 @@
 from typing import Any
-
 from gi.repository import Adw, Gio, Gtk
 
 from cozy.ext import inject
 from cozy.ui.widgets.error_reporting import ErrorReporting
+
 from cozy.ui.widgets.storages import StorageLocations
 from cozy.view_model.settings_view_model import SettingsViewModel
 
@@ -11,8 +11,6 @@ from cozy.view_model.settings_view_model import SettingsViewModel
 @Gtk.Template.from_resource("/com/github/geigi/cozy/preferences.ui")
 class PreferencesView(Adw.PreferencesWindow):
     __gtype_name__ = "PreferencesWindow"
-
-    main_window = inject.attr("MainWindow")
 
     _glib_settings: Gio.Settings = inject.attr(Gio.Settings)
     _view_model: SettingsViewModel = inject.attr(SettingsViewModel)
@@ -31,7 +29,8 @@ class PreferencesView(Adw.PreferencesWindow):
     fadeout_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
 
     def __init__(self, **kwargs: Any) -> None:
-        super().__init__(transient_for=self.main_window.window, **kwargs)
+        main_window = inject.instance("MainWindow")
+        super().__init__(transient_for=main_window.window, **kwargs)
 
         error_reporting = ErrorReporting()
         error_reporting.show_header(False)
@@ -40,11 +39,8 @@ class PreferencesView(Adw.PreferencesWindow):
         self.storage_locations_view = StorageLocations()
         self.storages_page.add(self.storage_locations_view)
 
-        self._bind_settings()
-
         self._view_model.bind_to("lock_ui", self._on_lock_ui_changed)
-
-        self.connect("close-request", self._hide_window)
+        self._bind_settings()
 
     def _bind_settings(self) -> None:
         self._glib_settings.bind(
@@ -96,10 +92,4 @@ class PreferencesView(Adw.PreferencesWindow):
         )
 
     def _on_lock_ui_changed(self) -> None:
-        sensitive = not self._view_model.lock_ui
-
-        self.storage_locations_view.set_sensitive(sensitive)
-
-    def _hide_window(self, *_):
-        self.hide()
-        return True
+        self.storage_locations_view.set_sensitive(not self._view_model.lock_ui)
