@@ -94,8 +94,17 @@ class StoragesViewModel(Observable, EventSender):
 
         model.delete()
         self._model.invalidate()
-        self.emit_event("storage-removed", model)
 
+        storage_path = str(model.path)
+        for book in self._library.books:
+            chapters_to_remove = [
+                c for c in book.chapters if c.file.startswith(storage_path)
+            ]
+
+            for chapter in chapters_to_remove:
+                chapter.delete()
+
+        self.emit_event("storage-removed", model)
         self._notify("storage_locations")
 
     def set_default(self, model: Storage) -> None:
