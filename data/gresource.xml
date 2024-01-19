@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/github/geigi/cozy">
+    <file preprocess="xml-stripblanks">com.github.geigi.cozy.appdata.xml</file>
+    <file alias="authors">../AUTHORS.md</file>
+  </gresource>
+</gresources>
+

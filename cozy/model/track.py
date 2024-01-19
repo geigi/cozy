@@ -35,7 +35,7 @@ class Track(Chapter):
         if self._db_object.name:
             return self._db_object.name
 
-        return "{} {}".format(_("Chapter"), self.number)
+        return f"{_('Chapter')} {self.number}"
 
     @name.setter
     def name(self, new_name: str):

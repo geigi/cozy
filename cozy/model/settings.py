@@ -1,5 +1,4 @@
 import logging
-from typing import List, Optional
 
 import peewee
 
@@ -16,8 +15,8 @@ log = logging.getLogger("model.storage_location")
 
 
 class Settings:
-    _storages: List[Storage] = []
-    _db = cache = inject.attr(SqliteDatabase)
+    _storages: list[Storage] = []
+    _db = inject.attr(SqliteDatabase)
 
     def __init__(self):
         self._db_object: SettingsModel = SettingsModel.get()
@@ -27,7 +26,7 @@ class Settings:
         return self._db_object.first_start
 
     @property
-    def last_played_book(self) -> Optional[Book]:
+    def last_played_book(self) -> Book | None:
         try:
             return self._db_object.last_played_book
         except peewee.DoesNotExist:
@@ -48,21 +47,21 @@ class Settings:
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
-    def default_location(self):
-        return next(location
-                    for location
-                    in self.storage_locations
-                    if location.default)
+    def default_location(self) -> bool:
+        for location in self.storage_locations:
+            if location.default:
+                return True
+        return False
 
     @property
-    def storage_locations(self):
+    def storage_locations(self) -> list[Storage]:
         if not self._storages:
             self._load_all_storage_locations()
 
         return self._storages
 
     @property
-    def external_storage_locations(self):
+    def external_storage_locations(self) -> list[Storage]:
         if not self._storages:
             self._load_all_storage_locations()
 
@@ -78,14 +77,12 @@ class Settings:
             try:
                 self._storages.append(Storage(self._db, storage_db_obj.id))
             except InvalidPath:
-                log.error("Invalid path found in database, skipping: {}".format(storage_db_obj.path))
+                log.error("Invalid path found in database, skipping: %s", storage_db_obj.path)
 
         self._ensure_default_storage_present()
 
     def _ensure_default_storage_present(self):
-        default_storage_present = any(storage.default
-                                      for storage
-                                      in self._storages)
+        default_storage_present = any(storage.default for storage in self._storages)
 
-        if not default_storage_present and len(self._storages) > 0:
+        if not default_storage_present and self._storages:
             self._storages[0].default = True

@@ -76,13 +76,7 @@ class SleepTimerViewModel(Observable):
         self._stop_timer()
 
     def _start_timer(self):
-        if self._sleep_timer:
-            return
-
-        if self.remaining_seconds < 1:
-            return
-
-        if not self._player.playing:
+        if self._sleep_timer or self.remaining_seconds < 1 or not self._player.playing:
             return
 
         log.info("Start Timer")
@@ -114,12 +108,10 @@ class SleepTimerViewModel(Observable):
                 self._notify_main_thread("remaining_seconds")
 
     def _get_fadeout(self) -> int:
-        fadeout = 0
-
         if self._app_settings.sleep_timer_fadeout:
-            fadeout = self._app_settings.sleep_timer_fadeout_duration
+            return self._app_settings.sleep_timer_fadeout_duration
 
-        return fadeout
+        return 0
 
     def _stop_playback(self):
         fadeout = self._get_fadeout()
@@ -150,7 +142,7 @@ class SleepTimerViewModel(Observable):
             self._notify("stop_after_chapter")
         elif event == "play":
             self._start_timer()
-        elif event == "pause" or event == "stop":
+        elif event in {"pause", "stop"}:
             self._stop_timer()
         elif event == "fadeout-finished" and self._wait_for_fadeout_end:
             self._wait_for_fadeout_end = False

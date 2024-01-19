@@ -220,7 +220,7 @@
                             <property name="tooltip-text" translatable="true">Set as default storage location for new audiobooks</property>
                             <child>
                               <object class="GtkImage" id="default_image">
-                                <property name="icon-name">checkmark-symbolic</property>
+                                <property name="icon-name">check-plain-symbolic</property>
                               </object>
                             </child>
                             <style>

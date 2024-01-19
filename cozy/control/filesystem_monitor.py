@@ -100,10 +100,10 @@ class FilesystemMonitor(EventSender):
                 return False
 
             if path in directory and mount.can_unmount():
-                log.info("Storage location {} is external".format(directory))
+                log.info("Storage location %s is external", directory)
                 return True
 
-        log.info("Storage location {} is not external".format(directory))
+        log.info("Storage location %s is not external", directory)
         return False
 
     def __on_mount_added(self, monitor, mount):

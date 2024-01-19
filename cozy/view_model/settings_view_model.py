@@ -62,7 +62,7 @@ class SettingsViewModel(Observable, EventSender):
 
     def remove_storage_location(self, model: Storage):
         if model.default:
-            log.error("deleting the default storage location {} is not possible".format(model.path))
+            log.error("deleting the default storage location %s is not possible", model.path)
             reporter.error("settings_view_model", "deleting the default storage location is not possible")
             return
         

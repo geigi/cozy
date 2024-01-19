@@ -3,8 +3,6 @@ import os
 from enum import Enum, auto
 from typing import Optional
 
-from gi.repository import Gtk
-
 import cozy.ext.inject as inject
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
@@ -29,12 +27,6 @@ class LibraryViewMode(Enum):
     CURRENT = auto()
     AUTHOR = auto()
     READER = auto()
-
-
-class LibraryPage(Enum):
-    NONE = auto()
-    FILTER = auto()
-    BOOKS = auto()
 
 
 class LibraryViewModel(Observable, EventSender):
@@ -86,8 +78,11 @@ class LibraryViewModel(Observable, EventSender):
         self._notify("selected_filter")
 
     @property
-    def is_any_book_in_progress(self):
-        return any(book.position > 0 for book in self.books)
+    def is_any_book_in_progress(self) -> bool:
+        for book in self.books:
+            if book.position > 0:
+                return True
+        return False
 
     @property
     def authors(self):
@@ -135,24 +130,20 @@ class LibraryViewModel(Observable, EventSender):
 
     def display_book_filter(self, book_element: BookElement):
         book = book_element.book
-        author = book.author
-        reader = book.reader
 
         hide_offline_books = self._application_settings.hide_offline
         book_is_online = self._fs_monitor.get_book_online(book)
 
-        if hide_offline_books and not book_is_online and not book.downloaded:
-            return False
-
-        if self.library_view_mode == LibraryViewMode.CURRENT:
-            return True if book.last_played > 0 else False
-
         if self.selected_filter == _("All"):
             return True
+        elif hide_offline_books and not book_is_online and not book.downloaded:
+            return False
+        elif self.library_view_mode == LibraryViewMode.CURRENT:
+            return book.last_played > 0
         elif self.library_view_mode == LibraryViewMode.AUTHOR:
-            return True if self.selected_filter in author else False
+            return self.selected_filter in book.author
         elif self.library_view_mode == LibraryViewMode.READER:
-            return True if self.selected_filter in reader else False
+            return self.selected_filter in book.reader
 
     def display_book_sort(self, book_element1, book_element2):
         if self._library_view_mode == LibraryViewMode.CURRENT:
@@ -164,7 +155,10 @@ class LibraryViewModel(Observable, EventSender):
         self._notify("library_view_mode")
 
     def book_files_exist(self, book: Book) -> bool:
-        return any(os.path.exists(chapter.file) for chapter in book.chapters)
+        for chapter in book.chapters:
+            if os.path.isfile(chapter.file):
+                return True
+        return False
 
     def _on_fs_monitor_event(self, event, _):
         if event == "storage-online":
@@ -175,10 +169,6 @@ class LibraryViewModel(Observable, EventSender):
             self._notify("authors")
             self._notify("readers")
             self._notify("books-filter")
-        elif event == "external-storage-added":
-            pass
-        elif event == "external-storage-removed":
-            pass
 
     def _on_application_setting_changed(self, event, _):
         if event == "hide-offline":
@@ -200,17 +190,14 @@ class LibraryViewModel(Observable, EventSender):
             self._notify("books")
             self._notify("books-filter")
             self._notify("library_view_mode")
-        if event == "import-failed":
+        elif event == "import-failed":
             ImportFailedDialog(message).show()
 
     def _on_player_event(self, event, message):
-        if event == "play":
-            book = message
-
-            if book:
-                self._notify("current_book_in_playback")
-                self._notify("playing")
-                self._notify("books-filter")
+        if event == "play" and message:
+            self._notify("current_book_in_playback")
+            self._notify("playing")
+            self._notify("books-filter")
         elif event == "pause":
             self._notify("playing")
         elif event == "chapter-changed":
@@ -219,7 +206,7 @@ class LibraryViewModel(Observable, EventSender):
         elif event == "stop":
             self._notify("playing")
             self._notify("current_book_in_playback")
-        elif event == "position" or event == "book-finished":
+        elif event in {"position", "book-finished"}:
             self._notify("book-progress")
 
     def _on_settings_event(self, event: str, message):
@@ -252,11 +239,12 @@ class LibraryViewModel(Observable, EventSender):
         for chapter in book.chapters:
             try:
                 os.remove(chapter.file)
-                log.info("Deleted file: {}".format(chapter.file))
             except Exception as e:
-                log.error("Failed to delete file: {}".format(chapter.file))
+                log.error("Failed to delete file: %s", chapter.file)
                 log.debug(e)
                 reporter.warning("library_view_model", "Failed to delete a file.")
+            else:
+                log.info("Deleted file: %s", chapter.file)
 
     def play_book(self, book: Book):
         self._player.play_pause_book(book)

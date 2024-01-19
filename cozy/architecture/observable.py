@@ -33,21 +33,23 @@ class Observable:
             if callback in self._observers[prop]:
                 self._observers[prop].remove(callback)
             else:
-                log.info("Callback not found in prop's {} observers. Skipping remove bind...".format(prop))
+                log.info("Callback not found in prop's %s observers. Skipping remove bind...", prop)
         else:
             log.info("Prop not found in observers. Skipping remove bind...")
 
     def _notify(self, prop: str):
+        if prop not in self._observers:
+            return
+
         try:
-            if prop in self._observers:
-                for callback in self._observers[prop]:
-                    callback()
+            for callback in self._observers[prop]:
+                callback()
         except Exception as e:
             log.error(e)
             reporter.exception("observable", e)
 
     def _notify_main_thread(self, prop: str):
-        GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, self._notify, (prop))
+        GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, self._notify, prop)
 
     def _destroy_observers(self):
         self._observers = {}

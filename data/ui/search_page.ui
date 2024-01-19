@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="SearchView" parent="AdwBin">
+    <child>
+      <object class="GtkStack" id="stack">
+        <child>
+          <object class="AdwStatusPage" id="start_searching_page">
+            <property name="title" translatable="true">Search in your library</property>
+            <property name="icon-name">library-symbolic</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwStatusPage" id="nothing_found_page">
+            <property name="title" translatable="true">No results found</property>
+            <property name="icon-name">edit-find-symbolic</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="search_scroller">
+            <child>
+              <object class="AdwClamp">
+                <property name="margin-start">18</property>
+                <property name="margin-end">18</property>
+                <property name="margin-top">18</property>
+                <property name="margin-bottom">18</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">24</property>
+                    <child>
+                      <object class="AdwPreferencesGroup" id="book_result_box">
+                        <property name="title" translatable="true">Book</property>
+                        <property name="visible">false</property>
+                        <child>
+                          <object class="GtkListBox" id="book_result_list">
+                            <style>
+                              <class name="boxed-list"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwPreferencesGroup" id="author_result_box">
+                        <property name="title" translatable="true">Author</property>
+                        <property name="visible">false</property>
+                        <child>
+                          <object class="GtkListBox" id="author_result_list">
+                            <style>
+                              <class name="boxed-list"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwPreferencesGroup" id="reader_result_box">
+                        <property name="title" translatable="true">Reader</property>
+                        <property name="visible">false</property>
+                        <child>
+                          <object class="GtkListBox" id="reader_result_list">
+                            <style>
+                              <class name="boxed-list"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
