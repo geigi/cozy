@@ -216,7 +216,7 @@ class Book(Observable, EventSender):
             except TrackInconsistentData:
                 log.warning("Skipping inconsistent model")
             except Exception as e:
-                log.error("Could not create chapter object: {}".format(e))
+                log.error("Could not create chapter object: %s", e)
 
         for chapter in self._chapters:
             chapter.add_listener(self._on_chapter_event)

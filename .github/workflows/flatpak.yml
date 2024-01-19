@@ -5,9 +5,8 @@ on: [push, pull_request]
 jobs:
   flatpak:
     runs-on: ubuntu-latest
-
     container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-44
+      image: bilelmoussaoui/flatpak-github-actions:gnome-45
       options: --privileged
 
     strategy:
@@ -25,7 +24,7 @@ jobs:
 
     - name: Set up QEMU
       id: qemu
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
       with:
         platforms: arm64
       if: ${{ matrix.arch == 'aarch64' }}
