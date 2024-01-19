@@ -13,7 +13,7 @@
     <file preprocess="xml-stripblanks">playback_speed_popover.ui</file>
     <file preprocess="xml-stripblanks">preferences.ui</file>
     <file preprocess="xml-stripblanks">progress_popover.ui</file>
-    <file preprocess="xml-stripblanks">search_popover.ui</file>
+    <file preprocess="xml-stripblanks">search_page.ui</file>
     <file preprocess="xml-stripblanks">seek_bar.ui</file>
     <file preprocess="xml-stripblanks">timer_popover.ui</file>
     <file preprocess="xml-stripblanks">welcome.ui</file>

@@ -1,14 +1,14 @@
 from gi.repository import Adw, Gtk
 
 from cozy.ext import inject
-from cozy.control.artwork_cache import ArtworkCache
+from cozy.model.book import Book
+from cozy.ui.widgets.book_row import BookRow
 
 
 class DeleteBookView(Adw.MessageDialog):
     main_window = inject.attr("MainWindow")
-    artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
-    def __init__(self, callback, book):
+    def __init__(self, callback, book: Book):
         super().__init__(
             heading=_("Delete Audiobook?"),
             body=_("The audiobook will be removed from your disk and from Cozy's library."),
@@ -22,22 +22,8 @@ class DeleteBookView(Adw.MessageDialog):
         self.add_response("delete", _("Remove Audiobook"))
         self.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
 
-        book_row = Adw.ActionRow(
-            title=book.name,
-            subtitle=book.author,
-            selectable=False,
-            use_markup=False,
-        )
-        album_art = Gtk.Picture(margin_top=6, margin_bottom=6)
-
-        paintable = self.artwork_cache.get_cover_paintable(book, 1, 48)
-        if paintable:
-            album_art.set_paintable(paintable)
-            book_row.add_prefix(album_art)
-
         list_box = Gtk.ListBox(margin_top=12, css_classes=["boxed-list"])
-        list_box.append(book_row)
+        list_box.append(BookRow(book))
         self.set_extra_child(list_box)
 
         self.connect("response", callback, book)
-
