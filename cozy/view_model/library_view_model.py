@@ -96,8 +96,7 @@ class LibraryViewModel(Observable, EventSender):
 
         authors = {
             book.author
-            for book
-            in self._model.books
+            for book in self._model.books
             if is_book_online(book) or show_offline_books or book.downloaded
         }
 
@@ -110,8 +109,7 @@ class LibraryViewModel(Observable, EventSender):
 
         readers = {
             book.reader
-            for book
-            in self._model.books
+            for book in self._model.books
             if is_book_online(book) or show_offline_books or book.downloaded
         }
 
