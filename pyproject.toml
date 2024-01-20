@@ -6,3 +6,7 @@ skip-magic-trailing-comma = true
 line_length = 100
 profile = "black"
 multi_line_output = 3
+
+[tool.ruff]
+line-length = 100
+builtins = ["_"]
