@@ -11,4 +11,4 @@ multi_line_output = 3
 line-length = 100
 builtins = ["_"]
 output-format = "github"
-extend-select = ["B", "SIM", "PIE", "C4", "GT", "LOG"]
+extend-select = ["B", "SIM", "PIE", "C4", "INT", "LOG"]
