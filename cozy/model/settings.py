@@ -51,7 +51,7 @@ class Settings:
         for location in self.storage_locations:
             if location.default:
                 return location
-        assert False, "this should never happen"
+        raise AssertionError("This should never happen")
 
     @property
     def storage_locations(self) -> list[Storage]:
