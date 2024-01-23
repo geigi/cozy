@@ -27,8 +27,6 @@ class BookDetailView(Gtk.Box):
     __gtype_name__ = 'BookDetail'
 
     play_book_button: Gtk.Button = Gtk.Template.Child()
-    reset_book_button: Gtk.Button = Gtk.Template.Child()
-    button_box: Gtk.Box = Gtk.Template.Child()
 
     book_label: Gtk.Label = Gtk.Template.Child()
     author_label: Gtk.Label = Gtk.Template.Child()
@@ -99,7 +97,6 @@ class BookDetailView(Gtk.Box):
 
     def _connect_widgets(self):
         self.play_book_button.connect("clicked", self._play_book_clicked)
-        self.reset_book_button.connect("clicked", self._reset_book_clicked)
         self.download_switch.connect("state-set", self._download_switch_changed)
 
     def _on_book_changed(self):
@@ -128,8 +125,6 @@ class BookDetailView(Gtk.Box):
         self.author_label.set_text(book.author)
         self.header_title.set_title(book.name)
         self.header_title.set_subtitle(book.author)
-
-        self._update_buttons()
 
         self.last_played_label.set_text(self._view_model.last_played_text)
 
@@ -181,7 +176,6 @@ class BookDetailView(Gtk.Box):
                 break
 
     def _on_last_played_text_changed(self):
-        self._update_buttons()
         self.last_played_label.set_text(self._view_model.last_played_text)
 
     def _on_times_changed(self):
@@ -316,13 +310,3 @@ class BookDetailView(Gtk.Box):
     def _play_book_clicked(self, _):
         self._view_model.play_book()
 
-    def _reset_book_clicked(self, _):
-       self._view_model.reset_book()
-
-    def _update_buttons(self):
-        if self._view_model.last_played_text == "never":
-            self.reset_book_button.hide()
-            self.button_box.set_orientation(Gtk.Orientation.VERTICAL)
-        else:
-            self.reset_book_button.show()
-            self.button_box.set_orientation(Gtk.Orientation.HORIZONTAL)
