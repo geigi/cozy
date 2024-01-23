@@ -268,9 +268,20 @@
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkBox">
+                                  <object class="GtkBox" id="button_box">
                                     <property name="margin-top">20</property>
                                     <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkButton" id="reset_book_button">
+                                        <property name="focusable">true</property>
+                                        <property name="halign">center</property>
+                                        <property name="icon-name">object-rotate-left-symbolic</property>
+                                        <style>
+                                          <class name="button-margin"/>
+                                          <class name="pill"/>
+                                        </style>
+                                      </object>
+                                    </child>
                                     <child>
                                       <object class="GtkButton" id="play_book_button">
                                         <property name="focusable">true</property>
