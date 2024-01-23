@@ -78,9 +78,9 @@ class LibraryViewModel(Observable, EventSender):
         self._notify("selected_filter")
 
     @property
-    def is_any_book_in_progress(self) -> bool:
+    def is_any_book_recent(self) -> bool:
         for book in self.books:
-            if book.position > 0:
+            if book.last_played > 0:
                 return True
         return False
 
