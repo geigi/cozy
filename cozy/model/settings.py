@@ -30,15 +30,19 @@ class Settings:
         try:
             return self._db_object.last_played_book
         except peewee.DoesNotExist:
-            log.warning("last_played_book references an non existent object. Setting last_played_book to None.")
-            reporter.warning("settings_model",
-                             "last_played_book references an non existent object. Setting last_played_book to None.")
+            log.warning(
+                "last_played_book references an non existent object. Setting last_played_book to None."
+            )
+            reporter.warning(
+                "settings_model",
+                "last_played_book references an non existent object. Setting last_played_book to None.",
+            )
 
             self.last_played_book = None
             return None
 
     @last_played_book.setter
-    def last_played_book(self, new_value):
+    def last_played_book(self, new_value) -> None:
         if new_value:
             self._db_object.last_played_book = new_value._db_object
         else:
@@ -67,11 +71,11 @@ class Settings:
 
         return [storage for storage in self._storages if storage.external]
 
-    def invalidate(self):
-        self._storages = []
+    def invalidate(self) -> None:
+        self._storages.clear()
 
-    def _load_all_storage_locations(self):
-        self._storages = []
+    def _load_all_storage_locations(self) -> None:
+        self.invalidate()
 
         for storage_db_obj in StorageModel.select(StorageModel.id):
             try:
@@ -79,9 +83,9 @@ class Settings:
             except InvalidPath:
                 log.error("Invalid path found in database, skipping: %s", storage_db_obj.path)
 
-        self._ensure_default_storage_present()
+        self._ensure_default_storage_is_present()
 
-    def _ensure_default_storage_present(self):
+    def _ensure_default_storage_is_present(self):
         default_storage_present = any(storage.default for storage in self._storages)
 
         if not default_storage_present and self._storages:

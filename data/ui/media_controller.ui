@@ -106,7 +106,6 @@
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkButton" id="prev_button">
-                    <property name="sensitive">false</property>
                     <property name="focusable">true</property>
                     <property name="receives-default">true</property>
                     <property name="tooltip-text" translatable="true">Rewind</property>
@@ -126,7 +125,6 @@
                   <object class="GtkButton" id="play_button">
                     <property name="width-request">42</property>
                     <property name="height-request">42</property>
-                    <property name="sensitive">false</property>
                     <property name="focusable">true</property>
                     <property name="receives-default">true</property>
                     <property name="tooltip-text" translatable="true">Start playback</property>
@@ -145,7 +143,6 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="next_button">
-                    <property name="sensitive">false</property>
                     <property name="focusable">true</property>
                     <property name="receives-default">true</property>
                     <property name="tooltip-text" translatable="true">Forward</property>
@@ -200,7 +197,6 @@ audio-volume-medium-symbolic</property>
             </child>
             <child>
               <object class="GtkMenuButton" id="playback_speed_button">
-                <property name="sensitive">false</property>
                 <property name="focusable">true</property>
                 <property name="receives-default">true</property>
                 <property name="tooltip-text" translatable="true">Playback speed</property>
@@ -212,7 +208,6 @@ audio-volume-medium-symbolic</property>
             </child>
             <child>
               <object class="GtkMenuButton" id="timer_button">
-                <property name="sensitive">false</property>
                 <property name="focusable">true</property>
                 <property name="receives-default">true</property>
                 <property name="tooltip-text" translatable="true">Sleep timer</property>
