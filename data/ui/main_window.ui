@@ -156,15 +156,15 @@
                                                             <property name="hscroll-policy">minimum</property>
                                                             <property name="child">
                                                               <object class="GtkFlowBox" id="book_box">
-                                                                <property name="margin-top">6</property>
-                                                                <property name="margin-bottom">6</property>
-                                                                <property name="margin-start">6</property>
-                                                                <property name="margin-end">6</property>
+                                                                <property name="margin-top">18</property>
+                                                                <property name="margin-bottom">18</property>
+                                                                <property name="margin-start">18</property>
+                                                                <property name="margin-end">18</property>
                                                                 <property name="hexpand">true</property>
-                                                                <property name="vexpand">true</property>
+                                                                <property name="valign">start</property>
                                                                 <property name="homogeneous">true</property>
-                                                                <property name="column-spacing">6</property>
-                                                                <property name="row-spacing">3</property>
+                                                                <property name="column-spacing">18</property>
+                                                                <property name="row-spacing">18</property>
                                                                 <property name="min-children-per-line">1</property>
                                                                 <property name="max-children-per-line">10</property>
                                                                 <property name="selection-mode">none</property>
