@@ -94,7 +94,7 @@ class PlaybackControlViewModel(Observable, EventSender):
             self.emit_event(OpenView.BOOK, self.book)
 
     def _on_player_event(self, event, message):
-        if event == "play" or event == "pause":
+        if event in {"play", "pause"}:
             if self.book:
                 self._notify("playing")
         elif event == "position":

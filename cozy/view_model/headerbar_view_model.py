@@ -38,7 +38,7 @@ class HeaderbarViewModel(Observable, EventSender):
 
     @property
     def lock_ui(self) -> bool:
-        return self._view == View.NO_MEDIA or self._view == View.EMPTY_STATE or self._view == View.PREPARING_LIBRARY
+        return self._view in {View.NO_MEDIA, View.EMPTY_STATE, View.PREPARING_LIBRARY}
 
     @property
     def state(self) -> HeaderBarState:
@@ -63,10 +63,12 @@ class HeaderbarViewModel(Observable, EventSender):
         self._notify("work_message")
         self._notify("work_progress")
         self._notify("state")
+        self.emit_event_main_thread("working", True)
 
     def _stop_working(self):
         self._state = HeaderBarState.PLAYING
         self._notify("state")
+        self.emit_event_main_thread("working", False)
 
     def _on_importer_event(self, event: str, message):
         if event == "scan-progress" and isinstance(message, float):

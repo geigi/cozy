@@ -8,16 +8,21 @@ from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarSt
 
 from gi.repository import Adw, Gtk, GObject
 
+from cozy.ext import inject
+from cozy.ui.widgets.progress_popover import ProgressPopover
+from cozy.view_model.headerbar_view_model import HeaderBarState, HeaderbarViewModel
+
 log = logging.getLogger("Headerbar")
 
-COVER_SIZE = 45
 
-
-@Gtk.Template.from_resource('/com/github/geigi/cozy/headerbar.ui')
-class Headerbar(Adw.Bin):
+@Gtk.Template.from_resource("/com/github/geigi/cozy/headerbar.ui")
+class Headerbar(Gtk.Box):
     __gtype_name__ = "Headerbar"
 
     headerbar: Adw.HeaderBar = Gtk.Template.Child()
+
+    search_bar: Gtk.SearchBar = Gtk.Template.Child()
+    search_entry: Gtk.SearchEntry = Gtk.Template.Child()
 
     show_sidebar_button: Gtk.ToggleButton = Gtk.Template.Child()
     search_button: Gtk.MenuButton = Gtk.Template.Child()
@@ -34,7 +39,9 @@ class Headerbar(Adw.Bin):
         self.header_container: Adw.ToolbarView = main_window_builder.get_object("header_container")
         self.header_container.add_top_bar(self)
 
-        self.mobile_view_switcher: Adw.ViewSwitcherBar = main_window_builder.get_object("mobile_view_switcher")
+        self.mobile_view_switcher: Adw.ViewSwitcherBar = main_window_builder.get_object(
+            "mobile_view_switcher"
+        )
         self.split_view: Adw.OverlaySplitView = main_window_builder.get_object("split_view")
 
         self.sort_stack: Adw.ViewStack = main_window_builder.get_object("sort_stack")
@@ -43,6 +50,9 @@ class Headerbar(Adw.Bin):
 
         self.progress_popover = ProgressPopover()
         self.progress_menu_button.set_popover(self.progress_popover)
+
+        self.search_bar.connect_entry(self.search_entry)
+        self.search_bar.set_key_capture_widget(self.header_container)
 
         self._headerbar_view_model: HeaderbarViewModel = inject.instance(HeaderbarViewModel)
         self._connect_view_model()
@@ -82,6 +92,8 @@ class Headerbar(Adw.Bin):
             self.show_sidebar_button.set_visible(page != "recent")
         else:
             self.show_sidebar_button.set_visible(False)
+
+        self.search_button.set_active(False)
 
     def _on_mobile_view(self, widget, _):
         page = self.sort_stack.props.visible_child_name

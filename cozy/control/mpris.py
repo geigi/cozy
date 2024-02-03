@@ -106,17 +106,17 @@ class Server:
             result = getattr(self, snake_method)(*args)
         except AttributeError:
             invocation.return_dbus_error(
-                "{}.Error.NotSupported".format(interface_name), "Unsupported property"
+                f"{interface_name}.Error.NotSupported", "Unsupported property"
             )
         except Exception as e:
             log.error(e)
             reporter.exception("mpris", e)
             reporter.error(
                 "mpris",
-                "MPRIS method call failed with method name: {}".format(method_name),
+                f"MPRIS method call failed with method name: {method_name}",
             )
             invocation.return_dbus_error(
-                "{}.Error.Failed".format(interface_name), "Internal exception occurred"
+                f"{interface_name}.Error.Failed", "Internal exception occurred"
             )
         else:
             # out_args is at least (signature1).

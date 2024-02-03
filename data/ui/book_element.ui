@@ -8,10 +8,6 @@
       <object class="GtkBox" id="container_box">
         <property name="focusable">true</property>
         <property name="tooltip-text" translatable="true">Open book overview</property>
-        <property name="margin-start">6</property>
-        <property name="margin-end">6</property>
-        <property name="margin-top">12</property>
-        <property name="margin-bottom">12</property>
         <property name="orientation">vertical</property>
         <property name="spacing">1</property>
         <property name="valign">start</property>

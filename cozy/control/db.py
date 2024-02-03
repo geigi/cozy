@@ -25,7 +25,7 @@ def init_db():
     _connect_db(_db)
 
     sqlite_version = ".".join([str(num) for num in _db.server_version])
-    log.info("SQLite version: {}".format(sqlite_version))
+    log.info("SQLite version: %s", sqlite_version)
 
     if Settings.table_exists():
         update_db()
