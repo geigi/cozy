@@ -20,8 +20,8 @@ class PlaybackSpeedViewModel(Observable, EventSender):
     def playback_speed(self) -> float:
         if self._book:
             return self._book.playback_speed
-        else:
-            return 1.0
+
+        return 1.0
 
     @playback_speed.setter
     def playback_speed(self, new_value: float):

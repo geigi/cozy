@@ -198,12 +198,9 @@ class Importer(EventSender):
                         yield file
                 except Exception as e:
                     log.debug(e)
-                    log.info("Could not get modified timestamp for file {}".format(file))
+                    log.info("Could not get modified timestamp for file %s", file)
                     continue
 
                 continue
 
             yield file
-
-    def _get_file_count_in_dir(self, dir):
-        len([name for name in os.listdir(dir) if os.path.isfile(name)])

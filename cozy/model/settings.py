@@ -16,7 +16,7 @@ log = logging.getLogger("model.storage_location")
 
 class Settings:
     _storages: list[Storage] = []
-    _db = cache = inject.attr(SqliteDatabase)
+    _db = inject.attr(SqliteDatabase)
 
     def __init__(self):
         self._db_object: SettingsModel = SettingsModel.get()
@@ -78,12 +78,12 @@ class Settings:
             try:
                 self._storages.append(Storage(self._db, storage_db_obj.id))
             except InvalidPath:
-                log.error(
-                    "Invalid path found in database, skipping: {}".format(storage_db_obj.path)
-                )
+                log.error("Invalid path found in database, skipping: %s", storage_db_obj.path)
 
         self._ensure_default_storage_is_present()
 
-    def _ensure_default_storage_is_present(self) -> None:
-        if self._storages and not any(storage.default for storage in self._storages):
+    def _ensure_default_storage_is_present(self):
+        default_storage_present = any(storage.default for storage in self._storages)
+
+        if not default_storage_present and self._storages:
             self._storages[0].default = True

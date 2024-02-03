@@ -51,10 +51,10 @@ class AppController(metaclass=Singleton):
 
         self.library_view: LibraryView = LibraryView(main_window_builder)
         self.app_view: AppView = AppView(main_window_builder)
-        self.search_view: SearchView = SearchView()
-        self.book_detail_view: BookDetailView = BookDetailView(main_window_builder)
         self.headerbar: Headerbar = Headerbar(main_window_builder)
+        self.book_detail_view: BookDetailView = BookDetailView(main_window_builder)
         self.media_controller: MediaController = MediaController(main_window_builder)
+        self.search_view: SearchView = SearchView(main_window_builder, self.headerbar)
 
         self.library_view_model = inject.instance(LibraryViewModel)
         self.app_view_model = inject.instance(AppViewModel)
@@ -66,7 +66,7 @@ class AppController(metaclass=Singleton):
         self.settings_view_model = inject.instance(SettingsViewModel)
         self.player = inject.instance(Player)
 
-        self._connect_popovers()
+        self._connect_search_button()
 
         self.search_view_model.add_listener(self._on_open_view)
         self.book_detail_view_model.add_listener(self._on_open_view)
@@ -124,8 +124,11 @@ class AppController(metaclass=Singleton):
         self.library_view_model.open_library()
         self.app_view_model.view = View.LIBRARY_FILTER
 
-    def _connect_popovers(self):
-        self.headerbar.search_button.set_popover(self.search_view.popover)
+    def _connect_search_button(self):
+        self.headerbar.search_button.connect(
+            "notify::active",
+            self.search_view.on_state_changed
+        )
 
     def _on_open_view(self, event, data):
         if event == OpenView.AUTHOR:

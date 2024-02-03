@@ -34,7 +34,7 @@ class MediaDetector(EventSender):
         try:
             discoverer_info: GstPbutils.DiscovererInfo = self.discoverer.discover_uri(self.uri)
         except Exception as e:
-            log.info("Skipping file because it couldn't be detected: {}".format(self.uri))
+            log.info("Skipping file because it couldn't be detected: %s", self.uri)
             raise AudioFileCouldNotBeDiscovered(self.uri)
 
         is_valid_audio_file = self._is_valid_audio_file(discoverer_info)
