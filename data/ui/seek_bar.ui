@@ -28,7 +28,6 @@
     <child>
       <object class="GtkScale" id="progress_scale">
         <property name="width-request">150</property>
-        <property name="sensitive">false</property>
         <property name="focusable">true</property>
         <property name="tooltip-text" translatable="true">Jump to position in current chapter</property>
         <property name="valign">center</property>

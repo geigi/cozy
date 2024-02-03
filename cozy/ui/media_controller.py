@@ -40,8 +40,8 @@ class MediaController(Adw.BreakpointBin):
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
-        media_control_box: Gtk.Box = main_window_builder.get_object("media_control_box")
-        media_control_box.append(self)
+        self.container_bar: Gtk.Revealer = main_window_builder.get_object("media_control_box")
+        self.container_bar.set_child(self)
 
         self.seek_bar = SeekBar()
         self.seek_bar_container.append(self.seek_bar)
@@ -129,13 +129,7 @@ class MediaController(Adw.BreakpointBin):
 
     def _on_lock_ui_changed(self):
         sensitive = not self._playback_control_view_model.lock_ui
-        self.seek_bar.sensitive = sensitive
-        self.prev_button.set_sensitive(sensitive)
-        self.next_button.set_sensitive(sensitive)
-        self.play_button.set_sensitive(sensitive)
-        self.volume_button.set_sensitive(sensitive)
-        self.playback_speed_button.set_sensitive(sensitive)
-        self.timer_button.set_sensitive(sensitive)
+        self.container_bar.set_reveal_child(sensitive)
 
     def _on_volume_changed(self):
         self.volume_button.set_value(self._playback_control_view_model.volume)

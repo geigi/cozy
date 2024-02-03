@@ -22,14 +22,24 @@ class SeekBar(Gtk.Box):
 
         self.progress_scale.connect("value-changed", self._on_progress_scale_changed)
 
-        self._progress_scale_gesture = Gtk.GestureClick()
-        self._progress_scale_gesture.connect("pressed", self._on_progress_scale_press)
-        self._progress_scale_gesture.connect("end", self._on_progress_scale_release)
-        self.progress_scale.add_controller(self._progress_scale_gesture)
+        # HACK: Using a GtkGestureClick here is not possible, as GtkRange's internal
+        # gesture controller claims the button press event, and thus the released signal doesn't get emitted.
+        # Therefore we get its internal GtkGestureClick, and add our handlers to that.
+        # Hacky workaround from: https://gitlab.gnome.org/GNOME/gtk/-/issues/4939
+        # Ideally GtkRange would forward these signals, so we wouldn't need this hack
+        # TODO: Add these signals to Gtk and make a MR?
+        for controller in self.progress_scale.observe_controllers():
+            if isinstance(controller, Gtk.GestureClick):
+                click_gesture = controller
+                break
 
-        self._progress_scale_key = Gtk.EventControllerKey()
-        self._progress_scale_key.connect("key-pressed", self._on_progress_key_pressed)
-        self.progress_scale.add_controller(self._progress_scale_key)
+        click_gesture.set_button(0)  # Enable all mouse buttons
+        click_gesture.connect("pressed", self._on_progress_scale_press)
+        click_gesture.connect("released", self._on_progress_scale_release)
+
+        keyboard_controller = Gtk.EventControllerKey()
+        keyboard_controller.connect("key-pressed", self._on_progress_key_pressed)
+        self.progress_scale.add_controller(keyboard_controller)
 
     @property
     def position(self) -> float:
@@ -79,7 +89,6 @@ class SeekBar(Gtk.Box):
 
     def _on_progress_scale_press(self, *_):
         self._progress_scale_pressed = True
-        return False
 
 
 GObject.signal_new('position-changed', SeekBar, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,

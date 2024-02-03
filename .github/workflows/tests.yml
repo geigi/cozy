@@ -1,0 +1,20 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - "main"
+      - "master"
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/geigi/cozy-ci:main
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Run pytest
+      run: pytest

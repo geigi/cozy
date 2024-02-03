@@ -379,7 +379,7 @@ class Player(EventSender):
             position_for_ui = self.position - self.loaded_chapter.start_position
             self.emit_event_main_thread("position", position_for_ui)
         except Exception as e:
-            log.warning("Could not emit position event: {}".format(e))
+            log.warning("Could not emit position event: %s", e)
 
     def _fadeout_playback(self):
         duration = self._app_settings.sleep_timer_fadeout_duration * 20
