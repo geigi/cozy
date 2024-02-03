@@ -1,6 +1,14 @@
-subdir('img')
 subdir('ui')
 subdir('icons')
+
+gnome.compile_resources(
+  meson.project_name() + '.appdata',
+  'gresource.xml',
+  gresource_bundle: true,
+  install_dir: DATA_DIR,
+  install: true,
+)
+
 
 install_data(
     meson.project_name() + '.gschema.xml',
@@ -17,7 +25,7 @@ endif
 desktop_file = i18n.merge_file(
     input: meson.project_name() + '.desktop',
     output: meson.project_name() + '.desktop',
-    po_dir: join_paths(meson.source_root(), 'po', 'extra'),
+    po_dir: join_paths(meson.current_source_dir(), 'po', 'extra'),
     type: 'desktop',
     install: true,
     install_dir: join_paths(get_option('datadir'), 'applications')
@@ -33,7 +41,7 @@ endif
 appstream_file = i18n.merge_file(
     input: meson.project_name() + '.appdata.xml',
     output: meson.project_name() + '.appdata.xml',
-    po_dir: join_paths(meson.source_root(), 'po', 'extra'),
+    po_dir: join_paths(meson.current_source_dir(), 'po', 'extra'),
     install: true,
     install_dir: join_paths(get_option('datadir'), 'metainfo')
 )
@@ -41,6 +49,7 @@ appstream_file = i18n.merge_file(
 appstreamcli = find_program('appstreamcli', required: false)
 if appstreamcli.found()
   test('Validate appstream file', appstreamcli,
-    args: ['validate', '--no-net', appstream_file]
+    args: ['validate', '--no-net', '--explain', appstream_file],
+    workdir: meson.current_build_dir()
   )
 endif

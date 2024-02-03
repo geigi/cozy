@@ -114,6 +114,7 @@
     {
       "name": "cozy",
       "buildsystem": "meson",
+      "run-tests": true,
       "sources": [
         {
           "type": "dir",

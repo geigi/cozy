@@ -136,7 +136,7 @@ def _update_db_9(db):
             file = next((f for f in files if f.path == path), None)
 
             if File.select().where(File.path == path).count() > 0:
-                log.info("Path already existing in db: {}".format(path))
+                log.info("Path already existing in db: %s", path)
                 file = File.select().where(File.path == path).get()
             elif not file:
                 file = File(path=path, modified=track.modified, id=file_id)
@@ -144,7 +144,7 @@ def _update_db_9(db):
                 file_id += 1
 
             if TrackToFile.select().join(Track).where(TrackToFile.track.id == track.id).count() > 0:
-                log.info("TrackToFile already existing in db: {}".format(path))
+                log.info("TrackToFile already existing in db: %s", path)
                 continue
 
             track_to_file = TrackToFile(track=track.id, file=file, start_at=0)

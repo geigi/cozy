@@ -235,7 +235,7 @@ The translators:
 - karaagac
 - kevinmueller
 - leondorus
-- libreajans
+- Sabri Unal
 - linuxmasterclub
 - magnickolas
 - makaleks
