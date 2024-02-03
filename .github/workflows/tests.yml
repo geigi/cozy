@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "main"
+      - "master"
   pull_request:
 
 jobs:
@@ -14,5 +15,6 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
-      run: |
-        pytest
+
+    - name: Run pytest
+      run: pytest
