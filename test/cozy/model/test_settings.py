@@ -86,7 +86,7 @@ def test_fetching_non_existent_last_played_book_sets_it_to_none(peewee_database)
     assert SettingsModel.get().last_played_book is None
 
 
-def test_ensure_default_storage_present_adds_default_if_not_present(peewee_database):
+def test_ensure_default_storage_is_present_adds_default_if_not_present(peewee_database):
     from cozy.model.settings import Settings
     from cozy.db.storage import Storage
 
@@ -94,17 +94,17 @@ def test_ensure_default_storage_present_adds_default_if_not_present(peewee_datab
 
     settings = Settings()
     settings._load_all_storage_locations()
-    settings._ensure_default_storage_present()
+    settings._ensure_default_storage_is_present()
     assert Storage.get(1).default
     assert not Storage.get(2).default
 
 
-def test_ensure_default_storage_present_does_nothing_if_default_is_present(peewee_database):
+def test_ensure_default_storage_is_present_does_nothing_if_default_is_present(peewee_database):
     from cozy.model.settings import Settings
     from cozy.db.storage import Storage
 
     settings = Settings()
     settings._load_all_storage_locations()
-    settings._ensure_default_storage_present()
+    settings._ensure_default_storage_is_present()
     assert not Storage.get(1).default
     assert Storage.get(2).default
