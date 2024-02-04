@@ -81,7 +81,7 @@ class DatabaseImporter:
             book = next((book for book in book_db_objects if is_same_book(book.name, media_file.book_name)), None)
             file_query = File.select().where(File.path == media_file.path)
             if not file_query.exists():
-                log.error("No file object with path present: {}".format(media_file.path))
+                log.error("No file object with path present: %s", media_file.path)
                 continue
 
             file = file_query.get()

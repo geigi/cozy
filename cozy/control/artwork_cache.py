@@ -129,7 +129,7 @@ class ArtworkCache:
             else:
                 pixbuf = None
         except Exception as e:
-            log.warning("Failed to load pixbuf from path: {}. Deleting file.".format(path))
+            log.warning("Failed to load pixbuf from path: %s. Deleting file.", path)
             log.debug(e)
             os.remove(path)
             return None

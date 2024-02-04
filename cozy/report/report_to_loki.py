@@ -61,7 +61,7 @@ def report(component: str, type: LogLevel, message: str, exception: Exception):
         labels = __append_label(labels, "distro_version", distro.version())
         labels = __append_label(labels, "desktop_environment", os.environ.get('DESKTOP_SESSION'))
 
-    line = "[{}] {}".format(LOG_LEVEL_MAP[type], message)
+    line = f"[{LOG_LEVEL_MAP[type]}] {message}"
 
     headers = {
         'Content-type': 'application/json'
