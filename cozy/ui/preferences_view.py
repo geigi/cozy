@@ -20,7 +20,6 @@ class PreferencesView(Adw.PreferencesWindow):
 
     swap_author_reader_switch: Adw.SwitchRow = Gtk.Template.Child()
     replay_switch: Adw.SwitchRow = Gtk.Template.Child()
-
     sleep_timer_fadeout_switch: Adw.SwitchRow = Gtk.Template.Child()
     artwork_prefer_external_switch: Adw.SwitchRow = Gtk.Template.Child()
 
