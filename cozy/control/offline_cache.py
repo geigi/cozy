@@ -163,7 +163,7 @@ class OfflineCache(EventSender):
         self.thread.start()
 
     def _process_queue(self):
-        log.info("Started processing queue")
+        log.info("Started processing offline cache queue")
         self.filecopy_cancel = Gio.Cancellable()
 
         self._fill_queue_from_db()
@@ -174,11 +174,12 @@ class OfflineCache(EventSender):
             self.emit_event_main_thread("start")
 
         while len(self.queue) > 0:
-            log.info("Processing item")
             self.current_batch_count += 1
             item = self.queue[0]
             if self.thread.stopped():
                 break
+
+            log.info("Processing item: %r", item)
 
             query = OfflineCacheModel.select().where(OfflineCacheModel.id == item.id)
             if not query.exists():
@@ -192,7 +193,7 @@ class OfflineCache(EventSender):
                 self.current_book_processing = book.id
 
             if not new_item.copied and os.path.exists(new_item.original_file.path):
-                log.info("Copying item")
+                log.info("Copying item: %r", new_item)
                 self.emit_event_main_thread("message",
                                             _("Copying") + " " + tools.shorten_string(book.name, 30))
                 self.current = new_item
