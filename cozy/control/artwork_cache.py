@@ -88,7 +88,7 @@ class ArtworkCache:
                 resized_pixbuf.savev(file_path, "jpeg", ["quality", None], ["95"])
             except Exception as e:
                 reporter.warning("artwork_cache", "Failed to save resized cache albumart")
-                log.warning("Failed to save resized cache albumart for following uuid: " + gen_uuid)
+                log.warning("Failed to save resized cache albumart for following uuid: %s", gen_uuid)
                 log.warning(e)
 
         return resized_pixbuf
@@ -170,7 +170,7 @@ class ArtworkCache:
                 pixbuf = loader.get_pixbuf()
             except Exception as e:
                 reporter.warning("artwork_cache", "Could not get book cover from db.")
-                log.warning("Could not get cover for book " + book.name)
+                log.warning("Could not get cover for book %s", book.name)
                 log.warning(e)
 
         return pixbuf

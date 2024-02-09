@@ -39,8 +39,8 @@ class Application(Adw.Application):
 
     def do_startup(self):
         log.info(distro.linux_distribution(full_distribution_name=False))
-        log.info(f"Starting up cozy {__version__}")
-        log.info(f"libadwaita version: {Adw._version}")
+        log.info("Starting up cozy %s", __version__)
+        log.info("libadwaita version: %s", Adw._version)
 
         self.ui = CozyUI(self.pkgdatadir, self, __version__)
         Adw.Application.do_startup(self)
