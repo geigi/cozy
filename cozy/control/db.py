@@ -59,8 +59,7 @@ def _connect_db(db):
         db.connect(reuse_if_open=True)
     except Exception as e:
         reporter.exception("db", e)
-        log.error("Could not connect to database. ")
-        log.error(e)
+        log.error("Could not connect to database: %s", e)
 
 
 def books():

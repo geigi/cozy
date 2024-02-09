@@ -88,8 +88,7 @@ class ArtworkCache:
                 resized_pixbuf.savev(file_path, "jpeg", ["quality", None], ["95"])
             except Exception as e:
                 reporter.warning("artwork_cache", "Failed to save resized cache albumart")
-                log.warning("Failed to save resized cache albumart for following uuid: %s", gen_uuid)
-                log.warning(e)
+                log.warning("Failed to save resized cache albumart for uuid %r: %s", gen_uuid, e)
 
         return resized_pixbuf
 
@@ -170,8 +169,7 @@ class ArtworkCache:
                 pixbuf = loader.get_pixbuf()
             except Exception as e:
                 reporter.warning("artwork_cache", "Could not get book cover from db.")
-                log.warning("Could not get cover for book %s", book.name)
-                log.warning(e)
+                log.warning("Could not get cover for book %r: %s", book.name, e)
 
         return pixbuf
 
@@ -209,8 +207,7 @@ class ArtworkCache:
             cover_files = [f for f in os.listdir(directory)
                            if f.lower().endswith('.png') or f.lower().endswith(".jpg") or f.lower().endswith(".gif")]
         except Exception as e:
-            log.warning("Could not open audiobook directory and look for cover files.")
-            log.warning(e)
+            log.warning("Could not open audiobook directory and look for cover files: %s", e)
         for elem in (x for x in cover_files if os.path.splitext(x.lower())[0] == "cover"):
             # find cover.[jpg,png,gif]
             try:
