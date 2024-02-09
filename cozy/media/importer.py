@@ -2,7 +2,6 @@ import itertools
 import logging
 import os
 import time
-import traceback
 from enum import Enum, auto
 from multiprocessing.pool import Pool as Pool
 from typing import List, Set
@@ -115,9 +114,8 @@ class Importer(EventSender):
                 try:
                     self._database_importer.insert_many(media_files)
                 except Exception as e:
-                    log.error("Error while inserting new tracks to the database")
+                    log.exception("Error while inserting new tracks to the database")
                     reporter.exception("importer", e)
-                    log.error(traceback.format_exc())
                     self._toast.show("{}: {}".format(_("Error while importing new files"), str(e.__class__)))
 
             if self._progress >= self._files_count:
