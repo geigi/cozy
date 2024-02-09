@@ -208,7 +208,7 @@ class OfflineCache(EventSender):
                         self.thread.stop()
                         break
                     reporter.exception("offline_cache", e)
-                    log.error("Could not copy file to offline cache: " + new_item.original_file.path)
+                    log.error("Could not copy file to offline cache: %s", new_item.original_file.path)
                     log.error(e)
                     self.queue.remove(item)
                     continue

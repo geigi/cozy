@@ -117,11 +117,11 @@ class FilesystemMonitor(EventSender):
             log.warning("Mount added but no mount_path is present. Skipping...")
             return
 
-        log.debug("Volume mounted: " + mount_path)
+        log.debug("Volume mounted: %s", mount_path)
 
         storage = next((s for s in self.external_storage if mount_path in s.storage.path), None)
         if storage:
-            log.info("Storage online: " + mount_path)
+            log.info("Storage online: %s", mount_path)
             storage.online = True
             self.emit_event("storage-online", storage.storage.path)
 
@@ -136,11 +136,11 @@ class FilesystemMonitor(EventSender):
             log.warning("Mount removed but no mount_path is present. Skipping...")
             return
 
-        log.debug("Volume unmounted: " + mount_path)
+        log.debug("Volume unmounted: %s", mount_path)
 
         storage = next((s for s in self.external_storage if mount_path in s.storage.path), None)
         if storage:
-            log.info("Storage offline: " + mount_path)
+            log.info("Storage offline: %s", mount_path)
             storage.online = False
             self.emit_event("storage-offline", storage.storage.path)
 
