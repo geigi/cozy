@@ -20,11 +20,9 @@ class PlaybackSpeedPopover(Gtk.Popover):
         self.playback_speed_scale.set_increments(0.02, 0.05)
         self.playback_speed_scale.connect("value-changed", self._on_playback_speed_scale_changed)
 
-        self._connect_view_model()
-        self._on_playback_speed_changed()
-
-    def _connect_view_model(self):
         self._view_model.bind_to("playback_speed", self._on_playback_speed_changed)
+
+        self._on_playback_speed_changed()
 
     def _on_playback_speed_scale_changed(self, _):
         speed = round(self.playback_speed_scale.get_value(), 2)

@@ -15,12 +15,14 @@
         <property name="tooltip-text" translatable="true">Elapsed time</property>
         <property name="halign">end</property>
         <property name="valign">center</property>
-        <property name="label">&lt;span font_features=&apos;tnum&apos;&gt;--:--&lt;/span&gt;</property>
-        <property name="use-markup">true</property>
+        <property name="label">--:--</property>
         <property name="single-line-mode">true</property>
         <accessibility>
           <property name="label" translatable="true">Elapsed time of current part</property>
         </accessibility>
+        <style>
+          <class name="numeric"/>
+        </style>
       </object>
     </child>
     <child>
@@ -45,12 +47,14 @@
           <object class="GtkLabel" id="remaining_label">
             <property name="tooltip-text" translatable="true">Remaining time</property>
             <property name="halign">start</property>
-            <property name="label">&lt;span font_features=&apos;tnum&apos;&gt;--:--&lt;/span&gt;</property>
-            <property name="use-markup">true</property>
+            <property name="label">--:--</property>
             <property name="single-line-mode">true</property>
             <accessibility>
               <property name="label" translatable="true">Remaining time of current part</property>
             </accessibility>
+            <style>
+              <class name="numeric"/>
+            </style>
           </object>
         </child>
       </object>
