@@ -77,7 +77,6 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed instructions and developing Co
 - `distro`
 - `requests`
 - `pytz`
-- `packaging`
 - `gi-cairo`
 - `gst-1.0`
 - `file`

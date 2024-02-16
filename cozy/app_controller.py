@@ -26,7 +26,6 @@ from cozy.ui.library_view import LibraryView
 from cozy.ui.main_view import CozyUI
 from cozy.ui.media_controller import MediaController
 from cozy.ui.search_view import SearchView
-from cozy.ui.widgets.whats_new_window import WhatsNewWindow
 from cozy.view import View
 from cozy.view_model.app_view_model import AppViewModel
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
@@ -50,11 +49,9 @@ class AppController(metaclass=Singleton):
 
         reporter.info("main", "startup")
 
-        self.whats_new_window: WhatsNewWindow = WhatsNewWindow()
-
+        self.library_view: LibraryView = LibraryView(main_window_builder)
         self.app_view: AppView = AppView(main_window_builder)
         self.headerbar: Headerbar = Headerbar(main_window_builder)
-        self.library_view: LibraryView = LibraryView(main_window_builder)
         self.book_detail_view: BookDetailView = BookDetailView(main_window_builder)
         self.media_controller: MediaController = MediaController(main_window_builder)
         self.search_view: SearchView = SearchView(main_window_builder, self.headerbar)

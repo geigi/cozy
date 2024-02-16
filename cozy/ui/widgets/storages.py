@@ -7,7 +7,7 @@ from cozy.model.storage import Storage
 from cozy.view_model.storages_view_model import StoragesViewModel
 
 
-def ask_storage_location(callback: Callable[[str], None], initial_folder: str | None = None):
+def ask_storage_location(callback: Callable[[str | None], None], initial_folder: str | None = None):
     location_chooser = Gtk.FileDialog(title=_("Set Audiobooks Directory"))
 
     if initial_folder:
@@ -20,8 +20,7 @@ def ask_storage_location(callback: Callable[[str], None], initial_folder: str | 
         except GLib.GError:
             pass
         else:
-            if file is not None:
-                callback(file.get_path())
+            callback(None if file is None else file.get_path())
 
     location_chooser.select_folder(inject.instance("MainWindow").window, None, finish_callback)
 
@@ -53,8 +52,9 @@ class StorageRow(Adw.ActionRow):
     def ask_for_new_location(self, *_) -> None:
         ask_storage_location(self._on_folder_changed, initial_folder=self._model.path)
 
-    def _on_folder_changed(self, new_path: str) -> None:
-        self.emit("location-changed", new_path)
+    def _on_folder_changed(self, new_path: str | None) -> None:
+        if new_path is not None:
+            self.emit("location-changed", new_path)
 
     def _on_menu_opened(self, *_) -> None:
         self.emit("menu-opened")

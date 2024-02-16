@@ -44,7 +44,10 @@ class StoragesViewModel(Observable, EventSender):
             name="RebaseStorageLocationThread",
         ).start()
 
-    def add_storage_location(self, path: str) -> None:
+    def add_storage_location(self, path: str | None) -> None:
+        if path is None:
+            return
+
         model = Storage.new(self._db, path)
         model.external = self._fs_monitor.is_external(path)
 
