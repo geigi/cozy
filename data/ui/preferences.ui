@@ -27,16 +27,6 @@
         <property name="title" translatable="true">General</property>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="true">Appearance</property>
-            <child>
-              <object class="AdwSwitchRow" id="dark_mode_switch">
-                <property name="title">Dark Mode</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup">
             <property name="title" translatable="true">Tags</property>
             <child>
               <object class="AdwSwitchRow" id="swap_author_reader_switch">

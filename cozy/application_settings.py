@@ -110,14 +110,6 @@ class ApplicationSettings(EventSender):
         self._settings.set_int("forward-duration", new_value)
 
     @property
-    def dark_mode(self) -> bool:
-        return self._settings.get_boolean("dark-mode")
-
-    @dark_mode.setter
-    def dark_mode(self, new_value: bool):
-        self._settings.set_boolean("dark-mode", new_value)
-
-    @property
     def window_width(self) -> int:
         return self._settings.get_int("window-width")
 

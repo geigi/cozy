@@ -41,11 +41,6 @@
       <summary>Display the time according to the playback speed.</summary>
       <description></description>
     </key>
-    <key type="b" name="dark-mode">
-      <default>false</default> 
-      <summary>Enable Dark Mode.</summary>
-      <description></description>
-    </key>
     <key type="b" name="swap-author-reader">
       <default>false</default>
       <summary>Swap author and reader tag assignment.</summary>
