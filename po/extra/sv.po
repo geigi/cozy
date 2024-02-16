@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Åke Engelbrektson, 2021
-# Luna Jernberg <bittin@cafe8bitar.se>, 2023
+# Luna Jernberg <droidbittin@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-09 20:38+0200\n"
+"POT-Creation-Date: 2024-02-16 15:04+0100\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
-"Last-Translator: Luna Jernberg <bittin@cafe8bitar.se>, 2023\n"
+"Last-Translator: Luna Jernberg <droidbittin@gmail.com>, 2023\n"
 "Language-Team: Swedish (https://app.transifex.com/geigi/teams/78138/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/com.github.geigi.cozy.desktop:3
-#: data/com.github.geigi.cozy.appdata.xml:6
 msgid "Cozy"
 msgstr "Cozy"
 
@@ -35,24 +34,24 @@ msgstr "Ljudboksspelare"
 msgid "Play and organize your audio book collection"
 msgstr "Spela upp och organisera din ljudbokssamling"
 
-#: data/com.github.geigi.cozy.appdata.xml:7
+#: data/com.github.geigi.cozy.appdata.xml:15
 msgid "Listen to audio books"
 msgstr "Lyssna på ljudböcker"
 
-#: data/com.github.geigi.cozy.appdata.xml:9
+#: data/com.github.geigi.cozy.appdata.xml:17
 msgid "Do you like audio books? Then lets get cozy!"
 msgstr "Gillar du ljudböcker? Då kan det bli mysigt!"
 
-#: data/com.github.geigi.cozy.appdata.xml:12
+#: data/com.github.geigi.cozy.appdata.xml:18
 msgid "Cozy is a audio book player. Here are some of the features:"
 msgstr "Cozy är en ljudboksspelare. Här är några av funktionerna:"
 
-#: data/com.github.geigi.cozy.appdata.xml:16
+#: data/com.github.geigi.cozy.appdata.xml:20
 msgid "Import all your audio books into Cozy to browse them comfortably"
 msgstr ""
 "Importera alla dina ljudböcker till Cozy för att bekvämt bläddra efter dem"
 
-#: data/com.github.geigi.cozy.appdata.xml:17
+#: data/com.github.geigi.cozy.appdata.xml:21
 msgid ""
 "Listen to your DRM free mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav "
 "audio books"
@@ -60,27 +59,27 @@ msgstr ""
 "Lyssna på dina DRM-fria mp3, m4b, m4a (aac, ALAC, …), flac, ogg och wav "
 "ljudböcker."
 
-#: data/com.github.geigi.cozy.appdata.xml:18
+#: data/com.github.geigi.cozy.appdata.xml:22
 msgid "Remembers your playback position"
 msgstr "Kommer ihåg var du slutade lyssna."
 
-#: data/com.github.geigi.cozy.appdata.xml:19
+#: data/com.github.geigi.cozy.appdata.xml:23
 msgid "Sleep timer"
 msgstr "Insomningsur"
 
-#: data/com.github.geigi.cozy.appdata.xml:20
+#: data/com.github.geigi.cozy.appdata.xml:24
 msgid "Playback speed control for each book individually"
 msgstr "Kontroll av uppspelningshastighet, individuellt för varje bok."
 
-#: data/com.github.geigi.cozy.appdata.xml:21
+#: data/com.github.geigi.cozy.appdata.xml:25
 msgid "Search your library"
 msgstr "Sök i ditt bibliotek."
 
-#: data/com.github.geigi.cozy.appdata.xml:22
+#: data/com.github.geigi.cozy.appdata.xml:26
 msgid "Multiple storage location support"
 msgstr "Stöd för flera lagringsplatser."
 
-#: data/com.github.geigi.cozy.appdata.xml:23
+#: data/com.github.geigi.cozy.appdata.xml:27
 msgid ""
 "Offline Mode! This allows you to keep an audio book on your internal storage"
 " if you store your audio books on an external or network drive. Perfect to "
@@ -90,297 +89,10 @@ msgstr ""
 "om du lagrar dina ljudböcker på en extern eller nätverksenhet. Perfekt att "
 "lyssna på när du är på språng!"
 
-#: data/com.github.geigi.cozy.appdata.xml:24
+#: data/com.github.geigi.cozy.appdata.xml:28
 msgid "Drag and Drop to import new audio books"
 msgstr "Dra och släpp för att importera nya ljudböcker"
 
-#: data/com.github.geigi.cozy.appdata.xml:25
+#: data/com.github.geigi.cozy.appdata.xml:29
 msgid "Sort your audio books by author, reader and name"
 msgstr "Sortera dina ljudböcker efter författare, uppläsare och namn."
-
-#: data/com.github.geigi.cozy.appdata.xml:45
-msgid "Julian Geywitz"
-msgstr "Julian Geywitz"
-
-#: data/com.github.geigi.cozy.appdata.xml:59
-msgid "Support for GTK style manager (thanks A6GibKm)"
-msgstr "Stöd för GTK stilhanterare (tack A6GibKm)"
-
-#: data/com.github.geigi.cozy.appdata.xml:60
-msgid "Use natural sorting for chapter titles"
-msgstr "Använd naturlig sortering för kapiteltitlar"
-
-#: data/com.github.geigi.cozy.appdata.xml:61
-msgid "As always, updated translations thanks to all the translators!"
-msgstr "Som alltid, uppdaterade översättningar tack till alla översättare!"
-
-#: data/com.github.geigi.cozy.appdata.xml:67
-msgid ""
-"This release features a redesigned preference window. All settings can now "
-"be searched. Good news for mobile users too: the redesign should work a lot "
-"better on mobile devices now."
-msgstr ""
-"Den här utgåvan har ett omdesignat inställningsfönster. Alla inställningar "
-"kan nu sökas efter. Goda nyheter för mobilanvändare också: omdesignen borde "
-"fungera mycket bättre på mobila enheter nu."
-
-#: data/com.github.geigi.cozy.appdata.xml:71
-msgid "Redesigned preference window"
-msgstr "Omdesignat inställningsfönster"
-
-#: data/com.github.geigi.cozy.appdata.xml:72
-msgid "Preferences can now be searched"
-msgstr "Inställningar kan nu sökas efter"
-
-#: data/com.github.geigi.cozy.appdata.xml:73
-msgid ""
-"Fix: position slider did not update the time correctly after an import scan"
-msgstr ""
-"Fixat: positionsreglaget uppdaterade inte tiden korrekt efter en "
-"importskanning"
-
-#: data/com.github.geigi.cozy.appdata.xml:74
-msgid ""
-"Fix: after an import scan the library did not display the currently playing "
-"book correctly"
-msgstr ""
-"Fixat: efter enimportskanning så visade biblioteket inte den bok som spelas "
-"korrekt"
-
-#: data/com.github.geigi.cozy.appdata.xml:75
-#: data/com.github.geigi.cozy.appdata.xml:88
-msgid "Multiple small bug fixes"
-msgstr "Flera små buggfixar"
-
-#: data/com.github.geigi.cozy.appdata.xml:76
-#: data/com.github.geigi.cozy.appdata.xml:89
-#: data/com.github.geigi.cozy.appdata.xml:105
-#: data/com.github.geigi.cozy.appdata.xml:121
-#: data/com.github.geigi.cozy.appdata.xml:138
-#: data/com.github.geigi.cozy.appdata.xml:153
-#: data/com.github.geigi.cozy.appdata.xml:168
-#: data/com.github.geigi.cozy.appdata.xml:183
-#: data/com.github.geigi.cozy.appdata.xml:197
-#: data/com.github.geigi.cozy.appdata.xml:211
-msgid "As always, updated translations thanks to all of the translators!"
-msgstr "Som alltid, uppdaterade översättningar tack till alla översättare!"
-
-#: data/com.github.geigi.cozy.appdata.xml:82
-#: data/com.github.geigi.cozy.appdata.xml:95
-#: data/com.github.geigi.cozy.appdata.xml:111
-#: data/com.github.geigi.cozy.appdata.xml:159
-#: data/com.github.geigi.cozy.appdata.xml:174
-msgid "A small bugfix release which makes Cozy more reliable."
-msgstr "En liten buggfix som gör Cozy mer pålitlig."
-
-#: data/com.github.geigi.cozy.appdata.xml:86
-msgid "Fresh playback speed and sleep timer icons (thanks jimmac)"
-msgstr ""
-"Nya fräscha ikoner för uppspelningshastighet och vilotimer (tack jimmac)"
-
-#: data/com.github.geigi.cozy.appdata.xml:87
-msgid ""
-"Refreshing the library now uses a more descriptive text (thanks jubalh)"
-msgstr ""
-"Uppdatering av biblioteket använder nu en mer beskrivande text (tack jubalh)"
-
-#: data/com.github.geigi.cozy.appdata.xml:99
-#: data/com.github.geigi.cozy.appdata.xml:115
-msgid "Display an error banner if an error occurs while importing new files"
-msgstr "Visa en felbanner om ett fel uppstår när nya filer importeras"
-
-#: data/com.github.geigi.cozy.appdata.xml:100
-#: data/com.github.geigi.cozy.appdata.xml:116
-msgid ""
-"The audiobook directory selector in the empty state has been replaced by a "
-"button to allow a narrow window even with long directory names"
-msgstr ""
-"Ljudboksväljaren i tomt tillstånd har ersatts av en knapp för att tillåta "
-"ett smalt fönster även med långa katalognamn"
-
-#: data/com.github.geigi.cozy.appdata.xml:101
-#: data/com.github.geigi.cozy.appdata.xml:117
-msgid "Fix: multiple small UI issues"
-msgstr "Fixat: flera små UI-problem"
-
-#: data/com.github.geigi.cozy.appdata.xml:102
-#: data/com.github.geigi.cozy.appdata.xml:118
-msgid "Fix: the welcome screen now works properly on a mobile device"
-msgstr "Fixat: välkomstskärmen fungerar nu korrekt på en mobil enhet"
-
-#: data/com.github.geigi.cozy.appdata.xml:103
-#: data/com.github.geigi.cozy.appdata.xml:119
-msgid ""
-"Fix: don't display the mobile library switcher when no files are imported"
-msgstr ""
-"Fixat: visa inte växlaren för mobilbibliotek när inga filer importeras"
-
-#: data/com.github.geigi.cozy.appdata.xml:104
-#: data/com.github.geigi.cozy.appdata.xml:120
-msgid ""
-"Fix: in the book detail view the pause icon for a chapter remained even when"
-" the next chapter already started playing"
-msgstr ""
-"Fixat: i bokens detaljvy fanns pausikonen för ett kapitel kvar även när "
-"nästa kapitel redan började spelas"
-
-#: data/com.github.geigi.cozy.appdata.xml:127
-msgid ""
-"This release features a redesigned library with responsiveness in mind."
-msgstr ""
-"Den här utgåvan har ett omdesignat bibliotek med responsivitet i åtanke."
-
-#: data/com.github.geigi.cozy.appdata.xml:131
-msgid "Redesigned library"
-msgstr "Omdesignat bibliotek"
-
-#: data/com.github.geigi.cozy.appdata.xml:132
-msgid "Redesigned start screen"
-msgstr "Omdesignad startskärm"
-
-#: data/com.github.geigi.cozy.appdata.xml:133
-msgid "Redesigned book detail screen"
-msgstr "Omdesignad bokdetaljskärm"
-
-#: data/com.github.geigi.cozy.appdata.xml:134
-msgid "Responsive design for the main window"
-msgstr "Responsiv design för huvudfönstret"
-
-#: data/com.github.geigi.cozy.appdata.xml:135
-msgid "Introducing a welcome screen for new installations"
-msgstr "Introducerar en välkomstskärm för nya installationer"
-
-#: data/com.github.geigi.cozy.appdata.xml:136
-msgid "Fix: a rare bug where Cozy's volume was muted at first start"
-msgstr "Fixat: en sällsynt bugg där Cozys volym var avstängd vid första start"
-
-#: data/com.github.geigi.cozy.appdata.xml:137
-msgid "Fix: long book names or author names will be truncated properly"
-msgstr "Fixat: långa boknamn eller författarnamn kommer att trunkeras korrekt"
-
-#: data/com.github.geigi.cozy.appdata.xml:144
-msgid "Performance improvements for the book detail view and some bugfixes."
-msgstr "Prestandaförbättringar för bok detaljvy och några buggfixar."
-
-#: data/com.github.geigi.cozy.appdata.xml:148
-msgid ""
-"Chapters in the book detail view will now be loaded lazily (thanks chris-"
-"kobrzak!)"
-msgstr ""
-"Kapitel i boke detaljvy kommer nu att laddas i bakgrunden (tack chris-"
-"kobrzak!)"
-
-#: data/com.github.geigi.cozy.appdata.xml:149
-msgid ""
-"Books with a single chapter don't display a chapter number anymore (thanks "
-"chris-kobrzak!)"
-msgstr ""
-"Böcker med ett enda kapitel visar inte längre ett kapitelnummer (tack chris-"
-"kobrzak!)"
-
-#: data/com.github.geigi.cozy.appdata.xml:150
-msgid "Fix: Locals in What's new in Cozy screen (thanks alyssais!)"
-msgstr ""
-"Fixat: Översättningar på Vad är i nytt i Cozy skärmen (tack alyssais!)"
-
-#: data/com.github.geigi.cozy.appdata.xml:151
-msgid "Fix: Catch an error that could occur when a book stops"
-msgstr "Fixat: Fångade ett fel som kan uppstå när en bok slutar"
-
-#: data/com.github.geigi.cozy.appdata.xml:152
-msgid "Small performance improvements"
-msgstr "Små prestandaförbättringar"
-
-#: data/com.github.geigi.cozy.appdata.xml:163
-msgid ""
-"When an issue occurs during playback the error message is displayed to the "
-"user"
-msgstr ""
-"När ett problem uppstår under uppspelning visas ett felmeddelandet för "
-"användaren"
-
-#: data/com.github.geigi.cozy.appdata.xml:164
-msgid ""
-"Fix: Importing media without tags now properly decodes the file name as "
-"chapter name (thanks chris-kobrzak!)"
-msgstr ""
-"Fixat: Att importera media utan taggar avkodar nu filnamnet som kapitelnamn "
-"(tack chris-kobrzak!)"
-
-#: data/com.github.geigi.cozy.appdata.xml:165
-msgid "Fix: Ensure that always a default storage location is present"
-msgstr "Fixat: Se till att det alltid finns en standardlagringsplats"
-
-#: data/com.github.geigi.cozy.appdata.xml:166
-msgid "Fix: During import an error could occur which stopped the import"
-msgstr "Fixat: Under importen kunde ett fel uppstå som stoppade importen"
-
-#: data/com.github.geigi.cozy.appdata.xml:167
-msgid "Fix: During the database migration an error could occur"
-msgstr "Fixat: Under databasmigreringen kunde ett fel inträffa"
-
-#: data/com.github.geigi.cozy.appdata.xml:178
-msgid ""
-"When copying files to the audiobook library goes wrong, the user is now "
-"informed with the error"
-msgstr ""
-"När kopiering av filer till ljudboksbiblioteket går fel informeras "
-"användaren nu om felet"
-
-#: data/com.github.geigi.cozy.appdata.xml:179
-msgid "Fix: Possible error while displaying offline cache copy progress"
-msgstr "Fixat: Möjligt fel vid visning av förlopp för offlinecachekopiering"
-
-#: data/com.github.geigi.cozy.appdata.xml:180
-msgid ""
-"Fix: When changing the audiobook location or selecting a file in the file "
-"not found dialog an unexpected error could occur"
-msgstr ""
-"Fixat: När du ändrar ljudboksplats eller väljer en fil i dialogrutan då "
-"dialogrutan säger fil hittades inte, kan ett oväntat fel inträffa"
-
-#: data/com.github.geigi.cozy.appdata.xml:181
-msgid "Fix: Removing a storage dir in settings did not work"
-msgstr ""
-"Fixat: Att ta bort en lagringskatalog i inställningarna fungerade inte"
-
-#: data/com.github.geigi.cozy.appdata.xml:182
-msgid "Fix: Removing a book from the library did sometimes not work"
-msgstr "Fixat: Att ta bort en bok från biblioteket fungerade ibland inte"
-
-#: data/com.github.geigi.cozy.appdata.xml:189
-#: data/com.github.geigi.cozy.appdata.xml:203
-msgid "This release features chapter support for m4b files."
-msgstr "Den här utgåvan har kapitelstöd för m4b-filer."
-
-#: data/com.github.geigi.cozy.appdata.xml:193
-#: data/com.github.geigi.cozy.appdata.xml:207
-msgid ""
-"A long awaited feature has finally arrived: Chapter support for m4b files."
-msgstr ""
-"En efterlängtad funktion har äntligen kommit: Kapitelstöd för m4b-filer."
-
-#: data/com.github.geigi.cozy.appdata.xml:194
-#: data/com.github.geigi.cozy.appdata.xml:208
-msgid ""
-"Books with inconsistent spelling are now grouped into a single book (thanks "
-"chris-kobrzak!)."
-msgstr ""
-"Böcker med inkonsekvent stavning är nu grupperade i en enda bok (tack chris-"
-"kobrzak!)."
-
-#: data/com.github.geigi.cozy.appdata.xml:195
-#: data/com.github.geigi.cozy.appdata.xml:209
-msgid "Improved reliability of restoring the previous playback position."
-msgstr ""
-"Förbättrad tillförlitlighet för att återställa den tidigare "
-"uppspelningspositionen."
-
-#: data/com.github.geigi.cozy.appdata.xml:196
-#: data/com.github.geigi.cozy.appdata.xml:210
-msgid ""
-"Fix: clicking on a currently playing chapter did not pause the chapter as "
-"expected."
-msgstr ""
-"Fixat: att klicka på ett kapitel som spelas pausade inte kapitlet som "
-"förväntat."
