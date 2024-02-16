@@ -30,8 +30,8 @@
       "sources": [
         {
           "type": "file",
-          "url": "https://files.pythonhosted.org/packages/f4/2c/c90a3adaf0ddb70afe193f5ebfb539612af57cffe677c3126be533df3098/distro-1.8.0-py3-none-any.whl",
-          "sha256": "99522ca3e365cac527b44bde033f64c6945d90eb9f769703caaec52b09bbd3ff"
+          "url": "https://files.pythonhosted.org/packages/12/b3/231ffd4ab1fc9d679809f356cebee130ac7daa00d6d6f3206dd4fd137e9e/distro-1.9.0-py3-none-any.whl",
+          "sha256": "7bffd925d65168f85027d8da9af6bddab658135b840670a223589bc0c8ef02b2"
         }
       ]
     },
@@ -58,8 +58,8 @@
       "sources": [
         {
           "type": "file",
-          "url": "https://files.pythonhosted.org/packages/6a/30/a727bb1420076b3c14b60911d111f0fc0449d31a1123a1ad18878a7a4e40/peewee-3.17.0.tar.gz",
-          "sha256": "3a56967f28a43ca7a4287f4803752aeeb1a57a08dee2e839b99868181dfb5df8"
+          "url": "https://files.pythonhosted.org/packages/8d/a5/89cdbc4a7f6d7a0624c120be102db770ee717aa371066581e3daf2beb96f/peewee-3.17.1.tar.gz",
+          "sha256": "e009ac4227c4fdc0058a56e822ad5987684f0a1fbb20fed577200785102581c3"
         }
       ]
     },
@@ -72,8 +72,8 @@
       "sources": [
         {
           "type": "file",
-          "url": "https://files.pythonhosted.org/packages/32/4d/aaf7eff5deb402fd9a24a1449a8119f00d74ae9c2efa79f8ef9994261fc2/pytz-2023.3.post1-py2.py3-none-any.whl",
-          "sha256": "ce42d816b81b68506614c11e8937d3aa9e41007ceb50bfdcb0749b921bf646c7"
+          "url": "https://files.pythonhosted.org/packages/9c/3d/a121f284241f08268b21359bd425f7d4825cffc5ac5cd0e1b3d82ffd2b10/pytz-2024.1-py2.py3-none-any.whl",
+          "sha256": "328171f4e3623139da4983451950b28e95ac706e13f3f2630a879749e7a8b319"
         }
       ]
     },
@@ -86,8 +86,8 @@
       "sources": [
         {
           "type": "file",
-          "url": "https://files.pythonhosted.org/packages/64/62/428ef076be88fa93716b576e4a01f919d25968913e817077a386fcbe4f42/certifi-2023.11.17-py3-none-any.whl",
-          "sha256": "e036ab49d5b79556f99cfc2d9320b34cfbe5be05c5871b51de9329f0603b0474"
+          "url": "https://files.pythonhosted.org/packages/ba/06/a07f096c664aeb9f01624f858c3add0a4e913d6c96257acb4fce61e7de14/certifi-2024.2.2-py3-none-any.whl",
+          "sha256": "dc383c07b76109f368f6106eee2b593b04a011ea4d55f652c6ca24a754d1cdd1"
         },
         {
           "type": "file",
@@ -106,8 +106,8 @@
         },
         {
           "type": "file",
-          "url": "https://files.pythonhosted.org/packages/96/94/c31f58c7a7f470d5665935262ebd7455c7e4c7782eb525658d3dbf4b9403/urllib3-2.1.0-py3-none-any.whl",
-          "sha256": "55901e917a5896a349ff771be919f8bd99aff50b79fe58fec595eb37bbc56bb3"
+          "url": "https://files.pythonhosted.org/packages/88/75/311454fd3317aefe18415f04568edc20218453b709c63c58b9292c71be17/urllib3-2.2.0-py3-none-any.whl",
+          "sha256": "ce3711610ddce217e6d113a2732fafad960a03fd0318c91faa79481e35c11224"
         }
       ]
     },
