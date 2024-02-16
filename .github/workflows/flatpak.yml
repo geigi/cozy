@@ -15,7 +15,7 @@ jobs:
       # Don't fail the whole workflow if one architecture fails
       fail-fast: false
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Install deps
       run: |
