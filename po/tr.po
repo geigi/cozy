@@ -459,7 +459,7 @@ msgstr "Arama açılır kutusunu aç"
 
 #: data/ui/headerbar.ui:44
 msgid "Display background task progress"
-msgstr "Arkaplanda işlemin ilerleyişini göster"
+msgstr "Arka planda işlemin ilerleyişini göster"
 
 #: data/ui/headerbar.ui:67
 msgid "Start typing..."
