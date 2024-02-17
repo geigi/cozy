@@ -523,7 +523,7 @@ msgstr "Son Kullanılan Kitaplar Yok"
 
 #: data/ui/main_window.ui:195
 msgid "Explore your library by switching to the Author or Reader view"
-msgstr "Yazar veya Okuyucu görünümüne geçerek kütüphanenizi keşfedin"
+msgstr "Yazar ya da Okuyucu görünümüne geçerek kitaplığınızı keşfedin"
 
 #: data/ui/media_controller.ui:48
 msgid "Currently playing"
