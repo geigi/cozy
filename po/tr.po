@@ -245,7 +245,7 @@ msgstr "Okundu imle"
 
 #: cozy/ui/widgets/book_element.py:73
 msgid "Open in file browser"
-msgstr "Dosya yöneticisinde aç"
+msgstr "Dosya görüntüleyicide aç"
 
 #: cozy/ui/widgets/book_element.py:76
 msgid "Remove from library"
