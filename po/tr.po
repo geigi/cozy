@@ -277,7 +277,7 @@ msgstr "Hata ya da çökme raporu yok."
 
 #: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:174
 msgid "The following information will be sent in case of an error or crash:"
-msgstr "Hata ve çökme durumunda ilgili bilgi gönderilecek:"
+msgstr "Hata ya da çökme durumunda aşağıdaki bilgiler gönderilecek:"
 
 #: cozy/ui/widgets/error_reporting.py:24
 msgid "Which type of error occurred"
