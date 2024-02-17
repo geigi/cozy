@@ -241,7 +241,7 @@ msgstr ""
 
 #: cozy/ui/widgets/book_element.py:70
 msgid "Mark as read"
-msgstr "Okundu olarak işaretle"
+msgstr "Okundu imle"
 
 #: cozy/ui/widgets/book_element.py:73
 msgid "Open in file browser"
