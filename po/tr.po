@@ -691,7 +691,7 @@ msgstr "Depolama konumu"
 
 #: data/ui/storage_locations.ui:24
 msgid "Set as default"
-msgstr "Varsayılan olarak ayarla"
+msgstr "Öntanımlı olarak ayarla"
 
 #: data/ui/storage_locations.ui:28
 msgid "Remove"
