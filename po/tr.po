@@ -471,7 +471,7 @@ msgstr "_Kitaplığı Tara"
 
 #: data/ui/headerbar.ui:86
 msgid "_Hide unavailable books"
-msgstr "_Kullanılabilir olmayan kitapları gizle"
+msgstr "Kullanılamayan kitapları _gizle"
 
 #: data/ui/headerbar.ui:92
 msgid "_Preferences"
