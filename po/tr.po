@@ -675,7 +675,7 @@ msgstr "Geçerli bölümdeki konuma git"
 
 #: data/ui/seek_bar.ui:39
 msgid "Position of the current part in seconds"
-msgstr "Geçerli bölümün saniye cinsinden konumu"
+msgstr "Geçerli parçanın saniye cinsinden konumu"
 
 #: data/ui/seek_bar.ui:48
 msgid "Remaining time"
