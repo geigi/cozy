@@ -136,7 +136,7 @@ msgstr ""
 
 #: cozy/ui/db_migration_failed_view.py:15
 msgid "Failed to Update Database"
-msgstr "Veritabanı Güncellenemedi"
+msgstr "Veri Tabanı Güncellenemedi"
 
 #: cozy/ui/db_migration_failed_view.py:22
 msgid "Close Cozy"
