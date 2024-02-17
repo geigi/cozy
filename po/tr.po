@@ -663,7 +663,7 @@ msgstr "Kitap"
 
 #: data/ui/seek_bar.ui:15
 msgid "Elapsed time"
-msgstr "Geçen süre"
+msgstr "Geçen zaman"
 
 #: data/ui/seek_bar.ui:21
 msgid "Elapsed time of current part"
