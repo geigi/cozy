@@ -587,7 +587,7 @@ msgstr "Görünüm"
 
 #: data/ui/preferences.ui:33
 msgid "Dark Mode"
-msgstr "Karanlık Kip"
+msgstr "Koyu Kip"
 
 #: data/ui/preferences.ui:40
 msgid "Tags"
