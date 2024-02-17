@@ -411,9 +411,9 @@ msgid ""
 "never collect personal data, files you import or any information that could "
 "identify you."
 msgstr ""
-"Bu bilgilere katkıda bulunmak isteğe bağlıdır ve tamamen anonimdir. Kişisel "
-"verileri, içe aktardığınız dosyaları veya sizi tanımlayabilecek herhangi bir"
-" bilgiyi asla toplamayacağız. "
+"Bu bilgileri sağlamak isteğe bağlıdır ve tamamen anonimdir. Kişisel "
+"verileri, içe aktardığınız dosyaları ya da sizi tanımlayabilecek herhangi "
+"bir bilgiyi asla toplanmayacak. "
 
 #: data/ui/error_reporting.ui:84
 msgctxt "Error and crash reporting dialog"
