@@ -294,7 +294,7 @@ msgstr "Asztali környezet"
 
 #: cozy/ui/widgets/error_reporting.py:29
 msgid "Media type of files that Cozy couldn't import"
-msgstr "A Cozy által nem importálni nem sikerült fájlok típusa"
+msgstr "A Cozy által nem importálni nem tudott fájlok típusa"
 
 #: cozy/ui/widgets/filter_list_box.py:18
 #: cozy/view_model/library_view_model.py:45
@@ -413,7 +413,7 @@ msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
-"A Cozy-t nyilvánosan fejlesztjük, és a visszajelzésekért felelős kód "
+"A Cozyt nyilvánosan fejlesztjük, és a visszajelzésekért felelős kód "
 "megtekinthető itt: "
 
 #. Translators: Don't touch the markup. Translate the text "Sourcecode on
