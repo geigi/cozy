@@ -595,7 +595,7 @@ msgstr "Etiketler"
 
 #: data/ui/preferences.ui:43
 msgid "Swap Author and Reader"
-msgstr "Yazar ile Okuyanı Yer Değiştir"
+msgstr "Yazar ile Seslendireni Yer Değiştir"
 
 #: data/ui/preferences.ui:44
 msgid "Activate if author and reader are displayed the wrong way"
