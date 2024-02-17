@@ -281,7 +281,7 @@ msgstr "Hata ya da çökme durumunda aşağıdaki bilgiler gönderilecek:"
 
 #: cozy/ui/widgets/error_reporting.py:24
 msgid "Which type of error occurred"
-msgstr "Hangi tip hata meydana geldi"
+msgstr "Hangi tip hata oluştur"
 
 #: cozy/ui/widgets/error_reporting.py:25
 msgid "Line of code where an error occurred"
