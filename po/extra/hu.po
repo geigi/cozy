@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Benedek Dévényi, 2024
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-16 15:04+0100\n"
+"PO-Revision-Date: 2019-09-08 09:39+0000\n"
+"Last-Translator: Benedek Dévényi, 2024\n"
+"Language-Team: Hungarian (https://app.transifex.com/geigi/teams/78138/hu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data/com.github.geigi.cozy.desktop:3
+msgid "Cozy"
+msgstr "Cozy"
+
+#: data/com.github.geigi.cozy.desktop:4
+msgid "Audio Book Player"
+msgstr "Hangoskönyv-lejátszó"
+
+#: data/com.github.geigi.cozy.desktop:5
+msgid "Play and organize your audio book collection"
+msgstr "Hallgasd és rendszerezd hangoskönyvtáradat"
+
+#: data/com.github.geigi.cozy.appdata.xml:15
+msgid "Listen to audio books"
+msgstr "Hallgass hangoskönyveket"
+
+#: data/com.github.geigi.cozy.appdata.xml:17
+msgid "Do you like audio books? Then lets get cozy!"
+msgstr "Szereted a hangoskönyveket? Akkor érezd magad otthonosan a Cozy-val!"
+
+#: data/com.github.geigi.cozy.appdata.xml:18
+msgid "Cozy is a audio book player. Here are some of the features:"
+msgstr "A Cozy egy hangoskönyv-lejátszó. Íme néhány funkciója:"
+
+#: data/com.github.geigi.cozy.appdata.xml:20
+msgid "Import all your audio books into Cozy to browse them comfortably"
+msgstr ""
+"Importáld hangoskönyveidet a Cozyba, hogy kényelmesen böngészhesd őket"
+
+#: data/com.github.geigi.cozy.appdata.xml:21
+msgid ""
+"Listen to your DRM free mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav "
+"audio books"
+msgstr ""
+"Hallgasd kedvenc DRM-mentes hangoskönyveidet mp3, m4b, m4a (aac, ALAC, …), "
+"flac, ogg és wav formátumban"
+
+#: data/com.github.geigi.cozy.appdata.xml:22
+msgid "Remembers your playback position"
+msgstr "Megjegyzi a hallgatott könyveid jelátszási pozícióját"
+
+#: data/com.github.geigi.cozy.appdata.xml:23
+msgid "Sleep timer"
+msgstr "Alvásidőzítő"
+
+#: data/com.github.geigi.cozy.appdata.xml:24
+msgid "Playback speed control for each book individually"
+msgstr "Lejátszási sebesség szabályozása minden könyvhöz külön-külön"
+
+#: data/com.github.geigi.cozy.appdata.xml:25
+msgid "Search your library"
+msgstr "Keresés a könyvtáradban"
+
+#: data/com.github.geigi.cozy.appdata.xml:26
+msgid "Multiple storage location support"
+msgstr "Támogatja több tárolóhely megadását"
+
+#: data/com.github.geigi.cozy.appdata.xml:27
+msgid ""
+"Offline Mode! This allows you to keep an audio book on your internal storage"
+" if you store your audio books on an external or network drive. Perfect to "
+"listen to on the go!"
+msgstr ""
+"Offline mód! Így letöltheted hangoskönyveidet, ha azokat egy külső vagy "
+"hálózati meghajtón tárolod. Tökéletes az útközbeni hallgatáshoz!"
+
+#: data/com.github.geigi.cozy.appdata.xml:28
+msgid "Drag and Drop to import new audio books"
+msgstr "Hangoskönyvek importálása „fogd és vidd” funkcióval"
+
+#: data/com.github.geigi.cozy.appdata.xml:29
+msgid "Sort your audio books by author, reader and name"
+msgstr "Rendszerezd hangoskönyveidet cím, szerző és előadó szerint"
