@@ -451,7 +451,7 @@ msgstr "Seçenekler açılır kutusunu aç"
 
 #: data/ui/headerbar.ui:33
 msgid "Search your library"
-msgstr "Kütüphanede ara"
+msgstr "Kitaplıkta ara"
 
 #: data/ui/headerbar.ui:36
 msgid "Open the search popover"
