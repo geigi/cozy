@@ -448,7 +448,7 @@ msgstr "Keresés a könyvtárban"
 
 #: data/ui/headerbar.ui:36
 msgid "Open the search popover"
-msgstr "Open the search popover"
+msgstr "Keresés megnyitása"
 
 #: data/ui/headerbar.ui:44
 msgid "Display background task progress"
