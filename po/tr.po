@@ -385,7 +385,7 @@ msgstr "Bölümler yükleniyor, lütfen bekleyin..."
 
 #: data/ui/book_element.ui:10
 msgid "Open book overview"
-msgstr "Kitap önizlemesini aç"
+msgstr "Kitap genel görünümünü aç"
 
 #: data/ui/chapter_element.ui:5
 msgid "Play this part"
