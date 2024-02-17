@@ -269,11 +269,11 @@ msgstr "Ayrıntılı hata raporlama"
 
 #: cozy/ui/widgets/error_reporting.py:14 data/ui/error_reporting.ui:162
 msgid "Detailed error reporting with import errors"
-msgstr "İçe aktarma hataları ile detaylı hata raporlama"
+msgstr "İçe aktarma hataları ile ayrıntılı hata raporlama"
 
 #: cozy/ui/widgets/error_reporting.py:18
 msgid "No error or crash reporting."
-msgstr "Hata veya çökme raporu yok."
+msgstr "Hata ya da çökme raporu yok."
 
 #: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:174
 msgid "The following information will be sent in case of an error or crash:"
