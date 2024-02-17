@@ -603,7 +603,7 @@ msgstr "Yazar ve seslendiren yanlış görüntüleniyorsa etkinleştirin"
 
 #: data/ui/preferences.ui:51
 msgid "Playback"
-msgstr "Kayıttan Yürütme"
+msgstr "Oynatma"
 
 #: data/ui/preferences.ui:54
 msgid "Replay"
