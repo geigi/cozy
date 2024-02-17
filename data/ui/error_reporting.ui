@@ -21,7 +21,7 @@
         <property name="spacing">15</property>
         <child>
           <object class="GtkLabel">
-            <property name="label" translatable="1">User feedback</property>
+            <property name="label" translatable="true">User feedback</property>
             <property name="wrap">1</property>
             <style>
               <class name="title-3"/>
@@ -64,7 +64,7 @@
                       <object class="GtkLabel">
                         <property name="halign">start</property>
                         <property name="valign">center</property>
-                        <property name="label" translatable="1" context="Error and crash reporting dialog">You can help improve Cozy by contributing information in case of errors and crashes. </property>
+                        <property name="label" translatable="true" context="Error and crash reporting dialog">You can help improve Cozy by contributing information in case of errors and crashes. </property>
                         <property name="wrap">1</property>
                         <property name="xalign">0</property>
                       </object>
@@ -72,7 +72,7 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="valign">center</property>
-                        <property name="label" translatable="1" context="Error and crash reporting dialog">Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.</property>
+                        <property name="label" translatable="true" context="Error and crash reporting dialog">Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.</property>
                         <property name="wrap">1</property>
                         <property name="xalign">0</property>
                       </object>
@@ -81,8 +81,8 @@
                       <object class="GtkLabel">
                         <property name="valign">center</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="1" context="Error and crash reporting dialog">Cozy is opensource and the user feedback source code can be inspected here: </property>
-                        <property name="wrap">1</property>
+                        <property name="label" translatable="true" context="Error and crash reporting dialog">Cozy is opensource and the user feedback source code can be inspected here: </property>
+                        <property name="wrap">true</property>
                         <property name="xalign">0</property>
                       </object>
                     </child>
@@ -90,7 +90,8 @@
                 </child>
                 <child>
                   <object class="GtkLabel">
-                    <property name="label">&lt;a href=&quot;https://github.com/geigi/cozy/tree/master/cozy/report&quot;&gt;Sourcecode on GitHub&lt;/a&gt;</property>
+                    <!-- Translators: Don't touch the markup. Translate the text "Sourcecode on GitHub" only! -->
+                    <property name="label" translatable="true">&lt;a href=&quot;https://github.com/geigi/cozy/tree/master/cozy/report&quot;&gt;Sourcecode on GitHub&lt;/a&gt;</property>
                     <property name="use-markup">1</property>
                   </object>
                 </child>

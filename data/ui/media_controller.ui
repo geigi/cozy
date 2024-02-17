@@ -210,7 +210,7 @@ audio-volume-medium-symbolic</property>
               <object class="GtkMenuButton" id="timer_button">
                 <property name="focusable">true</property>
                 <property name="receives-default">true</property>
-                <property name="tooltip-text" translatable="true">Sleep timer</property>
+                <property name="tooltip-text" translatable="true">Sleep Timer</property>
                 <child>
                   <object class="GtkImage" id="timer_image">
                     <property name="icon-name">bed-symbolic</property>

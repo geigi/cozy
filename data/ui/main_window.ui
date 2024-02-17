@@ -190,8 +190,9 @@
                                                     <property name="name">no_recent</property>
                                                     <property name="child">
                                                       <object class="AdwStatusPage">
-                                                        <property name="title">It's empty for now</property>
-                                                        <property name="description">Start exploring your library by switching to the Author or Reader view.</property>
+                                                        <property name="icon-name">library-symbolic</property>
+                                                        <property name="title" translatable="true">No recent books yet</property>
+                                                        <property name="description" translatable="true">Explore your library by switching to the Author or Reader view</property>
                                                       </object>
                                                     </property>
                                                   </object>
