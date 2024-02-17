@@ -160,7 +160,7 @@ msgstr "İptal"
 
 #: cozy/ui/delete_book_view.py:22
 msgid "Remove Audiobook"
-msgstr "Sesli Kitabı Sil"
+msgstr "Sesli Kitabı Kaldır"
 
 #: cozy/ui/disk_element.py:22
 msgid "Disc"
