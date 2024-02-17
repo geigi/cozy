@@ -1,0 +1,685 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.geigi.cozy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Benedek Dévényi, 2024
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.geigi.cozy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-16 14:55+0100\n"
+"PO-Revision-Date: 2019-09-08 09:31+0000\n"
+"Last-Translator: Benedek Dévényi, 2024\n"
+"Language-Team: Hungarian (https://app.transifex.com/geigi/teams/78138/hu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cozy/application.py:59
+msgid "Audiobooks"
+msgstr "Hangoskönyvek"
+
+#: cozy/control/offline_cache.py:197
+msgid "Copying"
+msgstr "Másolás"
+
+#: cozy/media/files.py:67
+msgid "Cannot copy: Audiobook directory is read only"
+msgstr "Nem lehet másolni: A hangoskönyv mappa csak olvasható"
+
+#: cozy/media/files.py:69
+msgid "Cannot copy: Disk is full"
+msgstr "Nem lehet másolni: A lemez megtelt"
+
+#: cozy/media/files.py:71 cozy/media/files.py:87
+msgid "Cannot copy: Permission denied"
+msgstr "Nem lehet másolni: Engedély megtagadva"
+
+#: cozy/media/importer.py:121
+msgid "Error while importing new files"
+msgstr "Az új fájlok importálása során hiba történt"
+
+#: cozy/tools.py:92 cozy/tools.py:96
+#, python-brace-format
+msgid "{hours} hour"
+msgid_plural "{hours} hours"
+msgstr[0] "{hours} óra"
+msgstr[1] "{hours} óra"
+
+#: cozy/tools.py:94 cozy/tools.py:98
+#, python-brace-format
+msgid "{minutes} minute"
+msgid_plural "{minutes} minutes"
+msgstr[0] "{minutes} perc"
+msgstr[1] "{minutes} perc"
+
+#: cozy/tools.py:100
+#, python-brace-format
+msgid "{seconds} second"
+msgid_plural "{seconds} seconds"
+msgstr[0] "{seconds} másodperc"
+msgstr[1] "{seconds} másodperc"
+
+#: cozy/tools.py:102
+msgid "finished"
+msgstr "kiolvasva"
+
+#: cozy/tools.py:126
+msgid "never"
+msgstr "soha"
+
+#: cozy/tools.py:128
+msgid "today"
+msgstr "ma"
+
+#: cozy/tools.py:130
+msgid "yesterday"
+msgstr "tegnap"
+
+#: cozy/tools.py:132
+#, python-format
+msgid "%s days ago"
+msgstr "%s napja"
+
+#: cozy/tools.py:134
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] "{weeks} hete"
+msgstr[1] "{weeks} hete"
+
+#: cozy/tools.py:136
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] "{months} hónapja"
+msgstr[1] "{months} hónapja"
+
+#: cozy/tools.py:138
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] "{years} éve"
+msgstr[1] "{years} éve"
+
+#: cozy/ui/book_detail_view.py:299
+msgid "Downloaded"
+msgstr "Letöltve"
+
+#: cozy/ui/book_detail_view.py:302 data/ui/book_detail.ui:116
+msgid "Download"
+msgstr "Letöltés"
+
+#: cozy/ui/db_migration_failed_view.py:6
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able"
+" to startup. A backup of the database was created before the update and has "
+"been restored now. Until this issue is resolved please use version 0.9.5 of "
+"Cozy. You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
+"During an update of the database an error occurred and Cozy will not be able"
+" to startup. A backup of the database was created before the update and has "
+"been restored now. Until this issue is resolved please use version 0.9.5 of "
+"Cozy. You can help resolve this problem by reporting an issue on GitHub."
+
+#: cozy/ui/db_migration_failed_view.py:15
+msgid "Failed to Update Database"
+msgstr "Az adatbázis frissítése nem sikerült"
+
+#: cozy/ui/db_migration_failed_view.py:22
+msgid "Close Cozy"
+msgstr "Cozy bezárása"
+
+#: cozy/ui/db_migration_failed_view.py:23
+msgid "Receive help on GitHub"
+msgstr "Segítség a GitHubon"
+
+#: cozy/ui/delete_book_view.py:13
+msgid "Delete Audiobook?"
+msgstr "Törlöd ezt a hangoskönyvet?"
+
+#: cozy/ui/delete_book_view.py:14
+msgid "The audiobook will be removed from your disk and from Cozy's library."
+msgstr "A hangoskönyv el lesz távolítva a könvtáradból, és a lemezről is."
+
+#: cozy/ui/delete_book_view.py:21 cozy/ui/file_not_found_dialog.py:26
+msgid "Cancel"
+msgstr "Mégse"
+
+#: cozy/ui/delete_book_view.py:22
+msgid "Remove Audiobook"
+msgstr "Hangoskönyv törlése"
+
+#: cozy/ui/disk_element.py:22
+msgid "Disc"
+msgstr "Lemez"
+
+#: cozy/ui/file_not_found_dialog.py:18
+msgid "File not found"
+msgstr "Fájl nem található"
+
+#: cozy/ui/file_not_found_dialog.py:19
+msgid "This file could not be found. Do you want to locate it manually?"
+msgstr "Ez a fájl nem található. Szeretnéd megkeresni?"
+
+#: cozy/ui/file_not_found_dialog.py:27
+msgid "Locate"
+msgstr "Megkeresés"
+
+#: cozy/ui/file_not_found_dialog.py:38
+msgid "Locate Missing File"
+msgstr "Hiányzó fájl keresése"
+
+#: cozy/ui/file_not_found_dialog.py:41
+#, python-brace-format
+msgid "{ext} files"
+msgstr "{ext} fájlok"
+
+#: cozy/ui/file_not_found_dialog.py:44
+msgid "Audio files"
+msgstr "Hangfájlok"
+
+#: cozy/ui/import_failed_dialog.py:8
+msgid "This can have multiple reasons:"
+msgstr "Ennek több oka lehet:"
+
+#: cozy/ui/import_failed_dialog.py:11
+msgid "The audio format is not supported"
+msgstr "A formátum nem támogatott"
+
+#: cozy/ui/import_failed_dialog.py:12
+msgid "The path or filename contains non utf-8 characters"
+msgstr "Az elérési út vagy fájlnév tartalmaz nem UTF-8 karaktereket"
+
+#: cozy/ui/import_failed_dialog.py:13
+msgid "The file(s) are no valid audio files"
+msgstr "A fájl nem érvényes hangfájl"
+
+#: cozy/ui/import_failed_dialog.py:14
+msgid "The file(s) are corrupt"
+msgstr "A fájl sérült"
+
+#: cozy/ui/import_failed_dialog.py:28
+msgid "Some files could not be imported"
+msgstr "Egyes fájlokat nem sikerült importálni"
+
+#: cozy/ui/import_failed_dialog.py:35
+msgid "Ok"
+msgstr "Ok"
+
+#: cozy/ui/main_view.py:198
+msgid "Patreon Supporters"
+msgstr "Patreon támogatók"
+
+#: cozy/ui/main_view.py:202
+msgid "m4b chapter support in mutagen"
+msgstr "m4b fejezetek kivitelezése a Mutagenben"
+
+#: cozy/ui/main_view.py:206
+msgid "Open Source Projects"
+msgstr "Nyílt forráskódú projektek"
+
+#. Translators: Replace "translator-credits" with your names, one name per
+#. line
+#: cozy/ui/main_view.py:211
+msgid "translator-credits"
+msgstr "Dévényi Benedek"
+
+#: cozy/ui/widgets/book_element.py:70
+msgid "Mark as read"
+msgstr "Megjelölés olvasottként"
+
+#: cozy/ui/widgets/book_element.py:73
+msgid "Open in file browser"
+msgstr "Fájl helyének megnyitása"
+
+#: cozy/ui/widgets/book_element.py:76
+msgid "Remove from library"
+msgstr "Eltávolítás a könyvtárból"
+
+#: cozy/ui/widgets/book_row.py:25
+msgid "Play this book"
+msgstr "Lejátszás"
+
+#: cozy/ui/widgets/error_reporting.py:11
+msgid "Disabled"
+msgstr "Kikapcsolva"
+
+#: cozy/ui/widgets/error_reporting.py:12
+msgid "Basic error reporting"
+msgstr "Alap hibajelentés"
+
+#: cozy/ui/widgets/error_reporting.py:13
+msgid "Detailed error reporting"
+msgstr "Részletes hibajelentés"
+
+#: cozy/ui/widgets/error_reporting.py:14 data/ui/error_reporting.ui:161
+msgid "Detailed error reporting with import errors"
+msgstr "Részletes hibajelentés importálási hibákkal"
+
+#: cozy/ui/widgets/error_reporting.py:18
+msgid "No error or crash reporting."
+msgstr "Nincs hiba- vagy összeomlásjelentés."
+
+#: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:173
+msgid "The following information will be sent in case of an error or crash:"
+msgstr ""
+"Hiba vagy összeomlás esetén a következő információk kerülnek beküldésre:"
+
+#: cozy/ui/widgets/error_reporting.py:24
+msgid "Which type of error occurred"
+msgstr "Milyen hiba történt"
+
+#: cozy/ui/widgets/error_reporting.py:25
+msgid "Line of code where an error occurred"
+msgstr "A forráskód azon sorának száma, ahol a hiba történt"
+
+#: cozy/ui/widgets/error_reporting.py:26
+msgid "Cozy's version"
+msgstr "A Cozy verziója"
+
+#: cozy/ui/widgets/error_reporting.py:27
+msgid "Linux distribution"
+msgstr "Linux-disztribúció"
+
+#: cozy/ui/widgets/error_reporting.py:28
+msgid "Desktop environment"
+msgstr "Asztali környezet"
+
+#: cozy/ui/widgets/error_reporting.py:29
+msgid "Media type of files that Cozy couldn't import"
+msgstr "A Cozy által nem importálni nem sikerült fájlok típusa"
+
+#: cozy/ui/widgets/filter_list_box.py:18
+#: cozy/view_model/library_view_model.py:45
+#: cozy/view_model/library_view_model.py:135
+msgid "All"
+msgstr "Mind"
+
+#: cozy/ui/widgets/filter_list_box.py:19
+msgid "Display all books"
+msgstr "Összes könyv megjelenítése"
+
+#: cozy/ui/widgets/search_results.py:13
+#, python-brace-format
+msgid "Jump to {artist_name}"
+msgstr "Ugrás ide: {artist_name}"
+
+#: cozy/ui/widgets/sleep_timer.py:57 data/ui/timer_popover.ui:53
+msgid "min"
+msgstr "perc"
+
+#: cozy/ui/widgets/sleep_timer.py:62
+msgid "Off"
+msgstr "Kikapcsolva"
+
+#: cozy/ui/widgets/storages.py:11
+msgid "Set Audiobooks Directory"
+msgstr "Hangoskönyvmappa megadása"
+
+#: cozy/ui/widgets/storages.py:65 data/ui/storage_locations.ui:18
+msgid "External drive"
+msgstr "Külső meghajtó"
+
+#: cozy/ui/widgets/storages.py:68
+msgid "Internal drive"
+msgstr "Belső meghajtó"
+
+#: cozy/view_model/headerbar_view_model.py:78
+msgid "Refreshing audio book collection"
+msgstr "A hangoskönyvtár frissítése"
+
+#: cozy/view_model/headerbar_view_model.py:87
+#: cozy/view_model/headerbar_view_model.py:103
+msgid "Copying new files…"
+msgstr "Új fájlok másolása…"
+
+#: cozy/view_model/headerbar_view_model.py:94
+msgid "Changing audio book location…"
+msgstr "Hangoskönyvek helyének megváltoztatása…"
+
+#: data/ui/album_element.ui:47
+msgid "Play"
+msgstr "Lejátszás"
+
+#: data/ui/book_detail.ui:149
+msgid "Remaining"
+msgstr "Hátravan"
+
+#: data/ui/book_detail.ui:195
+msgid "Total"
+msgstr "Összesen"
+
+#: data/ui/book_detail.ui:208
+msgid "Last played"
+msgstr "Legutóbb"
+
+#: data/ui/book_detail.ui:221
+msgid "Published"
+msgstr "Published"
+
+#: data/ui/book_detail.ui:246
+msgid "Some or all files of this book cannot be found."
+msgstr "A könyv egyes fájljai nem találhatók."
+
+#: data/ui/book_detail.ui:259
+msgid "unavailable"
+msgstr "Nem elérhető"
+
+#: data/ui/book_detail.ui:363
+msgid "Loading chapters, please wait..."
+msgstr "Fejezetek betöltése…"
+
+#: data/ui/book_element.ui:10
+msgid "Open book overview"
+msgstr "Könyv áttekintésének megnyitása"
+
+#: data/ui/chapter_element.ui:5
+msgid "Play this part"
+msgstr "Ugrás erre a fejezetre"
+
+#: data/ui/error_reporting.ui:24 data/ui/preferences.ui:124
+msgid "User feedback"
+msgstr "Visszajelzés"
+
+#: data/ui/error_reporting.ui:67
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"You can help improve Cozy by contributing information in case of errors and "
+"crashes. "
+msgstr ""
+"Segíthetsz a Cozy javításában azzal, hogy hibák és összeomlások esetén "
+"információkat küldesz be."
+
+#: data/ui/error_reporting.ui:75
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Contributing this information is optional and completely anonymous. We will "
+"never collect personal data, files you import or any information that could "
+"identify you."
+msgstr ""
+"Ezen információk megadása nem kötelező és teljesen anonim. Soha nem gyűjtünk"
+" személyes adatokat, importált fájlokat vagy bármilyen olyan információt, "
+"amely alapján beazonosítható lennél."
+
+#: data/ui/error_reporting.ui:84
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Cozy is opensource and the user feedback source code can be inspected here: "
+msgstr ""
+"A Cozy-t nyilvánosan fejlesztjük, és a visszajelzésekért felelős kód "
+"megtekinthető itt: "
+
+#: data/ui/first_import_button.ui:12
+msgid "Select Folder"
+msgstr "Mappa kiválasztása"
+
+#: data/ui/headerbar.ui:17
+msgid "Toggle Filter Sidebar"
+msgstr "Szűrő megnyitása"
+
+#: data/ui/headerbar.ui:22
+msgid "Options"
+msgstr "Alkalmazásmenü megnyitása"
+
+#: data/ui/headerbar.ui:26
+msgid "Open the options popover"
+msgstr "Open the options popover"
+
+#: data/ui/headerbar.ui:33
+msgid "Search your library"
+msgstr "Keresés a könyvtárban"
+
+#: data/ui/headerbar.ui:36
+msgid "Open the search popover"
+msgstr "Open the search popover"
+
+#: data/ui/headerbar.ui:44
+msgid "Display background task progress"
+msgstr "Háttérfeladatok haladásának megjelenítése"
+
+#: data/ui/headerbar.ui:67
+msgid "Start typing..."
+msgstr "Kezdj gépelni…"
+
+#: data/ui/headerbar.ui:80
+msgid "_Scan Library"
+msgstr "Könyvtár _frissítése"
+
+#: data/ui/headerbar.ui:86
+msgid "_Hide unavailable books"
+msgstr "Nem elérhető könyvek _elrejtése"
+
+#: data/ui/headerbar.ui:92
+msgid "_Preferences"
+msgstr "_Beállítások"
+
+#: data/ui/headerbar.ui:96
+msgid "_About"
+msgstr "A Cozy _névjegye"
+
+#: data/ui/headerbar.ui:102
+msgid "_Quit"
+msgstr "_Kilépés"
+
+#: data/ui/main_window.ui:26
+msgid "Drop audio books here to add them to your library"
+msgstr "Ejts fájlokat ide a könyvtáradhoz való hozzáadáshoz"
+
+#: data/ui/main_window.ui:48
+msgid "Library"
+msgstr "Könyvtár"
+
+#: data/ui/main_window.ui:65
+msgid "Recent"
+msgstr "Korábbi"
+
+#: data/ui/main_window.ui:77 data/ui/search_page.ui:46
+msgid "Author"
+msgstr "Szerző"
+
+#: data/ui/main_window.ui:89
+msgid "List of authors"
+msgstr "Szerzők listája"
+
+#: data/ui/main_window.ui:108 data/ui/search_page.ui:59
+msgid "Reader"
+msgstr "Előadó"
+
+#: data/ui/main_window.ui:120
+msgid "List of readers"
+msgstr "Előadók listája"
+
+#: data/ui/main_window.ui:172
+msgid "List of books"
+msgstr "Könyvek listája"
+
+#: data/ui/media_controller.ui:48
+msgid "Currently playing"
+msgstr "Most szól"
+
+#: data/ui/media_controller.ui:65
+msgid "Title of currently playing book"
+msgstr "A lejátszásban levő könyv címe"
+
+#: data/ui/media_controller.ui:82
+msgid "Title of the currently playing part"
+msgstr "A lejátszásban levő fejezet címe"
+
+#: data/ui/media_controller.ui:111
+msgid "Rewind"
+msgstr "Ugrás vissza"
+
+#: data/ui/media_controller.ui:116
+msgid "Rewind playback"
+msgstr "Lejátszás visszatekerése"
+
+#: data/ui/media_controller.ui:130
+msgid "Start playback"
+msgstr "Jejátszás indítása"
+
+#: data/ui/media_controller.ui:135
+msgid "Start or pause the playback"
+msgstr "Jejátszás indítása vagy szüneteltetése"
+
+#: data/ui/media_controller.ui:148
+msgid "Forward"
+msgstr "Ugrás előre"
+
+#: data/ui/media_controller.ui:153
+msgid "Forward Playback"
+msgstr "Lejátszás előretekerése"
+
+#: data/ui/media_controller.ui:179
+msgid "Volume control"
+msgstr "Hangerő"
+
+#: data/ui/media_controller.ui:202
+msgid "Playback speed"
+msgstr "Jejátszási sebesség"
+
+#: data/ui/media_controller.ui:213
+msgid "Sleep timer"
+msgstr "Alvásidőzítő"
+
+#: data/ui/media_controller.ui:220
+msgid "Open the sleep timer popover"
+msgstr "Az alvásidőzítő megnyitása"
+
+#: data/ui/preferences.ui:27
+msgid "General"
+msgstr "Általános"
+
+#: data/ui/preferences.ui:30
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#: data/ui/preferences.ui:40
+msgid "Tags"
+msgstr "Címkék"
+
+#: data/ui/preferences.ui:44
+msgid "Activate if author and reader are displayed the wrong way"
+msgstr "Aktiváld, ha a szerző és az olvasó fordítva jelennek meg"
+
+#: data/ui/preferences.ui:51
+msgid "Playback"
+msgstr "Lejátszás"
+
+#: data/ui/preferences.ui:55
+msgid "Rewind 30 seconds of the current book when starting Cozy"
+msgstr "Visszatekerés 30 másodperccel a Cozy indításakor"
+
+#: data/ui/preferences.ui:80
+msgid "Sleep Timer"
+msgstr "Alvásidőzítő"
+
+#: data/ui/preferences.ui:104
+msgid "Storage"
+msgstr "Tárhely"
+
+#: data/ui/preferences.ui:107
+msgid "Artwork"
+msgstr "Borítókép"
+
+#: data/ui/preferences.ui:111
+msgid "Always use images (cover.jpg, *.png, …) when available"
+msgstr ""
+"Mindig használjon borítóképeket (cover.jpg, *.png, ...), ha rendelkezésre "
+"állnak"
+
+#: data/ui/preferences.ui:121
+msgid "Feedback"
+msgstr "Visszajelzés"
+
+#: data/ui/search_page.ui:9
+msgid "Search in your library"
+msgstr "Keresés a könyvtárban"
+
+#: data/ui/search_page.ui:15
+msgid "No results found"
+msgstr "Nincs eredmény"
+
+#: data/ui/search_page.ui:33
+msgid "Book"
+msgstr "Könyv"
+
+#: data/ui/seek_bar.ui:15
+msgid "Elapsed time"
+msgstr "Eltelt idő"
+
+#: data/ui/seek_bar.ui:21
+msgid "Elapsed time of current part"
+msgstr "A jelenlegi fejezet eltelt ideje"
+
+#: data/ui/seek_bar.ui:32
+msgid "Jump to position in current chapter"
+msgstr "Ugrás a jelenlegi fejezetben"
+
+#: data/ui/seek_bar.ui:39
+msgid "Position of the current part in seconds"
+msgstr "Az jelenlegi fejezet pozíciója másodpercben"
+
+#: data/ui/seek_bar.ui:48
+msgid "Remaining time"
+msgstr "Hátralevő idő"
+
+#: data/ui/seek_bar.ui:53
+msgid "Remaining time of current part"
+msgstr "A jelenlegi fejezetből hátralevő idő"
+
+#: data/ui/storage_locations.ui:5
+msgid "Storage locations"
+msgstr "Tárhelyek"
+
+#: data/ui/storage_locations.ui:24
+msgid "Set as default"
+msgstr "Beállítás alapértelmezettként"
+
+#: data/ui/storage_locations.ui:28
+msgid "Remove"
+msgstr "Eltávolítás"
+
+#: data/ui/timer_popover.ui:30
+msgid "Timer duration"
+msgstr "Az időzítő hossza"
+
+#: data/ui/timer_popover.ui:40
+msgid "Set the sleep timer duration in minutes"
+msgstr "Az alvásidőzítő időtartamának beállítása percben"
+
+#: data/ui/timer_popover.ui:86
+msgid "Stop after current chapter"
+msgstr "Megállás az jelenlegi fejezet után"
+
+#: data/ui/timer_popover.ui:107
+msgid "Enable system power control"
+msgstr "A rendszer kikapcsolása"
+
+#: data/ui/timer_popover.ui:125
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+"A lejátszás végén végrehejtandó művelet.\n"
+"a „leállítás” megkísérli kikapcsolni a rendszert\n"
+"a „felfüggesztés” megkísérli alvó állapotba tenni a rendszert."
+
+#: data/ui/timer_popover.ui:129
+msgid "System power action to perform"
+msgstr "Kikapcsolási művelet"
+
+#: data/ui/timer_popover.ui:137
+msgid "suspend"
+msgstr "felfüggesztés"
+
+#: data/ui/timer_popover.ui:143
+msgid "shutdown"
+msgstr "leállítás"
