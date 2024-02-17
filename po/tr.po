@@ -599,7 +599,7 @@ msgstr "Yazar ile Seslendireni Yer Değiştir"
 
 #: data/ui/preferences.ui:44
 msgid "Activate if author and reader are displayed the wrong way"
-msgstr "Yazar ve seslendiren yanlış şekilde görüntüleniyorsa etkinleştirin"
+msgstr "Yazar ve seslendiren yanlış görüntüleniyorsa etkinleştirin"
 
 #: data/ui/preferences.ui:51
 msgid "Playback"
