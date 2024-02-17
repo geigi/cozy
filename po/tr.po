@@ -401,8 +401,8 @@ msgid ""
 "You can help improve Cozy by contributing information in case of errors and "
 "crashes. "
 msgstr ""
-"Hatalar ve çökmeler durumunda bilgi sağlayarak Cozy'nin geliştirilmesine "
-"yardımcı olabilirsiniz. "
+"Hata ve çökme durumunda bilgi sağlayarak Cozy'nin geliştirilmesine yardımcı "
+"olabilirsiniz. "
 
 #: data/ui/error_reporting.ui:75
 msgctxt "Error and crash reporting dialog"
