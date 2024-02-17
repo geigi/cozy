@@ -219,7 +219,7 @@ msgstr "Patreon támogatók"
 
 #: cozy/ui/main_view.py:202
 msgid "m4b chapter support in mutagen"
-msgstr "m4b fejezetek kivitelezése a Mutagenben"
+msgstr "m4b fejezetek kivitelezése a Mutagenben:"
 
 #: cozy/ui/main_view.py:206
 msgid "Open Source Projects"
