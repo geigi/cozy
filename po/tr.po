@@ -285,7 +285,7 @@ msgstr "Hangi tip hata oluştur"
 
 #: cozy/ui/widgets/error_reporting.py:25
 msgid "Line of code where an error occurred"
-msgstr "Hata meydana gelen yerdeki bir satır kod"
+msgstr "Hatanın oluştuğu kod satırı"
 
 #: cozy/ui/widgets/error_reporting.py:26
 msgid "Cozy's version"
