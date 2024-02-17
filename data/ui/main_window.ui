@@ -23,7 +23,7 @@
             <child>
               <object class="AdwStatusPage">
                 <property name="icon-name">library-symbolic</property>
-                <property name="title" translatable="true">Drop audio books here to add them to your library</property>
+                <property name="title" translatable="true">Drop Audio Books Here to Add Them to Your Library</property>
                 <style>
                   <class name="drag-overlay-status-page"/>
                 </style>
@@ -191,7 +191,7 @@
                                                     <property name="child">
                                                       <object class="AdwStatusPage">
                                                         <property name="icon-name">library-symbolic</property>
-                                                        <property name="title" translatable="true">No recent books yet</property>
+                                                        <property name="title" translatable="true">No Recent Books Yet</property>
                                                         <property name="description" translatable="true">Explore your library by switching to the Author or Reader view</property>
                                                       </object>
                                                     </property>
@@ -274,7 +274,7 @@
                           <object class="AdwStatusPage" id="welcome_status_page">
                             <property name="icon-name">com.github.geigi.cozy</property>
                             <property name="title">Let's get cozy</property>
-                            <property name="description">Select a folder, or drag audiobooks here to add them to your library</property>
+                            <property name="description">Select a Folder, or Drag Audiobooks Here to Add Them to Your Library</property>
                           </object>
                         </property>
                       </object>

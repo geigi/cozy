@@ -40,7 +40,7 @@
             <property name="title" translatable="true">Tags</property>
             <child>
               <object class="AdwSwitchRow" id="swap_author_reader_switch">
-                <property name="title" translatable="true">Swap author and reader</property>
+                <property name="title" translatable="true">Swap Author and Reader</property>
                 <property name="subtitle" translatable="true">Activate if author and reader are displayed the wrong way</property>
               </object>
             </child>
@@ -85,7 +85,7 @@
                 <property name="show-enable-switch">true</property>
                 <child>
                   <object class="AdwSpinRow">
-                    <property name="title" translatable="true">Fadeout duration</property>
+                    <property name="title" translatable="true">Fadeout Duration</property>
                     <property name="focusable">true</property>
                     <property name="adjustment">fadeout_duration_adjustment</property>
                     <property name="snap-to-ticks">true</property>
@@ -107,7 +107,7 @@
             <property name="title" translatable="true">Artwork</property>
             <child>
               <object class="AdwSwitchRow" id="artwork_prefer_external_switch">
-                <property name="title" translatable="true">Prefer external images over embedded cover</property>
+                <property name="title" translatable="true">Prefer External Images Over Embedded Cover</property>
                 <property name="subtitle" translatable="true">Always use images (cover.jpg, *.png, …) when available</property>
               </object>
             </child>
