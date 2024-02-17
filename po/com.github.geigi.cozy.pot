@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-16 14:55+0100\n"
+"POT-Creation-Date: 2024-02-17 20:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -251,7 +251,7 @@ msgstr ""
 msgid "Detailed error reporting"
 msgstr ""
 
-#: cozy/ui/widgets/error_reporting.py:14 data/ui/error_reporting.ui:161
+#: cozy/ui/widgets/error_reporting.py:14 data/ui/error_reporting.ui:162
 msgid "Detailed error reporting with import errors"
 msgstr ""
 
@@ -259,7 +259,7 @@ msgstr ""
 msgid "No error or crash reporting."
 msgstr ""
 
-#: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:173
+#: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:174
 msgid "The following information will be sent in case of an error or crash:"
 msgstr ""
 
@@ -400,6 +400,13 @@ msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
 
+#. Translators: Don't touch the markup. Translate the text "Sourcecode on GitHub" only!
+#: data/ui/error_reporting.ui:94
+msgid ""
+"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Sourcecode "
+"on GitHub</a>"
+msgstr ""
+
 #: data/ui/first_import_button.ui:12
 msgid "Select Folder"
 msgstr ""
@@ -445,7 +452,7 @@ msgid "_Preferences"
 msgstr ""
 
 #: data/ui/headerbar.ui:96
-msgid "_About"
+msgid "_About Cozy"
 msgstr ""
 
 #: data/ui/headerbar.ui:102
@@ -453,7 +460,7 @@ msgid "_Quit"
 msgstr ""
 
 #: data/ui/main_window.ui:26
-msgid "Drop audio books here to add them to your library"
+msgid "Drop Audio Books Here to Add Them to Your Library"
 msgstr ""
 
 #: data/ui/main_window.ui:48
@@ -482,6 +489,14 @@ msgstr ""
 
 #: data/ui/main_window.ui:172
 msgid "List of books"
+msgstr ""
+
+#: data/ui/main_window.ui:194
+msgid "No Recent Books Yet"
+msgstr ""
+
+#: data/ui/main_window.ui:195
+msgid "Explore your library by switching to the Author or Reader view"
 msgstr ""
 
 #: data/ui/media_controller.ui:48
@@ -528,8 +543,8 @@ msgstr ""
 msgid "Playback speed"
 msgstr ""
 
-#: data/ui/media_controller.ui:213
-msgid "Sleep timer"
+#: data/ui/media_controller.ui:213 data/ui/preferences.ui:80
+msgid "Sleep Timer"
 msgstr ""
 
 #: data/ui/media_controller.ui:220
@@ -544,8 +559,16 @@ msgstr ""
 msgid "Appearance"
 msgstr ""
 
+#: data/ui/preferences.ui:33
+msgid "Dark Mode"
+msgstr ""
+
 #: data/ui/preferences.ui:40
 msgid "Tags"
+msgstr ""
+
+#: data/ui/preferences.ui:43
+msgid "Swap Author and Reader"
 msgstr ""
 
 #: data/ui/preferences.ui:44
@@ -556,12 +579,28 @@ msgstr ""
 msgid "Playback"
 msgstr ""
 
+#: data/ui/preferences.ui:54
+msgid "Replay"
+msgstr ""
+
 #: data/ui/preferences.ui:55
 msgid "Rewind 30 seconds of the current book when starting Cozy"
 msgstr ""
 
-#: data/ui/preferences.ui:80
-msgid "Sleep Timer"
+#: data/ui/preferences.ui:60
+msgid "Rewind Duration"
+msgstr ""
+
+#: data/ui/preferences.ui:69
+msgid "Forward Duration"
+msgstr ""
+
+#: data/ui/preferences.ui:83
+msgid "Fadeout"
+msgstr ""
+
+#: data/ui/preferences.ui:88
+msgid "Fadeout Duration"
 msgstr ""
 
 #: data/ui/preferences.ui:104
@@ -570,6 +609,10 @@ msgstr ""
 
 #: data/ui/preferences.ui:107
 msgid "Artwork"
+msgstr ""
+
+#: data/ui/preferences.ui:110
+msgid "Prefer External Images Over Embedded Cover"
 msgstr ""
 
 #: data/ui/preferences.ui:111

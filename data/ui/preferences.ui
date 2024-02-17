@@ -30,7 +30,7 @@
             <property name="title" translatable="true">Appearance</property>
             <child>
               <object class="AdwSwitchRow" id="dark_mode_switch">
-                <property name="title">Dark Mode</property>
+                <property name="title" translatable="true">Dark Mode</property>
               </object>
             </child>
           </object>
@@ -40,7 +40,7 @@
             <property name="title" translatable="true">Tags</property>
             <child>
               <object class="AdwSwitchRow" id="swap_author_reader_switch">
-                <property name="title">Swap author and reader</property>
+                <property name="title" translatable="true">Swap Author and Reader</property>
                 <property name="subtitle" translatable="true">Activate if author and reader are displayed the wrong way</property>
               </object>
             </child>
@@ -51,13 +51,13 @@
             <property name="title" translatable="true">Playback</property>
             <child>
               <object class="AdwSwitchRow"  id="replay_switch">
-                <property name="title">Replay</property>
+                <property name="title" translatable="true">Replay</property>
                 <property name="subtitle" translatable="true">Rewind 30 seconds of the current book when starting Cozy</property>
               </object>
             </child>
             <child>
               <object class="AdwSpinRow" id="rewind_duration_spin_button">
-                <property name="title">Rewind Duration</property>
+                <property name="title" translatable="true">Rewind Duration</property>
                 <property name="focusable">true</property>
                 <property name="adjustment">rewind_duration_adjustment</property>
                 <property name="snap-to-ticks">true</property>
@@ -66,7 +66,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="forward_duration_spin_button">
-                <property name="title">Forward Duration</property>
+                <property name="title" translatable="true">Forward Duration</property>
                 <property name="focusable">true</property>
                 <property name="adjustment">forward_duration_adjustment</property>
                 <property name="snap-to-ticks">true</property>
@@ -80,12 +80,12 @@
             <property name="title" translatable="true">Sleep Timer</property>
             <child>
               <object class="AdwExpanderRow" id="sleep_timer_fadeout_switch">
-                <property name="title">Fadeout</property>
+                <property name="title" translatable="true">Fadeout</property>
                 <property name="expanded">true</property>
                 <property name="show-enable-switch">true</property>
                 <child>
                   <object class="AdwSpinRow">
-                    <property name="title">Fadeout duration</property>
+                    <property name="title" translatable="true">Fadeout Duration</property>
                     <property name="focusable">true</property>
                     <property name="adjustment">fadeout_duration_adjustment</property>
                     <property name="snap-to-ticks">true</property>
@@ -107,7 +107,7 @@
             <property name="title" translatable="true">Artwork</property>
             <child>
               <object class="AdwSwitchRow" id="artwork_prefer_external_switch">
-                <property name="title">Prefer external images over embedded cover</property>
+                <property name="title" translatable="true">Prefer External Images Over Embedded Cover</property>
                 <property name="subtitle" translatable="true">Always use images (cover.jpg, *.png, …) when available</property>
               </object>
             </child>
