@@ -535,7 +535,7 @@ msgstr "Şu anda oynatılan kitabın başlığı"
 
 #: data/ui/media_controller.ui:82
 msgid "Title of the currently playing part"
-msgstr "Şuan oynatılan bölümün başlığı"
+msgstr "Şu anda oynatılan bölümün başlığı"
 
 #: data/ui/media_controller.ui:111
 msgid "Rewind"
