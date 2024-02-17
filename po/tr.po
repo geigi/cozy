@@ -539,7 +539,7 @@ msgstr "Şu anda oynatılan bölümün başlığı"
 
 #: data/ui/media_controller.ui:111
 msgid "Rewind"
-msgstr "Geri"
+msgstr "Geri Sar"
 
 #: data/ui/media_controller.ui:116
 msgid "Rewind playback"
