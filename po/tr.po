@@ -420,7 +420,7 @@ msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
-"Cozy açık kaynaklıdır ve kullanıcı geri bildirim kaynak kodu buradan "
+"Cozy açık kaynak kodludur ve kullanıcı geri bildirim kaynak kodu şuradan "
 "incelenebilir: "
 
 #. Translators: Don't touch the markup. Translate the text "Sourcecode on
