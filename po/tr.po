@@ -152,7 +152,7 @@ msgstr "Sesli Kitap Silinsin Mi?"
 
 #: cozy/ui/delete_book_view.py:14
 msgid "The audiobook will be removed from your disk and from Cozy's library."
-msgstr "Bu sesli kitap sabit diskinden ve Cozy kütüphanesinden kaldırılacak."
+msgstr "Bu sesli kitap sabit diskinden ve Cozy kitaplığından kaldırılacak."
 
 #: cozy/ui/delete_book_view.py:21 cozy/ui/file_not_found_dialog.py:26
 msgid "Cancel"
@@ -249,7 +249,7 @@ msgstr "Dosya yöneticisinde aç"
 
 #: cozy/ui/widgets/book_element.py:76
 msgid "Remove from library"
-msgstr "Kütüphaneden kaldır"
+msgstr "Kitaplıktan kaldır"
 
 #: cozy/ui/widgets/book_row.py:25
 msgid "Play this book"
