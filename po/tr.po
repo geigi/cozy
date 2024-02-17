@@ -559,7 +559,7 @@ msgstr "İleri"
 
 #: data/ui/media_controller.ui:153
 msgid "Forward Playback"
-msgstr "İleriye Sar"
+msgstr "Oynatmayı İleri Sar"
 
 #: data/ui/media_controller.ui:179
 msgid "Volume control"
