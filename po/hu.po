@@ -423,8 +423,8 @@ msgid ""
 "<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Sourcecode"
 " on GitHub</a>"
 msgstr ""
-"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Sourcecode"
-" on GitHub</a>"
+"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Forráskód "
+"a GitHubon</a>"
 
 #: data/ui/first_import_button.ui:12
 msgid "Select Folder"
