@@ -257,7 +257,7 @@ msgstr "Bu kitabı oynat"
 
 #: cozy/ui/widgets/error_reporting.py:11
 msgid "Disabled"
-msgstr "Engelli"
+msgstr "Devre dışı"
 
 #: cozy/ui/widgets/error_reporting.py:12
 msgid "Basic error reporting"
