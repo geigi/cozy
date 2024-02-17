@@ -467,7 +467,7 @@ msgstr "Yazmaya başlayın..."
 
 #: data/ui/headerbar.ui:80
 msgid "_Scan Library"
-msgstr "_Kütüphaneyi Tara"
+msgstr "_Kitaplığı Tara"
 
 #: data/ui/headerbar.ui:86
 msgid "_Hide unavailable books"
