@@ -543,7 +543,7 @@ msgstr "Geri Sar"
 
 #: data/ui/media_controller.ui:116
 msgid "Rewind playback"
-msgstr "Geriye Sar"
+msgstr "Oynatmayı geri sar"
 
 #: data/ui/media_controller.ui:130
 msgid "Start playback"
