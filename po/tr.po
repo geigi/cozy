@@ -316,7 +316,7 @@ msgstr "Tüm kitapları göster"
 #: cozy/ui/widgets/search_results.py:13
 #, python-brace-format
 msgid "Jump to {artist_name}"
-msgstr "{artist_name} zıpla"
+msgstr "{artist_name} git"
 
 #: cozy/ui/widgets/sleep_timer.py:57 data/ui/timer_popover.ui:53
 msgid "min"
