@@ -261,7 +261,7 @@ msgstr "Devre dışı"
 
 #: cozy/ui/widgets/error_reporting.py:12
 msgid "Basic error reporting"
-msgstr "Temel Hata Raporlama"
+msgstr "Temel hata raporlama"
 
 #: cozy/ui/widgets/error_reporting.py:13
 msgid "Detailed error reporting"
