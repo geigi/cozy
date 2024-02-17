@@ -667,7 +667,7 @@ msgstr "Geçen zaman"
 
 #: data/ui/seek_bar.ui:21
 msgid "Elapsed time of current part"
-msgstr "Geçerli bölümün geçen süresi"
+msgstr "Geçerli bölümün geçen zamanı"
 
 #: data/ui/seek_bar.ui:32
 msgid "Jump to position in current chapter"
@@ -679,7 +679,7 @@ msgstr "Geçerli parçanın saniye cinsinden konumu"
 
 #: data/ui/seek_bar.ui:48
 msgid "Remaining time"
-msgstr "Kalan süre"
+msgstr "Kalan zaman"
 
 #: data/ui/seek_bar.ui:53
 msgid "Remaining time of current part"
