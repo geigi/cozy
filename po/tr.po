@@ -683,7 +683,7 @@ msgstr "Kalan süre"
 
 #: data/ui/seek_bar.ui:53
 msgid "Remaining time of current part"
-msgstr "Geçerli bölümün kalan süresi"
+msgstr "Geçerli parçanın kalan süresi"
 
 #: data/ui/storage_locations.ui:5
 msgid "Storage locations"
