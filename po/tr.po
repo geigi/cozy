@@ -551,7 +551,7 @@ msgstr "Oynatmayı başlat"
 
 #: data/ui/media_controller.ui:135
 msgid "Start or pause the playback"
-msgstr "Oynatmayı başlat veya durdur"
+msgstr "Oynatmayı başlat ya da durdur"
 
 #: data/ui/media_controller.ui:148
 msgid "Forward"
