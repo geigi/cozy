@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-16 14:55+0100\n"
+"POT-Creation-Date: 2024-02-17 20:33+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Yahor Haurylenka, 2024\n"
 "Language-Team: Belarusian (Belarus) (https://app.transifex.com/geigi/teams/78138/be_BY/)\n"
@@ -274,7 +274,7 @@ msgstr "Справаздача аб асноўных памылках"
 msgid "Detailed error reporting"
 msgstr "Падрабязная справаздача аб памылках"
 
-#: cozy/ui/widgets/error_reporting.py:14 data/ui/error_reporting.ui:161
+#: cozy/ui/widgets/error_reporting.py:14 data/ui/error_reporting.ui:162
 msgid "Detailed error reporting with import errors"
 msgstr "Падрабязная справаздача аб памылках уключая памылкі імпарту"
 
@@ -282,7 +282,7 @@ msgstr "Падрабязная справаздача аб памылках ук
 msgid "No error or crash reporting."
 msgstr "Не рабіць справаздачы аб памылках і збоях."
 
-#: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:173
+#: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:174
 msgid "The following information will be sent in case of an error or crash:"
 msgstr "У выпадку памылкі або збою будзе адпраўлена наступная інфармацыя:"
 
@@ -430,6 +430,16 @@ msgstr ""
 "Cozy з'яўляецца праграмай з адкрытым зыходным кодам, а водгукі "
 "карыстальнікаў можна знайсці тут:"
 
+#. Translators: Don't touch the markup. Translate the text "Sourcecode on
+#. GitHub" only!
+#: data/ui/error_reporting.ui:94
+msgid ""
+"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Sourcecode"
+" on GitHub</a>"
+msgstr ""
+"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Зыходны "
+"код на GitHub</a>"
+
 #: data/ui/first_import_button.ui:12
 msgid "Select Folder"
 msgstr "Выберыце папку"
@@ -475,7 +485,7 @@ msgid "_Preferences"
 msgstr "_Параметры"
 
 #: data/ui/headerbar.ui:96
-msgid "_About"
+msgid "_About Cozy"
 msgstr "_Аб праграме"
 
 #: data/ui/headerbar.ui:102
@@ -483,7 +493,7 @@ msgid "_Quit"
 msgstr "_Выйсці"
 
 #: data/ui/main_window.ui:26
-msgid "Drop audio books here to add them to your library"
+msgid "Drop Audio Books Here to Add Them to Your Library"
 msgstr "Перацягніце сюды аўдыякнігі, каб дадаць іх у сваю бібліятэку"
 
 #: data/ui/main_window.ui:48
@@ -513,6 +523,16 @@ msgstr "Спіс дыктараў"
 #: data/ui/main_window.ui:172
 msgid "List of books"
 msgstr "Спіс кніг"
+
+#: data/ui/main_window.ui:194
+msgid "No Recent Books Yet"
+msgstr "Нядаўніх кніг пакуль няма"
+
+#: data/ui/main_window.ui:195
+msgid "Explore your library by switching to the Author or Reader view"
+msgstr ""
+"Пачніце вывучаць сваю бібліятэку, пераключыўшыся на прагляд \"Аўтар\" або "
+"\"Дыктар\""
 
 #: data/ui/media_controller.ui:48
 msgid "Currently playing"
@@ -558,8 +578,8 @@ msgstr "Рэгулятар гучнасці"
 msgid "Playback speed"
 msgstr "Хуткасць прайгравання"
 
-#: data/ui/media_controller.ui:213
-msgid "Sleep timer"
+#: data/ui/media_controller.ui:213 data/ui/preferences.ui:80
+msgid "Sleep Timer"
 msgstr "Таймер сну"
 
 #: data/ui/media_controller.ui:220
@@ -574,9 +594,17 @@ msgstr "Агульныя"
 msgid "Appearance"
 msgstr "Знешні выгляд"
 
+#: data/ui/preferences.ui:33
+msgid "Dark Mode"
+msgstr "Цёмны рэжым"
+
 #: data/ui/preferences.ui:40
 msgid "Tags"
 msgstr "Цэтлікі"
+
+#: data/ui/preferences.ui:43
+msgid "Swap Author and Reader"
+msgstr "Памяняйце месцамі аўтара і дыктара"
 
 #: data/ui/preferences.ui:44
 msgid "Activate if author and reader are displayed the wrong way"
@@ -586,13 +614,29 @@ msgstr "Уключыце, калі аўтар і дыктар адлюстроў
 msgid "Playback"
 msgstr "Прайграванне"
 
+#: data/ui/preferences.ui:54
+msgid "Replay"
+msgstr "Паўтор"
+
 #: data/ui/preferences.ui:55
 msgid "Rewind 30 seconds of the current book when starting Cozy"
 msgstr "Пераматаць бягучую кнігу на 30 секунд назад пры запуску Cozy"
 
-#: data/ui/preferences.ui:80
-msgid "Sleep Timer"
-msgstr "Таймер сну"
+#: data/ui/preferences.ui:60
+msgid "Rewind Duration"
+msgstr "Працягласць перамоткі"
+
+#: data/ui/preferences.ui:69
+msgid "Forward Duration"
+msgstr "Працягласць перамоткі"
+
+#: data/ui/preferences.ui:83
+msgid "Fadeout"
+msgstr "Згасанне"
+
+#: data/ui/preferences.ui:88
+msgid "Fadeout Duration"
+msgstr "Працягласць згасання"
 
 #: data/ui/preferences.ui:104
 msgid "Storage"
@@ -601,6 +645,10 @@ msgstr "Сховішча"
 #: data/ui/preferences.ui:107
 msgid "Artwork"
 msgstr "Твор"
+
+#: data/ui/preferences.ui:110
+msgid "Prefer External Images Over Embedded Cover"
+msgstr "Аддаваць перавагу знешнім выявам перад убудаванай вокладкай"
 
 #: data/ui/preferences.ui:111
 msgid "Always use images (cover.jpg, *.png, …) when available"
