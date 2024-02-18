@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-16 14:55+0100\n"
+"POT-Creation-Date: 2024-02-17 20:33+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
 "Last-Translator: Åke Engelbrektson, 2024\n"
 "Language-Team: Swedish (https://app.transifex.com/geigi/teams/78138/sv/)\n"
@@ -260,7 +260,7 @@ msgstr "Grundläggande felrapportering"
 msgid "Detailed error reporting"
 msgstr "Detaljerad felrapportering"
 
-#: cozy/ui/widgets/error_reporting.py:14 data/ui/error_reporting.ui:161
+#: cozy/ui/widgets/error_reporting.py:14 data/ui/error_reporting.ui:162
 msgid "Detailed error reporting with import errors"
 msgstr "Detaljerad felrapportering med importfel"
 
@@ -268,7 +268,7 @@ msgstr "Detaljerad felrapportering med importfel"
 msgid "No error or crash reporting."
 msgstr "Ingen fel eller kraschrapportering."
 
-#: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:173
+#: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:174
 msgid "The following information will be sent in case of an error or crash:"
 msgstr ""
 "Följande information kommer att skickas vid eventuellt fel eller krasch:"
@@ -415,6 +415,16 @@ msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr "Cozy är öppen källkod och återkopplingskoden kan inspekteras här:"
 
+#. Translators: Don't touch the markup. Translate the text "Sourcecode on
+#. GitHub" only!
+#: data/ui/error_reporting.ui:94
+msgid ""
+"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Sourcecode"
+" on GitHub</a>"
+msgstr ""
+"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Källkod på"
+" GitHub</a>"
+
 #: data/ui/first_import_button.ui:12
 msgid "Select Folder"
 msgstr "Välj mapp"
@@ -460,16 +470,16 @@ msgid "_Preferences"
 msgstr "_Inställningar"
 
 #: data/ui/headerbar.ui:96
-msgid "_About"
-msgstr "_Om"
+msgid "_About Cozy"
+msgstr "_Om Cosy"
 
 #: data/ui/headerbar.ui:102
 msgid "_Quit"
 msgstr "A_vsluta"
 
 #: data/ui/main_window.ui:26
-msgid "Drop audio books here to add them to your library"
-msgstr "Släpp ljudböcker här för att lägga till dem i ditt bibliotek"
+msgid "Drop Audio Books Here to Add Them to Your Library"
+msgstr "Släpp ljudböcker här, för att lägga till dem i ditt bibliotek."
 
 #: data/ui/main_window.ui:48
 msgid "Library"
@@ -498,6 +508,14 @@ msgstr "Lista över uppläsare"
 #: data/ui/main_window.ui:172
 msgid "List of books"
 msgstr "Lista över böcker"
+
+#: data/ui/main_window.ui:194
+msgid "No Recent Books Yet"
+msgstr "Inga tidigare böcker ännu"
+
+#: data/ui/main_window.ui:195
+msgid "Explore your library by switching to the Author or Reader view"
+msgstr "Utforska ditt bibliotek genom att växla till författar- eller läsvy."
 
 #: data/ui/media_controller.ui:48
 msgid "Currently playing"
@@ -543,8 +561,8 @@ msgstr "Volymkontroll"
 msgid "Playback speed"
 msgstr "Uppspelningshastighet"
 
-#: data/ui/media_controller.ui:213
-msgid "Sleep timer"
+#: data/ui/media_controller.ui:213 data/ui/preferences.ui:80
+msgid "Sleep Timer"
 msgstr "Insomningsur"
 
 #: data/ui/media_controller.ui:220
@@ -559,9 +577,17 @@ msgstr "Allmänt"
 msgid "Appearance"
 msgstr "Utseende"
 
+#: data/ui/preferences.ui:33
+msgid "Dark Mode"
+msgstr "Mörk läge"
+
 #: data/ui/preferences.ui:40
 msgid "Tags"
 msgstr "Taggar"
+
+#: data/ui/preferences.ui:43
+msgid "Swap Author and Reader"
+msgstr "Växla författare och uppläsare"
 
 #: data/ui/preferences.ui:44
 msgid "Activate if author and reader are displayed the wrong way"
@@ -571,13 +597,29 @@ msgstr "Aktivera om författare och uppläsare visas fel"
 msgid "Playback"
 msgstr "Uppspelning"
 
+#: data/ui/preferences.ui:54
+msgid "Replay"
+msgstr "Återuppspela"
+
 #: data/ui/preferences.ui:55
 msgid "Rewind 30 seconds of the current book when starting Cozy"
 msgstr "Spola tillbaka 30 sekunder i aktuell bok när Cosy startas"
 
-#: data/ui/preferences.ui:80
-msgid "Sleep Timer"
-msgstr "Insomningsur"
+#: data/ui/preferences.ui:60
+msgid "Rewind Duration"
+msgstr "Varaktighet för bakåtspolning"
+
+#: data/ui/preferences.ui:69
+msgid "Forward Duration"
+msgstr "Varaktighet för framspolning"
+
+#: data/ui/preferences.ui:83
+msgid "Fadeout"
+msgstr "Tona ut"
+
+#: data/ui/preferences.ui:88
+msgid "Fadeout Duration"
+msgstr "Varaktighet för uttoning"
 
 #: data/ui/preferences.ui:104
 msgid "Storage"
@@ -586,6 +628,10 @@ msgstr "Lagring"
 #: data/ui/preferences.ui:107
 msgid "Artwork"
 msgstr "Omslag"
+
+#: data/ui/preferences.ui:110
+msgid "Prefer External Images Over Embedded Cover"
+msgstr "Föredra externa bilder framför inbäddade"
 
 #: data/ui/preferences.ui:111
 msgid "Always use images (cover.jpg, *.png, …) when available"
