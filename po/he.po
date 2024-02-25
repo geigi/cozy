@@ -5,50 +5,46 @@
 # 
 # Translators:
 # איתמר גרינברג, 2022
-# Yaron Shahrabani <sh.yaron@gmail.com>, 2022
+# Yaron Shahrabani <sh.yaron@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-04 16:30+0100\n"
+"POT-Creation-Date: 2024-02-17 20:33+0100\n"
 "PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>, 2022\n"
-"Language-Team: Hebrew (https://www.transifex.com/geigi/teams/78138/he/)\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>, 2024\n"
+"Language-Team: Hebrew (https://app.transifex.com/geigi/teams/78138/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: he\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
 
-#: cozy/application.py:101
+#: cozy/application.py:59
 msgid "Audiobooks"
 msgstr "ספרים מוקלטים"
 
-#: cozy/control/offline_cache.py:200
+#: cozy/control/offline_cache.py:197
 msgid "Copying"
 msgstr "העתקה"
 
-#: cozy/media/files.py:69
+#: cozy/media/files.py:67
 msgid "Cannot copy: Audiobook directory is read only"
 msgstr "לא ניתן להעתיק: ספריית ספרי השמע היא לקריאה בלבד"
 
-#: cozy/media/files.py:71
+#: cozy/media/files.py:69
 msgid "Cannot copy: Disk is full"
 msgstr "לא ניתן להעתיק: הכונן מלא"
 
-#: cozy/media/files.py:73 cozy/media/files.py:89
+#: cozy/media/files.py:71 cozy/media/files.py:87
 msgid "Cannot copy: Permission denied"
 msgstr "לא ניתן להעתיק: ההרשאה נדחתה"
 
 #: cozy/media/importer.py:121
 msgid "Error while importing new files"
 msgstr "שגיאה בייבוא קבצים חדשים"
-
-#: cozy/model/track.py:38
-msgid "Chapter"
-msgstr "פרק"
 
 #: cozy/tools.py:92 cozy/tools.py:96
 #, python-brace-format
@@ -57,7 +53,6 @@ msgid_plural "{hours} hours"
 msgstr[0] "שעה"
 msgstr[1] "שעתיים"
 msgstr[2] "{hours} שעות"
-msgstr[3] "{hours} שעות"
 
 #: cozy/tools.py:94 cozy/tools.py:98
 #, python-brace-format
@@ -66,7 +61,6 @@ msgid_plural "{minutes} minutes"
 msgstr[0] "דקה"
 msgstr[1] "{minutes} דקות"
 msgstr[2] "{minutes} דקות"
-msgstr[3] "{minutes} דקות"
 
 #: cozy/tools.py:100
 #, python-brace-format
@@ -75,7 +69,6 @@ msgid_plural "{seconds} seconds"
 msgstr[0] "שנייה"
 msgstr[1] "{seconds} שניות"
 msgstr[2] "{seconds} שניות"
-msgstr[3] "{seconds} שניות"
 
 #: cozy/tools.py:102
 msgid "finished"
@@ -105,7 +98,6 @@ msgid_plural "{weeks} weeks ago"
 msgstr[0] "לפני שבוע"
 msgstr[1] "לפני שבועיים"
 msgstr[2] "לפני {weeks} שבועות"
-msgstr[3] "לפני {weeks} שבועות"
 
 #: cozy/tools.py:136
 #, python-brace-format
@@ -114,7 +106,6 @@ msgid_plural "{months} months ago"
 msgstr[0] "לפני חודש"
 msgstr[1] "לפני חודשיים"
 msgstr[2] "לפני {months} חודשים"
-msgstr[3] "לפני {months} חודשים"
 
 #: cozy/tools.py:138
 #, python-brace-format
@@ -123,240 +114,294 @@ msgid_plural "{years} years ago"
 msgstr[0] "לפני שנה"
 msgstr[1] "לפני שנתיים"
 msgstr[2] "לפני {years} שנים"
-msgstr[3] "לפני {years} שנים"
 
-#: cozy/ui/book_detail_view.py:313
+#: cozy/ui/book_detail_view.py:299
 msgid "Downloaded"
 msgstr "הורד"
 
-#: cozy/ui/book_detail_view.py:316 data/ui/book_detail.ui:152
+#: cozy/ui/book_detail_view.py:302 data/ui/book_detail.ui:116
 msgid "Download"
 msgstr "הורדה"
 
-#: cozy/ui/chapter_element.py:27
-msgid "Play this part"
-msgstr "לנגן את החלק הזה"
+#: cozy/ui/db_migration_failed_view.py:6
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able"
+" to startup. A backup of the database was created before the update and has "
+"been restored now. Until this issue is resolved please use version 0.9.5 of "
+"Cozy. You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
+"במהלך עדכון מסד הנתונים אירעה שגיאה ב־Cozy ולא תהיה לו אפשרות לעלות. נוצר "
+"גיבוי של מסד הנתונים לפני העדכון והוא שוחזר כעת. עד לפתרון התקלה נא להשתמש "
+"בגרסה 0.9.5 של Cozy. אפשר לסייע לפתור את הבעיה הזאת על ידי דיווח עליה "
+"ב־GitHub."
 
-#: cozy/ui/disk_element.py:27
-msgid "Disc"
-msgstr "תקליטור"
+#: cozy/ui/db_migration_failed_view.py:15
+msgid "Failed to Update Database"
+msgstr "עדכון מסד הנתונים נכשל"
 
-#: cozy/ui/file_not_found_dialog.py:56
-msgid "All files"
-msgstr "כל הקבצים"
-
-#: cozy/ui/main_view.py:301 data/ui/main_window.ui:412
-msgid "Set Audiobooks Directory"
-msgstr "הגדרת ספריית שמע"
-
-#: cozy/ui/warnings.py:27 cozy/ui/warnings.py:42
-#, python-brace-format
-msgid "{storage} is offline."
-msgstr "{storage} אינו מקוון."
-
-#: cozy/ui/widgets/book_element.py:52
-msgid "Mark as read"
-msgstr "סימון כנקרא"
-
-#: cozy/ui/widgets/book_element.py:55
-msgid "Open in file browser"
-msgstr "פתיחה בדפדפן הקבצים"
-
-#: cozy/ui/widgets/book_element.py:58
-msgid "Remove from library"
-msgstr "הסרה מהספרייה"
-
-#: cozy/ui/widgets/error_reporting.py:12
-msgid "Disabled"
-msgstr "מושבת"
-
-#: cozy/ui/widgets/error_reporting.py:13
-msgid "Basic error reporting"
-msgstr "דיווח שגיאות בסיסי"
-
-#: cozy/ui/widgets/error_reporting.py:14
-msgid "Detailed error reporting"
-msgstr "דיווח שגיאות מפורט"
-
-#: cozy/ui/widgets/error_reporting.py:15 data/ui/error_reporting.ui:240
-msgid "Detailed error reporting with import errors"
-msgstr "דיווח שגיאות מפורט עם שגיאות ייבוא"
-
-#: cozy/ui/widgets/error_reporting.py:19
-msgid "No error or crash reporting."
-msgstr "אין דיווח על שגיאות או קריסה."
-
-#: cozy/ui/widgets/error_reporting.py:20 data/ui/error_reporting.ui:259
-msgid "The following information will be sent in case of an error or crash:"
-msgstr "המידע הבא יישלח במקרה של שגיאה או קריסה:"
-
-#: cozy/ui/widgets/error_reporting.py:25
-msgid "Which type of error occurred"
-msgstr "איזה סוג של שגיאה אירעה"
-
-#: cozy/ui/widgets/error_reporting.py:26
-msgid "Line of code where an error occurred"
-msgstr "שורת הקוד שבה אירעה שגיאה"
-
-#: cozy/ui/widgets/error_reporting.py:27
-msgid "Cozy's version"
-msgstr "הגרסה של Cozy"
-
-#: cozy/ui/widgets/error_reporting.py:28
-msgid "Linux distribution"
-msgstr "הפצת לינוקס"
-
-#: cozy/ui/widgets/error_reporting.py:29
-msgid "Desktop environment"
-msgstr "סביבת שולחן עבודה"
-
-#: cozy/ui/widgets/error_reporting.py:30
-msgid "Media type of files that Cozy couldn't import"
-msgstr "סוג מדיה של קבצים ש־Cozy לא הצליח לייבא"
-
-#: cozy/ui/widgets/filter_list_box.py:20
-#: cozy/view_model/library_view_model.py:54
-#: cozy/view_model/library_view_model.py:160
-msgid "All"
-msgstr "הכול"
-
-#: cozy/ui/widgets/filter_list_box.py:21
-msgid "Display all books"
-msgstr "הצגה של כל הספרים"
-
-#: cozy/ui/widgets/search_results.py:73
-msgid "Jump to author "
-msgstr "מעבר לסופר"
-
-#: cozy/ui/widgets/search_results.py:76
-msgid "Jump to reader "
-msgstr "מעבר לקורא"
-
-#: cozy/ui/widgets/search_results.py:100
-msgid "Play this book"
-msgstr "השמעת הספר הזה"
-
-#: cozy/ui/widgets/sleep_timer.py:60 data/ui/timer_popover.ui:66
-msgid "min"
-msgstr "דק׳"
-
-#: cozy/ui/widgets/sleep_timer.py:65
-msgid "Off"
-msgstr "כבוי"
-
-#: cozy/ui/widgets/storage_list_box_row.py:70 data/ui/preferences.ui:377
-msgid "External drive"
-msgstr "כונן חיצוני"
-
-#: cozy/ui/widgets/storage_list_box_row.py:73
-msgid "Internal drive"
-msgstr "כונן פנימי"
-
-#: cozy/view_model/headerbar_view_model.py:91
-msgid "Refreshing audio book collection"
-msgstr "רענון אוסף ספרי שמע"
-
-#: cozy/view_model/headerbar_view_model.py:100
-#: cozy/view_model/headerbar_view_model.py:116
-msgid "Copying new files…"
-msgstr "קבצים חדשים מועתקים…"
-
-#: cozy/view_model/headerbar_view_model.py:107
-msgid "Changing audio book location…"
-msgstr "מיקום ספר השמע משתנה…"
-
-#: data/ui/about.ui:16
-msgid "GitHub"
-msgstr "GitHub"
-
-#: data/ui/album_element.ui:104
-msgid "Play"
-msgstr "השמעה"
-
-#: data/ui/book_detail.ui:219
-msgid "Remaining"
-msgstr "נותרו"
-
-#: data/ui/book_detail.ui:274
-msgid "Total"
-msgstr "סך הכול"
-
-#: data/ui/book_detail.ui:290
-msgid "Last played"
-msgstr "הושמע אחרון"
-
-#: data/ui/book_detail.ui:306
-msgid "Published"
-msgstr "פורסם"
-
-#: data/ui/book_detail.ui:341
-msgid "Some or all files of this book cannot be found."
-msgstr "לא ניתן למצוא חלק או את כל הקבצים של ספר זה."
-
-#: data/ui/book_detail.ui:364
-msgid "unavailable"
-msgstr "לא זמין"
-
-#: data/ui/book_detail.ui:533
-msgid "Loading chapters, please wait..."
-msgstr "הפרקים נטענים, נא להמתין…"
-
-#: data/ui/book_element.ui:36
-msgid "Open book overview"
-msgstr "פתיחת סקירת ספר"
-
-#: data/ui/db_migration_failed.ui:31
+#: cozy/ui/db_migration_failed_view.py:22
 msgid "Close Cozy"
 msgstr "לסגור את Cozy"
 
-#: data/ui/db_migration_failed.ui:47
+#: cozy/ui/db_migration_failed_view.py:23
 msgid "Receive help on GitHub"
 msgstr "קבלת עזרה ב־GitHub"
 
-#: data/ui/db_migration_failed.ui:108
-msgid "An error occured while updating the database"
-msgstr "אירעה שגיאה בעדכון מסד הנתונים"
+#: cozy/ui/delete_book_view.py:13
+msgid "Delete Audiobook?"
+msgstr "למחוק ספר שמע?"
 
-#: data/ui/db_migration_failed.ui:129
-msgid ""
-"During an update of the database an error occurred and Cozy will not be able to startup.\n"
-"A backup of the database was created before the update and has been restored now.\n"
-"Until this issue is resolved please use version 0.9.5 of Cozy.\n"
-"You can help resolve this problem by reporting an issue on GitHub."
-msgstr ""
-"במהלך עדכון מסד הנתונים אירעה שגיאה ול־Cozy לא תהיה אפשרות לעלות מחדש.\n"
-"לפני עדכון מסד הנתונים נוצר גיבוי שוחזר כעת.\n"
-"עד שהבעיה תיפתר, נא להשתמש בגרסה 0.9.5 של Cozy.\n"
-"אפשר לסייע לפתור בעיה זו על ידי דיווח עליה ב־GitHub."
-
-#: data/ui/delete_book_dialog.ui:31 data/ui/file_not_found.ui:19
-msgid "Cancel"
-msgstr "ביטול"
-
-#: data/ui/delete_book_dialog.ui:45
-msgid "Delete Audiobook"
-msgstr "מחיקת ספר שמע"
-
-#: data/ui/delete_book_dialog.ui:105
-msgid "Are you sure you want to delete the selected audiobook?"
-msgstr "למחוק את ספר השמע שנבחר?"
-
-#: data/ui/delete_book_dialog.ui:126
+#: cozy/ui/delete_book_view.py:14
 msgid "The audiobook will be removed from your disk and from Cozy's library."
 msgstr "ספר השמע יוסר מהכונן שלך ומהספרייה של Cozy."
 
-#: data/ui/error_reporting.ui:29 data/ui/preferences.ui:455
+#: cozy/ui/delete_book_view.py:21 cozy/ui/file_not_found_dialog.py:26
+msgid "Cancel"
+msgstr "ביטול"
+
+#: cozy/ui/delete_book_view.py:22
+msgid "Remove Audiobook"
+msgstr "הסרת ספר שמע"
+
+#: cozy/ui/disk_element.py:22
+msgid "Disc"
+msgstr "תקליטור"
+
+#: cozy/ui/file_not_found_dialog.py:18
+msgid "File not found"
+msgstr "קובץ לא נמצא"
+
+#: cozy/ui/file_not_found_dialog.py:19
+msgid "This file could not be found. Do you want to locate it manually?"
+msgstr "הקובץ הזה לא נמצא. לנסות לאתר אותו באופן ידני?"
+
+#: cozy/ui/file_not_found_dialog.py:27
+msgid "Locate"
+msgstr "איתור"
+
+#: cozy/ui/file_not_found_dialog.py:38
+msgid "Locate Missing File"
+msgstr "איתור קובץ חסר"
+
+#: cozy/ui/file_not_found_dialog.py:41
+#, python-brace-format
+msgid "{ext} files"
+msgstr "קובצי {ext}"
+
+#: cozy/ui/file_not_found_dialog.py:44
+msgid "Audio files"
+msgstr "קובצי שמע"
+
+#: cozy/ui/import_failed_dialog.py:8
+msgid "This can have multiple reasons:"
+msgstr "יכולות להיות לכך מגוון סיבות:"
+
+#: cozy/ui/import_failed_dialog.py:11
+msgid "The audio format is not supported"
+msgstr "תצורת השמע לא נתמכת"
+
+#: cozy/ui/import_failed_dialog.py:12
+msgid "The path or filename contains non utf-8 characters"
+msgstr "הנתיב או שם הקובץ מכילים תווים שאינם מתקן utf-8"
+
+#: cozy/ui/import_failed_dialog.py:13
+msgid "The file(s) are no valid audio files"
+msgstr "אלו אינם קובצי שמע תקינים"
+
+#: cozy/ui/import_failed_dialog.py:14
+msgid "The file(s) are corrupt"
+msgstr "הקבצים פגומים"
+
+#: cozy/ui/import_failed_dialog.py:28
+msgid "Some files could not be imported"
+msgstr "לא ניתן לייבא חלק מהקבצים"
+
+#: cozy/ui/import_failed_dialog.py:35
+msgid "Ok"
+msgstr "בסדר"
+
+#: cozy/ui/main_view.py:198
+msgid "Patreon Supporters"
+msgstr "תומכי פטריאון"
+
+#: cozy/ui/main_view.py:202
+msgid "m4b chapter support in mutagen"
+msgstr "תמיכה בפרקים בתצורת m4b ב־mutagen"
+
+#: cozy/ui/main_view.py:206
+msgid "Open Source Projects"
+msgstr "מיזמי קוד פתוח"
+
+#. Translators: Replace "translator-credits" with your names, one name per
+#. line
+#: cozy/ui/main_view.py:211
+msgid "translator-credits"
+msgstr "ירון שהרבני <sh.yaron@gmail.com>"
+
+#: cozy/ui/widgets/book_element.py:70
+msgid "Mark as read"
+msgstr "סימון כנקרא"
+
+#: cozy/ui/widgets/book_element.py:73
+msgid "Open in file browser"
+msgstr "פתיחה בדפדפן הקבצים"
+
+#: cozy/ui/widgets/book_element.py:76
+msgid "Remove from library"
+msgstr "הסרה מהספרייה"
+
+#: cozy/ui/widgets/book_row.py:25
+msgid "Play this book"
+msgstr "השמעת הספר הזה"
+
+#: cozy/ui/widgets/error_reporting.py:11
+msgid "Disabled"
+msgstr "מושבת"
+
+#: cozy/ui/widgets/error_reporting.py:12
+msgid "Basic error reporting"
+msgstr "דיווח שגיאות בסיסי"
+
+#: cozy/ui/widgets/error_reporting.py:13
+msgid "Detailed error reporting"
+msgstr "דיווח שגיאות מפורט"
+
+#: cozy/ui/widgets/error_reporting.py:14 data/ui/error_reporting.ui:162
+msgid "Detailed error reporting with import errors"
+msgstr "דיווח שגיאות מפורט עם שגיאות ייבוא"
+
+#: cozy/ui/widgets/error_reporting.py:18
+msgid "No error or crash reporting."
+msgstr "אין דיווח על שגיאות או קריסה."
+
+#: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:174
+msgid "The following information will be sent in case of an error or crash:"
+msgstr "המידע הבא יישלח במקרה של שגיאה או קריסה:"
+
+#: cozy/ui/widgets/error_reporting.py:24
+msgid "Which type of error occurred"
+msgstr "איזה סוג של שגיאה אירעה"
+
+#: cozy/ui/widgets/error_reporting.py:25
+msgid "Line of code where an error occurred"
+msgstr "שורת הקוד שבה אירעה שגיאה"
+
+#: cozy/ui/widgets/error_reporting.py:26
+msgid "Cozy's version"
+msgstr "הגרסה של Cozy"
+
+#: cozy/ui/widgets/error_reporting.py:27
+msgid "Linux distribution"
+msgstr "הפצת לינוקס"
+
+#: cozy/ui/widgets/error_reporting.py:28
+msgid "Desktop environment"
+msgstr "סביבת שולחן עבודה"
+
+#: cozy/ui/widgets/error_reporting.py:29
+msgid "Media type of files that Cozy couldn't import"
+msgstr "סוג מדיה של קבצים ש־Cozy לא הצליח לייבא"
+
+#: cozy/ui/widgets/filter_list_box.py:18
+#: cozy/view_model/library_view_model.py:45
+#: cozy/view_model/library_view_model.py:135
+msgid "All"
+msgstr "הכול"
+
+#: cozy/ui/widgets/filter_list_box.py:19
+msgid "Display all books"
+msgstr "הצגה של כל הספרים"
+
+#: cozy/ui/widgets/search_results.py:13
+#, python-brace-format
+msgid "Jump to {artist_name}"
+msgstr "דילוג אל {artist_name}"
+
+#: cozy/ui/widgets/sleep_timer.py:57 data/ui/timer_popover.ui:53
+msgid "min"
+msgstr "דק׳"
+
+#: cozy/ui/widgets/sleep_timer.py:62
+msgid "Off"
+msgstr "כבוי"
+
+#: cozy/ui/widgets/storages.py:11
+msgid "Set Audiobooks Directory"
+msgstr "הגדרת ספריית שמע"
+
+#: cozy/ui/widgets/storages.py:65 data/ui/storage_locations.ui:18
+msgid "External drive"
+msgstr "כונן חיצוני"
+
+#: cozy/ui/widgets/storages.py:68
+msgid "Internal drive"
+msgstr "כונן פנימי"
+
+#: cozy/view_model/headerbar_view_model.py:78
+msgid "Refreshing audio book collection"
+msgstr "רענון אוסף ספרי שמע"
+
+#: cozy/view_model/headerbar_view_model.py:87
+#: cozy/view_model/headerbar_view_model.py:103
+msgid "Copying new files…"
+msgstr "קבצים חדשים מועתקים…"
+
+#: cozy/view_model/headerbar_view_model.py:94
+msgid "Changing audio book location…"
+msgstr "מיקום ספר השמע משתנה…"
+
+#: data/ui/album_element.ui:47
+msgid "Play"
+msgstr "השמעה"
+
+#: data/ui/book_detail.ui:149
+msgid "Remaining"
+msgstr "נותרו"
+
+#: data/ui/book_detail.ui:195
+msgid "Total"
+msgstr "סך הכול"
+
+#: data/ui/book_detail.ui:208
+msgid "Last played"
+msgstr "הושמע אחרון"
+
+#: data/ui/book_detail.ui:221
+msgid "Published"
+msgstr "פורסם"
+
+#: data/ui/book_detail.ui:246
+msgid "Some or all files of this book cannot be found."
+msgstr "לא ניתן למצוא חלק או את כל הקבצים של ספר זה."
+
+#: data/ui/book_detail.ui:259
+msgid "unavailable"
+msgstr "לא זמין"
+
+#: data/ui/book_detail.ui:363
+msgid "Loading chapters, please wait..."
+msgstr "הפרקים נטענים, נא להמתין…"
+
+#: data/ui/book_element.ui:10
+msgid "Open book overview"
+msgstr "פתיחת סקירת ספר"
+
+#: data/ui/chapter_element.ui:5
+msgid "Play this part"
+msgstr "לנגן את החלק הזה"
+
+#: data/ui/error_reporting.ui:24 data/ui/preferences.ui:124
 msgid "User feedback"
 msgstr "משוב משתמשים"
 
-#: data/ui/error_reporting.ui:98
+#: data/ui/error_reporting.ui:67
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "You can help improve Cozy by contributing information in case of errors and "
 "crashes. "
 msgstr "אפשר לסייע לשפר את Cozy על ידי תרומת מידע במקרה של שגיאות וקריסות."
 
-#: data/ui/error_reporting.ui:112
+#: data/ui/error_reporting.ui:75
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Contributing this information is optional and completely anonymous. We will "
@@ -366,380 +411,303 @@ msgstr ""
 "תרומת מידע זה היא בגדר רשות ואלמונית לחלוטין. לעולם לא נאסוף נתונים אישיים, "
 "קבצים מיובאים או כל מידע שיכול להוביל לזיהוי שלך."
 
-#: data/ui/error_reporting.ui:127
+#: data/ui/error_reporting.ui:84
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr "Cozy הוא בקוד פתוח וניתן לעיין בקוד המקור של משוב המשתמש כאן:"
 
-#: data/ui/file_not_found.ui:32
-msgid "Locate"
-msgstr "איתור"
+#. Translators: Don't touch the markup. Translate the text "Sourcecode on
+#. GitHub" only!
+#: data/ui/error_reporting.ui:94
+msgid ""
+"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Sourcecode"
+" on GitHub</a>"
+msgstr ""
+"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">קוד המקור "
+"ב־GitHub</a>"
 
-#: data/ui/file_not_found.ui:86
-msgid "File not found"
-msgstr "קובץ לא נמצא"
+#: data/ui/first_import_button.ui:12
+msgid "Select Folder"
+msgstr "בחירת תיקייה"
 
-#: data/ui/file_not_found.ui:119
-msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "הקובץ הזה לא נמצא. לנסות לאתר אותו באופן ידני?"
+#: data/ui/headerbar.ui:17
+msgid "Toggle Filter Sidebar"
+msgstr "החלפת מצב סרגל צד סינון"
 
-#: data/ui/headerbar.ui:56
-msgid "Display background task progress"
-msgstr "הצגת התקדמות המשימה ברקע"
-
-#: data/ui/headerbar.ui:70
-msgid "Search your library"
-msgstr "חיפוש בספרייה שלך"
-
-#: data/ui/headerbar.ui:80
-msgid "Search menu button"
-msgstr "כפתור תפריט חיפוש"
-
-#: data/ui/headerbar.ui:81
-msgid "Open the search popover"
-msgstr "פתיחת חלון החיפוש הקופץ"
-
-#: data/ui/headerbar.ui:96
+#: data/ui/headerbar.ui:22
 msgid "Options"
 msgstr "אפשרויות"
 
-#: data/ui/headerbar.ui:107
-msgid "Options menu button"
-msgstr "אפשרויות לחצן התפריט"
-
-#: data/ui/headerbar.ui:108
+#: data/ui/headerbar.ui:26
 msgid "Open the options popover"
 msgstr "פתיחת חלון האפשרויות הקופץ"
 
-#: data/ui/import_failed.ui:27
-msgid "Ok"
-msgstr "בסדר"
+#: data/ui/headerbar.ui:33
+msgid "Search your library"
+msgstr "חיפוש בספרייה שלך"
 
-#: data/ui/import_failed.ui:81
-msgid "Some files could not be imported"
-msgstr "לא ניתן לייבא חלק מהקבצים"
+#: data/ui/headerbar.ui:36
+msgid "Open the search popover"
+msgstr "פתיחת חלון החיפוש הקופץ"
 
-#: data/ui/import_failed.ui:134
-msgid ""
-"This can have multiple reasons:\n"
-"- The audio format is not supported\n"
-"- The path or filename contains non utf-8 characters\n"
-"- The file(s) are no valid audio files\n"
-"- The file(s) are corrupt"
-msgstr ""
-"יכולות להיות לכך מספר סיבות:\n"
-"- תצורת קובץ השמע לא נתמכת\n"
-"- הנתיב או שם הקובץ מכילים תווים שאינם utf-8\n"
-"- הקבצים אינם קובצי שמע תקניים\n"
-"- הקבצים פגומים"
+#: data/ui/headerbar.ui:44
+msgid "Display background task progress"
+msgstr "הצגת התקדמות המשימה ברקע"
 
-#: data/ui/main_window.ui:68
+#: data/ui/headerbar.ui:67
+msgid "Start typing..."
+msgstr "נא להתחיל להקליד…"
+
+#: data/ui/headerbar.ui:80
+msgid "_Scan Library"
+msgstr "_סריקת הספרייה"
+
+#: data/ui/headerbar.ui:86
+msgid "_Hide unavailable books"
+msgstr "הס_תרת ספרים שאינם זמינים"
+
+#: data/ui/headerbar.ui:92
+msgid "_Preferences"
+msgstr "ה_עדפות"
+
+#: data/ui/headerbar.ui:96
+msgid "_About Cozy"
+msgstr "_על Cozy"
+
+#: data/ui/headerbar.ui:102
+msgid "_Quit"
+msgstr "י_ציאה"
+
+#: data/ui/main_window.ui:26
+msgid "Drop Audio Books Here to Add Them to Your Library"
+msgstr "יש להשליך לכאן ספרי שמע כדי להוסיף אותם לספרייה שלך"
+
+#: data/ui/main_window.ui:48
+msgid "Library"
+msgstr "ספרייה"
+
+#: data/ui/main_window.ui:65
 msgid "Recent"
 msgstr "לאחרונה"
 
-#: data/ui/main_window.ui:90
-msgid "List of authors"
-msgstr "רשימת הסופרים"
-
-#: data/ui/main_window.ui:106 data/ui/main_window.ui:250
-#: data/ui/search_popover.ui:107
+#: data/ui/main_window.ui:77 data/ui/search_page.ui:46
 msgid "Author"
 msgstr "סופר"
 
-#: data/ui/main_window.ui:128
-msgid "List of readers"
-msgstr "רשימת קוראים"
+#: data/ui/main_window.ui:89
+msgid "List of authors"
+msgstr "רשימת הסופרים"
 
-#: data/ui/main_window.ui:144 data/ui/search_popover.ui:201
+#: data/ui/main_window.ui:108 data/ui/search_page.ui:59
 msgid "Reader"
 msgstr "קורא"
 
-#: data/ui/main_window.ui:189
+#: data/ui/main_window.ui:120
+msgid "List of readers"
+msgstr "רשימת קוראים"
+
+#: data/ui/main_window.ui:172
 msgid "List of books"
 msgstr "רשימת ספרים"
 
-#: data/ui/main_window.ui:222
-msgid ""
-"Start exploring your library by switching to the Author or Reader view."
-msgstr "ניתן להתחיל לחפש בספרייה שלך על ידי מעבר לתצוגת סופר או קורא."
+#: data/ui/main_window.ui:194
+msgid "No Recent Books Yet"
+msgstr "עדיין אין ספרים אחרונים"
 
-#: data/ui/main_window.ui:280
-msgid "Stay tuned while Cozy is preparing your library…"
-msgstr "נא להמתין בסבלנות בזמן ש־Cozy מכין את הספרייה שלך…"
+#: data/ui/main_window.ui:195
+msgid "Explore your library by switching to the Author or Reader view"
+msgstr "ניתן לסייר בספרייה שלך על ידי החלפה לתצוגות היוצר או הקורא"
 
-#: data/ui/main_window.ui:334
-msgid "Import your Audiobooks"
-msgstr "ייבוא ספרי השמע שלך"
-
-#: data/ui/main_window.ui:353
-msgid ""
-"Cozy automatically imports your audiobooks in one directory - your library"
-msgstr "Cozy מייבא אוטומטית את ספרי השמע שלך למיקום אחד - הספרייה שלך"
-
-#: data/ui/main_window.ui:385
-msgid "Drag & Drop"
-msgstr "גרירה ושחרור"
-
-#: data/ui/main_window.ui:387
-msgid "Drag your audiobooks into cozy and they will be automatically imported"
-msgstr "ניתן לגרור את ספרי השמע שלך ל־Cozy והם ייובאו אוטומטית"
-
-#: data/ui/main_window.ui:414
-msgid "Load audiobooks from a directory, network drive or an external disk"
-msgstr "ניתן לטעון ספרי שמע מספרייה, כונן רשת או כונן חיצוני"
-
-#: data/ui/main_window.ui:417
-msgid "Select"
-msgstr "בחירה"
-
-#: data/ui/media_controller.ui:64 data/ui/media_controller.ui:482
-#: data/ui/media_controller_big.ui:189 data/ui/media_controller_small.ui:70
-msgid "Rewind"
-msgstr "הרצה לאחור"
-
-#: data/ui/media_controller.ui:71 data/ui/media_controller.ui:489
-#: data/ui/media_controller_big.ui:197 data/ui/media_controller_small.ui:77
-msgid "Rewind button"
-msgstr "לחצן הרצה לאחור"
-
-#: data/ui/media_controller.ui:72 data/ui/media_controller.ui:490
-#: data/ui/media_controller_big.ui:198 data/ui/media_controller_small.ui:78
-msgid "Rewind playback"
-msgstr "הרצת ההשמעה אחורה"
-
-#: data/ui/media_controller.ui:89 data/ui/media_controller.ui:507
-#: data/ui/media_controller_big.ui:220 data/ui/media_controller_small.ui:100
-msgid "Start playback"
-msgstr "התחלת השמעה"
-
-#: data/ui/media_controller.ui:96 data/ui/media_controller.ui:514
-#: data/ui/media_controller_big.ui:228 data/ui/media_controller_small.ui:107
-msgid "Play/Pause Button"
-msgstr "לחצן הפעלה/השהיה"
-
-#: data/ui/media_controller.ui:97 data/ui/media_controller.ui:515
-#: data/ui/media_controller_big.ui:229 data/ui/media_controller_small.ui:108
-msgid "Start or pause the playback"
-msgstr "התחלת או השהיית ההשמעה"
-
-#: data/ui/media_controller.ui:113 data/ui/media_controller.ui:531
-#: data/ui/media_controller_big.ui:252 data/ui/media_controller_small.ui:131
-msgid "Forward"
-msgstr "קדימה"
-
-#: data/ui/media_controller.ui:120 data/ui/media_controller.ui:538
-#: data/ui/media_controller_big.ui:260 data/ui/media_controller_small.ui:138
-msgid "Forward button"
-msgstr "כפתור קדימה"
-
-#: data/ui/media_controller.ui:121 data/ui/media_controller.ui:539
-#: data/ui/media_controller_big.ui:261 data/ui/media_controller_small.ui:139
-msgid "Forward Playback"
-msgstr "הרצת ההשמעה קדימה"
-
-#: data/ui/media_controller.ui:175 data/ui/media_controller_big.ui:76
+#: data/ui/media_controller.ui:48
 msgid "Currently playing"
 msgstr "מושמע כעת"
 
-#: data/ui/media_controller.ui:190 data/ui/media_controller_big.ui:97
-msgid "Booktitle"
-msgstr "כותרת הספר"
-
-#: data/ui/media_controller.ui:191 data/ui/media_controller_big.ui:98
+#: data/ui/media_controller.ui:65
 msgid "Title of currently playing book"
 msgstr "שם הספר המושמע כעת"
 
-#: data/ui/media_controller.ui:217 data/ui/media_controller_big.ui:126
-msgid "Part name"
-msgstr "שם החלק"
-
-#: data/ui/media_controller.ui:218 data/ui/media_controller_big.ui:127
+#: data/ui/media_controller.ui:82
 msgid "Title of the currently playing part"
 msgstr "כותרת החלק המושמע כעת"
 
-#: data/ui/media_controller.ui:256 data/ui/seek_bar.ui:20
-msgid "Elapsed time"
-msgstr "זמן שחלף"
+#: data/ui/media_controller.ui:111
+msgid "Rewind"
+msgstr "הרצה לאחור"
 
-#: data/ui/media_controller.ui:264 data/ui/seek_bar.ui:28
-msgid "Time elapsed"
-msgstr "זמן שעבר"
+#: data/ui/media_controller.ui:116
+msgid "Rewind playback"
+msgstr "הרצת ההשמעה אחורה"
 
-#: data/ui/media_controller.ui:265 data/ui/seek_bar.ui:29
-msgid "Elapsed time of current part"
-msgstr "הזמן שחלף מהחלק הנוכחי"
+#: data/ui/media_controller.ui:130
+msgid "Start playback"
+msgstr "התחלת השמעה"
 
-#: data/ui/media_controller.ui:281 data/ui/seek_bar.ui:45
-msgid "Jump to position in current chapter"
-msgstr "קפיצה למיקום בפרק הנוכחי"
+#: data/ui/media_controller.ui:135
+msgid "Start or pause the playback"
+msgstr "התחלת או השהיית ההשמעה"
 
-#: data/ui/media_controller.ui:290 data/ui/seek_bar.ui:56
-msgid "Position slider"
-msgstr "מחוון מיקום"
+#: data/ui/media_controller.ui:148
+msgid "Forward"
+msgstr "קדימה"
 
-#: data/ui/media_controller.ui:291 data/ui/seek_bar.ui:57
-msgid "Position of the current part in seconds"
-msgstr "מיקום החלק הנוכחי בשניות"
+#: data/ui/media_controller.ui:153
+msgid "Forward Playback"
+msgstr "הרצת ההשמעה קדימה"
 
-#: data/ui/media_controller.ui:310 data/ui/seek_bar.ui:76
-msgid "Remaining time"
-msgstr "זמן שנותר"
-
-#: data/ui/media_controller.ui:317 data/ui/seek_bar.ui:83
-msgid "Time remaining"
-msgstr "זמן נותר"
-
-#: data/ui/media_controller.ui:318 data/ui/seek_bar.ui:84
-msgid "Remaining time of current part"
-msgstr "הזמן שנותר מהחלק הנוכחי"
-
-#: data/ui/media_controller.ui:350 data/ui/media_controller_big.ui:324
+#: data/ui/media_controller.ui:179
 msgid "Volume control"
 msgstr "בקרת עוצמת השמע"
 
-#: data/ui/media_controller.ui:387 data/ui/media_controller.ui:572
-#: data/ui/media_controller_big.ui:367 data/ui/media_controller_small.ui:175
+#: data/ui/media_controller.ui:202
 msgid "Playback speed"
 msgstr "מהירות השמעה"
 
-#: data/ui/media_controller.ui:408 data/ui/media_controller_big.ui:394
-msgid "Sleep timer"
-msgstr "מתזמן שינה"
-
-#: data/ui/media_controller.ui:418 data/ui/media_controller_big.ui:404
-msgid "Timer menu button"
-msgstr "כפתור תזמון שינה"
-
-#: data/ui/media_controller.ui:419 data/ui/media_controller_big.ui:405
-msgid "Open the sleep timer popover"
-msgstr "פתיחת חלונית תזמון השינה"
-
-#: data/ui/media_controller_big.ui:53
-msgid "Open book"
-msgstr "פתיחת ספר"
-
-#: data/ui/preferences.ui:55
-msgid "General"
-msgstr "כללי"
-
-#: data/ui/preferences.ui:60
-msgid "Appearance"
-msgstr "מראה"
-
-#: data/ui/preferences.ui:83
-msgid "Tags"
-msgstr "תגיות"
-
-#: data/ui/preferences.ui:90
-msgid "Activate if author and reader are displayed the wrong way"
-msgstr "יש להפעיל אם הסופר והקורא לא מוצגים כראוי"
-
-#: data/ui/preferences.ui:107
-msgid "Playback"
-msgstr "נגינה"
-
-#: data/ui/preferences.ui:114
-msgid "Rewind 30 seconds of the current book when starting Cozy"
-msgstr "להחזיר אחורה את הספר ב־30 שניות עם הפעלת Cozy"
-
-#: data/ui/preferences.ui:172
+#: data/ui/media_controller.ui:213 data/ui/preferences.ui:80
 msgid "Sleep Timer"
 msgstr "מתזמן שינה"
 
-#: data/ui/preferences.ui:218
+#: data/ui/media_controller.ui:220
+msgid "Open the sleep timer popover"
+msgstr "פתיחת חלונית תזמון השינה"
+
+#: data/ui/preferences.ui:27
+msgid "General"
+msgstr "כללי"
+
+#: data/ui/preferences.ui:30
+msgid "Appearance"
+msgstr "מראה"
+
+#: data/ui/preferences.ui:33
+msgid "Dark Mode"
+msgstr "מצב כהה"
+
+#: data/ui/preferences.ui:40
+msgid "Tags"
+msgstr "תגיות"
+
+#: data/ui/preferences.ui:43
+msgid "Swap Author and Reader"
+msgstr "החלפה בין היוצר והקורא"
+
+#: data/ui/preferences.ui:44
+msgid "Activate if author and reader are displayed the wrong way"
+msgstr "יש להפעיל אם הסופר והקורא לא מוצגים כראוי"
+
+#: data/ui/preferences.ui:51
+msgid "Playback"
+msgstr "נגינה"
+
+#: data/ui/preferences.ui:54
+msgid "Replay"
+msgstr "נגינה מחדש"
+
+#: data/ui/preferences.ui:55
+msgid "Rewind 30 seconds of the current book when starting Cozy"
+msgstr "להחזיר אחורה את הספר ב־30 שניות עם הפעלת Cozy"
+
+#: data/ui/preferences.ui:60
+msgid "Rewind Duration"
+msgstr "משך חזרה אחורה"
+
+#: data/ui/preferences.ui:69
+msgid "Forward Duration"
+msgstr "משך דילוג קדימה"
+
+#: data/ui/preferences.ui:83
+msgid "Fadeout"
+msgstr "עמעום"
+
+#: data/ui/preferences.ui:88
+msgid "Fadeout Duration"
+msgstr "משך עמעום"
+
+#: data/ui/preferences.ui:104
 msgid "Storage"
 msgstr "אחסון"
 
-#: data/ui/preferences.ui:223
+#: data/ui/preferences.ui:107
 msgid "Artwork"
 msgstr "אומנות תואמת"
 
-#: data/ui/preferences.ui:230
+#: data/ui/preferences.ui:110
+msgid "Prefer External Images Over Embedded Cover"
+msgstr "להעדיף תמונות חיצוניות על עטיפה מוטמעת"
+
+#: data/ui/preferences.ui:111
 msgid "Always use images (cover.jpg, *.png, …) when available"
 msgstr "תמיד להשתמש בתמונות (cover.jpg,‏ ‎*.png, …) כשיש כאלה"
 
-#: data/ui/preferences.ui:247
-msgid "Storage locations"
-msgstr "מיקומי אחסון"
-
-#: data/ui/preferences.ui:309
-msgid "Add location"
-msgstr "הוספת מיקום"
-
-#: data/ui/preferences.ui:335
-msgid "Remove location"
-msgstr "הסרת מיקום"
-
-#: data/ui/preferences.ui:373
-msgid "Toggle this storage location to be internal/external."
-msgstr "החלפת מצב מיקום האחסון הזה כדי שיהיה פנימי/חיצוני."
-
-#: data/ui/preferences.ui:402
-msgid "Set as default storage location for new audiobooks"
-msgstr "הגדרה כמיקום ברירת המחדל לספרי שמע חדשים"
-
-#: data/ui/preferences.ui:406
-msgid "Set as default"
-msgstr "הגדרה כברירת מחדל"
-
-#: data/ui/preferences.ui:450
+#: data/ui/preferences.ui:121
 msgid "Feedback"
 msgstr "משוב"
 
-#: data/ui/preferences.ui:460
-msgid "User Feedback"
-msgstr "משוב משתמש"
+#: data/ui/search_page.ui:9
+msgid "Search in your library"
+msgstr "חיפוש בספרייה שלך"
 
-#: data/ui/search_popover.ui:24
-msgid "Search"
-msgstr "חיפוש"
+#: data/ui/search_page.ui:15
+msgid "No results found"
+msgstr "לא נמצאו תוצאות"
 
-#: data/ui/search_popover.ui:36
-msgid "Search box"
-msgstr "תיבת חיפוש"
-
-#: data/ui/search_popover.ui:37
-msgid "Search your audiobook library"
-msgstr "חיפוש בספריית ספרי השמע שלך"
-
-#: data/ui/search_popover.ui:67
-msgid "Which book are you looking for?"
-msgstr "מה הספר המבוקש?"
-
-#: data/ui/search_popover.ui:154
+#: data/ui/search_page.ui:33
 msgid "Book"
 msgstr "ספר"
 
-#: data/ui/search_popover.ui:248
-msgid "Part"
-msgstr "חלק"
+#: data/ui/seek_bar.ui:15
+msgid "Elapsed time"
+msgstr "זמן שחלף"
 
-#: data/ui/search_popover.ui:295
-msgid "Nothing found :("
-msgstr "לא נמצא דבר :("
+#: data/ui/seek_bar.ui:21
+msgid "Elapsed time of current part"
+msgstr "הזמן שחלף מהחלק הנוכחי"
 
-#: data/ui/timer_popover.ui:37
+#: data/ui/seek_bar.ui:32
+msgid "Jump to position in current chapter"
+msgstr "קפיצה למיקום בפרק הנוכחי"
+
+#: data/ui/seek_bar.ui:39
+msgid "Position of the current part in seconds"
+msgstr "מיקום החלק הנוכחי בשניות"
+
+#: data/ui/seek_bar.ui:48
+msgid "Remaining time"
+msgstr "זמן שנותר"
+
+#: data/ui/seek_bar.ui:53
+msgid "Remaining time of current part"
+msgstr "הזמן שנותר מהחלק הנוכחי"
+
+#: data/ui/storage_locations.ui:5
+msgid "Storage locations"
+msgstr "מיקומי אחסון"
+
+#: data/ui/storage_locations.ui:24
+msgid "Set as default"
+msgstr "הגדרה כברירת מחדל"
+
+#: data/ui/storage_locations.ui:28
+msgid "Remove"
+msgstr "הסרה"
+
+#: data/ui/timer_popover.ui:30
 msgid "Timer duration"
 msgstr "משך שעון העצר"
 
-#: data/ui/timer_popover.ui:49
-msgid "Timer duration slider"
-msgstr "מחוון משך שעון עצר"
-
-#: data/ui/timer_popover.ui:50
+#: data/ui/timer_popover.ui:40
 msgid "Set the sleep timer duration in minutes"
 msgstr "הגדרת משך שעון העצר לשינה בדקות"
 
-#: data/ui/timer_popover.ui:116
+#: data/ui/timer_popover.ui:86
 msgid "Stop after current chapter"
 msgstr "לעצור אחרי הפרק הנוכחי"
 
-#: data/ui/timer_popover.ui:164
+#: data/ui/timer_popover.ui:107
 msgid "Enable system power control"
 msgstr "הפעלת בקרת צריכת חשמל של המערכת"
 
-#: data/ui/timer_popover.ui:201
+#: data/ui/timer_popover.ui:125
 msgid ""
 "Type of the action when the timer finishes.\n"
 "\"shutdown\" will attempt to turn your system off (also known as power off)\n"
@@ -749,156 +717,14 @@ msgstr ""
 "„כיבוי” ינסה לכבות את המערכת שלך.\n"
 "„השהיה” תנסה להשהות את המערכת שלך (ידוע גם בתור שינה או תרדמת)."
 
-#: data/ui/timer_popover.ui:205
-msgid ""
-"System power action\n"
-"to perform"
-msgstr ""
-"פעולה חשמלית מערכתית\n"
-"לביצוע"
+#: data/ui/timer_popover.ui:129
+msgid "System power action to perform"
+msgstr "פעולת כיבוי/הדלקה לביצוע"
 
-#: data/ui/timer_popover.ui:221
+#: data/ui/timer_popover.ui:137
 msgid "suspend"
 msgstr "השהיה"
 
-#: data/ui/timer_popover.ui:237
+#: data/ui/timer_popover.ui:143
 msgid "shutdown"
 msgstr "כיבוי"
-
-#: data/ui/titlebar_menu.ui:7
-msgid "_Scan Library"
-msgstr "_סריקת הספרייה"
-
-#: data/ui/titlebar_menu.ui:13
-msgid "_Hide unavailable books"
-msgstr "הס_תרת ספרים שאינם זמינים"
-
-#: data/ui/titlebar_menu.ui:19
-msgid "_Preferences"
-msgstr "ה_עדפות"
-
-#: data/ui/titlebar_menu.ui:25
-msgid "_Help"
-msgstr "ע_זרה"
-
-#: data/ui/titlebar_menu.ui:29
-msgid "_About"
-msgstr "על _אודות"
-
-#: data/ui/titlebar_menu.ui:33
-msgid "_Quit"
-msgstr "י_ציאה"
-
-#: data/ui/welcome.ui:29
-msgid "Welcome!"
-msgstr "ברוך בואך!"
-
-#: data/ui/welcome.ui:46
-msgid "Add your audiobooks and let's get cozy."
-msgstr "אפשר להוסיף את ספרי השמע שלך ולהתכרבל."
-
-#: data/ui/whats_new.ui:9
-msgid "Whats new?"
-msgstr "מה חדש?"
-
-#: data/ui/whats_new.ui:27
-msgid "Continue"
-msgstr "להמשיך"
-
-#: data/ui/whats_new_importer.ui:17 data/ui/whats_new_library.ui:17
-#: data/ui/whats_new_m4b.ui:17 data/ui/whats_new_m4b_chapter.ui:17
-msgid "What's new in Cozy"
-msgstr "מה חדש ב־Cozy"
-
-#: data/ui/whats_new_importer.ui:52
-msgid "A completely rewritten and far more reliable media importer."
-msgstr "מייבא מדיה שנכתב לגמרי מחדש כדי שיהיה הרבה יותר אמין."
-
-#: data/ui/whats_new_importer.ui:77
-msgid ""
-"Did you experience audio files that couldn't be imported? Drag & Drop those "
-"files onto Cozy or use the application menu in the titlebar to rescan your "
-"audiobook directories!"
-msgstr ""
-"נתקלת בקובצי שמע שלא ניתן לייבא? ניתן לגרור ולשחרר אותם לתוך Cozy או להשתמש "
-"בתפריט היישומים בשורת הכותרת כדי לסרוק את ספריית ספרי השמע שלך מחדש!"
-
-#: data/ui/whats_new_importer.ui:92
-msgid "Supported media files currently are mp3, m4a, flac, ogg, opus and wav."
-msgstr "הקבצים שנתמכים מעתה הם mp3,‏ m4a,‏ flac,‏ ogg,‏ opus ו־wav."
-
-#: data/ui/whats_new_importer.ui:107
-msgid "More to come in a later update."
-msgstr "עוד מגוון פינוקים בעדכון הבא."
-
-#: data/ui/whats_new_library.ui:52
-msgid "An important change in library management"
-msgstr "שינוי חשוב בניהול הספרייה"
-
-#: data/ui/whats_new_library.ui:77
-msgid ""
-"Previously every file which was imported in your library but couldn't be "
-"found anymore was removed from the library during a scan."
-msgstr ""
-"בעבר, כל קובץ שייובא לספרייה שלך אך לא נמצא יותר הוסר מהספרייה במהלך סריקה."
-
-#: data/ui/whats_new_library.ui:92
-msgid ""
-"Now audiobooks are not removed from your library automatically anymore. This"
-" prevents accidentally loosing the progress of a audiobook when a file can't"
-" be found temporarily."
-msgstr ""
-"ספרי שמע לא נגרעים עוד מהספרייה שלך אוטומטית. תיקון זה מונע ממך לאבד את "
-"תהליך ההתקדמות בספר השמע כשלא ניתן למצוא אותו זמנית."
-
-#: data/ui/whats_new_library.ui:107
-msgid ""
-"To remove an audiobook from the library simply right-click on it and choose "
-"the remove from library option."
-msgstr ""
-"כדי להסיר ספרי שמע מהספרייה עליך פשוט ללחוץ עליו עם הלחצן הימני ולבחור "
-"באפשרות ההסרה מהספרייה."
-
-#: data/ui/whats_new_m4b.ui:52
-msgid "Basic support for m4b audio books."
-msgstr "תמיכה בסיסית בספרי שמע מסוג m4b."
-
-#: data/ui/whats_new_m4b.ui:77
-msgid ""
-"Many of you have been waiting for it: Support for m4b audio books! This "
-"version features basic support for m4b files without chapter support."
-msgstr ""
-"רבים מכם המתינו לבשורה הזאת: יש תמיכה בספרי שמע מסוג m4b! גרסה זו מציעה "
-"תמיכה בסיסית בקובצי m4b ללא תמיכה בפרקים."
-
-#: data/ui/whats_new_m4b.ui:92
-msgid ""
-"Drag & Drop your m4b files onto Cozy or use the application menu in the "
-"titlebar to rescan your audiobook directories."
-msgstr ""
-"יש לגרור את קובצי ה־m4b שלך לתוך Cozy או להשתמש בתפריט היישום שבשורת הכותרת "
-"כדי לסרוק את ספריית ספרי השמע שלך."
-
-#: data/ui/whats_new_m4b.ui:107
-msgid "Chapter support will follow in a later update. Stay tuned!"
-msgstr "תתווסף תמיכה בפרקים באחד העדכונים הבאים. נעדכן בקרוב!"
-
-#: data/ui/whats_new_m4b_chapter.ui:52
-msgid "Chapter support for m4b audio books."
-msgstr "תמיכה בפרקים לספרי שמע ב־m4b."
-
-#: data/ui/whats_new_m4b_chapter.ui:77
-msgid "This version of Cozy features chapter support for m4b audio books!"
-msgstr "גרסה זו של Cozy מציגה תמיכה בפרקים בספרי שמע מסוג m4b!"
-
-#: data/ui/whats_new_m4b_chapter.ui:92
-msgid ""
-"If you already have m4b files imported you'll need to start a scan of your "
-"library from the app menu."
-msgstr ""
-"אם כבר ייבאת קובצי m4b יהיה עליך להתחיל לסרוק את הספרייה שלך מתפריט "
-"היישומים."
-
-#: data/ui/whats_new_m4b_chapter.ui:107
-msgid "The chapters will then be detected."
-msgstr "כך יזוהו הפרקים."
