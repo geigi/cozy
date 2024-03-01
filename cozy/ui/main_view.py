@@ -121,7 +121,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.create_action("about", self.about)
         self.create_action("quit", self.quit, ["<primary>q", "<primary>w"])
         self.create_action("prefs", self.show_prefs, ["<primary>comma"])
-        self.create_action("scan", self.scan)
+        self.scan_action = self.create_action("scan", self.scan)
         self.play_pause_action = self.create_action("play_pause", self.play_pause, ["space"])
 
         self.hide_offline_action = Gio.SimpleAction.new_stateful(
