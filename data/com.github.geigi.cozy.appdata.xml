@@ -38,13 +38,16 @@
   <url type="translate">https://www.transifex.com/geigi/cozy/</url>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/geigi/cozy/master/data/screenshots/1.png</image>
+      <caption>The main window of Cozy, showcasing a some audiobooks</caption>
+      <image xml:lang="en">https://raw.githubusercontent.com/geigi/cozy/master/data/screenshots/1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/geigi/cozy/master/data/screenshots/1.png</image>
+      <caption>Overview of "The Hobbit" audiobook in Cozy</caption>
+      <image xml:lang="en">https://raw.githubusercontent.com/geigi/cozy/master/data/screenshots/2.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/geigi/cozy/master/data/screenshots/1.png</image>
+      <caption>Cozy's recent books view in dark mode, with the sleep timer popover</caption>
+      <image xml:lang="en">https://raw.githubusercontent.com/geigi/cozy/master/data/screenshots/3.png</image>
     </screenshot>
   </screenshots>
   <releases>
