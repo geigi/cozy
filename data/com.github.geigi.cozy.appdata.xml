@@ -241,8 +241,8 @@
     <display_length compare="gt">360</display_length>
   </recommends>
   <branding>
-    <color type="primary" scheme_preference="light">#ffa348</color>
-    <color type="primary" scheme_preference="dark">#ffa348</color>
+    <color type="primary" scheme_preference="light">#ffbe6f</color>
+    <color type="primary" scheme_preference="dark">#39314e</color>
   </branding>
   <custom>
     <value key="x-appcenter-suggested-price">2</value>
