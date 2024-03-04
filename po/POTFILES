@@ -9,7 +9,6 @@ cozy/ui/book_detail_view.py
 cozy/ui/chapter_element.py
 cozy/ui/db_migration_failed_view.py
 cozy/ui/delete_book_view.py
-cozy/ui/disk_element.py
 cozy/ui/file_not_found_dialog.py
 cozy/ui/import_failed_dialog.py
 cozy/ui/preferences_view.py
