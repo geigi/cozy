@@ -6,19 +6,22 @@
     <child>
       <object class="GtkOverlay">
         <property name="child">
-          <object class="GtkOverlay">
-            <property name="child">
-              <object class="GtkImage" id="album_art_image">
+          <object class="GtkStack" id="stack">
+            <child>
+              <object class="GtkPicture" id="artwork">
+                <property name="content-fit">contain</property>
+                <property name="hexpand">true</property>
+                <property name="vexpand">true</property>
+                <style>
+                  <class name="artwork_rounded_top_corners"/>
+                </style>
               </object>
-            </property>
-            <child type="overlay">
-              <object class="GtkRevealer" id="album_art_overlay_revealer">
-                <property name="transition-type">crossfade</property>
-                <property name="transition-duration">200</property>
-                <property name="child">
-                  <object class="GtkDrawingArea" id="album_art_drawing_area">
-                  </object>
-                </property>
+            </child>
+            <child>
+              <object class="GtkImage" id="book_icon">
+                <property name="pixel-size">200</property>
+                <property name="hexpand">true</property>
+                <property name="vexpand">true</property>
               </object>
             </child>
           </object>

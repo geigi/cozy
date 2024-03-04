@@ -52,11 +52,6 @@ class BookElement(Gtk.FlowBoxChild):
         key_event_controller.connect("key-pressed", self._on_key_press_event)
         self.container_box.add_controller(key_event_controller)
 
-        motion_event_controller = Gtk.EventControllerMotion()
-        motion_event_controller.connect("enter", self._on_cover_enter_notify)
-        motion_event_controller.connect("leave", self._on_cover_leave_notify)
-        self.container_box.add_controller(motion_event_controller)
-
     def set_playing(self, is_playing):
         self.art.set_playing(is_playing)
 
@@ -118,12 +113,6 @@ class BookElement(Gtk.FlowBoxChild):
     def _on_key_press_event(self, keyval, *_):
         if keyval == Gdk.KEY_Return and super().get_sensitive():
             self.emit("open-book-overview", self.book)
-
-    def _on_cover_enter_notify(self, *_):
-        self.art.set_hover(True)
-
-    def _on_cover_leave_notify(self, *_):
-        self.art.set_hover(False)
 
     def _on_album_art_press_event(self, *_):
         self.emit("play-pause-clicked", self.book)

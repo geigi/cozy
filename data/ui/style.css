@@ -16,7 +16,15 @@
 }
 
 .book_card {
-  padding: 1rem;
+  transition: background-color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.book_card:hover {
+  background-color: alpha(currentColor, 0.0625);
+}
+
+.book_card:active {
+  background-color: alpha(currentColor, 0.125);
 }
 
 .selected {
@@ -91,4 +99,9 @@
 
 .round-6 {
   border-radius: 6px;
+}
+
+
+.artwork_rounded_top_corners {
+  border-radius: 12px 12px 0 0;
 }
