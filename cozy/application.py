@@ -56,10 +56,9 @@ class Application(Adw.Application):
         if Settings.get().first_start:
             Settings.update(first_start=False).execute()
 
-            path = os.path.join(Path.home(), _("Audiobooks"))
-            Storage.create(path=path, default=True)
-
-            os.makedirs(path, exist_ok=True)
+            audiobooks_path = Path.home() / _("Audiobooks")
+            audiobooks_path.mkdir(exist_ok=True)
+            Storage.create(path=str(audiobooks_path), default=True)
 
         self.add_window(self.ui.window)
 

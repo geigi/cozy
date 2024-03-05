@@ -57,8 +57,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.auto_import()
         self.check_for_tracks()
 
-        self.is_initialized = True
-
     def startup(self):
         self.window_builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/ui/main_window.ui")
         self.window: Adw.ApplicationWindow = self.window_builder.get_object("app_window")
