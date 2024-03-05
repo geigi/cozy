@@ -17,7 +17,7 @@ log = logging.getLogger("MediaController")
 COVER_SIZE = 46
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/media_controller.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/media_controller.ui')
 class MediaController(Adw.BreakpointBin):
     __gtype_name__ = "MediaController"
 

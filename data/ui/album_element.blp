@@ -1,0 +1,62 @@
+using Gtk 4.0;
+
+template $AlbumElement: Box {
+  orientation: vertical;
+
+  Overlay {
+    child: Overlay {
+      child: Image album_art_image {};
+
+      [overlay]
+      Revealer album_art_overlay_revealer {
+        transition-type: crossfade;
+        transition-duration: 200;
+
+        child: DrawingArea album_art_drawing_area {};
+      }
+    };
+
+    [overlay]
+    Revealer play_button_revealer {
+      name: 'play_button_revealer';
+      halign: end;
+      valign: end;
+      hexpand: false;
+      vexpand: false;
+      transition-type: crossfade;
+      transition-duration: 200;
+
+      child: Overlay {
+        halign: end;
+        valign: end;
+        margin-end: 10;
+        margin-bottom: 10;
+
+        child: Button play_button {
+          width-request: 40;
+          height-request: 40;
+          focusable: true;
+          focus-on-click: false;
+          tooltip-text: _('Play');
+          halign: center;
+          valign: center;
+          icon-name: 'media-playback-start-symbolic';
+
+          styles [
+            "circular",
+            "book_play_button",
+          ]
+        };
+
+        [overlay]
+        DrawingArea progress_drawing_area {
+          can-target: false;
+          width-request: 40;
+          height-request: 40;
+          halign: center;
+          valign: center;
+        }
+      };
+    }
+  }
+}

@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/github/geigi/cozy">
+    <file>style.css</file>
+    <file preprocess="xml-stripblanks">ui/album_element.ui</file>
+    <file preprocess="xml-stripblanks">ui/book_detail.ui</file>
+    <file preprocess="xml-stripblanks">ui/book_element.ui</file>
+    <file preprocess="xml-stripblanks">ui/chapter_element.ui</file>
+    <file preprocess="xml-stripblanks">ui/error_reporting.ui</file>
+    <file preprocess="xml-stripblanks">ui/first_import_button.ui</file>
+    <file preprocess="xml-stripblanks">ui/headerbar.ui</file>
+    <file preprocess="xml-stripblanks">ui/main_window.ui</file>
+    <file preprocess="xml-stripblanks">ui/media_controller.ui</file>
+    <file preprocess="xml-stripblanks">ui/playback_speed_popover.ui</file>
+    <file preprocess="xml-stripblanks">ui/preferences.ui</file>
+    <file preprocess="xml-stripblanks">ui/progress_popover.ui</file>
+    <file preprocess="xml-stripblanks">ui/search_page.ui</file>
+    <file preprocess="xml-stripblanks">ui/seek_bar.ui</file>
+    <file preprocess="xml-stripblanks">ui/storage_locations.ui</file>
+    <file preprocess="xml-stripblanks">ui/storage_row.ui</file>
+    <file preprocess="xml-stripblanks">ui/timer_popover.ui</file>
+  </gresource>
+  <gresource prefix="/com/github/geigi/cozy/appdata">
+    <file alias="authors.list">../AUTHORS.md</file>
     <file preprocess="xml-stripblanks">com.github.geigi.cozy.appdata.xml</file>
-    <file alias="authors">../AUTHORS.md</file>
   </gresource>
 </gresources>
 

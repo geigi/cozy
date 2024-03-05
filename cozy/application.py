@@ -42,7 +42,7 @@ class Application(Adw.Application):
         log.info("Starting up cozy %s", __version__)
         log.info("libadwaita version: %s", Adw._version)
 
-        self.ui = CozyUI(self.pkgdatadir, self, __version__)
+        self.ui = CozyUI(self, __version__)
         Adw.Application.do_startup(self)
         init_db()
         self.ui.startup()
@@ -82,7 +82,7 @@ class Application(Adw.Application):
 
     def quit(self):
         self.app_controller.quit()
-        super(Application, self).quit()
+        super().quit()
 
     @staticmethod
     def init_custom_widgets():

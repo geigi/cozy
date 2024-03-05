@@ -16,7 +16,7 @@ STROKE_WIDTH = 3
 log = logging.getLogger("album_element")
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/album_element.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/album_element.ui')
 class AlbumElement(Gtk.Box):
     __gtype_name__ = "AlbumElement"
 

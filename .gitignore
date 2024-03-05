@@ -16,6 +16,8 @@ debian/debhelper-build-stamp
 debian/files
 peewee/
 venv/
+env/
+subprojects/
 
 .pytest_cache
 

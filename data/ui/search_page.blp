@@ -1,0 +1,63 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $SearchView: Adw.Bin {
+  Stack stack {
+    Adw.StatusPage start_searching_page {
+      title: _('Search in your library');
+      icon-name: 'library-symbolic';
+    }
+
+    Adw.StatusPage nothing_found_page {
+      title: _('No results found');
+      icon-name: 'edit-find-symbolic';
+    }
+
+    ScrolledWindow search_scroller {
+      Adw.Clamp {
+        margin-start: 18;
+        margin-end: 18;
+        margin-top: 18;
+        margin-bottom: 18;
+
+        Box {
+          orientation: vertical;
+          spacing: 24;
+
+          Adw.PreferencesGroup book_result_box {
+            title: _('Book');
+            visible: false;
+
+            ListBox book_result_list {
+              styles [
+                "boxed-list",
+              ]
+            }
+          }
+
+          Adw.PreferencesGroup author_result_box {
+            title: _('Author');
+            visible: false;
+
+            ListBox author_result_list {
+              styles [
+                "boxed-list",
+              ]
+            }
+          }
+
+          Adw.PreferencesGroup reader_result_box {
+            title: _('Reader');
+            visible: false;
+
+            ListBox reader_result_list {
+              styles [
+                "boxed-list",
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
