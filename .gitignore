@@ -17,7 +17,7 @@ debian/files
 peewee/
 venv/
 env/
-subprojects/blueprint-compiler
+blueprint-compiler/
 
 .pytest_cache
 

@@ -112,6 +112,17 @@
       ]
     },
     {
+      "name" : "blueprint-compiler",
+      "buildsystem" : "meson",
+      "sources" : [
+        {
+          "type" : "git",
+          "url" : "https://gitlab.gnome.org/jwestman/blueprint-compiler.git",
+          "branch" : "main"
+        }
+      ]
+    },
+    {
       "name": "cozy",
       "buildsystem": "meson",
       "run-tests": true,
