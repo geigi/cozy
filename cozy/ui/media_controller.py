@@ -17,7 +17,7 @@ log = logging.getLogger("MediaController")
 COVER_SIZE = 46
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/media_controller.ui')
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/media_controller.ui")
 class MediaController(Adw.BreakpointBin):
     __gtype_name__ = "MediaController"
 
@@ -51,11 +51,17 @@ class MediaController(Adw.BreakpointBin):
         self.timer_button.set_popover(self.sleep_timer)
 
         self.volume_button.set_icons(
-            ["audio-volume-muted-symbolic", "audio-volume-high-symbolic",
-                "audio-volume-low-symbolic", "audio-volume-medium-symbolic"]
+            [
+                "audio-volume-muted-symbolic",
+                "audio-volume-high-symbolic",
+                "audio-volume-low-symbolic",
+                "audio-volume-medium-symbolic",
+            ]
         )
 
-        self._playback_control_view_model: PlaybackControlViewModel = inject.instance(PlaybackControlViewModel)
+        self._playback_control_view_model: PlaybackControlViewModel = inject.instance(
+            PlaybackControlViewModel
+        )
         self._artwork_cache: ArtworkCache = inject.instance(ArtworkCache)
         self._connect_view_model()
         self._connect_widgets()
@@ -90,7 +96,9 @@ class MediaController(Adw.BreakpointBin):
         self.cover_img.set_cursor(Gdk.Cursor.new_from_name("pointer"))
 
     def _set_cover_image(self, book: Book):
-        paintable = self._artwork_cache.get_cover_paintable(book, self.get_scale_factor(), COVER_SIZE)
+        paintable = self._artwork_cache.get_cover_paintable(
+            book, self.get_scale_factor(), COVER_SIZE
+        )
         if paintable:
             self.cover_img.set_from_paintable(paintable)
         else:
