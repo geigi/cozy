@@ -50,6 +50,11 @@ class MediaController(Adw.BreakpointBin):
         self.playback_speed_button.set_popover(PlaybackSpeedPopover())
         self.timer_button.set_popover(self.sleep_timer)
 
+        self.volume_button.set_icons(
+            ["audio-volume-muted-symbolic", "audio-volume-high-symbolic",
+                "audio-volume-low-symbolic", "audio-volume-medium-symbolic"]
+        )
+
         self._playback_control_view_model: PlaybackControlViewModel = inject.instance(PlaybackControlViewModel)
         self._artwork_cache: ArtworkCache = inject.instance(ArtworkCache)
         self._connect_view_model()
