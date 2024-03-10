@@ -241,7 +241,10 @@ msgstr "Proyectos de código abierto"
 #. line
 #: cozy/ui/main_view.py:211
 msgid "translator-credits"
-msgstr "créditos-traductor"
+msgstr ""
+"Adolfo Jayme-Barrientos\n"
+"Jose Luis Tirado\n"
+"Ezequiel Partida"
 
 #: cozy/ui/widgets/book_element.py:70
 msgid "Mark as read"
