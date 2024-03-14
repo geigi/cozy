@@ -51,8 +51,7 @@ msgstr "Cozy — плеер для аудиокниг. Вот некоторые
 
 #: data/com.github.geigi.cozy.appdata.xml:20
 msgid "Import all your audio books into Cozy to browse them comfortably"
-msgstr ""
-"Импортируйте все свои аудиокниги в Cosy, чтобы обозревать их с комфортом"
+msgstr "Импортируйте все свои аудиокниги в Cozy для комфортного прослушивания"
 
 #: data/com.github.geigi.cozy.appdata.xml:21
 msgid ""
