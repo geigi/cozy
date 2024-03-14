@@ -63,7 +63,7 @@ msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml:22
 msgid "Remembers your playback position"
-msgstr "Запоминает позицию воспроизведения"
+msgstr "Запоминает, где вы остановились"
 
 #: data/com.github.geigi.cozy.appdata.xml:23
 msgid "Sleep timer"
