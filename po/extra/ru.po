@@ -93,7 +93,7 @@ msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml:28
 msgid "Drag and Drop to import new audio books"
-msgstr "Для импорта новых аудиокниг просто перетащите книги в окно программы"
+msgstr "Для импорта новых аудиокниг просто перетяните их в окно программы"
 
 #: data/com.github.geigi.cozy.appdata.xml:29
 msgid "Sort your audio books by author, reader and name"
