@@ -58,8 +58,8 @@ msgid ""
 "Listen to your DRM free mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav "
 "audio books"
 msgstr ""
-"Слушайте ваши бесплатные mp3, m4a (aac, ALAC, ...), flac, ogg и wav аудио "
-"книги"
+"Слушайте свои аудиокниги без DRM в форматах mp3, m4a (aac, ALAC, …), flac, "
+"ogg и wav"
 
 #: data/com.github.geigi.cozy.appdata.xml:22
 msgid "Remembers your playback position"
