@@ -22,7 +22,7 @@ log = logging.getLogger("BookDetailView")
 ALBUM_ART_SIZE = 256
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/book_detail.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/book_detail.ui')
 class BookDetailView(Gtk.Box):
     __gtype_name__ = 'BookDetail'
 

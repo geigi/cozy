@@ -30,7 +30,7 @@ LEVEL_DETAILS = {
 }
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/error_reporting.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/error_reporting.ui')
 class ErrorReporting(Gtk.Box):
     __gtype_name__ = 'ErrorReporting'
 

@@ -4,7 +4,7 @@ from cozy.model.book import Book
 from cozy.ui.widgets.album_element import AlbumElement
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/book_element.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/book_element.ui')
 class BookElement(Gtk.FlowBoxChild):
     __gtype_name__ = "BookElement"
 

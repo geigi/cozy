@@ -3,7 +3,7 @@ from gi.repository import Gdk, GObject, Gtk
 from cozy.control.string_representation import seconds_to_str
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/seek_bar.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/seek_bar.ui')
 class SeekBar(Gtk.Box):
     __gtype_name__ = "SeekBar"
 

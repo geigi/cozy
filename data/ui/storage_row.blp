@@ -1,0 +1,33 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $StorageRow: Adw.ActionRow {
+  selectable: false;
+  activatable: true;
+
+  [prefix]
+  Image icon {}
+
+  [suffix]
+  Image default_icon {
+    visible: false;
+    margin-start: 6;
+    margin-end: 6;
+    icon-name: 'emblem-default-symbolic';
+
+    styles [
+      "accent",
+    ]
+  }
+
+  [suffix]
+  MenuButton menu_button {
+    icon-name: 'view-more-symbolic';
+    valign: center;
+    halign: center;
+
+    styles [
+      "flat",
+    ]
+  }
+}

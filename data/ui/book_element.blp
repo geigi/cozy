@@ -1,0 +1,53 @@
+using Gtk 4.0;
+
+template $BookElement: FlowBoxChild {
+  height-request: 150;
+  width-request: 150;
+
+  child: Box container_box {
+    focusable: true;
+    tooltip-text: _('Open book overview');
+    orientation: vertical;
+    spacing: 1;
+    valign: start;
+
+    Label name_label {
+      halign: start;
+      valign: end;
+      margin-top: 15;
+      hexpand: false;
+      vexpand: false;
+      wrap: true;
+      ellipsize: end;
+      max-width-chars: 20;
+      xalign: 0;
+      yalign: 0;
+
+      styles [
+        "heading",
+      ]
+    }
+
+    Label author_label {
+      halign: start;
+      valign: end;
+      hexpand: false;
+      vexpand: false;
+      wrap: true;
+      ellipsize: end;
+      max-width-chars: 30;
+      xalign: 0;
+      yalign: 0;
+
+      styles [
+        "dim-label",
+        "caption",
+      ]
+    }
+
+    styles [
+      "card",
+      "book_card",
+    ]
+  };
+}

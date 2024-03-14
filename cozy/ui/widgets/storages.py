@@ -25,7 +25,7 @@ def ask_storage_location(callback: Callable[[str | None], None], initial_folder:
     location_chooser.select_folder(inject.instance("MainWindow").window, None, finish_callback)
 
 
-@Gtk.Template.from_resource("/com/github/geigi/cozy/storage_row.ui")
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/storage_row.ui")
 class StorageRow(Adw.ActionRow):
     __gtype_name__ = "StorageRow"
 
@@ -81,7 +81,7 @@ GObject.signal_new(
 GObject.signal_new("menu-opened", StorageRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ())
 
 
-@Gtk.Template.from_resource("/com/github/geigi/cozy/storage_locations.ui")
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/storage_locations.ui")
 class StorageLocations(Adw.PreferencesGroup):
     __gtype_name__ = "StorageLocations"
 

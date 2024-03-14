@@ -15,7 +15,7 @@ from cozy.view_model.headerbar_view_model import HeaderBarState, HeaderbarViewMo
 log = logging.getLogger("Headerbar")
 
 
-@Gtk.Template.from_resource("/com/github/geigi/cozy/headerbar.ui")
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/headerbar.ui")
 class Headerbar(Gtk.Box):
     __gtype_name__ = "Headerbar"
 

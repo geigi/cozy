@@ -4,7 +4,7 @@ from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel, SystemPo
 from gi.repository import Gtk
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/timer_popover.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/timer_popover.ui')
 class SleepTimer(Gtk.Popover):
     __gtype_name__ = "SleepTimer"
 
