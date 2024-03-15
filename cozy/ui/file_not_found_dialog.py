@@ -7,7 +7,7 @@ from cozy.media.importer import Importer
 from cozy.model.chapter import Chapter
 
 
-class FileNotFoundDialog(Adw.MessageDialog):
+class FileNotFoundDialog(Adw.AlertDialog):
     main_window = inject.attr("MainWindow")
     _importer: Importer = inject.attr(Importer)
 
@@ -19,15 +19,13 @@ class FileNotFoundDialog(Adw.MessageDialog):
             body=_("This file could not be found. Do you want to locate it manually?"),
             default_response="locate",
             close_response="cancel",
-            transient_for=self.main_window.window,
-            modal=True,
         )
 
         self.add_response("cancel", _("Cancel"))
         self.add_response("locate", _("Locate"))
         self.set_response_appearance("locate", Adw.ResponseAppearance.SUGGESTED)
 
-        label = Gtk.Label(label=chapter.file, margin_top=12)
+        label = Gtk.Label(label=chapter.file, margin_top=12, wrap=True)
         label.add_css_class("monospace")
         self.set_extra_child(label)
 
@@ -61,4 +59,7 @@ class FileNotFoundDialog(Adw.MessageDialog):
             if file is not None:
                 self.missing_chapter.file = file.get_path()
                 self._importer.scan()
+
+    def present(self) -> None:
+        super().present(self.main_window.window)
 
