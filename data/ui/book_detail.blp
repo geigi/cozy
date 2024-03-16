@@ -1,31 +1,31 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $BookDetail : Adw.BreakpointBin {
+template $BookDetail: Adw.BreakpointBin {
   width-request: 350;
   height-request: 52;
 
   Adw.Breakpoint {
-    condition ("max-width": 550sp)
+    condition ("max-width: 550sp")
+
     setters {
-      top_box.orientation = vertical;
-      top_box.spacing = 6;
-      top_box.halign = center;
-      book_label.halign = center;
-      author_label.halign = center;
-      play_button.halign = center;
+      top_box.orientation: vertical;
+      top_box.spacing: 6;
+      top_box.halign: center;
+      book_label.halign: center;
+      author_label.halign: center;
+      play_button.halign: center;
     }
   }
 
-  child:
-  ScrolledWindow {
+  child: ScrolledWindow {
     focusable: true;
     vexpand: true;
     hscrollbar-policy: never;
     propagate-natural-width: true;
     propagate-natural-height: true;
-    child:
-    Box {
+
+    child: Box {
       orientation: vertical;
 
       Adw.Clamp {
@@ -293,31 +293,23 @@ template $BookDetail : Adw.BreakpointBin {
 
           StackPage {
             name: 'chapters_wrapper';
-            child:
-            Box chapter_list_container {
+
+            child: Box chapter_list_container {
               orientation: vertical;
               spacing: 18;
-            }
-
-            ;
+            };
           }
 
           StackPage {
             name: 'chapters_loader';
-            child:
-            Spinner spinner {
+
+            child: Spinner spinner {
               halign: center;
               spinning: true;
-            }
-
-            ;
+            };
           }
         }
       }
-    }
-
-    ;
-  }
-
-  ;
+    };
+  };
 }
