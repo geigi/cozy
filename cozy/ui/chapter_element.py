@@ -4,7 +4,7 @@ from cozy.control.string_representation import seconds_to_str
 from cozy.model.chapter import Chapter
 
 
-@Gtk.Template.from_resource("/com/github/geigi/cozy/chapter_element.ui")
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/chapter_element.ui")
 class ChapterElement(Adw.ActionRow):
     __gtype_name__ = "ChapterElement"
 

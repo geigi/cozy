@@ -1,0 +1,45 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ChapterElement : Adw.ActionRow {
+  selectable: true;
+  activatable: true;
+  use-markup: false;
+  tooltip-text: _('Play this part');
+
+  [prefix]
+  Stack icon_stack {
+    StackPage {
+      name: 'number';
+      child:
+      Label number_label {
+        width-chars: 3;
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      ;
+    }
+
+    StackPage {
+      name: 'icon';
+      child:
+      Image play_icon {
+        icon-name: 'media-playback-start-symbolic';
+        halign: center;
+        valign: center;
+      }
+
+      ;
+    }
+  }
+
+  [suffix]
+  Label duration_label {
+    styles [
+      "dim-label",
+    ]
+  }
+}

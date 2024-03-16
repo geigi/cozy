@@ -11,7 +11,7 @@ from cozy.ui.widgets.search_results import ArtistResultRow
 from cozy.view_model.search_view_model import SearchViewModel
 
 
-@Gtk.Template.from_resource("/com/github/geigi/cozy/search_page.ui")
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/search_page.ui")
 class SearchView(Adw.Bin):
     __gtype_name__ = "SearchView"
 

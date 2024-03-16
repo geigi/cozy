@@ -35,7 +35,7 @@ class ChaptersListBox(Adw.PreferencesGroup):
         return chapter_element
 
 
-@Gtk.Template.from_resource("/com/github/geigi/cozy/book_detail.ui")
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/book_detail.ui")
 class BookDetailView(Adw.BreakpointBin):
     __gtype_name__ = "BookDetail"
 

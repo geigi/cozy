@@ -1,0 +1,107 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $Headerbar: Box {
+  orientation: vertical;
+
+  Adw.HeaderBar headerbar {
+    [title]
+    Adw.ViewSwitcher view_switcher {
+      policy: wide;
+    }
+
+    [start]
+    ToggleButton show_sidebar_button {
+      visible: false;
+      icon-name: 'sidebar-show-symbolic';
+      tooltip-text: _('Toggle Filter Sidebar');
+    }
+
+    [end]
+    MenuButton menu_button {
+      tooltip-text: _('Options');
+      menu-model: primary_menu;
+      icon-name: 'open-menu-symbolic';
+
+      accessibility {
+        label: _('Open the options popover');
+      }
+    }
+
+    [end]
+    ToggleButton search_button {
+      name: 'Search toggle button';
+      tooltip-text: _('Search your library');
+      icon-name: 'loupe-large-symbolic';
+
+      accessibility {
+        label: _('Open the search popover');
+      }
+    }
+
+    [end]
+    MenuButton progress_menu_button {
+      visible: false;
+      can-focus: true;
+      tooltip-text: _('Display background task progress');
+
+      Spinner progress_spinner {}
+
+      styles [
+        "flat",
+      ]
+    }
+  }
+
+  SearchBar search_bar {
+    search-mode-enabled: bind search_button.active bidirectional;
+
+    Adw.Clamp {
+      margin-start: 6;
+      margin-end: 6;
+      margin-bottom: 6;
+      maximum-size: 450;
+
+      SearchEntry search_entry {
+        search-delay: 100;
+        placeholder-text: _('Start typing...');
+        hexpand: true;
+      }
+    }
+  }
+}
+
+menu primary_menu {
+  section {
+    item {
+      action: 'app.scan';
+      label: _('_Scan Library');
+    }
+  }
+
+  section {
+    item {
+      action: 'app.hide_offline';
+      label: _('_Hide unavailable books');
+    }
+  }
+
+  section {
+    item {
+      action: 'app.prefs';
+      label: _('_Preferences');
+    }
+
+    item {
+      action: 'app.about';
+      label: _('_About Cozy');
+    }
+  }
+
+  section {
+    item {
+      action: 'app.quit';
+      label: _('_Quit');
+    }
+  }
+}

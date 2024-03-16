@@ -231,7 +231,7 @@ msgstr "Open Source Projekte"
 #. line
 #: cozy/ui/main_view.py:211
 msgid "translator-credits"
-msgstr "translator-credits"
+msgstr "Julian Geywitz"
 
 #: cozy/ui/widgets/book_element.py:70
 msgid "Mark as read"

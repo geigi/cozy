@@ -2,13 +2,14 @@ subdir('ui')
 subdir('icons')
 
 gnome.compile_resources(
-  meson.project_name() + '.appdata',
-  'gresource.xml',
-  gresource_bundle: true,
-  install_dir: DATA_DIR,
-  install: true,
+    meson.project_name(),
+    'gresource.xml',
+    dependencies: blueprints,
+    gresource_bundle: true,
+    source_dir: meson.current_build_dir(),
+    install_dir: DATA_DIR,
+    install: true,
 )
-
 
 install_data(
     meson.project_name() + '.gschema.xml',
