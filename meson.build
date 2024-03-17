@@ -81,8 +81,8 @@ install_subdir(
 )
 
 configure_file(
-  input: 'cozy/version.py',
-  output: 'version.py',
+  input: 'cozy/__init__.py',
+  output: '__init__.py',
   configuration: conf,
   install_dir: python_dir + '/cozy'
 )

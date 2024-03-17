@@ -1,19 +1,18 @@
-import os
-
-import requests
 import datetime
-import pytz
-import distro
+import os
 import platform
 
+import distro
+import pytz
+import requests
+from gi.repository import Gtk
+from mutagen import version_string as MutagenVersion
+from peewee import __version__ as PeeweeVersion
+
+from cozy import __version__ as CozyVersion
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
 from cozy.report.log_level import LogLevel
-from cozy.version import __version__ as CozyVersion
-from peewee import __version__ as PeeweeVersion
-from mutagen import version_string as MutagenVersion
-
-from gi.repository import Gtk
 
 URL = 'https://errors.cozy.sh:3100/api/prom/push'
 ENABLE = '@INSTALLED@'

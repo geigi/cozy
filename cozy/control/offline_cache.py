@@ -194,8 +194,7 @@ class OfflineCache(EventSender):
 
             if not new_item.copied and os.path.exists(new_item.original_file.path):
                 log.info("Copying item: %r", new_item)
-                self.emit_event_main_thread("message",
-                                            _("Copying") + " " + tools.shorten_string(book.name, 30))
+                self.emit_event_main_thread("message", _("Copying") + " " + book.name)
                 self.current = new_item
 
                 destination = Gio.File.new_for_path(os.path.join(self.cache_dir, new_item.cached_file))

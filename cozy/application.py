@@ -1,5 +1,4 @@
 import logging
-import os
 import platform
 import sys
 import threading
@@ -9,6 +8,7 @@ from traceback import format_exception
 import distro
 from gi.repository import Adw, GLib
 
+from cozy import __version__
 from cozy.app_controller import AppController
 from cozy.control.db import init_db
 from cozy.control.mpris import MPRIS
@@ -17,7 +17,6 @@ from cozy.db.storage import Storage
 from cozy.report import reporter
 from cozy.ui.main_view import CozyUI
 from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.version import __version__
 
 log = logging.getLogger("application")
 

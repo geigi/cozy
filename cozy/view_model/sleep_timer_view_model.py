@@ -3,7 +3,6 @@ import os
 from enum import Enum, auto
 from typing import Optional
 
-from cozy import tools
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable
 from cozy.ext import inject
@@ -80,7 +79,7 @@ class SleepTimerViewModel(Observable):
             return
 
         log.info("Start Timer")
-        self._sleep_timer = tools.IntervalTimer(1, self._on_timer_tick)
+        self._sleep_timer = IntervalTimer(1, self._on_timer_tick)
         self._sleep_timer.start()
 
     def _stop_timer(self):
@@ -119,18 +118,17 @@ class SleepTimerViewModel(Observable):
         self._player.pause(fadeout=fadeout > 0)
 
     def _handle_system_power_event(self):
-        platform = tools.system_platform()
-        command = ""
+        command = None
 
         if self.system_power_control == SystemPowerControl.SHUTDOWN:
             log.info("system will attempt to shutdown now!")
-            if platform is tools.Platform.Linux:
+            if "linux" in sys.platform.lower():
                 command = "systemctl poweroff"
             else:
                 command = "shutdown -h now"
         elif self.system_power_control == SystemPowerControl.SUSPEND:
             log.info("system will attempt to suspend now!")
-            if platform is tools.Platform.Linux:
+            if "linux" in sys.platform.lower():
                 command = "systemctl suspend"
 
         if command:
