@@ -71,7 +71,7 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed instructions and developing Co
 - `python3`
 - `meson >= 0.40.0` as build system
 - `gtk4 >= 4.10`
-- `libadwaita >= 1.4.0`
+- `libadwaita >= 1.5.0`
 - `peewee >= 3.9.6` as object relation mapper
 - `mutagen` for meta tag management
 - `distro`
