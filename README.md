@@ -72,13 +72,13 @@ flatpak uninstall --user com.github.geigi.cozy/x86_64/stable
 Thanks to @Meresmata
 
 ### I store my audiobooks in a location that is not accessible in the Flatpak sandbox:
-You can override the flatpak settings and allow access to a path (e.g. /media) like this:
+You can override the flatpak settings and allow access to a path (e.g. `/media`) like this:
 ```console
 flatpak --user override --filesystem=/media com.github.geigi.cozy
 ```
 
 ## Thanks
-A big thanks to all the contributors and translators. See the complete list in [AUTHORS.md](AUTHORS.MD)
+A big thanks to all the contributors and translators! See the complete list in [AUTHORS.md](AUTHORS.MD)
 
 
 ## Help us translate Cozy!
