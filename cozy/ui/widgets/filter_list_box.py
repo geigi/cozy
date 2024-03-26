@@ -12,7 +12,7 @@ class FilterListBox(Gtk.ListBox):
     def __init__(self, **properties):
         super().__init__(**properties)
 
-    def populate(self, elements: List[str]):
+    def populate(self, elements: list[str]):
         self.remove_all_children()
 
         all_row = ListBoxRowWithData(_("All"), True)

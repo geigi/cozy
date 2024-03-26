@@ -139,7 +139,7 @@ class TagReader:
 
         return values
 
-    def _get_m4b_chapters(self, mutagen_tags: MP4) -> List[Chapter]:
+    def _get_m4b_chapters(self, mutagen_tags: MP4) -> list[Chapter]:
         chapters = []
 
         if not mutagen_tags.chapters or len(mutagen_tags.chapters) == 0:

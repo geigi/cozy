@@ -24,7 +24,7 @@ class BookIsEmpty(Exception):
 
 
 class Book(Observable, EventSender):
-    _chapters: List[Chapter] = None
+    _chapters: list[Chapter] = None
     _settings: Settings = inject.attr(Settings)
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
@@ -161,7 +161,7 @@ class Book(Observable, EventSender):
 
     @property
     def duration(self):
-        return sum((chapter.length for chapter in self.chapters))
+        return sum(chapter.length for chapter in self.chapters)
 
     @property
     def progress(self):

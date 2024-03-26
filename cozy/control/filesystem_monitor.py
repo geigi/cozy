@@ -27,7 +27,7 @@ class ExternalStorage:
 
 
 class FilesystemMonitor(EventSender):
-    external_storage: List[ExternalStorage] = []
+    external_storage: list[ExternalStorage] = []
     _settings: Settings = inject.attr(Settings)
 
     def __init__(self):
@@ -84,7 +84,7 @@ class FilesystemMonitor(EventSender):
         return storage.online
 
     def is_external(self, directory: str) -> bool:
-        mounts: List[Gio.Mount] = self.volume_monitor.get_mounts()
+        mounts: list[Gio.Mount] = self.volume_monitor.get_mounts()
 
         for mount in mounts:
             root = mount.get_root()

@@ -5,7 +5,7 @@ from gi.repository import GLib
 
 
 class EventSender:
-    _listeners: List[Callable]
+    _listeners: list[Callable]
 
     def __init__(self):
         self._listeners = []

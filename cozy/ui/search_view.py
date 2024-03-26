@@ -1,5 +1,6 @@
 import threading
-from typing import Callable, Sequence
+from typing import Callable
+from collections.abc import Sequence
 
 from gi.repository import Adw, Gtk
 

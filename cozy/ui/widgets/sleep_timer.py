@@ -71,7 +71,7 @@ class SleepTimer(Gtk.Popover):
         if self._view_model.remaining_seconds < 1:
             value = 0
         else:
-            value = int((self._view_model.remaining_seconds / 60)) + 1
+            value = int(self._view_model.remaining_seconds / 60) + 1
 
         self.timer_scale.set_value(value)
 

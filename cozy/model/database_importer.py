@@ -39,9 +39,9 @@ class DatabaseImporter:
     _db = inject.attr(SqliteDatabase)
 
     def __init__(self):
-        self._book_update_positions: List[BookUpdatePositionRequest] = []
+        self._book_update_positions: list[BookUpdatePositionRequest] = []
 
-    def insert_many(self, media_files: Set[MediaFile]):
+    def insert_many(self, media_files: set[MediaFile]):
         self._book_update_positions = []
 
         files = self._prepare_files_db_objects(media_files)
@@ -50,7 +50,7 @@ class DatabaseImporter:
         self._insert_tracks(tracks)
         self._update_book_positions()
 
-    def _prepare_files_db_objects(self, media_files: Set[MediaFile]) -> List[object]:
+    def _prepare_files_db_objects(self, media_files: set[MediaFile]) -> list[object]:
         files = []
 
         for media_file in media_files:
@@ -71,8 +71,8 @@ class DatabaseImporter:
         file.modified = media_file.modified
         file.save(only=file.dirty_fields)
 
-    def _prepare_track_db_objects(self, media_files: Set[MediaFile]) -> Set[TrackInsertRequest]:
-        book_db_objects: Set[BookModel] = set()
+    def _prepare_track_db_objects(self, media_files: set[MediaFile]) -> set[TrackInsertRequest]:
+        book_db_objects: set[BookModel] = set()
 
         for media_file in media_files:
             if not media_file:
@@ -150,7 +150,7 @@ class DatabaseImporter:
                                 position=0,
                                 rating=-1)
 
-    def _get_track_db_objects_for_media_file(self, media_file: MediaFile) -> List[Track]:
+    def _get_track_db_objects_for_media_file(self, media_file: MediaFile) -> list[Track]:
         all_track_mappings = TrackToFile.select().join(File).where(TrackToFile.file.path == media_file.path)
 
         for item in all_track_mappings:
@@ -173,7 +173,7 @@ class DatabaseImporter:
 
         return all_track_mappings.count()
 
-    def _insert_tracks(self, tracks: Set[TrackInsertRequest]):
+    def _insert_tracks(self, tracks: set[TrackInsertRequest]):
         for track in tracks:
             track_db = Track.insert(track.track_data).execute()
             TrackToFile.create(track=track_db, file=track.file, start_at=track.start_at)

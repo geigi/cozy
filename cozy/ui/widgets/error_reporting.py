@@ -87,7 +87,7 @@ class ErrorReporting(Gtk.Box):
         details = ""
         for i in range(value + 1):
             for line in LEVEL_DETAILS[i]:
-                details += "• {}\n".format(line)
+                details += f"• {line}\n"
         self.details_label.set_text(details)
 
     def _on_app_setting_changed(self, event, _):

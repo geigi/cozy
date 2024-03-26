@@ -124,8 +124,8 @@ def _update_db_9(db):
     db.stop()
     db.start()
 
-    files: List[File] = []
-    track_to_files: List[TrackToFile] = []
+    files: list[File] = []
+    track_to_files: list[TrackToFile] = []
     file_id = 1
 
     if "file" in models["track"]._meta.sorted_field_names:
