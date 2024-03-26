@@ -167,7 +167,7 @@ class Importer(EventSender):
     def _walk_paths_to_scan(self, paths: list[str]) -> list[str]:
         """Get all files recursive inside a directory. Returns absolute paths."""
         for path in paths:
-            for directory, subdirectories, files in os.walk(path):
+            for directory, _, files in os.walk(path):
                 for file in files:
                     filepath = os.path.join(directory, file)
                     yield filepath

@@ -28,7 +28,7 @@ class Track(Chapter):
         except DoesNotExist:
             log.error("Inconsistent DB, TrackToFile object is missing. Deleting this track.")
             self._db_object.delete_instance(recursive=True, delete_nullable=False)
-            raise TrackInconsistentData
+            raise TrackInconsistentData from None
 
     @property
     def name(self):

@@ -55,8 +55,7 @@ class ArtworkCache:
         q.execute()
 
     def _on_importer_event(self, event, data):
-        if event == "scan":
-            if data == ScanStatus.STARTED:
+        if event == "scan" and data == ScanStatus.STARTED:
                 self.delete_artwork_cache()
 
     def _create_artwork_cache(self, book, pixbuf, size):
@@ -123,10 +122,7 @@ class ArtworkCache:
         path = self.get_album_art_path(book, size)
 
         try:
-            if path:
-                pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
-            else:
-                pixbuf = None
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file(path) if path else None
         except Exception as e:
             log.warning("Failed to load pixbuf from path: %s. Deleting file.", path)
             log.debug(e)

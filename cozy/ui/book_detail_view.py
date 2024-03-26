@@ -1,4 +1,5 @@
 import logging
+from contextlib import suppress
 import time
 from threading import Event, Thread
 from typing import Optional, Callable
@@ -278,10 +279,8 @@ class BookDetailView(Gtk.Box):
     def _interrupt_chapters_jobs(self):
         self._chapters_job_locked = True
 
-        try:
+        with suppress(AttributeError):
             self._chapters_thread.join(timeout=0.2)
-        except AttributeError:
-            pass
 
     def _prepare_chapters_job(self):
         self._chapters_job_locked: bool = False

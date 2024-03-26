@@ -1,5 +1,7 @@
 import os
 
+from contextlib import suppress
+
 import requests
 import datetime
 import pytz
@@ -79,10 +81,9 @@ def report(component: str, type: LogLevel, message: str, exception: Exception):
             }
         ]
     }
-    try:
+
+    with suppress(Exception):
         requests.post(URL, json=payload, headers=headers, timeout=10)
-    except:
-        pass
 
 
 def __append_label(labels, new_label_name, new_label_content):

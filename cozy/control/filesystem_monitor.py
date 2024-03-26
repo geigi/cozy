@@ -42,7 +42,6 @@ class FilesystemMonitor(EventSender):
         self._settings_view_model.add_listener(self.__on_settings_changed)
 
     def init_offline_mode(self):
-        external_storage = []
         mounts = self.volume_monitor.get_mounts()
         # go through all audiobook locations and test if they can be found in the mounts list
 

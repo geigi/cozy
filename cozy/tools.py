@@ -37,10 +37,7 @@ def is_elementary():
     """
     dist = distro.linux_distribution(full_distribution_name=False)
     log.debug(dist)
-    if '"elementary"' in dist or 'elementary' in dist:
-        return True
-    else:
-        return False
+    return '"elementary"' in dist or 'elementary' in dist
 
 
 # https://stackoverflow.com/questions/323972/is-there-any-way-to-kill-a-thread-in-python

@@ -78,10 +78,7 @@ class LibraryViewModel(Observable, EventSender):
 
     @property
     def is_any_book_in_progress(self) -> bool:
-        for book in self.books:
-            if book.position > 0:
-                return True
-        return False
+        return any(book.position > 0 for book in self.books)
 
     @property
     def authors(self):
@@ -152,10 +149,7 @@ class LibraryViewModel(Observable, EventSender):
         self._notify("library_view_mode")
 
     def book_files_exist(self, book: Book) -> bool:
-        for chapter in book.chapters:
-            if os.path.isfile(chapter.file):
-                return True
-        return False
+        return any(os.path.isfile(chapter.file) for chapter in book.chapters)
 
     def _on_fs_monitor_event(self, event, _):
         if event in {"storage-online", "storage-offline"}:

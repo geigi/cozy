@@ -91,10 +91,7 @@ def get_track_for_playback(book):
     query = Track.select().where(Track.id == book.position)
     if book.position < 1:
         track_items = get_tracks(book)
-        if len(track_items) > 0:
-            track = get_tracks(book)[0]
-        else:
-            track = None
+        track = get_tracks(book)[0] if len(track_items) > 0 else None
     elif query.exists():
         track = query.get()
     else:

@@ -118,7 +118,7 @@ class OfflineCache(EventSender):
 
     def get_cached_path(self, chapter: Chapter):
         query = OfflineCacheModel.select().where(OfflineCacheModel.original_file == chapter.file_id,
-                                                 OfflineCacheModel.copied == True)
+                                                 OfflineCacheModel.copied)
         if query.count() > 0:
             return os.path.join(self.cache_dir, query.get().cached_file)
         else:
@@ -244,11 +244,7 @@ class OfflineCache(EventSender):
         offline_files = OfflineCacheModel.select().where(OfflineCacheModel.original_file << file_ids)
         offline_file_ids = [file.original_file.id for file in offline_files]
 
-        for chapter in book.chapters:
-            if chapter.file_id not in offline_file_ids:
-                return False
-
-        return True
+        return all(chapter.file_id in offline_file_ids for chapter in book.chapters)
 
     def _is_processing(self):
         """
@@ -259,7 +255,7 @@ class OfflineCache(EventSender):
             return False
 
     def _fill_queue_from_db(self):
-        for item in OfflineCacheModel.select().where(OfflineCacheModel.copied == False):
+        for item in OfflineCacheModel.select().where(not OfflineCacheModel.copied):
             if not any(item.id == queued.id for queued in self.queue):
                 self.queue.append(item)
                 self.total_batch_count += 1

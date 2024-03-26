@@ -1,4 +1,5 @@
 import logging
+from contextlib import suppress
 
 from peewee import SqliteDatabase, DoesNotExist
 
@@ -221,10 +222,8 @@ class Book(Observable, EventSender):
 
     def _on_chapter_event(self, event: str, chapter: Chapter):
         if event == "chapter-deleted":
-            try:
+            with suppress(ValueError):
                 self.chapters.remove(chapter)
-            except ValueError:
-                pass
 
             if len(self._chapters) < 1:
                 if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:

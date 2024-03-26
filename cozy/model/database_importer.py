@@ -162,10 +162,7 @@ class DatabaseImporter:
     def _is_chapter_count_in_db_different(self, media_file: MediaFile) -> bool:
         all_track_mappings = self._get_chapter_count_in_db(media_file)
 
-        if all_track_mappings != len(media_file.chapters):
-            return True
-        else:
-            return False
+        return all_track_mappings != len(media_file.chapters)
 
     def _get_chapter_count_in_db(self, media_file: MediaFile) -> int:
         all_track_mappings = TrackToFile.select().join(File).where(TrackToFile.file.path == media_file.path)
