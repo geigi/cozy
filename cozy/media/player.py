@@ -384,7 +384,7 @@ class Player(EventSender):
     def _fadeout_playback(self):
         duration = self._app_settings.sleep_timer_fadeout_duration * 20
         current_vol = self._gst_player.volume
-        for i in range(0, duration):
+        for i in range(duration):
             volume = max(current_vol - (i / duration), 0)
             self._gst_player.position = volume
             time.sleep(0.05)

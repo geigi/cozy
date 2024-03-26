@@ -1,5 +1,4 @@
 import os
-from typing import List
 from urllib.parse import unquote, urlparse
 
 import mutagen

@@ -97,7 +97,7 @@ class ArtworkCache:
         if query.exists():
             try:
                 uuid = query.first().uuid
-            except Exception as e:
+            except Exception:
                 reporter.error("artwork_cache", "load_pixbuf_from_cache: query exists but query.first().uuid crashed.")
                 return None
         else:

@@ -1,6 +1,5 @@
 import logging
 
-import gi
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.db.book import Book

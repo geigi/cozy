@@ -1,5 +1,5 @@
 import logging
-from typing import List, Set, Optional
+from typing import Optional
 
 from peewee import SqliteDatabase
 

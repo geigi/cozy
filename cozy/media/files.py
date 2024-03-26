@@ -1,6 +1,5 @@
 import logging
 import os
-import urllib
 from pathlib import Path
 
 from gi.repository import Gio

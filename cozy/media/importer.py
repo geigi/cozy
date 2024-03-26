@@ -4,7 +4,6 @@ import os
 import time
 from enum import Enum, auto
 from multiprocessing.pool import Pool as Pool
-from typing import List, Set
 from urllib.parse import urlparse, unquote
 
 from cozy.architecture.event_sender import EventSender
@@ -38,7 +37,7 @@ def import_file(path: str):
     try:
         media_detector = MediaDetector(path)
         media_data = media_detector.get_media_data()
-    except NotAnAudioFile as e:
+    except NotAnAudioFile:
         return None
     except AudioFileCouldNotBeDiscovered as e:
         return unquote(urlparse(str(e)).path)

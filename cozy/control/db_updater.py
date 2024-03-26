@@ -2,7 +2,6 @@ import logging
 import os
 import shutil
 from datetime import datetime
-from typing import List
 
 from peewee import IntegerField, BooleanField, FloatField, ForeignKeyField, fn
 from playhouse.migrate import SqliteMigrator, migrate
@@ -240,7 +239,7 @@ def update_db():
     # First test for version 1
     try:
         next(c for c in db.get_columns("settings") if c.name == "version")
-    except Exception as e:
+    except Exception:
         if len(db.get_tables()) == 0:
             data_dir = get_data_dir()
             if os.path.exists(os.path.join(data_dir, "cozy.db")):

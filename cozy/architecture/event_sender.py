@@ -1,6 +1,5 @@
-from typing import List, Callable
+from typing import Callable
 
-import gi
 from gi.repository import GLib
 
 

@@ -1,4 +1,4 @@
-from gi.repository import Adw, Gtk, GObject
+from gi.repository import Adw, Gtk
 
 from .storages import ask_storage_location
 

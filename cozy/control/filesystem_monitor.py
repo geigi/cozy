@@ -1,5 +1,4 @@
 import logging
-from typing import List
 
 import cozy.ext.inject as inject
 from gi.repository import Gio
@@ -59,7 +58,6 @@ class FilesystemMonitor(EventSender):
         Free all references.
         """
         # self.volume_monitor.unref()
-        pass
 
     def get_book_online(self, book: Book):
         try:

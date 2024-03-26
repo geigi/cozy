@@ -1,6 +1,5 @@
 from gettext import gettext as _
 
-import gi
 
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject

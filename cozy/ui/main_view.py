@@ -1,6 +1,4 @@
 import logging
-import os
-from collections import defaultdict
 from threading import Thread
 from typing import Callable
 
@@ -17,9 +15,7 @@ from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
-from cozy.view_model.settings_view_model import SettingsViewModel
 from cozy.view_model.storages_view_model import StoragesViewModel
-from cozy.open_view import OpenView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.about_window import AboutWindow
 from cozy.ui.preferences_window import PreferencesWindow

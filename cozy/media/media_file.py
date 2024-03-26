@@ -1,4 +1,3 @@
-from typing import List
 
 from cozy.media.chapter import Chapter
 

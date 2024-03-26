@@ -13,7 +13,6 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library
-from cozy.model.storage import Storage
 from cozy.open_view import OpenView
 from cozy.report import reporter
 from cozy.ui.widgets.book_element import BookElement
@@ -159,11 +158,7 @@ class LibraryViewModel(Observable, EventSender):
         return False
 
     def _on_fs_monitor_event(self, event, _):
-        if event == "storage-online":
-            self._notify("authors")
-            self._notify("readers")
-            self._notify("books-filter")
-        elif event == "storage-offline":
+        if event in {"storage-online", "storage-offline"}:
             self._notify("authors")
             self._notify("readers")
             self._notify("books-filter")

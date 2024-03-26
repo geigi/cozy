@@ -1,4 +1,3 @@
-import functools
 from typing import Optional
 
 from gi.repository import Adw, Gtk

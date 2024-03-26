@@ -1,5 +1,4 @@
 import logging
-from typing import List, Set
 
 from peewee import fn, SqliteDatabase
 

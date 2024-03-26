@@ -7,7 +7,7 @@ from cozy.control.artwork_cache import ArtworkCache
 from cozy.model.book import Book
 from cozy.ext import inject
 
-from gi.repository import Gtk, GObject, Gdk
+from gi.repository import Gtk, GObject
 
 ALBUM_ART_SIZE = 200
 PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.NORMAL

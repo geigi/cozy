@@ -6,7 +6,6 @@ import os
 from cozy.architecture.event_sender import EventSender
 from cozy.control.application_directories import get_cache_dir
 import cozy.tools as tools
-import cozy.ui
 
 from gi.repository import Gio
 

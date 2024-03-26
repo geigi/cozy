@@ -3,7 +3,6 @@ import time
 from threading import Event, Thread
 from typing import Optional, Callable
 
-import gi
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.ext import inject
@@ -281,7 +280,7 @@ class BookDetailView(Gtk.Box):
 
         try:
             self._chapters_thread.join(timeout=0.2)
-        except AttributeError as e:
+        except AttributeError:
             pass
 
     def _prepare_chapters_job(self):

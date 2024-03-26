@@ -1,9 +1,7 @@
-from typing import List
 
 from gi.repository import Gtk
 
 from cozy.ui.list_box_row_with_data import ListBoxRowWithData
-from cozy.ui.list_box_separator_row import ListBoxSeparatorRow
 
 
 class FilterListBox(Gtk.ListBox):
