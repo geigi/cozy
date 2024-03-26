@@ -4,13 +4,13 @@ import os
 import time
 from enum import Enum, auto
 from multiprocessing.pool import Pool as Pool
-from urllib.parse import urlparse, unquote
+from urllib.parse import unquote, urlparse
 
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.profiler import timing
 from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
 from cozy.ext import inject
-from cozy.media.media_detector import MediaDetector, NotAnAudioFile, AudioFileCouldNotBeDiscovered
+from cozy.media.media_detector import AudioFileCouldNotBeDiscovered, MediaDetector, NotAnAudioFile
 from cozy.media.media_file import MediaFile
 from cozy.model.database_importer import DatabaseImporter
 from cozy.model.library import Library

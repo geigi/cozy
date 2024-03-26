@@ -1,8 +1,8 @@
 import logging
 
-import cozy.ext.inject as inject
 from gi.repository import Gio
 
+import cozy.ext.inject as inject
 from cozy.architecture.event_sender import EventSender
 from cozy.model.book import Book
 from cozy.model.settings import Settings

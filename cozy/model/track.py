@@ -1,6 +1,6 @@
 import logging
 
-from peewee import SqliteDatabase, DoesNotExist
+from peewee import DoesNotExist, SqliteDatabase
 
 from cozy.db.file import File
 from cozy.db.track import Track as TrackModel

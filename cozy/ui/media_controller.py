@@ -1,5 +1,6 @@
 import logging
 
+from gi.repository import Adw, Gdk, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.db.book import Book
@@ -8,8 +9,6 @@ from cozy.ui.widgets.playback_speed_popover import PlaybackSpeedPopover
 from cozy.ui.widgets.seek_bar import SeekBar
 from cozy.ui.widgets.sleep_timer import SleepTimer
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
-
-from gi.repository import Adw, Gtk, Gdk
 
 log = logging.getLogger("MediaController")
 

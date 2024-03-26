@@ -1,6 +1,6 @@
 import logging
 
-from peewee import fn, SqliteDatabase
+from peewee import SqliteDatabase, fn
 
 from cozy.db.book import Book as BookModel
 from cozy.db.file import File

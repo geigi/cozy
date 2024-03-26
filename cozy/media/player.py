@@ -3,7 +3,6 @@ import os
 import time
 from threading import Thread
 from typing import Optional
-from cozy.media.importer import Importer, ScanStatus
 
 from gi.repository import GLib, Gst
 
@@ -12,6 +11,7 @@ from cozy.architecture.event_sender import EventSender
 from cozy.control.offline_cache import OfflineCache
 from cozy.ext import inject
 from cozy.media.gst_player import GstPlayer, GstPlayerState
+from cozy.media.importer import Importer, ScanStatus
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.model.library import Library

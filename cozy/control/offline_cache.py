@@ -1,14 +1,12 @@
 import logging
-import uuid
 import os
-
-
-from cozy.architecture.event_sender import EventSender
-from cozy.control.application_directories import get_cache_dir
-import cozy.tools as tools
+import uuid
 
 from gi.repository import Gio
 
+import cozy.tools as tools
+from cozy.architecture.event_sender import EventSender
+from cozy.control.application_directories import get_cache_dir
 from cozy.db.file import File
 from cozy.db.offline_cache import OfflineCache as OfflineCacheModel
 from cozy.db.track_to_file import TrackToFile

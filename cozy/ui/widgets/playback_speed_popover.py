@@ -1,7 +1,7 @@
+from gi.repository import Gtk
+
 from cozy.ext import inject
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
-
-from gi.repository import Gtk
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/ui/playback_speed_popover.ui')

@@ -1,7 +1,7 @@
+from gi.repository import Gtk
+
 from cozy.ext import inject
 from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel, SystemPowerControl
-
-from gi.repository import Gtk
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/ui/timer_popover.ui')

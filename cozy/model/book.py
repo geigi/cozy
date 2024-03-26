@@ -1,13 +1,13 @@
 import logging
 from contextlib import suppress
 
-from peewee import SqliteDatabase, DoesNotExist
+from peewee import DoesNotExist, SqliteDatabase
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
-from cozy.db.collation import collate_natural
 from cozy.db.book import Book as BookModel
+from cozy.db.collation import collate_natural
 from cozy.db.track import Track as TrackModel
 from cozy.db.track_to_file import TrackToFile
 from cozy.ext import inject

@@ -1,8 +1,8 @@
+from typing import Callable
+
 from gi.repository import Adw, Gtk
 
 from .storages import ask_storage_location
-
-from typing import Callable
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/ui/first_import_button.ui')

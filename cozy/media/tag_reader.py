@@ -2,9 +2,8 @@ import os
 from urllib.parse import unquote, urlparse
 
 import mutagen
+from gi.repository import GLib, Gst, GstPbutils
 from mutagen.mp4 import MP4
-
-from gi.repository import GstPbutils, Gst, GLib
 
 from cozy.media.chapter import Chapter
 from cozy.media.media_file import MediaFile

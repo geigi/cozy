@@ -1,12 +1,10 @@
 import logging
 
+from gi.repository import Adw, GObject, Gtk
 
 from cozy.ext import inject
 from cozy.ui.widgets.progress_popover import ProgressPopover
-from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarState
-
-from gi.repository import Adw, Gtk, GObject
-
+from cozy.view_model.headerbar_view_model import HeaderBarState, HeaderbarViewModel
 
 log = logging.getLogger("Headerbar")
 

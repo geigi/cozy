@@ -1,10 +1,11 @@
-from datetime import datetime
-import time
+import logging as log
 import threading
-from platform import system as get_system
+import time
+from datetime import datetime
 from enum import Enum
 from gettext import ngettext
-import logging as log
+from platform import system as get_system
+
 import distro
 
 

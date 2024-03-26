@@ -1,12 +1,11 @@
 import logging
 import pathlib
 
-from cozy.architecture.event_sender import EventSender
+from gi.repository import Gst, GstPbutils
 
+from cozy.architecture.event_sender import EventSender
 from cozy.media.media_file import MediaFile
 from cozy.media.tag_reader import TagReader
-
-from gi.repository import Gst, GstPbutils
 
 log = logging.getLogger("media_detector")
 

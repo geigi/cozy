@@ -15,8 +15,8 @@ from cozy.model.book import Book
 from cozy.model.library import Library
 from cozy.open_view import OpenView
 from cozy.report import reporter
-from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.import_failed_dialog import ImportFailedDialog
+from cozy.ui.widgets.book_element import BookElement
 from cozy.view_model.storages_view_model import StoragesViewModel
 
 log = logging.getLogger("library_view_model")

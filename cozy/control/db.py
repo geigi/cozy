@@ -1,7 +1,6 @@
 import logging
 import time
 
-
 from cozy.control.db_updater import update_db
 from cozy.db.artwork_cache import ArtworkCache
 from cozy.db.book import Book

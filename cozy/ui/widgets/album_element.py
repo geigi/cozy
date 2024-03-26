@@ -2,12 +2,11 @@ import logging
 import math
 
 import cairo
+from gi.repository import GObject, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
-from cozy.model.book import Book
 from cozy.ext import inject
-
-from gi.repository import Gtk, GObject
+from cozy.model.book import Book
 
 ALBUM_ART_SIZE = 200
 PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.NORMAL

@@ -4,7 +4,6 @@ from gi.repository import Adw, Gtk
 
 from cozy.ext import inject
 
-
 HEADER = _("This can have multiple reasons:")
 POSSIBILITIES = "\n     • ".join((  # yes, it is a hack, because \t would be too wide
     "",

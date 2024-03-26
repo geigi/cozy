@@ -3,10 +3,10 @@ from typing import Optional
 from gi.repository import Adw, Gtk
 
 from cozy.ext import inject
-from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.delete_book_view import DeleteBookView
+from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
+from cozy.view_model.library_view_model import LibraryViewMode, LibraryViewModel
 
 READER_PAGE = "reader"
 AUTHOR_PAGE = "author"

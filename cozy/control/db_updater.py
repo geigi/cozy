@@ -3,7 +3,7 @@ import os
 import shutil
 from datetime import datetime
 
-from peewee import IntegerField, BooleanField, FloatField, ForeignKeyField, fn
+from peewee import BooleanField, FloatField, ForeignKeyField, IntegerField, fn
 from playhouse.migrate import SqliteMigrator, migrate
 from playhouse.reflection import generate_models
 

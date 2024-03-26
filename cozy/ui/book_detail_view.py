@@ -1,9 +1,10 @@
 import logging
-from contextlib import suppress
 import time
+from contextlib import suppress
 from threading import Event, Thread
-from typing import Optional, Callable
+from typing import Callable, Optional
 
+from gi.repository import Adw, GLib, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.ext import inject
@@ -13,8 +14,6 @@ from cozy.report import reporter
 from cozy.ui.chapter_element import ChapterElement
 from cozy.ui.disk_element import DiskElement
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
-
-from gi.repository import Adw, GLib, Gtk
 
 log = logging.getLogger("BookDetailView")
 
