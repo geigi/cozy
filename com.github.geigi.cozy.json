@@ -6,19 +6,15 @@
   "command": "com.github.geigi.cozy",
   "finish-args": [
     "--share=ipc",
+    "--share=network",
     "--socket=fallback-x11",
     "--socket=wayland",
-    "--device=dri",
-    "--share=network",
     "--socket=pulseaudio",
+    "--device=dri",
     "--filesystem=host",
     "--filesystem=xdg-run/gvfs",
     "--filesystem=xdg-run/gvfsd",
-    "--talk-name=org.freedesktop.Notifications",
-    "--talk-name=org.gtk.vfs.*",
-    "--own-name=org.mpris.MediaPlayer2.Cozy",
-    "--metadata=X-DConf=migrate-path=/com/github/geigi/cozy/",
-    "--env=LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/lib"
+    "--talk-name=org.gtk.vfs.*"
   ],
   "modules": [
     {

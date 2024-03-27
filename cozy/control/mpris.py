@@ -219,7 +219,7 @@ class MPRIS(Server):
         self._bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
         Gio.bus_own_name_on_connection(
             self._bus,
-            "org.mpris.MediaPlayer2.Cozy",
+            "org.mpris.MediaPlayer2.com.github.geigi.cozy",
             Gio.BusNameOwnerFlags.NONE,
             None,
             None,
