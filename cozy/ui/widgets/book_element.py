@@ -1,4 +1,4 @@
-from gi.repository import Gtk, GObject, Gdk, Gio
+from gi.repository import Gdk, Gio, GObject, Gtk
 
 from cozy.model.book import Book
 from cozy.ui.widgets.album_element import AlbumElement

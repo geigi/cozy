@@ -1,6 +1,5 @@
 import webbrowser
 
-import gi
 from gi.repository import Adw
 
 EXPLANATION = _("During an update of the database an error occurred and Cozy will not be able to startup.\

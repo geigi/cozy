@@ -1,11 +1,9 @@
 from gettext import gettext as _
 
-import gi
+from gi.repository import Gtk
 
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
-
-from gi.repository import Gtk
 
 LEVELS = [
     _("Disabled"),
@@ -87,7 +85,7 @@ class ErrorReporting(Gtk.Box):
         details = ""
         for i in range(value + 1):
             for line in LEVEL_DETAILS[i]:
-                details += "• {}\n".format(line)
+                details += f"• {line}\n"
         self.details_label.set_text(details)
 
     def _on_app_setting_changed(self, event, _):

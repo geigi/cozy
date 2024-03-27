@@ -1,5 +1,6 @@
+from peewee import BlobField, BooleanField, CharField, FloatField, IntegerField
+
 from cozy.db.model_base import ModelBase
-from peewee import CharField, IntegerField, BlobField, FloatField, BooleanField
 
 
 class Book(ModelBase):

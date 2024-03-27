@@ -1,5 +1,6 @@
 import threading
-from typing import Callable, Sequence
+from collections.abc import Sequence
+from typing import Callable
 
 from gi.repository import Adw, Gtk
 
@@ -109,10 +110,7 @@ class SearchView(Adw.Bin):
         if not results:
             return
 
-        if isinstance(results[0], Book):
-            row_type = BookRow
-        else:
-            row_type = ArtistResultRow
+        row_type = BookRow if isinstance(results[0], Book) else ArtistResultRow
 
         for result in results:
             listbox.append(row_type(result, callback))

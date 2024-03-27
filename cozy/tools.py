@@ -1,10 +1,11 @@
-from datetime import datetime
-import time
+import logging as log
 import threading
-from platform import system as get_system
+import time
+from datetime import datetime
 from enum import Enum
 from gettext import ngettext
-import logging as log
+from platform import system as get_system
+
 import distro
 
 
@@ -37,10 +38,7 @@ def is_elementary():
     """
     dist = distro.linux_distribution(full_distribution_name=False)
     log.debug(dist)
-    if '"elementary"' in dist or 'elementary' in dist:
-        return True
-    else:
-        return False
+    return '"elementary"' in dist or 'elementary' in dist
 
 
 # https://stackoverflow.com/questions/323972/is-there-any-way-to-kill-a-thread-in-python
@@ -49,7 +47,7 @@ class StoppableThread(threading.Thread):
     regularly for the stopped() condition."""
 
     def __init__(self, target=None):
-        super(StoppableThread, self).__init__(target=target)
+        super().__init__(target=target)
         self._stop_event = threading.Event()
 
     def stop(self):

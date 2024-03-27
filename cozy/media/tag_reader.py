@@ -1,11 +1,9 @@
 import os
-from typing import List
 from urllib.parse import unquote, urlparse
 
 import mutagen
+from gi.repository import GLib, Gst, GstPbutils
 from mutagen.mp4 import MP4
-
-from gi.repository import GstPbutils, Gst, GLib
 
 from cozy.media.chapter import Chapter
 from cozy.media.media_file import MediaFile
@@ -139,24 +137,19 @@ class TagReader:
 
         return values
 
-    def _get_m4b_chapters(self, mutagen_tags: MP4) -> List[Chapter]:
+    def _get_m4b_chapters(self, mutagen_tags: MP4) -> list[Chapter]:
         chapters = []
 
         if not mutagen_tags.chapters or len(mutagen_tags.chapters) == 0:
             return self._get_single_chapter()
 
-        index = 0
-
-        for chapter in mutagen_tags.chapters:
+        for index, chapter in enumerate(mutagen_tags.chapters):
             if index < len(mutagen_tags.chapters) - 1:
                 length = mutagen_tags.chapters[index + 1].start - chapter.start
             else:
                 length = self._get_length_in_seconds() - chapter.start
 
-            if chapter.title:
-                title = chapter.title
-            else:
-                title = ""
+            title = chapter.title or ""
 
             chapters.append(Chapter(
                 name=title,
@@ -164,8 +157,6 @@ class TagReader:
                 length=length,
                 number=index + 1
             ))
-
-            index += 1
 
         return chapters
 
