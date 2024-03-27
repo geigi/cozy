@@ -53,7 +53,7 @@ def test_default_returns_correct_default_value(peewee_database_storage):
     from cozy.model.storage import Storage
 
     storage = Storage(peewee_database_storage, 1)
-    assert storage.default == False
+    assert storage.default is False
 
 
 def test_setting_default_updates_in_track_object_and_database(peewee_database_storage):
@@ -72,7 +72,7 @@ def test_external_returns_correct_default_value(peewee_database_storage):
     from cozy.model.storage import Storage
 
     storage = Storage(peewee_database_storage, 1)
-    assert storage.external == False
+    assert storage.external is False
 
 
 def test_setting_external_updates_in_track_object_and_database(peewee_database_storage):
