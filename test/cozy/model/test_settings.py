@@ -33,7 +33,7 @@ def test_external_storage_locations_contain_only_external_storages(peewee_databa
     from cozy.db.storage import Storage
 
     settings = Settings()
-    storage_locations = Storage.select().where(Storage.external is True)
+    storage_locations = Storage.select().where(Storage.external)
 
     assert len(settings.external_storage_locations) == len(storage_locations)
     assert all(storage.external for storage in settings.external_storage_locations)

@@ -170,7 +170,7 @@ def test_offline_returns_default_value(peewee_database):
     from cozy.db.book import Book as BookDB
 
     book = Book(peewee_database, BookDB.get(1))
-    assert book.offline is False
+    assert not book.offline
 
 
 def test_setting_offline_updates_in_book_object_and_database(peewee_database):
@@ -179,8 +179,8 @@ def test_setting_offline_updates_in_book_object_and_database(peewee_database):
 
     book = Book(peewee_database, BookDB.get(1))
     book.offline = True
-    assert book.offline is True
-    assert BookDB.get_by_id(1).offline is True
+    assert book.offline
+    assert BookDB.get_by_id(1).offline
 
 
 def test_downloaded_returns_default_value(peewee_database):
@@ -188,7 +188,7 @@ def test_downloaded_returns_default_value(peewee_database):
     from cozy.db.book import Book as BookDB
 
     book = Book(peewee_database, BookDB.get(1))
-    assert book.downloaded is False
+    assert not book.downloaded
 
 
 def test_setting_downloaded_updates_in_book_object_and_database(peewee_database):
