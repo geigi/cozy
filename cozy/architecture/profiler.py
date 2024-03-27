@@ -1,6 +1,6 @@
-import time
-import logging
 import functools
+import logging
+import time
 
 log = logging.getLogger("timing")
 

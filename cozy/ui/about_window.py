@@ -5,7 +5,7 @@ from gi.repository import Adw, Gio, Gtk
 
 class AboutWindow:
     def __init__(self, version: str) -> None:
-        self._window = Adw.AboutWindow.new_from_appdata(
+        self._window = Adw.AboutDialog.new_from_appdata(
             "/com/github/geigi/cozy/appdata/com.github.geigi.cozy.appdata.xml",
             release_notes_version=version,
         )
@@ -53,5 +53,4 @@ class AboutWindow:
         )
 
     def present(self, parent: Adw.ApplicationWindow) -> None:
-        self._window.set_transient_for(parent)
-        self._window.present()
+        self._window.present(parent)

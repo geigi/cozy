@@ -7,7 +7,7 @@ from cozy.view_model.settings_view_model import SettingsViewModel
 
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/preferences.ui")
-class PreferencesWindow(Adw.PreferencesWindow):
+class PreferencesWindow(Adw.PreferencesDialog):
     __gtype_name__ = "PreferencesWindow"
 
     _glib_settings: Gio.Settings = inject.attr(Gio.Settings)
@@ -57,5 +57,4 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.storage_locations_view.set_sensitive(not self._view_model.lock_ui)
 
     def present(self, parent: Adw.ApplicationWindow) -> None:
-        self.set_transient_for(parent)
-        super().present()
+        super().present(parent)

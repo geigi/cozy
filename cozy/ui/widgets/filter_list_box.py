@@ -1,9 +1,7 @@
-from typing import List
 
 from gi.repository import Gtk
 
 from cozy.ui.list_box_row_with_data import ListBoxRowWithData
-from cozy.ui.list_box_separator_row import ListBoxSeparatorRow
 
 
 class FilterListBox(Gtk.ListBox):
@@ -12,7 +10,7 @@ class FilterListBox(Gtk.ListBox):
     def __init__(self, **properties):
         super().__init__(**properties)
 
-    def populate(self, elements: List[str]):
+    def populate(self, elements: list[str]):
         self.remove_all_children()
 
         all_row = ListBoxRowWithData(_("All"), True)

@@ -82,7 +82,6 @@ import inspect
 import logging
 import sys
 import threading
-import types
 from functools import wraps
 from typing import (Any, Awaitable, Callable, Dict, Generic, Hashable,
                     Optional, Type, TypeVar, Union, cast, get_type_hints,

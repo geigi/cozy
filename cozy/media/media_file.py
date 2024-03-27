@@ -1,4 +1,3 @@
-from typing import List
 
 from cozy.media.chapter import Chapter
 
@@ -11,10 +10,10 @@ class MediaFile:
     cover: bytes
     path: str
     modified: int
-    chapters: List[Chapter]
+    chapters: list[Chapter]
 
     def __init__(self, book_name: str, author: str, reader: str, disk: int, cover: bytes, path: str, modified: int,
-                 chapters: List[Chapter]):
+                 chapters: list[Chapter]):
         self.book_name = book_name
         self.author = author
         self.reader = reader

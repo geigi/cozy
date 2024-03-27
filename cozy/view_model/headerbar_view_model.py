@@ -7,7 +7,6 @@ from cozy.ext import inject
 from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.model.library import Library
-from cozy.open_view import OpenView
 from cozy.view import View
 
 

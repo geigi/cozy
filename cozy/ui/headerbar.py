@@ -1,12 +1,6 @@
 import logging
 
-import gi
-
-from cozy.ext import inject
-from cozy.ui.widgets.progress_popover import ProgressPopover
-from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarState
-
-from gi.repository import Adw, Gtk, GObject
+from gi.repository import Adw, GObject, Gtk
 
 from cozy.ext import inject
 from cozy.ui.widgets.progress_popover import ProgressPopover
@@ -96,8 +90,6 @@ class Headerbar(Gtk.Box):
         self.search_button.set_active(False)
 
     def _on_mobile_view(self, widget, _):
-        page = self.sort_stack.props.visible_child_name
-
         if widget.props.reveal:
             self.headerbar.set_title_widget(Adw.WindowTitle(title="Cozy"))
         else:

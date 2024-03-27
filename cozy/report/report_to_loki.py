@@ -1,6 +1,7 @@
 import datetime
 import os
 import platform
+from contextlib import suppress
 
 import distro
 import pytz
@@ -9,10 +10,10 @@ from gi.repository import Gtk
 from mutagen import version_string as MutagenVersion
 from peewee import __version__ as PeeweeVersion
 
-from cozy import __version__ as CozyVersion
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
 from cozy.report.log_level import LogLevel
+from cozy.version import __version__ as CozyVersion
 
 URL = 'https://errors.cozy.sh:3100/api/prom/push'
 ENABLE = '@INSTALLED@'
@@ -49,7 +50,7 @@ def report(component: str, type: LogLevel, message: str, exception: Exception):
     labels = __append_label(labels, "app", "cozy")
     labels = __append_label(labels, "level", LOG_LEVEL_MAP[type])
 
-    labels = __append_label(labels, "gtk_version", "{}.{}".format(Gtk.get_major_version(), Gtk.get_minor_version()))
+    labels = __append_label(labels, "gtk_version", f"{Gtk.get_major_version()}.{Gtk.get_minor_version()}")
     labels = __append_label(labels, "python_version", platform.python_version())
     labels = __append_label(labels, "peewee_version", PeeweeVersion)
     labels = __append_label(labels, "mutagen_version", MutagenVersion)
@@ -68,7 +69,7 @@ def report(component: str, type: LogLevel, message: str, exception: Exception):
     payload = {
         'streams': [
             {
-                'labels': "{{{}}}".format(labels),
+                'labels': f"{{{labels}}}",
                 'entries': [
                     {
                         'ts': curr_datetime,
@@ -78,10 +79,9 @@ def report(component: str, type: LogLevel, message: str, exception: Exception):
             }
         ]
     }
-    try:
+
+    with suppress(Exception):
         requests.post(URL, json=payload, headers=headers, timeout=10)
-    except:
-        pass
 
 
 def __append_label(labels, new_label_name, new_label_content):
@@ -90,6 +90,6 @@ def __append_label(labels, new_label_name, new_label_content):
     else:
         labels = ""
 
-    labels += "{}=\"{}\"".format(new_label_name, new_label_content)
+    labels += f"{new_label_name}=\"{new_label_content}\""
 
     return labels
