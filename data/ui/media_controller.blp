@@ -48,7 +48,7 @@ template $MediaController: Adw.BreakpointBin {
 
         Box title_box {
           hexpand: true;
-          tooltip-text: _('Currently playing');
+          tooltip-text: _("Currently playing");
           valign: center;
           orientation: vertical;
           spacing: 2;
@@ -63,7 +63,7 @@ template $MediaController: Adw.BreakpointBin {
             xalign: 0;
 
             accessibility {
-              label: _('Title of currently playing book');
+              label: _("Title of currently playing book");
             }
 
             styles [
@@ -81,7 +81,7 @@ template $MediaController: Adw.BreakpointBin {
             xalign: 0;
 
             accessibility {
-              label: _('Title of the currently playing part');
+              label: _("Title of the currently playing part");
             }
           }
         }
@@ -106,13 +106,13 @@ template $MediaController: Adw.BreakpointBin {
         Button prev_button {
           focusable: true;
           receives-default: true;
-          tooltip-text: _('Rewind');
+          tooltip-text: _("Rewind");
           halign: center;
           valign: center;
           icon-name: 'object-rotate-left-symbolic';
 
           accessibility {
-            label: _('Rewind playback');
+            label: _("Rewind playback");
           }
 
           styles [
@@ -126,13 +126,13 @@ template $MediaController: Adw.BreakpointBin {
           height-request: 42;
           focusable: true;
           receives-default: true;
-          tooltip-text: _('Start playback');
+          tooltip-text: _("Start playback");
           halign: center;
           valign: center;
           icon-name: 'media-playback-start-symbolic';
 
           accessibility {
-            label: _('Start or pause the playback');
+            label: _("Start or pause the playback");
           }
 
           styles [
@@ -145,13 +145,13 @@ template $MediaController: Adw.BreakpointBin {
         Button next_button {
           focusable: true;
           receives-default: true;
-          tooltip-text: _('Forward');
+          tooltip-text: _("Forward");
           halign: center;
           valign: center;
           icon-name: 'object-rotate-right-symbolic';
 
           accessibility {
-            label: _('Forward Playback');
+            label: _("Forward Playback");
           }
 
           styles [
@@ -175,7 +175,7 @@ template $MediaController: Adw.BreakpointBin {
       spacing: 3;
 
       ScaleButton volume_button {
-        tooltip-text: _('Volume control');
+        tooltip-text: _("Volume control");
 
         adjustment: Adjustment {
           lower: 0;
@@ -193,7 +193,7 @@ template $MediaController: Adw.BreakpointBin {
       MenuButton playback_speed_button {
         focusable: true;
         receives-default: true;
-        tooltip-text: _('Playback speed');
+        tooltip-text: _("Playback speed");
         icon-name: 'playback-speed-symbolic';
 
         styles [
@@ -204,14 +204,14 @@ template $MediaController: Adw.BreakpointBin {
       MenuButton timer_button {
         focusable: true;
         receives-default: true;
-        tooltip-text: _('Sleep Timer');
+        tooltip-text: _("Sleep Timer");
 
         Image timer_image {
           icon-name: 'bed-symbolic';
         }
 
         accessibility {
-          label: _('Open the sleep timer popover');
+          label: _("Open the sleep timer popover");
         }
 
         styles [

@@ -25,7 +25,7 @@ Adw.ApplicationWindow app_window {
 
       Adw.StatusPage {
         icon-name: 'library-symbolic';
-        title: _('Drop Audio Books Here to Add Them to Your Library');
+        title: _("Drop Audio Books Here to Add Them to Your Library");
 
         styles [
           "drag-overlay-status-page",
@@ -43,7 +43,7 @@ Adw.ApplicationWindow app_window {
 
             content: Adw.NavigationView navigation_view {
               Adw.NavigationPage {
-                title: _('Library');
+                title: _("Library");
                 tag: 'main';
 
                 Adw.ToolbarView header_container {
@@ -59,7 +59,7 @@ Adw.ApplicationWindow app_window {
 
                         Adw.ViewStackPage {
                           name: 'recent';
-                          title: _('Recent');
+                          title: _("Recent");
                           icon-name: 'recent-symbolic';
 
                           child: Label {
@@ -69,7 +69,7 @@ Adw.ApplicationWindow app_window {
 
                         Adw.ViewStackPage {
                           name: 'author';
-                          title: _('Author');
+                          title: _("Author");
                           icon-name: 'person-symbolic';
 
                           child: ScrolledWindow sort_author_scroller {
@@ -80,7 +80,7 @@ Adw.ApplicationWindow app_window {
                             child: Viewport sort_author_viewport {
                               $FilterListBox author_box {
                                 accessibility {
-                                  label: _('List of authors');
+                                  label: _("List of authors");
                                 }
 
                                 styles [
@@ -97,7 +97,7 @@ Adw.ApplicationWindow app_window {
 
                         Adw.ViewStackPage {
                           name: 'reader';
-                          title: _('Reader');
+                          title: _("Reader");
                           icon-name: 'microphone2-symbolic';
 
                           child: ScrolledWindow sort_reader_scroller {
@@ -108,7 +108,7 @@ Adw.ApplicationWindow app_window {
                             child: Viewport sort_reader_viewport {
                               $FilterListBox reader_box {
                                 accessibility {
-                                  label: _('List of readers');
+                                  label: _("List of readers");
                                 }
 
                                 styles [
@@ -158,7 +158,7 @@ Adw.ApplicationWindow app_window {
                                 selection-mode: none;
 
                                 accessibility {
-                                  label: _('List of books');
+                                  label: _("List of books");
                                 }
 
                                 styles [
@@ -178,8 +178,8 @@ Adw.ApplicationWindow app_window {
 
                           child: Adw.StatusPage {
                             icon-name: 'library-symbolic';
-                            title: _('No Recent Books Yet');
-                            description: _('Explore your library by switching to the Author or Reader view');
+                            title: _("No Recent Books Yet");
+                            description: _("Explore your library by switching to the Author or Reader view");
                           };
                         }
 

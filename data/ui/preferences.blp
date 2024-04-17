@@ -26,35 +26,35 @@ Adjustment rewind_duration_adjustment {
 template $PreferencesWindow: Adw.PreferencesDialog {
   Adw.PreferencesPage {
     icon-name: 'settings-symbolic';
-    title: _('General');
+    title: _("General");
 
     Adw.PreferencesGroup {
-      title: _('Appearance');
+      title: _("Appearance");
 
       Adw.SwitchRow dark_mode_switch {
-        title: _('Dark Mode');
+        title: _("Dark Mode");
       }
     }
 
     Adw.PreferencesGroup {
-      title: _('Tags');
+      title: _("Tags");
 
       Adw.SwitchRow swap_author_reader_switch {
-        title: _('Swap Author and Reader');
-        subtitle: _('Activate if author and reader are displayed the wrong way');
+        title: _("Swap Author and Reader");
+        subtitle: _("Activate if author and reader are displayed the wrong way");
       }
     }
 
     Adw.PreferencesGroup {
-      title: _('Playback');
+      title: _("Playback");
 
       Adw.SwitchRow replay_switch {
-        title: _('Replay');
-        subtitle: _('Rewind 30 seconds of the current book when starting Cozy');
+        title: _("Replay");
+        subtitle: _("Rewind 30 seconds of the current book when starting Cozy");
       }
 
       Adw.SpinRow rewind_duration_spin_button {
-        title: _('Rewind Duration');
+        title: _("Rewind Duration");
         focusable: true;
         adjustment: rewind_duration_adjustment;
         snap-to-ticks: true;
@@ -62,7 +62,7 @@ template $PreferencesWindow: Adw.PreferencesDialog {
       }
 
       Adw.SpinRow forward_duration_spin_button {
-        title: _('Forward Duration');
+        title: _("Forward Duration");
         focusable: true;
         adjustment: forward_duration_adjustment;
         snap-to-ticks: true;
@@ -71,15 +71,15 @@ template $PreferencesWindow: Adw.PreferencesDialog {
     }
 
     Adw.PreferencesGroup {
-      title: _('Sleep Timer');
+      title: _("Sleep Timer");
 
       Adw.ExpanderRow sleep_timer_fadeout_switch {
-        title: _('Fadeout');
+        title: _("Fadeout");
         expanded: true;
         show-enable-switch: true;
 
         Adw.SpinRow {
-          title: _('Fadeout Duration');
+          title: _("Fadeout Duration");
           focusable: true;
           adjustment: fadeout_duration_adjustment;
           snap-to-ticks: true;
@@ -91,24 +91,24 @@ template $PreferencesWindow: Adw.PreferencesDialog {
 
   Adw.PreferencesPage storages_page {
     icon-name: 'harddisk-symbolic';
-    title: _('Storage');
+    title: _("Storage");
 
     Adw.PreferencesGroup {
-      title: _('Artwork');
+      title: _("Artwork");
 
       Adw.SwitchRow artwork_prefer_external_switch {
-        title: _('Prefer External Images Over Embedded Cover');
-        subtitle: _('Always use images (cover.jpg, *.png, …) when available');
+        title: _("Prefer External Images Over Embedded Cover");
+        subtitle: _("Always use images (cover.jpg, *.png, …) when available");
       }
     }
   }
 
   Adw.PreferencesPage {
     icon-name: 'papyrus-vertical-symbolic';
-    title: _('Feedback');
+    title: _("Feedback");
 
     Adw.PreferencesGroup user_feedback_preference_group {
-      title: _('User feedback');
+      title: _("User feedback");
     }
   }
 }
