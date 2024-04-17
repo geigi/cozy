@@ -58,7 +58,7 @@ class TagReader:
         if len(authors) > 0 and authors[0]:
             return "; ".join(authors)
         else:
-            return "Unknown"
+            return _("Unknown")
 
     def _get_reader(self):
         readers = self._get_string_list(Gst.TAG_ARTIST)
@@ -66,7 +66,7 @@ class TagReader:
         if len(readers) > 0 and readers[0]:
             return "; ".join(readers)
         else:
-            return "Unknown"
+            return _("Unknown")
 
     def _get_disk(self):
         success, value = self.tags.get_uint_index(Gst.TAG_ALBUM_VOLUME_NUMBER, 0)

@@ -3,6 +3,7 @@ cozy/control/mpris.py
 cozy/control/offline_cache.py
 cozy/media/files.py
 cozy/media/importer.py
+cozy/media/tag_reader.py
 cozy/model/track.py
 cozy/tools.py
 cozy/ui/about_window.py
