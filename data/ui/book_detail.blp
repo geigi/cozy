@@ -271,6 +271,10 @@ template $BookDetail: Box {
                     receives-default: true;
                     halign: center;
                     icon-name: 'media-playback-start-symbolic';
+                    tooltip-text: _("Start/Stop playback");
+                    accessibility {
+                      label: _("Start or pause the playback");
+                    }
 
                     styles [
                       "suggested-action",
