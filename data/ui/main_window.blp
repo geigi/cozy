@@ -63,7 +63,7 @@ Adw.ApplicationWindow app_window {
                           icon-name: 'recent-symbolic';
 
                           child: Label {
-                            label: 'Empty';
+                            label: _("Empty");
                           };
                         }
 
@@ -193,7 +193,7 @@ Adw.ApplicationWindow app_window {
               }
 
               Adw.NavigationPage {
-                title: 'Book title';
+                title: _("Book title");
                 tag: 'book_overview';
 
                 child: Adw.ToolbarView book_details_container {};
@@ -225,8 +225,8 @@ Adw.ApplicationWindow app_window {
 
             content: Adw.StatusPage {
               icon-name: 'com.github.geigi.cozy';
-              title: 'Importing';
-              description: 'Stay tuned while Cozy is preparing your library…';
+              title: _("Importing");
+              description: _("Stay tuned while Cozy is preparing your library…");
             };
           };
         }
@@ -242,8 +242,8 @@ Adw.ApplicationWindow app_window {
 
             content: Adw.StatusPage welcome_status_page {
               icon-name: 'com.github.geigi.cozy';
-              title: 'Let\'s get cozy';
-              description: 'Select a Folder, or Drag Audiobooks Here to Add Them to Your Library';
+              title: _("Let's get cozy");
+              description: _("Select a Folder, or Drag Audiobooks Here to Add Them to Your Library");
             };
           };
         }
