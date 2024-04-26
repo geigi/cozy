@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Julian Geywitz <github@geigi.de>, 2019
 # abc Def <hdogan1974@gmail.com>, 2020
@@ -10,121 +10,145 @@
 # Oğuzhan KIRLI <oguzhankirli2004@gmail.com>, 2021
 # Veysel Erden, 2022
 # Sabri Ünal <libreajans@gmail.com>, 2024
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-17 20:33+0100\n"
-"PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>, 2024\n"
+"POT-Creation-Date: 2024-04-26 22:15+0300\n"
+"PO-Revision-Date: 2024-04-26 22:16+0300\n"
+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish (https://app.transifex.com/geigi/teams/78138/tr/)\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: cozy/application.py:59
+#: cozy/application.py:58
 msgid "Audiobooks"
 msgstr "Sesli Kitaplar"
 
-#: cozy/control/offline_cache.py:197
+#: cozy/control/offline_cache.py:195
 msgid "Copying"
 msgstr "Kopyalanıyor"
 
-#: cozy/media/files.py:67
+#: cozy/media/files.py:66
 msgid "Cannot copy: Audiobook directory is read only"
 msgstr "Kopyalanamadı: Sesli kitap dizini salt okunur"
 
-#: cozy/media/files.py:69
+#: cozy/media/files.py:68
 msgid "Cannot copy: Disk is full"
 msgstr "Kopyalanamadı: Disk dolu"
 
-#: cozy/media/files.py:71 cozy/media/files.py:87
+#: cozy/media/files.py:70 cozy/media/files.py:86
 msgid "Cannot copy: Permission denied"
 msgstr "Kopyalanamadı: Yeterli izin yok"
 
-#: cozy/media/importer.py:121
+#: cozy/media/importer.py:118
 msgid "Error while importing new files"
 msgstr "Yeni dosyaları içe aktarırken hata"
 
-#: cozy/tools.py:92 cozy/tools.py:96
+#: cozy/media/tag_reader.py:61 cozy/media/tag_reader.py:69
+msgid "Unknown"
+msgstr "Bilinmiyor"
+
+#: cozy/tools.py:90 cozy/tools.py:94
 #, python-brace-format
 msgid "{hours} hour"
 msgid_plural "{hours} hours"
 msgstr[0] "{hours} saat"
 msgstr[1] "{hours} saat"
 
-#: cozy/tools.py:94 cozy/tools.py:98
+#: cozy/tools.py:92 cozy/tools.py:96
 #, python-brace-format
 msgid "{minutes} minute"
 msgid_plural "{minutes} minutes"
 msgstr[0] "{minutes} dakika"
 msgstr[1] "{minutes} dakika"
 
-#: cozy/tools.py:100
+#: cozy/tools.py:98
 #, python-brace-format
 msgid "{seconds} second"
 msgid_plural "{seconds} seconds"
 msgstr[0] "{seconds} saniye"
 msgstr[1] "{seconds} saniye"
 
-#: cozy/tools.py:102
+#: cozy/tools.py:100
 msgid "finished"
 msgstr "bitti"
 
-#: cozy/tools.py:126
+#: cozy/tools.py:124
 msgid "never"
 msgstr "hiçbir zaman"
 
-#: cozy/tools.py:128
+#: cozy/tools.py:126
 msgid "today"
 msgstr "bugün"
 
-#: cozy/tools.py:130
+#: cozy/tools.py:128
 msgid "yesterday"
 msgstr "dün"
 
-#: cozy/tools.py:132
+#: cozy/tools.py:130
 #, python-format
 msgid "%s days ago"
 msgstr "%s gün önce"
 
-#: cozy/tools.py:134
+#: cozy/tools.py:132
 #, python-brace-format
 msgid "{weeks} week ago"
 msgid_plural "{weeks} weeks ago"
 msgstr[0] "{weeks} hafta önce"
 msgstr[1] "{weeks} hafta önce"
 
-#: cozy/tools.py:136
+#: cozy/tools.py:134
 #, python-brace-format
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
 msgstr[0] "{months} ay önce"
 msgstr[1] "{months} ay önce"
 
-#: cozy/tools.py:138
+#: cozy/tools.py:136
 #, python-brace-format
 msgid "{years} year ago"
 msgid_plural "{years} years ago"
 msgstr[0] "{years} yıl önce"
 msgstr[1] "{years} yıl önce"
 
-#: cozy/ui/book_detail_view.py:299
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: cozy/ui/about_window.py:21
+msgid "translator-credits"
+msgstr ""
+"Cozy Uygulamasına Gönül Verenler\n"
+"Sabri Ünal, 2024"
+
+#: cozy/ui/about_window.py:42
+msgid "Patreon Supporters"
+msgstr "Patreon Destekçileri"
+
+#: cozy/ui/about_window.py:45
+msgid "m4b chapter support in mutagen"
+msgstr "mutagen içinde m4b bölüm desteği"
+
+#: cozy/ui/about_window.py:47
+msgid "Open Source Projects"
+msgstr "Açık Kaynak Projeler"
+
+#: cozy/ui/book_detail_view.py:296
 msgid "Downloaded"
 msgstr "İndirildi"
 
-#: cozy/ui/book_detail_view.py:302 data/ui/book_detail.ui:116
+#: cozy/ui/book_detail_view.py:299 data/ui/book_detail.blp:112
 msgid "Download"
 msgstr "İndir"
 
-#: cozy/ui/db_migration_failed_view.py:6
+#: cozy/ui/db_migration_failed_view.py:5
 msgid ""
-"During an update of the database an error occurred and Cozy will not be able"
-" to startup. A backup of the database was created before the update and has "
+"During an update of the database an error occurred and Cozy will not be able "
+"to startup. A backup of the database was created before the update and has "
 "been restored now. Until this issue is resolved please use version 0.9.5 of "
 "Cozy. You can help resolve this problem by reporting an issue on GitHub."
 msgstr ""
@@ -134,191 +158,174 @@ msgstr ""
 "kullanın. Bu problemin düzelmesine GitHub'ta bir hata kaydı açarak yardımcı "
 "olabilirsiniz."
 
-#: cozy/ui/db_migration_failed_view.py:15
+#: cozy/ui/db_migration_failed_view.py:14
 msgid "Failed to Update Database"
 msgstr "Veri Tabanı Güncellenemedi"
 
-#: cozy/ui/db_migration_failed_view.py:22
+#: cozy/ui/db_migration_failed_view.py:20
 msgid "Close Cozy"
 msgstr "Cozy'yi Kapat"
 
-#: cozy/ui/db_migration_failed_view.py:23
+#: cozy/ui/db_migration_failed_view.py:21
 msgid "Receive help on GitHub"
 msgstr "GitHub'ta yardım al"
 
 #: cozy/ui/delete_book_view.py:13
-msgid "Delete Audiobook?"
-msgstr "Sesli Kitap Silinsin Mi?"
+msgid "Permanently Delete Audiobook?"
+msgstr "Sesli Kitap Kalıcı Olarak Silinsin Mi?"
 
 #: cozy/ui/delete_book_view.py:14
-msgid "The audiobook will be removed from your disk and from Cozy's library."
-msgstr "Bu sesli kitap sabit diskinden ve Cozy kitaplığından kaldırılacak."
+msgid ""
+"The audiobook will be permanently deleted from your disk and can not be "
+"restored"
+msgstr ""
+"Bu sesli kitap sabit diskinden kalıcı olarak silinecek ve geri yüklenemeyecek"
 
-#: cozy/ui/delete_book_view.py:21 cozy/ui/file_not_found_dialog.py:26
+#: cozy/ui/delete_book_view.py:19 cozy/ui/file_not_found_dialog.py:24
 msgid "Cancel"
 msgstr "İptal"
 
-#: cozy/ui/delete_book_view.py:22
-msgid "Remove Audiobook"
-msgstr "Sesli Kitabı Kaldır"
+#: cozy/ui/delete_book_view.py:20
+msgid "Delete"
+msgstr "Sil"
 
 #: cozy/ui/disk_element.py:22
 msgid "Disc"
 msgstr "Disk"
 
 #: cozy/ui/file_not_found_dialog.py:18
-msgid "File not found"
-msgstr "Dosya bulunamadı"
+msgid "File Not Found"
+msgstr "Dosya Bulunamadı"
 
 #: cozy/ui/file_not_found_dialog.py:19
 msgid "This file could not be found. Do you want to locate it manually?"
 msgstr "Dosya bulunamadı. Yerini belirlemek ister misiniz?"
 
-#: cozy/ui/file_not_found_dialog.py:27
+#: cozy/ui/file_not_found_dialog.py:25
 msgid "Locate"
 msgstr "Yer belirle"
 
-#: cozy/ui/file_not_found_dialog.py:38
+#: cozy/ui/file_not_found_dialog.py:36
 msgid "Locate Missing File"
 msgstr "Kayıp Dosyayı Bul"
 
-#: cozy/ui/file_not_found_dialog.py:41
+#: cozy/ui/file_not_found_dialog.py:39
 #, python-brace-format
-msgid "{ext} files"
-msgstr "{ext} dosyaları"
+msgid "{ext} Files"
+msgstr "{ext} Dosyaları"
 
-#: cozy/ui/file_not_found_dialog.py:44
-msgid "Audio files"
-msgstr "Ses dosyaları"
+#: cozy/ui/file_not_found_dialog.py:42
+msgid "Audio Files"
+msgstr "Ses Dosyaları"
 
-#: cozy/ui/import_failed_dialog.py:8
+#: cozy/ui/import_failed_dialog.py:7
 msgid "This can have multiple reasons:"
 msgstr "Bunun pek çok sebebi olabilir:"
 
-#: cozy/ui/import_failed_dialog.py:11
+#: cozy/ui/import_failed_dialog.py:10
 msgid "The audio format is not supported"
 msgstr "Ses biçimi desteklenmiyor"
 
-#: cozy/ui/import_failed_dialog.py:12
+#: cozy/ui/import_failed_dialog.py:11
 msgid "The path or filename contains non utf-8 characters"
 msgstr "Yol ya da dosya adı utf-8 olmayan karakter içeriyor"
 
-#: cozy/ui/import_failed_dialog.py:13
+#: cozy/ui/import_failed_dialog.py:12
 msgid "The file(s) are no valid audio files"
 msgstr "Dosya(lar) geçerli ses dosyası değil"
 
-#: cozy/ui/import_failed_dialog.py:14
+#: cozy/ui/import_failed_dialog.py:13
 msgid "The file(s) are corrupt"
 msgstr "Dosya(lar) bozuk"
 
-#: cozy/ui/import_failed_dialog.py:28
-msgid "Some files could not be imported"
-msgstr "Bazı dosyalar içe aktarılamadı"
+#: cozy/ui/import_failed_dialog.py:27
+msgid "Some Files Could Not Be Imported"
+msgstr "Bazı Dosyalar İçe Aktarılamadı"
 
-#: cozy/ui/import_failed_dialog.py:35
+#: cozy/ui/import_failed_dialog.py:32
 msgid "Ok"
 msgstr "Tamam"
 
-#: cozy/ui/main_view.py:198
-msgid "Patreon Supporters"
-msgstr "Patreon Destekçileri"
-
-#: cozy/ui/main_view.py:202
-msgid "m4b chapter support in mutagen"
-msgstr "mutagen içinde m4b bölüm desteği"
-
-#: cozy/ui/main_view.py:206
-msgid "Open Source Projects"
-msgstr "Açık Kaynak Projeler"
-
-#. Translators: Replace "translator-credits" with your names, one name per
-#. line
-#: cozy/ui/main_view.py:211
-msgid "translator-credits"
-msgstr ""
-"Cozy Uygulamasına Gönül Verenler\n"
-"Sabri Ünal, 2024"
-
 #: cozy/ui/widgets/book_element.py:70
-msgid "Mark as read"
-msgstr "Okundu imle"
+msgid "Mark as Read"
+msgstr "Okundu İmle"
 
 #: cozy/ui/widgets/book_element.py:73
-msgid "Open in file browser"
-msgstr "Dosya görüntüleyicide aç"
+msgid "Open in File Browser"
+msgstr "Dosya Tarayıcıda Aç"
 
 #: cozy/ui/widgets/book_element.py:76
-msgid "Remove from library"
-msgstr "Kitaplıktan kaldır"
+msgid "Permanently Delete…"
+msgstr "Kalıcı Olarak Sil…"
 
 #: cozy/ui/widgets/book_row.py:25
-msgid "Play this book"
-msgstr "Bu kitabı oynat"
+msgid "Play This Book"
+msgstr "Bu Kitabı Oynat"
 
-#: cozy/ui/widgets/error_reporting.py:11
+#: cozy/ui/widgets/error_reporting.py:9
 msgid "Disabled"
 msgstr "Devre dışı"
 
-#: cozy/ui/widgets/error_reporting.py:12
+#: cozy/ui/widgets/error_reporting.py:10
 msgid "Basic error reporting"
 msgstr "Temel hata raporlama"
 
-#: cozy/ui/widgets/error_reporting.py:13
+#: cozy/ui/widgets/error_reporting.py:11
 msgid "Detailed error reporting"
 msgstr "Ayrıntılı hata raporlama"
 
-#: cozy/ui/widgets/error_reporting.py:14 data/ui/error_reporting.ui:162
+#: cozy/ui/widgets/error_reporting.py:12 data/ui/error_reporting.blp:148
 msgid "Detailed error reporting with import errors"
 msgstr "İçe aktarma hataları ile ayrıntılı hata raporlama"
 
-#: cozy/ui/widgets/error_reporting.py:18
+#: cozy/ui/widgets/error_reporting.py:16
 msgid "No error or crash reporting."
 msgstr "Hata ya da çökme raporu yok."
 
-#: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:174
+#: cozy/ui/widgets/error_reporting.py:17 data/ui/error_reporting.blp:160
 msgid "The following information will be sent in case of an error or crash:"
 msgstr "Hata ya da çökme durumunda aşağıdaki bilgiler gönderilecek:"
 
-#: cozy/ui/widgets/error_reporting.py:24
+#: cozy/ui/widgets/error_reporting.py:22
 msgid "Which type of error occurred"
 msgstr "Hangi tip hata oluştur"
 
-#: cozy/ui/widgets/error_reporting.py:25
+#: cozy/ui/widgets/error_reporting.py:23
 msgid "Line of code where an error occurred"
 msgstr "Hatanın oluştuğu kod satırı"
 
-#: cozy/ui/widgets/error_reporting.py:26
+#: cozy/ui/widgets/error_reporting.py:24
 msgid "Cozy's version"
 msgstr "Cozy sürümü"
 
-#: cozy/ui/widgets/error_reporting.py:27
+#: cozy/ui/widgets/error_reporting.py:25
 msgid "Linux distribution"
 msgstr "Linux dağıtımı"
 
-#: cozy/ui/widgets/error_reporting.py:28
+#: cozy/ui/widgets/error_reporting.py:26
 msgid "Desktop environment"
 msgstr "Masaüstü ortamı"
 
-#: cozy/ui/widgets/error_reporting.py:29
+#: cozy/ui/widgets/error_reporting.py:27
 msgid "Media type of files that Cozy couldn't import"
 msgstr "Cozy'nin içe aktaramadığı ortam türü dosyaları"
 
-#: cozy/ui/widgets/filter_list_box.py:18
-#: cozy/view_model/library_view_model.py:45
-#: cozy/view_model/library_view_model.py:135
+#: cozy/ui/widgets/filter_list_box.py:16
+#: cozy/view_model/library_view_model.py:44
+#: cozy/view_model/library_view_model.py:131
 msgid "All"
 msgstr "Tümü"
 
-#: cozy/ui/widgets/filter_list_box.py:19
-msgid "Display all books"
-msgstr "Tüm kitapları göster"
+#: cozy/ui/widgets/filter_list_box.py:17
+msgid "Display All Books"
+msgstr "Tüm Kitapları Göster"
 
 #: cozy/ui/widgets/search_results.py:13
 #, python-brace-format
 msgid "Jump to {artist_name}"
 msgstr "{artist_name} git"
 
-#: cozy/ui/widgets/sleep_timer.py:57 data/ui/timer_popover.ui:53
+#: cozy/ui/widgets/sleep_timer.py:57 data/ui/timer_popover.blp:54
 msgid "min"
 msgstr "dk"
 
@@ -330,72 +337,86 @@ msgstr "Kapat"
 msgid "Set Audiobooks Directory"
 msgstr "Sesli Kitaplar Dizinini Ayarla"
 
-#: cozy/ui/widgets/storages.py:65 data/ui/storage_locations.ui:18
-msgid "External drive"
-msgstr "Harici sürücü"
+#: cozy/ui/widgets/storages.py:65 data/ui/storage_locations.blp:19
+msgid "External Drive"
+msgstr "Harici Sürücü"
 
 #: cozy/ui/widgets/storages.py:68
-msgid "Internal drive"
-msgstr "Dahili sürücü"
+msgid "Internal Drive"
+msgstr "Dahili Sürücü"
 
-#: cozy/view_model/headerbar_view_model.py:78
+#: cozy/view_model/headerbar_view_model.py:77
 msgid "Refreshing audio book collection"
 msgstr "Sesli kitap koleksiyonu yenileniyor"
 
-#: cozy/view_model/headerbar_view_model.py:87
-#: cozy/view_model/headerbar_view_model.py:103
+#: cozy/view_model/headerbar_view_model.py:86
+#: cozy/view_model/headerbar_view_model.py:102
 msgid "Copying new files…"
 msgstr "Yeni dosyalar kopyalanıyor..."
 
-#: cozy/view_model/headerbar_view_model.py:94
+#: cozy/view_model/headerbar_view_model.py:93
 msgid "Changing audio book location…"
 msgstr "Sesli kitap konumu değiştiriliyor…"
 
-#: data/ui/album_element.ui:47
-msgid "Play"
-msgstr "Oynat"
+#: data/ui/album_element.blp:40 data/ui/book_detail.blp:274
+#: data/ui/media_controller.blp:129
+msgid "Start/Stop Playback"
+msgstr "Oynatmayı Başlat/Durdur"
 
-#: data/ui/book_detail.ui:149
+#: data/ui/album_element.blp:45 data/ui/book_detail.blp:276
+#: data/ui/media_controller.blp:135
+msgid "Start or pause the playback"
+msgstr "Oynatmayı başlat ya da durdur"
+
+#: data/ui/book_detail.blp:63
+msgid "Book name"
+msgstr "Kitap adı"
+
+#: data/ui/book_detail.blp:81
+msgid "Book author"
+msgstr "Kitap yazarı"
+
+#: data/ui/book_detail.blp:140
 msgid "Remaining"
 msgstr "Kalan"
 
-#: data/ui/book_detail.ui:195
+#: data/ui/book_detail.blp:187
 msgid "Total"
 msgstr "Toplam"
 
-#: data/ui/book_detail.ui:208
+#: data/ui/book_detail.blp:201
 msgid "Last played"
 msgstr "Son oynatılan"
 
-#: data/ui/book_detail.ui:221
+#: data/ui/book_detail.blp:215
 msgid "Published"
 msgstr "Yayınlayan"
 
-#: data/ui/book_detail.ui:246
-msgid "Some or all files of this book cannot be found."
-msgstr "Bu kitabın tüm ya da bazı sayfaları bulunamadı."
+#: data/ui/book_detail.blp:240
+msgid "Some or All Files of This Book Cannot Be Found"
+msgstr "Bu Kitabın Tüm Ya Da Bazı Sayfaları Bulunamadı"
 
-#: data/ui/book_detail.ui:259
+#: data/ui/book_detail.blp:253
 msgid "unavailable"
 msgstr "erişilemez"
 
-#: data/ui/book_detail.ui:363
+#: data/ui/book_detail.blp:349
 msgid "Loading chapters, please wait..."
 msgstr "Bölümler yükleniyor, lütfen bekleyin..."
 
-#: data/ui/book_element.ui:10
-msgid "Open book overview"
-msgstr "Kitap genel görünümünü aç"
+#: data/ui/book_element.blp:9
+msgid "Open Book Overview"
+msgstr "Kitap Genel Görünümünü Aç"
 
-#: data/ui/chapter_element.ui:5
-msgid "Play this part"
-msgstr "Bu bölümü oynat"
+#: data/ui/chapter_element.blp:4
+msgid "Play This Part"
+msgstr "Bu Bölümü Oynat"
 
-#: data/ui/error_reporting.ui:24 data/ui/preferences.ui:124
+#: data/ui/error_reporting.blp:25
 msgid "User feedback"
 msgstr "Kullanıcı geri bildirimi"
 
-#: data/ui/error_reporting.ui:67
+#: data/ui/error_reporting.blp:67
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "You can help improve Cozy by contributing information in case of errors and "
@@ -404,7 +425,7 @@ msgstr ""
 "Hata ve çökme durumunda bilgi sağlayarak Cozy'nin geliştirilmesine yardımcı "
 "olabilirsiniz. "
 
-#: data/ui/error_reporting.ui:75
+#: data/ui/error_reporting.blp:74
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Contributing this information is optional and completely anonymous. We will "
@@ -415,7 +436,7 @@ msgstr ""
 "verileri, içe aktardığınız dosyaları ya da sizi tanımlayabilecek herhangi "
 "bir bilgiyi asla toplanmayacak. "
 
-#: data/ui/error_reporting.ui:84
+#: data/ui/error_reporting.blp:82
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
@@ -423,314 +444,353 @@ msgstr ""
 "Cozy açık kaynak kodludur ve kullanıcı geri bildirim kaynak kodu şuradan "
 "incelenebilir: "
 
-#. Translators: Don't touch the markup. Translate the text "Sourcecode on
-#. GitHub" only!
-#: data/ui/error_reporting.ui:94
+#: data/ui/error_reporting.blp:89
 msgid ""
-"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Sourcecode"
-" on GitHub</a>"
+"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Sourcecode "
+"on GitHub</a>"
 msgstr ""
 "<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">GitHub "
 "üstünden kaynak kodu</a>"
 
-#: data/ui/first_import_button.ui:12
+#: data/ui/first_import_button.blp:12
 msgid "Select Folder"
 msgstr "Klasör Seç"
 
-#: data/ui/headerbar.ui:17
+#: data/ui/headerbar.blp:17
 msgid "Toggle Filter Sidebar"
 msgstr "Süzgeç Kenar Çubuğunu Aç/Kapat"
 
-#: data/ui/headerbar.ui:22
-msgid "Options"
-msgstr "Seçenekler"
+#: data/ui/headerbar.blp:22
+msgid "Main Menu"
+msgstr "Ana Menü"
 
-#: data/ui/headerbar.ui:26
+#: data/ui/headerbar.blp:27
 msgid "Open the options popover"
 msgstr "Seçenekler açılır kutusunu aç"
 
-#: data/ui/headerbar.ui:33
-msgid "Search your library"
-msgstr "Kitaplıkta ara"
+#: data/ui/headerbar.blp:34
+msgid "Search Your Library"
+msgstr "Kitaplığınızda Arayın"
 
-#: data/ui/headerbar.ui:36
+#: data/ui/headerbar.blp:38
 msgid "Open the search popover"
 msgstr "Arama açılır kutusunu aç"
 
-#: data/ui/headerbar.ui:44
-msgid "Display background task progress"
-msgstr "Arka planda işlemin ilerleyişini göster"
+#: data/ui/headerbar.blp:46
+msgid "Display Background Task Progress"
+msgstr "Arka Plan Görev İlerlemesini Görüntüle"
 
-#: data/ui/headerbar.ui:67
-msgid "Start typing..."
-msgstr "Yazmaya başlayın..."
+#: data/ui/headerbar.blp:67
+msgid "Start typing"
+msgstr "Yazmaya başlayın"
 
-#: data/ui/headerbar.ui:80
+#: data/ui/headerbar.blp:78
 msgid "_Scan Library"
 msgstr "_Kitaplığı Tara"
 
-#: data/ui/headerbar.ui:86
-msgid "_Hide unavailable books"
-msgstr "Kullanılamayan kitapları _gizle"
+#: data/ui/headerbar.blp:85
+msgid "_Hide Unavailable Books"
+msgstr "Kullanılamayan Kitapları _Gizle"
 
-#: data/ui/headerbar.ui:92
+#: data/ui/headerbar.blp:92
 msgid "_Preferences"
 msgstr "_Tercihler"
 
-#: data/ui/headerbar.ui:96
+#: data/ui/headerbar.blp:97
 msgid "_About Cozy"
 msgstr "Cozy _Hakkında"
 
-#: data/ui/headerbar.ui:102
+#: data/ui/headerbar.blp:104
 msgid "_Quit"
 msgstr "_Çık"
 
-#: data/ui/main_window.ui:26
+#: data/ui/main_window.blp:28
 msgid "Drop Audio Books Here to Add Them to Your Library"
 msgstr "Kitaplığınıza Eklemek İçin Sesli Kitapları Buraya Bırakın"
 
-#: data/ui/main_window.ui:48
+#: data/ui/main_window.blp:46
 msgid "Library"
 msgstr "Kitaplık"
 
-#: data/ui/main_window.ui:65
+#: data/ui/main_window.blp:62
 msgid "Recent"
-msgstr "Son kullanılan"
+msgstr "Son Kullanılan"
 
-#: data/ui/main_window.ui:77 data/ui/search_page.ui:46
+#: data/ui/main_window.blp:66
+msgid "Empty"
+msgstr "Boş"
+
+#: data/ui/main_window.blp:72 data/ui/search_page.blp:39
 msgid "Author"
 msgstr "Yazar"
 
-#: data/ui/main_window.ui:89
+#: data/ui/main_window.blp:83
 msgid "List of authors"
 msgstr "Yazar listesi"
 
-#: data/ui/main_window.ui:108 data/ui/search_page.ui:59
+#: data/ui/main_window.blp:100 data/ui/search_page.blp:50
 msgid "Reader"
 msgstr "Seslendiren"
 
-#: data/ui/main_window.ui:120
+#: data/ui/main_window.blp:111
 msgid "List of readers"
 msgstr "Seslendiren listesi"
 
-#: data/ui/main_window.ui:172
+#: data/ui/main_window.blp:161
 msgid "List of books"
 msgstr "Kitap listesi"
 
-#: data/ui/main_window.ui:194
+#: data/ui/main_window.blp:181
 msgid "No Recent Books Yet"
 msgstr "Son Kullanılan Kitaplar Yok"
 
-#: data/ui/main_window.ui:195
+#: data/ui/main_window.blp:182
 msgid "Explore your library by switching to the Author or Reader view"
 msgstr "Yazar ya da Seslendiren görünümüne geçerek kitaplığınızı keşfedin"
 
-#: data/ui/media_controller.ui:48
-msgid "Currently playing"
-msgstr "Şu anda oynatılan"
+#: data/ui/main_window.blp:196
+msgid "Book Title"
+msgstr "Kitap Başlığı"
 
-#: data/ui/media_controller.ui:65
+#: data/ui/main_window.blp:228
+msgid "Importing"
+msgstr "İçe Aktarılıyor"
+
+#: data/ui/main_window.blp:229
+msgid "Stay tuned while Cozy is preparing your library…"
+msgstr "Cozy kütüphanenizi hazırlarken bizi izlemeye devam edin…"
+
+#: data/ui/main_window.blp:245
+msgid "Let's get cozy"
+msgstr "Hadi Rahatlayalım"
+
+#: data/ui/main_window.blp:246
+msgid "Select a Folder, or Drag Audiobooks Here to Add Them to Your Library"
+msgstr ""
+"Klasör Seçin ya da Sesli Kitapları Kitaplığınıza Eklemek İçin Buraya "
+"Sürükleyin"
+
+#: data/ui/media_controller.blp:51
+msgid "Currently Playing"
+msgstr "Şu Anda Oynatılan"
+
+#: data/ui/media_controller.blp:66
 msgid "Title of currently playing book"
 msgstr "Şu anda oynatılan kitabın başlığı"
 
-#: data/ui/media_controller.ui:82
+#: data/ui/media_controller.blp:84
 msgid "Title of the currently playing part"
 msgstr "Şu anda oynatılan bölümün başlığı"
 
-#: data/ui/media_controller.ui:111
+#: data/ui/media_controller.blp:109
 msgid "Rewind"
 msgstr "Geri Sar"
 
-#: data/ui/media_controller.ui:116
+#: data/ui/media_controller.blp:115
 msgid "Rewind playback"
 msgstr "Oynatmayı geri sar"
 
-#: data/ui/media_controller.ui:130
-msgid "Start playback"
-msgstr "Oynatmayı başlat"
-
-#: data/ui/media_controller.ui:135
-msgid "Start or pause the playback"
-msgstr "Oynatmayı başlat ya da durdur"
-
-#: data/ui/media_controller.ui:148
+#: data/ui/media_controller.blp:148
 msgid "Forward"
 msgstr "İleri"
 
-#: data/ui/media_controller.ui:153
-msgid "Forward Playback"
-msgstr "Oynatmayı İleri Sar"
+#: data/ui/media_controller.blp:154
+msgid "Forward playback"
+msgstr "Oynatmayı ileri sar"
 
-#: data/ui/media_controller.ui:179
-msgid "Volume control"
-msgstr "Ses denetimi"
+#: data/ui/media_controller.blp:178
+msgid "Volume Control"
+msgstr "Ses Denetimi"
 
-#: data/ui/media_controller.ui:202
-msgid "Playback speed"
-msgstr "Oynatma hızı"
+#: data/ui/media_controller.blp:196
+msgid "Playback Speed"
+msgstr "Oynatma Hızı"
 
-#: data/ui/media_controller.ui:213 data/ui/preferences.ui:80
+#: data/ui/media_controller.blp:207 data/ui/preferences.blp:74
 msgid "Sleep Timer"
 msgstr "Uyku Zamanlayıcısı"
 
-#: data/ui/media_controller.ui:220
+#: data/ui/media_controller.blp:214
 msgid "Open the sleep timer popover"
 msgstr "Uyku zamanlayıcı açılır kutusunu aç"
 
-#: data/ui/preferences.ui:27
+#: data/ui/preferences.blp:29
 msgid "General"
 msgstr "Genel"
 
-#: data/ui/preferences.ui:30
+#: data/ui/preferences.blp:32
 msgid "Appearance"
 msgstr "Görünüm"
 
-#: data/ui/preferences.ui:33
+#: data/ui/preferences.blp:35
 msgid "Dark Mode"
 msgstr "Koyu Kip"
 
-#: data/ui/preferences.ui:40
+#: data/ui/preferences.blp:40
 msgid "Tags"
 msgstr "Etiketler"
 
-#: data/ui/preferences.ui:43
+#: data/ui/preferences.blp:43
 msgid "Swap Author and Reader"
 msgstr "Yazar ile Seslendireni Yer Değiştir"
 
-#: data/ui/preferences.ui:44
+#: data/ui/preferences.blp:44
 msgid "Activate if author and reader are displayed the wrong way"
 msgstr "Yazar ve seslendiren yanlış görüntüleniyorsa etkinleştirin"
 
-#: data/ui/preferences.ui:51
+#: data/ui/preferences.blp:49
 msgid "Playback"
 msgstr "Oynatma"
 
-#: data/ui/preferences.ui:54
+#: data/ui/preferences.blp:52
 msgid "Replay"
 msgstr "Yeniden Oynat"
 
-#: data/ui/preferences.ui:55
+#: data/ui/preferences.blp:53
 msgid "Rewind 30 seconds of the current book when starting Cozy"
 msgstr "Cozy'yi başlattığınızda geçerli kitabı 30 saniye geri sar"
 
-#: data/ui/preferences.ui:60
+#: data/ui/preferences.blp:57
 msgid "Rewind Duration"
 msgstr "Geri Sarma Süresi"
 
-#: data/ui/preferences.ui:69
+#: data/ui/preferences.blp:65
 msgid "Forward Duration"
 msgstr "İleri Sarma Süresi"
 
-#: data/ui/preferences.ui:83
+#: data/ui/preferences.blp:77
 msgid "Fadeout"
 msgstr "Solma"
 
-#: data/ui/preferences.ui:88
+#: data/ui/preferences.blp:82
 msgid "Fadeout Duration"
 msgstr "Solma Süresi"
 
-#: data/ui/preferences.ui:104
+#: data/ui/preferences.blp:94
 msgid "Storage"
 msgstr "Depo"
 
-#: data/ui/preferences.ui:107
+#: data/ui/preferences.blp:97
 msgid "Artwork"
 msgstr "Kapak Resmi"
 
-#: data/ui/preferences.ui:110
+#: data/ui/preferences.blp:100
 msgid "Prefer External Images Over Embedded Cover"
 msgstr "Gömülü Kapak Resmi Yerine Harici Görüntüleri Tercih Et"
 
-#: data/ui/preferences.ui:111
+#: data/ui/preferences.blp:101
 msgid "Always use images (cover.jpg, *.png, …) when available"
 msgstr "Her zaman var olan resimleri kullanın (kapak.jpg, *.png, …)"
 
-#: data/ui/preferences.ui:121
+#: data/ui/preferences.blp:108
 msgid "Feedback"
 msgstr "Geri Bildirim"
 
-#: data/ui/search_page.ui:9
-msgid "Search in your library"
-msgstr "Kitaplıkta ara"
+#: data/ui/preferences.blp:111
+msgid "User Feedback"
+msgstr "Kullanıcı Geri Bildirimi"
 
-#: data/ui/search_page.ui:15
-msgid "No results found"
-msgstr "Sonuç bulunamadı"
+#: data/ui/search_page.blp:7
+msgid "Search in Your Library"
+msgstr "Kitaplığınızda Arayın"
 
-#: data/ui/search_page.ui:33
+#: data/ui/search_page.blp:12
+msgid "No Results Found"
+msgstr "Sonuç Bulunamadı"
+
+#: data/ui/search_page.blp:28
 msgid "Book"
 msgstr "Kitap"
 
-#: data/ui/seek_bar.ui:15
-msgid "Elapsed time"
-msgstr "Geçen zaman"
+#: data/ui/seek_bar.blp:15
+msgid "Elapsed Time"
+msgstr "Geçen Zaman"
 
-#: data/ui/seek_bar.ui:21
+#: data/ui/seek_bar.blp:22
 msgid "Elapsed time of current part"
 msgstr "Geçerli bölümün geçen zamanı"
 
-#: data/ui/seek_bar.ui:32
-msgid "Jump to position in current chapter"
-msgstr "Geçerli bölümdeki konuma git"
+#: data/ui/seek_bar.blp:33
+msgid "Jump to Position in Current Chapter"
+msgstr "Geçerli Bölümdeki Konuma Git"
 
-#: data/ui/seek_bar.ui:39
+#: data/ui/seek_bar.blp:41
 msgid "Position of the current part in seconds"
 msgstr "Geçerli parçanın saniye cinsinden konumu"
 
-#: data/ui/seek_bar.ui:48
-msgid "Remaining time"
-msgstr "Kalan zaman"
+#: data/ui/seek_bar.blp:49
+msgid "Remaining Time"
+msgstr "Kalan Zaman"
 
-#: data/ui/seek_bar.ui:53
+#: data/ui/seek_bar.blp:55
 msgid "Remaining time of current part"
 msgstr "Geçerli parçanın kalan zamanı"
 
-#: data/ui/storage_locations.ui:5
-msgid "Storage locations"
-msgstr "Depolama konumu"
+#: data/ui/storage_locations.blp:5
+msgid "Storage Locations"
+msgstr "Depolama Konumu"
 
-#: data/ui/storage_locations.ui:24
-msgid "Set as default"
-msgstr "Öntanımlı olarak ayarla"
+#: data/ui/storage_locations.blp:26
+msgid "Set as Default"
+msgstr "Öntanımlı Olarak Ayarla"
 
-#: data/ui/storage_locations.ui:28
+#: data/ui/storage_locations.blp:31
 msgid "Remove"
 msgstr "Kaldır"
 
-#: data/ui/timer_popover.ui:30
-msgid "Timer duration"
-msgstr "Zamanlayıcı süresi"
+#: data/ui/timer_popover.blp:30
+msgid "Timer Duration"
+msgstr "Zamanlayıcı Süresi"
 
-#: data/ui/timer_popover.ui:40
+#: data/ui/timer_popover.blp:41
 msgid "Set the sleep timer duration in minutes"
 msgstr "Uyku zamanlayıcı süresini dakika olarak belirle"
 
-#: data/ui/timer_popover.ui:86
+#: data/ui/timer_popover.blp:84
 msgid "Stop after current chapter"
 msgstr "Geçerli bölümden sonra dur"
 
-#: data/ui/timer_popover.ui:107
+#: data/ui/timer_popover.blp:100
 msgid "Enable system power control"
 msgstr "Sistem güç kontrolünü etkinleştir"
 
-#: data/ui/timer_popover.ui:125
+#: data/ui/timer_popover.blp:115
 msgid ""
 "Type of the action when the timer finishes.\n"
-"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
-"\"suspend\" will attempt to suspend your system (also known as sleep)."
+"“shutdown” will attempt to turn your system off (also known as power off)\n"
+"“suspend” will attempt to suspend your system (also known as sleep)."
 msgstr ""
 "Zamanlayıcı bittiğinde yapılacak eylemin türü.\n"
-"\"shutdown\" sisteminizi kapatmayı deneyecektir (güç kapatma olarak da bilinir)\n"
-"\"suspend\" sisteminizi askıya almaya çalışır (uyku olarak da bilinir)."
+"“shutdown” sisteminizi kapatmayı deneyecektir (güç kapatma olarak da "
+"bilinir)\n"
+"“suspend” sisteminizi askıya almaya çalışır (uyku olarak da bilinir)."
 
-#: data/ui/timer_popover.ui:129
+#: data/ui/timer_popover.blp:117
 msgid "System power action to perform"
 msgstr "Gerçekleştirilecek sistem güç eylemi"
 
-#: data/ui/timer_popover.ui:137
+#: data/ui/timer_popover.blp:124
 msgid "suspend"
 msgstr "askıya al"
 
-#: data/ui/timer_popover.ui:143
+#: data/ui/timer_popover.blp:129
 msgid "shutdown"
 msgstr "kapat"
+
+#~ msgid "External drive"
+#~ msgstr "Harici sürücü"
+
+#~ msgid "Search in your library"
+#~ msgstr "Kitaplıkta ara"
+
+#~ msgid "Remove Audiobook"
+#~ msgstr "Sesli Kitabı Kaldır"
+
+#~ msgid "Remove from library"
+#~ msgstr "Kitaplıktan kaldır"
+
+#~ msgid "Play"
+#~ msgstr "Oynat"
+
+#~ msgid "Options"
+#~ msgstr "Seçenekler"
