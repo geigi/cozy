@@ -14,7 +14,7 @@ class FilterListBox(Gtk.ListBox):
         self.remove_all_children()
 
         all_row = ListBoxRowWithData(_("All"), True)
-        all_row.set_tooltip_text(_("Display all books"))
+        all_row.set_tooltip_text(_("Display All Books"))
         self.append(all_row)
         self.select_row(all_row)
 

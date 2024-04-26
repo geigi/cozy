@@ -11,7 +11,7 @@ class DeleteBookView(Adw.AlertDialog):
     def __init__(self, callback, book: Book):
         super().__init__(
             heading=_("Permanently Delete Audiobook?"),
-            body=_("The audiobook will be permanently deleted from your disk and can not be restored."),
+            body=_("The audiobook will be permanently deleted from your disk and can not be restored"),
             default_response="cancel",
             close_response="cancel",
         )

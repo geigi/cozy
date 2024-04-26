@@ -24,7 +24,7 @@ class ImportFailedDialog(Adw.AlertDialog):
 
     def __init__(self, files: list[str]):
         super().__init__(
-            heading=_("Some files could not be imported"),
+            heading=_("Some Files Could Not Be Imported"),
             default_response="cancel",
             close_response="cancel",
         )

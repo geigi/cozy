@@ -2,7 +2,7 @@ using Gtk 4.0;
 using Adw 1;
 
 template $StorageLocations: Adw.PreferencesGroup {
-  title: _("Storage locations");
+  title: _("Storage Locations");
 
   ListBox storage_locations_list {
     margin-bottom: 18;
@@ -16,14 +16,14 @@ template $StorageLocations: Adw.PreferencesGroup {
 menu storage_menu {
   section {
     item {
-      label: _("External drive");
+      label: _("External Drive");
       action: 'storage.mark-external';
     }
   }
 
   section {
     item {
-      label: _("Set as default");
+      label: _("Set as Default");
       action: 'storage.make-default';
     }
 

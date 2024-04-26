@@ -19,7 +19,7 @@ template $Headerbar: Box {
 
     [end]
     MenuButton menu_button {
-      tooltip-text: _("Options");
+      tooltip-text: _("Main Menu");
       menu-model: primary_menu;
       icon-name: 'open-menu-symbolic';
 
@@ -31,7 +31,7 @@ template $Headerbar: Box {
     [end]
     ToggleButton search_button {
       name: 'Search toggle button';
-      tooltip-text: _("Search your library");
+      tooltip-text: _("Search Your Library");
       icon-name: 'loupe-large-symbolic';
 
       accessibility {
@@ -43,7 +43,7 @@ template $Headerbar: Box {
     MenuButton progress_menu_button {
       visible: false;
       can-focus: true;
-      tooltip-text: _("Display background task progress");
+      tooltip-text: _("Display Background Task Progress");
 
       Spinner progress_spinner {}
 
@@ -64,7 +64,7 @@ template $Headerbar: Box {
 
       SearchEntry search_entry {
         search-delay: 100;
-        placeholder-text: _("Start typing...");
+        placeholder-text: _("Start typing");
         hexpand: true;
       }
     }
@@ -82,7 +82,7 @@ menu primary_menu {
   section {
     item {
       action: 'app.hide_offline';
-      label: _("_Hide unavailable books");
+      label: _("_Hide Unavailable Books");
     }
   }
 

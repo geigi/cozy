@@ -22,7 +22,7 @@ class BookRow(Adw.ActionRow):
         if on_click is not None:
             self.connect("activated", lambda *_: on_click(book))
             self.set_activatable(True)
-            self.set_tooltip_text(_("Play this book"))
+            self.set_tooltip_text(_("Play This Book"))
 
         paintable = self._artwork_cache.get_cover_paintable(
             book, self.get_scale_factor(), BOOK_ICON_SIZE

@@ -15,7 +15,7 @@ class FileNotFoundDialog(Adw.AlertDialog):
         self.missing_chapter = chapter
 
         super().__init__(
-            heading=_("File not found"),
+            heading=_("File Not Found"),
             body=_("This file could not be found. Do you want to locate it manually?"),
             default_response="locate",
             close_response="cancel",
@@ -36,10 +36,10 @@ class FileNotFoundDialog(Adw.AlertDialog):
             file_dialog = Gtk.FileDialog(title=_("Locate Missing File"))
 
             extension = Path(self.missing_chapter.file).suffix[1:]
-            current_extension_filter = Gtk.FileFilter(name=_("{ext} files").format(ext=extension))
+            current_extension_filter = Gtk.FileFilter(name=_("{ext} Files").format(ext=extension))
             current_extension_filter.add_suffix(extension)
 
-            audio_files_filter = Gtk.FileFilter(name=_("Audio files"))
+            audio_files_filter = Gtk.FileFilter(name=_("Audio Files"))
             audio_files_filter.add_mime_type("audio/*")
 
             filters = Gio.ListStore.new(Gtk.FileFilter)
