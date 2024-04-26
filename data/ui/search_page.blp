@@ -4,12 +4,12 @@ using Adw 1;
 template $SearchView: Adw.Bin {
   Stack stack {
     Adw.StatusPage start_searching_page {
-      title: _('Search in your library');
+      title: _("Search in your library");
       icon-name: 'library-symbolic';
     }
 
     Adw.StatusPage nothing_found_page {
-      title: _('No results found');
+      title: _("No results found");
       icon-name: 'edit-find-symbolic';
     }
 
@@ -25,7 +25,7 @@ template $SearchView: Adw.Bin {
           spacing: 24;
 
           Adw.PreferencesGroup book_result_box {
-            title: _('Book');
+            title: _("Book");
             visible: false;
 
             ListBox book_result_list {
@@ -36,7 +36,7 @@ template $SearchView: Adw.Bin {
           }
 
           Adw.PreferencesGroup author_result_box {
-            title: _('Author');
+            title: _("Author");
             visible: false;
 
             ListBox author_result_list {
@@ -47,7 +47,7 @@ template $SearchView: Adw.Bin {
           }
 
           Adw.PreferencesGroup reader_result_box {
-            title: _('Reader');
+            title: _("Reader");
             visible: false;
 
             ListBox reader_result_list {

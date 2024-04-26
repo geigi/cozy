@@ -3,8 +3,10 @@ cozy/control/mpris.py
 cozy/control/offline_cache.py
 cozy/media/files.py
 cozy/media/importer.py
+cozy/media/tag_reader.py
 cozy/model/track.py
 cozy/tools.py
+cozy/ui/about_window.py
 cozy/ui/book_detail_view.py
 cozy/ui/chapter_element.py
 cozy/ui/db_migration_failed_view.py
@@ -13,7 +15,7 @@ cozy/ui/disk_element.py
 cozy/ui/file_not_found_dialog.py
 cozy/ui/import_failed_dialog.py
 cozy/ui/main_view.py
-cozy/ui/preferences_view.py
+cozy/ui/preferences_window.py
 cozy/ui/widgets/book_element.py
 cozy/ui/widgets/book_row.py
 cozy/ui/widgets/error_reporting.py

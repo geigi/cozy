@@ -27,7 +27,7 @@ template $SleepTimer: Popover {
       Scale timer_scale {
         width-request: 205;
         focusable: true;
-        tooltip-text: _('Timer duration');
+        tooltip-text: _("Timer duration");
         halign: start;
         margin-end: 10;
         adjustment: timer_value;
@@ -38,7 +38,7 @@ template $SleepTimer: Popover {
         value-pos: right;
 
         accessibility {
-          label: _('Set the sleep timer duration in minutes');
+          label: _("Set the sleep timer duration in minutes");
         }
 
         layout {
@@ -51,7 +51,7 @@ template $SleepTimer: Popover {
         halign: end;
         valign: center;
         margin-start: 6;
-        label: _('min');
+        label: _("min");
 
         layout {
           column: '2';
@@ -81,7 +81,7 @@ template $SleepTimer: Popover {
         hexpand: true;
         halign: start;
         margin-end: 10;
-        label: _('Stop after current chapter');
+        label: _("Stop after current chapter");
       }
 
       Switch chapter_switch {
@@ -97,7 +97,7 @@ template $SleepTimer: Popover {
       Label {
         hexpand: true;
         halign: start;
-        label: _('Enable system power control');
+        label: _("Enable system power control");
       }
 
       Switch power_control_switch {
@@ -112,21 +112,21 @@ template $SleepTimer: Popover {
 
       Label {
         hexpand: true;
-        tooltip-markup: _('Type of the action when the timer finishes.\n"shutdown" will attempt to turn your system off (also known as power off)\n"suspend" will attempt to suspend your system (also known as sleep).');
+        tooltip-markup: _("Type of the action when the timer finishes.\n“shutdown” will attempt to turn your system off (also known as power off)\n“suspend” will attempt to suspend your system (also known as sleep).");
         halign: start;
-        label: _('System power action to perform');
+        label: _("System power action to perform");
       }
 
       Box {
         orientation: vertical;
 
         CheckButton system_suspend_radiob {
-          label: _('suspend');
+          label: _("suspend");
           active: true;
         }
 
         CheckButton system_shutdown_radiob {
-          label: _('shutdown');
+          label: _("shutdown");
           group: system_suspend_radiob;
         }
       }

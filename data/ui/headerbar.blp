@@ -14,28 +14,28 @@ template $Headerbar: Box {
     ToggleButton show_sidebar_button {
       visible: false;
       icon-name: 'sidebar-show-symbolic';
-      tooltip-text: _('Toggle Filter Sidebar');
+      tooltip-text: _("Toggle Filter Sidebar");
     }
 
     [end]
     MenuButton menu_button {
-      tooltip-text: _('Options');
+      tooltip-text: _("Options");
       menu-model: primary_menu;
       icon-name: 'open-menu-symbolic';
 
       accessibility {
-        label: _('Open the options popover');
+        label: _("Open the options popover");
       }
     }
 
     [end]
     ToggleButton search_button {
       name: 'Search toggle button';
-      tooltip-text: _('Search your library');
+      tooltip-text: _("Search your library");
       icon-name: 'loupe-large-symbolic';
 
       accessibility {
-        label: _('Open the search popover');
+        label: _("Open the search popover");
       }
     }
 
@@ -43,7 +43,7 @@ template $Headerbar: Box {
     MenuButton progress_menu_button {
       visible: false;
       can-focus: true;
-      tooltip-text: _('Display background task progress');
+      tooltip-text: _("Display background task progress");
 
       Spinner progress_spinner {}
 
@@ -64,7 +64,7 @@ template $Headerbar: Box {
 
       SearchEntry search_entry {
         search-delay: 100;
-        placeholder-text: _('Start typing...');
+        placeholder-text: _("Start typing...");
         hexpand: true;
       }
     }
@@ -75,33 +75,33 @@ menu primary_menu {
   section {
     item {
       action: 'app.scan';
-      label: _('_Scan Library');
+      label: _("_Scan Library");
     }
   }
 
   section {
     item {
       action: 'app.hide_offline';
-      label: _('_Hide unavailable books');
+      label: _("_Hide unavailable books");
     }
   }
 
   section {
     item {
       action: 'app.prefs';
-      label: _('_Preferences');
+      label: _("_Preferences");
     }
 
     item {
       action: 'app.about';
-      label: _('_About Cozy');
+      label: _("_About Cozy");
     }
   }
 
   section {
     item {
       action: 'app.quit';
-      label: _('_Quit');
+      label: _("_Quit");
     }
   }
 }

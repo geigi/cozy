@@ -12,14 +12,14 @@ template $SeekBar: Box {
   spacing: 5;
 
   Label current_label {
-    tooltip-text: _('Elapsed time');
+    tooltip-text: _("Elapsed time");
     halign: end;
     valign: center;
     label: '--:--';
     single-line-mode: true;
 
     accessibility {
-      label: _('Elapsed time of current part');
+      label: _("Elapsed time of current part");
     }
 
     styles [
@@ -30,7 +30,7 @@ template $SeekBar: Box {
   Scale progress_scale {
     width-request: 150;
     focusable: true;
-    tooltip-text: _('Jump to position in current chapter');
+    tooltip-text: _("Jump to position in current chapter");
     valign: center;
     hexpand: true;
     adjustment: seek_bar_adjustment;
@@ -38,7 +38,7 @@ template $SeekBar: Box {
     fill-level: 0;
 
     accessibility {
-      label: _('Position of the current part in seconds');
+      label: _("Position of the current part in seconds");
     }
   }
 
@@ -46,13 +46,13 @@ template $SeekBar: Box {
     valign: center;
 
     Label remaining_label {
-      tooltip-text: _('Remaining time');
+      tooltip-text: _("Remaining time");
       halign: start;
       label: '--:--';
       single-line-mode: true;
 
       accessibility {
-        label: _('Remaining time of current part');
+        label: _("Remaining time of current part");
       }
 
       styles [
