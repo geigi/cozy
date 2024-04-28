@@ -1,9 +1,8 @@
 import logging
-from typing import List
 
-import cozy.ext.inject as inject
 from gi.repository import Gio
 
+import cozy.ext.inject as inject
 from cozy.architecture.event_sender import EventSender
 from cozy.model.book import Book
 from cozy.model.settings import Settings
@@ -27,7 +26,7 @@ class ExternalStorage:
 
 
 class FilesystemMonitor(EventSender):
-    external_storage: List[ExternalStorage] = []
+    external_storage: list[ExternalStorage] = []
     _settings: Settings = inject.attr(Settings)
 
     def __init__(self):
@@ -43,7 +42,6 @@ class FilesystemMonitor(EventSender):
         self._settings_view_model.add_listener(self.__on_settings_changed)
 
     def init_offline_mode(self):
-        external_storage = []
         mounts = self.volume_monitor.get_mounts()
         # go through all audiobook locations and test if they can be found in the mounts list
 
@@ -59,7 +57,6 @@ class FilesystemMonitor(EventSender):
         Free all references.
         """
         # self.volume_monitor.unref()
-        pass
 
     def get_book_online(self, book: Book):
         try:
@@ -84,7 +81,7 @@ class FilesystemMonitor(EventSender):
         return storage.online
 
     def is_external(self, directory: str) -> bool:
-        mounts: List[Gio.Mount] = self.volume_monitor.get_mounts()
+        mounts: list[Gio.Mount] = self.volume_monitor.get_mounts()
 
         for mount in mounts:
             root = mount.get_root()
@@ -117,11 +114,11 @@ class FilesystemMonitor(EventSender):
             log.warning("Mount added but no mount_path is present. Skipping...")
             return
 
-        log.debug("Volume mounted: " + mount_path)
+        log.debug("Volume mounted: %s", mount_path)
 
         storage = next((s for s in self.external_storage if mount_path in s.storage.path), None)
         if storage:
-            log.info("Storage online: " + mount_path)
+            log.info("Storage online: %s", mount_path)
             storage.online = True
             self.emit_event("storage-online", storage.storage.path)
 
@@ -136,11 +133,11 @@ class FilesystemMonitor(EventSender):
             log.warning("Mount removed but no mount_path is present. Skipping...")
             return
 
-        log.debug("Volume unmounted: " + mount_path)
+        log.debug("Volume unmounted: %s", mount_path)
 
         storage = next((s for s in self.external_storage if mount_path in s.storage.path), None)
         if storage:
-            log.info("Storage offline: " + mount_path)
+            log.info("Storage offline: %s", mount_path)
             storage.online = False
             self.emit_event("storage-offline", storage.storage.path)
 

@@ -1,7 +1,6 @@
 import logging
 import time
 
-
 from cozy.control.db_updater import update_db
 from cozy.db.artwork_cache import ArtworkCache
 from cozy.db.book import Book
@@ -59,8 +58,7 @@ def _connect_db(db):
         db.connect(reuse_if_open=True)
     except Exception as e:
         reporter.exception("db", e)
-        log.error("Could not connect to database. ")
-        log.error(e)
+        log.error("Could not connect to database: %s", e)
 
 
 def books():
@@ -92,10 +90,7 @@ def get_track_for_playback(book):
     query = Track.select().where(Track.id == book.position)
     if book.position < 1:
         track_items = get_tracks(book)
-        if len(track_items) > 0:
-            track = get_tracks(book)[0]
-        else:
-            track = None
+        track = get_tracks(book)[0] if len(track_items) > 0 else None
     elif query.exists():
         track = query.get()
     else:

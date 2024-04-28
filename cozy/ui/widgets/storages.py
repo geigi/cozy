@@ -7,7 +7,7 @@ from cozy.model.storage import Storage
 from cozy.view_model.storages_view_model import StoragesViewModel
 
 
-def ask_storage_location(callback: Callable[[str], None], initial_folder: str | None = None):
+def ask_storage_location(callback: Callable[[str | None], None], initial_folder: str | None = None):
     location_chooser = Gtk.FileDialog(title=_("Set Audiobooks Directory"))
 
     if initial_folder:
@@ -20,13 +20,12 @@ def ask_storage_location(callback: Callable[[str], None], initial_folder: str | 
         except GLib.GError:
             pass
         else:
-            if file is not None:
-                callback(file.get_path())
+            callback(None if file is None else file.get_path())
 
     location_chooser.select_folder(inject.instance("MainWindow").window, None, finish_callback)
 
 
-@Gtk.Template.from_resource("/com/github/geigi/cozy/storage_row.ui")
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/storage_row.ui")
 class StorageRow(Adw.ActionRow):
     __gtype_name__ = "StorageRow"
 
@@ -53,8 +52,9 @@ class StorageRow(Adw.ActionRow):
     def ask_for_new_location(self, *_) -> None:
         ask_storage_location(self._on_folder_changed, initial_folder=self._model.path)
 
-    def _on_folder_changed(self, new_path: str) -> None:
-        self.emit("location-changed", new_path)
+    def _on_folder_changed(self, new_path: str | None) -> None:
+        if new_path is not None:
+            self.emit("location-changed", new_path)
 
     def _on_menu_opened(self, *_) -> None:
         self.emit("menu-opened")
@@ -81,7 +81,7 @@ GObject.signal_new(
 GObject.signal_new("menu-opened", StorageRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ())
 
 
-@Gtk.Template.from_resource("/com/github/geigi/cozy/storage_locations.ui")
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/storage_locations.ui")
 class StorageLocations(Adw.PreferencesGroup):
     __gtype_name__ = "StorageLocations"
 

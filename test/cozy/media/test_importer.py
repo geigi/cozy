@@ -33,7 +33,7 @@ def test_external_paths_are_excluded_when_offline(mocker):
     internal_storages_in_db = Storage.select().where(Storage.external is not False)
     internal_storage_paths = [storage.path for storage in internal_storages_in_db]
     assert len(internal_storage_paths) == len(paths_to_import)
-    assert all([a == b for a, b in zip(internal_storage_paths, paths_to_import)])
+    assert all(a == b for a, b in zip(internal_storage_paths, paths_to_import))
 
 
 def test_paths_not_existing_are_excluded(mocker):
@@ -60,7 +60,7 @@ def test_all_existing_paths_are_included(mocker):
     internal_storage_paths = [storage.path for storage in internal_storages_in_db]
 
     assert len(internal_storage_paths) == len(paths_to_import)
-    assert all([a == b for a, b in zip(internal_storage_paths, paths_to_import)])
+    assert all(a == b for a, b in zip(internal_storage_paths, paths_to_import))
 
 
 def test_import_file_returns_false_for_directory(mocker):
@@ -76,12 +76,11 @@ def test_import_file_returns_false_for_directory(mocker):
 def test_filter_unchanged_files_returns_only_new_or_changed_files(mocker):
     from cozy.media.importer import Importer
 
-    example_chapters = []
 
     mocker.patch("cozy.model.library.Library.chapters")
     mocker.patch("os.path.getmtime", return_value=100)
 
-    importer = Importer()
+    Importer()
 
 
 def test_scan_emits_start_event(mocker):
@@ -200,4 +199,4 @@ def test_execute_import_returns_list_of_imported_files(mocker):
     importer = Importer()
     imported, _ = importer._execute_import(["a", "b"])
 
-    assert all([a == b for a, b in zip(imported, ["path", "path2"])])
+    assert all(a == b for a, b in zip(imported, ["path", "path2"]))

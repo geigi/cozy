@@ -1,6 +1,6 @@
+import logging
 import os
 import uuid
-import logging
 
 from gi.repository import Gdk, GdkPixbuf
 
@@ -55,8 +55,7 @@ class ArtworkCache:
         q.execute()
 
     def _on_importer_event(self, event, data):
-        if event == "scan":
-            if data == ScanStatus.STARTED:
+        if event == "scan" and data == ScanStatus.STARTED:
                 self.delete_artwork_cache()
 
     def _create_artwork_cache(self, book, pixbuf, size):
@@ -88,8 +87,7 @@ class ArtworkCache:
                 resized_pixbuf.savev(file_path, "jpeg", ["quality", None], ["95"])
             except Exception as e:
                 reporter.warning("artwork_cache", "Failed to save resized cache albumart")
-                log.warning("Failed to save resized cache albumart for following uuid: " + gen_uuid)
-                log.warning(e)
+                log.warning("Failed to save resized cache albumart for uuid %r: %s", gen_uuid, e)
 
         return resized_pixbuf
 
@@ -98,7 +96,7 @@ class ArtworkCache:
         if query.exists():
             try:
                 uuid = query.first().uuid
-            except Exception as e:
+            except Exception:
                 reporter.error("artwork_cache", "load_pixbuf_from_cache: query exists but query.first().uuid crashed.")
                 return None
         else:
@@ -124,10 +122,7 @@ class ArtworkCache:
         path = self.get_album_art_path(book, size)
 
         try:
-            if path:
-                pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
-            else:
-                pixbuf = None
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file(path) if path else None
         except Exception as e:
             log.warning("Failed to load pixbuf from path: %s. Deleting file.", path)
             log.debug(e)
@@ -170,8 +165,7 @@ class ArtworkCache:
                 pixbuf = loader.get_pixbuf()
             except Exception as e:
                 reporter.warning("artwork_cache", "Could not get book cover from db.")
-                log.warning("Could not get cover for book " + book.name)
-                log.warning(e)
+                log.warning("Could not get cover for book %r: %s", book.name, e)
 
         return pixbuf
 
@@ -209,8 +203,7 @@ class ArtworkCache:
             cover_files = [f for f in os.listdir(directory)
                            if f.lower().endswith('.png') or f.lower().endswith(".jpg") or f.lower().endswith(".gif")]
         except Exception as e:
-            log.warning("Could not open audiobook directory and look for cover files.")
-            log.warning(e)
+            log.warning("Could not open audiobook directory and look for cover files: %s", e)
         for elem in (x for x in cover_files if os.path.splitext(x.lower())[0] == "cover"):
             # find cover.[jpg,png,gif]
             try:

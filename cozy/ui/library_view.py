@@ -1,19 +1,18 @@
-import functools
 from typing import Optional
 
 from gi.repository import Adw, Gtk
 
 from cozy.ext import inject
-from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.delete_book_view import DeleteBookView
+from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
+from cozy.view_model.library_view_model import LibraryViewMode, LibraryViewModel
 
 READER_PAGE = "reader"
 AUTHOR_PAGE = "author"
 RECENT_PAGE = "recent"
 MAIN_BOOK_PAGE = "main"
-NO_MEDIA_PAGE = "no_media"
+WELCOME_PAGE = "welcome"
 
 NO_RECENT_PAGE = "no_recent"
 BOOKS_PAGE = "books"
@@ -112,7 +111,7 @@ class LibraryView:
         books_view_page = BOOKS_PAGE
 
         if len(self._view_model.books) < 1:
-            main_view_page = NO_MEDIA_PAGE
+            main_view_page = WELCOME_PAGE
             visible_child_name = RECENT_PAGE
         elif view_mode == LibraryViewMode.CURRENT:
             visible_child_name = RECENT_PAGE

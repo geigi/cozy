@@ -1,11 +1,10 @@
-from typing import List, Callable
+from typing import Callable
 
-import gi
 from gi.repository import GLib
 
 
 class EventSender:
-    _listeners: List[Callable]
+    _listeners: list[Callable]
 
     def __init__(self):
         self._listeners = []

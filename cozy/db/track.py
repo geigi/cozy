@@ -1,7 +1,7 @@
-from peewee import CharField, IntegerField, ForeignKeyField, FloatField
+from peewee import CharField, FloatField, ForeignKeyField, IntegerField
 
-from cozy.db.model_base import ModelBase
 from cozy.db.book import Book
+from cozy.db.model_base import ModelBase
 
 
 class Track(ModelBase):

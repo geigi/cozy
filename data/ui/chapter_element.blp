@@ -1,0 +1,64 @@
+using Gtk 4.0;
+
+template $ChapterElement: Box {
+  tooltip-text: _("Play this part");
+
+  Box {
+    margin-start: 12;
+    margin-end: 12;
+    margin-top: 6;
+    margin-bottom: 6;
+    spacing: 5;
+
+    Stack icon_stack {
+      StackPage {
+        name: 'number';
+
+        child: Label number_label {
+          halign: start;
+          width-chars: 3;
+          xalign: 0;
+          yalign: 0;
+
+          styles [
+            "dim-label",
+          ]
+        };
+      }
+
+      StackPage {
+        name: 'play_icon';
+
+        child: Image play_icon {
+          halign: start;
+          valign: center;
+          icon-name: 'media-playback-start-symbolic';
+          pixel-size: 12;
+        };
+      }
+    }
+
+    Label title_label {
+      hexpand: true;
+      ellipsize: end;
+      max-width-chars: 50;
+      xalign: 0;
+      yalign: 0;
+
+      styles [
+        "semi-bold",
+      ]
+    }
+
+    Label duration_label {
+      halign: end;
+      justify: right;
+      xalign: 0;
+      yalign: 0;
+    }
+  }
+
+  styles [
+    "chapter_element",
+  ]
+}

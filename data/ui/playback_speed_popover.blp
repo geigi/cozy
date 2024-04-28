@@ -1,0 +1,33 @@
+using Gtk 4.0;
+
+Adjustment speed_value {
+  lower: 0.5;
+  upper: 3.5;
+  value: 1;
+  step-increment: 0.05;
+  page-increment: 0.1;
+}
+
+template $PlaybackSpeedPopover: Popover {
+  width-request: 300;
+
+  child: Box {
+    Scale playback_speed_scale {
+      hexpand: true;
+      focusable: true;
+      margin-start: 6;
+      margin-end: 6;
+      margin-top: 6;
+      margin-bottom: 6;
+      adjustment: speed_value;
+      fill-level: 5;
+      round-digits: 1;
+    }
+
+    Label playback_speed_label {
+      margin-end: 12;
+      label: '<span font_features=\'tnum\'>1.0 x</span>';
+      use-markup: true;
+    }
+  };
+}

@@ -1,6 +1,6 @@
 import logging
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender

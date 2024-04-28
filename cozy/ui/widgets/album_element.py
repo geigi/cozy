@@ -2,12 +2,11 @@ import logging
 import math
 
 import cairo
+from gi.repository import GObject, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
-from cozy.model.book import Book
 from cozy.ext import inject
-
-from gi.repository import Gtk, GObject, Gdk
+from cozy.model.book import Book
 
 ALBUM_ART_SIZE = 200
 PLAY_BUTTON_ICON_SIZE = Gtk.IconSize.NORMAL
@@ -16,7 +15,7 @@ STROKE_WIDTH = 3
 log = logging.getLogger("album_element")
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/album_element.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/album_element.ui')
 class AlbumElement(Gtk.Box):
     __gtype_name__ = "AlbumElement"
 

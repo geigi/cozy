@@ -1,15 +1,13 @@
-from typing import Any
 from gi.repository import Adw, Gio, Gtk
 
 from cozy.ext import inject
 from cozy.ui.widgets.error_reporting import ErrorReporting
-
 from cozy.ui.widgets.storages import StorageLocations
 from cozy.view_model.settings_view_model import SettingsViewModel
 
 
-@Gtk.Template.from_resource("/com/github/geigi/cozy/preferences.ui")
-class PreferencesView(Adw.PreferencesWindow):
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/preferences.ui")
+class PreferencesWindow(Adw.PreferencesDialog):
     __gtype_name__ = "PreferencesWindow"
 
     _glib_settings: Gio.Settings = inject.attr(Gio.Settings)
@@ -27,9 +25,8 @@ class PreferencesView(Adw.PreferencesWindow):
     forward_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
     fadeout_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
 
-    def __init__(self, **kwargs: Any) -> None:
-        main_window = inject.instance("MainWindow")
-        super().__init__(transient_for=main_window.window, **kwargs)
+    def __init__(self) -> None:
+        super().__init__()
 
         error_reporting = ErrorReporting()
         error_reporting.show_header(False)
@@ -42,49 +39,20 @@ class PreferencesView(Adw.PreferencesWindow):
         self._bind_settings()
 
     def _bind_settings(self) -> None:
-        self._glib_settings.bind(
-            "swap-author-reader",
-            self.swap_author_reader_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
+        bind_settings = lambda setting, widget, propetry: self._glib_settings.bind(
+            setting, widget, propetry, Gio.SettingsBindFlags.DEFAULT
         )
 
-        self._glib_settings.bind(
-            "replay", self.replay_switch, "active", Gio.SettingsBindFlags.DEFAULT
-        )
-        self._glib_settings.bind(
-            "rewind-duration",
-            self.rewind_duration_adjustment,
-            "value",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-        self._glib_settings.bind(
-            "forward-duration",
-            self.forward_duration_adjustment,
-            "value",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-
-        self._glib_settings.bind(
-            "sleep-timer-fadeout",
-            self.sleep_timer_fadeout_switch,
-            "enable-expansion",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-
-        self._glib_settings.bind(
-            "sleep-timer-fadeout-duration",
-            self.fadeout_duration_adjustment,
-            "value",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-
-        self._glib_settings.bind(
-            "prefer-external-cover",
-            self.artwork_prefer_external_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
+        bind_settings("swap-author-reader", self.swap_author_reader_switch, "active")
+        bind_settings("replay", self.replay_switch, "active")
+        bind_settings("rewind-duration", self.rewind_duration_adjustment, "value")
+        bind_settings("forward-duration", self.forward_duration_adjustment, "value")
+        bind_settings("sleep-timer-fadeout", self.sleep_timer_fadeout_switch, "enable-expansion")
+        bind_settings("sleep-timer-fadeout-duration", self.fadeout_duration_adjustment, "value")
+        bind_settings("prefer-external-cover", self.artwork_prefer_external_switch, "active")
 
     def _on_lock_ui_changed(self) -> None:
         self.storage_locations_view.set_sensitive(not self._view_model.lock_ui)
+
+    def present(self, parent: Adw.ApplicationWindow) -> None:
+        super().present(parent)

@@ -1,4 +1,4 @@
-from peewee import ForeignKeyField, CharField
+from peewee import CharField, ForeignKeyField
 
 from cozy.db.book import Book
 from cozy.db.model_base import ModelBase

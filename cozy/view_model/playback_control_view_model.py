@@ -1,5 +1,3 @@
-from typing import Optional
-
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.ext import inject
@@ -17,7 +15,7 @@ class PlaybackControlViewModel(Observable, EventSender):
         super().__init__()
         super(Observable, self).__init__()
 
-        self._book: Optional[Book] = None
+        self._book: Book | None = None
 
         self._player.add_listener(self._on_player_event)
 
@@ -25,18 +23,12 @@ class PlaybackControlViewModel(Observable, EventSender):
             self.book = self._player.loaded_book
 
     @property
-    def book(self) -> Optional[Book]:
+    def book(self) -> Book | None:
         return self._book
 
     @book.setter
-    def book(self, value: Optional[Book]):
-        if self._book:
-            self._book.remove_bind("playback_speed", self._on_playback_speed_changed)
-
+    def book(self, value: Book | None):
         self._book = value
-        if value:
-            self._book.bind_to("playback_speed", self._on_playback_speed_changed)
-
         self._notify("lock_ui")
 
     @property
@@ -47,7 +39,7 @@ class PlaybackControlViewModel(Observable, EventSender):
         return self._player.playing
 
     @property
-    def position(self) -> Optional[float]:
+    def position(self) -> float | None:
         if not self._book:
             return None
 
@@ -62,11 +54,28 @@ class PlaybackControlViewModel(Observable, EventSender):
         self._player.position = new_value * self._book.playback_speed
 
     @property
-    def length(self) -> Optional[float]:
+    def length(self) -> float | None:
         if not self._player.loaded_book or not self._book:
             return None
 
         return self._player.loaded_book.current_chapter.length / self._book.playback_speed
+
+    @property
+    def relative_position(self) -> float | None:
+        if not self._player.loaded_book or not self._book:
+            return None
+
+        position = self._book.current_chapter.position - self._book.current_chapter.start_position
+        length = self._player.loaded_book.current_chapter.length
+        return position / NS_TO_SEC / length * 100
+
+    @relative_position.setter
+    def relative_position(self, new_value: float) -> None:
+        if not self._book:
+            return
+
+        length = self._player.loaded_book.current_chapter.length
+        self._player.position = new_value / 100 * length
 
     @property
     def lock_ui(self) -> bool:

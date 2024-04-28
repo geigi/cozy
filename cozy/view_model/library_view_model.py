@@ -13,11 +13,10 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library
-from cozy.model.storage import Storage
 from cozy.open_view import OpenView
 from cozy.report import reporter
-from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.import_failed_dialog import ImportFailedDialog
+from cozy.ui.widgets.book_element import BookElement
 from cozy.view_model.storages_view_model import StoragesViewModel
 
 log = logging.getLogger("library_view_model")
@@ -79,10 +78,7 @@ class LibraryViewModel(Observable, EventSender):
 
     @property
     def is_any_book_in_progress(self) -> bool:
-        for book in self.books:
-            if book.position > 0:
-                return True
-        return False
+        return any(book.position > 0 for book in self.books)
 
     @property
     def authors(self):
@@ -153,17 +149,10 @@ class LibraryViewModel(Observable, EventSender):
         self._notify("library_view_mode")
 
     def book_files_exist(self, book: Book) -> bool:
-        for chapter in book.chapters:
-            if os.path.isfile(chapter.file):
-                return True
-        return False
+        return any(os.path.isfile(chapter.file) for chapter in book.chapters)
 
     def _on_fs_monitor_event(self, event, _):
-        if event == "storage-online":
-            self._notify("authors")
-            self._notify("readers")
-            self._notify("books-filter")
-        elif event == "storage-offline":
+        if event in {"storage-online", "storage-offline"}:
             self._notify("authors")
             self._notify("readers")
             self._notify("books-filter")

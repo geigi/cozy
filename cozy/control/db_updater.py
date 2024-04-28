@@ -2,9 +2,8 @@ import logging
 import os
 import shutil
 from datetime import datetime
-from typing import List
 
-from peewee import IntegerField, BooleanField, FloatField, ForeignKeyField, fn
+from peewee import BooleanField, FloatField, ForeignKeyField, IntegerField, fn
 from playhouse.migrate import SqliteMigrator, migrate
 from playhouse.reflection import generate_models
 
@@ -124,8 +123,8 @@ def _update_db_9(db):
     db.stop()
     db.start()
 
-    files: List[File] = []
-    track_to_files: List[TrackToFile] = []
+    files: list[File] = []
+    track_to_files: list[TrackToFile] = []
     file_id = 1
 
     if "file" in models["track"]._meta.sorted_field_names:
@@ -240,7 +239,7 @@ def update_db():
     # First test for version 1
     try:
         next(c for c in db.get_columns("settings") if c.name == "version")
-    except Exception as e:
+    except Exception:
         if len(db.get_tables()) == 0:
             data_dir = get_data_dir()
             if os.path.exists(os.path.join(data_dir, "cozy.db")):
