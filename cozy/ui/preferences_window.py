@@ -16,7 +16,6 @@ class PreferencesWindow(Adw.PreferencesDialog):
     storages_page: Adw.PreferencesPage = Gtk.Template.Child()
     user_feedback_preference_group: Adw.PreferencesGroup = Gtk.Template.Child()
 
-    dark_mode_switch: Adw.SwitchRow = Gtk.Template.Child()
     swap_author_reader_switch: Adw.SwitchRow = Gtk.Template.Child()
     replay_switch: Adw.SwitchRow = Gtk.Template.Child()
     sleep_timer_fadeout_switch: Adw.SwitchRow = Gtk.Template.Child()
@@ -44,7 +43,6 @@ class PreferencesWindow(Adw.PreferencesDialog):
             setting, widget, propetry, Gio.SettingsBindFlags.DEFAULT
         )
 
-        bind_settings("dark-mode", self.dark_mode_switch, "active")
         bind_settings("swap-author-reader", self.swap_author_reader_switch, "active")
         bind_settings("replay", self.replay_switch, "active")
         bind_settings("rewind-duration", self.rewind_duration_adjustment, "value")
