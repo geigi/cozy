@@ -1,44 +1,7 @@
-import logging as log
 import threading
 import time
 from datetime import datetime
-from enum import Enum
 from gettext import ngettext
-from platform import system as get_system
-
-import distro
-
-
-class Platform(Enum):
-    Linux = 0
-    Mac = 1
-
-
-def system_platform():
-    os = get_system().upper()
-    if "LINUX" in os:
-        return Platform.Linux
-    else:
-        return Platform.Mac
-
-
-def shorten_string(string, length):
-    """
-    Shortens a string when it is longer than length and adds … at the end.
-    :param string: Text to be shortened
-    :param length: Max. length of string
-    :return : string or shortened string
-    """
-    return (string[:length] + '…') if len(string) > length else string
-
-
-def is_elementary():
-    """
-    Currently we are only checking for elementaryOS
-    """
-    dist = distro.linux_distribution(full_distribution_name=False)
-    log.debug(dist)
-    return '"elementary"' in dist or 'elementary' in dist
 
 
 # https://stackoverflow.com/questions/323972/is-there-any-way-to-kill-a-thread-in-python
