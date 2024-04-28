@@ -108,7 +108,7 @@ def main():
     application = Application(pkgdatadir)
 
     try:
-        # Handle the debug option seperatly without the Glib stuff
+        # Handle the debug option separately without the Glib stuff
         if "-d" in sys.argv:
             sys.argv.remove("-d")
         ret = application.run(sys.argv)

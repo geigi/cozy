@@ -23,7 +23,7 @@ Head over to [Matrix](https://matrix.to/#/#cozy:gnome.org) to join the conversat
 - **Playback speed control** for each book individually
 - **Search** your library
 - **Offline Mode!** This allows you to keep an audio book on your internal storage if you store your audiobooks on an external or network drive. Perfect for listening on the go!
-- Add **mulitple storage locations**
+- Add **multiple storage locations**
 - **Drag & Drop** to import new audio books
 - Listen to your DRM free **mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav** audio books
 - MPRIS integration (**Media keys** & playback info for desktop environment)

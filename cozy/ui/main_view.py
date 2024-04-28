@@ -146,7 +146,7 @@ class CozyUI(EventSender, metaclass=Singleton):
 
     def block_ui_buttons(self, block, scan=False):
         """
-        Makes the buttons to interact with the player insensetive.
+        Makes the buttons to interact with the player insensitive.
         :param block: Boolean
         """
         sensitive = not block

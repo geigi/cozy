@@ -14,7 +14,7 @@ NS_TO_SEC = 10 ** 9
 class TagReader:
     def __init__(self, uri: str, discoverer_info: GstPbutils.DiscovererInfo):
         if not uri:
-            raise ValueError("URI must not be None or emtpy")
+            raise ValueError("URI must not be None or empty")
 
         if not discoverer_info:
             raise ValueError("discoverer_info must not be None")
