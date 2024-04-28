@@ -20,8 +20,3 @@ class AppViewModel(Observable, EventSender):
         self._notify("view")
         self.emit_event_main_thread("view", self._view)
 
-    def navigate_back(self):
-        if self.view == View.BOOK_DETAIL:
-            self.view = View.LIBRARY_BOOKS
-        elif self.view == View.LIBRARY_BOOKS:
-            self.view = View.LIBRARY_FILTER

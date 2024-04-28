@@ -1,9 +1,9 @@
 import logging
 import os
+import sys
 from enum import Enum, auto
 from typing import Optional
 
-from cozy import tools
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable
 from cozy.ext import inject
@@ -76,17 +76,11 @@ class SleepTimerViewModel(Observable):
         self._stop_timer()
 
     def _start_timer(self):
-        if self._sleep_timer:
-            return
-
-        if self.remaining_seconds < 1:
-            return
-
-        if not self._player.playing:
+        if self._sleep_timer or self.remaining_seconds < 1 or not self._player.playing:
             return
 
         log.info("Start Timer")
-        self._sleep_timer = tools.IntervalTimer(1, self._on_timer_tick)
+        self._sleep_timer = IntervalTimer(1, self._on_timer_tick)
         self._sleep_timer.start()
 
     def _stop_timer(self):
@@ -114,12 +108,10 @@ class SleepTimerViewModel(Observable):
                 self._notify_main_thread("remaining_seconds")
 
     def _get_fadeout(self) -> int:
-        fadeout = 0
-
         if self._app_settings.sleep_timer_fadeout:
-            fadeout = self._app_settings.sleep_timer_fadeout_duration
+            return self._app_settings.sleep_timer_fadeout_duration
 
-        return fadeout
+        return 0
 
     def _stop_playback(self):
         fadeout = self._get_fadeout()
@@ -127,18 +119,17 @@ class SleepTimerViewModel(Observable):
         self._player.pause(fadeout=fadeout > 0)
 
     def _handle_system_power_event(self):
-        platform = tools.system_platform()
-        command = ""
+        command = None
 
         if self.system_power_control == SystemPowerControl.SHUTDOWN:
             log.info("system will attempt to shutdown now!")
-            if platform is tools.Platform.Linux:
+            if "linux" in sys.platform.lower():
                 command = "systemctl poweroff"
             else:
                 command = "shutdown -h now"
         elif self.system_power_control == SystemPowerControl.SUSPEND:
             log.info("system will attempt to suspend now!")
-            if platform is tools.Platform.Linux:
+            if "linux" in sys.platform.lower():
                 command = "systemctl suspend"
 
         if command:
@@ -150,7 +141,7 @@ class SleepTimerViewModel(Observable):
             self._notify("stop_after_chapter")
         elif event == "play":
             self._start_timer()
-        elif event == "pause" or event == "stop":
+        elif event in {"pause", "stop"}:
             self._stop_timer()
         elif event == "fadeout-finished" and self._wait_for_fadeout_end:
             self._wait_for_fadeout_end = False

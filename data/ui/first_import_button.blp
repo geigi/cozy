@@ -1,0 +1,23 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FirstImportButton: Button {
+  halign: center;
+
+  Stack stack {
+    hhomogeneous: false;
+
+    Adw.ButtonContent label {
+      halign: center;
+      label: _("Select Folder");
+      icon-name: 'folder-open-symbolic';
+    }
+
+    Spinner spinner {}
+  }
+
+  styles [
+    "suggested-action",
+    "pill",
+  ]
+}

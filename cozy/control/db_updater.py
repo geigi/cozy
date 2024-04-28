@@ -2,9 +2,8 @@ import logging
 import os
 import shutil
 from datetime import datetime
-from typing import List
 
-from peewee import IntegerField, BooleanField, FloatField, ForeignKeyField, fn
+from peewee import BooleanField, FloatField, ForeignKeyField, IntegerField, fn
 from playhouse.migrate import SqliteMigrator, migrate
 from playhouse.reflection import generate_models
 
@@ -124,8 +123,8 @@ def _update_db_9(db):
     db.stop()
     db.start()
 
-    files: List[File] = []
-    track_to_files: List[TrackToFile] = []
+    files: list[File] = []
+    track_to_files: list[TrackToFile] = []
     file_id = 1
 
     if "file" in models["track"]._meta.sorted_field_names:
@@ -136,7 +135,7 @@ def _update_db_9(db):
             file = next((f for f in files if f.path == path), None)
 
             if File.select().where(File.path == path).count() > 0:
-                log.info("Path already existing in db: {}".format(path))
+                log.info("Path already existing in db: %s", path)
                 file = File.select().where(File.path == path).get()
             elif not file:
                 file = File(path=path, modified=track.modified, id=file_id)
@@ -144,7 +143,7 @@ def _update_db_9(db):
                 file_id += 1
 
             if TrackToFile.select().join(Track).where(TrackToFile.track.id == track.id).count() > 0:
-                log.info("TrackToFile already existing in db: {}".format(path))
+                log.info("TrackToFile already existing in db: %s", path)
                 continue
 
             track_to_file = TrackToFile(track=track.id, file=file, start_at=0)
@@ -240,7 +239,7 @@ def update_db():
     # First test for version 1
     try:
         next(c for c in db.get_columns("settings") if c.name == "version")
-    except Exception as e:
+    except Exception:
         if len(db.get_tables()) == 0:
             data_dir = get_data_dir()
             if os.path.exists(os.path.join(data_dir, "cozy.db")):
@@ -283,8 +282,7 @@ def update_db():
             _restore_db(backup_dir_name)
 
             from cozy.ui.db_migration_failed_view import DBMigrationFailedView
-            dialog = DBMigrationFailedView()
-            dialog.show()
+            DBMigrationFailedView().present()
             exit(1)
 
     if version < 10:
@@ -298,8 +296,7 @@ def update_db():
             _restore_db(backup_dir_name)
 
             from cozy.ui.db_migration_failed_view import DBMigrationFailedView
-            dialog = DBMigrationFailedView()
-            dialog.show()
+            DBMigrationFailedView().present()
             exit(1)
 
 
@@ -354,3 +351,4 @@ def _restore_db(backup_dir_name: str):
     if os.path.exists(wal_path_backup):
         log.info("Copying wal file")
         shutil.copyfile(wal_path_backup, wal_path)
+

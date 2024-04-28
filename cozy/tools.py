@@ -1,46 +1,7 @@
-from datetime import datetime
-import time
 import threading
-from platform import system as get_system
-from enum import Enum
+import time
+from datetime import datetime
 from gettext import ngettext
-import logging as log
-import distro
-
-
-class Platform(Enum):
-    Linux = 0
-    Mac = 1
-
-
-def system_platform():
-    os = get_system().upper()
-    if "LINUX" in os:
-        return Platform.Linux
-    else:
-        return Platform.Mac
-
-
-def shorten_string(string, length):
-    """
-    Shortens a string when it is longer than length and adds … at the end.
-    :param string: Text to be shortened
-    :param length: Max. length of string
-    :return : string or shortened string
-    """
-    return (string[:length] + '…') if len(string) > length else string
-
-
-def is_elementary():
-    """
-    Currently we are only checking for elementaryOS
-    """
-    dist = distro.linux_distribution(full_distribution_name=False)
-    log.debug(dist)
-    if '"elementary"' in dist or 'elementary' in dist:
-        return True
-    else:
-        return False
 
 
 # https://stackoverflow.com/questions/323972/is-there-any-way-to-kill-a-thread-in-python
@@ -49,7 +10,7 @@ class StoppableThread(threading.Thread):
     regularly for the stopped() condition."""
 
     def __init__(self, target=None):
-        super(StoppableThread, self).__init__(target=target)
+        super().__init__(target=target)
         self._stop_event = threading.Event()
 
     def stop(self):

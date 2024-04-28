@@ -1,13 +1,16 @@
-import cozy.ext.inject as inject
+from typing import Callable
 
-from cozy.extensions.set import split_strings_to_set
-from cozy.open_view import OpenView
+from gi.repository import GLib
+
+import cozy.ext.inject as inject
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.extensions.set import split_strings_to_set
 from cozy.model.book import Book
 from cozy.model.library import Library
+from cozy.open_view import OpenView
 
 
 class SearchViewModel(Observable, EventSender):
@@ -15,61 +18,57 @@ class SearchViewModel(Observable, EventSender):
     _model: Library = inject.attr(Library)
     _application_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
-    _search_open: bool = False
-
     def __init__(self):
         super().__init__()
         super(Observable, self).__init__()
 
-    @property
-    def books(self):
-        return self._model.books
-
-    @property
-    def authors(self):
+    def _get_available_books(self) -> list[Book]:
         is_book_online = self._fs_monitor.get_book_online
-        show_offline_books = not self._application_settings.hide_offline
 
-        authors = {
-            book.author
-            for book
-            in self._model.books
-            if is_book_online(book) or show_offline_books
+        if self._application_settings.hide_offline:
+            return [book for book in self._model.books if is_book_online(book)]
+        else:
+            return self._model.books
+
+    def search(
+        self, search_query: str, callback: Callable[[list[Book], list[str], list[str]], None]
+    ) -> None:
+        search_query = search_query.lower()
+
+        available_books = self._get_available_books()
+        books = {
+            book
+            for book in available_books
+            if search_query in book.name.lower()
+            or search_query in book.author.lower()
+            or search_query in book.reader.lower()
         }
 
-        return sorted(split_strings_to_set(authors))
+        available_book_authors = split_strings_to_set({book.author for book in available_books})
+        authors = {author for author in available_book_authors if search_query in author.lower()}
 
-    @property
-    def readers(self):
-        is_book_online = self._fs_monitor.get_book_online
-        show_offline_books = not self._application_settings.hide_offline
+        available_book_readers = split_strings_to_set({book.reader for book in available_books})
+        readers = {reader for reader in available_book_readers if search_query in reader.lower()}
 
-        readers = {
-            book.reader
-            for book
-            in self._model.books
-            if is_book_online(book) or show_offline_books
-        }
+        GLib.MainContext.default().invoke_full(
+            GLib.PRIORITY_DEFAULT,
+            callback,
+            sorted(books, key=lambda book: book.name.lower()),
+            sorted(authors),
+            sorted(readers),
+        )
 
-        return sorted(split_strings_to_set(readers))
+    def close(self) -> None:
+        self._notify("close")
 
-    @property
-    def search_open(self):
-        return self._search_open
-
-    @search_open.setter
-    def search_open(self, value):
-        self._search_open = value
-        self._notify("search_open")
-
-    def jump_to_book(self, book: Book):
+    def jump_to_book(self, book: Book) -> None:
         self.emit_event(OpenView.BOOK, book)
-        self.search_open = False
+        self.close()
 
-    def jump_to_author(self, author: str):
+    def jump_to_author(self, author: str) -> None:
         self.emit_event(OpenView.AUTHOR, author)
-        self.search_open = False
+        self.close()
 
-    def jump_to_reader(self, reader: str):
+    def jump_to_reader(self, reader: str) -> None:
         self.emit_event(OpenView.READER, reader)
-        self.search_open = False
+        self.close()

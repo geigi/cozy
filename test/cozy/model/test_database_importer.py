@@ -65,7 +65,7 @@ def test_update_files_db_objects_updates_modified_field():
 
     database_importer = DatabaseImporter()
     file = File.select().where(File.path == "test.mp3").get()
-    file_objects = database_importer._update_files_in_db(file, media_file)
+    database_importer._update_files_in_db(file, media_file)
 
     assert File.select().where(File.path == "test.mp3").get().modified == 12345678
 

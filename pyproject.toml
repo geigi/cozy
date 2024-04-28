@@ -1,0 +1,19 @@
+[tool.black]
+line-length = 100
+skip-magic-trailing-comma = true
+
+[tool.isort]
+line_length = 100
+profile = "black"
+multi_line_output = 3
+skip = ["cozy/ext/inject/"]
+
+[tool.ruff]
+line-length = 100
+builtins = ["_"]
+output-format = "grouped"
+
+[tool.ruff.lint]
+extend-select = ["B", "SIM", "PIE", "C4", "INT", "LOG"]
+extend-ignore = ["E402", "E731"]
+exclude = ["cozy/ext/inject/*"]

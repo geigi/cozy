@@ -1,19 +1,18 @@
 from typing import Optional
 
-from gi.repository import Gtk, Handy
-from gi.repository.Gtk import Builder
+from gi.repository import Adw, Gtk
 
 from cozy.ext import inject
-from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.delete_book_view import DeleteBookView
+from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode, LibraryPage
+from cozy.view_model.library_view_model import LibraryViewMode, LibraryViewModel
 
 READER_PAGE = "reader"
 AUTHOR_PAGE = "author"
 RECENT_PAGE = "recent"
 MAIN_BOOK_PAGE = "main"
-NO_MEDIA_PAGE = "no_media"
+WELCOME_PAGE = "welcome"
 
 NO_RECENT_PAGE = "no_recent"
 BOOKS_PAGE = "books"
@@ -22,7 +21,7 @@ BOOKS_PAGE = "books"
 class LibraryView:
     _view_model: LibraryViewModel = inject.attr(LibraryViewModel)
 
-    def __init__(self, builder: Builder):
+    def __init__(self, builder: Gtk.Builder):
         self._builder = builder
         self._connected_book_element: Optional[BookElement] = None
 
@@ -40,16 +39,16 @@ class LibraryView:
     def _get_ui_elements(self):
         self._filter_stack: Gtk.Stack = self._builder.get_object("sort_stack")
         self._main_stack: Gtk.Stack = self._builder.get_object("main_stack")
+        self._navigation_view: Adw.NavigationView = self._builder.get_object("navigation_view")
+        self._split_view: Adw.OverlaySplitView = self._builder.get_object("split_view")
         self._book_box: Gtk.FlowBox = self._builder.get_object("book_box")
         self._filter_stack_revealer: Gtk.Revealer = self._builder.get_object("sort_stack_revealer")
         self._author_box: FilterListBox = self._builder.get_object("author_box")
         self._reader_box: FilterListBox = self._builder.get_object("reader_box")
-        self._library_leaflet: Handy.Leaflet = self._builder.get_object("library_leaflet")
         self._book_stack: Gtk.Stack = self._builder.get_object("book_stack")
 
     def _connect_ui_elements(self):
         self._filter_stack.connect("notify::visible-child", self._on_sort_stack_changed)
-        self._main_stack.connect("notify::visible-child", self._on_main_stack_changed)
         self._book_box.set_sort_func(self._view_model.display_book_sort)
         self._book_box.set_filter_func(self._view_model.display_book_filter)
 
@@ -64,7 +63,6 @@ class LibraryView:
 
     def _connect_view_model(self):
         self._view_model.bind_to("library_view_mode", self._on_library_view_mode_changed)
-        self._view_model.bind_to("library_page", self._on_library_page_changed)
         self._view_model.bind_to("authors", self.populate_author)
         self._view_model.bind_to("readers", self.populate_reader)
         self._view_model.bind_to("books", self.populate_book_box)
@@ -88,12 +86,6 @@ class LibraryView:
 
         self._view_model.library_view_mode = view_mode
 
-    def _on_main_stack_changed(self, widget, _):
-        page = widget.props.visible_child_name
-
-        if page != MAIN_BOOK_PAGE:
-            self._view_model.library_page = LibraryPage.NONE
-
     def populate_book_box(self):
         self._book_box.remove_all_children()
 
@@ -102,10 +94,7 @@ class LibraryView:
             book_element.connect("play-pause-clicked", self._play_book_clicked)
             book_element.connect("open-book-overview", self._open_book_overview_clicked)
             book_element.connect("book-removed", self._on_book_removed)
-            book_element.show_all()
-            self._book_box.add(book_element)
-
-        self._book_box.show_all()
+            self._book_box.append(book_element)
 
     def populate_author(self):
         self._author_box.populate(self._view_model.authors)
@@ -122,7 +111,7 @@ class LibraryView:
         books_view_page = BOOKS_PAGE
 
         if len(self._view_model.books) < 1:
-            main_view_page = NO_MEDIA_PAGE
+            main_view_page = WELCOME_PAGE
             visible_child_name = RECENT_PAGE
         elif view_mode == LibraryViewMode.CURRENT:
             visible_child_name = RECENT_PAGE
@@ -139,19 +128,12 @@ class LibraryView:
         self._main_stack.props.visible_child_name = main_view_page
         self._filter_stack.set_visible_child_name(visible_child_name)
         self._book_stack.set_visible_child_name(books_view_page)
+        self._navigation_view.pop_to_tag("main")
 
         if active_filter_box:
             self._apply_selected_filter(active_filter_box.get_selected_row())
 
         self._invalidate_filters()
-
-    def _on_library_page_changed(self):
-        page = self._view_model.library_page
-
-        if page == LibraryPage.FILTER:
-            self._library_leaflet.set_visible_child_name("filter")
-        elif page == LibraryPage.BOOKS:
-            self._library_leaflet.set_visible_child_name("books")
 
     def _invalidate_filters(self):
         self._book_box.invalidate_filter()
@@ -166,7 +148,6 @@ class LibraryView:
 
     def _on_filter_row_activated(self, _, row):
         self._apply_selected_filter(row)
-        self._view_model.library_page = LibraryPage.BOOKS
 
         return True
 
@@ -181,17 +162,19 @@ class LibraryView:
 
     def _open_book_overview_clicked(self, _, book):
         self._view_model.open_book_detail(book)
-        self._view_model.library_page = LibraryPage.NONE
+
         return True
 
     def _on_book_removed(self, _, book):
-        delete_from_library = True
-        delete_files = False
-
         if self._view_model.book_files_exist(book):
-            dialog = DeleteBookView()
-            delete_from_library = delete_files = dialog.get_delete_book()
-            dialog.destroy()
+            DeleteBookView(self._on_book_removed_clicked, book).present()
+
+    def _on_book_removed_clicked(self, _, response, book):
+        if response != "delete":
+            return
+
+        delete_from_library = True
+        delete_files = True  # TODO: maybe an option to not delete the files
 
         if delete_files:
             self._view_model.delete_book_files(book)
@@ -203,11 +186,14 @@ class LibraryView:
         if self._connected_book_element:
             self._connected_book_element.set_playing(False)
 
-        self._connected_book_element = next((book_element
-                                             for book_element
-                                             in self._book_box.get_children()
-                                             if book_element.book == self._view_model.current_book_in_playback),
-                                            None)
+        self._connected_book_element = None
+
+        index = 0
+        while book_element := self._book_box.get_child_at_index(index):
+            if book_element.book == self._view_model.current_book_in_playback:
+                self._connected_book_element = book_element
+                break
+            index += 1
 
     def _playing(self):
         if self._connected_book_element:

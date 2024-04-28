@@ -1,0 +1,253 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.ApplicationWindow app_window {
+  name: 'main_window';
+  title: 'Cozy';
+  icon-name: 'com.github.geigi.cozy';
+  width-request: 360;
+  height-request: 294;
+
+  Adw.Breakpoint {
+    condition ("max-width: 500sp")
+
+    setters {
+      mobile_view_switcher.reveal: true;
+    }
+  }
+
+  content: Overlay {
+    [overlay]
+    Revealer drop_revealer {
+      transition-type: crossfade;
+      reveal-child: false;
+      can-target: false;
+
+      Adw.StatusPage {
+        icon-name: 'library-symbolic';
+        title: _("Drop Audio Books Here to Add Them to Your Library");
+
+        styles [
+          "drag-overlay-status-page",
+        ]
+      }
+    }
+
+    Adw.ToastOverlay toast_overlay {
+      Stack main_stack {
+        StackPage {
+          name: 'main';
+
+          child: Adw.ToolbarView {
+            bottom-bar-style: raised;
+
+            content: Adw.NavigationView navigation_view {
+              Adw.NavigationPage {
+                title: _("Library");
+                tag: 'main';
+
+                Adw.ToolbarView header_container {
+                  content: Stack library_stack {
+                    transition-type: crossfade;
+
+                    Adw.OverlaySplitView split_view {
+                      show-sidebar: false;
+                      collapsed: true;
+
+                      sidebar: Adw.ViewStack sort_stack {
+                        vexpand: true;
+
+                        Adw.ViewStackPage {
+                          name: 'recent';
+                          title: _("Recent");
+                          icon-name: 'recent-symbolic';
+
+                          child: Label {
+                            label: _("Empty");
+                          };
+                        }
+
+                        Adw.ViewStackPage {
+                          name: 'author';
+                          title: _("Author");
+                          icon-name: 'person-symbolic';
+
+                          child: ScrolledWindow sort_author_scroller {
+                            focusable: true;
+                            hscrollbar-policy: never;
+                            has-frame: true;
+
+                            child: Viewport sort_author_viewport {
+                              $FilterListBox author_box {
+                                accessibility {
+                                  label: _("List of authors");
+                                }
+
+                                styles [
+                                  "navigation-sidebar",
+                                ]
+                              }
+                            };
+
+                            styles [
+                              "no_frame",
+                            ]
+                          };
+                        }
+
+                        Adw.ViewStackPage {
+                          name: 'reader';
+                          title: _("Reader");
+                          icon-name: 'microphone2-symbolic';
+
+                          child: ScrolledWindow sort_reader_scroller {
+                            focusable: true;
+                            hscrollbar-policy: never;
+                            has-frame: true;
+
+                            child: Viewport sort_reader_viewport {
+                              $FilterListBox reader_box {
+                                accessibility {
+                                  label: _("List of readers");
+                                }
+
+                                styles [
+                                  "navigation-sidebar",
+                                ]
+                              }
+                            };
+
+                            styles [
+                              "no_frame",
+                            ]
+                          };
+                        }
+                      };
+
+                      content: Stack book_stack {
+                        hexpand: true;
+                        hhomogeneous: false;
+                        vhomogeneous: false;
+                        interpolate-size: true;
+
+                        StackPage {
+                          name: 'books';
+
+                          child: ScrolledWindow book_scroller {
+                            focusable: true;
+                            hexpand: true;
+                            hscrollbar-policy: never;
+                            has-frame: true;
+
+                            child: Viewport books_viewport {
+                              vscroll-policy: natural;
+                              hscroll-policy: minimum;
+
+                              child: FlowBox book_box {
+                                margin-top: 18;
+                                margin-bottom: 18;
+                                margin-start: 18;
+                                margin-end: 18;
+                                hexpand: true;
+                                valign: start;
+                                homogeneous: true;
+                                column-spacing: 18;
+                                row-spacing: 18;
+                                min-children-per-line: 1;
+                                max-children-per-line: 10;
+                                selection-mode: none;
+
+                                accessibility {
+                                  label: _("List of books");
+                                }
+
+                                styles [
+                                  "book_box",
+                                ]
+                              };
+                            };
+
+                            styles [
+                              "no_frame",
+                            ]
+                          };
+                        }
+
+                        StackPage {
+                          name: 'no_recent';
+
+                          child: Adw.StatusPage {
+                            icon-name: 'library-symbolic';
+                            title: _("No Recent Books Yet");
+                            description: _("Explore your library by switching to the Author or Reader view");
+                          };
+                        }
+
+                        styles [
+                          "main_stack",
+                        ]
+                      };
+                    }
+                  };
+                }
+              }
+
+              Adw.NavigationPage {
+                title: _("Book title");
+                tag: 'book_overview';
+
+                child: Adw.ToolbarView book_details_container {};
+              }
+            };
+
+            [bottom]
+            Box {
+              orientation: vertical;
+
+              Revealer media_control_box {}
+
+              Adw.ViewSwitcherBar mobile_view_switcher {
+                reveal: false;
+                hexpand: true;
+              }
+            }
+          };
+        }
+
+        StackPage {
+          name: 'import';
+
+          child: Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              show-title: false;
+            }
+
+            content: Adw.StatusPage {
+              icon-name: 'com.github.geigi.cozy';
+              title: _("Importing");
+              description: _("Stay tuned while Cozy is preparing your library…");
+            };
+          };
+        }
+
+        StackPage {
+          name: 'welcome';
+
+          child: Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              show-title: false;
+            }
+
+            content: Adw.StatusPage welcome_status_page {
+              icon-name: 'com.github.geigi.cozy';
+              title: _("Let's get cozy");
+              description: _("Select a Folder, or Drag Audiobooks Here to Add Them to Your Library");
+            };
+          };
+        }
+      }
+    }
+  };
+}

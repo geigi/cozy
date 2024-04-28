@@ -1,5 +1,5 @@
 import logging
-from typing import List, Set, Optional
+from typing import Optional
 
 from peewee import SqliteDatabase
 
@@ -20,9 +20,9 @@ class Library(EventSender):
     _db = cache = inject.attr(SqliteDatabase)
     _settings: Settings = inject.attr(Settings)
 
-    _books: List[Book] = []
-    _chapters: Set[Chapter] = set()
-    _files: Set[str] = set()
+    _books: list[Book] = []
+    _chapters: set[Chapter] = set()
+    _files: set[str] = set()
 
     def __init__(self):
         super().__init__()
@@ -40,21 +40,21 @@ class Library(EventSender):
         return readers
 
     @property
-    def books(self) -> List[Book]:
+    def books(self) -> list[Book]:
         if not self._books:
             self._load_all_books()
 
         return self._books
 
     @property
-    def chapters(self) -> Set[Chapter]:
+    def chapters(self) -> set[Chapter]:
         if not self._chapters:
             self._load_all_chapters()
 
         return self._chapters
 
     @property
-    def files(self) -> Set[str]:
+    def files(self) -> set[str]:
         if not self._files:
             self._load_all_files()
 
@@ -93,10 +93,8 @@ class Library(EventSender):
         self.emit_event_main_thread("rebase-started")
 
         chapter_count = len(self.chapters)
-        progress = 0
-        for chapter in self.chapters:
+        for progress, chapter in enumerate(self.chapters, 1):
             if chapter.file.startswith(old_path):
-                progress += 1
                 chapter.file = chapter.file.replace(old_path, new_path)
                 self.emit_event_main_thread("rebase-progress", progress / chapter_count)
 

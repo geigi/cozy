@@ -1,0 +1,63 @@
+using Gtk 4.0;
+
+Adjustment seek_bar_adjustment {
+  upper: 100;
+  step-increment: 1;
+  page-increment: 15;
+}
+
+template $SeekBar: Box {
+  valign: center;
+  hexpand: true;
+  spacing: 5;
+
+  Label current_label {
+    tooltip-text: _("Elapsed time");
+    halign: end;
+    valign: center;
+    label: '--:--';
+    single-line-mode: true;
+
+    accessibility {
+      label: _("Elapsed time of current part");
+    }
+
+    styles [
+      "numeric",
+    ]
+  }
+
+  Scale progress_scale {
+    width-request: 150;
+    focusable: true;
+    tooltip-text: _("Jump to position in current chapter");
+    valign: center;
+    hexpand: true;
+    adjustment: seek_bar_adjustment;
+    restrict-to-fill-level: false;
+    fill-level: 0;
+
+    accessibility {
+      label: _("Position of the current part in seconds");
+    }
+  }
+
+  Box remaining_event_box {
+    valign: center;
+
+    Label remaining_label {
+      tooltip-text: _("Remaining time");
+      halign: start;
+      label: '--:--';
+      single-line-mode: true;
+
+      accessibility {
+        label: _("Remaining time of current part");
+      }
+
+      styles [
+        "numeric",
+      ]
+    }
+  }
+}

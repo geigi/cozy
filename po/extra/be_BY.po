@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Yahor Haurylenka <k1llo2810@gmail.com>, 2023
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-16 15:04+0100\n"
+"PO-Revision-Date: 2019-09-08 09:39+0000\n"
+"Last-Translator: Yahor Haurylenka <k1llo2810@gmail.com>, 2023\n"
+"Language-Team: Belarusian (Belarus) (https://app.transifex.com/geigi/teams/78138/be_BY/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: be_BY\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: data/com.github.geigi.cozy.desktop:3
+msgid "Cozy"
+msgstr "Cozy"
+
+#: data/com.github.geigi.cozy.desktop:4
+msgid "Audio Book Player"
+msgstr "Прайгравальнік аўдыякніг"
+
+#: data/com.github.geigi.cozy.desktop:5
+msgid "Play and organize your audio book collection"
+msgstr "Прайграйце і ўпарадкуйце сваю калекцыю аўдыякніг"
+
+#: data/com.github.geigi.cozy.appdata.xml:15
+msgid "Listen to audio books"
+msgstr "Слухайце аўдыякнігі"
+
+#: data/com.github.geigi.cozy.appdata.xml:17
+msgid "Do you like audio books? Then lets get cozy!"
+msgstr "Вы любіце аўдыякнігі? Тады давайце зробім утульна!"
+
+#: data/com.github.geigi.cozy.appdata.xml:18
+msgid "Cozy is a audio book player. Here are some of the features:"
+msgstr "Cozy - прайгравальнік аўдыякніг. Вось некаторыя з функцый:"
+
+#: data/com.github.geigi.cozy.appdata.xml:20
+msgid "Import all your audio books into Cozy to browse them comfortably"
+msgstr "Імпартуйце ўсе свае аўдыякнігі ў Cozy, каб зручна іх праглядаць"
+
+#: data/com.github.geigi.cozy.appdata.xml:21
+msgid ""
+"Listen to your DRM free mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav "
+"audio books"
+msgstr ""
+"Слухайце свае аўдыякнігі без DRM у фармаце mp3, m4b, m4a (aac, ALAC, ...), "
+"flac, ogg і wav"
+
+#: data/com.github.geigi.cozy.appdata.xml:22
+msgid "Remembers your playback position"
+msgstr "Запамінае вашу пазіцыю прайгравання"
+
+#: data/com.github.geigi.cozy.appdata.xml:23
+msgid "Sleep timer"
+msgstr "Таймер сну"
+
+#: data/com.github.geigi.cozy.appdata.xml:24
+msgid "Playback speed control for each book individually"
+msgstr "Рэгуляванне хуткасці прайгравання для кожнай кнігі асобна"
+
+#: data/com.github.geigi.cozy.appdata.xml:25
+msgid "Search your library"
+msgstr "Пошук у вашай бібліятэцы"
+
+#: data/com.github.geigi.cozy.appdata.xml:26
+msgid "Multiple storage location support"
+msgstr "Падтрымка некалькіх размяшчэнняў сховішчаў"
+
+#: data/com.github.geigi.cozy.appdata.xml:27
+msgid ""
+"Offline Mode! This allows you to keep an audio book on your internal storage"
+" if you store your audio books on an external or network drive. Perfect to "
+"listen to on the go!"
+msgstr ""
+"Аўтаномны рэжым! Гэта дазваляе захоўваць аўдыякнігі ва ўнутраным сховішчы, "
+"калі вы захоўваеце свае аўдыякнігі на знешнім або сеткавым дыску. Ідэальна "
+"для праслухоўвання ў дарозе!"
+
+#: data/com.github.geigi.cozy.appdata.xml:28
+msgid "Drag and Drop to import new audio books"
+msgstr "Каб імпартаваць новыя аўдыякнігі, проста перацягніце іх"
+
+#: data/com.github.geigi.cozy.appdata.xml:29
+msgid "Sort your audio books by author, reader and name"
+msgstr "Сартуйце свае аўдыёкнігі па аўтару, дыктару і назве"

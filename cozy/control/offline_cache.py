@@ -1,15 +1,12 @@
 import logging
-import uuid
 import os
-
-
-from cozy.architecture.event_sender import EventSender
-from cozy.control.application_directories import get_cache_dir
-import cozy.tools as tools
-import cozy.ui
+import uuid
 
 from gi.repository import Gio
 
+import cozy.tools as tools
+from cozy.architecture.event_sender import EventSender
+from cozy.control.application_directories import get_cache_dir
 from cozy.db.file import File
 from cozy.db.offline_cache import OfflineCache as OfflineCacheModel
 from cozy.db.track_to_file import TrackToFile
@@ -119,7 +116,7 @@ class OfflineCache(EventSender):
 
     def get_cached_path(self, chapter: Chapter):
         query = OfflineCacheModel.select().where(OfflineCacheModel.original_file == chapter.file_id,
-                                                 OfflineCacheModel.copied == True)
+                                                 OfflineCacheModel.copied)
         if query.count() > 0:
             return os.path.join(self.cache_dir, query.get().cached_file)
         else:
@@ -163,7 +160,7 @@ class OfflineCache(EventSender):
         self.thread.start()
 
     def _process_queue(self):
-        log.info("Started processing queue")
+        log.info("Started processing offline cache queue")
         self.filecopy_cancel = Gio.Cancellable()
 
         self._fill_queue_from_db()
@@ -174,11 +171,12 @@ class OfflineCache(EventSender):
             self.emit_event_main_thread("start")
 
         while len(self.queue) > 0:
-            log.info("Processing item")
             self.current_batch_count += 1
             item = self.queue[0]
             if self.thread.stopped():
                 break
+
+            log.info("Processing item: %r", item)
 
             query = OfflineCacheModel.select().where(OfflineCacheModel.id == item.id)
             if not query.exists():
@@ -192,9 +190,8 @@ class OfflineCache(EventSender):
                 self.current_book_processing = book.id
 
             if not new_item.copied and os.path.exists(new_item.original_file.path):
-                log.info("Copying item")
-                self.emit_event_main_thread("message",
-                                            _("Copying") + " " + tools.shorten_string(book.name, 30))
+                log.info("Copying item: %r", new_item)
+                self.emit_event_main_thread("message", _("Copying") + " " + book.name)
                 self.current = new_item
 
                 destination = Gio.File.new_for_path(os.path.join(self.cache_dir, new_item.cached_file))
@@ -208,8 +205,7 @@ class OfflineCache(EventSender):
                         self.thread.stop()
                         break
                     reporter.exception("offline_cache", e)
-                    log.error("Could not copy file to offline cache: " + new_item.original_file.path)
-                    log.error(e)
+                    log.error("Could not copy file %r to offline cache: %s", new_item.original_file.path, e)
                     self.queue.remove(item)
                     continue
 
@@ -245,11 +241,7 @@ class OfflineCache(EventSender):
         offline_files = OfflineCacheModel.select().where(OfflineCacheModel.original_file << file_ids)
         offline_file_ids = [file.original_file.id for file in offline_files]
 
-        for chapter in book.chapters:
-            if chapter.file_id not in offline_file_ids:
-                return False
-
-        return True
+        return all(chapter.file_id in offline_file_ids for chapter in book.chapters)
 
     def _is_processing(self):
         """
@@ -260,7 +252,7 @@ class OfflineCache(EventSender):
             return False
 
     def _fill_queue_from_db(self):
-        for item in OfflineCacheModel.select().where(OfflineCacheModel.copied == False):
+        for item in OfflineCacheModel.select().where(not OfflineCacheModel.copied):
             if not any(item.id == queued.id for queued in self.queue):
                 self.queue.append(item)
                 self.total_batch_count += 1

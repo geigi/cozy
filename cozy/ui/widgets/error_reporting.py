@@ -1,12 +1,9 @@
 from gettext import gettext as _
 
-import gi
+from gi.repository import Gtk
 
 from cozy.application_settings import ApplicationSettings
 from cozy.ext import inject
-
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
 
 LEVELS = [
     _("Disabled"),
@@ -31,7 +28,7 @@ LEVEL_DETAILS = {
 }
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/error_reporting.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/error_reporting.ui')
 class ErrorReporting(Gtk.Box):
     __gtype_name__ = 'ErrorReporting'
 
@@ -60,6 +57,7 @@ class ErrorReporting(Gtk.Box):
     def _load_report_level(self):
         level = self.app_settings.report_level
         self.verbose_adjustment.set_value(level + 1)
+        self._update_ui_texts(level)
 
     def __init_scale(self):
         for i in range(1, 5):
@@ -87,9 +85,10 @@ class ErrorReporting(Gtk.Box):
         details = ""
         for i in range(value + 1):
             for line in LEVEL_DETAILS[i]:
-                details += "• {}\n".format(line)
+                details += f"• {line}\n"
         self.details_label.set_text(details)
 
     def _on_app_setting_changed(self, event, _):
         if event == "report-level":
             self._load_report_level()
+

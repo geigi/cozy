@@ -1,26 +1,30 @@
-import gi
+from gi.repository import Adw, Gtk
 
 from cozy.ext import inject
+from cozy.model.book import Book
+from cozy.ui.widgets.book_row import BookRow
 
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
 
-
-@Gtk.Template(resource_path='/com/github/geigi/cozy/delete_book_dialog.ui')
-class DeleteBookView(Gtk.Dialog):
-    __gtype_name__ = 'DeleteBookDialog'
-
+class DeleteBookView(Adw.AlertDialog):
     main_window = inject.attr("MainWindow")
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, callback, book: Book):
+        super().__init__(
+            heading=_("Delete Audiobook?"),
+            body=_("The audiobook will be removed from your disk and from Cozy's library."),
+            default_response="cancel",
+            close_response="cancel",
+        )
 
-        self.set_modal(self.main_window.window)
+        self.add_response("cancel", _("Cancel"))
+        self.add_response("delete", _("Remove Audiobook"))
+        self.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
 
-    def get_delete_book(self):
-        response = self.run()
+        list_box = Gtk.ListBox(margin_top=12, css_classes=["boxed-list"])
+        list_box.append(BookRow(book))
+        self.set_extra_child(list_box)
 
-        if response == Gtk.ResponseType.APPLY:
-            return True
-        else:
-            return False
+        self.connect("response", callback, book)
+
+    def present(self) -> None:
+        super().present(self.main_window.window)

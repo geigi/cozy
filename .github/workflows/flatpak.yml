@@ -5,9 +5,8 @@ on: [push, pull_request]
 jobs:
   flatpak:
     runs-on: ubuntu-latest
-
     container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-41
+      image: bilelmoussaoui/flatpak-github-actions:gnome-45
       options: --privileged
 
     strategy:
@@ -16,7 +15,7 @@ jobs:
       # Don't fail the whole workflow if one architecture fails
       fail-fast: false
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Install deps
       run: |
@@ -25,12 +24,12 @@ jobs:
 
     - name: Set up QEMU
       id: qemu
-      uses: docker/setup-qemu-action@v1
+      uses: docker/setup-qemu-action@v3
       with:
         platforms: arm64
       if: ${{ matrix.arch == 'aarch64' }}
 
-    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v6
       with:
         bundle: Cozy.flatpak
         manifest-path: com.github.geigi.cozy.json

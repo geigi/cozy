@@ -1,10 +1,7 @@
-import gi
-
-gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/progress_popover.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/progress_popover.ui')
 class ProgressPopover(Gtk.Popover):
     __gtype_name__ = 'ProgressPopover'
 
@@ -19,3 +16,4 @@ class ProgressPopover(Gtk.Popover):
 
     def set_progress(self, progress: float):
         self.progress_bar.set_fraction(progress)
+

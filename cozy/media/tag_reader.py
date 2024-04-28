@@ -1,14 +1,9 @@
 import os
-from typing import List
 from urllib.parse import unquote, urlparse
 
-import gi
 import mutagen
+from gi.repository import GLib, Gst, GstPbutils
 from mutagen.mp4 import MP4
-
-gi.require_version('Gst', '1.0')
-gi.require_version('GstPbutils', '1.0')
-from gi.repository import GstPbutils, Gst, GLib
 
 from cozy.media.chapter import Chapter
 from cozy.media.media_file import MediaFile
@@ -63,7 +58,7 @@ class TagReader:
         if len(authors) > 0 and authors[0]:
             return "; ".join(authors)
         else:
-            return "Unknown"
+            return _("Unknown")
 
     def _get_reader(self):
         readers = self._get_string_list(Gst.TAG_ARTIST)
@@ -71,7 +66,7 @@ class TagReader:
         if len(readers) > 0 and readers[0]:
             return "; ".join(readers)
         else:
-            return "Unknown"
+            return _("Unknown")
 
     def _get_disk(self):
         success, value = self.tags.get_uint_index(Gst.TAG_ALBUM_VOLUME_NUMBER, 0)
@@ -142,24 +137,19 @@ class TagReader:
 
         return values
 
-    def _get_m4b_chapters(self, mutagen_tags: MP4) -> List[Chapter]:
+    def _get_m4b_chapters(self, mutagen_tags: MP4) -> list[Chapter]:
         chapters = []
 
         if not mutagen_tags.chapters or len(mutagen_tags.chapters) == 0:
             return self._get_single_chapter()
 
-        index = 0
-
-        for chapter in mutagen_tags.chapters:
+        for index, chapter in enumerate(mutagen_tags.chapters):
             if index < len(mutagen_tags.chapters) - 1:
                 length = mutagen_tags.chapters[index + 1].start - chapter.start
             else:
                 length = self._get_length_in_seconds() - chapter.start
 
-            if chapter.title:
-                title = chapter.title
-            else:
-                title = ""
+            title = chapter.title or ""
 
             chapters.append(Chapter(
                 name=title,
@@ -167,8 +157,6 @@ class TagReader:
                 length=length,
                 number=index + 1
             ))
-
-            index += 1
 
         return chapters
 

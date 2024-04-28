@@ -7,7 +7,6 @@ from cozy.ext import inject
 from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.model.library import Library
-from cozy.open_view import OpenView
 from cozy.view import View
 
 
@@ -38,7 +37,7 @@ class HeaderbarViewModel(Observable, EventSender):
 
     @property
     def lock_ui(self) -> bool:
-        return self._view == View.NO_MEDIA or self._view == View.EMPTY_STATE or self._view == View.PREPARING_LIBRARY
+        return self._view in {View.NO_MEDIA, View.EMPTY_STATE, View.PREPARING_LIBRARY}
 
     @property
     def state(self) -> HeaderBarState:
@@ -52,23 +51,8 @@ class HeaderbarViewModel(Observable, EventSender):
     def work_message(self) -> str:
         return self._work_message
 
-    @property
-    def can_navigate_back(self) -> bool:
-        return self._view == View.BOOK_DETAIL or \
-               self._view == View.LIBRARY_BOOKS
-
-    @property
-    def show_library_filter(self) -> bool:
-        return self._view == View.LIBRARY or \
-               self._view == View.LIBRARY_BOOKS or \
-               self._view == View.LIBRARY_FILTER or \
-               self._view == View.BOOK_DETAIL or \
-               self._view == View.NO_MEDIA
-
     def set_view(self, value: View):
         self._view = value
-        self._notify("can_navigate_back")
-        self._notify("show_library_filter")
         self._notify("lock_ui")
 
     def _start_working(self, message: str):
@@ -78,10 +62,12 @@ class HeaderbarViewModel(Observable, EventSender):
         self._notify("work_message")
         self._notify("work_progress")
         self._notify("state")
+        self.emit_event_main_thread("working", True)
 
     def _stop_working(self):
         self._state = HeaderBarState.PLAYING
         self._notify("state")
+        self.emit_event_main_thread("working", False)
 
     def _on_importer_event(self, event: str, message):
         if event == "scan-progress" and isinstance(message, float):
@@ -120,5 +106,3 @@ class HeaderbarViewModel(Observable, EventSender):
         elif event == "finished":
             self._stop_working()
 
-    def navigate_back(self):
-        self.emit_event(OpenView.BACK)

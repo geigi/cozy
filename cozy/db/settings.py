@@ -1,7 +1,7 @@
-from peewee import CharField, BooleanField, ForeignKeyField, IntegerField
+from peewee import BooleanField, CharField, ForeignKeyField, IntegerField
 
-from cozy.db.model_base import ModelBase
 from cozy.db.book import Book
+from cozy.db.model_base import ModelBase
 
 DB_VERSION = 10
 

@@ -1,11 +1,7 @@
-from typing import List
 
-import gi
-gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 from cozy.ui.list_box_row_with_data import ListBoxRowWithData
-from cozy.ui.list_box_separator_row import ListBoxSeparatorRow
 
 
 class FilterListBox(Gtk.ListBox):
@@ -14,26 +10,25 @@ class FilterListBox(Gtk.ListBox):
     def __init__(self, **properties):
         super().__init__(**properties)
 
-    def populate(self, elements: List[str]):
+    def populate(self, elements: list[str]):
         self.remove_all_children()
 
-        all_row = ListBoxRowWithData(_("All"), False)
+        all_row = ListBoxRowWithData(_("All"), True)
         all_row.set_tooltip_text(_("Display all books"))
-        self.add(all_row)
-        self.add(ListBoxSeparatorRow())
+        self.append(all_row)
         self.select_row(all_row)
 
         for element in elements:
             row = ListBoxRowWithData(element, False)
-            self.add(row)
-
-        self.show_all()
+            self.append(row)
 
     def select_row_with_content(self, row_content: str):
-        for row in self.get_children():
-            if not isinstance(row, ListBoxRowWithData):
-                continue
+        child = self.get_first_child()
+        while child:
+            next = child.get_next_sibling()
 
-            if row.data == row_content:
-                self.select_row(row)
+            if isinstance(child, ListBoxRowWithData) and child.data == row_content:
+                self.select_row(child)
                 break
+
+            child = next

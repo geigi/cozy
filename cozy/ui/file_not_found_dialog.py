@@ -1,67 +1,65 @@
-import os
+from pathlib import Path
 
-from gi.repository import Gtk
+from gi.repository import Adw, Gio, GLib, Gtk
 
-import cozy.ui
 from cozy.ext import inject
 from cozy.media.importer import Importer
 from cozy.model.chapter import Chapter
-from cozy.model.library import Library
 
 
-class FileNotFoundDialog():
+class FileNotFoundDialog(Adw.AlertDialog):
+    main_window = inject.attr("MainWindow")
     _importer: Importer = inject.attr(Importer)
-    _library: Library = inject.attr(Library)
-
 
     def __init__(self, chapter: Chapter):
         self.missing_chapter = chapter
-        self.parent = cozy.ui.main_view.CozyUI()
-        self.builder = Gtk.Builder.new_from_resource(
-            "/com/github/geigi/cozy/file_not_found.ui")
-        self.dialog = self.builder.get_object("dialog")
-        self.dialog.set_modal(self.parent.window)
-        self.builder.get_object("file_label").set_markup(
-            "<tt>" + chapter.file + "</tt>")
 
-        cancel_button = self.builder.get_object("cancel_button")
-        cancel_button.connect("clicked", self.close)
-        locate_button = self.builder.get_object("locate_button")
-        locate_button.connect("clicked", self.locate)
+        super().__init__(
+            heading=_("File not found"),
+            body=_("This file could not be found. Do you want to locate it manually?"),
+            default_response="locate",
+            close_response="cancel",
+        )
 
-    def show(self):
-        self.dialog.show()
+        self.add_response("cancel", _("Cancel"))
+        self.add_response("locate", _("Locate"))
+        self.set_response_appearance("locate", Adw.ResponseAppearance.SUGGESTED)
 
-    def close(self, _):
-        self.dialog.destroy()
+        label = Gtk.Label(label=chapter.file, margin_top=12, wrap=True)
+        label.add_css_class("monospace")
+        self.set_extra_child(label)
 
-    def locate(self, __):
-        directory, filename = os.path.split(self.missing_chapter.file)
-        dialog = Gtk.FileChooserDialog("Please locate the file " + filename, self.parent.window,
-                                       Gtk.FileChooserAction.OPEN,
-                                       (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                                        Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+        self.connect("response", self._on_locate)
 
-        filter = Gtk.FileFilter()
-        filter.add_pattern(filename)
-        filter.set_name(filename)
-        dialog.add_filter(filter)
-        path, file_extension = os.path.splitext(self.missing_chapter.file)
-        filter = Gtk.FileFilter()
-        filter.add_pattern("*" + file_extension)
-        filter.set_name(file_extension + " files")
-        dialog.add_filter(filter)
-        filter = Gtk.FileFilter()
-        filter.add_pattern("*")
-        filter.set_name(_("All files"))
-        dialog.add_filter(filter)
-        dialog.set_local_only(False)
+    def _on_locate(self, __, response):
+        if response == "locate":
+            file_dialog = Gtk.FileDialog(title=_("Locate Missing File"))
 
-        response = dialog.run()
-        if response == Gtk.ResponseType.OK:
-            new_location = dialog.get_filename()
-            self.missing_chapter.file = new_location
-            self._importer.scan()
-            self.dialog.destroy()
+            extension = Path(self.missing_chapter.file).suffix[1:]
+            current_extension_filter = Gtk.FileFilter(name=_("{ext} files").format(ext=extension))
+            current_extension_filter.add_suffix(extension)
 
-        dialog.destroy()
+            audio_files_filter = Gtk.FileFilter(name=_("Audio files"))
+            audio_files_filter.add_mime_type("audio/*")
+
+            filters = Gio.ListStore.new(Gtk.FileFilter)
+            filters.append(current_extension_filter)
+            filters.append(audio_files_filter)
+
+            file_dialog.set_filters(filters)
+            file_dialog.set_default_filter(current_extension_filter)
+            file_dialog.open(self.main_window.window, None, self._file_dialog_open_callback)
+
+    def _file_dialog_open_callback(self, dialog, result):
+        try:
+            file = dialog.open_finish(result)
+        except GLib.GError:
+            pass
+        else:
+            if file is not None:
+                self.missing_chapter.file = file.get_path()
+                self._importer.scan()
+
+    def present(self) -> None:
+        super().present(self.main_window.window)
+
