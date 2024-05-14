@@ -39,8 +39,8 @@ class PreferencesWindow(Adw.PreferencesDialog):
         self._bind_settings()
 
     def _bind_settings(self) -> None:
-        bind_settings = lambda setting, widget, propetry: self._glib_settings.bind(
-            setting, widget, propetry, Gio.SettingsBindFlags.DEFAULT
+        bind_settings = lambda setting, widget, property: self._glib_settings.bind(
+            setting, widget, property, Gio.SettingsBindFlags.DEFAULT
         )
 
         bind_settings("swap-author-reader", self.swap_author_reader_switch, "active")
