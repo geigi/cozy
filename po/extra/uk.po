@@ -28,7 +28,7 @@ msgstr "Програвач аудіокниг"
 
 #: data/com.github.geigi.cozy.desktop:5
 msgid "Play and organize your audio book collection"
-msgstr ""
+msgstr "Слухайте та впорядковуйте свою колекцію аудіокниг"
 
 #: data/com.github.geigi.cozy.appdata.xml:15
 msgid "Listen to audio books"

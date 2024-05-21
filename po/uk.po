@@ -293,11 +293,11 @@ msgstr "Завантаження розділів, будь ласка, заче
 msgid "page0"
 msgstr "сторінка0"
 
-#: data/ui/error\_reporting.ui:23
+#: data/ui/error_reporting.ui:23
 msgid "User feedback"
 msgstr "Зворотний зв'язок користувачів"
 
-#: data/ui/error\_reporting.ui:66
+#: data/ui/error_reporting.ui:66
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "You can help improve Cozy by contributing information in case of errors and "
@@ -306,7 +306,7 @@ msgstr ""
 "Ви можете допомогти покращити Cozy, надаючи інформацію про випадки помилок та "
 "аварійних завершень роботи. "
 
-#: data/ui/error\_reporting.ui:80
+#: data/ui/error_reporting.ui:80
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Contributing this information is optional and completely anonymous. We will "
@@ -317,7 +317,7 @@ msgstr ""
 "персональні дані, файли, які ви імпортуєте, або будь-яку інформацію, яка могла б "
 "ідентифікувати вас. "
 
-#: data/ui/error\_reporting.ui:95
+#: data/ui/error_reporting.ui:95
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
