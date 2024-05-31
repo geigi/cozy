@@ -45,6 +45,12 @@ class StorageRow(Adw.ActionRow):
         self._set_default_icon()
         self._set_drive_icon()
 
+    @GObject.Signal(arg_types=(object,))
+    def location_changed(self, *_): ...
+
+    @GObject.Signal
+    def menu_opened(self): ...
+
     @property
     def model(self) -> Storage:
         return self._model
@@ -69,16 +75,6 @@ class StorageRow(Adw.ActionRow):
 
     def _set_default_icon(self) -> None:
         self.default_icon.set_visible(self._model.default)
-
-
-GObject.signal_new(
-    "location-changed",
-    StorageRow,
-    GObject.SIGNAL_RUN_LAST,
-    GObject.TYPE_PYOBJECT,
-    (GObject.TYPE_PYOBJECT,),
-)
-GObject.signal_new("menu-opened", StorageRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ())
 
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/storage_locations.ui")
