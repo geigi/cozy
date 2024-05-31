@@ -1,6 +1,4 @@
 import logging
-import os
-from collections import defaultdict
 from threading import Thread
 from typing import Callable
 
@@ -17,24 +15,18 @@ from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
-from cozy.view_model.settings_view_model import SettingsViewModel
-from cozy.view_model.storages_view_model import StoragesViewModel
-from cozy.open_view import OpenView
+from cozy.ui.about_window import AboutWindow
 from cozy.ui.library_view import LibraryView
-from cozy.ui.preferences_view import PreferencesView
+from cozy.ui.preferences_window import PreferencesWindow
 from cozy.ui.widgets.first_import_button import FirstImportButton
-
+from cozy.view_model.storages_view_model import StoragesViewModel
 
 log = logging.getLogger("ui")
 
 
 class CozyUI(EventSender, metaclass=Singleton):
-    """
-    CozyUI is the main ui class.
-    """
-    # Is currently an dialog open?
-    is_initialized = False
-    __inhibit_cookie = None
+    """CozyUI is the main ui class"""
+
     fs_monitor = inject.attr(fs_monitor.FilesystemMonitor)
     application_settings = inject.attr(ApplicationSettings)
     _importer: Importer = inject.attr(Importer)
@@ -43,13 +35,12 @@ class CozyUI(EventSender, metaclass=Singleton):
     _player: Player = inject.attr(Player)
     _storages_view_model: StoragesViewModel = inject.attr(StoragesViewModel)
 
-    def __init__(self, pkgdatadir, app, version):
+    _library_view: LibraryView
+
+    def __init__(self, app, version):
         super().__init__()
-        self.pkgdir = pkgdatadir
         self.app = app
         self.version = version
-
-        self._library_view: LibraryView = None
 
     def activate(self, library_view: LibraryView):
         self.__init_window()
@@ -61,24 +52,9 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.auto_import()
         self.check_for_tracks()
 
-        self.is_initialized = True
-
     def startup(self):
-        self.__init_resources()
-
-    def __init_resources(self):
-        """
-        Initialize all resources like gresource and glade windows.
-        """
-
-        self.appdata_resource = Gio.resource_load(
-            os.path.join(self.pkgdir, 'com.github.geigi.cozy.appdata.gresource'))
-        Gio.Resource._register(self.appdata_resource)
-
-        self.window_builder = Gtk.Builder.new_from_resource(
-            "/com/github/geigi/cozy/main_window.ui")
-
-        self.window: Gtk.Window = self.window_builder.get_object("app_window")
+        self.window_builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/ui/main_window.ui")
+        self.window: Adw.ApplicationWindow = self.window_builder.get_object("app_window")
 
     def __init_window(self):
         """
@@ -112,15 +88,9 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         Init all app actions.
         """
-
-        about_action = Gio.SimpleAction.new("about", None)
-        about_action.connect("activate", self.about)
-        self.app.add_action(about_action)
-        self.app.set_accels_for_action("app.about", ["F1"])
-
-        self.create_action("about", self.about)
+        self.create_action("about", self.show_about_window, ["F1"])
+        self.create_action("prefs", self.show_preferences_window, ["<primary>comma"])
         self.create_action("quit", self.quit, ["<primary>q", "<primary>w"])
-        self.create_action("prefs", self.show_prefs, ["<primary>comma"])
         self.scan_action = self.create_action("scan", self.scan)
         self.play_pause_action = self.create_action("play_pause", self.play_pause, ["space"])
 
@@ -129,6 +99,16 @@ class CozyUI(EventSender, metaclass=Singleton):
         )
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
+
+    def __init_components(self):
+        path = self._settings.default_location.path if self._settings.storage_locations else None
+        self.import_button = FirstImportButton(self._set_audiobook_path, path)
+        self.get_object("welcome_status_page").set_child(self.import_button)
+
+        if not self._player.loaded_book:
+            self.block_ui_buttons(True)
+
+        self._importer.add_listener(self._on_importer_event)
 
     def create_action(
         self,
@@ -145,16 +125,6 @@ class CozyUI(EventSender, metaclass=Singleton):
 
         return action
 
-    def __init_components(self):
-        path = self._settings.default_location.path if self._settings.storage_locations else None
-        self.import_button = FirstImportButton(self._set_audiobook_path, path)
-        self.get_object("welcome_status_page").set_child(self.import_button)
-
-        if not self._player.loaded_book:
-            self.block_ui_buttons(True)
-
-        self._importer.add_listener(self._on_importer_event)
-
     def get_object(self, name):
         return self.window_builder.get_object(name)
 
@@ -165,67 +135,18 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.on_close(None)
         self.app.quit()
 
-    def _get_contributors(self):
-        authors_file = self.appdata_resource.lookup_data("/com/github/geigi/cozy/authors", Gio.ResourceLookupFlags.NONE)
+    def show_about_window(self, *_):
+        AboutWindow(self.version).present(self.window)
 
-        current_section = ""
-        result = defaultdict(list)
-        for line in authors_file.get_data().decode().splitlines():
-            if line.startswith("#"):
-                current_section = line[1:].strip().lower()
-            elif line.startswith("-"):
-                result[current_section].append(line[1:].strip())
-
-        return result
-
-    def about(self, *junk):
-        """
-        Show about window.
-        """
-        about = Adw.AboutWindow.new_from_appdata(
-            "/com/github/geigi/cozy/com.github.geigi.cozy.appdata.xml",
-            release_notes_version=self.version,
-        )
-
-        contributors = self._get_contributors()
-        about.set_developers(sorted(contributors["code"]))
-        about.set_designers(sorted(contributors["design"]))
-        about.set_artists(sorted(contributors["icon"]))
-
-        about.set_license_type(Gtk.License.GPL_3_0)
-
-        about.add_acknowledgement_section(
-            _("Patreon Supporters"),
-            ["Fred Warren", "Gabriel", "Hu Mann", "Josiah", "Oleksii Kriukov"]
-        )
-        about.add_acknowledgement_section(
-            _("m4b chapter support in mutagen"),
-            ("mweinelt",),
-        )
-        about.add_acknowledgement_section(
-            _("Open Source Projects"),
-            ("Lollypop music player https://gitlab.gnome.org/World/lollypop",),
-        )
-
-        # Translators: Replace "translator-credits" with your names, one name per line
-        about.set_translator_credits(_("translator-credits"))
-        about.add_legal_section("python-inject", "© 2010 Ivan Korobkov", Gtk.License.APACHE_2_0)
-
-        about.set_transient_for(self.window)
-        about.present()
-
-    def show_prefs(self, *_):
-        """
-        Show preferences window.
-        """
-        PreferencesView().present()
+    def show_preferences_window(self, *_):
+        PreferencesWindow().present(self.window)
 
     def play_pause(self, *_):
         self._player.play_pause()
 
     def block_ui_buttons(self, block, scan=False):
         """
-        Makes the buttons to interact with the player insensetive.
+        Makes the buttons to interact with the player insensitive.
         :param block: Boolean
         """
         sensitive = not block

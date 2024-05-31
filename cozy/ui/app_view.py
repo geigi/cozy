@@ -1,8 +1,8 @@
-from gi.repository import Gtk, Adw
+from gi.repository import Adw, Gtk
 
 from cozy.ext import inject
-from cozy.view_model.app_view_model import AppViewModel
 from cozy.view import View
+from cozy.view_model.app_view_model import AppViewModel
 
 LIBRARY = "main"
 EMPTY_STATE = "welcome"

@@ -4,7 +4,6 @@ from gi.repository import Adw, Gtk
 
 from cozy.ext import inject
 
-
 HEADER = _("This can have multiple reasons:")
 POSSIBILITIES = "\n     • ".join((  # yes, it is a hack, because \t would be too wide
     "",
@@ -17,7 +16,7 @@ POSSIBILITIES = "\n     • ".join((  # yes, it is a hack, because \t would be t
 message = HEADER + POSSIBILITIES
 
 
-class ImportFailedDialog(Adw.MessageDialog):
+class ImportFailedDialog(Adw.AlertDialog):
     """
     Dialog that displays failed files on import.
     """
@@ -28,8 +27,6 @@ class ImportFailedDialog(Adw.MessageDialog):
             heading=_("Some files could not be imported"),
             default_response="cancel",
             close_response="cancel",
-            transient_for=self.main_window.window,
-            modal=True,
         )
 
         self.add_response("cancel", _("Ok"))
@@ -56,4 +53,7 @@ class ImportFailedDialog(Adw.MessageDialog):
         box.append(body_label)
         box.append(scroller)
         self.set_extra_child(box)
+
+    def present(self) -> None:
+        super().present(self.main_window.window)
 

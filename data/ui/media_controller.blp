@@ -1,0 +1,223 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $MediaController: Adw.BreakpointBin {
+  hexpand: true;
+  width-request: 350;
+  height-request: 52;
+
+  Adw.Breakpoint {
+    condition ("max-width: 750sp")
+
+    setters {
+      seek_bar_container.visible: false;
+      volume_button.visible: false;
+      separator.visible: false;
+      center_box.hexpand: false;
+    }
+  }
+
+  Adw.Breakpoint {
+    condition ("max-width: 550sp")
+
+    setters {
+      title_box.visible: false;
+      seek_bar_container.visible: false;
+      volume_button.visible: false;
+      timer_button.visible: false;
+      separator.visible: false;
+      center_box.hexpand: false;
+    }
+  }
+
+  child: CenterBox {
+    [start]
+    Box mini_player {
+      valign: center;
+      hexpand: false;
+      spacing: 12;
+
+      Box book_info_box {
+        spacing: 12;
+        height-request: 0;
+
+        Image cover_img {
+          pixel-size: 52;
+          icon-name: 'end';
+        }
+
+        Box title_box {
+          hexpand: true;
+          tooltip-text: _("Currently playing");
+          valign: center;
+          orientation: vertical;
+          spacing: 2;
+
+          Label title_label {
+            halign: start;
+            valign: center;
+            ellipsize: end;
+            width-chars: 15;
+            single-line-mode: true;
+            max-width-chars: 20;
+            xalign: 0;
+
+            accessibility {
+              label: _("Title of currently playing book");
+            }
+
+            styles [
+              "heading",
+            ]
+          }
+
+          Label subtitle_label {
+            halign: start;
+            valign: center;
+            ellipsize: end;
+            width-chars: 15;
+            single-line-mode: true;
+            max-width-chars: 20;
+            xalign: 0;
+
+            accessibility {
+              label: _("Title of the currently playing part");
+            }
+          }
+        }
+
+        Separator separator {
+          orientation: vertical;
+        }
+      }
+    }
+
+    [center]
+    Box center_box {
+      hexpand: true;
+      margin-start: 12;
+      margin-end: 12;
+      spacing: 12;
+
+      Box control_box {
+        valign: center;
+        spacing: 6;
+
+        Button prev_button {
+          focusable: true;
+          receives-default: true;
+          tooltip-text: _("Rewind");
+          halign: center;
+          valign: center;
+          icon-name: 'object-rotate-left-symbolic';
+
+          accessibility {
+            label: _("Rewind playback");
+          }
+
+          styles [
+            "flat",
+            "circular",
+          ]
+        }
+
+        Button play_button {
+          width-request: 42;
+          height-request: 42;
+          focusable: true;
+          receives-default: true;
+          tooltip-text: _("Start/Stop playback");
+          halign: center;
+          valign: center;
+          icon-name: 'media-playback-start-symbolic';
+
+          accessibility {
+            label: _("Start or pause the playback");
+          }
+
+          styles [
+            "opaque",
+            "play_button",
+            "circular",
+          ]
+        }
+
+        Button next_button {
+          focusable: true;
+          receives-default: true;
+          tooltip-text: _("Forward");
+          halign: center;
+          valign: center;
+          icon-name: 'object-rotate-right-symbolic';
+
+          accessibility {
+            label: _("Forward Playback");
+          }
+
+          styles [
+            "flat",
+            "circular",
+          ]
+        }
+      }
+
+      Box seek_bar_container {
+        hexpand: true;
+      }
+    }
+
+    [end]
+    Box tools_box {
+      halign: center;
+      valign: center;
+      margin-start: 12;
+      margin-end: 12;
+      spacing: 3;
+
+      ScaleButton volume_button {
+        tooltip-text: _("Volume control");
+
+        adjustment: Adjustment {
+          lower: 0;
+          upper: 1;
+          value: 1;
+          step-increment: 0.1;
+          page-increment: 0.2;
+        };
+
+        styles [
+          "flat",
+        ]
+      }
+
+      MenuButton playback_speed_button {
+        focusable: true;
+        receives-default: true;
+        tooltip-text: _("Playback speed");
+        icon-name: 'playback-speed-symbolic';
+
+        styles [
+          "flat",
+        ]
+      }
+
+      MenuButton timer_button {
+        focusable: true;
+        receives-default: true;
+        tooltip-text: _("Sleep Timer");
+
+        Image timer_image {
+          icon-name: 'bed-symbolic';
+        }
+
+        accessibility {
+          label: _("Open the sleep timer popover");
+        }
+
+        styles [
+          "flat",
+        ]
+      }
+    }
+  };
+}

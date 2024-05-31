@@ -5,7 +5,7 @@ from cozy.model.book import Book
 from cozy.ui.widgets.book_row import BookRow
 
 
-class DeleteBookView(Adw.MessageDialog):
+class DeleteBookView(Adw.AlertDialog):
     main_window = inject.attr("MainWindow")
 
     def __init__(self, callback, book: Book):
@@ -14,8 +14,6 @@ class DeleteBookView(Adw.MessageDialog):
             body=_("The audiobook will be removed from your disk and from Cozy's library."),
             default_response="cancel",
             close_response="cancel",
-            transient_for=self.main_window.window,
-            modal=True,
         )
 
         self.add_response("cancel", _("Cancel"))
@@ -27,3 +25,6 @@ class DeleteBookView(Adw.MessageDialog):
         self.set_extra_child(list_box)
 
         self.connect("response", callback, book)
+
+    def present(self) -> None:
+        super().present(self.main_window.window)

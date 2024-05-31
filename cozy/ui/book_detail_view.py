@@ -1,9 +1,10 @@
 import logging
 import time
+from contextlib import suppress
 from threading import Event, Thread
-from typing import Optional, Callable
+from typing import Callable, Optional
 
-import gi
+from gi.repository import Adw, GLib, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.ext import inject
@@ -14,15 +15,13 @@ from cozy.ui.chapter_element import ChapterElement
 from cozy.ui.disk_element import DiskElement
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
 
-from gi.repository import Adw, GLib, Gtk
-
 log = logging.getLogger("BookDetailView")
 
 
 ALBUM_ART_SIZE = 256
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/book_detail.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/book_detail.ui')
 class BookDetailView(Gtk.Box):
     __gtype_name__ = 'BookDetail'
 
@@ -279,10 +278,8 @@ class BookDetailView(Gtk.Box):
     def _interrupt_chapters_jobs(self):
         self._chapters_job_locked = True
 
-        try:
+        with suppress(AttributeError):
             self._chapters_thread.join(timeout=0.2)
-        except AttributeError as e:
-            pass
 
     def _prepare_chapters_job(self):
         self._chapters_job_locked: bool = False

@@ -52,7 +52,7 @@ gettext.install('com.github.geigi.cozy', localedir)
 
 
 # gresource must be registered before importing any Gtk.Template annotated classes
-resource = Gio.Resource.load(os.path.join(pkgdatadir, 'com.github.geigi.cozy.ui.gresource'))
+resource = Gio.Resource.load(os.path.join(pkgdatadir, 'com.github.geigi.cozy.gresource'))
 resource._register()
 
 old_except_hook = None
@@ -108,7 +108,7 @@ def main():
     application = Application(pkgdatadir)
 
     try:
-        # Handle the debug option seperatly without the Glib stuff
+        # Handle the debug option separately without the Glib stuff
         if "-d" in sys.argv:
             sys.argv.remove("-d")
         ret = application.run(sys.argv)

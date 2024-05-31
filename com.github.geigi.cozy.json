@@ -1,24 +1,20 @@
 {
   "app-id": "com.github.geigi.cozy",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "45",
+  "runtime-version": "46",
   "sdk": "org.gnome.Sdk",
   "command": "com.github.geigi.cozy",
   "finish-args": [
     "--share=ipc",
+    "--share=network",
     "--socket=fallback-x11",
     "--socket=wayland",
-    "--device=dri",
-    "--share=network",
     "--socket=pulseaudio",
+    "--device=dri",
     "--filesystem=host",
     "--filesystem=xdg-run/gvfs",
     "--filesystem=xdg-run/gvfsd",
-    "--talk-name=org.freedesktop.Notifications",
-    "--talk-name=org.gtk.vfs.*",
-    "--own-name=org.mpris.MediaPlayer2.Cozy",
-    "--metadata=X-DConf=migrate-path=/com/github/geigi/cozy/",
-    "--env=LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/lib"
+    "--talk-name=org.gtk.vfs.*"
   ],
   "modules": [
     {
@@ -108,6 +104,18 @@
           "type": "file",
           "url": "https://files.pythonhosted.org/packages/88/75/311454fd3317aefe18415f04568edc20218453b709c63c58b9292c71be17/urllib3-2.2.0-py3-none-any.whl",
           "sha256": "ce3711610ddce217e6d113a2732fafad960a03fd0318c91faa79481e35c11224"
+        }
+      ]
+    },
+    {
+      "name": "blueprint-compiler",
+      "buildsystem": "meson",
+      "cleanup": [ "*" ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler.git",
+          "tag": "v0.10.0"
         }
       ]
     },

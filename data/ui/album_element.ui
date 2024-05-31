@@ -1,76 +1,72 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<interface>
-  <requires lib="gtk" version="4.0"/>
-  <template class="AlbumElement" parent="GtkBox">
-    <property name="orientation">vertical</property>
-    <child>
-      <object class="GtkOverlay">
-        <property name="child">
-          <object class="GtkStack" id="stack">
-            <child>
-              <object class="GtkPicture" id="artwork">
-                <property name="content-fit">contain</property>
-                <property name="hexpand">true</property>
-                <property name="vexpand">true</property>
-                <style>
-                  <class name="artwork_rounded_top_corners"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkImage" id="book_icon">
-                <property name="pixel-size">200</property>
-                <property name="hexpand">true</property>
-                <property name="vexpand">true</property>
-              </object>
-            </child>
-          </object>
-        </property>
-        <child type="overlay">
-          <object class="GtkRevealer" id="play_button_revealer">
-            <property name="name">play_button_revealer</property>
-            <property name="halign">end</property>
-            <property name="valign">end</property>
-            <property name="hexpand">0</property>
-            <property name="vexpand">0</property>
-            <property name="transition-type">crossfade</property>
-            <property name="transition-duration">200</property>
-            <property name="child">
-              <object class="GtkOverlay">
-                <property name="halign">end</property>
-                <property name="valign">end</property>
-                <property name="margin-end">10</property>
-                <property name="margin-bottom">10</property>
-                <property name="child">
-                  <object class="GtkButton" id="play_button">
-                    <property name="width-request">40</property>
-                    <property name="height-request">40</property>
-                    <property name="focusable">1</property>
-                    <property name="focus-on-click">0</property>
-                    <property name="tooltip-text" translatable="1">Play</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="icon-name">media-playback-start-symbolic</property>
-                    <style>
-                      <class name="circular"/>
-                      <class name="book_play_button"/>
-                    </style>
-                  </object>
-                </property>
-                <child type="overlay">
-                  <object class="GtkDrawingArea" id="progress_drawing_area">
-                    <property name="can-target">0</property>
-                    <property name="width-request">40</property>
-                    <property name="height-request">40</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-              </object>
-            </property>
-          </object>
-        </child>
-      </object>
-    </child>
-  </template>
-</interface>
+using Gtk 4.0;
+
+template $AlbumElement: Box {
+  orientation: vertical;
+
+  Overlay {
+    child: Stack stack {
+      Picture artwork {
+        content-fit: contain;
+        hexpand: true;
+        vexpand: true;
+
+        styles [
+          "artwork_rounded_top_corners",
+        ]
+      }
+
+      Image book_icon {
+        pixel-size: 200;
+        hexpand: true;
+        vexpand: true;
+      }
+    };
+
+    [overlay]
+    Revealer play_button_revealer {
+      name: 'play_button_revealer';
+      halign: end;
+      valign: end;
+      hexpand: false;
+      vexpand: false;
+      transition-type: crossfade;
+      transition-duration: 200;
+
+      child: Overlay {
+        halign: end;
+        valign: end;
+        margin-end: 10;
+        margin-bottom: 10;
+
+        child: Button play_button {
+          width-request: 40;
+          height-request: 40;
+          focusable: true;
+          focus-on-click: false;
+          halign: center;
+          valign: center;
+          icon-name: 'media-playback-start-symbolic';
+          tooltip-text: _("Start/Stop playback");
+          accessibility {
+            label: _("Start or pause the playback");
+          }
+
+          styles [
+            "circular",
+            "book_play_button",
+          ]
+        };
+
+        [overlay]
+        DrawingArea progress_drawing_area {
+          can-target: false;
+          width-request: 40;
+          height-request: 40;
+          halign: center;
+          valign: center;
+        }
+      };
+    }
+  }
+}
+

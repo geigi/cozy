@@ -1,6 +1,6 @@
 def seconds_to_str(seconds, max_length=None, include_seconds=True):
     """
-    Converts seconds to a string with the following apperance:
+    Converts seconds to a string with the following appearance:
     hh:mm:ss
 
     :param seconds: The seconds as float
@@ -9,12 +9,11 @@ def seconds_to_str(seconds, max_length=None, include_seconds=True):
     h, m = divmod(m, 60)
 
     if max_length:
-        max_m, max_s = divmod(max_length, 60)
+        max_m, _ = divmod(max_length, 60)
         max_h, max_m = divmod(max_m, 60)
     else:
         max_h = h
         max_m = m
-        max_s = s
 
     if (max_h >= 10):
         result = "%02d:%02d" % (h, m)
