@@ -2,10 +2,8 @@ import logging
 import time
 from threading import Event, Thread
 from typing import Callable, Final
-from math import pi as PI
 
 from gi.repository import Adw, GLib, Gtk, GObject
-import cairo
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.ext import inject
