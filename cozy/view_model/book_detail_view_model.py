@@ -155,9 +155,6 @@ class BookDetailViewModel(Observable, EventSender):
             chapter.position = chapter.start_position
         self._player.play_pause_chapter(self._book, chapter)
 
-    def open_book_detail_view(self):
-        self._notify("open")
-
     def _on_player_event(self, event, message):
         if not self.book:
             return

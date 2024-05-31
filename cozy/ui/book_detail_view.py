@@ -1,9 +1,11 @@
 import logging
 import time
 from threading import Event, Thread
-from typing import Callable, Final, Optional
+from typing import Callable, Final
+from math import pi as PI
 
-from gi.repository import Adw, GLib, Gtk
+from gi.repository import Adw, GLib, Gtk, GObject
+import cairo
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.ext import inject
@@ -50,9 +52,6 @@ class BookDetailView(Adw.BreakpointBin):
     remaining_label: Gtk.Label = Gtk.Template.Child()
     book_progress_bar: Gtk.ProgressBar = Gtk.Template.Child()
 
-    published_label: Gtk.Label = Gtk.Template.Child()
-    published_text: Gtk.Label = Gtk.Template.Child()
-
     download_box: Gtk.Box = Gtk.Template.Child()
     download_label: Gtk.Label = Gtk.Template.Child()
     download_image: Gtk.Image = Gtk.Template.Child()
@@ -61,10 +60,12 @@ class BookDetailView(Adw.BreakpointBin):
     album_art: Gtk.Picture = Gtk.Template.Child()
     album_art_container: Gtk.Box = Gtk.Template.Child()
 
-    unavailable_badge: Gtk.Box = Gtk.Template.Child()
+    unavailable_banner: Adw.Banner = Gtk.Template.Child()
 
     chapters_stack: Gtk.Stack = Gtk.Template.Child()
     chapter_list_container: Gtk.Box = Gtk.Template.Child()
+
+    book_title = GObject.Property(type=str)
 
     _view_model: BookDetailViewModel = inject.attr(BookDetailViewModel)
     _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
@@ -74,15 +75,11 @@ class BookDetailView(Adw.BreakpointBin):
     def __init__(self, main_window_builder: Gtk.Builder):
         super().__init__()
 
-        self._navigation_view: Adw.NavigationView = main_window_builder.get_object(
-            "navigation_view"
-        )
-        self._book_details_container: Adw.ToolbarView = main_window_builder.get_object(
-            "book_details_container"
-        )
-        self._book_details_container.set_content(self)
+        overview: Adw.ToolbarView = main_window_builder.get_object("book_overview")
+        overview.set_content(self)
 
-        self._book_details_container.add_top_bar(Adw.HeaderBar(show_title=False))
+        book_overview_page: Adw.NavigationPage = main_window_builder.get_object("book_overview_page")
+        self.bind_property("book-title", book_overview_page, "title", GObject.BindingFlags.SYNC_CREATE)
 
         self._chapters_event = Event()
         self._chapters_thread: Thread | None = None
@@ -106,7 +103,6 @@ class BookDetailView(Adw.BreakpointBin):
         self._view_model.bind_to("total_text", self._on_times_changed)
         self._view_model.bind_to("playback_speed", self._on_times_changed)
         self._view_model.bind_to("lock_ui", self._on_lock_ui_changed)
-        self._view_model.bind_to("open", self._on_open)
 
     def _connect_widgets(self):
         self.play_button.connect("clicked", self._play_book_clicked)
@@ -128,12 +124,10 @@ class BookDetailView(Adw.BreakpointBin):
 
         self._current_selected_chapter = None
 
-        self.published_label.set_visible(False)
-        self.published_text.set_visible(False)
         self.total_label.set_visible(False)
-        self.unavailable_badge.set_visible(False)
+        self.unavailable_banner.set_revealed(False)
 
-        self.book_label.set_text(book.name)
+        self.book_title = book.name
         self.author_label.set_text(book.author)
 
         self.last_played_label.set_text(self._view_model.last_played_text)
@@ -141,12 +135,6 @@ class BookDetailView(Adw.BreakpointBin):
         self._set_cover_image(book)
         self._set_progress()
         self._display_external_section()
-
-    def _on_open(self):
-        if self._navigation_view.props.visible_page.props.tag == "book_overview":
-            self._navigation_view.pop_to_tag("book_overview")
-        else:
-            self._navigation_view.push_by_tag("book_overview")
 
     def _on_play_changed(self):
         playing = self._view_model.playing
@@ -171,7 +159,7 @@ class BookDetailView(Adw.BreakpointBin):
             )
 
     def _on_book_available_changed(self):
-        self.unavailable_badge.set_visible(not self._view_model.is_book_available)
+        self.unavailable_banner.set_revealed(not self._view_model.is_book_available)
 
     def _on_current_chapter_changed(self):
         if self._current_selected_chapter:

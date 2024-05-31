@@ -192,11 +192,13 @@ Adw.ApplicationWindow app_window {
                 }
               }
 
-              Adw.NavigationPage {
-                title: _("Book title");
+              Adw.NavigationPage book_overview_page {
                 tag: 'book_overview';
 
-                child: Adw.ToolbarView book_details_container {};
+                child: Adw.ToolbarView book_overview {
+                  [top]
+                  Adw.HeaderBar {}
+                };
               }
             };
 

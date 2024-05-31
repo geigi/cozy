@@ -99,3 +99,4 @@ class AlbumElement(Gtk.Box):
 GObject.type_register(AlbumElement)
 GObject.signal_new('play-pause-clicked', AlbumElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
                    (GObject.TYPE_PYOBJECT,))
+

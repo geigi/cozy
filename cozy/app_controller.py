@@ -116,8 +116,8 @@ class AppController(metaclass=Singleton):
         self.library_view_model.selected_filter = reader
 
     def open_book(self, book: Book):
-        self.book_detail_view_model.open_book_detail_view()
         self.book_detail_view_model.book = book
+        self.app_view_model.open_book_detail_view()
 
     def open_library(self):
         self.library_view_model.open_library()
