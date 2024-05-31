@@ -7,7 +7,7 @@ from cozy.view_model.settings_view_model import SettingsViewModel
 
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/preferences.ui")
-class PreferencesWindow(Adw.PreferencesWindow):
+class PreferencesWindow(Adw.PreferencesDialog):
     __gtype_name__ = "PreferencesWindow"
 
     _glib_settings: Gio.Settings = inject.attr(Gio.Settings)
@@ -16,7 +16,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
     storages_page: Adw.PreferencesPage = Gtk.Template.Child()
     user_feedback_preference_group: Adw.PreferencesGroup = Gtk.Template.Child()
 
-    dark_mode_switch: Adw.SwitchRow = Gtk.Template.Child()
     swap_author_reader_switch: Adw.SwitchRow = Gtk.Template.Child()
     replay_switch: Adw.SwitchRow = Gtk.Template.Child()
     sleep_timer_fadeout_switch: Adw.SwitchRow = Gtk.Template.Child()
@@ -40,11 +39,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self._bind_settings()
 
     def _bind_settings(self) -> None:
-        bind_settings = lambda setting, widget, propetry: self._glib_settings.bind(
-            setting, widget, propetry, Gio.SettingsBindFlags.DEFAULT
+        bind_settings = lambda setting, widget, property: self._glib_settings.bind(
+            setting, widget, property, Gio.SettingsBindFlags.DEFAULT
         )
 
-        bind_settings("dark-mode", self.dark_mode_switch, "active")
         bind_settings("swap-author-reader", self.swap_author_reader_switch, "active")
         bind_settings("replay", self.replay_switch, "active")
         bind_settings("rewind-duration", self.rewind_duration_adjustment, "value")
@@ -57,5 +55,4 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.storage_locations_view.set_sensitive(not self._view_model.lock_ui)
 
     def present(self, parent: Adw.ApplicationWindow) -> None:
-        self.set_transient_for(parent)
-        super().present()
+        super().present(parent)

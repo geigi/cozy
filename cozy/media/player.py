@@ -3,7 +3,6 @@ import os
 import time
 from threading import Thread
 from typing import Optional
-from cozy.media.importer import Importer, ScanStatus
 
 from gi.repository import GLib, Gst
 
@@ -12,6 +11,7 @@ from cozy.architecture.event_sender import EventSender
 from cozy.control.offline_cache import OfflineCache
 from cozy.ext import inject
 from cozy.media.gst_player import GstPlayer, GstPlayerState
+from cozy.media.importer import Importer, ScanStatus
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.model.library import Library
@@ -384,7 +384,7 @@ class Player(EventSender):
     def _fadeout_playback(self):
         duration = self._app_settings.sleep_timer_fadeout_duration * 20
         current_vol = self._gst_player.volume
-        for i in range(0, duration):
+        for i in range(duration):
             volume = max(current_vol - (i / duration), 0)
             self._gst_player.position = volume
             time.sleep(0.05)

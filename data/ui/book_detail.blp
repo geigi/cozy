@@ -65,7 +65,7 @@ template $BookDetail: Adw.BreakpointBin {
 
             Label book_label {
               halign: start;
-              label: 'Book name';
+              label: _("Book name");
               ellipsize: end;
               max-width-chars: 35;
               lines: 1;
@@ -78,7 +78,7 @@ template $BookDetail: Adw.BreakpointBin {
 
             Label author_label {
               halign: start;
-              label: 'Book author';
+              label: _("Book author");
               ellipsize: end;
               max-width-chars: 50;
               lines: 1;
@@ -96,16 +96,20 @@ template $BookDetail: Adw.BreakpointBin {
               halign: start;
               valign: end;
               vexpand: true;
-
-              Adw.ButtonContent play_icon {
-                label: _('Start');
-                icon-name: 'media-playback-start-symbolic';
+              tooltip-text: _("Start/Stop playback");
+              accessibility {
+                label: _("Start or pause the playback");
               }
 
               styles [
                 "suggested-action",
                 "pill",
               ]
+
+              Adw.ButtonContent play_icon {
+                label: _("Start");
+                icon-name: 'media-playback-start-symbolic';
+              }
             }
           }
 
@@ -126,7 +130,7 @@ template $BookDetail: Adw.BreakpointBin {
               Label download_label {
                 margin-start: 5;
                 margin-end: 4;
-                label: _('Download');
+                label: _("Download");
               }
             }
 
@@ -154,7 +158,7 @@ template $BookDetail: Adw.BreakpointBin {
             Label remaining_text {
               halign: start;
               hexpand: true;
-              label: _('Remaining');
+              label: _("Remaining");
 
               styles [
                 "dim-label",
@@ -201,7 +205,7 @@ template $BookDetail: Adw.BreakpointBin {
 
             Label {
               halign: start;
-              label: _('Total');
+              label: _("Total");
 
               styles [
                 "dim-label",
@@ -215,7 +219,7 @@ template $BookDetail: Adw.BreakpointBin {
 
             Label {
               halign: start;
-              label: _('Last played');
+              label: _("Last played");
 
               styles [
                 "dim-label",
@@ -229,7 +233,7 @@ template $BookDetail: Adw.BreakpointBin {
 
             Label published_text {
               halign: start;
-              label: _('Published');
+              label: _("Published");
 
               styles [
                 "dim-label",
@@ -254,7 +258,7 @@ template $BookDetail: Adw.BreakpointBin {
           }
 
           Box unavailable_badge {
-            tooltip-text: _('Some or all files of this book cannot be found.');
+            tooltip-text: _("Some or all files of this book cannot be found.");
             halign: center;
             spacing: 4;
 
@@ -267,7 +271,7 @@ template $BookDetail: Adw.BreakpointBin {
             }
 
             Label {
-              label: _('unavailable');
+              label: _("unavailable");
 
               styles [
                 "unavailable_label",

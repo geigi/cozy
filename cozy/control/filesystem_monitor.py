@@ -1,9 +1,8 @@
 import logging
-from typing import List
 
-import cozy.ext.inject as inject
 from gi.repository import Gio
 
+import cozy.ext.inject as inject
 from cozy.architecture.event_sender import EventSender
 from cozy.model.book import Book
 from cozy.model.settings import Settings
@@ -27,7 +26,7 @@ class ExternalStorage:
 
 
 class FilesystemMonitor(EventSender):
-    external_storage: List[ExternalStorage] = []
+    external_storage: list[ExternalStorage] = []
     _settings: Settings = inject.attr(Settings)
 
     def __init__(self):
@@ -43,7 +42,6 @@ class FilesystemMonitor(EventSender):
         self._settings_view_model.add_listener(self.__on_settings_changed)
 
     def init_offline_mode(self):
-        external_storage = []
         mounts = self.volume_monitor.get_mounts()
         # go through all audiobook locations and test if they can be found in the mounts list
 
@@ -59,7 +57,6 @@ class FilesystemMonitor(EventSender):
         Free all references.
         """
         # self.volume_monitor.unref()
-        pass
 
     def get_book_online(self, book: Book):
         try:
@@ -84,7 +81,7 @@ class FilesystemMonitor(EventSender):
         return storage.online
 
     def is_external(self, directory: str) -> bool:
-        mounts: List[Gio.Mount] = self.volume_monitor.get_mounts()
+        mounts: list[Gio.Mount] = self.volume_monitor.get_mounts()
 
         for mount in mounts:
             root = mount.get_root()

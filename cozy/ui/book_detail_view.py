@@ -1,7 +1,7 @@
 import logging
 import time
 from threading import Event, Thread
-from typing import Callable, Final
+from typing import Callable, Final, Optional
 
 from gi.repository import Adw, GLib, Gtk
 

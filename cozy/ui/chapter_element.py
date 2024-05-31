@@ -1,4 +1,4 @@
-from gi.repository import Adw, GObject, Gtk
+from gi.repository import Adw, Gdk, GObject, Gtk
 
 from cozy.control.string_representation import seconds_to_str
 from cozy.model.chapter import Chapter
