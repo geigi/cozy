@@ -1,276 +1,286 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $BookDetail: Adw.BreakpointBin {
-  width-request: 350;
-  height-request: 52;
+template $BookDetail: Adw.NavigationPage {
+  tag: 'book_overview';
+  title: bind template.book-title;
 
-  Adw.Breakpoint {
-    condition ("max-width: 550sp")
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
 
-    setters {
-      top_box.orientation: vertical;
-      top_box.spacing: 6;
-      top_box.halign: center;
-      book_label.halign: center;
-      author_label.halign: center;
-      play_button.halign: center;
-    }
-  }
+    content: Adw.BreakpointBin {
+      width-request: 350;
+      height-request: 52;
 
-  child: Box {
-    orientation: vertical;
+      Adw.Breakpoint {
+        condition ("max-width: 550sp")
 
-    Adw.Banner unavailable_banner {
-      title: _("Some or all files of this book cannot be found.");
-    }
-
-    ScrolledWindow {
-      focusable: true;
-      vexpand: true;
-      hscrollbar-policy: never;
-      propagate-natural-width: true;
-      propagate-natural-height: true;
+        setters {
+          top_box.orientation: vertical;
+          top_box.spacing: 6;
+          top_box.halign: center;
+          book_label.halign: center;
+          author_label.halign: center;
+          play_button.halign: center;
+        }
+      }
 
       child: Box {
         orientation: vertical;
 
-        Adw.Clamp {
-          maximum-size: 800;
-
-          Box top_box {
-            orientation: horizontal;
-            spacing: 30;
-            margin-start: 18;
-            margin-end: 18;
-            margin-top: 12;
-            margin-bottom: 18;
-            halign: start;
-
-            Box album_art_container {
-              halign: center;
-              width-request: 200;
-              height-request: 200;
-
-              Picture album_art {
-                styles [
-                  "book_detail_art",
-                ]
-              }
-
-              styles [
-                "card",
-              ]
-            }
-
-            Box {
-              orientation: vertical;
-              margin-top: 12;
-              margin-bottom: 12;
-              spacing: 6;
-              vexpand: false;
-
-              Label book_label {
-                halign: start;
-                label: bind template.book_title;
-                ellipsize: end;
-                max-width-chars: 35;
-                lines: 1;
-
-                styles [
-                  "title-1",
-                  "bold",
-                ]
-              }
-
-              Label author_label {
-                halign: start;
-                label: _("Book author");
-                ellipsize: end;
-                max-width-chars: 50;
-                lines: 1;
-
-                styles [
-                  "title-3",
-                  "dim-label",
-                ]
-              }
-
-              Button play_button {
-                focusable: true;
-                receives-default: true;
-                margin-top: 18;
-                halign: start;
-                valign: end;
-                vexpand: true;
-                tooltip-text: _("Start/Stop playback");
-                accessibility {
-                  label: _("Start or pause the playback");
-                }
-
-                styles [
-                  "suggested-action",
-                  "pill",
-                ]
-
-                Adw.ButtonContent play_icon {
-                  label: _("Start");
-                  icon-name: 'media-playback-start-symbolic';
-                }
-              }
-            }
-
-            Box {
-              halign: center;
-              valign: center;
-              margin-bottom: 12;
-              spacing: 5;
-
-              Box download_box {
-                halign: end;
-                valign: center;
-
-                Image download_image {
-                  icon-name: 'download-symbolic';
-                }
-
-                Label download_label {
-                  margin-start: 5;
-                  margin-end: 4;
-                  label: _("Download");
-                }
-              }
-
-              Switch download_switch {
-                focusable: true;
-                halign: start;
-                valign: center;
-              }
-            }
-
-            ProgressBar book_progress_bar {
-              width-request: 250;
-              halign: center;
-              valign: start;
-              show-text: true;
-              margin-bottom: 18;
-            }
-
-            Grid {
-              margin-bottom: 18;
-              hexpand: true;
-              row-spacing: 4;
-              column-spacing: 20;
-
-              Label remaining_text {
-                halign: start;
-                hexpand: true;
-                label: _("Remaining");
-
-                styles [
-                  "dim-label",
-                ]
-
-                layout {
-                  column: '0';
-                  row: '3';
-                }
-              }
-
-              Label remaining_label {
-                hexpand: true;
-                label: 'label';
-                xalign: 0;
-
-                layout {
-                  column: '1';
-                  row: '3';
-                }
-              }
-
-              Label total_label {
-                hexpand: true;
-                label: 'label';
-                xalign: 0;
-
-                layout {
-                  column: '1';
-                  row: '2';
-                }
-              }
-
-              Label last_played_label {
-                hexpand: true;
-                label: 'label';
-                xalign: 0;
-
-                layout {
-                  column: '1';
-                  row: '1';
-                }
-              }
-
-              Label {
-                halign: start;
-                label: _("Total");
-
-                styles [
-                  "dim-label",
-                ]
-
-                layout {
-                  column: '0';
-                  row: '2';
-                }
-              }
-
-              Label {
-                halign: start;
-                label: _("Last played");
-
-                styles [
-                  "dim-label",
-                ]
-
-                layout {
-                  column: '0';
-                  row: '1';
-                }
-              }
-            }
-          }
+        Adw.Banner unavailable_banner {
+          title: _("Some or all files of this book cannot be found.");
         }
 
-        Adw.Clamp {
-          maximum-size: 800;
+        ScrolledWindow {
+          focusable: true;
           vexpand: true;
+          hscrollbar-policy: never;
+          propagate-natural-width: true;
+          propagate-natural-height: true;
 
-          Stack chapters_stack {
-            margin-start: 18;
-            margin-end: 18;
-            margin-top: 12;
-            margin-bottom: 24;
+          child: Box {
+            orientation: vertical;
 
-            StackPage {
-              name: 'chapters_wrapper';
+            Adw.Clamp {
+              maximum-size: 800;
 
-              child: Box chapter_list_container {
-                orientation: vertical;
-                spacing: 18;
-              };
+              Box top_box {
+                orientation: horizontal;
+                spacing: 30;
+                margin-start: 18;
+                margin-end: 18;
+                margin-top: 12;
+                margin-bottom: 18;
+                halign: start;
+
+                Box album_art_container {
+                  halign: center;
+                  width-request: 200;
+                  height-request: 200;
+
+                  Picture album_art {
+                    styles [
+                      "book_detail_art",
+                    ]
+                  }
+
+                  styles [
+                    "card",
+                  ]
+                }
+
+                Box {
+                  orientation: vertical;
+                  margin-top: 12;
+                  margin-bottom: 12;
+                  spacing: 6;
+                  vexpand: false;
+
+                  Label book_label {
+                    halign: start;
+                    label: bind template.book_title;
+                    ellipsize: end;
+                    max-width-chars: 35;
+                    lines: 1;
+
+                    styles [
+                      "title-1",
+                      "bold",
+                    ]
+                  }
+
+                  Label author_label {
+                    halign: start;
+                    label: _("Book author");
+                    ellipsize: end;
+                    max-width-chars: 50;
+                    lines: 1;
+
+                    styles [
+                      "title-3",
+                      "dim-label",
+                    ]
+                  }
+
+                  Button play_button {
+                    focusable: true;
+                    receives-default: true;
+                    margin-top: 18;
+                    halign: start;
+                    valign: end;
+                    vexpand: true;
+                    tooltip-text: _("Start/Stop playback");
+                    accessibility {
+                      label: _("Start or pause the playback");
+                    }
+
+                    styles [
+                      "suggested-action",
+                      "pill",
+                    ]
+
+                    Adw.ButtonContent play_icon {
+                      label: _("Start");
+                      icon-name: 'media-playback-start-symbolic';
+                    }
+                  }
+                }
+
+                Box {
+                  halign: center;
+                  valign: center;
+                  margin-bottom: 12;
+                  spacing: 5;
+
+                  Box download_box {
+                    halign: end;
+                    valign: center;
+
+                    Image download_image {
+                      icon-name: 'download-symbolic';
+                    }
+
+                    Label download_label {
+                      margin-start: 5;
+                      margin-end: 4;
+                      label: _("Download");
+                    }
+                  }
+
+                  Switch download_switch {
+                    focusable: true;
+                    halign: start;
+                    valign: center;
+                  }
+                }
+
+                ProgressBar book_progress_bar {
+                  width-request: 250;
+                  halign: center;
+                  valign: start;
+                  show-text: true;
+                  margin-bottom: 18;
+                }
+
+                Grid {
+                  margin-bottom: 18;
+                  hexpand: true;
+                  row-spacing: 4;
+                  column-spacing: 20;
+
+                  Label remaining_text {
+                    halign: start;
+                    hexpand: true;
+                    label: _("Remaining");
+
+                    styles [
+                      "dim-label",
+                    ]
+
+                    layout {
+                      column: '0';
+                      row: '3';
+                    }
+                  }
+
+                  Label remaining_label {
+                    hexpand: true;
+                    label: 'label';
+                    xalign: 0;
+
+                    layout {
+                      column: '1';
+                      row: '3';
+                    }
+                  }
+
+                  Label total_label {
+                    hexpand: true;
+                    label: 'label';
+                    xalign: 0;
+
+                    layout {
+                      column: '1';
+                      row: '2';
+                    }
+                  }
+
+                  Label last_played_label {
+                    hexpand: true;
+                    label: 'label';
+                    xalign: 0;
+
+                    layout {
+                      column: '1';
+                      row: '1';
+                    }
+                  }
+
+                  Label {
+                    halign: start;
+                    label: _("Total");
+
+                    styles [
+                      "dim-label",
+                    ]
+
+                    layout {
+                      column: '0';
+                      row: '2';
+                    }
+                  }
+
+                  Label {
+                    halign: start;
+                    label: _("Last played");
+
+                    styles [
+                      "dim-label",
+                    ]
+
+                    layout {
+                      column: '0';
+                      row: '1';
+                    }
+                  }
+                }
+              }
             }
 
-            StackPage {
-              name: 'chapters_loader';
+            Adw.Clamp {
+              maximum-size: 800;
+              vexpand: true;
 
-              child: Spinner spinner {
-                halign: center;
-                spinning: true;
-              };
+              Stack chapters_stack {
+                margin-start: 18;
+                margin-end: 18;
+                margin-top: 12;
+                margin-bottom: 24;
+
+                StackPage {
+                  name: 'chapters_wrapper';
+
+                  child: Box chapter_list_container {
+                    orientation: vertical;
+                    spacing: 18;
+                  };
+                }
+
+                StackPage {
+                  name: 'chapters_loader';
+
+                  child: Spinner spinner {
+                    halign: center;
+                    spinning: true;
+                  };
+                }
+              }
             }
-          }
+          };
         }
       };
-    }
-  };
+    };
+  }
 }

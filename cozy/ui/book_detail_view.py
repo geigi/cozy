@@ -36,7 +36,7 @@ class ChaptersListBox(Adw.PreferencesGroup):
 
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/book_detail.ui")
-class BookDetailView(Adw.BreakpointBin):
+class BookDetailView(Adw.NavigationPage):
     __gtype_name__ = "BookDetail"
 
     play_button: Gtk.Button = Gtk.Template.Child()
@@ -70,14 +70,8 @@ class BookDetailView(Adw.BreakpointBin):
 
     _current_selected_chapter: ChapterElement | None = None
 
-    def __init__(self, main_window_builder: Gtk.Builder):
+    def __init__(self):
         super().__init__()
-
-        overview: Adw.ToolbarView = main_window_builder.get_object("book_overview")
-        overview.set_content(self)
-
-        book_overview_page: Adw.NavigationPage = main_window_builder.get_object("book_overview_page")
-        self.bind_property("book-title", book_overview_page, "title", GObject.BindingFlags.SYNC_CREATE)
 
         self._chapters_event = Event()
         self._chapters_thread: Thread | None = None

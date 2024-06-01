@@ -16,6 +16,7 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
 from cozy.ui.about_window import AboutWindow
+from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
 from cozy.ui.widgets.first_import_button import FirstImportButton
@@ -81,6 +82,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
         self.navigation_view: Adw.NavigationView = self.window_builder.get_object("navigation_view")
         self.drop_revealer: Gtk.Revealer = self.window_builder.get_object("drop_revealer")
+
+        self.navigation_view.add(BookDetailView())
 
         self.window.present()
 
