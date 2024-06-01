@@ -52,6 +52,15 @@ class BookElement(Gtk.FlowBoxChild):
         key_event_controller.connect("key-pressed", self._on_key_press_event)
         self.container_box.add_controller(key_event_controller)
 
+    @GObject.Signal(arg_types=(object,))
+    def play_pause_clicked(self, *_): ...
+
+    @GObject.Signal(arg_types=(object,))
+    def open_book_overview(self, *_): ...
+
+    @GObject.Signal(arg_types=(object,))
+    def book_removed(self, *_): ...
+
     def set_playing(self, is_playing):
         self.art.set_playing(is_playing)
 
@@ -62,13 +71,13 @@ class BookElement(Gtk.FlowBoxChild):
         menu_model = Gio.Menu()
 
         self.install_action("book_element.mark_as_read", None, self._mark_as_read)
-        menu_model.append(_("Mark as read"), "book_element.mark_as_read")
+        menu_model.append(_("Mark as Read"), "book_element.mark_as_read")
 
         self.install_action("book_element.jump_to_folder", None, self._jump_to_folder)
-        menu_model.append(_("Open in file browser"), "book_element.jump_to_folder")
+        menu_model.append(_("Open in File Browser"), "book_element.jump_to_folder")
 
         self.install_action("book_element.remove_book", None, self._remove_book)
-        menu_model.append(_("Remove from library"), "book_element.remove_book")
+        menu_model.append(_("Permanently Delete…"), "book_element.remove_book")
 
         menu = Gtk.PopoverMenu(menu_model=menu_model, has_arrow=False)
         menu.set_parent(self.art)
@@ -116,13 +125,3 @@ class BookElement(Gtk.FlowBoxChild):
 
     def _on_album_art_press_event(self, *_):
         self.emit("play-pause-clicked", self.book)
-
-
-GObject.type_register(BookElement)
-GObject.signal_new('play-pause-clicked', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
-                   (GObject.TYPE_PYOBJECT,))
-GObject.signal_new('open-book-overview', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
-                   (GObject.TYPE_PYOBJECT,))
-GObject.signal_new('book-removed', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
-                   (GObject.TYPE_PYOBJECT,))
-

@@ -42,9 +42,11 @@ class AlbumElement(Gtk.Box):
             self.book_icon.set_from_icon_name("book-open-variant-symbolic")
             self.stack.set_visible_child(self.book_icon)
 
-
         self.play_button.connect("clicked", self._on_play_button_press)
         self.progress_drawing_area.set_draw_func(self._draw_progress)
+
+    @GObject.Signal(arg_types=(object,))
+    def play_pause_clicked(self, *_): ...
 
     def set_playing(self, playing: bool):
         if playing:
@@ -72,19 +74,5 @@ class AlbumElement(Gtk.Box):
         context.set_line_width(STROKE_WIDTH)
         context.stroke()
 
-    def draw_background(self, area: Gtk.DrawingArea, context: cairo.Context):
-        width = area.get_allocated_width()
-        height = area.get_allocated_height()
-
-        context.arc(width / 2.0, height / 2.0, self.radius, 0, math.pi * 2.0)
-        context.set_source_rgba(0, 0, 0, 1.0)
-        context.set_line_width(2)
-        context.stroke()
-
     def update_progress(self):
         self.progress_drawing_area.queue_draw()
-
-
-GObject.type_register(AlbumElement)
-GObject.signal_new('play-pause-clicked', AlbumElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
-                   (GObject.TYPE_PYOBJECT,))
