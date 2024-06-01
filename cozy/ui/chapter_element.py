@@ -24,6 +24,9 @@ class ChapterElement(Adw.ActionRow):
         self.duration_label.set_label(seconds_to_str(self.chapter.length))
         self.number_label.set_text(str(self.chapter.number))
 
+    @GObject.Signal(arg_types=(object,))
+    def play_pause_clicked(self, *_): ...
+
     def _on_button_press(self, *_):
         self.emit("play-pause-clicked", self.chapter)
 
@@ -38,13 +41,3 @@ class ChapterElement(Adw.ActionRow):
             self.play_icon.set_from_icon_name("media-playback-pause-symbolic")
         else:
             self.play_icon.set_from_icon_name("media-playback-start-symbolic")
-
-
-GObject.type_register(ChapterElement)
-GObject.signal_new(
-    "play-pause-clicked",
-    ChapterElement,
-    GObject.SIGNAL_RUN_LAST,
-    GObject.TYPE_PYOBJECT,
-    (GObject.TYPE_PYOBJECT,),
-)

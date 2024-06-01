@@ -57,6 +57,15 @@ class BookElement(Gtk.FlowBoxChild):
         motion_event_controller.connect("leave", self._on_cover_leave_notify)
         self.container_box.add_controller(motion_event_controller)
 
+    @GObject.Signal(arg_types=(object,))
+    def play_pause_clicked(self, *_): ...
+
+    @GObject.Signal(arg_types=(object,))
+    def open_book_overview(self, *_): ...
+
+    @GObject.Signal(arg_types=(object,))
+    def book_removed(self, *_): ...
+
     def set_playing(self, is_playing):
         self.art.set_playing(is_playing)
 
@@ -127,13 +136,3 @@ class BookElement(Gtk.FlowBoxChild):
 
     def _on_album_art_press_event(self, *_):
         self.emit("play-pause-clicked", self.book)
-
-
-GObject.type_register(BookElement)
-GObject.signal_new('play-pause-clicked', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
-                   (GObject.TYPE_PYOBJECT,))
-GObject.signal_new('open-book-overview', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
-                   (GObject.TYPE_PYOBJECT,))
-GObject.signal_new('book-removed', BookElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
-                   (GObject.TYPE_PYOBJECT,))
-
