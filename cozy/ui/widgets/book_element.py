@@ -76,13 +76,13 @@ class BookElement(Gtk.FlowBoxChild):
         menu_model = Gio.Menu()
 
         self.install_action("book_element.mark_as_read", None, self._mark_as_read)
-        menu_model.append(_("Mark as read"), "book_element.mark_as_read")
+        menu_model.append(_("Mark as Read"), "book_element.mark_as_read")
 
         self.install_action("book_element.jump_to_folder", None, self._jump_to_folder)
-        menu_model.append(_("Open in file browser"), "book_element.jump_to_folder")
+        menu_model.append(_("Open in File Browser"), "book_element.jump_to_folder")
 
         self.install_action("book_element.remove_book", None, self._remove_book)
-        menu_model.append(_("Remove from library"), "book_element.remove_book")
+        menu_model.append(_("Permanently Delete…"), "book_element.remove_book")
 
         menu = Gtk.PopoverMenu(menu_model=menu_model, has_arrow=False)
         menu.set_parent(self.art)
