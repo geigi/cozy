@@ -20,7 +20,7 @@ class TagReader:
             raise ValueError("discoverer_info must not be None")
 
         self.uri: str = uri
-        self.discoverer_info: GstPbutils.DiscovererInfo = discoverer_info
+        self.discoverer_info = discoverer_info
 
         self.tags: Gst.TagList = discoverer_info.get_tags()
 

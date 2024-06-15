@@ -5,6 +5,7 @@ import time
 from enum import Enum, auto
 from multiprocessing.pool import Pool as Pool
 from urllib.parse import unquote, urlparse
+from pathlib import Path
 
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.profiler import timing
@@ -22,6 +23,7 @@ log = logging.getLogger("importer")
 
 CHUNK_SIZE = 100
 
+AUDIO_EXTENSIONS = {'.mp3', '.ogg', '.flac', '.m4a', '.m4b', '.mp4', '.wav', '.opus'}
 
 class ScanStatus(Enum):
     STARTED = auto()
@@ -109,7 +111,7 @@ class Importer(EventSender):
 
             self._progress += CHUNK_SIZE
 
-            if len(media_files) != 0:
+            if media_files:
                 try:
                     self._database_importer.insert_many(media_files)
                 except Exception as e:
@@ -164,13 +166,12 @@ class Importer(EventSender):
 
         return [path for path in paths if os.path.exists(path)]
 
-    def _walk_paths_to_scan(self, paths: list[str]) -> list[str]:
+    def _walk_paths_to_scan(self, directories: list[str]) -> list[str]:
         """Get all files recursive inside a directory. Returns absolute paths."""
-        for path in paths:
-            for directory, _, files in os.walk(path):
-                for file in files:
-                    filepath = os.path.join(directory, file)
-                    yield filepath
+        for dir in directories:
+            for path in Path(dir).rglob("**/*"):
+                if path.suffix.lower() in AUDIO_EXTENSIONS:
+                    yield str(path)
 
     def _filter_unchanged_files(self, files: list[str]) -> list[str]:
         """Filter all files that are already imported and that have not changed from a list of paths."""
