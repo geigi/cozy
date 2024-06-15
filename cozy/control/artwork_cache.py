@@ -24,7 +24,7 @@ class ArtworkCache:
         _app_settings.add_listener(self._on_app_setting_changed)
 
     @property
-    def artwork_cache_dir():
+    def artwork_cache_dir(self):
         return Path(get_cache_dir()) / "artwork"
 
     def get_cover_paintable(self, book, scale, size=0) -> Gdk.Texture | None:
@@ -76,21 +76,21 @@ class ArtworkCache:
             ArtworkCacheModel.create(book=book.id, uuid=uuid)
 
         cache_dir = self.artwork_cache_dir / uuid
-        cache_dir.mkdir(exists_ok=True, parents=True)
+        cache_dir.mkdir(exist_ok=True, parents=True)
         file_path = (cache_dir / str(size)).with_suffix(".jpg")
 
         resized_pixbuf = self._resize_pixbuf(pixbuf, size)
 
         if not file_path.exists():
             try:
-                resized_pixbuf.savev(file_path, "jpeg", ["quality", None], ["95"])
+                resized_pixbuf.savev(str(file_path), "jpeg", ["quality", None], ["95"])
             except Exception as e:
                 reporter.warning("artwork_cache", "Failed to save resized cache albumart")
                 log.warning("Failed to save resized cache albumart for uuid %r: %s", uuid, e)
 
         return resized_pixbuf
 
-    def get_album_art_path(self, book, size):
+    def get_album_art_path(self, book, size) -> str:
         query = ArtworkCacheModel.select().where(ArtworkCacheModel.book == book.id)
         if not query.exists():
             return None
@@ -109,7 +109,7 @@ class ArtworkCache:
         if cache_dir.is_dir():
             file_path = (cache_dir / str(size)).with_suffix(".jpg")
             if file_path.exists():
-                return file_path
+                return str(file_path)
 
         return None
 
