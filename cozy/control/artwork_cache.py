@@ -1,8 +1,8 @@
 import logging
 import os
-from uuid import uuid4
-from pathlib import Path
 import shutil
+from pathlib import Path
+from uuid import uuid4
 
 from gi.repository import Gdk, GdkPixbuf
 
@@ -98,7 +98,10 @@ class ArtworkCache:
         try:
             uuid = query.first().uuid
         except Exception:
-            reporter.error("artwork_cache", "load_pixbuf_from_cache: query exists but query.first().uuid crashed.")
+            reporter.error(
+                "artwork_cache",
+                "load_pixbuf_from_cache: query exists but query.first().uuid crashed.",
+            )
             return None
 
         cache_dir = self.artwork_cache_dir / uuid
@@ -199,4 +202,3 @@ class ArtworkCache:
     def _on_app_setting_changed(self, event: str, data):
         if event == "prefer-external-cover":
             self.delete_artwork_cache()
-
