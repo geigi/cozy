@@ -126,7 +126,7 @@ class Server:
             result = (result,)
 
             out_args = self.method_outargs[method_name]
-            if out_args != "()" and result[0]:
+            if out_args != "()" and result[0] is not None:
                 variant = GLib.Variant(out_args, result)
                 invocation.return_value(variant)
             else:
@@ -281,7 +281,7 @@ class MPRIS(Server):
         # Might raise an AttributeError. We handle that in Server.on_method_call
         return getattr(self, to_snake_case(property_name))
 
-    def get_all(self, interface):
+    def get_all(self, interface) -> dict[str, GLib.Variant]:
         if interface == self.MEDIA_PLAYER2_INTERFACE:
             properties = (
                 "CanQuit",
@@ -305,6 +305,8 @@ class MPRIS(Server):
                 "CanControl",
                 "Volume",
             )
+        else:
+            return {}
 
         return {property: self.get(interface, property) for property in properties}
 
@@ -377,7 +379,11 @@ class MPRIS(Server):
         return metadata.to_dict()
 
     def _on_player_changed(self, event: str, _) -> None:
-        if event == "chapter-changed":
+        if event == "position":
+            self.properties_changed(
+                self.MEDIA_PLAYER2_PLAYER_INTERFACE, {"Position": self.position}, []
+            )
+        elif event == "chapter-changed":
             self._on_current_changed()
         elif event == "play":
             self._on_status_changed("Playing")
