@@ -144,7 +144,7 @@ def test_length_returns_default_value(peewee_database):
     from cozy.db.track import Track as TrackDB
 
     track = Track(peewee_database, TrackDB.get(1))
-    assert track.length == 42.1
+    assert track.length == 42.1 * 1e9
 
 
 def test_setting_length_updates_in_track_object_and_database(peewee_database):
@@ -152,8 +152,8 @@ def test_setting_length_updates_in_track_object_and_database(peewee_database):
     from cozy.model.track import Track
 
     track = Track(peewee_database, TrackDB.get(1))
-    track.length = 42.42
-    assert track.length == 42.42
+    track.length = 42.42 * 1e9
+    assert track.length == 42.42 * 1e9
     assert TrackDB.get_by_id(1).length == 42.42
 
 
