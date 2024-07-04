@@ -1,11 +1,11 @@
+from gi.repository import Gst
+
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.ext import inject
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.open_view import OpenView
-
-from gi.repository import Gst
 
 
 class PlaybackControlViewModel(Observable, EventSender):
@@ -44,7 +44,7 @@ class PlaybackControlViewModel(Observable, EventSender):
             return None
 
         position = self._book.current_chapter.position - self._book.current_chapter.start_position
-        return position / NS_TO_SEC / self._book.playback_speed
+        return position / Gst.SECOND / self._book.playback_speed
 
     @position.setter
     def position(self, new_value: int):

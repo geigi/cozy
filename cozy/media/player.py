@@ -1,5 +1,6 @@
 import logging
 import os
+import threading
 import time
 from threading import Thread
 from typing import Optional
@@ -18,16 +19,6 @@ from cozy.report import reporter
 from cozy.tools import IntervalTimer
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.toaster import ToastNotifier
-
-
-import threading
-from enum import Enum, auto
-from typing import Optional
-
-from gi.repository import Gst
-
-from cozy.architecture.event_sender import EventSender
-from cozy.report import reporter
 
 log = logging.getLogger(__name__)
 
@@ -234,8 +225,15 @@ class GstPlayer(EventSender):
         counter = 0
         seeked = False
         while not seeked and counter < 500:
-            seeked = self._player.seek(self._playback_speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH, Gst.SeekType.SET,
-                                       new_position_ns, Gst.SeekType.NONE, 0)
+            seeked = self._player.seek(
+                self._playback_speed,
+                Gst.Format.TIME,
+                Gst.SeekFlags.FLUSH,
+                Gst.SeekType.SET,
+                new_position_ns,
+                Gst.SeekType.NONE,
+                0,
+            )
 
             if not seeked:
                 counter += 1
@@ -245,8 +243,15 @@ class GstPlayer(EventSender):
             reporter.warning("gst_player", "Failed to seek, counter expired.")
 
     def _on_playback_speed_timer(self):
-        self._player.seek(self._playback_speed, Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.ACCURATE,
-                          Gst.SeekType.SET, self.position, Gst.SeekType.NONE, 0)
+        self._player.seek(
+            self._playback_speed,
+            Gst.Format.TIME,
+            Gst.SeekFlags.FLUSH | Gst.SeekFlags.ACCURATE,
+            Gst.SeekType.SET,
+            self.position,
+            Gst.SeekType.NONE,
+            0,
+        )
 
         self._playback_speed_timer_running = False
 
@@ -495,12 +500,14 @@ class Player(EventSender):
         chapter_number = self._book.chapters.index(self._book.current_chapter)
         rewind_nanoseconds = self._app_settings.rewind_duration * Gst.SECOND * self.playback_speed
 
-        if current_position_relative - rewind_seconds > 0:
+        if current_position_relative - rewind_nanoseconds > 0:
             self._gst_player.position = current_position - rewind_nanoseconds
         elif chapter_number > 0:
             previous_chapter = self._book.chapters[chapter_number - 1]
             self._load_chapter(previous_chapter)
-            self._gst_player.position = previous_chapter.end_position + (current_position_relative - rewind_nanoseconds)
+            self._gst_player.position = previous_chapter.end_position + (
+                current_position_relative - rewind_nanoseconds
+            )
         else:
             self._gst_player.position = 0
 
@@ -521,7 +528,9 @@ class Player(EventSender):
         elif chapter_number < len(self._book.chapters) - 1:
             next_chapter = self._book.chapters[chapter_number + 1]
             self._load_chapter(next_chapter)
-            self._gst_player.position = next_chapter.start_position + (forward_nanoseconds - old_chapter.length - current_position_relative)
+            self._gst_player.position = next_chapter.start_position + (
+                forward_nanoseconds - old_chapter.length - current_position_relative
+            )
         else:
             self._next_chapter()
 
@@ -533,7 +542,9 @@ class Player(EventSender):
     def _next_chapter(self):
         if not self._book:
             log.error("Cannot play next chapter because no book reference is stored.")
-            reporter.error("player", "Cannot play next chapter because no book reference is stored.")
+            reporter.error(
+                "player", "Cannot play next chapter because no book reference is stored."
+            )
             return
 
         index_current_chapter = self._book.chapters.index(self._book.current_chapter)
@@ -650,8 +661,4 @@ class Player(EventSender):
         This allows gapless playback for media files that contain many chapters.
         """
 
-        difference = abs(self.position - position)
-        if difference < 10 ** 9:
-            return False
-
-        return True
+        return not abs(self.position - position) < Gst.SECOND

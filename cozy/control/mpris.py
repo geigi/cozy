@@ -71,9 +71,7 @@ class Server:
 
         for interface in Gio.DBusNodeInfo.new_for_xml(self.__doc__).interfaces:
             for method in interface.methods:
-                self.method_inargs[method.name] = tuple(
-                    arg.signature for arg in method.in_args
-                )
+                self.method_inargs[method.name] = tuple(arg.signature for arg in method.in_args)
                 out_sig = [arg.signature for arg in method.out_args]
                 self.method_outargs[method.name] = "(" + "".join(out_sig) + ")"
 
@@ -113,10 +111,7 @@ class Server:
         except Exception as e:
             log.error(e)
             reporter.exception("mpris", e)
-            reporter.error(
-                "mpris",
-                f"MPRIS method call failed with method name: {method_name}",
-            )
+            reporter.error("mpris", f"MPRIS method call failed with method name: {method_name}")
             invocation.return_dbus_error(
                 f"{interface_name}.Error.Failed", "Internal exception occurred"
             )
@@ -269,13 +264,7 @@ class MPRIS(Server):
             return GLib.Variant("b", True)
         elif property_name in {"CanRaise", "HasTrackList"}:
             return GLib.Variant("b", False)
-        elif property_name in {
-            "CanGoNext",
-            "CanGoPrevious",
-            "CanPlay",
-            "CanPause",
-            "CanSeek",
-        }:
+        elif property_name in {"CanGoNext", "CanGoPrevious", "CanPlay", "CanPause", "CanSeek"}:
             return GLib.Variant("b", self._player.loaded_book is not None)
         elif property_name in {"SupportedUriSchemes", "SupportedMimeTypes"}:
             return GLib.Variant("as", [])

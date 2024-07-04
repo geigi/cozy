@@ -1,7 +1,5 @@
 import threading
 import time
-from datetime import datetime
-from gettext import ngettext
 
 
 # https://stackoverflow.com/questions/323972/is-there-any-way-to-kill-a-thread-in-python

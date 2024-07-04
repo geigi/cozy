@@ -1,9 +1,12 @@
-from gi.repository import Gst
-
 from datetime import datetime
 from gettext import ngettext
 
-def ns_to_time(nanoseconds: int, max_length: int | None=None, include_seconds: bool = True) -> str:
+from gi.repository import Gst
+
+
+def ns_to_time(
+    nanoseconds: int, max_length: int | None = None, include_seconds: bool = True
+) -> str:
     """
     Converts nanoseconds to a string with the following appearance:
     hh:mm:ss
@@ -20,9 +23,9 @@ def ns_to_time(nanoseconds: int, max_length: int | None=None, include_seconds: b
         max_h = h
         max_m = m
 
-    if (max_h >= 10):
+    if max_h >= 10:
         result = "%02d:%02d" % (h, m)
-    elif (max_h >= 1):
+    elif max_h >= 1:
         result = "%d:%02d" % (h, m)
     else:
         result = "%02d" % m
@@ -41,7 +44,7 @@ def ns_to_human_readable(nanoseconds: int) -> str:
     21 seconds
     :param seconds: int
     """
-    m, s = divmod(nanoseconds / G, 60)
+    m, s = divmod(nanoseconds / Gst.SECOND, 60)
     h, m = divmod(m, 60)
     h = int(h)
     m = int(m)
@@ -49,15 +52,17 @@ def ns_to_human_readable(nanoseconds: int) -> str:
 
     result = ""
     if h > 0 and m > 0:
-        result = ngettext('{hours} hour', '{hours} hours', h).format(hours=h) + \
-                 " " + \
-                 ngettext('{minutes} minute', '{minutes} minutes', m).format(minutes=m)
+        result = (
+            ngettext("{hours} hour", "{hours} hours", h).format(hours=h)
+            + " "
+            + ngettext("{minutes} minute", "{minutes} minutes", m).format(minutes=m)
+        )
     elif h > 0:
-        result = ngettext('{hours} hour', '{hours} hours', h).format(hours=h)
+        result = ngettext("{hours} hour", "{hours} hours", h).format(hours=h)
     elif m > 0:
-        result = ngettext('{minutes} minute', '{minutes} minutes', m).format(minutes=m)
+        result = ngettext("{minutes} minute", "{minutes} minutes", m).format(minutes=m)
     elif s > 0:
-        result = ngettext('{seconds} second', '{seconds} seconds', s).format(seconds=s)
+        result = ngettext("{seconds} second", "{seconds} seconds", s).format(seconds=s)
     else:
         result = _("finished")
 
@@ -88,10 +93,10 @@ def date_delta_to_human_readable(unix_time):
     elif days < 2:
         return _("yesterday")
     elif days < 7:
-        return _(f"{days} days ago")
+        return _("{days} days ago").format(days=days)
     elif weeks < 5:
-        return ngettext('{weeks} week ago', '{weeks} weeks ago', weeks).format(weeks=weeks)
+        return ngettext("{weeks} week ago", "{weeks} weeks ago", weeks).format(weeks=weeks)
     elif months < 12:
-        return ngettext('{months} month ago', '{months} months ago', months).format(months=months)
+        return ngettext("{months} month ago", "{months} months ago", months).format(months=months)
     else:
-        return ngettext('{years} year ago', '{years} years ago', years).format(years=years)
+        return ngettext("{years} year ago", "{years} years ago", years).format(years=years)

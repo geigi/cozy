@@ -173,7 +173,4 @@ class TagReader:
         if mutagen.version[0] > 1:
             return True
 
-        if mutagen.version[0] == 1 and mutagen.version[1] >= 45:
-            return True
-
-        return False
+        return mutagen.version[0] == 1 and mutagen.version[1] >= 45
