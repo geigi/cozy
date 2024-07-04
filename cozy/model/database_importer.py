@@ -197,7 +197,7 @@ class DatabaseImporter:
         for chapter in book_model.chapters:
             old_position = progress
             if completed_chapter_length + chapter.length > old_position:
-                chapter.position = chapter.start_position + ((old_position - completed_chapter_length) * 10 ** 9)
+                chapter.position = chapter.start_position + (old_position - completed_chapter_length)
                 book_model.position = chapter.id
                 return
             else:

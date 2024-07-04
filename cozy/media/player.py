@@ -31,9 +31,6 @@ from cozy.report import reporter
 
 log = logging.getLogger(__name__)
 
-NS_TO_SEC = Gst.SECOND
-US_TO_SEC = 1e6
-
 
 class GstPlayer(EventSender):
     _bus: Gst.Bus | None
@@ -90,8 +87,6 @@ class GstPlayer(EventSender):
 
     @position.setter
     def position(self, new_position_ns: int):
-        """Sets the player position in nanoseconds"""
-
         if new_position_ns != 0:
             new_position_ns = max(0, new_position_ns)
             duration = self._query_gst_time(self._player.query_duration)
@@ -336,9 +331,8 @@ class Player(EventSender):
 
     @position.setter
     def position(self, new_value: int):
-        # FIXME: setter expects seconds, but getter returns nanoseconds
         if self.loaded_chapter is not None:
-            self._gst_player.position = max(self.loaded_chapter.start_position + new_value * Gst.SECOND, 0)
+            self._gst_player.position = max(self.loaded_chapter.start_position + new_value, 0)
 
     @property
     def volume(self) -> float:
@@ -499,15 +493,14 @@ class Player(EventSender):
         current_position = self._gst_player.position
         current_position_relative = max(current_position - self.loaded_chapter.start_position, 0)
         chapter_number = self._book.chapters.index(self._book.current_chapter)
-        rewind_seconds = self._app_settings.rewind_duration * self.playback_speed
+        rewind_nanoseconds = self._app_settings.rewind_duration * Gst.SECOND * self.playback_speed
 
-        if current_position_relative / NS_TO_SEC - rewind_seconds > 0:
-            self._gst_player.position = current_position - NS_TO_SEC * rewind_seconds
+        if current_position_relative - rewind_seconds > 0:
+            self._gst_player.position = current_position - rewind_nanoseconds
         elif chapter_number > 0:
             previous_chapter = self._book.chapters[chapter_number - 1]
             self._load_chapter(previous_chapter)
-            self._gst_player.position = previous_chapter.end_position + (
-                        current_position_relative - NS_TO_SEC * rewind_seconds)
+            self._gst_player.position = previous_chapter.end_position + (current_position_relative - rewind_nanoseconds)
         else:
             self._gst_player.position = 0
 
@@ -521,15 +514,14 @@ class Player(EventSender):
         current_position_relative = max(current_position - self.loaded_chapter.start_position, 0)
         old_chapter = self._book.current_chapter
         chapter_number = self._book.chapters.index(self._book.current_chapter)
-        forward_seconds = self._app_settings.forward_duration * self.playback_speed
+        forward_nanoseconds = self._app_settings.forward_duration * Gst.SECOND * self.playback_speed
 
-        if current_position_relative / NS_TO_SEC + forward_seconds < self._book.current_chapter.length:
-            self._gst_player.position = current_position + (NS_TO_SEC * forward_seconds)
+        if current_position_relative + forward_nanoseconds < self._book.current_chapter.length:
+            self._gst_player.position = current_position + forward_nanoseconds
         elif chapter_number < len(self._book.chapters) - 1:
             next_chapter = self._book.chapters[chapter_number + 1]
             self._load_chapter(next_chapter)
-            self._gst_player.position = next_chapter.start_position + (
-                    NS_TO_SEC * forward_seconds - (old_chapter.length * NS_TO_SEC - current_position_relative))
+            self._gst_player.position = next_chapter.start_position + (forward_nanoseconds - old_chapter.length - current_position_relative)
         else:
             self._next_chapter()
 

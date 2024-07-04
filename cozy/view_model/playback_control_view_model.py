@@ -5,7 +5,7 @@ from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.open_view import OpenView
 
-NS_TO_SEC = 10 ** 9
+from gi.repository import Gst
 
 
 class PlaybackControlViewModel(Observable, EventSender):
@@ -51,7 +51,7 @@ class PlaybackControlViewModel(Observable, EventSender):
         if not self._book:
             return
 
-        self._player.position = new_value * self._book.playback_speed
+        self._player.position = new_value * Gst.SECOND * self._book.playback_speed
 
     @property
     def length(self) -> float | None:
@@ -67,7 +67,7 @@ class PlaybackControlViewModel(Observable, EventSender):
 
         position = self._book.current_chapter.position - self._book.current_chapter.start_position
         length = self._player.loaded_book.current_chapter.length
-        return position / NS_TO_SEC / length * 100
+        return position / length * 100
 
     @relative_position.setter
     def relative_position(self, new_value: float) -> None:
@@ -75,7 +75,7 @@ class PlaybackControlViewModel(Observable, EventSender):
             return
 
         length = self._player.loaded_book.current_chapter.length
-        self._player.position = new_value / 100 * length
+        self._player.position = int(length * new_value / 100)
 
     @property
     def lock_ui(self) -> bool:

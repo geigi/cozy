@@ -1,11 +1,11 @@
-def seconds_to_str(seconds, max_length=None, include_seconds=True):
+def seconds_to_str(nanoseconds: int, max_length=None, include_seconds=True):
     """
-    Converts seconds to a string with the following appearance:
+    Converts nanoseconds to a string with the following appearance:
     hh:mm:ss
 
-    :param seconds: The seconds as float
+    :param nanoseconds: int
     """
-    m, s = divmod(seconds, 60)
+    m, s = divmod(nanoseconds / 1e9, 60)
     h, m = divmod(m, 60)
 
     if max_length:

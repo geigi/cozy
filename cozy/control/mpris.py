@@ -17,13 +17,15 @@ from gi.repository import Gio, GLib
 from cozy.application_settings import ApplicationSettings
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.ext import inject
-from cozy.media.player import NS_TO_SEC, US_TO_SEC, Player
+from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.report import reporter
 
 log = logging.getLogger("mpris")
 
 CamelCasePattern = re.compile(r"(?<!^)(?=[A-Z])")
+
+NS_TO_US = 1e3
 
 
 def to_snake_case(name: str) -> str:
@@ -257,10 +259,10 @@ class MPRIS(Server):
         self._player.destroy()
 
     def set_position(self, track_id: str, position: int):
-        self._player.position = position / US_TO_SEC
+        self._player.position = position * NS_TO_US
 
     def seek(self, offset: int):
-        self._player.position = self._player.position / NS_TO_SEC + offset / US_TO_SEC
+        self._player.position = self._player.position + offset * NS_TO_US
 
     def get(self, interface: str, property_name: str) -> GLib.Variant:
         if property_name in {"CanQuit", "CanControl"}:
@@ -372,7 +374,7 @@ class MPRIS(Server):
             title=book.current_chapter.name,
             album=book.name,
             artist=[book.author],
-            length=book.current_chapter.length * US_TO_SEC,
+            length=book.current_chapter.length / NS_TO_US,
             url=uri_template.format(path=book.current_chapter.file),
             artwork_uri=self._artwork_cache.get_album_art_path(book, 256),
         )

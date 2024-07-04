@@ -34,7 +34,7 @@ class IntervalTimer(StoppableThread):
             time.sleep(self._interval)
 
 
-def seconds_to_human_readable(seconds):
+def seconds_to_human_readable(nanoseconds):
     """
     Create a string with the following format:
     6 hours 1 minute
@@ -42,7 +42,7 @@ def seconds_to_human_readable(seconds):
     21 seconds
     :param seconds: Integer
     """
-    m, s = divmod(seconds, 60)
+    m, s = divmod(nanoseconds / 1e9, 60)
     h, m = divmod(m, 60)
     h = int(h)
     m = int(m)
