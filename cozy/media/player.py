@@ -24,8 +24,8 @@ log = logging.getLogger(__name__)
 
 
 class GstPlayer(EventSender):
-    _bus: Gst.Bus | None
-    _player: Gst.Bin | None
+    _bus: Gst.Bus
+    _player: Gst.Bin
 
     def __init__(self):
         super().__init__()
@@ -34,10 +34,11 @@ class GstPlayer(EventSender):
         self._playback_speed_timer_running: bool = False
         self._volume: float = 1.0
 
-        Gst.init(None)
         self.setup_pipeline()
 
     def setup_pipeline(self):
+        Gst.init(None)
+
         scaletempo = Gst.ElementFactory.make("scaletempo", "scaletempo")
         scaletempo.sync_state_with_parent()
 
@@ -46,10 +47,9 @@ class GstPlayer(EventSender):
 
         audiosink = Gst.ElementFactory.make("autoaudiosink", "audiosink")
         audiobin.add(audiosink)
-
         scaletempo.link(audiosink)
-        pad = scaletempo.get_static_pad("sink")
-        ghost_pad = Gst.GhostPad.new("sink", pad)
+
+        ghost_pad = Gst.GhostPad.new("sink", scaletempo.get_static_pad("sink"))
         audiobin.add_pad(ghost_pad)
 
         self._player = Gst.ElementFactory.make("playbin", "player")
@@ -289,14 +289,13 @@ class Player(EventSender):
     _offline_cache: OfflineCache = inject.attr(OfflineCache)
     _toast: ToastNotifier = inject.attr(ToastNotifier)
     _importer: Importer = inject.attr(Importer)
+    _gst_player: GstPlayer = inject.attr(GstPlayer)
 
     def __init__(self):
         super().__init__()
 
         self._book: Optional[Book] = None
         self._play_next_chapter: bool = True
-
-        self._gst_player = GstPlayer()
 
         self._importer.add_listener(self._on_importer_event)
         self._gst_player.add_listener(self._on_gst_player_event)

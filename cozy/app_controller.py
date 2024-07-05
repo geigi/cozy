@@ -8,7 +8,7 @@ from cozy.control.db import get_db
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.control.offline_cache import OfflineCache
 from cozy.media.files import Files
-from cozy.media.player import Player
+from cozy.media.player import GstPlayer, Player
 from cozy.model.book import Book
 from cozy.model.database_importer import DatabaseImporter
 from cozy.model.library import Library
@@ -99,6 +99,7 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(HeaderbarViewModel, lambda: HeaderbarViewModel())
         binder.bind_to_constructor(PlaybackSpeedViewModel, lambda: PlaybackSpeedViewModel())
         binder.bind_to_constructor(SleepTimerViewModel, lambda: SleepTimerViewModel())
+        binder.bind_to_constructor(GstPlayer, lambda: GstPlayer())
         binder.bind_to_constructor(PowerManager, lambda: PowerManager())
         binder.bind_to_constructor(ToastNotifier, lambda: ToastNotifier())
         binder.bind_to_constructor(AppViewModel, lambda: AppViewModel())
