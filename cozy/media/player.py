@@ -1,11 +1,9 @@
 import logging
 import os
-import threading
 import time
-from threading import Thread
 from typing import Optional
 
-from gi.repository import GLib, Gst
+from gi.repository import GLib, Gst, GstController
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
@@ -24,7 +22,6 @@ log = logging.getLogger(__name__)
 
 
 class GstPlayer(EventSender):
-    _bus: Gst.Bus
     _player: Gst.Bin
 
     def __init__(self):
@@ -33,31 +30,52 @@ class GstPlayer(EventSender):
         self._playback_speed: float = 1.0
         self._playback_speed_timer_running: bool = False
         self._volume: float = 1.0
+        self._fade_timeout: int | None = None
 
-        self.setup_pipeline()
+        self._setup_pipeline()
+        self._setup_fadeout_control()
 
-    def setup_pipeline(self):
+        bus = self._player.get_bus()
+        bus.add_signal_watch()
+        bus.connect("message", self._on_gst_message)
+
+    def _setup_pipeline(self):
         Gst.init(None)
+
+        audio_sink = Gst.Bin.new()
 
         scaletempo = Gst.ElementFactory.make("scaletempo", "scaletempo")
         scaletempo.sync_state_with_parent()
 
-        audiobin = Gst.ElementFactory.make("bin", "audiosink")
-        audiobin.add(scaletempo)
+        self._volume_fader = Gst.ElementFactory.make("volume", "fadevolume")
+        audiosink = Gst.ElementFactory.make("autoaudiosink", "autoaudiosink")
 
-        audiosink = Gst.ElementFactory.make("autoaudiosink", "audiosink")
-        audiobin.add(audiosink)
+        audio_sink.add(self._volume_fader)
+        audio_sink.add(scaletempo)
+        audio_sink.add(audiosink)
+
+        self._volume_fader.link(scaletempo)
         scaletempo.link(audiosink)
 
-        ghost_pad = Gst.GhostPad.new("sink", scaletempo.get_static_pad("sink"))
-        audiobin.add_pad(ghost_pad)
+        ghost_pad = Gst.GhostPad.new("sink", self._volume_fader.get_static_pad("sink"))
+        audio_sink.add_pad(ghost_pad)
 
         self._player = Gst.ElementFactory.make("playbin", "player")
-        self._player.set_property("audio-sink", audiobin)
+        self._player.set_property("audio-sink", audio_sink)
 
-        self._bus = self._player.get_bus()
-        self._bus.add_signal_watch()
-        self._bus.connect("message", self._on_gst_message)
+    def _setup_fadeout_control(self):
+        self.fadeout_control_source = GstController.InterpolationControlSource(
+            mode=GstController.InterpolationMode.LINEAR
+        )
+
+        fadeout_control_binding = GstController.DirectControlBinding(
+            object=self._volume_fader,
+            name="volume",
+            absolute=True,
+            control_source=self.fadeout_control_source,
+        )
+
+        self._volume_fader.add_control_binding(fadeout_control_binding)
 
     @property
     def position(self) -> int:
@@ -103,9 +121,7 @@ class GstPlayer(EventSender):
 
         self._playback_speed_timer_running = True
 
-        t = threading.Timer(0.2, self._on_playback_speed_timer)
-        t.name = "PlaybackSpeedDelayTimer"
-        t.start()
+        GLib.timeout_add(200, self._on_playback_speed_timer)
 
     @property
     def loaded_file_path(self) -> Optional[str]:
@@ -134,30 +150,13 @@ class GstPlayer(EventSender):
 
     @property
     def volume(self) -> float:
-        if not self._is_player_loaded():
-            log.error("Could not determine volume because player is not loaded.")
-            return 1.0
-
         return self._player.get_property("volume")
 
     @volume.setter
     def volume(self, new_value: float):
         self._volume = max(0.0, min(1.0, new_value))
-
-        if not self._is_player_loaded():
-            log.warning("Could not set volume because player is not loaded.")
-            return
-
         self._player.set_property("volume", self._volume)
         self._player.set_property("mute", False)
-
-    def dispose(self):
-        if not self._player:
-            return
-
-        self._player.set_state(Gst.State.NULL)
-        self._playback_speed = 1.0
-        log.info("Dispose")
 
     def load_file(self, path: str):
         if not os.path.exists(path):
@@ -166,8 +165,6 @@ class GstPlayer(EventSender):
         self._player.set_state(Gst.State.NULL)
         self._playback_speed = 1.0
         self._player.set_property("uri", "file://" + path)
-        self._player.set_property("volume", self._volume)
-        self._player.set_property("mute", False)
         self._player.set_state(Gst.State.PAUSED)
 
     def play(self):
@@ -198,8 +195,43 @@ class GstPlayer(EventSender):
         if not self._is_player_loaded():
             return
 
-        self.dispose()
+        self._player.set_state(Gst.State.NULL)
+        self._playback_speed = 1.0
+
         self.emit_event("state", Gst.State.READY)
+
+    def _fadeout_callback(self) -> None:
+        self.fadeout_control_source.unset_all()
+
+        if self._fade_timeout:
+            GLib.source_remove(self._fade_timeout)
+            self._fade_timeout = None
+
+        self.pause()
+        self._volume_fader.props.volume = 1.0
+
+        self.emit_event("fadeout-finished", None)
+
+    def fadeout(self, length: int) -> None:
+        if not self._is_player_loaded():
+            return
+
+        position = self._query_gst_time(self._player.query_position)
+        duration = self._query_gst_time(self._player.query_duration)
+
+        if position is None or duration is None:
+            return
+
+        end_position = min(position + length * Gst.SECOND, duration)
+
+        log.info("Starting playback fadeout")
+
+        self.fadeout_control_source.set(position, 1.0)
+        self.fadeout_control_source.set(end_position, 0.0)
+
+        self._fade_timeout = GLib.timeout_add(
+            (end_position - position) // Gst.MSECOND, self._fadeout_callback
+        )
 
     def _is_player_loaded(self) -> bool:
         _, state, __ = self._player.get_state(Gst.CLOCK_TIME_NONE)
@@ -301,7 +333,6 @@ class Player(EventSender):
         self._gst_player.add_listener(self._on_gst_player_event)
 
         self.play_status_updater: IntervalTimer = IntervalTimer(1, self._emit_tick)
-        self._fadeout_thread: Optional[Thread] = None
 
         self.volume = self._app_settings.volume
 
@@ -373,10 +404,8 @@ class Player(EventSender):
             reporter.error("player", "Trying to play/pause although player is in STOP state.")
 
     def pause(self, fadeout: bool = False):
-        if fadeout and not self._fadeout_thread:
-            log.info("Starting fadeout playback")
-            self._fadeout_thread = Thread(target=self._fadeout_playback, name="PlayerFadeoutThread")
-            self._fadeout_thread.start()
+        if fadeout:
+            self._gst_player.fadeout(self._app_settings.sleep_timer_fadeout_duration)
             return
 
         if self._gst_player.state == Gst.State.PLAYING:
@@ -427,11 +456,7 @@ class Player(EventSender):
             self._gst_player.play()
 
     def destroy(self):
-        self._gst_player.dispose()
-        self._stop_playback()
-
-        if self._fadeout_thread:
-            self._fadeout_thread.stop()
+        self._gst_player.stop()
 
     def _load_book(self, book: Book):
         if self._book == book:
@@ -638,21 +663,6 @@ class Player(EventSender):
             self.emit_event_main_thread("position", position_for_ui)
         except Exception as e:
             log.warning("Could not emit position event: %s", e)
-
-    def _fadeout_playback(self):
-        duration = self._app_settings.sleep_timer_fadeout_duration * 20
-        current_vol = self._gst_player.volume
-        for i in range(duration):
-            volume = max(current_vol - (i / duration), 0)
-            self._gst_player.volume = volume
-            time.sleep(0.05)
-
-        log.info("Fadeout completed.")
-        self.play_pause()
-        self._gst_player.volume = current_vol
-        self.emit_event_main_thread("fadeout-finished", None)
-
-        self._fadeout_thread = None
 
     def _should_jump_to_chapter_position(self, position: int) -> bool:
         """
