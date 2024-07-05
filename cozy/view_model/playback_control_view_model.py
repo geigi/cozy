@@ -98,6 +98,22 @@ class PlaybackControlViewModel(Observable, EventSender):
     def forward(self):
         self._player.forward()
 
+    def seek_forward(self):
+        current_position = self._player.position
+        self._player.position = current_position + 10 * NS_TO_SEC  # Move forward by 10 seconds
+
+    def seek_backward(self):
+        current_position = self._player.position
+        self._player.position = max(0, current_position - 10 * NS_TO_SEC)  # Move backward by 10 seconds
+
+    def increase_volume(self):
+        current_volume = self._player.volume
+        self._player.volume = min(1.0, current_volume + 0.1)  # Increase volume by 10%
+
+    def decrease_volume(self):
+        current_volume = self._player.volume
+        self._player.volume = max(0.0, current_volume - 0.1)  # Decrease volume by 10%
+
     def open_book_detail(self):
         if self.book:
             self.emit_event(OpenView.BOOK, self.book)
