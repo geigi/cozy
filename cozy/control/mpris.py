@@ -301,6 +301,10 @@ class MPRIS(Server):
 
         return {property: self.get(interface, property) for property in properties}
 
+    def set(self, interface: str, property_name: str, value) -> None:
+        # Might raise an AttributeError. We handle that in Server.on_method_call
+        return setattr(self, to_snake_case(property_name), value)
+
     def properties_changed(self, iface_name, changed_props, invalidated_props):
         self._bus.emit_signal(
             None,
@@ -342,6 +346,10 @@ class MPRIS(Server):
     @property
     def volume(self):
         return GLib.Variant("d", self._player.volume)
+
+    @volume.setter
+    def volume(self, new_value: float) -> None:
+        self._player.volume = new_value
 
     def _get_track_id(self) -> float:
         """
