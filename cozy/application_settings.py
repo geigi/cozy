@@ -9,6 +9,7 @@ class ApplicationSettings(EventSender):
 
     def __init__(self):
         super().__init__()
+        self._settings.delay()
         self._connect()
 
     def _connect(self):
