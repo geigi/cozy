@@ -15,7 +15,7 @@ class FileNotFoundDialog(Adw.AlertDialog):
         self.missing_chapter = chapter
 
         super().__init__(
-            heading=_("File not found"),
+            heading=_("File Not Found"),
             body=_("This file could not be found. Do you want to locate it manually?"),
             default_response="locate",
             close_response="cancel",

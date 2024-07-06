@@ -31,6 +31,7 @@ class CozyUI(EventSender, metaclass=Singleton):
     application_settings = inject.attr(ApplicationSettings)
     _importer: Importer = inject.attr(Importer)
     _settings: SettingsModel = inject.attr(SettingsModel)
+    _gio_settings: Gio.Settings = inject.attr(Gio.Settings)
     _files: Files = inject.attr(Files)
     _player: Player = inject.attr(Player)
     _storages_view_model: StoragesViewModel = inject.attr(StoragesViewModel)
@@ -67,8 +68,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.window.set_application(self.app)
 
         self.window.connect("close-request", self.on_close)
-        self.window.connect("notify::default-width", self._on_window_size_allocate)
-        self.window.connect("notify::default-height", self._on_window_size_allocate)
 
         self._drop_target = Gtk.DropTarget()
         self._drop_target.set_gtypes([Gdk.FileList])
@@ -228,12 +227,16 @@ class CozyUI(EventSender, metaclass=Singleton):
         log.info("Closing.")
         self.fs_monitor.close()
 
+        self._save_window_size()
+
         self._player.destroy()
 
         close_db()
 
         report.close()
 
+        log.info("Saving settings.")
+        self._gio_settings.apply()
         log.info("Closing app.")
         self.app.quit()
         log.info("App closed.")
@@ -254,7 +257,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         else:
             self.window.unmaximize()
 
-    def _on_window_size_allocate(self, *_):
+    def _save_window_size(self, *_):
         width, height = self.window.get_default_size()
         self.application_settings.window_width = width
         self.application_settings.window_height = height
