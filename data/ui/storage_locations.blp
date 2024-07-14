@@ -13,6 +13,12 @@ template $StorageLocations: Adw.PreferencesGroup {
   }
 }
 
+Adw.ButtonRow new_storage_row {
+  title: _("Add Storage");
+  start-icon-name: "list-add-symbolic";
+  activated => $_on_new_storage_clicked();
+}
+
 menu storage_menu {
   section {
     item {
