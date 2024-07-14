@@ -2,7 +2,7 @@ from typing import Optional
 
 from gi.repository import Adw, Gtk
 
-from cozy.ext import inject
+import inject
 from cozy.ui.delete_book_view import DeleteBookView
 from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.widgets.filter_list_box import FilterListBox

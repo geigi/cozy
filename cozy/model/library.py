@@ -7,7 +7,7 @@ from cozy.architecture.event_sender import EventSender
 from cozy.architecture.profiler import timing
 from cozy.db.book import Book as BookModel
 from cozy.db.file import File
-from cozy.ext import inject
+import inject
 from cozy.extensions.set import split_strings_to_set
 from cozy.model.book import Book, BookIsEmpty
 from cozy.model.chapter import Chapter

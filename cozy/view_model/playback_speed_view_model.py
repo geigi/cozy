@@ -1,7 +1,7 @@
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.db.book import Book
-from cozy.ext import inject
+import inject
 from cozy.media.player import Player
 
 

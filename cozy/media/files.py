@@ -5,7 +5,7 @@ from pathlib import Path
 from gi.repository import Gio
 
 from cozy.architecture.event_sender import EventSender
-from cozy.ext import inject
+import inject
 from cozy.media.importer import Importer
 from cozy.model.settings import Settings
 from cozy.report import reporter

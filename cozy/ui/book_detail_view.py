@@ -7,7 +7,7 @@ from typing import Callable, Optional
 from gi.repository import Adw, GLib, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
-from cozy.ext import inject
+import inject
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.report import reporter

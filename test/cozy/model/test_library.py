@@ -2,7 +2,7 @@ import pytest
 from peewee import SqliteDatabase
 
 from cozy.application_settings import ApplicationSettings
-from cozy.ext import inject
+import inject
 from cozy.extensions.set import split_strings_to_set
 from cozy.model.settings import Settings
 from test.cozy.mocks import ApplicationSettingsMock

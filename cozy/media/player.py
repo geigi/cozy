@@ -9,7 +9,7 @@ from gi.repository import GLib, Gst
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.control.offline_cache import OfflineCache
-from cozy.ext import inject
+import inject
 from cozy.media.gst_player import GstPlayer, GstPlayerState
 from cozy.media.importer import Importer, ScanStatus
 from cozy.model.book import Book

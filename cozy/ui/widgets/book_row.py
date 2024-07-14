@@ -3,7 +3,7 @@ from typing import Callable
 from gi.repository import Adw, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
-from cozy.ext import inject
+import inject
 from cozy.model.book import Book
 
 BOOK_ICON_SIZE = 52

@@ -1,6 +1,6 @@
 from gi.repository import Adw, Gio, Gtk
 
-from cozy.ext import inject
+import inject
 from cozy.ui.widgets.error_reporting import ErrorReporting
 from cozy.ui.widgets.storages import StorageLocations
 from cozy.view_model.settings_view_model import SettingsViewModel

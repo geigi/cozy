@@ -4,7 +4,7 @@ from typing import NoReturn
 import peewee
 from peewee import SqliteDatabase
 
-import cozy.ext.inject as inject
+import inject
 from cozy.db.book import Book
 from cozy.db.settings import Settings as SettingsModel
 from cozy.db.storage import Storage as StorageModel

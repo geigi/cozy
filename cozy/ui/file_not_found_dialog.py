@@ -2,7 +2,7 @@ from pathlib import Path
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
-from cozy.ext import inject
+import inject
 from cozy.media.importer import Importer
 from cozy.model.chapter import Chapter
 

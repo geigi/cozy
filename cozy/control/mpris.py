@@ -16,7 +16,7 @@ from gi.repository import Gio, GLib
 
 from cozy.application_settings import ApplicationSettings
 from cozy.control.artwork_cache import ArtworkCache
-from cozy.ext import inject
+import inject
 from cozy.media.player import NS_TO_SEC, US_TO_SEC, Player
 from cozy.model.book import Book
 from cozy.report import reporter

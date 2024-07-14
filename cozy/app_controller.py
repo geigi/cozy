@@ -1,7 +1,7 @@
 from gi.repository import Gio
 from peewee import SqliteDatabase
 
-import cozy.ext.inject as inject
+import inject
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.singleton import Singleton
 from cozy.control.db import get_db

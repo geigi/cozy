@@ -3,7 +3,7 @@ import logging
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
-from cozy.ext import inject
+import inject
 from cozy.media.importer import Importer
 from cozy.model.settings import Settings
 

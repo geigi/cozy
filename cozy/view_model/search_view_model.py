@@ -2,7 +2,7 @@ from typing import Callable
 
 from gi.repository import GLib
 
-import cozy.ext.inject as inject
+import inject
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable

@@ -4,7 +4,7 @@ import pytest
 from peewee import SqliteDatabase
 
 from cozy.application_settings import ApplicationSettings
-from cozy.ext import inject
+import inject
 from cozy.media.gst_player import GstPlayer
 from cozy.model.library import Library
 from cozy.model.settings import Settings

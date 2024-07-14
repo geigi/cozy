@@ -1,7 +1,7 @@
 import pytest
 from peewee import SqliteDatabase
 
-from cozy.ext import inject
+import inject
 
 
 @pytest.fixture(autouse=True)

@@ -10,7 +10,7 @@ from cozy.db.book import Book as BookModel
 from cozy.db.collation import collate_natural
 from cozy.db.track import Track as TrackModel
 from cozy.db.track_to_file import TrackToFile
-from cozy.ext import inject
+import inject
 from cozy.model.chapter import Chapter
 from cozy.model.settings import Settings
 from cozy.model.track import Track, TrackInconsistentData

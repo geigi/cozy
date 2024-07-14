@@ -9,7 +9,7 @@ from gi.repository import Gdk, GdkPixbuf
 from cozy.application_settings import ApplicationSettings
 from cozy.control.application_directories import get_cache_dir
 from cozy.db.artwork_cache import ArtworkCache as ArtworkCacheModel
-from cozy.ext import inject
+import inject
 from cozy.media.importer import Importer, ScanStatus
 from cozy.report import reporter
 

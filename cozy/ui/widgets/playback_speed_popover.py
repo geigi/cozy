@@ -1,6 +1,6 @@
 from gi.repository import Gtk
 
-from cozy.ext import inject
+import inject
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 
 

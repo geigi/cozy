@@ -10,7 +10,7 @@ from urllib.parse import unquote, urlparse
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.profiler import timing
 from cozy.control.filesystem_monitor import FilesystemMonitor, StorageNotFound
-from cozy.ext import inject
+import inject
 from cozy.media.media_detector import AudioFileCouldNotBeDiscovered, MediaDetector, NotAnAudioFile
 from cozy.media.media_file import MediaFile
 from cozy.model.database_importer import DatabaseImporter

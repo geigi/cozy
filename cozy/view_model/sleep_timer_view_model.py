@@ -6,7 +6,7 @@ from typing import Optional
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable
-from cozy.ext import inject
+import inject
 from cozy.media.player import Player
 from cozy.tools import IntervalTimer
 

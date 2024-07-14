@@ -2,7 +2,7 @@ import logging
 
 from gi.repository import Gtk
 
-from cozy.ext import inject
+import inject
 from cozy.media.player import Player
 
 log = logging.getLogger("power_mgr")
