@@ -1,6 +1,5 @@
-from gi.repository import Adw, Gtk
-
 import inject
+from gi.repository import Adw, Gtk
 
 
 class ToastNotifier:

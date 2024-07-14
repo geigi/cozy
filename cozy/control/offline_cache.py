@@ -2,6 +2,7 @@ import logging
 import os
 import uuid
 
+import inject
 from gi.repository import Gio
 
 import cozy.tools as tools
@@ -10,7 +11,6 @@ from cozy.control.application_directories import get_cache_dir
 from cozy.db.file import File
 from cozy.db.offline_cache import OfflineCache as OfflineCacheModel
 from cozy.db.track_to_file import TrackToFile
-import inject
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.report import reporter

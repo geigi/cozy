@@ -1,9 +1,9 @@
 from unittest.mock import MagicMock, call
 
+import inject
 import pytest
 from peewee import SqliteDatabase
 
-import inject
 from cozy.media.media_file import MediaFile
 from cozy.model.library import Library
 

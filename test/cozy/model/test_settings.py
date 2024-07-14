@@ -1,6 +1,5 @@
-import pytest
-
 import inject
+import pytest
 from peewee import SqliteDatabase
 
 

@@ -2,10 +2,10 @@ import logging
 import os
 from pathlib import Path
 
+import inject
 from gi.repository import Gio
 
 from cozy.architecture.event_sender import EventSender
-import inject
 from cozy.media.importer import Importer
 from cozy.model.settings import Settings
 from cozy.report import reporter

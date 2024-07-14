@@ -1,12 +1,12 @@
 import logging
 
+import inject
 from peewee import SqliteDatabase, fn
 
 from cozy.db.book import Book as BookModel
 from cozy.db.file import File
 from cozy.db.track import Track
 from cozy.db.track_to_file import TrackToFile
-import inject
 from cozy.extensions.is_same_book import is_same_book
 from cozy.media.media_file import MediaFile
 from cozy.model.book import Book, BookIsEmpty

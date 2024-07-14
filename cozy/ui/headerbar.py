@@ -1,8 +1,8 @@
 import logging
 
+import inject
 from gi.repository import Adw, GObject, Gtk
 
-import inject
 from cozy.ui.widgets.progress_popover import ProgressPopover
 from cozy.view_model.headerbar_view_model import HeaderBarState, HeaderbarViewModel
 

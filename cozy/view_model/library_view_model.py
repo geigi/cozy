@@ -4,6 +4,7 @@ from enum import Enum, auto
 from typing import Optional
 
 import inject
+
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable

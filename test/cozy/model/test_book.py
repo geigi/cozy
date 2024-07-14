@@ -1,9 +1,10 @@
+from test.cozy.mocks import ApplicationSettingsMock
+
+import inject
 import pytest
 from peewee import SqliteDatabase
 
 from cozy.application_settings import ApplicationSettings
-import inject
-from test.cozy.mocks import ApplicationSettingsMock
 
 
 @pytest.fixture(autouse=True)

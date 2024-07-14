@@ -4,9 +4,10 @@ import sys
 from enum import Enum, auto
 from typing import Optional
 
+import inject
+
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable
-import inject
 from cozy.media.player import Player
 from cozy.tools import IntervalTimer
 

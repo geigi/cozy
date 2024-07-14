@@ -2,10 +2,10 @@ import logging
 import math
 
 import cairo
+import inject
 from gi.repository import GObject, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
-import inject
 from cozy.model.book import Book
 
 ALBUM_ART_SIZE = 200

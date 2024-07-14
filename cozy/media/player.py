@@ -4,12 +4,12 @@ import time
 from threading import Thread
 from typing import Optional
 
+import inject
 from gi.repository import GLib, Gst
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.control.offline_cache import OfflineCache
-import inject
 from cozy.media.gst_player import GstPlayer, GstPlayerState
 from cozy.media.importer import Importer, ScanStatus
 from cozy.model.book import Book

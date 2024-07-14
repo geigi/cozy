@@ -1,7 +1,6 @@
+import inject
 import pytest
 from peewee import SqliteDatabase
-
-import inject
 
 
 @pytest.fixture(autouse=True)

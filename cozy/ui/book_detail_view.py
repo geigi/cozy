@@ -4,10 +4,10 @@ from contextlib import suppress
 from threading import Event, Thread
 from typing import Callable, Optional
 
+import inject
 from gi.repository import Adw, GLib, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
-import inject
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.report import reporter
