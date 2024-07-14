@@ -41,4 +41,3 @@ class ChapterElement(Adw.ActionRow):
             self.play_icon.set_from_icon_name("media-playback-pause-symbolic")
         else:
             self.play_icon.set_from_icon_name("media-playback-start-symbolic")
-
