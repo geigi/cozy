@@ -43,14 +43,6 @@ class AboutWindow:
             ["Fred Warren", "Gabriel", "Hu Mann", "Josiah", "Oleksii Kriukov"],
         )
         self._window.add_acknowledgement_section(_("m4b chapter support in mutagen"), ("mweinelt",))
-        self._window.add_acknowledgement_section(
-            _("Open Source Projects"),
-            ("Lollypop music player https://gitlab.gnome.org/World/lollypop",),
-        )
-
-        self._window.add_legal_section(
-            "python-inject", "© 2010 Ivan Korobkov", Gtk.License.APACHE_2_0
-        )
 
     def present(self, parent: Adw.ApplicationWindow) -> None:
         self._window.present(parent)
