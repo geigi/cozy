@@ -94,15 +94,9 @@ def __on_command_line():
         ])
 
 
-def extend_classes():
-    extend_gtk_container()
-
-
 def main():
     __on_command_line()
     print(sys.argv)
-
-    extend_classes()
 
     listen()
 
@@ -144,6 +138,5 @@ if __name__ == '__main__':
     # Some modules import multiprocessing which would lead to an exception
     # when setting the start method
     from cozy.application import Application
-    from cozy.ui.widgets.list_box_extensions import extend_gtk_container
 
     main()
