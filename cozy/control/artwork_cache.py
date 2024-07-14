@@ -1,6 +1,8 @@
 import logging
 import os
-import uuid
+import shutil
+from pathlib import Path
+from uuid import uuid4
 
 from gi.repository import Gdk, GdkPixbuf
 
@@ -20,6 +22,10 @@ class ArtworkCache:
         _importer.add_listener(self._on_importer_event)
         _app_settings = inject.instance(ApplicationSettings)
         _app_settings.add_listener(self._on_app_setting_changed)
+
+    @property
+    def artwork_cache_dir(self):
+        return Path(get_cache_dir()) / "artwork"
 
     def get_cover_paintable(self, book, scale, size=0) -> Gdk.Texture | None:
         pixbuf = None
@@ -45,18 +51,12 @@ class ArtworkCache:
         """
         Deletes the artwork cache completely.
         """
-        cache_dir = os.path.join(get_cache_dir(), "artwork")
-
-        import shutil
-        if os.path.exists(cache_dir):
-            shutil.rmtree(cache_dir)
-
-        q = ArtworkCacheModel.delete()
-        q.execute()
+        shutil.rmtree(self.artwork_cache_dir, ignore_errors=True)
+        ArtworkCacheModel.delete().execute()
 
     def _on_importer_event(self, event, data):
         if event == "scan" and data == ScanStatus.STARTED:
-                self.delete_artwork_cache()
+            self.delete_artwork_cache()
 
     def _create_artwork_cache(self, book, pixbuf, size):
         """
@@ -68,53 +68,48 @@ class ArtworkCache:
         :return: Resized pixbuf
         """
         query = ArtworkCacheModel.select().where(ArtworkCacheModel.book == book.id)
-        gen_uuid = ""
 
         if query.exists():
-            gen_uuid = str(query.first().uuid)
+            uuid = str(query.first().uuid)
         else:
-            gen_uuid = str(uuid.uuid4())
-            ArtworkCacheModel.create(book=book.id, uuid=gen_uuid)
+            uuid = str(uuid4())
+            ArtworkCacheModel.create(book=book.id, uuid=uuid)
 
-        cache_dir = os.path.join(os.path.join(get_cache_dir(), "artwork"), gen_uuid)
-        if not os.path.exists(cache_dir):
-            os.makedirs(cache_dir)
+        cache_dir = self.artwork_cache_dir / uuid
+        cache_dir.mkdir(exist_ok=True, parents=True)
+        file_path = (cache_dir / str(size)).with_suffix(".jpg")
 
         resized_pixbuf = self._resize_pixbuf(pixbuf, size)
-        file_path = os.path.join(cache_dir, str(size) + ".jpg")
-        if not os.path.exists(file_path):
+
+        if not file_path.exists():
             try:
-                resized_pixbuf.savev(file_path, "jpeg", ["quality", None], ["95"])
+                resized_pixbuf.savev(str(file_path), "jpeg", ["quality", None], ["95"])
             except Exception as e:
                 reporter.warning("artwork_cache", "Failed to save resized cache albumart")
-                log.warning("Failed to save resized cache albumart for uuid %r: %s", gen_uuid, e)
+                log.warning("Failed to save resized cache albumart for uuid %r: %s", uuid, e)
 
         return resized_pixbuf
 
-    def get_album_art_path(self, book, size):
+    def get_album_art_path(self, book, size) -> str:
         query = ArtworkCacheModel.select().where(ArtworkCacheModel.book == book.id)
-        if query.exists():
-            try:
-                uuid = query.first().uuid
-            except Exception:
-                reporter.error("artwork_cache", "load_pixbuf_from_cache: query exists but query.first().uuid crashed.")
-                return None
-        else:
+        if not query.exists():
             return None
-
-        cache_dir = os.path.join(get_cache_dir(), "artwork")
-        cache_dir = os.path.join(cache_dir, uuid)
 
         try:
-            if os.path.exists(cache_dir):
-                file_path = os.path.join(cache_dir, str(size) + ".jpg")
-                if os.path.exists(file_path):
-                    return file_path
-                else:
-                    return None
-        except Exception as e:
-            log.warning(e)
+            uuid = query.first().uuid
+        except Exception:
+            reporter.error(
+                "artwork_cache",
+                "load_pixbuf_from_cache: query exists but query.first().uuid crashed.",
+            )
             return None
+
+        cache_dir = self.artwork_cache_dir / uuid
+
+        if cache_dir.is_dir():
+            file_path = (cache_dir / str(size)).with_suffix(".jpg")
+            if file_path.exists():
+                return str(file_path)
 
         return None
 
@@ -139,92 +134,71 @@ class ArtworkCache:
         :param size: The size of the bigger side in pixels
         :return: pixbuf object containing the cover
         """
-        pixbuf = None
+        loading_order = [self._load_pixbuf_from_db, self._load_pixbuf_from_file]
 
         if app_settings.prefer_external_cover:
-            pixbuf = self._load_pixbuf_from_file(book)
+            loading_order.reverse()
 
-            if pixbuf is None:
-                pixbuf = self._load_pixbuf_from_db(book)
-        else:
-            pixbuf = self._load_pixbuf_from_db(book)
+        for loader in loading_order:
+            pixbuf = loader(book)
+            if pixbuf:
+                return pixbuf
 
-            if pixbuf is None:
-                pixbuf = self._load_pixbuf_from_file(book)
-
-        return pixbuf
+        return None
 
     def _load_pixbuf_from_db(self, book):
-        pixbuf = None
+        if not book or not book.cover:
+            return None
 
-        if book and book.cover:
-            try:
-                loader = GdkPixbuf.PixbufLoader.new()
-                loader.write(book.cover)
-                loader.close()
-                pixbuf = loader.get_pixbuf()
-            except Exception as e:
-                reporter.warning("artwork_cache", "Could not get book cover from db.")
-                log.warning("Could not get cover for book %r: %s", book.name, e)
-
-        return pixbuf
+        try:
+            loader = GdkPixbuf.PixbufLoader.new()
+            loader.write(book.cover)
+            loader.close()
+        except Exception as e:
+            reporter.warning("artwork_cache", "Could not get book cover from db.")
+            log.warning("Could not get cover for book %r: %s", book.name, e)
+        else:
+            return loader.get_pixbuf()
 
     def _resize_pixbuf(self, pixbuf, size):
         """
         Resizes an pixbuf and keeps the aspect ratio.
         :return: Resized pixbuf.
         """
-        resized_pixbuf = pixbuf
+        if size == 0:
+            return pixbuf
 
-        if size > 0:
-            if pixbuf.get_height() > pixbuf.get_width():
-                width = int(pixbuf.get_width() / (pixbuf.get_height() / size))
-                resized_pixbuf = pixbuf.scale_simple(
-                    width, size, GdkPixbuf.InterpType.BILINEAR)
-            else:
-                height = int(pixbuf.get_height() / (pixbuf.get_width() / size))
-                resized_pixbuf = pixbuf.scale_simple(
-                    size, height, GdkPixbuf.InterpType.BILINEAR)
+        if pixbuf.get_height() > pixbuf.get_width():
+            width = int(pixbuf.get_width() / (pixbuf.get_height() / size))
+            return pixbuf.scale_simple(width, size, GdkPixbuf.InterpType.BILINEAR)
+        else:
+            height = int(pixbuf.get_height() / (pixbuf.get_width() / size))
+            return pixbuf.scale_simple(size, height, GdkPixbuf.InterpType.BILINEAR)
 
-        return resized_pixbuf
-
-    def _load_pixbuf_from_file(self, book):
+    def _load_pixbuf_from_file(self, book) -> GdkPixbuf.Pixbuf | None:
         """
         Try to load the artwork from a book from image files.
         :param book: The book to load the artwork from.
         :return: Artwork as pixbuf object.
         """
-        pixbuf = None
-        cover_files = []
 
-        try:
-            directory = os.path.dirname(os.path.normpath(book.chapters[0].file))
+        directory = Path(book.chapters[0].file).absolute().parent
+        cover_extensions = {".jpg", ".jpeg", ".png", ".gif"}
 
-            cover_files = [f for f in os.listdir(directory)
-                           if f.lower().endswith('.png') or f.lower().endswith(".jpg") or f.lower().endswith(".gif")]
-        except Exception as e:
-            log.warning("Could not open audiobook directory and look for cover files: %s", e)
-        for elem in (x for x in cover_files if os.path.splitext(x.lower())[0] == "cover"):
-            # find cover.[jpg,png,gif]
+        for path in directory.glob("cover.*"):
+            if path.suffix.lower() not in cover_extensions:
+                continue
+
             try:
-                pixbuf = GdkPixbuf.Pixbuf.new_from_file(os.path.join(directory, elem))
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file(str(path))
             except Exception as e:
                 log.debug(e)
+
             if pixbuf:
-                break
-        if pixbuf is None:
-            # find other cover file (sort alphabet)
-            cover_files.sort(key=str.lower)
-            for elem in cover_files:
-                try:
-                    pixbuf = GdkPixbuf.Pixbuf.new_from_file(os.path.join(directory, elem))
-                except Exception as e:
-                    log.debug(e)
-                if pixbuf:
-                    break
-        return pixbuf
+                return pixbuf
+
+        return None
 
     def _on_app_setting_changed(self, event: str, data):
         if event == "prefer-external-cover":
             self.delete_artwork_cache()
-

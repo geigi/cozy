@@ -41,6 +41,7 @@ The preferred source for installing Cozy is Flathub
 | openSUSE | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> |
 | Fedora | <center><a href="https://src.fedoraproject.org/rpms/cozy">cozy</a> |
 | Arch Linux (AUR) | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> |
+| Debian | <a href="https://packages.debian.org/cozy">cozy</a></center> |
 | VoidLinux | <a href="https://github.com/void-linux/void-packages/tree/master/srcpkgs/cozy">cozy</a> |
 | Solus | <a href="https://dev.getsol.us/source/cozy/">cozy</a> |
 | MX Linux | <center><a href="https://forum.mxlinux.org/viewtopic.php?p=621071#p621071">Cozy</a> |

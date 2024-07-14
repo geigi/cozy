@@ -41,6 +41,15 @@ class SeekBar(Gtk.Box):
         keyboard_controller.connect("key-pressed", self._on_progress_key_pressed)
         self.progress_scale.add_controller(keyboard_controller)
 
+    @GObject.Signal(arg_types=(object,))
+    def position_changed(self, *_): ...
+
+    @GObject.Signal
+    def rewind(self): ...
+
+    @GObject.Signal
+    def forward(self): ...
+
     @property
     def position(self) -> float:
         return self.progress_scale.get_value()
@@ -89,10 +98,3 @@ class SeekBar(Gtk.Box):
 
     def _on_progress_scale_press(self, *_):
         self._progress_scale_pressed = True
-
-
-GObject.signal_new('position-changed', SeekBar, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
-                   (GObject.TYPE_PYOBJECT,))
-
-GObject.signal_new('rewind', SeekBar, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ())
-GObject.signal_new('forward', SeekBar, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ())

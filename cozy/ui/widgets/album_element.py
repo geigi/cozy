@@ -43,10 +43,11 @@ class AlbumElement(Gtk.Box):
 
         self.play_button.connect("clicked", self._on_play_button_press)
 
-        # TODO: Just use CSS
-        #self.progress_drawing_area.connect("realize", lambda w: w.get_window().set_pass_through(True))
+        # TODO: Use CSS for hover
         self.progress_drawing_area.set_draw_func(self._draw_progress)
-        #self.album_art_drawing_area.set_draw_func(self._draw_album_hover)
+
+    @GObject.Signal(arg_types=(object,))
+    def play_pause_clicked(self, *_): ...
 
     def set_playing(self, playing: bool):
         if playing:
@@ -60,11 +61,6 @@ class AlbumElement(Gtk.Box):
 
     def _on_play_button_press(self, _):
         self.emit("play-pause-clicked", self._book)
-
-    def _draw_album_hover(self, area: Gtk.DrawingArea, context: cairo.Context, *_):
-        context.rectangle(0, 0, area.get_allocated_width(), area.get_allocated_height())
-        context.set_source_rgba(1, 1, 1, 0.15)
-        context.fill()
 
     def _draw_progress(self, area: Gtk.DrawingArea, context: cairo.Context, *_):
         width = area.get_allocated_width()
@@ -83,20 +79,5 @@ class AlbumElement(Gtk.Box):
         context.set_line_width(STROKE_WIDTH)
         context.stroke()
 
-    def draw_background(self, area: Gtk.DrawingArea, context: cairo.Context):
-        width = area.get_allocated_width()
-        height = area.get_allocated_height()
-
-        context.arc(width / 2.0, height / 2.0, self.radius, 0, math.pi * 2.0)
-        context.set_source_rgba(0, 0, 0, 1.0)
-        context.set_line_width(2)
-        context.stroke()
-
     def update_progress(self):
         self.progress_drawing_area.queue_draw()
-
-
-GObject.type_register(AlbumElement)
-GObject.signal_new('play-pause-clicked', AlbumElement, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
-                   (GObject.TYPE_PYOBJECT,))
-

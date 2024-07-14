@@ -4,6 +4,7 @@ import os
 import time
 from enum import Enum, auto
 from multiprocessing.pool import Pool as Pool
+from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from cozy.architecture.event_sender import EventSender
@@ -21,6 +22,8 @@ from cozy.ui.toaster import ToastNotifier
 log = logging.getLogger("importer")
 
 CHUNK_SIZE = 100
+
+AUDIO_EXTENSIONS = {".mp3", ".ogg", ".flac", ".m4a", ".m4b", ".mp4", ".wav", ".opus"}
 
 
 class ScanStatus(Enum):
@@ -109,13 +112,15 @@ class Importer(EventSender):
 
             self._progress += CHUNK_SIZE
 
-            if len(media_files) != 0:
+            if media_files:
                 try:
                     self._database_importer.insert_many(media_files)
                 except Exception as e:
                     log.exception("Error while inserting new tracks to the database")
                     reporter.exception("importer", e)
-                    self._toast.show("{}: {}".format(_("Error while importing new files"), str(e.__class__)))
+                    self._toast.show(
+                        "{}: {}".format(_("Error while importing new files"), str(e.__class__))
+                    )
 
             if self._progress >= self._files_count:
                 break
@@ -150,10 +155,9 @@ class Importer(EventSender):
     def _get_configured_storage_paths(self) -> list[str]:
         """From all storage path configured by the user,
         we only want to scan those paths that are currently online and exist."""
-        paths = [storage.path
-                 for storage
-                 in self._settings.storage_locations
-                 if not storage.external]
+        paths = [
+            storage.path for storage in self._settings.storage_locations if not storage.external
+        ]
 
         for storage in self._settings.external_storage_locations:
             try:
@@ -164,13 +168,12 @@ class Importer(EventSender):
 
         return [path for path in paths if os.path.exists(path)]
 
-    def _walk_paths_to_scan(self, paths: list[str]) -> list[str]:
+    def _walk_paths_to_scan(self, directories: list[str]) -> list[str]:
         """Get all files recursive inside a directory. Returns absolute paths."""
-        for path in paths:
-            for directory, _, files in os.walk(path):
-                for file in files:
-                    filepath = os.path.join(directory, file)
-                    yield filepath
+        for dir in directories:
+            for path in Path(dir).rglob("**/*"):
+                if path.suffix.lower() in AUDIO_EXTENSIONS:
+                    yield str(path)
 
     def _filter_unchanged_files(self, files: list[str]) -> list[str]:
         """Filter all files that are already imported and that have not changed from a list of paths."""
@@ -179,10 +182,9 @@ class Importer(EventSender):
         for file in files:
             if file in imported_files:
                 try:
-                    chapter = next(chapter
-                                   for chapter
-                                   in self._library.chapters
-                                   if chapter.file == file)
+                    chapter = next(
+                        chapter for chapter in self._library.chapters if chapter.file == file
+                    )
                 except StopIteration as e:
                     log.warning("_filter_unchanged_files raised a stop iteration.")
                     log.debug(e)
