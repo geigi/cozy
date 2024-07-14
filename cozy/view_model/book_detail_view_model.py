@@ -162,8 +162,7 @@ class BookDetailViewModel(Observable, EventSender):
         if event in {"play", "pause"}:
             self._notify("playing")
         elif event in {"position", "book-finished"}:
-            self._notify("progress_percent")
-            self._notify("remaining_text")
+            self._notify("progress")
 
     def _on_fs_monitor_event(self, event, _):
         if not self._book:
@@ -179,18 +178,15 @@ class BookDetailViewModel(Observable, EventSender):
         self._notify("last_played_text")
 
     def _on_book_progress_changed(self):
-        self._notify("remaining_text")
-        self._notify("progress_percent")
+        self._notify("progress")
 
     def _on_book_duration_changed(self):
-        self._notify("progress_percent")
-        self._notify("remaining_text")
-        self._notify("total_text")
+        self._notify("progress")
+        self._notify("length")
 
     def _on_playback_speed_changed(self):
-        self._notify("progress_percent")
-        self._notify("remaining_text")
-        self._notify("total_text")
+        self._notify("progress")
+        self._notify("length")
 
     def _on_offline_cache_event(self, event, message) -> None:
         if self._book and isinstance(message, Book) and self._book.id == message.id and event in {"book-offline-removed", "book-offline"}:
