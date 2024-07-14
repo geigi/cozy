@@ -1,19 +1,20 @@
 import logging
 import time
+from math import pi as PI
 from threading import Event, Thread
 from typing import Callable, Final
-from math import pi as PI
 
-from gi.repository import Adw, GLib, Gtk, GObject, Gdk, Graphene, Gsk, Gio
 import cairo
+from gi.repository import Adw, Gio, GLib, GObject, Graphene, Gtk
+
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.ext import inject
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.report import reporter
 from cozy.ui.chapter_element import ChapterElement
-from cozy.view_model.book_detail_view_model import BookDetailViewModel
 from cozy.ui.toaster import ToastNotifier
+from cozy.view_model.book_detail_view_model import BookDetailViewModel
 
 log = logging.getLogger(__name__)
 
@@ -303,7 +304,9 @@ class BookDetailView(Adw.NavigationPage):
 
         if external:
             self.available_offline_action.handler_block_by_func(self._download_switch_changed)
-            self.available_offline_action.set_state(GLib.Variant.new_boolean(self._view_model.book.offline))
+            self.available_offline_action.set_state(
+                GLib.Variant.new_boolean(self._view_model.book.offline)
+            )
             self.available_offline_action.handler_unblock_by_func(self._download_switch_changed)
 
     def _set_cover_image(self, book: Book):

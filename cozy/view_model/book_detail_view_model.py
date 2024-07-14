@@ -189,7 +189,12 @@ class BookDetailViewModel(Observable, EventSender):
         self._notify("length")
 
     def _on_offline_cache_event(self, event, message) -> None:
-        if self._book and isinstance(message, Book) and self._book.id == message.id and event in {"book-offline-removed", "book-offline"}:
+        if (
+            self._book
+            and isinstance(message, Book)
+            and self._book.id == message.id
+            and event in {"book-offline-removed", "book-offline"}
+        ):
             self._notify("downloaded")
 
     def _on_app_setting_changed(self, event, _):
