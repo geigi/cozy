@@ -7,7 +7,14 @@ template $BookDetail: Adw.NavigationPage {
 
   Adw.ToolbarView {
     [top]
-    Adw.HeaderBar {}
+    Adw.HeaderBar {
+      [end]
+      MenuButton book_menu {
+        menu-model: book_menu_model;
+        icon-name: "view-more-symbolic";
+        tooltip-text: _("Open Book Menu");
+      }
+    }
 
     content: Adw.BreakpointBin {
       width-request: 350;
@@ -194,35 +201,6 @@ template $BookDetail: Adw.NavigationPage {
                     }
                   }
                 }
-
-                Box {
-                  halign: center;
-                  valign: center;
-                  margin-bottom: 12;
-                  spacing: 5;
-                  visible: false;
-
-                  Box download_box {
-                    halign: end;
-                    valign: center;
-
-                    Image download_image {
-                      icon-name: 'download-symbolic';
-                    }
-
-                    Label download_label {
-                      margin-start: 5;
-                      margin-end: 4;
-                      label: _("Download");
-                    }
-                  }
-
-                  Switch download_switch {
-                    focusable: true;
-                    halign: start;
-                    valign: center;
-                  }
-                }
               }
             }
 
@@ -259,5 +237,15 @@ template $BookDetail: Adw.NavigationPage {
         }
       };
     };
+  }
+}
+
+menu book_menu_model {
+  section {
+    item {
+      action: 'book_overview.download';
+      label: _("_Available Offline");
+      hidden-when: "action-disabled";
+    }
   }
 }

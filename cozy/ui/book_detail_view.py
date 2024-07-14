@@ -4,7 +4,7 @@ from threading import Event, Thread
 from typing import Callable, Final
 from math import pi as PI
 
-from gi.repository import Adw, GLib, Gtk, GObject, Gdk, Graphene, Gsk
+from gi.repository import Adw, GLib, Gtk, GObject, Gdk, Graphene, Gsk, Gio
 import cairo
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.ext import inject
@@ -13,6 +13,7 @@ from cozy.model.chapter import Chapter
 from cozy.report import reporter
 from cozy.ui.chapter_element import ChapterElement
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
+from cozy.ui.toaster import ToastNotifier
 
 log = logging.getLogger(__name__)
 
@@ -95,11 +96,6 @@ class BookDetailView(Adw.NavigationPage):
 
     book_progress_ring: ProgressRing = Gtk.Template.Child()
 
-    download_box: Gtk.Box = Gtk.Template.Child()
-    download_label: Gtk.Label = Gtk.Template.Child()
-    download_image: Gtk.Image = Gtk.Template.Child()
-    download_switch: Gtk.Switch = Gtk.Template.Child()
-
     album_art: Gtk.Picture = Gtk.Template.Child()
     album_art_container: Gtk.Box = Gtk.Template.Child()
 
@@ -112,6 +108,7 @@ class BookDetailView(Adw.NavigationPage):
 
     _view_model: BookDetailViewModel = inject.attr(BookDetailViewModel)
     _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
+    _toaster: ToastNotifier = inject.attr(ToastNotifier)
 
     _current_selected_chapter: ChapterElement | None = None
 
@@ -128,6 +125,15 @@ class BookDetailView(Adw.NavigationPage):
         self._connect_view_model()
         self._connect_widgets()
 
+        menu_action_group = Gio.SimpleActionGroup()
+        self.insert_action_group("book_overview", menu_action_group)
+
+        self.available_offline_action = Gio.SimpleAction.new_stateful(
+            "download", None, GLib.Variant.new_boolean(False)
+        )
+        self.available_offline_action.connect("change-state", self._download_switch_changed)
+        menu_action_group.add_action(self.available_offline_action)
+
     def _connect_view_model(self):
         self._view_model.bind_to("book", self._on_book_changed)
         self._view_model.bind_to("playing", self._on_play_changed)
@@ -141,7 +147,6 @@ class BookDetailView(Adw.NavigationPage):
 
     def _connect_widgets(self):
         self.play_button.connect("clicked", self._play_book_clicked)
-        self.download_switch.connect("state-set", self._download_switch_changed)
 
     def _on_book_changed(self):
         book = self._view_model.book
@@ -216,7 +221,7 @@ class BookDetailView(Adw.NavigationPage):
         self.book_progress_ring.progress = self._view_model.progress_percent
 
     def _on_lock_ui_changed(self):
-        self.download_switch.set_sensitive(not self._view_model.lock_ui)
+        self.available_offline_action.set_enabled(not self._view_model.lock_ui)
 
     def _on_chapters_displayed(self):
         self.total_label.set_text(self._view_model.total_text)
@@ -294,13 +299,12 @@ class BookDetailView(Adw.NavigationPage):
 
     def _display_external_section(self):
         external = self._view_model.is_book_external
-        self.download_box.set_visible(external)
-        self.download_switch.set_visible(external)
+        self.available_offline_action.set_enabled(external)
 
         if external:
-            self.download_switch.handler_block_by_func(self._download_switch_changed)
-            self.download_switch.set_active(self._view_model.book.offline)
-            self.download_switch.handler_unblock_by_func(self._download_switch_changed)
+            self.available_offline_action.handler_block_by_func(self._download_switch_changed)
+            self.available_offline_action.set_state(GLib.Variant.new_boolean(self._view_model.book.offline))
+            self.available_offline_action.handler_unblock_by_func(self._download_switch_changed)
 
     def _set_cover_image(self, book: Book):
         self.album_art_container.set_visible(False)
@@ -324,18 +328,13 @@ class BookDetailView(Adw.NavigationPage):
         if not self._view_model.is_book_external:
             return
 
-        if self._view_model.book.downloaded:
-            icon_name = "downloaded-symbolic"
-            text = _("Downloaded")
-        else:
-            icon_name = "download-symbolic"
-            text = _("Download")
+        # TODO: show this only after download
+        # if self._view_model.book.downloaded:
+        #     self._toaster.show(_("{book_title} is now available offline").format(book_title=self._view_model.book.name))
 
-        self.download_image.set_from_icon_name(icon_name)
-        self.download_label.set_text(text)
-
-    def _download_switch_changed(self, _, state: bool):
-        self._view_model.download_book(state)
+    def _download_switch_changed(self, action, value):
+        action.set_state(value)
+        self._view_model.download_book(value.get_boolean())
         self._set_book_download_status()
 
     def _play_chapter_clicked(self, _, chapter: Chapter):
