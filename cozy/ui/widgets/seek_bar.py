@@ -1,6 +1,6 @@
 from gi.repository import Gdk, GObject, Gtk
 
-from cozy.control.string_representation import seconds_to_str
+from cozy.control.time_format import ns_to_time
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/ui/seek_bar.ui')
@@ -82,8 +82,8 @@ class SeekBar(Gtk.Box):
         position = int(total * self.progress_scale.get_value() / 100)
         remaining_secs = int(total - position)
 
-        self.current_label.set_text(seconds_to_str(position, total))
-        self.remaining_label.set_text(seconds_to_str(remaining_secs, total))
+        self.current_label.set_text(ns_to_time(position, total))
+        self.remaining_label.set_text(ns_to_time(remaining_secs, total))
 
     def _on_progress_scale_release(self, *_):
         self._progress_scale_pressed = False

@@ -1,6 +1,6 @@
 from gi.repository import Gdk, GObject, Gtk
 
-from cozy.control.string_representation import seconds_to_str
+from cozy.control.time_format import ns_to_time
 from cozy.model.chapter import Chapter
 
 
@@ -31,7 +31,7 @@ class ChapterElement(Gtk.Box):
 
         self.number_label.set_text(str(self.chapter.number))
         self.title_label.set_text(self.chapter.name)
-        self.duration_label.set_text(seconds_to_str(self.chapter.length))
+        self.duration_label.set_text(ns_to_time(self.chapter.length))
 
     @GObject.Signal(arg_types=(object,))
     def play_pause_clicked(self, *_): ...
