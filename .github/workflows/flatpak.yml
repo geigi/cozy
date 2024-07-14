@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: bilelmoussaoui/flatpak-github-actions:gnome-nightly
-      repository-name: gnome-nightly
-      repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
       options: --privileged
 
     strategy:
@@ -37,6 +35,8 @@ jobs:
 
     - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v6
       with:
+        repository-name: gnome-nightly
+        repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
         bundle: Cozy.flatpak
         manifest-path: com.github.geigi.cozy.json
         cache-key: "flatpak-builder-${{ github.sha }}"
