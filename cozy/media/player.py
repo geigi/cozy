@@ -1,16 +1,14 @@
 import logging
 import os
 import time
-from threading import Thread
 from typing import Optional
 
-from gi.repository import GLib, Gst
+from gi.repository import GLib, Gst, GstController
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.control.offline_cache import OfflineCache
 from cozy.ext import inject
-from cozy.media.gst_player import GstPlayer, GstPlayerState
 from cozy.media.importer import Importer, ScanStatus
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
@@ -20,10 +18,301 @@ from cozy.tools import IntervalTimer
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.toaster import ToastNotifier
 
-log = logging.getLogger("mediaplayer")
+log = logging.getLogger(__name__)
 
-US_TO_SEC = 10 ** 6
-NS_TO_SEC = 10 ** 9
+
+class GstPlayer(EventSender):
+    _player: Gst.Bin
+
+    def __init__(self):
+        super().__init__()
+
+        self._playback_speed: float = 1.0
+        self._playback_speed_timer_running: bool = False
+        self._volume: float = 1.0
+        self._fade_timeout: int | None = None
+
+        self._setup_pipeline()
+        self._setup_fadeout_control()
+
+        bus = self._player.get_bus()
+        bus.add_signal_watch()
+        bus.connect("message", self._on_gst_message)
+
+    def _setup_pipeline(self):
+        Gst.init(None)
+
+        audio_sink = Gst.Bin.new()
+
+        scaletempo = Gst.ElementFactory.make("scaletempo", "scaletempo")
+        scaletempo.sync_state_with_parent()
+
+        self._volume_fader = Gst.ElementFactory.make("volume", "fadevolume")
+        audiosink = Gst.ElementFactory.make("autoaudiosink", "autoaudiosink")
+
+        audio_sink.add(self._volume_fader)
+        audio_sink.add(scaletempo)
+        audio_sink.add(audiosink)
+
+        self._volume_fader.link(scaletempo)
+        scaletempo.link(audiosink)
+
+        ghost_pad = Gst.GhostPad.new("sink", self._volume_fader.get_static_pad("sink"))
+        audio_sink.add_pad(ghost_pad)
+
+        self._player = Gst.ElementFactory.make("playbin", "player")
+        self._player.set_property("audio-sink", audio_sink)
+
+    def _setup_fadeout_control(self):
+        self.fadeout_control_source = GstController.InterpolationControlSource(
+            mode=GstController.InterpolationMode.LINEAR
+        )
+
+        fadeout_control_binding = GstController.DirectControlBinding(
+            object=self._volume_fader,
+            name="volume",
+            absolute=True,
+            control_source=self.fadeout_control_source,
+        )
+
+        self._volume_fader.add_control_binding(fadeout_control_binding)
+
+    @property
+    def position(self) -> int:
+        """Returns the player position in nanoseconds"""
+
+        if not self._is_player_loaded():
+            return 0
+
+        position = self._query_gst_time(self._player.query_position)
+
+        if position:
+            return position
+
+        log.warning("Failed to query position from player.")
+        reporter.warning("gst_player", "Failed to query position from player.")
+
+        return 0
+
+    @position.setter
+    def position(self, new_position_ns: int):
+        if new_position_ns != 0:
+            new_position_ns = max(0, new_position_ns)
+            duration = self._query_gst_time(self._player.query_duration)
+
+            if duration:
+                new_position_ns = min(new_position_ns, duration)
+
+        self._execute_seek(new_position_ns)
+
+    @property
+    def playback_speed(self) -> float:
+        return self._playback_speed
+
+    @playback_speed.setter
+    def playback_speed(self, value: float):
+        if not self._is_player_loaded():
+            return
+
+        self._playback_speed = value
+
+        if self._playback_speed_timer_running:
+            return
+
+        self._playback_speed_timer_running = True
+
+        GLib.timeout_add(200, self._on_playback_speed_timer)
+
+    @property
+    def loaded_file_path(self) -> Optional[str]:
+        if not self._is_player_loaded():
+            return None
+
+        uri = self._player.get_property("current-uri")
+        if uri:
+            return uri.replace("file://", "")
+        else:
+            return None
+
+    @property
+    def state(self) -> Gst.State:
+        if not self._is_player_loaded():
+            return Gst.State.READY
+
+        _, state, __ = self._player.get_state(Gst.CLOCK_TIME_NONE)
+        if state == Gst.State.PLAYING:
+            return Gst.State.PLAYING
+        elif state == Gst.State.PAUSED:
+            return Gst.State.PAUSED
+        else:
+            log.debug("GST player state was not playing or paused but %s", state)
+            return Gst.State.READY
+
+    @property
+    def volume(self) -> float:
+        return self._player.get_property("volume")
+
+    @volume.setter
+    def volume(self, new_value: float):
+        self._volume = max(0.0, min(1.0, new_value))
+        self._player.set_property("volume", self._volume)
+        self._player.set_property("mute", False)
+
+    def load_file(self, path: str):
+        if not os.path.exists(path):
+            raise FileNotFoundError()
+
+        self._player.set_state(Gst.State.NULL)
+        self._playback_speed = 1.0
+        self._player.set_property("uri", "file://" + path)
+        self._player.set_state(Gst.State.PAUSED)
+
+    def play(self):
+        if not self._is_player_loaded() or self.state == Gst.State.PLAYING:
+            return
+
+        success = self._player.set_state(Gst.State.PLAYING)
+
+        if success == Gst.StateChangeReturn.FAILURE:
+            log.warning("Failed set gst player to play.")
+            reporter.warning("gst_player", "Failed set gst player to play.")
+        else:
+            self.emit_event("state", Gst.State.PLAYING)
+
+    def pause(self):
+        if not self._is_player_loaded():
+            return
+
+        success = self._player.set_state(Gst.State.PAUSED)
+
+        if success == Gst.StateChangeReturn.FAILURE:
+            log.warning("Failed set gst player to pause.")
+            reporter.warning("gst_player", "Failed set gst player to pause.")
+        else:
+            self.emit_event("state", Gst.State.PAUSED)
+
+    def stop(self):
+        if not self._is_player_loaded():
+            return
+
+        self._player.set_state(Gst.State.NULL)
+        self._playback_speed = 1.0
+
+        self.emit_event("state", Gst.State.READY)
+
+    def _fadeout_callback(self) -> None:
+        self.fadeout_control_source.unset_all()
+
+        if self._fade_timeout:
+            GLib.source_remove(self._fade_timeout)
+            self._fade_timeout = None
+
+        self.pause()
+        self._volume_fader.props.volume = 1.0
+
+        self.emit_event("fadeout-finished", None)
+
+    def fadeout(self, length: int) -> None:
+        if not self._is_player_loaded():
+            return
+
+        position = self._query_gst_time(self._player.query_position)
+        duration = self._query_gst_time(self._player.query_duration)
+
+        if position is None or duration is None:
+            return
+
+        end_position = min(position + length * Gst.SECOND, duration)
+
+        log.info("Starting playback fadeout")
+
+        self.fadeout_control_source.set(position, 1.0)
+        self.fadeout_control_source.set(end_position, 0.0)
+
+        self._fade_timeout = GLib.timeout_add(
+            (end_position - position) // Gst.MSECOND, self._fadeout_callback
+        )
+
+    def _is_player_loaded(self) -> bool:
+        _, state, __ = self._player.get_state(Gst.CLOCK_TIME_NONE)
+        return state in (Gst.State.PLAYING, Gst.State.PAUSED)
+
+    @staticmethod
+    def _query_gst_time(query_function) -> Optional[int]:
+        success = False
+        counter = 0
+
+        while not success and counter < 10:
+            success, value = query_function(Gst.Format.TIME)
+
+            if success:
+                return value
+            else:
+                counter += 1
+                time.sleep(0.01)
+
+        return None
+
+    def _execute_seek(self, new_position_ns: int):
+        counter = 0
+        seeked = False
+        while not seeked and counter < 500:
+            seeked = self._player.seek(
+                self._playback_speed,
+                Gst.Format.TIME,
+                Gst.SeekFlags.FLUSH,
+                Gst.SeekType.SET,
+                new_position_ns,
+                Gst.SeekType.NONE,
+                0,
+            )
+
+            if not seeked:
+                counter += 1
+                time.sleep(0.01)
+        if not seeked:
+            log.info("Failed to seek, counter expired.")
+            reporter.warning("gst_player", "Failed to seek, counter expired.")
+
+    def _on_playback_speed_timer(self):
+        self._player.seek(
+            self._playback_speed,
+            Gst.Format.TIME,
+            Gst.SeekFlags.FLUSH | Gst.SeekFlags.ACCURATE,
+            Gst.SeekType.SET,
+            self.position,
+            Gst.SeekType.NONE,
+            0,
+        )
+
+        self._playback_speed_timer_running = False
+
+    def _on_gst_message(self, _, message: Gst.Message):
+        t = message.type
+        if t == Gst.MessageType.BUFFERING:
+            if message.percentage < 100:
+                self._player.set_state(Gst.State.PAUSED)
+                log.info("Buffering…")
+            else:
+                self._player.set_state(Gst.State.PLAYING)
+                log.info("Buffering finished.")
+        elif t == Gst.MessageType.EOS:
+            self.emit_event("file-finished")
+        elif t == Gst.MessageType.ERROR:
+            error, debug_msg = message.parse_error()
+
+            if error.code == Gst.ResourceError.NOT_FOUND:
+                self.stop()
+                self.emit_event("resource-not-found")
+
+                log.warning("gst: Resource not found. Stopping player.")
+                reporter.warning("gst_player", "gst: Resource not found. Stopping player.")
+                return
+
+            reporter.error("player", f"{error.code}: {error}")
+            log.error("%s: %s", error.code, error)
+            log.debug(debug_msg)
+            self.emit_event("error", error)
 
 
 class Player(EventSender):
@@ -32,7 +321,6 @@ class Player(EventSender):
     _offline_cache: OfflineCache = inject.attr(OfflineCache)
     _toast: ToastNotifier = inject.attr(ToastNotifier)
     _importer: Importer = inject.attr(Importer)
-
     _gst_player: GstPlayer = inject.attr(GstPlayer)
 
     def __init__(self):
@@ -45,9 +333,7 @@ class Player(EventSender):
         self._gst_player.add_listener(self._on_gst_player_event)
 
         self.play_status_updater: IntervalTimer = IntervalTimer(1, self._emit_tick)
-        self._fadeout_thread: Optional[Thread] = None
 
-        self._gst_player.init()
         self.volume = self._app_settings.volume
 
         self._load_last_book()
@@ -72,7 +358,7 @@ class Player(EventSender):
 
     @property
     def playing(self) -> bool:
-        return self._gst_player.state == GstPlayerState.PLAYING
+        return self._gst_player.state == Gst.State.PLAYING
 
     @property
     def position(self) -> int:
@@ -80,9 +366,8 @@ class Player(EventSender):
 
     @position.setter
     def position(self, new_value: int):
-        # FIXME: setter expects seconds, but getter returns nanoseconds
         if self.loaded_chapter is not None:
-            self._gst_player.position = max(self.loaded_chapter.start_position + (new_value * NS_TO_SEC), 0)
+            self._gst_player.position = max(self.loaded_chapter.start_position + new_value, 0)
 
     @property
     def volume(self) -> float:
@@ -110,22 +395,20 @@ class Player(EventSender):
         self._gst_player.playback_speed = value
 
     def play_pause(self):
-        if self._gst_player.state == GstPlayerState.PAUSED:
+        if self._gst_player.state == Gst.State.PAUSED:
             self._gst_player.play()
-        elif self._gst_player.state == GstPlayerState.PLAYING:
+        elif self._gst_player.state == Gst.State.PLAYING:
             self._gst_player.pause()
         else:
             log.error("Trying to play/pause although player is in STOP state.")
             reporter.error("player", "Trying to play/pause although player is in STOP state.")
 
     def pause(self, fadeout: bool = False):
-        if fadeout and not self._fadeout_thread:
-            log.info("Starting fadeout playback")
-            self._fadeout_thread = Thread(target=self._fadeout_playback, name="PlayerFadeoutThread")
-            self._fadeout_thread.start()
+        if fadeout:
+            self._gst_player.fadeout(self._app_settings.sleep_timer_fadeout_duration)
             return
 
-        if self._gst_player.state == GstPlayerState.PLAYING:
+        if self._gst_player.state == Gst.State.PLAYING:
             self._gst_player.pause()
 
     def play_pause_book(self, book: Book):
@@ -160,24 +443,20 @@ class Player(EventSender):
 
     def rewind(self):
         state = self._gst_player.state
-        if state != GstPlayerState.STOPPED:
+        if state != Gst.State.READY:
             self._rewind_in_book()
-        if state == GstPlayerState.PLAYING:
+        if state == Gst.State.PLAYING:
             self._gst_player.play()
 
     def forward(self):
         state = self._gst_player.state
-        if state != GstPlayerState.STOPPED:
+        if state != Gst.State.READY:
             self._forward_in_book()
-        if state == GstPlayerState.PLAYING:
+        if state == Gst.State.PLAYING:
             self._gst_player.play()
 
     def destroy(self):
-        self._gst_player.dispose()
-        self._stop_playback()
-
-        if self._fadeout_thread:
-            self._fadeout_thread.stop()
+        self._gst_player.stop()
 
     def _load_book(self, book: Book):
         if self._book == book:
@@ -218,8 +497,8 @@ class Player(EventSender):
                 return
 
         if file_changed or self._should_jump_to_chapter_position(chapter.position):
-            self._gst_player.position = chapter.position
             self._gst_player.playback_speed = self._book.playback_speed
+            self._gst_player.position = chapter.position
 
         if file_changed or self._book.position != chapter.id:
             self._book.position = chapter.id
@@ -243,15 +522,16 @@ class Player(EventSender):
         current_position = self._gst_player.position
         current_position_relative = max(current_position - self.loaded_chapter.start_position, 0)
         chapter_number = self._book.chapters.index(self._book.current_chapter)
-        rewind_seconds = self._app_settings.rewind_duration * self.playback_speed
+        rewind_nanoseconds = self._app_settings.rewind_duration * Gst.SECOND * self.playback_speed
 
-        if current_position_relative / NS_TO_SEC - rewind_seconds > 0:
-            self._gst_player.position = current_position - NS_TO_SEC * rewind_seconds
+        if current_position_relative - rewind_nanoseconds > 0:
+            self._gst_player.position = current_position - rewind_nanoseconds
         elif chapter_number > 0:
             previous_chapter = self._book.chapters[chapter_number - 1]
             self._load_chapter(previous_chapter)
             self._gst_player.position = previous_chapter.end_position + (
-                        current_position_relative - NS_TO_SEC * rewind_seconds)
+                current_position_relative - rewind_nanoseconds
+            )
         else:
             self._gst_player.position = 0
 
@@ -265,15 +545,16 @@ class Player(EventSender):
         current_position_relative = max(current_position - self.loaded_chapter.start_position, 0)
         old_chapter = self._book.current_chapter
         chapter_number = self._book.chapters.index(self._book.current_chapter)
-        forward_seconds = self._app_settings.forward_duration * self.playback_speed
+        forward_nanoseconds = self._app_settings.forward_duration * Gst.SECOND * self.playback_speed
 
-        if current_position_relative / NS_TO_SEC + forward_seconds < self._book.current_chapter.length:
-            self._gst_player.position = current_position + (NS_TO_SEC * forward_seconds)
+        if current_position_relative + forward_nanoseconds < self._book.current_chapter.length:
+            self._gst_player.position = current_position + forward_nanoseconds
         elif chapter_number < len(self._book.chapters) - 1:
             next_chapter = self._book.chapters[chapter_number + 1]
             self._load_chapter(next_chapter)
             self._gst_player.position = next_chapter.start_position + (
-                    NS_TO_SEC * forward_seconds - (old_chapter.length * NS_TO_SEC - current_position_relative))
+                forward_nanoseconds - old_chapter.length - current_position_relative
+            )
         else:
             self._next_chapter()
 
@@ -285,7 +566,9 @@ class Player(EventSender):
     def _next_chapter(self):
         if not self._book:
             log.error("Cannot play next chapter because no book reference is stored.")
-            reporter.error("player", "Cannot play next chapter because no book reference is stored.")
+            reporter.error(
+                "player", "Cannot play next chapter because no book reference is stored."
+            )
             return
 
         index_current_chapter = self._book.chapters.index(self._book.current_chapter)
@@ -315,14 +598,14 @@ class Player(EventSender):
             self._next_chapter()
         elif event == "resource-not-found":
             self._handle_file_not_found()
-        elif event == "state" and message == GstPlayerState.PLAYING:
+        elif event == "state" and message == Gst.State.PLAYING:
             self._book.last_played = int(time.time())
             self._start_tick_thread()
             self.emit_event_main_thread("play", self._book)
-        elif event == "state" and message == GstPlayerState.PAUSED:
+        elif event == "state" and message == Gst.State.PAUSED:
             self._stop_tick_thread()
             self.emit_event_main_thread("pause")
-        elif event == "state" and message == GstPlayerState.STOPPED:
+        elif event == "state" and message == Gst.State.READY:
             self._stop_playback()
         elif event == "error":
             self._handle_gst_error(message)
@@ -381,29 +664,10 @@ class Player(EventSender):
         except Exception as e:
             log.warning("Could not emit position event: %s", e)
 
-    def _fadeout_playback(self):
-        duration = self._app_settings.sleep_timer_fadeout_duration * 20
-        current_vol = self._gst_player.volume
-        for i in range(duration):
-            volume = max(current_vol - (i / duration), 0)
-            self._gst_player.position = volume
-            time.sleep(0.05)
-
-        log.info("Fadeout completed.")
-        self.play_pause()
-        self._gst_player.volume = current_vol
-        self.emit_event_main_thread("fadeout-finished", None)
-
-        self._fadeout_thread = None
-
     def _should_jump_to_chapter_position(self, position: int) -> bool:
         """
         Should the player jump to the given position?
         This allows gapless playback for media files that contain many chapters.
         """
 
-        difference = abs(self.position - position)
-        if difference < 10 ** 9:
-            return False
-
-        return True
+        return not abs(self.position - position) < Gst.SECOND

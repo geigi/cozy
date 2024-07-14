@@ -8,8 +8,7 @@ from cozy.control.db import get_db
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.control.offline_cache import OfflineCache
 from cozy.media.files import Files
-from cozy.media.gst_player import GstPlayer
-from cozy.media.player import Player
+from cozy.media.player import GstPlayer, Player
 from cozy.model.book import Book
 from cozy.model.database_importer import DatabaseImporter
 from cozy.model.library import Library

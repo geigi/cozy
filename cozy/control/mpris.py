@@ -17,13 +17,15 @@ from gi.repository import Gio, GLib
 from cozy.application_settings import ApplicationSettings
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.ext import inject
-from cozy.media.player import NS_TO_SEC, US_TO_SEC, Player
+from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.report import reporter
 
 log = logging.getLogger("mpris")
 
 CamelCasePattern = re.compile(r"(?<!^)(?=[A-Z])")
+
+NS_TO_US = 1e3
 
 
 def to_snake_case(name: str) -> str:
@@ -69,9 +71,7 @@ class Server:
 
         for interface in Gio.DBusNodeInfo.new_for_xml(self.__doc__).interfaces:
             for method in interface.methods:
-                self.method_inargs[method.name] = tuple(
-                    arg.signature for arg in method.in_args
-                )
+                self.method_inargs[method.name] = tuple(arg.signature for arg in method.in_args)
                 out_sig = [arg.signature for arg in method.out_args]
                 self.method_outargs[method.name] = "(" + "".join(out_sig) + ")"
 
@@ -111,10 +111,7 @@ class Server:
         except Exception as e:
             log.error(e)
             reporter.exception("mpris", e)
-            reporter.error(
-                "mpris",
-                f"MPRIS method call failed with method name: {method_name}",
-            )
+            reporter.error("mpris", f"MPRIS method call failed with method name: {method_name}")
             invocation.return_dbus_error(
                 f"{interface_name}.Error.Failed", "Internal exception occurred"
             )
@@ -126,7 +123,7 @@ class Server:
             result = (result,)
 
             out_args = self.method_outargs[method_name]
-            if out_args != "()" and result[0]:
+            if out_args != "()" and result[0] is not None:
                 variant = GLib.Variant(out_args, result)
                 invocation.return_value(variant)
             else:
@@ -257,23 +254,17 @@ class MPRIS(Server):
         self._player.destroy()
 
     def set_position(self, track_id: str, position: int):
-        self._player.position = position / US_TO_SEC
+        self._player.position = position * NS_TO_US
 
     def seek(self, offset: int):
-        self._player.position = self._player.position / NS_TO_SEC + offset / US_TO_SEC
+        self._player.position = self._player.position + offset * NS_TO_US
 
     def get(self, interface: str, property_name: str) -> GLib.Variant:
         if property_name in {"CanQuit", "CanControl"}:
             return GLib.Variant("b", True)
         elif property_name in {"CanRaise", "HasTrackList"}:
             return GLib.Variant("b", False)
-        elif property_name in {
-            "CanGoNext",
-            "CanGoPrevious",
-            "CanPlay",
-            "CanPause",
-            "CanSeek",
-        }:
+        elif property_name in {"CanGoNext", "CanGoPrevious", "CanPlay", "CanPause", "CanSeek"}:
             return GLib.Variant("b", self._player.loaded_book is not None)
         elif property_name in {"SupportedUriSchemes", "SupportedMimeTypes"}:
             return GLib.Variant("as", [])
@@ -281,7 +272,7 @@ class MPRIS(Server):
         # Might raise an AttributeError. We handle that in Server.on_method_call
         return getattr(self, to_snake_case(property_name))
 
-    def get_all(self, interface):
+    def get_all(self, interface) -> dict[str, GLib.Variant]:
         if interface == self.MEDIA_PLAYER2_INTERFACE:
             properties = (
                 "CanQuit",
@@ -305,8 +296,14 @@ class MPRIS(Server):
                 "CanControl",
                 "Volume",
             )
+        else:
+            return {}
 
         return {property: self.get(interface, property) for property in properties}
+
+    def set(self, interface: str, property_name: str, value) -> None:
+        # Might raise an AttributeError. We handle that in Server.on_method_call
+        return setattr(self, to_snake_case(property_name), value)
 
     def properties_changed(self, iface_name, changed_props, invalidated_props):
         self._bus.emit_signal(
@@ -350,6 +347,10 @@ class MPRIS(Server):
     def volume(self):
         return GLib.Variant("d", self._player.volume)
 
+    @volume.setter
+    def volume(self, new_value: float) -> None:
+        self._player.volume = new_value
+
     def _get_track_id(self) -> float:
         """
         Track IDs must be unique even up to the point that if a song
@@ -370,14 +371,18 @@ class MPRIS(Server):
             title=book.current_chapter.name,
             album=book.name,
             artist=[book.author],
-            length=book.current_chapter.length * US_TO_SEC,
+            length=book.current_chapter.length / NS_TO_US,
             url=uri_template.format(path=book.current_chapter.file),
             artwork_uri=self._artwork_cache.get_album_art_path(book, 256),
         )
         return metadata.to_dict()
 
     def _on_player_changed(self, event: str, _) -> None:
-        if event == "chapter-changed":
+        if event == "position":
+            self.properties_changed(
+                self.MEDIA_PLAYER2_PLAYER_INTERFACE, {"Position": self.position}, []
+            )
+        elif event == "chapter-changed":
             self._on_current_changed()
         elif event == "play":
             self._on_status_changed("Playing")

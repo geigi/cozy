@@ -1,4 +1,4 @@
-from cozy import tools
+from cozy.control import time_format
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
@@ -79,14 +79,14 @@ class BookDetailViewModel(Observable, EventSender):
         if not self._book:
             return None
 
-        return tools.past_date_to_human_readable(self._book.last_played)
+        return time_format.date_delta_to_human_readable(self._book.last_played)
 
     @property
     def total_text(self) -> str | None:
         if not self._book:
             return None
 
-        return tools.seconds_to_human_readable(self._book.duration / self._book.playback_speed)
+        return time_format.ns_to_human_readable(self._book.duration / self._book.playback_speed)
 
     @property
     def remaining_text(self) -> str | None:
@@ -94,7 +94,7 @@ class BookDetailViewModel(Observable, EventSender):
             return None
 
         remaining = self._book.duration - self._book.progress
-        return tools.seconds_to_human_readable(remaining / self._book.playback_speed)
+        return time_format.ns_to_human_readable(remaining / self._book.playback_speed)
 
     @property
     def progress_percent(self) -> float | None:
