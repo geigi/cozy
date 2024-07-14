@@ -17,7 +17,6 @@ from cozy.open_view import OpenView
 from cozy.power_manager import PowerManager
 from cozy.report import reporter
 from cozy.ui.app_view import AppView
-from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.headerbar import Headerbar
 from cozy.ui.library_view import LibraryView
 from cozy.ui.main_view import CozyUI
@@ -50,7 +49,6 @@ class AppController(metaclass=Singleton):
         self.library_view: LibraryView = LibraryView(main_window_builder)
         self.app_view: AppView = AppView(main_window_builder)
         self.headerbar: Headerbar = Headerbar(main_window_builder)
-        self.book_detail_view: BookDetailView = BookDetailView(main_window_builder)
         self.media_controller: MediaController = MediaController(main_window_builder)
         self.search_view: SearchView = SearchView(main_window_builder, self.headerbar)
 
@@ -115,8 +113,8 @@ class AppController(metaclass=Singleton):
         self.library_view_model.selected_filter = reader
 
     def open_book(self, book: Book):
-        self.book_detail_view_model.open_book_detail_view()
         self.book_detail_view_model.book = book
+        self.app_view_model.open_book_detail_view()
 
     def open_library(self):
         self.library_view_model.open_library()

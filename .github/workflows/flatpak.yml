@@ -22,20 +22,22 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Install deps
+      if: ${{ matrix.arch == 'aarch64' }}
       run: |
         dnf -y install docker
-      if: ${{ matrix.arch == 'aarch64' }}
 
     - name: Set up QEMU
       id: qemu
+      if: ${{ matrix.arch == 'aarch64' }}
       uses: docker/setup-qemu-action@v3
       with:
         platforms: arm64
-      if: ${{ matrix.arch == 'aarch64' }}
 
     - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v6
       with:
+        repository-name: gnome-nightly
+        repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
         bundle: Cozy.flatpak
         manifest-path: com.github.geigi.cozy.json
         cache-key: "flatpak-builder-${{ github.sha }}"
-        arch: ${{ matrix.arch }}  
+        arch: ${{ matrix.arch }}
