@@ -94,7 +94,7 @@ class LibraryView:
             book_element = BookElement(book)
             book_element.connect("play-pause-clicked", self._play_book_clicked)
             book_element.connect("open-book-overview", self._open_book_overview_clicked)
-            book_element.connect("book-removed", self._on_book_removed)
+            book_element.connect("remove-book", self._on_remove_book)
             self._book_box.append(book_element)
 
     def populate_author(self):
@@ -166,11 +166,11 @@ class LibraryView:
 
         return True
 
-    def _on_book_removed(self, _, book):
+    def _on_remove_book(self, _, book):
         if self._view_model.book_files_exist(book):
-            DeleteBookView(self._on_book_removed_clicked, book).present()
+            DeleteBookView(self._on_remove_book_response, book).present()
 
-    def _on_book_removed_clicked(self, _, response, book):
+    def _on_remove_book_response(self, _, response, book):
         if response != "delete":
             return
 

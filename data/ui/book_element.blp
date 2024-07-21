@@ -1,61 +1,143 @@
-
 using Gtk 4.0;
+using Adw 1;
 
 template $BookElement: FlowBoxChild {
-  height-request: 90;
-  width-request: 90;
+  Adw.Clamp {
+    maximum-size: 250;
+    Overlay {
+      [overlay]
+      Revealer play_revealer {
+        transition-type: crossfade;
+        valign: end;
+        halign: end;
 
-  child: Box container_box {
-    focusable: true;
-    tooltip-text: _("Open book overview");
-    orientation: vertical;
-    spacing: 1;
-    hexpand: true;
-    vexpand: true;
+        $BookElementPlayButton play_button {
+          width-request: 54;
+          height-request: 54;
+          margin-end: 18;
+          margin-bottom: 18;
+          focusable: true;
+          focus-on-click: false;
+          icon_name: "media-playback-start-symbolic";
+          tooltip-text: _("Start/Stop playback");
 
-    Label name_label {
-      halign: start;
-      valign: end;
-      margin-top: 12;
-      margin-start: 12;
-      margin-end: 12;
-      hexpand: false;
-      vexpand: false;
-      wrap: true;
-      ellipsize: end;
-      max-width-chars: 20;
-      xalign: 0;
-      yalign: 0;
+          clicked => $_play_pause();
 
-      styles [
-        "heading",
-      ]
+          accessibility {
+            label: _("Start or pause the playback");
+          }
+
+          styles [
+            "circular",
+            "suggested-action",
+          ]
+        }
+      }
+
+      [overlay]
+      Revealer menu_revealer {
+        transition-type: crossfade;
+        valign: start;
+        halign: end;
+
+        MenuButton menu_button {
+          margin-end: 6;
+          margin-top: 6;
+          menu-model: book_menu;
+          icon-name: "view-more-symbolic";
+          tooltip-text: _("Open Book Menu");
+
+          styles [
+            "circular",
+            "opaque",
+          ]
+        }
+      }
+
+      Button button {
+        overflow: hidden;
+        tooltip-text: _("Open Book Overview");
+
+        clicked => $_open_book_overview();
+
+        accessibility {
+          labelled-by: title;
+        }
+
+        Box {
+          orientation: vertical;
+
+          Stack stack {
+            Picture artwork {
+              content-fit: contain;
+              hexpand: true;
+              vexpand: true;
+            }
+
+            Image fallback_icon {
+              pixel-size: 200;
+              hexpand: true;
+              vexpand: true;
+            }
+          }
+
+          Label title {
+            label: bind template.title;
+            tooltip-text: bind template.title;
+            ellipsize: end;
+            hexpand: false;
+            halign: start;
+            margin-top: 12;
+            margin-start: 12;
+            margin-end: 12;
+            xalign: 0;
+
+            styles [
+              "heading",
+            ]
+          }
+
+          Label {
+            label: bind template.author;
+            tooltip-text: bind template.author;
+            ellipsize: end;
+            hexpand: false;
+            halign: start;
+            margin-top: 3;
+            margin-bottom: 12;
+            margin-start: 12;
+            margin-end: 12;
+            xalign: 0;
+
+            styles [
+              "dim-label",
+              "caption",
+            ]
+          }
+      }
+      styles ["card"]
+    }
+  }
+  }
+}
+
+menu book_menu {
+  section {
+    item {
+      action: 'app.mark_book_as_read';
+      label: _("Mark as Read");
     }
 
-    Label author_label {
-      halign: start;
-      valign: end;
-      margin-top: 3;
-      margin-bottom: 12;
-      margin-start: 12;
-      margin-end: 12;
-      hexpand: false;
-      vexpand: false;
-      wrap: true;
-      ellipsize: end;
-      max-width-chars: 30;
-      xalign: 0;
-      yalign: 0;
-
-      styles [
-        "dim-label",
-        "caption",
-      ]
+    item {
+      action: 'app.jump_to_book_folder';
+      label: _("Open in Files");
     }
+  }
 
-    styles [
-      "card",
-      "book_card",
-    ]
-  };
+  section {
+    item {
+      action: 'app.remove_book';
+      label: _("Delete Permanently…");
+    }
+  }
 }

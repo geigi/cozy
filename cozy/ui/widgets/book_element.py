@@ -1,127 +1,158 @@
-from gi.repository import Gdk, Gio, GObject, Gtk
-
+from gi.repository import Gdk, Gio, GObject, Gtk, Graphene
+import cairo
+from math import pi as PI
 from cozy.model.book import Book
 from cozy.ui.widgets.album_element import AlbumElement
+from cozy.ext import inject
+from cozy.control.artwork_cache import ArtworkCache
+
+ALBUM_ART_SIZE = 200
+STROKE_WIDTH = 4
+
+
+class BookElementPlayButton(Gtk.Button):
+    __gtype_name__ = "BookElementPlayButton"
+
+    progress = GObject.Property(type=float, default=0.0)
+
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.connect("notify::progress", self.redraw)
+
+    def redraw(self, *_) -> None:
+        self.queue_draw()
+
+    def set_playing(self, playing: bool):
+        if playing:
+            self.set_icon_name("media-playback-pause-symbolic")
+        else:
+            self.set_icon_name("media-playback-start-symbolic")
+
+    def do_snapshot(self, snapshot: Gtk.Snapshot) -> None:
+        Gtk.Button.do_snapshot(self, snapshot)
+
+        if self.progress == 0.0:
+            return
+
+        size = self.get_allocated_height()
+        radius = (size - STROKE_WIDTH) / 2.0
+
+        context = snapshot.append_cairo(Graphene.Rect().init(0, 0, size, size))
+
+        context.set_source_rgb(1.0, 1.0, 1.0)
+        context.set_line_width(STROKE_WIDTH)
+        context.set_line_cap(cairo.LineCap.ROUND)
+
+        context.arc(size / 2, size / 2, radius, -0.5 * PI, self.progress * 2 * PI - (0.5 * PI))
+        context.stroke()
 
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/ui/book_element.ui')
 class BookElement(Gtk.FlowBoxChild):
     __gtype_name__ = "BookElement"
 
-    name_label: Gtk.Label = Gtk.Template.Child()
-    author_label: Gtk.Label = Gtk.Template.Child()
-    container_box: Gtk.Box = Gtk.Template.Child()
+    title = GObject.Property(type=str, default=_("Unknown"))
+    author = GObject.Property(type=str, default=_("Unknown"))
+
+    artwork: Gtk.Picture = Gtk.Template.Child()
+    fallback_icon: Gtk.Image = Gtk.Template.Child()
+    stack: Gtk.Stack = Gtk.Template.Child()
+    button: Gtk.Stack = Gtk.Template.Child()
+    menu_button: Gtk.MenuButton = Gtk.Template.Child()
+    play_revealer: Gtk.Revealer = Gtk.Template.Child()
+    menu_revealer: Gtk.Revealer = Gtk.Template.Child()
+    play_button: BookElementPlayButton = Gtk.Template.Child()
+
+    artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
+
+    __gsignals__ = {
+        "play-pause-clicked": (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, (object,)),
+        "open-book-overview": (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, (object,)),
+        "remove-book": (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, (object,)),
+    }
 
     def __init__(self, book: Book):
         super().__init__()
 
         self.book = book
-        self.pressed = False
 
-        self.name_label.set_text(book.name)
-        self.name_label.set_tooltip_text(book.name)
-        self.author_label.set_text(book.author)
-        self.author_label.set_tooltip_text(book.author)
+        self.title = book.name
+        self.author = book.author
 
-        self.art = AlbumElement(self.book)
-        self.art.connect("play-pause-clicked", self._on_album_art_press_event)
+        paintable = self.artwork_cache.get_cover_paintable(book, 1, ALBUM_ART_SIZE)
 
-        self.container_box.prepend(self.art)
+        if paintable:
+            self.artwork.set_paintable(paintable)
+            self.artwork.set_size_request(ALBUM_ART_SIZE, ALBUM_ART_SIZE)
+            self.stack.set_visible_child(self.artwork)
+        else:
+            self.fallback_icon.set_from_icon_name("book-open-variant-symbolic")
+            self.stack.set_visible_child(self.fallback_icon)
+
+        self._install_event_controllers()
         self.set_cursor(Gdk.Cursor.new_from_name("pointer"))
+        self.update_progress()
 
-        self._add_event_controllers()
+    def _install_event_controllers(self):
+        hover_controller = Gtk.EventControllerMotion()
+        hover_controller.connect("enter", self._on_hover, True)
+        hover_controller.connect("leave", self._on_hover, None, None, False)
 
-    def _add_event_controllers(self):
-        primary_button_gesture = Gtk.GestureClick(button=Gdk.BUTTON_PRIMARY)
-        # primary_button_gesture.connect("pressed", self._select_item)
-        primary_button_gesture.connect("released", self._open_book_overview)
-        self.container_box.add_controller(primary_button_gesture)
-
-        secondary_button_gesture = Gtk.GestureClick(button=Gdk.BUTTON_SECONDARY)
-        secondary_button_gesture.connect("released", self._show_context_menu)
-        self.container_box.add_controller(secondary_button_gesture)
-
-        # FIXME: When clicking on an album's play button in the recents view,
-        # it jumps to the first position, and GtkGestureLongPress thinks it's
-        # a long press gesture, although it's just an unfinished long press
         long_press_gesture = Gtk.GestureLongPress()
-        long_press_gesture.connect("pressed", self._show_context_menu)
-        self.container_box.add_controller(long_press_gesture)
+        long_press_gesture.connect("pressed", self._on_long_tap)
 
         key_event_controller = Gtk.EventControllerKey()
         key_event_controller.connect("key-pressed", self._on_key_press_event)
-        self.container_box.add_controller(key_event_controller)
 
-    @GObject.Signal(arg_types=(object,))
-    def play_pause_clicked(self, *_): ...
-
-    @GObject.Signal(arg_types=(object,))
-    def open_book_overview(self, *_): ...
-
-    @GObject.Signal(arg_types=(object,))
-    def book_removed(self, *_): ...
+        self.add_controller(hover_controller)
+        self.add_controller(long_press_gesture)
+        self.add_controller(key_event_controller)
 
     def set_playing(self, is_playing):
-        self.art.set_playing(is_playing)
+        self.play_button.set_playing(is_playing)
 
     def update_progress(self):
-        self.art.update_progress()
+        self.play_button.progress = self.book.progress / self.book.duration
 
-    def _create_context_menu(self):
-        menu_model = Gio.Menu()
+    def remove(self) -> None:
+        self.emit("remove-book", self.book)
 
-        self.install_action("book_element.mark_as_read", None, self._mark_as_read)
-        menu_model.append(_("Mark as Read"), "book_element.mark_as_read")
-
-        self.install_action("book_element.jump_to_folder", None, self._jump_to_folder)
-        menu_model.append(_("Open in File Browser"), "book_element.jump_to_folder")
-
-        self.install_action("book_element.remove_book", None, self._remove_book)
-        menu_model.append(_("Permanently Delete…"), "book_element.remove_book")
-
-        menu = Gtk.PopoverMenu(menu_model=menu_model, has_arrow=False)
-        menu.set_parent(self.art)
-
-        return menu
-
-    def _remove_book(self, *_):
-        self.emit("book-removed", self.book)
-
-    def _mark_as_read(self, *_):
+    def mark_as_read(self) -> None:
         self.book.position = -1
+        self.update_progress()
 
-    def _jump_to_folder(self, *_):
-        """
-        Opens the folder containing this books files in the default file explorer.
-        """
+    def jump_to_folder(self) -> None:
         track = self.book.chapters[0]
 
         file_launcher = Gtk.FileLauncher(file=Gio.File.new_for_path(track.file))
         dummy_callback = lambda d, r: d.open_containing_folder_finish(r)
         file_launcher.open_containing_folder(None, None, dummy_callback)
 
-    def _show_context_menu(self, gesture: Gtk.Gesture, *_):
-        gesture.set_state(Gtk.EventSequenceState.CLAIMED)
-
-        self._create_context_menu().popup()
-
-    def _select_item(self, gesture: Gtk.Gesture, *_):
-        if super().get_sensitive():
-            gesture.set_state(Gtk.EventSequenceState.CLAIMED)
-            self.pressed = True
-            self.container_box.add_css_class("selected")
-
-    def _open_book_overview(self, gesture, *_):
-        gesture.set_state(Gtk.EventSequenceState.CLAIMED)
-
-        self.pressed = False
-        self.container_box.remove_css_class("selected")
-        if super().get_sensitive():
-            self.emit("open-book-overview", self.book)
-
-    def _on_key_press_event(self, keyval, *_):
-        if keyval == Gdk.KEY_Return and super().get_sensitive():
-            self.emit("open-book-overview", self.book)
-
-    def _on_album_art_press_event(self, *_):
+    @Gtk.Template.Callback()
+    def _play_pause(self, *_):
         self.emit("play-pause-clicked", self.book)
+
+    @Gtk.Template.Callback()
+    def _open_book_overview(self, *_):
+        self.emit("open-book-overview", self.book)
+
+    @inject.params(application="GtkApp")
+    def _on_hover(self, ju, n, k, revealed: bool, application: Gtk.Application) -> None:
+        if not self.menu_button.get_active():
+            self.play_revealer.set_reveal_child(revealed)
+            self.menu_revealer.set_reveal_child(revealed)
+
+            if revealed:
+                application.selected_book = self
+
+    def _on_long_tap(self, gesture: Gtk.Gesture, *_):
+        gesture.set_state(Gtk.EventSequenceState.CLAIMED)
+
+        device = gesture.get_device()
+        if device and device.get_source() == Gdk.InputSource.TOUCHSCREEN:
+            self.menu_button.emit("activate")
+
+    def _on_key_press_event(self, controller, keyval, *_):
+        if keyval == Gdk.KEY_Return:
+            self.emit("open-book-overview", self.book)
