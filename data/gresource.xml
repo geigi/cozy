@@ -2,9 +2,8 @@
 <gresources>
   <gresource prefix="/com/github/geigi/cozy">
     <file>style.css</file>
-    <file preprocess="xml-stripblanks">ui/album_element.ui</file>
+    <file preprocess="xml-stripblanks">ui/book_card.ui</file>
     <file preprocess="xml-stripblanks">ui/book_detail.ui</file>
-    <file preprocess="xml-stripblanks">ui/book_element.ui</file>
     <file preprocess="xml-stripblanks">ui/chapter_element.ui</file>
     <file preprocess="xml-stripblanks">ui/error_reporting.ui</file>
     <file preprocess="xml-stripblanks">ui/first_import_button.ui</file>
