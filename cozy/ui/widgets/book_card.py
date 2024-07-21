@@ -1,10 +1,10 @@
 from math import pi as PI
 
 import cairo
+import inject
 from gi.repository import Gdk, Gio, GObject, Graphene, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
-from cozy.ext import inject
 from cozy.model.book import Book
 
 ALBUM_ART_SIZE = 200
