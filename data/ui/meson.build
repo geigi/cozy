@@ -3,7 +3,6 @@ message('Compiling blueprints')
 
 blueprints = custom_target('blueprints',
   input: files(
-    'album_element.blp',
     'book_detail.blp',
     'book_element.blp',
     'chapter_element.blp',
