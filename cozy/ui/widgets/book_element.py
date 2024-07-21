@@ -91,14 +91,16 @@ class BookElement(Gtk.FlowBoxChild):
             self.fallback_icon.set_from_icon_name("book-open-variant-symbolic")
             self.stack.set_visible_child(self.fallback_icon)
 
-        self._install_event_controllers()
+        self.menu_button.connect("notify::active", self._on_leave)
         self.set_cursor(Gdk.Cursor.new_from_name("pointer"))
+
+        self._install_event_controllers()
         self.update_progress()
 
     def _install_event_controllers(self):
         hover_controller = Gtk.EventControllerMotion()
-        hover_controller.connect("enter", self._on_hover, True)
-        hover_controller.connect("leave", self._on_hover, None, None, False)
+        hover_controller.connect("enter", self._on_enter)
+        hover_controller.connect("leave", self._on_leave)
 
         long_press_gesture = Gtk.GestureLongPress()
         long_press_gesture.connect("pressed", self._on_long_tap)
@@ -138,14 +140,16 @@ class BookElement(Gtk.FlowBoxChild):
     def _open_book_overview(self, *_):
         self.emit("open-book-overview", self.book)
 
-    @inject.params(application="GtkApp")
-    def _on_hover(self, ju, n, k, revealed: bool, application: Gtk.Application) -> None:
-        if not self.menu_button.get_active():
-            self.play_revealer.set_reveal_child(revealed)
-            self.menu_revealer.set_reveal_child(revealed)
+    def _on_enter(self, *_) -> None:
+        self.play_revealer.set_reveal_child(True)
+        self.menu_revealer.set_reveal_child(True)
 
-            if revealed:
-                application.selected_book = self
+        inject.instance("GtkApp").selected_book = self
+
+    def _on_leave(self, *_) -> None:
+        if not self.menu_button.get_active():
+            self.play_revealer.set_reveal_child(False)
+            self.menu_revealer.set_reveal_child(False)
 
     def _on_long_tap(self, gesture: Gtk.Gesture, *_):
         gesture.set_state(Gtk.EventSequenceState.CLAIMED)
