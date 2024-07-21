@@ -11,7 +11,7 @@ class FirstImportButton(Gtk.Button):
 
     stack: Gtk.Stack = Gtk.Template.Child()
     label: Adw.ButtonContent = Gtk.Template.Child()
-    spinner: Gtk.Spinner = Gtk.Template.Child()
+    spinner: Adw.Spinner = Gtk.Template.Child()
 
     def __init__(self, callback: Callable[[str], None], initial_folder: str) -> None:
         super().__init__()
@@ -20,5 +20,4 @@ class FirstImportButton(Gtk.Button):
 
     def disable(self) -> None:
         self.set_sensitive(False)
-        self.spinner.set_spinning(True)
         self.stack.set_visible_child(self.spinner)
