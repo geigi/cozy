@@ -1,14 +1,12 @@
 import logging
 
-from peewee import DoesNotExist, SqliteDatabase
-
 from gi.repository import Gst
+from peewee import DoesNotExist, SqliteDatabase
 
 from cozy.db.file import File
 from cozy.db.track import Track as TrackModel
 from cozy.db.track_to_file import TrackToFile
 from cozy.model.chapter import Chapter
-
 
 log = logging.getLogger("TrackModel")
 

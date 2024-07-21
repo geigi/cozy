@@ -4,8 +4,8 @@ from math import pi as PI
 from threading import Event, Thread
 from typing import Callable, Final
 
-import inject
 import cairo
+import inject
 from gi.repository import Adw, Gio, GLib, GObject, Graphene, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
