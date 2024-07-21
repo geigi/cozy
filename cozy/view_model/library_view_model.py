@@ -16,7 +16,7 @@ from cozy.model.library import Library
 from cozy.open_view import OpenView
 from cozy.report import reporter
 from cozy.ui.import_failed_dialog import ImportFailedDialog
-from cozy.ui.widgets.book_element import BookElement
+from cozy.ui.widgets.book_card import BookCard
 from cozy.view_model.storages_view_model import StoragesViewModel
 
 log = logging.getLogger("library_view_model")
@@ -122,7 +122,7 @@ class LibraryViewModel(Observable, EventSender):
         self._notify("books")
         self._notify("books-filter")
 
-    def display_book_filter(self, book_element: BookElement):
+    def display_book_filter(self, book_element: BookCard):
         book = book_element.book
 
         hide_offline_books = self._application_settings.hide_offline
