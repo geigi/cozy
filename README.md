@@ -28,13 +28,16 @@ Head over to [Matrix](https://matrix.to/#/#cozy:gnome.org) to join the conversat
 - Listen to your DRM free **mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav** audio books
 - MPRIS integration (**Media keys** & playback info for desktop environment)
 
-# Install
+# Installation 
 
-The preferred source for installing Cozy is Flathub
+The preferred way to install Cozy is via Flatpak. You can get the official package from Flathub.
 
 <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
-### Distro packages
+Alternatively, there are third party packages available in distros' repositories. Keep in mind that these packages are usually outdated, and if you encounter an issue, they may in fact have already been fixed.
+
+<details>
+<summary>List of distro packages</summary>
 
 | Distro | Package |
 |--------|:---------:|
@@ -48,6 +51,8 @@ The preferred source for installing Cozy is Flathub
 | Ubuntu (PPA) | <center><a href="https://launchpad.net/~cozy-team/+archive/ubuntu/cozy">cozy</a> |
 | OpenBSD | <center><a href="https://cvsweb.openbsd.org/ports/audio/cozy/">cozy</a> |
 | Nix | <center><a href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/audio/cozy/default.nix">cozy</a> |
+
+</details>
 
 # Development
 See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed instructions about developing Cozy in GNOME Builder, Fedora and Ubuntu
