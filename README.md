@@ -30,7 +30,7 @@ Head over to [Matrix](https://matrix.to/#/#cozy:gnome.org) to join the conversat
 
 # Installation 
 
-The preferred way of installing Cozy is Flatpak. You can get the official package from Flathub.
+The preferred way to install Cozy is via Flatpak. You can get the official package from Flathub.
 
 <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
