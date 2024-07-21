@@ -34,10 +34,10 @@ The preferred way to install Cozy is via Flatpak. You can get the official packa
 
 <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
-Alternatively, there are third party packages available in distros' repositories.
+Alternatively, there are third party packages available in distros' repositories. Keep in mind that these packages are usually outdated, and if you encounter an issue, they may in fact have already been fixed.
 
 <details>
-<summary>See the list of distro packages</summary>
+<summary>List of distro packages</summary>
 
 | Distro | Package |
 |--------|:---------:|
