@@ -226,9 +226,11 @@ template $BookDetail: Adw.NavigationPage {
                 StackPage {
                   name: 'chapters_loader';
 
-                  child: Spinner spinner {
-                    halign: center;
-                    spinning: true;
+                  child: Adw.StatusPage _loading_status_page {
+                    paintable: Adw.SpinnerPaintable {
+                      widget: _loading_status_page;
+                    };
+                    title: _("Loading…");
                   };
                 }
               }

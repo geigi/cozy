@@ -23,7 +23,7 @@ class Headerbar(Gtk.Box):
     menu_button: Gtk.MenuButton = Gtk.Template.Child()
 
     progress_menu_button: Gtk.MenuButton = Gtk.Template.Child()
-    progress_spinner: Gtk.Spinner = Gtk.Template.Child()
+    progress_spinner: Adw.Spinner = Gtk.Template.Child()
 
     view_switcher: Adw.ViewSwitcher = Gtk.Template.Child()
 
@@ -109,10 +109,8 @@ class Headerbar(Gtk.Box):
         if self._headerbar_view_model.state == HeaderBarState.PLAYING:
             self.progress_menu_button.set_visible(False)
             self.progress_popover.set_progress(0)
-            self.progress_spinner.stop()
         else:
             self.progress_menu_button.set_visible(True)
-            self.progress_spinner.start()
 
     def _on_work_progress_changed(self):
         self.progress_popover.set_progress(self._headerbar_view_model.work_progress)
