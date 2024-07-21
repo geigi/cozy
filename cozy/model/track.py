@@ -2,12 +2,13 @@ import logging
 
 from peewee import DoesNotExist, SqliteDatabase
 
+from gi.repository import Gst
+
 from cozy.db.file import File
 from cozy.db.track import Track as TrackModel
 from cozy.db.track_to_file import TrackToFile
 from cozy.model.chapter import Chapter
 
-NS_TO_SEC = 10 ** 9
 
 log = logging.getLogger("TrackModel")
 
@@ -75,7 +76,7 @@ class Track(Chapter):
 
     @property
     def end_position(self) -> int:
-        return self.start_position + (int(self.length) * NS_TO_SEC)
+        return self.start_position + self.length
 
     @property
     def file(self):
@@ -96,11 +97,11 @@ class Track(Chapter):
 
     @property
     def length(self) -> float:
-        return self._db_object.length
+        return int(self._db_object.length * Gst.SECOND)
 
     @length.setter
     def length(self, new_length: float):
-        self._db_object.length = new_length
+        self._db_object.length = new_length / Gst.SECOND
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property

@@ -32,6 +32,13 @@ class AppView:
 
     def _connect_view_model(self):
         self._view_model.bind_to("view", self._on_view_changed)
+        self._view_model.bind_to("open_book_overview", self._on_open_book_overview)
+
+    def _on_open_book_overview(self):
+        if self._navigation_view.props.visible_page.props.tag == "book_overview":
+            self._navigation_view.pop_to_tag("book_overview")
+        else:
+            self._navigation_view.push_by_tag("book_overview")
 
     def _on_view_changed(self):
         view = self._view_model.view

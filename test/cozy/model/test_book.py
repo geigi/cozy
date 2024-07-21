@@ -292,10 +292,10 @@ def test_progress_return_progress_for_started_book(peewee_database):
 
     book = Book(peewee_database, BookDB.get(1))
     chapter = book.chapters[0]
-    chapter.position = 42 * 1000000000
+    chapter.position = 42000000000
     book.position = chapter.id
 
-    assert book.progress == 42
+    assert book.progress == 42000000000
 
 
 def test_progress_should_be_zero_for_unstarted_book(peewee_database):

@@ -174,7 +174,7 @@ class Book(Observable, EventSender):
         for chapter in self.chapters:
             if chapter.id == self.position:
                 relative_position = max(chapter.position - chapter.start_position, 0)
-                progress += int(relative_position / 1000000000)
+                progress += relative_position
                 return progress
 
             progress += chapter.length
