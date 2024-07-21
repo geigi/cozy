@@ -3,12 +3,12 @@ import os
 import time
 from typing import Optional
 
+import inject
 from gi.repository import GLib, Gst, GstController
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.control.offline_cache import OfflineCache
-from cozy.ext import inject
 from cozy.media.importer import Importer, ScanStatus
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter

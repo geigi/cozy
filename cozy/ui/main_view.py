@@ -2,10 +2,10 @@ import logging
 from threading import Thread
 from typing import Callable
 
+import inject
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
 import cozy.control.filesystem_monitor as fs_monitor
-import cozy.ext.inject as inject
 import cozy.report.reporter as report
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender

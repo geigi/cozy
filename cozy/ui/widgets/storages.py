@@ -1,8 +1,8 @@
 from typing import Callable
 
+import inject
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
-from cozy.ext import inject
 from cozy.model.storage import Storage
 from cozy.view_model.storages_view_model import StoragesViewModel
 

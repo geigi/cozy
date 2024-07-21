@@ -1,7 +1,7 @@
+import inject
 from gi.repository import Gio
 
 from cozy.architecture.event_sender import EventSender
-from cozy.ext import inject
 
 
 class ApplicationSettings(EventSender):

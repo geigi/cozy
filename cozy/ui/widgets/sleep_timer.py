@@ -1,6 +1,6 @@
+import inject
 from gi.repository import Gtk
 
-from cozy.ext import inject
 from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel, SystemPowerControl
 
 

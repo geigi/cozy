@@ -5,10 +5,10 @@ from threading import Event, Thread
 from typing import Callable, Final
 
 import cairo
+import inject
 from gi.repository import Adw, Gio, GLib, GObject, Graphene, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
-from cozy.ext import inject
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.report import reporter

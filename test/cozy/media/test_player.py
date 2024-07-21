@@ -1,10 +1,10 @@
-from unittest.mock import MagicMock, call, PropertyMock
+from unittest.mock import MagicMock, PropertyMock, call
 
+import inject
 import pytest
 from peewee import SqliteDatabase
 
 from cozy.application_settings import ApplicationSettings
-from cozy.ext import inject
 from cozy.media.player import GstPlayer
 from cozy.model.library import Library
 from cozy.model.settings import Settings

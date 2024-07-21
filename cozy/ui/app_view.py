@@ -1,6 +1,6 @@
+import inject
 from gi.repository import Adw, Gtk
 
-from cozy.ext import inject
 from cozy.view import View
 from cozy.view_model.app_view_model import AppViewModel
 

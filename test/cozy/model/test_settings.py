@@ -1,6 +1,5 @@
+import inject
 import pytest
-
-import cozy.ext.inject as inject
 from peewee import SqliteDatabase
 
 

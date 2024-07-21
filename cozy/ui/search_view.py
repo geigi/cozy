@@ -2,9 +2,9 @@ import threading
 from collections.abc import Sequence
 from typing import Callable
 
+import inject
 from gi.repository import Adw, Gtk
 
-from cozy.ext import inject
 from cozy.model.book import Book
 from cozy.ui.headerbar import Headerbar
 from cozy.ui.widgets.book_row import BookRow

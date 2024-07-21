@@ -1,10 +1,11 @@
-from cozy.control import time_format
+import inject
+
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
+from cozy.control import time_format
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.control.offline_cache import OfflineCache
-from cozy.ext import inject
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter

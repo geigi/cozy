@@ -1,8 +1,8 @@
 from typing import Optional
 
+import inject
 from gi.repository import Adw, Gtk
 
-from cozy.ext import inject
 from cozy.ui.delete_book_view import DeleteBookView
 from cozy.ui.widgets.book_card import BookCard
 from cozy.ui.widgets.filter_list_box import FilterListBox
