@@ -87,7 +87,8 @@ class LibraryView:
         self._view_model.library_view_mode = view_mode
 
     def populate_book_box(self):
-        for child in self._book_box:
+        children = [child for child in self._book_box]
+        for child in children:
             self._book_box.remove(child)
 
         for book in self._view_model.books:
