@@ -87,7 +87,7 @@ class LibraryView:
         self._view_model.library_view_mode = view_mode
 
     def populate_book_box(self):
-        children = [child for child in self._book_box]
+        children = list(self._book_box)  # Handy PyGObject feature to get children
         for child in children:
             self._book_box.remove(child)
 
