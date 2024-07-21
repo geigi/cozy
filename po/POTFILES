@@ -15,7 +15,7 @@ cozy/ui/file_not_found_dialog.py
 cozy/ui/import_failed_dialog.py
 cozy/ui/main_view.py
 cozy/ui/preferences_window.py
-cozy/ui/widgets/book_element.py
+cozy/ui/widgets/book_card.py
 cozy/ui/widgets/book_row.py
 cozy/ui/widgets/error_reporting.py
 cozy/ui/widgets/filter_list_box.py
@@ -25,8 +25,8 @@ cozy/ui/widgets/storages.py
 cozy/view_model/headerbar_view_model.py
 cozy/view_model/library_view_model.py
 data/ui/album_element.blp
+data/ui/book_card.blp
 data/ui/book_detail.blp
-data/ui/book_element.blp
 data/ui/chapter_element.blp
 data/ui/error_reporting.blp
 data/ui/first_import_button.blp

@@ -11,8 +11,8 @@ ALBUM_ART_SIZE = 200
 STROKE_WIDTH = 4
 
 
-class BookElementPlayButton(Gtk.Button):
-    __gtype_name__ = "BookElementPlayButton"
+class BookCardPlayButton(Gtk.Button):
+    __gtype_name__ = "BookCardPlayButton"
 
     progress = GObject.Property(type=float, default=0.0)
 
@@ -49,9 +49,9 @@ class BookElementPlayButton(Gtk.Button):
         context.stroke()
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/book_element.ui')
-class BookElement(Gtk.FlowBoxChild):
-    __gtype_name__ = "BookElement"
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/book_card.ui')
+class BookCard(Gtk.FlowBoxChild):
+    __gtype_name__ = "BookCard"
 
     title = GObject.Property(type=str, default=_("Unknown"))
     author = GObject.Property(type=str, default=_("Unknown"))
@@ -63,7 +63,7 @@ class BookElement(Gtk.FlowBoxChild):
     menu_button: Gtk.MenuButton = Gtk.Template.Child()
     play_revealer: Gtk.Revealer = Gtk.Template.Child()
     menu_revealer: Gtk.Revealer = Gtk.Template.Child()
-    play_button: BookElementPlayButton = Gtk.Template.Child()
+    play_button: BookCardPlayButton = Gtk.Template.Child()
 
     artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
