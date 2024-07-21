@@ -28,25 +28,31 @@ Head over to [Matrix](https://matrix.to/#/#cozy:gnome.org) to join the conversat
 - Listen to your DRM free **mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav** audio books
 - MPRIS integration (**Media keys** & playback info for desktop environment)
 
-# Install
+# Installation 
 
-The preferred source for installing Cozy is Flathub
+The preferred way to install Cozy is via Flatpak. You can get the official package from Flathub.
 
 <a href='https://flathub.org/apps/details/com.github.geigi.cozy'><img width='150' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
-### Distro packages
+Alternatively, there are third party packages available in distros' repositories. Keep in mind that these packages are usually outdated, and if you encounter an issue, they may in fact have already been fixed.
+
+<details>
+<summary>List of distro packages</summary>
 
 | Distro | Package |
 |--------|:---------:|
 | openSUSE | <center><a href="https://software.opensuse.org/package/cozy">cozy</a> |
 | Fedora | <center><a href="https://src.fedoraproject.org/rpms/cozy">cozy</a> |
 | Arch Linux (AUR) | <a href="https://aur.archlinux.org/packages/cozy-audiobooks/">cozy-audiobooks</a></center> |
+| Debian | <a href="https://packages.debian.org/cozy">cozy</a></center> |
 | VoidLinux | <a href="https://github.com/void-linux/void-packages/tree/master/srcpkgs/cozy">cozy</a> |
 | Solus | <a href="https://dev.getsol.us/source/cozy/">cozy</a> |
 | MX Linux | <center><a href="https://forum.mxlinux.org/viewtopic.php?p=621071#p621071">Cozy</a> |
 | Ubuntu (PPA) | <center><a href="https://launchpad.net/~cozy-team/+archive/ubuntu/cozy">cozy</a> |
 | OpenBSD | <center><a href="https://cvsweb.openbsd.org/ports/audio/cozy/">cozy</a> |
 | Nix | <center><a href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/audio/cozy/default.nix">cozy</a> |
+
+</details>
 
 # Development
 See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed instructions about developing Cozy in GNOME Builder, Fedora and Ubuntu

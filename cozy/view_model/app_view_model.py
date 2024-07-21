@@ -10,6 +10,9 @@ class AppViewModel(Observable, EventSender):
 
         self._view = View.EMPTY_STATE
 
+    def open_book_detail_view(self):
+        self._notify("open_book_overview")
+
     @property
     def view(self) -> View:
         return self._view

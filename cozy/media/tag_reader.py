@@ -8,7 +8,7 @@ from mutagen.mp4 import MP4
 from cozy.media.chapter import Chapter
 from cozy.media.media_file import MediaFile
 
-NS_TO_SEC = 10 ** 9
+NS_TO_SEC = 10**9
 
 
 class TagReader:
@@ -20,7 +20,7 @@ class TagReader:
             raise ValueError("discoverer_info must not be None")
 
         self.uri: str = uri
-        self.discoverer_info: GstPbutils.DiscovererInfo = discoverer_info
+        self.discoverer_info = discoverer_info
 
         self.tags: Gst.TagList = discoverer_info.get_tags()
 
@@ -36,7 +36,7 @@ class TagReader:
             disk=self._get_disk(),
             chapters=self._get_chapters(),
             cover=self._get_cover(),
-            modified=self._get_modified()
+            modified=self._get_modified(),
         )
 
         return media_file
@@ -100,7 +100,7 @@ class TagReader:
             name=self._get_track_name(),
             position=0,
             length=self._get_length_in_seconds(),
-            number=self._get_track_number()
+            number=self._get_track_number(),
         )
         return [chapter]
 
@@ -151,12 +151,14 @@ class TagReader:
 
             title = chapter.title or ""
 
-            chapters.append(Chapter(
-                name=title,
-                position=int(chapter.start * NS_TO_SEC),
-                length=length,
-                number=index + 1
-            ))
+            chapters.append(
+                Chapter(
+                    name=title,
+                    position=int(chapter.start * NS_TO_SEC),
+                    length=length,
+                    number=index + 1,
+                )
+            )
 
         return chapters
 
@@ -171,7 +173,4 @@ class TagReader:
         if mutagen.version[0] > 1:
             return True
 
-        if mutagen.version[0] == 1 and mutagen.version[1] >= 45:
-            return True
-
-        return False
+        return mutagen.version[0] == 1 and mutagen.version[1] >= 45

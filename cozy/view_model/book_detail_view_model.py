@@ -1,4 +1,4 @@
-from cozy import tools
+from cozy.control import time_format
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
@@ -79,14 +79,14 @@ class BookDetailViewModel(Observable, EventSender):
         if not self._book:
             return None
 
-        return tools.past_date_to_human_readable(self._book.last_played)
+        return time_format.date_delta_to_human_readable(self._book.last_played)
 
     @property
     def total_text(self) -> str | None:
         if not self._book:
             return None
 
-        return tools.seconds_to_human_readable(self._book.duration / self._book.playback_speed)
+        return time_format.ns_to_human_readable(self._book.duration / self._book.playback_speed)
 
     @property
     def remaining_text(self) -> str | None:
@@ -94,7 +94,7 @@ class BookDetailViewModel(Observable, EventSender):
             return None
 
         remaining = self._book.duration - self._book.progress
-        return tools.seconds_to_human_readable(remaining / self._book.playback_speed)
+        return time_format.ns_to_human_readable(remaining / self._book.playback_speed)
 
     @property
     def progress_percent(self) -> float | None:
@@ -155,9 +155,6 @@ class BookDetailViewModel(Observable, EventSender):
             chapter.position = chapter.start_position
         self._player.play_pause_chapter(self._book, chapter)
 
-    def open_book_detail_view(self):
-        self._notify("open")
-
     def _on_player_event(self, event, message):
         if not self.book:
             return
@@ -165,8 +162,7 @@ class BookDetailViewModel(Observable, EventSender):
         if event in {"play", "pause"}:
             self._notify("playing")
         elif event in {"position", "book-finished"}:
-            self._notify("progress_percent")
-            self._notify("remaining_text")
+            self._notify("progress")
 
     def _on_fs_monitor_event(self, event, _):
         if not self._book:
@@ -182,24 +178,23 @@ class BookDetailViewModel(Observable, EventSender):
         self._notify("last_played_text")
 
     def _on_book_progress_changed(self):
-        self._notify("remaining_text")
-        self._notify("progress_percent")
+        self._notify("progress")
 
     def _on_book_duration_changed(self):
-        self._notify("progress_percent")
-        self._notify("remaining_text")
-        self._notify("total_text")
+        self._notify("progress")
+        self._notify("length")
 
     def _on_playback_speed_changed(self):
-        self._notify("progress_percent")
-        self._notify("remaining_text")
-        self._notify("total_text")
+        self._notify("progress")
+        self._notify("length")
 
-    def _on_offline_cache_event(self, event, message):
-        if not (message and self._book) or self._book.id != message.id:
-            return
-
-        if event in {"book-offline-removed", "book-offline"}:
+    def _on_offline_cache_event(self, event, message) -> None:
+        if (
+            self._book
+            and isinstance(message, Book)
+            and self._book.id == message.id
+            and event in {"book-offline-removed", "book-offline"}
+        ):
             self._notify("downloaded")
 
     def _on_app_setting_changed(self, event, _):

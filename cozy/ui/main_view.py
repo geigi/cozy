@@ -16,6 +16,7 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
 from cozy.ui.about_window import AboutWindow
+from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
 from cozy.ui.widgets.first_import_button import FirstImportButton
@@ -31,6 +32,7 @@ class CozyUI(EventSender, metaclass=Singleton):
     application_settings = inject.attr(ApplicationSettings)
     _importer: Importer = inject.attr(Importer)
     _settings: SettingsModel = inject.attr(SettingsModel)
+    _gio_settings: Gio.Settings = inject.attr(Gio.Settings)
     _files: Files = inject.attr(Files)
     _player: Player = inject.attr(Player)
     _storages_view_model: StoragesViewModel = inject.attr(StoragesViewModel)
@@ -67,8 +69,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.window.set_application(self.app)
 
         self.window.connect("close-request", self.on_close)
-        self.window.connect("notify::default-width", self._on_window_size_allocate)
-        self.window.connect("notify::default-height", self._on_window_size_allocate)
 
         self._drop_target = Gtk.DropTarget()
         self._drop_target.set_gtypes([Gdk.FileList])
@@ -81,6 +81,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.main_stack: Gtk.Stack = self.window_builder.get_object("main_stack")
         self.navigation_view: Adw.NavigationView = self.window_builder.get_object("navigation_view")
         self.drop_revealer: Gtk.Revealer = self.window_builder.get_object("drop_revealer")
+
+        self.navigation_view.add(BookDetailView())
 
         self.window.present()
 
@@ -228,12 +230,16 @@ class CozyUI(EventSender, metaclass=Singleton):
         log.info("Closing.")
         self.fs_monitor.close()
 
+        self._save_window_size()
+
         self._player.destroy()
 
         close_db()
 
         report.close()
 
+        log.info("Saving settings.")
+        self._gio_settings.apply()
         log.info("Closing app.")
         self.app.quit()
         log.info("App closed.")
@@ -254,7 +260,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         else:
             self.window.unmaximize()
 
-    def _on_window_size_allocate(self, *_):
+    def _save_window_size(self, *_):
         width, height = self.window.get_default_size()
         self.application_settings.window_width = width
         self.application_settings.window_height = height

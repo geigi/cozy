@@ -1,64 +1,41 @@
 using Gtk 4.0;
+using Adw 1;
 
-template $ChapterElement: Box {
+template $ChapterElement: Adw.ActionRow {
+  selectable: true;
+  activatable: true;
+  use-markup: false;
   tooltip-text: _("Play this part");
 
-  Box {
-    margin-start: 12;
-    margin-end: 12;
-    margin-top: 6;
-    margin-bottom: 6;
-    spacing: 5;
+  [prefix]
+  Stack icon_stack {
+    StackPage {
+      name: 'number';
 
-    Stack icon_stack {
-      StackPage {
-        name: 'number';
+      child: Label number_label {
+        width-chars: 3;
 
-        child: Label number_label {
-          halign: start;
-          width-chars: 3;
-          xalign: 0;
-          yalign: 0;
-
-          styles [
-            "dim-label",
-          ]
-        };
-      }
-
-      StackPage {
-        name: 'play_icon';
-
-        child: Image play_icon {
-          halign: start;
-          valign: center;
-          icon-name: 'media-playback-start-symbolic';
-          pixel-size: 12;
-        };
-      }
+        styles [
+          "dim-label",
+        ]
+      };
     }
 
-    Label title_label {
-      hexpand: true;
-      ellipsize: end;
-      max-width-chars: 50;
-      xalign: 0;
-      yalign: 0;
+    StackPage {
+      name: 'icon';
 
-      styles [
-        "semi-bold",
-      ]
-    }
-
-    Label duration_label {
-      halign: end;
-      justify: right;
-      xalign: 0;
-      yalign: 0;
+      child: Image play_icon {
+        icon-name: 'media-playback-start-symbolic';
+        halign: center;
+        valign: center;
+      };
     }
   }
 
-  styles [
-    "chapter_element",
-  ]
+  [suffix]
+  Label duration_label {
+    styles [
+      "dim-label",
+    ]
+  }
 }
