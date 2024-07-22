@@ -117,7 +117,7 @@ class LibraryView:
             visible_child_name = RECENT_PAGE
         elif view_mode == LibraryViewMode.CURRENT:
             visible_child_name = RECENT_PAGE
-            if not self._view_model.is_any_book_in_progress:
+            if not self._view_model.is_any_book_recent:
                 books_view_page = NO_RECENT_PAGE
         elif view_mode == LibraryViewMode.AUTHOR:
             visible_child_name = AUTHOR_PAGE
