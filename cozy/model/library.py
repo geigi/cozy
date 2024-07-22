@@ -1,13 +1,13 @@
 import logging
-from typing import List, Set, Optional
+from typing import Optional
 
+import inject
 from peewee import SqliteDatabase
 
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.profiler import timing
 from cozy.db.book import Book as BookModel
 from cozy.db.file import File
-from cozy.ext import inject
 from cozy.extensions.set import split_strings_to_set
 from cozy.model.book import Book, BookIsEmpty
 from cozy.model.chapter import Chapter
@@ -20,9 +20,9 @@ class Library(EventSender):
     _db = cache = inject.attr(SqliteDatabase)
     _settings: Settings = inject.attr(Settings)
 
-    _books: List[Book] = []
-    _chapters: Set[Chapter] = set()
-    _files: Set[str] = set()
+    _books: list[Book] = []
+    _chapters: set[Chapter] = set()
+    _files: set[str] = set()
 
     def __init__(self):
         super().__init__()
@@ -40,21 +40,21 @@ class Library(EventSender):
         return readers
 
     @property
-    def books(self) -> List[Book]:
+    def books(self) -> list[Book]:
         if not self._books:
             self._load_all_books()
 
         return self._books
 
     @property
-    def chapters(self) -> Set[Chapter]:
+    def chapters(self) -> set[Chapter]:
         if not self._chapters:
             self._load_all_chapters()
 
         return self._chapters
 
     @property
-    def files(self) -> Set[str]:
+    def files(self) -> set[str]:
         if not self._files:
             self._load_all_files()
 

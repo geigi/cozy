@@ -1,10 +1,10 @@
-from cozy.ext import inject
-from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel, SystemPowerControl
-
+import inject
 from gi.repository import Gtk
 
+from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel, SystemPowerControl
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/timer_popover.ui')
+
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/timer_popover.ui')
 class SleepTimer(Gtk.Popover):
     __gtype_name__ = "SleepTimer"
 
@@ -71,7 +71,7 @@ class SleepTimer(Gtk.Popover):
         if self._view_model.remaining_seconds < 1:
             value = 0
         else:
-            value = int((self._view_model.remaining_seconds / 60)) + 1
+            value = int(self._view_model.remaining_seconds / 60) + 1
 
         self.timer_scale.set_value(value)
 
@@ -93,10 +93,5 @@ class SleepTimer(Gtk.Popover):
         self.chapter_switch.set_active(self._view_model.stop_after_chapter)
 
     def _on_timer_enabled_changed(self):
-        if self._view_model.timer_enabled:
-            icon = "bed-symbolic"
-        else:
-            icon = "no-bed-symbolic"
-
-        self._timer_image.set_from_icon_name(icon)
+        self._timer_image.set_from_icon_name('bed-symbolic' if self._view_model.timer_enabled else 'no-bed-symbolic')
 

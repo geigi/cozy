@@ -33,6 +33,7 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Gdk', '4.0')
 gi.require_version('Adw', '1')
 gi.require_version('Gst', '1.0')
+gi.require_version('GstController', '1.0')
 gi.require_version('GstPbutils', '1.0')
 
 from gi.repository import Gio, GLib
@@ -52,7 +53,7 @@ gettext.install('com.github.geigi.cozy', localedir)
 
 
 # gresource must be registered before importing any Gtk.Template annotated classes
-resource = Gio.Resource.load(os.path.join(pkgdatadir, 'com.github.geigi.cozy.ui.gresource'))
+resource = Gio.Resource.load(os.path.join(pkgdatadir, 'com.github.geigi.cozy.gresource'))
 resource._register()
 
 old_except_hook = None
@@ -93,22 +94,16 @@ def __on_command_line():
         ])
 
 
-def extend_classes():
-    extend_gtk_container()
-
-
 def main():
     __on_command_line()
     print(sys.argv)
-
-    extend_classes()
 
     listen()
 
     application = Application(pkgdatadir)
 
     try:
-        # Handle the debug option seperatly without the Glib stuff
+        # Handle the debug option separately without the Glib stuff
         if "-d" in sys.argv:
             sys.argv.remove("-d")
         ret = application.run(sys.argv)
@@ -143,6 +138,5 @@ if __name__ == '__main__':
     # Some modules import multiprocessing which would lead to an exception
     # when setting the start method
     from cozy.application import Application
-    from cozy.ui.widgets.list_box_extensions import extend_gtk_container
 
     main()

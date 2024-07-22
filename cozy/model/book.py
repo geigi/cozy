@@ -1,17 +1,16 @@
 import logging
-from typing import List
+from contextlib import suppress
 
-from peewee import SqliteDatabase, DoesNotExist
+import inject
+from peewee import DoesNotExist, SqliteDatabase
 
 from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
-from cozy.architecture.profiler import timing
-from cozy.db.collation import collate_natural
 from cozy.db.book import Book as BookModel
+from cozy.db.collation import collate_natural
 from cozy.db.track import Track as TrackModel
 from cozy.db.track_to_file import TrackToFile
-from cozy.ext import inject
 from cozy.model.chapter import Chapter
 from cozy.model.settings import Settings
 from cozy.model.track import Track, TrackInconsistentData
@@ -24,7 +23,7 @@ class BookIsEmpty(Exception):
 
 
 class Book(Observable, EventSender):
-    _chapters: List[Chapter] = None
+    _chapters: list[Chapter] = None
     _settings: Settings = inject.attr(Settings)
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
@@ -161,7 +160,7 @@ class Book(Observable, EventSender):
 
     @property
     def duration(self):
-        return sum((chapter.length for chapter in self.chapters))
+        return sum(chapter.length for chapter in self.chapters)
 
     @property
     def progress(self):
@@ -175,7 +174,7 @@ class Book(Observable, EventSender):
         for chapter in self.chapters:
             if chapter.id == self.position:
                 relative_position = max(chapter.position - chapter.start_position, 0)
-                progress += int(relative_position / 1000000000)
+                progress += relative_position
                 return progress
 
             progress += chapter.length
@@ -223,10 +222,8 @@ class Book(Observable, EventSender):
 
     def _on_chapter_event(self, event: str, chapter: Chapter):
         if event == "chapter-deleted":
-            try:
+            with suppress(ValueError):
                 self.chapters.remove(chapter)
-            except ValueError:
-                pass
 
             if len(self._chapters) < 1:
                 if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:

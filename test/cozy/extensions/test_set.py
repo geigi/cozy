@@ -2,7 +2,7 @@ from cozy.extensions.set import split_strings_to_set
 
 
 def test_split_strings_does_nothing_for_non_seperated_element():
-    test = "This is a nice test. Nothing should be splitted."
+    test = "This is a nice test. Nothing should be split."
     result = split_strings_to_set({test})
 
     assert {test} == result

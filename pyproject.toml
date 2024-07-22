@@ -6,3 +6,12 @@ skip-magic-trailing-comma = true
 line_length = 100
 profile = "black"
 multi_line_output = 3
+
+[tool.ruff]
+line-length = 100
+builtins = ["_"]
+output-format = "grouped"
+
+[tool.ruff.lint]
+extend-select = ["B", "SIM", "PIE", "C4", "INT", "LOG"]
+extend-ignore = ["E402", "E731"]

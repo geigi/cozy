@@ -1,7 +1,7 @@
 from gi.repository import Gtk
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/progress_popover.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/progress_popover.ui')
 class ProgressPopover(Gtk.Popover):
     __gtype_name__ = 'ProgressPopover'
 

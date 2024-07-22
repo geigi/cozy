@@ -1,13 +1,12 @@
 import logging
-from typing import List, Set
 
-from peewee import fn, SqliteDatabase
+import inject
+from peewee import SqliteDatabase, fn
 
 from cozy.db.book import Book as BookModel
 from cozy.db.file import File
 from cozy.db.track import Track
 from cozy.db.track_to_file import TrackToFile
-from cozy.ext import inject
 from cozy.extensions.is_same_book import is_same_book
 from cozy.media.media_file import MediaFile
 from cozy.model.book import Book, BookIsEmpty
@@ -39,9 +38,9 @@ class DatabaseImporter:
     _db = inject.attr(SqliteDatabase)
 
     def __init__(self):
-        self._book_update_positions: List[BookUpdatePositionRequest] = []
+        self._book_update_positions: list[BookUpdatePositionRequest] = []
 
-    def insert_many(self, media_files: Set[MediaFile]):
+    def insert_many(self, media_files: set[MediaFile]):
         self._book_update_positions = []
 
         files = self._prepare_files_db_objects(media_files)
@@ -50,7 +49,7 @@ class DatabaseImporter:
         self._insert_tracks(tracks)
         self._update_book_positions()
 
-    def _prepare_files_db_objects(self, media_files: Set[MediaFile]) -> List[object]:
+    def _prepare_files_db_objects(self, media_files: set[MediaFile]) -> list[object]:
         files = []
 
         for media_file in media_files:
@@ -71,8 +70,8 @@ class DatabaseImporter:
         file.modified = media_file.modified
         file.save(only=file.dirty_fields)
 
-    def _prepare_track_db_objects(self, media_files: Set[MediaFile]) -> Set[TrackInsertRequest]:
-        book_db_objects: Set[BookModel] = set()
+    def _prepare_track_db_objects(self, media_files: set[MediaFile]) -> set[TrackInsertRequest]:
+        book_db_objects: set[BookModel] = set()
 
         for media_file in media_files:
             if not media_file:
@@ -150,7 +149,7 @@ class DatabaseImporter:
                                 position=0,
                                 rating=-1)
 
-    def _get_track_db_objects_for_media_file(self, media_file: MediaFile) -> List[Track]:
+    def _get_track_db_objects_for_media_file(self, media_file: MediaFile) -> list[Track]:
         all_track_mappings = TrackToFile.select().join(File).where(TrackToFile.file.path == media_file.path)
 
         for item in all_track_mappings:
@@ -163,17 +162,14 @@ class DatabaseImporter:
     def _is_chapter_count_in_db_different(self, media_file: MediaFile) -> bool:
         all_track_mappings = self._get_chapter_count_in_db(media_file)
 
-        if all_track_mappings != len(media_file.chapters):
-            return True
-        else:
-            return False
+        return all_track_mappings != len(media_file.chapters)
 
     def _get_chapter_count_in_db(self, media_file: MediaFile) -> int:
         all_track_mappings = TrackToFile.select().join(File).where(TrackToFile.file.path == media_file.path)
 
         return all_track_mappings.count()
 
-    def _insert_tracks(self, tracks: Set[TrackInsertRequest]):
+    def _insert_tracks(self, tracks: set[TrackInsertRequest]):
         for track in tracks:
             track_db = Track.insert(track.track_data).execute()
             TrackToFile.create(track=track_db, file=track.file, start_at=track.start_at)
@@ -201,7 +197,7 @@ class DatabaseImporter:
         for chapter in book_model.chapters:
             old_position = progress
             if completed_chapter_length + chapter.length > old_position:
-                chapter.position = chapter.start_position + ((old_position - completed_chapter_length) * 10 ** 9)
+                chapter.position = chapter.start_position + (old_position - completed_chapter_length)
                 book_model.position = chapter.id
                 return
             else:

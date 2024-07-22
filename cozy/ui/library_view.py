@@ -1,19 +1,18 @@
-import functools
 from typing import Optional
 
+import inject
 from gi.repository import Adw, Gtk
 
-from cozy.ext import inject
-from cozy.ui.widgets.book_element import BookElement
 from cozy.ui.delete_book_view import DeleteBookView
+from cozy.ui.widgets.book_card import BookCard
 from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.view_model.library_view_model import LibraryViewModel, LibraryViewMode
+from cozy.view_model.library_view_model import LibraryViewMode, LibraryViewModel
 
 READER_PAGE = "reader"
 AUTHOR_PAGE = "author"
 RECENT_PAGE = "recent"
 MAIN_BOOK_PAGE = "main"
-NO_MEDIA_PAGE = "no_media"
+WELCOME_PAGE = "welcome"
 
 NO_RECENT_PAGE = "no_recent"
 BOOKS_PAGE = "books"
@@ -24,7 +23,7 @@ class LibraryView:
 
     def __init__(self, builder: Gtk.Builder):
         self._builder = builder
-        self._connected_book_element: Optional[BookElement] = None
+        self._connected_book_card: Optional[BookCard] = None
 
         self._get_ui_elements()
         self._connect_ui_elements()
@@ -88,14 +87,16 @@ class LibraryView:
         self._view_model.library_view_mode = view_mode
 
     def populate_book_box(self):
-        self._book_box.remove_all_children()
+        children = list(self._book_box)  # Handy PyGObject feature to get children
+        for child in children:
+            self._book_box.remove(child)
 
         for book in self._view_model.books:
-            book_element = BookElement(book)
-            book_element.connect("play-pause-clicked", self._play_book_clicked)
-            book_element.connect("open-book-overview", self._open_book_overview_clicked)
-            book_element.connect("book-removed", self._on_book_removed)
-            self._book_box.append(book_element)
+            book_card = BookCard(book)
+            book_card.connect("play-pause-clicked", self._play_book_clicked)
+            book_card.connect("open-book-overview", self._open_book_overview_clicked)
+            book_card.connect("remove-book", self._on_remove_book)
+            self._book_box.append(book_card)
 
     def populate_author(self):
         self._author_box.populate(self._view_model.authors)
@@ -112,7 +113,7 @@ class LibraryView:
         books_view_page = BOOKS_PAGE
 
         if len(self._view_model.books) < 1:
-            main_view_page = NO_MEDIA_PAGE
+            main_view_page = WELCOME_PAGE
             visible_child_name = RECENT_PAGE
         elif view_mode == LibraryViewMode.CURRENT:
             visible_child_name = RECENT_PAGE
@@ -166,11 +167,11 @@ class LibraryView:
 
         return True
 
-    def _on_book_removed(self, _, book):
+    def _on_remove_book(self, _, book):
         if self._view_model.book_files_exist(book):
-            DeleteBookView(self._on_book_removed_clicked, book).present()
+            DeleteBookView(self._on_remove_book_response, book).present()
 
-    def _on_book_removed_clicked(self, _, response, book):
+    def _on_remove_book_response(self, _, response, book):
         if response != "delete":
             return
 
@@ -184,24 +185,24 @@ class LibraryView:
             self._view_model.remove_book(book)
 
     def _current_book_in_playback(self):
-        if self._connected_book_element:
-            self._connected_book_element.set_playing(False)
+        if self._connected_book_card:
+            self._connected_book_card.set_playing(False)
 
-        self._connected_book_element = None
+        self._connected_book_card = None
 
         index = 0
-        while book_element := self._book_box.get_child_at_index(index):
-            if book_element.book == self._view_model.current_book_in_playback:
-                self._connected_book_element = book_element
+        while book_card := self._book_box.get_child_at_index(index):
+            if book_card.book == self._view_model.current_book_in_playback:
+                self._connected_book_card = book_card
                 break
             index += 1
 
     def _playing(self):
-        if self._connected_book_element:
-            self._connected_book_element.set_playing(self._view_model.playing)
+        if self._connected_book_card:
+            self._connected_book_card.set_playing(self._view_model.playing)
 
     def _on_book_progress_changed(self):
-        if not self._connected_book_element:
+        if not self._connected_book_card:
             return
 
-        self._connected_book_element.update_progress()
+        self._connected_book_card.update_progress()

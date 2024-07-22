@@ -1,13 +1,12 @@
 import logging
 
-from peewee import SqliteDatabase, DoesNotExist
+from gi.repository import Gst
+from peewee import DoesNotExist, SqliteDatabase
 
 from cozy.db.file import File
 from cozy.db.track import Track as TrackModel
 from cozy.db.track_to_file import TrackToFile
 from cozy.model.chapter import Chapter
-
-NS_TO_SEC = 10 ** 9
 
 log = logging.getLogger("TrackModel")
 
@@ -28,7 +27,7 @@ class Track(Chapter):
         except DoesNotExist:
             log.error("Inconsistent DB, TrackToFile object is missing. Deleting this track.")
             self._db_object.delete_instance(recursive=True, delete_nullable=False)
-            raise TrackInconsistentData
+            raise TrackInconsistentData from None
 
     @property
     def name(self):
@@ -75,7 +74,7 @@ class Track(Chapter):
 
     @property
     def end_position(self) -> int:
-        return self.start_position + (int(self.length) * NS_TO_SEC)
+        return self.start_position + self.length
 
     @property
     def file(self):
@@ -96,11 +95,11 @@ class Track(Chapter):
 
     @property
     def length(self) -> float:
-        return self._db_object.length
+        return int(self._db_object.length * Gst.SECOND)
 
     @length.setter
     def length(self, new_length: float):
-        self._db_object.length = new_length
+        self._db_object.length = new_length / Gst.SECOND
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property

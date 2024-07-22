@@ -1,5 +1,4 @@
 import logging
-import os
 import platform
 import sys
 import threading
@@ -9,6 +8,7 @@ from traceback import format_exception
 import distro
 from gi.repository import Adw, GLib
 
+from cozy import __version__
 from cozy.app_controller import AppController
 from cozy.control.db import init_db
 from cozy.control.mpris import MPRIS
@@ -17,7 +17,6 @@ from cozy.db.storage import Storage
 from cozy.report import reporter
 from cozy.ui.main_view import CozyUI
 from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.version import __version__
 
 log = logging.getLogger("application")
 
@@ -25,6 +24,7 @@ log = logging.getLogger("application")
 class Application(Adw.Application):
     ui: CozyUI
     app_controller: AppController
+    _selected_book = None
 
     def __init__(self, pkgdatadir: str):
         self.pkgdatadir = pkgdatadir
@@ -39,10 +39,10 @@ class Application(Adw.Application):
 
     def do_startup(self):
         log.info(distro.linux_distribution(full_distribution_name=False))
-        log.info(f"Starting up cozy {__version__}")
-        log.info(f"libadwaita version: {Adw._version}")
+        log.info("Starting up cozy %s", __version__)
+        log.info("libadwaita version: %s", Adw._version)
 
-        self.ui = CozyUI(self.pkgdatadir, self, __version__)
+        self.ui = CozyUI(self, __version__)
         Adw.Application.do_startup(self)
         init_db()
         self.ui.startup()
@@ -56,16 +56,23 @@ class Application(Adw.Application):
         if Settings.get().first_start:
             Settings.update(first_start=False).execute()
 
-            path = os.path.join(Path.home(), _("Audiobooks"))
-            Storage.create(path=path, default=True)
-
-            os.makedirs(path, exist_ok=True)
+            audiobooks_path = Path.home() / _("Audiobooks")
+            audiobooks_path.mkdir(exist_ok=True)
+            Storage.create(path=str(audiobooks_path), default=True)
 
         self.add_window(self.ui.window)
 
         if platform.system().lower() == "linux":
             mpris = MPRIS(self)
             mpris._on_current_changed()
+
+    @property
+    def selected_book(self):
+        return self._selected_book
+
+    @selected_book.setter
+    def selected_book(self, new_book) -> None:
+        self._selected_book = new_book
 
     def handle_exception(self, _):
         print("handle exception")
@@ -82,7 +89,7 @@ class Application(Adw.Application):
 
     def quit(self):
         self.app_controller.quit()
-        super(Application, self).quit()
+        super().quit()
 
     @staticmethod
     def init_custom_widgets():

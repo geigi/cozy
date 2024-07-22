@@ -1,11 +1,12 @@
+from test.cozy.mocks import ApplicationSettingsMock
+
+import inject
 import pytest
 from peewee import SqliteDatabase
 
 from cozy.application_settings import ApplicationSettings
-from cozy.ext import inject
 from cozy.extensions.set import split_strings_to_set
 from cozy.model.settings import Settings
-from test.cozy.mocks import ApplicationSettingsMock
 
 
 @pytest.fixture(autouse=True)
@@ -83,7 +84,7 @@ def test_rebase_path():
     from cozy.model.library import Library
 
     library = Library()
-    chapters = {chapter for chapter in library.chapters if chapter.file.startswith("20.000 Meilen unter dem Meer")}
+    chapters = {chapter for chapter in library.chapters if chapter.file.startswith("20.000 Meilen unter dem Meer")}  # noqa: F841
     library.rebase_path("20.000 Meilen unter dem Meer", "new path")
 
 
@@ -96,7 +97,7 @@ def test_empty_last_book_returns_none():
     assert library.last_played_book is None
 
 
-def test_empty_last_book_returns_none():
+def test_library_last_book_returns_the_book_it_was_set_to():
     from cozy.model.library import Library
 
     library = Library()

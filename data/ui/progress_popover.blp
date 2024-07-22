@@ -1,0 +1,27 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ProgressPopover: Popover {
+  Adw.Clamp {
+    margin-start: 15;
+    margin-end: 15;
+    margin-top: 15;
+    margin-bottom: 15;
+    maximum-size: 300;
+    tightening-threshold: 250;
+
+    Box {
+      orientation: vertical;
+      spacing: 10;
+
+      Label progress_label {
+        ellipsize: end;
+        xalign: 0;
+      }
+
+      ProgressBar progress_bar {
+        fraction: 0.5;
+      }
+    }
+  }
+}
