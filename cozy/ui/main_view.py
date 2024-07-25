@@ -91,6 +91,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         Init all app actions.
         """
         self.create_action("about", self.show_about_window, ["F1"])
+        self.create_action("reset_book", self.reset_book)
         self.create_action("remove_book", self.remove_book)
         self.create_action("mark_book_as_read", self.mark_book_as_read)
         self.create_action("jump_to_book_folder", self.jump_to_book_folder)
@@ -129,6 +130,14 @@ class CozyUI(EventSender, metaclass=Singleton):
             self.app.set_accels_for_action(f"app.{name}", shortcuts)
 
         return action
+
+    def refresh_library_filters(self):
+        self._library_view.refresh_filters()
+
+    def reset_book(self, *_) -> None:
+        if self.app.selected_book is not None:
+            self.app.selected_book.reset()
+        self.refresh_library_filters()
 
     def remove_book(self, *_) -> None:
         if self.app.selected_book is not None:
