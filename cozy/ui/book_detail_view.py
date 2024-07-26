@@ -345,14 +345,3 @@ class BookDetailView(Adw.NavigationPage):
 
     def _play_book_clicked(self, _):
         self._view_model.play_book()
-
-    def _reset_book_clicked(self, _):
-        self._view_model.reset_book()
-        self._update_buttons()
-        self._main_view.refresh_library_filters()
-
-    def _update_buttons(self):
-        if self._view_model._book.last_played == 0:
-            self.reset_button.hide()
-        else:
-            self.reset_button.show()
