@@ -345,7 +345,6 @@ class BookDetailView(Adw.NavigationPage):
 
     def _play_book_clicked(self, _):
         self._view_model.play_book()
-<<<<<<< HEAD
 
     def _reset_book_clicked(self, _):
         self._view_model.reset_book()
@@ -357,5 +356,3 @@ class BookDetailView(Adw.NavigationPage):
             self.reset_button.hide()
         else:
             self.reset_button.show()
-=======
->>>>>>> parent of 32d69f71 (Add "Reset" button to book detail view)
