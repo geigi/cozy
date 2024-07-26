@@ -15,13 +15,16 @@ from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
+
 from cozy.ui.about_window import AboutWindow
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
 from cozy.ui.widgets.first_import_button import FirstImportButton
+
 from cozy.view_model.storages_view_model import StoragesViewModel
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
+from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 
 log = logging.getLogger("ui")
 
@@ -38,6 +41,7 @@ class CozyUI(EventSender, metaclass=Singleton):
     _player: Player = inject.attr(Player)
     _storages_view_model: StoragesViewModel = inject.attr(StoragesViewModel)
     _playback_control_view_model: PlaybackControlViewModel = inject.attr(PlaybackControlViewModel)
+    _playback_speed_view_model: PlaybackSpeedViewModel = inject.attr(PlaybackSpeedViewModel)
 
     _library_view: LibraryView
 
@@ -106,6 +110,9 @@ class CozyUI(EventSender, metaclass=Singleton):
 
         self.create_action("volume_up", self.volume_up, ["Up"])
         self.create_action("volume_down", self.volume_down, ["Down"])
+
+        self.create_action("speed_up", self.speed_up, ['plus', 'equal'])
+        self.create_action("speed_down", self.speed_down, ['minus', 'hyphen'])
 
         self.scan_action = self.create_action("scan", self.scan)
         self.play_pause_action = self.create_action("play_pause", self.play_pause, ["space"])
@@ -185,6 +192,12 @@ class CozyUI(EventSender, metaclass=Singleton):
     def volume_down(self, *_):
         self._player.volume_down()
         self.app.app_controller.media_controller._on_volume_changed()
+
+    def speed_up(self, *_):
+        self._playback_speed_view_model.speed_up()
+
+    def speed_down(self, *_):
+        self._playback_speed_view_model.speed_down()
 
     def block_ui_buttons(self, block, scan=False):
         """
