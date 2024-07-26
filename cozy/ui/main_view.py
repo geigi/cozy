@@ -104,6 +104,9 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.create_action("seek_forward", self.seek_forward, ["Right"])
         self.create_action("seek_rewind", self.seek_rewind, ["Left"])
 
+        self.create_action("volume_up", self.volume_up, ["Up"])
+        self.create_action("volume_down", self.volume_down, ["Down"])
+
         self.scan_action = self.create_action("scan", self.scan)
         self.play_pause_action = self.create_action("play_pause", self.play_pause, ["space"])
 
@@ -174,6 +177,14 @@ class CozyUI(EventSender, metaclass=Singleton):
 
     def seek_rewind(self, *_):
         self._playback_control_view_model.rewind()
+
+    def volume_up(self, *_):
+        self._player.volume_up()
+        self.app.app_controller.media_controller._on_volume_changed()
+
+    def volume_down(self, *_):
+        self._player.volume_down()
+        self.app.app_controller.media_controller._on_volume_changed()
 
     def block_ui_buttons(self, block, scan=False):
         """

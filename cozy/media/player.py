@@ -455,6 +455,12 @@ class Player(EventSender):
         if state == Gst.State.PLAYING:
             self._gst_player.play()
 
+    def volume_up(self):
+        self.volume = min(1.0, self.volume + 0.1)
+
+    def volume_down(self):
+        self.volume = max(0, self.volume - 0.1)
+
     def destroy(self):
         self._gst_player.stop()
 
