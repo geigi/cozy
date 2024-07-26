@@ -1,4 +1,4 @@
-from gi.repository import Gdk, GObject, Gtk
+from gi.repository import GObject, Gtk
 
 from cozy.control.time_format import ns_to_time
 
