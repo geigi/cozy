@@ -114,8 +114,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.create_action("speed_up", self.speed_up, ['plus', 'equal'])
         self.create_action("speed_down", self.speed_down, ['minus', 'hyphen'])
 
-        self.create_action("previous_chapter", self.previous_chapter, ["Page_Down", "bracketleft"])
-        self.create_action("next_chapter", self.next_chapter, ["Page_Up", "bracketright"])
+        self.create_action("previous_chapter", self.previous_chapter, ["Page_Down", "bracketleft", "braceleft"])
+        self.create_action("next_chapter", self.next_chapter, ["Page_Up", "bracketright", "braceright"])
 
         self.scan_action = self.create_action("scan", self.scan)
         self.play_pause_action = self.create_action("play_pause", self.play_pause, ["space"])
