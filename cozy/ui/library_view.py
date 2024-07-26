@@ -140,7 +140,6 @@ class LibraryView:
 
         self._invalidate_filters()
 
-
     def _invalidate_filters(self):
         self._book_box.invalidate_filter()
         self._book_box.invalidate_sort()
