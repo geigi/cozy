@@ -21,6 +21,7 @@ from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
 from cozy.ui.widgets.first_import_button import FirstImportButton
 from cozy.view_model.storages_view_model import StoragesViewModel
+from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 
 log = logging.getLogger("ui")
 
@@ -36,6 +37,7 @@ class CozyUI(EventSender, metaclass=Singleton):
     _files: Files = inject.attr(Files)
     _player: Player = inject.attr(Player)
     _storages_view_model: StoragesViewModel = inject.attr(StoragesViewModel)
+    _playback_control_view_model: PlaybackControlViewModel = inject.attr(PlaybackControlViewModel)
 
     _library_view: LibraryView
 
@@ -92,10 +94,16 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         self.create_action("about", self.show_about_window, ["F1"])
         self.create_action("remove_book", self.remove_book)
+
         self.create_action("mark_book_as_read", self.mark_book_as_read)
         self.create_action("jump_to_book_folder", self.jump_to_book_folder)
+
         self.create_action("prefs", self.show_preferences_window, ["<primary>comma"])
         self.create_action("quit", self.quit, ["<primary>q", "<primary>w"])
+
+        self.create_action("seek_forward", self.seek_forward, ["Right"])
+        self.create_action("seek_rewind", self.seek_rewind, ["Left"])
+
         self.scan_action = self.create_action("scan", self.scan)
         self.play_pause_action = self.create_action("play_pause", self.play_pause, ["space"])
 
@@ -160,6 +168,12 @@ class CozyUI(EventSender, metaclass=Singleton):
 
     def play_pause(self, *_):
         self._player.play_pause()
+
+    def seek_forward(self, *_):
+        self._playback_control_view_model.forward()
+
+    def seek_rewind(self, *_):
+        self._playback_control_view_model.rewind()
 
     def block_ui_buttons(self, block, scan=False):
         """

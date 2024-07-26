@@ -94,9 +94,11 @@ class PlaybackControlViewModel(Observable, EventSender):
 
     def rewind(self):
         self._player.rewind()
+        self._player._emit_tick()
 
     def forward(self):
         self._player.forward()
+        self._player._emit_tick()
 
     def open_book_detail(self):
         if self.book:
