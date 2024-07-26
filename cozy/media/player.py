@@ -601,7 +601,7 @@ class Player(EventSender):
 
         self._book.current_chapter.position = self._book.current_chapter.start_position
         print('index', index_current_chapter)
-        if 0 > index_current_chapter - 1:
+        if index_current_chapter - 1 < 0:
             log.info("Book reached start, cannot rewind further.")
 
             chapter = self._book.chapters[0]
