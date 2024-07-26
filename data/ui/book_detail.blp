@@ -177,53 +177,27 @@ template $BookDetail: Adw.NavigationPage {
                     }
                   }
 
-Box button_box {
-                    orientation: horizontal;
-                    Button play_button {
-                      halign: start;
-                      valign: end;
-                      vexpand: true;
-                      margin-top: 12;
-                      focusable: true;
-                      receives-default: true;
-                      tooltip-text: _("Start/Stop playback");
+                  Button play_button {
+                    halign: start;
+                    valign: end;
+                    vexpand: true;
+                    margin-top: 12;
+                    focusable: true;
+                    receives-default: true;
+                    tooltip-text: _("Start/Stop playback");
 
-                      accessibility {
-                        label: _("Start or pause the playback");
-                      }
-
-                      styles [
-                        "suggested-action",
-                        "pill",
-                      ]
-
-                      Adw.ButtonContent play_icon {
-                        label: _("Start");
-                        icon-name: 'media-playback-start-symbolic';
-                      }
+                    accessibility {
+                      label: _("Start or pause the playback");
                     }
 
-                    Button reset_button {
-                      halign: start;
-                      valign: end;
-                      vexpand: true;
-                      margin-start: 10;
-                      margin-top: 12;
-                      focusable: true;
-                      tooltip-text: _("Reset playback status");
+                    styles [
+                      "suggested-action",
+                      "pill",
+                    ]
 
-                      accessibility {
-                        label: _("Reset playback status");
-                      }
-
-                      styles [
-                        "pill",
-                      ]
-
-                      Adw.ButtonContent {
-                        label: _("Reset");
-                        icon-name: 'object-rotate-left-symbolic';
-                      }
+                    Adw.ButtonContent play_icon {
+                      label: _("Start");
+                      icon-name: 'media-playback-start-symbolic';
                     }
                   }
                 }

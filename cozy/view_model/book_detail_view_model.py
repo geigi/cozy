@@ -156,11 +156,6 @@ class BookDetailViewModel(Observable, EventSender):
             chapter.position = chapter.start_position
         self._player.play_pause_chapter(self._book, chapter)
 
-    def reset_book(self):
-        self._book.last_played = 0
-        if self.playing:
-            self._player.play_pause_book(self.book)
-
     def _on_player_event(self, event, message):
         if not self.book:
             return

@@ -15,7 +15,6 @@ from cozy.report import reporter
 from cozy.ui.chapter_element import ChapterElement
 from cozy.ui.toaster import ToastNotifier
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
-from cozy.ui import main_view
 
 log = logging.getLogger(__name__)
 
@@ -91,8 +90,6 @@ class BookDetailView(Adw.NavigationPage):
     play_button: Gtk.Button = Gtk.Template.Child()
     play_icon: Adw.ButtonContent = Gtk.Template.Child()
 
-    reset_button: Gtk.Button = Gtk.Template.Child()
-
     book_label: Gtk.Label = Gtk.Template.Child()
     author_label: Gtk.Label = Gtk.Template.Child()
     total_label: Gtk.Label = Gtk.Template.Child()
@@ -118,8 +115,6 @@ class BookDetailView(Adw.NavigationPage):
 
     def __init__(self):
         super().__init__()
-
-        self._main_view = main_view.CozyUI()
 
         self._chapters_event = Event()
         self._chapters_thread: Thread | None = None
@@ -153,7 +148,6 @@ class BookDetailView(Adw.NavigationPage):
 
     def _connect_widgets(self):
         self.play_button.connect("clicked", self._play_book_clicked)
-        self.reset_button.connect("clicked", self._reset_book_clicked)
 
     def _on_book_changed(self):
         book = self._view_model.book
@@ -181,11 +175,8 @@ class BookDetailView(Adw.NavigationPage):
         self._on_progress_changed()
         self._display_external_section()
 
-        self._update_buttons()
-
     def _on_play_changed(self):
         playing = self._view_model.playing
-        self._update_buttons()
 
         if playing:
             self.play_icon.set_icon_name("media-playback-pause-symbolic")
@@ -354,6 +345,7 @@ class BookDetailView(Adw.NavigationPage):
 
     def _play_book_clicked(self, _):
         self._view_model.play_book()
+<<<<<<< HEAD
 
     def _reset_book_clicked(self, _):
         self._view_model.reset_book()
@@ -365,3 +357,5 @@ class BookDetailView(Adw.NavigationPage):
             self.reset_button.hide()
         else:
             self.reset_button.show()
+=======
+>>>>>>> parent of 32d69f71 (Add "Reset" button to book detail view)
