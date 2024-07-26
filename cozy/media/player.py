@@ -589,6 +589,32 @@ class Player(EventSender):
             chapter.position = chapter.start_position
             self.play_pause_chapter(self._book, chapter)
 
+    def _previous_chapter(self):
+        if not self._book:
+            log.error("Cannot play next chapter because no book reference is stored.")
+            reporter.error(
+                "player", "Cannot play next chapter because no book reference is stored."
+            )
+            return
+
+        index_current_chapter = self._book.chapters.index(self._book.current_chapter)
+
+        self._book.current_chapter.position = self._book.current_chapter.start_position
+        print('index', index_current_chapter)
+        if 0 > index_current_chapter - 1:
+            log.info("Book reached start, cannot rewind further.")
+
+            chapter = self._book.chapters[0]
+            chapter.position = chapter.start_position
+            print(chapter.position, index_current_chapter)
+            self._load_chapter(chapter)
+            self.pause()
+            self._emit_tick()
+        else:
+            chapter = self._book.chapters[index_current_chapter - 1]
+            chapter.position = chapter.start_position
+            self.play_pause_chapter(self._book, chapter)
+
     def _on_importer_event(self, event: str, message):
         if event == "scan" and message == ScanStatus.SUCCESS:
             log.info("Reloading current book")
