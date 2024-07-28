@@ -98,7 +98,8 @@ class BookDetailView(Adw.NavigationPage):
     book_progress_ring: ProgressRing = Gtk.Template.Child()
 
     album_art: Gtk.Picture = Gtk.Template.Child()
-    album_art_container: Gtk.Box = Gtk.Template.Child()
+    album_art_container: Gtk.Stack = Gtk.Template.Child()
+    fallback_icon: Gtk.Image = Gtk.Template.Child()
 
     unavailable_banner: Adw.Banner = Gtk.Template.Child()
 
@@ -310,16 +311,18 @@ class BookDetailView(Adw.NavigationPage):
             self.available_offline_action.handler_unblock_by_func(self._download_switch_changed)
 
     def _set_cover_image(self, book: Book):
-        self.album_art_container.set_visible(False)
 
         paintable = self._artwork_cache.get_cover_paintable(
             book, self.get_scale_factor(), ALBUM_ART_SIZE
         )
 
         if paintable:
-            self.album_art_container.set_visible(True)
             self.album_art.set_paintable(paintable)
             self.album_art.set_overflow(True)
+            self.album_art_container.set_visible_child(self.album_art)
+        else:
+            self.fallback_icon.set_from_icon_name("book-open-variant-symbolic")
+            self.album_art_container.set_visible_child(self.fallback_icon)
 
     def _interrupt_chapters_jobs(self):
         self._chapters_job_locked = True

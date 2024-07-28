@@ -62,7 +62,7 @@ template $BookDetail: Adw.NavigationPage {
                 margin-bottom: 18;
                 halign: start;
 
-                Box album_art_container {
+                Stack album_art_container {
                   halign: center;
                   width-request: 200;
                   height-request: 200;
@@ -71,6 +71,10 @@ template $BookDetail: Adw.NavigationPage {
                     styles [
                       "book_detail_art",
                     ]
+                  }
+
+                  Image fallback_icon {
+                    pixel-size: 200;
                   }
 
                   styles [
