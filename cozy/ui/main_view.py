@@ -105,26 +105,41 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.create_action("prefs", self.show_preferences_window, ["<primary>comma"])
         self.create_action("quit", self.quit, ["<primary>q", "<primary>w"])
 
-        self.create_action("seek_forward", self.seek_forward, ["Right"])
-        self.create_action("seek_rewind", self.seek_rewind, ["Left"])
-
-        self.create_action("volume_up", self.volume_up, ["Up"])
-        self.create_action("volume_down", self.volume_down, ["Down"])
-
-        self.create_action("speed_up", self.speed_up, ['plus', 'equal'])
-        self.create_action("speed_down", self.speed_down, ['minus', 'hyphen'])
-
-        self.create_action("previous_chapter", self.previous_chapter, ["Page_Down", "bracketleft", "braceleft"])
-        self.create_action("next_chapter", self.next_chapter, ["Page_Up", "bracketright", "braceright"])
-
         self.scan_action = self.create_action("scan", self.scan)
         self.play_pause_action = self.create_action("play_pause", self.play_pause, ["space"])
+
+        self.seek_forward_action = self.create_action("seek_forward", self.seek_forward, ["Right"])
+        self.seek_rewind_action = self.create_action("seek_rewind", self.seek_rewind, ["Left"])
+
+        self.volume_up_action = self.create_action("volume_up", self.volume_up, ["Up"])
+        self.volume_down_action = self.create_action("volume_down", self.volume_down, ["Down"])
+
+        self.speed_up_action = self.create_action("speed_up", self.speed_up, ['plus', 'equal'])
+        self.speed_down_action = self.create_action("speed_down", self.speed_down, ['minus', 'hyphen'])
+
+        self.previous_chapter_action = self.create_action("previous_chapter", self.previous_chapter, ["Page_Down", "bracketleft", "braceleft"])
+        self.next_chapter_action = self.create_action("next_chapter", self.next_chapter, ["Page_Up", "bracketright", "braceright"])
 
         self.hide_offline_action = Gio.SimpleAction.new_stateful(
             "hide_offline", None, GLib.Variant.new_boolean(self.application_settings.hide_offline)
         )
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
+
+    def set_keyboard_shortcuts_enabled(self, enabled):
+        self.play_pause_action.set_enabled(enabled)
+
+        self.seek_forward_action.set_enabled(enabled)
+        self.seek_rewind_action.set_enabled(enabled)
+
+        self.volume_up_action.set_enabled(enabled)
+        self.volume_down_action.set_enabled(enabled)
+
+        self.speed_up_action.set_enabled(enabled)
+        self.speed_down_action.set_enabled(enabled)
+
+        self.previous_chapter_action.set_enabled(enabled)
+        self.next_chapter_action.set_enabled(enabled)
 
     def __init_components(self):
         path = self._settings.default_location.path if self._settings.storage_locations else None
