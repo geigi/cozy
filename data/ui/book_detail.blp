@@ -120,59 +120,19 @@ template $BookDetail: Adw.NavigationPage {
                   ProgressBar book_progress_bar {
                   }
 
-                  Grid {
+                  Box {
+                    orientation: horizontal;
                     hexpand: true;
-                    row-spacing: 3;
-                    column-spacing: 20;
-
-                    Label {
-                      halign: start;
-                      hexpand: true;
-                      label: _("Remaining");
-
-                      styles [
-                        "dim-label",
-                      ]
-
-                      layout {
-                        column: 0;
-                        row: 0;
-                      }
-                    }
+                    halign: fill;
 
                     Label remaining_label {
-                      hexpand: true;
-                      xalign: 0;
-
-                      layout {
-                        column: 1;
-                        row: 0;
-                      }
-                    }
-
-                    Label {
                       halign: start;
-                      hexpand: true;
-                      label: _("Total");
-
-                      styles [
-                        "dim-label",
-                      ]
-
-                      layout {
-                        column: 0;
-                        row: 1;
-                      }
                     }
 
                     Label total_label{
+                      halign: end;
                       hexpand: true;
-                      xalign: 0;
-
-                      layout {
-                        column: 1;
-                        row: 1;
-                      }
+                      label: "loading...";
                     }
                   }
 
