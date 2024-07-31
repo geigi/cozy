@@ -101,6 +101,11 @@ class BookDetailView(Adw.NavigationPage):
 
     def _connect_widgets(self):
         self.play_button.connect("clicked", self._play_book_clicked)
+        self.connect("showing", self._refresh_page)
+
+    def _refresh_page(self, *_):
+        # should probably combine with _on_book_changed later
+        self._on_progress_changed()
 
     def _on_book_changed(self):
         book = self._view_model.book
