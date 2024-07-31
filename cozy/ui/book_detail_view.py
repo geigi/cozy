@@ -47,7 +47,7 @@ class BookDetailView(Adw.NavigationPage):
     book_label: Gtk.Label = Gtk.Template.Child()
     author_label: Gtk.Label = Gtk.Template.Child()
     total_label: Gtk.Label = Gtk.Template.Child()
-    remaining_label: Gtk.Label = Gtk.Template.Child()
+    progress_label: Gtk.Label = Gtk.Template.Child()
 
     book_progress_bar: Gtk.ProgressBar = Gtk.Template.Child()
 
@@ -173,7 +173,7 @@ class BookDetailView(Adw.NavigationPage):
         self.total_label.set_text(self._view_model.total_text)
 
     def _on_progress_changed(self):
-        self.remaining_label.set_text(self._view_model.remaining_text)
+        self.progress_label.set_text(self._view_model.progress_text)
         self.book_progress_bar.set_fraction(self._view_model.progress_percent)
 
     def _on_lock_ui_changed(self):
