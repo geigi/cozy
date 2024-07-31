@@ -60,7 +60,8 @@ template $BookDetail: Adw.NavigationPage {
                 margin-end: 18;
                 margin-top: 12;
                 margin-bottom: 18;
-                halign: start;
+                halign: fill;
+                hexpand: true;
 
                 Stack album_art_container {
                   halign: center;
@@ -89,6 +90,7 @@ template $BookDetail: Adw.NavigationPage {
                   spacing: 6;
                   vexpand: false;
 
+
                   Label book_label {
                     halign: start;
                     label: bind template.book_title;
@@ -115,71 +117,65 @@ template $BookDetail: Adw.NavigationPage {
                     ]
                   }
 
-                  Box {
-                    valign: end;
-                    margin-top: 18;
-                    spacing: 6;
+                  ProgressBar book_progress_bar {
+                  }
 
-                    $ProgressRing book_progress_ring {
-                      valign: center;
+                  Grid {
+                    hexpand: true;
+                    row-spacing: 3;
+                    column-spacing: 20;
+
+                    Label {
+                      halign: start;
+                      hexpand: true;
+                      label: _("Remaining");
+
+                      styles [
+                        "dim-label",
+                      ]
+
+                      layout {
+                        column: 0;
+                        row: 0;
+                      }
                     }
 
-                    Grid {
+                    Label remaining_label {
                       hexpand: true;
-                      row-spacing: 3;
-                      column-spacing: 20;
+                      xalign: 0;
 
-                      Label {
-                        halign: start;
-                        hexpand: true;
-                        label: _("Remaining");
-
-                        styles [
-                          "dim-label",
-                        ]
-
-                        layout {
-                          column: 0;
-                          row: 0;
-                        }
+                      layout {
+                        column: 1;
+                        row: 0;
                       }
+                    }
 
-                      Label remaining_label {
-                        hexpand: true;
-                        xalign: 0;
+                    Label {
+                      halign: start;
+                      hexpand: true;
+                      label: _("Total");
 
-                        layout {
-                          column: 1;
-                          row: 0;
-                        }
+                      styles [
+                        "dim-label",
+                      ]
+
+                      layout {
+                        column: 0;
+                        row: 1;
                       }
+                    }
 
-                      Label {
-                        halign: start;
-                        hexpand: true;
-                        label: _("Total");
+                    Label total_label{
+                      hexpand: true;
+                      xalign: 0;
 
-                        styles [
-                          "dim-label",
-                        ]
-
-                        layout {
-                          column: 0;
-                          row: 1;
-                        }
-                      }
-
-                      Label total_label{
-                        hexpand: true;
-                        xalign: 0;
-
-                        layout {
-                          column: 1;
-                          row: 1;
-                        }
+                      layout {
+                        column: 1;
+                        row: 1;
                       }
                     }
                   }
+
 
                   Button play_button {
                     halign: start;

@@ -19,57 +19,11 @@ from cozy.view_model.book_detail_view_model import BookDetailViewModel
 log = logging.getLogger(__name__)
 
 ALBUM_ART_SIZE: Final[int] = 256
-PROGRESS_RING_LINE_WIDTH: Final[int] = 5
 
 
 def call_in_main_thread(*args) -> None:
     # TODO: move this elsewhere, it might come useful
     GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, *args)
-
-
-class ProgressRing(Gtk.Widget):
-    __gtype_name__ = "ProgressRing"
-
-    progress = GObject.Property(type=float, default=0.0)
-
-    def __init__(self) -> None:
-        super().__init__()
-
-        self._style_manager = Adw.StyleManager()
-        self._style_manager.connect("notify::accent-color", self.redraw)
-        self.connect("notify::progress", self.redraw)
-
-    def redraw(self, *_) -> None:
-        self.queue_draw()
-
-    def do_measure(self, *_) -> tuple[int, int, int, int]:
-        return (40, 40, -1, -1)
-
-    def do_snapshot(self, snapshot: Gtk.Snapshot) -> None:
-        size = self.get_allocated_height()
-        radius = (size - 8) / 2.0
-
-        context = snapshot.append_cairo(Graphene.Rect().init(0, 0, size, size))
-
-        context.arc(size / 2, size / 2, radius, 0, 2 * PI)
-        context.set_source_rgba(*self.get_dim_color())
-        context.set_line_width(PROGRESS_RING_LINE_WIDTH)
-        context.stroke()
-
-        context.arc(size / 2, size / 2, radius, -0.5 * PI, self.progress * 2 * PI - (0.5 * PI))
-        context.set_source_rgb(*self.get_accent_color())
-        context.set_line_width(PROGRESS_RING_LINE_WIDTH)
-        context.set_line_cap(cairo.LineCap.ROUND)
-        context.stroke()
-
-    def get_dim_color(self) -> tuple[int, int, int, int]:
-        color = self.get_color()
-        return color.red, color.green, color.blue, 0.15
-
-    def get_accent_color(self) -> tuple[int, int, int]:
-        color = self._style_manager.get_accent_color_rgba()
-        return color.red, color.green, color.blue
-
 
 class ChaptersListBox(Adw.PreferencesGroup):
     def __init__(self, title: str):
@@ -95,7 +49,7 @@ class BookDetailView(Adw.NavigationPage):
     total_label: Gtk.Label = Gtk.Template.Child()
     remaining_label: Gtk.Label = Gtk.Template.Child()
 
-    book_progress_ring: ProgressRing = Gtk.Template.Child()
+    book_progress_bar: Gtk.ProgressBar = Gtk.Template.Child()
 
     album_art: Gtk.Picture = Gtk.Template.Child()
     album_art_container: Gtk.Stack = Gtk.Template.Child()
@@ -220,7 +174,7 @@ class BookDetailView(Adw.NavigationPage):
 
     def _on_progress_changed(self):
         self.remaining_label.set_text(self._view_model.remaining_text)
-        self.book_progress_ring.progress = self._view_model.progress_percent
+        self.book_progress_bar.set_fraction(self._view_model.progress_percent)
 
     def _on_lock_ui_changed(self):
         self.available_offline_action.set_enabled(not self._view_model.lock_ui)

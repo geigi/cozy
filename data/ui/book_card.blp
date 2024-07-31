@@ -11,14 +11,14 @@ template $BookCard: FlowBoxChild {
         valign: end;
         halign: end;
 
-        $BookElementPlayButton play_button {
+        Button play_button {
           width-request: 54;
           height-request: 54;
           margin-end: 18;
           margin-bottom: 18;
           focusable: true;
           focus-on-click: false;
-          icon_name: "media-playback-start-symbolic";
+          icon-name: "media-playback-start-symbolic";
           tooltip-text: _("Start/Stop playback");
 
           clicked => $_play_pause();
