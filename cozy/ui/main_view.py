@@ -15,12 +15,16 @@ from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
+
 from cozy.ui.about_window import AboutWindow
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
 from cozy.ui.widgets.first_import_button import FirstImportButton
+
 from cozy.view_model.storages_view_model import StoragesViewModel
+from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
+from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 
 log = logging.getLogger("ui")
 
@@ -36,6 +40,8 @@ class CozyUI(EventSender, metaclass=Singleton):
     _files: Files = inject.attr(Files)
     _player: Player = inject.attr(Player)
     _storages_view_model: StoragesViewModel = inject.attr(StoragesViewModel)
+    _playback_control_view_model: PlaybackControlViewModel = inject.attr(PlaybackControlViewModel)
+    _playback_speed_view_model: PlaybackSpeedViewModel = inject.attr(PlaybackSpeedViewModel)
 
     _library_view: LibraryView
 
@@ -93,18 +99,48 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.create_action("about", self.show_about_window, ["F1"])
         self.create_action("reset_book", self.reset_book)
         self.create_action("remove_book", self.remove_book)
+
         self.create_action("mark_book_as_read", self.mark_book_as_read)
         self.create_action("jump_to_book_folder", self.jump_to_book_folder)
+
         self.create_action("prefs", self.show_preferences_window, ["<primary>comma"])
         self.create_action("quit", self.quit, ["<primary>q", "<primary>w"])
+
         self.scan_action = self.create_action("scan", self.scan)
         self.play_pause_action = self.create_action("play_pause", self.play_pause, ["space"])
+
+        self.seek_forward_action = self.create_action("seek_forward", self.seek_forward, ["Right"])
+        self.seek_rewind_action = self.create_action("seek_rewind", self.seek_rewind, ["Left"])
+
+        self.volume_up_action = self.create_action("volume_up", self.volume_up, ["Up"])
+        self.volume_down_action = self.create_action("volume_down", self.volume_down, ["Down"])
+
+        self.speed_up_action = self.create_action("speed_up", self.speed_up, ['plus', 'equal'])
+        self.speed_down_action = self.create_action("speed_down", self.speed_down, ['minus', 'hyphen'])
+
+        self.previous_chapter_action = self.create_action("previous_chapter", self.previous_chapter, ["Page_Down", "bracketleft", "braceleft"])
+        self.next_chapter_action = self.create_action("next_chapter", self.next_chapter, ["Page_Up", "bracketright", "braceright"])
 
         self.hide_offline_action = Gio.SimpleAction.new_stateful(
             "hide_offline", None, GLib.Variant.new_boolean(self.application_settings.hide_offline)
         )
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
+
+    def set_keyboard_shortcuts_enabled(self, enabled):
+        self.play_pause_action.set_enabled(enabled)
+
+        self.seek_forward_action.set_enabled(enabled)
+        self.seek_rewind_action.set_enabled(enabled)
+
+        self.volume_up_action.set_enabled(enabled)
+        self.volume_down_action.set_enabled(enabled)
+
+        self.speed_up_action.set_enabled(enabled)
+        self.speed_down_action.set_enabled(enabled)
+
+        self.previous_chapter_action.set_enabled(enabled)
+        self.next_chapter_action.set_enabled(enabled)
 
     def __init_components(self):
         path = self._settings.default_location.path if self._settings.storage_locations else None
@@ -169,6 +205,32 @@ class CozyUI(EventSender, metaclass=Singleton):
 
     def play_pause(self, *_):
         self._player.play_pause()
+
+    def seek_forward(self, *_):
+        self._playback_control_view_model.forward()
+
+    def seek_rewind(self, *_):
+        self._playback_control_view_model.rewind()
+
+    def volume_up(self, *_):
+        self._player.volume_up()
+        self.app.app_controller.media_controller._on_volume_changed()
+
+    def volume_down(self, *_):
+        self._player.volume_down()
+        self.app.app_controller.media_controller._on_volume_changed()
+
+    def speed_up(self, *_):
+        self._playback_speed_view_model.speed_up()
+
+    def speed_down(self, *_):
+        self._playback_speed_view_model.speed_down()
+
+    def next_chapter(self, *_):
+        self._player._next_chapter()
+
+    def previous_chapter(self, *_):
+        self._player._previous_chapter()
 
     def block_ui_buttons(self, block, scan=False):
         """
