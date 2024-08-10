@@ -105,6 +105,10 @@ class LibraryView:
         self._reader_box.populate(self._view_model.readers)
 
     def _on_library_view_mode_changed(self):
+        self.refresh_filters()
+        self._navigation_view.pop_to_tag("main")
+
+    def refresh_filters(self):
         visible_child_name = None
         active_filter_box: Gtk.ListBox = None
 
@@ -130,7 +134,6 @@ class LibraryView:
         self._main_stack.props.visible_child_name = main_view_page
         self._filter_stack.set_visible_child_name(visible_child_name)
         self._book_stack.set_visible_child_name(books_view_page)
-        self._navigation_view.pop_to_tag("main")
 
         if active_filter_box:
             self._apply_selected_filter(active_filter_box.get_selected_row())
