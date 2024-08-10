@@ -21,5 +21,20 @@
         </foaf:OnlineAccount>
       </foaf:account>
     </foaf:Person>
+    <foaf:Person>
+      <foaf:name>Benedek Dévényi</foaf:name>
+      <foaf:account>
+        <foaf:OnlineAccount>
+          <foaf:accountServiceHomepage rdf:resource="https://github.com"/>
+          <foaf:accountName>rdbende</foaf:accountName>
+        </foaf:OnlineAccount>
+      </foaf:account>
+      <foaf:account>
+        <foaf:OnlineAccount>
+          <foaf:accountServiceHomepage rdf:resource="https://gitlab.gnome.org"/>
+          <foaf:accountName>rdbende</foaf:accountName>
+        </foaf:OnlineAccount>
+      </foaf:account>
+    </foaf:Person>
   </maintainer>
 </Project>
