@@ -15,27 +15,17 @@ endif
 dependency('glib-2.0')
 dependency('libadwaita-1', version: '>= 1.5.0')
 
-# from https://github.com/AsavarTzeth/pulseeffects/blob/master/meson.build
-# Support Debian non-standard python paths
-# Fallback to Meson python module if command fails
+# Get Python installation paths
 message('Getting python install path')
-py3_purelib = ''
-r = run_command(
-  python_bin.full_path(),
-  '-c',
-  'from distutils.sysconfig import get_python_lib; print(get_python_lib(prefix=""))',
-  check: false,
-)
+py3_purelib = python_bin.get_path('purelib')
+py3_stdlib = python_bin.get_path('stdlib')
 
-if r.returncode() != 0
-  py3_purelib = python_bin.get_path('purelib')
-  if not py3_purelib.endswith('site-packages')
-    error('Cannot find python install path')
-  endif
-  python_dir = py3_purelib
-else
-  python_dir = r.stdout().strip()
+# Validate and use paths
+if not py3_purelib.endswith('site-packages')
+  error('Cannot find python install path')
 endif
+
+python_dir = py3_purelib
 
 # Python 3 required modules
 python3_required_modules = ['distro', 'peewee', 'mutagen', 'gi']
