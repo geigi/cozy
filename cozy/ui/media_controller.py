@@ -113,11 +113,12 @@ class MediaController(Adw.BreakpointBin):
         main_window.create_action("volume_up", self._volume_up, ["Up"], only_main_view=True)
         main_window.create_action("volume_down", self._volume_down, ["Down"], only_main_view=True)
 
-        main_window.create_action("speed_up", self._speed_up, ['plus', 'equal'], only_main_view=True)
-        main_window.create_action("speed_down", self._speed_down, ['minus', 'hyphen'], only_main_view=True)
+        main_window.create_action("speed_up", self._speed_up, ["plus", "KP_Add"], only_main_view=True)
+        main_window.create_action("speed_down", self._speed_down, ['minus',  "KP_Subtract", 'hyphen'], only_main_view=True)
+        main_window.create_action("speed_reset", self._speed_reset, ['equal'], only_main_view=True)
 
-        main_window.create_action("previous_chapter", self._previous_chapter, ["Page_Down", "bracketleft", "braceleft"], only_main_view=True)
-        main_window.create_action("next_chapter", self._next_chapter, ["Page_Up", "bracketright", "braceright"], only_main_view=True)
+        main_window.create_action("previous_chapter", self._previous_chapter, ["Page_Down", "<primary>Left"], only_main_view=True)
+        main_window.create_action("next_chapter", self._next_chapter, ["Page_Up", "<primary>Right"], only_main_view=True)
 
     def _on_book_changed(self) -> None:
         book = self._playback_control_view_model.book
@@ -172,6 +173,9 @@ class MediaController(Adw.BreakpointBin):
 
     def _speed_down(self, *_):
         self._playback_speed_view_model.speed_down()
+
+    def _speed_reset(self, *_):
+        self._playback_speed_view_model.speed_reset()
 
     def _next_chapter(self, *_):
         self._playback_control_view_model.next_chapter()
