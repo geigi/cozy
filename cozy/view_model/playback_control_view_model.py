@@ -100,6 +100,20 @@ class PlaybackControlViewModel(Observable, EventSender):
         self._player.forward()
         self._player._emit_tick()
 
+    def next_chapter(self):
+        self._player._next_chapter()
+
+    def previous_chapter(self):
+        self._player._previous_chapter()
+
+    def volume_up(self):
+        self._player.volume_up()
+        self._notify("volume")
+
+    def volume_down(self):
+        self._player.volume_down()
+        self._notify("volume")
+
     def open_book_detail(self):
         if self.book:
             self.emit_event(OpenView.BOOK, self.book)

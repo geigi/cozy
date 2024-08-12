@@ -50,6 +50,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.app = app
         self.version = version
 
+        self._actions_to_disable = []
+
     def activate(self, library_view: LibraryView):
         self.__init_window()
         self.__init_actions()
@@ -107,19 +109,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.create_action("quit", self.quit, ["<primary>q", "<primary>w"])
 
         self.scan_action = self.create_action("scan", self.scan)
-        self.play_pause_action = self.create_action("play_pause", self.play_pause, ["space"])
-
-        self.seek_forward_action = self.create_action("seek_forward", self.seek_forward, ["Right"])
-        self.seek_rewind_action = self.create_action("seek_rewind", self.seek_rewind, ["Left"])
-
-        self.volume_up_action = self.create_action("volume_up", self.volume_up, ["Up"])
-        self.volume_down_action = self.create_action("volume_down", self.volume_down, ["Down"])
-
-        self.speed_up_action = self.create_action("speed_up", self.speed_up, ['plus', 'equal'])
-        self.speed_down_action = self.create_action("speed_down", self.speed_down, ['minus', 'hyphen'])
-
-        self.previous_chapter_action = self.create_action("previous_chapter", self.previous_chapter, ["Page_Down", "bracketleft", "braceleft"])
-        self.next_chapter_action = self.create_action("next_chapter", self.next_chapter, ["Page_Up", "bracketright", "braceright"])
 
         self.hide_offline_action = Gio.SimpleAction.new_stateful(
             "hide_offline", None, GLib.Variant.new_boolean(self.application_settings.hide_offline)
@@ -127,20 +116,9 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
 
-    def set_keyboard_shortcuts_enabled(self, enabled):
-        self.play_pause_action.set_enabled(enabled)
-
-        self.seek_forward_action.set_enabled(enabled)
-        self.seek_rewind_action.set_enabled(enabled)
-
-        self.volume_up_action.set_enabled(enabled)
-        self.volume_down_action.set_enabled(enabled)
-
-        self.speed_up_action.set_enabled(enabled)
-        self.speed_down_action.set_enabled(enabled)
-
-        self.previous_chapter_action.set_enabled(enabled)
-        self.next_chapter_action.set_enabled(enabled)
+    def set_hotkeys_enabled(self, enabled: bool) -> None:
+        for action in self._actions_to_disable:
+            action.set_enabled(enabled)
 
     def __init_components(self):
         path = self._settings.default_location.path if self._settings.storage_locations else None
@@ -157,6 +135,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         name: str,
         callback: Callable[[Gio.SimpleAction, None], None],
         shortcuts: list[str] | None = None,
+        *,
+        only_main_view: bool = False,
     ) -> Gio.SimpleAction:
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
@@ -164,6 +144,9 @@ class CozyUI(EventSender, metaclass=Singleton):
 
         if shortcuts:
             self.app.set_accels_for_action(f"app.{name}", shortcuts)
+
+        if only_main_view:
+            self._actions_to_disable.append(action)
 
         return action
 
@@ -197,40 +180,21 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.on_close(None)
         self.app.quit()
 
+    def _dialog_close_callback(self, dialog):
+        dialog.disconnect_by_func(self._callback)
+        self.set_hotkeys_enabled(True)
+
     def show_about_window(self, *_):
-        AboutWindow(self.version).present(self.window)
+        self.set_hotkeys_enabled(False)
+        about = AboutWindow(self.version)
+        about.connect("closed", self._callback)
+        about.present(self.window)
 
     def show_preferences_window(self, *_):
-        PreferencesWindow().present(self.window)
-
-    def play_pause(self, *_):
-        self._player.play_pause()
-
-    def seek_forward(self, *_):
-        self._playback_control_view_model.forward()
-
-    def seek_rewind(self, *_):
-        self._playback_control_view_model.rewind()
-
-    def volume_up(self, *_):
-        self._player.volume_up()
-        self.app.app_controller.media_controller._on_volume_changed()
-
-    def volume_down(self, *_):
-        self._player.volume_down()
-        self.app.app_controller.media_controller._on_volume_changed()
-
-    def speed_up(self, *_):
-        self._playback_speed_view_model.speed_up()
-
-    def speed_down(self, *_):
-        self._playback_speed_view_model.speed_down()
-
-    def next_chapter(self, *_):
-        self._player._next_chapter()
-
-    def previous_chapter(self, *_):
-        self._player._previous_chapter()
+        self.set_hotkeys_enabled(False)
+        prefs = PreferencesWindow()
+        prefs.connect("closed", self._callback)
+        prefs.present(self.window)
 
     def block_ui_buttons(self, block, scan=False):
         """
@@ -239,7 +203,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         sensitive = not block
         try:
-            self.play_pause_action.set_enabled(sensitive)
+            self.set_hotkeys_enabled(sensitive)
             if scan:
                 self.scan_action.set_enabled(sensitive)
                 self.hide_offline_action.set_enabled(sensitive)

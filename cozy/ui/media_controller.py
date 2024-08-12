@@ -9,6 +9,7 @@ from cozy.ui.widgets.playback_speed_popover import PlaybackSpeedPopover
 from cozy.ui.widgets.seek_bar import SeekBar
 from cozy.ui.widgets.sleep_timer import SleepTimer
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
+from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 
 log = logging.getLogger("MediaController")
 
@@ -57,9 +58,8 @@ class MediaController(Adw.BreakpointBin):
             ]
         )
 
-        self._playback_control_view_model: PlaybackControlViewModel = inject.instance(
-            PlaybackControlViewModel
-        )
+        self._playback_control_view_model = inject.instance(PlaybackControlViewModel)
+        self._playback_speed_view_model = inject.instance(PlaybackSpeedViewModel)
         self._artwork_cache: ArtworkCache = inject.instance(ArtworkCache)
         self._connect_view_model()
         self._connect_widgets()
@@ -69,6 +69,7 @@ class MediaController(Adw.BreakpointBin):
         self._on_length_changed()
         self._on_position_changed()
         self._on_volume_changed()
+        self._setup_shortcuts()
 
     def _connect_view_model(self):
         self._playback_control_view_model.bind_to("book", self._on_book_changed)
@@ -102,6 +103,21 @@ class MediaController(Adw.BreakpointBin):
         else:
             self.cover_img.set_from_icon_name("book-open-variant-symbolic")
             self.cover_img.props.pixel_size = COVER_SIZE
+
+    @inject.param("main_window", "MainWindow")
+    def _setup_shortcuts(self, main_window):
+        main_window.create_action("play_pause", self._play_clicked, ["space"], only_main_view=True)
+        main_window.create_action("seek_rewind", self._rewind_clicked, ["Left"], only_main_view=True)
+        main_window.create_action("seek_forward", self._forward_clicked, ["Right"], only_main_view=True)
+
+        main_window.create_action("volume_up", self._volume_up, ["Up"], only_main_view=True)
+        main_window.create_action("volume_down", self._volume_down, ["Down"], only_main_view=True)
+
+        main_window.create_action("speed_up", self._speed_up, ['plus', 'equal'], only_main_view=True)
+        main_window.create_action("speed_down", self._speed_down, ['minus', 'hyphen'], only_main_view=True)
+
+        main_window.create_action("previous_chapter", self._previous_chapter, ["Page_Down", "bracketleft", "braceleft"], only_main_view=True)
+        main_window.create_action("next_chapter", self._next_chapter, ["Page_Up", "bracketright", "braceright"], only_main_view=True)
 
     def _on_book_changed(self) -> None:
         book = self._playback_control_view_model.book
@@ -144,6 +160,24 @@ class MediaController(Adw.BreakpointBin):
 
     def _on_volume_changed(self):
         self.volume_button.set_value(self._playback_control_view_model.volume)
+
+    def _volume_up(self, *_):
+        self._playback_control_view_model.volume_up()
+
+    def _volume_down(self, *_):
+        self._playback_control_view_model.volume_down()
+
+    def _speed_up(self, *_):
+        self._playback_speed_view_model.speed_up()
+
+    def _speed_down(self, *_):
+        self._playback_speed_view_model.speed_down()
+
+    def _next_chapter(self, *_):
+        self._playback_control_view_model.next_chapter()
+
+    def _previous_chapter(self, *_):
+        self._playback_control_view_model.previous_chapter()
 
     def _play_clicked(self, *_):
         self._playback_control_view_model.play_pause()
