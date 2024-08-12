@@ -126,10 +126,7 @@ class MediaController(Adw.BreakpointBin):
         main_window.create_action("speed_reset", self._speed_reset, ["equal"], only_main_view=True)
 
         main_window.create_action(
-            "previous_chapter",
-            self._previous_chapter,
-            ["Page_Down", "<primary>Left"],
-            only_main_view=True,
+            "prev_chapter", self._prev_chapter, ["Page_Down", "<primary>Left"], only_main_view=True
         )
         main_window.create_action(
             "next_chapter", self._next_chapter, ["Page_Up", "<primary>Right"], only_main_view=True
@@ -195,7 +192,7 @@ class MediaController(Adw.BreakpointBin):
     def _next_chapter(self, *_):
         self._playback_control_view_model.next_chapter()
 
-    def _previous_chapter(self, *_):
+    def _prev_chapter(self, *_):
         self._playback_control_view_model.previous_chapter()
 
     def _play_clicked(self, *_):
