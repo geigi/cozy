@@ -107,18 +107,33 @@ class MediaController(Adw.BreakpointBin):
     @inject.param("main_window", "MainWindow")
     def _setup_shortcuts(self, main_window):
         main_window.create_action("play_pause", self._play_clicked, ["space"], only_main_view=True)
-        main_window.create_action("seek_rewind", self._rewind_clicked, ["Left"], only_main_view=True)
-        main_window.create_action("seek_forward", self._forward_clicked, ["Right"], only_main_view=True)
+        main_window.create_action(
+            "seek_rewind", self._rewind_clicked, ["Left"], only_main_view=True
+        )
+        main_window.create_action(
+            "seek_forward", self._forward_clicked, ["Right"], only_main_view=True
+        )
 
         main_window.create_action("volume_up", self._volume_up, ["Up"], only_main_view=True)
         main_window.create_action("volume_down", self._volume_down, ["Down"], only_main_view=True)
 
-        main_window.create_action("speed_up", self._speed_up, ["plus", "KP_Add"], only_main_view=True)
-        main_window.create_action("speed_down", self._speed_down, ['minus',  "KP_Subtract", 'hyphen'], only_main_view=True)
-        main_window.create_action("speed_reset", self._speed_reset, ['equal'], only_main_view=True)
+        main_window.create_action(
+            "speed_up", self._speed_up, ["plus", "KP_Add"], only_main_view=True
+        )
+        main_window.create_action(
+            "speed_down", self._speed_down, ["minus", "KP_Subtract", "hyphen"], only_main_view=True
+        )
+        main_window.create_action("speed_reset", self._speed_reset, ["equal"], only_main_view=True)
 
-        main_window.create_action("previous_chapter", self._previous_chapter, ["Page_Down", "<primary>Left"], only_main_view=True)
-        main_window.create_action("next_chapter", self._next_chapter, ["Page_Up", "<primary>Right"], only_main_view=True)
+        main_window.create_action(
+            "previous_chapter",
+            self._previous_chapter,
+            ["Page_Down", "<primary>Left"],
+            only_main_view=True,
+        )
+        main_window.create_action(
+            "next_chapter", self._next_chapter, ["Page_Up", "<primary>Right"], only_main_view=True
+        )
 
     def _on_book_changed(self) -> None:
         book = self._playback_control_view_model.book

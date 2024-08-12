@@ -36,11 +36,11 @@ class PlaybackSpeedViewModel(Observable, EventSender):
             self._notify("playback_speed")
 
     def speed_up(self):
-        self.playback_speed = min(self.playback_speed + .1, 3.5)
+        self.playback_speed = min(self.playback_speed + 0.1, 3.5)
         self._notify("playback_speed")
 
     def speed_down(self):
-        self.playback_speed = max(self.playback_speed - .1, 0.5)
+        self.playback_speed = max(self.playback_speed - 0.1, 0.5)
         self._notify("playback_speed")
 
     def speed_reset(self):

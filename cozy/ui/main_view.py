@@ -15,16 +15,14 @@ from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
-
 from cozy.ui.about_window import AboutWindow
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
 from cozy.ui.widgets.first_import_button import FirstImportButton
-
-from cozy.view_model.storages_view_model import StoragesViewModel
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
+from cozy.view_model.storages_view_model import StoragesViewModel
 
 log = logging.getLogger("ui")
 
@@ -63,7 +61,9 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.check_for_tracks()
 
     def startup(self):
-        self.window_builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/ui/main_window.ui")
+        self.window_builder = Gtk.Builder.new_from_resource(
+            "/com/github/geigi/cozy/ui/main_window.ui"
+        )
         self.window: Adw.ApplicationWindow = self.window_builder.get_object("app_window")
 
     def __init_window(self):
@@ -214,7 +214,10 @@ class CozyUI(EventSender, metaclass=Singleton):
         Switch the UI state back to playing.
         This enables all UI functionality for the user.
         """
-        if self.navigation_view.props.visible_page != "book_overview" and self.main_stack.props.visible_child_name != "welcome":
+        if (
+            self.navigation_view.props.visible_page != "book_overview"
+            and self.main_stack.props.visible_child_name != "welcome"
+        ):
             self.navigation_view.pop_to_tag("main")
 
         if self._player.loaded_book:
@@ -314,4 +317,3 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.application_settings.window_width = width
         self.application_settings.window_height = height
         self.application_settings.window_maximize = self.window.is_maximized()
-
