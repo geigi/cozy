@@ -203,7 +203,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         sensitive = not block
         try:
-            self.set_hotkeys_enabled(sensitive)
             if scan:
                 self.scan_action.set_enabled(sensitive)
                 self.hide_offline_action.set_enabled(sensitive)
