@@ -181,19 +181,19 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.app.quit()
 
     def _dialog_close_callback(self, dialog):
-        dialog.disconnect_by_func(self._callback)
+        dialog.disconnect_by_func(self._dialog_close_callback)
         self.set_hotkeys_enabled(True)
 
     def show_about_window(self, *_):
         self.set_hotkeys_enabled(False)
         about = AboutWindow(self.version)
-        about.connect("closed", self._callback)
+        about.connect("closed", self._dialog_close_callback)
         about.present(self.window)
 
     def show_preferences_window(self, *_):
         self.set_hotkeys_enabled(False)
         prefs = PreferencesWindow()
-        prefs.connect("closed", self._callback)
+        prefs.connect("closed", self._dialog_close_callback)
         prefs.present(self.window)
 
     def block_ui_buttons(self, block, scan=False):
