@@ -123,7 +123,7 @@ class BookDetailView(Adw.NavigationPage):
 
         self._current_selected_chapter = None
 
-        self.total_label.set_text('Loading...')
+        self.total_label.set_text(_("Loading…"))
         self.unavailable_banner.set_revealed(False)
 
         self.book_title = book.name
