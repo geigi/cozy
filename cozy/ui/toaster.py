@@ -1,6 +1,5 @@
+import inject
 from gi.repository import Adw, Gtk
-
-from cozy.ext import inject
 
 
 class ToastNotifier:

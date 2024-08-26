@@ -1,9 +1,9 @@
+import logging
 from typing import Callable
 
 from gi.repository import GLib
 
 from cozy.report import reporter
-import logging
 
 log = logging.getLogger("observable")
 

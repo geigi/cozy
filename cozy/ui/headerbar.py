@@ -1,21 +1,15 @@
 import logging
 
-import gi
+import inject
+from gi.repository import Adw, GObject, Gtk
 
-from cozy.ext import inject
-from cozy.ui.widgets.progress_popover import ProgressPopover
-from cozy.view_model.headerbar_view_model import HeaderbarViewModel, HeaderBarState
-
-from gi.repository import Adw, Gtk, GObject
-
-from cozy.ext import inject
 from cozy.ui.widgets.progress_popover import ProgressPopover
 from cozy.view_model.headerbar_view_model import HeaderBarState, HeaderbarViewModel
 
 log = logging.getLogger("Headerbar")
 
 
-@Gtk.Template.from_resource("/com/github/geigi/cozy/headerbar.ui")
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/headerbar.ui")
 class Headerbar(Gtk.Box):
     __gtype_name__ = "Headerbar"
 
@@ -29,7 +23,7 @@ class Headerbar(Gtk.Box):
     menu_button: Gtk.MenuButton = Gtk.Template.Child()
 
     progress_menu_button: Gtk.MenuButton = Gtk.Template.Child()
-    progress_spinner: Gtk.Spinner = Gtk.Template.Child()
+    progress_spinner: Adw.Spinner = Gtk.Template.Child()
 
     view_switcher: Adw.ViewSwitcher = Gtk.Template.Child()
 
@@ -96,8 +90,6 @@ class Headerbar(Gtk.Box):
         self.search_button.set_active(False)
 
     def _on_mobile_view(self, widget, _):
-        page = self.sort_stack.props.visible_child_name
-
         if widget.props.reveal:
             self.headerbar.set_title_widget(Adw.WindowTitle(title="Cozy"))
         else:
@@ -117,10 +109,8 @@ class Headerbar(Gtk.Box):
         if self._headerbar_view_model.state == HeaderBarState.PLAYING:
             self.progress_menu_button.set_visible(False)
             self.progress_popover.set_progress(0)
-            self.progress_spinner.stop()
         else:
             self.progress_menu_button.set_visible(True)
-            self.progress_spinner.start()
 
     def _on_work_progress_changed(self):
         self.progress_popover.set_progress(self._headerbar_view_model.work_progress)

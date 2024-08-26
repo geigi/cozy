@@ -1,7 +1,7 @@
+import inject
 from gi.repository import Gio
 
 from cozy.architecture.event_sender import EventSender
-from cozy.ext import inject
 
 
 class ApplicationSettings(EventSender):
@@ -9,6 +9,7 @@ class ApplicationSettings(EventSender):
 
     def __init__(self):
         super().__init__()
+        self._settings.delay()
         self._connect()
 
     def _connect(self):
@@ -108,14 +109,6 @@ class ApplicationSettings(EventSender):
     @forward_duration.setter
     def forward_duration(self, new_value):
         self._settings.set_int("forward-duration", new_value)
-
-    @property
-    def dark_mode(self) -> bool:
-        return self._settings.get_boolean("dark-mode")
-
-    @dark_mode.setter
-    def dark_mode(self, new_value: bool):
-        self._settings.set_boolean("dark-mode", new_value)
 
     @property
     def window_width(self) -> int:

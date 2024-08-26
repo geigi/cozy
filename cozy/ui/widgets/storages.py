@@ -1,13 +1,13 @@
 from typing import Callable
 
+import inject
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
-from cozy.ext import inject
 from cozy.model.storage import Storage
 from cozy.view_model.storages_view_model import StoragesViewModel
 
 
-def ask_storage_location(callback: Callable[[str], None], initial_folder: str | None = None):
+def ask_storage_location(callback: Callable[[str | None], None], initial_folder: str | None = None):
     location_chooser = Gtk.FileDialog(title=_("Set Audiobooks Directory"))
 
     if initial_folder:
@@ -20,13 +20,12 @@ def ask_storage_location(callback: Callable[[str], None], initial_folder: str | 
         except GLib.GError:
             pass
         else:
-            if file is not None:
-                callback(file.get_path())
+            callback(None if file is None else file.get_path())
 
     location_chooser.select_folder(inject.instance("MainWindow").window, None, finish_callback)
 
 
-@Gtk.Template.from_resource("/com/github/geigi/cozy/storage_row.ui")
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/storage_row.ui")
 class StorageRow(Adw.ActionRow):
     __gtype_name__ = "StorageRow"
 
@@ -46,6 +45,12 @@ class StorageRow(Adw.ActionRow):
         self._set_default_icon()
         self._set_drive_icon()
 
+    @GObject.Signal(arg_types=(object,))
+    def location_changed(self, *_): ...
+
+    @GObject.Signal
+    def menu_opened(self): ...
+
     @property
     def model(self) -> Storage:
         return self._model
@@ -53,8 +58,9 @@ class StorageRow(Adw.ActionRow):
     def ask_for_new_location(self, *_) -> None:
         ask_storage_location(self._on_folder_changed, initial_folder=self._model.path)
 
-    def _on_folder_changed(self, new_path: str) -> None:
-        self.emit("location-changed", new_path)
+    def _on_folder_changed(self, new_path: str | None) -> None:
+        if new_path is not None:
+            self.emit("location-changed", new_path)
 
     def _on_menu_opened(self, *_) -> None:
         self.emit("menu-opened")
@@ -71,23 +77,14 @@ class StorageRow(Adw.ActionRow):
         self.default_icon.set_visible(self._model.default)
 
 
-GObject.signal_new(
-    "location-changed",
-    StorageRow,
-    GObject.SIGNAL_RUN_LAST,
-    GObject.TYPE_PYOBJECT,
-    (GObject.TYPE_PYOBJECT,),
-)
-GObject.signal_new("menu-opened", StorageRow, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT, ())
-
-
-@Gtk.Template.from_resource("/com/github/geigi/cozy/storage_locations.ui")
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/storage_locations.ui")
 class StorageLocations(Adw.PreferencesGroup):
     __gtype_name__ = "StorageLocations"
 
     _view_model: StoragesViewModel = inject.attr(StoragesViewModel)
 
     storage_locations_list: Gtk.ListBox = Gtk.Template.Child()
+    new_storage_row: Adw.ButtonRow = Gtk.Template.Child()
     storage_menu: Gio.Menu = Gtk.Template.Child()
 
     def __init__(self) -> None:
@@ -97,7 +94,6 @@ class StorageLocations(Adw.PreferencesGroup):
         self._view_model.bind_to("storage_attributes", self._reload_storage_list)
 
         self._create_actions()
-        self.new_storage_button = self._create_new_storage_button()
 
         self._reload_storage_list()
 
@@ -121,13 +117,6 @@ class StorageLocations(Adw.PreferencesGroup):
         self.make_default_action.connect("activate", self._set_default_storage_location)
         self.action_group.add_action(self.make_default_action)
 
-    def _create_new_storage_button(self) -> Adw.ActionRow:
-        icon = Gtk.Image(icon_name="list-add-symbolic", margin_top=18, margin_bottom=18)
-        row = Adw.ActionRow(selectable=False, activatable=True)
-        row.connect("activated", self._on_new_storage_clicked)
-        row.set_child(icon)
-        return row
-
     def _reload_storage_list(self) -> None:
         self.storage_locations_list.remove_all()
 
@@ -137,7 +126,7 @@ class StorageLocations(Adw.PreferencesGroup):
             row.connect("menu-opened", self._on_storage_menu_opened)
             self.storage_locations_list.append(row)
 
-        self.storage_locations_list.append(self.new_storage_button)
+        self.storage_locations_list.append(self.new_storage_row)
 
     def _remove_storage_location(self, *_) -> None:
         self._view_model.remove(self._view_model.selected_storage)
@@ -151,6 +140,7 @@ class StorageLocations(Adw.PreferencesGroup):
         value = action.get_property(value.name)
         self._view_model.set_external(self._view_model.selected_storage, value)
 
+    @Gtk.Template.Callback()
     def _on_new_storage_clicked(self, *_) -> None:
         ask_storage_location(self._view_model.add_storage_location)
 

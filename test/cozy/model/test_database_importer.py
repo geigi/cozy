@@ -1,7 +1,6 @@
+import inject
 import pytest
 from peewee import SqliteDatabase
-
-from cozy.ext import inject
 
 
 @pytest.fixture(autouse=True)
@@ -65,7 +64,7 @@ def test_update_files_db_objects_updates_modified_field():
 
     database_importer = DatabaseImporter()
     file = File.select().where(File.path == "test.mp3").get()
-    file_objects = database_importer._update_files_in_db(file, media_file)
+    database_importer._update_files_in_db(file, media_file)
 
     assert File.select().where(File.path == "test.mp3").get().modified == 12345678
 
@@ -519,7 +518,7 @@ def test_update_book_position_sets_position_for_multi_chapter_file_correctly():
     database_importer = DatabaseImporter()
 
     book = Book.get_by_id(11)
-    database_importer._update_book_position(book, 4251)
+    database_importer._update_book_position(book, 4251000000000)
 
     book = Book.get_by_id(11)
     assert book.position == 232
@@ -534,10 +533,10 @@ def test_update_book_position_sets_position_for_single_chapter_file_correctly():
     database_importer = DatabaseImporter()
 
     book = Book.get_by_id(2)
-    database_importer._update_book_position(book, 4251)
+    database_importer._update_book_position(book, 4251000000000)
 
     book = Book.get_by_id(2)
-    desired_chapter_position = 4251000000000.0 - ((Track.get_by_id(198).length + Track.get_by_id(197).length) * 10 ** 9)
+    desired_chapter_position = 4251000000000 - ((Track.get_by_id(198).length + Track.get_by_id(197).length) * 1e9)
     assert book.position == 194
     assert Track.get_by_id(194).position == desired_chapter_position
 
@@ -551,7 +550,7 @@ def test_update_book_position_resets_position_if_it_is_longer_than_the_duration(
     book = Book.get_by_id(11)
     book.position = 1
     book.save(only=book.dirty_fields)
-    database_importer._update_book_position(book, 42510)
+    database_importer._update_book_position(book, 42510000000000)
 
     book = Book.get_by_id(11)
     assert book.position == 0

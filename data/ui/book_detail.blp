@@ -1,0 +1,253 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $BookDetail: Adw.NavigationPage {
+  tag: 'book_overview';
+  title: bind template.book-title;
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [end]
+      MenuButton book_menu {
+        menu-model: book_menu_model;
+        icon-name: "view-more-symbolic";
+        tooltip-text: _("Open Book Menu");
+      }
+    }
+
+    content: Adw.BreakpointBin {
+      width-request: 350;
+      height-request: 52;
+
+      Adw.Breakpoint {
+        condition ("max-width: 550sp")
+
+        setters {
+          top_box.orientation: vertical;
+          top_box.spacing: 6;
+          top_box.halign: center;
+          book_label.halign: center;
+          author_label.halign: center;
+          play_button.halign: center;
+        }
+      }
+
+      child: Box {
+        orientation: vertical;
+
+        Adw.Banner unavailable_banner {
+          title: _("Some or all files of this book cannot be found.");
+        }
+
+        ScrolledWindow {
+          focusable: true;
+          vexpand: true;
+          hscrollbar-policy: never;
+          propagate-natural-width: true;
+          propagate-natural-height: true;
+
+          child: Box {
+            orientation: vertical;
+
+            Adw.Clamp {
+              maximum-size: 800;
+
+              Box top_box {
+                orientation: horizontal;
+                spacing: 30;
+                margin-start: 18;
+                margin-end: 18;
+                margin-top: 12;
+                margin-bottom: 18;
+                halign: start;
+
+                Box album_art_container {
+                  halign: center;
+                  width-request: 200;
+                  height-request: 200;
+
+                  Picture album_art {
+                    styles [
+                      "book_detail_art",
+                    ]
+                  }
+
+                  styles [
+                    "card",
+                  ]
+                }
+
+                Box {
+                  orientation: vertical;
+                  margin-top: 12;
+                  margin-bottom: 12;
+                  spacing: 6;
+                  vexpand: false;
+
+                  Label book_label {
+                    halign: start;
+                    label: bind template.book_title;
+                    ellipsize: end;
+                    max-width-chars: 35;
+                    lines: 1;
+
+                    styles [
+                      "title-1",
+                      "bold",
+                    ]
+                  }
+
+                  Label author_label {
+                    halign: start;
+                    label: _("Book author");
+                    ellipsize: end;
+                    max-width-chars: 50;
+                    lines: 1;
+
+                    styles [
+                      "title-3",
+                      "dim-label",
+                    ]
+                  }
+
+                  Box {
+                    valign: end;
+                    margin-top: 18;
+                    spacing: 6;
+
+                    $ProgressRing book_progress_ring {
+                      valign: center;
+                    }
+
+                    Grid {
+                      hexpand: true;
+                      row-spacing: 3;
+                      column-spacing: 20;
+
+                      Label {
+                        halign: start;
+                        hexpand: true;
+                        label: _("Remaining");
+
+                        styles [
+                          "dim-label",
+                        ]
+
+                        layout {
+                          column: 0;
+                          row: 0;
+                        }
+                      }
+
+                      Label remaining_label {
+                        hexpand: true;
+                        xalign: 0;
+
+                        layout {
+                          column: 1;
+                          row: 0;
+                        }
+                      }
+
+                      Label {
+                        halign: start;
+                        hexpand: true;
+                        label: _("Total");
+
+                        styles [
+                          "dim-label",
+                        ]
+
+                        layout {
+                          column: 0;
+                          row: 1;
+                        }
+                      }
+
+                      Label total_label{
+                        hexpand: true;
+                        xalign: 0;
+
+                        layout {
+                          column: 1;
+                          row: 1;
+                        }
+                      }
+                    }
+                  }
+
+                  Button play_button {
+                    halign: start;
+                    valign: end;
+                    vexpand: true;
+                    margin-top: 12;
+                    focusable: true;
+                    receives-default: true;
+                    tooltip-text: _("Start/Stop playback");
+
+                    accessibility {
+                      label: _("Start or pause the playback");
+                    }
+
+                    styles [
+                      "suggested-action",
+                      "pill",
+                    ]
+
+                    Adw.ButtonContent play_icon {
+                      label: _("Start");
+                      icon-name: 'media-playback-start-symbolic';
+                    }
+                  }
+                }
+              }
+            }
+
+            Adw.Clamp {
+              maximum-size: 800;
+              vexpand: true;
+
+              Stack chapters_stack {
+                margin-start: 18;
+                margin-end: 18;
+                margin-top: 12;
+                margin-bottom: 24;
+
+                StackPage {
+                  name: 'chapters_wrapper';
+
+                  child: Box chapter_list_container {
+                    orientation: vertical;
+                    spacing: 18;
+                  };
+                }
+
+                StackPage {
+                  name: 'chapters_loader';
+
+                  child: Adw.StatusPage _loading_status_page {
+                    paintable: Adw.SpinnerPaintable {
+                      widget: _loading_status_page;
+                    };
+                    title: _("Loading…");
+                  };
+                }
+              }
+            }
+          };
+        }
+      };
+    };
+  }
+}
+
+menu book_menu_model {
+  section {
+    item {
+      action: 'book_overview.download';
+      label: _("_Available Offline");
+      hidden-when: "action-disabled";
+    }
+  }
+}

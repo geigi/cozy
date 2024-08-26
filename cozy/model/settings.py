@@ -1,14 +1,14 @@
 import logging
+from typing import NoReturn
 
+import inject
 import peewee
-
-import cozy.ext.inject as inject
 from peewee import SqliteDatabase
 
 from cozy.db.book import Book
 from cozy.db.settings import Settings as SettingsModel
 from cozy.db.storage import Storage as StorageModel
-from cozy.model.storage import Storage, InvalidPath
+from cozy.model.storage import InvalidPath, Storage
 from cozy.report import reporter
 
 log = logging.getLogger("model.storage_location")
@@ -51,8 +51,11 @@ class Settings:
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
-    def default_location(self) -> Storage:
-        return next(location for location in self.storage_locations if location.default)
+    def default_location(self) -> Storage | NoReturn:
+        for location in self.storage_locations:
+            if location.default:
+                return location
+        raise AssertionError("This should never happen")
 
     @property
     def storage_locations(self) -> list[Storage]:

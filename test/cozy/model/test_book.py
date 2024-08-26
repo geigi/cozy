@@ -1,9 +1,10 @@
+from test.cozy.mocks import ApplicationSettingsMock
+
+import inject
 import pytest
 from peewee import SqliteDatabase
 
 from cozy.application_settings import ApplicationSettings
-from cozy.ext import inject
-from test.cozy.mocks import ApplicationSettingsMock
 
 
 @pytest.fixture(autouse=True)
@@ -116,7 +117,7 @@ def test_cover_returns_default_value(peewee_database):
     from cozy.db.book import Book as BookDB
 
     book = Book(peewee_database, BookDB.get(1))
-    assert book.cover == None
+    assert book.cover is None
 
 
 def test_setting_cover_updates_in_book_object_and_database(peewee_database):
@@ -170,7 +171,7 @@ def test_offline_returns_default_value(peewee_database):
     from cozy.db.book import Book as BookDB
 
     book = Book(peewee_database, BookDB.get(1))
-    assert book.offline == False
+    assert not book.offline
 
 
 def test_setting_offline_updates_in_book_object_and_database(peewee_database):
@@ -179,8 +180,8 @@ def test_setting_offline_updates_in_book_object_and_database(peewee_database):
 
     book = Book(peewee_database, BookDB.get(1))
     book.offline = True
-    assert book.offline is True
-    assert BookDB.get_by_id(1).offline is True
+    assert book.offline
+    assert BookDB.get_by_id(1).offline
 
 
 def test_downloaded_returns_default_value(peewee_database):
@@ -188,7 +189,7 @@ def test_downloaded_returns_default_value(peewee_database):
     from cozy.db.book import Book as BookDB
 
     book = Book(peewee_database, BookDB.get(1))
-    assert book.downloaded == False
+    assert not book.downloaded
 
 
 def test_setting_downloaded_updates_in_book_object_and_database(peewee_database):
@@ -218,7 +219,7 @@ def test_tracks_are_ordered_by_disk_number_name(peewee_database):
     chapters_manually_sorted = book.chapters.copy()
     chapters_manually_sorted.sort(key=lambda chapter: (chapter.disk, chapter.number, chapter.name))
 
-    assert all([a == b for a, b in zip(book.chapters, chapters_manually_sorted)])
+    assert all(a == b for a, b in zip(book.chapters, chapters_manually_sorted))
 
 
 def test_current_track_is_actually_current_track(peewee_database):
@@ -274,7 +275,7 @@ def test_deleted_book_removed_from_last_played_book_if_necessary(peewee_database
     settings.last_played_book = book
     book._on_chapter_event("chapter-deleted", book.chapters[0])
 
-    assert settings.last_played_book == None
+    assert settings.last_played_book is None
 
 
 def test_skipping_removing_a_non_existing_chapter(peewee_database):
@@ -291,10 +292,10 @@ def test_progress_return_progress_for_started_book(peewee_database):
 
     book = Book(peewee_database, BookDB.get(1))
     chapter = book.chapters[0]
-    chapter.position = 42 * 1000000000
+    chapter.position = 42000000000
     book.position = chapter.id
 
-    assert book.progress == 42
+    assert book.progress == 42000000000
 
 
 def test_progress_should_be_zero_for_unstarted_book(peewee_database):

@@ -1,12 +1,11 @@
 import logging
 import os
-import urllib
 from pathlib import Path
 
+import inject
 from gi.repository import Gio
 
 from cozy.architecture.event_sender import EventSender
-from cozy.ext import inject
 from cozy.media.importer import Importer
 from cozy.model.settings import Settings
 from cozy.report import reporter
@@ -59,7 +58,7 @@ class Files(EventSender):
         flags = Gio.FileCopyFlags.OVERWRITE
         self.filecopy_cancel = Gio.Cancellable()
         try:
-            copied = source.copy(destination, flags, self.filecopy_cancel, self._update_copy_status, None)
+            source.copy(destination, flags, self.filecopy_cancel, self._update_copy_status, None)
         except Exception as e:
             if e.code == Gio.IOErrorEnum.CANCELLED:
                 pass
@@ -77,7 +76,7 @@ class Files(EventSender):
 
     def _copy_directory(self, path, destination):
         main_source_path = os.path.split(path)[0]
-        for dirpath, dirnames, filenames in os.walk(path):
+        for dirpath, _, filenames in os.walk(path):
             dirname = os.path.relpath(dirpath, main_source_path)
             destination_dir = os.path.join(destination, dirname)
             try:

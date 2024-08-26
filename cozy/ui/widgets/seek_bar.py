@@ -1,9 +1,9 @@
 from gi.repository import Gdk, GObject, Gtk
 
-from cozy.control.string_representation import seconds_to_str
+from cozy.control.time_format import ns_to_time
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/seek_bar.ui')
+@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/seek_bar.ui')
 class SeekBar(Gtk.Box):
     __gtype_name__ = "SeekBar"
 
@@ -12,9 +12,12 @@ class SeekBar(Gtk.Box):
     remaining_label: Gtk.Label = Gtk.Template.Child()
     remaining_event_box: Gtk.Box = Gtk.Template.Child()
 
+    length: float
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self.length: float = 0.0
         self._progress_scale_pressed = False
 
         self.progress_scale.connect("value-changed", self._on_progress_scale_changed)
@@ -38,6 +41,15 @@ class SeekBar(Gtk.Box):
         keyboard_controller.connect("key-pressed", self._on_progress_key_pressed)
         self.progress_scale.add_controller(keyboard_controller)
 
+    @GObject.Signal(arg_types=(object,))
+    def position_changed(self, *_): ...
+
+    @GObject.Signal
+    def rewind(self): ...
+
+    @GObject.Signal
+    def forward(self): ...
+
     @property
     def position(self) -> float:
         return self.progress_scale.get_value()
@@ -46,15 +58,6 @@ class SeekBar(Gtk.Box):
     def position(self, new_value: float):
         if not self._progress_scale_pressed:
             self.progress_scale.set_value(new_value)
-
-    @property
-    def length(self) -> float:
-        return self.progress_scale.get_adjustment().get_upper()
-
-    @length.setter
-    def length(self, new_value: float):
-        self.progress_scale.set_range(0, new_value)
-        self._on_progress_scale_changed(None)
 
     @property
     def sensitive(self) -> bool:
@@ -75,32 +78,23 @@ class SeekBar(Gtk.Box):
         self.remaining_event_box.set_visible(value)
 
     def _on_progress_scale_changed(self, _):
-        position = int(self.progress_scale.get_value())
-        total = self.progress_scale.get_adjustment().get_upper()
+        total = self.length
+        position = int(total * self.progress_scale.get_value() / 100)
+        remaining_secs = int(total - position)
 
-        remaining_secs: int = int(total - position)
-        current_text = seconds_to_str(position, total)
-        remaining_text = seconds_to_str(remaining_secs, total)
-        self.current_label.set_markup("<span font_features='tnum'>" + current_text + "</span>")
-        self.remaining_label.set_markup("<span font_features='tnum'>-" + remaining_text + "</span>")
+        self.current_label.set_text(ns_to_time(position, total))
+        self.remaining_label.set_text(ns_to_time(remaining_secs, total))
 
     def _on_progress_scale_release(self, *_):
         self._progress_scale_pressed = False
         value = self.progress_scale.get_value()
         self.emit("position-changed", value)
 
-    def _on_progress_key_pressed(self, _, event):
-        if event.keyval == Gdk.KEY_Up or event.keyval == Gdk.KEY_Left:
-            self.position = max(self.position - 30, 0)
-            self.emit("position-changed", self.position)
-        elif event.keyval == Gdk.KEY_Down or event.keyval == Gdk.KEY_Right:
-            max_value = self.progress_scale.get_adjustment().get_upper()
-            self.position = min(self.position + 30, max_value)
-            self.emit("position-changed", self.position)
+    def _on_progress_key_pressed(self, _, event, *__):
+        if event in {Gdk.KEY_Up, Gdk.KEY_Left}:
+            self.emit("rewind")
+        elif event in {Gdk.KEY_Down, Gdk.KEY_Right}:
+            self.emit("forward")
 
     def _on_progress_scale_press(self, *_):
         self._progress_scale_pressed = True
-
-
-GObject.signal_new('position-changed', SeekBar, GObject.SIGNAL_RUN_LAST, GObject.TYPE_PYOBJECT,
-                   (GObject.TYPE_PYOBJECT,))

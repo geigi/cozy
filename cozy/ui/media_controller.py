@@ -1,23 +1,21 @@
 import logging
 
-import gi
+import inject
+from gi.repository import Adw, Gdk, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.db.book import Book
-from cozy.ext import inject
 from cozy.ui.widgets.playback_speed_popover import PlaybackSpeedPopover
 from cozy.ui.widgets.seek_bar import SeekBar
 from cozy.ui.widgets.sleep_timer import SleepTimer
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
-
-from gi.repository import Adw, Gtk, Gdk
 
 log = logging.getLogger("MediaController")
 
 COVER_SIZE = 46
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/media_controller.ui')
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/media_controller.ui")
 class MediaController(Adw.BreakpointBin):
     __gtype_name__ = "MediaController"
 
@@ -50,7 +48,18 @@ class MediaController(Adw.BreakpointBin):
         self.playback_speed_button.set_popover(PlaybackSpeedPopover())
         self.timer_button.set_popover(self.sleep_timer)
 
-        self._playback_control_view_model: PlaybackControlViewModel = inject.instance(PlaybackControlViewModel)
+        self.volume_button.set_icons(
+            [
+                "audio-volume-muted-symbolic",
+                "audio-volume-high-symbolic",
+                "audio-volume-low-symbolic",
+                "audio-volume-medium-symbolic",
+            ]
+        )
+
+        self._playback_control_view_model: PlaybackControlViewModel = inject.instance(
+            PlaybackControlViewModel
+        )
         self._artwork_cache: ArtworkCache = inject.instance(ArtworkCache)
         self._connect_view_model()
         self._connect_widgets()
@@ -71,19 +80,23 @@ class MediaController(Adw.BreakpointBin):
 
     def _connect_widgets(self):
         self.play_button.connect("clicked", self._play_clicked)
-        self.prev_button.connect("clicked", self._rewind_clicked)
-        self.next_button.connect("clicked", self._forward_clicked)
         self.volume_button.connect("value-changed", self._on_volume_button_changed)
         self.seek_bar.connect("position-changed", self._on_seek_bar_position_changed)
 
-        self._cover_img_gesture = Gtk.GestureClick()
-        self._cover_img_gesture.connect("pressed", self._cover_clicked)
-        self.cover_img.add_controller(self._cover_img_gesture)
+        self.prev_button.connect("clicked", self._rewind_clicked)
+        self.next_button.connect("clicked", self._forward_clicked)
+        self.seek_bar.connect("rewind", self._rewind_clicked)
+        self.seek_bar.connect("forward", self._forward_clicked)
 
+        cover_click_gesture = Gtk.GestureClick()
+        cover_click_gesture.connect("pressed", self._cover_clicked)
+        self.cover_img.add_controller(cover_click_gesture)
         self.cover_img.set_cursor(Gdk.Cursor.new_from_name("pointer"))
 
     def _set_cover_image(self, book: Book):
-        paintable = self._artwork_cache.get_cover_paintable(book, self.get_scale_factor(), COVER_SIZE)
+        paintable = self._artwork_cache.get_cover_paintable(
+            book, self.get_scale_factor(), COVER_SIZE
+        )
         if paintable:
             self.cover_img.set_from_paintable(paintable)
         else:
@@ -116,7 +129,7 @@ class MediaController(Adw.BreakpointBin):
             self.play_button.set_icon_name("media-playback-start-symbolic")
 
     def _on_position_changed(self):
-        position = self._playback_control_view_model.position
+        position = self._playback_control_view_model.relative_position
         if position is not None:
             self.seek_bar.position = position
 
@@ -148,4 +161,4 @@ class MediaController(Adw.BreakpointBin):
         self._playback_control_view_model.volume = volume
 
     def _on_seek_bar_position_changed(self, _, position):
-        self._playback_control_view_model.position = position
+        self._playback_control_view_model.relative_position = position

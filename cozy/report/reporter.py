@@ -1,9 +1,7 @@
 import traceback
-
-from cozy.report.log_level import LogLevel
-
 from multiprocessing.pool import ThreadPool as Pool
 
+from cozy.report.log_level import LogLevel
 from cozy.report.report_to_loki import report
 
 report_pool = Pool(5)
