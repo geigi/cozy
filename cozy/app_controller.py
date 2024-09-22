@@ -2,7 +2,6 @@ import inject
 from gi.repository import Gio
 from peewee import SqliteDatabase
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.singleton import Singleton
 from cozy.control.db import get_db
 from cozy.control.filesystem_monitor import FilesystemMonitor
@@ -15,6 +14,7 @@ from cozy.model.database_importer import DatabaseImporter
 from cozy.model.library import Library
 from cozy.model.settings import Settings
 from cozy.report import reporter
+from cozy.settings import ApplicationSettings
 from cozy.ui.app_view import AppView
 from cozy.ui.headerbar import Headerbar
 from cozy.ui.library_view import LibraryView

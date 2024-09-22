@@ -1,6 +1,5 @@
 import inject
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control import time_format
@@ -12,6 +11,7 @@ from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.model.library import Library
 from cozy.model.settings import Settings
+from cozy.settings import ApplicationSettings
 
 
 class BookDetailViewModel(Observable, EventSender):

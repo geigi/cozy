@@ -7,7 +7,6 @@ from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
 import cozy.control.filesystem_monitor as fs_monitor
 import cozy.report.reporter as report
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.singleton import Singleton
 from cozy.control.db import books, close_db
@@ -15,6 +14,7 @@ from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
+from cozy.settings import ApplicationSettings
 from cozy.ui.about_window import AboutWindow
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView

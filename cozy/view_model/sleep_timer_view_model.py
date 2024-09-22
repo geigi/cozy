@@ -6,9 +6,9 @@ from typing import Optional
 
 import inject
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.observable import Observable
 from cozy.media.player import Player
+from cozy.settings import ApplicationSettings
 from cozy.tools import IntervalTimer
 
 log = logging.getLogger("sleep_timer_view_model")

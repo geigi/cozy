@@ -4,7 +4,6 @@ from threading import Thread
 import inject
 from peewee import SqliteDatabase
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
@@ -12,6 +11,7 @@ from cozy.media.importer import Importer
 from cozy.model.library import Library
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage
+from cozy.settings import ApplicationSettings
 
 log = logging.getLogger("storages_view_model")
 

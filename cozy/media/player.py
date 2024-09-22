@@ -6,7 +6,6 @@ from typing import Optional
 import inject
 from gi.repository import GLib, Gst, GstController, Gtk
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.control.offline_cache import OfflineCache
 from cozy.media.importer import Importer, ScanStatus
@@ -14,6 +13,7 @@ from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.model.library import Library
 from cozy.report import reporter
+from cozy.settings import ApplicationSettings
 from cozy.tools import IntervalTimer
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.toaster import ToastNotifier

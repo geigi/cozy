@@ -5,7 +5,6 @@ from typing import Optional
 
 import inject
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
@@ -16,6 +15,7 @@ from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library
 from cozy.report import reporter
+from cozy.settings import ApplicationSettings
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.widgets.book_card import BookCard
 from cozy.view_model.storages_view_model import StoragesViewModel

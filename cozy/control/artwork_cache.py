@@ -7,11 +7,11 @@ from uuid import uuid4
 import inject
 from gi.repository import Gdk, GdkPixbuf
 
-from cozy.application_settings import ApplicationSettings
 from cozy.control.application_directories import get_cache_dir
 from cozy.db.artwork_cache import ArtworkCache as ArtworkCacheModel
 from cozy.media.importer import Importer, ScanStatus
 from cozy.report import reporter
+from cozy.settings import ApplicationSettings
 
 log = logging.getLogger("artwork_cache")
 

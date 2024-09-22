@@ -4,7 +4,7 @@ import inject
 import pytest
 from peewee import SqliteDatabase
 
-from cozy.application_settings import ApplicationSettings
+from cozy.settings import ApplicationSettings
 from cozy.extensions.set import split_strings_to_set
 from cozy.model.settings import Settings
 
