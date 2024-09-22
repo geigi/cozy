@@ -1,4 +1,4 @@
-from cozy.extensions.set import split_strings_to_set
+from cozy.model.library import split_strings_to_set
 
 
 def test_split_strings_does_nothing_for_non_seperated_element():
