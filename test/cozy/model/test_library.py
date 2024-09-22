@@ -5,7 +5,6 @@ import pytest
 from peewee import SqliteDatabase
 
 from cozy.application_settings import ApplicationSettings
-from cozy.extensions.set import split_strings_to_set
 from cozy.model.settings import Settings
 
 
@@ -28,7 +27,7 @@ def test_library_contains_books():
 
 
 def test_authors_contains_every_author_from_db():
-    from cozy.model.library import Library
+    from cozy.model.library import Library, split_strings_to_set
     from cozy.db.book import Book
 
     library = Library()
@@ -42,7 +41,7 @@ def test_authors_contains_every_author_from_db():
 
 
 def test_readers_contains_every_reader_from_db():
-    from cozy.model.library import Library
+    from cozy.model.library import Library, split_strings_to_set
     from cozy.db.book import Book
 
     library = Library()
