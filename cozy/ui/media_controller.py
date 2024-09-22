@@ -118,10 +118,10 @@ class MediaController(Adw.BreakpointBin):
         main_window.create_action("volume_down", self._volume_down, ["Down"], only_main_view=True)
 
         main_window.create_action(
-            "speed_up", self._speed_up, ["plus", "KP_Add"], only_main_view=True
+            "speed_up", self._speed_up, ["plus", "KP_Add", "<primary>Up"], only_main_view=True
         )
         main_window.create_action(
-            "speed_down", self._speed_down, ["minus", "KP_Subtract", "hyphen"], only_main_view=True
+            "speed_down", self._speed_down, ["minus", "KP_Subtract", "<primary>Down"], only_main_view=True
         )
         main_window.create_action("speed_reset", self._speed_reset, ["equal"], only_main_view=True)
 
