@@ -9,12 +9,10 @@ from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.enums import OpenView
-from cozy.extensions.set import split_strings_to_set
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library, split_strings_to_set
-from cozy.open_view import OpenView
 from cozy.report import reporter
 from cozy.settings import ApplicationSettings
 from cozy.ui.import_failed_dialog import ImportFailedDialog
