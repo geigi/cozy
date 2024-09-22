@@ -7,10 +7,10 @@ from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.enums import OpenView
 from cozy.extensions.set import split_strings_to_set
 from cozy.model.book import Book
 from cozy.model.library import Library
-from cozy.open_view import OpenView
 
 
 class SearchViewModel(Observable, EventSender):
