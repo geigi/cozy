@@ -105,12 +105,8 @@ class BookCard(Gtk.FlowBoxChild):
         long_press_gesture = Gtk.GestureLongPress()
         long_press_gesture.connect("pressed", self._on_long_tap)
 
-        key_event_controller = Gtk.EventControllerKey()
-        key_event_controller.connect("key-pressed", self._on_key_press_event)
-
         self.add_controller(hover_controller)
         self.add_controller(long_press_gesture)
-        self.add_controller(key_event_controller)
 
     def set_playing(self, is_playing):
         self.play_button.set_playing(is_playing)
@@ -160,7 +156,3 @@ class BookCard(Gtk.FlowBoxChild):
         device = gesture.get_device()
         if device and device.get_source() == Gdk.InputSource.TOUCHSCREEN:
             self.menu_button.emit("activate")
-
-    def _on_key_press_event(self, controller, keyval, *_):
-        if keyval == Gdk.KEY_Return:
-            self.emit("open-book-overview", self.book)

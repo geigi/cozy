@@ -479,6 +479,12 @@ class Player(EventSender):
         if state == Gst.State.PLAYING:
             self._gst_player.play()
 
+    def volume_up(self):
+        self.volume = min(1.0, self.volume + 0.1)
+
+    def volume_down(self):
+        self.volume = max(0, self.volume - 0.1)
+
     def destroy(self):
         self._gst_player.stop()
 
@@ -604,6 +610,30 @@ class Player(EventSender):
             self._gst_player.stop()
         else:
             chapter = self._book.chapters[index_current_chapter + 1]
+            chapter.position = chapter.start_position
+            self.play_pause_chapter(self._book, chapter)
+
+    def _previous_chapter(self):
+        if not self._book:
+            log.error("Cannot play previous chapter because no book reference is stored.")
+            reporter.error(
+                "player", "Cannot play previous chapter because no book reference is stored."
+            )
+            return
+
+        index_current_chapter = self._book.chapters.index(self._book.current_chapter)
+        self._book.current_chapter.position = self._book.current_chapter.start_position
+
+        if index_current_chapter - 1 < 0:
+            log.info("Book reached start, cannot rewind further.")
+            chapter = self._book.chapters[0]
+            chapter.position = chapter.start_position
+
+            self._load_chapter(chapter)
+            self.pause()
+            self._emit_tick()
+        else:
+            chapter = self._book.chapters[index_current_chapter - 1]
             chapter.position = chapter.start_position
             self.play_pause_chapter(self._book, chapter)
 

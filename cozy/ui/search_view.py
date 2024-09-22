@@ -54,12 +54,12 @@ class SearchView(Adw.Bin):
     def open(self, *_) -> None:
         self.library_stack.set_visible_child(self)
         self.search_bar.set_search_mode(True)
-        self.main_view.play_pause_action.set_enabled(False)
+        self.main_view.set_hotkeys_enabled(False)
 
     def close(self) -> None:
         self.library_stack.set_visible_child(self.split_view)
         self.search_bar.set_search_mode(False)
-        self.main_view.play_pause_action.set_enabled(True)
+        self.main_view.set_hotkeys_enabled(True)
 
     def on_state_changed(self, widget: Gtk.Widget, param) -> None:
         if widget.get_property(param.name):

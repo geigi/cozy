@@ -1,4 +1,5 @@
 import logging
+import re
 from typing import Optional
 
 import inject
@@ -8,12 +9,15 @@ from cozy.architecture.event_sender import EventSender
 from cozy.architecture.profiler import timing
 from cozy.db.book import Book as BookModel
 from cozy.db.file import File
-from cozy.extensions.set import split_strings_to_set
 from cozy.model.book import Book, BookIsEmpty
 from cozy.model.chapter import Chapter
 from cozy.model.settings import Settings
 
 log = logging.getLogger("ui")
+
+
+def split_strings_to_set(set_to_split: set[str]) -> set[str]:
+    return {entry.strip() for item in set_to_split for entry in re.split(",|;|/|&", item)}
 
 
 class Library(EventSender):

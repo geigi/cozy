@@ -21,7 +21,7 @@ def test_setting_path_updates_in_track_object_and_database(peewee_database_stora
 
 
 def test_setting_invalid_path_raises_exception(peewee_database_storage):
-    from cozy.model.storage import Storage, InvalidPath
+    from cozy.model.storage import InvalidPath, Storage
 
     invalid_path = "not an absolute path"
     storage = Storage(peewee_database_storage, 1)

@@ -4,10 +4,10 @@ import inject
 import pytest
 from peewee import SqliteDatabase
 
-from cozy.settings import ApplicationSettings
 from cozy.media.player import GstPlayer
 from cozy.model.library import Library
 from cozy.model.settings import Settings
+from cozy.settings import ApplicationSettings
 
 
 @pytest.fixture(autouse=True)
