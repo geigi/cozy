@@ -26,6 +26,7 @@ import os
 import signal
 import sys
 import traceback
+from pathlib import Path
 
 import gi
 

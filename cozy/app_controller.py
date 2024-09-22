@@ -14,7 +14,6 @@ from cozy.model.database_importer import DatabaseImporter
 from cozy.model.library import Library
 from cozy.model.settings import Settings
 from cozy.open_view import OpenView
-from cozy.power_manager import PowerManager
 from cozy.report import reporter
 from cozy.ui.app_view import AppView
 from cozy.ui.headerbar import Headerbar
@@ -74,8 +73,6 @@ class AppController(metaclass=Singleton):
 
         self.main_window.add_listener(self._on_main_window_event)
 
-        self.power_manager = inject.instance(PowerManager)
-
     def configure_inject(self, binder):
         binder.bind_to_provider(SqliteDatabase, get_db)
         binder.bind("MainWindow", self.main_window)
@@ -98,7 +95,6 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(PlaybackSpeedViewModel, lambda: PlaybackSpeedViewModel())
         binder.bind_to_constructor(SleepTimerViewModel, lambda: SleepTimerViewModel())
         binder.bind_to_constructor(GstPlayer, lambda: GstPlayer())
-        binder.bind_to_constructor(PowerManager, lambda: PowerManager())
         binder.bind_to_constructor(ToastNotifier, lambda: ToastNotifier())
         binder.bind_to_constructor(AppViewModel, lambda: AppViewModel())
         binder.bind_to_constructor(SettingsViewModel, lambda: SettingsViewModel())
