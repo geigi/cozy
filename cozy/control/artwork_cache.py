@@ -7,7 +7,7 @@ from uuid import uuid4
 import inject
 from gi.repository import Gdk, GdkPixbuf
 
-from cozy.control.application_directories import get_cache_dir
+from cozy.control.application_directories import get_artwork_cache_dir
 from cozy.db.artwork_cache import ArtworkCache as ArtworkCacheModel
 from cozy.media.importer import Importer, ScanStatus
 from cozy.report import reporter
@@ -22,10 +22,6 @@ class ArtworkCache:
         _importer.add_listener(self._on_importer_event)
         _app_settings = inject.instance(ApplicationSettings)
         _app_settings.add_listener(self._on_app_setting_changed)
-
-    @property
-    def artwork_cache_dir(self):
-        return Path(get_cache_dir()) / "artwork"
 
     def get_cover_paintable(self, book, scale, size=0) -> Gdk.Texture | None:
         pixbuf = None
@@ -51,7 +47,7 @@ class ArtworkCache:
         """
         Deletes the artwork cache completely.
         """
-        shutil.rmtree(self.artwork_cache_dir, ignore_errors=True)
+        shutil.rmtree(get_artwork_cache_dir(), ignore_errors=True)
         ArtworkCacheModel.delete().execute()
 
     def _on_importer_event(self, event, data):
@@ -75,7 +71,7 @@ class ArtworkCache:
             uuid = str(uuid4())
             ArtworkCacheModel.create(book=book.id, uuid=uuid)
 
-        cache_dir = self.artwork_cache_dir / uuid
+        cache_dir = get_artwork_cache_dir() / uuid
         cache_dir.mkdir(exist_ok=True, parents=True)
         file_path = (cache_dir / str(size)).with_suffix(".jpg")
 
@@ -104,7 +100,7 @@ class ArtworkCache:
             )
             return None
 
-        cache_dir = self.artwork_cache_dir / uuid
+        cache_dir = get_artwork_cache_dir() / uuid
 
         if cache_dir.is_dir():
             file_path = (cache_dir / str(size)).with_suffix(".jpg")

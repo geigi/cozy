@@ -538,8 +538,8 @@ class Player(EventSender):
         if self._book.offline and self._book.downloaded:
             path = self._offline_cache.get_cached_path(chapter)
 
-            if path and os.path.exists(path):
-                return path
+            if path and path.exists():
+                return str(path)
 
         return chapter.file
 

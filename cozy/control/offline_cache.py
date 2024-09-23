@@ -1,13 +1,14 @@
 import logging
 import os
 import uuid
+from pathlib import Path
 
 import inject
 from gi.repository import Gio
 
 import cozy.tools as tools
 from cozy.architecture.event_sender import EventSender
-from cozy.control.application_directories import get_cache_dir
+from cozy.control.application_directories import get_offline_cache_dir
 from cozy.db.file import File
 from cozy.db.offline_cache import OfflineCache as OfflineCacheModel
 from cozy.db.track_to_file import TrackToFile
@@ -25,6 +26,7 @@ class OfflineCache(EventSender):
     This includes operations like copying to the cache and adding or removing files from
     the cache.
     """
+
     queue = []
     total_batch_count = 0
     current_batch_count = 0
@@ -38,16 +40,16 @@ class OfflineCache(EventSender):
         super().__init__()
 
         from cozy.media.importer import Importer
+
         self._importer = inject.instance(Importer)
 
         from cozy.model.library import Library
+
         self._library = inject.instance(Library)
 
         self._importer.add_listener(self._on_importer_event)
 
-        self.cache_dir = os.path.join(get_cache_dir(), "offline")
-        if not os.path.exists(self.cache_dir):
-            os.makedirs(self.cache_dir)
+        self.cache_dir = get_offline_cache_dir()
 
         self._start_processing()
 
@@ -136,14 +138,13 @@ class OfflineCache(EventSender):
         Deletes the entire offline cache files.
         Doesn't delete anything from the cozy.db.
         """
-        cache_dir = os.path.join(get_cache_dir(), "offline")
 
         import shutil
-        shutil.rmtree(cache_dir)
+
+        shutil.rmtree(self.cache_dir)
 
     def _stop_processing(self):
-        """
-        """
+        """ """
         if not self._is_processing() or not self.thread:
             return
 

@@ -39,6 +39,8 @@ gi.require_version("GstPbutils", "1.0")
 
 from gi.repository import Gio, GLib
 
+from cozy.control.application_directories import get_data_dir
+
 pkgdatadir = "@DATA_DIR@"
 localedir = "@LOCALE_DIR@"
 
@@ -54,9 +56,7 @@ gettext.install("com.github.geigi.cozy", localedir)
 
 
 log = logging.getLogger("main")
-data_dir = Path(GLib.get_user_data_dir()) / "cozy"
-if not data_dir.is_dir():
-    data_dir.mkdir(parents=True)
+data_dir = get_data_dir()
 
 # setup log files
 log_file = data_dir / "cozy.log"
