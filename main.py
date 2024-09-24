@@ -26,7 +26,6 @@ import os
 import signal
 import sys
 import traceback
-from pathlib import Path
 
 import gi
 
@@ -37,7 +36,7 @@ gi.require_version("Gst", "1.0")
 gi.require_version("GstController", "1.0")
 gi.require_version("GstPbutils", "1.0")
 
-from gi.repository import Gio, GLib
+from gi.repository import Gio
 
 from cozy.control.application_directories import get_data_dir
 
