@@ -16,7 +16,7 @@ def get_sqlite_database():
 
 
 def database_file_exists():
-    return (get_data_dir(), "cozy.db").is_file()
+    return (get_data_dir() / "cozy.db").is_file()
 
 
 def __open_database():
