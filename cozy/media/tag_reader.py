@@ -170,6 +170,48 @@ class TagReader:
 
         return chapters
 
+    def _get_ogg_chapters(self) -> list[Chapter]:
+        comment_list: list[str] = self._get_string_list("extended-comment")
+        chapter_dict: dict[int, list[float | str | None]] = {}
+        for comment in comment_list:
+            if len(comment) < 12 or comment[:7] not in {"CHAPTER", "chapter"}:
+                continue
+            try:
+                chapter_num = int(comment[7:10], 10)
+            except ValueError:
+                continue
+            if chapter_num not in chapter_dict:
+                chapter_dict[chapter_num] = [None, None]
+            if len(comment) > 15 and comment[10:14] in {"NAME", "name"}:
+                chapter_dict[chapter_num][1] = comment[15:]
+            else:
+                chapter_dict[chapter_num][0] = self._vorbis_timestamp_to_secs(comment[11:])
+        if 0 not in chapter_dict or chapter_dict[0][0] is None or chapter_dict[0][1] is None:
+            return self._get_single_chapter()
+        i = 1
+        chapter_list: list[Chapter] = []
+        while (
+            i in chapter_dict and chapter_dict[i][0] is not None and chapter_dict[i][1] is not None
+        ):
+            chapter_list.append(
+                Chapter(
+                    name=chapter_dict[i - 1][1],
+                    position=int(chapter_dict[i - 1][0] * NS_TO_SEC),
+                    length=chapter_dict[i][0] - chapter_dict[i - 1][0],
+                    number=i,
+                )
+            )
+            i += 1
+        chapter_list.append(
+            Chapter(
+                name=chapter_dict[i - 1][1],
+                position=int(chapter_dict[i - 1][0] * NS_TO_SEC),
+                length=self._get_length_in_seconds() - chapter_dict[i - 1][0],
+                number=i,
+            )
+        )
+        return chapter_list
+
     def _parse_with_mutagen(self) -> MP4:
         path = unquote(urlparse(self.uri).path)
         mutagen_mp4 = MP4(path)
@@ -182,3 +224,13 @@ class TagReader:
             return True
 
         return mutagen.version[0] == 1 and mutagen.version[1] >= 45
+
+    @staticmethod
+    def _vorbis_timestamp_to_secs(timestamp: str) -> float | None:
+        elems = timestamp.split(":")
+        if len(elems) != 3:
+            return None
+        try:
+            return int(elems[0], 10) * 3600 + int(elems[1], 10) * 60 + float(elems[2])
+        except ValueError:
+            return None
