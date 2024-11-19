@@ -174,7 +174,7 @@ class TagReader:
         comment_list: list[str] = self._get_string_list("extended-comment")
         chapter_dict: dict[int, list[float | str | None]] = {}
         for comment in comment_list:
-            if len(comment) < 12 or comment[:7] not in {"CHAPTER", "chapter"}:
+            if len(comment) < 12 or comment[:7].lower() != "chapter":
                 continue
             try:
                 chapter_num = int(comment[7:10], 10)
@@ -182,7 +182,7 @@ class TagReader:
                 continue
             if chapter_num not in chapter_dict:
                 chapter_dict[chapter_num] = [None, None]
-            if len(comment) > 15 and comment[10:14] in {"NAME", "name"}:
+            if len(comment) > 15 and comment[10:14].lower() != "name":
                 chapter_dict[chapter_num][1] = comment[15:]
             else:
                 chapter_dict[chapter_num][0] = self._vorbis_timestamp_to_secs(comment[11:])
