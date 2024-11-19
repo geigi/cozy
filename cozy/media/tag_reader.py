@@ -23,7 +23,7 @@ class TagReader:
         self.discoverer_info = discoverer_info
 
         self.tags: Gst.TagList = discoverer_info.get_tags()
-
+        self._is_ogg = self.uri.lower().endswith(("opus", "ogg", "flac"))
         if not self.tags:
             raise ValueError("Failed to retrieve tags from discoverer_info")
 
@@ -53,7 +53,11 @@ class TagReader:
         return unquote(directory)
 
     def _get_author(self):
-        authors = self._get_string_list(Gst.TAG_COMPOSER)
+        authors = (
+            self._get_string_list(Gst.TAG_ARTIST)
+            if self._is_ogg
+            else self._get_string_list(Gst.TAG_COMPOSER)
+        )
 
         if len(authors) > 0 and authors[0]:
             return "; ".join(authors)
@@ -61,7 +65,11 @@ class TagReader:
             return _("Unknown")
 
     def _get_reader(self):
-        readers = self._get_string_list(Gst.TAG_ARTIST)
+        readers = (
+            self._get_string_list(Gst.TAG_PERFORMER)
+            if self._is_ogg
+            else self._get_string_list(Gst.TAG_ARTIST)
+        )
 
         if len(readers) > 0 and readers[0]:
             return "; ".join(readers)
