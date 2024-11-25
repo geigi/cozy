@@ -100,6 +100,8 @@ class TagReader:
         if self.uri.lower().endswith("m4b") and self._mutagen_supports_chapters():
             mutagen_tags = self._parse_with_mutagen()
             return self._get_m4b_chapters(mutagen_tags)
+        elif self._is_ogg:
+            return self._get_ogg_chapters()
         else:
             return self._get_single_chapter()
 
