@@ -195,7 +195,6 @@ class TagReader:
                 chapter_dict[chapter_num][1] = comment_split[1]
             elif len(comment_split[0]) == 10:
                 chapter_dict[chapter_num][0] = self._vorbis_timestamp_to_secs(comment_split[1])
-        print(chapter_dict)
         if 0 not in chapter_dict or chapter_dict[0][0] is None or chapter_dict[0][1] is None:
             return self._get_single_chapter()
         i = 1
