@@ -174,18 +174,26 @@ class TagReader:
         comment_list: list[str] = self._get_string_list("extended-comment")
         chapter_dict: dict[int, list[float | str | None]] = {}
         for comment in comment_list:
-            if len(comment) < 12 or comment[:7].lower() != "chapter":
+            comment_split = comment.split("=", 1)
+            if len(comment_split) != 2:  # Is a tag set in this comment
                 continue
+            if (
+                len(comment_split[0]) not in (10, 14)
+                or comment_split[0][:7].lower() != "chapter"
+                or not comment_split[0][7:10].isdecimal()
+            ):
+                continue  # Is the tag in the form chapter + 3 numbers + maybe name
             try:
-                chapter_num = int(comment[7:10], 10)
+                chapter_num = int(comment_split[0][7:10], 10)  # get number from 3 chars
             except ValueError:
                 continue
             if chapter_num not in chapter_dict:
                 chapter_dict[chapter_num] = [None, None]
-            if len(comment) > 15 and comment[10:14].lower() != "name":
-                chapter_dict[chapter_num][1] = comment[15:]
-            else:
-                chapter_dict[chapter_num][0] = self._vorbis_timestamp_to_secs(comment[11:])
+            if len(comment_split[0]) == 14 and comment_split[0][10:14].lower() == "name":
+                chapter_dict[chapter_num][1] = comment_split[1]
+            elif len(comment_split[0]) == 10:
+                chapter_dict[chapter_num][0] = self._vorbis_timestamp_to_secs(comment_split[1])
+        print(chapter_dict)
         if 0 not in chapter_dict or chapter_dict[0][0] is None or chapter_dict[0][1] is None:
             return self._get_single_chapter()
         i = 1
