@@ -1,7 +1,7 @@
 import inject
 from gi.repository import Adw, Gtk
 
-from cozy.view import View
+from cozy.enums import View
 from cozy.view_model.app_view_model import AppViewModel
 
 LIBRARY = "main"

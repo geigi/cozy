@@ -4,9 +4,8 @@ import time
 from typing import Optional
 
 import inject
-from gi.repository import GLib, Gst, GstController
+from gi.repository import GLib, Gst, GstController, Gtk
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.control.offline_cache import OfflineCache
 from cozy.media.importer import Importer, ScanStatus
@@ -14,6 +13,7 @@ from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.model.library import Library
 from cozy.report import reporter
+from cozy.settings import ApplicationSettings
 from cozy.tools import IntervalTimer
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.toaster import ToastNotifier
@@ -315,6 +315,29 @@ class GstPlayer(EventSender):
             self.emit_event("error", error)
 
 
+class PowerManager:
+    _gtk_app = inject.attr("GtkApp")
+
+    def __init__(self):
+        self._inhibit_cookie = None
+
+    def _on_player_changed(self, event: str, data):
+        if event in ["pause", "stop"]:
+            if self._inhibit_cookie:
+                log.info("Uninhibited standby.")
+                self._gtk_app.uninhibit(self._inhibit_cookie)
+                self._inhibit_cookie = None
+
+        elif event == "play":
+            if self._inhibit_cookie:
+                return
+
+            self._inhibit_cookie = self._gtk_app.inhibit(
+                None, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook"
+            )
+            log.info("Inhibited standby.")
+
+
 class Player(EventSender):
     _library: Library = inject.attr(Library)
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
@@ -329,6 +352,7 @@ class Player(EventSender):
         self._book: Optional[Book] = None
         self._play_next_chapter: bool = True
 
+        self.add_listener(PowerManager()._on_player_changed)
         self._importer.add_listener(self._on_importer_event)
         self._gst_player.add_listener(self._on_gst_player_event)
 
@@ -514,8 +538,8 @@ class Player(EventSender):
         if self._book.offline and self._book.downloaded:
             path = self._offline_cache.get_cached_path(chapter)
 
-            if path and os.path.exists(path):
-                return path
+            if path and path.exists():
+                return str(path)
 
         return chapter.file
 

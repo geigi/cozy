@@ -3,7 +3,7 @@ from gettext import gettext as _
 import inject
 from gi.repository import Gtk
 
-from cozy.application_settings import ApplicationSettings
+from cozy.settings import ApplicationSettings
 
 LEVELS = [
     _("Disabled"),

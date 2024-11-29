@@ -1,6 +1,6 @@
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
-from cozy.view import View
+from cozy.enums import View
 
 
 class AppViewModel(Observable, EventSender):

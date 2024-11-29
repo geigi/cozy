@@ -2,20 +2,19 @@ import inject
 from gi.repository import Gio
 from peewee import SqliteDatabase
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.singleton import Singleton
 from cozy.control.db import get_db
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.control.offline_cache import OfflineCache
+from cozy.enums import OpenView, View
 from cozy.media.files import Files
 from cozy.media.player import GstPlayer, Player
 from cozy.model.book import Book
 from cozy.model.database_importer import DatabaseImporter
 from cozy.model.library import Library
 from cozy.model.settings import Settings
-from cozy.open_view import OpenView
-from cozy.power_manager import PowerManager
 from cozy.report import reporter
+from cozy.settings import ApplicationSettings
 from cozy.ui.app_view import AppView
 from cozy.ui.headerbar import Headerbar
 from cozy.ui.library_view import LibraryView
@@ -23,7 +22,6 @@ from cozy.ui.main_view import CozyUI
 from cozy.ui.media_controller import MediaController
 from cozy.ui.search_view import SearchView
 from cozy.ui.toaster import ToastNotifier
-from cozy.view import View
 from cozy.view_model.app_view_model import AppViewModel
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
 from cozy.view_model.headerbar_view_model import HeaderbarViewModel
@@ -74,8 +72,6 @@ class AppController(metaclass=Singleton):
 
         self.main_window.add_listener(self._on_main_window_event)
 
-        self.power_manager = inject.instance(PowerManager)
-
     def configure_inject(self, binder):
         binder.bind_to_provider(SqliteDatabase, get_db)
         binder.bind("MainWindow", self.main_window)
@@ -98,7 +94,6 @@ class AppController(metaclass=Singleton):
         binder.bind_to_constructor(PlaybackSpeedViewModel, lambda: PlaybackSpeedViewModel())
         binder.bind_to_constructor(SleepTimerViewModel, lambda: SleepTimerViewModel())
         binder.bind_to_constructor(GstPlayer, lambda: GstPlayer())
-        binder.bind_to_constructor(PowerManager, lambda: PowerManager())
         binder.bind_to_constructor(ToastNotifier, lambda: ToastNotifier())
         binder.bind_to_constructor(AppViewModel, lambda: AppViewModel())
         binder.bind_to_constructor(SettingsViewModel, lambda: SettingsViewModel())

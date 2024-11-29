@@ -1,9 +1,8 @@
 import json
 import os
 
-import pytest
-
 import gi
+import pytest
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Gdk', '4.0')
@@ -26,12 +25,12 @@ def chunks(lst, n):
 
 @pytest.fixture(scope="function")
 def peewee_database():
-    from cozy.db.track import Track
     from cozy.db.book import Book
-    from cozy.db.settings import Settings
-    from cozy.db.storage_blacklist import StorageBlackList
-    from cozy.db.storage import Storage
     from cozy.db.file import File
+    from cozy.db.settings import Settings
+    from cozy.db.storage import Storage
+    from cozy.db.storage_blacklist import StorageBlackList
+    from cozy.db.track import Track
     from cozy.db.track_to_file import TrackToFile
 
     db_path, models, test_db = prepare_db()
@@ -77,8 +76,8 @@ def peewee_database():
 
 @pytest.fixture(scope="function")
 def peewee_database_storage():
-    from cozy.db.storage import Storage
     from cozy.db.settings import Settings
+    from cozy.db.storage import Storage
     from cozy.db.storage_blacklist import StorageBlackList
 
     db_path, models, test_db = prepare_db()
@@ -106,16 +105,17 @@ def teardown_db(db_path, models, test_db):
 
 def prepare_db():
     from playhouse.pool import PooledSqliteDatabase
+
     from cozy.db.artwork_cache import ArtworkCache
     from cozy.db.book import Book
+    from cozy.db.collation import collate_natural
+    from cozy.db.file import File
     from cozy.db.offline_cache import OfflineCache
     from cozy.db.settings import Settings
     from cozy.db.storage import Storage
     from cozy.db.storage_blacklist import StorageBlackList
     from cozy.db.track import Track
-    from cozy.db.file import File
     from cozy.db.track_to_file import TrackToFile
-    from cozy.db.collation import collate_natural
 
     models = [Track, Book, File, TrackToFile, Settings, ArtworkCache, Storage, StorageBlackList, OfflineCache]
 

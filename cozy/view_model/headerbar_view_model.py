@@ -5,10 +5,10 @@ import inject
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.offline_cache import OfflineCache
+from cozy.enums import View
 from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.model.library import Library
-from cozy.view import View
 
 
 class HeaderBarState(Enum):
