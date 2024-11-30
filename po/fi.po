@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# Oi Suomi On! <oisuomion@protonmail.com>, 2020
 # Jaakko Saarikko <jaakko.saarikko@protonmail.com>, 2021
-# Oi Suomi On! <oisuomion@protonmail.com>, 2021
 # Julian Geywitz <github@geigi.de>, 2024
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2024
 # 
@@ -30,19 +30,19 @@ msgstr "Äänikirjat"
 
 #: cozy/control/offline_cache.py:197
 msgid "Copying"
-msgstr "Jäljennetään"
+msgstr "Kopioidaan"
 
 #: cozy/media/files.py:67
 msgid "Cannot copy: Audiobook directory is read only"
-msgstr "Ei voida jäljentää: äänikirjojen kansio on \"vain luku\" -muodossa"
+msgstr "Ei voida kopioida: äänikirjojen kansio on \"vain luku\"-muodossa"
 
 #: cozy/media/files.py:69
 msgid "Cannot copy: Disk is full"
-msgstr "Ei voida jäljentää: levy on täynnä"
+msgstr "Ei voida kopioida: levy on täynnä"
 
 #: cozy/media/files.py:71 cozy/media/files.py:87
 msgid "Cannot copy: Permission denied"
-msgstr "Ei voida jäjentää: käyttöoikeus evätty"
+msgstr "Ei voida kopioida: käyttöoikeus evätty"
 
 #: cozy/media/importer.py:121
 msgid "Error while importing new files"
