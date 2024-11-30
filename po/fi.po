@@ -38,7 +38,7 @@ msgstr "Ei voida kopioida: äänikirjojen kansio on \"vain luku\"-muodossa"
 
 #: cozy/media/files.py:69
 msgid "Cannot copy: Disk is full"
-msgstr "Ei voida jäljentää: levy on täynnä"
+msgstr "Ei voida kopioida: levy on täynnä"
 
 #: cozy/media/files.py:71 cozy/media/files.py:87
 msgid "Cannot copy: Permission denied"
