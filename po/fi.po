@@ -30,7 +30,7 @@ msgstr "Äänikirjat"
 
 #: cozy/control/offline_cache.py:197
 msgid "Copying"
-msgstr "Jäljennetään"
+msgstr "Kopioidaan"
 
 #: cozy/media/files.py:67
 msgid "Cannot copy: Audiobook directory is read only"
