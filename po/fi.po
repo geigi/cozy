@@ -34,7 +34,7 @@ msgstr "Kopioidaan"
 
 #: cozy/media/files.py:67
 msgid "Cannot copy: Audiobook directory is read only"
-msgstr "Ei voida jäljentää: äänikirjojen kansio on \"vain luku\" -muodossa"
+msgstr "Ei voida kopioida: äänikirjojen kansio on \"vain luku\"-muodossa"
 
 #: cozy/media/files.py:69
 msgid "Cannot copy: Disk is full"
