@@ -77,3 +77,7 @@
 .opaque {
   opacity: 1;
 }
+
+row.spin spinbutton text {
+  opacity: 0;
+}

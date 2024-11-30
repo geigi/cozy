@@ -45,9 +45,9 @@ class MediaController(Adw.BreakpointBin):
         self.seek_bar = SeekBar()
         self.seek_bar_container.append(self.seek_bar)
 
-        self.sleep_timer: SleepTimer = SleepTimer(self.timer_image)
+        self.sleep_timer = SleepTimer(self.timer_button)
+        self.timer_button.connect("clicked", self.sleep_timer.present)
         self.playback_speed_button.set_popover(PlaybackSpeedPopover())
-        self.timer_button.set_popover(self.sleep_timer)
 
         self.volume_button.set_icons(
             [

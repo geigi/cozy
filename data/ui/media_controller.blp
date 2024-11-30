@@ -201,17 +201,15 @@ template $MediaController: Adw.BreakpointBin {
         ]
       }
 
-      MenuButton timer_button {
-        focusable: true;
-        receives-default: true;
+      Button timer_button {
         tooltip-text: _("Sleep Timer");
 
         Image timer_image {
-          icon-name: 'bed-symbolic';
+          icon-name: "no-bed-symbolic";
         }
 
         accessibility {
-          label: _("Open the sleep timer popover");
+          label: _("Open the sleep timer dialog");
         }
 
         styles [

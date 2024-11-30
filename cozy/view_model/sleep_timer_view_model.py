@@ -71,6 +71,7 @@ class SleepTimerViewModel(Observable):
         self._stop_timer()
         self.remaining_seconds = 0
         self._notify("remaining_seconds")
+        self._notify("stop_after_chapter")
         self._notify("timer_enabled")
 
     def destroy(self):

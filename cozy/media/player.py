@@ -649,7 +649,10 @@ class Player(EventSender):
 
     def _on_gst_player_event(self, event: str, message):
         if event == "file-finished":
-            self._next_chapter()
+            if self._play_next_chapter:
+                self._next_chapter()
+            else:
+                self._stop_playback()
         elif event == "resource-not-found":
             self._handle_file_not_found()
         elif event == "state" and message == Gst.State.PLAYING:
@@ -708,7 +711,7 @@ class Player(EventSender):
             log.info("Not emitting tick because no book/chapter is loaded.")
             return
 
-        if self.position > self.loaded_chapter.end_position:
+        if self.position > self.loaded_chapter.end_position and self._play_next_chapter:
             self._next_chapter()
 
         try:
