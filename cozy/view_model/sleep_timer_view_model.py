@@ -33,7 +33,7 @@ class SleepTimerViewModel(Observable):
 
         self._remaining_seconds: int = 0
         self._system_power_control: SystemPowerControl = SystemPowerControl.OFF
-        self._sleep_timer: Optional[IntervalTimer] = None
+        self._timer_running = False
         self._fadeout_running = False
 
         self._player.add_listener(self._on_player_changed)
@@ -95,20 +95,14 @@ class SleepTimerViewModel(Observable):
 
     def _start_timer(self):
         self.stop_after_chapter = False
-        if self._sleep_timer or self._remaining_seconds < 1 or not self._player.playing:
-            return
+        self._timer_running = True
 
         log.info("Start Sleep Timer")
-        self._sleep_timer = IntervalTimer(1, self._on_timer_tick)
-        self._sleep_timer.start()
 
     def _stop_timer(self):
-        if not self._sleep_timer:
-            return
+        self._timer_running = False
 
         log.info("Stop Sleep Timer")
-        self._sleep_timer.stop()
-        self._sleep_timer = None
         self._notify("timer_enabled")
 
     def _stop_playback(self):
@@ -116,6 +110,7 @@ class SleepTimerViewModel(Observable):
 
     def _on_timer_tick(self):
         self._remaining_seconds -= 1
+        self._notify_main_thread("remaining_seconds")
 
         if self._remaining_seconds <= FADEOUT_DURATION and not self._fadeout_running:
             self._fadeout_running = True
@@ -125,16 +120,14 @@ class SleepTimerViewModel(Observable):
             self._stop_timer()
             self._stop_playback()
 
-        self._notify_main_thread("remaining_seconds")
-
     def _on_player_changed(self, event, _):
-        if event == "chapter-changed":
+        if event == "position":
+            if self._timer_running and self._player._play_next_chapter:
+                # Protected attribute access above, because I don't feel like going through two layers of properties
+                self._on_timer_tick()
+        elif event == "chapter-changed":
             self.stop_after_chapter = False
             self._notify("stop_after_chapter")
-        elif event == "play":
-            self._start_timer()
-        elif event in {"pause", "stop"}:
-            self._stop_timer()
 
     def _handle_system_power_event(self):
         # TODO: This doesn't work in Flatpak. Either remove it completely, or make it conditional

@@ -207,10 +207,7 @@ class GstPlayer(EventSender):
             GLib.source_remove(self._fade_timeout)
             self._fade_timeout = None
 
-        self.pause()
         self._volume_fader.props.volume = 1.0
-
-        self.emit_event("fadeout-finished", None)
 
     def fadeout(self, length: int) -> None:
         if not self._is_player_loaded():
