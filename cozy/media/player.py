@@ -427,11 +427,10 @@ class Player(EventSender):
             log.error("Trying to play/pause although player is in STOP state.")
             reporter.error("player", "Trying to play/pause although player is in STOP state.")
 
-    def pause(self, fadeout: bool = False):
-        if fadeout:
-            self._gst_player.fadeout(self._app_settings.sleep_timer_fadeout_duration)
-            return
+    def fadeout(self, duration: int):
+        self._gst_player.fadeout(duration)
 
+    def pause(self):
         if self._gst_player.state == Gst.State.PLAYING:
             self._gst_player.pause()
 

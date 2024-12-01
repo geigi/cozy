@@ -78,6 +78,6 @@
   opacity: 1;
 }
 
-row.spin spinbutton text {
+row.spin.sleep-timer spinbutton text {
   opacity: 0;
 }

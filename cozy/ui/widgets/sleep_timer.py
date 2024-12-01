@@ -30,6 +30,7 @@ class SleepTimer(Adw.Dialog):
     set_timer_button: Gtk.Button = Gtk.Template.Child()
     timer_state: Adw.StatusPage = Gtk.Template.Child()
     toolbarview: Adw.ToolbarView = Gtk.Template.Child()
+    till_end_of_chapter_button_row: Adw.ButtonRow = Gtk.Template.Child()
 
     def __init__(self, parent_button: Gtk.Button):
         super().__init__()
@@ -92,6 +93,7 @@ class SleepTimer(Adw.Dialog):
     @Gtk.Template.Callback()
     def cancel_timer(self, *_):
         self._view_model.remaining_seconds = 0
+        self._view_model.stop_after_chapter = False
         super().close()
 
     def _timer_interval_selected(self, action, _):
@@ -111,6 +113,7 @@ class SleepTimer(Adw.Dialog):
 
     def _create_spin_timer_row(self, group: TimerRow | None = None):
         spin_row = Adw.SpinRow(adjustment=self.custom_adjustment)
+        spin_row.add_css_class("sleep-timer")
         self.custom_adjustment.connect("value-changed", self._update_custom_interval_text)
 
         radio = Gtk.CheckButton(css_classes=["selection-mode"],
@@ -128,9 +131,9 @@ class SleepTimer(Adw.Dialog):
         self.timer_state.set_title(seconds_to_time(self._view_model.remaining_seconds))
 
     def _on_stop_after_chapter_changed(self):
-        print(self._view_model.stop_after_chapter)
+        self.till_end_of_chapter_button_row.set_visible(not self._view_model.stop_after_chapter)
         if self._view_model.stop_after_chapter:
-            self.timer_state.set_title(_("Stopping at end of Current Chapter"))
+            self.timer_state.set_title(_("Stopping After Current Chapter"))
 
     def _on_timer_enabled_changed(self):
         self.stack.set_visible_child_name("running" if self._view_model.timer_enabled else "uninitiated")
