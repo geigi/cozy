@@ -117,6 +117,8 @@ class SleepTimer(Adw.Dialog):
 
     @Gtk.Template.Callback()
     def set_timer(self, *_):
+        super().close()
+
         value = self.sleep_timer_action.get_state().unpack()
         if value == -1:
             self._view_model.remaining_seconds = self.custom_adjustment.get_value() * 60
@@ -125,20 +127,19 @@ class SleepTimer(Adw.Dialog):
         else:
             self._view_model.remaining_seconds = value * 60
 
-        super().close()
-
     @Gtk.Template.Callback()
     def plus_5_minutes(self, *_):
-        self._view_model.remaining_seconds += 300
-        super().close()
+        if self._view_model.stop_after_chapter:
+            self._view_model.remaining_seconds = self._view_model.get_remaining_from_chapter() + 300
+        else:
+            self._view_model.remaining_seconds += 300
 
     @Gtk.Template.Callback()
     def till_end_of_chapter(self, *_):
         self._view_model.stop_after_chapter = True
-        super().close()
 
     @Gtk.Template.Callback()
     def cancel_timer(self, *_):
+        super().close()
         self._view_model.remaining_seconds = 0
         self._view_model.stop_after_chapter = False
-        super().close()

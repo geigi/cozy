@@ -4,6 +4,8 @@ import sys
 from enum import Enum, auto
 from typing import Optional
 
+from gi.repository import Gst
+
 import inject
 
 from cozy.architecture.observable import Observable
@@ -80,6 +82,14 @@ class SleepTimerViewModel(Observable):
         self._notify("stop_after_chapter")
         self._notify("timer_enabled")
 
+    def get_remaining_from_chapter(self) -> float | None:
+        book = self._player.loaded_book
+        if not book:
+            return 0
+
+        position = book.current_chapter.length - (book.current_chapter.position - book.current_chapter.start_position)
+        return int(position / Gst.SECOND / book.playback_speed)
+
     def destroy(self):
         self._stop_timer()
 
@@ -127,7 +137,7 @@ class SleepTimerViewModel(Observable):
             self._stop_timer()
 
     def _handle_system_power_event(self):
-        # TODO: This doesn't work in Flatpak. Either remove it completely, or make it conditional'
+        # TODO: This doesn't work in Flatpak. Either remove it completely, or make it conditional
         command = None
 
         if self.system_power_control == SystemPowerControl.SHUTDOWN:
