@@ -1,25 +1,28 @@
 from __future__ import annotations
 
 import inject
-from gi.repository import Adw, Gtk, GObject, GLib, Gio
+from gi.repository import Adw, Gio, GLib, Gtk
 
-from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel, SystemPowerControl
 from cozy.control.time_format import min_to_human_readable, seconds_to_time
+from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel
 
 
 class TimerRow(Adw.ActionRow):
-    def __init__(self, group: TimerRow | None = None, target = 0):
-        super().__init__(title=_("End of Chapter") if target == -2 else min_to_human_readable(target))
+    def __init__(self, group: TimerRow | None = None, target=0):
+        super().__init__(
+            title=_("End of Chapter") if target == -2 else min_to_human_readable(target)
+        )
         self.radio = Gtk.CheckButton(
             css_classes=["selection-mode"],
             group=group.radio if group else None,
             action_name="timer.selected",
-            action_target=GLib.Variant("n", target))
+            action_target=GLib.Variant("n", target),
+        )
         self.set_activatable_widget(self.radio)
         self.add_prefix(self.radio)
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/timer_popover.ui')
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/timer_popover.ui")
 class SleepTimer(Adw.Dialog):
     __gtype_name__ = "SleepTimer"
 
@@ -42,9 +45,7 @@ class SleepTimer(Adw.Dialog):
         self.insert_action_group("timer", demo_group)
 
         self.sleep_timer_action = Gio.SimpleAction(
-            name="selected",
-            state=GLib.Variant("n", 0),
-            parameter_type=GLib.VariantType("n"),
+            name="selected", state=GLib.Variant("n", 0), parameter_type=GLib.VariantType("n")
         )
         demo_group.add_action(self.sleep_timer_action)
         self.sleep_timer_action.connect("notify::state", self._timer_interval_selected)
@@ -116,10 +117,12 @@ class SleepTimer(Adw.Dialog):
         spin_row.add_css_class("sleep-timer")
         self.custom_adjustment.connect("value-changed", self._update_custom_interval_text)
 
-        radio = Gtk.CheckButton(css_classes=["selection-mode"],
+        radio = Gtk.CheckButton(
+            css_classes=["selection-mode"],
             group=group.radio if group else None,
             action_name="timer.selected",
-            action_target=GLib.Variant("n", -1))
+            action_target=GLib.Variant("n", -1),
+        )
         spin_row.set_activatable_widget(radio)
         spin_row.add_prefix(radio)
         return spin_row
@@ -136,10 +139,13 @@ class SleepTimer(Adw.Dialog):
             self.timer_state.set_title(_("Stopping After Current Chapter"))
 
     def _on_timer_enabled_changed(self):
-        self.stack.set_visible_child_name("running" if self._view_model.timer_enabled else "uninitiated")
+        self.stack.set_visible_child_name(
+            "running" if self._view_model.timer_enabled else "uninitiated"
+        )
         self.toolbarview.set_reveal_bottom_bars(not self._view_model.timer_enabled)
-        self._parent_button.set_icon_name("bed-symbolic" if self._view_model.timer_enabled else "no-bed-symbolic")
+        self._parent_button.set_icon_name(
+            "bed-symbolic" if self._view_model.timer_enabled else "no-bed-symbolic"
+        )
 
     def present(self, *_) -> None:
         super().present(inject.instance("MainWindow").window)
-
