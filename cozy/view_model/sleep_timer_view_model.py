@@ -2,7 +2,6 @@ import logging
 import os
 import sys
 from enum import Enum, auto
-from typing import Optional
 
 from gi.repository import Gst
 
@@ -11,7 +10,6 @@ import inject
 from cozy.architecture.observable import Observable
 from cozy.media.player import Player
 from cozy.settings import ApplicationSettings
-from cozy.tools import IntervalTimer
 
 log = logging.getLogger("sleep_timer_view_model")
 
@@ -87,7 +85,9 @@ class SleepTimerViewModel(Observable):
         if not book:
             return 0
 
-        position = book.current_chapter.length - (book.current_chapter.position - book.current_chapter.start_position)
+        position = book.current_chapter.length - (
+            book.current_chapter.position - book.current_chapter.start_position
+        )
         return int(position / Gst.SECOND / book.playback_speed)
 
     def destroy(self):
