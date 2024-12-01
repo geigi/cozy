@@ -24,7 +24,7 @@ class SleepTimer(Adw.Dialog):
         super().__init__()
         self._parent_button = parent_button
 
-        self.custom_adjustment = Gtk.Adjustment(lower=1, upper=1200, value=20, step_increment=1)
+        self.custom_adjustment = Gtk.Adjustment(lower=1, upper=300, value=20, step_increment=1)
 
         timer_action_group = Gio.SimpleActionGroup()
         self.insert_action_group("timer", timer_action_group)
