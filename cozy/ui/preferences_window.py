@@ -29,7 +29,6 @@ class PreferencesWindow(Adw.PreferencesDialog):
         super().__init__()
 
         error_reporting = ErrorReporting()
-        error_reporting.show_header(False)
         self.user_feedback_preference_group.add(error_reporting)
 
         self.storage_locations_view = StorageLocations()

@@ -1,174 +1,49 @@
 using Gtk 4.0;
+using Adw 1;
 
-Adjustment verbose_adjustment {
-  lower: 1;
-  upper: 5;
-  value: 3;
-  step-increment: 1;
-  page-increment: 1;
-  page-size: 1;
-}
 
 template $ErrorReporting: Box {
   orientation: vertical;
-  spacing: 10;
+  spacing: 12;
 
-  styles [
-    "card",
-  ]
+  Label {
+    halign: fill;
+    hexpand: true;
+    label: C_("Error and crash reporting dialog", "You can help us improve Cozy by contributing information in case of errors and crashes.");
+    wrap: true;
+    xalign: 0;
+  }
 
-  Box header_box {
-    halign: center;
-    spacing: 15;
+  Label {
+    halign: fill;
+    hexpand: true;
+    label: C_("Error and crash reporting dialog", "Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.");
+    wrap: true;
+    xalign: 0;
+  }
 
-    Label {
-      label: _("User feedback");
-      wrap: true;
+  Label {
+    halign: fill;
+    hexpand: true;
+    label: C_("Error and crash reporting dialog", "Cozy is developed in the open, and the error reporting code can be inspected here:");
+    wrap: true;
+    xalign: 0;
+  }
 
-      styles [
-        "title-3",
-      ]
-    }
-
-    Image {
-      pixel-size: 32;
-      icon-name: 'book-alert-symbolic';
-    }
+  LinkButton {
+    label: _("Sourcecode on GitHub");
+    uri: "https://github.com/geigi/cozy/tree/master/cozy/report";
+    margin-bottom: 6;
   }
 
   ListBox {
+    styles ["boxed-list"]
     selection-mode: none;
-    activate-on-single-click: false;
 
-    styles [
-      "transparent_bg",
-    ]
-
-    ListBoxRow {
-      activatable: false;
-      selectable: false;
-
-      child: Box {
-        margin-start: 10;
-        margin-end: 10;
-        margin-top: 10;
-        margin-bottom: 10;
-        orientation: vertical;
-        spacing: 10;
-
-        Box {
-          valign: center;
-          orientation: vertical;
-          spacing: 10;
-
-          Label {
-            halign: start;
-            valign: center;
-            label: C_("Error and crash reporting dialog", "You can help improve Cozy by contributing information in case of errors and crashes. ");
-            wrap: true;
-            xalign: 0;
-          }
-
-          Label {
-            valign: center;
-            label: C_("Error and crash reporting dialog", "Contributing this information is optional and completely anonymous. We will never collect personal data, files you import or any information that could identify you.");
-            wrap: true;
-            xalign: 0;
-          }
-
-          Label {
-            valign: center;
-            halign: start;
-            label: C_("Error and crash reporting dialog", "Cozy is opensource and the user feedback source code can be inspected here: ");
-            wrap: true;
-            xalign: 0;
-          }
-        }
-
-        Label {
-          label: _("<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Sourcecode on GitHub</a>");
-          use-markup: true;
-        }
-      };
+    Adw.ComboRow detail_combo {
+      title: "Detail Level";
     }
 
-    ListBoxRow {
-      activatable: false;
-      selectable: false;
-
-      child: Separator {
-        margin-start: 5;
-        margin-end: 5;
-      };
-    }
-
-    ListBoxRow {
-      activatable: false;
-      selectable: false;
-
-      child: Scale verbose_scale {
-        focusable: true;
-        margin-start: 20;
-        margin-end: 20;
-        margin-top: 10;
-        margin-bottom: 10;
-        adjustment: verbose_adjustment;
-        restrict-to-fill-level: false;
-        fill-level: 0;
-        round-digits: 0;
-      };
-    }
-
-    ListBoxRow {
-      activatable: false;
-      selectable: false;
-
-      child: Separator {
-        margin-start: 5;
-        margin-end: 5;
-      };
-    }
-
-    ListBoxRow {
-      activatable: false;
-      selectable: false;
-
-      child: Box {
-        halign: start;
-        valign: center;
-        margin-start: 10;
-        margin-end: 10;
-        margin-top: 10;
-        margin-bottom: 10;
-        orientation: vertical;
-        spacing: 10;
-
-        Label level_label {
-          halign: start;
-          label: _("Detailed error reporting with import errors");
-          wrap: true;
-          xalign: 0;
-
-          styles [
-            "heading",
-          ]
-        }
-
-        Label description_label {
-          halign: start;
-          valign: start;
-          label: _("The following information will be sent in case of an error or crash:");
-          wrap: true;
-          xalign: 0;
-        }
-
-        Label details_label {
-          vexpand: true;
-          halign: start;
-          valign: start;
-          wrap: true;
-        }
-      };
-    }
+    Adw.ActionRow description {}
   }
 }

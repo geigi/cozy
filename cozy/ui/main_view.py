@@ -20,6 +20,7 @@ from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
 from cozy.ui.widgets.first_import_button import FirstImportButton
+from cozy.ui.widgets.welcome_dialog import WelcomeDialog
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.storages_view_model import StoragesViewModel
@@ -91,6 +92,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.drop_revealer: Gtk.Revealer = self.window_builder.get_object("drop_revealer")
 
         self.navigation_view.add(BookDetailView())
+
+        WelcomeDialog().present(self.window)
 
         self.window.present()
 

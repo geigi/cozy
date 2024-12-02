@@ -1,0 +1,51 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $WelcomeDialog: Adw.Dialog {
+  width-request: 360;
+  content-width: 450;
+  content-height: 600;
+
+  Adw.Carousel carousel {
+    Adw.StatusPage welcome_page {
+      icon-name: 'com.github.geigi.cozy';
+      title: "Let's Get Cozy!";
+      hexpand: true;
+    }
+
+    Box reporting_page{
+      orientation: vertical;
+      spacing: 18;
+
+      Adw.StatusPage {
+        valign: start;
+        margin-start: 12;
+        margin-end: 12;
+        title: "Error Reporting";
+
+        styles ["compact"]
+
+        child: $ErrorReporting {};
+      }
+
+      CenterBox {
+        valign: end;
+        vexpand: true;
+
+        [center]
+        Box {
+          spacing: 12;
+          margin-bottom: 18;
+          Button {
+            label: "I Don't Want This";
+            clicked => $deny_reporting();
+          }
+          Button {
+            label: "It's Fine With Me";
+            clicked => $accept_reporting();
+          }
+        }
+      }
+    }
+  }
+}
