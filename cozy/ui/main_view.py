@@ -92,8 +92,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.drop_revealer: Gtk.Revealer = self.window_builder.get_object("drop_revealer")
 
         self.navigation_view.add(BookDetailView())
-
-        WelcomeDialog().present(self.window)
+        if self.application_settings.first_launch:
+            WelcomeDialog().present(self.window)
 
         self.window.present()
 

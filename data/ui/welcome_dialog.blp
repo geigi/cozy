@@ -47,5 +47,46 @@ template $WelcomeDialog: Adw.Dialog {
         }
       }
     }
+    Adw.StatusPage locations_page {
+      title: _("Add Audiobooks");
+      margin-start: 12;
+      margin-end: 12;
+
+      child: Box {
+        orientation: vertical;
+        spacing: 18;
+
+        Adw.PreferencesGroup {
+          Adw.SwitchRow {
+            title: _("Create Default Audiobooks Directory");
+            subtitle: _("This will create a dedicated directory for audiobooks in your home directory");
+          }
+
+          Adw.ActionRow {
+            selectable: false;
+            activatable: true;
+            title: _("Audiobooks Directory");
+            subtitle: _("You can add more locations in the settings");
+
+            activated => $choose_directory();
+
+            [suffix]
+            Button {
+              icon-name: "folder-open-symbolic";
+              valign: center;
+            }
+          }
+        }
+
+        Button {
+          label: _("Done");
+          halign: center;
+
+          styles ["pill", "suggested-action"]
+
+          clicked => $done();
+        }
+      };
+    }
   }
 }
