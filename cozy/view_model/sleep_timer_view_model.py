@@ -53,8 +53,6 @@ class SleepTimerViewModel(Observable):
         else:
             self._stop_timer()
 
-        self._notify("timer_enabled")
-
     @property
     def system_power_control(self) -> SystemPowerControl:
         return self._system_power_control
@@ -72,9 +70,8 @@ class SleepTimerViewModel(Observable):
         self._player.play_next_chapter = not new_value
 
         if new_value:
-            self._stop_timer()
             self.remaining_seconds = 0
-            log.info("Sleep Timer Stop at end of Chapter Set")
+            log.info("Stop at end of Chapter Set")
 
         self._notify("remaining_seconds")
         self._notify("stop_after_chapter")
@@ -98,6 +95,7 @@ class SleepTimerViewModel(Observable):
         self._timer_running = True
 
         log.info("Start Sleep Timer")
+        self._notify("timer_enabled")
 
     def _stop_timer(self):
         self._timer_running = False
@@ -122,8 +120,7 @@ class SleepTimerViewModel(Observable):
 
     def _on_player_changed(self, event, _):
         if event == "position":
-            if self._timer_running and self._player._play_next_chapter:
-                # Protected attribute access above, because I don't feel like going through two layers of properties
+            if self._timer_running:
                 self._on_timer_tick()
         elif event == "chapter-changed":
             self.stop_after_chapter = False
