@@ -1,19 +1,10 @@
 using Gtk 4.0;
 using Adw 1;
 
-EntryBuffer timer_buffer {
-  text: '0';
-  max-length: 10;
-}
-
-Adjustment timer_value {
-  upper: 120;
-  step-increment: 1;
-  page-increment: 5;
-}
-
 template $SleepTimer: Adw.Dialog {
-  width-request: 180;
+  width-request: 250;
+  content-width: 380;
+
   title: _("Sleep Timer");
 
   child: Adw.ToolbarView toolbarview{
