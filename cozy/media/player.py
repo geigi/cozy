@@ -482,6 +482,7 @@ class Player(EventSender):
         self.volume = max(0, self.volume - 0.1)
 
     def destroy(self):
+        self._stop_tick_thread()
         self._gst_player.stop()
 
     def _load_book(self, book: Book):

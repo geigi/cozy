@@ -87,9 +87,6 @@ class SleepTimerViewModel(Observable):
         )
         return int(position / Gst.SECOND / book.playback_speed)
 
-    def destroy(self):
-        self._stop_timer()
-
     def _start_timer(self):
         self.stop_after_chapter = False
         self._timer_running = True
@@ -103,12 +100,9 @@ class SleepTimerViewModel(Observable):
         log.info("Stop Sleep Timer")
         self._notify("timer_enabled")
 
-    def _stop_playback(self):
-        self._player.pause()
-
     def _on_timer_tick(self):
         self._remaining_seconds -= 1
-        self._notify_main_thread("remaining_seconds")
+        self._notify("remaining_seconds")
 
         if self._remaining_seconds <= FADEOUT_DURATION and not self._fadeout_running:
             self._fadeout_running = True
@@ -116,7 +110,7 @@ class SleepTimerViewModel(Observable):
 
         if self._remaining_seconds <= 0:
             self._stop_timer()
-            self._stop_playback()
+            self._player.pause()
 
     def _on_player_changed(self, event, _):
         if event == "position":
@@ -124,7 +118,6 @@ class SleepTimerViewModel(Observable):
                 self._on_timer_tick()
         elif event == "chapter-changed":
             self.stop_after_chapter = False
-            self._notify("stop_after_chapter")
 
     def _handle_system_power_event(self):
         # TODO: This doesn't work in Flatpak. Either remove it completely, or make it conditional
