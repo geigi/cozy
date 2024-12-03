@@ -7,15 +7,26 @@ template $WelcomeDialog: Adw.Dialog {
   content-height: 600;
 
   Adw.Carousel carousel {
+    interactive: false;
+
     Adw.StatusPage welcome_page {
       icon-name: 'com.github.geigi.cozy';
       title: "Let's Get Cozy!";
       hexpand: true;
+
+      Button {
+        halign: center;
+        label: _("Start!");
+
+        styles ["pill", "suggested-action"]
+
+        clicked => $advance();
+      }
     }
 
     Box reporting_page{
       orientation: vertical;
-      spacing: 18;
+      spacing: 12;
 
       Adw.StatusPage {
         valign: start;
@@ -35,13 +46,15 @@ template $WelcomeDialog: Adw.Dialog {
         [center]
         Box {
           spacing: 12;
-          margin-bottom: 18;
+          margin-bottom: 12;
+          homogeneous: true;
+
           Button {
             label: "I Don't Want This";
             clicked => $deny_reporting();
           }
           Button {
-            label: "It's Fine With Me";
+            label: "It's Fine by Me";
             clicked => $accept_reporting();
           }
         }
@@ -73,8 +86,13 @@ template $WelcomeDialog: Adw.Dialog {
 
             [suffix]
             Button {
-              icon-name: "folder-open-symbolic";
               valign: center;
+              clicked => $choose_directory();
+
+              Adw.ButtonContent chooser_button_label {
+                icon-name: "folder-open-symbolic";
+                can-shrink: true;
+              }
             }
           }
         }

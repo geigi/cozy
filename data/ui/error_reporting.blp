@@ -4,7 +4,7 @@ using Adw 1;
 
 template $ErrorReporting: Box {
   orientation: vertical;
-  spacing: 12;
+  spacing: 8;
 
   Label {
     halign: fill;
@@ -41,7 +41,7 @@ template $ErrorReporting: Box {
     selection-mode: none;
 
     Adw.ComboRow detail_combo {
-      title: "Detail Level";
+      title: _("Detail Level");
     }
 
     Adw.ActionRow description {}
