@@ -57,9 +57,10 @@ template $WelcomeDialog: Adw.Dialog {
         spacing: 18;
 
         Adw.PreferencesGroup {
-          Adw.SwitchRow {
+          Adw.SwitchRow create_directory_switch {
             title: _("Create Default Audiobooks Directory");
             subtitle: _("This will create a dedicated directory for audiobooks in your home directory");
+            active: true;
           }
 
           Adw.ActionRow {
@@ -79,8 +80,8 @@ template $WelcomeDialog: Adw.Dialog {
         }
 
         Button {
-          label: _("Done");
           halign: center;
+          label: _("Done");
 
           styles ["pill", "suggested-action"]
 

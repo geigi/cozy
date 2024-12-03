@@ -6,7 +6,6 @@
     <file preprocess="xml-stripblanks">ui/book_detail.ui</file>
     <file preprocess="xml-stripblanks">ui/chapter_element.ui</file>
     <file preprocess="xml-stripblanks">ui/error_reporting.ui</file>
-    <file preprocess="xml-stripblanks">ui/first_import_button.ui</file>
     <file preprocess="xml-stripblanks">ui/headerbar.ui</file>
     <file preprocess="xml-stripblanks">ui/main_window.ui</file>
     <file preprocess="xml-stripblanks">ui/media_controller.ui</file>

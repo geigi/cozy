@@ -12,8 +12,6 @@ from cozy import __version__
 from cozy.app_controller import AppController
 from cozy.control.db import init_db
 from cozy.control.mpris import MPRIS
-from cozy.db.settings import Settings
-from cozy.db.storage import Storage
 from cozy.report import reporter
 from cozy.ui.main_view import CozyUI
 from cozy.ui.widgets.filter_list_box import FilterListBox
@@ -52,14 +50,6 @@ class Application(Adw.Application):
         self.app_controller = AppController(self, main_window_builder, self.ui)
 
         self.ui.activate(self.app_controller.library_view)
-
-        if Settings.get().first_start:
-            Settings.update(first_start=False).execute()
-
-            audiobooks_path = Path.home() / _("Audiobooks")
-            audiobooks_path.mkdir(exist_ok=True)
-            Storage.create(path=str(audiobooks_path), default=True)
-
         self.add_window(self.ui.window)
 
         if platform.system().lower() == "linux":

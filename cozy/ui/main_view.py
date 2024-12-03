@@ -19,11 +19,11 @@ from cozy.ui.about_window import AboutWindow
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
-from cozy.ui.widgets.first_import_button import FirstImportButton
 from cozy.ui.widgets.welcome_dialog import WelcomeDialog
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.storages_view_model import StoragesViewModel
+from cozy.ui.widgets.storages import ask_storage_location
 
 log = logging.getLogger("ui")
 
@@ -124,14 +124,16 @@ class CozyUI(EventSender, metaclass=Singleton):
             action.set_enabled(enabled)
 
     def __init_components(self):
-        path = self._settings.default_location.path if self._settings.storage_locations else None
-        self.import_button = FirstImportButton(self._set_audiobook_path, path)
-        self.get_object("welcome_status_page").set_child(self.import_button)
+        self.get_object("first_import_button").connect("clicked", self._on_choose_location_clicked)
 
         if not self._player.loaded_book:
             self.block_ui_buttons(True)
 
         self._importer.add_listener(self._on_importer_event)
+
+    def _on_choose_location_clicked(self, _):
+        initial_path = self._settings.default_location.path if self._settings.storage_locations else None
+        ask_storage_location(self._set_audiobook_path, initial_path)
 
     def create_action(
         self,
@@ -273,8 +275,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         if path is None:
             return
 
-        self.import_button.disable()
-        self._storages_view_model.add_first_storage_location(path)
+        self.main_stack.set_visible_child_name("import")
+        self._storages_view_model.add_storage_location(path, default=True)
         self.scan(None, None)
         self.fs_monitor.init_offline_mode()
 
