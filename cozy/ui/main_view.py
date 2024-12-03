@@ -19,11 +19,11 @@ from cozy.ui.about_window import AboutWindow
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
+from cozy.ui.widgets.storages import ask_storage_location
 from cozy.ui.widgets.welcome_dialog import WelcomeDialog
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.storages_view_model import StoragesViewModel
-from cozy.ui.widgets.storages import ask_storage_location
 
 log = logging.getLogger("ui")
 

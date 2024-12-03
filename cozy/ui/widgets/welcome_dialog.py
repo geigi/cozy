@@ -1,17 +1,15 @@
-from pathlib import Path
-import inject
 import os.path
+from pathlib import Path
+
+import inject
 from gi.repository import Adw, Gtk
 
-from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
-from cozy.ui.widgets.error_reporting import ErrorReporting
 from cozy.settings import ApplicationSettings
+from cozy.ui.widgets.storages import ask_storage_location
 from cozy.view_model.storages_view_model import StoragesViewModel
 
-from cozy.ui.widgets.storages import ask_storage_location
 
-
-@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/welcome_dialog.ui')
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/welcome_dialog.ui")
 class WelcomeDialog(Adw.Dialog):
     __gtype_name__ = "WelcomeDialog"
 

@@ -2,7 +2,6 @@ import logging
 import platform
 import sys
 import threading
-from pathlib import Path
 from traceback import format_exception
 
 import distro
@@ -27,7 +26,7 @@ class Application(Adw.Application):
     def __init__(self, pkgdatadir: str):
         self.pkgdatadir = pkgdatadir
 
-        super().__init__(application_id='com.github.geigi.cozy')
+        super().__init__(application_id="com.github.geigi.cozy")
         self.init_custom_widgets()
 
         GLib.setenv("PULSE_PROP_media.role", "music", True)

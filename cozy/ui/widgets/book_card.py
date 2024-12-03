@@ -49,7 +49,7 @@ class BookCardPlayButton(Gtk.Button):
         context.stroke()
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/book_card.ui')
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/book_card.ui")
 class BookCard(Gtk.FlowBoxChild):
     __gtype_name__ = "BookCard"
 

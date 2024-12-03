@@ -9,28 +9,29 @@ LEVELS = [
     _("Disabled"),
     _("Basic error reporting"),
     _("Detailed error reporting"),
-    _("Detailed, with media types")
+    _("Detailed, with media types"),
 ]
 
 LEVEL_DESCRIPTION = [
     _("No error or crash reporting."),
-    _("The following information will be sent in case of an error or crash:")
+    _("The following information will be sent in case of an error or crash:"),
 ]
 
 LEVEL_DETAILS = [
     [],
-    [_("Which type of error occurred"),
+    [
+        _("Which type of error occurred"),
         _("Line of code where an error occurred"),
-        _("Cozy's version"), ],
-    [_("Linux distribution"),
-        _("Desktop environment")],
-    [_("Media type of files that Cozy couldn't import")]
+        _("Cozy's version"),
+    ],
+    [_("Linux distribution"), _("Desktop environment")],
+    [_("Media type of files that Cozy couldn't import")],
 ]
 
 
-@Gtk.Template.from_resource('/com/github/geigi/cozy/ui/error_reporting.ui')
+@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/error_reporting.ui")
 class ErrorReporting(Gtk.Box):
-    __gtype_name__ = 'ErrorReporting'
+    __gtype_name__ = "ErrorReporting"
 
     description: Adw.ActionRow = Gtk.Template.Child()
     detail_combo: Adw.ComboRow = Gtk.Template.Child()
@@ -61,10 +62,9 @@ class ErrorReporting(Gtk.Box):
 
     def _update_description(self, level: int):
         self.description.set_title(LEVEL_DESCRIPTION[min(level, 1)])
-        details = "\n".join(["• " + i for i in chain(*LEVEL_DETAILS[:level+1])])
+        details = "\n".join(["• " + i for i in chain(*LEVEL_DETAILS[: level + 1])])
         self.description.set_subtitle(details)
 
     def _on_app_setting_changed(self, event, _):
         if event == "report-level":
             self._load_report_level()
-
