@@ -241,13 +241,13 @@ class CozyUI(EventSender, metaclass=Singleton):
         if books().count() < 1:
             self.block_ui_buttons(True)
 
-    def scan(self, _, __):
+    def scan(self, *_):
         thread = Thread(target=self._importer.scan, name="ScanMediaThread")
         thread.start()
 
     def auto_import(self):
         if self.application_settings.autoscan:
-            self.scan(None, None)
+            self.scan()
 
     def __on_hide_offline(self, action, value):
         """
@@ -271,13 +271,12 @@ class CozyUI(EventSender, metaclass=Singleton):
         thread.start()
         return True
 
-    def _set_audiobook_path(self, path: str | None) -> None:
+    def _set_audiobook_path(self, path: str | None, default: bool = True) -> None:
         if path is None:
             return
 
         self.main_stack.set_visible_child_name("import")
-        self._storages_view_model.add_storage_location(path, default=True)
-        self.scan(None, None)
+        self._storages_view_model.add_storage_location(path, default=default)
         self.fs_monitor.init_offline_mode()
 
     def on_close(self, widget, data=None):

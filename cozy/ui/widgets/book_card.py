@@ -112,7 +112,8 @@ class BookCard(Gtk.FlowBoxChild):
         self.play_button.set_playing(is_playing)
 
     def update_progress(self):
-        self.play_button.progress = self.book.progress / self.book.duration
+        if self.book.duration:
+            self.play_button.progress = self.book.progress / self.book.duration
 
     def reset(self) -> None:
         self.book.last_played = 0

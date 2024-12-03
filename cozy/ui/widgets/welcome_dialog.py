@@ -38,15 +38,17 @@ class WelcomeDialog(Adw.Dialog):
         self.advance()
 
     @Gtk.Template.Callback()
-    def done(self, obj):
+    def done(self, _):
         self.close()
-
-        inject.instance("MainWindow")._set_audiobook_path(self._path)
 
         if self.create_directory_switch.props.active:
             audiobooks_dir = Path.home() / _("Audiobooks")
             audiobooks_dir.mkdir(exist_ok=True)
-            self._storages_view_model.add_storage_location(str(audiobooks_dir))
+            self._storages_view_model.add_storage_location(str(audiobooks_dir), default=True)
+
+            inject.instance("MainWindow")._set_audiobook_path(self._path, default=False)
+        else:
+            inject.instance("MainWindow")._set_audiobook_path(self._path)
 
     @Gtk.Template.Callback()
     def choose_directory(self, _):

@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 from threading import Thread
 
 import inject
@@ -55,7 +56,9 @@ class StoragesViewModel(Observable, EventSender):
         self._model.invalidate()
         self._notify("storage_locations")
 
-        self._scan_new_storage(model)
+        if any(Path(path).iterdir()):
+            # Do this check here, because importer has an entirely different mechanism
+            self._scan_new_storage(model)
 
     def change_storage_location(self, model: Storage, new_path: str) -> None:
         old_path = model.path
