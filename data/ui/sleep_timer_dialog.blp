@@ -37,12 +37,13 @@ template $SleepTimer: Adw.Dialog {
       margin-end: 18;
       margin-top: 12;
       margin-bottom: 12;
-      visible-child-name: "uninitiated";
 
       StackPage {
         name: "uninitiated";
         child: Adw.PreferencesGroup list {};
       }
+
+      visible-child-name: "uninitiated";
 
       StackPage {
         name: "running";
