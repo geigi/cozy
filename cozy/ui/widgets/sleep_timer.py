@@ -81,6 +81,11 @@ class SleepTimer(Adw.Dialog):
         spin_row.add_css_class("sleep-timer")
         self._add_radio_button_to_timer_row(spin_row, -1, group.radio)
 
+        spin_button = spin_row.get_first_child().get_last_child().get_last_child()
+        spin_button.set_halign(Gtk.Align.END)
+
+        spin_row.connect("input", lambda x, y: spin_row.activate() or 0)
+
         return spin_row
 
     def _update_custom_interval_text(self, *_) -> None:
