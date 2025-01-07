@@ -71,6 +71,11 @@
       <summary>Hide currently unavailable books in the library.</summary>
       <description></description>
     </key>
+    <key type="b" name="hide-read">
+      <default>false</default> 
+      <summary>Hide books that have been read in the library.</summary>
+      <description></description>
+    </key>
     <key type="i" name="report-level">
       <default>2</default>
       <summary>Level of error report details.</summary>

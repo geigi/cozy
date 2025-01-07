@@ -128,8 +128,13 @@ class LibraryViewModel(Observable, EventSender):
         hide_offline_books = self._application_settings.hide_offline
         book_is_online = self._fs_monitor.get_book_online(book)
 
-
         if hide_offline_books and not book_is_online and not book.downloaded:
+            return False
+
+        hide_read_books = self._application_settings.hide_read
+        book_is_read = book.progress >= book.duration
+        
+        if hide_read_books and book_is_read:
             return False
 
         if self.library_view_mode == LibraryViewMode.CURRENT:
@@ -162,6 +167,10 @@ class LibraryViewModel(Observable, EventSender):
 
     def _on_application_setting_changed(self, event, _):
         if event == "hide-offline":
+            self._notify("authors")
+            self._notify("readers")
+            self._notify("books-filter")
+        elif event == "hide-read":
             self._notify("authors")
             self._notify("readers")
             self._notify("books-filter")

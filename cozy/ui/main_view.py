@@ -116,6 +116,12 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
 
+        self.hide_read_action = Gio.SimpleAction.new_stateful(
+            "hide_read", None, GLib.Variant.new_boolean(self.application_settings.hide_read)
+        )
+        self.hide_read_action.connect("change-state", self.__on_hide_read)
+        self.app.add_action(self.hide_read_action)
+
     def set_hotkeys_enabled(self, enabled: bool) -> None:
         for action in self._actions_to_disable:
             action.set_enabled(enabled)
@@ -250,6 +256,13 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         action.set_state(value)
         self.application_settings.hide_offline = value.get_boolean()
+
+    def __on_hide_read(self, action, value):
+        """
+        Hide read books from the library view.
+        """
+        action.set_state(value)
+        self.application_settings.hide_read = value.get_boolean()
 
     def _on_drag_enter(self, *_):
         self.drop_revealer.set_reveal_child(True)
