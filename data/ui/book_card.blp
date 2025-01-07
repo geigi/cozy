@@ -56,6 +56,26 @@ template $BookCard: FlowBoxChild {
         }
       }
 
+      [overlay]
+      Revealer played_revealer {
+        transition-type: crossfade;
+        valign: start;
+        halign: start;
+
+        Image status_icon {
+          margin-start: 6;
+          margin-top: 6;
+          pixel-size: 20;
+          tooltip-text: _("Book status");
+
+          styles [
+            "circular",
+            "opaque",
+            "status-icon",
+          ]
+        }
+      }
+
       Button button {
         overflow: hidden;
         tooltip-text: _("Open Book Overview");

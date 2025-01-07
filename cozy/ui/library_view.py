@@ -209,3 +209,4 @@ class LibraryView:
             return
 
         self._connected_book_card.update_progress()
+        self._connected_book_card.update_status_icon()
