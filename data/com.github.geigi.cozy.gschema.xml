@@ -46,16 +46,6 @@
       <summary>Swap author and reader tag assignment.</summary>
       <description></description>
     </key>
-    <key type="b" name="sleep-timer-fadeout">
-      <default>false</default> 
-      <summary>Enable fading out when using the sleep timer.</summary>
-      <description></description>
-    </key>
-    <key type="i" name="sleep-timer-fadeout-duration">
-      <default>15</default> 
-      <summary>Duration of the sleep timer fadeout.</summary>
-      <description></description>
-    </key>
     <key type="d" name="volume">
       <default>1.0</default> 
       <summary>Volume.</summary>

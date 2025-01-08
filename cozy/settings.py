@@ -63,14 +63,6 @@ class ApplicationSettings(EventSender):
         self._settings.set_boolean("prefer-external-cover", new_value)
 
     @property
-    def sleep_timer_fadeout(self) -> bool:
-        return self._settings.get_boolean("sleep-timer-fadeout")
-
-    @property
-    def sleep_timer_fadeout_duration(self) -> int:
-        return self._settings.get_int("sleep-timer-fadeout-duration")
-
-    @property
     def timer(self) -> int:
         return self._settings.get_int("timer")
 
