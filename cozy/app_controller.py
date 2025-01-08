@@ -149,5 +149,4 @@ class AppController(metaclass=Singleton):
             self._on_open_view(data, None)
 
     def quit(self):
-        self.sleep_timer_view_model.destroy()
         self.player.destroy()

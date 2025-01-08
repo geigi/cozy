@@ -4,6 +4,10 @@ from gettext import ngettext
 from gi.repository import Gst
 
 
+def seconds_to_time(seconds: int) -> str:
+    return ns_to_time(seconds * Gst.SECOND)
+
+
 def ns_to_time(
     nanoseconds: int, max_length: int | None = None, include_seconds: bool = True
 ) -> str:
@@ -34,6 +38,10 @@ def ns_to_time(
         result += ":%02d" % s
 
     return result
+
+
+def min_to_human_readable(minutes: int) -> str:
+    return ns_to_human_readable(minutes * Gst.SECOND * 60)
 
 
 def ns_to_human_readable(nanoseconds: int) -> str:

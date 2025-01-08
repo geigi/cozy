@@ -207,10 +207,7 @@ class GstPlayer(EventSender):
             GLib.source_remove(self._fade_timeout)
             self._fade_timeout = None
 
-        self.pause()
         self._volume_fader.props.volume = 1.0
-
-        self.emit_event("fadeout-finished", None)
 
     def fadeout(self, length: int) -> None:
         if not self._is_player_loaded():
@@ -427,11 +424,10 @@ class Player(EventSender):
             log.error("Trying to play/pause although player is in STOP state.")
             reporter.error("player", "Trying to play/pause although player is in STOP state.")
 
-    def pause(self, fadeout: bool = False):
-        if fadeout:
-            self._gst_player.fadeout(self._app_settings.sleep_timer_fadeout_duration)
-            return
+    def fadeout(self, duration: int):
+        self._gst_player.fadeout(duration)
 
+    def pause(self):
         if self._gst_player.state == Gst.State.PLAYING:
             self._gst_player.pause()
 
@@ -486,6 +482,7 @@ class Player(EventSender):
         self.volume = max(0, self.volume - 0.1)
 
     def destroy(self):
+        self._stop_tick_thread()
         self._gst_player.stop()
 
     def _load_book(self, book: Book):
@@ -649,7 +646,10 @@ class Player(EventSender):
 
     def _on_gst_player_event(self, event: str, message):
         if event == "file-finished":
-            self._next_chapter()
+            if self._play_next_chapter:
+                self._next_chapter()
+            else:
+                self._stop_playback()
         elif event == "resource-not-found":
             self._handle_file_not_found()
         elif event == "state" and message == Gst.State.PLAYING:
@@ -708,7 +708,7 @@ class Player(EventSender):
             log.info("Not emitting tick because no book/chapter is loaded.")
             return
 
-        if self.position > self.loaded_chapter.end_position:
+        if self.position > self.loaded_chapter.end_position and self._play_next_chapter:
             self._next_chapter()
 
         try:

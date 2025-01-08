@@ -18,12 +18,10 @@ class PreferencesWindow(Adw.PreferencesDialog):
 
     swap_author_reader_switch: Adw.SwitchRow = Gtk.Template.Child()
     replay_switch: Adw.SwitchRow = Gtk.Template.Child()
-    sleep_timer_fadeout_switch: Adw.SwitchRow = Gtk.Template.Child()
     artwork_prefer_external_switch: Adw.SwitchRow = Gtk.Template.Child()
 
     rewind_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
     forward_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
-    fadeout_duration_adjustment: Gtk.Adjustment = Gtk.Template.Child()
 
     def __init__(self) -> None:
         super().__init__()
@@ -46,8 +44,6 @@ class PreferencesWindow(Adw.PreferencesDialog):
         bind_settings("replay", self.replay_switch, "active")
         bind_settings("rewind-duration", self.rewind_duration_adjustment, "value")
         bind_settings("forward-duration", self.forward_duration_adjustment, "value")
-        bind_settings("sleep-timer-fadeout", self.sleep_timer_fadeout_switch, "enable-expansion")
-        bind_settings("sleep-timer-fadeout-duration", self.fadeout_duration_adjustment, "value")
         bind_settings("prefer-external-cover", self.artwork_prefer_external_switch, "active")
 
     def _on_lock_ui_changed(self) -> None:
