@@ -1,5 +1,5 @@
 distro
-mutagen
+mutagen>=1.47
 peewee>=3.9.6
 pytz
 requests
