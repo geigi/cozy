@@ -173,6 +173,8 @@ class LibraryView:
     def _on_remove_book(self, _, book):
         if self._view_model.book_files_exist(book):
             DeleteBookView(self._on_remove_book_response, book).present()
+        else:
+            self._view_model.remove_book(book)
 
     def _on_remove_book_response(self, _, response, book):
         if response != "delete":
