@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
   <schema path="/com/github/geigi/cozy/" id="com.github.geigi.cozy" gettext-domain="cozy">
+    <key type="b" name="first-launch">
+      <default>true</default>
+      <summary>Whether to show the welcome dialog</summary>
+      <description></description>
+    </key>
     <key type="b" name="symlinks">
       <default>false</default>
       <summary>Follow symlinks</summary>
