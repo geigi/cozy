@@ -27,6 +27,14 @@ class ApplicationSettings(EventSender):
         self._settings.set_boolean("hide-offline", new_value)
 
     @property
+    def hide_read(self) -> bool:
+        return self._settings.get_boolean("hide-read")
+
+    @hide_read.setter
+    def hide_read(self, new_value: bool):
+        self._settings.set_boolean("hide-read", new_value)
+
+    @property
     def swap_author_reader(self) -> bool:
         return self._settings.get_boolean("swap-author-reader")
 

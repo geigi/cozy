@@ -103,6 +103,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.create_action("remove_book", self.remove_book)
 
         self.create_action("mark_book_as_read", self.mark_book_as_read)
+        self.create_action("mark_book_as_unread", self.mark_book_as_unread)
         self.create_action("jump_to_book_folder", self.jump_to_book_folder)
 
         self.create_action("prefs", self.show_preferences_window, ["<primary>comma"], global_shorcut=True)
@@ -115,6 +116,12 @@ class CozyUI(EventSender, metaclass=Singleton):
         )
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
+
+        self.hide_read_action = Gio.SimpleAction.new_stateful(
+            "hide_read", None, GLib.Variant.new_boolean(self.application_settings.hide_read)
+        )
+        self.hide_read_action.connect("change-state", self.__on_hide_read)
+        self.app.add_action(self.hide_read_action)
 
     def set_hotkeys_enabled(self, enabled: bool) -> None:
         for action in self._actions_to_disable:
@@ -165,6 +172,10 @@ class CozyUI(EventSender, metaclass=Singleton):
     def mark_book_as_read(self, *_) -> None:
         if self.app.selected_book is not None:
             self.app.selected_book.mark_as_read()
+
+    def mark_book_as_unread(self, *_) -> None:
+        if self.app.selected_book is not None:
+            self.app.selected_book.mark_as_unread()
 
     def jump_to_book_folder(self, *_) -> None:
         if self.app.selected_book is not None:
@@ -250,6 +261,13 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         action.set_state(value)
         self.application_settings.hide_offline = value.get_boolean()
+
+    def __on_hide_read(self, action, value):
+        """
+        Hide read books from the library view.
+        """
+        action.set_state(value)
+        self.application_settings.hide_read = value.get_boolean()
 
     def _on_drag_enter(self, *_):
         self.drop_revealer.set_reveal_child(True)

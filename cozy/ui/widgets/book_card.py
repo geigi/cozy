@@ -63,6 +63,8 @@ class BookCard(Gtk.FlowBoxChild):
     menu_button: Gtk.MenuButton = Gtk.Template.Child()
     play_revealer: Gtk.Revealer = Gtk.Template.Child()
     menu_revealer: Gtk.Revealer = Gtk.Template.Child()
+    played_revealer: Gtk.Revealer = Gtk.Template.Child()
+    status_icon: Gtk.Image = Gtk.Template.Child()
     play_button: BookCardPlayButton = Gtk.Template.Child()
 
     artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
@@ -96,6 +98,7 @@ class BookCard(Gtk.FlowBoxChild):
 
         self._install_event_controllers()
         self.update_progress()
+        self.update_status_icon()
 
     def _install_event_controllers(self):
         hover_controller = Gtk.EventControllerMotion()
@@ -107,6 +110,26 @@ class BookCard(Gtk.FlowBoxChild):
 
         self.add_controller(hover_controller)
         self.add_controller(long_press_gesture)
+
+    def update_status_icon(self):
+        """
+        Update the status icon based on current book state.
+        """
+        if self.book.position != 0:
+            if self.book.progress >= self.book.duration:
+                self.status_icon.set_from_icon_name("check-round-outline2-symbolic")
+                self.status_icon.set_tooltip_text(_("Book completed"))
+                self.status_icon.add_css_class("success")
+                self.status_icon.remove_css_class("accent")
+            else:
+                self.status_icon.set_from_icon_name("listen-book-symbolic")
+                self.status_icon.set_tooltip_text(_("Book in progress"))
+                self.status_icon.add_css_class("accent")
+                self.status_icon.remove_css_class("success")
+
+            self.played_revealer.set_reveal_child(True)
+        else:
+            self.played_revealer.set_reveal_child(False)
 
     def set_playing(self, is_playing):
         self.play_button.set_playing(is_playing)
@@ -123,6 +146,18 @@ class BookCard(Gtk.FlowBoxChild):
     def mark_as_read(self) -> None:
         self.book.position = -1
         self.update_progress()
+        self.update_status_icon()
+        self.update_menu_actions()
+
+    def mark_as_unread(self) -> None:
+        self.book.position = 0
+        self.book.last_played = 0
+        for chapter in self.book.chapters:
+            chapter.position = chapter.start_position
+            
+        self.update_progress()
+        self.update_status_icon()
+        self.update_menu_actions()
 
     def jump_to_folder(self) -> None:
         track = self.book.chapters[0]
@@ -156,3 +191,16 @@ class BookCard(Gtk.FlowBoxChild):
         device = gesture.get_device()
         if device and device.get_source() == Gdk.InputSource.TOUCHSCREEN:
             self.menu_button.emit("activate")
+
+    def update_menu_actions(self) -> None:
+        app = inject.instance("GtkApp")
+        
+        # Show mark_book_as_read only when position is not -1 and book is not completed
+        mark_as_read_action = app.lookup_action("mark_book_as_read")
+        if mark_as_read_action is not None:
+            mark_as_read_action.set_enabled(self.book.position != -1 and self.book.progress < self.book.duration)
+
+        # Show mark_book_as_unread only when position is -1 or book is completed
+        mark_as_unread_action = app.lookup_action("mark_book_as_unread")
+        if mark_as_unread_action is not None:
+            mark_as_unread_action.set_enabled(self.book.position == -1 or self.book.progress >= self.book.duration)

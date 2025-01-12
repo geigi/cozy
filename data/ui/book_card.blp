@@ -56,6 +56,26 @@ template $BookCard: FlowBoxChild {
         }
       }
 
+      [overlay]
+      Revealer played_revealer {
+        transition-type: crossfade;
+        valign: start;
+        halign: start;
+
+        Image status_icon {
+          margin-start: 6;
+          margin-top: 6;
+          pixel-size: 20;
+          tooltip-text: _("Book status");
+
+          styles [
+            "circular",
+            "opaque",
+            "status-icon",
+          ]
+        }
+      }
+
       Button button {
         overflow: hidden;
         tooltip-text: _("Open Book Overview");
@@ -128,6 +148,15 @@ menu book_menu {
     item {
       action: 'app.mark_book_as_read';
       label: _("Mark as Read");
+
+      hidden-when: "action-disabled";
+    }
+
+    item {
+      action: 'app.mark_book_as_unread';
+      label: _("Mark as Unread");
+
+      hidden-when: "action-disabled";
     }
 
     item {

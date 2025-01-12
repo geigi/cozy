@@ -244,6 +244,14 @@ msgstr "Projets open source"
 msgid "translator-credits"
 msgstr "Irénée Thirion"
 
+#: cozy/ui/widgets/book_card.py:121
+msgid "Book completed"
+msgstr "Livre terminé"
+
+#: cozy/ui/widgets/book_card.py:126
+msgid "Book in progress"
+msgstr "Livre en cours"
+
 #: cozy/ui/widgets/book_element.py:70
 msgid "Mark as read"
 msgstr "Marquer comme lu"
@@ -360,6 +368,10 @@ msgstr "Modifier l'emplacement des livres audio…"
 #: data/ui/album_element.ui:47
 msgid "Play"
 msgstr "Jouer"
+
+#: data/ui/book_card.ui:157
+msgid "Mark as Unread"
+msgstr "Marquer comme non lu"
 
 #: data/ui/book_detail.ui:149
 msgid "Remaining"
@@ -478,6 +490,10 @@ msgstr "_Scanner la bibliothèque"
 #: data/ui/headerbar.ui:86
 msgid "_Hide unavailable books"
 msgstr "_Masquer les livres non disponibles"
+
+#: data/ui/headerbar.ui:91
+msgid "_Hide read books"
+msgstr "_Masquer les livres lus"
 
 #: data/ui/headerbar.ui:92
 msgid "_Preferences"
