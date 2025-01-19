@@ -173,12 +173,8 @@ class CozyUI(EventSender, metaclass=Singleton):
     def get_object(self, name):
         return self.window_builder.get_object(name)
 
-    def quit(self, action, parameter):
-        """
-        Quit app.
-        """
-        self.on_close(None)
-        self.app.quit()
+    def get_builder(self):
+        return self.window_builder
 
     def _dialog_close_callback(self, dialog):
         dialog.disconnect_by_func(self._dialog_close_callback)
@@ -275,29 +271,24 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.scan(None, None)
         self.fs_monitor.init_offline_mode()
 
-    def on_close(self, widget, data=None):
+    def on_close(self, *_):
         """
         Close and dispose everything that needs to be when window is closed.
         """
-        log.info("Closing.")
+        log.info("Releasing resources.")
         self.fs_monitor.close()
-
         self._save_window_size()
-
         self._player.destroy()
-
         close_db()
-
         report.close()
-
         log.info("Saving settings.")
         self._gio_settings.apply()
+
+    def quit(self, *_):
+        self.on_close()
         log.info("Closing app.")
         self.app.quit()
         log.info("App closed.")
-
-    def get_builder(self):
-        return self.window_builder
 
     def _on_importer_event(self, event: str, message):
         if event == "scan" and message == ScanStatus.SUCCESS:

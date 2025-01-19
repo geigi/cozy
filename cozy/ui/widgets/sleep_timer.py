@@ -4,7 +4,7 @@ import inject
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from cozy.control.time_format import min_to_human_readable, seconds_to_time
-from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel
+from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel, SystemPowerAction
 
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/sleep_timer_dialog.ui")
@@ -19,6 +19,7 @@ class SleepTimer(Adw.Dialog):
     timer_state: Adw.StatusPage = Gtk.Template.Child()
     toolbarview: Adw.ToolbarView = Gtk.Template.Child()
     till_end_of_chapter_button_row: Adw.ButtonRow = Gtk.Template.Child()
+    power_action_combo_row: Adw.ComboRow() = Gtk.Template.Child()
 
     def __init__(self, parent_button: Gtk.Button):
         super().__init__()
@@ -45,6 +46,10 @@ class SleepTimer(Adw.Dialog):
         self.list.add(self.spin_row)
         self.custom_adjustment.connect("value-changed", self._update_custom_interval_text)
         self._update_custom_interval_text()
+
+        self.power_action_list = [_("None"), _("Suspend"), _("Shutdown")]
+        power_action_list_model = Gtk.StringList.new(self.power_action_list)
+        self.power_action_combo_row.props.model = power_action_list_model
 
         self._connect_view_model()
 
@@ -148,3 +153,9 @@ class SleepTimer(Adw.Dialog):
         super().close()
         self._view_model.remaining_seconds = 0
         self._view_model.stop_after_chapter = False
+
+    @Gtk.Template.Callback()
+    def on_power_action_selected(self, obj, _):
+        selected_string = obj.props.selected_item.get_string()
+        selected_string_index = self.power_action_list.index(selected_string)
+        self._view_model.system_power_action = SystemPowerAction(selected_string_index)

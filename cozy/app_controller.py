@@ -147,6 +147,3 @@ class AppController(metaclass=Singleton):
     def _on_main_window_event(self, event: str, data):
         if event == "open_view":
             self._on_open_view(data, None)
-
-    def quit(self):
-        self.player.destroy()

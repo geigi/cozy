@@ -14,7 +14,9 @@
     "--filesystem=host",
     "--filesystem=xdg-run/gvfs",
     "--filesystem=xdg-run/gvfsd",
-    "--talk-name=org.gtk.vfs.*"
+    "--talk-name=org.gtk.vfs.*",
+    "--talk-name=org.gnome.SessionManager",
+    "--system-talk-name=org.freedesktop.login1"
   ],
   "modules": [
     {

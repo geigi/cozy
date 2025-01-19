@@ -88,7 +88,6 @@ class Application(Adw.Application):
             sys.excepthook(exc_type, exc_value, exc_traceback)
 
     def quit(self):
-        self.app_controller.quit()
         super().quit()
 
     @staticmethod
