@@ -92,9 +92,9 @@ class TagReader:
         mutagen_file = File(path)
 
         if isinstance(mutagen_file, MP4):
-            return self._get_mp4_chapter(mutagen_file)
+            return self._get_mp4_chapters(mutagen_file)
         elif isinstance(mutagen_file, MP3):
-            return self._get_mp3_chapter(mutagen_file)
+            return self._get_mp3_chapters(mutagen_file)
         else:
             return self._get_single_file_chapter()
 
@@ -140,7 +140,7 @@ class TagReader:
         )
         return [chapter]
 
-    def _get_mp4_chapter(self, file: MP4) -> list[Chapter]:
+    def _get_mp4_chapters(self, file: MP4) -> list[Chapter]:
         if not file.chapters or len(file.chapters) == 0:
             return self._get_single_file_chapter()
 
@@ -163,7 +163,7 @@ class TagReader:
 
         return chapters
 
-    def _get_mp3_chapter(self, file: MP3) -> list[Chapter]:
+    def _get_mp3_chapters(self, file: MP3) -> list[Chapter]:
         chaps = file.tags.getall("CHAP")
         if not chaps:
             return self._get_single_file_chapter()
