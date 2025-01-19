@@ -105,7 +105,9 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.create_action("mark_book_as_read", self.mark_book_as_read)
         self.create_action("jump_to_book_folder", self.jump_to_book_folder)
 
-        self.create_action("prefs", self.show_preferences_window, ["<primary>comma"], global_shorcut=True)
+        self.create_action(
+            "prefs", self.show_preferences_window, ["<primary>comma"], global_shorcut=True
+        )
         self.create_action("quit", self.quit, ["<primary>q", "<primary>w"], global_shorcut=True)
 
         self.scan_action = self.create_action("scan", self.scan)

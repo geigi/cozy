@@ -116,10 +116,7 @@ class AppController(metaclass=Singleton):
         self.app_view_model.view = View.LIBRARY_FILTER
 
     def _connect_search_button(self):
-        self.headerbar.search_button.connect(
-            "notify::active",
-            self.search_view.on_state_changed
-        )
+        self.headerbar.search_button.connect("notify::active", self.search_view.on_state_changed)
 
     def _on_open_view(self, event, data):
         if event == OpenView.AUTHOR:

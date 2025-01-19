@@ -29,7 +29,7 @@ class Application(Adw.Application):
     def __init__(self, pkgdatadir: str):
         self.pkgdatadir = pkgdatadir
 
-        super().__init__(application_id='com.github.geigi.cozy')
+        super().__init__(application_id="com.github.geigi.cozy")
         self.init_custom_widgets()
 
         GLib.setenv("PULSE_PROP_media.role", "music", True)
@@ -83,7 +83,11 @@ class Application(Adw.Application):
             return
 
         try:
-            reporter.exception("uncaught", exc_value, "\n".join(format_exception(exc_type, exc_value, exc_traceback)))
+            reporter.exception(
+                "uncaught",
+                exc_value,
+                "\n".join(format_exception(exc_type, exc_value, exc_traceback)),
+            )
         finally:
             sys.excepthook(exc_type, exc_value, exc_traceback)
 

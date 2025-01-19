@@ -1,11 +1,9 @@
 import logging
 import os
-import sys
-from enum import Enum, auto
-
-from gi.repository import Gst, Gio, GLib
+from enum import Enum
 
 import inject
+from gi.repository import Gio, GLib, Gst
 
 from cozy.architecture.observable import Observable
 from cozy.media.player import Player
@@ -133,38 +131,40 @@ class SleepTimerViewModel(Observable):
 
     def _shutdown(self):
         inject.instance("MainWindow").quit()  # Exit gracefully
-        if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
+        if os.getenv("XDG_CURRENT_DESKTOP") == "GNOME":
             Gio.bus_get_sync(Gio.BusType.SESSION, None).call_sync(
-                'org.gnome.SessionManager',
-                '/org/gnome/SessionManager',
-                'org.gnome.SessionManager',
-                'Shutdown',
+                "org.gnome.SessionManager",
+                "/org/gnome/SessionManager",
+                "org.gnome.SessionManager",
+                "Shutdown",
                 None,
                 None,
                 Gio.DBusCallFlags.NONE,
                 -1,
-                None
+                None,
             )
         else:
             Gio.bus_get_sync(Gio.BusType.SYSTEM, None).call_sync(
-                'org.freedesktop.login1',
-                '/org/freedesktop/login1',
-                'org.freedesktop.login1.Manager',
-                'PowerOff',
+                "org.freedesktop.login1",
+                "/org/freedesktop/login1",
+                "org.freedesktop.login1.Manager",
+                "PowerOff",
                 GLib.Variant.new_tuple(GLib.Variant.new_boolean(True)),
                 None,
                 Gio.DBusCallFlags.NONE,
                 -1,
-                None,)
+                None,
+            )
 
     def _suspend(self):
         Gio.bus_get_sync(Gio.BusType.SYSTEM, None).call_sync(
-            'org.freedesktop.login1',
-            '/org/freedesktop/login1',
-            'org.freedesktop.login1.Manager',
-            'Suspend',
+            "org.freedesktop.login1",
+            "/org/freedesktop/login1",
+            "org.freedesktop.login1.Manager",
+            "Suspend",
             GLib.Variant.new_tuple(GLib.Variant.new_boolean(True)),
             None,
             Gio.DBusCallFlags.NONE,
             -1,
-            None,)
+            None,
+        )
