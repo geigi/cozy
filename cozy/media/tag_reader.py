@@ -22,7 +22,8 @@ class TagReader:
         self.discoverer_info = discoverer_info
 
         self.tags: Gst.TagList = discoverer_info.get_tags()
-        self.tag_format = self.tags.get_string_index("container-format", 0)[1].lower()
+        result, tag_format = self.tags.get_string_index("container-format", 0)
+        self.tag_format = tag_format.lower() if result else None
 
         if not self.tags:
             raise ValueError("Failed to retrieve tags from discoverer_info")
