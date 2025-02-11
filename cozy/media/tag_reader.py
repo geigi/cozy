@@ -1,14 +1,13 @@
 import os
 from urllib.parse import unquote, urlparse
 
-import mutagen
 from gi.repository import GLib, Gst, GstPbutils
+from mutagen import File
+from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 
 from cozy.media.chapter import Chapter
 from cozy.media.media_file import MediaFile
-
-NS_TO_SEC = 10**9
 
 
 class TagReader:
@@ -55,7 +54,7 @@ class TagReader:
     def _get_author(self):
         authors = self._get_string_list(Gst.TAG_COMPOSER)
 
-        if len(authors) > 0 and authors[0]:
+        if authors and authors[0]:
             return "; ".join(authors)
         else:
             return _("Unknown")
@@ -63,7 +62,7 @@ class TagReader:
     def _get_reader(self):
         readers = self._get_string_list(Gst.TAG_ARTIST)
 
-        if len(readers) > 0 and readers[0]:
+        if readers and readers[0]:
             return "; ".join(readers)
         else:
             return _("Unknown")
@@ -89,20 +88,15 @@ class TagReader:
         return unquote(filename_without_extension)
 
     def _get_chapters(self):
-        if self.uri.lower().endswith("m4b") and self._mutagen_supports_chapters():
-            mutagen_tags = self._parse_with_mutagen()
-            return self._get_m4b_chapters(mutagen_tags)
-        else:
-            return self._get_single_chapter()
+        path = unquote(urlparse(self.uri).path)
+        mutagen_file = File(path)
 
-    def _get_single_chapter(self):
-        chapter = Chapter(
-            name=self._get_track_name(),
-            position=0,
-            length=self._get_length_in_seconds(),
-            number=self._get_track_number(),
-        )
-        return [chapter]
+        if isinstance(mutagen_file, MP4):
+            return self._get_mp4_chapters(mutagen_file)
+        elif isinstance(mutagen_file, MP3):
+            return self._get_mp3_chapters(mutagen_file)
+        else:
+            return self._get_single_file_chapter()
 
     def _get_cover(self):
         success, sample = self.tags.get_sample_index(Gst.TAG_IMAGE, 0)
@@ -131,30 +125,37 @@ class TagReader:
 
         values = []
         for i in range(self.tags.get_tag_size(tag)):
-            (success, value) = self.tags.get_string_index(tag, i)
+            success, value = self.tags.get_string_index(tag, i)
             if success:
                 values.append(value.strip())
 
         return values
 
-    def _get_m4b_chapters(self, mutagen_tags: MP4) -> list[Chapter]:
+    def _get_single_file_chapter(self):
+        chapter = Chapter(
+            name=self._get_track_name(),
+            position=0,
+            length=self._get_length_in_seconds(),
+            number=self._get_track_number(),
+        )
+        return [chapter]
+
+    def _get_mp4_chapters(self, file: MP4) -> list[Chapter]:
+        if not file.chapters or len(file.chapters) == 0:
+            return self._get_single_file_chapter()
+
         chapters = []
 
-        if not mutagen_tags.chapters or len(mutagen_tags.chapters) == 0:
-            return self._get_single_chapter()
-
-        for index, chapter in enumerate(mutagen_tags.chapters):
-            if index < len(mutagen_tags.chapters) - 1:
-                length = mutagen_tags.chapters[index + 1].start - chapter.start
+        for index, chapter in enumerate(file.chapters):
+            if index < len(file.chapters) - 1:
+                length = file.chapters[index + 1].start - chapter.start
             else:
                 length = self._get_length_in_seconds() - chapter.start
 
-            title = chapter.title or ""
-
             chapters.append(
                 Chapter(
-                    name=title,
-                    position=int(chapter.start * NS_TO_SEC),
+                    name=chapter.title or "",
+                    position=int(chapter.start * Gst.SECOND),
                     length=length,
                     number=index + 1,
                 )
@@ -162,15 +163,30 @@ class TagReader:
 
         return chapters
 
-    def _parse_with_mutagen(self) -> MP4:
-        path = unquote(urlparse(self.uri).path)
-        mutagen_mp4 = MP4(path)
+    def _get_mp3_chapters(self, file: MP3) -> list[Chapter]:
+        chaps = file.tags.getall("CHAP")
+        if not chaps:
+            return self._get_single_file_chapter()
 
-        return mutagen_mp4
+        chapters = []
+        chaps.sort(key=lambda k: k.element_id)
 
-    @staticmethod
-    def _mutagen_supports_chapters() -> bool:
-        if mutagen.version[0] > 1:
-            return True
+        for index, chapter in enumerate(chaps):
+            if index < len(chaps) - 1:
+                length = chapter.end_time - chapter.start_time
+            else:
+                length = self._get_length_in_seconds() - chapter.start_time
 
-        return mutagen.version[0] == 1 and mutagen.version[1] >= 45
+            sub_frames = chapter.sub_frames.get("TIT2", ())
+            title = sub_frames.text[0] if sub_frames else ""
+
+            chapters.append(
+                Chapter(
+                    name=title,
+                    position=int(chapter.start_time * Gst.SECOND),
+                    length=length,
+                    number=index + 1,
+                )
+            )
+
+        return chapters

@@ -123,7 +123,7 @@ def test_get_m4b_chapters(mocker, discoverer_mocks):
     from cozy.media.tag_reader import TagReader
 
     tag_reader = TagReader("file://abc/def/01 a nice file.m4b", discoverer_mocks.info)
-    chapters = tag_reader._get_m4b_chapters(M4B([M4BChapter("test", 0), M4BChapter("testa", 1)]))
+    chapters = tag_reader._get_mp4_chapters(M4B([M4BChapter("test", 0), M4BChapter("testa", 1)]))
 
     assert len(chapters) == 2
     assert chapters[0].name == "test"
@@ -144,7 +144,7 @@ def test_get_m4b_chapters_creates_single_chapter_if_none_present(mocker, discove
     from cozy.media.tag_reader import TagReader
 
     tag_reader = TagReader("file://abc/def/01 a nice file.m4b", discoverer_mocks.info)
-    chapters = tag_reader._get_m4b_chapters(M4B([]))
+    chapters = tag_reader._get_mp4_chapters(M4B([]))
 
     assert len(chapters) == 1
     assert chapters[0].name == "a nice file"
