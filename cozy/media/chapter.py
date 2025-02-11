@@ -1,11 +1,11 @@
-class Chapter:
-    name: str
-    position: int
-    length: float
-    number: int
+from dataclasses import dataclass
 
-    def __init__(self, name: str, position: int, length: float, number: int):
-        self.name = name
-        self.position = position
-        self.number = number
-        self.length = length
+@dataclass
+class Chapter:
+    name: str | None
+    position: int | None  # in seconds
+    length: float | None  # in seconds
+    number: int | None
+
+    def is_valid(self):
+        return self.name is not None and self.position is not None
