@@ -3,13 +3,13 @@ from typing import Callable
 import inject
 from gi.repository import GLib
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
+from cozy.enums import OpenView
 from cozy.model.book import Book
 from cozy.model.library import Library, split_strings_to_set
-from cozy.open_view import OpenView
+from cozy.settings import ApplicationSettings
 
 
 class SearchViewModel(Observable, EventSender):

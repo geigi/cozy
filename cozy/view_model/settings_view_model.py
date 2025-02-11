@@ -2,11 +2,11 @@ import logging
 
 import inject
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.media.importer import Importer
 from cozy.model.settings import Settings
+from cozy.settings import ApplicationSettings
 
 log = logging.getLogger("settings_view_model")
 

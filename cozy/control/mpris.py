@@ -15,11 +15,11 @@ from dataclasses import dataclass
 import inject
 from gi.repository import Gio, GLib
 
-from cozy.application_settings import ApplicationSettings
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.report import reporter
+from cozy.settings import ApplicationSettings
 
 log = logging.getLogger("mpris")
 
