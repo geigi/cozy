@@ -1,8 +1,8 @@
 from gi.repository import Adw, GObject, Gtk
+from os import path
 
 from cozy.control.time_format import ns_to_time
 from cozy.model.chapter import Chapter
-
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/chapter_element.ui")
 class ChapterElement(Adw.ActionRow):
@@ -23,6 +23,7 @@ class ChapterElement(Adw.ActionRow):
         self.set_title(self.chapter.name)
         self.number_label.set_text(str(self.chapter.number))
         self.duration_label.set_text(ns_to_time(self.chapter.length))
+        self.set_tooltip_text(path.basename(self.chapter.file))
 
     @GObject.Signal(arg_types=(object,))
     def play_pause_clicked(self, *_): ...
