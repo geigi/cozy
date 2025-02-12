@@ -33,7 +33,7 @@ jobs:
       with:
         platforms: arm64
 
-    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v6
+    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
       with:
         repository-name: gnome-nightly
         repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
