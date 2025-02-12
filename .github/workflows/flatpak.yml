@@ -41,3 +41,4 @@ jobs:
         manifest-path: com.github.geigi.cozy.json
         cache-key: "flatpak-builder-${{ github.sha }}"
         arch: ${{ matrix.arch }}
+        upload-artifact: false
