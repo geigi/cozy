@@ -22,6 +22,8 @@ class TagReader:
         self.discoverer_info = discoverer_info
 
         self.tags: Gst.TagList = discoverer_info.get_tags()
+        result, tag_format = self.tags.get_string_index("container-format", 0)
+        self.tag_format = tag_format.lower() if result else None
 
         if not self.tags:
             raise ValueError("Failed to retrieve tags from discoverer_info")
@@ -52,7 +54,11 @@ class TagReader:
         return unquote(directory)
 
     def _get_author(self):
-        authors = self._get_string_list(Gst.TAG_COMPOSER)
+        authors = (
+            self._get_string_list(Gst.TAG_ARTIST)
+            if self.tag_format == "ogg"
+            else self._get_string_list(Gst.TAG_COMPOSER)
+        )
 
         if authors and authors[0]:
             return "; ".join(authors)
@@ -60,7 +66,11 @@ class TagReader:
             return _("Unknown")
 
     def _get_reader(self):
-        readers = self._get_string_list(Gst.TAG_ARTIST)
+        readers = (
+            self._get_string_list(Gst.TAG_PERFORMER)
+            if self.tag_format == "ogg"
+            else self._get_string_list(Gst.TAG_ARTIST)
+        )
 
         if readers and readers[0]:
             return "; ".join(readers)
@@ -95,6 +105,8 @@ class TagReader:
             return self._get_mp4_chapters(mutagen_file)
         elif isinstance(mutagen_file, MP3):
             return self._get_mp3_chapters(mutagen_file)
+        elif self.tag_format == "ogg":
+            return self._get_ogg_chapters()
         else:
             return self._get_single_file_chapter()
 
@@ -190,3 +202,60 @@ class TagReader:
             )
 
         return chapters
+
+    def _get_ogg_chapters(self) -> list[Chapter]:
+        comment_list: list[str] = self._get_string_list("extended-comment")
+        chapter_dict: dict[int, Chapter] = {}
+        chapter_list: list[Chapter] = []
+
+        for comment in comment_list:
+            if not comment.lower().startswith("chapter"):
+                continue
+
+            try:
+                tag, value = comment.split("=", 1)
+            except ValueError:
+                continue
+
+            if len(tag) not in (10, 14) or not tag[7:10].isdecimal():
+                continue  # Tag should be in the form CHAPTER + 3 numbers + NAME (for chapter names only)
+
+            try:
+                chapter_num = int(tag[7:10], 10) + 1  # get chapter number from 3 chars
+            except ValueError:
+                continue
+
+            if chapter_num not in chapter_dict:
+                chapter_dict[chapter_num] = Chapter(None, None, None, chapter_num)
+
+            if tag.lower().endswith("name"):
+                chapter_dict[chapter_num].name = value
+            elif len(tag) == 10:
+                chapter_dict[chapter_num].position = self._vorbis_timestamp_to_secs(value)
+
+        if not chapter_dict:
+            return self._get_single_file_chapter()
+
+        prev_chapter = None
+        for _, chapter in sorted(chapter_dict.items()):
+            if not chapter.is_valid():
+                return self._get_single_file_chapter()
+
+            if prev_chapter:
+                prev_chapter.length = chapter.position - prev_chapter.position
+
+            chapter_list.append(chapter)
+            prev_chapter = chapter
+
+        prev_chapter.length = self._get_length_in_seconds() - prev_chapter.position
+
+        return chapter_list
+
+    @staticmethod
+    def _vorbis_timestamp_to_secs(timestamp: str) -> float | None:
+        parts = timestamp.split(":", 2)
+
+        try:
+            return int(parts[0], 10) * 3600 + int(parts[1], 10) * 60 + float(parts[2])
+        except ValueError:
+            return None
