@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg height="16px" viewBox="0 0 16 16" width="16px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <filter id="a" height="100%" width="100%" x="0%" y="0%">
-        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+        <feColorMatrix color-interpolation-filters="sRGB" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
     </filter>
-    <mask id="b">
+    <clipPath id="b">
+        <path d="m 0 0 h 16 v 16 h -16 z m 0 0"/>
+    </clipPath>
+    <mask id="c">
         <g filter="url(#a)">
-            <rect fill-opacity="0.187" height="16" width="16"/>
+            <image height="152" transform="matrix(1 0 0 1 -168 -16)" width="192" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAACYCAYAAACyAeadAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVR4nO3BMQEAAADCoPVP7WsIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAPIpwABWLk4FQAAAABJRU5ErkJggg=="/>
         </g>
     </mask>
-    <radialGradient id="c" cx="197.74678" cy="69.253197" gradientTransform="matrix(37.758633 0 0 19.739206 -7375.666016 -1304.003174)" gradientUnits="userSpaceOnUse" r="2.50025">
-        <stop offset="0" stop-color="#ffffff" stop-opacity="0.987395"/>
+    <radialGradient id="d" cx="197.74678" cy="69.253197" gradientTransform="matrix(37.758633 0 0 19.739206 -7375.666016 -1304.003174)" gradientUnits="userSpaceOnUse" r="2.50025">
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0.988235"/>
         <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
     </radialGradient>
-    <clipPath id="d">
+    <clipPath id="e">
         <rect height="152" width="192"/>
     </clipPath>
-    <mask id="e">
-        <g filter="url(#a)">
-            <rect fill-opacity="0.187" height="16" width="16"/>
-        </g>
-    </mask>
     <clipPath id="f">
-        <rect height="152" width="192"/>
+        <rect height="16" width="16"/>
     </clipPath>
-    <mask id="g">
+    <clipPath id="g">
+        <path d="m 0 0 h 16 v 16 h -16 z m 0 0"/>
+    </clipPath>
+    <mask id="h">
         <g filter="url(#a)">
-            <rect fill-opacity="0.1" height="16" width="16"/>
+            <image height="152" transform="matrix(1 0 0 1 -168 -16)" width="192" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAACYCAYAAACyAeadAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVR4nO3BMQEAAADCoPVP7WsIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAPIpwABWLk4FQAAAABJRU5ErkJggg=="/>
         </g>
     </mask>
-    <clipPath id="h">
+    <clipPath id="i">
         <rect height="152" width="192"/>
     </clipPath>
-    <mask id="i">
-        <g filter="url(#a)">
-            <rect fill-opacity="0.56294" height="16" width="16"/>
-        </g>
-    </mask>
     <clipPath id="j">
-        <rect height="152" width="192"/>
+        <rect height="16" width="16"/>
     </clipPath>
-    <g clip-path="url(#d)" mask="url(#b)" transform="matrix(1 0 0 1 -168 -16)">
-        <path d="m 90.224109 7.752846 v 121.498014" fill="none" stroke="url(#c)" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="5" transform="matrix(0.217853 0 0 0.217853 10.485 65.865704)"/>
+    <g clip-path="url(#f)">
+        <g clip-path="url(#b)">
+            <g mask="url(#c)">
+                <g clip-path="url(#e)" transform="matrix(1 0 0 1 -168 -16)">
+                    <path d="m 90.22095 7.750735 v 121.508817" fill="none" stroke="url(#d)" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="5" transform="matrix(0.214884 0 0 0.213301 11.280915 72.819416)"/>
+                </g>
+            </g>
+        </g>
     </g>
-    <g clip-path="url(#f)" mask="url(#e)" transform="matrix(1 0 0 1 -168 -16)">
-        <path d="m 90.236449 7.752855 v 121.498014" fill="none" stroke="url(#c)" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="5" transform="matrix(-0.217853 0 0 0.217853 133.599719 65.865702)"/>
+    <g clip-path="url(#j)">
+        <g clip-path="url(#g)">
+            <g mask="url(#h)">
+                <g clip-path="url(#i)" transform="matrix(1 0 0 1 -168 -16)">
+                    <path d="m 90.23346 7.75077 v 121.508817" fill="none" stroke="url(#d)" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="5" transform="matrix(-0.214884 0 0 0.213301 132.717867 72.819408)"/>
+                </g>
+            </g>
+        </g>
     </g>
-    <g clip-path="url(#h)" mask="url(#g)" transform="matrix(1 0 0 1 -168 -16)">
-        <path d="m 128 116.65625 c -0.082031 4.089844 -3.378906 7.34375 -7.492188 7.34375 h -0.5 v 1 h 0.5 c 3.246094 0 6.058594 -1.8125 7.492188 -4.480469 z m -46 7.34375 l 38 1 v -1 z m 0 0"/>
-        <path d="m 128 119.65625 c -0.082031 4.089844 -3.378906 7.34375 -7.492188 7.34375 h -0.5 v 1 h 0.5 c 3.222657 0 6.023438 -1.789062 7.460938 -4.425781 c 0.015625 -0.191407 0.03125 -0.382813 0.03125 -0.574219 z m -46 7.34375 l 38 1 v -1 z m 0 0"/>
-    </g>
-    <g clip-path="url(#j)" mask="url(#i)" transform="matrix(1 0 0 1 -168 -16)">
-        <path d="m 60 97.238281 c -0.570312 0 -1.109375 0.121094 -1.601562 0.335938 c 1.414062 0.613281 2.402343 2.015625 2.402343 3.664062 l -0.027343 14.6875 c 1.84375 -0.359375 3.226562 -1.972656 3.226562 -3.925781 v -10.761719 c 0 -2.21875 -1.785156 -4 -4 -4 z m 0 0" fill="#5e5c64"/>
-    </g>
-    <path d="m 8 2.34375 c -0.863281 0 -1.726562 0.222656 -2.5 0.671875 c -1.445312 0.832031 -2.363281 2.332031 -2.476562 3.984375 h -0.023438 v 1 c -1.109375 0 -2 0.890625 -2 2 v 2 c 0 1.109375 0.890625 2 2 2 h 2 v -6.65625 c 0 -1.074219 0.570312 -2.0625 1.5 -2.597656 c 0.929688 -0.539063 2.070312 -0.539063 3 0 c 0.929688 0.535156 1.5 1.523437 1.5 2.597656 v 6.65625 h 2 c 1.109375 0 2 -0.890625 2 -2 v -2 c 0 -1.109375 -0.890625 -2 -2 -2 v -1 h -0.023438 c -0.113281 -1.652344 -1.03125 -3.152344 -2.476562 -3.984375 c -0.773438 -0.449219 -1.636719 -0.671875 -2.5 -0.671875 z m 0 0"/>
+    <path d="m 8 2.171875 c -0.863281 0 -1.726562 0.222656 -2.5 0.671875 c -1.445312 0.832031 -2.386719 2.332031 -2.5 3.984375 v 1 c -1.109375 0 -2 0.890625 -2 2 v 2 c 0 1.109375 0.890625 2 2 2 h 2 v -6.65625 c 0 -1.074219 0.570312 -2.0625 1.5 -2.597656 c 0.929688 -0.539063 2.070312 -0.539063 3 0 c 0.929688 0.535156 1.5 1.523437 1.5 2.597656 v 6.65625 h 2 c 1.109375 0 2 -0.890625 2 -2 v -2 c 0 -1.109375 -0.890625 -2 -2 -2 v -1 c -0.113281 -1.652344 -1.054688 -3.152344 -2.5 -3.984375 c -0.773438 -0.449219 -1.636719 -0.671875 -2.5 -0.671875 z m 0 0"/>
 </svg>
