@@ -185,9 +185,9 @@ class TagReader:
 
         for index, chapter in enumerate(chaps):
             if index < len(chaps) - 1:
-                length = chapter.end_time - chapter.start_time
+                length = (chapter.end_time - chapter.start_time) / 1000
             else:
-                length = self._get_length_in_seconds() - chapter.start_time
+                length = self._get_length_in_seconds() - chapter.start_time / 1000
 
             sub_frames = chapter.sub_frames.get("TIT2", ())
             title = sub_frames.text[0] if sub_frames else ""
@@ -195,7 +195,7 @@ class TagReader:
             chapters.append(
                 Chapter(
                     name=title,
-                    position=int(chapter.start_time * Gst.SECOND),
+                    position=int(chapter.start_time * Gst.MSECOND),
                     length=length,
                     number=index + 1,
                 )
