@@ -181,7 +181,7 @@ class TagReader:
             return self._get_single_file_chapter()
 
         chapters = []
-        chaps.sort(key=lambda k: k.element_id)
+        chaps.sort(key=lambda k: k.start_time)
 
         for index, chapter in enumerate(chaps):
             if index < len(chaps) - 1:
