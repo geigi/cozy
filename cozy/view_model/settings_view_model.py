@@ -22,9 +22,6 @@ class SettingsViewModel(Observable, EventSender):
 
         self._lock_ui: bool = False
 
-        if self._model.first_start:
-            self._importer.scan()
-
     @property
     def lock_ui(self) -> bool:
         return self._lock_ui
