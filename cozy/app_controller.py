@@ -116,10 +116,7 @@ class AppController(metaclass=Singleton):
         self.app_view_model.view = View.LIBRARY_FILTER
 
     def _connect_search_button(self):
-        self.headerbar.search_button.connect(
-            "notify::active",
-            self.search_view.on_state_changed
-        )
+        self.headerbar.search_button.connect("notify::active", self.search_view.on_state_changed)
 
     def _on_open_view(self, event, data):
         if event == OpenView.AUTHOR:
@@ -147,6 +144,3 @@ class AppController(metaclass=Singleton):
     def _on_main_window_event(self, event: str, data):
         if event == "open_view":
             self._on_open_view(data, None)
-
-    def quit(self):
-        self.player.destroy()
