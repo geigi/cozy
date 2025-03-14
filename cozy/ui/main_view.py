@@ -262,8 +262,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         return True
 
     def _on_drag_data_received(self, widget, value, *_):
-        thread = Thread(target=self._files.copy, args=[value.get_files()], name="DnDImportThread")
-        thread.start()
+        Thread(target=self._files.copy, args=[value.get_files()], name="DnDImportThread").start()
+        self._on_drag_leave()
         return True
 
     def _set_audiobook_path(self, path: str | None) -> None:
