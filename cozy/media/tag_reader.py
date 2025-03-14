@@ -231,7 +231,7 @@ class TagReader:
             if tag.lower().endswith("name"):
                 chapter_dict[chapter_num].name = value
             elif len(tag) == 10:
-                chapter_dict[chapter_num].position = self._vorbis_timestamp_to_secs(value)
+                chapter_dict[chapter_num].position = self._vorbis_timestamp_to_ns(value)
 
         if not chapter_dict:
             return self._get_single_file_chapter()
@@ -242,20 +242,20 @@ class TagReader:
                 return self._get_single_file_chapter()
 
             if prev_chapter:
-                prev_chapter.length = chapter.position - prev_chapter.position
+                prev_chapter.length = (chapter.position - prev_chapter.position) / Gst.SECOND
 
             chapter_list.append(chapter)
             prev_chapter = chapter
 
-        prev_chapter.length = self._get_length_in_seconds() - prev_chapter.position
+        prev_chapter.length = self._get_length_in_seconds() - prev_chapter.position / Gst.SECOND
 
         return chapter_list
 
     @staticmethod
-    def _vorbis_timestamp_to_secs(timestamp: str) -> float | None:
+    def _vorbis_timestamp_to_ns(timestamp: str) -> float | None:
         parts = timestamp.split(":", 2)
 
         try:
-            return int(parts[0], 10) * 3600 + int(parts[1], 10) * 60 + float(parts[2])
+            return (int(parts[0], 10) * 3600 + int(parts[1], 10) * 60 + float(parts[2])) * Gst.SECOND
         except ValueError:
             return None
