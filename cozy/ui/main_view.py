@@ -252,18 +252,20 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.application_settings.hide_offline = value.get_boolean()
 
     def _on_drag_enter(self, *_):
+        self.drop_revealer.set_visible(True)
         self.drop_revealer.set_reveal_child(True)
         self.main_stack.add_css_class("blurred")
         return True
 
     def _on_drag_leave(self, *_):
+        self.drop_revealer.set_visible(False)
         self.drop_revealer.set_reveal_child(False)
         self.main_stack.remove_css_class("blurred")
         return True
 
     def _on_drag_data_received(self, widget, value, *_):
-        thread = Thread(target=self._files.copy, args=[value.get_files()], name="DnDImportThread")
-        thread.start()
+        Thread(target=self._files.copy, args=[value.get_files()], name="DnDImportThread").start()
+        self._on_drag_leave()
         return True
 
     def _set_audiobook_path(self, path: str | None) -> None:
