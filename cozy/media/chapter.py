@@ -3,8 +3,8 @@ from dataclasses import dataclass
 @dataclass
 class Chapter:
     name: str | None
-    position: int | None  # in seconds
-    length: float | None  # in seconds
+    position: int | None  # in nanoseconds
+    length: float | None  # in seconds... sigh  # FIXME: finally use nanoseconds everywhere consistently
     number: int | None
 
     def is_valid(self):
