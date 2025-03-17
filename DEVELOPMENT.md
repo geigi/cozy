@@ -2,10 +2,31 @@
 
 This document is intended for software engineers and translators who would like to help out with the development of Cozy, or simply be able to run bleeding edge versions of the code locally.
 
+## Code style
+
+To ensure good quality code, we lint our codebase with Ruff. We recommend that you run Ruff before pushing your changes to GitHub and correct the warnings, otherwise the automatic checks on pull requests will fail.
+
+```
+ruff check <filename>
+```
+
+For consistent code style, we format the source files using `black` and `isort`. Run these two tools on the changed files before committing.
+
+```
+black cozy
+isort cozy
+```
+
+You can install these tools via pip: 
+
+```
+pip install black isort ruff
+```
+
 
 ## Building with GNOME Builder (recommended)
 
-Cozy can be built and run with [GNOME Builder](https://apps.gnome.org/Builder/).
+We recommend using [GNOME Builder](https://apps.gnome.org/Builder/) to build and run Cozy.
 
 1. Open GNOME Builder
 2. Click the **Clone Repository** button
