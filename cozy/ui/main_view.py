@@ -19,7 +19,8 @@ from cozy.ui.about_window import AboutWindow
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
-from cozy.ui.widgets.first_import_button import FirstImportButton
+from cozy.ui.widgets.storages import ask_storage_location
+from cozy.ui.widgets.welcome_dialog import WelcomeDialog
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.storages_view_model import StoragesViewModel
@@ -91,6 +92,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.drop_revealer: Gtk.Revealer = self.window_builder.get_object("drop_revealer")
 
         self.navigation_view.add(BookDetailView())
+        if self.application_settings.first_launch:
+            WelcomeDialog().present(self.window)
 
         self.window.present()
 
@@ -121,14 +124,16 @@ class CozyUI(EventSender, metaclass=Singleton):
             action.set_enabled(enabled)
 
     def __init_components(self):
-        path = self._settings.default_location.path if self._settings.storage_locations else None
-        self.import_button = FirstImportButton(self._set_audiobook_path, path)
-        self.get_object("welcome_status_page").set_child(self.import_button)
+        self.get_object("first_import_button").connect("clicked", self._on_choose_location_clicked)
 
         if not self._player.loaded_book:
             self.block_ui_buttons(True)
 
         self._importer.add_listener(self._on_importer_event)
+
+    def _on_choose_location_clicked(self, _):
+        initial_path = self._settings.default_location.path if self._settings.storage_locations else None
+        ask_storage_location(self._set_audiobook_path, initial_path)
 
     def create_action(
         self,
@@ -236,13 +241,13 @@ class CozyUI(EventSender, metaclass=Singleton):
         if books().count() < 1:
             self.block_ui_buttons(True)
 
-    def scan(self, _, __):
+    def scan(self, *_):
         thread = Thread(target=self._importer.scan, name="ScanMediaThread")
         thread.start()
 
     def auto_import(self):
         if self.application_settings.autoscan:
-            self.scan(None, None)
+            self.scan()
 
     def __on_hide_offline(self, action, value):
         """
@@ -268,13 +273,12 @@ class CozyUI(EventSender, metaclass=Singleton):
         self._on_drag_leave()
         return True
 
-    def _set_audiobook_path(self, path: str | None) -> None:
+    def _set_audiobook_path(self, path: str | None, default: bool = True) -> None:
         if path is None:
             return
 
-        self.import_button.disable()
-        self._storages_view_model.add_first_storage_location(path)
-        self.scan(None, None)
+        self.main_stack.set_visible_child_name("import")
+        self._storages_view_model.add_storage_location(path, default=default)
         self.fs_monitor.init_offline_mode()
 
     def on_close(self, widget, data=None):

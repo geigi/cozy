@@ -1,0 +1,111 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $WelcomeDialog: Adw.Dialog {
+  width-request: 360;
+  content-width: 450;
+  content-height: 600;
+
+  Adw.Carousel carousel {
+    interactive: false;
+
+    Adw.StatusPage welcome_page {
+      icon-name: 'com.github.geigi.cozy';
+      title: "Let's Get Cozy!";
+      hexpand: true;
+
+      Button {
+        halign: center;
+        label: _("Start!");
+
+        styles ["pill", "suggested-action"]
+
+        clicked => $advance();
+      }
+    }
+
+    Box reporting_page{
+      orientation: vertical;
+      spacing: 12;
+
+      Adw.StatusPage {
+        valign: start;
+        margin-start: 12;
+        margin-end: 12;
+        title: "Error Reporting";
+
+        styles ["compact"]
+
+        child: $ErrorReporting {};
+      }
+
+      CenterBox {
+        valign: end;
+        vexpand: true;
+
+        [center]
+        Box {
+          spacing: 12;
+          margin-bottom: 12;
+          homogeneous: true;
+
+          Button {
+            label: "I Don't Want This";
+            clicked => $deny_reporting();
+          }
+          Button {
+            label: "It's Fine by Me";
+            clicked => $accept_reporting();
+          }
+        }
+      }
+    }
+    Adw.StatusPage locations_page {
+      title: _("Add Audiobooks");
+      margin-start: 12;
+      margin-end: 12;
+
+      child: Box {
+        orientation: vertical;
+        spacing: 18;
+
+        Adw.PreferencesGroup {
+          Adw.SwitchRow create_directory_switch {
+            title: _("Create Default Audiobooks Directory");
+            subtitle: _("This will create a dedicated directory for audiobooks in your home directory");
+            active: true;
+          }
+
+          Adw.ActionRow {
+            selectable: false;
+            activatable: true;
+            title: _("Audiobooks Directory");
+            subtitle: _("You can add more locations in the settings");
+
+            activated => $choose_directory();
+
+            [suffix]
+            Button {
+              valign: center;
+              clicked => $choose_directory();
+
+              Adw.ButtonContent chooser_button_label {
+                icon-name: "folder-open-symbolic";
+                can-shrink: true;
+              }
+            }
+          }
+        }
+
+        Button {
+          halign: center;
+          label: _("Done");
+
+          styles ["pill", "suggested-action"]
+
+          clicked => $done();
+        }
+      };
+    }
+  }
+}
