@@ -1,7 +1,8 @@
 import logging
-import os
 import time
+from pathlib import Path
 from typing import Optional
+from urllib.parse import quote
 
 import inject
 from gi.repository import GLib, Gst, GstController, Gtk
@@ -159,12 +160,12 @@ class GstPlayer(EventSender):
         self._player.set_property("mute", False)
 
     def load_file(self, path: str):
-        if not os.path.exists(path):
+        if not Path(path).exists():
             raise FileNotFoundError()
 
         self._player.set_state(Gst.State.NULL)
         self._playback_speed = 1.0
-        self._player.set_property("uri", "file://" + path)
+        self._player.set_property("uri", "file://" + quote(path))
         self._player.set_state(Gst.State.PAUSED)
 
     def play(self):
