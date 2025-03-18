@@ -176,8 +176,7 @@ class TagReader:
         return chapters
 
     def _get_mp3_chapters(self, file: MP3) -> list[Chapter]:
-        chaps = file.tags.getall("CHAP")
-        if not chaps:
+        if not file.tags or not (chaps := file.tags.getall("CHAP")):
             return self._get_single_file_chapter()
 
         chapters = []
