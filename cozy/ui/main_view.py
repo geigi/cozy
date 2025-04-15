@@ -7,7 +7,6 @@ from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
 import cozy.control.filesystem_monitor as fs_monitor
 import cozy.report.reporter as report
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.singleton import Singleton
 from cozy.control.db import books, close_db
@@ -15,11 +14,15 @@ from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.settings import Settings as SettingsModel
+from cozy.settings import ApplicationSettings
 from cozy.ui.about_window import AboutWindow
 from cozy.ui.book_detail_view import BookDetailView
 from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
-from cozy.ui.widgets.first_import_button import FirstImportButton
+from cozy.ui.widgets.storages import ask_storage_location
+from cozy.ui.widgets.welcome_dialog import WelcomeDialog
+from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
+from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.storages_view_model import StoragesViewModel
 
 log = logging.getLogger("ui")
@@ -36,6 +39,8 @@ class CozyUI(EventSender, metaclass=Singleton):
     _files: Files = inject.attr(Files)
     _player: Player = inject.attr(Player)
     _storages_view_model: StoragesViewModel = inject.attr(StoragesViewModel)
+    _playback_control_view_model: PlaybackControlViewModel = inject.attr(PlaybackControlViewModel)
+    _playback_speed_view_model: PlaybackSpeedViewModel = inject.attr(PlaybackSpeedViewModel)
 
     _library_view: LibraryView
 
@@ -43,6 +48,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         super().__init__()
         self.app = app
         self.version = version
+
+        self._actions_to_disable = []
 
     def activate(self, library_view: LibraryView):
         self.__init_window()
@@ -55,7 +62,9 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.check_for_tracks()
 
     def startup(self):
-        self.window_builder = Gtk.Builder.new_from_resource("/com/github/geigi/cozy/ui/main_window.ui")
+        self.window_builder = Gtk.Builder.new_from_resource(
+            "/com/github/geigi/cozy/ui/main_window.ui"
+        )
         self.window: Adw.ApplicationWindow = self.window_builder.get_object("app_window")
 
     def __init_window(self):
@@ -83,6 +92,8 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.drop_revealer: Gtk.Revealer = self.window_builder.get_object("drop_revealer")
 
         self.navigation_view.add(BookDetailView())
+        if self.application_settings.first_launch:
+            WelcomeDialog().present(self.window)
 
         self.window.present()
 
@@ -90,15 +101,17 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         Init all app actions.
         """
-        self.create_action("about", self.show_about_window, ["F1"])
+        self.create_action("about", self.show_about_window, ["F1"], global_shorcut=True)
         self.create_action("reset_book", self.reset_book)
         self.create_action("remove_book", self.remove_book)
+
         self.create_action("mark_book_as_read", self.mark_book_as_read)
         self.create_action("jump_to_book_folder", self.jump_to_book_folder)
-        self.create_action("prefs", self.show_preferences_window, ["<primary>comma"])
-        self.create_action("quit", self.quit, ["<primary>q", "<primary>w"])
+
+        self.create_action("prefs", self.show_preferences_window, ["<primary>comma"], global_shorcut=True)
+        self.create_action("quit", self.quit, ["<primary>q", "<primary>w"], global_shorcut=True)
+
         self.scan_action = self.create_action("scan", self.scan)
-        self.play_pause_action = self.create_action("play_pause", self.play_pause, ["space"])
 
         self.hide_offline_action = Gio.SimpleAction.new_stateful(
             "hide_offline", None, GLib.Variant.new_boolean(self.application_settings.hide_offline)
@@ -106,21 +119,29 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.hide_offline_action.connect("change-state", self.__on_hide_offline)
         self.app.add_action(self.hide_offline_action)
 
+    def set_hotkeys_enabled(self, enabled: bool) -> None:
+        for action in self._actions_to_disable:
+            action.set_enabled(enabled)
+
     def __init_components(self):
-        path = self._settings.default_location.path if self._settings.storage_locations else None
-        self.import_button = FirstImportButton(self._set_audiobook_path, path)
-        self.get_object("welcome_status_page").set_child(self.import_button)
+        self.get_object("first_import_button").connect("clicked", self._on_choose_location_clicked)
 
         if not self._player.loaded_book:
             self.block_ui_buttons(True)
 
         self._importer.add_listener(self._on_importer_event)
 
+    def _on_choose_location_clicked(self, _):
+        initial_path = self._settings.default_location.path if self._settings.storage_locations else None
+        ask_storage_location(self._set_audiobook_path, initial_path)
+
     def create_action(
         self,
         name: str,
         callback: Callable[[Gio.SimpleAction, None], None],
         shortcuts: list[str] | None = None,
+        *,
+        global_shorcut: bool = False,
     ) -> Gio.SimpleAction:
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
@@ -128,6 +149,9 @@ class CozyUI(EventSender, metaclass=Singleton):
 
         if shortcuts:
             self.app.set_accels_for_action(f"app.{name}", shortcuts)
+
+        if not global_shorcut:
+            self._actions_to_disable.append(action)
 
         return action
 
@@ -161,14 +185,21 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.on_close(None)
         self.app.quit()
 
+    def _dialog_close_callback(self, dialog):
+        dialog.disconnect_by_func(self._dialog_close_callback)
+        self.set_hotkeys_enabled(True)
+
     def show_about_window(self, *_):
-        AboutWindow(self.version).present(self.window)
+        self.set_hotkeys_enabled(False)
+        about = AboutWindow(self.version)
+        about.connect("closed", self._dialog_close_callback)
+        about.present(self.window)
 
     def show_preferences_window(self, *_):
-        PreferencesWindow().present(self.window)
-
-    def play_pause(self, *_):
-        self._player.play_pause()
+        self.set_hotkeys_enabled(False)
+        prefs = PreferencesWindow()
+        prefs.connect("closed", self._dialog_close_callback)
+        prefs.present(self.window)
 
     def block_ui_buttons(self, block, scan=False):
         """
@@ -177,7 +208,6 @@ class CozyUI(EventSender, metaclass=Singleton):
         """
         sensitive = not block
         try:
-            self.play_pause_action.set_enabled(sensitive)
             if scan:
                 self.scan_action.set_enabled(sensitive)
                 self.hide_offline_action.set_enabled(sensitive)
@@ -189,7 +219,10 @@ class CozyUI(EventSender, metaclass=Singleton):
         Switch the UI state back to playing.
         This enables all UI functionality for the user.
         """
-        if self.navigation_view.props.visible_page != "book_overview" and self.main_stack.props.visible_child_name != "welcome":
+        if (
+            self.navigation_view.props.visible_page != "book_overview"
+            and self.main_stack.props.visible_child_name != "welcome"
+        ):
             self.navigation_view.pop_to_tag("main")
 
         if self._player.loaded_book:
@@ -208,13 +241,13 @@ class CozyUI(EventSender, metaclass=Singleton):
         if books().count() < 1:
             self.block_ui_buttons(True)
 
-    def scan(self, _, __):
+    def scan(self, *_):
         thread = Thread(target=self._importer.scan, name="ScanMediaThread")
         thread.start()
 
     def auto_import(self):
         if self.application_settings.autoscan:
-            self.scan(None, None)
+            self.scan()
 
     def __on_hide_offline(self, action, value):
         """
@@ -224,27 +257,28 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.application_settings.hide_offline = value.get_boolean()
 
     def _on_drag_enter(self, *_):
+        self.drop_revealer.set_visible(True)
         self.drop_revealer.set_reveal_child(True)
         self.main_stack.add_css_class("blurred")
         return True
 
     def _on_drag_leave(self, *_):
+        self.drop_revealer.set_visible(False)
         self.drop_revealer.set_reveal_child(False)
         self.main_stack.remove_css_class("blurred")
         return True
 
     def _on_drag_data_received(self, widget, value, *_):
-        thread = Thread(target=self._files.copy, args=[value.get_files()], name="DnDImportThread")
-        thread.start()
+        Thread(target=self._files.copy, args=[value.get_files()], name="DnDImportThread").start()
+        self._on_drag_leave()
         return True
 
-    def _set_audiobook_path(self, path: str | None) -> None:
+    def _set_audiobook_path(self, path: str | None, default: bool = True) -> None:
         if path is None:
             return
 
-        self.import_button.disable()
-        self._storages_view_model.add_first_storage_location(path)
-        self.scan(None, None)
+        self.main_stack.set_visible_child_name("import")
+        self._storages_view_model.add_storage_location(path, default=default)
         self.fs_monitor.init_offline_mode()
 
     def on_close(self, widget, data=None):
@@ -289,4 +323,3 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.application_settings.window_width = width
         self.application_settings.window_height = height
         self.application_settings.window_maximize = self.window.is_maximized()
-

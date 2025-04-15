@@ -1,12 +1,6 @@
 using Gtk 4.0;
 using Adw 1;
 
-Adjustment fadeout_duration_adjustment {
-  upper: 120;
-  value: 15;
-  step-increment: 5;
-  page-increment: 10;
-}
 
 Adjustment forward_duration_adjustment {
   lower: 5;
@@ -61,24 +55,6 @@ template $PreferencesWindow: Adw.PreferencesDialog {
         numeric: true;
       }
     }
-
-    Adw.PreferencesGroup {
-      title: _("Sleep Timer");
-
-      Adw.ExpanderRow sleep_timer_fadeout_switch {
-        title: _("Fadeout");
-        expanded: true;
-        show-enable-switch: true;
-
-        Adw.SpinRow {
-          title: _("Fadeout Duration");
-          focusable: true;
-          adjustment: fadeout_duration_adjustment;
-          snap-to-ticks: true;
-          numeric: true;
-        }
-      }
-    }
   }
 
   Adw.PreferencesPage storages_page {
@@ -100,7 +76,7 @@ template $PreferencesWindow: Adw.PreferencesDialog {
     title: _("Feedback");
 
     Adw.PreferencesGroup user_feedback_preference_group {
-      title: _("User Feedback");
+      title: _("Error Reporting");
     }
   }
 }

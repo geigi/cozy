@@ -63,14 +63,6 @@ class ApplicationSettings(EventSender):
         self._settings.set_boolean("prefer-external-cover", new_value)
 
     @property
-    def sleep_timer_fadeout(self) -> bool:
-        return self._settings.get_boolean("sleep-timer-fadeout")
-
-    @property
-    def sleep_timer_fadeout_duration(self) -> int:
-        return self._settings.get_int("sleep-timer-fadeout-duration")
-
-    @property
     def timer(self) -> int:
         return self._settings.get_int("timer")
 
@@ -93,6 +85,14 @@ class ApplicationSettings(EventSender):
     @last_launched_version.setter
     def last_launched_version(self, new_value: str):
         self._settings.set_string("last-launched-version", new_value)
+
+    @property
+    def first_launch(self) -> bool:
+        return self._settings.get_boolean("first-launch")
+
+    @first_launch.setter
+    def first_launch(self, new_value: bool):
+        self._settings.set_boolean("first-launch", new_value)
 
     @property
     def rewind_duration(self) -> int:

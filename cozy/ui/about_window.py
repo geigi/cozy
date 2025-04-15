@@ -22,6 +22,8 @@ class AboutWindow:
 
         self.set_extra_credits()
 
+        self.connect = self._window.connect
+
     def get_contributors(self) -> list[str]:
         authors_file = Gio.resources_lookup_data(
             "/com/github/geigi/cozy/appdata/authors.list", Gio.ResourceLookupFlags.NONE

@@ -8,8 +8,9 @@ from playhouse.migrate import SqliteMigrator, migrate
 from playhouse.reflection import generate_models
 
 from cozy.control.application_directories import get_cache_dir
+from cozy.control.application_directories import get_data_dir as get_data_dir_path
 from cozy.db.file import File
-from cozy.db.model_base import get_data_dir, get_sqlite_database
+from cozy.db.model_base import get_sqlite_database
 from cozy.db.offline_cache import OfflineCache
 from cozy.db.settings import Settings
 from cozy.db.storage import Storage
@@ -19,6 +20,8 @@ from cozy.db.track_to_file import TrackToFile
 from cozy.report import reporter
 
 log = logging.getLogger("db_updater")
+
+get_data_dir = lambda: str(get_data_dir_path())  # i don't want to rewrite this file for pathlib
 
 
 def __update_db_1(db):

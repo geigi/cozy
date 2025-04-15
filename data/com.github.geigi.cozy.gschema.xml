@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
   <schema path="/com/github/geigi/cozy/" id="com.github.geigi.cozy" gettext-domain="cozy">
+    <key type="b" name="first-launch">
+      <default>true</default>
+      <summary>Whether to show the welcome dialog</summary>
+      <description></description>
+    </key>
     <key type="b" name="symlinks">
       <default>false</default>
       <summary>Follow symlinks</summary>
@@ -44,16 +49,6 @@
     <key type="b" name="swap-author-reader">
       <default>false</default>
       <summary>Swap author and reader tag assignment.</summary>
-      <description></description>
-    </key>
-    <key type="b" name="sleep-timer-fadeout">
-      <default>false</default> 
-      <summary>Enable fading out when using the sleep timer.</summary>
-      <description></description>
-    </key>
-    <key type="i" name="sleep-timer-fadeout-duration">
-      <default>15</default> 
-      <summary>Duration of the sleep timer fadeout.</summary>
       <description></description>
     </key>
     <key type="d" name="volume">

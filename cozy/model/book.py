@@ -4,7 +4,6 @@ from contextlib import suppress
 import inject
 from peewee import DoesNotExist, SqliteDatabase
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.db.book import Book as BookModel
@@ -14,6 +13,7 @@ from cozy.db.track_to_file import TrackToFile
 from cozy.model.chapter import Chapter
 from cozy.model.settings import Settings
 from cozy.model.track import Track, TrackInconsistentData
+from cozy.settings import ApplicationSettings
 
 log = logging.getLogger("BookModel")
 

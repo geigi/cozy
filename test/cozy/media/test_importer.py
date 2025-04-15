@@ -20,8 +20,8 @@ def setup_inject(peewee_database_storage):
 
 
 def test_external_paths_are_excluded_when_offline(mocker):
-    from cozy.media.importer import Importer
     from cozy.db.storage import Storage
+    from cozy.media.importer import Importer
 
     mocker.patch("os.path.exists", return_value=True)
     mocker.patch("cozy.control.filesystem_monitor.FilesystemMonitor.is_storage_online", autospec=True,
@@ -48,8 +48,8 @@ def test_paths_not_existing_are_excluded(mocker):
 
 
 def test_all_existing_paths_are_included(mocker):
-    from cozy.media.importer import Importer
     from cozy.db.storage import Storage
+    from cozy.media.importer import Importer
 
     mocker.patch("os.path.exists", return_value=True)
 
