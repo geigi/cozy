@@ -59,7 +59,7 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed instructions about developing 
 
 ## FAQ
 ### I have imported wrong files and cannot get rid of them:
-Delete the following folders to reset cozy (this will loose all saved progress):
+Delete the following folders to reset Cozy (this will lose all saved progress):
 ```
 ~/.local/share/cozy
 ~/.cache/cozy
