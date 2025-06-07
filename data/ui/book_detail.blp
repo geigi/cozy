@@ -75,6 +75,7 @@ template $BookDetail: Adw.NavigationPage {
                   }
 
                   Image fallback_icon {
+                    icon-name: "book-open-variant-symbolic";
                     pixel-size: 200;
                   }
 
@@ -216,7 +217,7 @@ menu book_menu_model {
   section {
     item {
       action: 'book_overview.download';
-      label: _("Download Book");
+      label: _("_Available Offline");
       hidden-when: "action-disabled";
     }
   }

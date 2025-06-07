@@ -278,7 +278,6 @@ class BookDetailView(Adw.NavigationPage):
             self.album_art.set_overflow(True)
             self.album_art_container.set_visible_child(self.album_art)
         else:
-            self.fallback_icon.set_from_icon_name("book-open-variant-symbolic")
             self.album_art_container.set_visible_child(self.fallback_icon)
 
     def _interrupt_chapters_jobs(self):
