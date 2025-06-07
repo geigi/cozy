@@ -1,10 +1,10 @@
 import logging
+from pathlib import Path
 from threading import Thread
 
 import inject
 from peewee import SqliteDatabase
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
@@ -12,6 +12,7 @@ from cozy.media.importer import Importer
 from cozy.model.library import Library
 from cozy.model.settings import Settings
 from cozy.model.storage import Storage
+from cozy.settings import ApplicationSettings
 
 log = logging.getLogger("storages_view_model")
 
@@ -44,26 +45,20 @@ class StoragesViewModel(Observable, EventSender):
             name="RebaseStorageLocationThread",
         ).start()
 
-    def add_storage_location(self, path: str | None) -> None:
+    def add_storage_location(self, path: str | None, default: bool = False) -> None:
         if path is None:
             return
 
         model = Storage.new(self._db, path)
+        model.default = default
         model.external = self._fs_monitor.is_external(path)
 
         self._model.invalidate()
         self._notify("storage_locations")
 
-        self._scan_new_storage(model)
-
-    def add_first_storage_location(self, path: str) -> None:
-        storage = self.storages[0]
-        storage.path = path
-        storage.external = self._fs_monitor.is_external(path)
-        assert storage.default
-
-        self._model.invalidate()
-        self._notify("storage_locations")
+        if any(Path(path).iterdir()):
+            # Do this check here, because importer has an entirely different mechanism
+            self._scan_new_storage(model)
 
     def change_storage_location(self, model: Storage, new_path: str) -> None:
         old_path = model.path

@@ -12,8 +12,8 @@ from mutagen import version_string as MutagenVersion
 from peewee import __version__ as PeeweeVersion
 
 from cozy import __version__ as CozyVersion
-from cozy.application_settings import ApplicationSettings
 from cozy.report.log_level import LogLevel
+from cozy.settings import ApplicationSettings
 
 URL = 'https://errors.cozy.sh:3100/api/prom/push'
 ENABLE = '@INSTALLED@'

@@ -1,17 +1,17 @@
 import inject
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control import time_format
 from cozy.control.filesystem_monitor import FilesystemMonitor
 from cozy.control.offline_cache import OfflineCache
+from cozy.enums import OpenView
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.model.library import Library
 from cozy.model.settings import Settings
-from cozy.open_view import OpenView
+from cozy.settings import ApplicationSettings
 
 
 class BookDetailViewModel(Observable, EventSender):

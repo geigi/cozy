@@ -1,14 +1,13 @@
 import os
 from urllib.parse import unquote, urlparse
 
-import mutagen
 from gi.repository import GLib, Gst, GstPbutils
+from mutagen import File
+from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 
 from cozy.media.chapter import Chapter
 from cozy.media.media_file import MediaFile
-
-NS_TO_SEC = 10**9
 
 
 class TagReader:
@@ -23,6 +22,8 @@ class TagReader:
         self.discoverer_info = discoverer_info
 
         self.tags: Gst.TagList = discoverer_info.get_tags()
+        result, tag_format = self.tags.get_string_index("container-format", 0)
+        self.tag_format = tag_format.lower() if result else None
 
         if not self.tags:
             raise ValueError("Failed to retrieve tags from discoverer_info")
@@ -53,17 +54,25 @@ class TagReader:
         return unquote(directory)
 
     def _get_author(self):
-        authors = self._get_string_list(Gst.TAG_COMPOSER)
+        authors = (
+            self._get_string_list(Gst.TAG_ARTIST)
+            if self.tag_format == "ogg"
+            else self._get_string_list(Gst.TAG_COMPOSER)
+        )
 
-        if len(authors) > 0 and authors[0]:
+        if authors and authors[0]:
             return "; ".join(authors)
         else:
             return _("Unknown")
 
     def _get_reader(self):
-        readers = self._get_string_list(Gst.TAG_ARTIST)
+        readers = (
+            self._get_string_list(Gst.TAG_PERFORMER)
+            if self.tag_format == "ogg"
+            else self._get_string_list(Gst.TAG_ARTIST)
+        )
 
-        if len(readers) > 0 and readers[0]:
+        if readers and readers[0]:
             return "; ".join(readers)
         else:
             return _("Unknown")
@@ -89,20 +98,17 @@ class TagReader:
         return unquote(filename_without_extension)
 
     def _get_chapters(self):
-        if self.uri.lower().endswith("m4b") and self._mutagen_supports_chapters():
-            mutagen_tags = self._parse_with_mutagen()
-            return self._get_m4b_chapters(mutagen_tags)
-        else:
-            return self._get_single_chapter()
+        path = unquote(urlparse(self.uri).path)
+        mutagen_file = File(path)
 
-    def _get_single_chapter(self):
-        chapter = Chapter(
-            name=self._get_track_name(),
-            position=0,
-            length=self._get_length_in_seconds(),
-            number=self._get_track_number(),
-        )
-        return [chapter]
+        if isinstance(mutagen_file, MP4):
+            return self._get_mp4_chapters(mutagen_file)
+        elif isinstance(mutagen_file, MP3):
+            return self._get_mp3_chapters(mutagen_file)
+        elif self.tag_format == "ogg":
+            return self._get_ogg_chapters()
+        else:
+            return self._get_single_file_chapter()
 
     def _get_cover(self):
         success, sample = self.tags.get_sample_index(Gst.TAG_IMAGE, 0)
@@ -131,30 +137,37 @@ class TagReader:
 
         values = []
         for i in range(self.tags.get_tag_size(tag)):
-            (success, value) = self.tags.get_string_index(tag, i)
+            success, value = self.tags.get_string_index(tag, i)
             if success:
                 values.append(value.strip())
 
         return values
 
-    def _get_m4b_chapters(self, mutagen_tags: MP4) -> list[Chapter]:
+    def _get_single_file_chapter(self):
+        chapter = Chapter(
+            name=self._get_track_name(),
+            position=0,
+            length=self._get_length_in_seconds(),
+            number=self._get_track_number(),
+        )
+        return [chapter]
+
+    def _get_mp4_chapters(self, file: MP4) -> list[Chapter]:
+        if not file.chapters or len(file.chapters) == 0:
+            return self._get_single_file_chapter()
+
         chapters = []
 
-        if not mutagen_tags.chapters or len(mutagen_tags.chapters) == 0:
-            return self._get_single_chapter()
-
-        for index, chapter in enumerate(mutagen_tags.chapters):
-            if index < len(mutagen_tags.chapters) - 1:
-                length = mutagen_tags.chapters[index + 1].start - chapter.start
+        for index, chapter in enumerate(file.chapters):
+            if index < len(file.chapters) - 1:
+                length = file.chapters[index + 1].start - chapter.start
             else:
                 length = self._get_length_in_seconds() - chapter.start
 
-            title = chapter.title or ""
-
             chapters.append(
                 Chapter(
-                    name=title,
-                    position=int(chapter.start * NS_TO_SEC),
+                    name=chapter.title or "",
+                    position=int(chapter.start * Gst.SECOND),
                     length=length,
                     number=index + 1,
                 )
@@ -162,15 +175,86 @@ class TagReader:
 
         return chapters
 
-    def _parse_with_mutagen(self) -> MP4:
-        path = unquote(urlparse(self.uri).path)
-        mutagen_mp4 = MP4(path)
+    def _get_mp3_chapters(self, file: MP3) -> list[Chapter]:
+        if not file.tags or not (chaps := file.tags.getall("CHAP")):
+            return self._get_single_file_chapter()
 
-        return mutagen_mp4
+        chapters = []
+        chaps.sort(key=lambda k: k.start_time)
+
+        for index, chapter in enumerate(chaps):
+            if index < len(chaps) - 1:
+                length = (chapter.end_time - chapter.start_time) / 1000
+            else:
+                length = self._get_length_in_seconds() - chapter.start_time / 1000
+
+            sub_frames = chapter.sub_frames.get("TIT2", ())
+            title = sub_frames.text[0] if sub_frames else ""
+
+            chapters.append(
+                Chapter(
+                    name=title,
+                    position=int(chapter.start_time * Gst.MSECOND),
+                    length=length,
+                    number=index + 1,
+                )
+            )
+
+        return chapters
+
+    def _get_ogg_chapters(self) -> list[Chapter]:
+        comment_list: list[str] = self._get_string_list("extended-comment")
+        chapter_dict: dict[int, Chapter] = {}
+        chapter_list: list[Chapter] = []
+
+        for comment in comment_list:
+            if not comment.lower().startswith("chapter"):
+                continue
+
+            try:
+                tag, value = comment.split("=", 1)
+            except ValueError:
+                continue
+
+            if len(tag) not in (10, 14) or not tag[7:10].isdecimal():
+                continue  # Tag should be in the form CHAPTER + 3 numbers + NAME (for chapter names only)
+
+            try:
+                chapter_num = int(tag[7:10], 10) + 1  # get chapter number from 3 chars
+            except ValueError:
+                continue
+
+            if chapter_num not in chapter_dict:
+                chapter_dict[chapter_num] = Chapter(None, None, None, chapter_num)
+
+            if tag.lower().endswith("name"):
+                chapter_dict[chapter_num].name = value
+            elif len(tag) == 10:
+                chapter_dict[chapter_num].position = self._vorbis_timestamp_to_ns(value)
+
+        if not chapter_dict:
+            return self._get_single_file_chapter()
+
+        prev_chapter = None
+        for _, chapter in sorted(chapter_dict.items()):
+            if not chapter.is_valid():
+                return self._get_single_file_chapter()
+
+            if prev_chapter:
+                prev_chapter.length = (chapter.position - prev_chapter.position) / Gst.SECOND
+
+            chapter_list.append(chapter)
+            prev_chapter = chapter
+
+        prev_chapter.length = self._get_length_in_seconds() - prev_chapter.position / Gst.SECOND
+
+        return chapter_list
 
     @staticmethod
-    def _mutagen_supports_chapters() -> bool:
-        if mutagen.version[0] > 1:
-            return True
+    def _vorbis_timestamp_to_ns(timestamp: str) -> float | None:
+        parts = timestamp.split(":", 2)
 
-        return mutagen.version[0] == 1 and mutagen.version[1] >= 45
+        try:
+            return (int(parts[0], 10) * 3600 + int(parts[1], 10) * 60 + float(parts[2])) * Gst.SECOND
+        except ValueError:
+            return None

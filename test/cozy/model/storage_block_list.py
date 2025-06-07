@@ -11,8 +11,8 @@ def setup_inject(peewee_database_storage):
 
 
 def test_rebase_path():
-    from cozy.model.storage_block_list import StorageBlockList
     from cozy.db.storage_blacklist import StorageBlackList
+    from cozy.model.storage_block_list import StorageBlockList
 
     model = StorageBlockList()
 

@@ -1,12 +1,12 @@
 import logging
-import os
 import time
+from pathlib import Path
 from typing import Optional
+from urllib.parse import quote
 
 import inject
-from gi.repository import GLib, Gst, GstController
+from gi.repository import GLib, Gst, GstController, Gtk
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.control.offline_cache import OfflineCache
 from cozy.media.importer import Importer, ScanStatus
@@ -14,6 +14,7 @@ from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.model.library import Library
 from cozy.report import reporter
+from cozy.settings import ApplicationSettings
 from cozy.tools import IntervalTimer
 from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.toaster import ToastNotifier
@@ -159,12 +160,12 @@ class GstPlayer(EventSender):
         self._player.set_property("mute", False)
 
     def load_file(self, path: str):
-        if not os.path.exists(path):
+        if not Path(path).exists():
             raise FileNotFoundError()
 
         self._player.set_state(Gst.State.NULL)
         self._playback_speed = 1.0
-        self._player.set_property("uri", "file://" + path)
+        self._player.set_property("uri", "file://" + quote(path))
         self._player.set_state(Gst.State.PAUSED)
 
     def play(self):
@@ -207,10 +208,7 @@ class GstPlayer(EventSender):
             GLib.source_remove(self._fade_timeout)
             self._fade_timeout = None
 
-        self.pause()
         self._volume_fader.props.volume = 1.0
-
-        self.emit_event("fadeout-finished", None)
 
     def fadeout(self, length: int) -> None:
         if not self._is_player_loaded():
@@ -315,6 +313,29 @@ class GstPlayer(EventSender):
             self.emit_event("error", error)
 
 
+class PowerManager:
+    _gtk_app = inject.attr("GtkApp")
+
+    def __init__(self):
+        self._inhibit_cookie = None
+
+    def _on_player_changed(self, event: str, data):
+        if event in ["pause", "stop"]:
+            if self._inhibit_cookie:
+                log.info("Uninhibited standby.")
+                self._gtk_app.uninhibit(self._inhibit_cookie)
+                self._inhibit_cookie = None
+
+        elif event == "play":
+            if self._inhibit_cookie:
+                return
+
+            self._inhibit_cookie = self._gtk_app.inhibit(
+                None, Gtk.ApplicationInhibitFlags.SUSPEND, "Playback of audiobook"
+            )
+            log.info("Inhibited standby.")
+
+
 class Player(EventSender):
     _library: Library = inject.attr(Library)
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
@@ -329,6 +350,7 @@ class Player(EventSender):
         self._book: Optional[Book] = None
         self._play_next_chapter: bool = True
 
+        self.add_listener(PowerManager()._on_player_changed)
         self._importer.add_listener(self._on_importer_event)
         self._gst_player.add_listener(self._on_gst_player_event)
 
@@ -403,11 +425,10 @@ class Player(EventSender):
             log.error("Trying to play/pause although player is in STOP state.")
             reporter.error("player", "Trying to play/pause although player is in STOP state.")
 
-    def pause(self, fadeout: bool = False):
-        if fadeout:
-            self._gst_player.fadeout(self._app_settings.sleep_timer_fadeout_duration)
-            return
+    def fadeout(self, duration: int):
+        self._gst_player.fadeout(duration)
 
+    def pause(self):
         if self._gst_player.state == Gst.State.PLAYING:
             self._gst_player.pause()
 
@@ -455,7 +476,14 @@ class Player(EventSender):
         if state == Gst.State.PLAYING:
             self._gst_player.play()
 
+    def volume_up(self):
+        self.volume = min(1.0, self.volume + 0.1)
+
+    def volume_down(self):
+        self.volume = max(0, self.volume - 0.1)
+
     def destroy(self):
+        self._stop_tick_thread()
         self._gst_player.stop()
 
     def _load_book(self, book: Book):
@@ -508,8 +536,8 @@ class Player(EventSender):
         if self._book.offline and self._book.downloaded:
             path = self._offline_cache.get_cached_path(chapter)
 
-            if path and os.path.exists(path):
-                return path
+            if path and path.exists():
+                return str(path)
 
         return chapter.file
 
@@ -583,6 +611,30 @@ class Player(EventSender):
             chapter.position = chapter.start_position
             self.play_pause_chapter(self._book, chapter)
 
+    def _previous_chapter(self):
+        if not self._book:
+            log.error("Cannot play previous chapter because no book reference is stored.")
+            reporter.error(
+                "player", "Cannot play previous chapter because no book reference is stored."
+            )
+            return
+
+        index_current_chapter = self._book.chapters.index(self._book.current_chapter)
+        self._book.current_chapter.position = self._book.current_chapter.start_position
+
+        if index_current_chapter - 1 < 0:
+            log.info("Book reached start, cannot rewind further.")
+            chapter = self._book.chapters[0]
+            chapter.position = chapter.start_position
+
+            self._load_chapter(chapter)
+            self.pause()
+            self._emit_tick()
+        else:
+            chapter = self._book.chapters[index_current_chapter - 1]
+            chapter.position = chapter.start_position
+            self.play_pause_chapter(self._book, chapter)
+
     def _on_importer_event(self, event: str, message):
         if event == "scan" and message == ScanStatus.SUCCESS:
             log.info("Reloading current book")
@@ -595,7 +647,10 @@ class Player(EventSender):
 
     def _on_gst_player_event(self, event: str, message):
         if event == "file-finished":
-            self._next_chapter()
+            if self._play_next_chapter:
+                self._next_chapter()
+            else:
+                self._stop_playback()
         elif event == "resource-not-found":
             self._handle_file_not_found()
         elif event == "state" and message == Gst.State.PLAYING:
@@ -654,7 +709,7 @@ class Player(EventSender):
             log.info("Not emitting tick because no book/chapter is loaded.")
             return
 
-        if self.position > self.loaded_chapter.end_position:
+        if self.position > self.loaded_chapter.end_position and self._play_next_chapter:
             self._next_chapter()
 
         try:

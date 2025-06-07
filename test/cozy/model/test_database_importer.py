@@ -12,8 +12,8 @@ def setup_inject(peewee_database):
 
 
 def test_prepare_files_db_objects_skips_existing_files():
-    from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     media_file = MediaFile(book_name="New Book Name",
                            author="New Author",
@@ -30,8 +30,8 @@ def test_prepare_files_db_objects_skips_existing_files():
 
 
 def test_prepare_files_db_objects_skips_duplicate_file():
-    from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     media_file = MediaFile(book_name="New Book Name",
                            author="New Author",
@@ -49,9 +49,9 @@ def test_prepare_files_db_objects_skips_duplicate_file():
 
 
 def test_update_files_db_objects_updates_modified_field():
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
     from cozy.db.file import File
+    from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     media_file = MediaFile(book_name="New Book Name",
                            author="New Author",
@@ -70,8 +70,8 @@ def test_update_files_db_objects_updates_modified_field():
 
 
 def test_prepare_files_db_objects_returns_object_for_new_file():
-    from cozy.model.database_importer import DatabaseImporter
     from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     media_file = MediaFile(book_name="New Book Name",
                            author="New Author",
@@ -96,10 +96,10 @@ def test_prepare_db_objects_skips_none():
 
 
 def test_create_track_db_object_creates_object():
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
     from cozy.db.book import Book
     from cozy.media.chapter import Chapter
+    from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
 
@@ -126,10 +126,10 @@ def test_create_track_db_object_creates_object():
 
 
 def test_update_book_db_object_updates_object():
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
     from cozy.db.book import Book
     from cozy.media.chapter import Chapter
+    from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
 
@@ -154,10 +154,10 @@ def test_update_book_db_object_updates_object():
 
 
 def test_update_book_db_object_updates_object_regardless_of_book_spelling():
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
     from cozy.db.book import Book
     from cozy.media.chapter import Chapter
+    from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
 
@@ -182,10 +182,10 @@ def test_update_book_db_object_updates_object_regardless_of_book_spelling():
 
 
 def test_create_book_db_object_creates_object():
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
     from cozy.db.book import Book
     from cozy.media.chapter import Chapter
+    from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
 
@@ -212,11 +212,11 @@ def test_create_book_db_object_creates_object():
 
 
 def test_prepare_db_objects_recreates_existing_track(mocker):
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
-    from cozy.media.chapter import Chapter
-    from cozy.db.track_to_file import TrackToFile
     from cozy.db.file import File
+    from cozy.db.track_to_file import TrackToFile
+    from cozy.media.chapter import Chapter
+    from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
 
@@ -248,9 +248,9 @@ def test_prepare_db_objects_recreates_existing_track(mocker):
 
 
 def test_prepare_db_objects_skips_if_file_object_not_present(mocker):
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
     from cozy.media.chapter import Chapter
+    from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
 
@@ -270,10 +270,10 @@ def test_prepare_db_objects_skips_if_file_object_not_present(mocker):
 
 
 def test_prepare_db_objects_creates_new_track(mocker):
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
-    from cozy.media.chapter import Chapter
     from cozy.db.file import File
+    from cozy.media.chapter import Chapter
+    from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
     spy = mocker.spy(database_importer, "_get_track_list_for_db")
@@ -296,10 +296,10 @@ def test_prepare_db_objects_creates_new_track(mocker):
 
 
 def test_prepare_db_objects_updates_existing_book(mocker):
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
-    from cozy.media.chapter import Chapter
     from cozy.db.file import File
+    from cozy.media.chapter import Chapter
+    from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
     spy = mocker.spy(database_importer, "_update_book_db_object")
@@ -322,10 +322,10 @@ def test_prepare_db_objects_updates_existing_book(mocker):
 
 
 def test_prepare_db_objects_updates_existing_book_regardless_of_spelling(mocker):
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
-    from cozy.media.chapter import Chapter
     from cozy.db.file import File
+    from cozy.media.chapter import Chapter
+    from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
     spy = mocker.spy(database_importer, "_update_book_db_object")
@@ -358,10 +358,10 @@ def test_prepare_db_objects_updates_existing_book_regardless_of_spelling(mocker)
 
 
 def test_prepare_db_objects_creates_new_book(mocker):
-    from cozy.model.database_importer import DatabaseImporter
-    from cozy.media.media_file import MediaFile
-    from cozy.media.chapter import Chapter
     from cozy.db.file import File
+    from cozy.media.chapter import Chapter
+    from cozy.media.media_file import MediaFile
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
     spy = mocker.spy(database_importer, "_create_book_db_object")
@@ -384,11 +384,11 @@ def test_prepare_db_objects_creates_new_book(mocker):
 
 
 def test_delete_all_tracks_from_db_does_as_it_says():
-    from cozy.media.media_file import MediaFile
-    from cozy.media.chapter import Chapter
     from cozy.db.file import File
     from cozy.db.track import Track
     from cozy.db.track_to_file import TrackToFile
+    from cozy.media.chapter import Chapter
+    from cozy.media.media_file import MediaFile
     from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
@@ -467,10 +467,10 @@ def test_is_chapter_count_in_db_different_returns_false_for_equal_chapter_count(
 
 
 def test_insert_track_inserts_all_rows_expected():
-    from cozy.model.database_importer import DatabaseImporter, TrackInsertRequest
     from cozy.db.book import Book
     from cozy.db.file import File
     from cozy.db.track_to_file import TrackToFile
+    from cozy.model.database_importer import DatabaseImporter, TrackInsertRequest
 
     database_importer = DatabaseImporter()
 
@@ -501,8 +501,8 @@ def test_insert_track_inserts_all_rows_expected():
 
 
 def test_update_book_position_skips_empty_book():
-    from cozy.model.database_importer import DatabaseImporter
     from cozy.db.book import Book
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
 
@@ -511,9 +511,9 @@ def test_update_book_position_skips_empty_book():
 
 
 def test_update_book_position_sets_position_for_multi_chapter_file_correctly():
-    from cozy.model.database_importer import DatabaseImporter
     from cozy.db.book import Book
     from cozy.db.track import Track
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
 
@@ -526,9 +526,9 @@ def test_update_book_position_sets_position_for_multi_chapter_file_correctly():
 
 
 def test_update_book_position_sets_position_for_single_chapter_file_correctly():
-    from cozy.model.database_importer import DatabaseImporter
     from cozy.db.book import Book
     from cozy.db.track import Track
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
 
@@ -542,8 +542,8 @@ def test_update_book_position_sets_position_for_single_chapter_file_correctly():
 
 
 def test_update_book_position_resets_position_if_it_is_longer_than_the_duration():
-    from cozy.model.database_importer import DatabaseImporter
     from cozy.db.book import Book
+    from cozy.model.database_importer import DatabaseImporter
 
     database_importer = DatabaseImporter()
 

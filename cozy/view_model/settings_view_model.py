@@ -2,11 +2,11 @@ import logging
 
 import inject
 
-from cozy.application_settings import ApplicationSettings
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.media.importer import Importer
 from cozy.model.settings import Settings
+from cozy.settings import ApplicationSettings
 
 log = logging.getLogger("settings_view_model")
 
@@ -21,9 +21,6 @@ class SettingsViewModel(Observable, EventSender):
         super(Observable, self).__init__()
 
         self._lock_ui: bool = False
-
-        if self._model.first_start:
-            self._importer.scan()
 
     @property
     def lock_ui(self) -> bool:

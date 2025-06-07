@@ -1,0 +1,95 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Danial Behzadi <dani.behzi@ubuntu.com>, 2025
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-16 15:04+0100\n"
+"PO-Revision-Date: 2019-09-08 09:39+0000\n"
+"Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>, 2025\n"
+"Language-Team: Persian (https://app.transifex.com/geigi/teams/78138/fa/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fa\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: data/com.github.geigi.cozy.desktop:3
+msgid "Cozy"
+msgstr "دنج"
+
+#: data/com.github.geigi.cozy.desktop:4
+msgid "Audio Book Player"
+msgstr "پخش کتاب صوتی"
+
+#: data/com.github.geigi.cozy.desktop:5
+msgid "Play and organize your audio book collection"
+msgstr "پخش و سازمان‌دهی مجموعهٔ کتاب‌های صوتیتان"
+
+#: data/com.github.geigi.cozy.appdata.xml:15
+msgid "Listen to audio books"
+msgstr "گوش دادن به کتاب‌های صوتی"
+
+#: data/com.github.geigi.cozy.appdata.xml:17
+msgid "Do you like audio books? Then lets get cozy!"
+msgstr "کتاب صوتی دوست دارید؟ پس بیایید دنج کنیم!"
+
+#: data/com.github.geigi.cozy.appdata.xml:18
+msgid "Cozy is a audio book player. Here are some of the features:"
+msgstr "دنج پخش‌کنندهٔ کتاب صوتی است. برخی ویژگی‌ها:"
+
+#: data/com.github.geigi.cozy.appdata.xml:20
+msgid "Import all your audio books into Cozy to browse them comfortably"
+msgstr "درون‌ریزی همهٔ کتاب‌های صوتیتان در دنج برای مرور آسانشان"
+
+#: data/com.github.geigi.cozy.appdata.xml:21
+msgid ""
+"Listen to your DRM free mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav "
+"audio books"
+msgstr ""
+"گوش دادن به کتاب‌های صوتی بدون DRM در قالب‌های‎ ‪ mp3، m4b، m4a (aac، ALAC, "
+"…)، flac، ogg  و wav"
+
+#: data/com.github.geigi.cozy.appdata.xml:22
+msgid "Remembers your playback position"
+msgstr "به خاطر سپردن موقعیت پخشتان"
+
+#: data/com.github.geigi.cozy.appdata.xml:23
+msgid "Sleep timer"
+msgstr "زمان‌سنج خواب"
+
+#: data/com.github.geigi.cozy.appdata.xml:24
+msgid "Playback speed control for each book individually"
+msgstr "واپایش جداگانهٔ سرعت پخش برای هر کار"
+
+#: data/com.github.geigi.cozy.appdata.xml:25
+msgid "Search your library"
+msgstr "جست‌وجوی کتابخانه‌تان"
+
+#: data/com.github.geigi.cozy.appdata.xml:26
+msgid "Multiple storage location support"
+msgstr "پشتیبانی از چندین محل ذخیره سازی"
+
+#: data/com.github.geigi.cozy.appdata.xml:27
+msgid ""
+"Offline Mode! This allows you to keep an audio book on your internal storage"
+" if you store your audio books on an external or network drive. Perfect to "
+"listen to on the go!"
+msgstr ""
+"حالت برون‌خط! می‌گذارد در صورت ذخیرهٔ کردن کتاب‌های صوتیتان روی گردانندهٔ "
+"شبکه یا خارحی، آن را روی ذخیره ساز داخلی نگه دارید. عالی برای شنیدن در مسیر!"
+
+#: data/com.github.geigi.cozy.appdata.xml:28
+msgid "Drag and Drop to import new audio books"
+msgstr "کشیدن و رها کردن برای درون ریزی کتاب‌های صوتی جدید"
+
+#: data/com.github.geigi.cozy.appdata.xml:29
+msgid "Sort your audio books by author, reader and name"
+msgstr "چینش کتاب‌های صوتی بر اساس نگارنده، راوی و نام"

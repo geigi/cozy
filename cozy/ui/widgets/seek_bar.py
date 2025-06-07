@@ -1,4 +1,4 @@
-from gi.repository import Gdk, GObject, Gtk
+from gi.repository import GObject, Gtk
 
 from cozy.control.time_format import ns_to_time
 
@@ -36,10 +36,6 @@ class SeekBar(Gtk.Box):
         click_gesture.set_button(0)  # Enable all mouse buttons
         click_gesture.connect("pressed", self._on_progress_scale_press)
         click_gesture.connect("released", self._on_progress_scale_release)
-
-        keyboard_controller = Gtk.EventControllerKey()
-        keyboard_controller.connect("key-pressed", self._on_progress_key_pressed)
-        self.progress_scale.add_controller(keyboard_controller)
 
     @GObject.Signal(arg_types=(object,))
     def position_changed(self, *_): ...
@@ -89,12 +85,6 @@ class SeekBar(Gtk.Box):
         self._progress_scale_pressed = False
         value = self.progress_scale.get_value()
         self.emit("position-changed", value)
-
-    def _on_progress_key_pressed(self, _, event, *__):
-        if event in {Gdk.KEY_Up, Gdk.KEY_Left}:
-            self.emit("rewind")
-        elif event in {Gdk.KEY_Down, Gdk.KEY_Right}:
-            self.emit("forward")
 
     def _on_progress_scale_press(self, *_):
         self._progress_scale_pressed = True

@@ -22,10 +22,11 @@ Adw.ApplicationWindow app_window {
       transition-type: crossfade;
       reveal-child: false;
       can-target: false;
+      visible: false;
 
       Adw.StatusPage {
         icon-name: 'library-symbolic';
-        title: _("Drop Audio Books Here to Add Them to Your Library");
+        title: _("Drop audiobooks here to add them to your library");
 
         styles [
           "drag-overlay-status-page",
@@ -216,8 +217,10 @@ Adw.ApplicationWindow app_window {
               show-title: false;
             }
 
-            content: Adw.StatusPage {
-              icon-name: 'com.github.geigi.cozy';
+            content: Adw.StatusPage import_status_page {
+              paintable: Adw.SpinnerPaintable {
+                widget: import_status_page;
+              };
               title: _("Importing");
               description: _("Stay tuned while Cozy is preparing your library…");
             };
@@ -235,8 +238,18 @@ Adw.ApplicationWindow app_window {
 
             content: Adw.StatusPage welcome_status_page {
               icon-name: 'com.github.geigi.cozy';
-              title: _("Let's get cozy");
-              description: _("Select a Folder, or Drag Audiobooks Here to Add Them to Your Library");
+              title: _("Let's Get Cozy!");
+              description: _("Select a folder, or drop audiobooks here to add them to your library");
+              child: Button first_import_button {
+                halign: center;
+                styles ["pill", "suggested-action"]
+
+                Adw.ButtonContent content {
+                  halign: center;
+                  label: _("Select Folder");
+                  icon-name: 'folder-open-symbolic';
+                }
+              };
             };
           };
         }

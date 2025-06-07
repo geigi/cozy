@@ -1,0 +1,73 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $SleepTimer: Adw.Dialog {
+  width-request: 250;
+  content-width: 380;
+
+  title: _("Sleep Timer");
+
+  child: Adw.ToolbarView toolbarview{
+    [top]
+    Adw.HeaderBar headerbar {}
+
+    [bottom]
+    ActionBar button_bar {
+      [center]
+      Box {
+        spacing: 12;
+        margin-bottom: 12;
+        homogeneous: true;
+        Button cancel_button {
+          label: _("Cancel");
+          clicked => $close();
+        }
+
+        Button set_timer_button {
+          label: _("Set Timer");
+          sensitive: false;
+          clicked => $set_timer();
+          styles ["suggested-action"]
+        }
+      }
+    }
+
+    content: Stack stack {
+      margin-start: 18;
+      margin-end: 18;
+      margin-top: 12;
+      margin-bottom: 12;
+
+      StackPage {
+        name: "uninitiated";
+        child: Adw.PreferencesGroup list {};
+      }
+
+      visible-child-name: "uninitiated";
+
+      StackPage {
+        name: "running";
+        child: Adw.StatusPage timer_state {
+          styles ["numeric"]
+          child: Adw.PreferencesGroup {
+            separate-rows: true;
+
+            Adw.ButtonRow {
+              title: _("+ 5 minutes");
+              activated => $plus_5_minutes();
+            }
+            Adw.ButtonRow till_end_of_chapter_button_row {
+              title: _("End of Chapter");
+              activated => $till_end_of_chapter();
+            }
+            Adw.ButtonRow {
+              title: _("Cancel Timer");
+              activated => $cancel_timer();
+              styles ["suggested-action"]
+            }
+          };
+        };
+      }
+    };
+  };
+}

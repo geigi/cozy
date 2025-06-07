@@ -7,11 +7,14 @@ from cozy.db.book import Book as BookModel
 from cozy.db.file import File
 from cozy.db.track import Track
 from cozy.db.track_to_file import TrackToFile
-from cozy.extensions.is_same_book import is_same_book
 from cozy.media.media_file import MediaFile
 from cozy.model.book import Book, BookIsEmpty
 
 log = logging.getLogger("db_importer")
+
+
+def is_same_book(book_a: str, book_b: str) -> bool:
+    return book_a.casefold() == book_b.casefold()
 
 
 class TrackInsertRequest:

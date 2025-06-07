@@ -11,8 +11,8 @@ def setup_inject(peewee_database):
 
 
 def test_storage_locations_contains_every_storage_location_from_db(peewee_database):
-    from cozy.model.settings import Settings
     from cozy.db.storage import Storage
+    from cozy.model.settings import Settings
 
     settings = Settings()
     storage_locations = Storage.select()
@@ -28,8 +28,8 @@ def test_storage_locations_contains_every_storage_location_from_db(peewee_databa
 
 
 def test_external_storage_locations_contain_only_external_storages(peewee_database):
-    from cozy.model.settings import Settings
     from cozy.db.storage import Storage
+    from cozy.model.settings import Settings
 
     settings = Settings()
     storage_locations = Storage.select().where(Storage.external)
@@ -39,8 +39,8 @@ def test_external_storage_locations_contain_only_external_storages(peewee_databa
 
 
 def test_last_played_book_returns_correct_value(peewee_database):
-    from cozy.model.settings import Settings
     from cozy.db.book import Book
+    from cozy.model.settings import Settings
 
     settings = Settings()
 
@@ -48,8 +48,8 @@ def test_last_played_book_returns_correct_value(peewee_database):
 
 
 def test_setting_last_played_book_to_none_updates_in_settings_object_and_database(peewee_database):
-    from cozy.model.settings import Settings
     from cozy.db.settings import Settings as SettingsModel
+    from cozy.model.settings import Settings
 
     settings = Settings()
     settings.last_played_book = None
@@ -59,8 +59,8 @@ def test_setting_last_played_book_to_none_updates_in_settings_object_and_databas
 
 
 def test_fetching_non_existent_last_played_book_returns_none(peewee_database):
-    from cozy.model.settings import Settings
     from cozy.db.settings import Settings as SettingsModel
+    from cozy.model.settings import Settings
 
     db_object = SettingsModel.get()
     db_object.last_played_book = 437878782
@@ -72,8 +72,8 @@ def test_fetching_non_existent_last_played_book_returns_none(peewee_database):
 
 
 def test_fetching_non_existent_last_played_book_sets_it_to_none(peewee_database):
-    from cozy.model.settings import Settings
     from cozy.db.settings import Settings as SettingsModel
+    from cozy.model.settings import Settings
 
     db_object = SettingsModel.get()
     db_object.last_played_book = 437878782
@@ -86,8 +86,8 @@ def test_fetching_non_existent_last_played_book_sets_it_to_none(peewee_database)
 
 
 def test_ensure_default_storage_is_present_adds_default_if_not_present(peewee_database):
-    from cozy.model.settings import Settings
     from cozy.db.storage import Storage
+    from cozy.model.settings import Settings
 
     Storage.update(default=False).where(Storage.id == 2).execute()
 
@@ -99,8 +99,8 @@ def test_ensure_default_storage_is_present_adds_default_if_not_present(peewee_da
 
 
 def test_ensure_default_storage_is_present_does_nothing_if_default_is_present(peewee_database):
-    from cozy.model.settings import Settings
     from cozy.db.storage import Storage
+    from cozy.model.settings import Settings
 
     settings = Settings()
     settings._load_all_storage_locations()
