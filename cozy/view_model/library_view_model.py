@@ -129,9 +129,10 @@ class LibraryViewModel(Observable, EventSender):
         book_is_online = self._fs_monitor.get_book_online(book)
 
 
-        if hide_offline_books and not book_is_online and not book.downloaded:
-            return False
-        elif hide_offline_books and not self.book_files_exist(book):
+        if hide_offline_books and \
+           ((book_is_online and not book.downloaded) or \
+           (not self.book_files_exist(book))):
+        
             return False
         
         if self.library_view_mode == LibraryViewMode.CURRENT:
