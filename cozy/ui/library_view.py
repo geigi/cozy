@@ -1,4 +1,5 @@
 from typing import Optional
+import os
 
 import inject
 from gi.repository import Adw, Gtk, Gio
@@ -173,13 +174,20 @@ class LibraryView:
         return True
 
     def _jump_to_folder(self, _, book):
-        track = book.chapters[0]
-
-        if self._view_model.book_files_exist(book):
-            file_launcher = Gtk.FileLauncher(file=Gio.File.new_for_path(track.file))
+        track = False
+        
+        # find first chapter with availible file, 
+        # (all this file stuff should probably be moved to the book class)
+        for chapter in book.chapters:
+                if os.path.exists(chapter.file):
+                    track = chapter.file
+                    break
+        
+        if track:
+            file_launcher = Gtk.FileLauncher(file=Gio.File.new_for_path(track))
             file_launcher.open_containing_folder(None, None, lambda d, r: d.open_containing_folder_finish(r))
         else:
-            FileNotFoundDialog(track).present()
+            FileNotFoundDialog(book.chapters[0]).present()
 
     def _on_remove_book(self, _, book):
         if self._view_model.book_files_exist(book):
