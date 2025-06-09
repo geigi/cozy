@@ -131,7 +131,9 @@ class LibraryViewModel(Observable, EventSender):
 
         if hide_offline_books and not book_is_online and not book.downloaded:
             return False
-
+        elif hide_offline_books and not self.book_files_exist(book):
+            return False
+        
         if self.library_view_mode == LibraryViewMode.CURRENT:
             return book.last_played > 0
 
