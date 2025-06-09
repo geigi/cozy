@@ -1,3 +1,4 @@
+import os
 from gi.repository import Adw, GObject, Gtk
 
 from cozy.control.time_format import ns_to_time
@@ -22,7 +23,11 @@ class ChapterElement(Adw.ActionRow):
 
         self.set_title(self.chapter.name)
         self.number_label.set_text(str(self.chapter.number))
-        self.duration_label.set_text(ns_to_time(self.chapter.length))
+
+        if not os.path.exists(chapter.file):
+            self.duration_label.set_text(_("File not Found"))
+        else:
+            self.duration_label.set_text(ns_to_time(self.chapter.length))
 
     @GObject.Signal(arg_types=(object,))
     def play_pause_clicked(self, *_): ...
