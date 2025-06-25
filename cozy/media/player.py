@@ -651,6 +651,8 @@ class Player(EventSender):
                 self._next_chapter()
             else:
                 self._stop_playback()
+                self.emit_event_main_thread("fadeout-finished")
+                self._play_next_chapter = True
         elif event == "resource-not-found":
             self._handle_file_not_found()
         elif event == "state" and message == Gst.State.PLAYING:

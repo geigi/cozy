@@ -1,11 +1,9 @@
 import logging
 import os
-import sys
-from enum import Enum, auto
-
-from gi.repository import Gst
+from enum import Enum
 
 import inject
+from gi.repository import Gio, GLib, Gst
 
 from cozy.architecture.observable import Observable
 from cozy.media.player import Player
@@ -16,10 +14,10 @@ log = logging.getLogger("sleep_timer_view_model")
 FADEOUT_DURATION = 20
 
 
-class SystemPowerControl(Enum):
-    OFF = auto()
-    SUSPEND = auto()
-    SHUTDOWN = auto()
+class SystemPowerAction(Enum):
+    NONE = 0
+    SUSPEND = 1
+    SHUTDOWN = 2
 
 
 class SleepTimerViewModel(Observable):
@@ -30,7 +28,7 @@ class SleepTimerViewModel(Observable):
         super().__init__()
 
         self._remaining_seconds: int = 0
-        self._system_power_control: SystemPowerControl = SystemPowerControl.OFF
+        self._system_power_action = SystemPowerAction.NONE
         self._timer_running = False
         self._fadeout_running = False
 
@@ -54,12 +52,12 @@ class SleepTimerViewModel(Observable):
             self._stop_timer()
 
     @property
-    def system_power_control(self) -> SystemPowerControl:
-        return self._system_power_control
+    def system_power_action(self) -> SystemPowerAction:
+        return self._system_power_action
 
-    @system_power_control.setter
-    def system_power_control(self, new_value: SystemPowerControl):
-        self._system_power_control = new_value
+    @system_power_action.setter
+    def system_power_action(self, new_value: SystemPowerAction) -> None:
+        self._system_power_action = new_value
 
     @property
     def stop_after_chapter(self) -> bool:
@@ -111,6 +109,7 @@ class SleepTimerViewModel(Observable):
         if self._remaining_seconds <= 0:
             self._stop_timer()
             self._player.pause()
+            self._handle_system_power_event()
 
     def _on_player_changed(self, event, _):
         if event == "position":
@@ -118,21 +117,54 @@ class SleepTimerViewModel(Observable):
                 self._on_timer_tick()
         elif event == "chapter-changed":
             self.stop_after_chapter = False
+        elif event == "fadeout-finished":
+            self._handle_system_power_event()
 
     def _handle_system_power_event(self):
-        # TODO: This doesn't work in Flatpak. Either remove it completely, or make it conditional
-        command = None
+        match self.system_power_action:
+            case SystemPowerAction.SHUTDOWN:
+                self._shutdown()
+            case SystemPowerAction.SUSPEND:
+                self._suspend()
+            case _:
+                return
 
-        if self.system_power_control == SystemPowerControl.SHUTDOWN:
-            log.info("system will attempt to shutdown now!")
-            if "linux" in sys.platform.lower():
-                command = "systemctl poweroff"
-            else:
-                command = "shutdown -h now"
-        elif self.system_power_control == SystemPowerControl.SUSPEND:
-            log.info("system will attempt to suspend now!")
-            if "linux" in sys.platform.lower():
-                command = "systemctl suspend"
+    def _shutdown(self):
+        inject.instance("MainWindow").quit()  # Exit gracefully
+        if os.getenv("XDG_CURRENT_DESKTOP") == "GNOME":
+            Gio.bus_get_sync(Gio.BusType.SESSION, None).call_sync(
+                "org.gnome.SessionManager",
+                "/org/gnome/SessionManager",
+                "org.gnome.SessionManager",
+                "Shutdown",
+                None,
+                None,
+                Gio.DBusCallFlags.NONE,
+                -1,
+                None,
+            )
+        else:
+            Gio.bus_get_sync(Gio.BusType.SYSTEM, None).call_sync(
+                "org.freedesktop.login1",
+                "/org/freedesktop/login1",
+                "org.freedesktop.login1.Manager",
+                "PowerOff",
+                GLib.Variant.new_tuple(GLib.Variant.new_boolean(True)),
+                None,
+                Gio.DBusCallFlags.NONE,
+                -1,
+                None,
+            )
 
-        if command:
-            os.system(command)
+    def _suspend(self):
+        Gio.bus_get_sync(Gio.BusType.SYSTEM, None).call_sync(
+            "org.freedesktop.login1",
+            "/org/freedesktop/login1",
+            "org.freedesktop.login1.Manager",
+            "Suspend",
+            GLib.Variant.new_tuple(GLib.Variant.new_boolean(True)),
+            None,
+            Gio.DBusCallFlags.NONE,
+            -1,
+            None,
+        )

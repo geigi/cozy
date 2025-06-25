@@ -72,12 +72,15 @@ class Application(Adw.Application):
             return
 
         try:
-            reporter.exception("uncaught", exc_value, "\n".join(format_exception(exc_type, exc_value, exc_traceback)))
+            reporter.exception(
+                "uncaught",
+                exc_value,
+                "\n".join(format_exception(exc_type, exc_value, exc_traceback)),
+            )
         finally:
             sys.excepthook(exc_type, exc_value, exc_traceback)
 
     def quit(self):
-        self.app_controller.quit()
         super().quit()
 
     @staticmethod

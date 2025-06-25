@@ -40,7 +40,19 @@ template $SleepTimer: Adw.Dialog {
 
       StackPage {
         name: "uninitiated";
-        child: Adw.PreferencesGroup list {};
+        child: Box {
+          orientation: vertical;
+          spacing: 12;
+
+          Adw.PreferencesGroup list {}
+          Adw.PreferencesGroup {
+            Adw.ComboRow power_action_combo_row {
+              title: _("System Power Control");
+              subtitle: _("Action to perform when timer finishes");
+              notify::selected-item => $on_power_action_selected();
+            }
+          }
+        };
       }
 
       visible-child-name: "uninitiated";
