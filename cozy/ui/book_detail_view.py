@@ -1,12 +1,10 @@
 import logging
 import time
-from math import pi as PI
 from threading import Event, Thread
 from typing import Callable, Final
 
-import cairo
 import inject
-from gi.repository import Adw, Gio, GLib, GObject, Graphene, Gtk
+from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.model.book import Book
@@ -19,57 +17,11 @@ from cozy.view_model.book_detail_view_model import BookDetailViewModel
 log = logging.getLogger(__name__)
 
 ALBUM_ART_SIZE: Final[int] = 256
-PROGRESS_RING_LINE_WIDTH: Final[int] = 5
 
 
 def call_in_main_thread(*args) -> None:
     # TODO: move this elsewhere, it might come useful
     GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, *args)
-
-
-class ProgressRing(Gtk.Widget):
-    __gtype_name__ = "ProgressRing"
-
-    progress = GObject.Property(type=float, default=0.0)
-
-    def __init__(self) -> None:
-        super().__init__()
-
-        self._style_manager = Adw.StyleManager()
-        self._style_manager.connect("notify::accent-color", self.redraw)
-        self.connect("notify::progress", self.redraw)
-
-    def redraw(self, *_) -> None:
-        self.queue_draw()
-
-    def do_measure(self, *_) -> tuple[int, int, int, int]:
-        return (40, 40, -1, -1)
-
-    def do_snapshot(self, snapshot: Gtk.Snapshot) -> None:
-        size = self.get_allocated_height()
-        radius = (size - 8) / 2.0
-
-        context = snapshot.append_cairo(Graphene.Rect().init(0, 0, size, size))
-
-        context.arc(size / 2, size / 2, radius, 0, 2 * PI)
-        context.set_source_rgba(*self.get_dim_color())
-        context.set_line_width(PROGRESS_RING_LINE_WIDTH)
-        context.stroke()
-
-        context.arc(size / 2, size / 2, radius, -0.5 * PI, self.progress * 2 * PI - (0.5 * PI))
-        context.set_source_rgb(*self.get_accent_color())
-        context.set_line_width(PROGRESS_RING_LINE_WIDTH)
-        context.set_line_cap(cairo.LineCap.ROUND)
-        context.stroke()
-
-    def get_dim_color(self) -> tuple[int, int, int, int]:
-        color = self.get_color()
-        return color.red, color.green, color.blue, 0.15
-
-    def get_accent_color(self) -> tuple[int, int, int]:
-        color = self._style_manager.get_accent_color_rgba()
-        return color.red, color.green, color.blue
-
 
 class ChaptersListBox(Adw.PreferencesGroup):
     def __init__(self, title: str):
@@ -93,12 +45,13 @@ class BookDetailView(Adw.NavigationPage):
     book_label: Gtk.Label = Gtk.Template.Child()
     author_label: Gtk.Label = Gtk.Template.Child()
     total_label: Gtk.Label = Gtk.Template.Child()
-    remaining_label: Gtk.Label = Gtk.Template.Child()
+    progress_label: Gtk.Label = Gtk.Template.Child()
 
-    book_progress_ring: ProgressRing = Gtk.Template.Child()
+    book_progress_bar: Gtk.ProgressBar = Gtk.Template.Child()
 
     album_art: Gtk.Picture = Gtk.Template.Child()
-    album_art_container: Gtk.Box = Gtk.Template.Child()
+    album_art_container: Gtk.Stack = Gtk.Template.Child()
+    fallback_icon: Gtk.Image = Gtk.Template.Child()
 
     unavailable_banner: Adw.Banner = Gtk.Template.Child()
 
@@ -148,6 +101,11 @@ class BookDetailView(Adw.NavigationPage):
 
     def _connect_widgets(self):
         self.play_button.connect("clicked", self._play_book_clicked)
+        self.connect("showing", self._refresh_page)
+
+    def _refresh_page(self, *_):
+        # should probably combine with _on_book_changed later
+        self._on_progress_changed()
 
     def _on_book_changed(self):
         book = self._view_model.book
@@ -165,7 +123,7 @@ class BookDetailView(Adw.NavigationPage):
 
         self._current_selected_chapter = None
 
-        self.total_label.set_visible(False)
+        self.total_label.set_text(_("Loading…"))
         self.unavailable_banner.set_revealed(False)
 
         self.book_title = book.name
@@ -218,8 +176,8 @@ class BookDetailView(Adw.NavigationPage):
         self.total_label.set_text(self._view_model.total_text)
 
     def _on_progress_changed(self):
-        self.remaining_label.set_text(self._view_model.remaining_text)
-        self.book_progress_ring.progress = self._view_model.progress_percent
+        self.progress_label.set_text(self._view_model.progress_text)
+        self.book_progress_bar.set_fraction(self._view_model.progress_percent)
 
     def _on_lock_ui_changed(self):
         self.available_offline_action.set_enabled(not self._view_model.lock_ui)
@@ -310,16 +268,17 @@ class BookDetailView(Adw.NavigationPage):
             self.available_offline_action.handler_unblock_by_func(self._download_switch_changed)
 
     def _set_cover_image(self, book: Book):
-        self.album_art_container.set_visible(False)
 
         paintable = self._artwork_cache.get_cover_paintable(
             book, self.get_scale_factor(), ALBUM_ART_SIZE
         )
 
         if paintable:
-            self.album_art_container.set_visible(True)
             self.album_art.set_paintable(paintable)
             self.album_art.set_overflow(True)
+            self.album_art_container.set_visible_child(self.album_art)
+        else:
+            self.album_art_container.set_visible_child(self.fallback_icon)
 
     def _interrupt_chapters_jobs(self):
         self._chapters_job_locked = True
