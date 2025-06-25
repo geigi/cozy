@@ -2,7 +2,7 @@ from math import pi as PI
 
 import cairo
 import inject
-from gi.repository import Gdk, Gio, GObject, Graphene, Gtk
+from gi.repository import Gdk, GObject, Graphene, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.model.book import Book
@@ -70,6 +70,7 @@ class BookCard(Gtk.FlowBoxChild):
     __gsignals__ = {
         "play-pause-clicked": (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, (object,)),
         "open-book-overview": (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, (object,)),
+        "jump-to-folder": (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, (object,)),
         "remove-book": (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, (object,)),
     }
 
@@ -126,11 +127,7 @@ class BookCard(Gtk.FlowBoxChild):
         self.update_progress()
 
     def jump_to_folder(self) -> None:
-        track = self.book.chapters[0]
-
-        file_launcher = Gtk.FileLauncher(file=Gio.File.new_for_path(track.file))
-        dummy_callback = lambda d, r: d.open_containing_folder_finish(r)
-        file_launcher.open_containing_folder(None, None, dummy_callback)
+        self.emit("jump-to-folder", self.book)
 
     @Gtk.Template.Callback()
     def _play_pause(self, *_):

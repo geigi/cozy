@@ -1,3 +1,4 @@
+import os
 from gi.repository import Adw, GObject, Gtk
 from os import path
 
@@ -22,8 +23,12 @@ class ChapterElement(Adw.ActionRow):
 
         self.set_title(self.chapter.name)
         self.number_label.set_text(str(self.chapter.number))
-        self.duration_label.set_text(ns_to_time(self.chapter.length))
-        self.set_tooltip_text(path.basename(self.chapter.file))
+
+        if not os.path.exists(chapter.file):
+            self.duration_label.set_text(_("File not Found"))
+        else:
+            self.duration_label.set_text(ns_to_time(self.chapter.length))
+            self.set_tooltip_text(path.basename(self.chapter.file))
 
     @GObject.Signal(arg_types=(object,))
     def play_pause_clicked(self, *_): ...
