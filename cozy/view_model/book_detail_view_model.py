@@ -87,15 +87,14 @@ class BookDetailViewModel(Observable, EventSender):
         if not self._book:
             return None
 
-        return time_format.ns_to_human_readable(self._book.duration / self._book.playback_speed)
+        return time_format.ns_to_time(self._book.duration / self._book.playback_speed)
 
     @property
-    def remaining_text(self) -> str | None:
+    def progress_text(self) -> str | None:
         if not self._book:
             return None
 
-        remaining = self._book.duration - self._book.progress
-        return time_format.ns_to_human_readable(remaining / self._book.playback_speed)
+        return time_format.ns_to_time(self._book.progress / self._book.playback_speed)
 
     @property
     def progress_percent(self) -> float | None:

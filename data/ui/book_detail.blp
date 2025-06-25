@@ -60,9 +60,10 @@ template $BookDetail: Adw.NavigationPage {
                 margin-end: 18;
                 margin-top: 12;
                 margin-bottom: 18;
-                halign: start;
+                halign: fill;
+                hexpand: true;
 
-                Box album_art_container {
+                Stack album_art_container {
                   halign: center;
                   width-request: 200;
                   height-request: 200;
@@ -73,6 +74,11 @@ template $BookDetail: Adw.NavigationPage {
                     ]
                   }
 
+                  Image fallback_icon {
+                    icon-name: "book-open-variant-symbolic";
+                    pixel-size: 200;
+                  }
+
                   styles [
                     "card",
                   ]
@@ -80,10 +86,9 @@ template $BookDetail: Adw.NavigationPage {
 
                 Box {
                   orientation: vertical;
-                  margin-top: 12;
-                  margin-bottom: 12;
                   spacing: 6;
                   vexpand: false;
+
 
                   Label book_label {
                     halign: start;
@@ -111,71 +116,25 @@ template $BookDetail: Adw.NavigationPage {
                     ]
                   }
 
-                  Box {
-                    valign: end;
-                    margin-top: 18;
-                    spacing: 6;
+                  ProgressBar book_progress_bar {
+                  }
 
-                    $ProgressRing book_progress_ring {
-                      valign: center;
+                  Box {
+                    orientation: horizontal;
+                    hexpand: true;
+                    halign: fill;
+
+                    Label progress_label {
+                      halign: start;
                     }
 
-                    Grid {
+                    Label total_label{
+                      halign: end;
                       hexpand: true;
-                      row-spacing: 3;
-                      column-spacing: 20;
-
-                      Label {
-                        halign: start;
-                        hexpand: true;
-                        label: _("Remaining");
-
-                        styles [
-                          "dim-label",
-                        ]
-
-                        layout {
-                          column: 0;
-                          row: 0;
-                        }
-                      }
-
-                      Label remaining_label {
-                        hexpand: true;
-                        xalign: 0;
-
-                        layout {
-                          column: 1;
-                          row: 0;
-                        }
-                      }
-
-                      Label {
-                        halign: start;
-                        hexpand: true;
-                        label: _("Total");
-
-                        styles [
-                          "dim-label",
-                        ]
-
-                        layout {
-                          column: 0;
-                          row: 1;
-                        }
-                      }
-
-                      Label total_label{
-                        hexpand: true;
-                        xalign: 0;
-
-                        layout {
-                          column: 1;
-                          row: 1;
-                        }
-                      }
+                      label: _("Loading…");
                     }
                   }
+
 
                   Button play_button {
                     halign: start;
@@ -245,9 +204,28 @@ template $BookDetail: Adw.NavigationPage {
 menu book_menu_model {
   section {
     item {
+      action: 'app.mark_book_as_read';
+      label: _("Mark as Read");
+    }
+
+    item {
+      action: 'app.jump_to_book_folder';
+      label: _("Open in Files");
+    }
+  }
+
+  section {
+    item {
       action: 'book_overview.download';
       label: _("_Available Offline");
       hidden-when: "action-disabled";
+    }
+  }
+
+  section {
+    item {
+      action: 'app.remove_book';
+      label: _("Delete Permanently…");
     }
   }
 }
