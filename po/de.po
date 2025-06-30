@@ -2,19 +2,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.geigi.cozy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # ckaotik ., 2021
 # Julian Geywitz <github@geigi.de>, 2024
-# 
+# sebphi93 <github.surname@alias.1pxcn.com>, 2025.
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.geigi.cozy\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-17 20:33+0100\n"
-"PO-Revision-Date: 2019-09-08 09:31+0000\n"
-"Last-Translator: Julian Geywitz <github@geigi.de>, 2024\n"
+"PO-Revision-Date: 2025-06-30 12:38+0200\n"
+"Last-Translator: sebphi93 <github.surname@alias.1pxcn.com>\n"
 "Language-Team: German (https://app.transifex.com/geigi/teams/78138/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -131,7 +132,7 @@ msgstr ""
 
 #: cozy/ui/db_migration_failed_view.py:15
 msgid "Failed to Update Database"
-msgstr "Das Datenbank Update ist fehlgeschlagen"
+msgstr "Das Update der Datenbank ist fehlgeschlagen"
 
 #: cozy/ui/db_migration_failed_view.py:22
 msgid "Close Cozy"
@@ -418,8 +419,8 @@ msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
 msgstr ""
-"Cozy ist opensource und der Fehlerbericht-Quellcode kann hier eingesehen "
-"werden:"
+"Cozy ist Open-source software (OSS) und der Fehlerbericht-Quellcode kann "
+"hier eingesehen werden:"
 
 #. Translators: Don't touch the markup. Translate the text "Sourcecode on
 #. GitHub" only!
@@ -465,7 +466,7 @@ msgstr "Suchen..."
 
 #: data/ui/headerbar.ui:80
 msgid "_Scan Library"
-msgstr "_Scan Library"
+msgstr "_Bibliothek scannen"
 
 #: data/ui/headerbar.ui:86
 msgid "_Hide unavailable books"
@@ -538,11 +539,11 @@ msgstr "Name des aktuell abgespielten Kapitels"
 
 #: data/ui/media_controller.ui:111
 msgid "Rewind"
-msgstr "Zurück springen"
+msgstr "Zurückspulen"
 
 #: data/ui/media_controller.ui:116
 msgid "Rewind playback"
-msgstr "Zurück springen"
+msgstr "Zurückspulen"
 
 #: data/ui/media_controller.ui:130
 msgid "Start playback"
@@ -554,11 +555,11 @@ msgstr "Starte oder pausiere die Wiedergabe"
 
 #: data/ui/media_controller.ui:148
 msgid "Forward"
-msgstr "Vor springen"
+msgstr "Vorspulen"
 
 #: data/ui/media_controller.ui:153
 msgid "Forward Playback"
-msgstr "Vor springen"
+msgstr "Vorspulen"
 
 #: data/ui/media_controller.ui:179
 msgid "Volume control"
@@ -614,15 +615,15 @@ msgstr "Spule beim Start von Cozy 30 Sekunden im aktuellen Buch zurück"
 
 #: data/ui/preferences.ui:60
 msgid "Rewind Duration"
-msgstr "Zurück springen Dauer"
+msgstr "Zurückspulen Dauer"
 
 #: data/ui/preferences.ui:69
 msgid "Forward Duration"
-msgstr "Vor springen Dauer"
+msgstr "Vorspulen Dauer"
 
 #: data/ui/preferences.ui:83
 msgid "Fadeout"
-msgstr "Fadeout"
+msgstr "Ausblenden"
 
 #: data/ui/preferences.ui:88
 msgid "Fadeout Duration"
@@ -686,7 +687,7 @@ msgstr "Verbleibende Zeit des aktuellen Kapitels"
 
 #: data/ui/storage_locations.ui:5
 msgid "Storage locations"
-msgstr "Hörbuch Ordner"
+msgstr "Hörbuch-Ordner"
 
 #: data/ui/storage_locations.ui:24
 msgid "Set as default"
@@ -720,7 +721,7 @@ msgid ""
 msgstr ""
 "Wird ausgeführt sobald der Timer ausgelaufen ist.\n"
 "Herunterfahren: Schaltet das System aus\n"
-"Schlafen: Wechselt in den Energiespar Modus"
+"Schlafen: Wechselt in den Energiesparmodus"
 
 #: data/ui/timer_popover.ui:129
 msgid "System power action to perform"
