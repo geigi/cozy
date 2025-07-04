@@ -88,6 +88,6 @@ A big thanks to all the contributors and translators! See the complete list in [
 
 
 ## Help us translate Cozy!
-Cozy is on <a href="https://www.transifex.com/geigi/cozy/">Transifex</a>, where anyone can contribute and translate. Can't find your language in the list? Let us know!
+Cozy is on <a href="https://explore.transifex.com/geigi/cozy/">Transifex</a>, where anyone can contribute and translate. Can't find your language in the list? Let us know!
 
 If you like this project, consider supporting me on <a href="https://www.patreon.com/geigi">Patreon</a> :)
