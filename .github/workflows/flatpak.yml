@@ -42,3 +42,14 @@ jobs:
         cache-key: "flatpak-builder-${{ github.sha }}"
         arch: ${{ matrix.arch }}
         upload-artifact: false
+
+    - name: Create tarball
+      run: |
+        mv Cozy.flatpak Cozy-${{ matrix.arch }}.flatpak
+        tar -czvf Cozy-${{ matrix.arch }}.tar.gz Cozy-${{ matrix.arch }}.flatpak
+
+    - name: Upload tarball artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Cozy-${{ matrix.arch }}.tar.gz
+        path: Cozy-${{ matrix.arch }}.tar.gz

@@ -1,0 +1,11 @@
+--- a/playhouse/_sqlite_ext.pyx
++++ b/playhouse/_sqlite_ext.pyx
+@@ -326,7 +326,7 @@
+ cdef python_to_sqlite(sqlite3_context *context, value):
+     if value is None:
+         sqlite3_result_null(context)
+-    elif isinstance(value, (int, long)):
++    elif isinstance(value, int):
+         sqlite3_result_int64(context, value)
+     elif isinstance(value, float):
+         sqlite3_result_double(context, value)
