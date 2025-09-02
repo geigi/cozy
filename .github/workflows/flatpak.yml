@@ -19,7 +19,7 @@ jobs:
       # Don't fail the whole workflow if one architecture fails
       fail-fast: false
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
 
     - name: Install deps
       if: ${{ matrix.arch == 'aarch64' }}
