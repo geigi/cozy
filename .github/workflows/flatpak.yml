@@ -38,7 +38,7 @@ jobs:
         repository-name: gnome-nightly
         repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
         bundle: Cozy.flatpak
-        manifest-path: com.github.geigi.cozy.json
+        manifest-path: flatpak/com.github.geigi.cozy.json
         cache-key: "flatpak-builder-${{ github.sha }}"
         arch: ${{ matrix.arch }}
         upload-artifact: false
