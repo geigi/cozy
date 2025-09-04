@@ -33,12 +33,8 @@ jobs:
       with:
         platforms: arm64
 
-    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
-      with:
-        repository-name: gnome-nightly
-        repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
-        bundle: Cozy.flatpak
-        manifest-path: flatpak/com.github.geigi.cozy.json
-        cache-key: "flatpak-builder-${{ github.sha }}"
-        arch: ${{ matrix.arch }}
-        upload-artifact: false
+	- name: Flatpak Builder
+		uses: flatpak/flatpak-github-actions/flatpak-builder@v6.5
+		with:
+		  bundle: com.github.geigi.cozy.json.flatpak
+		  manifest-path: flatpak/com.github.geigi.cozy.json
