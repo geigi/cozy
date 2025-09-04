@@ -1,0 +1,35 @@
+{
+  "app-id": "com.github.geigi.cozy",
+  "runtime": "org.gnome.Platform",
+  "runtime-version": "master",
+  "sdk": "org.gnome.Sdk",
+  "command": "com.github.geigi.cozy",
+  "finish-args": [
+    "--share=ipc",
+    "--share=network",
+    "--socket=fallback-x11",
+    "--socket=wayland",
+    "--socket=pulseaudio",
+    "--device=dri",
+    "--filesystem=host",
+    "--filesystem=xdg-run/gvfs",
+    "--filesystem=xdg-run/gvfsd",
+    "--talk-name=org.gtk.vfs.*",
+    "--talk-name=org.gnome.SessionManager",
+    "--system-talk-name=org.freedesktop.login1"
+  ],
+  "modules": [
+    "python-deps.json",
+    {
+      "name": "cozy",
+      "buildsystem": "meson",
+      "run-tests": true,
+      "sources": [
+        {
+          "type": "dir",
+          "path": "."
+        }
+      ]
+    }
+  ]
+}

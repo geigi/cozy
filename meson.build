@@ -38,7 +38,7 @@ else
 endif
 
 # Python 3 required modules
-python3_required_modules = ['distro', 'peewee', 'mutagen', 'gi']
+python3_required_modules = ['distro', 'mutagen', 'peewee', 'pytz', 'requests', 'inject', 'gi']
 
 foreach p : python3_required_modules
   # Source: https://docs.python.org/3/library/importlib.html#checking-if-a-module-can-be-imported
