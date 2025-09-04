@@ -11,7 +11,6 @@ on:
 
 jobs:
   flatpak:
-    name: "Flatpak"
     runs-on: ubuntu-latest
     container:
       image: bilelmoussaoui/flatpak-github-actions:gnome-nightly
@@ -24,7 +23,7 @@ jobs:
       fail-fast: false
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     # Docker is required by the docker/setup-qemu-action which enables emulation
     - name: Install deps
       if: ${{ matrix.arch != 'x86_64' }}
@@ -39,7 +38,7 @@ jobs:
       uses: docker/setup-qemu-action@v3
       with:
         platforms: arm64
-    - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+    - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.5
       with:
         repository-name: gnome-nightly
         repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
