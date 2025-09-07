@@ -11,6 +11,7 @@ from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.report import reporter
 from cozy.ui.chapter_element import ChapterElement
+from cozy.ui.delete_book_view import DeleteBookView
 from cozy.ui.toaster import ToastNotifier
 from cozy.view_model.book_detail_view_model import BookDetailViewModel
 
