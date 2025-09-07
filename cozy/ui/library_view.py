@@ -190,10 +190,7 @@ class LibraryView:
             FileNotFoundDialog(book.chapters[0]).present()
 
     def _on_remove_book(self, _, book):
-        if self._view_model.book_files_exist(book):
-            DeleteBookView(self._on_remove_book_response, book).present()
-        else:
-            self._view_model.remove_book(book)
+        DeleteBookView(self._on_remove_book_response, book).present()
 
     def _on_remove_book_response(self, _, response, book):
         if response != "delete":
@@ -202,7 +199,7 @@ class LibraryView:
         delete_from_library = True
         delete_files = True  # TODO: maybe an option to not delete the files
 
-        if delete_files:
+        if delete_files and self._view_model.book_files_exist(book):
             self._view_model.delete_book_files(book)
 
         if delete_from_library:
