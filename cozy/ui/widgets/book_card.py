@@ -150,7 +150,4 @@ class BookCard(Gtk.FlowBoxChild):
 
     def _on_long_tap(self, gesture: Gtk.Gesture, *_):
         gesture.set_state(Gtk.EventSequenceState.CLAIMED)
-
-        device = gesture.get_device()
-        if device and device.get_source() == Gdk.InputSource.TOUCHSCREEN:
-            self.menu_button.emit("activate")
+        self.menu_button.emit("activate")
