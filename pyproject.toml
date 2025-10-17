@@ -14,4 +14,4 @@ output-format = "grouped"
 
 [tool.ruff.lint]
 extend-select = ["B", "SIM", "PIE", "C4", "INT", "LOG"]
-extend-ignore = ["E402", "E731"]
+extend-ignore = ["E402", "E731", "B905"]
