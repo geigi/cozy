@@ -81,6 +81,16 @@ class Book(Observable, EventSender):
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
+    def hidden(self):
+        return self._db_object.hidden
+
+    @hidden.setter
+    def hidden(self, value: bool):
+        self._db_object.hidden = value
+
+        self._db_object.save(only=self._db_object.dirty_fields)
+
+    @property
     def position(self) -> int:
         return self._db_object.position
 
@@ -185,19 +195,20 @@ class Book(Observable, EventSender):
         if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
             self._settings.last_played_book = None
 
-        book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
-        track_to_files = TrackToFile.select().join(TrackModel).where(TrackToFile.track << book_tracks)
+        # book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
+        # track_to_files = TrackToFile.select().join(TrackModel).where(TrackToFile.track << book_tracks)
 
-        for track in track_to_files:
-            try:
-                track.file.delete_instance(recursive=True)
-            except DoesNotExist:
-                track.delete_instance()
+        # for track in track_to_files:
+        #     try:
+        #         track.file.delete_instance(recursive=True)
+        #     except DoesNotExist:
+        #         track.delete_instance()
 
-        for track in book_tracks:
-            track.delete_instance(recursive=True)
+        # for track in book_tracks:
+        #     track.delete_instance(recursive=True)
 
-        self._db_object.delete_instance(recursive=True)
+        # self._db_object.delete_instance(recursive=True)
+        self.hidden = True
         self.destroy_listeners()
         self._destroy_observers()
 

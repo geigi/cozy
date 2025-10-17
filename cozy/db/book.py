@@ -14,3 +14,4 @@ class Book(ModelBase):
     last_played = IntegerField(default=0)
     offline = BooleanField(default=False)
     downloaded = BooleanField(default=False)
+    hidden = BooleanField(default=False)

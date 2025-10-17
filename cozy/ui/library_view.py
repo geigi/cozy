@@ -196,16 +196,7 @@ class LibraryView:
             self._view_model.remove_book(book)
 
     def _on_remove_book_response(self, _, response, book):
-        if response != "delete":
-            return
-
-        delete_from_library = True
-        delete_files = True  # TODO: maybe an option to not delete the files
-
-        if delete_files:
-            self._view_model.delete_book_files(book)
-
-        if delete_from_library:
+        if response == "remove":
             self._view_model.remove_book(book)
 
     def _current_book_in_playback(self):
@@ -230,3 +221,4 @@ class LibraryView:
             return
 
         self._connected_book_card.update_progress()
+
