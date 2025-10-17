@@ -39,4 +39,7 @@ class BookRow(Adw.ActionRow):
         album_art.set_margin_top(6)
         album_art.set_margin_bottom(6)
 
-        self.add_prefix(album_art)
+        clamp = Adw.Clamp(maximum_size=BOOK_ICON_SIZE)
+        clamp.set_child(album_art)
+
+        self.add_prefix(clamp)
