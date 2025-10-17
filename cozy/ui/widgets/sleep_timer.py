@@ -47,10 +47,6 @@ class SleepTimer(Adw.Dialog):
         self.custom_adjustment.connect("value-changed", self._update_custom_interval_text)
         self._update_custom_interval_text()
 
-        self.power_action_list = [_("None"), _("Suspend"), _("Shutdown")]
-        power_action_list_model = Gtk.StringList.new(self.power_action_list)
-        self.power_action_combo_row.props.model = power_action_list_model
-
         self._connect_view_model()
 
     def _connect_view_model(self):
@@ -156,6 +152,4 @@ class SleepTimer(Adw.Dialog):
 
     @Gtk.Template.Callback()
     def on_power_action_selected(self, obj, _):
-        selected_string = obj.props.selected_item.get_string()
-        selected_string_index = self.power_action_list.index(selected_string)
-        self._view_model.system_power_action = SystemPowerAction(selected_string_index)
+        self._view_model.system_power_action = SystemPowerAction(obj.props.selected)
