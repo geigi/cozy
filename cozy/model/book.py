@@ -191,24 +191,27 @@ class Book(Observable, EventSender):
 
         return progress
 
-    def remove(self):
+    def remove(self, delete_db_objects: bool = False):
         if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
             self._settings.last_played_book = None
 
-        # book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
-        # track_to_files = TrackToFile.select().join(TrackModel).where(TrackToFile.track << book_tracks)
+        if delete_db_objects:
+            book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
+            track_to_files = TrackToFile.select().join(TrackModel).where(TrackToFile.track << book_tracks)
 
-        # for track in track_to_files:
-        #     try:
-        #         track.file.delete_instance(recursive=True)
-        #     except DoesNotExist:
-        #         track.delete_instance()
+            for track in track_to_files:
+                try:
+                    track.file.delete_instance(recursive=True)
+                except DoesNotExist:
+                    track.delete_instance()
 
-        # for track in book_tracks:
-        #     track.delete_instance(recursive=True)
+            for track in book_tracks:
+                track.delete_instance(recursive=True)
 
-        # self._db_object.delete_instance(recursive=True)
-        self.hidden = True
+            self._db_object.delete_instance(recursive=True)
+        else:
+            self.hidden = True
+
         self.destroy_listeners()
         self._destroy_observers()
 
