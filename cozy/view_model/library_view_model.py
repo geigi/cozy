@@ -131,7 +131,7 @@ class LibraryViewModel(Observable, EventSender):
 
         if (
             book.hidden
-            or hide_offline_books and (book_is_online and not book.downloaded) or not self.book_files_exist(book)
+            or (hide_offline_books and not ((book_is_online or book.downloaded) and self.book_files_exist(book)))
         ):
             return False
         
