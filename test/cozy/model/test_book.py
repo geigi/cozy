@@ -76,6 +76,16 @@ def test_setting_reader_updates_in_book_object_and_database(peewee_database):
     assert BookDB.get_by_id(1).reader == "Altered"
 
 
+def test_blacklisting_a_book_updates_in_book_object_and_database(peewee_database):
+    from cozy.db.book import Book as BookDB
+    from cozy.model.book import Book
+
+    book = Book(peewee_database, BookDB.get(1))
+    book.hidden = True
+    assert book.hidden
+    assert BookDB.get_by_id(1).hidden
+
+
 def test_position_returns_default_value(peewee_database):
     from cozy.db.book import Book as BookDB
     from cozy.model.book import Book
@@ -320,28 +330,12 @@ def test_progress_should_be_100_for_finished_book(peewee_database):
 
 def test_removing_book_removes_all_traces_in_db(peewee_database):
     from cozy.db.book import Book as BookDB
-    from cozy.db.file import File
-    from cozy.db.track import Track
-    from cozy.db.track_to_file import TrackToFile
     from cozy.model.book import Book
 
     book = Book(peewee_database, BookDB.get(1))
-    track_ids = [chapter.id for chapter in book.chapters]
-    track_to_file_ids = [track_to_file.id for track_to_file in
-                         TrackToFile.select().join(Track).where(TrackToFile.track.id << track_ids)]
-    file_ids = [track_to_file.file.id for track_to_file in
-                TrackToFile.select().join(Track).where(TrackToFile.track.id << track_ids)]
-
-    assert len(track_ids) > 0
-    assert len(track_to_file_ids) > 0
-    assert len(file_ids) > 0
-
     book.remove()
 
-    assert BookDB.select().where(BookDB.id == 1).count() == 0
-    assert Track.select().where(Track.id << track_ids).count() == 0
-    assert TrackToFile.select().where(TrackToFile.id << track_to_file_ids).count() == 0
-    assert File.select().where(File.id << file_ids).count() == 0
+    assert Book(peewee_database, BookDB.get(1)).hidden
 
 
 def test_removing_book_with_missing_file_removes_all_traces_in_db(peewee_database):
@@ -364,7 +358,7 @@ def test_removing_book_with_missing_file_removes_all_traces_in_db(peewee_databas
 
     File.get_by_id(file_ids[0]).delete_instance()
 
-    book.remove()
+    book.remove(delete_db_objects=True)
 
     assert BookDB.select().where(BookDB.id == 1).count() == 0
     assert Track.select().where(Track.id << track_ids).count() == 0
