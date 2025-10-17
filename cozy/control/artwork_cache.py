@@ -1,13 +1,13 @@
+import io
 import logging
 import os
 import shutil
 from pathlib import Path
 from uuid import uuid4
-import io
-from PIL import Image
 
 import inject
-from gi.repository import Gdk, GLib
+from gi.repository import Gdk
+from PIL import Image
 
 from cozy.control.application_directories import get_artwork_cache_dir
 from cozy.db.artwork_cache import ArtworkCache as ArtworkCacheModel
@@ -59,11 +59,11 @@ class ArtworkCache:
                 "load_texture_from_cache: query exists but query.first().uuid crashed.",
             )
             return None
-        
+
         cache_dir = get_artwork_cache_dir() / uuid
         cache_dir.mkdir(exist_ok=True, parents=True)
         file_path = (cache_dir / str(size)).with_suffix(".png")
-    
+
         if file_path.exists():
             return str(file_path)
 
@@ -79,11 +79,11 @@ class ArtworkCache:
             ArtworkCacheModel.create(book=book.id, uuid=uuid)
 
         resized = image.resize((size, size), Image.LANCZOS)
-        
+
         cache_dir = get_artwork_cache_dir() / uuid
         cache_dir.mkdir(exist_ok=True, parents=True)
         file_path = (cache_dir / str(size)).with_suffix(".png")
-        
+
         if not file_path.exists():
             try:
                 resized.save(str(file_path), format="PNG")
