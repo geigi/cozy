@@ -7,8 +7,8 @@
 
 # It's getting Cozy
 
-![Unit Testing](https://github.com/geigi/cozy/workflows/Unit%20Testing/badge.svg)
-![Flathub Downloads](https://img.shields.io/flathub/downloads/com.github.geigi.cozy?color=e66100&logo=flatpak)
+[![Tests](https://github.com/geigi/cozy/actions/workflows/tests.yml/badge.svg)](https://github.com/geigi/cozy/actions/workflows/tests.yml)
+![Flathub Downloads](https://img.shields.io/flathub/downloads/com.github.geigi.cozy?color=e66100&logo=flatpak&label=Flathub%20installs)
 
 ![Screenshot](https://raw.githubusercontent.com/geigi/cozy/img/img/screenshot1.png)
 
@@ -50,7 +50,7 @@ Alternatively, there are third party packages available in distros' repositories
 | MX Linux | <center><a href="https://forum.mxlinux.org/viewtopic.php?p=621071#p621071">Cozy</a> |
 | Ubuntu (PPA) | <center><a href="https://launchpad.net/~cozy-team/+archive/ubuntu/cozy">cozy</a> |
 | OpenBSD | <center><a href="https://cvsweb.openbsd.org/ports/audio/cozy/">cozy</a> |
-| Nix | <center><a href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/audio/cozy/default.nix">cozy</a> |
+| Nix | <center><a href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/co/cozy/package.nix">cozy</a> |
 
 </details>
 
@@ -78,10 +78,11 @@ flatpak uninstall --user com.github.geigi.cozy/x86_64/stable
 Thanks to @Meresmata
 
 ### I store my audiobooks in a location that is not accessible in the Flatpak sandbox:
-You can override the flatpak settings and allow access to a path (e.g. `/media`) like this:
-```console
-flatpak --user override --filesystem=/media com.github.geigi.cozy
-```
+You can use the [Flatseal](https://flathub.org/en/apps/com.github.tchx84.Flatseal) application to change permissions of a Flatpak app and allow access to a custom path (e.g. `/media`) like this:
+
+<img height="450" alt="image" src="https://github.com/user-attachments/assets/1f999ddf-f7f6-4127-9cae-38b60ed9f0f5" />
+
+
 
 ## Thanks
 A big thanks to all the contributors and translators! See the complete list in [AUTHORS.md](AUTHORS.MD)
