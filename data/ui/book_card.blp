@@ -71,7 +71,7 @@ template $BookCard: FlowBoxChild {
 
           Stack stack {
             Picture artwork {
-              content-fit: contain;
+              content-fit: cover;
               hexpand: true;
               vexpand: true;
             }
@@ -144,7 +144,7 @@ menu book_menu {
   section {
     item {
       action: 'app.remove_book';
-      label: _("Delete Permanently…");
+      label: _("Remove from Library");
     }
   }
 }

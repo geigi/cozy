@@ -63,25 +63,31 @@ template $BookDetail: Adw.NavigationPage {
                 halign: fill;
                 hexpand: true;
 
-                Stack album_art_container {
-                  halign: center;
-                  width-request: 200;
-                  height-request: 200;
+                Adw.Clamp {
+                  maximum-size: 200;
 
-                  Picture album_art {
+                  Stack album_art_container {
+                    halign: center;
+                    width-request: 200;
+                    height-request: 200;
+
+                    Picture album_art {
+                      content-fit: cover;
+
+                      styles [
+                        "book_detail_art",
+                      ]
+                    }
+
+                    Image fallback_icon {
+                      icon-name: "book-open-variant-symbolic";
+                      pixel-size: 200;
+                    }
+
                     styles [
-                      "book_detail_art",
+                      "card",
                     ]
                   }
-
-                  Image fallback_icon {
-                    icon-name: "book-open-variant-symbolic";
-                    pixel-size: 200;
-                  }
-
-                  styles [
-                    "card",
-                  ]
                 }
 
                 Box {
@@ -225,7 +231,7 @@ menu book_menu_model {
   section {
     item {
       action: 'app.remove_book';
-      label: _("Delete Permanently…");
+      label: _("Remove from Library");
     }
   }
 }

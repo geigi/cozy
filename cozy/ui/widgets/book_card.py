@@ -82,7 +82,7 @@ class BookCard(Gtk.FlowBoxChild):
         self.title = book.name
         self.author = book.author
 
-        paintable = self.artwork_cache.get_cover_paintable(book, 1, ALBUM_ART_SIZE)
+        paintable = self.artwork_cache.get_cover_paintable(book, self.get_scale_factor(), ALBUM_ART_SIZE)
 
         if paintable:
             self.artwork.set_paintable(paintable)

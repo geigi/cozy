@@ -237,6 +237,22 @@ def _update_db_10(db):
     Settings.update(version=10).execute()
 
 
+def _update_db_11(db):
+    log.info("Migrating to DB Version 11...")
+
+    migrator = SqliteMigrator(db)
+    hidden = BooleanField(default=False)
+
+    migrate(
+        migrator.add_column('book', 'hidden', hidden)
+    )
+
+    db.stop()
+    db.start()
+
+    Settings.update(version=11).execute()
+
+
 def update_db():
     db = get_sqlite_database()
     # First test for version 1
@@ -292,6 +308,20 @@ def update_db():
         backup_dir_name = _backup_db(db)
         try:
             _update_db_10(db)
+        except Exception as e:
+            log.error(e)
+            reporter.exception("db_updator", e)
+            db.stop()
+            _restore_db(backup_dir_name)
+
+            from cozy.ui.db_migration_failed_view import DBMigrationFailedView
+            DBMigrationFailedView().present()
+            exit(1)
+
+    if version < 11:
+        backup_dir_name = _backup_db(db)
+        try:
+            _update_db_11(db)
         except Exception as e:
             log.error(e)
             reporter.exception("db_updator", e)

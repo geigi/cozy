@@ -13,7 +13,6 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library, split_strings_to_set
-from cozy.report import reporter
 from cozy.settings import ApplicationSettings
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.widgets.book_card import BookCard
@@ -129,10 +128,10 @@ class LibraryViewModel(Observable, EventSender):
         book_is_online = self._fs_monitor.get_book_online(book)
 
 
-        if hide_offline_books and \
-           ((book_is_online and not book.downloaded) or \
-           (not self.book_files_exist(book))):
-        
+        if (
+            book.hidden
+            or (hide_offline_books and not ((book_is_online or book.downloaded) and self.book_files_exist(book)))
+        ):
             return False
         
         if self.library_view_mode == LibraryViewMode.CURRENT:
@@ -220,17 +219,6 @@ class LibraryViewModel(Observable, EventSender):
 
     def open_book_detail(self, book: Book):
         self.emit_event(OpenView.BOOK, book)
-
-    def delete_book_files(self, book: Book):
-        for chapter in book.chapters:
-            try:
-                os.remove(chapter.file)
-            except Exception as e:
-                log.error("Failed to delete file: %s", chapter.file)
-                log.debug(e)
-                reporter.warning("library_view_model", "Failed to delete a file.")
-            else:
-                log.info("Deleted file: %s", chapter.file)
 
     def play_book(self, book: Book):
         self._player.play_pause_book(book)

@@ -10,15 +10,15 @@ class DeleteBookView(Adw.AlertDialog):
 
     def __init__(self, callback, book: Book):
         super().__init__(
-            heading=_("Permanently Delete Audiobook?"),
-            body=_("The audiobook will be permanently deleted from your device and cannot be recovered"),
+            heading=_("Remove Audiobook From Library?"),
+            body=_("This audiobook will be removed from Cozy's library. To be able to listen to it again, you will need to remove, and re-add its storage location."),
             default_response="cancel",
             close_response="cancel",
         )
 
         self.add_response("cancel", _("Cancel"))
-        self.add_response("delete", _("Delete"))
-        self.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
+        self.add_response("remove", _("Remove"))
+        self.set_response_appearance("remove", Adw.ResponseAppearance.DESTRUCTIVE)
 
         list_box = Gtk.ListBox(margin_top=12, css_classes=["boxed-list"])
         list_box.append(BookRow(book))
