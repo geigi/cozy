@@ -89,7 +89,7 @@ class BookCard(Gtk.FlowBoxChild):
             self.artwork.set_size_request(ALBUM_ART_SIZE, ALBUM_ART_SIZE)
             self.stack.set_visible_child(self.artwork)
         else:
-            self.fallback_icon.set_from_icon_name("book-open-variant-symbolic")
+            self.fallback_icon.set_from_icon_name("cozy.book-open-symbolic")
             self.stack.set_visible_child(self.fallback_icon)
 
         self.menu_button.connect("notify::active", self._on_leave)

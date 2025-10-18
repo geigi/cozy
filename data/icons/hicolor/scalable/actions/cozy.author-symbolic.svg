@@ -1,0 +1,21 @@
+<svg width='16' height='16'
+     xmlns:gpa='https://www.gtk.org/grappa'
+     gpa:version='1'
+     gpa:keywords='person contact being human'>
+  <path d='M 12 5 C 12 7.20913887, 10.2091389 9, 8 9 C 5.79086113 9, 4 7.20913887, 4 5 C 4 2.79086089, 5.79086113 1, 8 1 C 10.2091389 1, 12 2.79086089, 12 5 Z'
+        id='path0'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        stroke='rgb(0,0,0)'
+        fill='none'
+        class='foreground-stroke transparent-fill'/>
+  <path d='M 2.78062963 9.67166996 C 1.70704246 10.3889761, 1 11.6119194, 1 13 L 1 15 L 15 15 L 15 13 C 15 11.5086508, 14.1838417 10.2079268, 12.9738131 9.52011204'
+        id='path1'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        stroke='rgb(0,0,0)'
+        fill='none'
+        class='foreground-stroke transparent-fill'/>
+</svg>

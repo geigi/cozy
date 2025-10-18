@@ -25,7 +25,7 @@ Adw.ApplicationWindow app_window {
       visible: false;
 
       Adw.StatusPage {
-        icon-name: 'library-symbolic';
+        icon-name: 'cozy.library-symbolic';
         title: _("Drop audiobooks here to add them to your library");
 
         styles [
@@ -61,7 +61,7 @@ Adw.ApplicationWindow app_window {
                         Adw.ViewStackPage {
                           name: 'recent';
                           title: _("Recent");
-                          icon-name: 'recent-symbolic';
+                          icon-name: 'cozy.recent-symbolic';
 
                           child: Label {
                             label: _("Empty");
@@ -71,7 +71,7 @@ Adw.ApplicationWindow app_window {
                         Adw.ViewStackPage {
                           name: 'author';
                           title: _("Author");
-                          icon-name: 'person-symbolic';
+                          icon-name: 'cozy.author-symbolic';
 
                           child: ScrolledWindow sort_author_scroller {
                             focusable: true;
@@ -99,7 +99,7 @@ Adw.ApplicationWindow app_window {
                         Adw.ViewStackPage {
                           name: 'reader';
                           title: _("Reader");
-                          icon-name: 'microphone2-symbolic';
+                          icon-name: 'cozy.reader-symbolic';
 
                           child: ScrolledWindow sort_reader_scroller {
                             focusable: true;
@@ -178,7 +178,7 @@ Adw.ApplicationWindow app_window {
                           name: 'no_recent';
 
                           child: Adw.StatusPage {
-                            icon-name: 'library-symbolic';
+                            icon-name: 'cozy.library-symbolic';
                             title: _("No Recent Books Yet");
                             description: _("Explore your library by switching to the Author or Reader view");
                           };
@@ -247,7 +247,7 @@ Adw.ApplicationWindow app_window {
                 Adw.ButtonContent content {
                   halign: center;
                   label: _("Select Folder");
-                  icon-name: 'folder-open-symbolic';
+                  icon-name: 'cozy.folder-symbolic';
                 }
               };
             };
