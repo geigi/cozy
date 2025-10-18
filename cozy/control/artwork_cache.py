@@ -78,7 +78,7 @@ class ArtworkCache:
             uuid = str(uuid4())
             ArtworkCacheModel.create(book=book.id, uuid=uuid)
 
-        resized = image.resize((size, size), Image.LANCZOS)
+        image.thumbnail((size, size), Image.Resampling.LANCZOS)
 
         cache_dir = get_artwork_cache_dir() / uuid
         cache_dir.mkdir(exist_ok=True, parents=True)
@@ -86,7 +86,7 @@ class ArtworkCache:
 
         if not file_path.exists():
             try:
-                resized.save(str(file_path), format="PNG")
+                image.save(str(file_path), format="PNG")
             except Exception as e:
                 reporter.warning("artwork_cache", "Failed to save resized cache albumart")
                 log.warning("Failed to save resized cache albumart for uuid %r: %s", uuid, e)
