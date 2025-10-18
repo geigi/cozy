@@ -2,9 +2,11 @@ name: Flatpak
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
+    paths-ignore:
+      - '**/README.md'
   pull_request:
+    branches: [ "master" ]
 
 jobs:
   flatpak:
@@ -18,23 +20,28 @@ jobs:
         arch: [x86_64, aarch64]
       # Don't fail the whole workflow if one architecture fails
       fail-fast: false
+
     steps:
     - uses: actions/checkout@v5
-
+    # Docker is required by the docker/setup-qemu-action which enables emulation
     - name: Install deps
-      if: ${{ matrix.arch == 'aarch64' }}
+      if: ${{ matrix.arch != 'x86_64' }}
       run: |
-        dnf -y install docker
-
+        # Use the static binaries because it's unable to use a package manager 
+        curl https://download.docker.com/linux/static/stable/x86_64/docker-26.0.0.tgz --output ./docker.tgz
+        tar xzvf docker.tgz
+        mv docker/* /usr/bin
     - name: Set up QEMU
+      if: ${{ matrix.arch != 'x86_64' }}
       id: qemu
-      if: ${{ matrix.arch == 'aarch64' }}
       uses: docker/setup-qemu-action@v3
       with:
         platforms: arm64
-
-	- name: Flatpak Builder
-		uses: flatpak/flatpak-github-actions/flatpak-builder@v6.5
-		with:
-		  bundle: com.github.geigi.cozy.json.flatpak
-		  manifest-path: flatpak/com.github.geigi.cozy.json
+    - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.5
+      with:
+        repository-name: gnome-nightly
+        repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
+        bundle: com.github.geigi.cozy.flatpak
+        manifest-path: flatpak/com.github.geigi.cozy.json
+        cache-key: flatpak-builder-${{ matrix.arch }}-${{ github.sha }}
+        arch: ${{ matrix.arch }}
