@@ -67,10 +67,10 @@ class StorageRow(Adw.ActionRow):
 
     def _set_drive_icon(self) -> None:
         if self._model.external:
-            self.icon.set_from_icon_name("network-server-symbolic")
+            self.icon.set_from_icon_name("cozy.network-folder-symbolic")
             self.icon.set_tooltip_text(_("External drive"))
         else:
-            self.icon.set_from_icon_name("folder-open-symbolic")
+            self.icon.set_from_icon_name("cozy.folder-symbolic")
             self.icon.set_tooltip_text(_("Internal drive"))
 
     def _set_default_icon(self) -> None:

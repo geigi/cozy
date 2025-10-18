@@ -111,7 +111,7 @@ class SleepTimer(Adw.Dialog):
         )
         self.toolbarview.set_reveal_bottom_bars(not self._view_model.timer_enabled)
         self._parent_button.set_icon_name(
-            "bed-symbolic" if self._view_model.timer_enabled else "no-bed-symbolic"
+            "cozy.bed-symbolic" if self._view_model.timer_enabled else "cozy.no-bed-symbolic"
         )
 
     def present(self, *_) -> None:

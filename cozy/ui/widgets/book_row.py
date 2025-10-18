@@ -32,7 +32,7 @@ class BookRow(Adw.ActionRow):
             album_art.add_css_class("round-6")
             album_art.set_overflow(True)
         else:
-            album_art = Gtk.Image.new_from_icon_name("book-open-variant-symbolic")
+            album_art = Gtk.Image.new_from_icon_name("cozy.book-open-symbolic")
             album_art.set_pixel_size(BOOK_ICON_SIZE)
 
         album_art.set_size_request(BOOK_ICON_SIZE, BOOK_ICON_SIZE)
