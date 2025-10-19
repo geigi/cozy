@@ -2,7 +2,7 @@ from math import pi as PI
 
 import cairo
 import inject
-from gi.repository import Gdk, GObject, Graphene, Gtk, Gio, GLib
+from gi.repository import Gdk, Gio, GLib, GObject, Graphene, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.model.book import Book
@@ -84,7 +84,9 @@ class BookCard(Gtk.FlowBoxChild):
         self.title = book.name
         self.author = book.author
 
-        paintable = self.artwork_cache.get_cover_paintable(book, self.get_scale_factor(), ALBUM_ART_SIZE)
+        paintable = self.artwork_cache.get_cover_paintable(
+            book, self.get_scale_factor(), ALBUM_ART_SIZE
+        )
 
         if paintable:
             self.artwork.set_paintable(paintable)
@@ -108,19 +110,29 @@ class BookCard(Gtk.FlowBoxChild):
         open_in_files_item = Gio.MenuItem.new(_("Open in Files"))
         remove_item = Gio.MenuItem.new(_("Remove from Library"))
 
-        remove_recents_item.set_action_and_target_value("app.reset_book", GLib.Variant.new_int16(self.book.id))
-        open_in_files_item.set_action_and_target_value("app.jump_to_book_folder", GLib.Variant.new_int16(self.book.id))
-        remove_item.set_action_and_target_value("app.remove_book", GLib.Variant.new_int16(self.book.id))
+        remove_recents_item.set_action_and_target_value(
+            "app.reset_book", GLib.Variant.new_int16(self.book.id)
+        )
+        open_in_files_item.set_action_and_target_value(
+            "app.jump_to_book_folder", GLib.Variant.new_int16(self.book.id)
+        )
+        remove_item.set_action_and_target_value(
+            "app.remove_book", GLib.Variant.new_int16(self.book.id)
+        )
 
         self.first_menu_section.append_item(remove_recents_item)
         self.first_menu_section.append_item(open_in_files_item)
         self.second_menu_section.append_item(remove_item)
 
         self.mark_read_item = Gio.MenuItem.new(_("Mark as Read"))
-        self.mark_read_item.set_action_and_target_value("app.mark_book_as_read", GLib.Variant.new_int16(self.book.id))
+        self.mark_read_item.set_action_and_target_value(
+            "app.mark_book_as_read", GLib.Variant.new_int16(self.book.id)
+        )
 
         self.mark_unread_item = Gio.MenuItem.new(_("Mark as Unread"))
-        self.mark_unread_item.set_action_and_target_value("app.mark_book_as_unread", GLib.Variant.new_int16(self.book.id))
+        self.mark_unread_item.set_action_and_target_value(
+            "app.mark_book_as_unread", GLib.Variant.new_int16(self.book.id)
+        )
 
         self._on_position_updated(remove_first_menu_item=False)
 

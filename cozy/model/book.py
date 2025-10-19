@@ -166,7 +166,9 @@ class Book(Observable, EventSender):
 
     @property
     def current_chapter(self):
-        return next((chapter for chapter in self.chapters if chapter.id == self.position), self.chapters[0])
+        return next(
+            (chapter for chapter in self.chapters if chapter.id == self.position), self.chapters[0]
+        )
 
     @property
     def duration(self):
@@ -201,12 +203,17 @@ class Book(Observable, EventSender):
         self.position = 0
 
     def remove(self, delete_db_objects: bool = False):
-        if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
+        if (
+            self._settings.last_played_book
+            and self._settings.last_played_book.id == self._db_object.id
+        ):
             self._settings.last_played_book = None
 
         if delete_db_objects:
             book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
-            track_to_files = TrackToFile.select().join(TrackModel).where(TrackToFile.track << book_tracks)
+            track_to_files = (
+                TrackToFile.select().join(TrackModel).where(TrackToFile.track << book_tracks)
+            )
 
             for track in track_to_files:
                 try:
@@ -225,10 +232,13 @@ class Book(Observable, EventSender):
         self._destroy_observers()
 
     def _fetch_chapters(self):
-        tracks = TrackModel \
-            .select() \
-            .where(TrackModel.book == self._db_object) \
-            .order_by(TrackModel.disk, TrackModel.number, collate_natural.collation(TrackModel.name))
+        tracks = (
+            TrackModel.select()
+            .where(TrackModel.book == self._db_object)
+            .order_by(
+                TrackModel.disk, TrackModel.number, collate_natural.collation(TrackModel.name)
+            )
+        )
 
         self._chapters = []
         for track in tracks:
@@ -249,7 +259,10 @@ class Book(Observable, EventSender):
                 self.chapters.remove(chapter)
 
             if len(self._chapters) < 1:
-                if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
+                if (
+                    self._settings.last_played_book
+                    and self._settings.last_played_book.id == self._db_object.id
+                ):
                     self._settings.last_played_book = None
 
                 self._db_object.delete_instance(recursive=True)

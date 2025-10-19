@@ -4,8 +4,7 @@ from enum import Enum, auto
 from typing import Optional
 
 import inject
-
-from gi.repository import Gtk, Gio
+from gi.repository import Gio, Gtk
 
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
@@ -16,11 +15,11 @@ from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library, split_strings_to_set
 from cozy.settings import ApplicationSettings
+from cozy.ui.delete_book_view import DeleteBookView
+from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.widgets.book_card import BookCard
 from cozy.view_model.storages_view_model import StoragesViewModel
-from cozy.ui.file_not_found_dialog import FileNotFoundDialog
-from cozy.ui.delete_book_view import DeleteBookView
 
 log = logging.getLogger("library_view_model")
 
@@ -141,13 +140,15 @@ class LibraryViewModel(Observable, EventSender):
         # find first chapter with available file,
         # (all this file stuff should probably be moved to the book class)
         for chapter in book.chapters:
-                if os.path.exists(chapter.file):
-                    track = chapter.file
-                    break
+            if os.path.exists(chapter.file):
+                track = chapter.file
+                break
 
         if track:
             file_launcher = Gtk.FileLauncher(file=Gio.File.new_for_path(track))
-            file_launcher.open_containing_folder(None, None, lambda d, r: d.open_containing_folder_finish(r))
+            file_launcher.open_containing_folder(
+                None, None, lambda d, r: d.open_containing_folder_finish(r)
+            )
         else:
             FileNotFoundDialog(book.chapters[0]).present()
 
@@ -157,13 +158,12 @@ class LibraryViewModel(Observable, EventSender):
         hide_offline_books = self._application_settings.hide_offline
         book_is_online = self._fs_monitor.get_book_online(book)
 
-
-        if (
-            book.hidden
-            or (hide_offline_books and not ((book_is_online or book.downloaded) and self.book_files_exist(book)))
+        if book.hidden or (
+            hide_offline_books
+            and not ((book_is_online or book.downloaded) and self.book_files_exist(book))
         ):
             return False
-        
+
         if self.library_view_mode == LibraryViewMode.CURRENT:
             return book.last_played > 0
 

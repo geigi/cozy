@@ -1,8 +1,7 @@
 from typing import Optional
-import os
 
 import inject
-from gi.repository import Adw, Gtk, Gio
+from gi.repository import Adw, Gtk
 
 from cozy.ui.widgets.book_card import BookCard
 from cozy.ui.widgets.filter_list_box import FilterListBox
@@ -191,4 +190,3 @@ class LibraryView:
             return
 
         self._connected_book_card.update_progress()
-

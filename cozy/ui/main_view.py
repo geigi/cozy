@@ -22,10 +22,10 @@ from cozy.ui.library_view import LibraryView
 from cozy.ui.preferences_window import PreferencesWindow
 from cozy.ui.widgets.storages import ask_storage_location
 from cozy.ui.widgets.welcome_dialog import WelcomeDialog
+from cozy.view_model.library_view_model import LibraryViewModel
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.storages_view_model import StoragesViewModel
-from cozy.view_model.library_view_model import LibraryViewModel
 
 log = logging.getLogger("ui")
 
@@ -107,9 +107,15 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.create_action("reset_book", self.reset_book, param=GLib.VariantType.new("n"))
         self.create_action("remove_book", self.remove_book, param=GLib.VariantType.new("n"))
 
-        self.create_action("mark_book_as_read", self.mark_book_as_read, param=GLib.VariantType.new("n"))
-        self.create_action("mark_book_as_unread", self.mark_book_as_unread, param=GLib.VariantType.new("n"))
-        self.create_action("jump_to_book_folder", self.jump_to_book_folder, param=GLib.VariantType.new("n"))
+        self.create_action(
+            "mark_book_as_read", self.mark_book_as_read, param=GLib.VariantType.new("n")
+        )
+        self.create_action(
+            "mark_book_as_unread", self.mark_book_as_unread, param=GLib.VariantType.new("n")
+        )
+        self.create_action(
+            "jump_to_book_folder", self.jump_to_book_folder, param=GLib.VariantType.new("n")
+        )
 
         self.create_action(
             "prefs", self.show_preferences_window, ["<primary>comma"], global_shorcut=True
@@ -137,7 +143,9 @@ class CozyUI(EventSender, metaclass=Singleton):
         self._importer.add_listener(self._on_importer_event)
 
     def _on_choose_location_clicked(self, _):
-        initial_path = self._settings.default_location.path if self._settings.storage_locations else None
+        initial_path = (
+            self._settings.default_location.path if self._settings.storage_locations else None
+        )
         ask_storage_location(self._set_audiobook_path, initial_path)
 
     def create_action(
@@ -146,7 +154,7 @@ class CozyUI(EventSender, metaclass=Singleton):
         callback: Callable[[Gio.SimpleAction, None], None],
         shortcuts: list[str] | None = None,
         *,
-        param = None,
+        param=None,
         global_shorcut: bool = False,
     ) -> Gio.SimpleAction:
         action = Gio.SimpleAction.new(name, param)
