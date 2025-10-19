@@ -13,7 +13,7 @@ import time
 from dataclasses import dataclass
 
 import inject
-from gi.repository import Gio, GLib
+from gi.repository import Gio, GLib, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.media.player import Player
@@ -213,6 +213,11 @@ class MPRIS(Server):
     _app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
 
     def __init__(self, app) -> None:
+        self._last_next_event_time = 0
+        self._last_previous_event_time = 0
+        self._timer_next = None
+        self._timer_prev = None
+
         self._bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
         Gio.bus_own_name_on_connection(
             self._bus,
@@ -236,10 +241,26 @@ class MPRIS(Server):
         self._application.quit()
 
     def next(self):
-        self._player.forward()
+        double_click_time = Gtk.Settings.get_default().get_property("gtk-double-click-time")
+        time_now = time.time() * 1000
+        if time_now < self._last_next_event_time + double_click_time:
+            GLib.source_remove(self._timer_next)
+            self._player._next_chapter()
+        else:
+            self._timer_next = GLib.timeout_add(double_click_time + 10, self._player.forward)
+
+        self._last_next_event_time = time_now
 
     def previous(self):
-        self._player.rewind()
+        double_click_time = Gtk.Settings.get_default().get_property("gtk-double-click-time")
+        time_now = time.time() * 1000
+        if time_now < self._last_previous_event_time + double_click_time:
+            GLib.source_remove(self._timer_prev)
+            self._player._previous_chapter()
+        else:
+            self._timer_prev = GLib.timeout_add(double_click_time + 10, self._player.rewind)
+
+        self._last_previous_event_time = time_now
 
     def play(self):
         self._player.play_pause()
