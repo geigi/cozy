@@ -2,7 +2,7 @@ from math import pi as PI
 
 import cairo
 import inject
-from gi.repository import Gdk, GObject, Graphene, Gtk
+from gi.repository import Gdk, Gio, GLib, GObject, Graphene, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.model.book import Book
@@ -65,6 +65,9 @@ class BookCard(Gtk.FlowBoxChild):
     menu_revealer: Gtk.Revealer = Gtk.Template.Child()
     play_button: BookCardPlayButton = Gtk.Template.Child()
 
+    first_menu_section: Gio.MenuModel = Gtk.Template.Child()
+    second_menu_section: Gio.MenuModel = Gtk.Template.Child()
+
     artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
 
     __gsignals__ = {
@@ -78,11 +81,12 @@ class BookCard(Gtk.FlowBoxChild):
         super().__init__()
 
         self.book = book
-
         self.title = book.name
         self.author = book.author
 
-        paintable = self.artwork_cache.get_cover_paintable(book, self.get_scale_factor(), ALBUM_ART_SIZE)
+        paintable = self.artwork_cache.get_cover_paintable(
+            book, self.get_scale_factor(), ALBUM_ART_SIZE
+        )
 
         if paintable:
             self.artwork.set_paintable(paintable)
@@ -96,7 +100,41 @@ class BookCard(Gtk.FlowBoxChild):
         self.set_cursor(Gdk.Cursor.new_from_name("pointer"))
 
         self._install_event_controllers()
-        self.update_progress()
+
+        self.book.bind_to("position", self._on_position_updated)
+
+        self._setup_menu()
+
+    def _setup_menu(self):
+        remove_recents_item = Gio.MenuItem.new(_("Remove from Recents"))
+        open_in_files_item = Gio.MenuItem.new(_("Open in Files"))
+        remove_item = Gio.MenuItem.new(_("Remove from Library"))
+
+        remove_recents_item.set_action_and_target_value(
+            "app.reset_book", GLib.Variant.new_int16(self.book.id)
+        )
+        open_in_files_item.set_action_and_target_value(
+            "app.jump_to_book_folder", GLib.Variant.new_int16(self.book.id)
+        )
+        remove_item.set_action_and_target_value(
+            "app.remove_book", GLib.Variant.new_int16(self.book.id)
+        )
+
+        self.first_menu_section.append_item(remove_recents_item)
+        self.first_menu_section.append_item(open_in_files_item)
+        self.second_menu_section.append_item(remove_item)
+
+        self.mark_read_item = Gio.MenuItem.new(_("Mark as Read"))
+        self.mark_read_item.set_action_and_target_value(
+            "app.mark_book_as_read", GLib.Variant.new_int16(self.book.id)
+        )
+
+        self.mark_unread_item = Gio.MenuItem.new(_("Mark as Unread"))
+        self.mark_unread_item.set_action_and_target_value(
+            "app.mark_book_as_unread", GLib.Variant.new_int16(self.book.id)
+        )
+
+        self._on_position_updated(remove_first_menu_item=False)
 
     def _install_event_controllers(self):
         hover_controller = Gtk.EventControllerMotion()
@@ -112,23 +150,6 @@ class BookCard(Gtk.FlowBoxChild):
     def set_playing(self, is_playing):
         self.play_button.set_playing(is_playing)
 
-    def update_progress(self):
-        if self.book.duration:
-            self.play_button.progress = self.book.progress / self.book.duration
-
-    def reset(self) -> None:
-        self.book.last_played = 0
-
-    def remove(self) -> None:
-        self.emit("remove-book", self.book)
-
-    def mark_as_read(self) -> None:
-        self.book.position = -1
-        self.update_progress()
-
-    def jump_to_folder(self) -> None:
-        self.emit("jump-to-folder", self.book)
-
     @Gtk.Template.Callback()
     def _play_pause(self, *_):
         self.emit("play-pause-clicked", self.book)
@@ -141,8 +162,6 @@ class BookCard(Gtk.FlowBoxChild):
         self.play_revealer.set_reveal_child(True)
         self.menu_revealer.set_reveal_child(True)
 
-        inject.instance("GtkApp").selected_book = self
-
     def _on_leave(self, *_) -> None:
         if not self.menu_button.get_active():
             self.play_revealer.set_reveal_child(False)
@@ -154,3 +173,18 @@ class BookCard(Gtk.FlowBoxChild):
         device = gesture.get_device()
         if device and device.get_source() == Gdk.InputSource.TOUCHSCREEN:
             self.menu_button.emit("activate")
+
+    def update_progress(self):
+        if self.book.duration:
+            self.play_button.progress = self.book.progress / self.book.duration
+
+    def _on_position_updated(self, *, remove_first_menu_item: bool = True) -> None:
+        self.update_progress()
+
+        if remove_first_menu_item:
+            self.first_menu_section.remove(0)
+
+        if self.book.position == -1:
+            self.first_menu_section.prepend_item(self.mark_unread_item)
+        else:
+            self.first_menu_section.prepend_item(self.mark_read_item)

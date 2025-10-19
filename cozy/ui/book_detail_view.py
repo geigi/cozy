@@ -23,6 +23,7 @@ def call_in_main_thread(*args) -> None:
     # TODO: move this elsewhere, it might come useful
     GLib.MainContext.default().invoke_full(GLib.PRIORITY_DEFAULT_IDLE, *args)
 
+
 class ChaptersListBox(Adw.PreferencesGroup):
     def __init__(self, title: str):
         super().__init__()
@@ -57,6 +58,8 @@ class BookDetailView(Adw.NavigationPage):
 
     chapters_stack: Gtk.Stack = Gtk.Template.Child()
     chapter_list_container: Gtk.Box = Gtk.Template.Child()
+
+    menu_section: Gio.MenuModel = Gtk.Template.Child()
 
     book_title = GObject.Property(type=str)
 
@@ -132,6 +135,19 @@ class BookDetailView(Adw.NavigationPage):
         self._set_cover_image(book)
         self._on_progress_changed()
         self._display_external_section()
+        self._setup_menu(book)
+
+    def _setup_menu(self, book):
+        open_in_files_item = Gio.MenuItem.new(_("Open in Files"))
+        remove_item = Gio.MenuItem.new(_("Remove from Library"))
+
+        open_in_files_item.set_action_and_target_value(
+            "app.jump_to_book_folder", GLib.Variant.new_int16(book.id)
+        )
+        remove_item.set_action_and_target_value("app.remove_book", GLib.Variant.new_int16(book.id))
+
+        self.menu_section.append_item(open_in_files_item)
+        self.menu_section.append_item(remove_item)
 
     def _on_play_changed(self):
         playing = self._view_model.playing
