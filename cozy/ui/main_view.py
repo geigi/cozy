@@ -13,6 +13,7 @@ from cozy.control.db import books, close_db
 from cozy.media.files import Files
 from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
+from cozy.model.library import Library
 from cozy.model.settings import Settings as SettingsModel
 from cozy.settings import ApplicationSettings
 from cozy.ui.about_window import AboutWindow
@@ -24,6 +25,7 @@ from cozy.ui.widgets.welcome_dialog import WelcomeDialog
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.storages_view_model import StoragesViewModel
+from cozy.view_model.library_view_model import LibraryViewModel
 
 log = logging.getLogger("ui")
 
@@ -102,11 +104,12 @@ class CozyUI(EventSender, metaclass=Singleton):
         Init all app actions.
         """
         self.create_action("about", self.show_about_window, ["F1"], global_shorcut=True)
-        self.create_action("reset_book", self.reset_book)
-        self.create_action("remove_book", self.remove_book)
+        self.create_action("reset_book", self.reset_book, param=GLib.VariantType.new("n"))
+        self.create_action("remove_book", self.remove_book, param=GLib.VariantType.new("n"))
 
-        self.create_action("mark_book_as_read", self.mark_book_as_read)
-        self.create_action("jump_to_book_folder", self.jump_to_book_folder)
+        self.create_action("mark_book_as_read", self.mark_book_as_read, param=GLib.VariantType.new("n"))
+        self.create_action("mark_book_as_unread", self.mark_book_as_unread, param=GLib.VariantType.new("n"))
+        self.create_action("jump_to_book_folder", self.jump_to_book_folder, param=GLib.VariantType.new("n"))
 
         self.create_action(
             "prefs", self.show_preferences_window, ["<primary>comma"], global_shorcut=True
@@ -143,9 +146,10 @@ class CozyUI(EventSender, metaclass=Singleton):
         callback: Callable[[Gio.SimpleAction, None], None],
         shortcuts: list[str] | None = None,
         *,
+        param = None,
         global_shorcut: bool = False,
     ) -> Gio.SimpleAction:
-        action = Gio.SimpleAction.new(name, None)
+        action = Gio.SimpleAction.new(name, param)
         action.connect("activate", callback)
         self.app.add_action(action)
 
@@ -160,22 +164,48 @@ class CozyUI(EventSender, metaclass=Singleton):
     def refresh_library_filters(self):
         self._library_view.refresh_filters()
 
-    def reset_book(self, *_) -> None:
-        if self.app.selected_book is not None:
-            self.app.selected_book.reset()
-        self.refresh_library_filters()
+    def _get_book_by_id(self, id):
+        for book in inject.instance(Library).books:
+            if book.id == id:
+                return book
 
-    def remove_book(self, *_) -> None:
-        if self.app.selected_book is not None:
-            self.app.selected_book.remove()
+        return None
 
-    def mark_book_as_read(self, *_) -> None:
-        if self.app.selected_book is not None:
-            self.app.selected_book.mark_as_read()
+    def reset_book(self, _, param) -> None:
+        id = param.get_int16()
+        book = self._get_book_by_id(id)
 
-    def jump_to_book_folder(self, *_) -> None:
-        if self.app.selected_book is not None:
-            self.app.selected_book.jump_to_folder()
+        if book is not None:
+            book.reset()
+            self.refresh_library_filters()
+
+    def remove_book(self, _, param) -> None:
+        id = param.get_int16()
+        book = self._get_book_by_id(id)
+
+        if book is not None:
+            inject.instance(LibraryViewModel).remove_book(book)
+
+    def mark_book_as_read(self, _, param) -> None:
+        id = param.get_int16()
+        book = self._get_book_by_id(id)
+
+        if book is not None:
+            book.mark_as_read()
+
+    def mark_book_as_unread(self, _, param) -> None:
+        id = param.get_int16()
+        book = self._get_book_by_id(id)
+
+        if book is not None:
+            book.mark_as_unread()
+
+    def jump_to_book_folder(self, _, param) -> None:
+        id = param.get_int16()
+        book = self._get_book_by_id(id)
+
+        if book is not None:
+            inject.instance(LibraryViewModel).jump_to_folder(book)
 
     def get_object(self, name):
         return self.window_builder.get_object(name)

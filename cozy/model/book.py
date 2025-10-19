@@ -191,6 +191,15 @@ class Book(Observable, EventSender):
 
         return progress
 
+    def reset(self) -> None:
+        self.last_played = 0
+
+    def mark_as_read(self) -> None:
+        self.position = -1
+
+    def mark_as_unread(self) -> None:
+        self.position = 0
+
     def remove(self, delete_db_objects: bool = False):
         if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
             self._settings.last_played_book = None

@@ -5,6 +5,8 @@ from typing import Optional
 
 import inject
 
+from gi.repository import Gtk, Gio
+
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
 from cozy.control.filesystem_monitor import FilesystemMonitor
@@ -17,6 +19,8 @@ from cozy.settings import ApplicationSettings
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.widgets.book_card import BookCard
 from cozy.view_model.storages_view_model import StoragesViewModel
+from cozy.ui.file_not_found_dialog import FileNotFoundDialog
+from cozy.ui.delete_book_view import DeleteBookView
 
 log = logging.getLogger("library_view_model")
 
@@ -113,13 +117,39 @@ class LibraryViewModel(Observable, EventSender):
     def playing(self) -> bool:
         return self._player.playing
 
-    def remove_book(self, book: Book):
-        book.remove()
+    def remove_book(self, book):
+        DeleteBookView(self._on_remove_book_response, book).present()
+
+    def _on_remove_book_response(self, _, response, book):
+        if response != "remove":
+            return
+
+        if self.book_files_exist(book):
+            book.remove()
+        else:
+            book.remove(delete_db_objects=True)
+
         self._model.invalidate()
         self._notify("authors")
         self._notify("readers")
         self._notify("books")
         self._notify("books-filter")
+
+    def jump_to_folder(self, book):
+        track = False
+
+        # find first chapter with available file,
+        # (all this file stuff should probably be moved to the book class)
+        for chapter in book.chapters:
+                if os.path.exists(chapter.file):
+                    track = chapter.file
+                    break
+
+        if track:
+            file_launcher = Gtk.FileLauncher(file=Gio.File.new_for_path(track))
+            file_launcher.open_containing_folder(None, None, lambda d, r: d.open_containing_folder_finish(r))
+        else:
+            FileNotFoundDialog(book.chapters[0]).present()
 
     def display_book_filter(self, book_element: BookCard):
         book = book_element.book

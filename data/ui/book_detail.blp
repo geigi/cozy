@@ -210,28 +210,11 @@ template $BookDetail: Adw.NavigationPage {
 menu book_menu_model {
   section {
     item {
-      action: 'app.mark_book_as_read';
-      label: _("Mark as Read");
-    }
-
-    item {
-      action: 'app.jump_to_book_folder';
-      label: _("Open in Files");
-    }
-  }
-
-  section {
-    item {
       action: 'book_overview.download';
       label: _("_Available Offline");
       hidden-when: "action-disabled";
     }
   }
 
-  section {
-    item {
-      action: 'app.remove_book';
-      label: _("Remove from Library");
-    }
-  }
+  section menu_section {}
 }

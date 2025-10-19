@@ -21,7 +21,6 @@ log = logging.getLogger("application")
 class Application(Adw.Application):
     ui: CozyUI
     app_controller: AppController
-    _selected_book = None
 
     def __init__(self, pkgdatadir: str):
         self.pkgdatadir = pkgdatadir
@@ -54,14 +53,6 @@ class Application(Adw.Application):
         if platform.system().lower() == "linux":
             mpris = MPRIS(self)
             mpris._on_current_changed()
-
-    @property
-    def selected_book(self):
-        return self._selected_book
-
-    @selected_book.setter
-    def selected_book(self, new_book) -> None:
-        self._selected_book = new_book
 
     def handle_exception(self, _):
         print("handle exception")

@@ -4,10 +4,8 @@ import os
 import inject
 from gi.repository import Adw, Gtk, Gio
 
-from cozy.ui.delete_book_view import DeleteBookView
 from cozy.ui.widgets.book_card import BookCard
 from cozy.ui.widgets.filter_list_box import FilterListBox
-from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.view_model.library_view_model import LibraryViewMode, LibraryViewModel
 
 READER_PAGE = "reader"
@@ -97,8 +95,6 @@ class LibraryView:
             book_card = BookCard(book)
             book_card.connect("play-pause-clicked", self._play_book_clicked)
             book_card.connect("open-book-overview", self._open_book_overview_clicked)
-            book_card.connect("jump-to-folder", self._jump_to_folder)
-            book_card.connect("remove-book", self._on_remove_book)
             self._book_box.append(book_card)
 
     def populate_author(self):
@@ -172,32 +168,6 @@ class LibraryView:
         self._view_model.open_book_detail(book)
 
         return True
-
-    def _jump_to_folder(self, _, book):
-        track = False
-        
-        # find first chapter with availible file, 
-        # (all this file stuff should probably be moved to the book class)
-        for chapter in book.chapters:
-                if os.path.exists(chapter.file):
-                    track = chapter.file
-                    break
-        
-        if track:
-            file_launcher = Gtk.FileLauncher(file=Gio.File.new_for_path(track))
-            file_launcher.open_containing_folder(None, None, lambda d, r: d.open_containing_folder_finish(r))
-        else:
-            FileNotFoundDialog(book.chapters[0]).present()
-
-    def _on_remove_book(self, _, book):
-        if self._view_model.book_files_exist(book):
-            DeleteBookView(self._on_remove_book_response, book).present()
-        else:
-            self._view_model.remove_book(book, delete_db_objects=True)
-
-    def _on_remove_book_response(self, _, response, book):
-        if response == "remove":
-            self._view_model.remove_book(book)
 
     def _current_book_in_playback(self):
         if self._connected_book_card:
