@@ -7,7 +7,7 @@ template $SleepTimer: Adw.Dialog {
 
   title: _("Sleep Timer");
 
-  child: Adw.ToolbarView toolbarview{
+  child: Adw.ToolbarView toolbarview {
     [top]
     Adw.HeaderBar headerbar {}
 
@@ -49,7 +49,15 @@ template $SleepTimer: Adw.Dialog {
             Adw.ComboRow power_action_combo_row {
               title: _("System Power Control");
               subtitle: _("Action to perform when timer finishes");
-              notify::selected-item => $on_power_action_selected();
+              notify::selected => $on_power_action_selected();
+
+              model: StringList {
+                strings [
+                  _("None"),
+                  _("Suspend"),
+                  _("Shutdown")
+                ]
+              };
             }
           }
         };
@@ -76,6 +84,20 @@ template $SleepTimer: Adw.Dialog {
               title: _("Cancel Timer");
               activated => $cancel_timer();
               styles ["suggested-action"]
+            }
+            Adw.ComboRow {
+              title: _("System Power Control");
+              subtitle: _("Action to perform when timer finishes");
+              notify::selected => $on_power_action_selected();
+              selected: bind power_action_combo_row.selected bidirectional;
+
+              model: StringList {
+                strings [
+                  _("None"),
+                  _("Suspend"),
+                  _("Shutdown")
+                ]
+              };
             }
           };
         };

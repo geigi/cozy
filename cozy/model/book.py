@@ -81,6 +81,16 @@ class Book(Observable, EventSender):
         self._db_object.save(only=self._db_object.dirty_fields)
 
     @property
+    def hidden(self):
+        return self._db_object.hidden
+
+    @hidden.setter
+    def hidden(self, value: bool):
+        self._db_object.hidden = value
+
+        self._db_object.save(only=self._db_object.dirty_fields)
+
+    @property
     def position(self) -> int:
         return self._db_object.position
 
@@ -156,7 +166,9 @@ class Book(Observable, EventSender):
 
     @property
     def current_chapter(self):
-        return next((chapter for chapter in self.chapters if chapter.id == self.position), self.chapters[0])
+        return next(
+            (chapter for chapter in self.chapters if chapter.id == self.position), self.chapters[0]
+        )
 
     @property
     def duration(self):
@@ -181,31 +193,52 @@ class Book(Observable, EventSender):
 
         return progress
 
-    def remove(self):
-        if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
+    def reset(self) -> None:
+        self.last_played = 0
+
+    def mark_as_read(self) -> None:
+        self.position = -1
+
+    def mark_as_unread(self) -> None:
+        self.position = 0
+
+    def remove(self, delete_db_objects: bool = False):
+        if (
+            self._settings.last_played_book
+            and self._settings.last_played_book.id == self._db_object.id
+        ):
             self._settings.last_played_book = None
 
-        book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
-        track_to_files = TrackToFile.select().join(TrackModel).where(TrackToFile.track << book_tracks)
+        if delete_db_objects:
+            book_tracks = [TrackModel.get_by_id(chapter.id) for chapter in self.chapters]
+            track_to_files = (
+                TrackToFile.select().join(TrackModel).where(TrackToFile.track << book_tracks)
+            )
 
-        for track in track_to_files:
-            try:
-                track.file.delete_instance(recursive=True)
-            except DoesNotExist:
-                track.delete_instance()
+            for track in track_to_files:
+                try:
+                    track.file.delete_instance(recursive=True)
+                except DoesNotExist:
+                    track.delete_instance()
 
-        for track in book_tracks:
-            track.delete_instance(recursive=True)
+            for track in book_tracks:
+                track.delete_instance(recursive=True)
 
-        self._db_object.delete_instance(recursive=True)
+            self._db_object.delete_instance(recursive=True)
+        else:
+            self.hidden = True
+
         self.destroy_listeners()
         self._destroy_observers()
 
     def _fetch_chapters(self):
-        tracks = TrackModel \
-            .select() \
-            .where(TrackModel.book == self._db_object) \
-            .order_by(TrackModel.disk, TrackModel.number, collate_natural.collation(TrackModel.name))
+        tracks = (
+            TrackModel.select()
+            .where(TrackModel.book == self._db_object)
+            .order_by(
+                TrackModel.disk, TrackModel.number, collate_natural.collation(TrackModel.name)
+            )
+        )
 
         self._chapters = []
         for track in tracks:
@@ -226,7 +259,10 @@ class Book(Observable, EventSender):
                 self.chapters.remove(chapter)
 
             if len(self._chapters) < 1:
-                if self._settings.last_played_book and self._settings.last_played_book.id == self._db_object.id:
+                if (
+                    self._settings.last_played_book
+                    and self._settings.last_played_book.id == self._db_object.id
+                ):
                     self._settings.last_played_book = None
 
                 self._db_object.delete_instance(recursive=True)

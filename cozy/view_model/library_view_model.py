@@ -4,6 +4,7 @@ from enum import Enum, auto
 from typing import Optional
 
 import inject
+from gi.repository import Gio, Gtk
 
 from cozy.architecture.event_sender import EventSender
 from cozy.architecture.observable import Observable
@@ -13,8 +14,9 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.media.player import Player
 from cozy.model.book import Book
 from cozy.model.library import Library, split_strings_to_set
-from cozy.report import reporter
 from cozy.settings import ApplicationSettings
+from cozy.ui.delete_book_view import DeleteBookView
+from cozy.ui.file_not_found_dialog import FileNotFoundDialog
 from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.widgets.book_card import BookCard
 from cozy.view_model.storages_view_model import StoragesViewModel
@@ -114,13 +116,41 @@ class LibraryViewModel(Observable, EventSender):
     def playing(self) -> bool:
         return self._player.playing
 
-    def remove_book(self, book: Book):
-        book.remove()
+    def remove_book(self, book):
+        DeleteBookView(self._on_remove_book_response, book).present()
+
+    def _on_remove_book_response(self, _, response, book):
+        if response != "remove":
+            return
+
+        if self.book_files_exist(book):
+            book.remove()
+        else:
+            book.remove(delete_db_objects=True)
+
         self._model.invalidate()
         self._notify("authors")
         self._notify("readers")
         self._notify("books")
         self._notify("books-filter")
+
+    def jump_to_folder(self, book):
+        track = False
+
+        # find first chapter with available file,
+        # (all this file stuff should probably be moved to the book class)
+        for chapter in book.chapters:
+            if os.path.exists(chapter.file):
+                track = chapter.file
+                break
+
+        if track:
+            file_launcher = Gtk.FileLauncher(file=Gio.File.new_for_path(track))
+            file_launcher.open_containing_folder(
+                None, None, lambda d, r: d.open_containing_folder_finish(r)
+            )
+        else:
+            FileNotFoundDialog(book.chapters[0]).present()
 
     def display_book_filter(self, book_element: BookCard):
         book = book_element.book
@@ -128,13 +158,12 @@ class LibraryViewModel(Observable, EventSender):
         hide_offline_books = self._application_settings.hide_offline
         book_is_online = self._fs_monitor.get_book_online(book)
 
-
-        if hide_offline_books and \
-           ((book_is_online and not book.downloaded) or \
-           (not self.book_files_exist(book))):
-        
+        if book.hidden or (
+            hide_offline_books
+            and not ((book_is_online or book.downloaded) and self.book_files_exist(book))
+        ):
             return False
-        
+
         if self.library_view_mode == LibraryViewMode.CURRENT:
             return book.last_played > 0
 
@@ -220,17 +249,6 @@ class LibraryViewModel(Observable, EventSender):
 
     def open_book_detail(self, book: Book):
         self.emit_event(OpenView.BOOK, book)
-
-    def delete_book_files(self, book: Book):
-        for chapter in book.chapters:
-            try:
-                os.remove(chapter.file)
-            except Exception as e:
-                log.error("Failed to delete file: %s", chapter.file)
-                log.debug(e)
-                reporter.warning("library_view_model", "Failed to delete a file.")
-            else:
-                log.info("Deleted file: %s", chapter.file)
 
     def play_book(self, book: Book):
         self._player.play_pause_book(book)

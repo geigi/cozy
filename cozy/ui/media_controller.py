@@ -51,10 +51,10 @@ class MediaController(Adw.BreakpointBin):
 
         self.volume_button.set_icons(
             [
-                "audio-volume-muted-symbolic",
-                "audio-volume-high-symbolic",
-                "audio-volume-low-symbolic",
-                "audio-volume-medium-symbolic",
+                "cozy.volume-muted-symbolic",
+                "cozy.volume-high-symbolic",
+                "cozy.volume-low-symbolic",
+                "cozy.volume-medium-symbolic",
             ]
         )
 
@@ -101,7 +101,7 @@ class MediaController(Adw.BreakpointBin):
         if paintable:
             self.cover_img.set_from_paintable(paintable)
         else:
-            self.cover_img.set_from_icon_name("book-open-variant-symbolic")
+            self.cover_img.set_from_icon_name("cozy.book-open-symbolic")
             self.cover_img.props.pixel_size = COVER_SIZE
 
     @inject.param("main_window", "MainWindow")
