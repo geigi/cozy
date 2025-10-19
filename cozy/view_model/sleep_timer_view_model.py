@@ -31,6 +31,7 @@ class SleepTimerViewModel(Observable):
         self._system_power_action = SystemPowerAction.NONE
         self._timer_running = False
         self._fadeout_running = False
+        self._glib_timer_id = None
 
         self._player.add_listener(self._on_player_changed)
 
@@ -81,7 +82,7 @@ class SleepTimerViewModel(Observable):
             return 0
 
         position = book.current_chapter.length - (
-                book.current_chapter.position - book.current_chapter.start_position
+            book.current_chapter.position - book.current_chapter.start_position
         )
         return int(position / Gst.SECOND / book.playback_speed)
 
@@ -93,7 +94,7 @@ class SleepTimerViewModel(Observable):
         self._notify("timer_enabled")
 
         # Start a GLib timeout to tick every second
-        if not hasattr(self, '_glib_timer_id') or self._glib_timer_id is None:
+        if self._glib_timer_id is None:
             self._glib_timer_id = GLib.timeout_add_seconds(1, self._glib_timer_tick)
 
     def _stop_timer(self):
@@ -103,13 +104,14 @@ class SleepTimerViewModel(Observable):
         self._notify("timer_enabled")
 
         # Remove the GLib timeout if running
-        if hasattr(self, '_glib_timer_id') and self._glib_timer_id is not None:
+        if self._glib_timer_id is not None:
             GLib.source_remove(self._glib_timer_id)
             self._glib_timer_id = None
 
     def _glib_timer_tick(self):
         if not self._timer_running:
-            return False  # Stop the timeout
+            return False
+
         self._on_timer_tick()
         return self._timer_running and self._remaining_seconds > 0
 
