@@ -31,6 +31,7 @@ class SleepTimerViewModel(Observable):
         self._system_power_action = SystemPowerAction.NONE
         self._timer_running = False
         self._fadeout_running = False
+        self._glib_timer_id = None
 
         self._player.add_listener(self._on_player_changed)
 
@@ -92,11 +93,27 @@ class SleepTimerViewModel(Observable):
         log.info("Start Sleep Timer")
         self._notify("timer_enabled")
 
+        # Start a GLib timeout to tick every second
+        if self._glib_timer_id is None:
+            self._glib_timer_id = GLib.timeout_add_seconds(1, self._glib_timer_tick)
+
     def _stop_timer(self):
         self._timer_running = False
 
         log.info("Stop Sleep Timer")
         self._notify("timer_enabled")
+
+        # Remove the GLib timeout if running
+        if self._glib_timer_id is not None:
+            GLib.source_remove(self._glib_timer_id)
+            self._glib_timer_id = None
+
+    def _glib_timer_tick(self):
+        if not self._timer_running:
+            return False
+
+        self._on_timer_tick()
+        return self._timer_running and self._remaining_seconds > 0
 
     def _on_timer_tick(self):
         self._remaining_seconds -= 1
@@ -112,10 +129,7 @@ class SleepTimerViewModel(Observable):
             self._handle_system_power_event()
 
     def _on_player_changed(self, event, _):
-        if event == "position":
-            if self._timer_running:
-                self._on_timer_tick()
-        elif event == "chapter-changed":
+        if event == "chapter-changed":
             self.stop_after_chapter = False
         elif event == "fadeout-finished":
             self._handle_system_power_event()
@@ -129,7 +143,8 @@ class SleepTimerViewModel(Observable):
             case _:
                 return
 
-    def _shutdown(self):
+    @staticmethod
+    def _shutdown():
         inject.instance("MainWindow").quit()  # Exit gracefully
         if os.getenv("XDG_CURRENT_DESKTOP") == "GNOME":
             Gio.bus_get_sync(Gio.BusType.SESSION, None).call_sync(
@@ -156,7 +171,8 @@ class SleepTimerViewModel(Observable):
                 None,
             )
 
-    def _suspend(self):
+    @staticmethod
+    def _suspend():
         Gio.bus_get_sync(Gio.BusType.SYSTEM, None).call_sync(
             "org.freedesktop.login1",
             "/org/freedesktop/login1",

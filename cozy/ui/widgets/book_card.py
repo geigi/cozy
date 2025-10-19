@@ -59,7 +59,7 @@ class BookCard(Gtk.FlowBoxChild):
     artwork: Gtk.Picture = Gtk.Template.Child()
     fallback_icon: Gtk.Image = Gtk.Template.Child()
     stack: Gtk.Stack = Gtk.Template.Child()
-    button: Gtk.Stack = Gtk.Template.Child()
+    button: Gtk.Button = Gtk.Template.Child()
     menu_button: Gtk.MenuButton = Gtk.Template.Child()
     play_revealer: Gtk.Revealer = Gtk.Template.Child()
     menu_revealer: Gtk.Revealer = Gtk.Template.Child()
@@ -143,9 +143,10 @@ class BookCard(Gtk.FlowBoxChild):
 
         long_press_gesture = Gtk.GestureLongPress()
         long_press_gesture.connect("pressed", self._on_long_tap)
+        long_press_gesture.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
 
         self.add_controller(hover_controller)
-        self.add_controller(long_press_gesture)
+        self.button.add_controller(long_press_gesture)
 
     def set_playing(self, is_playing):
         self.play_button.set_playing(is_playing)
@@ -169,10 +170,9 @@ class BookCard(Gtk.FlowBoxChild):
 
     def _on_long_tap(self, gesture: Gtk.Gesture, *_):
         gesture.set_state(Gtk.EventSequenceState.CLAIMED)
-
-        device = gesture.get_device()
-        if device and device.get_source() == Gdk.InputSource.TOUCHSCREEN:
-            self.menu_button.emit("activate")
+        self.menu_button.emit("activate")
+        self.play_revealer.set_reveal_child(True)
+        self.menu_revealer.set_reveal_child(True)
 
     def update_progress(self):
         if self.book.duration:
