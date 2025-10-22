@@ -15,7 +15,7 @@ from cozy.model.settings import Settings
 from cozy.model.track import Track, TrackInconsistentData
 from cozy.settings import ApplicationSettings
 
-log = logging.getLogger("BookModel")
+log = logging.getLogger(__name__)
 
 
 class BookIsEmpty(Exception):

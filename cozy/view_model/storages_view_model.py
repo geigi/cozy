@@ -14,7 +14,7 @@ from cozy.model.settings import Settings
 from cozy.model.storage import Storage
 from cozy.settings import ApplicationSettings
 
-log = logging.getLogger("storages_view_model")
+log = logging.getLogger(__name__)
 
 
 class StoragesViewModel(Observable, EventSender):

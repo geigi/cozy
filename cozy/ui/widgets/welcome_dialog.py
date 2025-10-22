@@ -11,7 +11,7 @@ from cozy.view_model.storages_view_model import StoragesViewModel
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/welcome_dialog.ui")
 class WelcomeDialog(Adw.Dialog):
-    __gtype_name__ = "WelcomeDialog"
+    __gtype_name__ = __qualname__
 
     app_settings: ApplicationSettings = inject.attr(ApplicationSettings)
     _storages_view_model: StoragesViewModel = inject.attr(StoragesViewModel)

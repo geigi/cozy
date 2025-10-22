@@ -19,7 +19,7 @@ from cozy.db.track import Track
 from cozy.db.track_to_file import TrackToFile
 from cozy.report import reporter
 
-log = logging.getLogger("db_updater")
+log = logging.getLogger(__name__)
 
 get_data_dir = lambda: str(get_data_dir_path())  # i don't want to rewrite this file for pathlib
 

@@ -11,7 +11,7 @@ from cozy.db.storage import Storage as StorageModel
 from cozy.model.storage import InvalidPath, Storage
 from cozy.report import reporter
 
-log = logging.getLogger("model.storage_location")
+log = logging.getLogger(__name__)
 
 
 class Settings:

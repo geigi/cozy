@@ -15,7 +15,7 @@ from cozy.report import reporter
 from cozy.ui.main_view import CozyUI
 from cozy.ui.widgets.filter_list_box import FilterListBox
 
-log = logging.getLogger("application")
+log = logging.getLogger(__name__)
 
 
 class Application(Adw.Application):

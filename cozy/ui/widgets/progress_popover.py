@@ -3,7 +3,7 @@ from gi.repository import Gtk
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/ui/progress_popover.ui')
 class ProgressPopover(Gtk.Popover):
-    __gtype_name__ = 'ProgressPopover'
+    __gtype_name__ = __qualname__
 
     progress_label: Gtk.Label = Gtk.Template.Child()
     progress_bar: Gtk.ProgressBar = Gtk.Template.Child()

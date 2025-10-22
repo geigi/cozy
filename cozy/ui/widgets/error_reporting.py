@@ -31,7 +31,7 @@ LEVEL_DETAILS = [
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/error_reporting.ui")
 class ErrorReporting(Gtk.Box):
-    __gtype_name__ = "ErrorReporting"
+    __gtype_name__ = __qualname__
 
     description: Adw.ActionRow = Gtk.Template.Child()
     detail_combo: Adw.ComboRow = Gtk.Template.Child()

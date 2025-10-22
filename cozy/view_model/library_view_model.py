@@ -21,7 +21,7 @@ from cozy.ui.import_failed_dialog import ImportFailedDialog
 from cozy.ui.widgets.book_card import BookCard
 from cozy.view_model.storages_view_model import StoragesViewModel
 
-log = logging.getLogger("library_view_model")
+log = logging.getLogger(__name__)
 
 
 class LibraryViewMode(Enum):

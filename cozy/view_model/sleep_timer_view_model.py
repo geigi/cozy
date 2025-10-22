@@ -9,7 +9,7 @@ from cozy.architecture.observable import Observable
 from cozy.media.player import Player
 from cozy.settings import ApplicationSettings
 
-log = logging.getLogger("sleep_timer_view_model")
+log = logging.getLogger(__name__)
 
 FADEOUT_DURATION = 20
 

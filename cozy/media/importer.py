@@ -20,7 +20,7 @@ from cozy.model.settings import Settings
 from cozy.report import reporter
 from cozy.ui.toaster import ToastNotifier
 
-log = logging.getLogger("importer")
+log = logging.getLogger(__name__)
 
 CHUNK_SIZE = 100
 

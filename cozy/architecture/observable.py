@@ -5,7 +5,7 @@ from gi.repository import GLib
 
 from cozy.report import reporter
 
-log = logging.getLogger("observable")
+log = logging.getLogger(__name__)
 
 
 class Observable:

@@ -7,7 +7,7 @@ from cozy.model.chapter import Chapter
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/chapter_element.ui")
 class ChapterElement(Adw.ActionRow):
-    __gtype_name__ = "ChapterElement"
+    __gtype_name__ = __qualname__
 
     icon_stack: Gtk.Stack = Gtk.Template.Child()
     play_icon: Gtk.Image = Gtk.Template.Child()

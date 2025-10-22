@@ -15,7 +15,7 @@ from cozy.db.track import Track
 from cozy.db.track_to_file import TrackToFile
 from cozy.report import reporter
 
-log = logging.getLogger("db")
+log = logging.getLogger(__name__)
 
 _db = get_sqlite_database()
 

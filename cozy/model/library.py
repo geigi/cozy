@@ -13,7 +13,7 @@ from cozy.model.book import Book, BookIsEmpty
 from cozy.model.chapter import Chapter
 from cozy.model.settings import Settings
 
-log = logging.getLogger("ui")
+log = logging.getLogger(__name__)
 
 
 def split_strings_to_set(set_to_split: set[str]) -> set[str]:

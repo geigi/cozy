@@ -7,7 +7,7 @@ from cozy.architecture.event_sender import EventSender
 from cozy.media.media_file import MediaFile
 from cozy.media.tag_reader import TagReader
 
-log = logging.getLogger("media_detector")
+log = logging.getLogger(__name__)
 
 
 class NotAnAudioFile(Exception):

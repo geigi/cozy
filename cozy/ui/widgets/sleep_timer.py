@@ -9,7 +9,7 @@ from cozy.view_model.sleep_timer_view_model import SleepTimerViewModel, SystemPo
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/sleep_timer_dialog.ui")
 class SleepTimer(Adw.Dialog):
-    __gtype_name__ = "SleepTimer"
+    __gtype_name__ = __qualname__
 
     _view_model = inject.attr(SleepTimerViewModel)
 

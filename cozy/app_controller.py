@@ -44,11 +44,11 @@ class AppController(metaclass=Singleton):
 
         reporter.info("main", "startup")
 
-        self.library_view: LibraryView = LibraryView(main_window_builder)
-        self.app_view: AppView = AppView(main_window_builder)
-        self.headerbar: Headerbar = Headerbar(main_window_builder)
-        self.media_controller: MediaController = MediaController(main_window_builder)
-        self.search_view: SearchView = SearchView(main_window_builder, self.headerbar)
+        self.library_view = LibraryView(main_window_builder)
+        self.app_view = AppView(main_window_builder)
+        self.headerbar = Headerbar(main_window_builder)
+        self.media_controller = MediaController(main_window_builder)
+        self.search_view = SearchView(main_window_builder, self.headerbar)
 
         self.library_view_model = inject.instance(LibraryViewModel)
         self.app_view_model = inject.instance(AppViewModel)
@@ -69,8 +69,6 @@ class AppController(metaclass=Singleton):
         self.playback_control_view_model.add_listener(self._on_open_view)
         self.headerbar_view_model.add_listener(self._on_working_event)
         self.app_view_model.add_listener(self._on_app_view_event)
-
-        self.main_window.add_listener(self._on_main_window_event)
 
     def configure_inject(self, binder):
         binder.bind_to_provider(SqliteDatabase, get_db)
@@ -140,7 +138,3 @@ class AppController(metaclass=Singleton):
         if event == "working":
             self.book_detail_view_model.lock_ui = data
             self.settings_view_model.lock_ui = data
-
-    def _on_main_window_event(self, event: str, data):
-        if event == "open_view":
-            self._on_open_view(data, None)

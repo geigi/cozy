@@ -27,7 +27,7 @@ from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 from cozy.view_model.storages_view_model import StoragesViewModel
 
-log = logging.getLogger("ui")
+log = logging.getLogger(__name__)
 
 
 class CozyUI(EventSender, metaclass=Singleton):

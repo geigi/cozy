@@ -2,7 +2,7 @@ import functools
 import logging
 import time
 
-log = logging.getLogger("timing")
+log = logging.getLogger(__name__)
 
 def timing(f):
     @functools.wraps(f)

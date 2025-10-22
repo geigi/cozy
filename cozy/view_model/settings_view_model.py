@@ -8,7 +8,7 @@ from cozy.media.importer import Importer
 from cozy.model.settings import Settings
 from cozy.settings import ApplicationSettings
 
-log = logging.getLogger("settings_view_model")
+log = logging.getLogger(__name__)
 
 
 class SettingsViewModel(Observable, EventSender):
