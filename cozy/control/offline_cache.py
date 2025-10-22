@@ -117,8 +117,11 @@ class OfflineCache(EventSender):
         OfflineCacheModel.delete().where(storage.path in OfflineCacheModel.original_file.path).execute()
 
     def get_cached_path(self, chapter: Chapter) -> Path:
-        query = OfflineCacheModel.select().where(OfflineCacheModel.original_file == chapter.file_id,
-                                                 OfflineCacheModel.copied)
+        query = OfflineCacheModel.select().where(
+            OfflineCacheModel.original_file == chapter.file_id,
+            OfflineCacheModel.copied == True  # noqa: E712
+        )
+
         if query.count() > 0:
             return self.cache_dir / query.get().cached_file
         else:
@@ -253,7 +256,7 @@ class OfflineCache(EventSender):
             return False
 
     def _fill_queue_from_db(self):
-        for item in OfflineCacheModel.select().where(not OfflineCacheModel.copied):
+        for item in OfflineCacheModel.select().where(OfflineCacheModel.copied == False):  # noqa: E712
             if not any(item.id == queued.id for queued in self.queue):
                 self.queue.append(item)
                 self.total_batch_count += 1
