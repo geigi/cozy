@@ -39,7 +39,7 @@ class ChaptersListBox(Adw.PreferencesGroup):
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/book_detail.ui")
 class BookDetailView(Adw.NavigationPage):
-    __gtype_name__ = "BookDetail"
+    __gtype_name__ = __qualname__
 
     play_button: Gtk.Button = Gtk.Template.Child()
     play_icon: Adw.ButtonContent = Gtk.Template.Child()

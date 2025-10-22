@@ -5,7 +5,7 @@ from cozy.control.time_format import ns_to_time
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/ui/seek_bar.ui')
 class SeekBar(Gtk.Box):
-    __gtype_name__ = "SeekBar"
+    __gtype_name__ = __qualname__
 
     progress_scale: Gtk.Scale = Gtk.Template.Child()
     current_label: Gtk.Label = Gtk.Template.Child()

@@ -8,7 +8,7 @@ from cozy.view_model.settings_view_model import SettingsViewModel
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/preferences.ui")
 class PreferencesWindow(Adw.PreferencesDialog):
-    __gtype_name__ = "PreferencesWindow"
+    __gtype_name__ = __qualname__
 
     _glib_settings: Gio.Settings = inject.attr(Gio.Settings)
     _view_model: SettingsViewModel = inject.attr(SettingsViewModel)

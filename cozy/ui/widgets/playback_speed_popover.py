@@ -6,7 +6,7 @@ from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 
 @Gtk.Template.from_resource('/com/github/geigi/cozy/ui/playback_speed_popover.ui')
 class PlaybackSpeedPopover(Gtk.Popover):
-    __gtype_name__ = "PlaybackSpeedPopover"
+    __gtype_name__ = __qualname__
 
     _view_model: PlaybackSpeedViewModel = inject.attr(PlaybackSpeedViewModel)
 

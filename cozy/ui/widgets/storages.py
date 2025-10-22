@@ -27,7 +27,7 @@ def ask_storage_location(callback: Callable[[str | None], None], initial_folder:
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/storage_row.ui")
 class StorageRow(Adw.ActionRow):
-    __gtype_name__ = "StorageRow"
+    __gtype_name__ = __qualname__
 
     icon: Gtk.Image = Gtk.Template.Child()
     default_icon: Gtk.Image = Gtk.Template.Child()
@@ -79,7 +79,7 @@ class StorageRow(Adw.ActionRow):
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/storage_locations.ui")
 class StorageLocations(Adw.PreferencesGroup):
-    __gtype_name__ = "StorageLocations"
+    __gtype_name__ = __qualname__
 
     _view_model: StoragesViewModel = inject.attr(StoragesViewModel)
 

@@ -11,7 +11,7 @@ log = logging.getLogger("Headerbar")
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/headerbar.ui")
 class Headerbar(Gtk.Box):
-    __gtype_name__ = "Headerbar"
+    __gtype_name__ = __qualname__
 
     headerbar: Adw.HeaderBar = Gtk.Template.Child()
 

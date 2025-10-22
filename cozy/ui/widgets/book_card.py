@@ -12,7 +12,7 @@ STROKE_WIDTH = 4
 
 
 class BookCardPlayButton(Gtk.Button):
-    __gtype_name__ = "BookCardPlayButton"
+    __gtype_name__ = __qualname__
 
     progress = GObject.Property(type=float, default=0.0)
 
@@ -51,7 +51,7 @@ class BookCardPlayButton(Gtk.Button):
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/book_card.ui")
 class BookCard(Gtk.FlowBoxChild):
-    __gtype_name__ = "BookCard"
+    __gtype_name__ = __qualname__
 
     title = GObject.Property(type=str, default=_("Unknown"))
     author = GObject.Property(type=str, default=_("Unknown"))

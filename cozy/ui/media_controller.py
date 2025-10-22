@@ -18,7 +18,7 @@ COVER_SIZE = 46
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/media_controller.ui")
 class MediaController(Adw.BreakpointBin):
-    __gtype_name__ = "MediaController"
+    __gtype_name__ = __qualname__
 
     seek_bar_container: Gtk.Box = Gtk.Template.Child()
 

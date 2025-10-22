@@ -5,7 +5,7 @@ from cozy.ui.list_box_row_with_data import ListBoxRowWithData
 
 
 class FilterListBox(Gtk.ListBox):
-    __gtype_name__ = 'FilterListBox'
+    __gtype_name__ = __qualname__
 
     def __init__(self, **properties):
         super().__init__(**properties)
