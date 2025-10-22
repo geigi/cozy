@@ -46,6 +46,8 @@ class SleepTimerViewModel(Observable):
     def remaining_seconds(self, new_value: int):
         self._remaining_seconds = new_value
 
+        self._notify("remaining_seconds")
+
         if new_value > 0:
             self._start_timer()
         else:
@@ -58,6 +60,8 @@ class SleepTimerViewModel(Observable):
     @system_power_action.setter
     def system_power_action(self, new_value: SystemPowerAction) -> None:
         self._system_power_action = new_value
+        self._notify("remaining_seconds")
+        self._notify("stop_after_chapter")
 
     @property
     def stop_after_chapter(self) -> bool:
