@@ -44,11 +44,11 @@ class AppController(metaclass=Singleton):
 
         reporter.info("main", "startup")
 
-        self.library_view: LibraryView = LibraryView(main_window_builder)
-        self.app_view: AppView = AppView(main_window_builder)
-        self.headerbar: Headerbar = Headerbar(main_window_builder)
-        self.media_controller: MediaController = MediaController(main_window_builder)
-        self.search_view: SearchView = SearchView(main_window_builder, self.headerbar)
+        self.library_view = LibraryView(main_window_builder)
+        self.app_view = AppView(main_window_builder)
+        self.headerbar = Headerbar(main_window_builder)
+        self.media_controller = MediaController(main_window_builder)
+        self.search_view = SearchView(main_window_builder, self.headerbar)
 
         self.library_view_model = inject.instance(LibraryViewModel)
         self.app_view_model = inject.instance(AppViewModel)
