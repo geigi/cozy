@@ -7,6 +7,7 @@ import inject
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
 from cozy.control.artwork_cache import ArtworkCache
+from cozy.control.offline_cache import OfflineCache
 from cozy.model.book import Book
 from cozy.model.chapter import Chapter
 from cozy.report import reporter
@@ -65,6 +66,7 @@ class BookDetailView(Adw.NavigationPage):
 
     _view_model: BookDetailViewModel = inject.attr(BookDetailViewModel)
     _artwork_cache: ArtworkCache = inject.attr(ArtworkCache)
+    _offline_cache: OfflineCache = inject.attr(OfflineCache)
     _toaster: ToastNotifier = inject.attr(ToastNotifier)
 
     _current_selected_chapter: ChapterElement | None = None
@@ -95,12 +97,18 @@ class BookDetailView(Adw.NavigationPage):
         self._view_model.bind_to("book", self._on_book_changed)
         self._view_model.bind_to("playing", self._on_play_changed)
         self._view_model.bind_to("is_book_available", self._on_book_available_changed)
-        self._view_model.bind_to("downloaded", self._set_book_download_status)
         self._view_model.bind_to("current_chapter", self._on_current_chapter_changed)
         self._view_model.bind_to("length", self._on_length_changed)
         self._view_model.bind_to("progress", self._on_progress_changed)
         self._view_model.bind_to("playback_speed", self._on_progress_changed)
         self._view_model.bind_to("lock_ui", self._on_lock_ui_changed)
+        self._offline_cache.add_listener(self._on_offline_cache_event)
+
+    def _on_offline_cache_event(self, event, book):
+        if event != "book-offline":
+            return
+
+        self._toaster.show(_("{book_title} is now available offline").format(book_title=book.name))
 
     def _connect_widgets(self):
         self.play_button.connect("clicked", self._play_book_clicked)
@@ -202,7 +210,6 @@ class BookDetailView(Adw.NavigationPage):
     def _on_chapters_displayed(self):
         self.total_label.set_text(self._view_model.total_text)
         self.total_label.set_visible(True)
-        self._set_book_download_status()
 
         self._on_current_chapter_changed()
         self._on_play_changed()
@@ -285,7 +292,6 @@ class BookDetailView(Adw.NavigationPage):
             self.available_offline_action.handler_unblock_by_func(self._download_switch_changed)
 
     def _set_cover_image(self, book: Book):
-
         paintable = self._artwork_cache.get_cover_paintable(
             book, self.get_scale_factor(), ALBUM_ART_SIZE
         )
@@ -303,18 +309,9 @@ class BookDetailView(Adw.NavigationPage):
         if self._chapters_thread:
             self._chapters_thread.join(timeout=0.2)
 
-    def _set_book_download_status(self):
-        if not self._view_model.is_book_external:
-            return
-
-        # TODO: show this only after download
-        # if self._view_model.book.downloaded:
-        #     self._toaster.show(_("{book_title} is now available offline").format(book_title=self._view_model.book.name))
-
     def _download_switch_changed(self, action, value):
         action.set_state(value)
         self._view_model.download_book(value.get_boolean())
-        self._set_book_download_status()
 
     def _play_chapter_clicked(self, _, chapter: Chapter):
         self._view_model.play_chapter(chapter)
