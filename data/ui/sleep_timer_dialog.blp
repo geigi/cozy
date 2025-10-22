@@ -24,7 +24,7 @@ template $SleepTimer: Adw.Dialog {
         }
 
         Button set_timer_button {
-          label: _("Set Timer");
+          label: _("Start Timer");
           sensitive: false;
           clicked => $set_timer();
           styles ["suggested-action"]
@@ -48,12 +48,12 @@ template $SleepTimer: Adw.Dialog {
           Adw.PreferencesGroup {
             Adw.ComboRow power_action_combo_row {
               title: _("System Power Control");
-              subtitle: _("Action to perform when timer finishes");
+              subtitle: _("What to do when timer ends");
               notify::selected => $on_power_action_selected();
 
               model: StringList {
                 strings [
-                  _("None"),
+                  _("Just Stop"),
                   _("Suspend"),
                   _("Shutdown")
                 ]
@@ -87,13 +87,13 @@ template $SleepTimer: Adw.Dialog {
             }
             Adw.ComboRow {
               title: _("System Power Control");
-              subtitle: _("Action to perform when timer finishes");
+              subtitle: _("What to do when timer ends");
               notify::selected => $on_power_action_selected();
               selected: bind power_action_combo_row.selected bidirectional;
 
               model: StringList {
                 strings [
-                  _("None"),
+                  _("Just Stop"),
                   _("Suspend"),
                   _("Shutdown")
                 ]
