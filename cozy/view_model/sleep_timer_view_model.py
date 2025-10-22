@@ -75,7 +75,6 @@ class SleepTimerViewModel(Observable):
             self.remaining_seconds = 0
             log.info("Stop at end of Chapter Set")
 
-        self._notify("remaining_seconds")
         self._notify("stop_after_chapter")
         self._notify("timer_enabled")
 
