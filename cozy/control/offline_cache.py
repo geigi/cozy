@@ -160,7 +160,7 @@ class OfflineCache(EventSender):
 
     def _stop_processing(self):
         """ """
-        if not self._is_processing() or not self.thread:
+        if not self._is_processing or not self.thread:
             return
 
         self.filecopy_cancel.cancel()
@@ -168,7 +168,7 @@ class OfflineCache(EventSender):
 
     def _start_processing(self):
         """ """
-        if self._is_processing():
+        if self._is_processing:
             return
 
         self.thread = tools.StoppableThread(target=self._process_queue)
@@ -269,12 +269,12 @@ class OfflineCache(EventSender):
 
         return all(chapter.file_id in offline_file_ids for chapter in book.chapters)
 
+    @property
     def _is_processing(self):
-        """ """
         if self.thread:
             return self.thread.is_alive()
-        else:
-            return False
+
+        return False
 
     def _fill_queue_from_db(self):
         for item in OfflineCacheModel.select().where(
