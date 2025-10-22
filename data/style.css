@@ -81,3 +81,7 @@
 row.spin.sleep-timer spinbutton text {
   opacity: 0;
 }
+
+.padded-button {
+  padding: 8px 20px;
+}

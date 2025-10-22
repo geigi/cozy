@@ -98,12 +98,31 @@ class SleepTimer(Adw.Dialog):
             self.set_timer_button.set_sensitive(True)
 
     def _on_remaining_seconds_changed(self):
-        self.timer_state.set_title(seconds_to_time(self._view_model.remaining_seconds))
+        time = seconds_to_time(self._view_model.remaining_seconds)
+
+        match self._view_model.system_power_action:
+            case SystemPowerAction.SUSPEND:
+                title = _("Suspending in {time}")
+            case SystemPowerAction.SHUTDOWN:
+                title = _("Shutting down in {time}")
+            case _:
+                title = "{time}"
+
+        self.timer_state.set_title(title.format(time=time))
 
     def _on_stop_after_chapter_changed(self):
         self.till_end_of_chapter_button_row.set_visible(not self._view_model.stop_after_chapter)
+
         if self._view_model.stop_after_chapter:
-            self.timer_state.set_title(_("Stopping After Current Chapter"))
+            match self._view_model.system_power_action:
+                case SystemPowerAction.SUSPEND:
+                    title = _("Suspending after this chapter.")
+                case SystemPowerAction.SHUTDOWN:
+                    title = _("Shutting down after this chapter.")
+                case _:
+                    title = _("Stopping after this chapter.")
+
+            self.timer_state.set_title(title)
 
     def _on_timer_enabled_changed(self):
         self.stack.set_visible_child_name(

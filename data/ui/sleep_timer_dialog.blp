@@ -8,6 +8,8 @@ template $SleepTimer: Adw.Dialog {
   title: _("Sleep Timer");
 
   child: Adw.ToolbarView toolbarview {
+    bottom-bar-style: raised_border;
+
     [top]
     Adw.HeaderBar headerbar {}
 
@@ -16,18 +18,20 @@ template $SleepTimer: Adw.Dialog {
       [center]
       Box {
         spacing: 12;
-        margin-bottom: 12;
+        margin-top: 6;
+        margin-bottom: 6;
         homogeneous: true;
         Button cancel_button {
           label: _("Cancel");
           clicked => $close();
+          styles ["padded-button"]
         }
 
         Button set_timer_button {
-          label: _("Set Timer");
+          label: _("Start Timer");
           sensitive: false;
           clicked => $set_timer();
-          styles ["suggested-action"]
+          styles ["suggested-action", "padded-button"]
         }
       }
     }
@@ -35,8 +39,8 @@ template $SleepTimer: Adw.Dialog {
     content: Stack stack {
       margin-start: 18;
       margin-end: 18;
-      margin-top: 12;
-      margin-bottom: 12;
+      margin-top: 6;
+      margin-bottom: 18;
 
       StackPage {
         name: "uninitiated";
@@ -48,12 +52,12 @@ template $SleepTimer: Adw.Dialog {
           Adw.PreferencesGroup {
             Adw.ComboRow power_action_combo_row {
               title: _("System Power Control");
-              subtitle: _("Action to perform when timer finishes");
+              subtitle: _("What to do when timer ends");
               notify::selected => $on_power_action_selected();
 
               model: StringList {
                 strings [
-                  _("None"),
+                  _("Just Stop"),
                   _("Suspend"),
                   _("Shutdown")
                 ]
@@ -87,13 +91,13 @@ template $SleepTimer: Adw.Dialog {
             }
             Adw.ComboRow {
               title: _("System Power Control");
-              subtitle: _("Action to perform when timer finishes");
+              subtitle: _("What to do when timer ends");
               notify::selected => $on_power_action_selected();
               selected: bind power_action_combo_row.selected bidirectional;
 
               model: StringList {
                 strings [
-                  _("None"),
+                  _("Just Stop"),
                   _("Suspend"),
                   _("Shutdown")
                 ]
