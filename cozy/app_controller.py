@@ -70,8 +70,6 @@ class AppController(metaclass=Singleton):
         self.headerbar_view_model.add_listener(self._on_working_event)
         self.app_view_model.add_listener(self._on_app_view_event)
 
-        self.main_window.add_listener(self._on_main_window_event)
-
     def configure_inject(self, binder):
         binder.bind_to_provider(SqliteDatabase, get_db)
         binder.bind("MainWindow", self.main_window)
@@ -140,7 +138,3 @@ class AppController(metaclass=Singleton):
         if event == "working":
             self.book_detail_view_model.lock_ui = data
             self.settings_view_model.lock_ui = data
-
-    def _on_main_window_event(self, event: str, data):
-        if event == "open_view":
-            self._on_open_view(data, None)
