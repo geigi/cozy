@@ -64,10 +64,12 @@ class OfflineCache(EventSender):
         for file_id in file_ids:
             cached_file_name = str(uuid.uuid4())
             files_to_cache.append((file_id, cached_file_name))
-        chunks = [files_to_cache[x:x + 500] for x in range(0, len(files_to_cache), 500)]
+
+        chunks = [files_to_cache[x : x + 500] for x in range(0, len(files_to_cache), 500)]
         for chunk in chunks:
-            query = OfflineCacheModel.insert_many(chunk, fields=[OfflineCacheModel.original_file,
-                                                                 OfflineCacheModel.cached_file])
+            query = OfflineCacheModel.insert_many(
+                chunk, fields=[OfflineCacheModel.original_file, OfflineCacheModel.cached_file]
+            )
             self.total_batch_count += len(chunk)
             query.execute()
 
@@ -79,7 +81,9 @@ class OfflineCache(EventSender):
         """
         self._stop_processing()
         ids = {t.file_id for t in book.chapters}
-        offline_elements = OfflineCacheModel.select().join(File).where(OfflineCacheModel.original_file.id << ids)
+        offline_elements = (
+            OfflineCacheModel.select().join(File).where(OfflineCacheModel.original_file.id << ids)
+        )
 
         for element in offline_elements:
             file_path = os.path.join(self.cache_dir, element.cached_file)
@@ -94,7 +98,9 @@ class OfflineCache(EventSender):
                 if self.current and item.id == self.current.id:
                     self.filecopy_cancel.cancel()
 
-        entries_to_delete = OfflineCacheModel.select().join(File).where(OfflineCacheModel.original_file.id << ids)
+        entries_to_delete = (
+            OfflineCacheModel.select().join(File).where(OfflineCacheModel.original_file.id << ids)
+        )
         ids_to_delete = [t.id for t in entries_to_delete]
         OfflineCacheModel.delete().where(OfflineCacheModel.id << ids_to_delete).execute()
         book.downloaded = False
@@ -104,8 +110,11 @@ class OfflineCache(EventSender):
         self._start_processing()
 
     def remove_all_for_storage(self, storage):
-        for element in OfflineCacheModel.select().join(File).where(
-                storage.path in OfflineCacheModel.original_file.path):
+        for element in (
+            OfflineCacheModel.select()
+            .join(File)
+            .where(storage.path in OfflineCacheModel.original_file.path)
+        ):
             file_path = self.cache_dir / element.cached_file
             if file_path == self.cache_dir:
                 continue
@@ -114,12 +123,14 @@ class OfflineCache(EventSender):
             if file.query_exists():
                 file.delete()
 
-        OfflineCacheModel.delete().where(storage.path in OfflineCacheModel.original_file.path).execute()
+        OfflineCacheModel.delete().where(
+            storage.path in OfflineCacheModel.original_file.path
+        ).execute()
 
     def get_cached_path(self, chapter: Chapter) -> Path:
         query = OfflineCacheModel.select().where(
             OfflineCacheModel.original_file == chapter.file_id,
-            OfflineCacheModel.copied == True  # noqa: E712
+            OfflineCacheModel.copied == True,  # noqa: E712
         )
 
         if query.count() > 0:
@@ -133,7 +144,8 @@ class OfflineCache(EventSender):
         """
         if OfflineCacheModel.select().count() > 0:
             OfflineCacheModel.update(copied=False).where(
-                OfflineCacheModel.original_file.path in paths).execute()
+                OfflineCacheModel.original_file.path in paths
+            ).execute()
             self._fill_queue_from_db()
 
     def delete_cache(self):
@@ -155,8 +167,7 @@ class OfflineCache(EventSender):
         self.thread.stop()
 
     def _start_processing(self):
-        """
-        """
+        """ """
         if self._is_processing():
             return
 
@@ -198,24 +209,33 @@ class OfflineCache(EventSender):
                 self.emit_event_main_thread("message", _("Copying") + " " + book.name)
                 self.current = new_item
 
-                destination = Gio.File.new_for_path(os.path.join(self.cache_dir, new_item.cached_file))
+                destination = Gio.File.new_for_path(
+                    os.path.join(self.cache_dir, new_item.cached_file)
+                )
                 source = Gio.File.new_for_path(new_item.original_file.path)
                 flags = Gio.FileCopyFlags.OVERWRITE
                 try:
-                    copied = source.copy(destination, flags, self.filecopy_cancel, self.__update_copy_status, None)
+                    copied = source.copy(
+                        destination, flags, self.filecopy_cancel, self.__update_copy_status, None
+                    )
                 except Exception as e:
                     if e.code == Gio.IOErrorEnum.CANCELLED:
                         log.info("Download of book was cancelled.")
                         self.thread.stop()
                         break
                     reporter.exception("offline_cache", e)
-                    log.error("Could not copy file %r to offline cache: %s", new_item.original_file.path, e)
+                    log.error(
+                        "Could not copy file %r to offline cache: %s",
+                        new_item.original_file.path,
+                        e,
+                    )
                     self.queue.remove(item)
                     continue
 
                 if copied:
                     OfflineCacheModel.update(copied=True).where(
-                        OfflineCacheModel.id == new_item.id).execute()
+                        OfflineCacheModel.id == new_item.id
+                    ).execute()
 
             self.queue.remove(item)
 
@@ -242,21 +262,24 @@ class OfflineCache(EventSender):
 
     def _is_book_downloaded(self, book: Book):
         file_ids = [chapter.file_id for chapter in book.chapters]
-        offline_files = OfflineCacheModel.select().where(OfflineCacheModel.original_file << file_ids)
+        offline_files = OfflineCacheModel.select().where(
+            OfflineCacheModel.original_file << file_ids
+        )
         offline_file_ids = [file.original_file.id for file in offline_files]
 
         return all(chapter.file_id in offline_file_ids for chapter in book.chapters)
 
     def _is_processing(self):
-        """
-        """
+        """ """
         if self.thread:
             return self.thread.is_alive()
         else:
             return False
 
     def _fill_queue_from_db(self):
-        for item in OfflineCacheModel.select().where(OfflineCacheModel.copied == False):  # noqa: E712
+        for item in OfflineCacheModel.select().where(
+            OfflineCacheModel.copied == False
+        ):  # noqa: E712
             if not any(item.id == queued.id for queued in self.queue):
                 self.queue.append(item)
                 self.total_batch_count += 1
