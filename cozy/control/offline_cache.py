@@ -278,8 +278,8 @@ class OfflineCache(EventSender):
 
     def _fill_queue_from_db(self):
         for item in OfflineCacheModel.select().where(
-            OfflineCacheModel.copied == False
-        ):  # noqa: E712
+            OfflineCacheModel.copied == False  # noqa: E712
+        ):
             if not any(item.id == queued.id for queued in self.queue):
                 self.queue.append(item)
                 self.total_batch_count += 1
