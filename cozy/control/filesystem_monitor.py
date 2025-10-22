@@ -9,7 +9,7 @@ from cozy.model.settings import Settings
 from cozy.model.storage import Storage
 from cozy.report import reporter
 
-log = logging.getLogger("fs_monitor")
+log = logging.getLogger(__name__)
 
 
 class StorageNotFound(Exception):

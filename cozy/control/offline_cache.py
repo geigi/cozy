@@ -17,7 +17,7 @@ from cozy.model.chapter import Chapter
 from cozy.report import reporter
 from cozy.view_model.settings_view_model import SettingsViewModel
 
-log = logging.getLogger("offline_cache")
+log = logging.getLogger(__name__)
 
 
 class OfflineCache(EventSender):

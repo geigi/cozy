@@ -54,7 +54,7 @@ gettext.textdomain("com.github.geigi.cozy")
 gettext.install("com.github.geigi.cozy", localedir)
 
 
-log = logging.getLogger("main")
+log = logging.getLogger(__name__)
 data_dir = get_data_dir()
 
 # setup log files
@@ -64,7 +64,7 @@ old_log_file = data_dir / "cozy.old.log"
 if log_file.exists():
     log_file.replace(old_log_file)
 
-LOG_FORMAT = "%(asctime)s [%(threadName)-12.12s] [%(name)-10.10s] [%(levelname)-5.5s]  %(message)s"
+LOG_FORMAT = "%(asctime)s [%(threadName)-10.10s] [%(name)-20.20s] [%(levelname)-4.4s]  %(message)s"
 LOG_DATE_FORMAT = "%H:%M:%S"
 
 

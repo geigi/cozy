@@ -11,7 +11,7 @@ from cozy.ui.widgets.sleep_timer import SleepTimer
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
 from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
 
-log = logging.getLogger("MediaController")
+log = logging.getLogger(__name__)
 
 COVER_SIZE = 46
 

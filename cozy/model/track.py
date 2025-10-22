@@ -8,7 +8,7 @@ from cozy.db.track import Track as TrackModel
 from cozy.db.track_to_file import TrackToFile
 from cozy.model.chapter import Chapter
 
-log = logging.getLogger("TrackModel")
+log = logging.getLogger(__name__)
 
 
 class TrackInconsistentData(Exception):

@@ -5,7 +5,7 @@ from playhouse.sqliteq import SqliteQueueDatabase
 
 from cozy.control.application_directories import get_data_dir
 
-log = logging.getLogger("db")
+log = logging.getLogger(__name__)
 
 _db = None
 

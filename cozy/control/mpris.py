@@ -21,7 +21,7 @@ from cozy.model.book import Book
 from cozy.report import reporter
 from cozy.settings import ApplicationSettings
 
-log = logging.getLogger("mpris")
+log = logging.getLogger(__name__)
 
 CamelCasePattern = re.compile(r"(?<!^)(?=[A-Z])")
 

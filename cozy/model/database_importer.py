@@ -10,7 +10,7 @@ from cozy.db.track_to_file import TrackToFile
 from cozy.media.media_file import MediaFile
 from cozy.model.book import Book, BookIsEmpty
 
-log = logging.getLogger("db_importer")
+log = logging.getLogger(__name__)
 
 
 def is_same_book(book_a: str, book_b: str) -> bool:

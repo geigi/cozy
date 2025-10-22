@@ -15,7 +15,7 @@ from cozy.media.importer import Importer, ScanStatus
 from cozy.report import reporter
 from cozy.settings import ApplicationSettings
 
-log = logging.getLogger("artwork_cache")
+log = logging.getLogger(__name__)
 
 
 class ArtworkCache:

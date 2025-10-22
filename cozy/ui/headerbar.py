@@ -6,7 +6,7 @@ from gi.repository import Adw, GObject, Gtk
 from cozy.ui.widgets.progress_popover import ProgressPopover
 from cozy.view_model.headerbar_view_model import HeaderBarState, HeaderbarViewModel
 
-log = logging.getLogger("Headerbar")
+log = logging.getLogger(__name__)
 
 
 @Gtk.Template.from_resource("/com/github/geigi/cozy/ui/headerbar.ui")
