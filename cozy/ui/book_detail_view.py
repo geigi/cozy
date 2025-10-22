@@ -146,6 +146,7 @@ class BookDetailView(Adw.NavigationPage):
         )
         remove_item.set_action_and_target_value("app.remove_book", GLib.Variant.new_int16(book.id))
 
+        self.menu_section.remove_all()
         self.menu_section.append_item(open_in_files_item)
         self.menu_section.append_item(remove_item)
 
