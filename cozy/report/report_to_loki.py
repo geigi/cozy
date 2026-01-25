@@ -5,7 +5,7 @@ from contextlib import suppress
 
 import distro
 import inject
-import pytz
+from zoneinfo import ZoneInfo
 import requests
 from gi.repository import Gtk
 from mutagen import version_string as MutagenVersion
@@ -36,7 +36,7 @@ def report(component: str, type: LogLevel, message: str, exception: Exception):
     if report_level == 0:
         return
 
-    curr_datetime = datetime.datetime.now(pytz.timezone('Europe/Berlin'))
+    curr_datetime = datetime.datetime.now(ZoneInfo('Europe/Berlin'))
     curr_datetime = curr_datetime.isoformat('T')
 
     if not component or not type or not message:
