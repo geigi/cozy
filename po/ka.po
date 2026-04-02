@@ -1,0 +1,725 @@
+# Georgian translation for com.github.geigi.cozy.
+# Copyright (C) 2026 com.github.geigi.cozy's authors.
+# This file is distributed under the same license as the com.github.geigi.cozy package.
+# Ekaterine Papava <papava.e@gtu.ge>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.geigi.cozy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-17 20:33+0100\n"
+"PO-Revision-Date: 2026-04-02 11:30+0200\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+
+#: cozy/application.py:59
+msgid "Audiobooks"
+msgstr "აუდიოწიგნები"
+
+#: cozy/control/offline_cache.py:197
+msgid "Copying"
+msgstr "კოპირება"
+
+#: cozy/media/files.py:67
+msgid "Cannot copy: Audiobook directory is read only"
+msgstr "კოპირება შეუძლებელია: აუდიოწიგნის საქაღალდე მხოლოდ წაკითხვადია"
+
+#: cozy/media/files.py:69
+msgid "Cannot copy: Disk is full"
+msgstr "კოპირება შეუძლებელია: დისკი სავსეა"
+
+#: cozy/media/files.py:71 cozy/media/files.py:87
+msgid "Cannot copy: Permission denied"
+msgstr "კოპირება შეუძლებელია: წვდომა აკრძალულია"
+
+#: cozy/media/importer.py:121
+msgid "Error while importing new files"
+msgstr "შეცდომა ახალი ფაილების შემოტანისას"
+
+#: cozy/tools.py:92 cozy/tools.py:96
+#, python-brace-format
+msgid "{hours} hour"
+msgid_plural "{hours} hours"
+msgstr[0] "{hours} საათი"
+msgstr[1] "{hours} საათი"
+
+#: cozy/tools.py:94 cozy/tools.py:98
+#, python-brace-format
+msgid "{minutes} minute"
+msgid_plural "{minutes} minutes"
+msgstr[0] "{minutes} წუთი"
+msgstr[1] "{minutes} წუთი"
+
+#: cozy/tools.py:100
+#, python-brace-format
+msgid "{seconds} second"
+msgid_plural "{seconds} seconds"
+msgstr[0] "{seconds} წამი"
+msgstr[1] "{seconds} წამი"
+
+#: cozy/tools.py:102
+msgid "finished"
+msgstr "დასრულებული"
+
+#: cozy/tools.py:126
+msgid "never"
+msgstr "არასოდეს"
+
+#: cozy/tools.py:128
+msgid "today"
+msgstr "დღეს"
+
+#: cozy/tools.py:130
+msgid "yesterday"
+msgstr "გუშინ"
+
+#: cozy/tools.py:132
+#, python-format
+msgid "%s days ago"
+msgstr "%s დღის წინ"
+
+#: cozy/tools.py:134
+#, python-brace-format
+msgid "{weeks} week ago"
+msgid_plural "{weeks} weeks ago"
+msgstr[0] "{weeks} კვირის წინ"
+msgstr[1] "{weeks} კვირის წინ"
+
+#: cozy/tools.py:136
+#, python-brace-format
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] "{months} თვის წინ"
+msgstr[1] "{months} თვის წინ"
+
+#: cozy/tools.py:138
+#, python-brace-format
+msgid "{years} year ago"
+msgid_plural "{years} years ago"
+msgstr[0] "{years} წლის წინ"
+msgstr[1] "{years} წლის წინ"
+
+#: cozy/ui/book_detail_view.py:299
+msgid "Downloaded"
+msgstr "გადმოწერილია"
+
+#: cozy/ui/book_detail_view.py:302 data/ui/book_detail.ui:116
+msgid "Download"
+msgstr "გადმოწერა"
+
+#: cozy/ui/db_migration_failed_view.py:6
+msgid ""
+"During an update of the database an error occurred and Cozy will not be able "
+"to startup. A backup of the database was created before the update and has "
+"been restored now. Until this issue is resolved please use version 0.9.5 of "
+"Cozy. You can help resolve this problem by reporting an issue on GitHub."
+msgstr ""
+"მონაცემთა ბაზის განახლებისას აღმოჩენილია შეცდომა და Cozy ვერ გაეშვება. "
+"განახლებამდე მოხდა მონაცემთა ბაზის მარქაფი და ის ახლა აღდგენილია. სანამ ამ "
+"პრობლემას გავასწორებთ, გამოიყენეთ Cozy-ის ვერსია 0.9.5. ამ პრობლემის "
+"მოგვარება GitHub-ზე პრობლემის გახსნით შეგიძლიათ."
+
+#: cozy/ui/db_migration_failed_view.py:15
+msgid "Failed to Update Database"
+msgstr "მონაცემთა ბაზის განახლება ჩავარდა"
+
+#: cozy/ui/db_migration_failed_view.py:22
+msgid "Close Cozy"
+msgstr "Cozy-ის დახურვა"
+
+#: cozy/ui/db_migration_failed_view.py:23
+msgid "Receive help on GitHub"
+msgstr "დახმარების მიღება GitHub-ზე"
+
+#: cozy/ui/delete_book_view.py:13
+msgid "Delete Audiobook?"
+msgstr "წავშალო აუდიოწიგნი?"
+
+#: cozy/ui/delete_book_view.py:14
+msgid "The audiobook will be removed from your disk and from Cozy's library."
+msgstr "აუდიოწიგნი წაიშლება დისკიდან და Cozy-ის ბიბლიოთეკიდან."
+
+#: cozy/ui/delete_book_view.py:21 cozy/ui/file_not_found_dialog.py:26
+msgid "Cancel"
+msgstr "გაუქმება"
+
+#: cozy/ui/delete_book_view.py:22
+msgid "Remove Audiobook"
+msgstr "აუდიოწიგნის წაშლა"
+
+#: cozy/ui/disk_element.py:22
+msgid "Disc"
+msgstr "დისკის #"
+
+#: cozy/ui/file_not_found_dialog.py:18
+msgid "File not found"
+msgstr "ფაილი ვერ მოიძებნა"
+
+#: cozy/ui/file_not_found_dialog.py:19
+msgid "This file could not be found. Do you want to locate it manually?"
+msgstr "ამ ფაილის აღმოჩენა შეუძლებელია. გნებავთ, ხელით იპოვოთ?"
+
+#: cozy/ui/file_not_found_dialog.py:27
+msgid "Locate"
+msgstr "მოძიება"
+
+#: cozy/ui/file_not_found_dialog.py:38
+msgid "Locate Missing File"
+msgstr "ნაკლული ფაილის პოვნა"
+
+#: cozy/ui/file_not_found_dialog.py:41
+#, python-brace-format
+msgid "{ext} files"
+msgstr "{ext} ფაილები"
+
+#: cozy/ui/file_not_found_dialog.py:44
+msgid "Audio files"
+msgstr "აუდიო ფაილები"
+
+#: cozy/ui/import_failed_dialog.py:8
+msgid "This can have multiple reasons:"
+msgstr "ამას, შეიძლება, მრავალი მიზეზი ჰქონდეს:"
+
+#: cozy/ui/import_failed_dialog.py:11
+msgid "The audio format is not supported"
+msgstr "აუდიოფორმატი მხარდაჭერილი არაა"
+
+#: cozy/ui/import_failed_dialog.py:12
+msgid "The path or filename contains non utf-8 characters"
+msgstr "ბილიკი, ან ფაილის სახელი არა-utf-8 სიმბოლოებს შეიცავს"
+
+#: cozy/ui/import_failed_dialog.py:13
+msgid "The file(s) are no valid audio files"
+msgstr "ფაილ(ებ)-ი სწორი აუდიოფაილები არაა"
+
+#: cozy/ui/import_failed_dialog.py:14
+msgid "The file(s) are corrupt"
+msgstr "ფაილ(ებ)-ი დაზიანებულია"
+
+#: cozy/ui/import_failed_dialog.py:28
+msgid "Some files could not be imported"
+msgstr "ზოგიერთი ფაილის შემოტანა სეუძლებელია"
+
+#: cozy/ui/import_failed_dialog.py:35
+msgid "Ok"
+msgstr "დიახ"
+
+#: cozy/ui/main_view.py:198
+msgid "Patreon Supporters"
+msgstr "Patreon-ის მხარდამჭერები"
+
+#: cozy/ui/main_view.py:202
+msgid "m4b chapter support in mutagen"
+msgstr "m4b თავების მხარდაჭერა mutagen-ში"
+
+#: cozy/ui/main_view.py:206
+msgid "Open Source Projects"
+msgstr "ღია კოდის პროექტები"
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: cozy/ui/main_view.py:211
+msgid "translator-credits"
+msgstr "ეკატერინე პაპავა"
+
+#: cozy/ui/widgets/book_element.py:70
+msgid "Mark as read"
+msgstr "მონიშნე როგორც წაკითხული"
+
+#: cozy/ui/widgets/book_element.py:73
+msgid "Open in file browser"
+msgstr "ფაილების ბრაუზერში გახსნა"
+
+#: cozy/ui/widgets/book_element.py:76
+msgid "Remove from library"
+msgstr "ბიბლიოთეკიდან წაშლა"
+
+#: cozy/ui/widgets/book_row.py:25
+msgid "Play this book"
+msgstr "ამ წიგნის დაკვრა"
+
+#: cozy/ui/widgets/error_reporting.py:11
+msgid "Disabled"
+msgstr "გამორთულია"
+
+#: cozy/ui/widgets/error_reporting.py:12
+msgid "Basic error reporting"
+msgstr "საბაზისო შეტყობინება შეცდომებზე"
+
+#: cozy/ui/widgets/error_reporting.py:13
+msgid "Detailed error reporting"
+msgstr "დეტალური შეტყობინება შეცდომებზე"
+
+#: cozy/ui/widgets/error_reporting.py:14 data/ui/error_reporting.ui:162
+msgid "Detailed error reporting with import errors"
+msgstr "საბაზისო შეტყობინება შეცდომებზე შემოტანის შეცდომებით"
+
+#: cozy/ui/widgets/error_reporting.py:18
+msgid "No error or crash reporting."
+msgstr "შეცდომის და ავარიის შესახებ ანგარიშის გადაცემის გარეშე."
+
+#: cozy/ui/widgets/error_reporting.py:19 data/ui/error_reporting.ui:174
+msgid "The following information will be sent in case of an error or crash:"
+msgstr "შეცდომის, ან ავარიის შემთხვევაში გაიგზავნება შემდეგი ინფორმაცია:"
+
+#: cozy/ui/widgets/error_reporting.py:24
+msgid "Which type of error occurred"
+msgstr "რა ტიპის შეცდომა მოხდა"
+
+#: cozy/ui/widgets/error_reporting.py:25
+msgid "Line of code where an error occurred"
+msgstr "კოდის ხაზი, რომელზეც შეცდომა მოხდა"
+
+#: cozy/ui/widgets/error_reporting.py:26
+msgid "Cozy's version"
+msgstr "Cozy-ის ვერსია"
+
+#: cozy/ui/widgets/error_reporting.py:27
+msgid "Linux distribution"
+msgstr "Linux-ის დისტრიბუტივი"
+
+#: cozy/ui/widgets/error_reporting.py:28
+msgid "Desktop environment"
+msgstr "სამუშაო გარემოები"
+
+#: cozy/ui/widgets/error_reporting.py:29
+msgid "Media type of files that Cozy couldn't import"
+msgstr "ფაილების, რომლებიც Cozy-მა ვერ შემოიტანა, მედიის ტიპი"
+
+#: cozy/ui/widgets/filter_list_box.py:18
+#: cozy/view_model/library_view_model.py:45
+#: cozy/view_model/library_view_model.py:135
+msgid "All"
+msgstr "ყველა"
+
+#: cozy/ui/widgets/filter_list_box.py:19
+msgid "Display all books"
+msgstr "ყველა წიგნის ჩვენება"
+
+#: cozy/ui/widgets/search_results.py:13
+#, python-brace-format
+msgid "Jump to {artist_name}"
+msgstr "{artist_name}-ზე გადასვლა"
+
+#: cozy/ui/widgets/sleep_timer.py:57 data/ui/timer_popover.ui:53
+msgid "min"
+msgstr "წთ"
+
+#: cozy/ui/widgets/sleep_timer.py:62
+msgid "Off"
+msgstr "გამორთ"
+
+#: cozy/ui/widgets/storages.py:11
+msgid "Set Audiobooks Directory"
+msgstr "აუდიოწიგნების საქაღალდის დაყენება"
+
+#: cozy/ui/widgets/storages.py:65 data/ui/storage_locations.ui:18
+msgid "External drive"
+msgstr "გარე დისკი"
+
+#: cozy/ui/widgets/storages.py:68
+msgid "Internal drive"
+msgstr "შიდა დისკი"
+
+#: cozy/view_model/headerbar_view_model.py:78
+msgid "Refreshing audio book collection"
+msgstr "აუდიოწიგნების კოლექციის განახლება"
+
+#: cozy/view_model/headerbar_view_model.py:87
+#: cozy/view_model/headerbar_view_model.py:103
+msgid "Copying new files…"
+msgstr "ახალი ფაილების კოპირება…"
+
+#: cozy/view_model/headerbar_view_model.py:94
+msgid "Changing audio book location…"
+msgstr "აუდიოწიგნის მდებარეობის შეცვლა…"
+
+#: data/ui/album_element.ui:47
+msgid "Play"
+msgstr "დაკვრა"
+
+#: data/ui/book_detail.ui:149
+msgid "Remaining"
+msgstr "დარჩენილი დრო"
+
+#: data/ui/book_detail.ui:195
+msgid "Total"
+msgstr "სულ"
+
+#: data/ui/book_detail.ui:208
+msgid "Last played"
+msgstr "ბოლოს დაკვრის დრო"
+
+#: data/ui/book_detail.ui:221
+msgid "Published"
+msgstr "გამოქვეყნებულია"
+
+#: data/ui/book_detail.ui:246
+msgid "Some or all files of this book cannot be found."
+msgstr "ამ წიგნის ზოგიერთი, ან ყველა ფაილი აღმოჩენილი არაა."
+
+#: data/ui/book_detail.ui:259
+msgid "unavailable"
+msgstr "მიუწვდომელი"
+
+#: data/ui/book_detail.ui:363
+msgid "Loading chapters, please wait..."
+msgstr "მიმდინარეობს თავების ჩატვირთვა. მოითმინეთ..."
+
+#: data/ui/book_element.ui:10
+msgid "Open book overview"
+msgstr "წიგნის მიმოხილვის გახსნა"
+
+#: data/ui/chapter_element.ui:5
+msgid "Play this part"
+msgstr "ამ ნაწილის დაკვრა"
+
+#: data/ui/error_reporting.ui:24 data/ui/preferences.ui:124
+msgid "User feedback"
+msgstr "მომხარებლის უკუკავშირი"
+
+#: data/ui/error_reporting.ui:67
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"You can help improve Cozy by contributing information in case of errors and "
+"crashes. "
+msgstr ""
+"თქვენ შეგიძლიათ, დაგვეხმაროთ Cozy-ის გაუმჯობესებაში, თუ მოგვწერთ ინფორმაციას "
+"მისი ავარიული დასრულების შემთხვევების შესახებ. "
+
+#: data/ui/error_reporting.ui:75
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Contributing this information is optional and completely anonymous. We will "
+"never collect personal data, files you import or any information that could "
+"identify you."
+msgstr ""
+"ამ ინფორმაციის მოწოდება არასავალდებულო და სრულად ანონიმურია. ჩვენ არასდროს "
+"ვაგროვებთ პერსონალურ მონაცემებს და ფაილებს, რომლებიც თქვენ შემოგაქვთ, ან "
+"ინფორმაციას, რომლითაც თქვენი იდენტიფიკაციაა შესაძლებელი."
+
+#: data/ui/error_reporting.ui:84
+msgctxt "Error and crash reporting dialog"
+msgid ""
+"Cozy is opensource and the user feedback source code can be inspected here: "
+msgstr ""
+"Cozy ღია წყაროთია და მომხმარებლის უკუკავშირი მის კოდზე შეგიძლიათ, აქ იხილოთ: "
+
+#. Translators: Don't touch the markup. Translate the text "Sourcecode on GitHub" only!
+#: data/ui/error_reporting.ui:94
+msgid ""
+"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">Sourcecode "
+"on GitHub</a>"
+msgstr ""
+"<a href=\"https://github.com/geigi/cozy/tree/master/cozy/report\">კოდი "
+"GitHub-ზე</a>"
+
+#: data/ui/first_import_button.ui:12
+msgid "Select Folder"
+msgstr "აირჩიეთ საქაღალდე"
+
+#: data/ui/headerbar.ui:17
+msgid "Toggle Filter Sidebar"
+msgstr "ფილტრის ჩოჩიას გადართვა"
+
+#: data/ui/headerbar.ui:22
+msgid "Options"
+msgstr "მორგება"
+
+#: data/ui/headerbar.ui:26
+msgid "Open the options popover"
+msgstr "პარამეტრების მხტუნარას გახსნა"
+
+#: data/ui/headerbar.ui:33
+msgid "Search your library"
+msgstr "ძებნა თქვენს ბიბლიოთეკაში"
+
+#: data/ui/headerbar.ui:36
+msgid "Open the search popover"
+msgstr "ძებნის მხტუნარას გახსნა"
+
+#: data/ui/headerbar.ui:44
+msgid "Display background task progress"
+msgstr "ფონური ამოცანის მიმდინარეობის ჩვენება"
+
+#: data/ui/headerbar.ui:67
+msgid "Start typing..."
+msgstr "დაიწყეთ კრეფა..."
+
+#: data/ui/headerbar.ui:80
+msgid "_Scan Library"
+msgstr "ბლბიოთეკის _სკანირება"
+
+#: data/ui/headerbar.ui:86
+msgid "_Hide unavailable books"
+msgstr "_ხელმიუწვდომელი წიგნების დამალვა"
+
+#: data/ui/headerbar.ui:92
+msgid "_Preferences"
+msgstr "_მორგება"
+
+#: data/ui/headerbar.ui:96
+msgid "_About Cozy"
+msgstr "Cozy-ის შეს_ახებ"
+
+#: data/ui/headerbar.ui:102
+msgid "_Quit"
+msgstr "გასვ_ლა"
+
+#: data/ui/main_window.ui:26
+msgid "Drop Audio Books Here to Add Them to Your Library"
+msgstr "დაყარეთ აუდიოწიგნები აქ მათი ბიბლიოთეკაში ჩასამატებლად"
+
+#: data/ui/main_window.ui:48
+msgid "Library"
+msgstr "ბიბლიოთეკა"
+
+#: data/ui/main_window.ui:65
+msgid "Recent"
+msgstr "უახლესი"
+
+#: data/ui/main_window.ui:77 data/ui/search_page.ui:46
+msgid "Author"
+msgstr "ავტორი"
+
+#: data/ui/main_window.ui:89
+msgid "List of authors"
+msgstr "ავტორების სია"
+
+#: data/ui/main_window.ui:108 data/ui/search_page.ui:59
+msgid "Reader"
+msgstr "მკითხველი"
+
+#: data/ui/main_window.ui:120
+msgid "List of readers"
+msgstr "მკითხველების სია"
+
+#: data/ui/main_window.ui:172
+msgid "List of books"
+msgstr "წიგნების სია"
+
+#: data/ui/main_window.ui:194
+msgid "No Recent Books Yet"
+msgstr "უახლესი წიგნები ჯერ არაა"
+
+#: data/ui/main_window.ui:195
+msgid "Explore your library by switching to the Author or Reader view"
+msgstr "გამოიკვლიეთ თქვენი ბიბლიოთეკა ავტორის, ან მკითხველის ხედზე გადასვლით"
+
+#: data/ui/media_controller.ui:48
+msgid "Currently playing"
+msgstr "ამჟამად ვუკრავ"
+
+#: data/ui/media_controller.ui:65
+msgid "Title of currently playing book"
+msgstr "ამჟამად დაკრული წიგნის სახელი"
+
+#: data/ui/media_controller.ui:82
+msgid "Title of the currently playing part"
+msgstr "ამჟამად დაკრული ნაწილის სახელი"
+
+#: data/ui/media_controller.ui:111
+msgid "Rewind"
+msgstr "გადახვევა"
+
+#: data/ui/media_controller.ui:116
+msgid "Rewind playback"
+msgstr "უკან გადახვევა"
+
+#: data/ui/media_controller.ui:130
+msgid "Start playback"
+msgstr "დაკვრის დაწყება"
+
+#: data/ui/media_controller.ui:135
+msgid "Start or pause the playback"
+msgstr "დაკვრის დაწყება, ან შეჩერება"
+
+#: data/ui/media_controller.ui:148
+msgid "Forward"
+msgstr "წინ"
+
+#: data/ui/media_controller.ui:153
+msgid "Forward Playback"
+msgstr "წინ დაკვრა"
+
+#: data/ui/media_controller.ui:179
+msgid "Volume control"
+msgstr "ხმის კონტროლი"
+
+#: data/ui/media_controller.ui:202
+msgid "Playback speed"
+msgstr "დაკვრის სიჩქარე"
+
+#: data/ui/media_controller.ui:213 data/ui/preferences.ui:80
+msgid "Sleep Timer"
+msgstr "ძილის წამმზომი"
+
+#: data/ui/media_controller.ui:220
+msgid "Open the sleep timer popover"
+msgstr "დაძინების ტაიმერის მხტუნარას გახსნა"
+
+#: data/ui/preferences.ui:27
+msgid "General"
+msgstr "ზოგადი"
+
+#: data/ui/preferences.ui:30
+msgid "Appearance"
+msgstr "გარეგნობა"
+
+#: data/ui/preferences.ui:33
+msgid "Dark Mode"
+msgstr "მუქი რეჟიმი"
+
+#: data/ui/preferences.ui:40
+msgid "Tags"
+msgstr "ჭდეები"
+
+#: data/ui/preferences.ui:43
+msgid "Swap Author and Reader"
+msgstr "ავტორისა და მკითხველის მიმოცვლა"
+
+#: data/ui/preferences.ui:44
+msgid "Activate if author and reader are displayed the wrong way"
+msgstr "გაააქტიურეთ, თუ ავტორი, ან მკითხველი არასწორადაა ნაჩვენები"
+
+#: data/ui/preferences.ui:51
+msgid "Playback"
+msgstr "დაკვრა"
+
+#: data/ui/preferences.ui:54
+msgid "Replay"
+msgstr "თავიდან დაკვრა"
+
+#: data/ui/preferences.ui:55
+msgid "Rewind 30 seconds of the current book when starting Cozy"
+msgstr "მიმდინარე წიგნის 30 წამის უკან გადახვევა Cozy-ის გაშვებისას"
+
+#: data/ui/preferences.ui:60
+msgid "Rewind Duration"
+msgstr "უკან გადახვევის ხანგრძლივობა"
+
+#: data/ui/preferences.ui:69
+msgid "Forward Duration"
+msgstr "წინ გადახვევის ხანგრძლივობა"
+
+#: data/ui/preferences.ui:83
+msgid "Fadeout"
+msgstr "მინავლება"
+
+#: data/ui/preferences.ui:88
+msgid "Fadeout Duration"
+msgstr "მინავლების ხანგრძლივობა"
+
+#: data/ui/preferences.ui:104
+msgid "Storage"
+msgstr "საცავი"
+
+#: data/ui/preferences.ui:107
+msgid "Artwork"
+msgstr "ნამუშევრები"
+
+#: data/ui/preferences.ui:110
+msgid "Prefer External Images Over Embedded Cover"
+msgstr "გარე გამოსახულებებს მეტი პრიორიტეტი აქვთ, ვიდრე ჩაშენებულ ყდას"
+
+#: data/ui/preferences.ui:111
+msgid "Always use images (cover.jpg, *.png, …) when available"
+msgstr ""
+"გამოსახულებების (cover.jog, *.png, ..) ყოველთვის გამოყენება, როცა ისინი "
+"ხელმისაწვდომია"
+
+#: data/ui/preferences.ui:121
+msgid "Feedback"
+msgstr "უკუკავშირი"
+
+#: data/ui/search_page.ui:9
+msgid "Search in your library"
+msgstr "ძებნა თქვენს ბიბლიოთეკაში"
+
+#: data/ui/search_page.ui:15
+msgid "No results found"
+msgstr "შედეგების გარეშე"
+
+#: data/ui/search_page.ui:33
+msgid "Book"
+msgstr "წიგნი"
+
+#: data/ui/seek_bar.ui:15
+msgid "Elapsed time"
+msgstr "გასული დრო"
+
+#: data/ui/seek_bar.ui:21
+msgid "Elapsed time of current part"
+msgstr "მიმდინარე ნაწილის გასული დრო"
+
+#: data/ui/seek_bar.ui:32
+msgid "Jump to position in current chapter"
+msgstr "გადასვლა პოზიციაზე მიმდინარე თავში"
+
+#: data/ui/seek_bar.ui:39
+msgid "Position of the current part in seconds"
+msgstr "მიმდინარე ნაწილის პოზიცია წამებში"
+
+#: data/ui/seek_bar.ui:48
+msgid "Remaining time"
+msgstr "დარჩენილი დრო"
+
+#: data/ui/seek_bar.ui:53
+msgid "Remaining time of current part"
+msgstr "მიმდინარე ნაწილის დარჩენილი დრო"
+
+#: data/ui/storage_locations.ui:5
+msgid "Storage locations"
+msgstr "საცავის მდებარეობები"
+
+#: data/ui/storage_locations.ui:24
+msgid "Set as default"
+msgstr "ნაგულისხმევად დაყენება"
+
+#: data/ui/storage_locations.ui:28
+msgid "Remove"
+msgstr "წაშლა"
+
+#: data/ui/timer_popover.ui:30
+msgid "Timer duration"
+msgstr "წამზომის ხანგრძლივობა"
+
+#: data/ui/timer_popover.ui:40
+msgid "Set the sleep timer duration in minutes"
+msgstr "დააყენეთ ძილის ტაიმერი წუთებში"
+
+#: data/ui/timer_popover.ui:86
+msgid "Stop after current chapter"
+msgstr "გაჩერება მიმდინარე თავის შემდეგ"
+
+#: data/ui/timer_popover.ui:107
+msgid "Enable system power control"
+msgstr "სისტემის კვების კონტროლის ჩართვა"
+
+#: data/ui/timer_popover.ui:125
+msgid ""
+"Type of the action when the timer finishes.\n"
+"\"shutdown\" will attempt to turn your system off (also known as power off)\n"
+"\"suspend\" will attempt to suspend your system (also known as sleep)."
+msgstr ""
+"ქმედების ტიპი, როცა წამზომი დასრულდება.\n"
+"\"გამორთვა\" სცდის, გამორთოს თქვენი სისტემა (ასევე ცნობილია, როგორც კვების "
+"გამორთვა)\n"
+"\"შეჩერება\" სცდის, შეაჩეროს თქვენი სისტემა (ასევე ცნობილია, როგორც ძილი)."
+
+#: data/ui/timer_popover.ui:129
+msgid "System power action to perform"
+msgstr "სისტემის კვების ქმედება"
+
+#: data/ui/timer_popover.ui:137
+msgid "suspend"
+msgstr "შეჩერება"
+
+#: data/ui/timer_popover.ui:143
+msgid "shutdown"
+msgstr "გამორთვა"
