@@ -475,7 +475,7 @@ msgstr "_Inställningar"
 
 #: data/ui/headerbar.ui:96
 msgid "_About Cozy"
-msgstr "_Om Cosy"
+msgstr "_Om Cozy"
 
 #: data/ui/headerbar.ui:102
 msgid "_Quit"
