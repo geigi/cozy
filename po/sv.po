@@ -704,7 +704,7 @@ msgstr "Ange varaktighet för insomningsuret i minuter"
 
 #: data/ui/timer_popover.ui:86
 msgid "Stop after current chapter"
-msgstr "Stoppa efter aktuell kapitel"
+msgstr "Stoppa efter aktuellt kapitel"
 
 #: data/ui/timer_popover.ui:107
 msgid "Enable system power control"
