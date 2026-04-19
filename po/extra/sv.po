@@ -50,7 +50,8 @@ msgstr "Cozy är en ljudboksspelare. Här är några funktioner:"
 #: data/com.github.geigi.cozy.appdata.xml:20
 msgid "Import all your audio books into Cozy to browse them comfortably"
 msgstr ""
-"Importera alla dina ljudböcker till Cozy för att bekvämt bläddra efter dem"
+"Importera alla dina ljudböcker till Cozy så att du enkelt kan bläddra bland "
+"dem"
 
 #: data/com.github.geigi.cozy.appdata.xml:21
 msgid ""
