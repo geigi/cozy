@@ -519,7 +519,8 @@ msgstr "Inga tidigare böcker ännu"
 
 #: data/ui/main_window.ui:195
 msgid "Explore your library by switching to the Author or Reader view"
-msgstr "Utforska ditt bibliotek genom att växla till författar- eller läsvy."
+msgstr ""
+"Utforska ditt bibliotek genom att växla till författar- eller uppläsarvy."
 
 #: data/ui/media_controller.ui:48
 msgid "Currently playing"
