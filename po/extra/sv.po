@@ -87,7 +87,7 @@ msgid ""
 " if you store your audio books on an external or network drive. Perfect to "
 "listen to on the go!"
 msgstr ""
-"Offlineläge! Detta gör att du kan behålla en ljudbok på ditt interna minne "
+"Offlineläge! Detta gör att du kan behålla en ljudbok på din interna lagring "
 "om du lagrar dina ljudböcker på en extern eller nätverksenhet. Perfekt att "
 "lyssna på när du är på språng!"
 
