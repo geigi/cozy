@@ -338,7 +338,7 @@ msgstr "Intern disk"
 
 #: cozy/view_model/headerbar_view_model.py:78
 msgid "Refreshing audio book collection"
-msgstr "Uppdaterar ljudbokskollektionen"
+msgstr "Uppdaterar ljudbokssamlingen"
 
 #: cozy/view_model/headerbar_view_model.py:87
 #: cozy/view_model/headerbar_view_model.py:103
