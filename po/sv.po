@@ -684,7 +684,7 @@ msgstr "Återstående tid för aktuell del"
 
 #: data/ui/storage_locations.ui:5
 msgid "Storage locations"
-msgstr "Lagringsplats"
+msgstr "Lagringsplatser"
 
 #: data/ui/storage_locations.ui:24
 msgid "Set as default"
