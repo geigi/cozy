@@ -175,7 +175,7 @@ msgstr "Denna fil hittades inte. Vill du leta reda på den manuellt?"
 
 #: cozy/ui/file_not_found_dialog.py:27
 msgid "Locate"
-msgstr "Plats"
+msgstr "Leta reda på"
 
 #: cozy/ui/file_not_found_dialog.py:38
 msgid "Locate Missing File"
