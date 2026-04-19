@@ -71,7 +71,7 @@ msgstr "Insomningsur"
 
 #: data/com.github.geigi.cozy.appdata.xml:24
 msgid "Playback speed control for each book individually"
-msgstr "Kontroll av uppspelningshastighet, individuellt för varje bok."
+msgstr "Ställ in uppspelningshastigheten individuellt för varje bok"
 
 #: data/com.github.geigi.cozy.appdata.xml:25
 msgid "Search your library"
