@@ -584,7 +584,7 @@ msgstr "Utseende"
 
 #: data/ui/preferences.ui:33
 msgid "Dark Mode"
-msgstr "Mörk läge"
+msgstr "Mörkt läge"
 
 #: data/ui/preferences.ui:40
 msgid "Tags"
