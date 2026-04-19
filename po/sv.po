@@ -171,7 +171,7 @@ msgstr "Filen hittades inte"
 
 #: cozy/ui/file_not_found_dialog.py:19
 msgid "This file could not be found. Do you want to locate it manually?"
-msgstr "Denna fil hittades inte. Vill du lokalisera den manuellt?"
+msgstr "Denna fil hittades inte. Vill du leta reda på den manuellt?"
 
 #: cozy/ui/file_not_found_dialog.py:27
 msgid "Locate"
