@@ -1,0 +1,94 @@
+# Georgian translation for cozy-extra.
+# Copyright (C) 2026 cozy-extra's authors.
+# This file is distributed under the same license as the extra package.
+# Ekaterine Papava <papava.e@gtu.ge>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-16 15:04+0100\n"
+"PO-Revision-Date: 2026-05-01 18:44+0200\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
+"Language-Team: \n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: data/com.github.geigi.cozy.desktop:3
+msgid "Cozy"
+msgstr "Cozy"
+
+#: data/com.github.geigi.cozy.desktop:4
+msgid "Audio Book Player"
+msgstr "აუდიო წიგნების დამკვრელი"
+
+#: data/com.github.geigi.cozy.desktop:5
+msgid "Play and organize your audio book collection"
+msgstr "დაუკარით და დაალაგეთ თქვენი აუდიოწიგნების კოლექცია"
+
+#: data/com.github.geigi.cozy.appdata.xml:15
+msgid "Listen to audio books"
+msgstr "მოუსმინეთ აუდიო წიგნებს"
+
+#: data/com.github.geigi.cozy.appdata.xml:17
+msgid "Do you like audio books? Then lets get cozy!"
+msgstr "მოგწონთ აუდიოწიგნები? მაშინ, მოდით, მოვკალათდეთ მყუდროდ!"
+
+#: data/com.github.geigi.cozy.appdata.xml:18
+msgid "Cozy is a audio book player. Here are some of the features:"
+msgstr "Cozy არის აუდიო წიგნის დამკვრელი. აქ არის რამდენიმე ფუნქცია:"
+
+#: data/com.github.geigi.cozy.appdata.xml:20
+msgid "Import all your audio books into Cozy to browse them comfortably"
+msgstr ""
+"შემოიტანეთ ყველა თქვენი აუდიოწიგნი Cozy-ში, რომ კომფორტულად დაათვალიეროთ "
+"ისინი"
+
+#: data/com.github.geigi.cozy.appdata.xml:21
+msgid ""
+"Listen to your DRM free mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav "
+"audio books"
+msgstr ""
+"მოუსმინეთ თქვენს DRM-ისგან თავისუფალ mp3, m4b, m4a (aac, ALAC, ...), flac, "
+"ogg და wav აუდიოწიგნებს"
+
+#: data/com.github.geigi.cozy.appdata.xml:22
+msgid "Remembers your playback position"
+msgstr "იმახსოვრებს თქვენი დაკვრის პოზიციას"
+
+#: data/com.github.geigi.cozy.appdata.xml:23
+msgid "Sleep timer"
+msgstr "ძილის წამზომი"
+
+#: data/com.github.geigi.cozy.appdata.xml:24
+msgid "Playback speed control for each book individually"
+msgstr "დაკვრის სიჩქარის კონტროლი თითოეული წიგნისთვის ინდივიდუალურად"
+
+#: data/com.github.geigi.cozy.appdata.xml:25
+msgid "Search your library"
+msgstr "ძებნა თქვენს ბიბლიოთეკაში"
+
+#: data/com.github.geigi.cozy.appdata.xml:26
+msgid "Multiple storage location support"
+msgstr "ერთზე მეტი საცავის მდებარეობის მხარდაჭერა"
+
+#: data/com.github.geigi.cozy.appdata.xml:27
+msgid ""
+"Offline Mode! This allows you to keep an audio book on your internal storage "
+"if you store your audio books on an external or network drive. Perfect to "
+"listen to on the go!"
+msgstr ""
+"ინტერნეტგარეშე რეჟიმი! ეს საშუალებას გაძლევთ, შეინახოთ აუდიოწიგნი თქვენს "
+"შიდა მეხსიერებაში, თუ ინახავთ აუდიოწიგნებს, გარე ან ქსელურ დისკწამყვანზე. "
+"შესანიშნავია მოსასმენად მოგზაურობის დროს!"
+
+#: data/com.github.geigi.cozy.appdata.xml:28
+msgid "Drag and Drop to import new audio books"
+msgstr "გადმოათრიეთ და დაყარეთ ახალი აუდიოწიგნების შემოსატანად"
+
+#: data/com.github.geigi.cozy.appdata.xml:29
+msgid "Sort your audio books by author, reader and name"
+msgstr "დაალაგეთ თქვენი აუდიო წიგნები ავტორის, მკითხველისა და სახელის მიხედვით"
