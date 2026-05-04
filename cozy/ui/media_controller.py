@@ -1,39 +1,31 @@
 import logging
-
-import inject
-from gi.repository import Adw, Gdk, Gtk
-
+import gi
 from cozy.control.artwork_cache import ArtworkCache
 from cozy.db.book import Book
+from cozy.ext import inject
 from cozy.ui.widgets.playback_speed_popover import PlaybackSpeedPopover
 from cozy.ui.widgets.seek_bar import SeekBar
 from cozy.ui.widgets.sleep_timer import SleepTimer
 from cozy.view_model.playback_control_view_model import PlaybackControlViewModel
-from cozy.view_model.playback_speed_view_model import PlaybackSpeedViewModel
+from gi.repository import Adw, Gtk, Gdk
 
 log = logging.getLogger("MediaController")
-
 COVER_SIZE = 46
 
-
-@Gtk.Template.from_resource("/com/github/geigi/cozy/ui/media_controller.ui")
+@Gtk.Template.from_resource('/com/github/geigi/cozy/media_controller.ui')
 class MediaController(Adw.BreakpointBin):
     __gtype_name__ = "MediaController"
 
     seek_bar_container: Gtk.Box = Gtk.Template.Child()
-
     play_button: Gtk.Button = Gtk.Template.Child()
     prev_button: Gtk.Button = Gtk.Template.Child()
     next_button: Gtk.Button = Gtk.Template.Child()
     volume_button: Gtk.ScaleButton = Gtk.Template.Child()
-
     cover_img: Gtk.Image = Gtk.Template.Child()
     title_label: Gtk.Label = Gtk.Template.Child()
     subtitle_label: Gtk.Label = Gtk.Template.Child()
-
     playback_speed_button: Gtk.MenuButton = Gtk.Template.Child()
     timer_button: Gtk.MenuButton = Gtk.Template.Child()
-
     timer_image: Gtk.Image = Gtk.Template.Child()
 
     def __init__(self, main_window_builder: Gtk.Builder):
@@ -45,31 +37,28 @@ class MediaController(Adw.BreakpointBin):
         self.seek_bar = SeekBar()
         self.seek_bar_container.append(self.seek_bar)
 
-        self.sleep_timer = SleepTimer(self.timer_button)
-        self.timer_button.connect("clicked", self.sleep_timer.present)
+        self.sleep_timer: SleepTimer = SleepTimer(self.timer_image)
         self.playback_speed_button.set_popover(PlaybackSpeedPopover())
+        self.timer_button.set_popover(self.sleep_timer)
 
-        self.volume_button.set_icons(
-            [
-                "cozy.volume-muted-symbolic",
-                "cozy.volume-high-symbolic",
-                "cozy.volume-low-symbolic",
-                "cozy.volume-medium-symbolic",
-            ]
-        )
-
-        self._playback_control_view_model = inject.instance(PlaybackControlViewModel)
-        self._playback_speed_view_model = inject.instance(PlaybackSpeedViewModel)
+        self._playback_control_view_model: PlaybackControlViewModel = inject.instance(PlaybackControlViewModel)
         self._artwork_cache: ArtworkCache = inject.instance(ArtworkCache)
         self._connect_view_model()
         self._connect_widgets()
 
-        self._on_book_changed()
+        # Defer book cover loading until widget is realized
+        self._initial_cover_loaded = False
+        self.connect("realize", self._load_initial_state)
+
         self._on_lock_ui_changed()
         self._on_length_changed()
         self._on_position_changed()
         self._on_volume_changed()
-        self._setup_shortcuts()
+
+    def _load_initial_state(self, widget):
+        if not self._initial_cover_loaded:
+            self._initial_cover_loaded = True
+            self._on_book_changed()
 
     def _connect_view_model(self):
         self._playback_control_view_model.bind_to("book", self._on_book_changed)
@@ -83,7 +72,6 @@ class MediaController(Adw.BreakpointBin):
         self.play_button.connect("clicked", self._play_clicked)
         self.volume_button.connect("value-changed", self._on_volume_button_changed)
         self.seek_bar.connect("position-changed", self._on_seek_bar_position_changed)
-
         self.prev_button.connect("clicked", self._rewind_clicked)
         self.next_button.connect("clicked", self._forward_clicked)
         self.seek_bar.connect("rewind", self._rewind_clicked)
@@ -95,30 +83,12 @@ class MediaController(Adw.BreakpointBin):
         self.cover_img.set_cursor(Gdk.Cursor.new_from_name("pointer"))
 
     def _set_cover_image(self, book: Book):
-        paintable = self._artwork_cache.get_cover_paintable(
-            book, self.get_scale_factor(), COVER_SIZE
-        )
+        paintable = self._artwork_cache.get_cover_paintable(book, self.get_scale_factor(), COVER_SIZE)
         if paintable:
             self.cover_img.set_from_paintable(paintable)
         else:
-            self.cover_img.set_from_icon_name("cozy.book-open-symbolic")
+            self.cover_img.set_from_icon_name("book-open-variant-symbolic")
             self.cover_img.props.pixel_size = COVER_SIZE
-
-    @inject.param("main_window", "MainWindow")
-    def _setup_shortcuts(self, main_window):
-        main_window.create_action("play_pause", self._play_clicked, ["space"])
-        main_window.create_action("seek_rewind", self._rewind_clicked, ["Left"])
-        main_window.create_action("seek_forward", self._forward_clicked, ["Right"])
-
-        main_window.create_action("volume_up", self._volume_up, ["Up"])
-        main_window.create_action("volume_down", self._volume_down, ["Down"])
-
-        main_window.create_action("speed_up", self._speed_up, ["plus", "KP_Add", "<primary>Up"])
-        main_window.create_action("speed_down", self._speed_down, ["minus", "KP_Subtract", "<primary>Down"])
-        main_window.create_action("speed_reset", self._speed_reset, ["equal"])
-
-        main_window.create_action("prev_chapter", self._prev_chapter, ["Page_Down", "<primary>Left"])
-        main_window.create_action("next_chapter", self._next_chapter, ["Page_Up", "<primary>Right"])
 
     def _on_book_changed(self) -> None:
         book = self._playback_control_view_model.book
@@ -161,27 +131,6 @@ class MediaController(Adw.BreakpointBin):
 
     def _on_volume_changed(self):
         self.volume_button.set_value(self._playback_control_view_model.volume)
-
-    def _volume_up(self, *_):
-        self._playback_control_view_model.volume_up()
-
-    def _volume_down(self, *_):
-        self._playback_control_view_model.volume_down()
-
-    def _speed_up(self, *_):
-        self._playback_speed_view_model.speed_up()
-
-    def _speed_down(self, *_):
-        self._playback_speed_view_model.speed_down()
-
-    def _speed_reset(self, *_):
-        self._playback_speed_view_model.speed_reset()
-
-    def _next_chapter(self, *_):
-        self._playback_control_view_model.next_chapter()
-
-    def _prev_chapter(self, *_):
-        self._playback_control_view_model.previous_chapter()
 
     def _play_clicked(self, *_):
         self._playback_control_view_model.play_pause()
