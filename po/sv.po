@@ -379,7 +379,7 @@ msgstr "ej tillgänglig"
 
 #: data/ui/book_detail.ui:363
 msgid "Loading chapters, please wait..."
-msgstr "Läser in kapitel, vänta..."
+msgstr "Läser in kapitel, vänta…"
 
 #: data/ui/book_element.ui:10
 msgid "Open book overview"
