@@ -718,7 +718,7 @@ msgid ""
 msgstr ""
 "Typ av åtgärd när insomningstiden gått ut.\n"
 "\"stäng av\" försöker stänga av systemet.\n"
-"\"vänteläge\" försöker försätta datorn i viloläge."
+"\"vänteläge\" försöker försätta datorn i vänteläge."
 
 #: data/ui/timer_popover.ui:129
 msgid "System power action to perform"
