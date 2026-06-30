@@ -87,9 +87,9 @@ msgid ""
 " if you store your audio books on an external or network drive. Perfect to "
 "listen to on the go!"
 msgstr ""
-"Offlineläge! Detta gör att du kan behålla en ljudbok på din interna lagring "
-"om du lagrar dina ljudböcker på en extern eller nätverksenhet. Perfekt att "
-"lyssna på när du är på språng!"
+"Offlineläge! Det gör att du kan behålla en ljudbok i intern lagring om du "
+"lagrar dina ljudböcker på en extern enhet eller nätverksenhet. Perfekt när "
+"du vill lyssna på språng!"
 
 #: data/com.github.geigi.cozy.appdata.xml:28
 msgid "Drag and Drop to import new audio books"
