@@ -459,7 +459,7 @@ msgstr "Visa förlopp för bakgrundsaktivitet"
 
 #: data/ui/headerbar.ui:67
 msgid "Start typing..."
-msgstr "Börja skriv..."
+msgstr "Börja skriva…"
 
 #: data/ui/headerbar.ui:80
 msgid "_Scan Library"
