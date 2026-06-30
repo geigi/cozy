@@ -491,7 +491,7 @@ msgstr "Bibliotek"
 
 #: data/ui/main_window.ui:65
 msgid "Recent"
-msgstr "Tidigare"
+msgstr "Senaste"
 
 #: data/ui/main_window.ui:77 data/ui/search_page.ui:46
 msgid "Author"
