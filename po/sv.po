@@ -224,7 +224,7 @@ msgstr "Patreon-stödjare"
 
 #: cozy/ui/main_view.py:202
 msgid "m4b chapter support in mutagen"
-msgstr "m4b-kapitelstöd i mutagen"
+msgstr "stöd för m4b-kapitel i mutagen"
 
 #: cozy/ui/main_view.py:206
 msgid "Open Source Projects"
