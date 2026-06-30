@@ -343,7 +343,7 @@ msgstr "Uppdaterar ljudbokssamlingen"
 #: cozy/view_model/headerbar_view_model.py:87
 #: cozy/view_model/headerbar_view_model.py:103
 msgid "Copying new files…"
-msgstr "Kopierar nya filer..."
+msgstr "Kopierar nya filer…"
 
 #: cozy/view_model/headerbar_view_model.py:94
 msgid "Changing audio book location…"
