@@ -572,11 +572,11 @@ msgstr "Uppspelningshastighet"
 
 #: data/ui/media_controller.ui:213 data/ui/preferences.ui:80
 msgid "Sleep Timer"
-msgstr "Insomningstimer"
+msgstr "Insomningsur"
 
 #: data/ui/media_controller.ui:220
 msgid "Open the sleep timer popover"
-msgstr "Öppna fönstret för insomningstimern"
+msgstr "Öppna fönstret för insomningsuret"
 
 #: data/ui/preferences.ui:27
 msgid "General"
@@ -704,7 +704,7 @@ msgstr "Insomningsurets varaktighet"
 
 #: data/ui/timer_popover.ui:40
 msgid "Set the sleep timer duration in minutes"
-msgstr "Ange varaktighet för insomningstimern i minuter"
+msgstr "Ange insomningsurets varaktighet i minuter"
 
 #: data/ui/timer_popover.ui:86
 msgid "Stop after current chapter"
@@ -720,7 +720,7 @@ msgid ""
 "\"shutdown\" will attempt to turn your system off (also known as power off)\n"
 "\"suspend\" will attempt to suspend your system (also known as sleep)."
 msgstr ""
-"Typ av åtgärd när insomningstimern går ut.\n"
+"Typ av åtgärd när insomningsuret går ut.\n"
 "\"stäng av\" försöker stänga av systemet.\n"
 "\"vänteläge\" försöker försätta datorn i vänteläge."
 
