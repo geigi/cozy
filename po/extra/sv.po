@@ -63,7 +63,7 @@ msgstr ""
 
 #: data/com.github.geigi.cozy.appdata.xml:22
 msgid "Remembers your playback position"
-msgstr "Kommer ihåg var du slutade lyssna."
+msgstr "Kommer ihåg var du slutade lyssna"
 
 #: data/com.github.geigi.cozy.appdata.xml:23
 msgid "Sleep timer"
@@ -97,4 +97,4 @@ msgstr "Dra och släpp för att importera nya ljudböcker"
 
 #: data/com.github.geigi.cozy.appdata.xml:29
 msgid "Sort your audio books by author, reader and name"
-msgstr "Sortera dina ljudböcker efter författare, uppläsare och namn."
+msgstr "Sortera dina ljudböcker efter författare, uppläsare och namn"
