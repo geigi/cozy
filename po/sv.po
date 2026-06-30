@@ -419,7 +419,9 @@ msgstr ""
 msgctxt "Error and crash reporting dialog"
 msgid ""
 "Cozy is opensource and the user feedback source code can be inspected here: "
-msgstr "Cozy är öppen källkod och återkopplingskoden kan inspekteras här:"
+msgstr ""
+"Cozy har öppen källkod och källkoden för återkopplingsfunktionen kan "
+"granskas här:"
 
 #. Translators: Don't touch the markup. Translate the text "Sourcecode on
 #. GitHub" only!
