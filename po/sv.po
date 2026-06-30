@@ -604,7 +604,7 @@ msgstr "Uppspelning"
 
 #: data/ui/preferences.ui:54
 msgid "Replay"
-msgstr "Återuppspela"
+msgstr "Återspolning"
 
 #: data/ui/preferences.ui:55
 msgid "Rewind 30 seconds of the current book when starting Cozy"
