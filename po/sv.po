@@ -726,7 +726,7 @@ msgstr "Strömåtgärd att utföra"
 
 #: data/ui/timer_popover.ui:137
 msgid "suspend"
-msgstr "Viloläge"
+msgstr "vänteläge"
 
 #: data/ui/timer_popover.ui:143
 msgid "shutdown"
