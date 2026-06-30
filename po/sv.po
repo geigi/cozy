@@ -730,4 +730,4 @@ msgstr "vänteläge"
 
 #: data/ui/timer_popover.ui:143
 msgid "shutdown"
-msgstr "Stäng av"
+msgstr "stäng av"
