@@ -708,7 +708,7 @@ msgstr "Stoppa efter aktuellt kapitel"
 
 #: data/ui/timer_popover.ui:107
 msgid "Enable system power control"
-msgstr "Aktivera systemkraftkontroll"
+msgstr "Aktivera systemets strömstyrning"
 
 #: data/ui/timer_popover.ui:125
 msgid ""
