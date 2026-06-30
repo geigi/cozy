@@ -204,7 +204,7 @@ msgstr "Sökvägen eller filnamnet innehåller icke-UTF-8-tecken"
 
 #: cozy/ui/import_failed_dialog.py:13
 msgid "The file(s) are no valid audio files"
-msgstr "Filen eller filerna är inte giltiga ljudfiler"
+msgstr "Filen/filerna är inte giltiga ljudfiler"
 
 #: cozy/ui/import_failed_dialog.py:14
 msgid "The file(s) are corrupt"
