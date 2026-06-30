@@ -722,7 +722,7 @@ msgstr ""
 
 #: data/ui/timer_popover.ui:129
 msgid "System power action to perform"
-msgstr "Systemkraftåtgärd att utföra"
+msgstr "Strömåtgärd att utföra"
 
 #: data/ui/timer_popover.ui:137
 msgid "suspend"
