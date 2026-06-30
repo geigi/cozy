@@ -242,7 +242,7 @@ msgstr "Markera som läst"
 
 #: cozy/ui/widgets/book_element.py:73
 msgid "Open in file browser"
-msgstr "Öppna i filhanterare"
+msgstr "Öppna i filhanteraren"
 
 #: cozy/ui/widgets/book_element.py:76
 msgid "Remove from library"
@@ -467,7 +467,7 @@ msgstr "_Skanna biblioteket"
 
 #: data/ui/headerbar.ui:86
 msgid "_Hide unavailable books"
-msgstr "_Dölj icke tillgängliga böcker"
+msgstr "_Dölj otillgängliga böcker"
 
 #: data/ui/headerbar.ui:92
 msgid "_Preferences"
