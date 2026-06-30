@@ -636,7 +636,7 @@ msgstr "Omslag"
 
 #: data/ui/preferences.ui:110
 msgid "Prefer External Images Over Embedded Cover"
-msgstr "Föredra externa bilder framför inbäddade"
+msgstr "Föredra externa bilder framför inbäddat omslag"
 
 #: data/ui/preferences.ui:111
 msgid "Always use images (cover.jpg, *.png, …) when available"
