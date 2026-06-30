@@ -371,7 +371,7 @@ msgstr "Publicerad"
 
 #: data/ui/book_detail.ui:246
 msgid "Some or all files of this book cannot be found."
-msgstr "Vissa eller alla filer kan inte hittas till den här boken."
+msgstr "Vissa eller alla filer för den här boken kan inte hittas."
 
 #: data/ui/book_detail.ui:259
 msgid "unavailable"
