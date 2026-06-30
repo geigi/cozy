@@ -67,7 +67,7 @@ msgstr "Kommer ihåg var du slutade lyssna"
 
 #: data/com.github.geigi.cozy.appdata.xml:23
 msgid "Sleep timer"
-msgstr "Insomningstimer"
+msgstr "Insomningsur"
 
 #: data/com.github.geigi.cozy.appdata.xml:24
 msgid "Playback speed control for each book individually"
