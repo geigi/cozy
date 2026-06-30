@@ -112,11 +112,11 @@ msgstr[1] "{years} år sedan"
 
 #: cozy/ui/book_detail_view.py:299
 msgid "Downloaded"
-msgstr "Nedladdat"
+msgstr "Hämtat"
 
 #: cozy/ui/book_detail_view.py:302 data/ui/book_detail.ui:116
 msgid "Download"
-msgstr "Ladda ner"
+msgstr "Hämtar"
 
 #: cozy/ui/db_migration_failed_view.py:6
 msgid ""
