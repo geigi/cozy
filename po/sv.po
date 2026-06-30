@@ -717,8 +717,8 @@ msgid ""
 "\"suspend\" will attempt to suspend your system (also known as sleep)."
 msgstr ""
 "Typ av åtgärd när insomningstiden gått ut.\n"
-"\"Stäng av\" försöker stänga av systemet.\n"
-"\"Viloläge\" försöker försätta datorn i viloläge."
+"\"stäng av\" försöker stänga av systemet.\n"
+"\"vänteläge\" försöker försätta datorn i viloläge."
 
 #: data/ui/timer_popover.ui:129
 msgid "System power action to perform"
