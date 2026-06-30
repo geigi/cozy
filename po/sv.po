@@ -220,7 +220,7 @@ msgstr "OK"
 
 #: cozy/ui/main_view.py:198
 msgid "Patreon Supporters"
-msgstr "Patreon-supportrar"
+msgstr "Patreon-stödjare"
 
 #: cozy/ui/main_view.py:202
 msgid "m4b chapter support in mutagen"
