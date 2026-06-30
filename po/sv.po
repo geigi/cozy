@@ -443,7 +443,7 @@ msgstr "Alternativ"
 
 #: data/ui/headerbar.ui:26
 msgid "Open the options popover"
-msgstr "Öppna inställningsfönstret"
+msgstr "Öppna alternativmenyn"
 
 #: data/ui/headerbar.ui:33
 msgid "Search your library"
@@ -451,7 +451,7 @@ msgstr "Sök i ditt bibliotek"
 
 #: data/ui/headerbar.ui:36
 msgid "Open the search popover"
-msgstr "Öppna sökfönstret"
+msgstr "Öppna sökpanelen"
 
 #: data/ui/headerbar.ui:44
 msgid "Display background task progress"
