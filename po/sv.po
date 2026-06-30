@@ -334,7 +334,7 @@ msgstr "Extern enhet"
 
 #: cozy/ui/widgets/storages.py:68
 msgid "Internal drive"
-msgstr "Intern disk"
+msgstr "Intern enhet"
 
 #: cozy/view_model/headerbar_view_model.py:78
 msgid "Refreshing audio book collection"
