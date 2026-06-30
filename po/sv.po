@@ -515,7 +515,7 @@ msgstr "Lista över böcker"
 
 #: data/ui/main_window.ui:194
 msgid "No Recent Books Yet"
-msgstr "Inga nyligen spelade böcker ännu"
+msgstr "Inga senaste spelade böcker ännu"
 
 #: data/ui/main_window.ui:195
 msgid "Explore your library by switching to the Author or Reader view"
