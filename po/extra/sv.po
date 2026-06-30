@@ -79,7 +79,7 @@ msgstr "Sök i ditt bibliotek"
 
 #: data/com.github.geigi.cozy.appdata.xml:26
 msgid "Multiple storage location support"
-msgstr "Stöd för flera lagringsplatser."
+msgstr "Stöd för flera lagringsplatser"
 
 #: data/com.github.geigi.cozy.appdata.xml:27
 msgid ""
