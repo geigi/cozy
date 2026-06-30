@@ -624,7 +624,7 @@ msgstr "Varaktighet för framspolning"
 
 #: data/ui/preferences.ui:83
 msgid "Fadeout"
-msgstr "Tona ut"
+msgstr "Uttoning"
 
 #: data/ui/preferences.ui:88
 msgid "Fadeout Duration"
