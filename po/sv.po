@@ -41,7 +41,7 @@ msgstr "Kan inte kopiera: Disken är full."
 
 #: cozy/media/files.py:71 cozy/media/files.py:87
 msgid "Cannot copy: Permission denied"
-msgstr "Kan inte kopiera: Behörighet saknas."
+msgstr "Kan inte kopiera: Behörighet saknas"
 
 #: cozy/media/importer.py:121
 msgid "Error while importing new files"
