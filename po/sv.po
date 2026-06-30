@@ -576,7 +576,7 @@ msgstr "Insomningsur"
 
 #: data/ui/media_controller.ui:220
 msgid "Open the sleep timer popover"
-msgstr "Öppna menyn för insomningsuret"
+msgstr "Öppna menyn för insomningsuret ännu"
 
 #: data/ui/preferences.ui:27
 msgid "General"
