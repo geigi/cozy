@@ -704,7 +704,7 @@ msgstr "Insomningsurets varaktighet"
 
 #: data/ui/timer_popover.ui:40
 msgid "Set the sleep timer duration in minutes"
-msgstr "Ange varaktighet för insomningsuret i minuter"
+msgstr "Ange varaktighet för insomningstimern i minuter"
 
 #: data/ui/timer_popover.ui:86
 msgid "Stop after current chapter"
