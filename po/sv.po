@@ -435,7 +435,7 @@ msgstr "Välj mapp"
 
 #: data/ui/headerbar.ui:17
 msgid "Toggle Filter Sidebar"
-msgstr "Sidofält av/på"
+msgstr "Visa/dölj filtersidofältet"
 
 #: data/ui/headerbar.ui:22
 msgid "Options"
