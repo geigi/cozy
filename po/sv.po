@@ -51,7 +51,7 @@ msgstr "Fel vid import av nya filer"
 #, python-brace-format
 msgid "{hours} hour"
 msgid_plural "{hours} hours"
-msgstr[0] "{hours} timma"
+msgstr[0] "{hours} timme"
 msgstr[1] "{hours} timmar"
 
 #: cozy/tools.py:94 cozy/tools.py:98
