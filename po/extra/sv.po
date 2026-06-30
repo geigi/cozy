@@ -5,7 +5,7 @@
 # 
 # Translators:
 # Åke Engelbrektson, 2021
-# Luna Jernberg <droidbittin@gmail.com>, 2023
+# Luna Jernberg <droidbittin@gmail.com>, 2022
 # Karl Jonatan Nyberg, 2026
 # 
 #, fuzzy
@@ -41,7 +41,7 @@ msgstr "Lyssna på ljudböcker"
 
 #: data/com.github.geigi.cozy.appdata.xml:17
 msgid "Do you like audio books? Then lets get cozy!"
-msgstr "Gillar du ljudböcker? Då kan det bli mysigt!"
+msgstr "Gillar du ljudböcker? Då är Cozy något för dig!"
 
 #: data/com.github.geigi.cozy.appdata.xml:18
 msgid "Cozy is a audio book player. Here are some of the features:"
