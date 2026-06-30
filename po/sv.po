@@ -483,7 +483,7 @@ msgstr "A_vsluta"
 
 #: data/ui/main_window.ui:26
 msgid "Drop Audio Books Here to Add Them to Your Library"
-msgstr "Släpp ljudböcker här, för att lägga till dem i ditt bibliotek."
+msgstr "Släpp ljudböcker här för att lägga till dem i ditt bibliotek"
 
 #: data/ui/main_window.ui:48
 msgid "Library"
