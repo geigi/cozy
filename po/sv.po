@@ -234,7 +234,9 @@ msgstr "Projekt med öppen källkod"
 #. line
 #: cozy/ui/main_view.py:211
 msgid "translator-credits"
-msgstr "Åke Engelbrektson"
+msgstr ""
+"Jonatan Nyberg\n"
+"Åke Engelbrektson"
 
 #: cozy/ui/widgets/book_element.py:70
 msgid "Mark as read"
