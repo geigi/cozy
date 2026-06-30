@@ -696,7 +696,7 @@ msgstr "Ta bort"
 
 #: data/ui/timer_popover.ui:30
 msgid "Timer duration"
-msgstr "Tidurets varaktighet"
+msgstr "Insomningsurets varaktighet"
 
 #: data/ui/timer_popover.ui:40
 msgid "Set the sleep timer duration in minutes"
