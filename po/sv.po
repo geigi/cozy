@@ -720,7 +720,7 @@ msgid ""
 "\"shutdown\" will attempt to turn your system off (also known as power off)\n"
 "\"suspend\" will attempt to suspend your system (also known as sleep)."
 msgstr ""
-"Typ av åtgärd när insomningstiden gått ut.\n"
+"Typ av åtgärd när insomningstiden går ut.\n"
 "\"stäng av\" försöker stänga av systemet.\n"
 "\"vänteläge\" försöker försätta datorn i vänteläge."
 
