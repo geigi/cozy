@@ -45,21 +45,19 @@ msgstr "Gillar du ljudböcker? Då är Cozy något för dig!"
 
 #: data/com.github.geigi.cozy.appdata.xml:18
 msgid "Cozy is a audio book player. Here are some of the features:"
-msgstr "Cozy är en ljudboksspelare. Här är några funktioner:"
+msgstr "Cozy är en ljudboksspelare med bland annat följande funktioner:"
 
 #: data/com.github.geigi.cozy.appdata.xml:20
 msgid "Import all your audio books into Cozy to browse them comfortably"
-msgstr ""
-"Importera alla dina ljudböcker till Cozy så att du enkelt kan bläddra bland "
-"dem"
+msgstr "Importera alla dina ljudböcker till Cozy och bläddra enkelt bland dem"
 
 #: data/com.github.geigi.cozy.appdata.xml:21
 msgid ""
 "Listen to your DRM free mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav "
 "audio books"
 msgstr ""
-"Lyssna på dina DRM-fria ljudböcker i formaten mp3, m4b, m4a (aac, ALAC, …), "
-"flac, ogg och wav."
+"Lyssna på DRM-fria ljudböcker i formaten MP3, M4B, M4A (AAC, ALAC, …), FLAC,"
+" OGG och WAV"
 
 #: data/com.github.geigi.cozy.appdata.xml:22
 msgid "Remembers your playback position"
@@ -87,13 +85,13 @@ msgid ""
 " if you store your audio books on an external or network drive. Perfect to "
 "listen to on the go!"
 msgstr ""
-"Offlineläge! Det gör att du kan behålla en ljudbok i intern lagring om du "
-"lagrar dina ljudböcker på en extern enhet eller nätverksenhet. Perfekt när "
-"du vill lyssna på språng!"
+"Offlineläge! Det gör att du kan spara en ljudbok i det interna "
+"lagringsutrymmet när dina ljudböcker finns på en extern enhet eller "
+"nätverksenhet. Perfekt när du vill lyssna på resande fot!"
 
 #: data/com.github.geigi.cozy.appdata.xml:28
 msgid "Drag and Drop to import new audio books"
-msgstr "Dra och släpp för att importera nya ljudböcker"
+msgstr "Dra och släpp nya ljudböcker för att importera dem"
 
 #: data/com.github.geigi.cozy.appdata.xml:29
 msgid "Sort your audio books by author, reader and name"
