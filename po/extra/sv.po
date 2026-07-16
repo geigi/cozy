@@ -4,8 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Åke Engelbrektson, 2021
-# Luna Jernberg <droidbittin@gmail.com>, 2023
+# Åke Engelbrektson, 2020
+# Luna Jernberg <droidbittin@gmail.com>, 2022
+# Jonatan Nyberg, 2026
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-16 15:04+0100\n"
 "PO-Revision-Date: 2019-09-08 09:39+0000\n"
-"Last-Translator: Luna Jernberg <droidbittin@gmail.com>, 2023\n"
+"Last-Translator: Jonatan Nyberg, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/geigi/teams/78138/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,28 +41,27 @@ msgstr "Lyssna på ljudböcker"
 
 #: data/com.github.geigi.cozy.appdata.xml:17
 msgid "Do you like audio books? Then lets get cozy!"
-msgstr "Gillar du ljudböcker? Då kan det bli mysigt!"
+msgstr "Gillar du ljudböcker? Då är Cozy något för dig!"
 
 #: data/com.github.geigi.cozy.appdata.xml:18
 msgid "Cozy is a audio book player. Here are some of the features:"
-msgstr "Cozy är en ljudboksspelare. Här är några av funktionerna:"
+msgstr "Cozy är en ljudboksspelare med bland annat följande funktioner:"
 
 #: data/com.github.geigi.cozy.appdata.xml:20
 msgid "Import all your audio books into Cozy to browse them comfortably"
-msgstr ""
-"Importera alla dina ljudböcker till Cozy för att bekvämt bläddra efter dem"
+msgstr "Importera alla dina ljudböcker till Cozy och bläddra enkelt bland dem"
 
 #: data/com.github.geigi.cozy.appdata.xml:21
 msgid ""
 "Listen to your DRM free mp3, m4b, m4a (aac, ALAC, …), flac, ogg and wav "
 "audio books"
 msgstr ""
-"Lyssna på dina DRM-fria mp3, m4b, m4a (aac, ALAC, …), flac, ogg och wav "
-"ljudböcker."
+"Lyssna på DRM-fria ljudböcker i formaten MP3, M4B, M4A (AAC, ALAC, …), FLAC,"
+" OGG och WAV"
 
 #: data/com.github.geigi.cozy.appdata.xml:22
 msgid "Remembers your playback position"
-msgstr "Kommer ihåg var du slutade lyssna."
+msgstr "Kommer ihåg var du slutade lyssna"
 
 #: data/com.github.geigi.cozy.appdata.xml:23
 msgid "Sleep timer"
@@ -69,15 +69,15 @@ msgstr "Insomningsur"
 
 #: data/com.github.geigi.cozy.appdata.xml:24
 msgid "Playback speed control for each book individually"
-msgstr "Kontroll av uppspelningshastighet, individuellt för varje bok."
+msgstr "Ställ in uppspelningshastigheten individuellt för varje bok"
 
 #: data/com.github.geigi.cozy.appdata.xml:25
 msgid "Search your library"
-msgstr "Sök i ditt bibliotek."
+msgstr "Sök i ditt bibliotek"
 
 #: data/com.github.geigi.cozy.appdata.xml:26
 msgid "Multiple storage location support"
-msgstr "Stöd för flera lagringsplatser."
+msgstr "Stöd för flera lagringsplatser"
 
 #: data/com.github.geigi.cozy.appdata.xml:27
 msgid ""
@@ -85,14 +85,14 @@ msgid ""
 " if you store your audio books on an external or network drive. Perfect to "
 "listen to on the go!"
 msgstr ""
-"Offlineläge! Detta gör att du kan behålla en ljudbok på ditt interna minne "
-"om du lagrar dina ljudböcker på en extern eller nätverksenhet. Perfekt att "
-"lyssna på när du är på språng!"
+"Offlineläge! Det gör att du kan spara en ljudbok i det interna "
+"lagringsutrymmet när dina ljudböcker finns på en extern enhet eller "
+"nätverksenhet. Perfekt när du vill lyssna på resande fot!"
 
 #: data/com.github.geigi.cozy.appdata.xml:28
 msgid "Drag and Drop to import new audio books"
-msgstr "Dra och släpp för att importera nya ljudböcker"
+msgstr "Dra och släpp nya ljudböcker för att importera dem"
 
 #: data/com.github.geigi.cozy.appdata.xml:29
 msgid "Sort your audio books by author, reader and name"
-msgstr "Sortera dina ljudböcker efter författare, uppläsare och namn."
+msgstr "Sortera dina ljudböcker efter författare, uppläsare och namn"
