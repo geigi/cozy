@@ -947,7 +947,7 @@ msgid "Close Cozy"
 msgstr "Tutup Cozy"
 
 #: data/ui/db_migration_failed.ui:47
-msgid "Recieve help on GitHub"
+msgid "Receive help on GitHub"
 msgstr "Mendapatkan bantuan Github"
 
 #: data/ui/db_migration_failed.ui:108

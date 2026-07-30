@@ -914,7 +914,7 @@ msgid "Close Cozy"
 msgstr ""
 
 #: data/ui/db_migration_failed.ui:47
-msgid "Recieve help on GitHub"
+msgid "Receive help on GitHub"
 msgstr ""
 
 #: data/ui/db_migration_failed.ui:108
