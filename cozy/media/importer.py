@@ -193,7 +193,12 @@ class Importer(EventSender):
                     continue
 
                 try:
-                    mtime = os.path.getmtime(file)
+                    # TagReader stores int(os.path.getmtime(...)), so the
+                    # comparison has to be truncated as well. Comparing the
+                    # raw float against the stored integer is true for every
+                    # file whose mtime has a fractional part, which makes
+                    # every scan re-import the whole library.
+                    mtime = int(os.path.getmtime(file))
                     if mtime > chapter.modified:
                         yield file
                 except Exception as e:
