@@ -94,10 +94,25 @@ class CozyUI(EventSender, metaclass=Singleton):
         self.drop_revealer: Gtk.Revealer = self.window_builder.get_object("drop_revealer")
 
         self.navigation_view.add(BookDetailView())
-        if self.application_settings.first_launch:
+        if self._is_first_launch():
             WelcomeDialog().present(self.window)
 
         self.window.present()
+
+    def _is_first_launch(self) -> bool:
+        if not self.application_settings.first_launch:
+            return False
+
+        # Before the welcome dialog was introduced the flag lived in the
+        # database. Users coming from those versions have never written the
+        # GSettings key, so it still reads its default of true and they are
+        # greeted as new users — and the dialog adds their default storage
+        # location a second time. Trust the database when it says otherwise.
+        if not self._settings.first_start:
+            self.application_settings.first_launch = False
+            return False
+
+        return True
 
     def __init_actions(self):
         """
