@@ -83,6 +83,55 @@ def test_filter_unchanged_files_returns_only_new_or_changed_files(mocker):
     Importer()
 
 
+def _importer_with_chapter(path, modified, known_files=None):
+    from cozy.media.importer import Importer
+
+    chapter = MagicMock()
+    chapter.file = path
+    chapter.modified = modified
+
+    # Importer reads the library through inject, and the attribute is a
+    # read-only descriptor, so the injected mock is configured instead.
+    library = inject.instance(Library)
+    library.files = {path} if known_files is None else known_files
+    library.chapters = [chapter]
+
+    return Importer()
+
+
+def test_unchanged_file_with_fractional_mtime_is_not_rescanned(mocker):
+    """A file is unchanged when its mtime only differs in the fraction.
+
+    TagReader stores int(os.path.getmtime(...)), so comparing the raw float
+    against the stored integer marks every file as changed and makes each
+    scan re-import the whole library.
+    """
+    path = "/library/book/chapter.mp3"
+    mocker.patch("os.path.getmtime", return_value=1787314720.0450535)
+
+    importer = _importer_with_chapter(path, modified=1787314720)
+
+    assert list(importer._filter_unchanged_files([path])) == []
+
+
+def test_changed_file_is_rescanned(mocker):
+    path = "/library/book/chapter.mp3"
+    mocker.patch("os.path.getmtime", return_value=1787314799.5)
+
+    importer = _importer_with_chapter(path, modified=1787314720)
+
+    assert list(importer._filter_unchanged_files([path])) == [path]
+
+
+def test_unknown_file_is_scanned(mocker):
+    path = "/library/book/new-chapter.mp3"
+    importer = _importer_with_chapter(
+        "/library/book/other.mp3", modified=1, known_files=set()
+    )
+
+    assert list(importer._filter_unchanged_files([path])) == [path]
+
+
 def test_scan_emits_start_event(mocker):
     from cozy.media.importer import Importer, ScanStatus
 
